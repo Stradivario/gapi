@@ -3,12 +3,11 @@ commands:
     init: git pull --recurse-submodules
   version:
     patch:
-      - for d in ./*/ ; do (cd "$d" && npm version patch && git push && gapi npm publish); done && gapi repo commit >/dev/null 2>&1
+      - for d in ./*/ ; do (cd "$d" && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit >/dev/null 2>&1
   repo:
     commit:
-      - git add .
-      - git commit -m "chore(VersionBump)"
+      - npm version patch
+      - gapi npm publish
       - git push
-      - echo Version published!
   npm:
     publish: npm publish --update-readme --access public
