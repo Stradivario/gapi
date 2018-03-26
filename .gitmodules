@@ -28,3 +28,6 @@
 [submodule "gapi-testing-util"]
 	path = gapi-testing-util
 	url = git@github.com:Stradivario/gapi-testing-util.git
+[submodule "gapi-cloud"]
+	path = gapi-cloud
+	url = git@github.com:Stradivario/gapi-cloud.git
