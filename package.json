@@ -1,0 +1,21 @@
+{
+  "name": "gapi",
+  "version": "0.7.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stradivario/gapi.git"
+  },
+  "author": {
+    "name": "Kristian Tachev(Stradivario)",
+    "email": "kristiqn.tachev@gmail.com"
+  },
+  "keywords": [
+    "graphql",
+    "gapi",
+    "node"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "http://gitlab.youvolio.com/gapi/gapi/issues"
+  }
+}
