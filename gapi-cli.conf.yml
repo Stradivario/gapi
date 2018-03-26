@@ -1,0 +1,5 @@
+commands:
+  cli:
+    init: git pull --recurse-submodules
+  version:
+    patch: for d in ./*/ ; do (cd "$d" && npm version patch && git push && npm publish); done
