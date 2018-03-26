@@ -3,12 +3,7 @@ commands:
     init: git pull --recurse-submodules
   version:
     patch:
-      - for dir in ./*/; do cd -P "$dir" ||continue;    printf %s\\n "$PWD" >&2;
-      - npm version patch
-      - git push
-      - gapi npm publish
-      - cd "$OLDPWD" ||  ! break; done || ! cd - >&2
-      - gapi repo commit
+      - for d in ./*/ ; do (cd "$d" && npm version patch && git push && gapi npm publish); done && gapi repo commit >/dev/null 2>&1
   repo:
     commit:
       - git add .
