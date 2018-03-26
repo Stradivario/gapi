@@ -6,8 +6,9 @@ commands:
       - for d in ./*/ ; do (cd "$d" && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit >/dev/null 2>&1
   repo:
     commit:
-      - npm version patch
-      - gapi npm publish
+      - git add .
+      - git commit -m "chore(VersionBump)"
       - git push
+      - gapi npm publish
   npm:
     publish: npm publish --update-readme --access public
