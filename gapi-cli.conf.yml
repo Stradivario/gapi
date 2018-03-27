@@ -9,6 +9,7 @@ commands:
       - git add .
       - git commit -m "chore(VersionBump)"
       - git push
+      - npm version patch
       - gapi npm publish
   npm:
     publish: npm publish --update-readme --access public
