@@ -7,7 +7,7 @@ commands:
     change:
       - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && npm i --package-lock-only); done && gapi commit all && gapi repo commit
     patch:
-      - gapi version change && for d in ./*/ ; do (cd "$d" && npm version patch && git push && npm publish --update-readme --access public); done && gapi version change
+      -  gapi version change && for d in ./*/ ; do (cd "$d" && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit
   repo:
     commit:
       - git add .
