@@ -3,7 +3,8 @@ const { join } = require('path');
 const { lstatSync, readdirSync, readFileSync } = require('fs');
 
 const package = require('./package.json');
-const buildVersion = package.version;
+let buildVersion = package.version;
+
 const isDirectory = source => lstatSync(source).isDirectory();
 const getDirectories = source => readdirSync(source).map(name => join(source, name)).filter(isDirectory);
 const repos = [];
