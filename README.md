@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Stradivario/gapi-core.svg?branch=master)](https://travis-ci.org/Stradivario/gapi-core)
 
-**Really easy [GraphQL](https://graphql.org/) API framework builded on top of NodeJS inspired by [@Angular](https://angular.io/)**
+**Really easy [GraphQL](https://graphql.org/) API framework build on top of NodeJS inspired by [@Angular](https://angular.io/)**
 
 **Created to provide complex backend scalable applications with minimum effort.**
 
