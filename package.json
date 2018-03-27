@@ -1,77 +1,7 @@
 {
-  "name": "@gapi/starter-basic",
+  "name": "@gapi/main",
   "version": "0.7.18",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "postpublish": "git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-starter.git && git push --tags && git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-starter.git --tags",
-    "start": "gapi start",
-    "start:prod": "gapi start --prod",
-    "stop:prod": "gapi stop --prod",
-    "start:docker": "gapi app start",
-    "stop:docker": "gapi app stop",
-    "build:docker": "gapi app build",
-    "start:workers": "gapi workers start",
-    "stop:workers": "gapi workers stop",
-    "pretest": "npm run lint",
-    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "test": "gapi test",
-    "test-watch": "gapi test --watch"
-  },
   "author": "Kristiyan Tachev",
-  "license": "MIT",
-  "dependencies": {
-    "@gapi/cli": "^0.7.18",
-    "@gapi/core": "^0.7.14",
-    "rxjs": "^5.5.6",
-    "ts-node": "^5.0.1",
-    "typescript": "^2.7.1"
-  },
-  "devDependencies": {
-    "@types/jest": "^22.2.0",
-    "graphql-tester": "0.0.5",
-    "jest": "^22.4.2",
-    "jest-cli": "^22.4.2",
-    "ts-jest": "^22.4.1",
-    "ts-lint": "^4.5.1"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "./src/**/*.spec.ts"
-    ],
-    "verbose": false,
-    "exec": "ts-node ./src/main.ts",
-    "watch": [
-      "./src/**/*.ts"
-    ],
-    "events": {},
-    "ext": "ts"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "/node_modules/"
-    ],
-    "coverageReporters": [
-      "lcov",
-      "html"
-    ],
-    "rootDir": "./",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json",
-      "node"
-    ],
-    "globals": {
-      "__DEV__": true
-    },
-    "transform": {
-      "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "/src/.*\\.spec.(ts|tsx|js)$",
-    "verbose": true,
-    "collectCoverage": true
-  }
+  "license": "MIT"
 }
