@@ -5,9 +5,9 @@ commands:
       - git submodule update --init --recursive
   version:
     change:
-      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && npm i --package-lock-only); done && gapi commit all && gapi repo commit
+      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && npm i --package-lock-only); done && gapi commit all-publish && gapi repo commit
     patch:
-      - for d in ./*/ ; do (cd "$d" && npm version patch && git push && npm publish --update-readme --access public); done && gapi version change
+      - for d in ./*/ ; do (cd "$d" && npm version patch); done && gapi version change
   repo:
     commit:
       - git add .
@@ -20,6 +20,6 @@ commands:
   
   commit:
     all: for d in ./*/ ; do (cd "$d" && git add . && git commit -m "chore(all):commit for all repos" && git push && npm run postpublish); done
-
+    all-publish: for d in ./*/ ; do (cd "$d" && git add . && git commit -m "chore(all):commit for all repos" && git push && npm run postpublish && npm publish --update-readme --access public); done
 
     #  >/dev/null 2>&1
