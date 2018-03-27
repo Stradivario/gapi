@@ -1,6 +1,8 @@
 commands:
   cli:
-    init: git pull --recurse-submodules
+    init:
+      - git submodule sync --recursive
+      - git submodule update --init --recursive
   version:
     patch:
       - for d in ./*/ ; do (cd "$d" && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit >/dev/null 2>&1
