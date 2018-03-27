@@ -133,13 +133,13 @@ npm install @gapi/cli -g
 ##### To skip the following steps creating project and bootstraping from scratch you can type the following command:
 It may take 20 seconds because it will install project dependencies.
 
-###### ![Build Status](http://gitlab.youvolio.com/gapi/gapi-starter/badges/master/build.svg)
+[![Build Status](https://travis-ci.org/Stradivario/gapi-starter.svg?branch=master)](https://travis-ci.org/Stradivario/gapi-starter)
 ###### [Basic project](https://github.com/Stradivario/gapi-starter) 
 ```bash
 gapi new my-project
 ```
 
-###### ![Build Status](http://gitlab.youvolio.com/gapi/gapi-starter-postgres-sequelize/badges/master/build.svg)
+[![Build Status](https://travis-ci.org/Stradivario/gapi-starter-postgres-sequelize-rabbitmq.svg?branch=master)](https://travis-ci.org/Stradivario/gapi-starter-postgres-sequelize-rabbitmq)
 ###### [Advanced Project](https://github.com/Stradivario/gapi-starter-postgres-sequelize)
 ```bash
 gapi new my-project --advanced
