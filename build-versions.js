@@ -20,18 +20,24 @@ getDirectories(__dirname)
   });
 })
 
-function changeVersion(packages) {
+function changeVersion(packages, operation) {
   if (packages) {
+    const matches = [];
+
     for(let dep in packages) {
       repos.forEach(repo => {
         if(dep === repo.name) {
-          if (dep === repo.name) {
-            console.log(packages, repo.name, dep);
-            packages[repo.name] = '^' + buildVersion;
-          }
+    
+          packages[repo.name] = '^' + buildVersion;
+          matches.push({name: repo.name, packageVersion: packages[repo.name]})
         }
       })
     }
+    if (matches.length) {
+      console.log(operation);
+      console.log(JSON.stringify(matches, null, 1));
+    }
+    return matches;
   }
 }
 
@@ -39,9 +45,24 @@ repos
 .forEach(r => {
   const rawFile = readFileSync(r.directory + '/package.json', 'utf8');
   const package = JSON.parse(rawFile);
-  changeVersion(package.dependencies);
-  changeVersion(package.devDependencies);
-  changeVersion(package.peerDependencies);
-  writeFileSync(r.directory + '/package.json', JSON.stringify(package, null, 2), 'utf8');
+
+  console.log('### ', r.name, '###');
+  const dependencies = changeVersion(package.dependencies, 'dependencies: ') || [];
+  const devDependencies = changeVersion(package.devDependencies, 'devDependencies: ') || [];
+  const peerDependencies = changeVersion(package.peerDependencies, 'peerDependencies') || [];
+  package.version = buildVersion;
+  const matches = [
+    ...dependencies,
+    ...devDependencies,
+    ...peerDependencies
+  ];
+  if (matches.length) {
+    console.log('Found dependencies!');
+    writeFileSync(r.directory + '/package.json', JSON.stringify(package, null, 2), 'utf8');
+    console.log('---------------------------------------------');
+  } else {
+    console.log('No Matches found')
+  }
+
 });
 

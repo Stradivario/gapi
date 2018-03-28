@@ -20,7 +20,7 @@ commands:
     publish: npm publish --update-readme --access public
   
   commit:
-    all: for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'chore(all):commit for all repos' && git push && npm run postpublish); done
-    all-publish: for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'chore(all):commit for all repos' && git push && npm publish --update-readme --access public); done
+    all: for d in ./*/ ; do (cd "$d" && git add . && git commit -m all && git push && npm run postpublish); done
+    all-publish: for d in ./*/ ; do (cd "$d" && git add . && git commit -m all && git push && npm publish --update-readme --access public); done
 
     #  >/dev/null 2>&
