@@ -10,7 +10,7 @@ commands:
       - npm version patch
       - git push
       - gapi npm publish
-      - for d in ./*/ ; do (cd "$d" && npm version patch && npm publish --update-readme --access public); done && gapi version change
+      - for d in ./*/ ; do (cd "$d" && npm version patch && npm publish --update-readme --access public); done && gapi repo commit && gapi version change
   repo:
     commit:
       - git add .
