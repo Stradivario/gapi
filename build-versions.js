@@ -50,6 +50,7 @@ repos
   const dependencies = changeVersion(package.dependencies, 'dependencies: ') || [];
   const devDependencies = changeVersion(package.devDependencies, 'devDependencies: ') || [];
   const peerDependencies = changeVersion(package.peerDependencies, 'peerDependencies') || [];
+
   const matches = [
     ...dependencies,
     ...devDependencies,
