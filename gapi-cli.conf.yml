@@ -14,7 +14,7 @@ commands:
   repo:
     commit:
       - git add .
-      - git commit -m "autocommitmessage"
+      - git commit -m autocommitmessage
       - git push
   npm:
     publish: npm publish --update-readme --access public
