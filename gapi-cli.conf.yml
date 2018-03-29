@@ -5,7 +5,7 @@ commands:
       - git submodule update --init --recursive
   version:
     change:
-      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && npm i --package-lock-only && git add . && git commit -m versionpatch && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit
+      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && npm i --package-lock-only && git add . && git commit -m versionpatch && git push && npm version patch && npm publish --update-readme --access public); done && gapi repo commit
     patch:
       - npm version patch
       - git push
