@@ -2,7 +2,9 @@ commands:
   cli:
     init:
       - git submodule sync --recursive
-      - git submodule update --init --recursive
+      - git submodule update --init --
+      - for d in ./*/ ; do (cd "$d" && git archive --remote=ssh://git@gitlab.youvolio.com:522/kristiyan.tachev/version-tag-hook.git HEAD hooks | tar -x -C .git); done
+
   version:
     change:
       - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && git push && npm version patch && npm publish --update-readme --access public); done && gapi repo commit
@@ -26,3 +28,4 @@ commands:
 
     #  >/dev/null 2>&
 
+  
