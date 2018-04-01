@@ -331,7 +331,6 @@ gapi workers stop
 ```
 
 
-
 # Creating application from scratch and custom bootstrapping Without CLI
 
 ### Create folder structure like this root/src/app
@@ -1221,6 +1220,95 @@ query {
 }
 ```
 
+
+### Decorators
+
+
+All Gapi Decorators
+
+**@Query** - Define Query object added above method inside @GapiController
+
+**@Mutation** - Define Mutation object added above method inside @GapiController
+
+**@Subscription** - Define Subscription object added above method inside @GapiController
+
+**@Subscribe** - It will be used with @Subscription Decorator and it takes PubSubIterator function @Subscribe(() => UserSubscriptionsController.pubsub.asyncIterator('CREATE_SIGNAL_BASIC')) can be used also withFilter 
+
+```typescript
+    @Subscribe(
+        withFilter(
+            () => UserSubscriptionsController.pubsub.asyncIterator('CREATE_SIGNAL_WITH_FILTER'),
+            (payload, {id}, context) => {
+                console.log('User trying to subscribe: ', id, JSON.stringify(context));
+                // if user passes your expression it will be subscribed to this subscription
+                return id !== context.id;
+            }
+        )
+    )
+    @Subscription()
+    subscribeToUserMessagesWithFilter(message): UserMessage {
+        return { message };
+    }
+```
+
+**@Public** - Works with (@Query, @Mutation, Subscription) adds property "public = true" will make this particular resolver Public without authentication
+
+**@Scope** - Can take arguments like what kind of User can use this Resolver @scope('ADMIN', 'USER', 'SALES')
+
+**@Type** - Works with (@Query, @Mutation, Subscription) passing GapiObjectType class here for example UserType this is internally new GraphQLObjectType
+
+**@GapiObjectType** - Internally is using new GraphQLObjectType() adding name of the class as a {name: constructor.name} can take {name: 'YourCustomName'} as argument also the same Object type can be used for generating new GraphQLInputObjectType when passing {input: true} used for Arguments
+
+**@Resolve** - This is used internally inside GapiObjectType and it is related with modifying return result from GraphQL like in the following example
+```typescript
+@GapiObjectType()
+export class UserType {
+    id: number | GraphQLScalarType = GraphQLInt;
+    
+    @Resolve('id')
+    getId?(root, payload, context) {
+        return 5;
+    }
+}
+
+```
+Important part is that getId? method needs to be OPTIONAL because it will be part of the Interface defined by the class UserType so everywhere if you use UserType it will ask you to add getId as a function but we just want to modify the return result from Schema with Resolve method decorator.
+
+**@GapiController** - It will define Controllers inside Gapi Application you can have as many as you wish controllers just when you are ready import them inside @GapiModule({controllers: ...CONTROLLERS})
+
+
+**@GapiModule** - This is the starting point of the application when we bootstrap our module inside root/src/main.ts.Also can be used to create another GapiModules which can be imported inside AppModule {imports: ...IMPORTS}
+
+**@Service** - Passed above class, this Decorator will insert metadata related with this class and all Dependencies Injected inside constructor() so when application starts you will get a Singleton of many Services if they are not Factory Services(Will explain how to create Factory in next release).So you can use single instance of a Service injected everywhere inside your application.
+
+**@Inject** - It will inject Service with specific NAME for example when using InjectionToken('my-name') you can do something like
+
+```typescript
+constructor(
+    @Inject('my-name') private name: string;
+) {}
+```
+
+**@Injector** - Use this very carefully! It will Inject Services before application is fully loaded used to load Instance of a class before the real load of application it is used only inside GapiObjectType because Types are the first thing that will be loaded inside Gapi Application so we need our Services on Processing Decorators which is when the application loads.If you can use Dependency Injection internally provided.
+
+**@InjectType** - This is BETA decorator for now is used without Decorator sign @ example:
+
+```typescript
+@GapiObjectType()
+export class UserType {
+    readonly id: number | GraphQLScalarType = GraphQLInt;
+    readonly settings: string | UserSettings = InjectType(UserSettingsType);
+}
+```
+In future releases it will be used as follows: 
+
+```typescript
+@GapiObjectType()
+export class UserType {
+    readonly id: number | GraphQLScalarType = GraphQLInt;
+    @InjectType(UserSettingsType) readonly settings: string;
+}
+```
 
 
 TODO: Better documentation...
