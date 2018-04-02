@@ -1224,7 +1224,7 @@ query {
 ### Effects OfType
 
 ```typescript
-import { OfType, Service } from '@gapi/core';
+import { OfType, GapiEffect } from '@gapi/core';
 import { EffectTypes } from '../core/api-introspection/EffectTypes';
 
 @GapiEffect()
