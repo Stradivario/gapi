@@ -1227,7 +1227,7 @@ query {
 import { OfType, Service } from '@gapi/core';
 import { EffectTypes } from '../core/api-introspection/EffectTypes';
 
-@Service()
+@GapiEffect()
 export class UserEffects {
 
     @OfType<EffectTypes>(EffectTypes.login)
@@ -1261,6 +1261,34 @@ export type EffectTypes = keyof typeof EffectTypes;
 
 ```
 
+Import GapiEffect inside GapiModule
+
+```typescript
+
+import { GapiModule } from '@gapi/core';
+import { UserQueriesController } from './user-queries.controller';
+import { UserSubscriptionsController } from './user-subscriptions.controller';
+import { UserMutationsController } from './user-mutations.controller';
+import { UserService } from './services/user.service';
+import { AnotherService } from './services/another.service';
+import { UserEffects } from './user.effects';
+
+@GapiModule({
+    controllers: [
+        UserQueriesController,
+        UserSubscriptionsController,
+        UserMutationsController
+    ],
+    services: [
+        UserService,
+        AnotherService
+    ],
+    effects: [
+        UserEffects
+    ]
+})
+export class UserModule {}
+```
 
 ### Decorators
 
