@@ -17,6 +17,7 @@ commands:
     commit:
       - git add .
       - git commit -m 'autocommitmessage'
+      - npm version patch
       - git push
   npm:
   
