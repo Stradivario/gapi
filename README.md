@@ -1220,6 +1220,48 @@ query {
 }
 ```
 
+@Beta!
+### Effects OfType
+
+```typecsript
+import { OfType, Service } from '@gapi/core';
+import { EffectTypes } from '../core/api-introspection/EffectTypes';
+
+@Service()
+export class UserEffects {
+
+    @OfType<EffectTypes>(EffectTypes.findUser)
+    findUser(payload, context) {
+        console.log(payload, context);
+    }
+
+}
+
+```
+How it works ?
+
+When the application starts the whole schema is collected via Decorators applied inside GapiControllers.Now when we have our schema collected and bootstraping is done next step is to attach all BehaviorSubject Observables to particular resolver and from that step we got Type based string literal enums a.k.a Gapi Effects.They look like that:
+
+```typescript
+
+function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
+    return o.reduce((res, key) => {
+        res[key] = key;
+        return res;
+    }, Object.create(null));
+}
+export const EffectTypes = strEnum(['findUser',
+'login',
+'subscribeToUserMessagesBasic',
+'subscribeToUserMessagesWithFilter',
+'destroyUser',
+'updateUser',
+'addUser',
+'publishSignal']);
+export type EffectTypes = keyof typeof EffectTypes;
+
+```
+
 
 ### Decorators
 
