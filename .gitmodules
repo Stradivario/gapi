@@ -31,3 +31,6 @@
 [submodule "gapi-cloud"]
 	path = gapi-cloud
 	url = git@github.com:Stradivario/gapi-cloud.git
+[submodule "gapi-microservices"]
+	path = gapi-microservices
+	url = git@github.com:Stradivario/gapi-microservices.git
