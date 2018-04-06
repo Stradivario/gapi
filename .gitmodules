@@ -34,3 +34,6 @@
 [submodule "gapi-microservices"]
 	path = gapi-microservices
 	url = git@github.com:Stradivario/gapi-microservices.git
+[submodule "gapi-starter-microservices"]
+	path = gapi-starter-microservices
+	url = git@github.com:Stradivario/gapi-starter-microservices.git
