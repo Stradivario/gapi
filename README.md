@@ -145,6 +145,14 @@ gapi new my-project
 gapi new my-project --advanced
 ```
 
+[![Build Status](https://travis-ci.org/Stradivario/gapi-starter-microservices.svg?branch=master)](https://travis-ci.org/Stradivario/gapi-starter-microservices)
+###### [Microservices Project](https://github.com/Stradivario/gapi-starter-microservices)
+#### To create new basic project with microservices from scratch via CLI type:
+```bash
+gapi new my-project --microservices
+```
+
+
 Enter inside my-project and type: 
 
 ```bash
