@@ -37,3 +37,6 @@
 [submodule "gapi-starter-microservices"]
 	path = gapi-starter-microservices
 	url = git@github.com:Stradivario/gapi-starter-microservices.git
+[submodule "gapi-onesignal-notifications"]
+	path = gapi-onesignal-notifications
+	url = git@github.com:Stradivario/gapi-onesignal-notifications.git
