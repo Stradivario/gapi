@@ -1,7 +1,7 @@
 {
   "name": "@gapi/main",
-  "version": "0.7.185",
-   "description": "",
+  "version": "0.7.186",
+  "description": "",
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "devDependencies": {
