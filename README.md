@@ -448,7 +448,7 @@ import { GapiModule, GapiHapiPlugin, Service, GapiHapiPluginInterface } from '@g
 @Service()
 export class TestService {
   testMethod() {
-    return 1;
+    return 'Hello world';
   }
 }
 
@@ -470,8 +470,7 @@ class MyHapiPlugin implements GapiHapiPluginInterface {
   }
 
   async handler(request, h) {
-    console.log(this.testService.testMethod());
-    return 'Hello world';
+    return this.testService.helloWorld();
   }
 
 }
