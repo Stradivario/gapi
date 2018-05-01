@@ -443,7 +443,7 @@ Can be provided also Class with Hapi Plugin configuration
 
 ```typescript
 
-import { GapiModule, GapiHapiPlugin, Service } from '@gapi/core';
+import { GapiModule, GapiHapiPlugin, Service, GapiHapiPluginInterface } from '@gapi/core';
 
 @Service()
 export class TestService {
@@ -453,7 +453,7 @@ export class TestService {
 }
 
 @GapiHapiPlugin()
-class MyHapiPlugin {
+class MyHapiPlugin implements GapiHapiPluginInterface {
   name = 'MyPlugin';
   version = '1.0.0';
 
