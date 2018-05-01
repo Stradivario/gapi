@@ -486,9 +486,40 @@ export class AppModule {}
 
 ```
 
+### ForRoot configuration for modules
+
 ```typescript
+import { GapiModule, GapiModuleWithServices, InjectionToken } from '@gapi/core';
+
+@Service()
+export class MODULE_DI_CONFIG {
+    text: string = 'Hello world';
+}
 
 
+const MY_MODULE_CONFIG = new InjectionToken<MODULE_DI_CONFIG>('my-module-config');
+
+
+@GapiModule({
+  imports: []
+})
+export class YourModule {
+  public static forRoot(): GapiModuleWithServices {
+    return {
+      gapiModule: YourModule,
+      services: [
+          { provide: MY_MODULE_CONFIG, useValue: { text: 'Hello world' } },
+          { provide: MY_MODULE_CONFIG, useClass: MODULE_DI_CONFIG },
+          { 
+            provide: MY_MODULE_CONFIG,
+            useFactory: () => {
+                return {text: 'Hello world'};
+            }
+          }
+      ]
+    }
+  }
+}
 ```
 
 ### Docker
