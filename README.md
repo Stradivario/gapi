@@ -411,6 +411,72 @@ Purpose of Effects is to create logic after particular resolver is triggered Suc
 - Create After effect for UI/UX for example when user Login you can trigger some Push notification for user.
 - etc.
 
+
+### Hapi Plugins
+
+
+```typescript
+
+import { GapiModule } from '@gapi/core';
+
+@GapiModule({
+    plugins: [{
+        name: 'myPlugin',
+        version: '1.0.0',
+        register: async function (server, options) {
+            server.route({
+                method: 'GET',
+                path: '/test',
+                handler: function (request, h) {
+                    return 'hello, world';
+                }
+            });
+        }
+    }]
+})
+export class AppModule {}
+
+
+```
+
+Can be provided also Class with Hapi Plugin configuration
+
+```typescript
+
+import { GapiModule } from '@gapi/core';
+
+class MyHapiPlugin {
+  name = 'MyHapiPlugin';
+  version = '1.0.0';
+
+  async register(server, options) {
+
+    // Create a route for example
+
+    server.route({
+      method: 'GET',
+      path: '/test',
+      handler: function (request, h) {
+        return 'hello, world';
+      }
+    });
+
+  }
+}
+
+@GapiModule({
+    plugins: [MyHapiPlugin]
+})
+export class AppModule {}
+
+
+```
+
+```typescript
+
+
+```
+
 ### Docker
 
 ###### Following commands will start RabbitMQ, PostgreSQL, API, NGINX as a services and you need DOCKER installed on your system!
@@ -1426,6 +1492,7 @@ export class UserType {
     @InjectType(UserSettingsType) readonly settings: string;
 }
 ```
+
 
 
 TODO: Better documentation...
