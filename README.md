@@ -445,27 +445,41 @@ Can be provided also Class with Hapi Plugin configuration
 
 import { GapiModule } from '@gapi/core';
 
-class MyHapiPlugin {
-  name = 'MyHapiPlugin';
-  version = '1.0.0';
-
-  async register(server, options) {
-
-    // Create a route for example
-
-    server.route({
-      method: 'GET',
-      path: '/test',
-      handler: function (request, h) {
-        return 'hello, world';
-      }
-    });
-
+@Service()
+export class TestService {
+  testMethod() {
+    return 1;
   }
 }
 
+@Service()
+class MyPlugin {
+  name = 'MyPlugin';
+  version = '1.0.0';
+
+  constructor(
+    private testService: TestService
+  ) {}
+
+  async register(server, options) {
+    server.route({
+      method: 'GET',
+      path: '/test',
+      handler: this.handler.bind(this)
+    });
+  }
+
+  async handler(request, h) {
+    console.log(this.testService.testMethod());
+    return 'Hello world';
+  }
+
+}
+
+
 @GapiModule({
-    plugins: [MyHapiPlugin]
+    plugins: [MyHapiPlugin],
+    services: [TestService]
 })
 export class AppModule {}
 
