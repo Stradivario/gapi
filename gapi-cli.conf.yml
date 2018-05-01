@@ -23,6 +23,8 @@ commands:
       - git commit -m 'autocommitmessage'
       - git push
   npm:
+    pushtags:
+      - for d in ./*/ ; do (cd "$d" && npm run postpublish); done
   
   commit:
     all: for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && dir && git push && npm run postpublish); done
