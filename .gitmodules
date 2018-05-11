@@ -40,3 +40,6 @@
 [submodule "gapi-onesignal-notifications"]
 	path = gapi-onesignal-notifications
 	url = git@github.com:Stradivario/gapi-onesignal-notifications.git
+[submodule "gapi-voyager"]
+	path = gapi-voyager
+	url = git@github.com:Stradivario/gapi-voyager.git
