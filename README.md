@@ -24,6 +24,14 @@
 
 
 ***
+
+***
+
+**Amazon ServerLess Ready!**
+
+[Check Example](#amazon-serverless)
+
+***
 **Part of the frameworks and techniques used without which Gapi would not exist :love_letter:**
 
 - [Inversion of control pattern](https://martinfowler.com/articles/injection.html#InversionOfControl)
@@ -519,6 +527,46 @@ export class YourModule {
     }
   }
 }
+```
+
+### Amazon Serverless (#amazon-serverless)
+Inside main.ts
+```typescript
+import { AppModule } from './app/app.module';
+import { Bootstrap } from '@gapi/core';
+
+export const handler = async (event, context, callback) => {
+    const app = await Bootstrap(AppModule);
+    const URL = require('url');
+    const url = URL.format(
+        {
+            pathname: event.path,
+            query: event.queryStringParameters
+        }
+    );
+
+    const options = {
+        method: event.httpMethod,
+        url,
+        payload: event.body,
+        headers: event.headers,
+        validate: false
+    };
+    const res = await app.server.inject(options);
+    const headers = Object.assign(
+        res.headers,
+        {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'
+        }
+    );
+    callback(null, {
+        statusCode: res.statusCode,
+        body: res.result,
+        headers
+    });
+};
+
 ```
 
 ### Docker
@@ -1536,6 +1584,8 @@ export class UserType {
     @InjectType(UserSettingsType) readonly settings: string;
 }
 ```
+
+
 
 
 
