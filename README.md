@@ -25,8 +25,6 @@
 
 ***
 
-***
-
 **Amazon ServerLess Ready!**
 
 [Check Example](#amazon-serverless)
@@ -528,8 +526,8 @@ export class YourModule {
   }
 }
 ```
-
-### Amazon Serverless (#amazon-serverless)
+(#amazon-serverless)
+### Amazon Serverless 
 Inside main.ts
 ```typescript
 import { AppModule } from './app/app.module';
