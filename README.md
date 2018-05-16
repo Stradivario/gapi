@@ -66,7 +66,9 @@ IOC explanation taken from [this](https://stackoverflow.com/a/6551303) article:
 ##### [@Gapi-Typescript-Sequelize](https://github.com/Stradivario/gapi-sequelize)
 ##### [@Gapi-Angular-Client](https://github.com/Stradivario/gapi-angular-client)
 ##### [@Gapi-Amqp-PubSub](https://github.com/Stradivario/gapi-amqp) (Internally)
-
+##### [@Gapi-Onesignal-Notifications](https://github.com/Stradivario/gapi-onesignal-notifications)
+##### [@Gapi-Sequelize](https://github.com/Stradivario/gapi-sequelize)
+##### [@Gapi-voyager](https://github.com/Stradivario/gapi-voyager)
 
 ## Installation and basic examples:
 ##### To install this library, run:
@@ -533,6 +535,8 @@ Inside main.ts
 import { AppModule } from './app/app.module';
 import { Bootstrap } from '@gapi/core';
 
+Bootstrap(AppModule);
+
 export const handler = async (event, context, callback) => {
     const app = await Bootstrap(AppModule);
     const URL = require('url');
@@ -542,7 +546,6 @@ export const handler = async (event, context, callback) => {
             query: event.queryStringParameters
         }
     );
-
     const options = {
         method: event.httpMethod,
         url,
@@ -558,12 +561,67 @@ export const handler = async (event, context, callback) => {
             'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'
         }
     );
-    callback(null, {
+    return {
         statusCode: res.statusCode,
         body: res.result,
         headers
-    });
+    }
 };
+
+```
+
+#### Serverless-offline
+
+If we want to use AWS Lambdas Offline we need to set PORT to null because HAPI will generate random PORT everytime and as far as i know lambas are independent server which will be started everytime when someone execute that particular function.So when running offline it will not say that port 9000 is opened with another server.
+
+```typescript
+
+import { GapiModule, ConfigService, Container } from '@gapi/core';
+import { UserModule } from './user/user.module';
+import { CoreModule } from './core/core.module';
+
+@GapiModule({
+    imports: [
+        UserModule,
+        CoreModule
+    ],
+    services: [
+        ConfigService.forRoot({
+            APP_CONFIG: {
+                ...Container.get(ConfigService).APP_CONFIG,
+                port: process.env.NODE_ENV === 'production' ? null : process.env.API_PORT
+            }
+        })
+    ]
+})
+export class AppModule { }
+```
+
+Lambdas cannot use Typescript so we need to compile our application to es6 as commonjs module
+```bash
+tsc
+```
+
+Then we can run
+```bash
+serverless deploy
+```
+
+Later you can create PROXY server and map all existing Lambdas as a single GRAPHQL Schema
+```typescript
+import { GapiModule } from '@gapi/core';
+import { GapiMicroserviceModule } from '@gapi/microservices';
+import { CoreModule } from './core/core.module';
+
+@GapiModule({
+  imports: [
+    CoreModule,
+    GapiMicroserviceModule.forRoot([
+      {name: 'microservice1', link: 'https://hkzdqnc1i2.execute-api.us-east-2.amazonaws.com/development/graphql'}
+    ]),
+  ]
+})
+export class AppModule {}
 
 ```
 
