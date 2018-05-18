@@ -604,6 +604,31 @@ Lambdas cannot use Typescript so we need to compile our application to es6 as co
 tsc
 ```
 
+Create serverless.yml
+```yml
+service: gapi-serverless
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: development
+  profile: default
+  region: us-east-2
+
+functions:
+  root:
+    handler: src/main.handler
+    events:
+      - http:
+          path: "/{proxy+}"
+          method: any
+          cors: true
+          integration: lambda-proxy
+
+plugins:
+  - serverless-offline
+
+```
+
 Then we can run
 ```bash
 serverless deploy
