@@ -43,3 +43,6 @@
 [submodule "gapi-voyager"]
 	path = gapi-voyager
 	url = git@github.com:Stradivario/gapi-voyager.git
+[submodule "gapi-starter-serverless-sequelize"]
+	path = gapi-starter-serverless-sequelize
+	url = git@github.com:Stradivario/gapi-starter-serverless-sequelize.git
