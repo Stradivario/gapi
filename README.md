@@ -160,6 +160,21 @@ gapi new my-project --advanced
 gapi new my-project --microservices
 ```
 
+[![Build Status](https://travis-ci.org/Stradivario/gapi-starter-serverless.svg?branch=master)](https://travis-ci.org/Stradivario/gapi-starter-serverless)
+###### [Microservices Project](https://github.com/Stradivario/gapi-starter-serverless)
+#### To create new advanced sequelize project with serverless from scratch via CLI type:
+```bash
+gapi new my-project --serverless
+```
+
+[![Build Status](https://travis-ci.org/Stradivario/gapi-starter-serverless-sequelize.svg?branch=master)](https://travis-ci.org/Stradivario/gapi-starter-serverless-sequelize)
+###### [Microservices Project](https://github.com/Stradivario/gapi-starter-serverless-sequelize)
+#### To create new advanced sequelize project with serverless from scratch via CLI type:
+```bash
+gapi new my-project --serverless-sequelize
+```
+
+
 
 Enter inside my-project and type: 
 
