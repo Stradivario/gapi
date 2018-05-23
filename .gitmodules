@@ -46,3 +46,6 @@
 [submodule "gapi-starter-serverless-sequelize"]
 	path = gapi-starter-serverless-sequelize
 	url = git@github.com:Stradivario/gapi-starter-serverless-sequelize.git
+[submodule "gapi-ethereum"]
+	path = gapi-ethereum
+	url = git@github.com:Stradivario/gapi-ethereum.git
