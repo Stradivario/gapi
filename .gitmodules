@@ -49,3 +49,6 @@
 [submodule "gapi-ethereum"]
 	path = gapi-ethereum
 	url = git@github.com:Stradivario/gapi-ethereum.git
+[submodule "gapi-ipfs"]
+	path = gapi-ipfs
+	url = git@github.com:Stradivario/gapi-ipfs.git
