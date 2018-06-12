@@ -52,3 +52,6 @@
 [submodule "gapi-ipfs"]
 	path = gapi-ipfs
 	url = git@github.com:Stradivario/gapi-ipfs.git
+[submodule "gapi-orbitdb"]
+	path = gapi-orbitdb
+	url = git@github.com:Stradivario/gapi-orbitdb.git
