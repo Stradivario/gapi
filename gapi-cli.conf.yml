@@ -32,6 +32,9 @@ commands:
     all: for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && dir && git push && npm run postpublish); done
     all-publish: for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' && git push && npm publish --update-readme --access public); done
 
+  info:
+    status: for d in ./*/ ; do (cd "$d" && pwd && git status); done
+
     # all-publish: for d in ./*/ ; do (cd "$d" && git add . && git commit -m autocommitmessage && git push && npm publish --update-readme --access public); done
 
     #  >/dev/null 2>&
