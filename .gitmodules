@@ -58,3 +58,6 @@
 [submodule "gapi-ipfs-pubsub"]
 	path = gapi-ipfs-pubsub
 	url = git@github.com:Stradivario/gapi-ipfs-pubsub.git
+[submodule "gapi-auth"]
+	path = gapi-auth
+	url = git@github.com:Stradivario/gapi-auth.git
