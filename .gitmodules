@@ -64,3 +64,6 @@
 [submodule "gapi-starter-serverless"]
 	path = gapi-starter-serverless
 	url = git@github.com:Stradivario/gapi-starter-serverless.git
+[submodule "gapi-playground"]
+	path = gapi-playground
+	url = git@github.com:Stradivario/gapi-playground
