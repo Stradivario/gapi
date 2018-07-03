@@ -9,9 +9,9 @@ commands:
     change-patch:
       - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit-patch
     change-minor:
-      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit-minor
+      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && npm version minor && git push && npm publish --update-readme --access public); done && gapi repo commit-patch
     change-major:
-      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit-major
+      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && npm version major && git push && npm publish --update-readme --access public); done && gapi repo commit-patch
     patch:
       - npm version patch
       - git push

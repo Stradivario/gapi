@@ -67,3 +67,6 @@
 [submodule "gapi-playground"]
 	path = gapi-playground
 	url = git@github.com:Stradivario/gapi-playground
+[submodule "gapi-starter-simple"]
+	path = gapi-starter-simple
+	url = https://github.com/Stradivario/gapi-starter-simple
