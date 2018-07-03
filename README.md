@@ -80,17 +80,17 @@ npm install @gapi/core
 ## Simplest Gapi server
 
 ```typescript
-import {
-  GapiObjectType, GraphQLScalarType, GraphQLInt, GraphQLNonNull,
-  GapiController, Type, Query, GapiModule, Bootstrap
-} from '@gapi/core';
+import { CoreModule } from '@gapi/core';
+import { Controller, Module, BootstrapFramework } from '@rxdi/core';
+import { GapiObjectType, Query, Public, Type } from '@rxdi/graphql';
+import { GraphQLScalarType, GraphQLInt, GraphQLNonNull } from 'graphql';
 
 @GapiObjectType()
 export class UserType {
     readonly id: number | GraphQLScalarType = GraphQLInt;
 }
 
-@GapiController()
+@Controller()
 export class UserQueriesController {
 
     @Type(UserType)
@@ -105,14 +105,13 @@ export class UserQueriesController {
 
 }
 
-@GapiModule({
-    controllers: [
-        UserQueriesController
-    ]
+@Module({
+    controllers: [UserQueriesController]
 })
 export class AppModule { }
 
-Bootstrap(AppModule);
+
+BootstrapFramework(AppModule, [CoreModule]).subscribe()
 ```
 
 Execute
@@ -120,7 +119,6 @@ Execute
 ```bash
 ts-node index.ts
 ```
-
 
 
 ## With CLI
@@ -234,7 +232,7 @@ gapi test --before
 ##### Unit Testing
 
 ```typescript
-import { Container } from '@gapi/core';
+import { Container } from '@rxdi/core';
 import { AuthPrivateService } from './auth.service';
 
 const authService: AuthPrivateService = Container.get(AuthPrivateService);
@@ -260,9 +258,10 @@ describe('Auth Service', () => {
 ##### Integrated testing utility inside basic and advanced examples E2E testing
 Filepath: `root/src/app/user/user-queries.controller.e2e.spec.ts`
 ```typescript
-import { Container } from '@gapi/core';
+import { Container } from '@rxdi/core';
 import { IQuery } from '../core/api-introspection/index';
 import { TestUtil } from '../core/test-util/testing.service';
+import { map } from 'rxjs/operators';
 
 const testUtil: TestUtil = Container.get(TestUtil);
 
@@ -284,10 +283,12 @@ describe('User Queries Controller', () => {
         id: 1
       }
     })
-      .map(res => {
-        expect(res.success).toBeTruthy();
-        return res.data.findUser;
-      })
+      .pipe(
+        map(res => {
+            expect(res.success).toBeTruthy();
+            return res.data.findUser;
+        })
+      )
       .subscribe(async res => {
         expect(res.id).toBe(1);
         expect(res.settings.username).toBe('o');
@@ -319,17 +320,18 @@ Filepath: `root/src/app/core/test-util/testing.service.ts`
                 authorization: query.signiture.token
             });
         }
-        return Observable.fromPromise(this.tester(JSON.stringify(query)));
+        return from(this.tester(JSON.stringify(query)));
     }
 ```
 
 ### Effects
 
 ```typescript
-import { OfType, GapiEffect } from '@gapi/core';
+import { Effect } from '@rxdi/core';
+import { OfType } from '@rxdi/graphql';
 import { EffectTypes } from '../core/api-introspection/EffectTypes';
 
-@GapiEffect()
+@Effect()
 export class UserEffects {
 
     @OfType<EffectTypes>(EffectTypes.login)
@@ -363,11 +365,11 @@ export type EffectTypes = keyof typeof EffectTypes;
 
 ```
 
-Import GapiEffect inside GapiModule
+Import GapiEffect inside Module
 
 ```typescript
 
-import { GapiModule } from '@gapi/core';
+import { Module } from '@rxdi/core';
 import { UserQueriesController } from './user-queries.controller';
 import { UserSubscriptionsController } from './user-subscriptions.controller';
 import { UserMutationsController } from './user-mutations.controller';
@@ -375,7 +377,7 @@ import { UserService } from './services/user.service';
 import { AnotherService } from './services/another.service';
 import { UserEffects } from './user.effects';
 
-@GapiModule({
+@Module({
     controllers: [
         UserQueriesController,
         UserSubscriptionsController,
@@ -436,13 +438,13 @@ Purpose of Effects is to create logic after particular resolver is triggered Suc
 
 
 ### Hapi Plugins
-
+Working only for version bellow < 1.0.0  will be developed in next weeks
 
 ```typescript
 
-import { GapiModule } from '@gapi/core';
+import { Module } from '@gapi/core';
 
-@GapiModule({
+@Module({
     plugins: [{
         name: 'myPlugin',
         version: '1.0.0',
@@ -462,11 +464,14 @@ export class AppModule {}
 
 ```
 
-Can be provided also Class with Hapi Plugin configuration
+How to register plugin to the system.
+Difference between Plugin and Service is that system will trigger register method inside constructor if exist,
+else it will resolve OnInit and constructor properties.
+That way you can register your own plugins to the system after everything is bootstrapped.
 
 ```typescript
 
-import { GapiModule, GapiHapiPlugin, Service, GapiHapiPluginInterface } from '@gapi/core';
+import { Module, Plugin, Service, PluginInterface } from '@rxdi/core';
 
 @Service()
 export class TestService {
@@ -475,8 +480,8 @@ export class TestService {
   }
 }
 
-@GapiHapiPlugin()
-class MyHapiPlugin implements GapiHapiPluginInterface {
+@Plugin()
+export class MyHapiPlugin implements PluginInterface {
   name = 'MyPlugin';
   version = '1.0.0';
 
@@ -498,8 +503,7 @@ class MyHapiPlugin implements GapiHapiPluginInterface {
 
 }
 
-
-@GapiModule({
+@Module({
     plugins: [MyHapiPlugin],
     services: [TestService]
 })
@@ -511,24 +515,22 @@ export class AppModule {}
 ### ForRoot configuration for modules
 
 ```typescript
-import { GapiModule, GapiModuleWithServices, InjectionToken } from '@gapi/core';
+import { Module, ModuleWithServices, InjectionToken } from '@rxdi/core';
 
 @Service()
 export class MODULE_DI_CONFIG {
     text: string = 'Hello world';
 }
 
-
 const MY_MODULE_CONFIG = new InjectionToken<MODULE_DI_CONFIG>('my-module-config');
 
-
-@GapiModule({
+@Module({
   imports: []
 })
 export class YourModule {
-  public static forRoot(): GapiModuleWithServices {
+  public static forRoot(): ModuleWithServices {
     return {
-      gapiModule: YourModule,
+      module: YourModule,
       services: [
           { provide: MY_MODULE_CONFIG, useValue: { text: 'Hello world' } },
           { provide: MY_MODULE_CONFIG, useClass: MODULE_DI_CONFIG },
@@ -548,13 +550,29 @@ export class YourModule {
 Inside main.ts
 ```typescript
 import { AppModule } from './app/app.module';
-import { Bootstrap } from '@gapi/core';
+import { Bootstrap } from '@rxdi/core';
 import { format } from 'url';
 
-Bootstrap(AppModule);
+const App = BootstrapFramework(AppModule, [CoreModule], {
+    init: false,
+    initOptions: {
+        effects: true,
+        plugins: true,
+        services: true,
+        controllers: true
+    },
+    logger: {
+        logging: true,
+        date: true,
+        exitHandler: true,
+        fileService: true,
+        hashes: true
+    }
+})
+.toPromise();
 
 export const handler = async (event, context, callback) => {
-    const app = await Bootstrap(AppModule);
+    const app = await App(AppModule);
     const url = format({
         pathname: event.path,
         query: event.queryStringParameters
@@ -589,29 +607,57 @@ export const handler = async (event, context, callback) => {
 
 #### Serverless-offline
 
-If we want to use AWS Lambdas Offline we need to set PORT to null because HAPI will generate random PORT everytime and as far as i know lambas are independent server which will be started everytime when someone execute that particular function.So when running offline it will not say that port 9000 is opened with another server.
+If we want to use AWS Lambdas Offline we need to set RandomPort to true inside HapiConfig because HAPI will generate random PORT everytime and as far as i know lambas are independent server which will be started everytime when someone execute that particular function.So when running offline it will not say that port 9000 is opened with another server.
 
 ```typescript
+import { AppModule } from './app/app.module';
+import { BootstrapFramework } from '@rxdi/core';
+import { CoreModule } from '@gapi/core';
 
-import { GapiModule, ConfigService, Container } from '@gapi/core';
-import { UserModule } from './user/user.module';
-import { CoreModule } from './core/core.module';
-
-@GapiModule({
-    imports: [
-        UserModule,
-        CoreModule
-    ],
-    services: [
-        ConfigService.forRoot({
-            APP_CONFIG: {
-                ...Container.get(ConfigService).APP_CONFIG,
-                port: process.env.NODE_ENV === 'production' ? null : process.env.API_PORT
+const GapiCoreModule = CoreModule.forRoot({
+    server: {
+        randomPort: true,
+        hapi: {
+            port: 9000
+        }
+    },
+    graphql: {
+        path: '/graphql',
+        openBrowser: false,
+        writeEffects: false,
+        graphiQlPath: '/graphiql',
+        graphiqlOptions: {
+            endpointURL: '/graphql',
+            subscriptionsEndpoint: `ws://localhost:9000/subscriptions`,
+            websocketConnectionParams: {
+                token: process.env.GRAPHIQL_TOKEN
             }
-        })
-    ]
+        },
+        graphqlOptions: {
+            schema: null
+        }
+    },
+});
+BootstrapFramework(AppModule, [GapiCoreModule], {
+    init: false,
+    initOptions: {
+        effects: true,
+        plugins: true,
+        services: true,
+        controllers: true
+    },
+    logger: {
+        logging: true,
+        date: true,
+        exitHandler: true,
+        fileService: true,
+        hashes: true
+    }
 })
-export class AppModule { }
+.subscribe(
+    () => console.log('Started!'),
+    (e) => console.error(e)
+);
 ```
 
 Lambdas cannot use Typescript so we need to compile our application to es6 as commonjs module
@@ -651,14 +697,14 @@ serverless deploy
 
 Later you can create PROXY server and map all existing Lambdas as a single GRAPHQL Schema
 ```typescript
-import { GapiModule } from '@gapi/core';
-import { GapiMicroserviceModule } from '@gapi/microservices';
+import { Module } from '@rxdi/core';
+import { MicroserviceModule } from '@gapi/microservices';
 import { CoreModule } from './core/core.module';
 
-@GapiModule({
+@Module({
   imports: [
     CoreModule,
-    GapiMicroserviceModule.forRoot([
+    MicroserviceModule.forRoot([
       {name: 'microservice1', link: 'https://hkzdqnc1i2.execute-api.us-east-2.amazonaws.com/development/graphql'}
     ]),
   ]
@@ -715,24 +761,17 @@ gapi workers stop
 ### Folder root/src/app/app.module.ts
 
 ```typescript
-
-import { GapiModule, GapiServerModule, ConfigService } from '@gapi/core';
+import { Module } from '@rxdi/core';
 import { UserModule } from './user/user.module';
+import { CoreModule } from './core/core.module';
 
-@GapiModule({
+@Module({
     imports: [
-        UserModule
-    ],
-    services: [
-        ConfigService.forRoot({
-            APP_CONFIG: {
-                port: 9000
-            }
-        })
+        UserModule,
+        CoreModule
     ]
 })
-export class AppModule {}
-
+export class AppModule { }
 
 ```
 
@@ -740,19 +779,26 @@ export class AppModule {}
 ### Folder root/src/app/user/user.module.ts
 ```typescript
 
-import { GapiModule } from '@gapi/core';
-import { UserQueriesController } from './user.queries.controller';
-import { UserMutationsController } from './user.mutations.controller';
-import { UserService, AnotherService } from './user/services/user.service';
+import { Module } from '@rxdi/core';
+import { UserQueriesController } from './user-queries.controller';
+import { UserSubscriptionsController } from './user-subscriptions.controller';
+import { UserMutationsController } from './user-mutations.controller';
+import { UserService } from './services/user.service';
+import { AnotherService } from './services/another.service';
+import { UserEffect } from './user.effect';
 
-@GapiModule({
+@Module({
     controllers: [
         UserQueriesController,
+        UserSubscriptionsController,
         UserMutationsController
     ],
     services: [
         UserService,
         AnotherService
+    ],
+    effects: [
+        UserEffect
     ]
 })
 export class UserModule {}
@@ -771,17 +817,22 @@ export class UserModule {}
 ##### If you remove @Resolve decorator it will be passed value returned from the first root resolver
 
 ```typescript
-import { GraphQLObjectType, GraphQLString, GraphQLInt, InjectType, GapiObjectType, Type, Resolve, GraphQLScalarType } from "gapi";
-import { UserSettingsObjectType } from './user-settings.type';
+import { GapiObjectType, Resolve, InjectType } from '@rxdi/graphql';
+import { GraphQLScalarType, GraphQLInt, GraphQLString } from 'graphql';
+import { UserSettings } from './user.settings';
 
 @GapiObjectType()
 export class UserType {
-    id: number | GraphQLScalarType = GraphQLInt;
-    settings: string | UserSettings = InjectType(UserSettingsType);
-    
+    readonly id: number | GraphQLScalarType = GraphQLInt;
+    readonly email: string | GraphQLScalarType = GraphQLString;
+    readonly type: string | GraphQLScalarType =  GraphQLString;
+    readonly password: string | GraphQLScalarType =  GraphQLString;
+    readonly name: string | GraphQLScalarType =  GraphQLString;
+    readonly settings: UserSettings = InjectType(UserSettings);
+
     @Resolve('id')
     getId?(root, payload, context) {
-        return 5;
+        return 1;
     }
 }
 ```
@@ -789,25 +840,21 @@ export class UserType {
 ## UserSettings Schema
 
 ```typescript
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GapiObjectType, Type, Resolve, GraphQLScalarType } from "gapi";
-
+import { Injector } from '@rxdi/core';
+import { GapiObjectType, Resolve } from '@rxdi/graphql';
+import { AnotherService } from '../services/another.service';
+import { GraphQLScalarType, GraphQLBoolean } from 'graphql';
 
 @GapiObjectType()
 export class UserSettings {
 
     @Injector(AnotherService) private anotherService?: AnotherService;
 
-    readonly username: string | GraphQLScalarType = GraphQLString;
-    readonly firstname: string | GraphQLScalarType = GraphQLString;
+    readonly sidebar: boolean | GraphQLScalarType = GraphQLBoolean;
 
-    @Resolve('username')
-    async getUsername?(root, payload, context) {
-        return await this.anotherService.trimFirstLetterAsync(root.username);
-    }
-
-    @Resolve('firstname')
-    getFirstname?(root, payload, context) {
-        return 'firstname-changed';
+    @Resolve('sidebar')
+    async getSidebar?(root, payload, context) {
+        return await this.anotherService.returnTrueAsync();
     }
 
 }
@@ -817,19 +864,21 @@ export class UserSettings {
 ## UserMessage Schema for Subscriptions
 
 ```typescript
-import { GapiObjectType, GraphQLScalarType, GraphQLString } from '@gapi/core';
+import { GapiObjectType } from '@rxdi/graphql';
+import { GraphQLScalarType, GraphQLString } from 'graphql';
 
 @GapiObjectType()
 export class UserMessage {
-    readonly message: number | GraphQLScalarType = GraphQLString;
+    readonly message: string | GraphQLScalarType = GraphQLString;
 }
 ```
 
 ## UserToken
 
 ```typescript
-import { GapiObjectType, GraphQLScalarType, GraphQLString, InjectType } from '@gapi/core';
+import { GapiObjectType, InjectType } from '@rxdi/graphql';
 import { UserType } from './user.type';
+import { GraphQLScalarType, GraphQLString } from 'graphql';
 
 @GapiObjectType()
 export class UserTokenType {
@@ -842,32 +891,36 @@ export class UserTokenType {
 ## Query
 ##### Folder root/src/user/query.controller.ts
 ```typescript
-import { Query, GraphQLNonNull, Type, GapiController, GraphQLInt, GraphQLString } from '@gapi/core';
+import { Controller } from '@rxdi/core';
+import { Type, Query, Public } from '@rxdi/graphql';
+import { GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
 import { UserService } from './services/user.service';
 import { UserType } from './types/user.type';
 import { UserTokenType } from './types/user-login.type';
 import { AuthPrivateService } from '../core/services/auth/auth.service';
 import { IUserType, IUserTokenType } from '../core/api-introspection/index';
 
-@GapiController()
+@Controller()
 export class UserQueriesController {
 
     constructor(
         private userService: UserService,
         private authService: AuthPrivateService
-    ) {}
+    ) { }
 
     @Type(UserType)
+    @Public()
     @Query({
         id: {
             type: new GraphQLNonNull(GraphQLInt)
         }
     })
-    findUser(root, { id }, context): IUserType  {
+    findUser(root, { id }, context): IUserType {
         return this.userService.findUser(id);
     }
 
     @Type(UserTokenType)
+    @Public()
     @Query({
         email: {
             type: new GraphQLNonNull(GraphQLString)
@@ -876,7 +929,7 @@ export class UserQueriesController {
             type: new GraphQLNonNull(GraphQLString)
         }
     })
-    login(root, {email, password}, context) {
+    login(root, { email, password }, context) {
         let credential: IUserTokenType;
 
         // Find user from database
@@ -914,18 +967,39 @@ export class UserQueriesController {
 ## Mutation
 ##### Folder root/src/user/mutation.controller.ts
 ```typescript
-import { Query, GraphQLNonNull, Scope, Type, GraphQLObjectType, Mutation, GapiController, Service, GraphQLInt, Container, Injector, GapiPubSubService, GraphQLString } from "gapi";
+import { Controller } from '@rxdi/core';
 import { UserService } from './services/user.service';
 import { UserType } from './types/user.type';
-import { UserMessage } from "./types/user-message.type";
+import { UserMessage } from './types/user-message.type';
+import { IUserType } from '../core/api-introspection';
+import { PubSubService } from '@rxdi/graphql-pubsub';
+import { Scope, Type, Mutation, Public } from '@rxdi/graphql';
+import { GraphQLNonNull, GraphQLString, GraphQLInt } from 'graphql';
 
-@GapiController()
+@Controller()
 export class UserMutationsController {
 
     constructor(
-        private userService: UserService
-        private pubsub: GapiPubSubService
+        private userService: UserService,
+        private pubsub: PubSubService
     ) {}
+
+    @Scope('ADMIN')
+    @Type(UserMessage)
+    @Public()
+    @Mutation({
+        message: {
+            type: new GraphQLNonNull(GraphQLString)
+        },
+        signal: {
+            type: new GraphQLNonNull(GraphQLString)
+        },
+    })
+    publishSignal(root, { message, signal }, context): UserMessage  {
+        console.log(`${signal} Signal Published message: ${message} by ${context.email}`);
+        this.pubsub.publish(signal, `${signal} Signal Published message: ${message} by ${context.email}`);
+        return {message};
+    }
 
     @Scope('ADMIN')
     @Type(UserType)
@@ -934,7 +1008,7 @@ export class UserMutationsController {
             type: new GraphQLNonNull(GraphQLInt)
         }
     })
-    deleteUser(root, { id }, context): UserType  {
+    deleteUser(root, { id }, context): IUserType  {
         return this.userService.deleteUser(id);
     }
 
@@ -945,7 +1019,7 @@ export class UserMutationsController {
             type: new GraphQLNonNull(GraphQLInt)
         }
     })
-    updateUser(root, { id }, context): UserType {
+    updateUser(root, { id }, context): IUserType {
         return this.userService.updateUser(id);
     }
 
@@ -956,27 +1030,12 @@ export class UserMutationsController {
             type: new GraphQLNonNull(GraphQLInt)
         }
     })
-    addUser(root, { id }, context): UserType  {
+    addUser(root, { id }, context): IUserType  {
         return this.userService.addUser(id);
     }
 
-
-    @Scope('ADMIN')
-    @Type(UserMessage)
-    @Mutation({
-        message: {
-            type: new GraphQLNonNull(GraphQLString)
-        },
-        signal: {
-            type: new GraphQLNonNull(GraphQLString)
-        },
-    })
-    publishSignal(root, { message, signal }, context): UserMessage  {
-        this.pubsub.publish(signal, `Signal Published message: ${message} by ${context.email}`);
-        return {message};
-    }
-
 }
+
 
 ```
 
@@ -984,25 +1043,24 @@ export class UserMutationsController {
 ##### Folder root/src/user/user.subscription.controller.ts
 ```typescript
 
-import {
-    GapiObjectType, GraphQLScalarType, GraphQLString, GapiController,
-    GapiPubSubService, Type, Injector, Subscribe, Subscription, withFilter, Scope, GraphQLInt, GraphQLNonNull
-} from '@gapi/core';
-import { UserService } from './services/user.service';
+import { Controller } from '@rxdi/core';
+import { Type, Scope, Public } from '@rxdi/graphql';
+import { withFilter } from 'graphql-subscriptions';
+import { GraphQLNonNull, GraphQLInt } from 'graphql';
+import { PubSubService, Subscribe, Subscription } from '@rxdi/graphql-pubsub';
 import { UserMessage } from './types/user-message.type';
 
-@GapiController()
+@Controller()
 export class UserSubscriptionsController {
 
-    @Injector(GapiPubSubService) private static pubsub: GapiPubSubService;
-
     constructor(
-        private userService: UserService
+        private pubsub: PubSubService
     ) {}
 
-    @Scope('USER')
+    @Scope('ADMIN')
     @Type(UserMessage)
-    @Subscribe(() => UserSubscriptionsController.pubsub.asyncIterator('CREATE_SIGNAL_BASIC'))
+    @Public()
+    @Subscribe((self: UserSubscriptionsController) => self.pubsub.asyncIterator('CREATE_SIGNAL_BASIC'))
     @Subscription()
     subscribeToUserMessagesBasic(message): UserMessage {
         return { message };
@@ -1012,10 +1070,10 @@ export class UserSubscriptionsController {
     @Type(UserMessage)
     @Subscribe(
         withFilter(
-            () => UserSubscriptionsController.pubsub.asyncIterator('CREATE_SIGNAL_WITH_FILTER'),
+            (self: UserSubscriptionsController) => self.pubsub.asyncIterator('CREATE_SIGNAL_WITH_FILTER'),
             (payload, {id}, context) => {
                 console.log('Subscribed User: ', id, JSON.stringify(context));
-                return id !== context.id;
+                return true;
             }
         )
     )
@@ -1056,44 +1114,80 @@ subscription {
 ## Create Service with @Service decorator somewhere
 ##### Folder root/src/user/services/user.service.ts
 ```typescript
-import { Service } from "gapi";
+
+import { Service } from '@rxdi/core';
+import { IUserType } from '../../core/api-introspection';
 
 @Service()
-class AnotherService {
-    trimFirstLetter(username: string) {
+export class AnotherService {
+    trimFirstLetter(username: string): string {
         return username.charAt(1);
     }
 
     trimFirstLetterAsync(username): Promise<string> {
         return Promise.resolve(this.trimFirstLetter(username));
     }
+
+    returnTrueAsync() {
+        return Promise.resolve(true);
+    }
 }
 
 @Service()
 export class UserService {
     constructor(
-        private anotherService: AnotherService
-    ) {}
+    ) { }
 
-    findUser(id: number) {
-        return { id: 1 };
+    findUser(id: number): IUserType {
+        return {
+            id: 1,
+            email: 'test@gmail.com',
+            type: 'ADMIN',
+            password: '123456',
+            name: 'Pesho',
+            settings: {
+                sidebar: true
+            }
+        };
     }
 
-    addUser(id: number) {
-        const username = this.anotherService.trimFirstLetter('username');
-        return { id: 1, username };
+    addUser(id: number): IUserType {
+        return {
+            id: 1,
+            email: 'test@gmail.com',
+            type: 'ADMIN',
+            password: '123456',
+            name: 'Pesho',
+            settings: {
+                sidebar: true
+            }
+        };
     }
 
-    deleteUser(id: number) {
-        return { id: 1 };
+    deleteUser(id: number): IUserType {
+        return {
+            id: 1,
+            email: 'test@gmail.com',
+            type: 'ADMIN',
+            password: '123456',
+            name: 'Pesho',
+            settings: {
+                sidebar: true
+            }
+        };
     }
 
-    updateUser(id) {
-        return { id: 1 };
-    }
-
-    subscribeToUserUpdates() {
-        return { id: 1 };
+    updateUser(id): IUserType {
+        return {
+            id: 1,
+            email: 'test@gmail.com',
+            type: 'ADMIN',
+            password: '123456',
+            name: 'Pesho',
+            settings: {
+                sidebar: true
+            }
+        };
     }
 
 }
@@ -1103,12 +1197,30 @@ export class UserService {
 ## Finally Bootstrap your application
 ##### Folder root/src/main.ts
 ```typescript
-
 import { AppModule } from './app/app.module';
-import { Bootstrap } from '@gapi/core';
+import { BootstrapFramework } from '@rxdi/core';
+import { CoreModule } from '@gapi/core';
 
-Bootstrap(AppModule);
-
+BootstrapFramework(AppModule, [CoreModule], {
+    init: false,
+    initOptions: {
+        effects: true,
+        plugins: true,
+        services: true,
+        controllers: true
+    },
+    logger: {
+        logging: true,
+        date: true,
+        exitHandler: true,
+        fileService: true,
+        hashes: true
+    }
+})
+.subscribe(
+    () => console.log('Started!'),
+    (e) => console.error(e)
+);
 ```
 
 
@@ -1129,24 +1241,15 @@ gapi start
 
 ```typescript
 
-import { GapiModule, ConfigService } from '@gapi/core';
+import { Module } from '@rxdi/core';
 import { AuthPrivateService } from './services/auth/auth.service';
-import { readFileSync } from 'fs';
 
-@GapiModule({
+@Module({
     services: [
-        ConfigService.forRoot({
-            APP_CONFIG: {
-                port: 9000,
-                cert: readFileSync('./cert.key'),
-                graphiqlToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg'
-            },
-        }),
         AuthPrivateService
     ]
 })
 export class CoreModule {}
-
 ```
 
 #### Create PrivateAuthService @Service() this is complete Subscriptions Query Mutation Authentication via single method "validateToken()"
@@ -1156,23 +1259,24 @@ export class CoreModule {}
 
 ```typescript
 
-import { Service, ConnectionHookService, AuthService, TokenData } from '@gapi/core';
+import { Service } from '@rxdi/core';
 import * as Boom from 'boom';
 
-interface UserInfo extends TokenData {
+export interface UserInfo {
     scope: ['ADMIN', 'USER'];
     type: 'ADMIN' | 'USER';
+    iat: number;
 }
 
 @Service()
 export class AuthPrivateService {
 
     constructor(
-        private authService: AuthService,
-        private connectionHookService: ConnectionHookService
+        // private authService: AuthService,
+        // private connectionHookService: ConnectionHookService
     ) {
-        this.connectionHookService.modifyHooks.onSubConnection = this.onSubConnection.bind(this);
-        this.authService.modifyFunctions.validateToken = this.validateToken.bind(this);
+        // this.connectionHookService.modifyHooks.onSubConnection = this.onSubConnection.bind(this);
+        // this.authService.modifyFunctions.validateToken = this.validateToken.bind(this);
     }
 
     onSubConnection(connectionParams): UserInfo {
@@ -1194,29 +1298,33 @@ export class AuthPrivateService {
         }
     }
 
-    verifyToken(token: string): TokenData {
-        return this.authService.verifyToken(token);
+    verifyToken(token: string): any {
+        // return this.authService.verifyToken(token);
+        return token;
     }
 
-    signJWTtoken(tokenData: TokenData): string {
-        return this.authService.sign(tokenData);
+    signJWTtoken(tokenData: any): any {
+        // return this.authService.sign(tokenData);
+        return tokenData;
     }
 
-    issueJWTToken(tokenData: TokenData) {
-        const jwtToken = this.authService.sign({
-            email: '',
-            id: 1,
-            scope: ['ADMIN', 'USER']
-        });
-        return jwtToken;
+    issueJWTToken(tokenData: any) {
+        // const jwtToken = this.authService.sign({
+        //     email: '',
+        //     id: 1,
+        //     scope: ['ADMIN', 'USER']
+        // });
+        // return jwtToken;
     }
 
-    decryptPassword(password: string): string {
-        return this.authService.decrypt(password);
+    decryptPassword(password: string): any {
+        // return this.authService.decrypt(password);
+        return password;
     }
 
-    encryptPassword(password: string): string {
-        return this.authService.encrypt(password);
+    encryptPassword(password: string): any {
+        // return this.authService.encrypt(password);
+        return password;
     }
 
 }
@@ -1226,12 +1334,12 @@ export class AuthPrivateService {
 ##### Final import CoreModule inside AppModule
 
 ```typescript
-import { GapiModule, GapiServerModule } from '@gapi/core';
+import { Module } from '@rxdi/core';
 import { UserModule } from './user/user.module';
 import { UserService } from './user/services/user.service';
 import { CoreModule } from './core/core.module';
 
-@GapiModule({
+@Module({
     imports: [
         UserModule,
         CoreModule
@@ -1246,7 +1354,7 @@ export class AppModule { }
 
 ```typescript
 
-import { GapiModule, InjectionToken } from '@gapi/core';
+import { Module, InjectionToken } from '@rxdi/core';
 import { UserModule } from './user/user.module';
 import { CoreModule } from './core/core.module';
 
@@ -1254,9 +1362,9 @@ class UserId {
     id: number;
 }
 
-const UserIdToken = new InjectionToken<UserId>('UserId');
+export const UserIdToken = new InjectionToken<UserId>('UserId');
 
-@GapiModule({
+@Module({
     imports: [
         UserModule,
         CoreModule
@@ -1282,7 +1390,7 @@ export class AppModule { }
 ```
 
 ```typescript
-@GapiController()
+@Controller()
 export class UserQueriesController {
     constructor(
         @Inject('UserId') private userId: {id: number}, // Value injection
@@ -1298,12 +1406,12 @@ export class UserQueriesController {
 
 **You can put also Observable as a value**
 ```typescript
-import { GapiModule } from '@gapi/core';
+import { Module } from '@rxdi/core';
 import { UserModule } from './user/user.module';
 import { CoreModule } from './core/core.module';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-@GapiModule({
+@Module({
     imports: [
         UserModule,
         CoreModule
@@ -1321,18 +1429,16 @@ export class AppModule { }
 **Then inject this service somewhere in your application**
 
 ```typescript
-import {
-    GapiController, GapiPubSubService, Type, Subscribe, Subscription,
-    withFilter, Scope, GraphQLInt, GraphQLNonNull, Injector, Inject
-} from '@gapi/core';
+import { Controller } from '@rxdi/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { PubSubService } from '@rxdi/graphql-pubsub';
 
-@GapiController()
+@Controller()
 export class UserSubscriptionsController {
 
     constructor(
         @Inject('Observable') private observable: BehaviorSubject<number>,
-        private pubsub: GapiPubSubService
+        private pubsub: PubSubService
     ) {
         this.observable.subscribe(() => this.pubsub.publish('CREATE_SIGNAL_BASIC', `Signal Published message: ${this.observable.getValue()}`));
     }
@@ -1342,7 +1448,7 @@ export class UserSubscriptionsController {
 **Then you can put it inside another service and emit values**
 
 ```typescript
-import { Service, Inject } from '@gapi/core';
+import { Service, Inject } from '@rxdi/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 
@@ -1378,8 +1484,8 @@ subscription {
 ##### Complex schema object with nested schemas of same type
 
 ```typescript
-import { GraphQLObjectType, GraphQLString, GraphQLInt, InjectType, GapiObjectType, Type, Resolve, GraphQLList, GraphQLBoolean } from "gapi";
-import { GraphQLScalarType } from "graphql";
+import { GapiObjectType, InjectType, Resolve, Type } from '@rxdi/graphql';
+import { GraphQLGapiObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLBoolean, GraphQLScalarType } from "graphql";
 
 @GapiObjectType()
 export class UserSettingsType {
@@ -1599,18 +1705,18 @@ query {
 
 All Gapi Decorators
 
-**@Query** - Define Query object added above method inside @GapiController
+**@Query** - Define Query object added above method inside @Controller
 
-**@Mutation** - Define Mutation object added above method inside @GapiController
+**@Mutation** - Define Mutation object added above method inside @Controller
 
-**@Subscription** - Define Subscription object added above method inside @GapiController
+**@Subscription** - Define Subscription object added above method inside @Controller
 
 **@Subscribe** - It will be used with @Subscription Decorator and it takes PubSubIterator function @Subscribe(() => UserSubscriptionsController.pubsub.asyncIterator('CREATE_SIGNAL_BASIC')) can be used also withFilter 
 
 ```typescript
     @Subscribe(
         withFilter(
-            () => UserSubscriptionsController.pubsub.asyncIterator('CREATE_SIGNAL_WITH_FILTER'),
+            (self: UserSubscriptionsController) => self.pubsub.asyncIterator('CREATE_SIGNAL_WITH_FILTER'),
             (payload, {id}, context) => {
                 console.log('User trying to subscribe: ', id, JSON.stringify(context));
                 // if user passes your expression it will be subscribed to this subscription
@@ -1628,7 +1734,7 @@ All Gapi Decorators
 
 **@Scope** - Can take arguments like what kind of User can use this Resolver @scope('ADMIN', 'USER', 'SALES')
 
-**@Type** - Works with (@Query, @Mutation, Subscription) passing GapiObjectType class here for example UserType this is internally new GraphQLObjectType
+**@Type** - Works with (@Query, @Mutation, Subscription) passing ObjectType class here for example UserType this is internally new GraphQLObjectType
 
 **@GapiObjectType** - Internally is using new GraphQLObjectType() adding name of the class as a {name: constructor.name} can take {name: 'YourCustomName'} as argument also the same Object type can be used for generating new GraphQLInputObjectType when passing {input: true} used for Arguments
 
@@ -1647,10 +1753,10 @@ export class UserType {
 ```
 Important part is that getId? method needs to be OPTIONAL because it will be part of the Interface defined by the class UserType so everywhere if you use UserType it will ask you to add getId as a function but we just want to modify the return result from Schema with Resolve method decorator.
 
-**@GapiController** - It will define Controllers inside Gapi Application you can have as many as you wish controllers just when you are ready import them inside @GapiModule({controllers: ...CONTROLLERS})
+**@Controller** - It will define Controllers inside Gapi Application you can have as many as you wish controllers just when you are ready import them inside @Module({controllers: ...CONTROLLERS})
 
 
-**@GapiModule** - This is the starting point of the application when we bootstrap our module inside root/src/main.ts.Also can be used to create another GapiModules which can be imported inside AppModule {imports: ...IMPORTS}
+**@Module** - This is the starting point of the application when we bootstrap our module inside root/src/main.ts.Also can be used to create another Modules which can be imported inside AppModule {imports: ...IMPORTS}
 
 **@Service** - Passed above class, this Decorator will insert metadata related with this class and all Dependencies Injected inside constructor() so when application starts you will get a Singleton of many Services if they are not Factory Services(Will explain how to create Factory in next release).So you can use single instance of a Service injected everywhere inside your application.
 
