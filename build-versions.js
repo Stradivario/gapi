@@ -28,6 +28,7 @@ function changeVersion(packages, operation) {
 
     for (let dep in packages) {
       repos.forEach(repo => {
+        packages[repo.name]
         if (dep === repo.name) {
           packages[repo.name] = "^" + buildVersion;
           matches.push({

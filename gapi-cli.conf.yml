@@ -15,15 +15,15 @@ commands:
     patch:
       - npm version patch
       - git push
-      - for d in ./*/ ; do (cd "$d" && npm version patch && npm publish --update-readme --access public); done && gapi repo commit-patch && gapi version change-patch
+      - for d in ./*/ ; do (cd "$d" && npm version patch && npm publish --update-readme --access public); done && gapi repo commit && gapi version change-patch
     minor:
       - npm version minor
       - git push
-      - for d in ./*/ ; do (cd "$d" && npm version minor && npm publish --update-readme --access public); done && gapi repo commit-minor && gapi version change-minor
+      - for d in ./*/ ; do (cd "$d" && npm version minor && npm publish --update-readme --access public); done && gapi repo commit && gapi version change-minor
     major:
       - npm version major
       - git push
-      - for d in ./*/ ; do (cd "$d" && npm version major && npm publish --update-readme --access public); done && gapi repo commit-major && gapi version change-major
+      - for d in ./*/ ; do (cd "$d" && npm version major && npm publish --update-readme --access public); done && gapi repo commit && gapi version change-major
   repo:
     commit-patch:
       - git add .
