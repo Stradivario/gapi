@@ -6,17 +6,41 @@ commands:
       - for d in ./*/ ; do (cd "$d" && git archive --remote=ssh://git@gitlab.youvolio.com:522/kristiyan.tachev/version-tag-hook.git HEAD hooks | tar -x -C .git); done
 
   version:
-    change:
+    change-patch:
       - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit-patch
+    change-minor:
+      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit-minor
+    change-major:
+      - node ./build-versions.js && for d in ./*/ ; do (cd "$d" && git add . && git commit -m 'autocommitmessage' || true && npm version patch && git push && npm publish --update-readme --access public); done && gapi repo commit-major
     patch:
       - npm version patch
       - git push
-      - for d in ./*/ ; do (cd "$d" && npm version patch && npm publish --update-readme --access public); done && gapi repo commit && gapi version change
+      - for d in ./*/ ; do (cd "$d" && npm version patch && npm publish --update-readme --access public); done && gapi repo commit-patch && gapi version change-patch
+    minor:
+      - npm version minor
+      - git push
+      - for d in ./*/ ; do (cd "$d" && npm version minor && npm publish --update-readme --access public); done && gapi repo commit-minor && gapi version change-minor
+    major:
+      - npm version major
+      - git push
+      - for d in ./*/ ; do (cd "$d" && npm version major && npm publish --update-readme --access public); done && gapi repo commit-major && gapi version change-major
   repo:
     commit-patch:
       - git add .
       - git commit -m 'autocommitmessage'
       - npm version patch
+      - git push
+
+    commit-minor:
+      - git add .
+      - git commit -m 'autocommitmessage'
+      - npm version minor
+      - git push
+
+    commit-major:
+      - git add .
+      - git commit -m 'autocommitmessage'
+      - npm version major
       - git push
     commit:
       - git add .
