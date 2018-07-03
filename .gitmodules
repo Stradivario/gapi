@@ -61,3 +61,6 @@
 [submodule "gapi-auth"]
 	path = gapi-auth
 	url = git@github.com:Stradivario/gapi-auth.git
+[submodule "gapi-starter-serverless"]
+	path = gapi-starter-serverless
+	url = https://github.com/Stradivario/gapi-starter-serverless
