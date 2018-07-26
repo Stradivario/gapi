@@ -437,41 +437,19 @@ Purpose of Effects is to create logic after particular resolver is triggered Suc
 - etc.
 
 
-### Hapi Plugins
-Working only for version bellow < 1.0.0  will be developed in next weeks
-
-```typescript
-
-import { Module } from '@gapi/core';
-
-@Module({
-    plugins: [{
-        name: 'myPlugin',
-        version: '1.0.0',
-        register: async function (server, options) {
-            server.route({
-                method: 'GET',
-                path: '/test',
-                handler: function (request, h) {
-                    return 'hello, world';
-                }
-            });
-        }
-    }]
-})
-export class AppModule {}
-
-
-```
+### Plugins
 
 How to register plugin to the system.
 Difference between Plugin and Service is that system will trigger register method inside constructor if exist,
 else it will resolve OnInit and constructor properties.
 That way you can register your own plugins to the system after everything is bootstrapped.
+If you decide for example to return Promise on `register` and resolve it inside setTimeout(() =>resolve(data), 1000) the app will wait till the promise is resolved.
 
 ```typescript
 
 import { Module, Plugin, Service, PluginInterface } from '@rxdi/core';
+import { HAPI_SERVER } from '@rxdi/hapi';
+import { Server } from 'hapi';
 
 @Service()
 export class TestService {
@@ -486,11 +464,12 @@ export class MyHapiPlugin implements PluginInterface {
   version = '1.0.0';
 
   constructor(
-    private testService: TestService
+    private testService: TestService,
+    @Inject(HAPI_SERVER) private server: Server
   ) {}
 
-  async register(server, options) {
-    server.route({
+  async register() {
+    this.server.route({
       method: 'GET',
       path: '/test',
       handler: this.handler.bind(this)
@@ -508,7 +487,6 @@ export class MyHapiPlugin implements PluginInterface {
     services: [TestService]
 })
 export class AppModule {}
-
 
 ```
 
@@ -554,6 +532,8 @@ import { AppModule } from './app/app.module';
 import { BootstrapFramework, Container } from '@rxdi/core';
 import { FrameworkImports } from './framework-imports';
 import { format } from 'url';
+import { HAPI_SERVER } from '@rxdi/hapi';
+import { Server } from 'hapi';
 
 const App = BootstrapFramework(AuthMicroserviceModule, [FrameworkImports], { init: true }).toPromise();
 
