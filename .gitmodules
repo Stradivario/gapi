@@ -7,9 +7,6 @@
 [submodule "gapi-apache-kafka"]
 	path = gapi-apache-kafka
 	url = git@github.com:Stradivario/gapi-apache-kafka.git
-[submodule "gapi-cli"]
-	path = gapi-cli
-	url = git@github.com:Stradivario/gapi-cli.git
 [submodule "gapi-cli-docs"]
 	path = gapi-cli-docs
 	url = git@github.com:Stradivario/gapi-cli-docs.git
@@ -70,3 +67,6 @@
 [submodule "gapi-starter-simple"]
 	path = gapi-starter-simple
 	url = git@github.com:Stradivario/gapi-starter-simple.git
+[submodule "gapi-cli"]
+	path = gapi-cli
+	url = git@github.com:Stradivario/gapi-cli.git

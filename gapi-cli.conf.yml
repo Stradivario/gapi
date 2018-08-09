@@ -2,7 +2,7 @@ commands:
   cli:
     init:
       - git submodule sync --recursive
-      - git submodule update --init --recursive
+      - git submodule update --init --recursive --force
       - for d in ./*/ ; do (cd "$d" && git archive --remote=ssh://git@gitlab.youvolio.com:522/kristiyan.tachev/version-tag-hook.git HEAD hooks | tar -x -C .git); done
 
   version:
