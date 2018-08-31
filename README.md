@@ -1841,6 +1841,104 @@ Important part is that getId? method needs to be OPTIONAL because it will be par
 
 **@Controller** - It will define Controllers inside Gapi Application you can have as many as you wish controllers just when you are ready import them inside @Module({controllers: ...CONTROLLERS})
 
+**@Guard** - this decorator will add Guards to particular resolvers can be used this way:
+
+```
+import { Controller } from '@rxdi/core';
+import { Type, Query, Guard } from '@rxdi/graphql';
+import { UserService } from './services/user.service';
+import { UserListType } from './types/user-list.type';
+import { AdminOnly } from '../core/guards/admin-only.guard';
+
+@Controller()
+export class UserQueriesController {
+
+    constructor(
+        private userService: UserService
+    ) { }
+
+    @Type(UserListType)
+    @Guard(AdminOnly)
+    @Query()
+    listUsers() {
+        return this.userService.findAll();
+    }
+
+}
+
+
+```
+
+Or you can apply them globaly to controller like this
+
+```
+
+import { Query, GraphQLControllerOptions, InjectType } from '@rxdi/graphql';
+import { UserService } from './services/user.service';
+import { UserListType } from './types/user-list.type';
+import { AdminOnly } from '../core/guards/admin-only.guard';
+
+@Controller<GraphQLControllerOptions>({
+    guards: [AdminOnly],
+    type: InjectType(UserListType)
+})
+export class UserQueriesController {
+
+    constructor(
+        private userService: UserService
+    ) { }
+
+    @Query()
+    listUsers() {
+        return this.userService.findAll();
+    }
+}
+
+```
+
+The basic guard example:
+
+```
+import { Service, CanActivateResolver } from '@gapi/core';
+import { ENUMS } from '../enums';
+import { UserType } from '../../user/types/user.type';
+
+@Service()
+export class AdminOnly implements CanActivateResolver {
+    canActivate(
+        context: UserType
+    ) {
+        return context.type === 'ADMIN';
+    }
+}
+
+```
+
+Valid use cases are:
+
+```
+@Service()
+export class AdminOnly implements CanActivateResolver {
+    canActivate(
+        context: UserType
+    ) {
+        return Observable.create(o => o.next(true));
+
+        return new Promise((r) => r(true));
+
+        return Observable.create(o => o.next(false));
+
+        return new Promise((r) => r(false));
+        if (context.type !== 'ADMIN') {
+            throw new Error('error');
+        }
+    }
+}
+
+```
+
+If you try to mix @Guard decorator and apply globaly guards it will merge them so you will have both of the guards.
+
 
 **@Module** - This is the starting point of the application when we bootstrap our module inside root/src/main.ts.Also can be used to create another Modules which can be imported inside AppModule {imports: ...IMPORTS}
 
