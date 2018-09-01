@@ -1843,7 +1843,7 @@ Important part is that getId? method needs to be OPTIONAL because it will be par
 
 **@Guard** - this decorator will add Guards to particular resolvers can be used this way:
 
-```
+```typescript
 import { Controller } from '@rxdi/core';
 import { Type, Query, Guard } from '@rxdi/graphql';
 import { UserService } from './services/user.service';
@@ -1871,7 +1871,7 @@ export class UserQueriesController {
 
 Or you can apply them globaly to controller like this
 
-```
+```typescript
 
 import { Query, GraphQLControllerOptions, InjectType } from '@rxdi/graphql';
 import { UserService } from './services/user.service';
@@ -1898,7 +1898,7 @@ export class UserQueriesController {
 
 The basic guard example:
 
-```
+```typescript
 import { Service, CanActivateResolver } from '@gapi/core';
 import { ENUMS } from '../enums';
 import { UserType } from '../../user/types/user.type';
@@ -1916,7 +1916,7 @@ export class AdminOnly implements CanActivateResolver {
 
 Valid use cases are:
 
-```
+```typescript
 @Service()
 export class AdminOnly implements CanActivateResolver {
     canActivate(
@@ -1943,7 +1943,7 @@ If you try to mix @Guard decorator and apply globaly guards it will merge them s
 **@Interceptor** - This abstraction can be used to modify or just log result before you process it to the client can be used like this:
 
 Logging interceptor
-```
+```typescript
 import { InterceptResolver, Service, GenericGapiResolversType } from '@gapi/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -1967,7 +1967,7 @@ export class LoggerInterceptor implements InterceptResolver {
 ```
 Then you can attach it inside Query, Mutation, Subscription decorators
 
-```
+```typescript
     @Interceptor(LoggerInterceptor)
     @Query({
         id: {
@@ -1983,7 +1983,7 @@ Then you can attach it inside Query, Mutation, Subscription decorators
 You can also modify result returned
 
 Modify interceptor
-```
+```typescript
 import { InterceptResolver, Service, GenericGapiResolversType } from '@gapi/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
