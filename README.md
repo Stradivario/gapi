@@ -1940,6 +1940,75 @@ export class AdminOnly implements CanActivateResolver {
 If you try to mix @Guard decorator and apply globaly guards it will merge them so you will have both of the guards.
 
 
+**@Interceptor** - This abstraction can be used to modify or just log result before you process it to the client can be used like this:
+
+Logging interceptor
+```
+import { InterceptResolver, Service, GenericGapiResolversType } from '@gapi/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { UserType } from '../../user/types/user.type';
+
+@Service()
+export class LoggerInterceptor implements InterceptResolver {
+    intercept(
+        chainable$: Observable<any>,
+        payload,
+        context: UserType,
+        descriptor: GenericGapiResolversType
+    ) {
+        console.log('Before...');
+        const now = Date.now();
+        return chainable$.pipe(
+            tap(() => console.log(`After... ${Date.now() - now}ms`)),
+        );
+    }
+}
+```
+Then you can attach it inside Query, Mutation, Subscription decorators
+
+```
+    @Interceptor(LoggerInterceptor)
+    @Query({
+        id: {
+            type: new GraphQLNonNull(GraphQLString)
+        }
+    })
+    findUser(root, { id }): Promise<User> {
+        return this.userService.findUserById(id);
+    }
+
+```
+
+You can also modify result returned
+
+Modify interceptor
+```
+import { InterceptResolver, Service, GenericGapiResolversType } from '@gapi/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { UserType } from '../../user/types/user.type';
+
+@Service()
+export class ModifyInterceptor implements InterceptResolver {
+    intercept(
+        chainable$: Observable<any>,
+        payload,
+        context: UserType,
+        descriptor: GenericGapiResolversType
+    ) {
+        console.log('Before...');
+        const now = Date.now();
+        return chainable$.pipe(
+            map((res) => {
+                console.log(`After... ${Date.now() - now}ms`);
+                return res;
+            }),
+        );
+    }
+}
+```
+
 **@Module** - This is the starting point of the application when we bootstrap our module inside root/src/main.ts.Also can be used to create another Modules which can be imported inside AppModule {imports: ...IMPORTS}
 
 **@Service** - Passed above class, this Decorator will insert metadata related with this class and all Dependencies Injected inside constructor() so when application starts you will get a Singleton of many Services if they are not Factory Services(Will explain how to create Factory in next release).So you can use single instance of a Service injected everywhere inside your application.
