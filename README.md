@@ -1547,6 +1547,27 @@ export class UserService {
     }
 ```
 
+
+**Cross reference circular dependency**
+
+```typescript
+import { UserService } from './user.service';
+
+@Service()
+export class AnotherService {
+    @Inject(() => UserService) private userService: UserService
+```
+
+```typescript
+import { AnotherService } from './another.service';
+
+@Service()
+export class UserService {
+    @Inject(() => AnotherService) private anotherService: AnotherService
+```
+
+
+
 **You can see the subscription when you subscribe to basic chanel inside GraphiQL dev panel**
 
 ```typescript
