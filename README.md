@@ -1899,14 +1899,16 @@ export class UserQueriesController {
 The basic guard example:
 
 ```typescript
-import { Service, CanActivateResolver } from '@gapi/core';
+import { Service, CanActivateResolver, GenericGapiResolversType } from '@gapi/core';
 import { ENUMS } from '../enums';
 import { UserType } from '../../user/types/user.type';
 
 @Service()
 export class AdminOnly implements CanActivateResolver {
     canActivate(
-        context: UserType
+        context: UserType,
+        payload,
+        descriptor: GenericGapiResolversType
     ) {
         return context.type === 'ADMIN';
     }
@@ -1920,7 +1922,9 @@ Valid use cases are:
 @Service()
 export class AdminOnly implements CanActivateResolver {
     canActivate(
-        context: UserType
+        context: UserType,
+        payload,
+        descriptor: GenericGapiResolversType
     ) {
         return Observable.create(o => o.next(true));
 
@@ -1953,8 +1957,8 @@ import { UserType } from '../../user/types/user.type';
 export class LoggerInterceptor implements InterceptResolver {
     intercept(
         chainable$: Observable<any>,
-        payload,
         context: UserType,
+        payload,
         descriptor: GenericGapiResolversType
     ) {
         console.log('Before...');
@@ -1993,8 +1997,8 @@ import { UserType } from '../../user/types/user.type';
 export class ModifyInterceptor implements InterceptResolver {
     intercept(
         chainable$: Observable<any>,
-        payload,
         context: UserType,
+        payload,
         descriptor: GenericGapiResolversType
     ) {
         console.log('Before...');
