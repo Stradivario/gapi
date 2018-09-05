@@ -116,11 +116,30 @@ export class AppModule { }
 BootstrapFramework(AppModule, [CoreModule]).subscribe()
 ```
 
+You need to create `tsconfig.json` with following content
+
+```json
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
+    }
+}
+```
+
 Execute
 
 ```bash
 ts-node index.ts
 ```
+
+Or execute the following command to set these options on runtime:
+
+```bash
+export TS_NODE_COMPILER_OPTIONS='{"experimentalDecorators": true, "emitDecoratorMetadata": true}' &&
+ts-node index.ts --compilerOptions $TS_NODE_COMPILER_OPTIONS
+```
+
 To add configuration click [here](#gapi-configuration)
 
 ## With CLI
@@ -494,6 +513,7 @@ export class AppModule {}
 
 ```typescript
 import { Module, ModuleWithServices, InjectionToken } from '@rxdi/core';
+import { of } from 'rxjs';
 
 @Service()
 export class MODULE_DI_CONFIG {
@@ -514,8 +534,29 @@ export class YourModule {
           { provide: MY_MODULE_CONFIG, useClass: MODULE_DI_CONFIG },
           { 
             provide: MY_MODULE_CONFIG,
-            useFactory: () => {
-                return {text: 'Hello world'};
+            useFactory: () => ({text: 'Hello world'})
+          },
+          { 
+            provide: MY_MODULE_CONFIG,
+            lazy: true, // Will be evaluated and resolved if false will remain Promise
+            useFactory: async () => await Promise.resolve({text: 'Hello world'})
+          },
+          { 
+            provide: MY_MODULE_CONFIG,
+            lazy: true, // Will be evaluated and resolved if false will remain Observable
+            useFactory: () => of({text: 'Hello world'})
+          },
+          { 
+            // this example will download external module from link and save it inside node modules
+            // then will load it inside createUniqueHash token or MY_MODULE_CONFIG.
+            provide: MY_MODULE_CONFIG,
+            useDynamic: {
+                fileName: 'createUniqueHash',
+                namespace: '@helpers',
+                extension: 'js',
+                typings: '',
+                outputFolder: '/node_modules/',
+                link: 'https://ipfs.infura.io/ipfs/QmdQtC3drfQ6M6GFpDdrhYRKoky8BycKzWbTkc4NEzGLug'
             }
           }
       ]
@@ -681,6 +722,7 @@ export class AppModule {}
 
 
 (#gapi-configuration)
+
 ## Configuration
 > Since 1.0.0 version @gapi micrated to @rxdi there is a little changes which are with Configuration
 > @gapi now uses @rxdi/core infrastructure so it is a Framework created on top of it
