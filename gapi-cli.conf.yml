@@ -57,7 +57,7 @@ commands:
   info:
     status: for d in ./*/ ; do (cd "$d" && pwd && git status); done
     pull: for d in ./*/ ; do (cd "$d" && git reset --hard && git pull); done
-    push: for d in ./*/ ; do (cd "$d" && git push); done
+    push: for d in ./*/ ; do (cd "$d" && git push origin master); done
 
     # all-publish: for d in ./*/ ; do (cd "$d" && git add . && git commit -m autocommitmessage && git push && npm publish --update-readme --access public); done
 
