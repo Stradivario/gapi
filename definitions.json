@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "repo": "amqp",
+    "label": "@gapi/amqp",
+    "owner": "Stradivario",
+    "folderName": "gapi-amqp",
+    "url": "https://github.com/Stradivario/gapi-amqp.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 2,
+    "repo": "angular-client",
+    "label": "@gapi/angular-client",
+    "owner": "Stradivario",
+    "folderName": "gapi-angular-client",
+    "url": "https://github.com/Stradivario/gapi-angular-client.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 3,
+    "repo": "apache-kafka",
+    "label": "@gapi/apache-kafka",
+    "owner": "Stradivario",
+    "folderName": "gapi-apache-kafka",
+    "url": "https://github.com/Stradivario/apache-kafka.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 4,
+    "repo": "auth",
+    "label": "@gapi/auth",
+    "owner": "Stradivario",
+    "folderName": "gapi-auth",
+    "url": "https://github.com/Stradivario/gapi-auth",
+    "namespace": "gapi"
+  },
+  {
+    "id": 5,
+    "repo": "cli",
+    "label": "@gapi/cli",
+    "owner": "Stradivario",
+    "folderName": "gapi-cli",
+    "url": "https://github.com/Stradivario/gapi-cli.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 6,
+    "repo": "core",
+    "label": "@gapi/core",
+    "owner": "Stradivario",
+    "folderName": "gapi-core",
+    "url": "https://github.com/Stradivario/gapi.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 7,
+    "repo": "ethereum",
+    "label": "@gapi/ethereum",
+    "owner": "Stradivario",
+    "folderName": "gapi-ethereum",
+    "url": "https://github.com/Stradivario/gapi-ethereum.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 8,
+    "repo": "ipfs",
+    "label": "@gapi/ipfs",
+    "owner": "Stradivario",
+    "folderName": "gapi-ipfs",
+    "url": "https://github.com/Stradivario/gapi-ipfs.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 9,
+    "repo": "ipfs-daemon",
+    "label": "@gapi/ipfs-daemon",
+    "owner": "Stradivario",
+    "folderName": "gapi-ipfs-daemon",
+    "url": "https://github.com/Stradivario/gapi-ipfs-daemon.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 10,
+    "repo": "ipfs-pubsub",
+    "label": "@gapi/ipfs-pubsub",
+    "owner": "Stradivario",
+    "folderName": "gapi-ipfs-pubsub",
+    "url": "https://github.com/Stradivario/gapi-ipfs.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 11,
+    "repo": "microservices",
+    "label": "@gapi/microservices",
+    "owner": "Stradivario",
+    "folderName": "gapi-microservices",
+    "url": "https://github.com/Stradivario/gapi-microservices.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 12,
+    "repo": "onesignal-notifications",
+    "label": "@gapi/onesignal-notifications",
+    "owner": "Stradivario",
+    "folderName": "gapi-onesignal-notifications",
+    "url": "https://github.com/Stradivario/onesignal-notifications.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 13,
+    "repo": "orbitdb",
+    "label": "@gapi/orbitdb",
+    "owner": "Stradivario",
+    "folderName": "gapi-orbitdb",
+    "url": "https://github.com/Stradivario/gapi-orbitdb.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 14,
+    "repo": "playground",
+    "label": "@gapi/playground",
+    "owner": "Stradivario",
+    "folderName": "gapi-playground",
+    "url": "https://github.com/Stradivario/gapi-playground",
+    "namespace": "gapi"
+  },
+  {
+    "id": 15,
+    "repo": "sequelize",
+    "label": "@gapi/sequelize",
+    "owner": "Stradivario",
+    "folderName": "gapi-sequelize",
+    "url": "https://github.com/Stradivario/gapi-sequelize.git",
+    "namespace": "gapi"
+  },
+  {
+    "id": 16,
+    "repo": "voyager",
+    "label": "@gapi/voyager",
+    "owner": "Stradivario",
+    "folderName": "gapi-voyager",
+    "url": "https://github.com/Stradivario/gapi-voyager.git",
+    "namespace": "gapi"
+  }
+]
