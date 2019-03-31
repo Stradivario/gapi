@@ -1,6 +1,3 @@
-[submodule "gapi-amqp"]
-	path = gapi-amqp
-	url = git@github.com:Stradivario/gapi-amqp.git
 [submodule "gapi-angular-client"]
 	path = gapi-angular-client
 	url = git@github.com:Stradivario/gapi-angular-client.git
