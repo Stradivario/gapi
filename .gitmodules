@@ -73,3 +73,6 @@
 [submodule "gapi-starter-simple-serverless"]
 	path = gapi-starter-simple-serverless
 	url = git@github.com:Stradivario/gapi-starter-simple-serverless.git
+[submodule "gapi-daemon-example-plugin"]
+	path = gapi-daemon-example-plugin
+	url = git@github.com:Stradivario/gapi-daemon-example-plugin.git
