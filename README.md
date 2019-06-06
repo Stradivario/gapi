@@ -83,7 +83,7 @@ npm install @gapi/core
 
 ```typescript
 import { CoreModule } from '@gapi/core';
-import { Controller, Module, BootstrapFramework } from '@rxdi/core';
+import { Controller, Module, Bootstrap } from '@rxdi/core';
 import { GapiObjectType, Query, Type } from '@rxdi/graphql';
 import { GraphQLScalarType, GraphQLInt, GraphQLNonNull } from 'graphql';
 
@@ -108,12 +108,15 @@ export class UserQueriesController {
 }
 
 @Module({
+    imports: [
+        CoreModule.forRoot()
+    ],
     controllers: [UserQueriesController]
 })
 export class AppModule { }
 
 
-BootstrapFramework(AppModule, [CoreModule]).subscribe()
+Bootstrap(AppModule).subscribe()
 ```
 
 You need to create `tsconfig.json` with following content
