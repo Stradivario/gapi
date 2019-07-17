@@ -76,3 +76,6 @@
 [submodule "gapi-daemon-example-plugin"]
 	path = gapi-daemon-example-plugin
 	url = git@github.com:Stradivario/gapi-daemon-example-plugin.git
+[submodule "gapi-daemon"]
+	path = gapi-daemon
+	url = git@github.com:Stradivario/gapi-daemon.git
