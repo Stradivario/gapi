@@ -84,39 +84,38 @@ npm install @gapi/core
 ```typescript
 import { CoreModule } from '@gapi/core';
 import { Controller, Module, Bootstrap } from '@rxdi/core';
-import { GapiObjectType, Query, Type } from '@rxdi/graphql';
-import { GraphQLScalarType, GraphQLInt, GraphQLNonNull } from 'graphql';
+import { Query, Type } from '@rxdi/graphql';
+import { GraphqlObjectType, GraphQLInt, GraphQLNonNull } from 'graphql';
 
-@GapiObjectType()
-export class UserType {
-    readonly id: number | GraphQLScalarType = GraphQLInt;
-}
+export const UserType = new GraphqlObjectType({
+  name: 'UserType',
+  fields: () => ({
+    id: {
+      type: GraphQLInt
+    }
+  })
+});
 
 @Controller()
 export class UserQueriesController {
-
-    @Type(UserType)
-    @Query({
-        id: {
-            type: new GraphQLNonNull(GraphQLInt)
-        }
-    })
-    findUser(root, { id }, context): UserType {
-        return {id: id};
+  @Type(UserType)
+  @Query({
+    id: {
+      type: new GraphQLNonNull(GraphQLInt)
     }
-
+  })
+  findUser(root, { id }, context): UserType {
+    return { id: id };
+  }
 }
 
 @Module({
-    imports: [
-        CoreModule.forRoot()
-    ],
-    controllers: [UserQueriesController]
+  imports: [CoreModule.forRoot()],
+  controllers: [UserQueriesController]
 })
-export class AppModule { }
+export class AppModule {}
 
-
-Bootstrap(AppModule).subscribe()
+Bootstrap(AppModule).subscribe();
 ```
 
 You need to create `tsconfig.json` with following content
