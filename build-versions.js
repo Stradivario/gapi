@@ -1,9 +1,10 @@
-const { writeFileSync } = require("fs");
-const { join } = require("path");
-const { lstatSync, readdirSync, readFileSync } = require("fs");
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { writeFileSync } = require('fs');
+const { join } = require('path');
+const { lstatSync, readdirSync, readFileSync } = require('fs');
 
-const package = require("./package.json");
-let buildVersion = package.version;
+const package = require('./package.json');
+const buildVersion = package.version;
 
 const isDirectory = source => lstatSync(source).isDirectory();
 const getDirectories = source =>
@@ -13,11 +14,11 @@ const getDirectories = source =>
 const repos = [];
 
 getDirectories(__dirname).forEach(dir => {
-  if (dir.includes(".git")) {
+  if (dir.includes('.git')) {
     return;
   }
   repos.push({
-    name: JSON.parse(readFileSync(dir + "/package.json", "utf8")).name,
+    name: JSON.parse(readFileSync(dir + '/package.json', 'utf8')).name,
     directory: dir
   });
 });
@@ -26,11 +27,11 @@ function changeVersion(packages, operation) {
   if (packages) {
     const matches = [];
 
-    for (let dep in packages) {
+    for (const dep in packages) {
       repos.forEach(repo => {
-        packages[repo.name]
+        packages[repo.name];
         if (dep === repo.name) {
-          packages[repo.name] = "^" + buildVersion;
+          packages[repo.name] = '^' + buildVersion;
           matches.push({
             name: repo.name,
             packageVersion: packages[repo.name]
@@ -47,36 +48,36 @@ function changeVersion(packages, operation) {
 }
 
 repos.forEach(r => {
-  const rawFile = readFileSync(r.directory + "/package.json", "utf8");
+  const rawFile = readFileSync(r.directory + '/package.json', 'utf8');
   const package = JSON.parse(rawFile);
-  console.log("### ", r.name, "###");
-  if (process.argv[2] === "--package") {
+  console.log('### ', r.name, '###');
+  if (process.argv[2] === '--package') {
     package.version = buildVersion;
     writeFileSync(
-      r.directory + "/package.json",
+      r.directory + '/package.json',
       JSON.stringify(package, null, 2),
-      "utf8"
+      'utf8'
     );
   } else {
     const dependencies =
-      changeVersion(package.dependencies, "dependencies: ") || [];
+      changeVersion(package.dependencies, 'dependencies: ') || [];
     const devDependencies =
-      changeVersion(package.devDependencies, "devDependencies: ") || [];
+      changeVersion(package.devDependencies, 'devDependencies: ') || [];
     const peerDependencies =
-      changeVersion(package.peerDependencies, "peerDependencies") || [];
+      changeVersion(package.peerDependencies, 'peerDependencies') || [];
 
     const matches = [...dependencies, ...devDependencies, ...peerDependencies];
 
     if (matches.length) {
-      console.log("Found dependencies!");
+      console.log('Found dependencies!');
       writeFileSync(
-        r.directory + "/package.json",
+        r.directory + '/package.json',
         JSON.stringify(package, null, 2),
-        "utf8"
+        'utf8'
       );
-      console.log("---------------------------------------------");
+      console.log('---------------------------------------------');
     } else {
-      console.log("No Matches found");
+      console.log('No Matches found');
     }
   }
 });

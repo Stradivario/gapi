@@ -1,0 +1,8 @@
+config:
+  schema:
+    introspectionEndpoint: http://localhost:42001/graphql
+    introspectionOutputFolder: ./src/daemon-server/api-introspection
+
+commands:
+  p:
+    g: gql`query { status { status } }`

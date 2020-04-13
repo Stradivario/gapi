@@ -1,0 +1,42 @@
+{
+  "name": "@gapi/ipfs",
+  "version": "1.8.23",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stradivario/gapi-ipfs.git"
+  },
+  "scripts": {
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
+    "delete-dist": "rm -rf dist",
+    "clean": "git clean -dxf",
+    "lint": "npx eslint . --ext .ts",
+    "lint-fix": "npx eslint . --fix --ext .ts",
+    "build": "rm -rf dist && tsc"
+  },
+  "author": {
+    "name": "Kristian Tachev(Stradivario)",
+    "email": "kristiqn.tachev@gmail.com"
+  },
+  "keywords": [
+    "graphql",
+    "gapi",
+    "node",
+    "ipfs"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "http://gitlab.youvolio.com/gapi/gapi-ipfs/issues"
+  },
+  "dependencies": {
+    "ipfs": "^0.33.1"
+  },
+  "devDependencies": {
+    "@rxdi/core": "0.7.41",
+    "@types/node": "^13.11.1",
+    "rxjs": "6.5.2"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts"
+}

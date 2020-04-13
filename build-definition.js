@@ -1,9 +1,10 @@
-const { writeFileSync } = require("fs");
-const { join } = require("path");
-const { lstatSync, readdirSync, readFileSync } = require("fs");
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { writeFileSync } = require('fs');
+const { join } = require('path');
+const { lstatSync, readdirSync, readFileSync } = require('fs');
 
-const package = require("./package.json");
-let buildVersion = package.version;
+const package = require('./package.json');
+const buildVersion = package.version;
 
 const isDirectory = source => lstatSync(source).isDirectory();
 const getDirectories = source =>
@@ -14,10 +15,10 @@ const repos = [];
 let count = 0;
 
 getDirectories(__dirname).forEach(dir => {
-  if (dir.includes(".git")) {
+  if (dir.includes('.git')) {
     return;
   }
-  const packageJson = JSON.parse(readFileSync(dir + "/package.json", "utf8"));
+  const packageJson = JSON.parse(readFileSync(dir + '/package.json', 'utf8'));
 
   if (packageJson.repository) {
     count++;
@@ -28,13 +29,9 @@ getDirectories(__dirname).forEach(dir => {
       owner: 'Stradivario',
       folderName: dir.replace(/^.*[\\\/]/, ''),
       url: packageJson.repository.url,
-      namespace: packageJson.name.split('/')[0].replace('@', ''),
+      namespace: packageJson.name.split('/')[0].replace('@', '')
     });
   }
 });
 
-writeFileSync(
-  "definitions.json",
-  JSON.stringify(repos, null, 2),
-  "utf8"
-);
+writeFileSync('definitions.json', JSON.stringify(repos, null, 2), 'utf8');

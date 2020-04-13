@@ -1,0 +1,109 @@
+config:
+# Application configuration
+  app:
+    local:
+      API_PORT: 9000
+      API_CERT: ./cert.key
+      NODE_ENV: development
+      AMQP_HOST: 182.10.0.5
+      AMQP_PORT: 5672
+      GRAPHIQL: true
+      GRAPHIQL_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg
+      ENDPOINT_TESTING: http://localhost:9000/graphql
+      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
+    prod:
+      API_PORT: 9000
+      API_CERT: ./cert.key
+      NODE_ENV: production
+      AMQP_HOST: 182.10.0.5
+      AMQP_PORT: 5672
+      GRAPHIQL: true
+      GRAPHIQL_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg
+      ENDPOINT_TESTING: http://localhost:9000/graphql
+      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
+# Testing configuration for local(dev) or worker(running tests as a separate worker with separate environment)
+  test: 
+    local: extends app/prod
+    worker:
+      API_PORT: 9000
+      API_CERT: ./cert.key
+      NODE_ENV: production
+      AMQP_HOST: 182.10.0.5
+      AMQP_PORT: 5672
+      ENDPOINT_TESTING: http://182.10.0.101:9000/graphql
+      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
+
+  schema:
+    introspectionEndpoint: http://localhost:9000/graphql
+    introspectionOutputFolder: ./src/api-introspection
+
+commands:
+
+  testing:
+    stop:
+      - docker rm -f gapi-api-prod-worker-tests-executor
+      - docker rm -f gapi-api-prod-worker-tests-provider
+    start:
+      - gapi testing start-provider
+      - sleep 10
+      - gapi testing start-executor
+      - echo Cleaning...
+      - gapi testing stop
+    start-provider: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.101 --name gapi-api-prod-worker-tests-provider gapi/api/prod
+    start-executor:
+      - docker run -d --network=gapiapiprod_gapi --ip=182.10.0.100 --name gapi-api-prod-worker-tests-executor gapi/api/prod
+      - docker exec gapi-api-prod-worker-tests-provider npm -v
+      - gapi test --worker
+
+  workers:
+    start:
+      - gapi workers start-1
+      - gapi workers start-2
+      - gapi workers start-3
+      - gapi workers start-4
+    stop:
+      - docker rm -f gapi-api-prod-worker-1
+      - docker rm -f gapi-api-prod-worker-2
+      - docker rm -f gapi-api-prod-worker-3
+      - docker rm -f gapi-api-prod-worker-4
+    start-1: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.21 --name gapi-api-prod-worker-1 gapi/api/prod
+    start-2: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.22 --name gapi-api-prod-worker-2 gapi/api/prod
+    start-3: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.23 --name gapi-api-prod-worker-3 gapi/api/prod
+    start-4: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.24 --name gapi-api-prod-worker-4 gapi/api/prod
+    example-worker-with-port: docker run -d --network=gapiapiprod_gapi --ip=182.10.0.25 --name gapi-api-prod-worker-5 -p 9001:9000 gapi/api/prod
+
+  app:
+    start:
+      - docker-compose -p gapi-api-prod up --force-recreate -d
+      - gapi rabbitmq enable-dashboard
+    stop:
+      - gapi nginx stop
+      - gapi api stop
+      - gapi rabbitmq stop
+    build: docker build -t gapi/api/prod .
+
+  api:
+    stop: docker rm -f gapi-api-prod
+
+  nginx:
+    stop: docker rm -f gapi-api-nginx
+
+  rabbitmq:
+    stop: docker rm -f gapi-api-rabbitmq
+    restart: docker restart gapi-api-rabbitmq
+    enable-dashboard: docker exec gapi-api-rabbitmq rabbitmq-plugins enable rabbitmq_management
+  prepare:
+    core:
+      - tsc
+      - find . -not -path "./node_modules/*" -type f -iname \*.js -delete
+      - parcel build --target node src/index.ts
+      - cp -r dist/index.js index.js
+      - gapi prepare clean
+    clean:
+      - rm -rf dist
+      - rm -rf .cache
+# You can define your custom commands for example 
+# commands:
+#   your-cli:
+#     my-command: 'npm -v'
+# This command can be executed as "gapi your-cli my-command"

@@ -1,0 +1,3 @@
+[submodule "gapi-cli-docs"]
+	path = gapi-cli-docs
+	url = https://github.com/Stradivario/gapi-cli-docs.git

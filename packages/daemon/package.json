@@ -1,0 +1,62 @@
+{
+  "name": "@gapi/daemon",
+  "version": "1.8.23",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stradivario/gapi.git"
+  },
+  "author": "Kristian Tachev <kristiqn.tachev@gmail.com> (Stradivario)",
+  "scripts": {
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
+    "delete-dist": "rm -rf dist",
+    "clean": "git clean -dxf",
+    "lint": "npx eslint . --ext .ts",
+    "lint-fix": "npx eslint . --fix --ext .ts",
+    "build": "rm -rf dist && tsc"
+  },
+  "keywords": [
+    "graphql",
+    "gapi",
+    "node"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Stradivario/gapi-daemon/issues"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ],
+    "rootDir": "./",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "node"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/development/.*\\.spec.(ts|tsx|js)$",
+    "verbose": true,
+    "collectCoverage": true
+  },
+  "description": "![Build Status](http://gitlab.youvolio.com/gapi/gapi-starter/badges/master/build.svg)",
+  "devDependencies": {
+    "@types/hapi": "^18.0.2",
+    "typescript": "^3.8.3",
+    "@rxdi/core": "0.7.41",
+    "@rxdi/graphql": "0.7.40",
+    "@rxdi/hapi": "0.7.38"
+  }
+}

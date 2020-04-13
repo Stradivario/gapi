@@ -1,81 +1,45 @@
-[submodule "gapi-angular-client"]
-	path = gapi-angular-client
-	url = git@github.com:Stradivario/gapi-angular-client.git
-[submodule "gapi-apache-kafka"]
-	path = gapi-apache-kafka
-	url = git@github.com:Stradivario/gapi-apache-kafka.git
-[submodule "gapi-cli-docs"]
-	path = gapi-cli-docs
-	url = git@github.com:Stradivario/gapi-cli-docs.git
-[submodule "gapi-core"]
-	path = gapi-core
-	url = git@github.com:Stradivario/gapi-core.git
-[submodule "gapi-sequelize"]
-	path = gapi-sequelize
-	url = git@github.com:Stradivario/gapi-sequelize.git
-[submodule "gapi-starter"]
-	path = gapi-starter
-	url = git@github.com:Stradivario/gapi-starter.git
-[submodule "gapi-starter-postgres-sequelize-rabbitmq"]
-	path = gapi-starter-postgres-sequelize-rabbitmq
-	url = git@github.com:Stradivario/gapi-starter-postgres-sequelize-rabbitmq.git
-[submodule "gapi-testing-util"]
-	path = gapi-testing-util
-	url = git@github.com:Stradivario/gapi-testing-util.git
-[submodule "gapi-cloud"]
-	path = gapi-cloud
-	url = git@github.com:Stradivario/gapi-cloud.git
-[submodule "gapi-microservices"]
-	path = gapi-microservices
-	url = git@github.com:Stradivario/gapi-microservices.git
-[submodule "gapi-starter-microservices"]
-	path = gapi-starter-microservices
-	url = git@github.com:Stradivario/gapi-starter-microservices.git
-[submodule "gapi-onesignal-notifications"]
-	path = gapi-onesignal-notifications
-	url = git@github.com:Stradivario/gapi-onesignal-notifications.git
-[submodule "gapi-voyager"]
-	path = gapi-voyager
-	url = git@github.com:Stradivario/gapi-voyager.git
-[submodule "gapi-starter-serverless-sequelize"]
-	path = gapi-starter-serverless-sequelize
-	url = git@github.com:Stradivario/gapi-starter-serverless-sequelize.git
-[submodule "gapi-ethereum"]
-	path = gapi-ethereum
-	url = git@github.com:Stradivario/gapi-ethereum.git
-[submodule "gapi-ipfs"]
-	path = gapi-ipfs
-	url = git@github.com:Stradivario/gapi-ipfs.git
-[submodule "gapi-orbitdb"]
-	path = gapi-orbitdb
-	url = git@github.com:Stradivario/gapi-orbitdb.git
-[submodule "gapi-ipfs-pubsub"]
-	path = gapi-ipfs-pubsub
-	url = git@github.com:Stradivario/gapi-ipfs-pubsub.git
-[submodule "gapi-auth"]
-	path = gapi-auth
-	url = git@github.com:Stradivario/gapi-auth.git
-[submodule "gapi-starter-serverless"]
-	path = gapi-starter-serverless
-	url = git@github.com:Stradivario/gapi-starter-serverless.git
-[submodule "gapi-playground"]
-	path = gapi-playground
-	url = git@github.com:Stradivario/gapi-playground
-[submodule "gapi-starter-simple"]
-	path = gapi-starter-simple
-	url = git@github.com:Stradivario/gapi-starter-simple.git
-[submodule "gapi-cli"]
-	path = gapi-cli
-	url = git@github.com:Stradivario/gapi-cli.git
-[submodule "gapi-ipfs-daemon"]
-	path = gapi-ipfs-daemon
-	url = git@github.com:Stradivario/gapi-ipfs-daemon.git
-[submodule "gapi-starter-simple-serverless"]
-	path = gapi-starter-simple-serverless
-	url = git@github.com:Stradivario/gapi-starter-simple-serverless.git
-[submodule "gapi-daemon-example-plugin"]
-	path = gapi-daemon-example-plugin
-	url = git@github.com:Stradivario/gapi-daemon-example-plugin.git
-[submodule "gapi-daemon"]
-	path = gapi-daemon
-	url = git@github.com:Stradivario/gapi-daemon.git
+[submodule "packages/gapi-cli"]
+	path = packages/gapi-cli
+	url = https://github.com/Stradivario/gapi-cli
+[submodule "packages/gapi-core"]
+	path = packages/gapi-core
+	url = https://github.com/Stradivario/gapi-core
+[submodule "packages/gapi-daemon"]
+	path = packages/gapi-daemon
+	url = https://github.com/Stradivario/gapi-daemon
+[submodule "packages/gapi-ethereum"]
+	path = packages/gapi-ethereum
+	url = https://github.com/Stradivario/gapi-ethereum
+[submodule "packages/gapi-ipfs"]
+	path = packages/gapi-ipfs
+	url = https://github.com/Stradivario/gapi-ipfs
+[submodule "packages/gapi-ipfs-daemon"]
+	path = packages/gapi-ipfs-daemon
+	url = https://github.com/Stradivario/gapi-ipfs-daemon
+[submodule "packages/gapi-ipfs-pubsub"]
+	path = packages/gapi-ipfs-pubsub
+	url = https://github.com/Stradivario/gapi-ipfs-pubsub
+[submodule "packages/gapi-microservices"]
+	path = packages/gapi-microservices
+	url = https://github.com/Stradivario/gapi-microservices
+[submodule "packages/gapi-onesignal-notifications"]
+	path = packages/gapi-onesignal-notifications
+	url = https://github.com/Stradivario/gapi-onesignal-notifications
+[submodule "packages/gapi-voyager"]
+	path = packages/gapi-voyager
+	url = https://github.com/Stradivario/gapi-voyager
+[submodule "packages/gapi-orbitdb"]
+	path = packages/gapi-orbitdb
+	url = https://github.com/Stradivario/gapi-orbitdb
+[submodule "packages/gapi-playground"]
+	path = packages/gapi-playground
+	url = https://github.com/Stradivario/gapi-playground
+[submodule "packages/gapi-sequelize"]
+	path = packages/gapi-sequelize
+	url = https://github.com/Stradivario/gapi-sequelize
+[submodule "packages/gapi-auth"]
+	path = packages/gapi-auth
+	url = https://github.com/Stradivario/gapi-auth
+[submodule "packages/gapi-apache-kafka"]
+	path = packages/gapi-apache-kafka
+	url = https://github.com/Stradivario/gapi-apache-kafka

@@ -1,0 +1,33 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish-gpr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+          # registry-url: https://npm.pkg.github.com/
+          # scope: "@rxdi"
+      - run: npx @rxdi/bolt install
+      - run: npm config set '//registry.npmjs.org/:_authToken' "${{secrets.NPM_TOKEN}}"
+      - run: npm run lint --if-present
+      - run: npm test --if-present
+      - run: git config --global user.email 'kristiqn.tachev@gmail.com'
+      - run: git config --global user.name "Kristiyan Tachev"
+      - run: npm version patch
+      - run: npm run patch
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: node ./change-version.js
+      - run: git add .
+      - run: git commit --amend --no-edit
+      - uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

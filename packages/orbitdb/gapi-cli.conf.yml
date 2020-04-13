@@ -1,0 +1,16 @@
+commands:
+  module:
+    build:
+      - ./node_modules/.bin/parcel build --target node development/index.ts
+      - ./node_modules/.bin/rxdi-merge --name @gapi/orbitdb --project . --out dist/index.d.ts
+      - find . -not -path "./node_modules/*" -type f -iname \*.map -delete
+      - cp -r dist/* ./dmodule
+      - ./node_modules/.bin/gapi module clean
+    clean:
+      - rm -rf dist
+      - rm -rf .cache
+    deploy:
+      - jsipfs add dmodule/index.js
+      - jsipfs add dmodule/index.d.ts
+    deploy-config:
+      - jsipfs add dmodule/index.json
