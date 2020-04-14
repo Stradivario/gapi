@@ -22,7 +22,9 @@ jobs:
       - run: git config --global user.email 'kristiqn.tachev@gmail.com'
       - run: git config --global user.name "Kristiyan Tachev"
       - run: npm version patch
+      - run: npm run build
       - run: npm run patch
+      - run: npm run publish
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: node ./change-version.js

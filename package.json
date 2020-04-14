@@ -14,7 +14,9 @@
   },
   "scripts": {
     "build": "npx bolt ws exec -- npm run build",
-    "patch": "npx bolt ws exec -- npm run patch",
+    "patch": "npx bolt ws exec -- npm version patch",
+    "publish": "npx bolt ws exec -- npm publish --update-readme --access public",
+    "clean-dist": "npx bolt ws exec -- rm -rf dist",
     "clean": "git clean -dxf",
     "test": "npx bolt ws exec -- npm run test",
     "lint": "npx bolt ws exec -- npm run lint",
