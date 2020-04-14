@@ -1,6 +1,6 @@
 {
   "name": "@gapi/schematics",
-  "version": "1.8.30",
+  "version": "1.8.31",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi/packages/schematics"
@@ -9,7 +9,7 @@
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
     "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
-    "lint": "npx eslint . --ext .ts",
+    "lint": "echo LINT SCHEMATICS",
     "lint-fix": "npx eslint . --fix --ext .ts",
     "build": "rm -rf dist && tsc || true && rsync -a --prune-empty-dirs --include '*/' --include '*' --exclude '*' src/ dist/"
   },
