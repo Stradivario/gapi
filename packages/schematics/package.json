@@ -1,0 +1,44 @@
+{
+  "name": "@gapi/schematics",
+  "version": "1.8.30",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stradivario/gapi/packages/schematics"
+  },
+  "scripts": {
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
+    "delete-dist": "rm -rf dist",
+    "clean": "git clean -dxf",
+    "lint": "npx eslint . --ext .ts",
+    "lint-fix": "npx eslint . --fix --ext .ts",
+    "build": "rm -rf dist && tsc || true && rsync -a --prune-empty-dirs --include '*/' --include '*' --exclude '*' src/ dist/"
+  },
+  "author": {
+    "name": "Kristian Tachev(Stradivario)",
+    "email": "kristiqn.tachev@gmail.com"
+  },
+  "keywords": [
+    "graphql",
+    "gapi",
+    "node",
+    "voyager"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "http://gitlab.youvolio.com/gapi/gapi-voyager/issues"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "schematics": "./collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^7.3.7",
+    "@angular-devkit/schematics": "^7.3.7",
+    "@angular-devkit/schematics-cli": "^0.13.7",
+    "ts-morph": "^1.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.1"
+  }
+}

@@ -28,7 +28,7 @@ export class GenerateTask {
     let method = '';
     const sourceRoot = nextOrDefault('--source-root', 'src/app');
     const language = nextOrDefault('--language', 'ts');
-    let schematicsName = nextOrDefault('--schematics-name', '@rxdi/schematics');
+    let schematicsName = nextOrDefault('--schematics-name', '@gapi/schematics');
     const schematicsConfig = this.configService.getSchematicsConfig();
     if (schematicsConfig.name) {
       schematicsName = schematicsConfig.name;

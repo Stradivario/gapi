@@ -1,0 +1,99 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "application": {
+      "factory": "./dist/lib/application/application.factory#main",
+      "description": "Create a Gapi application.",
+      "schema": "./dist/lib/application/schema.json"
+    },
+    "angular-app": {
+      "factory": "./dist/lib/client-app/angular/angular.factory#main",
+      "description": "Create a new Angular application.",
+      "schema": "./dist/lib/client-app/angular/schema.json"
+    },
+    "class": {
+      "factory": "./dist/lib/class/class.factory#main",
+      "description": "Create a new class.",
+      "schema": "./dist/lib/class/schema.json"
+    },
+    "controller": {
+      "factory": "./dist/lib/controller/controller.factory#main",
+      "description": "Create a Gapi controller.",
+      "schema": "./dist/lib/controller/schema.json"
+    },
+    "component": {
+      "factory": "./dist/lib/component/component.factory#main",
+      "description": "Create a Gapi component.",
+      "schema": "./dist/lib/component/schema.json"
+    },
+    "type": {
+      "factory": "./dist/lib/type/type.factory#main",
+      "description": "Create a Gapi type.",
+      "schema": "./dist/lib/type/schema.json"
+    },
+    "effect": {
+      "factory": "./dist/lib/effect/effect.factory#main",
+      "description": "Create a Gapi effect.",
+      "schema": "./dist/lib/effect/schema.json"
+    },
+    "decorator": {
+      "factory": "./dist/lib/decorator/decorator.factory#main",
+      "description": "Create a Gapi decorator.",
+      "schema": "./dist/lib/decorator/schema.json"
+    },
+    "plugin": {
+      "factory": "./dist/lib/plugin/plugin.factory#main",
+      "description": "Create a Gapi plugin.",
+      "schema": "./dist/lib/plugin/schema.json"
+    },
+    "guard": {
+      "factory": "./dist/lib/guard/guard.factory#main",
+      "description": "Create a Gapi guard.",
+      "schema": "./dist/lib/guard/schema.json"
+    },
+    "interceptor": {
+      "factory": "./dist/lib/interceptor/interceptor.factory#main",
+      "description": "Create a Gapi interceptor.",
+      "schema": "./dist/lib/interceptor/schema.json"
+    },
+    "interface": {
+      "factory": "./dist/lib/interface/interface.factory#main",
+      "description": "Create a Gapi interface.",
+      "schema": "./dist/lib/interface/schema.json"
+    },
+    "module": {
+      "factory": "./dist/lib/module/module.factory#main",
+      "description": "Create a Gapi module.",
+      "schema": "./dist/lib/module/schema.json"
+    },
+    "pipe": {
+      "factory": "./dist/lib/pipe/pipe.factory#main",
+      "description": "Create a Gapi pipe.",
+      "schema": "./dist/lib/pipe/schema.json"
+    },
+    "provider": {
+      "factory": "./dist/lib/provider/provider.factory#main",
+      "description": "Create a Gapi provider.",
+      "schema": "./dist/lib/provider/schema.json"
+    },
+    "service": {
+      "factory": "./dist/lib/service/service.factory#main",
+      "description": "Create a Gapi service.",
+      "schema": "./dist/lib/service/schema.json"
+    },
+    "resolver": {
+      "factory": "./dist/lib/resolver/resolver.factory#main",
+      "description": "Create a Gapi resolver.",
+      "schema": "./dist/lib/resolver/schema.json"
+    },
+    "configuration": {
+      "factory": "./dist/lib/configuration/configuration.factory#main",
+      "description": "Create a Gapi CLI configuration."
+    },
+    "library": {
+      "factory": "./dist/lib/library/library.factory#main",
+      "description": "Create a Gapi library (mono-repo).",
+      "schema": "./dist/lib/library/schema.json"
+    }
+  }
+}

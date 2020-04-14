@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsGapiType",
+  "title": "Gapi Type Options Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the type.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the type?"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the type."
+    },
+    "language": {
+      "type": "string",
+      "description": "Gapi type language (ts/js)."
+    },
+    "sourceRoot": {
+      "type": "string",
+      "description": "Gapi type source root directory."
+    },
+    "skipImport": {
+      "description": "Flag to skip the module import.",
+      "default": true
+    },
+    "flat": {
+      "default": true,
+      "description": "Flag to indicate if a directory is created."
+    },
+    "spec": {
+      "default": false,
+      "description": "Specifies if a spec file is generated."
+    }
+  },
+  "required": ["name"]
+}
