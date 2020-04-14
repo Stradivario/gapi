@@ -29,6 +29,7 @@
     "@rxdi/graphql": "0.7.40",
     "@rxdi/graphql-pubsub": "0.7.38",
     "@rxdi/hapi": "0.7.38",
+    "graphql": "^14.5.8",
     "graphql-geojson": "^1.0.0",
     "graphql-tools": "^3.0.2"
   },
