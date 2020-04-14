@@ -74,3 +74,10 @@ export * from '@rxdi/graphql-pubsub';
 export * from '@rxdi/graphql';
 export * from '@rxdi/hapi';
 export * from '@rxdi/core';
+export {
+  withFilter,
+  PubSubOptions,
+  FilterFn,
+  PubSubEngine,
+  ResolverFn
+} from 'graphql-subscriptions';
