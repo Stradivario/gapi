@@ -1,6 +1,6 @@
 {
   "name": "@gapi/playground",
-  "version": "1.8.25",
+  "version": "1.8.26",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi-playground"
@@ -11,7 +11,7 @@
     "clean": "git clean -dxf",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc || true"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",

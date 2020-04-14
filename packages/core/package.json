@@ -1,6 +1,6 @@
 {
   "name": "@gapi/core",
-  "version": "1.8.25",
+  "version": "1.8.26",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
@@ -32,10 +32,10 @@
     "graphql-geojson": "^1.0.0",
     "graphql-tools": "^3.0.2"
   },
-  "main": "./dist/main.js",
-  "types": "./dist/main.d.ts",
-  "module": "./dist/main.js",
-  "typings": "./dist/main.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "jest": {
     "testEnvironment": "node",
     "testPathIgnorePatterns": [

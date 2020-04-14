@@ -1,6 +1,6 @@
 {
   "name": "gapi",
-  "version": "1.8.25",
+  "version": "1.8.26",
   "description": "Graphql Scalable API",
   "bolt": {
     "workspaces": [
@@ -13,14 +13,12 @@
     }
   },
   "scripts": {
-    "bolt": "npx bolt && rm -rf ./packages/graphql/node_modules/@rxdi/lit-html ./packages/components/node_modules/@rxdi/lit-html ./packages/renderer/node_modules/@rxdi/lit-html ./packages/operators/node_modules/@rxdi/lit-html ./packages/experiments/node_modules/@rxdi/lit-html",
-    "start": "npx parcel ./examples/main/index.html --out-dir build/examples/main",
+    "build": "npx bolt ws exec -- npm run build",
     "patch": "npx bolt ws exec -- npm run patch",
     "clean": "git clean -dxf",
     "test": "npx bolt ws exec -- npm run test",
     "lint": "npx bolt ws exec -- npm run lint",
-    "lint-fix": "npx bolt ws exec -- npm run lint-fix",
-    "build": "rm -rf dist && tsc"
+    "lint-fix": "npx bolt ws exec -- npm run lint-fix"
   },
   "repository": {
     "type": "git",
