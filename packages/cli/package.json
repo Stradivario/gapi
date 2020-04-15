@@ -37,6 +37,7 @@
     "@gapi/core": "1.8.33",
     "graphql": "^14.6.0",
     "@gapi/schematics": "1.8.33",
+    "@zeit/ncc": "^0.22.1",
     "apollo-codegen": "0.20.2",
     "chalk": "2.4.2",
     "chokidar": "^3.0.0",
@@ -48,6 +49,7 @@
     "node-emoji": "1.10.0",
     "node-notifier": "^5.4.0",
     "parcel-bundler": "1.12.3",
+    "pkg": "^4.4.7",
     "rimraf": "2.6.3",
     "shelljs": "0.8.3",
     "yamljs": "0.3.0"

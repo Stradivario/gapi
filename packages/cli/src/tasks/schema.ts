@@ -81,8 +81,7 @@ export class SchemaTask {
         this.node_modules
       }/graphql-document-collector/bin/graphql-document-collector '${
         this.pattern ? this.pattern : '**/*.{graphql,gql}'
-      }' > ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`,
-      { async: true }
+      }' > ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`
     );
     const readDocumentsTemp = await promisify(readFile)(
       `${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`,
@@ -103,13 +102,11 @@ export class SchemaTask {
   public async generateSchema() {
     console.log(`Trying to hit ${this.endpoint} ...`);
     await this.execService.call(
-      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${this.node_modules}/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} --output ${this.folder}/schema.json`,
-      { async: true }
+      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${this.node_modules}/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} --output ${this.folder}/schema.json`
     );
     console.log(`Endpoint ${this.endpoint} hit!`);
     await this.execService.call(
-      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node  ${this.bashFolder}/gql2ts/index.js ${this.folder}/schema.json -o ${this.folder}/index.ts`,
-      { async: true }
+      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node  ${this.bashFolder}/gql2ts/index.js ${this.folder}/schema.json -o ${this.folder}/index.ts`
     );
   }
 

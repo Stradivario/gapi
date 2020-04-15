@@ -39,6 +39,12 @@ export type Tasks =
   | '--bundle-modules'
   | '--disable-excluded-folders'
   | '--inspect-brk'
+  | '--path'
+  | '--pkg-name'
+  | '--ncc-only'
+  | '--pkg-only'
+  | '--assets'
+  | '--single-executable'
   | '--target=browser';
 export const includes = (i: Tasks) => process.argv.toString().includes(i);
 export const nextOrDefault = (i: Tasks, fb: any = true, type = p => p) => {

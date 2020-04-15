@@ -47,10 +47,7 @@ export class TestTask {
           await this.execService.call(
             `nodemon --watch '${process.cwd()}/src/**/*.ts' --ignore '${
               this.configService.config.config.schema.introspectionOutputFolder
-            }/' --exec '${this.config} && npm run lint && jest' ${
-              this.verbose
-            }`,
-            { async: true }
+            }/' --exec '${this.config} && npm run lint && jest' ${this.verbose}`
           );
           // this.startTask.run();
           // await execService.call(`${this.config} && jest --watchAll`);
