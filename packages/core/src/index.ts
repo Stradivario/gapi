@@ -81,3 +81,5 @@ export {
   PubSubEngine,
   ResolverFn
 } from 'graphql-subscriptions';
+
+export * from './enum-to-gql';
