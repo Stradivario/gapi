@@ -91,7 +91,7 @@ export class SchemaTask {
     if (this.argsService.args.includes('--collect-types')) {
       await this.generateTypes(readDocumentsTemp);
     }
-    const parsedDocuments = `/* tslint:disable */ \n export const DOCUMENTS = ${readDocumentsTemp};`;
+    const parsedDocuments = `/* tslint:disable */\n/* eslint-disable prettier/prettier */ \nexport const DOCUMENTS = ${readDocumentsTemp};`;
     await promisify(writeFile)(
       `${this.folder}/documents.ts`,
       parsedDocuments,
@@ -127,12 +127,13 @@ export class SchemaTask {
         return result;
       })
       .filter(i => !!i);
-    const types = `
-function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
-    return o.reduce((res, key) => {
-        res[key] = key;
-        return res;
-    }, Object.create(null));
+    const types = `/* eslint-disable prettier/prettier */
+
+function strEnum<T extends string>(o: Array<T>): { [K in T]: K } {
+  return o.reduce((res, key) => {
+    res[key] = key;
+    return res;
+  }, Object.create(null));
 }
 export const DocumentTypes = strEnum(${JSON.stringify(savedDocuments)
       .replace(/"/g, `'`)
