@@ -3,7 +3,7 @@ import {
   SpawnOptionsWithoutStdio
 } from 'child_process';
 
-interface ProcessReturn {
+export interface ProcessReturn {
   data: never;
   code: number;
   error: never;
