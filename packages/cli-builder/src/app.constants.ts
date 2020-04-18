@@ -4,6 +4,7 @@ type Commands =
   | '--port'
   | '--random-port'
   | '--runner-type'
+  | '--send-response-to-server'
   | '--graphiql';
 
 export const includes = (i: Commands) =>
@@ -46,5 +47,8 @@ export const Environment = {
     includes('--graphiql'),
   WORKER_TYPE:
     process.env.GRAPHQL_RUNNER_TYPE ||
-    nextOrDefault('--runner-type')
+    nextOrDefault('--runner-type'),
+  SEND_RESPONSE_TO_SERVER:
+    process.env.GRAPHQL_RUNNER_SEND_RETURN_RESPONSE ||
+    includes('--send-response-to-server')
 };

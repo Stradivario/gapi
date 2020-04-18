@@ -5,6 +5,8 @@ import {
   subscribeToTopic,
   WebSocketLink
 } from '@gapi/core';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient } from 'apollo-client';
 import { gql } from 'apollo-server-core';
 import { createHash } from 'crypto';
 import { networkInterfaces } from 'os';
@@ -17,7 +19,11 @@ import { EnumToken } from '../../app.tokents';
 import { executeAction } from '../executors/commands';
 
 const webSocketImpl = require('ws');
-
+interface MachineStatus {
+  machineHash: string;
+  data?: string;
+  error?: string;
+}
 const machineHash = createHash('md5')
   .update(JSON.stringify(networkInterfaces()))
   .digest('base64');
@@ -43,7 +49,7 @@ export class SubscriptionService {
       );
     }
   }
-  subscribe(
+  async subscribe(
     uri: string,
     authorization?: string,
     worker_type?: string
@@ -64,6 +70,7 @@ export class SubscriptionService {
       },
       webSocketImpl
     });
+
     this.subscription = subscribeToTopic<{
       data: { registerWorker: IInstanceConnectionType };
     }>(
@@ -87,20 +94,69 @@ export class SubscriptionService {
         if (!cmd) {
           throw new Error('Missing command');
         }
-        await executeAction(command)(JSON.parse(args), cwd);
+        try {
+          const data = await executeAction(command)(
+            JSON.parse(args),
+            cwd
+          );
+          await this.sendStatus({
+            machineHash,
+            data: JSON.stringify(data)
+          });
+        } catch (error) {
+          await this.sendStatus({
+            machineHash,
+            error: JSON.stringify(error)
+          });
+        }
       }, console.error);
     return this.subscription;
   }
 
   unsubscribe() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  closePubsub() {
     if (this.link) {
       const subscriptionClient = this.link[
         'subscriptionClient'
       ] as SubscriptionClient;
+      subscriptionClient.unsubscribeAll();
       subscriptionClient.close();
     }
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  }
+
+  async sendStatus(variables: MachineStatus) {
+    if (Environment.SEND_RESPONSE_TO_SERVER) {
+      await this.sendMachineStatus(variables);
     }
+  }
+
+  sendMachineStatus(variables: MachineStatus) {
+    const client = new ApolloClient({
+      link: this.link,
+      cache: new InMemoryCache()
+    });
+    return client.mutate({
+      mutation: gql`
+        mutation notifyMachineResult(
+          $machineHash: String!
+          $data: String!
+          $error: String
+        ) {
+          notifyMachineResult(
+            machineHash: $machineHash
+            data: $data
+            error: $error
+          ) {
+            status
+          }
+        }
+      `,
+      variables
+    });
   }
 }

@@ -46,10 +46,18 @@ export class AppController {
   }
 
   @Mutation()
-  unsubscribeToGraphqlPubsub() {
+  unsubscribeFromGraphqlPubsub() {
     this.subscriptionService.unsubscribe();
     return {
       data: `Success unsubscribed from ${this.subscriptionService.currentSubscriptionUri}`
+    };
+  }
+
+  @Mutation()
+  closePubsub() {
+    this.subscriptionService.closePubsub();
+    return {
+      data: 'Pubsub closed'
     };
   }
 }

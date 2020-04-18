@@ -1,6 +1,4 @@
 import {
-  // Controller,
-  // GraphQLControllerOptions,
   GraphqlEnumType,
   GraphQLList,
   GraphQLNonNull,
