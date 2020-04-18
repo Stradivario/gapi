@@ -13,8 +13,8 @@ type GenericEnumType<T, K, A> = {
 
 export type GenericEnum<
   C,
-  T = Promise<number>,
-  K = string[]
+  T = any,
+  K = any
 > = GenericEnumType<C, T, K>;
 
 export const getAction = <T = {}, K = {}>(

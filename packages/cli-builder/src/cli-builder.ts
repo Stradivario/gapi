@@ -19,14 +19,17 @@ import { AppFrameModule } from './app.frame';
 import { CommandsToken, EnumToken } from './app.tokents';
 import { GenericCommandType } from './app.types';
 import { CoreModule } from './core/core.moduile';
-import { executeAction } from './core/executors/commands';
+import {
+  executeAction,
+  GenericEnum
+} from './core/executors/commands';
 
 @Module({
   imports: [AppFrameModule.forRoot(), CoreModule]
 })
 export class CLIBuilder {
-  public static forRoot<T>(
-    commands: T,
+  public static forRoot<C, T = unknown, K = unknown>(
+    commands: GenericEnum<C, T, K>,
     enumerables
   ): ModuleWithProviders {
     return {

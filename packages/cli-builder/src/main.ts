@@ -7,7 +7,6 @@ import { Server } from 'hapi';
 
 import { Environment } from './app.constants';
 import { CLIBuilder } from './cli-builder';
-import { GenericEnum } from './core/executors/commands';
 
 export enum Commands {
   GIT = 1,
@@ -17,7 +16,11 @@ export enum Commands {
 }
 
 Bootstrap(
-  CLIBuilder.forRoot<GenericEnum<typeof Commands>>(
+  CLIBuilder.forRoot<
+    typeof Commands,
+    Promise<number>,
+    string[]
+  >(
     {
       GIT: async (args: string[]) => {
         console.log('[RUN_GIT]: started arguments: ', args);
