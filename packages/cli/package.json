@@ -1,6 +1,6 @@
 {
   "name": "@gapi/cli",
-  "version": "1.8.44",
+  "version": "1.8.45",
   "description": "Gapi command line interface",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
@@ -34,9 +34,9 @@
   "author": "Kristiyan Tachev (@Stradivario)",
   "license": "MIT",
   "dependencies": {
-    "@gapi/core": "1.8.44",
+    "@gapi/core": "1.8.45",
     "graphql": "^14.6.0",
-    "@gapi/schematics": "1.8.44",
+    "@gapi/schematics": "1.8.45",
     "@zeit/ncc": "^0.22.1",
     "apollo-codegen": "0.20.2",
     "chalk": "2.4.2",
