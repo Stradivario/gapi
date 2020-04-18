@@ -31,7 +31,9 @@
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "@gapi/core": "1.8.43"
+    "@gapi/core": "1.8.43",
+    "bufferutil": "^4.0.1",
+    "ws": "^7.2.3"
   },
   "devDependencies": {
     "@types/hapi": "^18.0.2",
