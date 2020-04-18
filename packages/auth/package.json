@@ -1,6 +1,6 @@
 {
   "name": "@gapi/auth",
-  "version": "1.8.40",
+  "version": "1.8.41",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi-auth"
