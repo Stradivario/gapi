@@ -5,3 +5,5 @@ export {
   executeCommand,
   ProcessReturn
 } from './core/executors';
+export { Bootstrap } from '@gapi/core';
+export { SpawnOptionsWithoutStdio } from 'child_process';

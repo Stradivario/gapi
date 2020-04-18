@@ -11,16 +11,10 @@ import {
   CLIBuilder,
   Environment,
   GenericEnum,
-  executeCommand
-} from '@gapi/cli-builder';
-import {
   Bootstrap,
-  Container,
-  HAPI_SERVER
-} from '@gapi/core';
-import { Server } from 'hapi';
-
-import { SpawnOptionsWithoutStdio } from 'child_process';
+  executeCommand,
+  SpawnOptionsWithoutStdio
+} from '@gapi/cli-builder';
 
 export const Git = (
   args: string[] = [],
@@ -52,10 +46,44 @@ Bootstrap(
   } else {
     console.log(
       'SIGNAL_MAIN_API_STARTED',
-      `Running at http://localhost:${
-        Container.get<Server>(HAPI_SERVER).info.port
-      }`
+      `Running at http://localhost:${Environment.API_PORT}`
     );
   }
 });
+```
+
+Open http://localhost:42043`
+Execute graphql query
+
+```graphql
+mutation {
+  execute(cmd: GIT, args: ["status"]) {
+    code
+    data
+    error
+  }
+}
+```
+
+Subscribing to other topic
+
+```graphql
+mutation subscribeToGraphqlPubsub {
+  subscribeToGraphqlPubsub(
+    uri: "ws://localhost:9000/subscriptions"
+    worker_type: "runner"
+  ) {
+    code
+    data
+    error
+  }
+}
+
+mutation unsubscribeToGraphqlPubsub {
+  unsubscribeToGraphqlPubsub {
+    code
+    data
+    error
+  }
+}
 ```
