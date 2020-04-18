@@ -8,53 +8,37 @@ $ npm install @gapi/cli-builer
 
 ```ts
 import {
+  CLIBuilder,
+  Environment,
+  GenericEnum,
+  executeCommand
+} from '@gapi/cli-builder';
+import {
   Bootstrap,
   Container,
   HAPI_SERVER
 } from '@gapi/core';
 import { Server } from 'hapi';
 
-import {
-  Environment,
-  CLIBuilder,
-  GenericEnum
-} from '@gapi/cli-builder';
+import { SpawnOptionsWithoutStdio } from 'child_process';
+
+export const Git = (
+  args: string[] = [],
+  options?: SpawnOptionsWithoutStdio
+) => executeCommand('git', args, options);
 
 export enum Commands {
-  GIT = 1,
-  NPM = 2,
-  DOCKER = 3,
-  DOCKER_COMPOSE2 = 4
+  GIT = 1
 }
 
 Bootstrap(
-  CLIBuilder.forRoot<GenericEnum<typeof Commands>>(
+  CLIBuilder.forRoot<typeof Commands>(
     {
       GIT: async (args: string[]) => {
         console.log('[RUN_GIT]: started arguments: ', args);
+        const data = await Git(args);
         console.log('[RUN_GIT]: exited');
-        return 1;
-      },
-      NPM: async (args: string[]) => {
-        console.log('[RUN_NPM]: started arguments: ', args);
-        console.log('[RUN_NPM]: exited');
-        return 1;
-      },
-      DOCKER: async (args: string[]) => {
-        console.log(
-          '[RUN_DOCKER]: started arguments: ',
-          args
-        );
-        console.log('[RUN_DOCKER]: exited');
-        return 1;
-      },
-      DOCKER_COMPOSE2: async (args: string[]) => {
-        console.log(
-          '[RUN_DOCKER_COMPOSE]: started arguments: ',
-          args
-        );
-        console.log('[RUN_DOCKER_COMPOSE]: exited');
-        return 1;
+        return data;
       }
     },
     Commands

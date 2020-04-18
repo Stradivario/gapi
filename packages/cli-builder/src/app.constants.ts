@@ -45,6 +45,6 @@ export const Environment = {
     process.env.GRAPHQL_RUNNER_GRAPHIQL ||
     includes('--graphiql'),
   WORKER_TYPE:
-    process.env.GRAPHQL_RUNNER_WORKER_TYPE ||
-    nextOrDefault('--runner-type', 'runner')
+    process.env.GRAPHQL_RUNNER_TYPE ||
+    nextOrDefault('--runner-type')
 };
