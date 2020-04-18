@@ -1,4 +1,6 @@
-import { Module, SubscriptionService } from '@gapi/core';
+import { Module } from '@gapi/core';
+
+import { SubscriptionService } from './services/subscription.service';
 
 @Module({
   providers: [SubscriptionService]
