@@ -3,12 +3,18 @@ import {
   SpawnOptionsWithoutStdio
 } from 'child_process';
 
+interface ProcessReturn {
+  data: never;
+  code: number;
+  error: never;
+}
+
 export const executeCommand = (
   command: string,
   args: string[] = [],
   options?: SpawnOptionsWithoutStdio
 ) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<ProcessReturn>((resolve, reject) => {
     const child = spawn(command, args, options);
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);
@@ -20,9 +26,9 @@ export const executeCommand = (
     });
     child.on('close', (code: number) => {
       if (code !== 0) {
-        reject({ error, code });
+        reject({ data, code, error } as ProcessReturn);
       } else {
-        resolve({ data, code });
+        resolve({ data, code } as ProcessReturn);
       }
     });
   });
