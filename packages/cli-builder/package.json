@@ -1,6 +1,6 @@
 {
   "name": "@gapi/cli-builder",
-  "version": "1.8.37",
+  "version": "1.8.38",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
@@ -31,7 +31,7 @@
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "@gapi/core": "1.8.37"
+    "@gapi/core": "1.8.38"
   },
   "devDependencies": {
     "@types/hapi": "^18.0.2",
