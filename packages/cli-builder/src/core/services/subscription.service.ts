@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import {
   Container,
+  Inject,
   Injectable,
   subscribeToTopic,
   WebSocketLink
 } from '@gapi/core';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
-import { gql } from 'apollo-server-core';
 import { createHash } from 'crypto';
 import { networkInterfaces } from 'os';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,11 @@ import { map } from 'rxjs/operators';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 import { Environment } from '../../app.constants';
-import { EnumToken } from '../../app.tokents';
+import {
+  EnumToken,
+  MachineStatusQuery,
+  SubscriptionQuery
+} from '../../app.tokents';
 import { executeAction } from '../executors/commands';
 
 const webSocketImpl = require('ws');
@@ -40,7 +44,12 @@ export class SubscriptionService {
   subscription: Subscription;
   currentSubscriptionUri: string;
   private link: WebSocketLink;
-  constructor() {
+  constructor(
+    @Inject(SubscriptionQuery)
+    private subscriptionsQuery: SubscriptionQuery,
+    @Inject(MachineStatusQuery)
+    private machineStatusQuery: MachineStatusQuery
+  ) {
     if (Environment.SUBSCRIPTION_URI) {
       this.subscribe(
         Environment.SUBSCRIPTION_URI,
@@ -74,15 +83,7 @@ export class SubscriptionService {
     this.subscription = subscribeToTopic<{
       data: { registerWorker: IInstanceConnectionType };
     }>(
-      gql`
-        subscription($machineHash: String!) {
-          registerWorker(machineHash: $machineHash) {
-            command
-            args
-            cwd
-          }
-        }
-      `,
+      this.subscriptionsQuery,
       {
         machineHash
       },
@@ -141,21 +142,7 @@ export class SubscriptionService {
       cache: new InMemoryCache()
     });
     return client.mutate({
-      mutation: gql`
-        mutation notifyMachineResult(
-          $machineHash: String!
-          $data: String!
-          $error: String
-        ) {
-          notifyMachineResult(
-            machineHash: $machineHash
-            data: $data
-            error: $error
-          ) {
-            status
-          }
-        }
-      `,
+      mutation: this.machineStatusQuery,
       variables
     });
   }

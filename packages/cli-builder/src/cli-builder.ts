@@ -1,4 +1,5 @@
 import {
+  DocumentNode,
   GraphqlEnumType,
   GraphQLList,
   GraphQLNonNull,
@@ -10,11 +11,17 @@ import {
   ModuleWithProviders,
   SCHEMA_OVERRIDE
 } from '@gapi/core';
+import { gql } from 'apollo-server-core';
 
 import { Environment } from './app.constants';
 import { AppController } from './app.controller';
 import { AppFrameModule } from './app.frame';
-import { CommandsToken, EnumToken } from './app.tokents';
+import {
+  CommandsToken,
+  EnumToken,
+  MachineStatusQuery,
+  SubscriptionQuery
+} from './app.tokents';
 import { GenericCommandType } from './app.types';
 import { CoreModule } from './core/core.moduile';
 import {
@@ -28,7 +35,9 @@ import {
 export class CLIBuilder {
   public static forRoot<C, T = unknown, K = unknown>(
     commands: GenericEnum<C, T, K>,
-    enumerables
+    enumerables,
+    subscriptionQuery?: DocumentNode,
+    machineStatusQuery?: DocumentNode
   ): ModuleWithProviders {
     return {
       module: CLIBuilder,
@@ -40,6 +49,40 @@ export class CLIBuilder {
         {
           provide: EnumToken,
           useValue: enumerables
+        },
+        {
+          provide: MachineStatusQuery,
+          useValue:
+            machineStatusQuery ||
+            gql`
+              mutation notifyMachineResult(
+                $machineHash: String!
+                $data: String!
+                $error: String
+              ) {
+                notifyMachineResult(
+                  machineHash: $machineHash
+                  data: $data
+                  error: $error
+                ) {
+                  status
+                }
+              }
+            `
+        },
+        {
+          provide: SubscriptionQuery,
+          useValue:
+            subscriptionQuery ||
+            gql`
+              subscription($machineHash: String!) {
+                registerWorker(machineHash: $machineHash) {
+                  command
+                  args
+                  cwd
+                }
+              }
+            `
         },
         {
           provide: SCHEMA_OVERRIDE,
