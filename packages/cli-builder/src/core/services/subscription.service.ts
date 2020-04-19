@@ -104,6 +104,7 @@ export class SubscriptionService {
         } catch (error) {
           await this.sendStatus({
             machineHash,
+            data: '',
             error: JSON.stringify(error)
           });
         }
