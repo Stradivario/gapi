@@ -1,0 +1,8 @@
+config:
+  schematics:
+    name: @rxdi/schematics
+    dryRun: false
+  app:
+    local:
+      GRAPHQL_RUNNER_API_PORT: 42044
+      GRAPHQL_RUNNER_SUBSCRIPTION_URI: wss://pubsub.graphql-server.com/subscriptions

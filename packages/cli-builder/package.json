@@ -6,6 +6,7 @@
     "url": "https://github.com/Stradivario/gapi.git"
   },
   "scripts": {
+    "start": "gapi start --local --minify=false --inspect --iport 9232",
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
     "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
