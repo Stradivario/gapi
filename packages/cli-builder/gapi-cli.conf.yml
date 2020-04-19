@@ -1,8 +1,16 @@
 config:
-  schematics:
-    name: @rxdi/schematics
-    dryRun: false
   app:
     local:
       GRAPHQL_RUNNER_API_PORT: 42044
+      GRAPHQL_RUNNER_SUBSCRIPTION_URI: '' #'ws://localhost:9000/subscriptions'
+      GRAPHQL_RUNNER_TYPE: vscode
+      GRAPHQL_RUNNER_GRAPHIQL: true
+      GRAPHQL_RUNNER_SEND_RETURN_RESPONSE: true
+      GRAPHQL_RUNNER_SECRET: ''
+    prod:
+      GRAPHQL_RUNNER_API_PORT: 42044
       GRAPHQL_RUNNER_SUBSCRIPTION_URI: wss://pubsub.graphql-server.com/subscriptions
+      GRAPHQL_RUNNER_TYPE: runner
+      GRAPHQL_RUNNER_GRAPHIQL: true
+      GRAPHQL_RUNNER_SEND_RETURN_RESPONSE: true
+      GRAPHQL_RUNNER_SECRET: ''

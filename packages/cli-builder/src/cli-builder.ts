@@ -1,6 +1,5 @@
 import {
   GraphqlEnumType,
-  GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLSchema,
@@ -27,6 +26,7 @@ import {
   executeAction,
   GenericEnum
 } from './core/executors/commands';
+import { GraphQLJSON } from './scalar-object';
 
 @Module({
   imports: [AppFrameModule.forRoot(), CoreModule]
@@ -91,9 +91,7 @@ export class CLIBuilder {
                             )
                           },
                           args: {
-                            type: new GraphQLList(
-                              GraphQLString
-                            )
+                            type: GraphQLJSON
                           },
                           cwd: {
                             type: GraphQLString
