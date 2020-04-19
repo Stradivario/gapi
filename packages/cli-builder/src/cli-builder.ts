@@ -1,5 +1,4 @@
 import {
-  DocumentNode,
   GraphqlEnumType,
   GraphQLList,
   GraphQLNonNull,
@@ -11,7 +10,6 @@ import {
   ModuleWithProviders,
   SCHEMA_OVERRIDE
 } from '@gapi/core';
-import { gql } from 'apollo-server-core';
 
 import { Environment } from './app.constants';
 import { AppController } from './app.controller';
@@ -20,6 +18,7 @@ import {
   CommandsToken,
   EnumToken,
   MachineStatusQuery,
+  Network,
   SubscriptionQuery
 } from './app.tokents';
 import { GenericCommandType } from './app.types';
@@ -36,8 +35,7 @@ export class CLIBuilder {
   public static forRoot<C, T = unknown, K = unknown>(
     commands: GenericEnum<C, T, K>,
     enumerables,
-    subscriptionQuery?: DocumentNode,
-    machineStatusQuery?: DocumentNode
+    network: Network = new Network()
   ): ModuleWithProviders {
     return {
       module: CLIBuilder,
@@ -52,37 +50,11 @@ export class CLIBuilder {
         },
         {
           provide: MachineStatusQuery,
-          useValue:
-            machineStatusQuery ||
-            gql`
-              mutation notifyMachineResult(
-                $machineHash: String!
-                $data: String!
-                $error: String
-              ) {
-                notifyMachineResult(
-                  machineHash: $machineHash
-                  data: $data
-                  error: $error
-                ) {
-                  status
-                }
-              }
-            `
+          useValue: network.status
         },
         {
           provide: SubscriptionQuery,
-          useValue:
-            subscriptionQuery ||
-            gql`
-              subscription($machineHash: String!) {
-                registerWorker(machineHash: $machineHash) {
-                  command
-                  args
-                  cwd
-                }
-              }
-            `
+          useValue: network.subscription
         },
         {
           provide: SCHEMA_OVERRIDE,

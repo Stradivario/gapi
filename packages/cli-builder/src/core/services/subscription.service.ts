@@ -8,7 +8,6 @@ import {
 } from '@gapi/core';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
-import { createHash } from 'crypto';
 import { networkInterfaces } from 'os';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,6 +16,7 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { Environment } from '../../app.constants';
 import {
   EnumToken,
+  machineHash,
   MachineStatusQuery,
   SubscriptionQuery
 } from '../../app.tokents';
@@ -28,9 +28,6 @@ interface MachineStatus {
   data?: string;
   error?: string;
 }
-const machineHash = createHash('md5')
-  .update(JSON.stringify(networkInterfaces()))
-  .digest('base64');
 
 export interface IInstanceConnectionType {
   command?: number | null;
@@ -83,13 +80,13 @@ export class SubscriptionService {
     this.subscription = subscribeToTopic<{
       data: { registerWorker: IInstanceConnectionType };
     }>(
-      this.subscriptionsQuery,
-      {
-        machineHash
-      },
+      this.subscriptionsQuery.query,
+      this.subscriptionsQuery.variables,
       this.link
     )
-      .pipe(map(({ data }) => data.registerWorker))
+      .pipe(
+        map(({ data }) => this.subscriptionsQuery.map(data))
+      )
       .subscribe(async ({ args, command, cwd }) => {
         const cmd = Container.get(EnumToken)[command];
         if (!cmd) {
@@ -142,7 +139,7 @@ export class SubscriptionService {
       cache: new InMemoryCache()
     });
     return client.mutate({
-      mutation: this.machineStatusQuery,
+      mutation: this.machineStatusQuery.query,
       variables
     });
   }
