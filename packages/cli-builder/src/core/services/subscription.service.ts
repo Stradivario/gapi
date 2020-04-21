@@ -21,7 +21,7 @@ import {
   SubscriptionQuery
 } from '../../app.tokents';
 import { executeAction } from '../executors/commands';
-import { getIpAdresses } from './get-ip-adresses';
+import { getNetworkIP } from './get-ip-adresses';
 
 const webSocketImpl = require('ws');
 interface MachineStatus {
@@ -69,7 +69,7 @@ export class SubscriptionService {
           authorization,
           machineHash,
           worker_type,
-          ips: getIpAdresses(networkInterfaces()),
+          ip: await getNetworkIP(),
           networkInterfaces: JSON.stringify(
             networkInterfaces()
           )

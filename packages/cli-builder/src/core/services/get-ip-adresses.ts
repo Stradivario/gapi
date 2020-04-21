@@ -1,3 +1,5 @@
+import { createConnection } from 'net';
+
 export const getIpAdresses = (
   network: Record<
     string,
@@ -26,3 +28,21 @@ export const getIpAdresses = (
     });
     return acc;
   }, [] as string[]);
+
+export const getNetworkIP = (): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const socket = createConnection(80, 'www.google.com');
+    socket.on('connect', function() {
+      let addressInfo = socket.address() as {
+        address: string;
+      };
+      if (typeof addressInfo === 'string') {
+        addressInfo = JSON.parse(addressInfo);
+      }
+      resolve(addressInfo.address);
+      socket.end();
+    });
+    socket.on('error', function(e) {
+      reject(e);
+    });
+  });
