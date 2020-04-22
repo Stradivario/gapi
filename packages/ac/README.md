@@ -1,35 +1,66 @@
-# @Gapi Voyager Module
+```ts
+import { AccessControl, Union } from '@gapi/ac';
 
-##### Original Voyager module you can find here [VoyagerGraphql](https://github.com/APIs-guru/graphql-voyager)
-##### For questions/issues you can write ticket [here](http://gitlab.youvolio.com/gapi/gapi-voyager/issues)
-##### This module is intended to be used with [GAPI](https://github.com/Stradivario/gapi)
+enum GraphqlActions {
+  query,
+  mutation,
+  subscription,
+  event,
+}
 
-## Installation and basic examples:
-##### To install this Gapi module, run:
+enum Roles {
+  GUEST,
+  USER,
+  ADMIN,
+}
 
-```bash
-$ npm install @gapi/voyager --save
+interface IQuery {
+  status: {
+    status: number;
+  };
+}
+
+const Permissions: Union<typeof Roles, IQuery, typeof GraphqlActions> = {
+  GUEST: {
+    status: {
+      query: {
+        enabled: false,
+      },
+    },
+  },
+  USER: {
+    status: {
+      query: {
+        enabled: true,
+        attributes: {
+          status: false,
+        },
+      },
+    },
+  },
+  ADMIN: {
+    status: {
+      query: {
+        enabled: true,
+      },
+    },
+  },
+};
+
+const ac = new AccessControl<
+  typeof Roles,
+  IQuery & ISubscription & IMutation,
+  typeof GraphqlActions
+>(Permissions);
+
+const canAdminQueryStatus = ac.can('ADMIN', 'query', 'status');
+const canAdminQueryStatus = ac.can('USER', 'query', 'status');
+
+if (!canAdminQueryStatus) {
+  throw new Error('You are not authorized');
+}
+
+const data = { status: 200 };
+const filteredData = await ac.filter('USER', 'query', 'status')(data);
+filteredData; // { status: null }
 ```
-
-## Consuming @gapi/voyager
-
-##### Import inside AppModule or CoreModule
-```typescript
-
-import { Module } from '@rxdi/core';
-import { VoyagerModule } from '@gapi/voyager';
-
-@Module({
-    imports: [
-        VoyagerModule.forRoot({
-            path: '/voyager';
-            endpointUrl: '/graphql';
-        })
-    ]
-})
-export class CoreModule { }
-```
-
-TODO: Better documentation...
-
-Enjoy ! :)
