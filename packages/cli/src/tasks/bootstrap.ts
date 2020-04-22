@@ -14,7 +14,7 @@ export class BootstrapTask {
     this.pluginLoader
       .loadPlugins()
       .pipe(
-        switchMap(pluginModules =>
+        switchMap((pluginModules) =>
           setup({
             imports: [
               ...pluginModules,
@@ -22,14 +22,14 @@ export class BootstrapTask {
                 options || {
                   server: {
                     hapi: {
-                      port: nextOrDefault('--port', 42000, p => Number(p))
-                    }
+                      port: nextOrDefault('--port', 42000, (p) => Number(p)),
+                    },
                   },
                   graphql: {
                     openBrowser: false,
                     graphiql: false,
-                    graphiQlPlayground: false
-                  }
+                    graphiQlPlayground: false,
+                  },
                   // pubsub: {
                   //   host: 'localhost',
                   //   port: 5672,
@@ -42,9 +42,9 @@ export class BootstrapTask {
                   // }
                 }
               ),
-              ServerModule
+              ServerModule,
             ],
-            providers: [PluginWatcherService]
+            providers: [PluginWatcherService],
           })
         )
       )

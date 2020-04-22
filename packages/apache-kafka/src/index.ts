@@ -5,7 +5,7 @@ import { KafkaConfig } from './kafka.interface';
 import { GapiKafkaPubSubService } from './kafka.service';
 
 @Module({
-  services: [KafkaConfigService]
+  services: [KafkaConfigService],
 })
 export class GapiKafkaModule {
   static forRoot(config: KafkaConfig) {

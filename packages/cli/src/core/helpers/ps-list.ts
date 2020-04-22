@@ -28,16 +28,16 @@ const windows = async (): Promise<Process[]> => {
   // Source: https://github.com/MarkTiedemann/fastlist
   const bin = join(__dirname, 'fastlist.exe');
   const { stdout } = await promisify(execFile)(bin, {
-    maxBuffer: TEN_MEGABYTES
+    maxBuffer: TEN_MEGABYTES,
   });
   return stdout
     .trim()
     .split('\r\n')
-    .map(line => line.split('\t'))
+    .map((line) => line.split('\t'))
     .map(([name, pid, ppid]) => ({
       name,
       pid: Number.parseInt(pid, 10),
-      ppid: Number.parseInt(ppid, 10)
+      ppid: Number.parseInt(ppid, 10),
     }));
 };
 
@@ -46,17 +46,14 @@ const main = async (options = { all: null }): Promise<Process[]> => {
   const ret: ReturnType = {} as any;
 
   await Promise.all(
-    ['comm', 'args', 'ppid', 'uid', '%cpu', '%mem'].map(async cmd => {
+    ['comm', 'args', 'ppid', 'uid', '%cpu', '%mem'].map(async (cmd) => {
       const { stdout } = await promisify(execFile)(
         'ps',
         [flags, `pid,${cmd}`],
         { maxBuffer: TEN_MEGABYTES }
       );
 
-      for (let line of stdout
-        .trim()
-        .split('\n')
-        .slice(1)) {
+      for (let line of stdout.trim().split('\n').slice(1)) {
         line = line.trim();
         const [pid] = line.split(' ', 1);
         const val = line.slice(pid.length + 1).trim();
@@ -89,7 +86,7 @@ const main = async (options = { all: null }): Promise<Process[]> => {
       ppid: Number.parseInt(value.ppid, 10),
       uid: Number.parseInt(value.uid, 10),
       cpu: Number.parseFloat(value['%cpu']),
-      memory: Number.parseFloat(value['%mem'])
+      memory: Number.parseFloat(value['%mem']),
     }));
 };
 

@@ -159,7 +159,7 @@ export class StartTask {
         files,
         {
           original: this.configOriginal,
-          schema: this.configService.config.config.schema
+          schema: this.configService.config.config.schema,
         },
         true,
         false
@@ -177,7 +177,7 @@ export class StartTask {
                             status
                         }
                     }
-                `
+                `,
       });
     } catch (e) {}
     if (res.status === 200 && res.data.status.status === '200') {
@@ -200,7 +200,7 @@ export class StartTask {
               }
             }
             `,
-      variables
+      variables,
     });
   }
 
@@ -222,7 +222,7 @@ export class StartTask {
     if (schema.introspectionOutputFolder) {
       excludedFolders.push(schema.introspectionOutputFolder);
     }
-    excludedFolders = excludedFolders.map(f =>
+    excludedFolders = excludedFolders.map((f) =>
       normalize(process.cwd() + f).replace('.', '')
     );
     const bundler = new Bundler(file, {
@@ -232,14 +232,14 @@ export class StartTask {
       outFile: nextOrDefault('--outFile', null),
       // contentHash: true,
       // detailedReport: true,
-      hmr: nextOrDefault('--hmr', false, v => Boolean(v)),
+      hmr: nextOrDefault('--hmr', false, (v) => Boolean(v)),
       publicUrl: nextOrDefault('--public-url', '/'),
-      bundleNodeModules: includes('--bundle-modules')
+      bundleNodeModules: includes('--bundle-modules'),
     });
     const originalOnChange = bundler.onChange.bind(bundler);
-    bundler.onChange = function(path: string) {
+    bundler.onChange = function (path: string) {
       if (
-        excludedFolders.filter(d =>
+        excludedFolders.filter((d) =>
           path.substring(0, path.lastIndexOf('/')).includes(d)
         ).length &&
         !includes('--disable-excluded-folders')
@@ -263,7 +263,7 @@ export class StartTask {
         killChild();
       }
     });
-    bundler.on('bundled', compiledBundle => (bundle = compiledBundle));
+    bundler.on('bundled', (compiledBundle) => (bundle = compiledBundle));
     bundler.on('buildEnd', async () => {
       if (buildOnly) {
         process.stdout.write(`Gapi Application build finished! ${file}\n`);
@@ -324,8 +324,8 @@ export class StartTask {
           process.stdout.write(data);
           // isFirstTimeRun = false;
         });
-        child.stderr.on('data', data => process.stdout.write(data));
-        child.on('exit', code => {
+        child.stderr.on('data', (data) => process.stdout.write(data));
+        child.on('exit', (code) => {
           console.log(`Child process exited with code ${code}`);
           child = null;
         });

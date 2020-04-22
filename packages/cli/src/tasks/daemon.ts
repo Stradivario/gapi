@@ -20,7 +20,7 @@ import {
   GAPI_DAEMON_HTTP_PLUGINS_FOLDER,
   GAPI_DAEMON_IPFS_PLUGINS_FOLDER,
   GAPI_DAEMON_PLUGINS_FOLDER,
-  GAPI_DAEMON_PROCESS_LIST_FOLDER
+  GAPI_DAEMON_PROCESS_LIST_FOLDER,
 } from '../daemon-server/daemon.config';
 import { BootstrapTask } from './bootstrap';
 
@@ -34,7 +34,7 @@ export const DaemonTasks = strEnum([
   'unlink',
   'list',
   'restart',
-  'status'
+  'status',
 ]);
 export type DaemonTasks = keyof typeof DaemonTasks;
 
@@ -72,11 +72,11 @@ export class DaemonTask {
       stdio: [
         'ignore',
         openSync(this.outLogFile, 'a'),
-        openSync(this.errLogFile, 'a')
-      ]
+        openSync(this.errLogFile, 'a'),
+      ],
     });
     await promisify(writeFile)(this.pidLogFile, child.pid, {
-      encoding: 'utf-8'
+      encoding: 'utf-8',
     });
     console.log('DAEMON STARTED!', `\nPID: ${child.pid}`);
     child.unref();
@@ -100,26 +100,28 @@ export class DaemonTask {
     const linkList = await this.daemonExecutorService.getLinkList();
 
     const chalk = require('chalk');
-    [...new Set(linkList.data.getLinkList.map(l => l.linkName))].forEach(l => {
-      const list = linkList.data.getLinkList.filter(i => i.linkName === l);
-      console.log(
-        chalk.green(
-          `\n--- Link name: '${l}' --- \n--- Linked projects ${list.length} ---`
-        )
-      );
-      list.forEach((i, index) =>
+    [...new Set(linkList.data.getLinkList.map((l) => l.linkName))].forEach(
+      (l) => {
+        const list = linkList.data.getLinkList.filter((i) => i.linkName === l);
         console.log(
-          `\n${chalk.blue(
-            `(${index + 1})(${l})${
-              i.serverMetadata.port
-                ? `(Main Graph with port ${i.serverMetadata.port})`
-                : ''
-            }`
-          )} \n  Path: ${chalk.yellow(i.repoPath)}`,
-          `\n  Introspection folder: ${chalk.yellow(i.introspectionPath)}`
-        )
-      );
-    });
+          chalk.green(
+            `\n--- Link name: '${l}' --- \n--- Linked projects ${list.length} ---`
+          )
+        );
+        list.forEach((i, index) =>
+          console.log(
+            `\n${chalk.blue(
+              `(${index + 1})(${l})${
+                i.serverMetadata.port
+                  ? `(Main Graph with port ${i.serverMetadata.port})`
+                  : ''
+              }`
+            )} \n  Path: ${chalk.yellow(i.repoPath)}`,
+            `\n  Introspection folder: ${chalk.yellow(i.introspectionPath)}`
+          )
+        );
+      }
+    );
   };
 
   private kill = (pid: number) => process.kill(Number(pid));
@@ -143,13 +145,13 @@ export class DaemonTask {
       repoPath: process.cwd(),
       introspectionPath,
       linkName,
-      serverMetadata: {} as any
+      serverMetadata: {} as any,
     };
     await promisify(writeFile)(
       GAPI_DAEMON_PROCESS_LIST_FOLDER,
       JSON.stringify(
         processList
-          .filter(p => p.repoPath !== process.cwd())
+          .filter((p) => p.repoPath !== process.cwd())
           .concat(currentRepoProcess)
       ),
       { encoding }
@@ -177,12 +179,14 @@ export class DaemonTask {
     } catch (e) {}
     if (isDirectoryAvailable) {
       const processList: ILinkListType[] = await this.getProcessList();
-      const [currentProcess] = processList.filter(p => p.repoPath === linkName);
+      const [currentProcess] = processList.filter(
+        (p) => p.repoPath === linkName
+      );
       await promisify(writeFile)(
         GAPI_DAEMON_PROCESS_LIST_FOLDER,
-        JSON.stringify(processList.filter(p => p.repoPath !== linkName)),
+        JSON.stringify(processList.filter((p) => p.repoPath !== linkName)),
         {
-          encoding
+          encoding,
         }
       );
       console.log(
@@ -199,7 +203,7 @@ export class DaemonTask {
     try {
       processList = JSON.parse(
         await promisify(readFile)(GAPI_DAEMON_PROCESS_LIST_FOLDER, {
-          encoding: 'utf8'
+          encoding: 'utf8',
         })
       );
     } catch (e) {}
@@ -210,21 +214,21 @@ export class DaemonTask {
     const processList: ILinkListType[] = await this.getProcessList();
     const encoding = 'utf-8';
 
-    const linkName = nextOrDefault('unlink', null, t =>
+    const linkName = nextOrDefault('unlink', null, (t) =>
       t !== '--all' ? t : null
     );
     if (await this.isDirectoryAvailable(linkName)) {
       return;
     }
     const [currentProcess] = processList.filter(
-      p => p.repoPath === process.cwd()
+      (p) => p.repoPath === process.cwd()
     );
     if (linkName) {
       await promisify(writeFile)(
         GAPI_DAEMON_PROCESS_LIST_FOLDER,
-        JSON.stringify(processList.filter(p => p.linkName !== linkName)),
+        JSON.stringify(processList.filter((p) => p.linkName !== linkName)),
         {
-          encoding
+          encoding,
         }
       );
     } else if (includes('--all') && processList.length) {
@@ -232,27 +236,27 @@ export class DaemonTask {
         GAPI_DAEMON_PROCESS_LIST_FOLDER,
         JSON.stringify([]),
         {
-          encoding
+          encoding,
         }
       );
     } else if (currentProcess) {
       await promisify(writeFile)(
         GAPI_DAEMON_PROCESS_LIST_FOLDER,
-        JSON.stringify(processList.filter(p => p.repoPath !== process.cwd())),
+        JSON.stringify(processList.filter((p) => p.repoPath !== process.cwd())),
         { encoding }
       );
     } else if (includes('--link-name') && processList.length) {
       const linkName = nextOrDefault('--link-name');
       await promisify(writeFile)(
         GAPI_DAEMON_PROCESS_LIST_FOLDER,
-        JSON.stringify(processList.filter(p => p.linkName !== linkName)),
+        JSON.stringify(processList.filter((p) => p.linkName !== linkName)),
         { encoding }
       );
     }
     if (currentProcess) {
       if (linkName) {
         const unlinkedProcesses = processList.filter(
-          p => p.linkName === linkName
+          (p) => p.linkName === linkName
         );
         console.log(
           `Projects unlinked ${JSON.stringify(
@@ -283,7 +287,7 @@ export class DaemonTask {
     console.log(`${GAPI_DAEMON_FOLDER} cleaned!`);
   };
 
-  private genericRunner = (task: DaemonTasks) => args =>
+  private genericRunner = (task: DaemonTasks) => (args) =>
     (this[task] as any)(args || nextOrDefault(task, ''));
 
   private tasks: Map<
@@ -298,7 +302,7 @@ export class DaemonTask {
     [DaemonTasks.link, this.genericRunner(DaemonTasks.link)],
     [DaemonTasks.unlink, this.genericRunner(DaemonTasks.unlink)],
     [DaemonTasks.list, this.genericRunner(DaemonTasks.list)],
-    [DaemonTasks.status, this.genericRunner(DaemonTasks.status)]
+    [DaemonTasks.status, this.genericRunner(DaemonTasks.status)],
   ]);
 
   bootstrap = async (options: CoreModuleConfig) => {
@@ -343,14 +347,14 @@ export class DaemonTask {
       return await this.tasks.get(DaemonTasks.bootstrap)({
         server: {
           hapi: {
-            port: 42000
-          }
+            port: 42000,
+          },
         },
         graphql: {
           openBrowser: false,
           graphiql: false,
-          graphiQlPlayground: false
-        }
+          graphiQlPlayground: false,
+        },
       } as CoreModuleConfig);
     }
     console.log('Missing command for Daemon');
@@ -388,6 +392,6 @@ export class DaemonTask {
   }
 
   private async getActiveDaemon(pid: number) {
-    return (await getProcessList()).filter(p => p.pid === pid);
+    return (await getProcessList()).filter((p) => p.pid === pid);
   }
 }

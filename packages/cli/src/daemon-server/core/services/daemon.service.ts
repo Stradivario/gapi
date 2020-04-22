@@ -24,19 +24,19 @@ export class DaemonService {
       switchMap(([mainNode]) =>
         this.saveMainNode(
           Object.assign(mainNode ? mainNode : ({} as any), {
-            serverMetadata: payload.serverMetadata
+            serverMetadata: payload.serverMetadata,
           })
         )
       ),
-      switchMap(mainNode => this.findLinkedRepos(mainNode)),
-      switchMap(otherRepos =>
+      switchMap((mainNode) => this.findLinkedRepos(mainNode)),
+      switchMap((otherRepos) =>
         combineLatest([
           this.trigger(payload),
-          ...otherRepos.map(r =>
+          ...otherRepos.map((r) =>
             this.trigger(
               Object.assign(r, { serverMetadata: payload.serverMetadata })
             )
-          )
+          ),
         ])
       ),
       map(() => payload)
@@ -55,7 +55,7 @@ export class DaemonService {
       'schema',
       'introspect',
       '--collect-documents',
-      '--collect-types'
+      '--collect-types',
     ];
     await this.childService.spawn('gapi', args, payload.repoPath);
     return payload;
@@ -72,7 +72,9 @@ export class DaemonService {
     await promisify(writeFile)(
       GAPI_DAEMON_PROCESS_LIST_FOLDER,
       JSON.stringify(
-        processList.filter(p => p.repoPath !== payload.repoPath).concat(payload)
+        processList
+          .filter((p) => p.repoPath !== payload.repoPath)
+          .concat(payload)
       ),
       { encoding }
     );
@@ -90,7 +92,7 @@ export class DaemonService {
   }
   private findByRepoPath(payload: ILinkListType) {
     return from(this.listService.readList()).pipe(
-      switchMap(list =>
+      switchMap((list) =>
         list.length
           ? this.listService.findByRepoPath(payload.repoPath)
           : of([] as ILinkListType[])

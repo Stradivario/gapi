@@ -4,7 +4,7 @@ import { PLAYGROUND_CONFIG, PlaygroundConfig } from './palyground.config';
 import { GraphiQLPlaygroundPlugin } from './plugins';
 
 @Module({
-  plugins: [GraphiQLPlaygroundPlugin]
+  plugins: [GraphiQLPlaygroundPlugin],
 })
 export class PlaygroundModule {
   public static forRoot(config?: PlaygroundConfig): ModuleWithServices {
@@ -16,10 +16,10 @@ export class PlaygroundModule {
           useValue: config || {
             path: '/graphiql',
             endpoint: '/graphql',
-            version: '1.7.1'
-          }
-        }
-      ]
+            version: '1.7.1',
+          },
+        },
+      ],
     };
   }
 }

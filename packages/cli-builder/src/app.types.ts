@@ -1,20 +1,20 @@
 import {
   GraphQLInt,
   GraphQLObjectType,
-  GraphQLString
+  GraphQLString,
 } from 'graphql';
 
 export const GenericCommandType = new GraphQLObjectType({
   name: 'GenericCommandType',
   fields: {
     code: {
-      type: GraphQLInt
+      type: GraphQLInt,
     },
     data: {
-      type: GraphQLString
+      type: GraphQLString,
     },
     error: {
-      type: GraphQLString
-    }
-  }
+      type: GraphQLString,
+    },
+  },
 });

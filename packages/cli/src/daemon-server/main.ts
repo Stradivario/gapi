@@ -10,20 +10,20 @@ import { ServerModule } from './server.module';
 Container.get(PluginLoader)
   .loadPlugins()
   .pipe(
-    switchMap(pluginModules =>
+    switchMap((pluginModules) =>
       setup({
         imports: [
           ...pluginModules,
           CoreModule.forRoot({
             server: {
               hapi: {
-                port: 42001
-              }
+                port: 42001,
+              },
             },
             graphql: {
               graphiql: true,
               openBrowser: true,
-              graphiQlPlayground: false
+              graphiQlPlayground: false,
             },
             // pubsub: {
             //   host: 'localhost',
@@ -33,12 +33,12 @@ Container.get(PluginLoader)
             // },
             daemon: {
               activated: true,
-              link: 'http://localhost:42001/graphql'
-            }
+              link: 'http://localhost:42001/graphql',
+            },
           }),
-          ServerModule
+          ServerModule,
         ],
-        providers: [PluginWatcherService]
+        providers: [PluginWatcherService],
       })
     )
   )

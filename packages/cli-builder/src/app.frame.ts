@@ -1,7 +1,7 @@
 import {
   CoreModule,
   Module,
-  ModuleWithProviders
+  ModuleWithProviders,
 } from '@gapi/core';
 
 import { Environment } from './app.constants';
@@ -16,15 +16,15 @@ export class AppFrameModule {
           server: {
             randomPort: !!Environment.RANDOM_PORT,
             hapi: {
-              port: Environment.API_PORT
-            }
+              port: Environment.API_PORT,
+            },
           },
           graphql: {
             graphiQlPlayground: !!Environment.GRAPHIQL,
-            openBrowser: false
-          }
-        })
-      ]
+            openBrowser: false,
+          },
+        }),
+      ],
     };
   }
 }

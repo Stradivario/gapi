@@ -21,7 +21,7 @@ argsService.setArguments(process.argv);
 rootService
   .runTask()
   .then()
-  .catch(e => console.error(e));
+  .catch((e) => console.error(e));
 console.log(
   chalk.default.yellow(figlet.textSync('Gapi', { horizontalLayout: 'full' }))
 );

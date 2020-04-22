@@ -1,7 +1,7 @@
 import {
   Controller,
   GraphQLControllerOptions,
-  Mutation
+  Mutation,
 } from '@gapi/core';
 import { GraphQLNonNull, GraphQLString } from 'graphql';
 
@@ -10,7 +10,7 @@ import { SubscriptionService } from './core/services/subscription.service';
 
 @Controller<GraphQLControllerOptions>({
   guards: [],
-  type: GenericCommandType
+  type: GenericCommandType,
 })
 export class AppController {
   stoppedListener: NodeJS.Timeout;
@@ -21,14 +21,14 @@ export class AppController {
 
   @Mutation({
     uri: {
-      type: GraphQLNonNull(GraphQLString)
+      type: GraphQLNonNull(GraphQLString),
     },
     authorization: {
-      type: GraphQLString
+      type: GraphQLString,
     },
     worker_type: {
-      type: GraphQLString
-    }
+      type: GraphQLString,
+    },
   })
   subscribeToGraphqlPubsub(
     root,
@@ -41,7 +41,7 @@ export class AppController {
       worker_type || 'runner'
     );
     return {
-      data: `Success subscribed to pubsub ${uri}`
+      data: `Success subscribed to pubsub ${uri}`,
     };
   }
 
@@ -49,7 +49,7 @@ export class AppController {
   unsubscribeFromGraphqlPubsub() {
     this.subscriptionService.unsubscribe();
     return {
-      data: `Success unsubscribed from ${this.subscriptionService.currentSubscriptionUri}`
+      data: `Success unsubscribed from ${this.subscriptionService.currentSubscriptionUri}`,
     };
   }
 
@@ -57,7 +57,7 @@ export class AppController {
   closePubsub() {
     this.subscriptionService.closePubsub();
     return {
-      data: 'Pubsub closed'
+      data: 'Pubsub closed',
     };
   }
 }

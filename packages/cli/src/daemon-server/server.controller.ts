@@ -9,7 +9,7 @@ import {
   Query,
   Subscribe,
   Subscription,
-  Type
+  Type,
 } from '@gapi/core';
 import { Observable } from 'rxjs';
 
@@ -41,7 +41,7 @@ export class ServerController {
   @Subscription()
   statusSubscription(message) {
     return {
-      repoPath: message
+      repoPath: message,
     };
   }
 
@@ -55,17 +55,17 @@ export class ServerController {
   @Interceptor(NotifyInterceptor)
   @Mutation({
     repoPath: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: new GraphQLNonNull(GraphQLString),
     },
     introspectionPath: {
-      type: GraphQLString
+      type: GraphQLString,
     },
     linkName: {
-      type: GraphQLString
+      type: GraphQLString,
     },
     serverMetadata: {
-      type: ServerMetadataInputType
-    }
+      type: ServerMetadataInputType,
+    },
   })
   notifyDaemon(root, payload: ILinkListType): Observable<ILinkListType> {
     return this.daemonService.notifyDaemon(payload);

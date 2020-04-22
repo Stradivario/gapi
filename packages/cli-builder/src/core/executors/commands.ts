@@ -4,7 +4,7 @@ import { Container } from '@gapi/core';
 
 import {
   CommandsToken,
-  EnumToken
+  EnumToken,
 } from '../../app.tokents';
 
 type GenericEnumType<T, K, A> = {

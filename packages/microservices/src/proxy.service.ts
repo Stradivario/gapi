@@ -3,7 +3,7 @@ import { createHttpLink } from 'apollo-link-http';
 import {
   introspectSchema,
   makeRemoteExecutableSchema,
-  mergeSchemas
+  mergeSchemas,
 } from 'graphql-tools';
 
 import { MicroserviceInterface } from './microservice.interface';
@@ -22,7 +22,7 @@ export class ProxyService {
   public async getSchemaIntrospection(): Promise<GraphQLSchema> {
     return await this.mergeSchemas(
       await Promise.all(
-        this.microservices.map(ep => {
+        this.microservices.map((ep) => {
           console.log(`Microservice: ${ep.name} loaded!`);
           return this.getIntrospectSchema(ep);
         })
@@ -45,14 +45,14 @@ export class ProxyService {
       headers.authorization = Authorization.sign({
         email: microservice.name,
         id: -1,
-        scope: ['ADMIN']
+        scope: ['ADMIN'],
       });
     }
     const makeDatabaseServiceLink = () =>
       createHttpLink({ uri: microservice.link, fetch, headers });
     return makeRemoteExecutableSchema({
       schema: await introspectSchema(makeDatabaseServiceLink()),
-      link: makeDatabaseServiceLink()
+      link: makeDatabaseServiceLink(),
     });
   }
 }

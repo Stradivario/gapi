@@ -8,6 +8,6 @@ export const DocumentTypes = strEnum([
   'findUser.query.graphql',
   'publishSignal.mutation.graphql',
   'subscribeToUserMessagesBasic.subscription.graphql',
-  'getLinkList.query.graphql'
+  'getLinkList.query.graphql',
 ]);
 export type DocumentTypes = keyof typeof DocumentTypes;

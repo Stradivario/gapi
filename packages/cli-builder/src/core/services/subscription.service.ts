@@ -4,7 +4,7 @@ import {
   Inject,
   Injectable,
   subscribeToTopic,
-  WebSocketLink
+  WebSocketLink,
 } from '@gapi/core';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
@@ -18,7 +18,7 @@ import {
   EnumToken,
   machineHash,
   MachineStatusQuery,
-  SubscriptionQuery
+  SubscriptionQuery,
 } from '../../app.tokents';
 import { executeAction } from '../executors/commands';
 import { getNetworkIP } from './get-ip-adresses';
@@ -36,7 +36,7 @@ export interface IInstanceConnectionType {
   cwd?: string | null;
 }
 @Injectable({
-  init: true
+  init: true,
 })
 export class SubscriptionService {
   subscription: Subscription;
@@ -72,11 +72,11 @@ export class SubscriptionService {
           ip: await getNetworkIP(),
           networkInterfaces: JSON.stringify(
             networkInterfaces()
-          )
+          ),
         },
-        reconnect: true
+        reconnect: true,
       },
-      webSocketImpl
+      webSocketImpl,
     });
 
     this.subscription = subscribeToTopic<{
@@ -101,13 +101,13 @@ export class SubscriptionService {
           );
           await this.sendStatus({
             machineHash,
-            data: JSON.stringify(data)
+            data: JSON.stringify(data),
           });
         } catch (error) {
           await this.sendStatus({
             machineHash,
             data: '',
-            error: JSON.stringify(error)
+            error: JSON.stringify(error),
           });
         }
       }, console.error);
@@ -139,11 +139,11 @@ export class SubscriptionService {
   sendMachineStatus(variables: MachineStatus) {
     const client = new ApolloClient({
       link: this.link,
-      cache: new InMemoryCache()
+      cache: new InMemoryCache(),
     });
     return client.mutate({
       mutation: this.machineStatusQuery.query,
-      variables
+      variables,
     });
   }
 }

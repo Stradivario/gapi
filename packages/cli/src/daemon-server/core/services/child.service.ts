@@ -12,15 +12,16 @@ export class ChildService {
     return new Promise((resolve, reject) => {
       const child = spawn(command, args, { cwd, detached: true });
       const timeout = setTimeout(() => {
-        const message = `${command} ${args.toString()} exited with timeout after ${wait /
-          1000} seconds`;
+        const message = `${command} ${args.toString()} exited with timeout after ${
+          wait / 1000
+        } seconds`;
         child.kill(message as never);
         reject(message);
         clearTimeout(timeout);
       }, wait);
-      child.stdout.on('data', data => process.stdout.write(data));
-      child.stderr.on('data', data => process.stderr.write(data));
-      child.on('close', code => {
+      child.stdout.on('data', (data) => process.stdout.write(data));
+      child.stderr.on('data', (data) => process.stderr.write(data));
+      child.on('close', (code) => {
         clearTimeout(timeout);
         if (!code) {
           resolve(code);

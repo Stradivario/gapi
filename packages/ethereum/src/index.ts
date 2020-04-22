@@ -6,19 +6,19 @@ import { Web3ProviderToken, Web3Token } from './web3.injection';
 import Web3 = require('web3');
 
 @Module({
-  services: [EthereumConfig]
+  services: [EthereumConfig],
 })
 export class EthereumModule {
   public static forRoot(config: EthereumConfig): ModuleWithServices {
     const UserAddedContracts = [];
     if (config.contracts && config.contracts.length) {
-      config.contracts.forEach(i =>
+      config.contracts.forEach((i) =>
         UserAddedContracts.push({
           provide: i.contract,
           deps: [Web3Token],
           lazy: true,
           useFactory: async (web3: Web3) =>
-            await i.contract.createAndValidate(web3, getContractAddress(i.abi))
+            await i.contract.createAndValidate(web3, getContractAddress(i.abi)),
         })
       );
     }
@@ -27,11 +27,11 @@ export class EthereumModule {
       services: [
         {
           provide: EthereumConfig,
-          useValue: config || new EthereumConfig()
+          useValue: config || new EthereumConfig(),
         },
         {
           provide: Web3Token,
-          useValue: new Web3(null)
+          useValue: new Web3(null),
         },
         {
           provide: Web3ProviderToken,
@@ -42,10 +42,10 @@ export class EthereumModule {
             );
             web3.setProvider(provider);
             return provider;
-          }
+          },
         },
-        ...UserAddedContracts
-      ]
+        ...UserAddedContracts,
+      ],
     };
   }
 }

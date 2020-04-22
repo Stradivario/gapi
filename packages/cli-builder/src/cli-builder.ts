@@ -7,7 +7,7 @@ import {
   mergeSchemas,
   Module,
   ModuleWithProviders,
-  SCHEMA_OVERRIDE
+  SCHEMA_OVERRIDE,
 } from '@gapi/core';
 
 import { Environment } from './app.constants';
@@ -18,18 +18,18 @@ import {
   EnumToken,
   MachineStatusQuery,
   Network,
-  SubscriptionQuery
+  SubscriptionQuery,
 } from './app.tokents';
 import { GenericCommandType } from './app.types';
 import { CoreModule } from './core/core.moduile';
 import {
   executeAction,
-  GenericEnum
+  GenericEnum,
 } from './core/executors/commands';
 import { GraphQLJSON } from './scalar-object';
 
 @Module({
-  imports: [AppFrameModule.forRoot(), CoreModule]
+  imports: [AppFrameModule.forRoot(), CoreModule],
 })
 export class CLIBuilder {
   public static forRoot<C, T = unknown, K = unknown>(
@@ -42,19 +42,19 @@ export class CLIBuilder {
       providers: [
         {
           provide: CommandsToken,
-          useValue: commands
+          useValue: commands,
         },
         {
           provide: EnumToken,
-          useValue: enumerables
+          useValue: enumerables,
         },
         {
           provide: MachineStatusQuery,
-          useValue: network.status
+          useValue: network.status,
         },
         {
           provide: SubscriptionQuery,
-          useValue: network.subscription
+          useValue: network.subscription,
         },
         {
           provide: SCHEMA_OVERRIDE,
@@ -70,11 +70,11 @@ export class CLIBuilder {
                         type: new GraphQLObjectType({
                           name: 'StatusQueryType',
                           fields: () => ({
-                            status: { type: GraphQLString }
-                          })
-                        })
-                      }
-                    })
+                            status: { type: GraphQLString },
+                          }),
+                        }),
+                      },
+                    }),
                   }),
                   mutation: new GraphQLObjectType({
                     name: 'Mutation',
@@ -86,23 +86,23 @@ export class CLIBuilder {
                             type: new GraphQLNonNull(
                               new GraphqlEnumType({
                                 name: 'Commands',
-                                values: enumerables
+                                values: enumerables,
                               })
-                            )
+                            ),
                           },
                           args: {
-                            type: GraphQLJSON
+                            type: GraphQLJSON,
                           },
                           cwd: {
-                            type: GraphQLString
-                          }
+                            type: GraphQLString,
+                          },
                         },
                         resolve: (
                           root,
                           {
                             cmd,
                             args,
-                            cwd
+                            cwd,
                           }: {
                             cmd: string;
                             args: string[];
@@ -111,18 +111,18 @@ export class CLIBuilder {
                         ) =>
                           executeAction<number, string[]>(
                             cmd
-                          )(args, cwd)
-                      }
-                    })
-                  })
-                })
-              ]
-            })
-        }
+                          )(args, cwd),
+                      },
+                    }),
+                  }),
+                }),
+              ],
+            }),
+        },
       ],
       controllers: Environment.SUBSCRIPTION_URI
         ? []
-        : [AppController]
+        : [AppController],
     };
   }
 }

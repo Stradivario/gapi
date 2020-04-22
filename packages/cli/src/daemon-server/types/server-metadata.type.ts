@@ -4,16 +4,16 @@ export const ServerMetadataType = new GraphQLObjectType({
   name: 'ServerMetadataType',
   fields: () => ({
     port: {
-      type: GraphQLInt
-    }
-  })
+      type: GraphQLInt,
+    },
+  }),
 });
 
 export const ServerMetadataInputType = new GraphQLInputObjectType({
   name: 'ServerMetadataInputType',
   fields: () => ({
     port: {
-      type: GraphQLInt
-    }
-  })
+      type: GraphQLInt,
+    },
+  }),
 });

@@ -3,7 +3,7 @@ import {
   GraphQLArgument,
   GraphQLEnumValue,
   GraphQLField,
-  GraphQLInputField
+  GraphQLInputField,
 } from 'graphql';
 export interface IJSDocTag {
   tag: string;

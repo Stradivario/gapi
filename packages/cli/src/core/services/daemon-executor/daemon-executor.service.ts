@@ -22,7 +22,7 @@ export class DaemonExecutorService {
                   }
                 }
               }
-            `
+            `,
       },
       this.daemonLink
     );

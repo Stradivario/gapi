@@ -1,6 +1,6 @@
 import {
   spawn,
-  SpawnOptionsWithoutStdio
+  SpawnOptionsWithoutStdio,
 } from 'child_process';
 
 export interface ProcessReturn {
@@ -20,8 +20,8 @@ export const executeCommand = (
     child.stderr.pipe(process.stderr);
     let data = '';
     let error = '';
-    child.stderr.on('data', out => (error += out));
-    child.stdout.on('data', out => {
+    child.stderr.on('data', (out) => (error += out));
+    child.stdout.on('data', (out) => {
       data += out.toString();
     });
     child.on('close', (code: number) => {

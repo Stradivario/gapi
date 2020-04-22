@@ -19,7 +19,7 @@ export class VoyagerGapiHapiPlugin implements PluginInterface {
     this.server.route({
       method: 'GET',
       path: this.config.path,
-      handler: this.handler.bind(this)
+      handler: this.handler.bind(this),
     });
   }
   handler() {

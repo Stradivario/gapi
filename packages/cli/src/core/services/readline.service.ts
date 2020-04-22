@@ -7,16 +7,16 @@ export class ReadlineService {
   private createReadlineInterface() {
     return createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
   }
   async clearScreenDown() {
     return clearScreenDown(process.stdin);
   }
   async createQuestion<T>(question: string, task: Function) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.readline = this.createReadlineInterface();
-      this.readline.question(question, answer => {
+      this.readline.question(question, (answer) => {
         try {
           task(answer);
         } catch (e) {

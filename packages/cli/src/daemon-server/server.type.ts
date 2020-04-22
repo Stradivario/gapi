@@ -4,7 +4,7 @@ export const SubscriptionStatusType = new GraphQLObjectType({
   name: 'SubscriptionStatusType',
   fields: () => ({
     status: {
-      type: GraphQLString
-    }
-  })
+      type: GraphQLString,
+    },
+  }),
 });

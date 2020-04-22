@@ -59,7 +59,7 @@ const ALLOWED_FIELDS = [
   'isAdm',
   'isChrome',
   'android_channel_id',
-  'existing_android_channel_id'
+  'existing_android_channel_id',
 ];
 
 export interface PostBody {

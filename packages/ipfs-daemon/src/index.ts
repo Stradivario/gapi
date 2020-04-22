@@ -3,13 +3,13 @@ import {
   Container,
   ExitHandlerService,
   Module,
-  ModuleWithServices
+  ModuleWithServices,
 } from '@rxdi/core';
 import IPFSFactory = require('ipfsd-ctl');
 import {
   initIpfsDaemonOptions,
   IPFS_DAEMON,
-  Options
+  Options,
 } from './ipfs-daemon-injection';
 import { IpfsDaemonInfoService } from './ipfs-daemon-node-info';
 import { PingService } from './services';
@@ -25,7 +25,7 @@ export class IpfsDaemonModule {
           provide: IPFS_DAEMON,
           lazy: true,
           useFactory: async () => {
-            return await new Promise(resolve => {
+            return await new Promise((resolve) => {
               const infoService = Container.get(IpfsDaemonInfoService);
               const logger = Container.get(BootstrapLogger);
               const exitHandler = Container.get(ExitHandlerService);
@@ -33,7 +33,7 @@ export class IpfsDaemonModule {
               IPFSFactory.create({
                 remote: options.remote,
                 port: options.port,
-                type: options.type
+                type: options.type,
               }).spawn(
                 { config: options.config } || initIpfsDaemonOptions,
                 (err, ipfsd) => {
@@ -44,7 +44,7 @@ export class IpfsDaemonModule {
                     ipfsd.stop();
                     ipfsd.killProcess();
                   });
-                  ipfsd.api.id(function(e, id) {
+                  ipfsd.api.id(function (e, id) {
                     if (e) {
                       throw e;
                     }
@@ -59,16 +59,16 @@ export class IpfsDaemonModule {
                       apiHost: ipfsd.api.apiHost,
                       apiPort: ipfsd.api.apiPort,
                       gatewayHost: ipfsd.api.gatewayHost,
-                      gatewayPort: ipfsd.api.gatewayPort
+                      gatewayPort: ipfsd.api.gatewayPort,
                     });
                     resolve(ipfsd);
                   });
                 }
               );
             });
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
   }
 }

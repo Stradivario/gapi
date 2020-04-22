@@ -21,7 +21,7 @@ function ensureObject(value) {
 
 function parseObject(ast, variables) {
   const value = Object.create(null);
-  ast.fields.forEach(field => {
+  ast.fields.forEach((field) => {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     value[field.name.value] = parseLiteral(
       field.value,
@@ -43,7 +43,7 @@ function parseLiteral(ast, variables) {
     case Kind.OBJECT:
       return parseObject(ast, variables);
     case Kind.LIST:
-      return ast.values.map(n =>
+      return ast.values.map((n) =>
         parseLiteral(n, variables)
       );
     case Kind.NULL:
@@ -65,7 +65,7 @@ export const GraphQLJSON = new GraphQLScalarType({
     'The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).',
   serialize: identity,
   parseValue: identity,
-  parseLiteral
+  parseLiteral,
 });
 
 export default GraphQLJSON;
@@ -76,5 +76,5 @@ export const GraphQLJSONObject = new GraphQLScalarType({
     'The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).',
   serialize: ensureObject,
   parseValue: ensureObject,
-  parseLiteral: parseObject
+  parseLiteral: parseObject,
 });

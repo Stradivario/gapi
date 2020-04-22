@@ -28,9 +28,9 @@ export class DaemonService {
         variables: {
           repoPath: process.cwd(),
           serverMetadata: {
-            port: this.server.info.port
-          }
-        }
+            port: this.server.info.port,
+          },
+        },
       },
       this.defaultDaemonLink
     );

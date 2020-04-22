@@ -18,9 +18,9 @@ export class SequelizeModule {
             sequelize.addModels(config.models ? config.models : []);
             await sequelize.sync(config);
             return sequelize;
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
   }
 }

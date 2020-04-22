@@ -40,14 +40,14 @@ export class RootService {
   checkForCustomTasks(): Promise<any> {
     return new Promise(async (resolve, reject) => {
       const commands = this.configService.config.commands;
-      const filteredCommands = Object.keys(commands).filter(cmd => {
+      const filteredCommands = Object.keys(commands).filter((cmd) => {
         if (cmd === argsService.args[2]) {
           const customCommand = commands[cmd][argsService.args[3]];
           if (customCommand) {
             if (customCommand.constructor === Array) {
               let count = 0;
               const commandsArray = customCommand;
-              const commandsToExecute = commandsArray.map(res => {
+              const commandsToExecute = commandsArray.map((res) => {
                 count++;
                 let item;
                 if (count === commandsArray.length) {
@@ -67,8 +67,8 @@ export class RootService {
                   .replace('gql`', '')
                   .replace('`', '');
                 sendRequest({ query }, 'http://localhost:42001/graphql').then(
-                  data => console.log(data),
-                  e => console.error(e)
+                  (data) => console.log(data),
+                  (e) => console.error(e)
                 );
               } else {
                 resolve(exec(customCommand));

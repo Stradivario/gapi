@@ -6,6 +6,6 @@ import { IpfsHashMapService } from './services/ipfs-hash-map.service';
 import { ListService } from './services/list.service';
 
 @Module({
-  services: [ListService, DaemonService, ChildService, IpfsHashMapService]
+  services: [ListService, DaemonService, ChildService, IpfsHashMapService],
 })
 export class CoreModule {}

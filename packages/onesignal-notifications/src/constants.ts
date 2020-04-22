@@ -4,5 +4,5 @@ export const Constants = {
   /** PATHS **/
   NOTIFICATIONS_PATH: '/notifications',
   APPS_PATH: '/apps',
-  DEVICES_PATH: '/players'
+  DEVICES_PATH: '/players',
 };

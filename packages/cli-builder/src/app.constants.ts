@@ -12,7 +12,7 @@ export const includes = (i: Commands) =>
 export const nextOrDefault = (
   i: Commands,
   fb: unknown = true,
-  type = p => p
+  type = (p) => p
 ) => {
   if (process.argv.toString().includes(i)) {
     const isNextArgumentPresent =
@@ -50,5 +50,5 @@ export const Environment = {
     nextOrDefault('--runner-type'),
   SEND_RESPONSE_TO_SERVER:
     process.env.GRAPHQL_RUNNER_SEND_RETURN_RESPONSE ||
-    includes('--send-response-to-server')
+    includes('--send-response-to-server'),
 };

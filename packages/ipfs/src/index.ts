@@ -8,7 +8,7 @@ import { GapiIpfsLogger } from './ipfs-logger';
 import { GapiIpfsNodeInfoService } from './ipfs-node-info';
 
 @Module({
-  services: [GapiIpfsConfig]
+  services: [GapiIpfsConfig],
 })
 export class IpfsModule {
   static forRoot(config?: GapiIpfsConfig): ModuleWithServices {
@@ -24,7 +24,7 @@ export class IpfsModule {
             GapiIpfsConfig,
             IPFS_NODE_READY,
             GapiIpfsNodeInfoService,
-            ExitHandlerService
+            ExitHandlerService,
           ],
           lazy: true,
           useFactory: (
@@ -35,7 +35,7 @@ export class IpfsModule {
             nodeInfoService: GapiIpfsNodeInfoService,
             exitHandlerService: ExitHandlerService
           ) =>
-            Observable.create(o => {
+            Observable.create((o) => {
               const node: IPFS = new Ipfs(config);
               exitHandlerService.errorHandler.subscribe(() => {
                 node.stop(() => {
@@ -50,7 +50,7 @@ export class IpfsModule {
                 nodeInfoService.setInfo(nodeInfo);
                 logger.log(`Ipfs node info: ${nodeInfo}`);
               });
-              node.on('error', e => {
+              node.on('error', (e) => {
                 logger.err(`
                                 Ipfs node error!
                                 ${JSON.stringify(e)}
@@ -59,9 +59,9 @@ export class IpfsModule {
                   throw new Error('Ipfs node state: Offline');
                 });
               });
-            })
-        }
-      ]
+            }),
+        },
+      ],
     };
   }
 }

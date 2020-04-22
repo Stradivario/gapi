@@ -26,7 +26,7 @@ export class BuildTask {
     const globPaths = nextOrDefault('--glob', '')
       .split(',')
       .filter((i: string) => !!i)
-      .map(f => `.${f}`);
+      .map((f) => `.${f}`);
 
     if (includes('--ncc-only')) {
       return this.compileToSingleJS(filePath);
@@ -49,7 +49,7 @@ export class BuildTask {
       globPaths.length ? globPaths : filePath,
       {
         original: this.configService.config.config.app.local,
-        schema: this.configService.config.config.schema
+        schema: this.configService.config.config.schema,
       }
     );
   }
@@ -79,9 +79,9 @@ export class BuildTask {
             './operations.json',
             ...nextOrDefault('--assets', '')
               .split(',')
-              .filter((v: string) => v)
-          ]
-        }
+              .filter((v: string) => v),
+          ],
+        },
       }),
       { encoding: 'utf-8' }
     );
@@ -120,12 +120,12 @@ export class BuildTask {
             'es2015',
             'es6',
             'dom',
-            'esnext.asynciterable'
+            'esnext.asynciterable',
           ],
-          typeRoots: ['node_modules/@types']
+          typeRoots: ['node_modules/@types'],
         },
         include: ['./src/**/*'],
-        exclude: ['./node_modules', './src/**/*.spec.ts']
+        exclude: ['./node_modules', './src/**/*.spec.ts'],
       }),
       { encoding: 'utf-8' }
     );

@@ -47,7 +47,7 @@ export class AuthInternalService {
 
   sign(tokenData: TokenData): string {
     return sign(tokenData, this.config.cert, {
-      algorithm: this.config.algorithm
+      algorithm: this.config.algorithm,
     });
   }
 }

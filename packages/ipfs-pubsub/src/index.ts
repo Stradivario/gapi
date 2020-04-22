@@ -7,12 +7,12 @@ import { IpfsPubsubTopicService } from './services';
 import Room = require('ipfs-pubsub-room');
 
 @Module({
-  services: [IpfsPubSubConfig]
+  services: [IpfsPubSubConfig],
 })
 export class IpfsPubSubModule {
   static forRoot(config?: IpfsPubSubConfig): ModuleWithServices {
     const ROOMS = [];
-    config.rooms.map(room =>
+    config.rooms.map((room) =>
       ROOMS.push({
         provide: room,
         deps: [IPFS, IpfsPubSubRoom, IpfsPubsubTopicService],
@@ -26,7 +26,7 @@ export class IpfsPubSubModule {
             console.log(`Ipfs pubsub -> Joined to room: ${room.topic}`);
           });
           return topicService.setTopic(pubsub(ipfs, room.topic));
-        }
+        },
       })
     );
     return {
@@ -35,8 +35,8 @@ export class IpfsPubSubModule {
         IpfsPubsubTopicService,
         { provide: IpfsPubSubConfig, useValue: config || {} },
         { provide: IpfsPubSubRoom, useValue: Room },
-        ...ROOMS
-      ]
+        ...ROOMS,
+      ],
     };
   }
 }

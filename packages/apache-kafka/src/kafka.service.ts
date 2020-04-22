@@ -14,7 +14,7 @@ export class GapiKafkaPubSubService {
       this.sub = new KafkaPubSub({
         topic: 'anything',
         host: 'INSERT_KAFKA_IP',
-        port: 'INSERT_KAFKA_PORT'
+        port: 'INSERT_KAFKA_PORT',
       });
     } else {
       this.sub = new PubSub();

@@ -12,9 +12,9 @@ export class AuthModule {
         AuthInternalService,
         {
           provide: AUTH_MODULE_CONFIG,
-          useValue: config || {}
-        }
-      ]
+          useValue: config || {},
+        },
+      ],
     };
   }
 }

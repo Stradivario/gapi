@@ -2,7 +2,7 @@
 import {
   //   GenericGapiResolversType,
   Injectable,
-  InterceptResolver
+  InterceptResolver,
 } from '@gapi/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';

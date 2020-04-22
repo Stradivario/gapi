@@ -19,7 +19,7 @@ export class NewTask {
     rxdiClientAdvanced: 'https://github.com/rxdi/starter-client-side-advanced',
     rxdiNeoTypescript: 'https://github.com/rxdi/starter-neo4j-typescript',
     rxdiNeoJavascript: 'https://github.com/rxdi/starter-neo4j-javascript',
-    rxdiNeoComplex: 'https://github.com/rxdi/starter-neo4j-typescript-complex'
+    rxdiNeoComplex: 'https://github.com/rxdi/starter-neo4j-typescript-complex',
   };
 
   async run() {

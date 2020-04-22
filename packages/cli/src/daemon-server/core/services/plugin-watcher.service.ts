@@ -6,7 +6,7 @@ import {
   GAPI_DAEMON_HTTP_PLUGINS_FOLDER,
   GAPI_DAEMON_IPFS_PLUGINS_FOLDER,
   GAPI_DAEMON_PLUGINS_FOLDER,
-  IPFS_HASHED_MODULES
+  IPFS_HASHED_MODULES,
 } from '../../daemon.config';
 import { ChildService } from './child.service';
 
@@ -19,7 +19,7 @@ export class PluginWatcherService {
   }
 
   watch() {
-    return new Observable<string[]>(observer => {
+    return new Observable<string[]>((observer) => {
       const initPlugins: string[] = [];
       let isInitFinished = false;
       const watcher = watch(
@@ -27,11 +27,11 @@ export class PluginWatcherService {
           `${GAPI_DAEMON_IPFS_PLUGINS_FOLDER}/**/*.js`,
           `${GAPI_DAEMON_HTTP_PLUGINS_FOLDER}/**/*.js`,
           `${GAPI_DAEMON_PLUGINS_FOLDER}/**/*.js`,
-          IPFS_HASHED_MODULES
+          IPFS_HASHED_MODULES,
         ],
         {
           ignored: /^\./,
-          persistent: true
+          persistent: true,
         }
       );
       watcher
@@ -58,13 +58,13 @@ export class PluginWatcherService {
           observer.complete();
           isInitFinished = true;
         })
-        .on('unlink', path => {
+        .on('unlink', (path) => {
           console.log('File', path, 'has been removed');
           if (isInitFinished) {
             this.restartDaemon();
           }
         })
-        .on('error', error => console.error('Error happened', error));
+        .on('error', (error) => console.error('Error happened', error));
     });
   }
 

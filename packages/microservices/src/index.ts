@@ -17,11 +17,11 @@ export class MicroserviceModule {
         ProxyService,
         {
           provide: 'gapi-microservice-config-auth',
-          useValue: config
+          useValue: config,
         },
         {
           provide: 'gapi-microservice-config',
-          useValue: microservices
+          useValue: microservices,
         },
         {
           provide: 'gapi-custom-schema-definition',
@@ -29,9 +29,9 @@ export class MicroserviceModule {
           deps: [ProxyService],
           useFactory: async (proxyService: ProxyService) => {
             return await proxyService.getSchemaIntrospection();
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
   }
 }

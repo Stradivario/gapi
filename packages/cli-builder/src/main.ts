@@ -1,7 +1,7 @@
 import {
   Bootstrap,
   Container,
-  HAPI_SERVER
+  HAPI_SERVER,
 } from '@gapi/core';
 import { Server } from 'hapi';
 
@@ -12,7 +12,7 @@ export enum Commands {
   GIT = 1,
   NPM = 2,
   DOCKER = 3,
-  DOCKER_COMPOSE2 = 4
+  DOCKER_COMPOSE2 = 4,
 }
 
 Bootstrap(
@@ -47,7 +47,7 @@ Bootstrap(
         );
         console.log('[RUN_DOCKER_COMPOSE]: exited');
         return 1;
-      }
+      },
     },
     Commands
   )

@@ -5,7 +5,7 @@ import {
   GraphQLNonNull,
   GraphQLSchema,
   GraphQLType,
-  IntrospectionQuery
+  IntrospectionQuery,
 } from 'graphql';
 export declare type PossibleIntrospectionInputs =
   | {

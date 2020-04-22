@@ -18,8 +18,8 @@ export class IpfsPubsubTopicService {
 
   findTopic(topic: string) {
     return (
-      this.topics.getValue().filter(t => t.topic === topic)[0] ||
-      function() {
+      this.topics.getValue().filter((t) => t.topic === topic)[0] ||
+      function () {
         throw new Error(`Ipfs pubsub -> Missing topic: ${topic}`);
       }
     );

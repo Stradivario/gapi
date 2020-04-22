@@ -9,7 +9,7 @@ export const getIpAdresses = (
   Object.values(network).reduce((acc, interfaces) => {
     let alias = 0;
 
-    interfaces.forEach(iface => {
+    interfaces.forEach((iface) => {
       if (
         'IPv4' !== iface.family ||
         iface.internal !== false
@@ -32,7 +32,7 @@ export const getIpAdresses = (
 export const getNetworkIP = (): Promise<string> =>
   new Promise((resolve, reject) => {
     const socket = createConnection(80, 'www.google.com');
-    socket.on('connect', function() {
+    socket.on('connect', function () {
       let addressInfo = socket.address() as {
         address: string;
       };
@@ -42,7 +42,7 @@ export const getNetworkIP = (): Promise<string> =>
       resolve(addressInfo.address);
       socket.end();
     });
-    socket.on('error', function(e) {
+    socket.on('error', function (e) {
       reject(e);
     });
   });

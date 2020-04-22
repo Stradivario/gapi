@@ -13,7 +13,7 @@ import {
   QueryNamer,
   TypeJoiner,
   TypePrinter,
-  WrapType
+  WrapType,
 } from '@gql2ts/types';
 export declare const DEFAULT_INTERFACE_DECLARATION: InterfaceDeclarationGenerator;
 export declare const DEFAULT_INTERFACE_BUILDER: InterfaceAndTypeBuilder;

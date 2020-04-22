@@ -6,16 +6,16 @@ export const LinkListType = new GraphQLObjectType({
   name: 'LinkListType',
   fields: () => ({
     repoPath: {
-      type: GraphQLString
+      type: GraphQLString,
     },
     introspectionPath: {
-      type: GraphQLString
+      type: GraphQLString,
     },
     linkName: {
-      type: GraphQLString
+      type: GraphQLString,
     },
     serverMetadata: {
-      type: ServerMetadataType
-    }
-  })
+      type: ServerMetadataType,
+    },
+  }),
 });

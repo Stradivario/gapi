@@ -12,7 +12,7 @@ function checkCredential(credentialName, credential): boolean {
   const ALLOWED_CREDENTIALS: any = [
     { name: 'userAuthKey', type: 'string' },
     { name: 'app', type: 'object', requiredFields: ['appAuthKey', 'appId'] },
-    { name: 'apps', type: 'object' }
+    { name: 'apps', type: 'object' },
   ];
   for (let i = 0; i < ALLOWED_CREDENTIALS.length; i++) {
     if (ALLOWED_CREDENTIALS[i].name === credentialName) {
@@ -97,12 +97,12 @@ export class OneSignalClientService implements OneSignalClient {
   ): Promise<any> {
     const options = {
       url: url,
-      method: method
+      method: method,
     } as any;
     if (apiKey) {
       options.headers = {
         'Content-Type': 'application/json; charset=utf-8',
-        Authorization: 'Basic ' + apiKey
+        Authorization: 'Basic ' + apiKey,
       };
     }
     if (body) {
@@ -110,8 +110,8 @@ export class OneSignalClientService implements OneSignalClient {
       options.json = true;
     }
 
-    return new Promise(function(resolve, reject) {
-      request(options, function(err, httpResponse, data) {
+    return new Promise(function (resolve, reject) {
+      request(options, function (err, httpResponse, data) {
         if (err) {
           return reject(err);
         }

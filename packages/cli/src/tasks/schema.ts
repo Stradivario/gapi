@@ -26,12 +26,12 @@ export class SchemaTask {
     pattern?: string
   ) {
     const originalConsole = console.log.bind(console);
-    console.log = function() {
+    console.log = function () {
       return originalConsole.apply(console, [
         '\x1b[36m%s\x1b[0m',
         `${process.cwd()} =>`,
         // eslint-disable-next-line prefer-rest-params
-        ...arguments
+        ...arguments,
       ]);
     };
     this.folder =
@@ -73,9 +73,7 @@ export class SchemaTask {
     await promisify(mkdirp)(GAPI_DAEMON_CACHE_FOLDER);
   }
   public async collectQueries() {
-    const randomString = Math.random()
-      .toString(36)
-      .substring(2);
+    const randomString = Math.random().toString(36).substring(2);
     await this.execService.call(
       `node ${
         this.node_modules
@@ -112,7 +110,7 @@ export class SchemaTask {
 
   public async generateTypes(readDocumentsTemp) {
     const savedDocuments = Object.keys(JSON.parse(readDocumentsTemp))
-      .map(key => {
+      .map((key) => {
         const n = key.lastIndexOf('/');
         const result = key.substring(n + 1);
         if (result === 'ListMovies.graphql') {
@@ -126,7 +124,7 @@ export class SchemaTask {
         }
         return result;
       })
-      .filter(i => !!i);
+      .filter((i) => !!i);
     const types = `/* eslint-disable prettier/prettier */
 
 function strEnum<T extends string>(o: Array<T>): { [K in T]: K } {

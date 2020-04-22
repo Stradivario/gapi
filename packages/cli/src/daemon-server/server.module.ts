@@ -5,6 +5,6 @@ import { ServerController } from './server.controller';
 
 @Module({
   imports: [CoreModule],
-  controllers: [ServerController]
+  controllers: [ServerController],
 })
 export class ServerModule {}

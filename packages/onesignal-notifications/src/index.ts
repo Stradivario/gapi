@@ -8,7 +8,7 @@ export class OneSignalModule {
   static forRoot(config: OneSignalConfig): ModuleWithServices {
     Container.set(OneSignalClientService, new OneSignalClientService(config));
     return {
-      module: OneSignalModule
+      module: OneSignalModule,
     };
   }
 }

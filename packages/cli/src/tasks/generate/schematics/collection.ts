@@ -1,3 +1,3 @@
 export enum Collection {
-  GAPI = '@gapi/schematics'
+  GAPI = '@gapi/schematics',
 }

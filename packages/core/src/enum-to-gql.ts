@@ -1,7 +1,7 @@
 import {
   EnumTypeDefinitionNode,
   EnumTypeExtensionNode,
-  GraphQLEnumType
+  GraphQLEnumType,
 } from 'graphql';
 import Maybe from 'graphql/tsutils/Maybe';
 
@@ -16,7 +16,7 @@ interface GraphqlEnumTypeConfig<T = {}> {
 
 export const enumToGraphqlEnum = <T>(values: T) =>
   Object.keys(values)
-    .filter(value => isNaN(Number(value)) === false)
+    .filter((value) => isNaN(Number(value)) === false)
     .reduce((acc, value) => {
       acc[(values as unknown)[value]] = { value: Number(value) };
       return acc;

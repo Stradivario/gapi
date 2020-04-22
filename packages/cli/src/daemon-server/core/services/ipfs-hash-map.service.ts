@@ -35,9 +35,9 @@ export class IpfsHashMapService {
     }
   }
   find(hash: string) {
-    return this.hashMap.filter(m => m.hash === hash)[0];
+    return this.hashMap.filter((m) => m.hash === hash)[0];
   }
   remove(hash: string) {
-    this.hashMap = this.hashMap.filter(m => m.hash !== hash);
+    this.hashMap = this.hashMap.filter((m) => m.hash !== hash);
   }
 }

@@ -12,7 +12,7 @@ export class PingService {
     infura: 'https://ipfs.infura.io/ipfs/',
     cloudflare: 'https://cloudflare-ipfs.com/ipfs/',
     ipfsOriginal: 'https://ipfs.io/ipfs/',
-    thisNode: `http://${this.ipfsDaemonNodeInfo.info.gatewayHost}:${this.ipfsDaemonNodeInfo.info.gatewayPort}/ipfs/`
+    thisNode: `http://${this.ipfsDaemonNodeInfo.info.gatewayHost}:${this.ipfsDaemonNodeInfo.info.gatewayPort}/ipfs/`,
   };
 
   constructor(private ipfsDaemonNodeInfo: IpfsDaemonInfoService) {}
@@ -30,14 +30,14 @@ export class PingService {
   }
 
   httpObservable(link: string): Observable<IncomingMessage> {
-    return new Observable(o => {
+    return new Observable((o) => {
       if (link.includes('https')) {
-        HttpsGet(link, r => {
+        HttpsGet(link, (r) => {
           o.next(r);
           o.complete();
         });
       } else {
-        HttpGet(link, r => {
+        HttpGet(link, (r) => {
           o.next(r);
           o.complete();
         });

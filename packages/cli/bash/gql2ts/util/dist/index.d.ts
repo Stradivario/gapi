@@ -6,12 +6,12 @@ export {
   schemaFromInputs,
   isList,
   isNonNullable,
-  isEnum
+  isEnum,
 } from './schema';
 export {
   getDocTags,
   IJSDocTag,
   buildDocumentation,
-  IFieldDocumentation
+  IFieldDocumentation,
 } from './parser';
 export { filterAndJoinArray } from './util';

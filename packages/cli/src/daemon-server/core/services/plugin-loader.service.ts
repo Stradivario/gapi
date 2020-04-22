@@ -4,7 +4,7 @@ import {
   ExternalModuleConfiguration,
   FileService,
   Injectable,
-  Metadata
+  Metadata,
 } from '@rxdi/core';
 import { exists, readFileSync, writeFile } from 'fs';
 import { of } from 'rxjs';
@@ -15,7 +15,7 @@ import {
   GAPI_DAEMON_HTTP_PLUGINS_FOLDER,
   GAPI_DAEMON_IPFS_PLUGINS_FOLDER,
   GAPI_DAEMON_PLUGINS_FOLDER,
-  IPFS_HASHED_MODULES
+  IPFS_HASHED_MODULES,
 } from '../../daemon.config';
 import { IpfsHashMapService } from './ipfs-hash-map.service';
 import { PluginWatcherService } from './plugin-watcher.service';
@@ -29,8 +29,8 @@ export class PluginLoader {
   private defaultIpfsProvider = 'https://ipfs.io/ipfs/';
   private defaultDownloadFilename = 'gapi-plugin';
   private filterDups = (modules: CustomMetadata[]) =>
-    [...new Set(modules.map(i => i.metadata.moduleHash))].map(
-      m => this.cache[m]
+    [...new Set(modules.map((i) => i.metadata.moduleHash))].map(
+      (m) => this.cache[m]
     );
 
   cache: { [key: string]: CustomMetadata } = {};
@@ -46,22 +46,22 @@ export class PluginLoader {
       switchMap(() => this.ipfsHashMapService.readHashMap()),
       switchMap(() => this.pluginWatcherService.watch()),
       // switchMap(() => this.fileService.fileWalker(pluginsFolder)),
-      map(p =>
-        [...new Set(p)].map(path =>
+      map((p) =>
+        [...new Set(p)].map((path) =>
           !new RegExp(/^(.(?!.*\.js$))*$/g).test(path)
             ? this.loadModule(require(path))
             : null
         )
       ),
-      switchMap(pluginModules =>
+      switchMap((pluginModules) =>
         of(null).pipe(
           combineLatest(
-            [...new Set(this.loadIpfsHashes())].map(hash =>
+            [...new Set(this.loadIpfsHashes())].map((hash) =>
               this.getModule(hash)
             )
           ),
-          map(externalModules => externalModules.concat(pluginModules)),
-          map(m => m.filter(i => !!i)),
+          map((externalModules) => externalModules.concat(pluginModules)),
+          map((m) => m.filter((i) => !!i)),
           map((modules: CustomMetadata[]) => this.filterDups(modules)),
           tap(() => this.ipfsHashMapService.writeHashMapToFile())
         )
@@ -83,13 +83,13 @@ export class PluginLoader {
     return this.externalImporterService
       .downloadIpfsModuleConfig({
         hash,
-        provider
+        provider,
       })
       .pipe(
         take(1),
         tap((externalModule: ExternalModuleConfiguration) => {
           const isPresent = this.ipfsHashMapService.hashMap.filter(
-            h => h.hash === hash
+            (h) => h.hash === hash
           ).length;
           if (!isPresent) {
             this.ipfsHashMapService.hashMap.push({
@@ -99,8 +99,8 @@ export class PluginLoader {
                 namespace: externalModule.name,
                 extension: 'js',
                 outputFolder: `${GAPI_DAEMON_IPFS_PLUGINS_FOLDER}/`,
-                link: `${this.defaultIpfsProvider}${externalModule.module}`
-              }
+                link: `${this.defaultIpfsProvider}${externalModule.module}`,
+              },
             });
           }
         }),
@@ -111,7 +111,7 @@ export class PluginLoader {
               namespace: externalModule.name,
               extension: 'js',
               outputFolder: `${GAPI_DAEMON_IPFS_PLUGINS_FOLDER}/`,
-              link: `${this.defaultIpfsProvider}${externalModule.module}`
+              link: `${this.defaultIpfsProvider}${externalModule.module}`,
             },
             externalModule.name,
             { folderOverride: `//` }

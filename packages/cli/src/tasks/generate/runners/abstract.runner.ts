@@ -16,16 +16,16 @@ export class AbstractRunner {
     const options: SpawnOptions = {
       cwd,
       stdio: collect ? 'pipe' : 'inherit',
-      shell: true
+      shell: true,
     };
     return new Promise<null | string>((resolve, reject) => {
       const child: ChildProcess = spawn(`${this.binary}`, args, options);
       if (collect) {
-        child.stdout!.on('data', data =>
+        child.stdout!.on('data', (data) =>
           resolve(data.toString().replace(/\r\n|\n/, ''))
         );
       }
-      child.on('close', code => {
+      child.on('close', (code) => {
         if (code === 0) {
           resolve(null);
         } else {

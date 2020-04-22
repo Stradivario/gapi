@@ -38,9 +38,9 @@ export class Network {
       }
     `,
     variables: {
-      machineHash
+      machineHash,
     },
-    map: i => i.registerWorker
+    map: (i) => i.registerWorker,
   };
   status: NetworkItem = {
     query: gql`
@@ -57,6 +57,6 @@ export class Network {
           status
         }
       }
-    `
+    `,
   };
 }

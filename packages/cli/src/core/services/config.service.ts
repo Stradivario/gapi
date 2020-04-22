@@ -95,7 +95,7 @@ export class ConfigService {
         excludedFolders: [],
         introspectionEndpoint: '',
         introspectionOutputFolder: '',
-        pattern: ''
+        pattern: '',
       },
       this.config.config.schema
     );
@@ -103,11 +103,11 @@ export class ConfigService {
       this.config.config.schematics || ({} as any);
     this.config.config.app = this.config.config.app || {
       local: {
-        GAPI_VERSION: ''
+        GAPI_VERSION: '',
       },
       prod: {
-        GAPI_VERSION: ''
-      }
+        GAPI_VERSION: '',
+      },
     };
   }
   getSchematicsConfig() {

@@ -17,11 +17,11 @@ export class DaemonModule {
               AfterStart,
               {
                 provide: DaemonLink,
-                useValue: options.link || 'http://localhost:42000/graphql'
-              }
+                useValue: options.link || 'http://localhost:42000/graphql',
+              },
             ]
-          : [])
-      ]
+          : []),
+      ],
     };
   }
 }

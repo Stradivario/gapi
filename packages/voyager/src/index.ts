@@ -4,7 +4,7 @@ import { VoyagerConfig, VoyagerConfigModel } from './voyager-config';
 import { VoyagerGapiHapiPlugin } from './voyager-plugin';
 
 @Module({
-  plugins: [VoyagerGapiHapiPlugin]
+  plugins: [VoyagerGapiHapiPlugin],
 })
 export class VoyagerModule {
   static forRoot(
@@ -15,9 +15,9 @@ export class VoyagerModule {
       services: [
         {
           provide: VoyagerConfig,
-          useValue: config
-        }
-      ]
+          useValue: config,
+        },
+      ],
     };
   }
 }

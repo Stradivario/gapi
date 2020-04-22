@@ -7,7 +7,7 @@ import { includes, nextOrDefault } from '../core/helpers/index';
 import { IpfsHashMapService } from '../daemon-server/core/services/ipfs-hash-map.service';
 import {
   GAPI_DAEMON_IPFS_PLUGINS_FOLDER,
-  IPFS_HASHED_MODULES
+  IPFS_HASHED_MODULES,
 } from '../daemon-server/daemon.config';
 @Service()
 export class PluginTask {
@@ -28,7 +28,7 @@ export class PluginTask {
     }
     this.validateHash(hash);
     const hashes = await this.readFile();
-    const exist = hashes.filter(h => h === hash);
+    const exist = hashes.filter((h) => h === hash);
     if (exist.length) {
       console.error(`Plugin already exist ${hash}`);
       return;
@@ -52,7 +52,7 @@ export class PluginTask {
       this.ipfsHashMapService.remove(hash);
       await this.ipfsHashMapService.writeHashMapToFile();
       await this.writeHashesToFile(
-        (await this.readFile()).filter(h => h !== hash)
+        (await this.readFile()).filter((h) => h !== hash)
       );
     }
   }
