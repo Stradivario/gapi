@@ -1334,10 +1334,10 @@
     graphql-subscriptions "^1.1.0"
     rabbitmq-pub-sub "^0.2.5"
 
-"@rxdi/graphql@0.7.40":
-  version "0.7.40"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql/-/graphql-0.7.40.tgz#470c805129ce02827af58fcf6110920492fe781e"
-  integrity sha512-LXS7QEkLXDOvnJ4etiz71duTPjzgfFrPl6vEzbsCxghrOE47OqbOWHkjjLXFXddUOxrCBZB9AYOA+K3hK0TS8g==
+"@rxdi/graphql@0.7.41":
+  version "0.7.41"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql/-/graphql-0.7.41.tgz#98a6f9cf406ebaa38b9ec5bab0c1924d7e3e7ffd"
+  integrity sha512-zlLYYdyicusfsEF5jhPaW6ed1lyMwoDUmIOAAw1A3g1iRrFWCI6gfX99cn9HxtMTIXfnVZ6XW+uqoGAzO/Ho8A==
   dependencies:
     "@gapi/playground" "1.3.3"
     apollo-errors "1.9.0"
