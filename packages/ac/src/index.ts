@@ -21,7 +21,7 @@ export class AccessControl<T, R, P> {
     const attributes =
       (this.#roles[role as string][resource][action].attributes as string[]) ||
       [];
-    return async <T>(res: T | Promise<T>): Promise<T | T[]> => {
+    return async <T>(res: T | Promise<T>): Promise<T> => {
       if (!can) {
         return res;
       }
@@ -43,7 +43,7 @@ export class AccessControl<T, R, P> {
           delete data[attr];
         }
       }
-      return data;
+      return data as T;
     };
   }
 }
