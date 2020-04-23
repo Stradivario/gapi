@@ -21,11 +21,11 @@ export class AccessControl<T, R, P> {
     const attributes =
       (this.#roles[role as string][resource][action].attributes as string[]) ||
       [];
-    return async (res: unknown) => {
+    return async <T>(res: T | Promise<T>): Promise<T | T[]> => {
       if (!can) {
         return res;
       }
-      let data = await res;
+      let data = (await res) as T | T[];
       const attrArray = Object.keys(attributes).filter((a) => !attributes[a]);
       if (Array.isArray(data)) {
         data = data.map((a) => {

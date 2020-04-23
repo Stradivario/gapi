@@ -4,13 +4,20 @@ import { AccessControl } from '../src/index';
 import { Union } from '../src/types';
 
 enum Actions {
-  edit,
-  read,
-  delete,
-  write,
+  query,
+  mutation,
+  subscription,
 }
-enum Resolvers {
-  cli,
+
+interface Resolvers {
+  cli: {
+    omg: boolean;
+  };
+  cli_arrray: [
+    {
+      omg2: boolean;
+    },
+  ];
 }
 
 enum Roles {
@@ -19,24 +26,50 @@ enum Roles {
 }
 
 describe('[AccessControl]', () => {
-  const Permissions: Union<typeof Roles, typeof Resolvers, typeof Actions> = {
+  const Permissions: Union<typeof Roles, Resolvers, typeof Actions> = {
     USER: {
       cli: {
-        delete: false,
+        query: {
+          enabled: false,
+          attributes: {
+            omg: true,
+          },
+        },
       },
     },
     ADMIN: {
       cli: {
-        delete: true,
+        query: {
+          enabled: true,
+          attributes: {
+            omg: false,
+          },
+        },
+      },
+      cli_arrray: {
+        query: {
+          enabled: true,
+          attributes: {
+            omg2: false,
+          },
+        },
       },
     },
   };
   it('Should test basic features', async () => {
-    const ac = new AccessControl(Permissions);
-    const canAdminReadMachines = ac.can('ADMIN', 'delete', 'cli');
-    const canUserReadMachines = ac.can('USER', 'delete', 'cli');
+    const ac = new AccessControl<typeof Roles, Resolvers, typeof Actions>(
+      Permissions,
+    );
+    const canAdminReadMachines = ac.can('ADMIN', 'query', 'cli');
+    const canUserReadMachines = ac.can('USER', 'query', 'cli');
+    const canAdminReadCliArray = ac.can('ADMIN', 'query', 'cli_arrray');
 
     expect(canAdminReadMachines).toBeTruthy();
     expect(canUserReadMachines).toBeFalsy();
+    expect(canAdminReadCliArray).toBeTruthy();
+
+    const data = { omg2: 'edno' };
+    const filtered = await ac.filter('ADMIN', 'query', 'cli_arrray')(data);
+    expect(filtered.omg2).toBeFalsy();
   });
 });
