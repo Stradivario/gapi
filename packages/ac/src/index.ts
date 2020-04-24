@@ -24,17 +24,20 @@ export class AccessControl<T, R, P, C = unknown> {
   }
 
   validate(role: keyof T, action: keyof P, resource: keyof R) {
-    return (args: unknown, context: C) => {
+    return async (args: unknown, context: C) => {
       const can = this.can(role, action, resource);
       if (!can) {
         return false;
       }
       const roles: {
-        validators?: ((args: unknown, context: C) => boolean)[];
+        validators?: ((
+          args: unknown,
+          context: C,
+        ) => boolean | Promise<boolean>)[];
       } = this.getRoles(role, action, resource);
       for (const v of roles.validators || []) {
         if (typeof v === 'function') {
-          const c = v(args, context);
+          const c = await v(args, context);
           if (!c) {
             return false;
           }

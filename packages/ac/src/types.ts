@@ -19,7 +19,7 @@ export type Union<
           validators?: ((
             args: Unboxed<Resolvers[resolver]>,
             context: Context,
-          ) => boolean)[];
+          ) => boolean | Promise<boolean>)[];
           enabled: boolean;
           attributes?: GenericEnumType<Unboxed<Resolvers[resolver]>, boolean>;
         }
