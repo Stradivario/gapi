@@ -1,8 +1,8 @@
 import { Union } from './types';
 
-export class AccessControl<T, R, P> {
-  #roles: Union<T, R, P>;
-  constructor(roles: Union<T, R, P>) {
+export class AccessControl<T, R, P, C = unknown> {
+  #roles: Union<T, R, P, C>;
+  constructor(roles: Union<T, R, P, C>) {
     this.#roles = roles;
   }
 
@@ -14,6 +14,34 @@ export class AccessControl<T, R, P> {
       hasAction && !!selectedRole[resource][action].enabled;
 
     return !!selectedRole && hasResource && hasAction && isActionActive;
+  }
+
+  getRoles(role: keyof T, action: keyof P, resource: keyof R) {
+    return (
+      this.can(role, action, resource) &&
+      this.#roles[role as string][resource][action]
+    );
+  }
+
+  validate(role: keyof T, action: keyof P, resource: keyof R) {
+    return (args: unknown, context: C) => {
+      const can = this.can(role, action, resource);
+      if (!can) {
+        return false;
+      }
+      const roles: {
+        validators?: ((args: unknown, context: C) => boolean)[];
+      } = this.getRoles(role, action, resource);
+      for (const v of roles.validators || []) {
+        if (typeof v === 'function') {
+          const c = v(args, context);
+          if (!c) {
+            return false;
+          }
+        }
+      }
+      return true;
+    };
   }
 
   filter(role: keyof T, action: keyof P, resource: keyof R) {

@@ -2,19 +2,26 @@ export type GenericEnumType<T, K> = {
   [key in keyof T]: Partial<K>;
 };
 
-type Unboxed<T> = T extends (infer U)[] ? U : T;
+export type Unboxed<T> = T extends (infer U)[] ? U : T;
 
-export type Union<Roles, Resolvers, Actions> = GenericEnumType<
+export type Union<
+  Roles,
+  Resolvers,
+  Actions,
+  Context = unknown
+> = GenericEnumType<
   Roles,
   {
     [resolver in keyof Resolvers]: Partial<
       Record<
         keyof Actions,
         {
+          validators?: ((
+            args: Unboxed<Resolvers[resolver]>,
+            context: Context,
+          ) => boolean)[];
           enabled: boolean;
-          attributes?:
-            | GenericEnumType<Resolvers[resolver], boolean>
-            | GenericEnumType<Unboxed<Resolvers[resolver]>, boolean>;
+          attributes?: GenericEnumType<Unboxed<Resolvers[resolver]>, boolean>;
         }
       >
     >;
