@@ -107,9 +107,9 @@ export const UserType = new GraphQLObjectType({
   name: 'UserType',
   fields: () => ({
     id: {
-      type: GraphQLInt
-    }
-  })
+      type: GraphQLInt,
+    },
+  }),
 });
 
 @Controller()
@@ -117,8 +117,8 @@ export class UserQueriesController {
   @Type(UserType)
   @Query({
     id: {
-      type: new GraphQLNonNull(GraphQLInt)
-    }
+      type: new GraphQLNonNull(GraphQLInt),
+    },
   })
   findUser(root, { id }, context): UserType {
     return { id: id };
@@ -127,7 +127,7 @@ export class UserQueriesController {
 
 @Module({
   imports: [CoreModule.forRoot()],
-  controllers: [UserQueriesController]
+  controllers: [UserQueriesController],
 })
 export class AppModule {}
 
@@ -159,6 +159,47 @@ ts-node index.ts --compilerOptions $TS_NODE_COMPILER_OPTIONS
 ```
 
 To add configuration click [here](#gapi-configuration)
+
+### Graphql Federated
+
+```ts
+import { ApolloServer } from 'apollo-server';
+import { ApolloGateway, RemoteGraphQLDataSource } from '@apollo/gateway';
+
+const serviceList = [
+  {
+    name: 'accounts',
+    url: 'http://localhost:9000/graphql',
+  },
+];
+
+class AuthenticatedDataSource extends RemoteGraphQLDataSource {
+  willSendRequest({ request, context }) {
+    request.http.headers.set('authorization', context.authorization);
+  }
+}
+const gateway = new ApolloGateway({
+  serviceList,
+  buildService: ({ url }) => new AuthenticatedDataSource({ url }),
+  __exposeQueryPlanExperimental: true,
+});
+
+(async () => {
+  const server = new ApolloServer({
+    gateway,
+    engine: false,
+    context: ({
+      req: {
+        headers: { authorization },
+      },
+    }) => ({ authorization }),
+    subscriptions: false,
+  });
+
+  const { url } = await server.listen({ port: 4000 });
+  console.log(`🚀 Apollo Gateway ready at ${url}`);
+})();
+```
 
 ## With CLI
 
@@ -303,11 +344,11 @@ import { AuthPrivateService } from './auth.service';
 const authService: AuthPrivateService = Container.get(AuthPrivateService);
 
 describe('Auth Service', () => {
-  it('unit: signJWTtoken => token : Should sucessfully sign jwt', async done => {
+  it('unit: signJWTtoken => token : Should sucessfully sign jwt', async (done) => {
     const token = authService.signJWTtoken({
       email: 'dada@abv.bg',
       id: 1,
-      scope: ['ADMIN']
+      scope: ['ADMIN'],
     });
     expect(token).toBeTruthy();
     const verifyedToken = authService.verifyToken(token);
@@ -332,7 +373,7 @@ import { map } from 'rxjs/operators';
 const testUtil: TestUtil = Container.get(TestUtil);
 
 describe('User Queries Controller', () => {
-  it('e2e: queries => (findUser) : Should sucessfully find user', async done => {
+  it('e2e: queries => (findUser) : Should sucessfully find user', async (done) => {
     testUtil
       .sendRequest<IQuery>({
         query: `
@@ -347,23 +388,23 @@ describe('User Queries Controller', () => {
         }
       `,
         variables: {
-          id: 1
-        }
+          id: 1,
+        },
       })
       .pipe(
-        map(res => {
+        map((res) => {
           expect(res.success).toBeTruthy();
           return res.data.findUser;
         })
       )
       .subscribe(
-        async res => {
+        async (res) => {
           expect(res.id).toBe(1);
           expect(res.settings.username).toBe('o');
           expect(res.settings.firstname).toBe('pesho');
           done();
         },
-        err => {
+        (err) => {
           expect(err).toBe(null);
           done();
         }
@@ -430,7 +471,7 @@ export const EffectTypes = strEnum([
   'destroyUser',
   'updateUser',
   'addUser',
-  'publishSignal'
+  'publishSignal',
 ]);
 export type EffectTypes = keyof typeof EffectTypes;
 ```
@@ -450,10 +491,10 @@ import { UserEffects } from './user.effects';
   controllers: [
     UserQueriesController,
     UserSubscriptionsController,
-    UserMutationsController
+    UserMutationsController,
   ],
   services: [UserService, AnotherService],
-  effects: [UserEffects]
+  effects: [UserEffects],
 })
 export class UserModule {}
 ```
@@ -535,7 +576,7 @@ export class MyHapiPlugin implements PluginInterface {
     this.server.route({
       method: 'GET',
       path: '/test',
-      handler: this.handler.bind(this)
+      handler: this.handler.bind(this),
     });
   }
 
@@ -546,7 +587,7 @@ export class MyHapiPlugin implements PluginInterface {
 
 @Module({
   plugins: [MyHapiPlugin],
-  services: [TestService]
+  services: [TestService],
 })
 export class AppModule {}
 ```
@@ -567,7 +608,7 @@ const MY_MODULE_CONFIG = new InjectionToken<MODULE_DI_CONFIG>(
 );
 
 @Module({
-  imports: []
+  imports: [],
 })
 export class YourModule {
   public static forRoot(): ModuleWithServices {
@@ -578,17 +619,18 @@ export class YourModule {
         { provide: MY_MODULE_CONFIG, useClass: MODULE_DI_CONFIG },
         {
           provide: MY_MODULE_CONFIG,
-          useFactory: () => ({ text: 'Hello world' })
+          useFactory: () => ({ text: 'Hello world' }),
         },
         {
           provide: MY_MODULE_CONFIG,
           lazy: true, // Will be evaluated and resolved if false will remain Promise
-          useFactory: async () => await Promise.resolve({ text: 'Hello world' })
+          useFactory: async () =>
+            await Promise.resolve({ text: 'Hello world' }),
         },
         {
           provide: MY_MODULE_CONFIG,
           lazy: true, // Will be evaluated and resolved if false will remain Observable
-          useFactory: () => of({ text: 'Hello world' })
+          useFactory: () => of({ text: 'Hello world' }),
         },
         {
           // this example will download external module from link and save it inside node modules
@@ -601,10 +643,10 @@ export class YourModule {
             typings: '',
             outputFolder: '/node_modules/',
             link:
-              'https://ipfs.infura.io/ipfs/QmdQtC3drfQ6M6GFpDdrhYRKoky8BycKzWbTkc4NEzGLug'
-          }
-        }
-      ]
+              'https://ipfs.infura.io/ipfs/QmdQtC3drfQ6M6GFpDdrhYRKoky8BycKzWbTkc4NEzGLug',
+          },
+        },
+      ],
     };
   }
 }
@@ -625,25 +667,25 @@ import { HAPI_SERVER } from '@rxdi/hapi';
 import { Server } from 'hapi';
 
 const App = BootstrapFramework(AuthMicroserviceModule, [FrameworkImports], {
-  init: true
+  init: true,
 }).toPromise();
 
 export const handler = async (event, context, callback) => {
   const app = await App;
   const url = format({
     pathname: event.path,
-    query: event.queryStringParameters
+    query: event.queryStringParameters,
   });
   const options = {
     method: event.httpMethod,
     url,
     payload: event.body,
     headers: event.headers,
-    validate: false
+    validate: false,
   };
   let res = {
     statusCode: 502,
-    result: null
+    result: null,
   };
   try {
     res = await Container.get<Server>(HAPI_SERVER).inject(options);
@@ -652,12 +694,12 @@ export const handler = async (event, context, callback) => {
   }
   const headers = Object.assign({
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'
+    'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT',
   });
   return {
     statusCode: res.statusCode,
     body: res.result,
-    headers
+    headers,
   };
 };
 ```
@@ -675,8 +717,8 @@ const GapiCoreModule = CoreModule.forRoot({
   server: {
     randomPort: true,
     hapi: {
-      port: 9000
-    }
+      port: 9000,
+    },
   },
   graphql: {
     path: '/graphql',
@@ -687,13 +729,13 @@ const GapiCoreModule = CoreModule.forRoot({
       endpointURL: '/graphql',
       subscriptionsEndpoint: `ws://localhost:9000/subscriptions`,
       websocketConnectionParams: {
-        token: process.env.GRAPHIQL_TOKEN
-      }
+        token: process.env.GRAPHIQL_TOKEN,
+      },
     },
     graphqlOptions: {
-      schema: null
-    }
-  }
+      schema: null,
+    },
+  },
 });
 BootstrapFramework(AppModule, [GapiCoreModule], {
   init: false,
@@ -701,18 +743,18 @@ BootstrapFramework(AppModule, [GapiCoreModule], {
     effects: true,
     plugins: true,
     services: true,
-    controllers: true
+    controllers: true,
   },
   logger: {
     logging: true,
     date: true,
     exitHandler: true,
     fileService: true,
-    hashes: true
-  }
+    hashes: true,
+  },
 }).subscribe(
   () => console.log('Started!'),
-  e => console.error(e)
+  (e) => console.error(e)
 );
 ```
 
@@ -767,10 +809,10 @@ import { CoreModule } from './core/core.module';
       {
         name: 'microservice1',
         link:
-          'https://hkzdqnc1i2.execute-api.us-east-2.amazonaws.com/development/graphql'
-      }
-    ])
-  ]
+          'https://hkzdqnc1i2.execute-api.us-east-2.amazonaws.com/development/graphql',
+      },
+    ]),
+  ],
 })
 export class AppModule {}
 ```
@@ -846,17 +888,17 @@ import { readFileSync } from 'fs';
       cyper: {
         algorithm: 'aes256',
         iv: 'Jkyt1H3FA8JK9L3B',
-        privateKey: '8zTVzr3p53VC12jHV54rIYu2545x47lA'
-      }
+        privateKey: '8zTVzr3p53VC12jHV54rIYu2545x47lA',
+      },
     }),
     CoreModule.forRoot({
       server: {
         hapi: {
-          port: process.env.API_PORT || process.env.PORT || 9000
-        }
+          port: process.env.API_PORT || process.env.PORT || 9000,
+        },
       },
       pubsub: {
-        authentication: AuthService
+        authentication: AuthService,
       },
       graphql: {
         path: process.env.GRAPHQL_PATH,
@@ -879,15 +921,15 @@ import { readFileSync } from 'fs';
               : `:${process.env.API_PORT || process.env.PORT}`
           }/subscriptions`,
           websocketConnectionParams: {
-            token: process.env.GRAPHIQL_TOKEN
-          }
+            token: process.env.GRAPHIQL_TOKEN,
+          },
         },
         graphqlOptions: {
-          schema: null
-        }
-      }
-    })
-  ]
+          schema: null,
+        },
+      },
+    }),
+  ],
 })
 export class FrameworkImports {}
 ```
@@ -966,7 +1008,7 @@ import { UserModule } from './user/user.module';
 import { CoreModule } from './core/core.module';
 
 @Module({
-  imports: [UserModule, CoreModule]
+  imports: [UserModule, CoreModule],
 })
 export class AppModule {}
 ```
@@ -988,10 +1030,10 @@ import { UserEffect } from './user.effect';
   controllers: [
     UserQueriesController,
     UserSubscriptionsController,
-    UserMutationsController
+    UserMutationsController,
   ],
   services: [UserService, AnotherService],
-  effects: [UserEffect]
+  effects: [UserEffect],
 })
 export class UserModule {}
 ```
@@ -1105,8 +1147,8 @@ export class UserQueriesController {
   @Public()
   @Query({
     id: {
-      type: new GraphQLNonNull(GraphQLInt)
-    }
+      type: new GraphQLNonNull(GraphQLInt),
+    },
   })
   findUser(root, { id }, context): IUserType {
     return this.userService.findUser(id);
@@ -1116,11 +1158,11 @@ export class UserQueriesController {
   @Public()
   @Query({
     email: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: new GraphQLNonNull(GraphQLString),
     },
     password: {
-      type: new GraphQLNonNull(GraphQLString)
-    }
+      type: new GraphQLNonNull(GraphQLString),
+    },
   })
   login(root, { email, password }, context) {
     let credential: IUserTokenType;
@@ -1131,10 +1173,10 @@ export class UserQueriesController {
       email: email,
       type: 'ADMIN',
       settings: {
-        sidebar: true
+        sidebar: true,
       },
       password: this.authService.encryptPassword(password),
-      name: 'Test Testov'
+      name: 'Test Testov',
     };
 
     if (this.authService.decryptPassword(user.password) === password) {
@@ -1143,8 +1185,8 @@ export class UserQueriesController {
         token: this.authService.signJWTtoken({
           email: user.email,
           id: user.id,
-          scope: [user.type]
-        })
+          scope: [user.type],
+        }),
       };
     } else {
       throw new Error('missing-username-or-password');
@@ -1180,11 +1222,11 @@ export class UserMutationsController {
   @Public()
   @Mutation({
     message: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: new GraphQLNonNull(GraphQLString),
     },
     signal: {
-      type: new GraphQLNonNull(GraphQLString)
-    }
+      type: new GraphQLNonNull(GraphQLString),
+    },
   })
   publishSignal(root, { message, signal }, context): UserMessage {
     console.log(
@@ -1201,8 +1243,8 @@ export class UserMutationsController {
   @Type(UserType)
   @Mutation({
     id: {
-      type: new GraphQLNonNull(GraphQLInt)
-    }
+      type: new GraphQLNonNull(GraphQLInt),
+    },
   })
   deleteUser(root, { id }, context): IUserType {
     return this.userService.deleteUser(id);
@@ -1212,8 +1254,8 @@ export class UserMutationsController {
   @Type(UserType)
   @Mutation({
     id: {
-      type: new GraphQLNonNull(GraphQLInt)
-    }
+      type: new GraphQLNonNull(GraphQLInt),
+    },
   })
   updateUser(root, { id }, context): IUserType {
     return this.userService.updateUser(id);
@@ -1223,8 +1265,8 @@ export class UserMutationsController {
   @Type(UserType)
   @Mutation({
     id: {
-      type: new GraphQLNonNull(GraphQLInt)
-    }
+      type: new GraphQLNonNull(GraphQLInt),
+    },
   })
   addUser(root, { id }, context): IUserType {
     return this.userService.addUser(id);
@@ -1273,8 +1315,8 @@ export class UserSubscriptionsController {
   )
   @Subscription({
     id: {
-      type: new GraphQLNonNull(GraphQLInt)
-    }
+      type: new GraphQLNonNull(GraphQLInt),
+    },
   })
   subscribeToUserMessagesWithFilter(message): UserMessage {
     return { message };
@@ -1337,8 +1379,8 @@ export class UserService {
       password: '123456',
       name: 'Pesho',
       settings: {
-        sidebar: true
-      }
+        sidebar: true,
+      },
     };
   }
 
@@ -1350,8 +1392,8 @@ export class UserService {
       password: '123456',
       name: 'Pesho',
       settings: {
-        sidebar: true
-      }
+        sidebar: true,
+      },
     };
   }
 
@@ -1363,8 +1405,8 @@ export class UserService {
       password: '123456',
       name: 'Pesho',
       settings: {
-        sidebar: true
-      }
+        sidebar: true,
+      },
     };
   }
 
@@ -1376,8 +1418,8 @@ export class UserService {
       password: '123456',
       name: 'Pesho',
       settings: {
-        sidebar: true
-      }
+        sidebar: true,
+      },
     };
   }
 }
@@ -1398,18 +1440,18 @@ BootstrapFramework(AppModule, [CoreModule], {
     effects: true,
     plugins: true,
     services: true,
-    controllers: true
+    controllers: true,
   },
   logger: {
     logging: true,
     date: true,
     exitHandler: true,
     fileService: true,
-    hashes: true
-  }
+    hashes: true,
+  },
 }).subscribe(
   () => console.log('Started!'),
-  e => console.error(e)
+  (e) => console.error(e)
 );
 ```
 
@@ -1432,7 +1474,7 @@ import { Module } from '@rxdi/core';
 import { AuthPrivateService } from './services/auth/auth.service';
 
 @Module({
-  services: [AuthPrivateService]
+  services: [AuthPrivateService],
 })
 export class CoreModule {}
 ```
@@ -1455,8 +1497,7 @@ export interface UserInfo {
 
 @Service()
 export class AuthPrivateService {
-  constructor() // private authService: AuthService,
-  // private connectionHookService: ConnectionHookService
+  constructor() // private connectionHookService: ConnectionHookService // private authService: AuthService,
   {
     // this.connectionHookService.modifyHooks.onSubConnection = this.onSubConnection.bind(this);
     // this.authService.modifyFunctions.validateToken = this.validateToken.bind(this);
@@ -1524,7 +1565,7 @@ import { UserService } from './user/services/user.service';
 import { CoreModule } from './core/core.module';
 
 @Module({
-  imports: [UserModule, CoreModule]
+  imports: [UserModule, CoreModule],
 })
 export class AppModule {}
 ```
@@ -1547,19 +1588,19 @@ export const UserIdToken = new InjectionToken<UserId>('UserId');
   services: [
     {
       provide: 'UserId',
-      useValue: { id: 1 }
+      useValue: { id: 1 },
     },
     {
       provide: UserIdToken,
       useFactory: () => {
         return { id: 1 };
-      }
+      },
     },
     {
       provide: UserIdToken,
-      useClass: UserId
-    }
-  ]
+      useClass: UserId,
+    },
+  ],
 })
 export class AppModule {}
 ```
@@ -1591,9 +1632,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   services: [
     {
       provide: 'Observable',
-      useValue: new BehaviorSubject(1)
-    }
-  ]
+      useValue: new BehaviorSubject(1),
+    },
+  ],
 })
 export class AppModule {}
 ```
@@ -1685,7 +1726,7 @@ import {
   GraphQLInt,
   GraphQLList,
   GraphQLBoolean,
-  GraphQLScalarType
+  GraphQLScalarType,
 } from 'graphql';
 
 @GapiObjectType()
@@ -1989,7 +2030,7 @@ import { AdminOnly } from '../core/guards/admin-only.guard';
 
 @Controller<GraphQLControllerOptions>({
   guards: [AdminOnly],
-  type: InjectType(UserListType)
+  type: InjectType(UserListType),
 })
 export class UserQueriesController {
   constructor(private userService: UserService) {}
@@ -2007,7 +2048,7 @@ The basic guard example:
 import {
   Service,
   CanActivateResolver,
-  GenericGapiResolversType
+  GenericGapiResolversType,
 } from '@gapi/core';
 import { ENUMS } from '../enums';
 import { UserType } from '../../user/types/user.type';
@@ -2034,13 +2075,13 @@ export class AdminOnly implements CanActivateResolver {
     payload,
     descriptor: GenericGapiResolversType
   ) {
-    return Observable.create(o => o.next(true));
+    return Observable.create((o) => o.next(true));
 
-    return new Promise(r => r(true));
+    return new Promise((r) => r(true));
 
-    return Observable.create(o => o.next(false));
+    return Observable.create((o) => o.next(false));
 
-    return new Promise(r => r(false));
+    return new Promise((r) => r(false));
     if (context.type !== 'ADMIN') {
       throw new Error('error');
     }
@@ -2058,7 +2099,7 @@ Logging interceptor
 import {
   InterceptResolver,
   Service,
-  GenericGapiResolversType
+  GenericGapiResolversType,
 } from '@gapi/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -2104,7 +2145,7 @@ Modify interceptor
 import {
   InterceptResolver,
   Service,
-  GenericGapiResolversType
+  GenericGapiResolversType,
 } from '@gapi/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -2121,7 +2162,7 @@ export class ModifyInterceptor implements InterceptResolver {
     console.log('Before...');
     const now = Date.now();
     return chainable$.pipe(
-      map(res => {
+      map((res) => {
         console.log(`After... ${Date.now() - now}ms`);
         return res;
       })
