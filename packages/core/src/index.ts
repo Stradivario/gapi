@@ -7,6 +7,8 @@ import {
 } from '@rxdi/graphql-pubsub';
 import { HapiConfigModel, HapiModule } from '@rxdi/hapi';
 
+import { FederationController } from './federation.controller';
+
 export interface CoreModuleConfig {
   server?: HapiConfigModel;
   graphql?: GRAPHQL_PLUGIN_CONFIG;
@@ -57,6 +59,7 @@ export class CoreModule {
     config = config || DEFAULT_CONFIG;
     return {
       module: CoreModule,
+      controllers: [FederationController],
       frameworkImports: [
         HapiModule.forRoot({ ...DEFAULT_CONFIG.server, ...config.server }),
         GraphQLModule.forRoot({ ...DEFAULT_CONFIG.graphql, ...config.graphql }),
