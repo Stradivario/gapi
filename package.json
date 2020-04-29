@@ -61,7 +61,7 @@
     "@rxdi/dts-merge": "^0.0.239"
   },
   "dependencies": {
-    "@rxdi/core": "0.7.41",
+    "@rxdi/core": "0.7.49",
     "bn.js": "^4.11.8",
     "web3": "^0.20.2",
     "ipfs": "^0.33.1",
@@ -90,9 +90,9 @@
     "rxjs": "6.5.2",
     "shelljs": "0.8.3",
     "yamljs": "0.3.0",
-    "@rxdi/graphql": "0.7.41",
-    "@rxdi/graphql-pubsub": "0.7.38",
-    "@rxdi/hapi": "0.7.38",
+    "@rxdi/graphql": "0.7.49",
+    "@rxdi/graphql-pubsub": "0.7.49",
+    "@rxdi/hapi": "0.7.49",
     "graphql-geojson": "^1.0.0",
     "graphql-tools": "^5.0.0",
     "apollo-link-http": "^1.5.3",
