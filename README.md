@@ -101,9 +101,9 @@ npm install @gapi/core
 import { CoreModule } from '@gapi/core';
 import { Controller, Module, Bootstrap } from '@rxdi/core';
 import { Query, Type } from '@rxdi/graphql';
-import { GraphqlObjectType, GraphQLInt, GraphQLNonNull } from 'graphql';
+import { GraphQLObjectType, GraphQLInt, GraphQLNonNull } from 'graphql';
 
-export const UserType = new GraphqlObjectType({
+export const UserType = new GraphQLObjectType({
   name: 'UserType',
   fields: () => ({
     id: {
@@ -159,6 +159,69 @@ ts-node index.ts --compilerOptions $TS_NODE_COMPILER_OPTIONS
 ```
 
 To add configuration click [here](#gapi-configuration)
+
+### Graphql Federation
+
+https://github.com/Stradivario/gapi/tree/master/packages/federation
+
+```ts
+import { FederationModule } from '@gapi/federation';
+import { Bootstrap } from '@rxdi/core';
+
+Bootstrap(
+  FederationModule.forRoot({
+    port: 4000,
+    willSendRequest({ request, context }) {
+      request.http.headers.set('authorization', context.headers.authorization);
+    },
+    serviceList: [
+      { name: 'accounts', url: 'http://localhost:9000/graphql' },
+      { name: 'products', url: 'http://localhost:9001/graphql' },
+    ],
+  }),
+).subscribe(() => console.log('started'));
+```
+
+Or
+
+```ts
+import { ApolloServer } from 'apollo-server';
+import { ApolloGateway, RemoteGraphQLDataSource } from '@apollo/gateway';
+
+const serviceList = [
+  {
+    name: 'accounts',
+    url: 'http://localhost:9000/graphql',
+  },
+];
+
+class AuthenticatedDataSource extends RemoteGraphQLDataSource {
+  willSendRequest({ request, context }) {
+    request.http.headers.set('authorization', context.authorization);
+  }
+}
+const gateway = new ApolloGateway({
+  serviceList,
+  buildService: ({ url }) => new AuthenticatedDataSource({ url }),
+  __exposeQueryPlanExperimental: true,
+});
+
+(async () => {
+  const server = new ApolloServer({
+    gateway,
+    engine: false,
+    context: ({
+      req: {
+        headers: { authorization },
+      },
+    }) => ({ authorization }),
+    subscriptions: false,
+  });
+
+  const { url } = await server.listen({ port: 4000 });
+  console.log(`🚀 Apollo Gateway ready at ${url}`);
+})();
+```
 
 ## With CLI
 
