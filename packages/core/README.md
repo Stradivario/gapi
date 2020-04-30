@@ -160,7 +160,29 @@ ts-node index.ts --compilerOptions $TS_NODE_COMPILER_OPTIONS
 
 To add configuration click [here](#gapi-configuration)
 
-### Graphql Federated
+### Graphql Federation
+
+https://github.com/Stradivario/gapi/tree/master/packages/federation
+
+```ts
+import { FederationModule } from '@gapi/federation';
+import { Bootstrap } from '@rxdi/core';
+
+Bootstrap(
+  FederationModule.forRoot({
+    port: 4000,
+    willSendRequest({ request, context }) {
+      request.http.headers.set('authorization', context.headers.authorization);
+    },
+    serviceList: [
+      { name: 'accounts', url: 'http://localhost:9000/graphql' },
+      { name: 'products', url: 'http://localhost:9001/graphql' },
+    ],
+  }),
+).subscribe(() => console.log('started'));
+```
+
+Or
 
 ```ts
 import { ApolloServer } from 'apollo-server';
