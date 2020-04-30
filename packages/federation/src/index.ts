@@ -41,7 +41,7 @@ export class FederationModule {
             new ApolloServer({
               gateway,
               engine: false,
-              context: ({ req: { headers } }) => headers,
+              context: ({ req: { headers } }) => ({ headers }),
               subscriptions: false,
             }),
         },
