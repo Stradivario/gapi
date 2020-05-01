@@ -59,7 +59,8 @@ export class SubscriptionService {
   async subscribe(
     uri: string,
     authorization?: string,
-    worker_type?: string
+    worker_type?: string,
+    label?: string
   ) {
     this.currentSubscriptionUri = uri;
     this.link = new WebSocketLink({
@@ -69,6 +70,7 @@ export class SubscriptionService {
           authorization,
           machineHash,
           worker_type,
+          label,
           ip: await getNetworkIP(),
           networkInterfaces: JSON.stringify(
             networkInterfaces()

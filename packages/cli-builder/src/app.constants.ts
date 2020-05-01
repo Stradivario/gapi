@@ -2,6 +2,7 @@ type Commands =
   | '--wss'
   | '--secret'
   | '--port'
+  | '--label'
   | '--random-port'
   | '--runner-type'
   | '--send-response-to-server'
@@ -48,6 +49,9 @@ export const Environment = {
   WORKER_TYPE:
     process.env.GRAPHQL_RUNNER_TYPE ||
     nextOrDefault('--runner-type'),
+  LABEL:
+    process.env.GRAPHQL_RUNNER_LABEL ||
+    nextOrDefault('--label'),
   SEND_RESPONSE_TO_SERVER:
     process.env.GRAPHQL_RUNNER_SEND_RETURN_RESPONSE ||
     includes('--send-response-to-server'),
