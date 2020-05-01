@@ -51,7 +51,7 @@ export const Environment = {
     nextOrDefault('--runner-type'),
   LABEL:
     process.env.GRAPHQL_RUNNER_LABEL ||
-    nextOrDefault('--label'),
+    nextOrDefault('--label', ''),
   SEND_RESPONSE_TO_SERVER:
     process.env.GRAPHQL_RUNNER_SEND_RETURN_RESPONSE ||
     includes('--send-response-to-server'),

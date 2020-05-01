@@ -3,6 +3,8 @@ import { gql } from 'apollo-server-core';
 import { createHash } from 'crypto';
 import { networkInterfaces } from 'os';
 
+import { Environment } from './app.constants';
+
 export const CommandsToken = new InjectionToken();
 export const EnumToken = new InjectionToken();
 export const SubscriptionQuery = new InjectionToken<
@@ -29,8 +31,11 @@ export const machineHash = createHash('md5')
 export class Network {
   subscription: NetworkItem = {
     query: gql`
-      subscription($machineHash: String!) {
-        registerWorker(machineHash: $machineHash) {
+      subscription($machineHash: String!, $label: String!) {
+        registerWorker(
+          machineHash: $machineHash
+          label: $label
+        ) {
           command
           args
           cwd
@@ -39,6 +44,7 @@ export class Network {
     `,
     variables: {
       machineHash,
+      label: Environment.LABEL,
     },
     map: (i) => i.registerWorker,
   };
