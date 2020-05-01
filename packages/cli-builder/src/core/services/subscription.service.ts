@@ -52,7 +52,8 @@ export class SubscriptionService {
       this.subscribe(
         Environment.SUBSCRIPTION_URI,
         Environment.AUTHORIZATION_TOKEN,
-        Environment.WORKER_TYPE
+        Environment.WORKER_TYPE,
+        Environment.LABEL
       );
     }
   }
