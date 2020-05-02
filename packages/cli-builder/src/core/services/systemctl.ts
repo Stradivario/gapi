@@ -24,7 +24,7 @@ Description=${description}
 [Service]
 ExecStart=${process.cwd()}/runner-linux
 ${Object.entries(Environment).map(
-  ([key, value]) => `${key}=${value}`
+  ([key, value]) => `Environment="${key}=${value}"`
 )}
 
 [Install]
