@@ -6,6 +6,9 @@ type Commands =
   | '--random-port'
   | '--runner-type'
   | '--send-response-to-server'
+  | '--systemctl'
+  | '--systemctl-name'
+  | '--systemctl-description'
   | '--graphiql';
 
 export const includes = (i: Commands) =>
@@ -39,6 +42,15 @@ export const Environment = {
   API_PORT:
     process.env.GRAPHQL_RUNNER_API_PORT ||
     nextOrDefault('--port', '42043'),
+  SYSTEM_SERVICE:
+    process.env.GRAPHQL_SYSTEM_SERVICE ||
+    nextOrDefault('--systemctl', false),
+  SYSTEM_SERVICE_NAME:
+    process.env.GRAPHQL_SYSTEM_SERVICE_NAME ||
+    nextOrDefault('--systemctl-name', false),
+  SYSTEM_SERVICE_DESCRIPTION:
+    process.env.GRAPHQL_SYSTEM_SERVICE_DESCRIPTION ||
+    nextOrDefault('--systemctl-description', false),
   RANDOM_PORT:
     process.env.GRAPHQL_RUNNER_RANDOM_PORT ||
     includes('--random-port'),
