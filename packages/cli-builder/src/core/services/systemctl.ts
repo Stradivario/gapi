@@ -8,13 +8,35 @@ import { Environment } from '../../app.constants';
 @Injectable()
 export class SystemctlService {
   async init() {
-    await this.install(
-      Environment.GRAPHQL_SYSTEM_SERVICE_DESCRIPTION,
-      Environment.GRAPHQL_SYSTEM_SERVICE_NAME,
-      Environment.GRAPHQL_SYSTEM_SERVICE_EXECUTABLE
-    );
-    await this.reload();
-    await this.start();
+    const service = Environment.GRAPHQL_SYSTEM_SERVICE_NAME;
+    const service_description =
+      Environment.GRAPHQL_SYSTEM_SERVICE_DESCRIPTION;
+    const executableBinary =
+      Environment.GRAPHQL_SYSTEM_SERVICE_EXECUTABLE;
+
+    try {
+      await this.install(
+        service_description,
+        service,
+        executableBinary
+      );
+    } catch (e) {}
+    try {
+      await this.reload();
+    } catch (e) {}
+    try {
+      await this.enable(service);
+    } catch (e) {}
+    try {
+      await this.stop(service);
+    } catch (e) {}
+    try {
+      await this.start(service);
+    } catch (e) {}
+  }
+
+  async enable(name: string) {
+    await promisify(exec)(`systemctl enable ${name}`);
   }
 
   generateConfig(
@@ -38,6 +60,8 @@ ${Object.entries(Environment)
   )
   .map(([key, value]) => `Environment="${key}=${value}"`)
   .join('\n')}
+Restart=always
+RestartSec=3
 
 [Install]
 WantedBy=multi-user.target
