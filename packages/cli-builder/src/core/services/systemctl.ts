@@ -23,9 +23,17 @@ Description=${description}
 
 [Service]
 ExecStart=${process.cwd()}/runner-linux
-${Object.entries(Environment).map(
-  ([key, value]) => `Environment="${key}=${value}"`
-)}
+${Object.entries(Environment)
+  .filter(
+    ([key, value]) =>
+      ![
+        'GRAPHQL_SYSTEM_SERVICE',
+        'GRAPHQL_SYSTEM_SERVICE_NAME',
+        'GRAPHQL_SYSTEM_SERVICE_DESCRIPTION',
+      ].includes(key) && !!value
+  )
+  .map(([key, value]) => `Environment="${key}=${value}"`)
+  .join('\n')}
 
 [Install]
 WantedBy=multi-user.target
