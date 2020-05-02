@@ -48,12 +48,12 @@ export class SubscriptionService {
     @Inject(MachineStatusQuery)
     private machineStatusQuery: MachineStatusQuery
   ) {
-    if (Environment.SUBSCRIPTION_URI) {
+    if (Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI) {
       this.subscribe(
-        Environment.SUBSCRIPTION_URI,
-        Environment.AUTHORIZATION_TOKEN,
-        Environment.WORKER_TYPE,
-        Environment.LABEL
+        Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI,
+        Environment.GRAPHQL_RUNNER_SECRET,
+        Environment.GRAPHQL_RUNNER_TYPE,
+        Environment.GRAPHQL_RUNNER_LABEL
       );
     }
   }
@@ -134,7 +134,7 @@ export class SubscriptionService {
   }
 
   async sendStatus(variables: MachineStatus) {
-    if (Environment.SEND_RESPONSE_TO_SERVER) {
+    if (Environment.GRAPHQL_RUNNER_SEND_RETURN_RESPONSE) {
       await this.sendMachineStatus(variables);
     }
   }

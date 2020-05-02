@@ -14,13 +14,13 @@ export class AppFrameModule {
       frameworkImports: [
         CoreModule.forRoot({
           server: {
-            randomPort: !!Environment.RANDOM_PORT,
+            randomPort: !!Environment.GRAPHQL_RUNNER_RANDOM_PORT,
             hapi: {
-              port: Environment.API_PORT,
+              port: Environment.GRAPHQL_RUNNER_API_PORT,
             },
           },
           graphql: {
-            graphiQlPlayground: !!Environment.GRAPHIQL,
+            graphiQlPlayground: !!Environment.GRAPHQL_RUNNER_GRAPHIQL,
             openBrowser: false,
           },
         }),

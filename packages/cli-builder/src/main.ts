@@ -52,10 +52,10 @@ Bootstrap(
     Commands
   )
 ).subscribe(() => {
-  if (Environment.SUBSCRIPTION_URI) {
+  if (Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI) {
     console.log(
       'STARTED_SUBSCRIPTIONS:',
-      Environment.SUBSCRIPTION_URI
+      Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI
     );
   } else {
     console.log(
