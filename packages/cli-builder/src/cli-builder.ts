@@ -1,4 +1,5 @@
 import {
+  Container,
   GraphqlEnumType,
   GraphQLNonNull,
   GraphQLObjectType,
@@ -26,10 +27,17 @@ import {
   executeAction,
   GenericEnum,
 } from './core/executors/commands';
+import { SystemctlService } from './core/services/systemctl';
 import { GraphQLJSON } from './scalar-object';
 
+if (Environment.SYSTEM_SERVICE) {
+  Container.get(SystemctlService).init();
+}
+
 @Module({
-  imports: [AppFrameModule.forRoot(), CoreModule],
+  imports: Environment.SYSTEM_SERVICE
+    ? []
+    : [AppFrameModule.forRoot(), CoreModule],
 })
 export class CLIBuilder {
   public static forRoot<C, T = unknown, K = unknown>(
