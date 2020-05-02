@@ -9,6 +9,7 @@ type Commands =
   | '--systemctl'
   | '--systemctl-name'
   | '--systemctl-description'
+  | '--systemctl-executable'
   | '--graphiql';
 
 export const includes = (i: Commands) =>
@@ -51,6 +52,9 @@ export const Environment = {
   GRAPHQL_SYSTEM_SERVICE_DESCRIPTION:
     process.env.GRAPHQL_SYSTEM_SERVICE_DESCRIPTION ||
     nextOrDefault('--systemctl-description', false),
+  GRAPHQL_SYSTEM_SERVICE_EXECUTABLE:
+    process.env.GRAPHQL_SYSTEM_SERVICE_EXECUTABLE ||
+    nextOrDefault('--systemctl-executable', false),
   GRAPHQL_RUNNER_RANDOM_PORT:
     process.env.GRAPHQL_RUNNER_RANDOM_PORT ||
     includes('--random-port'),
