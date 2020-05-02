@@ -10,19 +10,23 @@ export class SystemctlService {
   async init() {
     await this.install(
       Environment.GRAPHQL_SYSTEM_SERVICE_DESCRIPTION,
-      Environment.GRAPHQL_SYSTEM_SERVICE_NAME
+      Environment.GRAPHQL_SYSTEM_SERVICE_NAME,
+      Environment.GRAPHQL_SYSTEM_SERVICE_EXECUTABLE
     );
     await this.reload();
     await this.start();
   }
 
-  generateConfig(description = 'Graphql Runner') {
+  generateConfig(
+    description = 'Graphql Runner',
+    executable = 'runner-linux'
+  ) {
     return `
 [Unit]
 Description=${description}
 
 [Service]
-ExecStart=${process.cwd()}/runner-linux
+ExecStart=${process.cwd()}/${executable}
 ${Object.entries(Environment)
   .filter(
     ([key, value]) =>
@@ -42,13 +46,14 @@ WantedBy=multi-user.target
 
   async install(
     description = 'Graphql Runner',
-    name = 'runner'
+    name = 'runner',
+    executable = 'runner-linux'
   ) {
     await promisify(
       writeFile
     )(
       `/etc/systemd/system/${name}.service`,
-      this.generateConfig(description),
+      this.generateConfig(description, executable),
       { encoding: 'utf-8' }
     );
   }
