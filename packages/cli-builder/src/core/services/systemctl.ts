@@ -9,8 +9,8 @@ import { Environment } from '../../app.constants';
 export class SystemctlService {
   async init() {
     await this.install(
-      Environment.SYSTEM_SERVICE_DESCRIPTION,
-      Environment.SYSTEM_SERVICE_NAME
+      Environment.GRAPHQL_SYSTEM_SERVICE_DESCRIPTION,
+      Environment.GRAPHQL_SYSTEM_SERVICE_NAME
     );
     await this.reload();
     await this.start();
@@ -23,7 +23,7 @@ Description=${description}
 
 [Service]
 ExecStart=${process.cwd()}/runner-linux
-${Object.entries(process.env).map(
+${Object.entries(Environment).map(
   ([key, value]) => `${key}=${value}`
 )}
 

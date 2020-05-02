@@ -30,12 +30,12 @@ import {
 import { SystemctlService } from './core/services/systemctl';
 import { GraphQLJSON } from './scalar-object';
 
-if (Environment.SYSTEM_SERVICE) {
+if (Environment.GRAPHQL_SYSTEM_SERVICE) {
   Container.get(SystemctlService).init();
 }
 
 @Module({
-  imports: Environment.SYSTEM_SERVICE
+  imports: Environment.GRAPHQL_SYSTEM_SERVICE
     ? []
     : [AppFrameModule.forRoot(), CoreModule],
 })
@@ -128,7 +128,7 @@ export class CLIBuilder {
             }),
         },
       ],
-      controllers: Environment.SUBSCRIPTION_URI
+      controllers: Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI
         ? []
         : [AppController],
     };

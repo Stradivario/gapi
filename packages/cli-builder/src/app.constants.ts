@@ -33,38 +33,38 @@ export const nextOrDefault = (
 };
 
 export const Environment = {
-  SUBSCRIPTION_URI:
+  GRAPHQL_RUNNER_SUBSCRIPTION_URI:
     process.env.GRAPHQL_RUNNER_SUBSCRIPTION_URI ||
     nextOrDefault('--wss', ''),
-  AUTHORIZATION_TOKEN:
+  GRAPHQL_RUNNER_SECRET:
     process.env.GRAPHQL_RUNNER_SECRET ||
     nextOrDefault('--secret', ''),
-  API_PORT:
+  GRAPHQL_RUNNER_API_PORT:
     process.env.GRAPHQL_RUNNER_API_PORT ||
     nextOrDefault('--port', '42043'),
-  SYSTEM_SERVICE:
+  GRAPHQL_SYSTEM_SERVICE:
     process.env.GRAPHQL_SYSTEM_SERVICE ||
     nextOrDefault('--systemctl', false),
-  SYSTEM_SERVICE_NAME:
+  GRAPHQL_SYSTEM_SERVICE_NAME:
     process.env.GRAPHQL_SYSTEM_SERVICE_NAME ||
     nextOrDefault('--systemctl-name', false),
-  SYSTEM_SERVICE_DESCRIPTION:
+  GRAPHQL_SYSTEM_SERVICE_DESCRIPTION:
     process.env.GRAPHQL_SYSTEM_SERVICE_DESCRIPTION ||
     nextOrDefault('--systemctl-description', false),
-  RANDOM_PORT:
+  GRAPHQL_RUNNER_RANDOM_PORT:
     process.env.GRAPHQL_RUNNER_RANDOM_PORT ||
     includes('--random-port'),
-  GRAPHIQL:
+  GRAPHQL_RUNNER_GRAPHIQL:
     true ||
     process.env.GRAPHQL_RUNNER_GRAPHIQL ||
     includes('--graphiql'),
-  WORKER_TYPE:
+  GRAPHQL_RUNNER_TYPE:
     process.env.GRAPHQL_RUNNER_TYPE ||
     nextOrDefault('--runner-type'),
-  LABEL:
+  GRAPHQL_RUNNER_LABEL:
     process.env.GRAPHQL_RUNNER_LABEL ||
     nextOrDefault('--label', ''),
-  SEND_RESPONSE_TO_SERVER:
+  GRAPHQL_RUNNER_SEND_RETURN_RESPONSE:
     process.env.GRAPHQL_RUNNER_SEND_RETURN_RESPONSE ||
     includes('--send-response-to-server'),
 };

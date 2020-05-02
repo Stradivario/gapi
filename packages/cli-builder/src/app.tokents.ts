@@ -44,7 +44,7 @@ export class Network {
     `,
     variables: {
       machineHash,
-      label: Environment.LABEL,
+      label: Environment.GRAPHQL_RUNNER_LABEL,
     },
     map: (i) => i.registerWorker,
   };
