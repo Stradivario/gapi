@@ -3,7 +3,7 @@
 #### Download binary
 
 ```bash
-wget https://github.com/Stradivario/gapi/tree/master/packages/federation/bin/federation-linux
+wget https://github.com/Stradivario/gapi/raw/master/packages/federation/bin/federation-linux
 ```
 
 #### Give it permission to execute
@@ -21,7 +21,7 @@ chmod +x federation-linux
 If you prefer `javascript` you can download `js` binary but it requires `Nodejs` to be installed on the system
 
 ```bash
-wget https://github.com/Stradivario/gapi/tree/master/packages/federation/bin/federation-linux.js
+wget https://github.com/Stradivario/gapi/raw/master/packages/federation/bin/federation-linux.js
 ```
 
 #### Configuration
