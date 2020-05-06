@@ -1,5 +1,7 @@
 import { Container, Service } from '@rxdi/core';
 import { exists, readFile, unlink, writeFile } from 'fs';
+import { from } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { promisify } from 'util';
 
 import { ArgsService } from '../core/services/args.service';
@@ -8,6 +10,7 @@ import { ExecService } from '../core/services/exec.service';
 import { GAPI_DAEMON_CACHE_FOLDER } from '../daemon-server/daemon.config';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { mkdirp } = require('@rxdi/core/dist/services/file/dist');
+import fetch from 'node-fetch';
 
 @Service()
 export class SchemaTask {
@@ -27,9 +30,10 @@ export class SchemaTask {
   ) {
     const originalConsole = console.log.bind(console);
     console.log = function () {
+      const cwd = process.cwd().split('/');
       return originalConsole.apply(console, [
         '\x1b[36m%s\x1b[0m',
-        `${process.cwd()} =>`,
+        `${cwd[cwd.length - 1]} =>`,
         // eslint-disable-next-line prefer-rest-params
         ...arguments,
       ]);
@@ -47,9 +51,6 @@ export class SchemaTask {
     if (process.argv[3] === 'introspect') {
       await this.createDir();
       await this.generateSchema();
-      console.log(
-        `Typings introspection based on GAPI Schema created inside folder: ${this.folder}/index.d.ts`
-      );
     }
 
     if (
@@ -58,12 +59,10 @@ export class SchemaTask {
     ) {
       await this.createDir();
       await this.collectQueries();
-      console.log(
-        `Schema documents created inside folder: ${this.folder}/documents.json`
-      );
+      await this.collectFragments();
     }
     console.log(
-      `To change export folder for this command you need to check this link https://github.com/Stradivario/gapi-cli/wiki/schema`
+      `[Final] To change export folder for this command you need to check this link https://github.com/Stradivario/gapi-cli/wiki/schema`
     );
   }
   private async createDir() {
@@ -72,8 +71,77 @@ export class SchemaTask {
     }
     await promisify(mkdirp)(GAPI_DAEMON_CACHE_FOLDER);
   }
+
+  private async collectFragments() {
+    console.log('[CollectFragments]: fragments collection started');
+    return from(
+      fetch(`http://localhost:9000/graphql`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          variables: {},
+          query: `
+          {
+            __schema {
+              types {
+                kind
+                name
+                possibleTypes {
+                  name
+                }
+              }
+            }
+          }
+        `,
+        }),
+      })
+    )
+      .pipe(
+        switchMap(
+          (res) =>
+            res.json() as Promise<{
+              data: {
+                __schema: {
+                  types: {
+                    kind: string;
+                    name: string;
+                    possibleTypes: { name: string };
+                  }[];
+                };
+              };
+            }>
+        ),
+        map((res) => res.data),
+        switchMap(({ __schema }) => {
+          // here we're filtering out any type information unrelated to unions or interfaces
+          const filteredData = __schema.types.filter(
+            (type) => type.possibleTypes !== null
+          );
+          __schema.types = filteredData;
+          return promisify(writeFile)(
+            `${this.folder}/fragmentTypes.ts`,
+            `/* tslint:disable */
+/* eslint-disable prettier/prettier */ 
+export const introspectionQueryResultData = ${JSON.stringify(
+              { __schema },
+              null,
+              2
+            )}
+          `
+          );
+        }),
+        tap(() =>
+          console.log('[CollectFragments]: fragments collection finished')
+        )
+      )
+      .toPromise();
+  }
   public async collectQueries() {
+    console.log('[CollectQueries]: queries collection started');
     const randomString = Math.random().toString(36).substring(2);
+    console.log(
+      `[CollectQueries]: generating temporary documents file ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`
+    );
     await this.execService.call(
       `node ${
         this.node_modules
@@ -81,30 +149,41 @@ export class SchemaTask {
         this.pattern ? this.pattern : '**/*.{graphql,gql}'
       }' > ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`
     );
+    console.log(
+      `[CollectQueries]: reading temporary documents file ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`
+    );
     const readDocumentsTemp = await promisify(readFile)(
       `${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`,
       'utf-8'
     );
     await promisify(unlink)(`${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`);
     if (this.argsService.args.includes('--collect-types')) {
+      console.log(`[CollectQueries]: generating types`);
       await this.generateTypes(readDocumentsTemp);
     }
     const parsedDocuments = `/* tslint:disable */\n/* eslint-disable prettier/prettier */ \nexport const DOCUMENTS = ${readDocumentsTemp};`;
+    console.log(
+      `[CollectQueries]: writing file to disc ${this.folder}/documents.ts`
+    );
     await promisify(writeFile)(
       `${this.folder}/documents.ts`,
       parsedDocuments,
       'utf8'
     );
+    console.log('[CollectQueries]: queries collection finished');
   }
 
   public async generateSchema() {
-    console.log(`Trying to hit ${this.endpoint} ...`);
+    console.log(`[GenerateSchema]: Trying to hit ${this.endpoint} ...`);
     await this.execService.call(
       `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${this.node_modules}/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} --output ${this.folder}/schema.json`
     );
-    console.log(`Endpoint ${this.endpoint} hit!`);
+    console.log(`[GenerateSchema]: Endpoint ${this.endpoint} hit!`);
     await this.execService.call(
       `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node  ${this.bashFolder}/gql2ts/index.js ${this.folder}/schema.json -o ${this.folder}/index.ts`
+    );
+    console.log(
+      `[GenerateSchema]: Typescript interfaces generated inside folder: ${this.folder}/index.d.ts`
     );
   }
 

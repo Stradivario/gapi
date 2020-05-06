@@ -37,6 +37,7 @@
     "@gapi/core": "1.8.72",
     "graphql": "^14.6.0",
     "@gapi/schematics": "1.8.72",
+    "node-fetch": "^2.1.2",
     "@zeit/ncc": "^0.22.1",
     "apollo-codegen": "0.20.2",
     "chalk": "2.4.2",
@@ -55,6 +56,7 @@
     "yamljs": "0.3.0"
   },
   "devDependencies": {
+    "@types/node-fetch": "^2.5.7",
     "@types/node": "^13.11.1",
     "@types/shelljs": "0.8.5",
     "@types/chokidar": "^2.1.3",
