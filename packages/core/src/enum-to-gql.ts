@@ -14,11 +14,13 @@ interface GraphqlEnumTypeConfig<T = {}> {
   extensionASTNodes?: Maybe<ReadonlyArray<EnumTypeExtensionNode>>;
 }
 
-export const enumToGraphqlEnum = <T>(Enum: T) =>
-  Object.keys(Enum).reduce((acc, key, index) => {
-    acc[isNaN(Number(Enum[key])) ? Enum[key] : key] = { value: index };
-    return acc;
-  }, {} as T);
+export const enumToGraphqlEnum = <T>(values: T) =>
+  Object.keys(values)
+    .filter((value) => isNaN(Number(value)) === false)
+    .reduce((acc, value) => {
+      acc[(values as unknown)[value]] = { value: Number(value) };
+      return acc;
+    }, {} as T);
 
 export class GraphqlEnumType<T> extends GraphQLEnumType {
   constructor(config: GraphqlEnumTypeConfig<T>) {
