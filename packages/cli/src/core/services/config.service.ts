@@ -43,6 +43,10 @@ export interface GapiMainConfig {
     introspectionOutputFolder: string;
     pattern: string;
   };
+  remote: {
+    link: string;
+    token: string;
+  };
 }
 export class Commands {
   commands: {
