@@ -54,7 +54,7 @@ export const Environment = {
     nextOrDefault('--systemctl-description', false),
   GRAPHQL_SYSTEM_SERVICE_EXECUTABLE:
     process.env.GRAPHQL_SYSTEM_SERVICE_EXECUTABLE ||
-    nextOrDefault('--systemctl-executable', false),
+    nextOrDefault('--systemctl-executable', ''),
   GRAPHQL_RUNNER_RANDOM_PORT:
     process.env.GRAPHQL_RUNNER_RANDOM_PORT ||
     includes('--random-port'),
