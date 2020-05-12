@@ -37,7 +37,6 @@ export class AppFrameModule {
             },
           },
           graphql: {
-            initQuery: false,
             graphiQlPlayground: !!Environment.GRAPHQL_RUNNER_GRAPHIQL,
             openBrowser: false,
           },
