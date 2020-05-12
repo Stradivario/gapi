@@ -6,7 +6,7 @@ config:
       GRAPHQL_RUNNER_TYPE: vscode
       GRAPHQL_RUNNER_GRAPHIQL: true
       GRAPHQL_RUNNER_SEND_RETURN_RESPONSE: true
-      GRAPHQL_RUNNER_SECRET: ''
+      GRAPHQL_RUNNER_SECRET: 'blabla'
     prod:
       GRAPHQL_RUNNER_API_PORT: 42044
       GRAPHQL_RUNNER_SUBSCRIPTION_URI: wss://pubsub.graphql-server.com/subscriptions
@@ -25,7 +25,7 @@ config:
       GRAPHQL_SYSTEM_SERVICE_NAME: 'gosho'
   remote:
     link: http://localhost:42044/graphql
-    token: ''
+    token: 'blabla'
 commands:
   git:
     status: gql`mutation { execute(cmd: GIT, args: ["status"]) { code data error } }`
