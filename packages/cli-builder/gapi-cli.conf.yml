@@ -23,3 +23,11 @@ config:
       GRAPHQL_RUNNER_SECRET: ''
       GRAPHQL_SYSTEM_SERVICE: true
       GRAPHQL_SYSTEM_SERVICE_NAME: 'gosho'
+  remote:
+    link: http://localhost:42044/graphql
+    token: ''
+commands:
+  git:
+    status: gql`mutation { execute(cmd: GIT, args: ["status"]) { code data error } }`
+    add: gql`mutation { execute(cmd: GIT, args: ["add", "."]) { code data error } }`
+    commit: gql`mutation { execute(cmd: GIT, args: ["commit", "-m", "pesho"]) { code data error } }`

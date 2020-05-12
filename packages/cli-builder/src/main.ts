@@ -7,7 +7,7 @@ import { Server } from 'hapi';
 
 import { Environment } from './app.constants';
 import { CLIBuilder } from './cli-builder';
-
+import { executeCommand } from './core/executors/helpers/index';
 export enum Commands {
   GIT = 1,
   NPM = 2,
@@ -18,14 +18,15 @@ export enum Commands {
 Bootstrap(
   CLIBuilder.forRoot<
     typeof Commands,
-    Promise<number>,
+    Promise<unknown>,
     string[]
   >(
     {
       GIT: async (args: string[]) => {
         console.log('[RUN_GIT]: started arguments: ', args);
+        const data = await executeCommand('git', args);
         console.log('[RUN_GIT]: exited');
-        return 1;
+        return data;
       },
       NPM: async (args: string[]) => {
         console.log('[RUN_NPM]: started arguments: ', args);

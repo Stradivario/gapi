@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { sendRequest } from '@gapi/core';
 import { Container, Service } from '@rxdi/core';
 import { exec } from 'shelljs';
 
@@ -40,6 +39,9 @@ export class RootService {
   checkForCustomTasks(): Promise<any> {
     return new Promise(async (resolve, reject) => {
       const commands = this.configService.config.commands;
+      const remoteLink = this.configService.config.config?.remote?.link;
+      const remoteToken = this.configService.config.config?.remote?.token;
+
       const filteredCommands = Object.keys(commands).filter((cmd) => {
         if (cmd === argsService.args[2]) {
           const customCommand = commands[cmd][argsService.args[3]];
@@ -66,10 +68,18 @@ export class RootService {
                 const query = (customCommand as string)
                   .replace('gql`', '')
                   .replace('`', '');
-                sendRequest({ query }, 'http://localhost:42001/graphql').then(
-                  (data) => console.log(data),
-                  (e) => console.error(e)
-                );
+                console.log(query);
+                fetch(remoteLink || 'http://localhost:42001/graphql', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    authorization: remoteToken || '',
+                  },
+                  body: JSON.stringify({ query }),
+                })
+                  .then((data) => data.json())
+                  .then(console.log)
+                  .catch((e) => console.error(e));
               } else {
                 resolve(exec(customCommand));
               }
