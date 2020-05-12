@@ -1,7 +1,9 @@
 import {
+  Boom,
   CoreModule,
   Module,
   ModuleWithProviders,
+  ON_REQUEST_HANDLER,
 } from '@gapi/core';
 
 import { Environment } from './app.constants';
@@ -11,6 +13,21 @@ export class AppFrameModule {
   public static forRoot(): ModuleWithProviders {
     return {
       module: AppFrameModule,
+      providers: [
+        {
+          provide: ON_REQUEST_HANDLER,
+          useFactory: () => async (next, request) => {
+            if (
+              Environment.GRAPHQL_RUNNER_SECRET &&
+              request.headers.authorization !==
+                Environment.GRAPHQL_RUNNER_SECRET
+            ) {
+              return Boom.unauthorized();
+            }
+            return next();
+          },
+        },
+      ],
       frameworkImports: [
         CoreModule.forRoot({
           server: {
@@ -20,6 +37,7 @@ export class AppFrameModule {
             },
           },
           graphql: {
+            initQuery: false,
             graphiQlPlayground: !!Environment.GRAPHQL_RUNNER_GRAPHIQL,
             openBrowser: false,
           },
