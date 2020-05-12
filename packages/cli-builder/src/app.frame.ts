@@ -18,6 +18,13 @@ export class AppFrameModule {
           provide: ON_REQUEST_HANDLER,
           useFactory: () => async (next, request) => {
             if (
+              request.payload.query.includes(
+                'query { status { status } }'
+              )
+            ) {
+              return next();
+            }
+            if (
               Environment.GRAPHQL_RUNNER_SECRET &&
               request.headers.authorization !==
                 Environment.GRAPHQL_RUNNER_SECRET
