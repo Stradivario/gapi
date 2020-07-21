@@ -233,8 +233,15 @@ export class StartTask {
       // contentHash: true,
       // detailedReport: true,
       hmr: nextOrDefault('--hmr', false, (v) => Boolean(v)),
+      hmrPort: nextOrDefault('--hmr-port', 0),
+      hmrHostname: nextOrDefault('--hmr-hostname', 0),
       publicUrl: nextOrDefault('--public-url', '/'),
+      scopeHoist: nextOrDefault('--scope-hoist', false, (v) => Boolean(v)),
+      cache: nextOrDefault('--cache', true, (v) => Boolean(v)),
+      cacheDir: nextOrDefault('--cache-dir', '.cache'),
+      sourceMaps: nextOrDefault('--source-maps', true, (v) => Boolean(v)),
       bundleNodeModules: includes('--bundle-modules'),
+      autoInstall: nextOrDefault('--auto-install', true, (v) => Boolean(v)),
     });
     const originalOnChange = bundler.onChange.bind(bundler);
     bundler.onChange = function (path: string) {

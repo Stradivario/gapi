@@ -45,7 +45,15 @@ export type Tasks =
   | '--pkg-only'
   | '--assets'
   | '--single-executable'
-  | '--target=browser';
+  | '--target=browser'
+  | '--auto-install'
+  | '--hmr-port'
+  | '--cache-dir'
+  | '--cache'
+  | '--source-maps'
+  | '--hmr-hostname'
+  | '--scope-hoist';
+
 export const includes = (i: Tasks) => process.argv.toString().includes(i);
 export const nextOrDefault = (i: Tasks, fb: any = true, type = (p) => p) => {
   if (process.argv.toString().includes(i)) {
