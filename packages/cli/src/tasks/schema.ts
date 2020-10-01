@@ -178,7 +178,11 @@ export const introspectionQueryResultData = ${JSON.stringify(
   public async generateSchema() {
     console.log(`[GenerateSchema]: Trying to hit ${this.endpoint} ...`);
     await this.execService.call(
-      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${this.node_modules}/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} --header "${this.headers}" --output ${this.folder}/schema.json`
+      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${
+        this.node_modules
+      }/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} ${
+        this.headers ? `--header "${this.headers}"` : ''
+      } --output ${this.folder}/schema.json`
     );
     console.log(`[GenerateSchema]: Endpoint ${this.endpoint} hit!`);
     await this.execService.call(
