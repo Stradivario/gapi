@@ -16,6 +16,7 @@ import fetch from 'node-fetch';
 export class SchemaTask {
   private folder: string;
   private endpoint: string;
+  private headers: string;
   private node_modules: string;
   private bashFolder: string;
   private pattern: string;
@@ -47,6 +48,7 @@ export class SchemaTask {
     this.pattern = pattern || this.configService.config.config.schema.pattern;
     this.node_modules = __dirname.replace('dist/tasks', 'node_modules');
     this.bashFolder = __dirname.replace('dist/tasks', 'bash');
+    this.headers = this.configService.config.config.schema.headers;
 
     if (process.argv[3] === 'introspect') {
       await this.createDir();
@@ -176,7 +178,7 @@ export const introspectionQueryResultData = ${JSON.stringify(
   public async generateSchema() {
     console.log(`[GenerateSchema]: Trying to hit ${this.endpoint} ...`);
     await this.execService.call(
-      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${this.node_modules}/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} --output ${this.folder}/schema.json`
+      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${this.node_modules}/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} --header "${this.headers}" --output ${this.folder}/schema.json`
     );
     console.log(`[GenerateSchema]: Endpoint ${this.endpoint} hit!`);
     await this.execService.call(
