@@ -41,6 +41,7 @@ export interface GapiMainConfig {
     excludedFolders: string[];
     introspectionEndpoint: string;
     introspectionOutputFolder: string;
+    headers: string;
     pattern: string;
   };
   remote: {
@@ -99,6 +100,7 @@ export class ConfigService {
         excludedFolders: [],
         introspectionEndpoint: '',
         introspectionOutputFolder: '',
+        headers: '',
         pattern: '',
       },
       this.config.config.schema
