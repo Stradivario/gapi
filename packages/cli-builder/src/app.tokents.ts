@@ -31,7 +31,7 @@ export const machineHash = createHash('md5')
 export class Network {
   subscription: NetworkItem = {
     query: gql`
-      subscription($machineHash: String!, $label: String!) {
+      subscription($machineHash: String, $label: String) {
         registerWorker(
           machineHash: $machineHash
           label: $label
