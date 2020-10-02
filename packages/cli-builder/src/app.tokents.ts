@@ -51,11 +51,13 @@ export class Network {
   status: NetworkItem = {
     query: gql`
       mutation notifyMachineResult(
-        $machineHash: String!
-        $data: String!
+        $label: String
+        $machineHash: String
+        $data: String
         $error: String
       ) {
         notifyMachineResult(
+          label: $label
           machineHash: $machineHash
           data: $data
           error: $error

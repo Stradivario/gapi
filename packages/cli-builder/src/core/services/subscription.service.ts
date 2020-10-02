@@ -26,6 +26,7 @@ import { getNetworkIP } from './get-ip-adresses';
 const webSocketImpl = require('ws');
 interface MachineStatus {
   machineHash: string;
+  label: string;
   data?: string;
   error?: string;
 }
@@ -103,11 +104,13 @@ export class SubscriptionService {
             cwd
           );
           await this.sendStatus({
+            label,
             machineHash,
             data: JSON.stringify(data),
           });
         } catch (error) {
           await this.sendStatus({
+            label,
             machineHash,
             data: '',
             error: JSON.stringify(error),
