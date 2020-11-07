@@ -14,7 +14,7 @@ export class SendGridHelperService {
   }
 
   async send(from: string, to: string, template: TemplatesModel) {
-    const html = await template.html;
+    const html = await template.html();
     return new Promise(async (resolve, reject) =>
       resolve(
         await this.mailer.send(

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { InjectionToken } from '@rxdi/core';
 import { MailData } from '@sendgrid/helpers/classes/mail';
 import { MailService } from '@sendgrid/mail';
@@ -13,13 +14,13 @@ export const DefaultEmail = new InjectionToken<string>(
 export type Mailer = typeof MailService;
 export type Templates = TemplatesModel[];
 
-// export type TemplateTypes = 'subscribe' | 'forgotpassword' | 'profiling';
+export type Without<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
-export class TemplatesModel implements MailData {
+export class TemplatesModel implements Without<MailData, 'html'> {
   type?: string;
   subject: string;
   text: string;
-  html?: string & Promise<string> & (<T>(arg: T) => Promise<string>);
+  html?: (arg?: any) => Promise<string>;
   to: string;
   from: string;
 }
