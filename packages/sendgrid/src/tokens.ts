@@ -13,14 +13,13 @@ export const DefaultEmail = new InjectionToken<string>(
 export type Mailer = typeof MailService;
 export type Templates = TemplatesModel[];
 
-export type TemplateTypes = 'subscribe' | 'forgotpassword' | 'profiling';
+// export type TemplateTypes = 'subscribe' | 'forgotpassword' | 'profiling';
 
 export class TemplatesModel implements MailData {
-  type?: TemplateTypes;
+  type?: string;
   subject: string;
   text: string;
-  html?: string;
-  asyncHtml?: Promise<string>;
+  html?: string & Promise<string> & (<T>(arg: T) => Promise<string>);
   to: string;
   from: string;
 }
