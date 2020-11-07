@@ -16,11 +16,7 @@ export class SendGridService {
     return { status: 'ok' };
   }
 
-  async sendEmailWithParams<T extends string, P>(
-    to: string,
-    type: T,
-    from?: string,
-  ) {
+  sendEmailWithParams<T extends string, P>(to: string, type: T, from?: string) {
     return async (params: P) => {
       const template = this.sendGridHelper.getTemplate(type);
       await this.sendGridHelper.sendWithParams(from || this.defaultEmail, to)(
