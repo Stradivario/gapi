@@ -1,6 +1,6 @@
 {
   "name": "@gapi/orbitdb",
-  "version": "1.8.88",
+  "version": "1.8.89",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi-orbitdb.git"
