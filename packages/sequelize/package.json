@@ -1,6 +1,6 @@
 {
   "name": "@gapi/sequelize",
-  "version": "1.8.91",
+  "version": "1.8.92",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi-sequelize.git"
