@@ -1,0 +1,52 @@
+{
+  "name": "@gapi/sendgrid",
+  "version": "1.8.86",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stradivario/gapi.git"
+  },
+  "scripts": {
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
+    "delete-dist": "rm -rf dist",
+    "clean": "git clean -dxf",
+    "lint": "npx eslint . --ext .ts",
+    "test": "echo TESTS",
+    "lint-fix": "npx eslint . --fix --ext .ts",
+    "build": "rm -rf dist && tsc || true"
+  },
+  "author": {
+    "name": "Kristian Tachev(Stradivario)",
+    "email": "kristiqn.tachev@gmail.com"
+  },
+  "keywords": [
+    "graphql",
+    "gapi",
+    "node",
+    "access-control"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Stradivario/gapi/issues"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "6.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.1",
+    "@types/jest": "^25.2.1",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
+    "eslint": "^6.7.2",
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-simple-import-sort": "^5.0.0",
+    "jest": "^25.5.4",
+    "ts-jest": "^25.4.0"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts"
+}

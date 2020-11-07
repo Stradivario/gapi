@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "target": "es6",
+    "baseUrl": ".",
+    "stripInternal": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "rootDir": "src",
+    "lib": ["es2017", "es2016", "es2015", "es6", "dom", "esnext.asynciterable"],
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types"]
+  },
+  "files": ["src/index.ts"]
+}
