@@ -1,66 +1,36 @@
 ```ts
-import { AccessControl, Union } from '@gapi/ac';
+import { SendgridModule } from '@gapi/sendgrid';
+import { Module } from '@rxdi/core';
 
-enum GraphqlActions {
-  query,
-  mutation,
-  subscription,
-  event,
-}
+import { ProfilingRequestTemplate } from './email-templates/profile-request.template';
+import { SubscriptionTemplate } from './email-templates/subscription.template';
 
-enum Roles {
-  GUEST,
-  USER,
-  ADMIN,
-}
-
-interface IQuery {
-  status: {
-    status: number;
-  };
-}
-
-const Permissions: Union<typeof Roles, IQuery, typeof GraphqlActions> = {
-  GUEST: {
-    status: {
-      query: {
-        enabled: false,
-      },
-    },
-  },
-  USER: {
-    status: {
-      query: {
-        enabled: true,
-        attributes: {
-          status: false,
+@Module({
+  imports: [
+    SendgridModule.forRoot({
+      templates: [
+        {
+          type: 'subscribe',
+          subject: 'Thank you for subscribing to Graphql Server feed!',
+          // tslint:disable-next-line:max-line-length
+          text: `From now on, you'll get regular updates. Cheers, Graphql Server`,
+          asyncHtml: SubscriptionTemplate,
+          from: null,
+          to: null,
         },
-      },
-    },
-  },
-  ADMIN: {
-    status: {
-      query: {
-        enabled: true,
-      },
-    },
-  },
-};
-
-const ac = new AccessControl<
-  typeof Roles,
-  IQuery & ISubscription & IMutation,
-  typeof GraphqlActions
->(Permissions);
-
-const canAdminQueryStatus = ac.can('ADMIN', 'query', 'status');
-const canAdminQueryStatus = ac.can('USER', 'query', 'status');
-
-if (!canAdminQueryStatus) {
-  throw new Error('You are not authorized');
-}
-
-const data = { status: 200 };
-const filteredData = await ac.filter('USER', 'query', 'status')(data);
-filteredData; // { status: null }
+        {
+          type: 'profiling',
+          subject: 'Thank you for your profiling request!',
+          text: `You have successfully requested free profiling.`,
+          asyncHtml: ProfilingRequestTemplate,
+          from: null,
+          to: null,
+        },
+      ],
+      apiKey: 'SENDGRID_API_KEY',
+      defaultEmail: 'kristiqn.tachev@gmail.com',
+    }),
+  ],
+})
+export class CoreModule {}
 ```

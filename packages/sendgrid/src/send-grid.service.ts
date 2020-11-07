@@ -1,13 +1,14 @@
-import { Service } from '@rxdi/core';
+import { Inject, Service } from '@rxdi/core';
 
 import { SendGridHelperService } from './send-grid.helpers';
-import { TemplateTypes } from './tokens';
+import { DefaultEmail, TemplateTypes } from './tokens';
 
 @Service()
 export class SendGridService {
-  private defaultEmail = 'support@push-pull.com';
-
-  constructor(private sendGridHelper: SendGridHelperService) {}
+  constructor(
+    private sendGridHelper: SendGridHelperService,
+    @Inject(DefaultEmail) private defaultEmail: string,
+  ) {}
 
   async sendEmail(to: string, type: TemplateTypes, from?: string) {
     const template = this.sendGridHelper.getTemplate(type);
