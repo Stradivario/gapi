@@ -1,7 +1,7 @@
 import { Inject, Service } from '@rxdi/core';
 
 import { SendGridHelperService } from './send-grid.helpers';
-import { DefaultEmail, TemplateTypes } from './tokens';
+import { DefaultEmail } from './tokens';
 
 @Service()
 export class SendGridService {
@@ -10,12 +10,26 @@ export class SendGridService {
     @Inject(DefaultEmail) private defaultEmail: string,
   ) {}
 
-  async sendEmail(to: string, type: TemplateTypes, from?: string) {
+  async sendEmail<T extends string>(to: string, type: T, from?: string) {
     const template = this.sendGridHelper.getTemplate(type);
     await this.sendGridHelper.send(from || this.defaultEmail, to, template);
     return { status: 'ok' };
   }
 
+  async sendEmailWithParams<T extends string, P>(
+    to: string,
+    type: T,
+    from?: string,
+  ) {
+    return async (params: P) => {
+      const template = this.sendGridHelper.getTemplate(type);
+      await this.sendGridHelper.sendWithParams(from || this.defaultEmail, to)(
+        template,
+        params,
+      );
+      return { status: 'ok' };
+    };
+  }
   async sendTemplateString({
     from,
     html,
