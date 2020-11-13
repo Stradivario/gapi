@@ -1,6 +1,6 @@
 {
   "name": "@gapi/ipfs-daemon",
-  "version": "1.8.93",
+  "version": "1.8.94",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi-ipfs-daemon.git"
