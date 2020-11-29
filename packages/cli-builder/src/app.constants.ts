@@ -10,7 +10,8 @@ type Commands =
   | '--systemctl-name'
   | '--systemctl-description'
   | '--systemctl-executable'
-  | '--graphiql';
+  | '--graphiql'
+  | '--nat-ip';
 
 export const includes = (i: Commands) =>
   process.argv.toString().includes(i);
@@ -71,4 +72,7 @@ export const Environment = {
   GRAPHQL_RUNNER_SEND_RETURN_RESPONSE:
     process.env.GRAPHQL_RUNNER_SEND_RETURN_RESPONSE ||
     includes('--send-response-to-server'),
+  GRAPHQL_RUNNER_NAT_IP:
+    process.env.GRAPHQL_RUNNER_NAT_IP ||
+    nextOrDefault('--nat-ip'),
 };
