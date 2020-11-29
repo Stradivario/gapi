@@ -73,7 +73,9 @@ export class SubscriptionService {
           machineHash,
           worker_type,
           label,
-          ip: await getNetworkIP(),
+          ip:
+            Environment.GRAPHQL_RUNNER_NAT_IP ||
+            (await getNetworkIP()),
           networkInterfaces: JSON.stringify(
             networkInterfaces()
           ),
