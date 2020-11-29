@@ -74,5 +74,5 @@ export const Environment = {
     includes('--send-response-to-server'),
   GRAPHQL_RUNNER_NAT_IP:
     process.env.GRAPHQL_RUNNER_NAT_IP ||
-    nextOrDefault('--nat-ip'),
+    nextOrDefault('--nat-ip', ''),
 };
