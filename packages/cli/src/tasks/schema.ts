@@ -77,7 +77,7 @@ export class SchemaTask {
   private async collectFragments() {
     console.log('[CollectFragments]: fragments collection started');
     return from(
-      fetch(`http://localhost:9000/graphql`, {
+      fetch(this.endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
