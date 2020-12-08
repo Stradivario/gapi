@@ -4,7 +4,7 @@ import { writeFile } from 'fs';
 import { promisify } from 'util';
 
 import { Environment } from '../../app.constants';
-
+const defaultRunnerName = 'runner';
 @Injectable()
 export class SystemctlService {
   async init() {
@@ -70,7 +70,7 @@ WantedBy=multi-user.target
 
   async install(
     description = 'Graphql Runner',
-    name = 'runner',
+    name = defaultRunnerName,
     executable = 'runner-linux'
   ) {
     await promisify(
@@ -87,19 +87,25 @@ WantedBy=multi-user.target
     );
     console.log(data);
   }
-  async start(name = 'runner') {
+  async start(name = defaultRunnerName) {
     const data = await promisify(exec)(
       `systemctl start ${name}`
     );
     console.log(data);
   }
-  async stop(name = 'runner') {
+
+  async restart() {
+    await this.stop();
+    await this.reload();
+    await this.start();
+  }
+  async stop(name = defaultRunnerName) {
     const data = await promisify(exec)(
       `systemctl stop ${name}`
     );
     console.log(data);
   }
-  async status(name = 'runner') {
+  async status(name = defaultRunnerName) {
     const data = await promisify(exec)(
       `systemctl status ${name}`
     );
