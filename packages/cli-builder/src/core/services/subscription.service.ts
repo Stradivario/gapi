@@ -98,6 +98,7 @@ export class SubscriptionService {
       .subscribe(async ({ args, command, cwd }) => {
         const cmd = Container.get(EnumToken)[command];
         if (!cmd) {
+          console.log('Missing command');
           throw new Error('Missing command');
         }
         try {
@@ -111,6 +112,7 @@ export class SubscriptionService {
             data: JSON.stringify(data),
           });
         } catch (error) {
+          console.log(error);
           await this.sendStatus({
             label,
             machineHash,
