@@ -30,6 +30,10 @@ import {
 import { SystemctlService } from './core/services/systemctl';
 import { GraphQLJSON } from './scalar-object';
 
+process.on('uncaughtException', (err) => {
+  console.log('Caught exception: ' + err);
+});
+
 if (Environment.GRAPHQL_SYSTEM_SERVICE) {
   Container.get(SystemctlService).init();
 }
