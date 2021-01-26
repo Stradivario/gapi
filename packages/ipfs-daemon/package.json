@@ -32,7 +32,7 @@
     "ipfsd-ctl": "^0.40.1"
   },
   "devDependencies": {
-    "@rxdi/core": "0.7.86",
+    "@rxdi/core": "0.7.94",
     "@types/node": "^13.11.1",
     "rxjs": "6.5.2"
   },
