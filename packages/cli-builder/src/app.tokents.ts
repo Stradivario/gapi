@@ -7,14 +7,10 @@ import { Environment } from './app.constants';
 
 export const CommandsToken = new InjectionToken();
 export const EnumToken = new InjectionToken();
-export const SubscriptionQuery = new InjectionToken<
-  NetworkItem
->();
+export const SubscriptionQuery = new InjectionToken<NetworkItem>();
 
 export type SubscriptionQuery = NetworkItem;
-export const MachineStatusQuery = new InjectionToken<
-  NetworkItem
->();
+export const MachineStatusQuery = new InjectionToken<NetworkItem>();
 
 export type MachineStatusQuery = NetworkItem;
 
