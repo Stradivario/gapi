@@ -1,6 +1,6 @@
 {
   "name": "@gapi/federation",
-  "version": "1.8.100",
+  "version": "1.8.101",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
