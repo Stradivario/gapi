@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/node": "^13.11.1",
-    "@rxdi/core": "0.7.96",
+    "@rxdi/core": "0.7.97",
     "@gapi/ipfs": "^1.8.22",
     "@gapi/cli": "^1.8.22",
     "@rxdi/dts-merge": "^0.0.239",
