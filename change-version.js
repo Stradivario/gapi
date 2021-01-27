@@ -8,22 +8,22 @@ async function main() {
   const { version } = await readPackageJson('package.json');
   const dirs = await promisify(readdir)('packages');
   const packagesJsons = await Promise.all(
-    dirs.map(async directory => {
+    dirs.map(async (directory) => {
       const path = `./packages/${directory}/package.json`;
       const file = await readPackageJson(path);
       return {
         file,
-        path
+        path,
       };
     })
   );
-  const privatePackages = packagesJsons.map(json => json.file.name);
-  const modified = packagesJsons.map(json => {
+  const privatePackages = packagesJsons.map((json) => json.file.name);
+  const modified = packagesJsons.map((json) => {
     json.file.dependencies = Object.entries(
       json.file.dependencies || []
     ).reduce((prev, [k]) => {
       if (privatePackages.includes(k)) {
-        prev[k] = version;
+        prev[k] = `^${version}`;
       }
       return prev;
     }, json.file.dependencies);
@@ -32,7 +32,7 @@ async function main() {
   await Promise.all(
     modified.map(({ file, path }) =>
       promisify(writeFile)(path, JSON.stringify(file, null, 2), {
-        encoding: 'utf-8'
+        encoding: 'utf-8',
       })
     )
   );

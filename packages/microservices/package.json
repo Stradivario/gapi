@@ -32,7 +32,7 @@
     "node-fetch": "^2.1.2"
   },
   "devDependencies": {
-    "@rxdi/core": "0.7.98",
+    "@rxdi/core": "^0.7.99",
     "@gapi/auth": "^1.8.22",
     "@gapi/core": "^1.8.22",
     "@types/graphql": "^14.5.0",

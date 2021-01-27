@@ -62,7 +62,7 @@
     "@rxdi/dts-merge": "^0.0.239"
   },
   "dependencies": {
-    "@rxdi/core": "0.7.98",
+    "@rxdi/core": "^0.7.99",
     "bn.js": "^4.11.8",
     "@sendgrid/mail": "6.5.2",
     "web3": "^0.20.2",
@@ -92,11 +92,11 @@
     "rxjs": "6.5.2",
     "shelljs": "0.8.3",
     "yamljs": "0.3.0",
-    "@rxdi/graphql": "0.7.98",
+    "@rxdi/graphql": "^0.7.99",
     "apollo-server": "^2.12.0",
     "@apollo/gateway": "^0.14.1",
-    "@rxdi/graphql-pubsub": "0.7.98",
-    "@rxdi/hapi": "0.7.98",
+    "@rxdi/graphql-pubsub": "^0.7.99",
+    "@rxdi/hapi": "^0.7.99",
     "graphql-geojson": "^1.0.0",
     "graphql-tools": "^5.0.0",
     "apollo-link-http": "^1.5.3",
