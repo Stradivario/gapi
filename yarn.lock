@@ -1555,10 +1555,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@rxdi/core@^0.7.99":
-  version "0.7.99"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.99.tgz#5a7696407863afd25f5999965867f911e3e10c64"
-  integrity sha512-kLZ/UEI72drhnAPvSwjyBldCSxPYGFyFVZnFJxGILgXp3WQXqp5WddxJ5uNQoyh9jJn5liL7ZgjD773CO+TV7Q==
+"@rxdi/core@^0.7.100":
+  version "0.7.100"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.100.tgz#180f91261173ca5c9f905931bf1bd02b2343b61e"
+  integrity sha512-gTBJSlPO//lrdRAsbl9I35leSww1BjG2fHTgerNdKYvR8Z/pmAXthXTiOJ0GEvU/pGDUZb5G5bfrRYqKohkTfg==
   dependencies:
     reflect-metadata "0.1.13"
     rxjs "^6.5.3"
@@ -1575,31 +1575,29 @@
     mkdirp "^0.5.1"
     typescript "^3.0.1"
 
-"@rxdi/graphql-pubsub@^0.7.99":
-  version "0.7.99"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-pubsub/-/graphql-pubsub-0.7.99.tgz#29437f2b91b2eb60aae4d71afa6a3c34a722ed76"
-  integrity sha512-jPrPmpTS7haW5Rl8Rw9OTFx1fomHEPQwye7/iFByPovlkYrTcxQSCXh82SCgXrPN9ARcm9ngIMrNlqFz+AAl7w==
+"@rxdi/graphql-pubsub@^0.7.100":
+  version "0.7.100"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-pubsub/-/graphql-pubsub-0.7.100.tgz#3b6c366234dfbb6abafd61e8c50a114dd61fd392"
+  integrity sha512-gMP51fPeK//JtEm83kGi3/s1Rg6phv7yXXJhzB7nBQb2EJqTjoUKs6Zun5tUPHFVnQYb3f/k+Jo5pQqBVDy5lA==
   dependencies:
-    "@rxdi/graphql-rabbitmq-subscriptions" "^0.7.98"
+    "@rxdi/graphql-rabbitmq-subscriptions" "^0.7.99"
     apollo-link-ws "^1.0.18"
     graphql-request "^1.8.2"
     subscriptions-transport-ws "^0.9.16"
     ws "6.2.1"
 
-"@rxdi/graphql-rabbitmq-subscriptions@^0.7.98":
-  version "0.7.99"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-rabbitmq-subscriptions/-/graphql-rabbitmq-subscriptions-0.7.99.tgz#543443c86dee00c4085dc0a2b113badb9aa62303"
-  integrity sha512-DSTJcvX+hil8tnnEg5V1HLjHnxaFDgPR17GhVO45GWtT3VKH88lzpbpOwQk2j8sCHvqM+kWF4Z0AbiAc7DGxqw==
+"@rxdi/graphql-rabbitmq-subscriptions@^0.7.99":
+  version "0.7.100"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-rabbitmq-subscriptions/-/graphql-rabbitmq-subscriptions-0.7.100.tgz#eecc80ccce2ebd2d26d08127f7907cc2601f422b"
+  integrity sha512-XKMDRJWK9+S3M3W5Iy8Kz2TcuE3L8tVHYxP/9ehlwaNFAorVm6aECnWaZ+dBAwM1aNDCTMSoglIT59J4ucW49w==
   dependencies:
-    "@rxdi/rabbitmq-pubsub" "^0.7.98"
-    "@types/bunyan" "^1.8.0"
-    async "^2.5.0"
+    "@rxdi/rabbitmq-pubsub" "^0.7.99"
     graphql-subscriptions "^1.1.0"
 
-"@rxdi/graphql@^0.7.99":
-  version "0.7.99"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql/-/graphql-0.7.99.tgz#526285f6ac02d7dd3093f20e6eb4fe5749ad222f"
-  integrity sha512-sQgdfh/JPd1HWaOjyJHgxl10m9LKe3B2jFQWiaeAiUOc0wJQsg+i7TEchr+3/SKEFKOqMA8Y3a+TiQvBitw4nQ==
+"@rxdi/graphql@^0.7.100":
+  version "0.7.100"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql/-/graphql-0.7.100.tgz#f9d11559a1f5595fe9ad9d8fce4cd38502b2287a"
+  integrity sha512-1r6fgRoJkVlin3bEBEU7kMfHLWUkKl5dkxeRLofN491g2YTn25Z4vpal4hLR2CobBX5vlReacs8E8mD7O6SwNg==
   dependencies:
     "@gapi/playground" "1.8.79"
     apollo-errors "1.9.0"
@@ -1609,22 +1607,21 @@
     fs-extra "7.0.1"
     graphql-tester "0.0.5"
 
-"@rxdi/hapi@^0.7.99":
-  version "0.7.99"
-  resolved "https://registry.yarnpkg.com/@rxdi/hapi/-/hapi-0.7.99.tgz#044be11dee59d49b8b91139ccb733f6fc421a09e"
-  integrity sha512-QBLJOnlnsF4NL1cVPnhWOtZV47jKdqq25itIkBHk3KwrRt476/zu1oM3gE3ASdeGgAvs/+opdg5KMckYxIgxAA==
+"@rxdi/hapi@^0.7.100":
+  version "0.7.100"
+  resolved "https://registry.yarnpkg.com/@rxdi/hapi/-/hapi-0.7.100.tgz#5fd2f85420bae4c944a478ccfc1054ac9fa63060"
+  integrity sha512-f1+iQLFZ3joiD5MAMeiPWjSZKnFvSRb3+DHcYGPZ6wugEX7r9hOp5KriFxyRbCdbfWYBMRsyPYys8Eh2p+0+hg==
   dependencies:
     hapi "^18.1.0"
     inert "^5.1.3"
     opn "^6.0.0"
 
-"@rxdi/rabbitmq-pubsub@^0.7.98":
-  version "0.7.99"
-  resolved "https://registry.yarnpkg.com/@rxdi/rabbitmq-pubsub/-/rabbitmq-pubsub-0.7.99.tgz#821459e39ab759ca7e8795a0b7a4ef9bb061c41c"
-  integrity sha512-cFEH7Krb+R+TJEbGfipDTOYhAFAgqmAB2Y0jrBbVzxmbE1ulcbHRaKfyO7P3A9euRzs+hrY/Ivqn96VsoEeziA==
+"@rxdi/rabbitmq-pubsub@^0.7.99":
+  version "0.7.100"
+  resolved "https://registry.yarnpkg.com/@rxdi/rabbitmq-pubsub/-/rabbitmq-pubsub-0.7.100.tgz#2dfa43de49799268b6b9631e4b566bc9f5b44d52"
+  integrity sha512-0X215vA+dRcVb95eI+hrTL3g/z6sRUa1s9cVRnOmMxYKDOjFMoP+WH6ucVfdnj+W97OxevpbPf36feMSVVYv1w==
   dependencies:
     amqplib "^0.6.0"
-    bluebird "^3.7.2"
 
 "@rxdi/schematics@0.7.37":
   version "0.7.37"
@@ -1771,13 +1768,6 @@
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/@types/boom/-/boom-7.3.0.tgz#33280c5552d4cfabc21b8b7e0f6d29292decd985"
   integrity sha512-PH7bfkt1nu4pnlxz+Ws+wwJJF1HE12W3ia+Iace2JT7q56DLH3hbyjOJyNHJYRxk3PkKaC36fHfHKyeG1rMgCA==
-
-"@types/bunyan@^1.8.0":
-  version "1.8.6"
-  resolved "https://registry.yarnpkg.com/@types/bunyan/-/bunyan-1.8.6.tgz#6527641cca30bedec5feb9ab527b7803b8000582"
-  integrity sha512-YiozPOOsS6bIuz31ilYqR5SlLif4TBWsousN2aCWLi5233nZSX19tFbcQUPdR7xJ8ypPyxkCGNxg0CIV5n9qxQ==
-  dependencies:
-    "@types/node" "*"
 
 "@types/caseless@*":
   version "0.12.2"
@@ -3259,7 +3249,7 @@ async@^1.4.2:
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
 
-async@^2.0.0, async@^2.0.1, async@^2.5.0, async@^2.6.0, async@^2.6.1, async@^2.6.2, async@^2.6.3:
+async@^2.0.0, async@^2.0.1, async@^2.6.0, async@^2.6.1, async@^2.6.2, async@^2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
   integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
@@ -3603,7 +3593,7 @@ blob@0.0.5, blob@~0.0.4:
   resolved "https://registry.yarnpkg.com/blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
   integrity sha512-gaqbzQPqOoamawKg0LGVd7SzLgXS+JH61oWprSLH+P+abTczqJbhTR8CmJ2u9/bUYNmHTGJx/UEmn6doAvvuig==
 
-bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.2, bluebird@^3.7.2:
+bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
