@@ -35,8 +35,8 @@
     "graphql-playground-html": "1.6.13"
   },
   "devDependencies": {
-    "@rxdi/core": "^0.7.105",
-    "@rxdi/hapi": "^0.7.105",
+    "@rxdi/core": "^0.7.106",
+    "@rxdi/hapi": "^0.7.106",
     "@types/hapi": "^18.0.2",
     "@types/node": "^13.11.1",
     "typescript": "^3.8.3"
