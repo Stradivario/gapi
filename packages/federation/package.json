@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@apollo/gateway": "^0.14.1",
-    "@rxdi/core": "^0.7.101",
+    "@rxdi/core": "^0.7.102",
     "apollo-server": "^2.12.0"
   },
   "devDependencies": {
