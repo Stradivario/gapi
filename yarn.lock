@@ -1555,10 +1555,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@rxdi/core@^0.7.106":
-  version "0.7.106"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.106.tgz#c5c951864c0f72adf7b6dc2fb50a4176d617eddd"
-  integrity sha512-tfvj+U3TInizGiNshSWYFRwWvj96C/79YOTedaKcwn8Y7fEXbn7yY/7Xk+wNd/gUQzz3ruaEilvibkyMH0x2JA==
+"@rxdi/core@^0.7.107":
+  version "0.7.107"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.107.tgz#33a2e3893c870b65f05714f1557779dc730fd4df"
+  integrity sha512-lePOFVsQDa9O73lGjjpt8529XHeuhAL+IeDKac8lNHGOeza3Qd1EbTIveZknbjLw8gTUCdOZcFRXkTVmsAtKFQ==
   dependencies:
     reflect-metadata "0.1.13"
     rxjs "^6.5.3"
@@ -1575,29 +1575,29 @@
     mkdirp "^0.5.1"
     typescript "^3.0.1"
 
-"@rxdi/graphql-pubsub@^0.7.106":
-  version "0.7.106"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-pubsub/-/graphql-pubsub-0.7.106.tgz#ea86111457baba92f0dc9a6f52db26f94aea9865"
-  integrity sha512-vSyiw3t0BTSoAPiVD6J+Ad0ttqOwDfyt76CiEXK31KKTy1v7hEK995rtUCk48XmBK+qYS55e2XZ77XSbIvcQ4Q==
+"@rxdi/graphql-pubsub@^0.7.107":
+  version "0.7.107"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-pubsub/-/graphql-pubsub-0.7.107.tgz#75a8ef99cdd78ade69381cd5bd3c0d56b250fab5"
+  integrity sha512-L0bOo4UxYAupcuCB9YjyQ5iKp0mCuklWSXWbWmTgIURCSUBdo0yqzK/1qo8eZ8lo63vfx79oECverC5mX3NBAw==
   dependencies:
-    "@rxdi/graphql-rabbitmq-subscriptions" "^0.7.105"
+    "@rxdi/graphql-rabbitmq-subscriptions" "^0.7.106"
     apollo-link-ws "^1.0.18"
     graphql-request "^1.8.2"
     subscriptions-transport-ws "^0.9.16"
     ws "6.2.1"
 
-"@rxdi/graphql-rabbitmq-subscriptions@^0.7.105":
-  version "0.7.106"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-rabbitmq-subscriptions/-/graphql-rabbitmq-subscriptions-0.7.106.tgz#38027be7cb386b3b95e54b4ae3a3a1f5c7c9358f"
-  integrity sha512-+BIxsE74PRrTInnOCjI9pEcpaimjcqCmP7SQnCL28FD2ivwmQgFboeIIsuonytSoJebcnQl2uC7BQlumU2IWBA==
+"@rxdi/graphql-rabbitmq-subscriptions@^0.7.106":
+  version "0.7.107"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-rabbitmq-subscriptions/-/graphql-rabbitmq-subscriptions-0.7.107.tgz#ae9c146da0472f86d72c96c4e3c93ce221576511"
+  integrity sha512-aiH8uwKvLCBe/K9FPkcisPqJOiK9ABKA/MumQK+mZKW3QUyY1CPCm2m/7VRForfU88TXniMWkMN8Lx4N5Klh9A==
   dependencies:
-    "@rxdi/rabbitmq-pubsub" "^0.7.105"
+    "@rxdi/rabbitmq-pubsub" "^0.7.106"
     graphql-subscriptions "^1.1.0"
 
-"@rxdi/graphql@^0.7.106":
-  version "0.7.106"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql/-/graphql-0.7.106.tgz#1703ca29a34602f73d7b3f46c6e57b3e16fe06c3"
-  integrity sha512-YHao9+Z7Go/eqLNrwYlQRkjDfKMiJpi0VYQyBa+rg3ysPiEY928U5urOcRm7NKc9bDdZ4t7uuYb0UVIuVDx4mw==
+"@rxdi/graphql@^0.7.107":
+  version "0.7.107"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql/-/graphql-0.7.107.tgz#6f27464060d0c9268fc4ffafccc6c0468d2fe0d0"
+  integrity sha512-2NexLx85+koLZ/tBmsEF8xjUEyrFwNO6pL7JCCSgkXQO9kG97vGfGIxwu863jMTlTM9jM2Qa5rZaWgazxwaB9w==
   dependencies:
     "@gapi/playground" "1.8.79"
     apollo-errors "1.9.0"
@@ -1607,19 +1607,19 @@
     fs-extra "7.0.1"
     graphql-tester "0.0.5"
 
-"@rxdi/hapi@^0.7.106":
-  version "0.7.106"
-  resolved "https://registry.yarnpkg.com/@rxdi/hapi/-/hapi-0.7.106.tgz#ce63135f45a70cb9aca1d8ca55e3d946c1bb0aa3"
-  integrity sha512-60xCK1jFd1ZA37s9d77tv0phTim8xT+lTtJMXHZpqtjPwkNwz5SY4Dpiw1InSTF6hcyKtDoHxlLG03uTBcWY+Q==
+"@rxdi/hapi@^0.7.107":
+  version "0.7.107"
+  resolved "https://registry.yarnpkg.com/@rxdi/hapi/-/hapi-0.7.107.tgz#f845d9220f675c51efc41c83065e68d5dbfa9309"
+  integrity sha512-fLnhEyXwJof4MMVISIxbRerKIkyl6hytIGfYQZ+J3ICoQE2Bf37+u/ZpjGkuNtI3Ez3dfv2lLU7QvmrS9puIDg==
   dependencies:
     hapi "^18.1.0"
     inert "^5.1.3"
     opn "^6.0.0"
 
-"@rxdi/rabbitmq-pubsub@^0.7.105":
-  version "0.7.106"
-  resolved "https://registry.yarnpkg.com/@rxdi/rabbitmq-pubsub/-/rabbitmq-pubsub-0.7.106.tgz#4c97fe1f529007dbc29547a78f7fb57ce2a3bdf0"
-  integrity sha512-/gs3QPxbAi4awg0vgZzUtPYzUDLd7uis3yBkxrwtjjWaTSulg6yKWc3uejZbl7iECgc0TEtx73OHxKYEmWvY6g==
+"@rxdi/rabbitmq-pubsub@^0.7.106":
+  version "0.7.107"
+  resolved "https://registry.yarnpkg.com/@rxdi/rabbitmq-pubsub/-/rabbitmq-pubsub-0.7.107.tgz#e195f08422e830c5e7706a258a5da14c044da7ec"
+  integrity sha512-3DGcUeNHS2cp2S4JVHHp79+/JxoKYe0L7vLTIIOdGlr8YSztkdAT025NYeoESwCispTngZ8h8dWG/FMDednYWQ==
   dependencies:
     amqplib "^0.6.0"
 
