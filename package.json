@@ -87,6 +87,7 @@
     "humps": "2.0.1",
     "node-emoji": "1.10.0",
     "node-notifier": "^5.4.0",
+    "json-url": "^2.6.0",
     "parcel-bundler": "1.12.3",
     "rimraf": "2.6.3",
     "rxjs": "6.5.2",
