@@ -10,7 +10,7 @@ import { ExecService } from '../core/services/exec.service';
 import { GAPI_DAEMON_CACHE_FOLDER } from '../daemon-server/daemon.config';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { mkdirp } = require('@rxdi/core/dist/services/file/dist');
-import * as codec from 'json-url';
+import { LZWService } from '@rxdi/compressor';
 import fetch from 'node-fetch';
 
 @Service()
@@ -177,7 +177,7 @@ export const introspectionQueryResultData = ${JSON.stringify(
       await promisify(writeFile)(
         `${this.folder}/documents.compressed.ts`,
         'export const DocumentsCompressed = `' +
-          (await codec('lzw').compress(JSON.parse(readDocumentsTemp))) +
+          LZWService.compress(JSON.parse(readDocumentsTemp)) +
           '`',
         'utf8'
       );

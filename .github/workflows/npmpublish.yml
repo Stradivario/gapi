@@ -28,11 +28,9 @@ jobs:
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: node ./change-version.js
+      - run: npx conventional-changelog-cli -p angular -i CHANGELOG.md -s --commit-path . -r 0
       - run: git add .
       - run: git commit --amend --no-edit
-      - uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ad-m/github-push-action@master
         with:
           tags: true
