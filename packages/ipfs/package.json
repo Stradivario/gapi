@@ -28,7 +28,7 @@
     "url": "http://gitlab.youvolio.com/gapi/gapi-ipfs/issues"
   },
   "dependencies": {
-    "ipfs": "^0.33.1"
+    "ipfs": "^0.54.2"
   },
   "devDependencies": {
     "@rxdi/core": "^0.7.107",
