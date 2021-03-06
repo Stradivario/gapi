@@ -56,6 +56,7 @@ export class DaemonService {
       'introspect',
       '--collect-documents',
       '--collect-types',
+      '--with-compressed',
     ];
     await this.childService.spawn('gapi', args, payload.repoPath);
     return payload;
