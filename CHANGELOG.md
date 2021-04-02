@@ -1,4 +1,4 @@
-## [1.8.115](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.115) (2021-03-06)
+## [1.8.116](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.116) (2021-04-02)
 
 
 ### Bug Fixes
@@ -45,6 +45,7 @@
 * **cli-builder:** notifiy result based on label in order to track machine with label ([bc837a6](https://github.com/Stradivario/gapi/commit/bc837a6e80bebe48b1feb9c396ee895740ee941c))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([a939f01](https://github.com/Stradivario/gapi/commit/a939f01fa3c83ee330ca8affa7ccee1c970be613))
 * **rxdi:** whole infrastructure bumped ([53f68cb](https://github.com/Stradivario/gapi/commit/53f68cb1f0240553da1ac73108edee6cd26c9cf8))
+* **sandgrid:** added options to last parameter in order to create attachment for the email and add s missing functionalities which restrict this library to be used as a extender of original sendgrid library ([4d7b649](https://github.com/Stradivario/gapi/commit/4d7b6492dee0f038dfbc033465ff8fa57c52d514))
 * **Sendgrid:** added default email from injection ([8a2ab11](https://github.com/Stradivario/gapi/commit/8a2ab119cc88897bd8290abc860e3e20dd113dd0))
 * **Sendgrid:** added sendgrid module to stack ([3cc32e3](https://github.com/Stradivario/gapi/commit/3cc32e37dd0205db91e2f4eee31a566651d547f1))
 
