@@ -1,4 +1,4 @@
-## [1.8.116](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.116) (2021-04-02)
+## [1.8.117](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.117) (2021-04-02)
 
 
 ### Bug Fixes
@@ -30,6 +30,7 @@
 * **federation:** full headers are resend to the appropriate service ([c62d273](https://github.com/Stradivario/gapi/commit/c62d273ccf4811e213222711f3d5c8892621f087))
 * **federation:** readme ([1d8b2c8](https://github.com/Stradivario/gapi/commit/1d8b2c89f6dba9a75e892309fd3dc76b8492a9de))
 * **InitQuery:** reverted ([f500c5b](https://github.com/Stradivario/gapi/commit/f500c5b8e9ed8b227be93d91e4856c548b10e72b))
+* **sendgrid:** added partial data to options ([0501b12](https://github.com/Stradivario/gapi/commit/0501b12325d5b9ce562dc2d4c704d8ec465a9fce))
 * **sendgrid:** fixed wrong async assignment ([aca38f6](https://github.com/Stradivario/gapi/commit/aca38f6c565131b0e22630f4fe24fd2b1b0780d1))
 * **sendgrid:** html property removed from type and re assigned like it needs to be ([648d411](https://github.com/Stradivario/gapi/commit/648d411171268f55b568c264af96b2949ee6e9b2))
 * **SystemdDaemon:** removed export from helpers ([77a7c1a](https://github.com/Stradivario/gapi/commit/77a7c1aedb4081d65a07a08929b777d686f797ae))
