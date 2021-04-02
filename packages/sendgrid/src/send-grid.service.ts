@@ -11,13 +11,17 @@ export class SendGridService {
     @Inject(DefaultEmail) private defaultEmail: string,
   ) {}
 
-  async sendEmail<T extends string>(to: string, type: T, options?: MailData) {
+  async sendEmail<T extends string>(
+    to: string,
+    type: T,
+    options?: Partial<MailData>,
+  ) {
     const template = this.sendGridHelper.getTemplate(type);
     await this.sendGridHelper.send(
       (options?.from as string) || this.defaultEmail,
       to,
       template,
-      options,
+      options as never,
     );
     return { status: 'ok' };
   }
@@ -25,14 +29,14 @@ export class SendGridService {
   sendEmailWithParams<T extends string, P>(
     to: string,
     type: T,
-    options?: MailData,
+    options?: Partial<MailData>,
   ) {
     return async (params: P) => {
       const template = this.sendGridHelper.getTemplate(type);
       await this.sendGridHelper.sendWithParams(
         (options?.from as string) || this.defaultEmail,
         to,
-        options,
+        options as never,
       )(template, params);
       return { status: 'ok' };
     };
@@ -50,7 +54,7 @@ export class SendGridService {
     html: string;
     from: string;
     to: string;
-    options?: MailData;
+    options?: Partial<MailData>;
   }) {
     return await this.sendGridHelper.raw(
       subject,
@@ -58,7 +62,7 @@ export class SendGridService {
       html,
       from,
       this.addDefaultEmail(to),
-      options,
+      options as never,
     );
   }
 

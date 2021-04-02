@@ -18,7 +18,7 @@ export class SendGridHelperService {
     from: string,
     to: string,
     template: TemplatesModel,
-    options?: MailData,
+    options?: Partial<MailData>,
   ) {
     const html = await template.html();
     return new Promise(async (resolve, reject) =>
@@ -39,7 +39,7 @@ export class SendGridHelperService {
     );
   }
 
-  sendWithParams<T>(from: string, to: string, options?: MailData) {
+  sendWithParams<T>(from: string, to: string, options?: Partial<MailData>) {
     return async (template: TemplatesModel, params: T) => {
       const html = await template.html(params);
       return new Promise(async (resolve, reject) =>
@@ -67,7 +67,7 @@ export class SendGridHelperService {
     html: string,
     from: string,
     to: string,
-    options?: MailData,
+    options?: Partial<MailData>,
   ) {
     return await this.mailer.send({
       subject,
