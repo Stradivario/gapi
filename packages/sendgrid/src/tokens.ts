@@ -24,3 +24,12 @@ export class TemplatesModel implements Without<MailData, 'html'> {
   to: string;
   from: string;
 }
+
+/* 
+    {
+      content: attachment,
+      filename: "attachment.pdf",
+      type: "application/pdf",
+      disposition: "attachment"
+    }
+*/

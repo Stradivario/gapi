@@ -1,4 +1,5 @@
 import { Inject, Service } from '@rxdi/core';
+import { MailData } from '@sendgrid/helpers/classes/mail';
 
 import { Mailer, Templates, TemplatesModel } from './tokens';
 
@@ -13,7 +14,12 @@ export class SendGridHelperService {
     return this.templates.filter((t) => t.type === type)[0];
   }
 
-  async send(from: string, to: string, template: TemplatesModel) {
+  async send(
+    from: string,
+    to: string,
+    template: TemplatesModel,
+    options?: MailData,
+  ) {
     const html = await template.html();
     return new Promise(async (resolve, reject) =>
       resolve(
@@ -24,6 +30,7 @@ export class SendGridHelperService {
             html,
             from,
             to,
+            ...options,
           },
           null,
           (e) => (e ? reject(e) : null),
@@ -32,7 +39,7 @@ export class SendGridHelperService {
     );
   }
 
-  sendWithParams<T>(from: string, to: string) {
+  sendWithParams<T>(from: string, to: string, options?: MailData) {
     return async (template: TemplatesModel, params: T) => {
       const html = await template.html(params);
       return new Promise(async (resolve, reject) =>
@@ -44,6 +51,7 @@ export class SendGridHelperService {
               html,
               from,
               to,
+              ...options,
             },
             null,
             (e) => (e ? reject(e) : null),
@@ -59,7 +67,15 @@ export class SendGridHelperService {
     html: string,
     from: string,
     to: string,
+    options?: MailData,
   ) {
-    return await this.mailer.send({ subject, text, html, from, to });
+    return await this.mailer.send({
+      subject,
+      text,
+      html,
+      from,
+      to,
+      ...options,
+    });
   }
 }

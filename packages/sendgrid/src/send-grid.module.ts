@@ -13,7 +13,7 @@ export class SendgridModule {
     } = {
       apiKey: '',
       templates: [],
-      defaultEmail: 'kristiqn.tachev@gmail.com',
+      defaultEmail: '',
     },
   ): ModuleWithProviders {
     return {
