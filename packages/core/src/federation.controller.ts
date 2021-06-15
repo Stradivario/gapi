@@ -7,6 +7,8 @@ import {
   printSchema,
 } from 'graphql';
 
+import { FedarationReplacer, GRAPHQL_FEDERATION_REPLACER } from './tokens';
+
 @Controller()
 export class FederationController {
   @Type(
@@ -20,13 +22,20 @@ export class FederationController {
     const appSchema = Container.get(
       GRAPHQL_PLUGIN_CONFIG
     ) as GRAPHQL_PLUGIN_CONFIG;
+
+    const schema = new GraphQLSchema({
+      query: appSchema.graphqlOptions.schema.getQueryType(),
+      mutation: appSchema.graphqlOptions.schema.getMutationType(),
+    });
+    let replacer = FedarationReplacer;
+    try {
+      replacer = Container.get(GRAPHQL_FEDERATION_REPLACER);
+    } catch (e) {}
+    const sdl = printSchema(schema)
+      .replace('_service: GraphqlFederation', '')
+      .replace('status: StatusQueryType', '');
     return {
-      sdl: printSchema(
-        new GraphQLSchema({
-          query: appSchema.graphqlOptions.schema.getQueryType(),
-          mutation: appSchema.graphqlOptions.schema.getMutationType(),
-        })
-      ),
+      sdl: replacer(sdl),
     };
   }
 }
