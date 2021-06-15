@@ -1,4 +1,4 @@
-## [1.8.117](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.117) (2021-04-02)
+## [1.8.118](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.118) (2021-06-15)
 
 
 ### Bug Fixes
@@ -44,6 +44,7 @@
 * **cli-builder:** added console.log on subscriptions ([a252177](https://github.com/Stradivario/gapi/commit/a2521772f5c28ca638ec18dd22fdb57606e93867))
 * **cli-builder:** introduced ip behind NAT can be specified ([8aa1f12](https://github.com/Stradivario/gapi/commit/8aa1f125901672ee118bd348e09acd1376e66956))
 * **cli-builder:** notifiy result based on label in order to track machine with label ([bc837a6](https://github.com/Stradivario/gapi/commit/bc837a6e80bebe48b1feb9c396ee895740ee941c))
+* **Federation:** removed _service and status from schema sdl when processing _service graph, removed ethereum, ipfs related modules with packages ([7b5781b](https://github.com/Stradivario/gapi/commit/7b5781bcc2fcf0578b0aaf57d2cbcd027d8d2b85))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([a939f01](https://github.com/Stradivario/gapi/commit/a939f01fa3c83ee330ca8affa7ccee1c970be613))
 * **rxdi:** whole infrastructure bumped ([53f68cb](https://github.com/Stradivario/gapi/commit/53f68cb1f0240553da1ac73108edee6cd26c9cf8))
 * **sandgrid:** added options to last parameter in order to create attachment for the email and add s missing functionalities which restrict this library to be used as a extender of original sendgrid library ([4d7b649](https://github.com/Stradivario/gapi/commit/4d7b6492dee0f038dfbc033465ff8fa57c52d514))
