@@ -12,7 +12,9 @@
     "lint": "npx eslint . --ext .ts",
     "test": "echo Tests",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && tsc || true"
+    "build": "rm -rf dist && tsc || true",
+    "build-single-executable": "gapi build --single-executable",
+    "build-stand-alone": "npm run build-single-executable && rm -rf bin && mkdir bin && cp ./dist/index.js ./bin/federation-linux.js && cp ./dist/federation-linux ./bin"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",
@@ -48,6 +50,9 @@
     "eslint-plugin-simple-import-sort": "^5.0.0",
     "jest": "^25.5.4",
     "ts-jest": "^25.4.0"
+  },
+  "bin": {
+    "federation": "./bin/federation-linux.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

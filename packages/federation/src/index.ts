@@ -3,7 +3,11 @@ import { Module, ModuleWithProviders } from '@rxdi/core';
 import { ApolloServer } from 'apollo-server';
 
 import { AuthenticatedDataSource } from './auth-data-source';
-import { ApolloGatewayInternal, ApolloServerInternal } from './tokens';
+import {
+  ApolloGatewayInternal,
+  ApolloServerInternal,
+  FederationModuleOptions,
+} from './tokens';
 
 @Module()
 export class FederationModule {
@@ -11,11 +15,8 @@ export class FederationModule {
     port,
     serviceList,
     willSendRequest,
-  }: {
-    port: number;
-    willSendRequest?: (ctx: { request; context }) => void;
-    serviceList: { name: string; url: string }[];
-  }): ModuleWithProviders {
+    context,
+  }: FederationModuleOptions): ModuleWithProviders {
     return {
       module: FederationModule,
       providers: [
@@ -41,7 +42,9 @@ export class FederationModule {
             new ApolloServer({
               gateway,
               engine: false,
-              context: ({ req: { headers } }) => ({ headers }),
+              context: context
+                ? context
+                : ({ req: { headers } }) => ({ headers }),
               subscriptions: false,
             }),
         },
