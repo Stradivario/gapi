@@ -1,4 +1,4 @@
-## [1.8.120](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.120) (2021-06-17)
+## [1.8.121](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.121) (2021-06-17)
 
 
 ### Bug Fixes
@@ -29,6 +29,7 @@
 * **core:** graphql added to dependencies since 15.0.0 is broken ([7f740bf](https://github.com/Stradivario/gapi/commit/7f740bfa8f68275516359d12e945c18c7e5a0bd9))
 * **federation:** full headers are resend to the appropriate service ([c62d273](https://github.com/Stradivario/gapi/commit/c62d273ccf4811e213222711f3d5c8892621f087))
 * **federation:** readme ([1d8b2c8](https://github.com/Stradivario/gapi/commit/1d8b2c89f6dba9a75e892309fd3dc76b8492a9de))
+* **federation:** rebuilded module and re-deployed ([05da054](https://github.com/Stradivario/gapi/commit/05da054ad5c8352a65922628fe87de5b5534e55c))
 * **InitQuery:** reverted ([f500c5b](https://github.com/Stradivario/gapi/commit/f500c5b8e9ed8b227be93d91e4856c548b10e72b))
 * **sendgrid:** added partial data to options ([0501b12](https://github.com/Stradivario/gapi/commit/0501b12325d5b9ce562dc2d4c704d8ec465a9fce))
 * **sendgrid:** fixed wrong async assignment ([aca38f6](https://github.com/Stradivario/gapi/commit/aca38f6c565131b0e22630f4fe24fd2b1b0780d1))
