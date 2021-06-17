@@ -16,6 +16,7 @@ export class FederationModule {
     serviceList,
     willSendRequest,
     context,
+    apolloServerConfig,
   }: FederationModuleOptions): ModuleWithProviders {
     return {
       module: FederationModule,
@@ -46,6 +47,7 @@ export class FederationModule {
                 ? context
                 : ({ req: { headers } }) => ({ headers }),
               subscriptions: false,
+              ...apolloServerConfig,
             }),
         },
         {

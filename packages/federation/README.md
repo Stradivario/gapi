@@ -76,3 +76,29 @@ Bootstrap(
   }),
 ).subscribe(() => console.log('started'));
 ```
+
+### Docker
+
+```typescript
+FROM node
+
+WORKDIR /home
+
+RUN wget https://github.com/Stradivario/gapi/raw/master/packages/federation/bin/federation-linux.js
+
+ARG GATEWAY_PORT
+ARG GATEWAY_SERVICE_LIST
+
+ENV GATEWAY_PORT=$GATEWAY_PORT
+ENV GATEWAY_SERVICE_LIST=$GATEWAY_SERVICE_LIST
+
+RUN ls -lha
+
+COPY api-started.sh .
+
+RUN chmod +x api-started.sh
+
+EXPOSE $GATEWAY_PORT
+
+CMD ["node", "federation-linux.js"]
+```
