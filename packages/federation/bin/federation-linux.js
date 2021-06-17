@@ -43565,7 +43565,7 @@ const apollo_server_1 = __webpack_require__(731);
 const auth_data_source_1 = __webpack_require__(3177);
 const tokens_1 = __webpack_require__(432);
 let FederationModule = FederationModule_1 = class FederationModule {
-    static forRoot({ port, serviceList, willSendRequest, context, }) {
+    static forRoot({ port, serviceList, willSendRequest, context, apolloServerConfig, }) {
         return {
             module: FederationModule_1,
             providers: [
@@ -43586,14 +43586,9 @@ let FederationModule = FederationModule_1 = class FederationModule {
                 {
                     provide: tokens_1.ApolloServerInternal,
                     deps: [tokens_1.ApolloGatewayInternal],
-                    useFactory: (gateway) => new apollo_server_1.ApolloServer({
-                        gateway,
-                        engine: false,
-                        context: context
+                    useFactory: (gateway) => new apollo_server_1.ApolloServer(Object.assign({ gateway, engine: false, context: context
                             ? context
-                            : ({ req: { headers } }) => ({ headers }),
-                        subscriptions: false,
-                    }),
+                            : ({ req: { headers } }) => ({ headers }), subscriptions: false }, apolloServerConfig)),
                 },
                 {
                     provide: 'Listen',

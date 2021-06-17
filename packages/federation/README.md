@@ -73,6 +73,9 @@ Bootstrap(
       { name: 'accounts', url: 'http://localhost:9000/graphql' },
       { name: 'products', url: 'http://localhost:9001/graphql' },
     ],
+    apolloServerConfig: {
+      playground: true,
+    },
   }),
 ).subscribe(() => console.log('started'));
 ```
