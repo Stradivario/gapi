@@ -16,4 +16,10 @@ export function registerProjectCommands(program: CommanderStatic) {
           .toPromise(),
       ),
     );
+
+  program
+    .command('project:use')
+    .description('Adds default project to be used all around the CLI')
+    .option('--project <project>, -p', 'Specify project id')
+    .action(lazy(() => import('./use').then((m) => m.default)));
 }

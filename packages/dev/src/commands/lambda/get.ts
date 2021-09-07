@@ -1,23 +1,64 @@
-import { switchMap, tap } from 'rxjs/operators';
+import { IFissionType } from '@introspection/index';
+import { Command } from 'commander';
+import { readFile } from 'fs';
+import { from, of, throwError } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { promisify } from 'util';
 
-import { isMongoId } from '~/helpers';
+import { isMongoId, parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 
-export default (...[lambdaId]) =>
-  isMongoId(lambdaId)
+import { ConfigJSON } from './helpers';
+
+export default async (cmd: Command) => {
+  const table = tap((data: IFissionType) => {
+    const columns: (keyof typeof data)[] = [
+      'name',
+      'projectId',
+      'url',
+      'method',
+    ];
+    console.log('-------------------');
+    console.log('[Action][getLambda]');
+    console.table([data], columns);
+    console.log('-------------------');
+  });
+  if (cmd.lambda) {
+    return isMongoId(cmd.lambda)
+      .pipe(
+        switchMap((id) => GraphqlClienAPI.getLambda(id)),
+        table,
+      )
+      .toPromise();
+  }
+  const spec = await from(
+    promisify(readFile)(cmd.spec || 'spec.json', { encoding: 'utf-8' }),
+  )
     .pipe(
-      switchMap((id) => GraphqlClienAPI.getLambda(id).toPromise()),
-      tap((data) => {
-        const columns: (keyof typeof data)[] = [
-          'name',
-          'projectId',
-          'url',
-          'method',
-        ];
-        console.log('-------------------');
-        console.log('[Action][getLambda]');
-        console.table([data], columns);
-        console.log('-------------------');
-      }),
+      catchError(() => of('{}')),
+      map((spec) => JSON.parse(spec) as ConfigJSON),
     )
     .toPromise();
+
+  const name = typeof cmd.name === 'string' ? (cmd.name as never) : spec.name;
+
+  if (name) {
+    return parseProjectId(cmd.project)
+      .pipe(
+        catchError((error) => {
+          if (!cmd.project) {
+            return throwError(
+              `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:get --name ${cmd.name} --project your-project-id"`,
+            );
+          }
+          return throwError(error);
+        }),
+        switchMap((projectId) =>
+          GraphqlClienAPI.getLambdaByName(name, projectId),
+        ),
+        table,
+      )
+      .toPromise();
+  }
+  throw new Error('unable-to-load-lambda');
+};

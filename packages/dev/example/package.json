@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@zeit/ncc": "*",
+    "rxjs": "*",
+    "typescript": "^3.9.7",
+    "@types/node": "*"
+  }
+}

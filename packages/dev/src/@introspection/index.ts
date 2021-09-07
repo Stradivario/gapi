@@ -79,6 +79,7 @@
     getLambdaLogs?: IFissionLogsType | null;
     listProjectLambdas?: Array<IFissionType> | null;
     getLambda?: IFissionType | null;
+    getLambdaByName?: IFissionType | null;
     getLambdaBuilderLogs?: IFissionLogsType | null;
     getSecretMap?: IKubectlConfig | null;
     getSecretMapById?: IKubectlConfig | null;

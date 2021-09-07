@@ -37,7 +37,7 @@ export function exitWithError(error: Error): never {
 }
 export function lazy(
   getActionFunc: () => Promise<(...args: any[]) => Promise<unknown>>,
-): (...args: any[]) => Promise<unknown> {
+): (...args: any[]) => Promise<void> {
   return async (...args: any[]) => {
     try {
       const actionFunc = await getActionFunc();
@@ -61,14 +61,12 @@ export const isMongoId = (mongoId: string) =>
     ),
   );
 
-export function parseProjectId(projectId: string) {
+export function parseProjectId(projectId?: string) {
   return from(
     promisify(readFile)(projectDirectory, { encoding: 'utf-8' }),
   ).pipe(
     catchError(() => of('')),
-    map((currentProjectId) =>
-      currentProjectId ? currentProjectId : projectId,
-    ),
+    map((currentProjectId) => (projectId ? projectId : currentProjectId)),
     switchMap((id) =>
       typeof id !== 'string' ? throwError('no-id-provided') : of(id),
     ),
