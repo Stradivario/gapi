@@ -1,11 +1,12 @@
+import { Command } from 'commander';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Unboxed } from '~/types';
 
-export default (...[projectId]) =>
-  parseProjectId(projectId)
+export default (cmd: Command) =>
+  parseProjectId(cmd.project)
     .pipe(
       switchMap((projectId) => GraphqlClienAPI.listLambdas(projectId)),
       tap((data) => {

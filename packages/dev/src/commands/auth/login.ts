@@ -1,3 +1,4 @@
+import { Command } from 'commander';
 import { mkdir, writeFile } from 'fs';
 import { from, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
@@ -7,8 +8,8 @@ import { mainDirectory, tokenDirectory, urlDirectory } from '~/types';
 
 import { GraphqlClienAPI } from '../../services/gql-client';
 
-export default async (...[token, key, url]) =>
-  of(GraphqlClienAPI.init(key))
+export default async (cmd: Command) =>
+  of(GraphqlClienAPI.init(cmd.key))
     .pipe(
       switchMap(() =>
         from(promisify(mkdir)(mainDirectory))
@@ -16,14 +17,14 @@ export default async (...[token, key, url]) =>
             catchError(() => of(true)),
             switchMap(() =>
               from(
-                promisify(writeFile)(urlDirectory, url, {
+                promisify(writeFile)(urlDirectory, cmd.url, {
                   encoding: 'utf-8',
                 }),
               ),
             ),
           )
           .pipe(
-            switchMap(() => GraphqlClienAPI.signIn(token).toPromise()),
+            switchMap(() => GraphqlClienAPI.signIn(cmd.token).toPromise()),
             switchMap(({ user }) =>
               from(user.getIdToken()).pipe(
                 switchMap((userToken) =>

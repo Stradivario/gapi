@@ -1,3 +1,9 @@
-export * from './auth';
-export * from './lambda';
-export * from './project';
+import { registerAuthCommands } from './auth';
+import { registerLambdaCommands } from './lambda';
+import { registerProjectCommands } from './project';
+
+export const commands = [
+  registerAuthCommands,
+  registerLambdaCommands,
+  registerProjectCommands,
+];
