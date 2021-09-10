@@ -83,4 +83,34 @@ export function registerLambdaCommands(program: commander.CommanderStatic) {
           .toPromise(),
       ),
     );
+
+  program
+    .command('lambda:logs')
+    .description('Get lambda logs')
+    .option('--lambda <lambda>, -l', 'get by lambda id')
+    .option('--name <name>, -n', 'get by lambda name')
+    .option('--project <project>, -p', 'get by lambda name')
+    .option('--spec <spec>, -p', 'get by lambda name')
+    .action(
+      lazy(() =>
+        from(import('./logs'))
+          .pipe(map((m) => m.default))
+          .toPromise(),
+      ),
+    );
+
+  program
+    .command('lambda:build:logs')
+    .description('Get lambda logs')
+    .option('--lambda <lambda>, -l', 'get by lambda id')
+    .option('--name <name>, -n', 'get by lambda name')
+    .option('--project <project>, -p', 'get by lambda name')
+    .option('--spec <spec>, -p', 'get by lambda name')
+    .action(
+      lazy(() =>
+        from(import('./logs-builder'))
+          .pipe(map((m) => m.default))
+          .toPromise(),
+      ),
+    );
 }

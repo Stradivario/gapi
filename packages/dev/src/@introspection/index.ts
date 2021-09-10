@@ -69,6 +69,7 @@
     listChats?: Array<IChat> | null;
     listChatMessages?: Array<IChatMessage> | null;
     getChat?: IChat | null;
+    getLambdaEditors?: Array<IUserType> | null;
     listMigrations?: Array<IMigrationType> | null;
     removeMigration?: IMigrationType | null;
     getMigration?: IMigrationType | null;
@@ -77,10 +78,12 @@
     findApp?: IAppType | null;
     getRouterUrl?: IFissionType | null;
     getLambdaLogs?: IFissionLogsType | null;
+    getLambdaLogsByName?: IFissionLogsType | null;
     listProjectLambdas?: Array<IFissionType> | null;
     getLambda?: IFissionType | null;
     getLambdaByName?: IFissionType | null;
     getLambdaBuilderLogs?: IFissionLogsType | null;
+    getLambdaBuilderLogsByName?: IFissionLogsType | null;
     getSecretMap?: IKubectlConfig | null;
     getSecretMapById?: IKubectlConfig | null;
     getConfigMap?: IKubectlConfig | null;
@@ -899,6 +902,8 @@ export
     createLambda?: IFissionType | null;
     updateLambda?: IFissionType | null;
     deleteLambda?: IFissionType | null;
+    openLambda?: IFissionType | null;
+    closeLambda?: IFissionType | null;
     createEnvironment?: IFissionType | null;
     deleteEnvironment?: IFissionType | null;
     createSecretMap?: IKubectlConfig | null;
