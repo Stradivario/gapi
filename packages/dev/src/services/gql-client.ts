@@ -145,6 +145,58 @@ export class GraphqlClienAPI {
     }).pipe(map((res) => res.updateLambda));
   }
 
+  public static getLambdaLogs(lambdaId: string) {
+    return this.query<IQuery>({
+      query: gql`
+        query getLambdaLogs($lambdaId: String!) {
+          getLambdaLogs(lambdaId: $lambdaId) {
+            data
+          }
+        }
+      `,
+      variables: { lambdaId },
+    }).pipe(map((res) => res.getLambdaLogs));
+  }
+
+  public static getLambdaLogsByName(name: string, projectId: string) {
+    return this.query<IQuery>({
+      query: gql`
+        query getLambdaLogsByName($projectId: String!, $name: String!) {
+          getLambdaLogsByName(projectId: $projectId, name: $name) {
+            data
+          }
+        }
+      `,
+      variables: { name, projectId },
+    }).pipe(map((res) => res.getLambdaLogsByName));
+  }
+
+  public static getLambdaBuilderLogs(lambdaId: string) {
+    return this.query<IQuery>({
+      query: gql`
+        query getLambdaBuilderLogs($lambdaId: String!) {
+          getLambdaBuilderLogs(lambdaId: $lambdaId) {
+            data
+          }
+        }
+      `,
+      variables: { lambdaId },
+    }).pipe(map((res) => res.getLambdaBuilderLogs));
+  }
+
+  public static getLambdaBuilderLogsByName(name: string, projectId: string) {
+    return this.query<IQuery>({
+      query: gql`
+        query getLambdaBuilderLogsByName($projectId: String!, $name: String!) {
+          getLambdaBuilderLogsByName(projectId: $projectId, name: $name) {
+            data
+          }
+        }
+      `,
+      variables: { name, projectId },
+    }).pipe(map((res) => res.getLambdaBuilderLogsByName));
+  }
+
   public static deleteLambda(payload: IDeleteLambdaInput) {
     return this.query<IMutation>({
       query: gql`

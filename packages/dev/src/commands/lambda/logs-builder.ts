@@ -1,4 +1,4 @@
-import { IFissionType } from '@introspection/index';
+import { IFissionLogsType } from '@introspection/index';
 import { Command } from 'commander';
 import { readFile } from 'fs';
 import { from, of, throwError } from 'rxjs';
@@ -11,23 +11,12 @@ import { GraphqlClienAPI } from '~/services/gql-client';
 import { ConfigJSON } from './helpers';
 
 export default async (cmd: Command) => {
-  const table = tap((data: IFissionType) => {
-    const columns: (keyof typeof data)[] = [
-      'name',
-      'projectId',
-      'url',
-      'method',
-    ];
-    console.log('-------------------');
-    console.log('[Action][getLambda]');
-    console.table([data], columns);
-    console.log('-------------------');
-  });
+  const result = tap(({ data }: IFissionLogsType) => process.stdin.write(data));
   if (cmd.lambda) {
     return isMongoId(cmd.lambda)
       .pipe(
-        switchMap((id) => GraphqlClienAPI.getLambda(id)),
-        table,
+        switchMap((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
+        result,
       )
       .toPromise();
   }
@@ -48,17 +37,18 @@ export default async (cmd: Command) => {
         catchError((error) => {
           if (!cmd.project) {
             return throwError(
-              `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:get --name ${name} --project your-project-id"`,
+              `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:logs --name ${name} --project your-project-id"`,
             );
           }
           return throwError(error);
         }),
+
         switchMap((projectId) =>
-          GraphqlClienAPI.getLambdaByName(name, projectId),
+          GraphqlClienAPI.getLambdaBuilderLogsByName(name, projectId),
         ),
-        table,
+        result,
       )
       .toPromise();
   }
-  throw new Error('unable-to-load-lambda');
+  throw new Error('unable-to-load-lambda-logs');
 };
