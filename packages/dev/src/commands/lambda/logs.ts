@@ -1,17 +1,19 @@
 import { IFissionLogsType } from '@introspection/index';
-import { Command } from 'commander';
-import { readFile } from 'fs';
-import { from, of, throwError } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { promisify } from 'util';
+import { throwError } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 
 import { isMongoId, parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 
-import { ConfigJSON } from './helpers';
+import { loadSpec } from './helpers/load-spec';
 
-export default async (cmd: Command) => {
-  const result = tap(({ data }: IFissionLogsType) => process.stdin.write(data));
+export default async (cmd: {
+  spec?: string;
+  name?: string;
+  project?: string;
+  lambda?: string;
+}) => {
+  const result = tap(({ data }: IFissionLogsType) => console.log(data));
   if (cmd.lambda) {
     return isMongoId(cmd.lambda)
       .pipe(
@@ -20,15 +22,7 @@ export default async (cmd: Command) => {
       )
       .toPromise();
   }
-  const spec = await from(
-    promisify(readFile)(cmd.spec || 'spec.json', { encoding: 'utf-8' }),
-  )
-    .pipe(
-      catchError(() => of('{}')),
-      map((spec) => JSON.parse(spec) as ConfigJSON),
-    )
-    .toPromise();
-
+  const spec = await loadSpec(cmd.spec).toPromise();
   const name = typeof cmd.name === 'string' ? (cmd.name as never) : spec.name;
 
   if (name) {

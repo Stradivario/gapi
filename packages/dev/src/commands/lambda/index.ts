@@ -85,8 +85,8 @@ export function registerLambdaCommands(program: commander.CommanderStatic) {
     );
 
   program
-    .command('lambda:logs')
-    .description('Get lambda logs')
+    .command('lambda:log')
+    .description('Get lambda log')
     .option('--lambda <lambda>, -l', 'get by lambda id')
     .option('--name <name>, -n', 'get by lambda name')
     .option('--project <project>, -p', 'get by lambda name')
@@ -100,12 +100,12 @@ export function registerLambdaCommands(program: commander.CommanderStatic) {
     );
 
   program
-    .command('lambda:build:logs')
-    .description('Get lambda logs')
+    .command('lambda:build:log')
+    .description('Get build log')
     .option('--lambda <lambda>, -l', 'get by lambda id')
     .option('--name <name>, -n', 'get by lambda name')
-    .option('--project <project>, -p', 'get by lambda name')
-    .option('--spec <spec>, -p', 'get by lambda name')
+    .option('--project <project>, -p', 'get by lambda project')
+    .option('--spec <spec>, -p', 'use configuration')
     .action(
       lazy(() =>
         from(import('./logs-builder'))

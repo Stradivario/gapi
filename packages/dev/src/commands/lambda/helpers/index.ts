@@ -5,11 +5,13 @@ import {
 import { CommanderStatic } from 'commander';
 import { readFile } from 'fs';
 import { from, Observable, of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { promisify } from 'util';
 
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
+
+import { loadSpec } from './load-spec';
 
 function ReadFile(file: string): Observable<string> {
   return from(promisify(readFile)(file, { encoding: 'utf-8' })).pipe(
@@ -17,26 +19,6 @@ function ReadFile(file: string): Observable<string> {
   );
 }
 
-function ReadFileJSON(file: string): Observable<ConfigJSON> {
-  return from(promisify(readFile)(file, { encoding: 'utf-8' })).pipe(
-    map((res) => JSON.parse(res) as ConfigJSON),
-    catchError(() => of({} as ConfigJSON)),
-  );
-}
-
-export interface ConfigJSON {
-  name: string;
-  route: string;
-  file: string;
-  script: string;
-  package: string;
-  params: string[];
-  config: string;
-  secret: string;
-  env: ILambdaEnvironmentsEnum;
-  method: IHttpMethodsEnum;
-  projectId: string;
-}
 export interface CreateOrUpdateLambdaArguments {
   project: string;
   spec: string;
@@ -61,13 +43,10 @@ export const createOrUpdateLambda = (
 ) =>
   parseProjectId(cmd.project)
     .pipe(
-      switchMap(
-        async (projectId) =>
-          ({
-            projectId,
-            ...(await ReadFileJSON(cmd.spec || 'spec.json').toPromise()),
-          } as ConfigJSON),
-      ),
+      switchMap(async (projectId) => ({
+        projectId,
+        ...(await loadSpec(cmd.spec).toPromise()),
+      })),
       switchMap(async (payload) =>
         GraphqlClienAPI[type]({
           code:

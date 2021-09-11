@@ -1,0 +1,10 @@
+name: pesho
+route: pesho
+file: index.ts
+script: bash.sh
+package: package.json
+params: ['test', 'proba']
+config: ''
+secret: test
+env: NODEJS
+method: GET

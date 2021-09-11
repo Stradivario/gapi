@@ -23,7 +23,7 @@ export default async function (context: Context) {
     status: 200,
     body: { secret, params, query },
     headers: {
-      'Access-Control-Allow-Origin': 'http://localhost:1234',
+      'Access-Control-Allow-Origin': '*',
     },
   };
 }
