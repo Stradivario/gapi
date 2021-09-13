@@ -1285,6 +1285,7 @@ and we can execute /my-lambda/{id}/{name}
     method?: IHttpMethodsEnum | null;
     packageJson?: string | null;
     buildBashScript?: string | null;
+    customUploadFileId?: string | null;
 }
 
 export   

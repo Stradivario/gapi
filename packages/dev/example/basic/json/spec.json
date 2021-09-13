@@ -1,0 +1,12 @@
+{
+  "name": "hello",
+  "route": "hello",
+  "file": "index.js",
+  "script": "build.sh",
+  "package": "package.json",
+  "params": [],
+  "config": "",
+  "secret": "",
+  "env": "NODEJS",
+  "method": "GET"
+}
