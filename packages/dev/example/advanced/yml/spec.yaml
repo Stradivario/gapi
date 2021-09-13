@@ -1,10 +1,11 @@
-name: pesho
-route: pesho
-file: index.ts
-script: bash.sh
+name: hello
+route: hello
+file: ./src/index.ts
+script: build.sh
 package: package.json
 params: ['test', 'proba']
 config: ''
 secret: test
 env: NODEJS
 method: GET
+uploadAsZip: true

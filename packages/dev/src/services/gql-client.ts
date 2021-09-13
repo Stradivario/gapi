@@ -8,7 +8,6 @@ import {
 } from '@introspection/index';
 import * as firebase from 'firebase/app';
 import { readFile } from 'fs';
-import fetch from 'node-fetch';
 import { combineLatest, from, of, throwError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { promisify } from 'util';
@@ -58,11 +57,11 @@ export class GraphqlClienAPI {
         ).pipe(
           switchMap((res) => res.json()),
           map(({ data, errors }) => {
-            if (!data) {
-              throw new Error('missing-entry');
-            }
             if (errors?.length) {
               throw new Error(JSON.stringify(errors, null, 2));
+            }
+            if (!data) {
+              throw new Error('missing-entry');
             }
             return data as T;
           }),
@@ -219,7 +218,7 @@ export class GraphqlClienAPI {
       }`,
     }).pipe(map((res) => res.listProjects));
   }
-  private static getConfig() {
+  static getConfig() {
     return combineLatest([
       from(promisify(readFile)(tokenDirectory, { encoding: 'utf-8' })),
       from(promisify(readFile)(urlDirectory, { encoding: 'utf-8' })),

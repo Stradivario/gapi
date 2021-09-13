@@ -30,4 +30,5 @@ createdAt
 updatedAt
 packageJson
 buildBashScript
+customUploadFileId
 `;
