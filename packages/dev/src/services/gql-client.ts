@@ -3,6 +3,7 @@ import 'firebase/auth';
 import {
   ICreateOrUpdateLambdaInput,
   IDeleteLambdaInput,
+  IFissionType,
   IMutation,
   IQuery,
 } from '@introspection/index';
@@ -79,11 +80,14 @@ export class GraphqlClienAPI {
     );
   }
 
-  public static getLambda(lambdaId: string) {
+  public static getLambda(
+    lambdaId: string,
+    fragments?: (keyof IFissionType)[],
+  ) {
     return this.query<IQuery>({
       query: gql`query getLambda($lambdaId: String!) {
         getLambda(lambdaId: $lambdaId) {
-          ${LambdaFragment}
+          ${fragments?.join(' ') || LambdaFragment}
         }
       }`,
       variables: { lambdaId },
@@ -97,11 +101,15 @@ export class GraphqlClienAPI {
     );
   }
 
-  public static getLambdaByName(name: string, projectId: string) {
+  public static getLambdaByName(
+    name: string,
+    projectId: string,
+    fragments?: (keyof IFissionType)[],
+  ) {
     return this.query<IQuery>({
       query: gql`query getLambdaByName($projectId: String!, $name: String!) {
         getLambdaByName(projectId: $projectId, name: $name) {
-          ${LambdaFragment}
+          ${fragments?.join(' ') || LambdaFragment}
         }
       }`,
       variables: {
