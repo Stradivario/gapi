@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import chalk from 'chalk';
-import { readFile } from 'fs';
-import { from, of, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { promisify } from 'util';
 
+import { readFileAsObservable } from './commands/lambda/helpers/read-file';
 import { projectDirectory } from './types';
 
 export class CustomError extends Error {
@@ -62,9 +61,7 @@ export const isMongoId = (mongoId: string) =>
   );
 
 export function parseProjectId(projectId?: string) {
-  return from(
-    promisify(readFile)(projectDirectory, { encoding: 'utf-8' }),
-  ).pipe(
+  return readFileAsObservable(projectDirectory).pipe(
     catchError(() => of('')),
     map((currentProjectId) => (projectId ? projectId : currentProjectId)),
     switchMap((id) =>

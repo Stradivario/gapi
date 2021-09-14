@@ -10,7 +10,6 @@ import FormData from 'form-data';
 import {
   createReadStream,
   mkdir,
-  readFile,
   ReadStream,
   writeFile,
   WriteStream,
@@ -25,12 +24,10 @@ import { GraphqlClienAPI } from '~/services/gql-client';
 
 import { loadSpec } from './load-spec';
 import { parseIgnoredFiles } from './parse-ignore';
+import { readFileAsObservable } from './read-file';
 
-function ReadFile(file: string): Observable<string> {
-  return from(promisify(readFile)(file, { encoding: 'utf-8' })).pipe(
-    catchError(() => of('')),
-  );
-}
+const ReadFile = (file: string): Observable<string> =>
+  readFileAsObservable(file).pipe(catchError(() => of('')));
 
 export interface CreateOrUpdateLambdaArguments {
   project: string;
@@ -80,15 +77,8 @@ export const createOrUpdateLambda = (
           zlib: { level: 9 }, // Sets the compression level.
         });
         await promisify(exec)(['chmod', '+x', data.script].join(' '));
-        const ignore = await from(
-          promisify(readFile)('.gignore', {
-            encoding: 'utf-8',
-          }),
-        )
-          .pipe(
-            catchError(() => of('')),
-            map((ignore) => parseIgnoredFiles(ignore) as string[]),
-          )
+        const ignore = await ReadFile('.gignore')
+          .pipe(map((ignore) => parseIgnoredFiles(ignore) as string[]))
           .toPromise();
 
         archive.glob('**', {
@@ -97,7 +87,6 @@ export const createOrUpdateLambda = (
 
         archive.finalize();
 
-        const body = new FormData();
         await from(streamToBufferPromise(archive))
           .pipe(
             switchMap((buffer) =>
@@ -112,12 +101,12 @@ export const createOrUpdateLambda = (
             ),
           )
           .toPromise();
-
+        const body = new FormData();
         body.append('file[]', createReadStream(`.gcache/${data.name}.zip`));
         const config = await GraphqlClienAPI.getConfig().toPromise();
 
         return from(
-          fetch('https://pubsub.graphql-server.com/upload-lambda', {
+          fetch(config.uploadUrl, {
             method: 'POST',
             body: body as never,
             headers: {
