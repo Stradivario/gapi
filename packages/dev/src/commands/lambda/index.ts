@@ -113,4 +113,22 @@ export function registerLambdaCommands(program: commander.CommanderStatic) {
           .toPromise(),
       ),
     );
+
+  program
+    .command('lambda:test')
+    .description('Test lambda')
+    .option('--lambda <lambda>, -l', 'get by lambda id')
+    .option('--name <name>, -n', 'get by lambda name')
+    .option('--project <project>, -p', 'get by lambda name')
+    .option('--spec <spec>, -p', 'get by lambda name')
+    .option('--queryParams <queryParams>', 'Adds query params to request')
+    .option('--pathParams <pathParams>', 'Adds query params to request')
+    .option('--body <body>, -b', 'Add body to request')
+    .action(
+      lazy(() =>
+        from(import('./test'))
+          .pipe(map((m) => m.default))
+          .toPromise(),
+      ),
+    );
 }

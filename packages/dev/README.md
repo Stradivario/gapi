@@ -74,3 +74,9 @@ spec.json
   "method": "GET"
 }
 ```
+
+#### Testing lambda
+
+```bash
+gcli lambda:test --queryParams '?test=1&proba=1&dada=5' --pathParams 'proba=5;test=7'
+```
