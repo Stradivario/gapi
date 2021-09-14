@@ -7,6 +7,7 @@ export function registerAuthCommands(program: CommanderStatic) {
     .command('login')
     .description('Login to graphql-server')
     .option('--key <key>, -k', 'Specify api key')
+    .option('--uploadUrl <key>, -uu', 'Specify upload server')
     .option(
       '--token <token>, -t',
       'Specify custom token generated from the website',

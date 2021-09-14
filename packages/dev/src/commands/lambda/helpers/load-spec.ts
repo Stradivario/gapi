@@ -2,11 +2,13 @@ import {
   IHttpMethodsEnum,
   ILambdaEnvironmentsEnum,
 } from '@introspection/index';
-import { readFile, stat } from 'fs';
+import { stat } from 'fs';
 import yaml from 'js-yaml';
 import { combineLatest, from, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { promisify } from 'util';
+
+import { readFileAsObservable } from './read-file';
 
 interface ConfigJSON {
   name: string;
@@ -25,18 +27,10 @@ interface ConfigJSON {
 export const loadSpec = (spec?: string) =>
   combineLatest([
     from(promisify(stat)(spec)).pipe(
-      switchMap(() =>
-        promisify(readFile)(spec, {
-          encoding: 'utf-8',
-        }),
-      ),
+      switchMap(() => readFileAsObservable(spec)),
       map((spec) => JSON.parse(spec)),
       catchError(() =>
-        from(
-          promisify(readFile)(spec, {
-            encoding: 'utf-8',
-          }),
-        ).pipe(
+        from(readFileAsObservable(spec)).pipe(
           map((file) => yaml.load(file)),
           catchError(() => of(false)),
         ),
@@ -44,21 +38,13 @@ export const loadSpec = (spec?: string) =>
     ),
     from(promisify(stat)('spec.json')).pipe(
       map(() => 'spec.json'),
-      switchMap((file) =>
-        promisify(readFile)(file, {
-          encoding: 'utf-8',
-        }),
-      ),
+      switchMap((file) => readFileAsObservable(file)),
       map((spec) => JSON.parse(spec)),
       catchError(() => of(false)),
     ),
     from(promisify(stat)('spec.yaml')).pipe(
       switchMap(async () =>
-        yaml.load(
-          await promisify(readFile)('spec.yaml', {
-            encoding: 'utf-8',
-          }),
-        ),
+        yaml.load(await readFileAsObservable('spec.yaml').toPromise()),
       ),
       catchError(() => of(false)),
     ),

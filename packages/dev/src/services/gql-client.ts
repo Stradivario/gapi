@@ -7,12 +7,21 @@ import {
   IQuery,
 } from '@introspection/index';
 import * as firebase from 'firebase/app';
-import { readFile } from 'fs';
 import { combineLatest, from, of, throwError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { promisify } from 'util';
 
-import { tokenDirectory, urlDirectory } from '~/types';
+import {
+  readFileAsObservable,
+  writeFileAsObservable,
+} from '~/commands/lambda/helpers/read-file';
+import {
+  generationTimeDirectory,
+  keyDirectory,
+  refreshTokenDirectory,
+  tokenDirectory,
+  uploadUrlDirectory,
+  urlDirectory,
+} from '~/types';
 
 import { LambdaFragment } from './types/lambda.fragment';
 import { ProjectFragment } from './types/project.fragment';
@@ -220,15 +229,71 @@ export class GraphqlClienAPI {
   }
   static getConfig() {
     return combineLatest([
-      from(promisify(readFile)(tokenDirectory, { encoding: 'utf-8' })),
-      from(promisify(readFile)(urlDirectory, { encoding: 'utf-8' })),
-    ]).pipe(map(([token, url]) => ({ token, url })));
+      readFileAsObservable(tokenDirectory),
+      readFileAsObservable(urlDirectory),
+      readFileAsObservable(refreshTokenDirectory),
+      readFileAsObservable(keyDirectory),
+      readFileAsObservable(generationTimeDirectory).pipe(
+        map((date) => Number(date)),
+      ),
+      readFileAsObservable(uploadUrlDirectory),
+    ]).pipe(
+      map(([token, url, refresh, key, timeGenerated, uploadUrl]) => ({
+        token,
+        url,
+        refresh,
+        key,
+        timeGenerated,
+        expired: (Date.now() - timeGenerated) / 1000 > 3600,
+        uploadUrl,
+      })),
+      switchMap((config) =>
+        config.expired
+          ? this.refreshToken(config.key, config.refresh).pipe(
+              map(({ id_token }) => ({ ...config, token: id_token })),
+            )
+          : of(config),
+      ),
+    );
+  }
+
+  private static refreshToken(key: string, refresh_token: string) {
+    return from(
+      fetch(`https://securetoken.googleapis.com/v1/token?key=${key}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          refresh_token,
+          grant_type: 'refresh_token',
+        }),
+      }),
+    ).pipe(
+      switchMap(
+        (res) =>
+          res.json() as Promise<{
+            access_token: string;
+            expires_in: string;
+            token_type: 'Baerer';
+            refresh_token: string;
+            id_token: string;
+            user_id: string;
+          }>,
+      ),
+      switchMap((cfg) =>
+        combineLatest([
+          writeFileAsObservable(tokenDirectory, cfg.id_token),
+          writeFileAsObservable(refreshTokenDirectory, cfg.refresh_token),
+          writeFileAsObservable(generationTimeDirectory, Date.now()),
+        ]).pipe(map(() => cfg)),
+      ),
+    );
   }
 
   public static signIn(customToken: string) {
     return from(firebase.auth().signInWithCustomToken(customToken)).pipe(
       switchMap(({ user }) =>
-        from(user.getIdToken()).pipe(map((token) => ({ user, token }))),
+        combineLatest([user.getIdToken(), of(user.refreshToken)]).pipe(
+          map(([token, refresh]) => ({ user, token, refresh })),
+        ),
       ),
     );
   }
