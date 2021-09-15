@@ -21,9 +21,14 @@ export default async (cmd: {
       map((lambda) => ({
         ...lambda,
         url: cmd.pathParams
-          .split(';')
-          .map((param) => param.split('='))
-          .reduce((prev, [key, value]) => prev.replace(key, value), lambda.url),
+          ? cmd.pathParams
+              .split(';')
+              .map((param) => param.split('='))
+              .reduce(
+                (prev, [key, value]) => prev.replace(key, value),
+                lambda.url,
+              )
+          : lambda.url,
       })),
       switchMap((lambda) =>
         from(

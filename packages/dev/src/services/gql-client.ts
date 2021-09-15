@@ -235,6 +235,19 @@ export class GraphqlClienAPI {
       }`,
     }).pipe(map((res) => res.listProjects));
   }
+
+  public static getProject(id: string) {
+    return this.query<IQuery>({
+      query: gql`query getProject($id: String!) {
+        getProject(id: $id) {
+          ${ProjectFragment}
+        }
+      }`,
+      variables: {
+        id,
+      },
+    }).pipe(map((res) => res.listProjects));
+  }
   static getConfig() {
     return combineLatest([
       readFileAsObservable(tokenDirectory),

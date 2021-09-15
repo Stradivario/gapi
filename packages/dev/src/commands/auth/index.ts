@@ -1,22 +1,17 @@
-import { CommanderStatic } from 'commander';
+import { Command } from 'commander';
 
 import { lazy } from '~/helpers';
 
-export function registerAuthCommands(program: CommanderStatic) {
+export function registerAuthCommands(program: Command) {
   program
     .command('login')
     .description('Login to graphql-server')
-    .option('--key <key>, -k', 'Specify api key')
-    .option('--uploadUrl <key>, -uu', 'Specify upload server')
+    .option('-k, --key <key>', 'Specify api key')
+    .option('-uu, --uploadUrl <key>', 'Specify upload server')
     .option(
-      '--token <token>, -t',
+      '-t, --token <token>',
       'Specify custom token generated from the website',
     )
-    .option('--url <url>, -u', 'Specify api url')
+    .option('-u, --url <url>', 'Specify api url')
     .action(lazy(() => import('./login').then((m) => m.default)));
-
-  program
-    .command('clear')
-    .description('Clears default project to be used all around the CLI')
-    .action(lazy(() => import('./clear').then((m) => m.default)));
 }

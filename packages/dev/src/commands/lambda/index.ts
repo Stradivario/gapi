@@ -1,4 +1,4 @@
-import commander from 'commander';
+import { Command } from 'commander';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -6,12 +6,12 @@ import { lazy } from '~/helpers';
 
 import { createCommand } from './helpers';
 
-export function registerLambdaCommands(program: commander.CommanderStatic) {
+export function registerLambdaCommands(program: Command) {
   program
     .command('lambda:list')
     .description('List of all lambdas for project')
     .option(
-      '--project <project>, -p',
+      '-p, --project <project>',
       'Specify custom token generated from the website',
     )
     .action(
@@ -25,10 +25,10 @@ export function registerLambdaCommands(program: commander.CommanderStatic) {
   program
     .command('lambda:get')
     .description('Get lambda by id')
-    .option('--lambda <lambda>, -l', 'get by lambda id')
-    .option('--name <name>, -n', 'get by lambda name')
-    .option('--project <project>, -p', 'get by lambda name')
-    .option('--spec <spec>, -p', 'get by lambda name')
+    .option('-l, --lambda <lambda>', 'get by lambda id')
+    .option('-n, --name <name>', 'get by lambda name')
+    .option('-p, --project <project>', 'get by lambda name')
+    .option('-p, --spec <spec>', 'get by lambda name')
     .action(
       lazy(() =>
         from(import('./get'))
@@ -73,9 +73,9 @@ export function registerLambdaCommands(program: commander.CommanderStatic) {
   program
     .command('lambda:delete')
     .description('Get lambda by id')
-    .option('--name <name>, -n', 'get by lambda name')
-    .option('--project <project>, -p', 'get by lambda name')
-    .option('--spec <spec>, -p', 'get by lambda name')
+    .option('-n, --name <name>', 'get by lambda name')
+    .option('-p, --project <project>', 'get by lambda name')
+    .option('-s, --spec <spec>', 'get by lambda name')
     .action(
       lazy(() =>
         from(import('./delete'))
@@ -87,10 +87,10 @@ export function registerLambdaCommands(program: commander.CommanderStatic) {
   program
     .command('lambda:log')
     .description('Get lambda log')
-    .option('--lambda <lambda>, -l', 'get by lambda id')
-    .option('--name <name>, -n', 'get by lambda name')
-    .option('--project <project>, -p', 'get by lambda name')
-    .option('--spec <spec>, -p', 'get by lambda name')
+    .option('-l, --lambda <lambda>', 'get by lambda id')
+    .option('-n, --name <name>', 'get by lambda name')
+    .option('-p, --project <project>', 'get by lambda name')
+    .option('-s, --spec <spec>', 'get by lambda name')
     .action(
       lazy(() =>
         from(import('./logs'))
@@ -102,10 +102,10 @@ export function registerLambdaCommands(program: commander.CommanderStatic) {
   program
     .command('lambda:build:log')
     .description('Get build log')
-    .option('--lambda <lambda>, -l', 'get by lambda id')
-    .option('--name <name>, -n', 'get by lambda name')
-    .option('--project <project>, -p', 'get by lambda project')
-    .option('--spec <spec>, -p', 'use configuration')
+    .option('-l, --lambda <lambda>', 'get by lambda id')
+    .option('-n, --name <name>', 'get by lambda name')
+    .option('-p, --project <project>', 'get by lambda project')
+    .option('-s, --spec <spec>', 'use configuration')
     .action(
       lazy(() =>
         from(import('./logs-builder'))
@@ -117,13 +117,13 @@ export function registerLambdaCommands(program: commander.CommanderStatic) {
   program
     .command('lambda:test')
     .description('Test lambda')
-    .option('--lambda <lambda>, -l', 'get by lambda id')
-    .option('--name <name>, -n', 'get by lambda name')
-    .option('--project <project>, -p', 'get by lambda name')
-    .option('--spec <spec>, -p', 'get by lambda name')
-    .option('--queryParams <queryParams>', 'Adds query params to request')
-    .option('--pathParams <pathParams>', 'Adds query params to request')
-    .option('--body <body>, -b', 'Add body to request')
+    .option('-l, --lambda <lambda>', 'get by lambda id')
+    .option('-n, --name <name>', 'get by lambda name')
+    .option('-p, --project <project>', 'get by lambda name')
+    .option('-s, --spec <spec>', 'get by lambda name')
+    .option('-qp, --queryParams <queryParams>', 'Adds query params to request')
+    .option('-pp, --pathParams <pathParams>', 'Adds query params to request')
+    .option('-b, --body <body>', 'Add body to request')
     .action(
       lazy(() =>
         from(import('./test'))
