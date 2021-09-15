@@ -61,7 +61,8 @@
     "js-yaml": "^4.1.0",
     "node-fetch": "^2.1.2",
     "rxjs": "6.5.2",
-    "stream-to-buffer": "^0.1.0"
+    "stream-to-buffer": "^0.1.0",
+    "@rxdi/compressor": "^0.7.114"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
