@@ -5,7 +5,7 @@ import {
 } from '@introspection/index';
 import archiver from 'archiver';
 import { exec } from 'child_process';
-import { CommanderStatic } from 'commander';
+import { Command } from 'commander';
 import FormData from 'form-data';
 import {
   createReadStream,
@@ -63,6 +63,9 @@ export const createOrUpdateLambda = (
 ) =>
   parseProjectId(cmd.project)
     .pipe(
+      switchMap((projectId) =>
+        GraphqlClienAPI.getProject(projectId).pipe(map(() => projectId)),
+      ),
       switchMap(async (projectId) => ({
         projectId,
         ...(await loadSpec(cmd.spec).toPromise()),
@@ -161,11 +164,11 @@ export const createOrUpdateLambda = (
 
 export const createCommand = (command: string) => (
   options: [string, string][],
-) => (program: CommanderStatic) => {
+) => (program: Command) => {
   const cmd = program.command(command);
 
   for (const option of options) {
     cmd.option(...option);
   }
-  return cmd as CommanderStatic;
+  return cmd as Command;
 };

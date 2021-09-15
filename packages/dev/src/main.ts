@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 import chalk from 'chalk';
-import program from 'commander';
+import { program } from 'commander';
 import fetch from 'node-fetch';
 
 import { commands } from './commands';

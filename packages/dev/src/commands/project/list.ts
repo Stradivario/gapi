@@ -3,7 +3,7 @@ import { tap } from 'rxjs/operators';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Unboxed } from '~/types';
 
-export default async (...[]) =>
+export default async () =>
   GraphqlClienAPI.listProjects()
     .pipe(
       tap((project) => {
