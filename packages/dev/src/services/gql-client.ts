@@ -7,6 +7,7 @@ import {
   IMutation,
   IQuery,
 } from '@introspection/index';
+import { LZWService } from '@rxdi/compressor';
 import * as firebase from 'firebase/app';
 import { combineLatest, from, of, throwError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -171,7 +172,13 @@ export class GraphqlClienAPI {
         }
       `,
       variables: { lambdaId },
-    }).pipe(map((res) => res.getLambdaLogs));
+    }).pipe(
+      map((res) => res.getLambdaLogs),
+      map((logs) => {
+        logs.data = LZWService.decompress(logs.data);
+        return logs;
+      }),
+    );
   }
 
   public static getLambdaLogsByName(name: string, projectId: string) {
@@ -184,7 +191,13 @@ export class GraphqlClienAPI {
         }
       `,
       variables: { name, projectId },
-    }).pipe(map((res) => res.getLambdaLogsByName));
+    }).pipe(
+      map((res) => res.getLambdaLogsByName),
+      map((logs) => {
+        logs.data = LZWService.decompress(logs.data);
+        return logs;
+      }),
+    );
   }
 
   public static getLambdaBuilderLogs(lambdaId: string) {
