@@ -1,17 +1,23 @@
 ### Installation
 
 ```bash
-curl -L "https://raw.githubusercontent.com/Stradivario/gapi/graphql-website-cli/packages/gcli/releas/gcli-linux" -o ~/.local/bin/gcli
+curl -L "https://raw.githubusercontent.com/Stradivario/gapi/packages/gcli/release/gcli-linux" -o ~/.local/bin/gcli
 ```
 
 ```bash
 sudo chmod +x ~/.local/bin/gcli
 ```
 
+#### Using NPM
+
+```bash
+npm i -g @gapi/gcli
+```
+
 ### Login
 
 ```bash
-gcli login --token 'GRAPHQL_TOKEN' --key 'GOOGLE_API_KEY' --url http://localhost:9004/graphql
+gcli login --token 'GRAPHQL_TOKEN' --key 'GOOGLE_API_KEY' --url 'URL' --uploadUrl 'UPLOAD_URL
 ```
 
 ### List Projects
@@ -23,7 +29,7 @@ gcli project:list
 ### use existing project
 
 ```bash
-gcli use --project 'PROJECT_ID'
+gcli use 'PROJECT_ID'
 ```
 
 ### List Lambdas for project
@@ -68,7 +74,13 @@ gcli lambda:create --name pesho --route pesho --file ./index.ts --script ./bash.
 gcli lambda:create --spec spec.json
 ```
 
-spec.json
+#### If `spec` already present
+
+```bash
+gcli lambda:create
+```
+
+example spec.json
 
 ```json
 {
@@ -83,6 +95,24 @@ spec.json
   "env": "NODEJS",
   "method": "GET"
 }
+```
+
+#### Updating Lambda
+
+```bash
+gcli lambda:update
+```
+
+#### Delete Lambda
+
+```bash
+gcli lambda:delete
+```
+
+#### Get Lambda
+
+```bash
+gcli lambda:get
 ```
 
 #### Testing lambda

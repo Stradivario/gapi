@@ -1,0 +1,16 @@
+release/**/*
+!release/index.js
+
+dist
+node_modules
+src
+example
+coverage
+.cache
+.eslintrc.js
+.babelrc
+jest.config.js
+tsconfig.json
+test/**/*
+.prettierrc.yml
+gapi-cli.conf.yml
