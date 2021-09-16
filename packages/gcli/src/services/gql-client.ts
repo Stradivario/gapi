@@ -174,10 +174,7 @@ export class GraphqlClienAPI {
       variables: { lambdaId },
     }).pipe(
       map((res) => res.getLambdaLogs),
-      map((logs) => {
-        logs.data = LZWService.decompress(logs.data);
-        return logs;
-      }),
+      map((logs) => ({ ...logs, data: LZWService.decompress(logs.data) })),
     );
   }
 
@@ -193,10 +190,7 @@ export class GraphqlClienAPI {
       variables: { name, projectId },
     }).pipe(
       map((res) => res.getLambdaLogsByName),
-      map((logs) => {
-        logs.data = LZWService.decompress(logs.data);
-        return logs;
-      }),
+      map((logs) => ({ ...logs, data: LZWService.decompress(logs.data) })),
     );
   }
 
@@ -210,7 +204,10 @@ export class GraphqlClienAPI {
         }
       `,
       variables: { lambdaId },
-    }).pipe(map((res) => res.getLambdaBuilderLogs));
+    }).pipe(
+      map((res) => res.getLambdaBuilderLogs),
+      map((logs) => ({ ...logs, data: LZWService.decompress(logs.data) })),
+    );
   }
 
   public static getLambdaBuilderLogsByName(name: string, projectId: string) {
@@ -223,7 +220,10 @@ export class GraphqlClienAPI {
         }
       `,
       variables: { name, projectId },
-    }).pipe(map((res) => res.getLambdaBuilderLogsByName));
+    }).pipe(
+      map((res) => res.getLambdaBuilderLogsByName),
+      map((logs) => ({ ...logs, data: LZWService.decompress(logs.data) })),
+    );
   }
 
   public static deleteLambda(payload: IDeleteLambdaInput) {
