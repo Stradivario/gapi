@@ -1,4 +1,4 @@
-## [1.8.123](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.123) (2021-09-16)
+## [1.8.124](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.124) (2021-09-16)
 
 
 ### Bug Fixes
@@ -32,6 +32,7 @@
 * **federation:** readme ([1d8b2c8](https://github.com/Stradivario/gapi/commit/1d8b2c89f6dba9a75e892309fd3dc76b8492a9de))
 * **federation:** rebuilded module and re-deployed ([05da054](https://github.com/Stradivario/gapi/commit/05da054ad5c8352a65922628fe87de5b5534e55c))
 * **gcli:** decompress logs ([70d9eea](https://github.com/Stradivario/gapi/commit/70d9eea541e798abe06ae36d5f792a5dd7aa7b00))
+* **gcli:** load spec file default export fix ([63ba724](https://github.com/Stradivario/gapi/commit/63ba72420423d4bdcad36cfd86017e29579d3a78))
 * **gcli:** removed packages from dependencies since we don't want them when installing ([22af3b7](https://github.com/Stradivario/gapi/commit/22af3b76167bdc128eaaeec82c2a5f75d9bd0d44))
 * **InitQuery:** reverted ([f500c5b](https://github.com/Stradivario/gapi/commit/f500c5b8e9ed8b227be93d91e4856c548b10e72b))
 * **sendgrid:** added partial data to options ([0501b12](https://github.com/Stradivario/gapi/commit/0501b12325d5b9ce562dc2d4c704d8ec465a9fce))
