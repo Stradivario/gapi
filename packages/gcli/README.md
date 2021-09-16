@@ -1,11 +1,11 @@
 ### Installation
 
 ```bash
-curl -L "https://raw.githubusercontent.com/Stradivario/gapi/packages/gcli/release/gcli-linux" -o ~/.local/bin/gcli
+curl -L "https://github.com/Stradivario/gapi/raw/master/packages/gcli/release/gcli-linux" -o ~/.local/bin/gcli
 ```
 
 ```bash
-sudo chmod +x ~/.local/bin/gcli
+chmod +x ~/.local/bin/gcli
 ```
 
 #### Using NPM
