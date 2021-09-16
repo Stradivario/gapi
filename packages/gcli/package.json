@@ -1,12 +1,12 @@
 {
-  "name": "@gapi/dev",
+  "name": "@gapi/gcli",
   "version": "1.8.121",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
   },
   "scripts": {
-    "start": "gapi start --local --path=./src/index.ts",
+    "start": "gapi start",
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
     "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
@@ -50,7 +50,7 @@
     "typescript": "^3.8.3"
   },
   "bin": {
-    "gcli": "./dist/index.js"
+    "gcli": "./dist/main.js"
   },
   "dependencies": {
     "archiver": "^5.3.0",
