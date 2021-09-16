@@ -1,3 +1,13 @@
+### Installation
+
+```bash
+curl -L "https://raw.githubusercontent.com/Stradivario/gapi/graphql-website-cli/packages/gcli/releas/gcli-linux" -o ~/.local/bin/gcli
+```
+
+```bash
+sudo chmod +x ~/.local/bin/gcli
+```
+
 ### Login
 
 ```bash
