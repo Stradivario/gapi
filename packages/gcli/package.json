@@ -1,0 +1,72 @@
+{
+  "name": "@gapi/gcli",
+  "version": "1.8.121",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stradivario/gapi.git"
+  },
+  "scripts": {
+    "start": "gapi start --outDir release --outFile index.js",
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
+    "delete-dist": "rm -rf dist",
+    "clean": "git clean -dxf",
+    "lint": "npx eslint . --ext .ts",
+    "test": "jest",
+    "lint-fix": "npx eslint . --fix --ext .ts",
+    "build:release": "gapi build --single-executable && cp ./dist/gcli-linux ./release && cp ./dist/index.js ./release",
+    "build": "echo BUILDED"
+  },
+  "author": {
+    "name": "Kristian Tachev(Stradivario)",
+    "email": "kristiqn.tachev@gmail.com"
+  },
+  "keywords": [
+    "graphql",
+    "gapi",
+    "node",
+    "access-control"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Stradivario/gapi/issues"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@rxdi/parcel-plugin-shebang": "^0.7.117",
+    "@types/jest": "^25.2.1",
+    "@types/js-yaml": "^4.0.3",
+    "@types/node": "^13.11.1",
+    "@types/node-fetch": "^2.5.7",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-simple-import-sort": "^5.0.0",
+    "jest": "^25.5.4",
+    "parcel-plugin-electron-dotenv": "^0.1.0",
+    "prettier": "^2.0.4",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.8.3"
+  },
+  "bin": {
+    "gcli": "./release/index.js"
+  },
+  "dependencies": {
+    "archiver": "^5.3.0",
+    "chalk": "2.4.2",
+    "commander": "8.2.0",
+    "firebase": "7.14.6",
+    "form-data": "^4.0.0",
+    "js-yaml": "^4.1.0",
+    "node-fetch": "^2.1.2",
+    "rxjs": "6.5.2",
+    "stream-to-buffer": "^0.1.0",
+    "@rxdi/compressor": "^0.7.114"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts"
+}
