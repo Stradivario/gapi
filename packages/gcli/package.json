@@ -13,7 +13,8 @@
     "lint": "npx eslint . --ext .ts",
     "test": "jest",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && tsc || true"
+    "build:release": "gapi build --single-executable && cp ./dist/gcli-linux ./release && cp ./dist/index.js ./release",
+    "build": "echo BUILDED"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",
@@ -50,7 +51,7 @@
     "typescript": "^3.8.3"
   },
   "bin": {
-    "gcli": "./dist/main.js"
+    "gcli": "./release/index.js"
   },
   "dependencies": {
     "archiver": "^5.3.0",
