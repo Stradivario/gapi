@@ -1,0 +1,9 @@
+node_modules/
+dist/
+
+.idea/
+
+release
+
+!release/index.js
+!release/gcli-linux
