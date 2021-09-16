@@ -15102,27 +15102,16 @@ module.exports.default = module.exports; // For TypeScript
 
 "use strict";
 
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loadSpec = void 0;
-const fs_1 = __webpack_require__(747);
 const js_yaml_1 = __webpack_require__(627);
 const rxjs_1 = __webpack_require__(139);
 const operators_1 = __webpack_require__(599);
-const util_1 = __webpack_require__(853);
 const read_file_1 = __webpack_require__(470);
 exports.loadSpec = (spec) => rxjs_1.combineLatest([
-    rxjs_1.from(util_1.promisify(fs_1.stat)(spec)).pipe(operators_1.switchMap(() => read_file_1.readFileAsObservable(spec)), operators_1.map((spec) => JSON.parse(spec)), operators_1.catchError(() => rxjs_1.from(read_file_1.readFileAsObservable(spec)).pipe(operators_1.map((file) => js_yaml_1.default.load(file)), operators_1.catchError(() => rxjs_1.of(false))))),
-    rxjs_1.from(util_1.promisify(fs_1.stat)('spec.json')).pipe(operators_1.map(() => 'spec.json'), operators_1.switchMap((file) => read_file_1.readFileAsObservable(file)), operators_1.map((spec) => JSON.parse(spec)), operators_1.catchError(() => rxjs_1.of(false))),
-    rxjs_1.from(util_1.promisify(fs_1.stat)('spec.yaml')).pipe(operators_1.switchMap(() => __awaiter(void 0, void 0, void 0, function* () { return js_yaml_1.default.load(yield read_file_1.readFileAsObservable('spec.yaml').toPromise()); })), operators_1.catchError(() => rxjs_1.of(false))),
+    read_file_1.readFileAsObservable(spec).pipe(operators_1.map((spec) => JSON.parse(spec)), operators_1.catchError(() => rxjs_1.from(read_file_1.readFileAsObservable(spec)).pipe(operators_1.map((file) => js_yaml_1.load(file)), operators_1.catchError(() => rxjs_1.of(false))))),
+    read_file_1.readFileAsObservable('spec.json').pipe(operators_1.map((spec) => JSON.parse(spec)), operators_1.catchError(() => rxjs_1.of(false))),
+    read_file_1.readFileAsObservable('spec.yaml').pipe(operators_1.map((data) => js_yaml_1.load(data)), operators_1.catchError(() => rxjs_1.of(false))),
 ]).pipe(operators_1.map(([custom, json, yaml]) => (custom || json || yaml)));
 
 

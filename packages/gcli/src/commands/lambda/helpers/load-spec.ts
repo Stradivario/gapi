@@ -2,11 +2,9 @@ import {
   IHttpMethodsEnum,
   ILambdaEnvironmentsEnum,
 } from '@introspection/index';
-import { stat } from 'fs';
-import yaml from 'js-yaml';
+import { load } from 'js-yaml';
 import { combineLatest, from, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import { promisify } from 'util';
+import { catchError, map } from 'rxjs/operators';
 
 import { readFileAsObservable } from './read-file';
 
@@ -26,26 +24,21 @@ interface ConfigJSON {
 
 export const loadSpec = (spec?: string) =>
   combineLatest([
-    from(promisify(stat)(spec)).pipe(
-      switchMap(() => readFileAsObservable(spec)),
+    readFileAsObservable(spec).pipe(
       map((spec) => JSON.parse(spec)),
       catchError(() =>
         from(readFileAsObservable(spec)).pipe(
-          map((file) => yaml.load(file)),
+          map((file) => load(file)),
           catchError(() => of(false)),
         ),
       ),
     ),
-    from(promisify(stat)('spec.json')).pipe(
-      map(() => 'spec.json'),
-      switchMap((file) => readFileAsObservable(file)),
+    readFileAsObservable('spec.json').pipe(
       map((spec) => JSON.parse(spec)),
       catchError(() => of(false)),
     ),
-    from(promisify(stat)('spec.yaml')).pipe(
-      switchMap(async () =>
-        yaml.load(await readFileAsObservable('spec.yaml').toPromise()),
-      ),
+    readFileAsObservable('spec.yaml').pipe(
+      map((data) => load(data)),
       catchError(() => of(false)),
     ),
   ]).pipe(
