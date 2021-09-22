@@ -3,7 +3,7 @@ import {
   IHttpMethodsEnum,
   ILambdaEnvironmentsEnum,
 } from '@introspection/index';
-import archiver from 'archiver';
+import * as archiver from 'archiver';
 import { exec } from 'child_process';
 import { Command } from 'commander';
 import FormData from 'form-data';
