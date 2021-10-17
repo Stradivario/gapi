@@ -1,16 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import {
-  ExternalImporter,
-  ExternalModuleConfiguration,
-  FileService,
-  Injectable,
-  Metadata,
-} from '@rxdi/core';
+import { Injectable, Metadata } from '@rxdi/core';
 import { exists, readFileSync, writeFile } from 'fs';
 import { of } from 'rxjs';
 import { combineLatest, map, switchMap, take, tap } from 'rxjs/operators';
 import { promisify } from 'util';
 
+import { FileService } from '../../../core/services/file';
 import {
   GAPI_DAEMON_HTTP_PLUGINS_FOLDER,
   GAPI_DAEMON_IPFS_PLUGINS_FOLDER,
@@ -18,6 +13,8 @@ import {
   IPFS_HASHED_MODULES,
 } from '../../daemon.config';
 import { IpfsHashMapService } from './ipfs-hash-map.service';
+import { ExternalImporter } from './ipfs/external-importer';
+import { ExternalModuleConfiguration } from './ipfs/external-importer-config';
 import { PluginWatcherService } from './plugin-watcher.service';
 
 interface CustomMetadata extends Function {

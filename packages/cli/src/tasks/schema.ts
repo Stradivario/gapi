@@ -1,17 +1,17 @@
+import { LZWService } from '@rxdi/compressor';
 import { Container, Service } from '@rxdi/core';
 import { exists, readFile, unlink, writeFile } from 'fs';
+import fetch from 'node-fetch';
 import { from } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { promisify } from 'util';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+import { mkdirp } from '../core/helpers/mkdirp';
 import { ArgsService } from '../core/services/args.service';
 import { ConfigService } from '../core/services/config.service';
 import { ExecService } from '../core/services/exec.service';
 import { GAPI_DAEMON_CACHE_FOLDER } from '../daemon-server/daemon.config';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { mkdirp } = require('@rxdi/core/dist/services/file/dist');
-import { LZWService } from '@rxdi/compressor';
-import fetch from 'node-fetch';
 
 @Service()
 export class SchemaTask {
@@ -70,9 +70,9 @@ export class SchemaTask {
   }
   private async createDir() {
     if (!(await promisify(exists)(this.folder))) {
-      await promisify(mkdirp)(this.folder);
+      await promisify(mkdirp as never)(this.folder);
     }
-    await promisify(mkdirp)(GAPI_DAEMON_CACHE_FOLDER);
+    await promisify(mkdirp as never)(GAPI_DAEMON_CACHE_FOLDER);
   }
 
   private async collectFragments() {
