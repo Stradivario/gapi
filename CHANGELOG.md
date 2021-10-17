@@ -1,4 +1,4 @@
-## [1.8.124](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.124) (2021-09-16)
+## [1.8.125](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.125) (2021-10-17)
 
 
 ### Bug Fixes
@@ -20,6 +20,7 @@
 * **cli-builder:** system executable filename added to empty string since it was braking ([193df28](https://github.com/Stradivario/gapi/commit/193df28abb42b06df6189ee10ee0f6c93778a87e))
 * **cli-builder:** when we have authorization and init query we need to drop authorization for this particular query ([b7b26e9](https://github.com/Stradivario/gapi/commit/b7b26e9f6e036e8ecf739c209c3340417ed28f44))
 * **cli:** added headers field to schema introspection in order to put authorization token ([17feddf](https://github.com/Stradivario/gapi/commit/17feddf91f7816ac1d6e14ef160739b33c175846))
+* **cli:** added ipfs services to daemon server using it ([63c65e4](https://github.com/Stradivario/gapi/commit/63c65e47310e69feeb117dd2eb64dd8575613aa0))
 * **cli:** collect fragments when generating schema was hitting wrong endpoint ([dcf7778](https://github.com/Stradivario/gapi/commit/dcf77786e542d548c149c9ce52b35e759ef55f17))
 * **cli:** enums was not exported inside index.ts ([312ddeb](https://github.com/Stradivario/gapi/commit/312ddeb3262e38b064604d88918d53ac9ae6d47c))
 * **cli:** if not defined headers property it throws error and intrupting previews flow without headers ([8518683](https://github.com/Stradivario/gapi/commit/85186831a08200b584ab39dcf8548ab085fd5daa))
@@ -58,6 +59,8 @@
 * **federation:** added willSendRequest and context lambdas in order to manage authentication outside the scope of the library ([ea45b5e](https://github.com/Stradivario/gapi/commit/ea45b5ee5e2831b4ce375c17817e5024eb96f798))
 * **Federation:** removed _service and status from schema sdl when processing _service graph, removed ethereum, ipfs related modules with packages ([7b5781b](https://github.com/Stradivario/gapi/commit/7b5781bcc2fcf0578b0aaf57d2cbcd027d8d2b85))
 * **gcli:** npm ignore file added ([5aa9097](https://github.com/Stradivario/gapi/commit/5aa90972c6220bb5e4213efbb0ffebd472bb25e1))
+* **gcli:** readme.md added correct link [ci-skip] ([830fcf4](https://github.com/Stradivario/gapi/commit/830fcf49b605c76953e53c1503a1f18139361ea1))
+* **gcli:** removed archiver as default export ([c79ca75](https://github.com/Stradivario/gapi/commit/c79ca75fcff77893f3b04ade02b66f215fd90a98))
 * **gcli:** single executable ([cf8417e](https://github.com/Stradivario/gapi/commit/cf8417e95ba80c6c5806fbb5306f8cf1f1445768))
 * **GraphqlCli:** init graphql-server cli ([0299494](https://github.com/Stradivario/gapi/commit/0299494966ff1e1ebd19d7bcfe19a6f7a4f75ae9))
 * **Lambda:** generation and deploy for lambda ([05214cc](https://github.com/Stradivario/gapi/commit/05214cce4acbdb6a06e74f7ec877e0d89c176986))
