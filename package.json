@@ -90,7 +90,7 @@
     "graphql-document-collector": "0.2.1",
     "humps": "2.0.1",
     "node-emoji": "1.10.0",
-    "node-notifier": "^5.4.0",
+    "node-notifier": "^8.0.1",
     "@rxdi/compressor": "^0.7.134",
     "parcel-bundler": "1.12.3",
     "rimraf": "2.6.3",
