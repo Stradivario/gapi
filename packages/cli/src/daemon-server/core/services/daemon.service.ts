@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FileService, Service } from '@rxdi/core';
+import { Service } from '@rxdi/core';
 import { exists, readFile, writeFile } from 'fs';
 import { combineLatest, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { promisify } from 'util';
 
+import { FileService } from '../../../core/services/file';
 import { ILinkListType } from '../../api-introspection';
 import { GAPI_DAEMON_PROCESS_LIST_FOLDER } from '../../daemon.config';
 import { GAPI_CLI_CONFIG_TEMPLATE } from '../templates/gapi-cli-config.template';

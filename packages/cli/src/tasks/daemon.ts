@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { CoreModuleConfig, HAPI_SERVER } from '@gapi/core';
-import { Container, FileService, Service } from '@rxdi/core';
+import { Container, Service } from '@rxdi/core';
 import { spawn } from 'child_process';
 import { exists, openSync, readFile, writeFile } from 'fs';
 import * as rimraf from 'rimraf';
@@ -14,6 +14,7 @@ import { getProcessList } from '../core/helpers/ps-list';
 import { strEnum } from '../core/helpers/stringEnum';
 import { GapiConfig } from '../core/services/config.service';
 import { DaemonExecutorService } from '../core/services/daemon-executor/daemon-executor.service';
+import { FileService } from '../core/services/file';
 import { ILinkListType } from '../daemon-server/api-introspection/index';
 import {
   GAPI_DAEMON_FOLDER,

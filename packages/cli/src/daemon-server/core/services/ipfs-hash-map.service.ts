@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/class-name-casing */
-import { ExternalImporterConfig, Injectable } from '@gapi/core';
+import { Injectable } from '@gapi/core';
 import { exists, readFile, writeFile } from 'fs';
 import { promisify } from 'util';
 
 import { IPFS_HASHED_MODULES_MAP } from '../../daemon.config';
+import { ExternalImporterConfig } from './ipfs/external-importer-config';
+
 export interface IPFS_MODULE_MAP {
   hash: string;
   module: ExternalImporterConfig;
