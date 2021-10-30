@@ -58,7 +58,7 @@
     "node-fetch": "^2.1.2",
     "rxjs": "6.5.2",
     "stream-to-buffer": "^0.1.0",
-    "@rxdi/compressor": "^0.7.134"
+    "@rxdi/compressor": "^0.7.136"
   },
   "bin": {
     "gcli": "./release/index.js"
