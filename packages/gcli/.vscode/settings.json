@@ -1,0 +1,16 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/node_modules": false,
+    "**/dist": false,
+    "**/.cache": false,
+    "**/*.d.ts": false,
+    "**/*.map": true
+  }
+}

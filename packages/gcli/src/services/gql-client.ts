@@ -3,6 +3,7 @@ import 'firebase/auth';
 import {
   ICreateOrUpdateLambdaInput,
   IDeleteLambdaInput,
+  IFissionLogsType,
   IFissionType,
   IMutation,
   IQuery,
@@ -174,7 +175,13 @@ export class GraphqlClienAPI {
       variables: { lambdaId },
     }).pipe(
       map((res) => res.getLambdaLogs),
-      map((logs) => ({ ...logs, data: LZWService.decompress(logs.data) })),
+      map(
+        (logs) =>
+          ({
+            ...logs,
+            data: LZWService.decompress(logs.data),
+          } as IFissionLogsType),
+      ),
     );
   }
 
@@ -190,7 +197,13 @@ export class GraphqlClienAPI {
       variables: { name, projectId },
     }).pipe(
       map((res) => res.getLambdaLogsByName),
-      map((logs) => ({ ...logs, data: LZWService.decompress(logs.data) })),
+      map(
+        (logs) =>
+          ({
+            ...logs,
+            data: LZWService.decompress(logs.data),
+          } as IFissionLogsType),
+      ),
     );
   }
 
@@ -206,7 +219,13 @@ export class GraphqlClienAPI {
       variables: { lambdaId },
     }).pipe(
       map((res) => res.getLambdaBuilderLogs),
-      map((logs) => ({ ...logs, data: LZWService.decompress(logs.data) })),
+      map(
+        (logs) =>
+          ({
+            ...logs,
+            data: LZWService.decompress(logs.data),
+          } as IFissionLogsType),
+      ),
     );
   }
 
@@ -222,7 +241,13 @@ export class GraphqlClienAPI {
       variables: { name, projectId },
     }).pipe(
       map((res) => res.getLambdaBuilderLogsByName),
-      map((logs) => ({ ...logs, data: LZWService.decompress(logs.data) })),
+      map(
+        (logs) =>
+          ({
+            ...logs,
+            data: LZWService.decompress(logs.data),
+          } as IFissionLogsType),
+      ),
     );
   }
 
