@@ -1,4 +1,4 @@
-## [1.8.127](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.127) (2021-11-01)
+## [1.8.128](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.128) (2021-11-10)
 
 
 ### Bug Fixes
@@ -35,6 +35,7 @@
 * **federation:** rebuilded module and re-deployed ([05da054](https://github.com/Stradivario/gapi/commit/05da054ad5c8352a65922628fe87de5b5534e55c))
 * **gcli:** builded again the package with namespace import from all ([9237232](https://github.com/Stradivario/gapi/commit/92372321239369bd9626df191f8f9a3e8c6e515f))
 * **gcli:** decompress logs ([70d9eea](https://github.com/Stradivario/gapi/commit/70d9eea541e798abe06ae36d5f792a5dd7aa7b00))
+* **gcli:** default export of form data and stream to buffer ([6374259](https://github.com/Stradivario/gapi/commit/6374259c3b3353bf9aae5df47af44f9426f6b25e))
 * **gcli:** load spec file default export fix ([63ba724](https://github.com/Stradivario/gapi/commit/63ba72420423d4bdcad36cfd86017e29579d3a78))
 * **gcli:** removed packages from dependencies since we don't want them when installing ([22af3b7](https://github.com/Stradivario/gapi/commit/22af3b76167bdc128eaaeec82c2a5f75d9bd0d44))
 * **InitQuery:** reverted ([f500c5b](https://github.com/Stradivario/gapi/commit/f500c5b8e9ed8b227be93d91e4856c548b10e72b))
