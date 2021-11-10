@@ -6,7 +6,7 @@ import {
 import * as archiver from 'archiver';
 import { exec } from 'child_process';
 import { Command } from 'commander';
-import FormData from 'form-data';
+import * as FormData from 'form-data';
 import {
   createReadStream,
   mkdir,
@@ -16,7 +16,7 @@ import {
 } from 'fs';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import streamToBuffer from 'stream-to-buffer';
+import * as streamToBuffer from 'stream-to-buffer';
 import { promisify } from 'util';
 
 import { parseProjectId } from '~/helpers';

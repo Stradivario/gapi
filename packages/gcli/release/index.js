@@ -61508,11 +61508,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCommand = exports.createOrUpdateLambda = void 0;
 const archiver = __webpack_require__(871);
 const child_process_1 = __webpack_require__(129);
-const form_data_1 = __webpack_require__(903);
+const FormData = __webpack_require__(903);
 const fs_1 = __webpack_require__(747);
 const rxjs_1 = __webpack_require__(139);
 const operators_1 = __webpack_require__(599);
-const stream_to_buffer_1 = __webpack_require__(210);
+const streamToBuffer = __webpack_require__(210);
 const util_1 = __webpack_require__(853);
 const helpers_1 = __webpack_require__(777);
 const gql_client_1 = __webpack_require__(793);
@@ -61522,7 +61522,7 @@ const read_file_1 = __webpack_require__(470);
 const ReadFile = (file) => read_file_1.readFileAsObservable(file).pipe(operators_1.catchError(() => rxjs_1.of('')));
 function streamToBufferPromise(file) {
     return new Promise((resolve, reject) => {
-        stream_to_buffer_1.default(file, function (err, buffer) {
+        streamToBuffer(file, function (err, buffer) {
             if (err) {
                 return reject(err);
             }
@@ -61553,7 +61553,7 @@ exports.createOrUpdateLambda = (cmd, type) => helpers_1.parseProjectId(cmd.proje
         encoding: 'utf-8',
     })))))
         .toPromise();
-    const body = new form_data_1.default();
+    const body = new FormData();
     body.append('file[]', fs_1.createReadStream(`.gcache/${data.name}.zip`));
     const config = yield gql_client_1.GraphqlClienAPI.getConfig().toPromise();
     return rxjs_1.from(fetch(config.uploadUrl, {
