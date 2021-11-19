@@ -1,4 +1,4 @@
-## [1.8.128](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.128) (2021-11-10)
+## [1.8.129](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.129) (2021-11-19)
 
 
 ### Bug Fixes
@@ -38,6 +38,7 @@
 * **gcli:** default export of form data and stream to buffer ([6374259](https://github.com/Stradivario/gapi/commit/6374259c3b3353bf9aae5df47af44f9426f6b25e))
 * **gcli:** load spec file default export fix ([63ba724](https://github.com/Stradivario/gapi/commit/63ba72420423d4bdcad36cfd86017e29579d3a78))
 * **gcli:** removed packages from dependencies since we don't want them when installing ([22af3b7](https://github.com/Stradivario/gapi/commit/22af3b76167bdc128eaaeec82c2a5f75d9bd0d44))
+* **gcli:** reverted logic without options request ([0c737f2](https://github.com/Stradivario/gapi/commit/0c737f2c7afc2ebf7485d592ba741299a3535fbe))
 * **InitQuery:** reverted ([f500c5b](https://github.com/Stradivario/gapi/commit/f500c5b8e9ed8b227be93d91e4856c548b10e72b))
 * **sendgrid:** added partial data to options ([0501b12](https://github.com/Stradivario/gapi/commit/0501b12325d5b9ce562dc2d4c704d8ec465a9fce))
 * **sendgrid:** fixed wrong async assignment ([aca38f6](https://github.com/Stradivario/gapi/commit/aca38f6c565131b0e22630f4fe24fd2b1b0780d1))
@@ -61,6 +62,7 @@
 * **federation:** added missing apollo server configs ([b049560](https://github.com/Stradivario/gapi/commit/b049560af645f1a4acf51afb3204efe145217722))
 * **federation:** added willSendRequest and context lambdas in order to manage authentication outside the scope of the library ([ea45b5e](https://github.com/Stradivario/gapi/commit/ea45b5ee5e2831b4ce375c17817e5024eb96f798))
 * **Federation:** removed _service and status from schema sdl when processing _service graph, removed ethereum, ipfs related modules with packages ([7b5781b](https://github.com/Stradivario/gapi/commit/7b5781bcc2fcf0578b0aaf57d2cbcd027d8d2b85))
+* **gcli:** added hasOptionsRequest to lambda creation ([b391b19](https://github.com/Stradivario/gapi/commit/b391b1916627c9c6a75c71915b711d8c86c5d011))
 * **gcli:** npm ignore file added ([5aa9097](https://github.com/Stradivario/gapi/commit/5aa90972c6220bb5e4213efbb0ffebd472bb25e1))
 * **gcli:** readme.md added correct link [ci-skip] ([830fcf4](https://github.com/Stradivario/gapi/commit/830fcf49b605c76953e53c1503a1f18139361ea1))
 * **gcli:** removed archiver as default export ([c79ca75](https://github.com/Stradivario/gapi/commit/c79ca75fcff77893f3b04ade02b66f215fd90a98))
