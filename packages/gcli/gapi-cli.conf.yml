@@ -1,11 +1,11 @@
 config:
- schematics:
-  name: @gapi/schematics
-  dryRun: false
- app:
-  local:
-   NODE_ENV: development
- schema:
-  introspectionEndpoint: http://localhost:9004/graphql
-  introspectionOutputFolder: ./src/@introspection
-  headers: 'Authorization: bearer'
+  schematics:
+    name: '@gapi/schematics'
+    dryRun: false
+  app:
+    local:
+      NODE_ENV: development
+  schema:
+    introspectionEndpoint: http://localhost:9004/graphql
+    introspectionOutputFolder: ./src/@introspection
+    headers: 'Authorization: bearer'

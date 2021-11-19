@@ -52,6 +52,7 @@ export function registerLambdaCommands(program: Command) {
     ['--code <code>', 'lambda project'],
     ['--file <file>', 'lambda project'],
     ['--secret <secret>', 'lambda project'],
+    ['--option-request', 'Option request for lambda to be created']
   ];
 
   createCommand('lambda:create')(createOrUpdateOptions)(program).action(

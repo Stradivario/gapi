@@ -20,6 +20,7 @@ interface ConfigJSON {
   config?: string;
   secret?: string;
   uploadAsZip?: string;
+  hasOptionsRequest?: boolean;
 }
 
 export const loadSpec = (spec?: string) =>
