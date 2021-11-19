@@ -7171,6 +7171,18 @@
               "deprecationReason": null
             },
             {
+              "name": "customUploadFileId",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createdBy",
               "description": null,
               "args": [],
@@ -13314,6 +13326,16 @@
               "defaultValue": null
             },
             {
+              "name": "hasOptionsRequest",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "packageJson",
               "description": null,
               "type": {
@@ -13393,6 +13415,12 @@
             },
             {
               "name": "PUT",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OPTIONS",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null

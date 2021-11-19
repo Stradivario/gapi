@@ -782,6 +782,7 @@ export
     method?: string | null;
     packageJson?: string | null;
     buildBashScript?: string | null;
+    customUploadFileId?: string | null;
     createdBy?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
@@ -1283,6 +1284,7 @@ and we can execute /my-lambda/{id}/{name}
     description: What type of endpoint we are creating GET, POST, etc. defaults to GET
   */
     method?: IHttpMethodsEnum | null;
+    hasOptionsRequest?: boolean | null;
     packageJson?: string | null;
     buildBashScript?: string | null;
     customUploadFileId?: string | null;
@@ -1292,7 +1294,7 @@ export
   type ILambdaEnvironmentsEnum = 'NODEJS';
 
 export   
-  type IHttpMethodsEnum = 'GET' | 'POST' | 'UPDATE' | 'PUT';
+  type IHttpMethodsEnum = 'GET' | 'POST' | 'UPDATE' | 'PUT' | 'OPTIONS';
 
   
   export interface IDeleteLambdaInput {
