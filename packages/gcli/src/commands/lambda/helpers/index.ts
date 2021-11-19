@@ -46,7 +46,6 @@ export interface CreateOrUpdateLambdaArguments {
   package: string;
   params: string[];
   customUploadFileId: string;
-  hasOptionsRequest: boolean;
 }
 function streamToBufferPromise(file: File | ReadStream | WriteStream) {
   return new Promise<Buffer>((resolve, reject) => {
@@ -153,8 +152,8 @@ export const createOrUpdateLambda = (
             '{}',
           params: cmd.params || payload.params || [],
           secret: cmd.secret || payload.secret || '',
-          customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || '',
-          hasOptionsRequest: !!cmd.hasOptionsRequest || !!payload.hasOptionsRequest || true,
+          customUploadFileId:
+            cmd.customUploadFileId || payload.customUploadFileId || '',
         }).toPromise(),
       ),
       tap((data) => {
