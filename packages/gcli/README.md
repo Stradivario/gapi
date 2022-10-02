@@ -59,7 +59,7 @@ gcli lambda:get --name 'MY_LAMBDA_NAME'
 ### Create Lambda
 
 ```bash
-gcli lambda:create --name pesho --route pesho --code 'module.exports = async (context) => ({ status: 200, body: "Hello, 22world!", headers: { "Access-Control-Allow-Origin": "https://graphql-server.com"}})'
+gcli lambda:create --name pesho --route pesho --code 'module.exports = async (context) => ({ status: 200, body: "Hello, world!", headers: { "Access-Control-Allow-Origin": "https://graphql-server.com"}})'
 ```
 
 ##### Or from files

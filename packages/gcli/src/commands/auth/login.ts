@@ -15,7 +15,7 @@ import {
 
 import { GraphqlClienAPI } from '../../services/gql-client';
 
-export default async (cmd: {
+export default (cmd: {
   key: string;
   url: string;
   uploadUrl: string;
@@ -29,9 +29,13 @@ export default async (cmd: {
             catchError(() => of(true)),
             switchMap(() =>
               combineLatest([
-                promisify(writeFile)(generationTimeDirectory, Date.now(), {
-                  encoding: 'utf-8',
-                }),
+                promisify(writeFile)(
+                  generationTimeDirectory,
+                  Date.now().toString(),
+                  {
+                    encoding: 'utf-8',
+                  },
+                ),
                 promisify(writeFile)(urlDirectory, cmd.url, {
                   encoding: 'utf-8',
                 }),

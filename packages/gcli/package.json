@@ -14,7 +14,7 @@
     "test": "jest",
     "lint-fix": "npx eslint . --fix --ext .ts",
     "build:release": "gapi build --single-executable && cp ./dist/gcli-linux ./release && cp ./dist/index.js ./release",
-    "build": "echo BUILDED"
+    "build": "echo BUILD"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",
