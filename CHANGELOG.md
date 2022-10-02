@@ -1,4 +1,4 @@
-## [1.8.129](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.129) (2021-11-19)
+## [1.8.130](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.130) (2022-10-02)
 
 
 ### Bug Fixes
@@ -40,6 +40,7 @@
 * **gcli:** removed packages from dependencies since we don't want them when installing ([22af3b7](https://github.com/Stradivario/gapi/commit/22af3b76167bdc128eaaeec82c2a5f75d9bd0d44))
 * **gcli:** reverted logic without options request ([0c737f2](https://github.com/Stradivario/gapi/commit/0c737f2c7afc2ebf7485d592ba741299a3535fbe))
 * **InitQuery:** reverted ([f500c5b](https://github.com/Stradivario/gapi/commit/f500c5b8e9ed8b227be93d91e4856c548b10e72b))
+* **login:** added method which converts number to string ([605fe1d](https://github.com/Stradivario/gapi/commit/605fe1dd587c7ed4af37318917be1568fbd4740e))
 * **sendgrid:** added partial data to options ([0501b12](https://github.com/Stradivario/gapi/commit/0501b12325d5b9ce562dc2d4c704d8ec465a9fce))
 * **sendgrid:** fixed wrong async assignment ([aca38f6](https://github.com/Stradivario/gapi/commit/aca38f6c565131b0e22630f4fe24fd2b1b0780d1))
 * **sendgrid:** html property removed from type and re assigned like it needs to be ([648d411](https://github.com/Stradivario/gapi/commit/648d411171268f55b568c264af96b2949ee6e9b2))
