@@ -341,7 +341,7 @@ export class GraphqlClienAPI {
         combineLatest([
           writeFileAsObservable(tokenDirectory, cfg.id_token),
           writeFileAsObservable(refreshTokenDirectory, cfg.refresh_token),
-          writeFileAsObservable(generationTimeDirectory, Date.now()),
+          writeFileAsObservable(generationTimeDirectory, Date.now().toString()),
         ]).pipe(map(() => cfg)),
       ),
     );

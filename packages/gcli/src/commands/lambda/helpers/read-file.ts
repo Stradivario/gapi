@@ -8,7 +8,5 @@ export const readFileAsObservable = (file: string) =>
 // const readFilesAsObservable = (files: string[]) =>
 //   combineLatest(files.map(readFileAsObservable));
 
-export const writeFileAsObservable = (
-  file: string,
-  body: string | number | Buffer,
-) => from(promisify(writeFile)(file, body, { encoding: 'utf-8' }));
+export const writeFileAsObservable = (file: string, body: string | Buffer) =>
+  from(promisify(writeFile)(file, body, { encoding: 'utf-8' }));
