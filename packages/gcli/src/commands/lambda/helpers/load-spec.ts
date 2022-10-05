@@ -1,6 +1,7 @@
 import {
   IHttpMethodsEnum,
   ILambdaEnvironmentsEnum,
+  ILambdaScaleInputOptions,
 } from '@introspection/index';
 import { load } from 'js-yaml';
 import { combineLatest, from, of } from 'rxjs';
@@ -20,6 +21,7 @@ interface ConfigJSON {
   config?: string;
   secret?: string;
   uploadAsZip?: string;
+  scaleOptions?: ILambdaScaleInputOptions;
 }
 
 export const loadSpec = (spec?: string) =>

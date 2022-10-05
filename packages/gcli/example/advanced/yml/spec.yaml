@@ -5,7 +5,7 @@ script: build.sh
 package: package.json
 params: ['test', 'proba']
 config: ''
-secret: test
+secret:
 env: NODEJS
 method: GET
 uploadAsZip: true
