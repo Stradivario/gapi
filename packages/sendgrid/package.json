@@ -1,6 +1,6 @@
 {
   "name": "@gapi/sendgrid",
-  "version": "1.8.132",
+  "version": "1.8.133",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
