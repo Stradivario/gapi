@@ -44791,7 +44791,7 @@ class GraphqlClienAPI {
         })).pipe(operators_1.switchMap((res) => res.json()), operators_1.switchMap((cfg) => rxjs_1.combineLatest([
             read_file_1.writeFileAsObservable(types_1.tokenDirectory, cfg.id_token),
             read_file_1.writeFileAsObservable(types_1.refreshTokenDirectory, cfg.refresh_token),
-            read_file_1.writeFileAsObservable(types_1.generationTimeDirectory, Date.now()),
+            read_file_1.writeFileAsObservable(types_1.generationTimeDirectory, Date.now().toString()),
         ]).pipe(operators_1.map(() => cfg))));
     }
     static signIn(customToken) {
