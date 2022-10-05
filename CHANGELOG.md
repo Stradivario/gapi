@@ -1,4 +1,4 @@
-## [1.8.131](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.131) (2022-10-03)
+## [1.8.132](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.132) (2022-10-05)
 
 
 ### Bug Fixes
@@ -21,6 +21,7 @@
 * **cli-builder:** when we have authorization and init query we need to drop authorization for this particular query ([b7b26e9](https://github.com/Stradivario/gapi/commit/b7b26e9f6e036e8ecf739c209c3340417ed28f44))
 * **cli:** added headers field to schema introspection in order to put authorization token ([17feddf](https://github.com/Stradivario/gapi/commit/17feddf91f7816ac1d6e14ef160739b33c175846))
 * **cli:** added ipfs services to daemon server using it ([63c65e4](https://github.com/Stradivario/gapi/commit/63c65e47310e69feeb117dd2eb64dd8575613aa0))
+* **cli:** builded gcli in order to reflect new changes ([11ecdfb](https://github.com/Stradivario/gapi/commit/11ecdfb683c7a4253db490c6a1b56414c5631624))
 * **cli:** collect fragments when generating schema was hitting wrong endpoint ([dcf7778](https://github.com/Stradivario/gapi/commit/dcf77786e542d548c149c9ce52b35e759ef55f17))
 * **cli:** enums was not exported inside index.ts ([312ddeb](https://github.com/Stradivario/gapi/commit/312ddeb3262e38b064604d88918d53ac9ae6d47c))
 * **cli:** humps added to dependencies updated rxdi to 136 ([d6ea8a8](https://github.com/Stradivario/gapi/commit/d6ea8a882e5ff077973bbf00b22cfb3cfb1810bc))
