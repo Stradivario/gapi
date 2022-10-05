@@ -5,7 +5,7 @@ export default async function (context: Context) {
   const secret = await context.getSecret('test');
   const params = context.getRouteParams();
   const query = context.getQueryParams();
-  log('Hello world');
+  log('Hello world2');
   return {
     status: 200,
     body: { secret, params, query },

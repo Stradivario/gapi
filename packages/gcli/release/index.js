@@ -466,6 +466,16 @@ updatedAt
 packageJson
 buildBashScript
 customUploadFileId
+scaleOptions {
+  minCpu
+  maxCpu
+  minMemory
+  maxMemory
+  minScale
+  maxScale
+  targetCpu
+  executorType
+}
 `;
 
 
@@ -15511,6 +15521,16 @@ exports.createOrUpdateLambda = (cmd, type) => helpers_1.parseProjectId(cmd.proje
         params: cmd.params || payload.params || [],
         secret: cmd.secret || payload.secret || '',
         customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || '',
+        scaleOptions: payload.scaleOptions || {
+            executorType: 'POOLMGR',
+            maxCpu: 0,
+            maxMemory: 0,
+            maxScale: 0,
+            minCpu: 0,
+            minMemory: 0,
+            minScale: 0,
+            targetCpu: 0,
+        },
     }).toPromise();
 })), operators_1.tap((data) => {
     console.dir(data, { depth: null, colors: true });

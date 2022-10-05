@@ -786,6 +786,7 @@ export
     createdBy?: string | null;
     createdAt?: string | null;
     updatedAt?: string | null;
+    scaleOptions?: ILambdaScaleOptions | null;
 }
 
   
@@ -810,6 +811,22 @@ export
     resourceVersion?: string | null;
     uid?: string | null;
 }
+
+  
+  export interface ILambdaScaleOptions {
+    __typename?: "LambdaScaleOptions";
+    minCpu?: number | null;
+    maxCpu?: number | null;
+    minMemory?: number | null;
+    maxMemory?: number | null;
+    minScale?: number | null;
+    maxScale?: number | null;
+    targetCpu?: number | null;
+    executorType?: ILambdaScaleOptionsExecutorTypeEnum | null;
+}
+
+export   
+  type ILambdaScaleOptionsExecutorTypeEnum = 'POOLMGR' | 'NEWDEPLOY';
 
   
   export interface IFissionLogsType {
@@ -1284,17 +1301,29 @@ and we can execute /my-lambda/{id}/{name}
     description: What type of endpoint we are creating GET, POST, etc. defaults to GET
   */
     method?: IHttpMethodsEnum | null;
-    hasOptionsRequest?: boolean | null;
     packageJson?: string | null;
     buildBashScript?: string | null;
     customUploadFileId?: string | null;
+    scaleOptions?: ILambdaScaleInputOptions | null;
 }
 
 export   
   type ILambdaEnvironmentsEnum = 'NODEJS';
 
 export   
-  type IHttpMethodsEnum = 'GET' | 'POST' | 'UPDATE' | 'PUT' | 'OPTIONS';
+  type IHttpMethodsEnum = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS';
+
+  
+  export interface ILambdaScaleInputOptions {
+    minCpu?: number | null;
+    maxCpu?: number | null;
+    minMemory?: number | null;
+    maxMemory?: number | null;
+    minScale?: number | null;
+    maxScale?: number | null;
+    targetCpu?: number | null;
+    executorType?: ILambdaScaleOptionsExecutorTypeEnum | null;
+}
 
   
   export interface IDeleteLambdaInput {

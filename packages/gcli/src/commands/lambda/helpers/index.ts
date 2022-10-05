@@ -154,6 +154,16 @@ export const createOrUpdateLambda = (
           secret: cmd.secret || payload.secret || '',
           customUploadFileId:
             cmd.customUploadFileId || payload.customUploadFileId || '',
+          scaleOptions: payload.scaleOptions || {
+            executorType: 'POOLMGR',
+            maxCpu: 0,
+            maxMemory: 0,
+            maxScale: 0,
+            minCpu: 0,
+            minMemory: 0,
+            minScale: 0,
+            targetCpu: 0,
+          },
         }).toPromise(),
       ),
       tap((data) => {

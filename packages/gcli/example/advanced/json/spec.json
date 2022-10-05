@@ -9,5 +9,15 @@
   "secret": "test",
   "env": "NODEJS",
   "method": "GET",
-  "uploadAsZip": true
+  "uploadAsZip": true,
+  "scaleOptions": {
+    "minCpu": 0,
+    "maxCpu": 0,
+    "minMemory": 0,
+    "maxMemory": 0,
+    "minScale": 0,
+    "maxScale": 0,
+    "targetCpu": 0,
+    "executorType": "POOLMGR"
+  }
 }
