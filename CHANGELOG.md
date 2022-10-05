@@ -1,4 +1,4 @@
-## [1.8.132](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.132) (2022-10-05)
+## [1.8.133](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.133) (2022-10-05)
 
 
 ### Bug Fixes
@@ -68,6 +68,7 @@
 * **gcli:** npm ignore file added ([5aa9097](https://github.com/Stradivario/gapi/commit/5aa90972c6220bb5e4213efbb0ffebd472bb25e1))
 * **gcli:** readme.md added correct link [ci-skip] ([830fcf4](https://github.com/Stradivario/gapi/commit/830fcf49b605c76953e53c1503a1f18139361ea1))
 * **gcli:** removed archiver as default export ([c79ca75](https://github.com/Stradivario/gapi/commit/c79ca75fcff77893f3b04ade02b66f215fd90a98))
+* **gcli:** scaling options added to yml file ([920eaad](https://github.com/Stradivario/gapi/commit/920eaadc8e4c0df10913c4b083510d68c9b25ac8))
 * **gcli:** single executable ([cf8417e](https://github.com/Stradivario/gapi/commit/cf8417e95ba80c6c5806fbb5306f8cf1f1445768))
 * **GraphqlCli:** init graphql-server cli ([0299494](https://github.com/Stradivario/gapi/commit/0299494966ff1e1ebd19d7bcfe19a6f7a4f75ae9))
 * **Lambda:** generation and deploy for lambda ([05214cc](https://github.com/Stradivario/gapi/commit/05214cce4acbdb6a06e74f7ec877e0d89c176986))
