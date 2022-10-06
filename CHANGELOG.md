@@ -1,4 +1,4 @@
-## [1.8.133](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.133) (2022-10-05)
+## [1.8.134](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.134) (2022-10-06)
 
 
 ### Bug Fixes
@@ -65,6 +65,7 @@
 * **federation:** added willSendRequest and context lambdas in order to manage authentication outside the scope of the library ([ea45b5e](https://github.com/Stradivario/gapi/commit/ea45b5ee5e2831b4ce375c17817e5024eb96f798))
 * **Federation:** removed _service and status from schema sdl when processing _service graph, removed ethereum, ipfs related modules with packages ([7b5781b](https://github.com/Stradivario/gapi/commit/7b5781bcc2fcf0578b0aaf57d2cbcd027d8d2b85))
 * **gcli:** added hasOptionsRequest to lambda creation ([b391b19](https://github.com/Stradivario/gapi/commit/b391b1916627c9c6a75c71915b711d8c86c5d011))
+* **gcli:** added multiple scaling options and some documentation inside the cli itself ([312f626](https://github.com/Stradivario/gapi/commit/312f6262114949dd35ee640ddd4791cb05df7e4f))
 * **gcli:** npm ignore file added ([5aa9097](https://github.com/Stradivario/gapi/commit/5aa90972c6220bb5e4213efbb0ffebd472bb25e1))
 * **gcli:** readme.md added correct link [ci-skip] ([830fcf4](https://github.com/Stradivario/gapi/commit/830fcf49b605c76953e53c1503a1f18139361ea1))
 * **gcli:** removed archiver as default export ([c79ca75](https://github.com/Stradivario/gapi/commit/c79ca75fcff77893f3b04ade02b66f215fd90a98))
