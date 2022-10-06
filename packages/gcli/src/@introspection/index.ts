@@ -815,14 +815,55 @@ export
   
   export interface ILambdaScaleOptions {
     __typename?: "LambdaScaleOptions";
+    /**
+    description?: Minimum CPU to be assigned to pod (In millicore, minimum 1)
+  */
     minCpu?: number | null;
+    /**
+    description?: Maximum CPU to be assigned to pod (In millicore, minimum 1)
+  */
     maxCpu?: number | null;
+    /**
+    description?: Minimum memory to be assigned to pod (In megabyte)
+  */
     minMemory?: number | null;
+    /**
+    description?: Maximum memory to be assigned to pod (In megabyte)
+  */
     maxMemory?: number | null;
+    /**
+    description?: Minimum number of pods (Uses resource inputs to configure HPA)
+  */
     minScale?: number | null;
+    /**
+    description?: Maximum number of pods (Uses resource inputs to configure HPA)
+  */
     maxScale?: number | null;
+    /**
+    description?: Target average CPU usage percentage across pods for scaling
+  */
     targetCpu?: number | null;
+    /**
+    description?: Executor type for execution; one of 'poolmgr', 'newdeploy'
+  */
     executorType?: ILambdaScaleOptionsExecutorTypeEnum | null;
+    /**
+    description?: The length of time (in seconds) that a function is idle before pod(s) are eligible for recycling
+  */
+    idleTimeout?: number | null;
+    /**
+    description?: Maximum number of pods specialized concurrently to serve requests
+  */
+    concurrency?: number | null;
+    /**
+    description?: Maximum time for a request to wait for the response from the
+function
+  */
+    functionTimeout?: number | null;
+    /**
+    description?: Timeout for executor to wait for function pod creation
+  */
+    specializationTimeout?: number | null;
 }
 
 export   
@@ -1315,14 +1356,55 @@ export
 
   
   export interface ILambdaScaleInputOptions {
+    /**
+    description: Minimum CPU to be assigned to pod (In millicore, minimum 1)
+  */
     minCpu?: number | null;
+    /**
+    description: Maximum CPU to be assigned to pod (In millicore, minimum 1)
+  */
     maxCpu?: number | null;
+    /**
+    description: Minimum memory to be assigned to pod (In megabyte)
+  */
     minMemory?: number | null;
+    /**
+    description: Maximum memory to be assigned to pod (In megabyte)
+  */
     maxMemory?: number | null;
+    /**
+    description: Minimum number of pods (Uses resource inputs to configure HPA)
+  */
     minScale?: number | null;
+    /**
+    description: Maximum number of pods (Uses resource inputs to configure HPA)
+  */
     maxScale?: number | null;
+    /**
+    description: Target average CPU usage percentage across pods for scaling
+  */
     targetCpu?: number | null;
+    /**
+    description: Executor type for execution; one of 'poolmgr', 'newdeploy'
+  */
     executorType?: ILambdaScaleOptionsExecutorTypeEnum | null;
+    /**
+    description: The length of time (in seconds) that a function is idle before pod(s) are eligible for recycling
+  */
+    idleTimeout?: number | null;
+    /**
+    description: Maximum number of pods specialized concurrently to serve requests
+  */
+    concurrency?: number | null;
+    /**
+    description: Maximum time for a request to wait for the response from the
+function
+  */
+    functionTimeout?: number | null;
+    /**
+    description: Timeout for executor to wait for function pod creation
+  */
+    specializationTimeout?: number | null;
 }
 
   

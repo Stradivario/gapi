@@ -38,20 +38,73 @@ export function registerLambdaCommands(program: Command) {
     );
 
   const createOrUpdateOptions: [string, string][] = [
-    ['--name <name>', 'lambda name'],
-    ['--project <project>', 'lambda project'],
-    ['--env <env>', 'lambda project'],
-    ['--method <method>', 'lambda project'],
-    ['--spec <spec>', 'lambda project'],
-    ['--packageJson <packageJson>', 'lambda project'],
-    ['--package <package>', 'lambda project'],
-    ['--buildBashScript <buildBashScript>', 'lambda project'],
-    ['--script <script>', 'lambda project'],
-    ['--params <params>', 'lambda project'],
-    ['--route <route>', 'lambda project'],
-    ['--code <code>', 'lambda project'],
-    ['--file <file>', 'lambda project'],
-    ['--secret <secret>', 'lambda project'],
+    ['--name <name>', 'Function name'],
+    ['--project <project>', 'Project in which this lambda is defined'],
+    ['--env <env>', 'Environment name for function can be NODEJS'],
+    [
+      '--method <method>',
+      'HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method',
+    ],
+    ['--spec <spec>', 'Spec file yml or json path'],
+    ['--packageJson <packageJson>', 'Define packageJson in string format'],
+    ['--package <package>', 'Path to package.json'],
+    [
+      '--buildBashScript <buildBashScript>',
+      'Package build command for builder to run with',
+    ],
+    ['--script <script>', 'Package build script path'],
+    ['--params <params>', 'Array from strings which defines route params'],
+    ['--route <route>', 'Lambda route in which will be accessible'],
+    ['--code <code>', 'URL or local path for single file source code'],
+    ['--file <file>', 'Main lambda file'],
+    [
+      '--executorType <executorType>',
+      "Executor type for execution; one of 'poolmgr', 'newdeploy'",
+    ],
+    [
+      '--maxCpu <maxCpu>',
+      'Maximum CPU to be assigned to pod (In millicore, minimum 1)',
+    ],
+    [
+      '--minCpu <minCpu>',
+      'Minimum CPU to be assigned to pod (In millicore, minimum 1)',
+    ],
+    [
+      '--maxMemory <maxMemory>',
+      'Maximum memory to be assigned to pod (In megabyte)',
+    ],
+    [
+      '--minMemory <minMemory>',
+      'Minimum memory to be assigned to pod (In megabyte)',
+    ],
+    [
+      '--minScale <minScale>',
+      'Minimum number of pods (Uses resource inputs to configure HPA)',
+    ],
+    [
+      '--maxScale <maxScale>',
+      'Maximum number of pods (Uses resource inputs to configure HPA)',
+    ],
+    [
+      '--targetCpu <targetCpu>',
+      'Target average CPU usage percentage across pods for scaling',
+    ],
+    [
+      '--idleTimeout <idleTimeout>',
+      'The length of time (in seconds) that a function is idle before pod(s) are eligible for recycling',
+    ],
+    [
+      '--concurrency <concurrency>',
+      'Maximum number of pods specialized concurrently to serve requests',
+    ],
+    [
+      '--functionTimeout <functionTimeout>',
+      'Maximum time for a request to wait for the response from the function',
+    ],
+    [
+      '--specializationTimeout <specializationTimeout>',
+      'Timeout for executor to wait for function pod creation',
+    ],
   ];
 
   createCommand('lambda:create')(createOrUpdateOptions)(program).action(

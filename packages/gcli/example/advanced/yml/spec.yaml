@@ -1,11 +1,24 @@
-name: hello
-route: hello
+name: hello2
+route: hello2
 file: ./src/index.ts
 script: build.sh
 package: package.json
 params: ['test', 'proba']
 config: ''
-secret:
+secret: 'test'
 env: NODEJS
 method: GET
 uploadAsZip: true
+scaleOptions:
+  minCpu: 0
+  maxCpu: 0
+  minMemory: 0
+  maxMemory: 0
+  minScale: 1
+  maxScale: 4
+  targetCpu: 50
+  executorType: NEWDEPLOY
+  idleTimeout: 120
+  concurrency: 500
+  functionTimeout: 60
+  specializationTimeout: 120

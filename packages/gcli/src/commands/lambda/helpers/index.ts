@@ -2,6 +2,7 @@ import {
   IGraphqlFile,
   IHttpMethodsEnum,
   ILambdaEnvironmentsEnum,
+  ILambdaScaleOptionsExecutorTypeEnum,
 } from '@introspection/index';
 import * as archiver from 'archiver';
 import { exec } from 'child_process';
@@ -46,6 +47,19 @@ export interface CreateOrUpdateLambdaArguments {
   package: string;
   params: string[];
   customUploadFileId: string;
+  /* Scale options */
+  minCpu: number;
+  maxCpu: number;
+  minMemory: number;
+  maxMemory: number;
+  minScale: number;
+  maxScale: number;
+  targetCpu: number;
+  executorType: ILambdaScaleOptionsExecutorTypeEnum;
+  idleTimeout: number;
+  concurrency: number;
+  functionTimeout: number;
+  specializationTimeout: number;
 }
 function streamToBufferPromise(file: File | ReadStream | WriteStream) {
   return new Promise<Buffer>((resolve, reject) => {
@@ -154,15 +168,30 @@ export const createOrUpdateLambda = (
           secret: cmd.secret || payload.secret || '',
           customUploadFileId:
             cmd.customUploadFileId || payload.customUploadFileId || '',
-          scaleOptions: payload.scaleOptions || {
-            executorType: 'POOLMGR',
-            maxCpu: 0,
-            maxMemory: 0,
-            maxScale: 0,
-            minCpu: 0,
-            minMemory: 0,
-            minScale: 0,
-            targetCpu: 0,
+          scaleOptions: {
+            executorType:
+              cmd.executorType ||
+              payload.scaleOptions?.executorType ||
+              'POOLMGR',
+            maxCpu: cmd.maxCpu || payload.scaleOptions?.maxCpu || 0,
+            maxMemory: cmd.maxMemory || payload.scaleOptions?.maxMemory || 0,
+            maxScale: cmd.maxScale || payload.scaleOptions?.maxScale || 0,
+            minCpu: cmd.minCpu || payload.scaleOptions?.minCpu || 0,
+            minMemory: cmd.minMemory || payload.scaleOptions?.minMemory || 0,
+            minScale: cmd.minScale || payload.scaleOptions?.minScale || 0,
+            targetCpu: cmd.targetCpu || payload.scaleOptions?.targetCpu || 0,
+            idleTimeout:
+              cmd.idleTimeout || payload.scaleOptions?.idleTimeout || 120,
+            concurrency:
+              cmd.concurrency || payload.scaleOptions?.concurrency || 500,
+            functionTimeout:
+              cmd.functionTimeout ||
+              payload.scaleOptions?.functionTimeout ||
+              60,
+            specializationTimeout:
+              cmd.specializationTimeout ||
+              payload.scaleOptions?.specializationTimeout ||
+              120,
           },
         }).toPromise(),
       ),
