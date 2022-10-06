@@ -40,5 +40,9 @@ scaleOptions {
   maxScale
   targetCpu
   executorType
+  idleTimeout
+  concurrency
+  functionTimeout
+  specializationTimeout
 }
 `;

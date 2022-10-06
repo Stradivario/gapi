@@ -475,6 +475,10 @@ scaleOptions {
   maxScale
   targetCpu
   executorType
+  idleTimeout
+  concurrency
+  functionTimeout
+  specializationTimeout
 }
 `;
 
@@ -15502,6 +15506,7 @@ exports.createOrUpdateLambda = (cmd, type) => helpers_1.parseProjectId(cmd.proje
         .pipe(operators_1.switchMap((res) => res.json()), operators_1.tap((res) => console.log(res)), operators_1.map((file) => (Object.assign(Object.assign({}, data), { customUploadFileId: file.id }))))
         .toPromise();
 })), operators_1.switchMap((payload) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
     return gql_client_1.GraphqlClienAPI[type]({
         code: cmd.code ||
             (yield ReadFile(payload.file || cmd.file).toPromise()) ||
@@ -15521,15 +15526,22 @@ exports.createOrUpdateLambda = (cmd, type) => helpers_1.parseProjectId(cmd.proje
         params: cmd.params || payload.params || [],
         secret: cmd.secret || payload.secret || '',
         customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || '',
-        scaleOptions: payload.scaleOptions || {
-            executorType: 'POOLMGR',
-            maxCpu: 0,
-            maxMemory: 0,
-            maxScale: 0,
-            minCpu: 0,
-            minMemory: 0,
-            minScale: 0,
-            targetCpu: 0,
+        scaleOptions: {
+            executorType: cmd.executorType || ((_a = payload.scaleOptions) === null || _a === void 0 ? void 0 : _a.executorType) ||
+                'POOLMGR',
+            maxCpu: cmd.maxCpu || ((_b = payload.scaleOptions) === null || _b === void 0 ? void 0 : _b.maxCpu) || 0,
+            maxMemory: cmd.maxMemory || ((_c = payload.scaleOptions) === null || _c === void 0 ? void 0 : _c.maxMemory) || 0,
+            maxScale: cmd.maxScale || ((_d = payload.scaleOptions) === null || _d === void 0 ? void 0 : _d.maxScale) || 0,
+            minCpu: cmd.minCpu || ((_e = payload.scaleOptions) === null || _e === void 0 ? void 0 : _e.minCpu) || 0,
+            minMemory: cmd.minMemory || ((_f = payload.scaleOptions) === null || _f === void 0 ? void 0 : _f.minMemory) || 0,
+            minScale: cmd.minScale || ((_g = payload.scaleOptions) === null || _g === void 0 ? void 0 : _g.minScale) || 0,
+            targetCpu: cmd.targetCpu || ((_h = payload.scaleOptions) === null || _h === void 0 ? void 0 : _h.targetCpu) || 0,
+            idleTimeout: cmd.idleTimeout || ((_j = payload.scaleOptions) === null || _j === void 0 ? void 0 : _j.idleTimeout) || 120,
+            concurrency: cmd.concurrency || ((_k = payload.scaleOptions) === null || _k === void 0 ? void 0 : _k.concurrency) || 500,
+            functionTimeout: cmd.functionTimeout || ((_l = payload.scaleOptions) === null || _l === void 0 ? void 0 : _l.functionTimeout) ||
+                60,
+            specializationTimeout: cmd.specializationTimeout || ((_m = payload.scaleOptions) === null || _m === void 0 ? void 0 : _m.specializationTimeout) ||
+                120,
         },
     }).toPromise();
 })), operators_1.tap((data) => {
@@ -64892,20 +64904,73 @@ function registerLambdaCommands(program) {
         .pipe(operators_1.map((m) => m.default))
         .toPromise()));
     const createOrUpdateOptions = [
-        ['--name <name>', 'lambda name'],
-        ['--project <project>', 'lambda project'],
-        ['--env <env>', 'lambda project'],
-        ['--method <method>', 'lambda project'],
-        ['--spec <spec>', 'lambda project'],
-        ['--packageJson <packageJson>', 'lambda project'],
-        ['--package <package>', 'lambda project'],
-        ['--buildBashScript <buildBashScript>', 'lambda project'],
-        ['--script <script>', 'lambda project'],
-        ['--params <params>', 'lambda project'],
-        ['--route <route>', 'lambda project'],
-        ['--code <code>', 'lambda project'],
-        ['--file <file>', 'lambda project'],
-        ['--secret <secret>', 'lambda project'],
+        ['--name <name>', 'Function name'],
+        ['--project <project>', 'Project in which this lambda is defined'],
+        ['--env <env>', 'Environment name for function can be NODEJS'],
+        [
+            '--method <method>',
+            'HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method',
+        ],
+        ['--spec <spec>', 'Spec file yml or json path'],
+        ['--packageJson <packageJson>', 'Define packageJson in string format'],
+        ['--package <package>', 'Path to package.json'],
+        [
+            '--buildBashScript <buildBashScript>',
+            'Package build command for builder to run with',
+        ],
+        ['--script <script>', 'Package build script path'],
+        ['--params <params>', 'Array from strings which defines route params'],
+        ['--route <route>', 'Lambda route in which will be accessible'],
+        ['--code <code>', 'URL or local path for single file source code'],
+        ['--file <file>', 'Main lambda file'],
+        [
+            '--executorType <executorType>',
+            "Executor type for execution; one of 'poolmgr', 'newdeploy'",
+        ],
+        [
+            '--maxCpu <maxCpu>',
+            'Maximum CPU to be assigned to pod (In millicore, minimum 1)',
+        ],
+        [
+            '--minCpu <minCpu>',
+            'Minimum CPU to be assigned to pod (In millicore, minimum 1)',
+        ],
+        [
+            '--maxMemory <maxMemory>',
+            'Maximum memory to be assigned to pod (In megabyte)',
+        ],
+        [
+            '--minMemory <minMemory>',
+            'Minimum memory to be assigned to pod (In megabyte)',
+        ],
+        [
+            '--minScale <minScale>',
+            'Minimum number of pods (Uses resource inputs to configure HPA)',
+        ],
+        [
+            '--maxScale <maxScale>',
+            'Maximum number of pods (Uses resource inputs to configure HPA)',
+        ],
+        [
+            '--targetCpu <targetCpu>',
+            'Target average CPU usage percentage across pods for scaling',
+        ],
+        [
+            '--idleTimeout <idleTimeout>',
+            'The length of time (in seconds) that a function is idle before pod(s) are eligible for recycling',
+        ],
+        [
+            '--concurrency <concurrency>',
+            'Maximum number of pods specialized concurrently to serve requests',
+        ],
+        [
+            '--functionTimeout <functionTimeout>',
+            'Maximum time for a request to wait for the response from the function',
+        ],
+        [
+            '--specializationTimeout <specializationTimeout>',
+            'Timeout for executor to wait for function pod creation',
+        ],
     ];
     helpers_2.createCommand('lambda:create')(createOrUpdateOptions)(program).action(helpers_1.lazy(() => rxjs_1.from(Promise.resolve().then(() => __webpack_require__(520)))
         .pipe(operators_1.map((m) => m.default))

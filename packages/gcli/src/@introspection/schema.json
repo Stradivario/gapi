@@ -7421,7 +7421,7 @@
           "fields": [
             {
               "name": "minCpu",
-              "description": null,
+              "description": "Minimum CPU to be assigned to pod (In millicore, minimum 1)",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -7433,7 +7433,7 @@
             },
             {
               "name": "maxCpu",
-              "description": null,
+              "description": "Maximum CPU to be assigned to pod (In millicore, minimum 1)",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -7445,7 +7445,7 @@
             },
             {
               "name": "minMemory",
-              "description": null,
+              "description": "Minimum memory to be assigned to pod (In megabyte)",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -7457,7 +7457,7 @@
             },
             {
               "name": "maxMemory",
-              "description": null,
+              "description": "Maximum memory to be assigned to pod (In megabyte)",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -7469,7 +7469,7 @@
             },
             {
               "name": "minScale",
-              "description": null,
+              "description": "Minimum number of pods (Uses resource inputs to configure HPA)",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -7481,7 +7481,7 @@
             },
             {
               "name": "maxScale",
-              "description": null,
+              "description": "Maximum number of pods (Uses resource inputs to configure HPA)",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -7493,7 +7493,7 @@
             },
             {
               "name": "targetCpu",
-              "description": null,
+              "description": "Target average CPU usage percentage across pods for scaling",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -7505,11 +7505,59 @@
             },
             {
               "name": "executorType",
-              "description": null,
+              "description": "Executor type for execution; one of 'poolmgr', 'newdeploy'",
               "args": [],
               "type": {
                 "kind": "ENUM",
                 "name": "LambdaScaleOptionsExecutorType",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "idleTimeout",
+              "description": "The length of time (in seconds) that a function is idle before pod(s) are eligible for recycling",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "concurrency",
+              "description": "Maximum number of pods specialized concurrently to serve requests",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "functionTimeout",
+              "description": "Maximum time for a request to wait for the response from the\nfunction",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "specializationTimeout",
+              "description": "Timeout for executor to wait for function pod creation",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -13578,7 +13626,7 @@
           "inputFields": [
             {
               "name": "minCpu",
-              "description": null,
+              "description": "Minimum CPU to be assigned to pod (In millicore, minimum 1)",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -13588,7 +13636,7 @@
             },
             {
               "name": "maxCpu",
-              "description": null,
+              "description": "Maximum CPU to be assigned to pod (In millicore, minimum 1)",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -13598,7 +13646,7 @@
             },
             {
               "name": "minMemory",
-              "description": null,
+              "description": "Minimum memory to be assigned to pod (In megabyte)",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -13608,7 +13656,7 @@
             },
             {
               "name": "maxMemory",
-              "description": null,
+              "description": "Maximum memory to be assigned to pod (In megabyte)",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -13618,7 +13666,7 @@
             },
             {
               "name": "minScale",
-              "description": null,
+              "description": "Minimum number of pods (Uses resource inputs to configure HPA)",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -13628,7 +13676,7 @@
             },
             {
               "name": "maxScale",
-              "description": null,
+              "description": "Maximum number of pods (Uses resource inputs to configure HPA)",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -13638,7 +13686,7 @@
             },
             {
               "name": "targetCpu",
-              "description": null,
+              "description": "Target average CPU usage percentage across pods for scaling",
               "type": {
                 "kind": "SCALAR",
                 "name": "Int",
@@ -13648,10 +13696,50 @@
             },
             {
               "name": "executorType",
-              "description": null,
+              "description": "Executor type for execution; one of 'poolmgr', 'newdeploy'",
               "type": {
                 "kind": "ENUM",
                 "name": "LambdaScaleOptionsExecutorType",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "idleTimeout",
+              "description": "The length of time (in seconds) that a function is idle before pod(s) are eligible for recycling",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "concurrency",
+              "description": "Maximum number of pods specialized concurrently to serve requests",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "functionTimeout",
+              "description": "Maximum time for a request to wait for the response from the\nfunction",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "specializationTimeout",
+              "description": "Timeout for executor to wait for function pod creation",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
                 "ofType": null
               },
               "defaultValue": null

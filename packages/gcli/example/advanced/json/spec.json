@@ -18,6 +18,10 @@
     "minScale": 0,
     "maxScale": 0,
     "targetCpu": 0,
-    "executorType": "POOLMGR"
+    "executorType": "POOLMGR",
+    "idleTimeout": 120,
+    "concurrency": 500,
+    "functionTimeout": 60,
+    "specializationTimeout": 120
   }
 }
