@@ -98,7 +98,7 @@
     "shelljs": "0.8.3",
     "yamljs": "0.3.0",
     "@rxdi/graphql": "^0.7.136",
-    "apollo-server": "^2.12.0",
+    "apollo-server": "^2.25.4",
     "@apollo/gateway": "^0.14.1",
     "@rxdi/graphql-pubsub": "^0.7.136",
     "@rxdi/hapi": "^0.7.136",
