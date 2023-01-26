@@ -15476,6 +15476,7 @@ exports.createOrUpdateLambda = (cmd, type) => helpers_1.parseProjectId(cmd.proje
     .pipe(operators_1.switchMap((projectId) => gql_client_1.GraphqlClienAPI.getProject(projectId).pipe(operators_1.map(() => projectId))), operators_1.switchMap((projectId) => __awaiter(void 0, void 0, void 0, function* () {
     return (Object.assign({ projectId }, (yield load_spec_1.loadSpec(cmd.spec).toPromise())));
 })), operators_1.switchMap((data) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     if (!data.uploadAsZip) {
         return Object.assign(Object.assign({}, data), { customUploadFileId: '' });
     }
@@ -15501,12 +15502,12 @@ exports.createOrUpdateLambda = (cmd, type) => helpers_1.parseProjectId(cmd.proje
     return rxjs_1.from(fetch(config.uploadUrl, {
         method: 'POST',
         body: body,
-        headers: Object.assign(Object.assign({}, body.getHeaders()), { Authorization: config.token, projectid: data.projectId, lambdaname: data.name }),
+        headers: Object.assign(Object.assign({}, body.getHeaders()), { Authorization: (_a = process.env.GCLI_AUTH_TOKEN) !== null && _a !== void 0 ? _a : config.token, projectid: data.projectId, lambdaname: data.name }),
     }))
         .pipe(operators_1.switchMap((res) => res.json()), operators_1.tap((res) => console.log(res)), operators_1.map((file) => (Object.assign(Object.assign({}, data), { customUploadFileId: file.id }))))
         .toPromise();
 })), operators_1.switchMap((payload) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+    var _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
     return gql_client_1.GraphqlClienAPI[type]({
         code: cmd.code ||
             (yield ReadFile(payload.file || cmd.file).toPromise()) ||
@@ -15527,20 +15528,20 @@ exports.createOrUpdateLambda = (cmd, type) => helpers_1.parseProjectId(cmd.proje
         secret: cmd.secret || payload.secret || '',
         customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || '',
         scaleOptions: {
-            executorType: cmd.executorType || ((_a = payload.scaleOptions) === null || _a === void 0 ? void 0 : _a.executorType) ||
+            executorType: cmd.executorType || ((_b = payload.scaleOptions) === null || _b === void 0 ? void 0 : _b.executorType) ||
                 'POOLMGR',
-            maxCpu: cmd.maxCpu || ((_b = payload.scaleOptions) === null || _b === void 0 ? void 0 : _b.maxCpu) || 0,
-            maxMemory: cmd.maxMemory || ((_c = payload.scaleOptions) === null || _c === void 0 ? void 0 : _c.maxMemory) || 0,
-            maxScale: cmd.maxScale || ((_d = payload.scaleOptions) === null || _d === void 0 ? void 0 : _d.maxScale) || 0,
-            minCpu: cmd.minCpu || ((_e = payload.scaleOptions) === null || _e === void 0 ? void 0 : _e.minCpu) || 0,
-            minMemory: cmd.minMemory || ((_f = payload.scaleOptions) === null || _f === void 0 ? void 0 : _f.minMemory) || 0,
-            minScale: cmd.minScale || ((_g = payload.scaleOptions) === null || _g === void 0 ? void 0 : _g.minScale) || 0,
-            targetCpu: cmd.targetCpu || ((_h = payload.scaleOptions) === null || _h === void 0 ? void 0 : _h.targetCpu) || 0,
-            idleTimeout: cmd.idleTimeout || ((_j = payload.scaleOptions) === null || _j === void 0 ? void 0 : _j.idleTimeout) || 120,
-            concurrency: cmd.concurrency || ((_k = payload.scaleOptions) === null || _k === void 0 ? void 0 : _k.concurrency) || 500,
-            functionTimeout: cmd.functionTimeout || ((_l = payload.scaleOptions) === null || _l === void 0 ? void 0 : _l.functionTimeout) ||
+            maxCpu: cmd.maxCpu || ((_c = payload.scaleOptions) === null || _c === void 0 ? void 0 : _c.maxCpu) || 0,
+            maxMemory: cmd.maxMemory || ((_d = payload.scaleOptions) === null || _d === void 0 ? void 0 : _d.maxMemory) || 0,
+            maxScale: cmd.maxScale || ((_e = payload.scaleOptions) === null || _e === void 0 ? void 0 : _e.maxScale) || 0,
+            minCpu: cmd.minCpu || ((_f = payload.scaleOptions) === null || _f === void 0 ? void 0 : _f.minCpu) || 0,
+            minMemory: cmd.minMemory || ((_g = payload.scaleOptions) === null || _g === void 0 ? void 0 : _g.minMemory) || 0,
+            minScale: cmd.minScale || ((_h = payload.scaleOptions) === null || _h === void 0 ? void 0 : _h.minScale) || 0,
+            targetCpu: cmd.targetCpu || ((_j = payload.scaleOptions) === null || _j === void 0 ? void 0 : _j.targetCpu) || 0,
+            idleTimeout: cmd.idleTimeout || ((_k = payload.scaleOptions) === null || _k === void 0 ? void 0 : _k.idleTimeout) || 120,
+            concurrency: cmd.concurrency || ((_l = payload.scaleOptions) === null || _l === void 0 ? void 0 : _l.concurrency) || 500,
+            functionTimeout: cmd.functionTimeout || ((_m = payload.scaleOptions) === null || _m === void 0 ? void 0 : _m.functionTimeout) ||
                 60,
-            specializationTimeout: cmd.specializationTimeout || ((_m = payload.scaleOptions) === null || _m === void 0 ? void 0 : _m.specializationTimeout) ||
+            specializationTimeout: cmd.specializationTimeout || ((_o = payload.scaleOptions) === null || _o === void 0 ? void 0 : _o.specializationTimeout) ||
                 120,
         },
     }).toPromise();
