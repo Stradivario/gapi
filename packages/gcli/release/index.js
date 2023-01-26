@@ -16750,6 +16750,7 @@ function registerAuthCommands(program) {
         .description('Login to graphql-server')
         .option('-k, --key <key>', 'Specify api key')
         .option('-uu, --uploadUrl <key>', 'Specify upload server')
+        .option('-i, --integration <key>', 'Initialize directories for CI/CD purposes')
         .option('-t, --token <token>', 'Specify custom token generated from the website')
         .option('-u, --url <url>', 'Specify api url')
         .action(helpers_1.lazy(() => Promise.resolve().then(() => __webpack_require__(875)).then((m) => m.default)));
@@ -54513,14 +54514,23 @@ exports.default = (cmd) => rxjs_1.of(gql_client_1.GraphqlClienAPI.init(cmd.key))
         encoding: 'utf-8',
     }),
 ])))
-    .pipe(operators_1.switchMap(() => gql_client_1.GraphqlClienAPI.signIn(cmd.token).toPromise()), operators_1.switchMap(({ user, refresh, token }) => rxjs_1.combineLatest([
+    .pipe(operators_1.switchMap(() => cmd.integration
+    ? rxjs_1.of({
+        user: {
+            displayName: 'Integration Account for CI/CD',
+            email: 'support@graphql-server.com',
+        },
+        refresh: '',
+        token: '',
+    })
+    : gql_client_1.GraphqlClienAPI.signIn(cmd.token).toPromise()), operators_1.switchMap(({ user, refresh, token }) => rxjs_1.combineLatest([
     util_1.promisify(fs_1.writeFile)(types_1.tokenDirectory, token, {
         encoding: 'utf-8',
     }),
     util_1.promisify(fs_1.writeFile)(types_1.refreshTokenDirectory, refresh, {
         encoding: 'utf-8',
     }),
-]).pipe(operators_1.map(() => user))), operators_1.tap((user) => console.log('Logged in as', `"${user.displayName}"`, 'with email', `"${user.email}"`)))))
+]).pipe(operators_1.map(() => user))), operators_1.tap((user) => console.log('Logged in as', `"${user === null || user === void 0 ? void 0 : user.displayName}"`, 'with email', `"${user === null || user === void 0 ? void 0 : user.email}"`)))))
     .toPromise();
 
 
