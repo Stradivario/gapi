@@ -61,7 +61,7 @@ export class GraphqlClienAPI {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              authorization: token,
+              authorization: process.env.GCLI_AUTH_TOKEN ?? token,
               Accept: 'application/json',
             },
             body: JSON.stringify({ query, variables }),

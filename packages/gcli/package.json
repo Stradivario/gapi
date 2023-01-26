@@ -15,6 +15,7 @@
     "lint-fix": "npx eslint . --fix --ext .ts",
     "build:release": "gapi build --single-executable && cp ./dist/gcli-linux ./release && cp ./dist/index.js ./release",
     "build": "echo BUILD",
+    "esbuild": "node build.js",
     "introspect": "gapi schema introspect --collect-documents --collect-types"
   },
   "author": {
@@ -59,7 +60,9 @@
     "node-fetch": "^2.1.2",
     "rxjs": "6.5.2",
     "stream-to-buffer": "^0.1.0",
-    "@rxdi/compressor": "^0.7.136"
+    "@rxdi/compressor": "^0.7.136",
+    "dotenv-load": "^2.0.1",
+    "esbuild": "0.15.18"
   },
   "bin": {
     "gcli": "./release/index.js"

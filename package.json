@@ -64,7 +64,9 @@
     "@types/rimraf": "^2.0.2",
     "@types/yamljs": "^0.2.30",
     "@rxdi/dts-merge": "^0.0.239",
-    "parcel-plugin-electron-dotenv": "^0.1.0"
+    "parcel-plugin-electron-dotenv": "^0.1.0",
+    "dotenv-load": "^2.0.1",
+    "esbuild": "0.15.18"
   },
   "dependencies": {
     "@rxdi/core": "^0.7.136",

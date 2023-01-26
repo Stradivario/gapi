@@ -44629,23 +44629,26 @@ function gql(...args) {
 exports.gql = gql;
 class GraphqlClienAPI {
     static query({ query, variables, }) {
-        return this.getConfig().pipe(operators_1.switchMap(({ token, url }) => rxjs_1.from(fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                authorization: token,
-                Accept: 'application/json',
-            },
-            body: JSON.stringify({ query, variables }),
-        })).pipe(operators_1.switchMap((res) => res.json()), operators_1.map(({ data, errors }) => {
-            if (errors === null || errors === void 0 ? void 0 : errors.length) {
-                throw new Error(JSON.stringify(errors, null, 2));
-            }
-            if (!data) {
-                throw new Error('missing-entry');
-            }
-            return data;
-        }))));
+        return this.getConfig().pipe(operators_1.switchMap(({ token, url }) => {
+            var _a;
+            return rxjs_1.from(fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: (_a = process.env.GCLI_AUTH_TOKEN) !== null && _a !== void 0 ? _a : token,
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify({ query, variables }),
+            })).pipe(operators_1.switchMap((res) => res.json()), operators_1.map(({ data, errors }) => {
+                if (errors === null || errors === void 0 ? void 0 : errors.length) {
+                    throw new Error(JSON.stringify(errors, null, 2));
+                }
+                if (!data) {
+                    throw new Error('missing-entry');
+                }
+                return data;
+            }));
+        }));
     }
     static getLambda(lambdaId, fragments) {
         return this.query({
