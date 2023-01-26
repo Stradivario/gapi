@@ -19,6 +19,7 @@ export default (cmd: {
   key: string;
   url: string;
   uploadUrl: string;
+  integration: boolean;
   token: string;
 }) =>
   of(GraphqlClienAPI.init(cmd.key))
@@ -49,7 +50,18 @@ export default (cmd: {
             ),
           )
           .pipe(
-            switchMap(() => GraphqlClienAPI.signIn(cmd.token).toPromise()),
+            switchMap(() =>
+              cmd.integration
+                ? of({
+                    user: {
+                      displayName: 'Integration Account for CI/CD',
+                      email: 'support@graphql-server.com',
+                    } as firebase.User,
+                    refresh: '',
+                    token: '',
+                  })
+                : GraphqlClienAPI.signIn(cmd.token).toPromise(),
+            ),
             switchMap(({ user, refresh, token }) =>
               combineLatest([
                 promisify(writeFile)(tokenDirectory, token, {
@@ -63,9 +75,9 @@ export default (cmd: {
             tap((user) =>
               console.log(
                 'Logged in as',
-                `"${user.displayName}"`,
+                `"${user?.displayName}"`,
                 'with email',
-                `"${user.email}"`,
+                `"${user?.email}"`,
               ),
             ),
           ),
