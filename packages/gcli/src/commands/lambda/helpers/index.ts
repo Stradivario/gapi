@@ -128,7 +128,7 @@ export const createOrUpdateLambda = (
             body: body as never,
             headers: {
               ...body.getHeaders(),
-              Authorization: process.env.GCLI_AUTH_TOKEN ?? config.token,
+              Authorization: config.token,
               projectid: data.projectId,
               lambdaname: data.name,
             },

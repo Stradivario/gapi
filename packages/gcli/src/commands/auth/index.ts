@@ -8,10 +8,7 @@ export function registerAuthCommands(program: Command) {
     .description('Login to graphql-server')
     .option('-k, --key <key>', 'Specify api key')
     .option('-uu, --uploadUrl <key>', 'Specify upload server')
-    .option(
-      '-i, --integration <key>',
-      'Initialize directories for CI/CD purposes',
-    )
+    .option('-ci, --ci', 'Initialize directories for CI/CD purposes')
     .option(
       '-t, --token <token>',
       'Specify custom token generated from the website',

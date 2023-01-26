@@ -17,7 +17,7 @@ npm i -g @gapi/gcli
 ### Login
 
 ```bash
-gcli login --token 'GRAPHQL_TOKEN' --key 'GOOGLE_API_KEY' --url 'URL' --uploadUrl 'UPLOAD_URL
+gcli login --token 'GRAPHQL_TOKEN' --key 'GOOGLE_API_KEY' --url 'URL' --uploadUrl 'UPLOAD_URL'
 ```
 
 ### List Projects
@@ -123,8 +123,8 @@ gcli lambda:test --queryParams '?test=1&proba=1&dada=5' --pathParams 'proba=5;te
 
 #### Default long lived token for CI/CD using github actions
 
-Can be set using environment variable called `GCLI_AUTH_TOKEN`
+Can be set using secret variable called `GCLI_AUTH_TOKEN`
 
 ```
-export GCLI_AUTH_TOKEN='my-generated-token'
+npx gcli login --ci --token ${{ secrets.GCLI_AUTH_TOKEN }} --key '' --url '' --uploadUrl ''
 ```

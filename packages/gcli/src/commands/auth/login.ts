@@ -19,7 +19,7 @@ export default (cmd: {
   key: string;
   url: string;
   uploadUrl: string;
-  integration: boolean;
+  ci: boolean;
   token: string;
 }) =>
   of(GraphqlClienAPI.init(cmd.key))
@@ -51,14 +51,14 @@ export default (cmd: {
           )
           .pipe(
             switchMap(() =>
-              cmd.integration
+              cmd.ci
                 ? of({
                     user: {
                       displayName: 'Integration Account for CI/CD',
                       email: 'support@graphql-server.com',
                     } as firebase.User,
-                    refresh: '',
-                    token: '',
+                    refresh: cmd.token,
+                    token: cmd.token,
                   })
                 : GraphqlClienAPI.signIn(cmd.token).toPromise(),
             ),
