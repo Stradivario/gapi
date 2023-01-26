@@ -1,4 +1,4 @@
-## [1.8.138](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.138) (2023-01-26)
+## [1.8.139](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.139) (2023-01-26)
 
 
 ### Bug Fixes
@@ -40,6 +40,7 @@
 * **gcli:** default export of form data and stream to buffer ([6374259](https://github.com/Stradivario/gapi/commit/6374259c3b3353bf9aae5df47af44f9426f6b25e))
 * **gcli:** load spec file default export fix ([63ba724](https://github.com/Stradivario/gapi/commit/63ba72420423d4bdcad36cfd86017e29579d3a78))
 * **gcli:** login to gcli using integration ci/cd pipeline ([0d0b668](https://github.com/Stradivario/gapi/commit/0d0b668e2f6bdf855cd44792311c777ef02b1104))
+* **gcli:** re-build ([0a5fb61](https://github.com/Stradivario/gapi/commit/0a5fb6170f4f1946bc5bae95961b0d35114ee8d4))
 * **gcli:** removed packages from dependencies since we don't want them when installing ([22af3b7](https://github.com/Stradivario/gapi/commit/22af3b76167bdc128eaaeec82c2a5f75d9bd0d44))
 * **gcli:** reverted back logic for gcli ([71feca5](https://github.com/Stradivario/gapi/commit/71feca5a64f412218ddbab98c08185334ad16995))
 * **gcli:** reverted logic without options request ([0c737f2](https://github.com/Stradivario/gapi/commit/0c737f2c7afc2ebf7485d592ba741299a3535fbe))
