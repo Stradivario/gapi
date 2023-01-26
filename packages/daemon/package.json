@@ -1,6 +1,6 @@
 {
   "name": "@gapi/daemon",
-  "version": "1.8.134",
+  "version": "1.8.135",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
