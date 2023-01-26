@@ -1,4 +1,4 @@
-## [1.8.136](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.136) (2023-01-26)
+## [1.8.137](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.137) (2023-01-26)
 
 
 ### Bug Fixes
@@ -34,6 +34,7 @@
 * **federation:** full headers are resend to the appropriate service ([c62d273](https://github.com/Stradivario/gapi/commit/c62d273ccf4811e213222711f3d5c8892621f087))
 * **federation:** readme ([1d8b2c8](https://github.com/Stradivario/gapi/commit/1d8b2c89f6dba9a75e892309fd3dc76b8492a9de))
 * **federation:** rebuilded module and re-deployed ([05da054](https://github.com/Stradivario/gapi/commit/05da054ad5c8352a65922628fe87de5b5534e55c))
+* **gcli:** authorization token passed also to upload lambda logic ([d606afd](https://github.com/Stradivario/gapi/commit/d606afd4975a98fc106047fbc813429ff29f2713))
 * **gcli:** builded again the package with namespace import from all ([9237232](https://github.com/Stradivario/gapi/commit/92372321239369bd9626df191f8f9a3e8c6e515f))
 * **gcli:** decompress logs ([70d9eea](https://github.com/Stradivario/gapi/commit/70d9eea541e798abe06ae36d5f792a5dd7aa7b00))
 * **gcli:** default export of form data and stream to buffer ([6374259](https://github.com/Stradivario/gapi/commit/6374259c3b3353bf9aae5df47af44f9426f6b25e))
