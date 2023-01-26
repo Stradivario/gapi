@@ -1,4 +1,4 @@
-## [1.8.137](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.137) (2023-01-26)
+## [1.8.138](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.138) (2023-01-26)
 
 
 ### Bug Fixes
@@ -41,6 +41,7 @@
 * **gcli:** load spec file default export fix ([63ba724](https://github.com/Stradivario/gapi/commit/63ba72420423d4bdcad36cfd86017e29579d3a78))
 * **gcli:** login to gcli using integration ci/cd pipeline ([0d0b668](https://github.com/Stradivario/gapi/commit/0d0b668e2f6bdf855cd44792311c777ef02b1104))
 * **gcli:** removed packages from dependencies since we don't want them when installing ([22af3b7](https://github.com/Stradivario/gapi/commit/22af3b76167bdc128eaaeec82c2a5f75d9bd0d44))
+* **gcli:** reverted back logic for gcli ([71feca5](https://github.com/Stradivario/gapi/commit/71feca5a64f412218ddbab98c08185334ad16995))
 * **gcli:** reverted logic without options request ([0c737f2](https://github.com/Stradivario/gapi/commit/0c737f2c7afc2ebf7485d592ba741299a3535fbe))
 * **InitQuery:** reverted ([f500c5b](https://github.com/Stradivario/gapi/commit/f500c5b8e9ed8b227be93d91e4856c548b10e72b))
 * **login:** added method which converts number to string ([605fe1d](https://github.com/Stradivario/gapi/commit/605fe1dd587c7ed4af37318917be1568fbd4740e))
