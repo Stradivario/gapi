@@ -120,3 +120,11 @@ gcli lambda:get
 ```bash
 gcli lambda:test --queryParams '?test=1&proba=1&dada=5' --pathParams 'proba=5;test=7'
 ```
+
+#### Default long lived token for CI/CD using github actions
+
+Can be set using environment variable called `GCLI_AUTH_TOKEN`
+
+```
+export GCLI_AUTH_TOKEN='my-generated-token'
+```
