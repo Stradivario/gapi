@@ -97,7 +97,7 @@
     "parcel-bundler": "1.12.3",
     "rimraf": "2.6.3",
     "rxjs": "6.5.2",
-    "shelljs": "0.8.3",
+    "shelljs": "0.8.5",
     "yamljs": "0.3.0",
     "@rxdi/graphql": "^0.7.166",
     "apollo-server": "^2.12.0",
