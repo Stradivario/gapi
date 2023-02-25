@@ -1,4 +1,4 @@
-## [1.8.142](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.142) (2023-02-25)
+## [1.8.143](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.143) (2023-02-25)
 
 
 ### Bug Fixes
@@ -50,6 +50,7 @@
 * **sendgrid:** fixed wrong async assignment ([aca38f6](https://github.com/Stradivario/gapi/commit/aca38f6c565131b0e22630f4fe24fd2b1b0780d1))
 * **sendgrid:** html property removed from type and re assigned like it needs to be ([648d411](https://github.com/Stradivario/gapi/commit/648d411171268f55b568c264af96b2949ee6e9b2))
 * **SystemdDaemon:** removed export from helpers ([77a7c1a](https://github.com/Stradivario/gapi/commit/77a7c1aedb4081d65a07a08929b777d686f797ae))
+* **versions:** mismatched versions 140 instead ot 142 ([dad2d4d](https://github.com/Stradivario/gapi/commit/dad2d4d726cd388c26e28517346eb0af4c622dc7))
 
 
 ### Features
