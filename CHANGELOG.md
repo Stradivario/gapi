@@ -1,4 +1,4 @@
-## [1.8.140](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.140) (2023-02-21)
+## [1.8.141](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.141) (2023-02-25)
 
 
 ### Bug Fixes
@@ -78,6 +78,7 @@
 * **gcli:** single executable ([cf8417e](https://github.com/Stradivario/gapi/commit/cf8417e95ba80c6c5806fbb5306f8cf1f1445768))
 * **GraphqlCli:** init graphql-server cli ([0299494](https://github.com/Stradivario/gapi/commit/0299494966ff1e1ebd19d7bcfe19a6f7a4f75ae9))
 * **Lambda:** generation and deploy for lambda ([05214cc](https://github.com/Stradivario/gapi/commit/05214cce4acbdb6a06e74f7ec877e0d89c176986))
+* **openai:** added open ai module with simple graphql mutation ([38304b8](https://github.com/Stradivario/gapi/commit/38304b8c270a97a6333514188481582cab09294d))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([a939f01](https://github.com/Stradivario/gapi/commit/a939f01fa3c83ee330ca8affa7ccee1c970be613))
 * **rxdi:** whole infrastructure bumped ([53f68cb](https://github.com/Stradivario/gapi/commit/53f68cb1f0240553da1ac73108edee6cd26c9cf8))
 * **sandgrid:** added options to last parameter in order to create attachment for the email and add s missing functionalities which restrict this library to be used as a extender of original sendgrid library ([4d7b649](https://github.com/Stradivario/gapi/commit/4d7b6492dee0f038dfbc033465ff8fa57c52d514))
