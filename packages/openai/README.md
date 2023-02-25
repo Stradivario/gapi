@@ -54,3 +54,38 @@ mutation {
   }
 }
 ```
+
+#### Extending the OpenAPI graphql endpoints using internal provided injection token `OpenAI`
+
+```typescript
+import { Controller, GraphQLNonNull, Inject, Mutation, Type } from '@gapi/core';
+import {
+  CreateCompletionInputType,
+  CreateCompletionRequest,
+  CreateCompletionType,
+  OpenAI,
+} from '@gapi/openai';
+import { from } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+@Controller()
+export class CustomControllerController {
+  constructor(@Inject(OpenAI) private openai: OpenAI) {}
+
+  @Type(CreateCompletionType)
+  @Mutation({
+    payload: {
+      type: new GraphQLNonNull(CreateCompletionInputType),
+    },
+  })
+  createCompletion(root, { payload }: { payload: CreateCompletionRequest }) {
+    return from(
+      this.openai.createCompletion({
+        ...payload,
+        max_tokens: payload.max_tokens ?? 2048,
+      }),
+    ).pipe(map((res) => res.data));
+  }
+}
+
+```
