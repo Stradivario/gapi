@@ -1,6 +1,6 @@
 {
   "name": "@gapi/openai",
-  "version": "1.8.142",
+  "version": "1.8.143",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "openai": "^3.1.0",
-    "@gapi/core": "^1.8.142"
+    "@gapi/core": "^1.8.143"
   },
   "devDependencies": {
     "@types/node": "^13.11.1",
