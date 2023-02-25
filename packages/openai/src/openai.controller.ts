@@ -20,8 +20,7 @@ export class OpenAIController {
   createCompletion(root, { payload }: { payload: CreateCompletionRequest }) {
     return from(
       this.openai.createCompletion({
-        model: payload.model ?? 'text-davinci-003',
-        prompt: payload.prompt,
+        ...payload,
         max_tokens: payload.max_tokens ?? 2048,
       }),
     ).pipe(map((res) => res.data));
