@@ -6,6 +6,7 @@ import { from } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { promisify } from 'util';
 
+import { isWindows } from '../core/helpers';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import { mkdirp } from '../core/helpers/mkdirp';
 import { ArgsService } from '../core/services/args.service';
@@ -189,7 +190,9 @@ export const introspectionQueryResultData = ${JSON.stringify(
   public async generateSchema() {
     console.log(`[GenerateSchema]: Trying to hit ${this.endpoint} ...`);
     await this.execService.call(
-      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${
+      `${
+        isWindows() ? 'set' : 'export'
+      } NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${
         this.node_modules
       }/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} ${
         this.headers ? `--header "${this.headers}"` : ''
@@ -197,7 +200,11 @@ export const introspectionQueryResultData = ${JSON.stringify(
     );
     console.log(`[GenerateSchema]: Endpoint ${this.endpoint} hit!`);
     await this.execService.call(
-      `export NODE_TLS_REJECT_UNAUTHORIZED=0 && node  ${this.bashFolder}/gql2ts/index.js ${this.folder}/schema.json -o ${this.folder}/index.ts`
+      `${
+        isWindows() ? 'set' : 'export'
+      } NODE_TLS_REJECT_UNAUTHORIZED=0 && node  ${
+        this.bashFolder
+      }/gql2ts/index.js ${this.folder}/schema.json -o ${this.folder}/index.ts`
     );
     console.log(
       `[GenerateSchema]: Typescript interfaces generated inside folder: ${this.folder}/index.d.ts`
