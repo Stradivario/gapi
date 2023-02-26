@@ -68,3 +68,5 @@ export const nextOrDefault = (i: Tasks, fb: any = true, type = (p) => p) => {
   }
   return fb;
 };
+
+export * from './is-windows';

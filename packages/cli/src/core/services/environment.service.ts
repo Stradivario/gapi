@@ -1,5 +1,7 @@
 import { Service } from '@rxdi/core';
 
+import { isWindows } from '../helpers';
+
 @Service()
 export class EnvironmentVariableService {
   setVariables(config) {
@@ -9,9 +11,13 @@ export class EnvironmentVariableService {
     conf.forEach((key) => {
       count++;
       if (conf.length === count) {
-        buildedEnvironments += `export ${key}=${config[key]}`;
+        buildedEnvironments += `${isWindows() ? 'set' : 'export'} ${key}=${
+          config[key]
+        }`;
       } else {
-        buildedEnvironments += `export ${key}=${config[key]} && `;
+        buildedEnvironments += `${isWindows() ? 'set' : 'export'} ${key}=${
+          config[key]
+        } && `;
       }
     });
     return buildedEnvironments;
