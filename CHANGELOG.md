@@ -1,4 +1,4 @@
-## [1.8.143](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.143) (2023-02-25)
+## [1.8.144](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.144) (2023-02-26)
 
 
 ### Bug Fixes
@@ -25,6 +25,7 @@
 * **cli:** collect fragments when generating schema was hitting wrong endpoint ([dcf7778](https://github.com/Stradivario/gapi/commit/dcf77786e542d548c149c9ce52b35e759ef55f17))
 * **cli:** enums was not exported inside index.ts ([312ddeb](https://github.com/Stradivario/gapi/commit/312ddeb3262e38b064604d88918d53ac9ae6d47c))
 * **cli:** humps added to dependencies updated rxdi to 136 ([d6ea8a8](https://github.com/Stradivario/gapi/commit/d6ea8a882e5ff077973bbf00b22cfb3cfb1810bc))
+* **cli:** if it is windows use set to set env variables instead of export ([bea7473](https://github.com/Stradivario/gapi/commit/bea747316b1d802b5d6f6c27e031d7aa8c026cf2))
 * **cli:** if not defined headers property it throws error and intrupting previews flow without headers ([8518683](https://github.com/Stradivario/gapi/commit/85186831a08200b584ab39dcf8548ab085fd5daa))
 * **cli:** lint removed from generated files ([8a75cf4](https://github.com/Stradivario/gapi/commit/8a75cf4b6e6132f1c4cbad9256eb7a981e9ec757))
 * **commander:** bumped to latest version ([7c0fa34](https://github.com/Stradivario/gapi/commit/7c0fa349773d5c6080f6422db0e58f39775498a0))
