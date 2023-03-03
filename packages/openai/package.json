@@ -29,7 +29,9 @@
     "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
-    "openai": "^3.1.0",
+    "openai": "^3.2.1"
+  },
+  "peerDependencies": {
     "@gapi/core": "^1.8.144"
   },
   "devDependencies": {

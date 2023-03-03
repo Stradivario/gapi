@@ -55,6 +55,41 @@ mutation {
 }
 ```
 
+
+#### Create Chat Completion prompt
+```graphql
+mutation {
+  createChatCompletion(
+    payload: {
+      model: "gpt-3.5-turbo"
+      prompt: "Can you write a description for card based on this text 'Create inside user portal page which will show when user log in to the system'"
+      max_tokens: 2048
+    }
+  ) {
+    id
+    object
+    created
+    model
+    choices {
+      text
+      message {
+        role
+        content
+      }
+      index
+      logprobs
+      finish_reason
+    }
+    usage {
+      prompt_tokens
+      completion_tokens
+      total_tokens
+    }
+  }
+}
+
+```
+
 #### Extending the OpenAPI graphql endpoints using internal provided injection token `OpenAI`
 
 ```typescript
@@ -82,6 +117,28 @@ export class CustomControllerController {
     return from(
       this.openai.createCompletion({
         ...payload,
+        max_tokens: payload.max_tokens ?? 2048,
+      }),
+    ).pipe(map((res) => res.data));
+  }
+
+
+  @Type(CreateCompletionType)
+  @Mutation({
+    payload: {
+      type: new GraphQLNonNull(CreateCompletionInputType),
+    },
+  })
+  createChatCompletion(
+    root,
+    { payload }: { payload: CreateCompletionRequest },
+  ) {
+    return from(
+      this.openai.createChatCompletion({
+        messages: [{
+          role: 'user',
+          content: payload.prompt as string
+        }],
         max_tokens: payload.max_tokens ?? 2048,
       }),
     ).pipe(map((res) => res.data));
