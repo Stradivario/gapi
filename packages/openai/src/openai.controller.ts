@@ -25,4 +25,28 @@ export class OpenAIController {
       }),
     ).pipe(map((res) => res.data));
   }
+
+  @Type(CreateCompletionType)
+  @Mutation({
+    payload: {
+      type: new GraphQLNonNull(CreateCompletionInputType),
+    },
+  })
+  createChatCompletion(
+    root,
+    { payload }: { payload: CreateCompletionRequest },
+  ) {
+    return from(
+      this.openai.createChatCompletion(
+        JSON.parse(
+          JSON.stringify({
+            ...payload,
+            messages: [{ role: 'user', content: payload.prompt as string }],
+            max_tokens: payload.max_tokens ?? 2048,
+            prompt: undefined,
+          }),
+        ),
+      ),
+    ).pipe(map((res) => res.data));
+  }
 }
