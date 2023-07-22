@@ -30,7 +30,7 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "@rxdi/core": "^0.7.172",
+    "@rxdi/core": "^0.7.173",
     "@types/node": "^13.11.1",
     "@types/request": "^2.48.1"
   },
