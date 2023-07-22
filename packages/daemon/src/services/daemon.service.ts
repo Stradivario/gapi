@@ -1,7 +1,7 @@
+import { Server } from '@hapi/hapi';
 import { Inject, Injectable } from '@rxdi/core';
 import { sendRequest } from '@rxdi/graphql';
 import { HAPI_SERVER } from '@rxdi/hapi';
-import { Server } from 'hapi';
 
 import { DaemonLink } from '../daemon.interface';
 

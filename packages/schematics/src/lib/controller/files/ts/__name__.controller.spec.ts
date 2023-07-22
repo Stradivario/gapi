@@ -10,7 +10,7 @@ import {
   setConfigServer,
   setConfigGraphql
 } from '@gapi/core';
-import { Server } from 'hapi';
+import { Server } from '@hapi/hapi';
 import { from } from 'rxjs';
 import { <%= classify(name) %>Controller } from './<%= name %>.controller';
 

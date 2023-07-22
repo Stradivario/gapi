@@ -1,7 +1,7 @@
+import { Request, ResponseToolkit, Server } from '@hapi/hapi';
 import { Inject, Plugin } from '@rxdi/core';
 import { HAPI_SERVER } from '@rxdi/hapi';
 import { renderPlaygroundPage } from 'graphql-playground-html';
-import { Request, ResponseToolkit, Server } from 'hapi';
 
 import { PLAYGROUND_CONFIG, PlaygroundConfig } from '../palyground.config';
 

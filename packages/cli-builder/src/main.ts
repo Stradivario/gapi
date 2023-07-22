@@ -3,7 +3,7 @@ import {
   Container,
   HAPI_SERVER,
 } from '@gapi/core';
-import { Server } from 'hapi';
+import { Server } from '@hapi/hapi';
 
 import { Environment } from './app.constants';
 import { CLIBuilder } from './cli-builder';

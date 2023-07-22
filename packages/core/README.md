@@ -575,7 +575,7 @@ If you decide for example to return Promise on `register` and resolve it inside 
 ```typescript
 import { Module, Plugin, Service, PluginInterface } from '@rxdi/core';
 import { HAPI_SERVER } from '@rxdi/hapi';
-import { Server } from 'hapi';
+import { Server } from '@hapi/hapi';
 
 @Service()
 export class TestService {
@@ -686,7 +686,7 @@ import { BootstrapFramework, Container } from '@rxdi/core';
 import { FrameworkImports } from './framework-imports';
 import { format } from 'url';
 import { HAPI_SERVER } from '@rxdi/hapi';
-import { Server } from 'hapi';
+import { Server } from '@hapi/hapi';
 
 const App = BootstrapFramework(AuthMicroserviceModule, [FrameworkImports], {
   init: true,
