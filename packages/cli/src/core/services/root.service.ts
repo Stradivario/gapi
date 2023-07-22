@@ -3,10 +3,10 @@
 import { Container, Service } from '@rxdi/core';
 import { exec } from 'shelljs';
 
-import { BootstrapTask } from '../../tasks/bootstrap';
+// import { BootstrapTask } from '../../tasks/bootstrap';
 import { BuildTask } from '../../tasks/build';
 import { CloudCodeTask } from '../../tasks/cloud-code';
-import { DaemonTask } from '../../tasks/daemon';
+// import { DaemonTask } from '../../tasks/daemon';
 import { DeployTask } from '../../tasks/deploy';
 import { GenerateTask } from '../../tasks/generate/generate';
 import { NewTask } from '../../tasks/new';
@@ -33,8 +33,8 @@ export class RootService {
   private deployTask: DeployTask = Container.get(DeployTask);
   private buildTask: BuildTask = Container.get(BuildTask);
   private generateTask: GenerateTask = Container.get(GenerateTask);
-  private daemonTask: DaemonTask = Container.get(DaemonTask);
-  private bootstrapTask: BootstrapTask = Container.get(BootstrapTask);
+  // private daemonTask: DaemonTask = Container.get(DaemonTask);
+  // private bootstrapTask: BootstrapTask = Container.get(BootstrapTask);
 
   checkForCustomTasks(): Promise<any> {
     return new Promise(async (resolve, reject) => {
@@ -136,13 +136,13 @@ export class RootService {
       return await this.generateTask.run();
     }
 
-    if (argsService.args[2] === 'daemon' || argsService.args[2] === 'd') {
-      return await this.daemonTask.run();
-    }
+    // if (argsService.args[2] === 'daemon' || argsService.args[2] === 'd') {
+    //   return await this.daemonTask.run();
+    // }
 
-    if (argsService.args[2] === 'bootstrap' || argsService.args[2] === 'b') {
-      return await this.bootstrapTask.run();
-    }
+    // if (argsService.args[2] === 'bootstrap' || argsService.args[2] === 'b') {
+    //   return await this.bootstrapTask.run();
+    // }
 
     if (argsService.args[2] === 'plugin') {
       return await this.pluginTask.run();

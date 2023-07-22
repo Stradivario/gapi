@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/class-name-casing */
-import { Injectable } from '@gapi/core';
+import { Injectable } from '@rxdi/core';
 import { exists, readFile, writeFile } from 'fs';
 import { promisify } from 'util';
 
