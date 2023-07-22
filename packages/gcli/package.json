@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
-    "@rxdi/parcel-plugin-shebang": "^0.7.172",
+    "@rxdi/parcel-plugin-shebang": "^0.7.173",
     "@types/jest": "^25.2.1",
     "@types/js-yaml": "^4.0.3",
     "@types/node": "^13.11.1",
@@ -60,7 +60,7 @@
     "node-fetch": "^2.1.2",
     "rxjs": "6.5.2",
     "stream-to-buffer": "^0.1.0",
-    "@rxdi/compressor": "^0.7.172",
+    "@rxdi/compressor": "^0.7.173",
     "dotenv-load": "^2.0.1",
     "esbuild": "0.15.18"
   },
