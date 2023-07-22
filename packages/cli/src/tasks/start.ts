@@ -8,13 +8,13 @@ import { EnvironmentVariableService } from '../core/services/environment.service
 import { ExecService } from '../core/services/exec.service';
 import Bundler = require('parcel-bundler');
 import childProcess = require('child_process');
-import { HAPI_SERVER, sendRequest } from '@gapi/core';
-import { Container as rxdiContainer } from '@gapi/core';
+// import { HAPI_SERVER, sendRequest } from '@gapi/core';
+// import { Container as rxdiContainer } from '@gapi/core';
 import { normalize } from 'path';
 import { promisify } from 'util';
 
 import { includes, nextOrDefault } from '../core/helpers';
-import { IQuery } from '../daemon-server/api-introspection';
+// import { IQuery } from '../daemon-server/api-introspection';
 
 @Service()
 export class StartTask {
@@ -166,43 +166,43 @@ export class StartTask {
       );
     }
   }
-  async isDaemonRunning() {
-    this.setFakeHapiServer();
-    let res = {} as any;
-    try {
-      res = await sendRequest<IQuery>({
-        query: `
-                    query {
-                        status {
-                            status
-                        }
-                    }
-                `,
-      });
-    } catch (e) {}
-    if (res.status === 200 && res.data.status.status === '200') {
-      return true;
-    }
-    return false;
-  }
+  // async isDaemonRunning() {
+  //   // this.setFakeHapiServer();
+  //   let res = {} as any;
+  //   try {
+  //     res = await sendRequest<IQuery>({
+  //       query: `
+  //                   query {
+  //                       status {
+  //                           status
+  //                       }
+  //                   }
+  //               `,
+  //     });
+  //   } catch (e) { }
+  //   if (res.status === 200 && res.data.status.status === '200') {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
-  private setFakeHapiServer() {
-    rxdiContainer.set(HAPI_SERVER, { info: { port: '42000' } });
-  }
+  // private setFakeHapiServer() {
+  //   rxdiContainer.set(HAPI_SERVER, { info: { port: '42000' } });
+  // }
 
-  async notifyDaemon(variables: { repoPath?: string }) {
-    this.setFakeHapiServer();
-    await sendRequest({
-      query: `
-            mutation notifyDaemon($repoPath: String!) {
-              notifyDaemon(repoPath: $repoPath) {
-                repoPath
-              }
-            }
-            `,
-      variables,
-    });
-  }
+  // async notifyDaemon(variables: { repoPath?: string }) {
+  //   this.setFakeHapiServer();
+  //   await sendRequest({
+  //     query: `
+  //           mutation notifyDaemon($repoPath: String!) {
+  //             notifyDaemon(repoPath: $repoPath) {
+  //               repoPath
+  //             }
+  //           }
+  //           `,
+  //     variables,
+  //   });
+  // }
 
   async prepareBundler(
     file,

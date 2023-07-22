@@ -34,7 +34,6 @@
   "author": "Kristiyan Tachev (@Stradivario)",
   "license": "MIT",
   "dependencies": {
-    "@gapi/core": "^1.8.147",
     "graphql": "^14.6.0",
     "@gapi/schematics": "^1.8.147",
     "node-fetch": "^2.1.2",
