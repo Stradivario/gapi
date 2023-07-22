@@ -2,7 +2,7 @@
 
 import { Plugin, PluginInterface, Inject } from '@rxdi/core';
 import { HAPI_SERVER } from '@rxdi/hapi';
-import { Server } from 'hapi';
+import { Server } from '@hapi/hapi';
 
 @Plugin()
 export class <%= classify(name) %>Plugin implements PluginInterface {

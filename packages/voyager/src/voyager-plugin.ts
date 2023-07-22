@@ -1,7 +1,7 @@
+import { Server } from '@hapi/hapi';
 import { Inject, Plugin, PluginInterface } from '@rxdi/core';
 import { HAPI_SERVER } from '@rxdi/hapi';
 import renderVoyagerPage from 'graphql-voyager/middleware/render-voyager-page';
-import { Server } from 'hapi';
 
 import { VoyagerConfig, VoyagerConfigModel } from './voyager-config';
 
