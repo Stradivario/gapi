@@ -1,6 +1,6 @@
 {
   "name": "@gapi/cli",
-  "version": "1.8.147",
+  "version": "1.8.148",
   "description": "Gapi command line interface",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
@@ -35,7 +35,7 @@
   "license": "MIT",
   "dependencies": {
     "graphql": "^14.6.0",
-    "@gapi/schematics": "^1.8.147",
+    "@gapi/schematics": "^1.8.148",
     "node-fetch": "^2.1.2",
     "@zeit/ncc": "^0.22.1",
     "apollo-codegen": "0.20.2",
