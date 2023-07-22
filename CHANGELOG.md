@@ -1,4 +1,4 @@
-## [1.8.147](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.147) (2023-07-22)
+## [1.8.148](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.148) (2023-07-22)
 
 
 ### Bug Fixes
@@ -28,6 +28,7 @@
 * **cli:** if it is windows use set to set env variables instead of export ([bea7473](https://github.com/Stradivario/gapi/commit/bea747316b1d802b5d6f6c27e031d7aa8c026cf2))
 * **cli:** if not defined headers property it throws error and intrupting previews flow without headers ([8518683](https://github.com/Stradivario/gapi/commit/85186831a08200b584ab39dcf8548ab085fd5daa))
 * **cli:** lint removed from generated files ([8a75cf4](https://github.com/Stradivario/gapi/commit/8a75cf4b6e6132f1c4cbad9256eb7a981e9ec757))
+* **cli:** removed daemon service from @gapi/cli and @gapi/core as a dependency ([4422836](https://github.com/Stradivario/gapi/commit/44228369494080523f26ec14e0c912a9b1af10d3))
 * **commander:** bumped to latest version ([7c0fa34](https://github.com/Stradivario/gapi/commit/7c0fa349773d5c6080f6422db0e58f39775498a0))
 * **core:** added export for graphql-subscriptions ([7c6e42f](https://github.com/Stradivario/gapi/commit/7c6e42f15de5c4d841d009cc9a57e6531e4fa63b))
 * **core:** enum-to-graphql enum ([a87b5cf](https://github.com/Stradivario/gapi/commit/a87b5cf724c233c25abe3dcea9484ba12f3288da))
