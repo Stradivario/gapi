@@ -1,4 +1,4 @@
-## [1.8.149](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.149) (2023-07-22)
+## [1.8.150](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.150) (2024-02-04)
 
 
 ### Bug Fixes
@@ -83,6 +83,7 @@
 * **GraphqlCli:** init graphql-server cli ([0299494](https://github.com/Stradivario/gapi/commit/0299494966ff1e1ebd19d7bcfe19a6f7a4f75ae9))
 * **Lambda:** generation and deploy for lambda ([05214cc](https://github.com/Stradivario/gapi/commit/05214cce4acbdb6a06e74f7ec877e0d89c176986))
 * **openai:** added more input parameters for the graphql endpoint ([186add6](https://github.com/Stradivario/gapi/commit/186add6fa75a8dd5165b7fa28eab49eaa02b6fed))
+* **openai:** added new version of openai and modified a little bit the code to fit new api ([39c7eb9](https://github.com/Stradivario/gapi/commit/39c7eb9161a86eedb2a93fa5bb03792616138910))
 * **openai:** added open ai module with simple graphql mutation ([38304b8](https://github.com/Stradivario/gapi/commit/38304b8c270a97a6333514188481582cab09294d))
 * **openai:** created chat completion node ([7e653cf](https://github.com/Stradivario/gapi/commit/7e653cf3f59866ca33a4a71775da938868710228))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([a939f01](https://github.com/Stradivario/gapi/commit/a939f01fa3c83ee330ca8affa7ccee1c970be613))
