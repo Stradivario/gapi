@@ -1,5 +1,5 @@
 import { InjectionToken } from '@gapi/core';
-import { OpenAIApi } from 'openai';
+import { OpenAI as OpenAIApi } from 'openai';
 
 export const OpenAI = new InjectionToken<OpenAI>('open-ai');
 
