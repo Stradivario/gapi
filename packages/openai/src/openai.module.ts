@@ -1,5 +1,5 @@
 import { Module, ModuleWithProviders } from '@gapi/core';
-import { Configuration, ConfigurationParameters, OpenAIApi } from 'openai';
+import { ClientOptions, OpenAI as OpenAIApi } from 'openai';
 
 import { OpenAIController } from './openai.controller';
 import { OpenAI } from './openai.tokens';
@@ -8,13 +8,13 @@ import { OpenAI } from './openai.tokens';
   controllers: [OpenAIController],
 })
 export class OpenAIModue {
-  public static forRoot(config: ConfigurationParameters): ModuleWithProviders {
+  public static forRoot(config: ClientOptions): ModuleWithProviders {
     return {
       module: OpenAIModue,
       providers: [
         {
           provide: OpenAI,
-          useFactory: () => new OpenAIApi(new Configuration(config)),
+          useFactory: () => new OpenAIApi(config),
         },
       ],
     };

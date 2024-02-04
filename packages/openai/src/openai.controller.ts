@@ -1,5 +1,5 @@
 import { Controller, GraphQLNonNull, Inject, Mutation, Type } from '@gapi/core';
-import { CreateCompletionRequest } from 'openai';
+import { CompletionCreateParamsNonStreaming } from 'openai/resources/completions';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -17,13 +17,16 @@ export class OpenAIController {
       type: new GraphQLNonNull(CreateCompletionInputType),
     },
   })
-  createCompletion(root, { payload }: { payload: CreateCompletionRequest }) {
+  createCompletion(
+    root,
+    { payload }: { payload: CompletionCreateParamsNonStreaming },
+  ) {
     return from(
-      this.openai.createCompletion({
+      this.openai.completions.create({
         ...payload,
         max_tokens: payload.max_tokens ?? 2048,
       }),
-    ).pipe(map((res) => res.data));
+    ).pipe(map((res) => res));
   }
 
   @Type(CreateCompletionType)
@@ -34,19 +37,19 @@ export class OpenAIController {
   })
   createChatCompletion(
     root,
-    { payload }: { payload: CreateCompletionRequest },
+    { payload }: { payload: CompletionCreateParamsNonStreaming },
   ) {
     return from(
-      this.openai.createChatCompletion(
+      this.openai.completions.create(
         JSON.parse(
           JSON.stringify({
             ...payload,
-            messages: [{ role: 'user', content: payload.prompt as string }],
+            messages: [{ role: 'user', content: payload.prompt }],
             max_tokens: payload.max_tokens ?? 2048,
             prompt: undefined,
           }),
         ),
       ),
-    ).pipe(map((res) => res.data));
+    ).pipe(map((res) => res));
   }
 }
