@@ -107,7 +107,7 @@
     "graphql-geojson": "^1.0.0",
     "graphql-tools": "^5.0.0",
     "apollo-link-http": "^1.5.3",
-    "node-fetch": "^2.1.2",
+    "node-fetch": "^2.6.7",
     "systemjs": "0.21.4",
     "@types/request": "^2.48.1",
     "request": "^2.88.0",
