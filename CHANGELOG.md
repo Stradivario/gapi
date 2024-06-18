@@ -1,4 +1,4 @@
-## [1.8.150](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.150) (2024-02-04)
+## [1.8.151](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.151) (2024-06-18)
 
 
 ### Bug Fixes
@@ -58,6 +58,7 @@
 
 ### Features
 
+* **ac:** validator is now a separated entity type so it can be referenced from outside of the library scope ([2d81f15](https://github.com/Stradivario/gapi/commit/2d81f15749eebebfece8ed55582bb932c8619a7f))
 * **AsyncTemplate:** added async template with parameters ([e1643e8](https://github.com/Stradivario/gapi/commit/e1643e8b76d60cb01d0ff9030ba57c194f9228d5))
 * **cli-builder:** added console.log on subscriptions ([a252177](https://github.com/Stradivario/gapi/commit/a2521772f5c28ca638ec18dd22fdb57606e93867))
 * **cli-builder:** introduced ip behind NAT can be specified ([8aa1f12](https://github.com/Stradivario/gapi/commit/8aa1f125901672ee118bd348e09acd1376e66956))
