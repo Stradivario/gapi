@@ -4,6 +4,12 @@ export type GenericEnumType<T, K> = {
 
 export type Unboxed<T> = T extends (infer U)[] ? U : T;
 
+export type Validator<T = never, C = never> = {
+  validators?: ((args: Unboxed<T>, context: C) => boolean | Promise<boolean>)[];
+  enabled: boolean;
+  attributes?: GenericEnumType<Unboxed<T>, boolean>;
+};
+
 export type Union<
   Roles,
   Resolvers,
@@ -13,17 +19,7 @@ export type Union<
   Roles,
   {
     [resolver in keyof Resolvers]: Partial<
-      Record<
-        keyof Actions,
-        {
-          validators?: ((
-            args: Unboxed<Resolvers[resolver]>,
-            context: Context,
-          ) => boolean | Promise<boolean>)[];
-          enabled: boolean;
-          attributes?: GenericEnumType<Unboxed<Resolvers[resolver]>, boolean>;
-        }
-      >
+      Record<keyof Actions, Validator<Resolvers[resolver], Context>>
     >;
   }
 >;
