@@ -1,4 +1,4 @@
-## [1.8.151](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.151) (2024-06-18)
+## [1.8.152](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.152) (2025-11-26)
 
 
 ### Bug Fixes
@@ -53,6 +53,7 @@
 * **sendgrid:** fixed wrong async assignment ([aca38f6](https://github.com/Stradivario/gapi/commit/aca38f6c565131b0e22630f4fe24fd2b1b0780d1))
 * **sendgrid:** html property removed from type and re assigned like it needs to be ([648d411](https://github.com/Stradivario/gapi/commit/648d411171268f55b568c264af96b2949ee6e9b2))
 * **SystemdDaemon:** removed export from helpers ([77a7c1a](https://github.com/Stradivario/gapi/commit/77a7c1aedb4081d65a07a08929b777d686f797ae))
+* **tests:** missing tests script ([e2c7eef](https://github.com/Stradivario/gapi/commit/e2c7eeff0f8f5f3cb9932b3d5cc5dec6e86ad227))
 * **versions:** mismatched versions 140 instead ot 142 ([dad2d4d](https://github.com/Stradivario/gapi/commit/dad2d4d726cd388c26e28517346eb0af4c622dc7))
 
 
@@ -70,6 +71,7 @@
 * **dev:** loaded spec on single place and used all over the functions ([4b11d45](https://github.com/Stradivario/gapi/commit/4b11d45fa1ce6a5141900ca49b541992631f2435))
 * **dev:** refresh token authentication added ([2461558](https://github.com/Stradivario/gapi/commit/24615585c18770b3bc4e07b56d0948b15896dca0))
 * **dev:** test command introduced with few parameters ([f6809d0](https://github.com/Stradivario/gapi/commit/f6809d0375963bb1ec723b9d8b8969c34a765179))
+* **falkordb:** added new module to import falkordb client into the gapi system ([60b2611](https://github.com/Stradivario/gapi/commit/60b26110956b1745541e7a6236d36403b9684d91))
 * **federation:** added missing apollo server configs ([b049560](https://github.com/Stradivario/gapi/commit/b049560af645f1a4acf51afb3204efe145217722))
 * **federation:** added willSendRequest and context lambdas in order to manage authentication outside the scope of the library ([ea45b5e](https://github.com/Stradivario/gapi/commit/ea45b5ee5e2831b4ce375c17817e5024eb96f798))
 * **Federation:** removed _service and status from schema sdl when processing _service graph, removed ethereum, ipfs related modules with packages ([7b5781b](https://github.com/Stradivario/gapi/commit/7b5781bcc2fcf0578b0aaf57d2cbcd027d8d2b85))
