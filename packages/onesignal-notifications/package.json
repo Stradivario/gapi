@@ -24,7 +24,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "http://gitlab.youvolio.com/gapi/onesignal-notifications/issues"
+    "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
     "request": "^2.88.0"
