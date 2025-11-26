@@ -10,7 +10,7 @@
     "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
     "lint": "npx eslint . --ext .ts",
-    "test": "echo TESTS",
+    "test": "echo test",
     "lint-fix": "npx eslint . --fix --ext .ts",
     "build": "rm -rf dist && tsc || true"
   },
