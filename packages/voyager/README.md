@@ -1,10 +1,13 @@
 # @Gapi Voyager Module
 
 ##### Original Voyager module you can find here [VoyagerGraphql](https://github.com/APIs-guru/graphql-voyager)
-##### For questions/issues you can write ticket [here](http://gitlab.youvolio.com/gapi/gapi-voyager/issues)
+
+##### For questions/issues you can write ticket [here](https://github.com/Stradivario/gapi/issues)
+
 ##### This module is intended to be used with [GAPI](https://github.com/Stradivario/gapi)
 
 ## Installation and basic examples:
+
 ##### To install this Gapi module, run:
 
 ```bash
@@ -14,6 +17,7 @@ $ npm install @gapi/voyager --save
 ## Consuming @gapi/voyager
 
 ##### Import inside AppModule or CoreModule
+
 ```typescript
 
 import { Module } from '@rxdi/core';

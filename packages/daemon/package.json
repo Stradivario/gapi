@@ -51,7 +51,7 @@
     "verbose": true,
     "collectCoverage": true
   },
-  "description": "![Build Status](http://gitlab.youvolio.com/gapi/gapi-starter/badges/master/build.svg)",
+  "description": "![Build Status](https://github.com/Stradivario/gapi/issues)",
   "devDependencies": {
     "@types/hapi": "^18.0.2",
     "typescript": "^3.8.3",

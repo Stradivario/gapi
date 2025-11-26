@@ -8,7 +8,7 @@
 
 **Created to provide complex backend scalable applications with minimum effort.**
 
-**For questions/issues you can write ticket [here](http://gitlab.youvolio.com/gapi/gapi/issues)**
+**For questions/issues you can write ticket [here](https://github.com/Stradivario/gapi/issues)**
 
 <!-- <p align="center"> -->
 
@@ -178,7 +178,7 @@ Bootstrap(
       { name: 'accounts', url: 'http://localhost:9000/graphql' },
       { name: 'products', url: 'http://localhost:9001/graphql' },
     ],
-  }),
+  })
 ).subscribe(() => console.log('started'));
 ```
 
@@ -1519,8 +1519,7 @@ export interface UserInfo {
 
 @Service()
 export class AuthPrivateService {
-  constructor() // private connectionHookService: ConnectionHookService // private authService: AuthService,
-  {
+  constructor() { // private connectionHookService: ConnectionHookService // private authService: AuthService,
     // this.connectionHookService.modifyHooks.onSubConnection = this.onSubConnection.bind(this);
     // this.authService.modifyFunctions.validateToken = this.validateToken.bind(this);
   }

@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "target": "es6",
+    "baseUrl": ".",
+    "stripInternal": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "rootDir": "./src",
+    "lib": [
+      "es2017",
+      "es2016",
+      "es2015",
+      "es6",
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "skipLibCheck": true,
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/"
+    ]
+  },
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "flatModuleOutFile": "gapi-amqp.js",
+    "flatModuleId": "gapi-amqp"
+  },
+  "files": [
+    "./src/index.ts"
+  ]
+}

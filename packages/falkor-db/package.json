@@ -1,14 +1,10 @@
 {
-  "name": "@gapi/sequelize",
+  "name": "@gapi/falkordb",
   "version": "1.8.151",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Stradivario/gapi-sequelize.git"
+    "url": "https://github.com/Stradivario/falkordb.git"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "module": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
   "scripts": {
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
     "delete-dist": "rm -rf dist",
@@ -24,17 +20,22 @@
   "keywords": [
     "graphql",
     "gapi",
-    "node"
+    "node",
+    "falkordb"
   ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
-    "sequelize": "^5.8.2",
-    "sequelize-typescript": "^1.1.0"
+    "falkordb": "^6.3.1"
   },
   "devDependencies": {
-    "@rxdi/core": "^0.7.173"
-  }
+    "@rxdi/core": "^0.7.173",
+    "@types/node": "^13.11.1"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts"
 }

@@ -21,7 +21,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "http://gitlab.youvolio.com/open-source/gapi/issues"
+    "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
     "@gapi/daemon": "^1.8.151",
@@ -61,7 +61,7 @@
     "verbose": true,
     "collectCoverage": true
   },
-  "description": "![Build Status](http://gitlab.youvolio.com/gapi/gapi-starter/badges/master/build.svg)",
+  "description": "![Build Status](https://github.com/Stradivario/gapi/issues)",
   "devDependencies": {
     "@types/hapi": "^18.0.2",
     "typescript": "^3.8.3"
