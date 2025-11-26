@@ -18,7 +18,7 @@
     "publish": "npx bolt ws exec -- npm publish --update-readme --access public",
     "clean-dist": "npx bolt ws exec -- rm -rf dist",
     "clean": "git clean -dxf",
-    "test": "npx bolt ws exec -- npm run test",
+    "test": "npx bolt ws exec -- npm test",
     "lint": "npx bolt ws exec -- npm run lint",
     "lint-fix": "npx bolt ws exec -- npm run lint-fix"
   },

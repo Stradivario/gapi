@@ -9,6 +9,7 @@
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
     "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
+    "test": "echo test",
     "lint": "echo LINT SCHEMATICS",
     "lint-fix": "npx eslint . --fix --ext .ts",
     "build": "rm -rf dist && tsc || true && rsync -a --prune-empty-dirs --include '*/' --include '*' --exclude '*' src/ dist/"
