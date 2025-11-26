@@ -25,7 +25,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "http://gitlab.youvolio.com/gapi/gapi-voyager/issues"
+    "url": "https://github.com/Stradivario/gapi/issues"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

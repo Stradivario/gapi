@@ -24,7 +24,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "http://gitlab.youvolio.com/gapi/microservices/issues"
+    "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
     "apollo-link-http": "^1.5.3",
