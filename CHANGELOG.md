@@ -1,4 +1,4 @@
-## [1.8.152](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.152) (2025-11-26)
+## [1.8.153](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.153) (2025-12-08)
 
 
 ### Bug Fixes
@@ -66,6 +66,7 @@
 * **cli-builder:** notifiy result based on label in order to track machine with label ([bc837a6](https://github.com/Stradivario/gapi/commit/bc837a6e80bebe48b1feb9c396ee895740ee941c))
 * **cli:** added more options for parcel in order to customize behaviour ([ec2b040](https://github.com/Stradivario/gapi/commit/ec2b040d0e3c7381ca3578c2deef8d709ce1a286))
 * **cli:** compressed documents exported in order to reduce bundle size using lzw codec and json-url library ([96d1fd7](https://github.com/Stradivario/gapi/commit/96d1fd732cf9995ec80f3aff860fd40927f4be2f))
+* **context7:** added ownership for context7 readme [ci-skip] ([2ba1567](https://github.com/Stradivario/gapi/commit/2ba15676af1fd979c76b3548c5b8ddedd0f3942e))
 * **dev:** added lambda logs commands ([576feee](https://github.com/Stradivario/gapi/commit/576feee1cbd1da2284a1f78c79b37223698a61d1))
 * **dev:** decompress the result from logs ([5020165](https://github.com/Stradivario/gapi/commit/5020165257ee4c180ee62f7d6d77277eff91f114))
 * **dev:** loaded spec on single place and used all over the functions ([4b11d45](https://github.com/Stradivario/gapi/commit/4b11d45fa1ce6a5141900ca49b541992631f2435))
@@ -89,6 +90,7 @@
 * **openai:** added new version of openai and modified a little bit the code to fit new api ([39c7eb9](https://github.com/Stradivario/gapi/commit/39c7eb9161a86eedb2a93fa5bb03792616138910))
 * **openai:** added open ai module with simple graphql mutation ([38304b8](https://github.com/Stradivario/gapi/commit/38304b8c270a97a6333514188481582cab09294d))
 * **openai:** created chat completion node ([7e653cf](https://github.com/Stradivario/gapi/commit/7e653cf3f59866ca33a4a71775da938868710228))
+* **rxdi:** bumped rxdi versions due to recent ai changed with description field exposed to graphql query mutation and subscription better schema generation ([0c6869e](https://github.com/Stradivario/gapi/commit/0c6869e6d4a109730938814e6ca8f70aa4d6676f))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([a939f01](https://github.com/Stradivario/gapi/commit/a939f01fa3c83ee330ca8affa7ccee1c970be613))
 * **rxdi:** whole infrastructure bumped ([53f68cb](https://github.com/Stradivario/gapi/commit/53f68cb1f0240553da1ac73108edee6cd26c9cf8))
 * **sandgrid:** added options to last parameter in order to create attachment for the email and add s missing functionalities which restrict this library to be used as a extender of original sendgrid library ([4d7b649](https://github.com/Stradivario/gapi/commit/4d7b6492dee0f038dfbc033465ff8fa57c52d514))
