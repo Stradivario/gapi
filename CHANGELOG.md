@@ -1,4 +1,4 @@
-## [1.8.154](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.154) (2025-12-11)
+## [1.8.155](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.155) (2025-12-16)
 
 
 ### Bug Fixes
@@ -48,6 +48,7 @@
 * **gcli:** reverted logic without options request ([0c737f2](https://github.com/Stradivario/gapi/commit/0c737f2c7afc2ebf7485d592ba741299a3535fbe))
 * **InitQuery:** reverted ([f500c5b](https://github.com/Stradivario/gapi/commit/f500c5b8e9ed8b227be93d91e4856c548b10e72b))
 * **login:** added method which converts number to string ([605fe1d](https://github.com/Stradivario/gapi/commit/605fe1dd587c7ed4af37318917be1568fbd4740e))
+* new api introduced with small changes ([7131bd9](https://github.com/Stradivario/gapi/commit/7131bd9d0ff4d9defe2839e679db7ff11e08fc9f))
 * **package.json:** added @rxdi/core dependency ([2b400a2](https://github.com/Stradivario/gapi/commit/2b400a229ad7ed98ebe8c16f3983964336c99402))
 * **sendgrid:** added partial data to options ([0501b12](https://github.com/Stradivario/gapi/commit/0501b12325d5b9ce562dc2d4c704d8ec465a9fce))
 * **sendgrid:** fixed wrong async assignment ([aca38f6](https://github.com/Stradivario/gapi/commit/aca38f6c565131b0e22630f4fe24fd2b1b0780d1))
