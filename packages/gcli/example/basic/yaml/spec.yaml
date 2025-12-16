@@ -6,5 +6,5 @@ package: package.json
 params: []
 config: ''
 secret:
-env: NODEJS
-method: GET
+env: nodejs
+method: ['GET']

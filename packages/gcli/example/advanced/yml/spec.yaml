@@ -6,8 +6,8 @@ package: package.json
 params: ['test', 'proba']
 config: ''
 secret: 'test'
-env: NODEJS
-method: GET
+env: nodejs
+method: ['GET']
 uploadAsZip: true
 scaleOptions:
   minCpu: 0
@@ -17,7 +17,7 @@ scaleOptions:
   minScale: 1
   maxScale: 4
   targetCpu: 50
-  executorType: NEWDEPLOY
+  executorType: newdeploy
   idleTimeout: 120
   concurrency: 500
   functionTimeout: 60

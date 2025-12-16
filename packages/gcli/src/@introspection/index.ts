@@ -867,7 +867,7 @@ function
 }
 
 export   
-  type ILambdaScaleOptionsExecutorTypeEnum = 'POOLMGR' | 'NEWDEPLOY';
+  type ILambdaScaleOptionsExecutorTypeEnum = 'poolmgr' | 'newdeploy';
 
   
   export interface IFissionLogsType {
@@ -1337,19 +1337,17 @@ and we can execute /my-lambda/{id}/{name}
     /**
     description: The environment in which this lambda will execute defaults to nodejs
   */
-    env?: ILambdaEnvironmentsEnum | null;
+    env?: string | null;
     /**
     description: What type of endpoint we are creating GET, POST, etc. defaults to GET
   */
-    method?: IHttpMethodsEnum | null;
+    method?: IHttpMethodsEnum[] | null;
     packageJson?: string | null;
     buildBashScript?: string | null;
     customUploadFileId?: string | null;
     scaleOptions?: ILambdaScaleInputOptions | null;
 }
 
-export   
-  type ILambdaEnvironmentsEnum = 'NODEJS';
 
 export   
   type IHttpMethodsEnum = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS';

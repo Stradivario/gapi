@@ -92,8 +92,8 @@ example spec.json
   "params": ["test", "proba"],
   "config": "",
   "secret": "",
-  "env": "NODEJS",
-  "method": "GET"
+  "env": "nodejs",
+  "method": ["GET"]
 }
 ```
 
