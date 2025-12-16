@@ -1,13 +1,12 @@
 import {
   IGraphqlFile,
   IHttpMethodsEnum,
-  ILambdaEnvironmentsEnum,
   ILambdaScaleOptionsExecutorTypeEnum,
 } from '@introspection/index';
-import * as archiver from 'archiver';
+import archiver from 'archiver';
 import { exec } from 'child_process';
 import { Command } from 'commander';
-import * as FormData from 'form-data';
+import FormData from 'form-data';
 import {
   createReadStream,
   mkdir,
@@ -17,7 +16,7 @@ import {
 } from 'fs';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import * as streamToBuffer from 'stream-to-buffer';
+import streamToBuffer from 'stream-to-buffer';
 import { promisify } from 'util';
 
 import { parseProjectId } from '~/helpers';
@@ -41,8 +40,8 @@ export interface CreateOrUpdateLambdaArguments {
   buildBashScript: string;
   config: string;
   secret: string;
-  env: ILambdaEnvironmentsEnum;
-  method: IHttpMethodsEnum;
+  env: string;
+  method: IHttpMethodsEnum[];
   packageJson: string;
   package: string;
   params: string[];
@@ -158,8 +157,8 @@ export const createOrUpdateLambda = (
             (await ReadFile(payload.script || cmd.script).toPromise()) ||
             '',
           config: payload.config || cmd.config || '',
-          env: cmd.env || payload.env || 'NODEJS',
-          method: cmd.method || payload.method || 'GET',
+          env: cmd.env || payload.env || 'nodejs',
+          method: cmd.method || payload.method || ['GET'],
           packageJson:
             cmd.packageJson ||
             (await ReadFile(payload.package || cmd.package).toPromise()) ||
@@ -172,7 +171,7 @@ export const createOrUpdateLambda = (
             executorType:
               cmd.executorType ||
               payload.scaleOptions?.executorType ||
-              'POOLMGR',
+              'poolmgr',
             maxCpu: cmd.maxCpu || payload.scaleOptions?.maxCpu || 0,
             maxMemory: cmd.maxMemory || payload.scaleOptions?.maxMemory || 0,
             maxScale: cmd.maxScale || payload.scaleOptions?.maxScale || 0,

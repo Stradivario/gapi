@@ -1,6 +1,5 @@
 import {
   IHttpMethodsEnum,
-  ILambdaEnvironmentsEnum,
   ILambdaScaleInputOptions,
 } from '@introspection/index';
 import { load } from 'js-yaml';
@@ -13,8 +12,8 @@ interface ConfigJSON {
   name: string;
   route: string;
   file: string;
-  env: ILambdaEnvironmentsEnum;
-  method?: IHttpMethodsEnum;
+  env: string;
+  method?: IHttpMethodsEnum[];
   script?: string;
   package?: string;
   params?: string[];

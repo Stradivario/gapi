@@ -42,7 +42,7 @@ export function registerLambdaCommands(program: Command) {
     ['--project <project>', 'Project in which this lambda is defined'],
     ['--env <env>', 'Environment name for function can be NODEJS'],
     [
-      '--method <method>',
+      '--method <method...>',
       'HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method',
     ],
     ['--spec <spec>', 'Spec file yml or json path'],
