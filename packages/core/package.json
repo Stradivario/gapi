@@ -1,6 +1,6 @@
 {
   "name": "@gapi/core",
-  "version": "1.8.155",
+  "version": "1.8.156",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
@@ -25,7 +25,7 @@
     "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
-    "@gapi/daemon": "^1.8.155",
+    "@gapi/daemon": "^1.8.156",
     "@rxdi/core": "^0.7.184",
     "@rxdi/graphql": "^0.7.184",
     "@rxdi/graphql-pubsub": "^0.7.184",
