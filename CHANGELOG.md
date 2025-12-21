@@ -1,4 +1,4 @@
-## [1.8.157](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.157) (2025-12-21)
+## [1.8.158](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.158) (2025-12-21)
 
 
 ### Bug Fixes
@@ -51,6 +51,7 @@
 * new api introduced with small changes ([7131bd9](https://github.com/Stradivario/gapi/commit/7131bd9d0ff4d9defe2839e679db7ff11e08fc9f))
 * **package.json:** added @rxdi/core dependency ([2b400a2](https://github.com/Stradivario/gapi/commit/2b400a229ad7ed98ebe8c16f3983964336c99402))
 * **rxdi:** reverted back changes ([eaa4d99](https://github.com/Stradivario/gapi/commit/eaa4d994160a6850321d37b2b6b4a843a7e17262))
+* **rxdi:** reverted back old logic ([dfc592c](https://github.com/Stradivario/gapi/commit/dfc592c300b7e08ad6ee7264f8af49531f17edc3))
 * **sendgrid:** added partial data to options ([0501b12](https://github.com/Stradivario/gapi/commit/0501b12325d5b9ce562dc2d4c704d8ec465a9fce))
 * **sendgrid:** fixed wrong async assignment ([aca38f6](https://github.com/Stradivario/gapi/commit/aca38f6c565131b0e22630f4fe24fd2b1b0780d1))
 * **sendgrid:** html property removed from type and re assigned like it needs to be ([648d411](https://github.com/Stradivario/gapi/commit/648d411171268f55b568c264af96b2949ee6e9b2))
