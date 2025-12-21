@@ -36,6 +36,6 @@
     "sequelize-typescript": "^1.1.0"
   },
   "devDependencies": {
-    "@rxdi/core": "^0.7.184"
+    "@rxdi/core": "^0.7.185"
   }
 }
