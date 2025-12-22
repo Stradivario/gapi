@@ -2,7 +2,7 @@ import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { Platform } from 'esbuild';
 
 export default async (args: {
-  entryPoints: string[];
+  files: string[];
   bundle: boolean;
   minify: boolean;
   platform: Platform;
@@ -12,7 +12,7 @@ export default async (args: {
 }) => {
   return (await import('esbuild'))
     .build({
-      entryPoints: args.entryPoints?.length ? args.entryPoints : ['index.ts'],
+      entryPoints: args.files?.length ? args.files : ['index.ts'],
       bundle: args.bundle ?? true,
       minify: args.minify ?? false,
       platform: args.platform ?? 'node',

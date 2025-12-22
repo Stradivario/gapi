@@ -14,8 +14,9 @@ export function buildCommands(program: Command) {
     )
     .option('-b, --bundle', 'Bundle code', true)
     .option('-m, --minify', 'Minify code', false)
-    .option('-p, --platform', 'Platform ', 'node')
-    .option('-t, --target', 'Target ', 'node14.4')
+    .option('-p, --platform <char>', 'Platform ', 'node')
+    .option('-t, --target <char>', 'Target ', 'node14.4')
+    .option('-o, --outfile <char>', 'Outfile name')
     .option('-e, --external <external...>', 'External libraries')
     .action(
       lazy(() =>
