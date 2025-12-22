@@ -1,4 +1,4 @@
-## [1.8.164](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.164) (2025-12-22)
+## [1.8.165](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.165) (2025-12-22)
 
 
 ### Bug Fixes
@@ -41,6 +41,7 @@
 * **gcli:** builded again the package with namespace import from all ([9237232](https://github.com/Stradivario/gapi/commit/92372321239369bd9626df191f8f9a3e8c6e515f))
 * **gcli:** decompress logs ([70d9eea](https://github.com/Stradivario/gapi/commit/70d9eea541e798abe06ae36d5f792a5dd7aa7b00))
 * **gcli:** default export of form data and stream to buffer ([6374259](https://github.com/Stradivario/gapi/commit/6374259c3b3353bf9aae5df47af44f9426f6b25e))
+* **gcli:** esbuild marked as external but installable inside dependencies ([6336c0f](https://github.com/Stradivario/gapi/commit/6336c0ff4dcaf04e08774ccd1d4a1a32fb174e6f))
 * **gcli:** load spec file default export fix ([63ba724](https://github.com/Stradivario/gapi/commit/63ba72420423d4bdcad36cfd86017e29579d3a78))
 * **gcli:** login to gcli using integration ci/cd pipeline ([0d0b668](https://github.com/Stradivario/gapi/commit/0d0b668e2f6bdf855cd44792311c777ef02b1104))
 * **gcli:** re-build ([0a5fb61](https://github.com/Stradivario/gapi/commit/0a5fb6170f4f1946bc5bae95961b0d35114ee8d4))
