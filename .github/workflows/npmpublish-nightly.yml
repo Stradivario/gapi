@@ -25,7 +25,7 @@ jobs:
 
       - name: Bump nightly version
         run: npm version prerelease --preid=nightly --no-git-tag-version
-      
+
       - name: Bump monorepo packages
         run: npm run nightly
 
@@ -33,6 +33,13 @@ jobs:
         run: npm run build
 
       - name: Publish nightly packages
-        run: npm run publish-packages -- --tag nightly
+        run: npm run publish-packages-nightly
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: node ./change-version.js
+      - run: git add .
+      - run: git commit --amend --no-edit
+      - uses: ad-m/github-push-action@master
+        with:
+          tags: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
