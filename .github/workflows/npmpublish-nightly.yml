@@ -1,0 +1,38 @@
+name: Publish Nightly
+
+on:
+  push:
+    branches:
+      - nightly
+
+jobs:
+  publish-nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+      - run: npx @rxdi/bolt install
+
+      - run: npm config set '//registry.npmjs.org/:_authToken' "${{secrets.NPM_TOKEN}}"
+      - run: git config --global user.email 'kristiqn.tachev@gmail.com'
+      - run: git config --global user.name "Kristiyan Tachev"
+      - run: npm test --if-present
+
+      - name: Bump nightly version
+        run: npm version prerelease --preid=nightly --no-git-tag-version
+      
+      - name: Bump monorepo packages
+        run: npm run nightly
+
+      - name: Build packages
+        run: npm run build
+
+      - name: Publish nightly packages
+        run: npm run publish-packages -- --tag nightly
+        env:
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
