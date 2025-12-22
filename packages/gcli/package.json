@@ -62,13 +62,14 @@
     "stream-to-buffer": "^0.1.0",
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3",
-    "@anatine/esbuild-decorators": "^0.2.19",
-    "esbuild": "^0.27.2"
+    "@anatine/esbuild-decorators": "^0.2.19"
   },
   "bin": {
     "gcli": "./release/index.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "esbuild": "^0.27.2"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "module": "./dist/index.js",
