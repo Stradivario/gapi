@@ -8,6 +8,7 @@ require('esbuild')
     platform: 'node',
     target: 'node14.4',
     outfile: './release/index.js',
+    external: ['esbuild'],
     define: {
       'process.env.MONGODB_URI': `'${process.env.MONGODB_URI}'`,
       'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,

@@ -65,10 +65,11 @@
     "@types/yamljs": "^0.2.30",
     "@rxdi/dts-merge": "^0.7.71",
     "parcel-plugin-electron-dotenv": "^0.1.0",
-    "dotenv-load": "^2.0.1",
-    "esbuild": "0.15.18"
+    "dotenv-load": "^2.0.1"
   },
   "dependencies": {
+    "@anatine/esbuild-decorators": "^0.2.19",
+    "esbuild": "^0.27.2",
     "@rxdi/core": "^0.7.190",
     "@sendgrid/mail": "6.5.2",
     "graphql-voyager": "^1.0.0-rc.15",
