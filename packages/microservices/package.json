@@ -33,7 +33,7 @@
     "node-fetch": "^2.1.2"
   },
   "devDependencies": {
-    "@rxdi/core": "^0.7.191-nightly.1",
+    "@rxdi/core": "^0.7.191-nightly.2",
     "@gapi/auth": "^1.8.168-nightly.0",
     "@gapi/core": "^1.8.168-nightly.0",
     "@types/graphql": "^14.5.0",
