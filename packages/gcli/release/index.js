@@ -181063,7 +181063,6 @@ var init_build = __esm({
     import_esbuild_decorators = __toESM(require_src());
     build_default = async (args) => {
       var _a;
-      console.log(args, args.outfile);
       return (await import("esbuild")).build({
         entryPoints: ((_a = args.files) == null ? void 0 : _a.length) ? args.files : ["index.ts"],
         bundle: args.bundle ?? true,
@@ -212010,7 +212009,7 @@ function buildCommands(program2) {
   program2.command("build").description("Build bundle using esbuild https://esbuild.github.io ").option(
     "-f, --files <files...>",
     "File or files to bundle defaults to index.ts"
-  ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform", "Platform ", "node").option("-t, --target", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(
+  ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(
     lazy(
       () => (0, import_rxjs5.from)(Promise.resolve().then(() => (init_build(), build_exports))).pipe((0, import_operators4.map)((m) => m.default)).toPromise()
     )
