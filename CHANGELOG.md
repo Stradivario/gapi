@@ -1,4 +1,4 @@
-## [1.8.167](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.167) (2025-12-22)
+## [1.8.168](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.168) (2025-12-22)
 
 
 ### Bug Fixes
@@ -99,6 +99,7 @@
 * **openai:** added new version of openai and modified a little bit the code to fit new api ([39c7eb9](https://github.com/Stradivario/gapi/commit/39c7eb9161a86eedb2a93fa5bb03792616138910))
 * **openai:** added open ai module with simple graphql mutation ([38304b8](https://github.com/Stradivario/gapi/commit/38304b8c270a97a6333514188481582cab09294d))
 * **openai:** created chat completion node ([7e653cf](https://github.com/Stradivario/gapi/commit/7e653cf3f59866ca33a4a71775da938868710228))
+* **rxdi:** bumped many versions of rxdi infrastructure ([038179b](https://github.com/Stradivario/gapi/commit/038179bb8fa1f27724325bfe855eca6fb6431791))
 * **rxdi:** bumped rxdi versions due to recent ai changed with description field exposed to graphql query mutation and subscription better schema generation ([0c6869e](https://github.com/Stradivario/gapi/commit/0c6869e6d4a109730938814e6ca8f70aa4d6676f))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([a939f01](https://github.com/Stradivario/gapi/commit/a939f01fa3c83ee330ca8affa7ccee1c970be613))
 * **rxdi:** whole infrastructure bumped ([53f68cb](https://github.com/Stradivario/gapi/commit/53f68cb1f0240553da1ac73108edee6cd26c9cf8))
