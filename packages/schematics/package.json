@@ -1,6 +1,6 @@
 {
   "name": "@gapi/schematics",
-  "version": "1.8.168-nightly.0",
+  "version": "1.8.168-nightly.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi/packages/schematics"
