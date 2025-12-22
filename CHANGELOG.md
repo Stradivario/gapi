@@ -1,4 +1,4 @@
-## [1.8.162](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.162) (2025-12-21)
+## [1.8.163](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.163) (2025-12-22)
 
 
 ### Bug Fixes
@@ -80,6 +80,7 @@
 * **federation:** added missing apollo server configs ([b049560](https://github.com/Stradivario/gapi/commit/b049560af645f1a4acf51afb3204efe145217722))
 * **federation:** added willSendRequest and context lambdas in order to manage authentication outside the scope of the library ([ea45b5e](https://github.com/Stradivario/gapi/commit/ea45b5ee5e2831b4ce375c17817e5024eb96f798))
 * **Federation:** removed _service and status from schema sdl when processing _service graph, removed ethereum, ipfs related modules with packages ([7b5781b](https://github.com/Stradivario/gapi/commit/7b5781bcc2fcf0578b0aaf57d2cbcd027d8d2b85))
+* **gcli:** added esbuild as a script with decorators ([1757ac7](https://github.com/Stradivario/gapi/commit/1757ac7d83804718d65c003128d975b573e61c89))
 * **gcli:** added global auth token using a environment variable GCLI_AUTH_TOKEN ([6f9d3e5](https://github.com/Stradivario/gapi/commit/6f9d3e59b8f930ae42dfe7b25d096705853b9429))
 * **gcli:** added hasOptionsRequest to lambda creation ([b391b19](https://github.com/Stradivario/gapi/commit/b391b1916627c9c6a75c71915b711d8c86c5d011))
 * **gcli:** added multiple scaling options and some documentation inside the cli itself ([312f626](https://github.com/Stradivario/gapi/commit/312f6262114949dd35ee640ddd4791cb05df7e4f))
