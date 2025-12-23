@@ -1,4 +1,4 @@
-## [1.8.172](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.172) (2025-12-23)
+## [1.8.173](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.173) (2025-12-23)
 
 
 ### Bug Fixes
@@ -69,6 +69,7 @@
 ### Features
 
 * **ac:** validator is now a separated entity type so it can be referenced from outside of the library scope ([2d81f15](https://github.com/Stradivario/gapi/commit/2d81f15749eebebfece8ed55582bb932c8619a7f))
+* **altair:** added new module replacing graphiql called altair ([18ff306](https://github.com/Stradivario/gapi/commit/18ff306e873ed8e641d39f2be7f757909ecf480b))
 * **AsyncTemplate:** added async template with parameters ([e1643e8](https://github.com/Stradivario/gapi/commit/e1643e8b76d60cb01d0ff9030ba57c194f9228d5))
 * **bump:** graphql and other version bumps removed microservices since it is replaced by federation ([ef6f0f9](https://github.com/Stradivario/gapi/commit/ef6f0f9d2b82fdccbe5abf58b02e25f914e58778))
 * **cli-builder:** added console.log on subscriptions ([a252177](https://github.com/Stradivario/gapi/commit/a2521772f5c28ca638ec18dd22fdb57606e93867))
