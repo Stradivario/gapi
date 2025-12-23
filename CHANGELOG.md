@@ -1,4 +1,4 @@
-## [1.8.169](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.169) (2025-12-23)
+## [1.8.170](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.170) (2025-12-23)
 
 
 ### Bug Fixes
@@ -33,6 +33,7 @@
 * **core:** added export for graphql-subscriptions ([7c6e42f](https://github.com/Stradivario/gapi/commit/7c6e42f15de5c4d841d009cc9a57e6531e4fa63b))
 * **core:** enum-to-graphql enum ([a87b5cf](https://github.com/Stradivario/gapi/commit/a87b5cf724c233c25abe3dcea9484ba12f3288da))
 * **core:** graphql added to dependencies since 15.0.0 is broken ([7f740bf](https://github.com/Stradivario/gapi/commit/7f740bfa8f68275516359d12e945c18c7e5a0bd9))
+* **eslint:** bumped eslint to latest version leading to many many things... ([7018e90](https://github.com/Stradivario/gapi/commit/7018e9094e5fcbf4b689d57b4b58fe53b355313e))
 * **federation:** full headers are resend to the appropriate service ([c62d273](https://github.com/Stradivario/gapi/commit/c62d273ccf4811e213222711f3d5c8892621f087))
 * **federation:** readme ([1d8b2c8](https://github.com/Stradivario/gapi/commit/1d8b2c89f6dba9a75e892309fd3dc76b8492a9de))
 * **federation:** rebuilded module and re-deployed ([05da054](https://github.com/Stradivario/gapi/commit/05da054ad5c8352a65922628fe87de5b5534e55c))
@@ -69,6 +70,7 @@
 
 * **ac:** validator is now a separated entity type so it can be referenced from outside of the library scope ([2d81f15](https://github.com/Stradivario/gapi/commit/2d81f15749eebebfece8ed55582bb932c8619a7f))
 * **AsyncTemplate:** added async template with parameters ([e1643e8](https://github.com/Stradivario/gapi/commit/e1643e8b76d60cb01d0ff9030ba57c194f9228d5))
+* **bump:** graphql and other version bumps removed microservices since it is replaced by federation ([ef6f0f9](https://github.com/Stradivario/gapi/commit/ef6f0f9d2b82fdccbe5abf58b02e25f914e58778))
 * **cli-builder:** added console.log on subscriptions ([a252177](https://github.com/Stradivario/gapi/commit/a2521772f5c28ca638ec18dd22fdb57606e93867))
 * **cli-builder:** introduced ip behind NAT can be specified ([8aa1f12](https://github.com/Stradivario/gapi/commit/8aa1f125901672ee118bd348e09acd1376e66956))
 * **cli-builder:** notifiy result based on label in order to track machine with label ([bc837a6](https://github.com/Stradivario/gapi/commit/bc837a6e80bebe48b1feb9c396ee895740ee941c))
