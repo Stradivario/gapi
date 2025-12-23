@@ -1,4 +1,4 @@
-## [1.8.173](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.173) (2025-12-23)
+## [1.8.174](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.174) (2025-12-23)
 
 
 ### Bug Fixes
@@ -107,6 +107,7 @@
 * **rxdi:** bumped many versions of rxdi infrastructure ([038179b](https://github.com/Stradivario/gapi/commit/038179bb8fa1f27724325bfe855eca6fb6431791))
 * **rxdi:** bumped rxdi versions due to recent ai changed with description field exposed to graphql query mutation and subscription better schema generation ([0c6869e](https://github.com/Stradivario/gapi/commit/0c6869e6d4a109730938814e6ca8f70aa4d6676f))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([a939f01](https://github.com/Stradivario/gapi/commit/a939f01fa3c83ee330ca8affa7ccee1c970be613))
+* **rxdi:** introduced options for altair ([76db050](https://github.com/Stradivario/gapi/commit/76db050584e8f226a4f923102a49ca79d46ed467))
 * **rxdi:** whole infrastructure bumped ([53f68cb](https://github.com/Stradivario/gapi/commit/53f68cb1f0240553da1ac73108edee6cd26c9cf8))
 * **sandgrid:** added options to last parameter in order to create attachment for the email and add s missing functionalities which restrict this library to be used as a extender of original sendgrid library ([4d7b649](https://github.com/Stradivario/gapi/commit/4d7b6492dee0f038dfbc033465ff8fa57c52d514))
 * **Sendgrid:** added default email from injection ([8a2ab11](https://github.com/Stradivario/gapi/commit/8a2ab119cc88897bd8290abc860e3e20dd113dd0))
