@@ -2475,19 +2475,19 @@
   resolved "https://registry.yarnpkg.com/@redis/time-series/-/time-series-1.1.0.tgz#cba454c05ec201bd5547aaf55286d44682ac8eb5"
   integrity sha512-c1Q99M5ljsIuc4YdaCwfUEXsofakb9c8+Zse2qxTadu8TalLXuAESzLvFAvNVbkmSlvlzIQOLpBCmWI9wTOt+g==
 
-"@rxdi/compressor@^0.7.192":
-  version "0.7.192"
-  resolved "https://registry.yarnpkg.com/@rxdi/compressor/-/compressor-0.7.192.tgz#01497b106436878aaa3e3ff1f97ad642bb3c268d"
-  integrity sha512-hb1Fv7wOdpL8/7GOuD3nld5dqlzwD+4rh1L0k8C/V/dLl/MknETDBeqGlMmLIZ/pxoK1lBEH0ujEq3R8lChGbg==
+"@rxdi/compressor@^0.7.193":
+  version "0.7.193"
+  resolved "https://registry.yarnpkg.com/@rxdi/compressor/-/compressor-0.7.193.tgz#fcc7a7cbcf45724adfabfd2c48d0bd97baa34ff9"
+  integrity sha512-1qFjqQwT9nClu2L45p2QQJ2O/5lPzR3dGTYDpcXkDKBeO89E+dCy7qeJPsizxANu21EtILlJCr2C1MUC+rVVnA==
   dependencies:
     msgpack5 "^5.3.1"
     node-lzw "^0.3.1"
     urlsafe-base64 "^1.0.0"
 
-"@rxdi/core@^0.7.192":
-  version "0.7.192"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.192.tgz#481d5fab8ff839ab46b397d658366c4db28c3a10"
-  integrity sha512-Tc9AzVt7ZJFX4df0Y6/xtzL73d9WBJJPU8dfSD/JvR6Y0VSAsyCa/ooOPS/VIRCm04XMay271ugYksivxDmKYA==
+"@rxdi/core@^0.7.193":
+  version "0.7.193"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.193.tgz#fbd44be91d552bb3e0cc9f1a2da4a5cbf4d93053"
+  integrity sha512-WDyuTHU9nktvu3MkePTfJIfCfsM8PPrRaCxBKKNPrgnEiMJnvR/fSkZK/YxWnFy/LTlI2pt3WoVqbvhgaWjFww==
   dependencies:
     "@abraham/reflection" "^0.8.0"
     rxjs "^7.8.0"
@@ -2500,29 +2500,29 @@
     glob "^7.1.2"
     mkdirp "^0.5.1"
 
-"@rxdi/graphql-pubsub@^0.7.192":
-  version "0.7.192"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-pubsub/-/graphql-pubsub-0.7.192.tgz#332ed80052736f8e7ae9258ce474bdfa780d33ad"
-  integrity sha512-7FZKpLHavAx6nh4s8d/BoPeqshWYDnlG/2Evjvr/YRR49mYAmhOT5JGYth76APiYyA1sKzU2Gd/tsLJXxtpEjA==
+"@rxdi/graphql-pubsub@^0.7.193":
+  version "0.7.193"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-pubsub/-/graphql-pubsub-0.7.193.tgz#69ded24a450f18c507b22f7bf8bd7aefc81fb770"
+  integrity sha512-Wf2K7T47UG3xHFgm1EBOiQ2Gx1zTuqWDqpEYgPXo9Rq679/ZrEFk2isHXDJAbSzM56X8VVxdHaOtBHEoQGugwg==
   dependencies:
     "@apollo/client" "^3.7.3"
-    "@rxdi/graphql-rabbitmq-subscriptions" "^0.7.191"
+    "@rxdi/graphql-rabbitmq-subscriptions" "^0.7.192"
     graphql-request "^1.8.2"
     subscriptions-transport-ws "^0.9.19"
     ws "6.2.1"
 
-"@rxdi/graphql-rabbitmq-subscriptions@^0.7.191":
-  version "0.7.192"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-rabbitmq-subscriptions/-/graphql-rabbitmq-subscriptions-0.7.192.tgz#2f8c140303c5a825897812417d28dc268c7bf295"
-  integrity sha512-Bw/krKIaH3PVXq4J/9/fkEQhTbsnlhagS1cuRH1NvHiTzON7V1xQt3SQ7HZ32/o8+Vw4BNAUQvG2eQrxuLTm9w==
+"@rxdi/graphql-rabbitmq-subscriptions@^0.7.192":
+  version "0.7.193"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-rabbitmq-subscriptions/-/graphql-rabbitmq-subscriptions-0.7.193.tgz#77053af8e82d066c723cc4cd02cc5800b618938d"
+  integrity sha512-j2ZgiKKA2MPclgvvWiI3o4kAuh/9/jovyEx/TY4/SdKqgcVx9LS98ODiH7QI0vREwL2RaoOIbGSHNQ8MJoegCg==
   dependencies:
-    "@rxdi/rabbitmq-pubsub" "^0.7.191"
+    "@rxdi/rabbitmq-pubsub" "^0.7.192"
     graphql-subscriptions "^3.0.0"
 
-"@rxdi/graphql@^0.7.192":
-  version "0.7.192"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql/-/graphql-0.7.192.tgz#f81284bd8809f632a5f08d1130cccd40df4f08d7"
-  integrity sha512-Xcx+ObrRFrdJnbaOpbQ0BhA9Stmrpj+N9ZR0cKosjdsSKdy4eqc3/UGXFnmqt75MshD/ASU0wEITliwhv841ZQ==
+"@rxdi/graphql@^0.7.193":
+  version "0.7.193"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql/-/graphql-0.7.193.tgz#93c0472b8cca1d20dc25335f94abe0729fc7b35a"
+  integrity sha512-2wwNCI5gaxaakD77Ur95zdsK79S7DmPwRW6UsX3P6kr4KymA1jZSZSArzpDAzVlZJfiJugtqqI5U9GPfSANZKw==
   dependencies:
     "@gapi/playground" "^1.8.146"
     "@hapi/boom" "^10.0.1"
@@ -2530,26 +2530,26 @@
     apollo-server-module-graphiql "1.4.0"
     graphql-tester "0.0.5"
 
-"@rxdi/hapi@^0.7.192":
-  version "0.7.192"
-  resolved "https://registry.yarnpkg.com/@rxdi/hapi/-/hapi-0.7.192.tgz#121545f0765e21ceaa8ccf8f653f54aa7a78ae86"
-  integrity sha512-q7WP1kVPKMLe8e2VwnOnPPgQTLjtYtYsDlUl1YWRe0BuNE3JprqX3GR5rj0zGqE+iLYJfecKNFlrboBzbU2Icg==
+"@rxdi/hapi@^0.7.193":
+  version "0.7.193"
+  resolved "https://registry.yarnpkg.com/@rxdi/hapi/-/hapi-0.7.193.tgz#b12fd2a19992959dacb6691e0a67e6d84a27d231"
+  integrity sha512-Q9WFOPHLFDtdWpcAVAUj8CGMVwmbccqWL+SUoisymbyz9ZxQwXDMw1JG/o3zwlNmY2Q0KmKZv3QZIpIzqx3TrQ==
   dependencies:
     "@hapi/hapi" "^21.3.2"
     "@hapi/inert" "^7.1.0"
 
-"@rxdi/parcel-plugin-shebang@^0.7.192":
-  version "0.7.192"
-  resolved "https://registry.yarnpkg.com/@rxdi/parcel-plugin-shebang/-/parcel-plugin-shebang-0.7.192.tgz#e2d3803f25c28810e34e4ee0bee9655acd13acce"
-  integrity sha512-C2MmqyNDX0VddQ+d72GjzbGvRwGFyyhnF1G1Etp5Jx8oOjGdBMhWUzFjwCFxiBNTRY6RvfhVSJZqya40C5laOQ==
+"@rxdi/parcel-plugin-shebang@^0.7.193":
+  version "0.7.193"
+  resolved "https://registry.yarnpkg.com/@rxdi/parcel-plugin-shebang/-/parcel-plugin-shebang-0.7.193.tgz#d1de965dda2c996cc64ce4f8daf2234323811b3e"
+  integrity sha512-r+M+vRJ4LexVjKg+6RSVNVB1UsT0QfgAOqlmjr3NSAJ/hcAOSvFEbTUmJD5LugGXeE3Q332PqIqjDA4vjVxkDg==
   dependencies:
     escape-string-regexp "^2.0.0"
     yn "^3.1.0"
 
-"@rxdi/rabbitmq-pubsub@^0.7.191":
-  version "0.7.192"
-  resolved "https://registry.yarnpkg.com/@rxdi/rabbitmq-pubsub/-/rabbitmq-pubsub-0.7.192.tgz#ca72640d3b47ccf0ddfea2c663e6cd8c9777e4cd"
-  integrity sha512-+SuobVz7U17ZsalOGm99XGIaEHIZsSQvwGolwTqFpfIZQTnnUOFN4TTvNFJVk6aHbg2Kup6DrXrhDeSeAn0fOg==
+"@rxdi/rabbitmq-pubsub@^0.7.192":
+  version "0.7.193"
+  resolved "https://registry.yarnpkg.com/@rxdi/rabbitmq-pubsub/-/rabbitmq-pubsub-0.7.193.tgz#3e8210f3a63045f785af562762338b1b8f57403d"
+  integrity sha512-sUFE5NZiWfLv8us1ZCAxjuyPvf9IGnDR4GO5onDGWYhW/N3NDFq7X3bWw3z4EIEUCGxP3q0YuNEUzfLnFmpV5A==
   dependencies:
     amqplib "^0.10.9"
 
