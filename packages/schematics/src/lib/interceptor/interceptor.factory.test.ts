@@ -3,6 +3,7 @@ import {
   UnitTestTree,
 } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
+
 import { InterceptorOptions } from './interceptor.schema';
 
 describe('Interceptor Factory', () => {
@@ -18,7 +19,7 @@ describe('Interceptor Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interceptor', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo.interceptor.ts'),
+      files.find((filename) => filename === '/foo.interceptor.ts'),
     ).toBeDefined();
     expect(tree.readContent('/foo.interceptor.ts')).toEqual(
       "import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';\n" +
@@ -40,7 +41,7 @@ describe('Interceptor Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interceptor', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar/foo.interceptor.ts'),
+      files.find((filename) => filename === '/bar/foo.interceptor.ts'),
     ).toBeDefined();
     expect(tree.readContent('/bar/foo.interceptor.ts')).toEqual(
       "import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';\n" +
@@ -63,7 +64,7 @@ describe('Interceptor Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interceptor', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/baz/foo.interceptor.ts'),
+      files.find((filename) => filename === '/baz/foo.interceptor.ts'),
     ).toBeDefined();
     expect(tree.readContent('/baz/foo.interceptor.ts')).toEqual(
       "import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';\n" +
@@ -85,7 +86,7 @@ describe('Interceptor Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interceptor', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo-bar.interceptor.ts'),
+      files.find((filename) => filename === '/foo-bar.interceptor.ts'),
     ).toBeDefined();
     expect(tree.readContent('/foo-bar.interceptor.ts')).toEqual(
       "import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';\n" +
@@ -107,7 +108,7 @@ describe('Interceptor Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interceptor', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar-baz/foo.interceptor.ts'),
+      files.find((filename) => filename === '/bar-baz/foo.interceptor.ts'),
     ).toBeDefined();
     expect(tree.readContent('/bar-baz/foo.interceptor.ts')).toEqual(
       "import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';\n" +
@@ -130,7 +131,7 @@ describe('Interceptor Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interceptor', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo.interceptor.js'),
+      files.find((filename) => filename === '/foo.interceptor.js'),
     ).toBeDefined();
     expect(tree.readContent('/foo.interceptor.js')).toEqual(
       "import { Injectable } from '@nestjs/common';\n" +

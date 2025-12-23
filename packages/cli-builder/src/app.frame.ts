@@ -19,7 +19,7 @@ export class AppFrameModule {
           useFactory: () => async (next, request) => {
             if (
               request.payload.query.includes(
-                'query { status { status } }'
+                'query { status { status } }',
               )
             ) {
               return next();
@@ -38,13 +38,15 @@ export class AppFrameModule {
       frameworkImports: [
         CoreModule.forRoot({
           server: {
-            randomPort: !!Environment.GRAPHQL_RUNNER_RANDOM_PORT,
+            randomPort:
+              !!Environment.GRAPHQL_RUNNER_RANDOM_PORT,
             hapi: {
               port: Environment.GRAPHQL_RUNNER_API_PORT,
             },
           },
           graphql: {
-            graphiQlPlayground: !!Environment.GRAPHQL_RUNNER_GRAPHIQL,
+            graphiQlPlayground:
+              !!Environment.GRAPHQL_RUNNER_GRAPHIQL,
             openBrowser: false,
           },
         }),

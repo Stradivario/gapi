@@ -15,12 +15,12 @@ export class FederationController {
     new GraphQLObjectType({
       name: 'GraphqlFederation',
       fields: () => ({ sdl: { type: GraphQLString } }),
-    })
+    }),
   )
   @Query()
   _service() {
     const appSchema = Container.get(
-      GRAPHQL_PLUGIN_CONFIG
+      GRAPHQL_PLUGIN_CONFIG,
     ) as GRAPHQL_PLUGIN_CONFIG;
 
     const schema = new GraphQLSchema({
@@ -30,7 +30,9 @@ export class FederationController {
     let replacer = FedarationReplacer;
     try {
       replacer = Container.get(GRAPHQL_FEDERATION_REPLACER);
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
     const sdl = printSchema(schema)
       .replace('_service: GraphqlFederation', '')
       .replace('status: StatusQueryType', '');

@@ -6,5 +6,5 @@ export class VoyagerConfigModel {
 }
 
 export const VoyagerConfig = new InjectionToken<VoyagerConfigModel>(
-  'gapi-voyager-config-injection-token'
+  'gapi-voyager-config-injection-token',
 );

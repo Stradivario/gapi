@@ -50,7 +50,7 @@ const main = async (options = { all: null }): Promise<Process[]> => {
       const { stdout } = await promisify(execFile)(
         'ps',
         [flags, `pid,${cmd}`],
-        { maxBuffer: TEN_MEGABYTES }
+        { maxBuffer: TEN_MEGABYTES },
       );
 
       for (let line of stdout.trim().split('\n').slice(1)) {
@@ -64,7 +64,7 @@ const main = async (options = { all: null }): Promise<Process[]> => {
 
         ret[pid][cmd] = val;
       }
-    })
+    }),
   );
 
   // Filter out inconsistencies as there might be race
@@ -77,7 +77,7 @@ const main = async (options = { all: null }): Promise<Process[]> => {
         value.ppid &&
         value.uid &&
         value['%cpu'] &&
-        value['%mem']
+        value['%mem'],
     )
     .map(([key, value]) => ({
       pid: Number.parseInt(key, 10),

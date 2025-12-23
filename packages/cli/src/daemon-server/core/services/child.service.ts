@@ -7,7 +7,7 @@ export class ChildService {
     command: string,
     args: string[],
     cwd: string,
-    wait: number = 30 * 1000
+    wait: number = 30 * 1000,
   ) {
     return new Promise((resolve, reject) => {
       const child = spawn(command, args, { cwd, detached: true });

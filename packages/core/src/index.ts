@@ -70,25 +70,24 @@ export class CoreModule {
   }
 }
 
+export * from './enum-to-gql';
+export * from '@rxdi/core';
+export * from '@rxdi/graphql';
+export * from '@rxdi/graphql-pubsub';
+export * from '@rxdi/hapi';
 export * from 'graphql';
 export {
-  ExecutionResult,
   buildSchema,
+  ExecutionResult,
   extendSchema,
   isSpecifiedScalarType,
 } from 'graphql';
-export * from 'graphql-tools';
 export * from 'graphql-geojson';
-export * from '@rxdi/graphql-pubsub';
-export * from '@rxdi/graphql';
-export * from '@rxdi/hapi';
-export * from '@rxdi/core';
 export {
-  withFilter,
-  PubSubOptions,
   FilterFn,
   PubSubEngine,
+  PubSubOptions,
   ResolverFn,
+  withFilter,
 } from 'graphql-subscriptions';
-
-export * from './enum-to-gql';
+export * from 'graphql-tools';

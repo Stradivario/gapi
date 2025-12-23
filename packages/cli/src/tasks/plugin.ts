@@ -52,7 +52,7 @@ export class PluginTask {
       this.ipfsHashMapService.remove(hash);
       await this.ipfsHashMapService.writeHashMapToFile();
       await this.writeHashesToFile(
-        (await this.readFile()).filter((h) => h !== hash)
+        (await this.readFile()).filter((h) => h !== hash),
       );
     }
   }
@@ -61,13 +61,13 @@ export class PluginTask {
     let hashes: string[] = [];
     if (await promisify(exists)(IPFS_HASHED_MODULES)) {
       hashes = JSON.parse(
-        await promisify(readFile)(IPFS_HASHED_MODULES, { encoding: 'utf8' })
+        await promisify(readFile)(IPFS_HASHED_MODULES, { encoding: 'utf8' }),
       );
     } else {
       await promisify(writeFile)(
         IPFS_HASHED_MODULES,
         JSON.stringify([], null, 4),
-        { encoding: 'utf8' }
+        { encoding: 'utf8' },
       );
     }
     return hashes;
@@ -77,7 +77,7 @@ export class PluginTask {
     await promisify(writeFile)(
       IPFS_HASHED_MODULES,
       JSON.stringify(hashes, null, 4),
-      { encoding: 'utf8' }
+      { encoding: 'utf8' },
     );
   }
 }

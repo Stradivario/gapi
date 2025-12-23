@@ -9,7 +9,7 @@ import { DaemonLink } from '../daemon.interface';
 export class DaemonService {
   constructor(
     @Inject(DaemonLink) private defaultDaemonLink: DaemonLink,
-    @Inject(HAPI_SERVER) private server: Server
+    @Inject(HAPI_SERVER) private server: Server,
   ) {}
 
   notifyDaemon() {
@@ -32,7 +32,7 @@ export class DaemonService {
           },
         },
       },
-      this.defaultDaemonLink
+      this.defaultDaemonLink,
     );
   }
 }

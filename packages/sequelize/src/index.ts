@@ -1,8 +1,8 @@
 import { Module, ModuleWithServices } from '@rxdi/core';
 import { Sequelize } from 'sequelize-typescript';
 
-import { SEQUELIZE } from './sequelize-config.service';
 import { SequelizeConfig } from './sequelize.interface';
+import { SEQUELIZE } from './sequelize-config.service';
 
 @Module()
 export class SequelizeModule {

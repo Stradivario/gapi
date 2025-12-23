@@ -7,7 +7,6 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { promisify } from 'util';
 
 import { isWindows } from '../core/helpers';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 import { mkdirp } from '../core/helpers/mkdirp';
 import { ArgsService } from '../core/services/args.service';
 import { ConfigService } from '../core/services/config.service';
@@ -29,7 +28,7 @@ export class SchemaTask {
   async run(
     introspectionEndpoint?: string,
     introspectionOutputFolder?: string,
-    pattern?: string
+    pattern?: string,
   ) {
     const originalConsole = console.log.bind(console);
     console.log = function () {
@@ -37,7 +36,7 @@ export class SchemaTask {
       return originalConsole.apply(console, [
         '\x1b[36m%s\x1b[0m',
         `${cwd[cwd.length - 1]} =>`,
-        // eslint-disable-next-line prefer-rest-params
+
         ...arguments,
       ]);
     };
@@ -66,7 +65,7 @@ export class SchemaTask {
       await this.collectFragments();
     }
     console.log(
-      `[Final] To change export folder for this command you need to check this link https://github.com/Stradivario/gapi-cli/wiki/schema`
+      `[Final] To change export folder for this command you need to check this link https://github.com/Stradivario/gapi-cli/wiki/schema`,
     );
   }
   private async createDir() {
@@ -98,7 +97,7 @@ export class SchemaTask {
           }
         `,
         }),
-      })
+      }),
     )
       .pipe(
         switchMap(
@@ -113,13 +112,13 @@ export class SchemaTask {
                   }[];
                 };
               };
-            }>
+            }>,
         ),
         map((res) => res.data),
         switchMap(({ __schema }) => {
           // here we're filtering out any type information unrelated to unions or interfaces
           const filteredData = __schema.types.filter(
-            (type) => type.possibleTypes !== null
+            (type) => type.possibleTypes !== null,
           );
           __schema.types = filteredData;
           return promisify(writeFile)(
@@ -129,14 +128,14 @@ export class SchemaTask {
 export const introspectionQueryResultData = ${JSON.stringify(
               { __schema },
               null,
-              2
+              2,
             )}
-          `
+          `,
           );
         }),
         tap(() =>
-          console.log('[CollectFragments]: fragments collection finished')
-        )
+          console.log('[CollectFragments]: fragments collection finished'),
+        ),
       )
       .toPromise();
   }
@@ -144,21 +143,21 @@ export const introspectionQueryResultData = ${JSON.stringify(
     console.log('[CollectQueries]: queries collection started');
     const randomString = Math.random().toString(36).substring(2);
     console.log(
-      `[CollectQueries]: generating temporary documents file ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`
+      `[CollectQueries]: generating temporary documents file ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`,
     );
     await this.execService.call(
       `node ${
         this.node_modules
       }/graphql-document-collector/bin/graphql-document-collector '${
         this.pattern ? this.pattern : '**/*.{graphql,gql}'
-      }' > ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`
+      }' > ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`,
     );
     console.log(
-      `[CollectQueries]: reading temporary documents file ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`
+      `[CollectQueries]: reading temporary documents file ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`,
     );
     const readDocumentsTemp = await promisify(readFile)(
       `${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`,
-      'utf-8'
+      'utf-8',
     );
     await promisify(unlink)(`${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`);
     if (this.argsService.args.includes('--collect-types')) {
@@ -167,12 +166,12 @@ export const introspectionQueryResultData = ${JSON.stringify(
     }
     const parsedDocuments = `/* tslint:disable */\n/* eslint-disable prettier/prettier */ \nexport const DOCUMENTS = ${readDocumentsTemp};`;
     console.log(
-      `[CollectQueries]: writing file to disc ${this.folder}/documents.ts`
+      `[CollectQueries]: writing file to disc ${this.folder}/documents.ts`,
     );
     await promisify(writeFile)(
       `${this.folder}/documents.ts`,
       parsedDocuments,
-      'utf8'
+      'utf8',
     );
     if (this.argsService.args.includes('--with-compressed')) {
       await promisify(writeFile)(
@@ -180,7 +179,7 @@ export const introspectionQueryResultData = ${JSON.stringify(
         'export const DocumentsCompressed = `' +
           LZWService.compress(JSON.parse(readDocumentsTemp)) +
           '`',
-        'utf8'
+        'utf8',
       );
     }
 
@@ -196,7 +195,7 @@ export const introspectionQueryResultData = ${JSON.stringify(
         this.node_modules
       }/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} ${
         this.headers ? `--header "${this.headers}"` : ''
-      } --output ${this.folder}/schema.json`
+      } --output ${this.folder}/schema.json`,
     );
     console.log(`[GenerateSchema]: Endpoint ${this.endpoint} hit!`);
     await this.execService.call(
@@ -204,10 +203,10 @@ export const introspectionQueryResultData = ${JSON.stringify(
         isWindows() ? 'set' : 'export'
       } NODE_TLS_REJECT_UNAUTHORIZED=0 && node  ${
         this.bashFolder
-      }/gql2ts/index.js ${this.folder}/schema.json -o ${this.folder}/index.ts`
+      }/gql2ts/index.js ${this.folder}/schema.json -o ${this.folder}/index.ts`,
     );
     console.log(
-      `[GenerateSchema]: Typescript interfaces generated inside folder: ${this.folder}/index.d.ts`
+      `[GenerateSchema]: Typescript interfaces generated inside folder: ${this.folder}/index.d.ts`,
     );
   }
 
@@ -243,7 +242,7 @@ export type DocumentTypes = keyof typeof DocumentTypes;`;
     return await promisify(writeFile)(
       `${this.folder}/documentTypes.ts`,
       types,
-      'utf8'
+      'utf8',
     );
   }
 }

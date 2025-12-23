@@ -124,7 +124,7 @@ export class RootService {
       return await this.schemaTask.run(
         introspectionEndpoint,
         introspectionFolder,
-        pattern
+        pattern,
       );
     }
 

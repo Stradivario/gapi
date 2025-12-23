@@ -40,17 +40,17 @@ export class BootstrapTask {
                   //   activated: true,
                   //   link: 'http://localhost:42001/graphql'
                   // }
-                }
+                },
               ),
               ServerModule,
             ],
             providers: [PluginWatcherService],
-          })
-        )
+          }),
+        ),
       )
       .subscribe(
         () => console.log('Daemon started'),
-        console.error.bind(console)
+        console.error.bind(console),
       );
   }
 }

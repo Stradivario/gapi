@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Container, Service } from '@rxdi/core';
 import { exists, existsSync } from 'fs';
@@ -21,7 +22,7 @@ export class StartTask {
   private argsService = Container.get(ArgsService);
   private configService: ConfigService = Container.get(ConfigService);
   private environmentService: EnvironmentVariableService = Container.get(
-    EnvironmentVariableService
+    EnvironmentVariableService,
   );
   private execService: ExecService = Container.get(ExecService);
   private config: string;
@@ -38,9 +39,8 @@ export class StartTask {
       this.configService.config.config.app || ({} as any);
     if (this.argsService.args[3] && this.argsService.args[3].includes('--')) {
       const currentConfigKey = this.argsService.args[3].replace('--', '');
-      const currentConfiguration = this.configService.config.config.app[
-        currentConfigKey
-      ];
+      const currentConfiguration =
+        this.configService.config.config.app[currentConfigKey];
       if (
         currentConfiguration &&
         currentConfiguration.prototype &&
@@ -48,18 +48,17 @@ export class StartTask {
         currentConfiguration.includes('extends')
       ) {
         this.config = this.environmentService.setVariables(
-          this.extendConfig(currentConfiguration)
+          this.extendConfig(currentConfiguration),
         );
         this.configOriginal = this.extendConfig(currentConfiguration);
         console.log(`'${currentConfigKey}' configuration loaded!`);
       } else if (currentConfiguration) {
-        this.config = this.environmentService.setVariables(
-          currentConfiguration
-        );
+        this.config =
+          this.environmentService.setVariables(currentConfiguration);
         this.configOriginal = currentConfiguration;
       } else {
         this.config = this.environmentService.setVariables(
-          this.configService.config.config.app.local
+          this.configService.config.config.app.local,
         );
         this.configOriginal = this.configService.config.config.app.local;
       }
@@ -74,12 +73,12 @@ export class StartTask {
         currentConfiguration.includes('extends')
       ) {
         this.config = this.environmentService.setVariables(
-          this.extendConfig(currentConfiguration)
+          this.extendConfig(currentConfiguration),
         );
         this.configOriginal = this.extendConfig(currentConfiguration);
       } else {
         this.config = this.environmentService.setVariables(
-          this.configService.config.config.app.local
+          this.configService.config.config.app.local,
         );
         this.configOriginal = this.configService.config.config.app.local;
       }
@@ -97,20 +96,20 @@ export class StartTask {
       return await this.execService.call(
         `${this.config} && pm2-docker ${cwd}/${
           customPathExists ? customPath : 'process.yml'
-        } --only APP`
+        } --only APP`,
       );
     } else if (this.argsService.args.toString().includes('--pm2')) {
       if (!stop.state) {
         return await this.execService.call(
           `${this.config} && pm2 stop ${cwd}/${
             customPathExists ? customPath : 'process.yml'
-          }`
+          }`,
         );
       } else {
         return await this.execService.call(
           `${this.config} && pm2 start ${cwd}/${
             customPathExists ? customPath : 'process.yml'
-          } --only APP`
+          } --only APP`,
         );
       }
     }
@@ -119,11 +118,11 @@ export class StartTask {
         return await this.execService.call(
           `${sleep} ts-node ${cwd}/${
             customPathExists ? customPath : 'index.ts'
-          }`
+          }`,
         );
       } else {
         return await this.execService.call(
-          `${sleep} ts-node ${cwd}/src/main.ts`
+          `${sleep} ts-node ${cwd}/src/main.ts`,
         );
       }
     } else if (process.argv.toString().includes('--ts-node')) {
@@ -138,7 +137,7 @@ export class StartTask {
           customPathExists
             ? `${cwd}/${customPathExists ? customPath : 'index.ts'}`
             : `${cwd}/src/main.ts`
-        }  ${this.verbose}`
+        }  ${this.verbose}`,
       );
     } else {
       if (htmlFile) {
@@ -162,7 +161,7 @@ export class StartTask {
           schema: this.configService.config.config.schema,
         },
         true,
-        false
+        false,
       );
     }
   }
@@ -213,7 +212,7 @@ export class StartTask {
     target: 'browser' | 'node' = includes('--target=browser')
       ? 'browser'
       : 'node',
-    excludedFolders: string[] = []
+    excludedFolders: string[] = [],
   ) {
     console.log(file);
     if (schema.excludedFolders.length) {
@@ -223,7 +222,7 @@ export class StartTask {
       excludedFolders.push(schema.introspectionOutputFolder);
     }
     excludedFolders = excludedFolders.map((f) =>
-      normalize(process.cwd() + f).replace('.', '')
+      normalize(process.cwd() + f).replace('.', ''),
     );
     const bundler = new Bundler(file, {
       target,
@@ -247,7 +246,7 @@ export class StartTask {
     bundler.onChange = function (path: string) {
       if (
         excludedFolders.filter((d) =>
-          path.substring(0, path.lastIndexOf('/')).includes(d)
+          path.substring(0, path.lastIndexOf('/')).includes(d),
         ).length &&
         !includes('--disable-excluded-folders')
       ) {
@@ -293,6 +292,7 @@ export class StartTask {
           try {
             await this.execService.call('npm run lint');
           } catch (e) {
+            console.error(e);
             hasError = true;
           }
           if (hasError) {
@@ -311,12 +311,12 @@ export class StartTask {
           console.log(
             `${type}=${nextOrDefault('--ihost', '127.0.0.1')}:${nextOrDefault(
               '--iport',
-              '9229'
-            )}`
+              '9229',
+            )}`,
           );
           return `${type}=${nextOrDefault(
             '--ihost',
-            '127.0.0.1'
+            '127.0.0.1',
           )}:${nextOrDefault('--iport', '9229')}`;
         }
         if (includes('--inspect-brk')) {
@@ -349,9 +349,8 @@ export class StartTask {
   extendConfig(config) {
     const splitted = config.split(' ');
     const argum = splitted[1].split('/');
-    const extendedConfiguration = this.configService.config.config[argum[0]][
-      argum[1]
-    ];
+    const extendedConfiguration =
+      this.configService.config.config[argum[0]][argum[1]];
     if (!extendedConfiguration) {
       throw new Error(`Cannot extend current configuration ${config}`);
     }

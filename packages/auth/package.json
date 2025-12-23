@@ -36,8 +36,8 @@
     "moment": "^2.22.2"
   },
   "devDependencies": {
-    "@rxdi/core": "^0.7.193",
-    "@types/node": "^13.11.1",
+    "@rxdi/core": "^0.7.194",
+    "@types/node": "^25.0.3",
     "typescript": "^5.9.3"
   }
 }

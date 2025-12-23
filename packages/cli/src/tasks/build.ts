@@ -50,7 +50,7 @@ export class BuildTask {
       {
         original: this.configService.config.config.app.local,
         schema: this.configService.config.config.schema,
-      }
+      },
     );
   }
 
@@ -63,7 +63,7 @@ export class BuildTask {
     if (await promisify(exists)('./package.json')) {
       packageName =
         JSON.parse(
-          await promisify(readFile)('./package.json', { encoding: 'utf-8' })
+          await promisify(readFile)('./package.json', { encoding: 'utf-8' }),
         ).name || packageName;
     }
     await promisify(writeFile)(
@@ -83,7 +83,7 @@ export class BuildTask {
           ],
         },
       }),
-      { encoding: 'utf-8' }
+      { encoding: 'utf-8' },
     );
     await this.execService.call('npx pkg .', { cwd: 'dist' });
   }
@@ -127,7 +127,7 @@ export class BuildTask {
         include: ['./src/**/*'],
         exclude: ['./node_modules', './src/**/*.spec.ts'],
       }),
-      { encoding: 'utf-8' }
+      { encoding: 'utf-8' },
     );
   }
 }

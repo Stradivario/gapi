@@ -16,7 +16,7 @@ export class AppController {
   stoppedListener: NodeJS.Timeout;
 
   constructor(
-    private subscriptionService: SubscriptionService
+    private subscriptionService: SubscriptionService,
   ) {}
 
   @Mutation({
@@ -35,14 +35,14 @@ export class AppController {
   })
   subscribeToGraphqlPubsub(
     root,
-    { uri, worker_type, authorization, label }
+    { uri, worker_type, authorization, label },
   ) {
     this.subscriptionService.unsubscribe();
     this.subscriptionService.subscribe(
       uri,
       authorization,
       worker_type || 'runner',
-      label
+      label,
     );
     return {
       data: `Success subscribed to pubsub ${uri}`,

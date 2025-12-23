@@ -3,6 +3,7 @@ import {
   UnitTestTree,
 } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
+
 import { ConfigurationOptions } from './configuration.schema';
 
 describe('Configuration Factory', () => {
@@ -17,7 +18,7 @@ describe('Configuration Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('configuration', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/project/nest-cli.json'),
+      files.find((filename) => filename === '/project/nest-cli.json'),
     ).not.toBeUndefined();
     expect(JSON.parse(tree.readContent('/project/nest-cli.json'))).toEqual({
       language: 'ts',
@@ -33,7 +34,7 @@ describe('Configuration Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('configuration', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/project/nest-cli.json'),
+      files.find((filename) => filename === '/project/nest-cli.json'),
     ).not.toBeUndefined();
     expect(JSON.parse(tree.readContent('/project/nest-cli.json'))).toEqual({
       language: 'js',
@@ -49,7 +50,7 @@ describe('Configuration Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('configuration', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/project/nest-cli.json'),
+      files.find((filename) => filename === '/project/nest-cli.json'),
     ).not.toBeUndefined();
     expect(JSON.parse(tree.readContent('/project/nest-cli.json'))).toEqual({
       language: 'ts',

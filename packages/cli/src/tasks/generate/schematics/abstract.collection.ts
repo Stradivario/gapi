@@ -2,7 +2,10 @@ import { AbstractRunner } from '../runners';
 import { SchematicOption } from './schematic.option';
 
 export class AbstractCollection {
-  constructor(protected collection: string, protected runner: AbstractRunner) {}
+  constructor(
+    protected collection: string,
+    protected runner: AbstractRunner,
+  ) {}
 
   public async execute(name: string, options: SchematicOption[]) {
     const command = this.buildCommandLine(name, options);

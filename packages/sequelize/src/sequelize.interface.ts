@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SequelizeOptions } from 'sequelize-typescript';
 import { Dialect } from 'sequelize/types';
+import { SequelizeOptions } from 'sequelize-typescript';
 
 export class SequelizeConfig implements SequelizeOptions {
   dialect?: Dialect;
@@ -15,6 +15,6 @@ export class SequelizeConfig implements SequelizeOptions {
   database?: string;
   force?: boolean;
   modifyFunctions?: {
-    sync?: () => {};
+    sync?: () => void;
   } = {};
 }

@@ -13,14 +13,15 @@ export class ReadlineService {
   async clearScreenDown() {
     return clearScreenDown(process.stdin);
   }
-  async createQuestion<T>(question: string, task: Function) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  async createQuestion(question: string, task: Function) {
     return new Promise((resolve) => {
       this.readline = this.createReadlineInterface();
       this.readline.question(question, (answer) => {
         try {
           task(answer);
         } catch (e) {
-          console.error('Missing question internal library error!');
+          console.error('Missing question internal library error!', e);
         }
         this.readline.close();
         resolve(true);

@@ -32,7 +32,7 @@ export class PluginWatcherService {
         {
           ignored: /^\./,
           persistent: true,
-        }
+        },
       );
       watcher
         .on('add', (path: string) => {

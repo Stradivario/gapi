@@ -11,7 +11,7 @@ export class TestTask {
   private argsService: ArgsService = Container.get(ArgsService);
   private configService: ConfigService = Container.get(ConfigService);
   private environmentService: EnvironmentVariableService = Container.get(
-    EnvironmentVariableService
+    EnvironmentVariableService,
   );
   private args: string;
   private config = ``;
@@ -29,13 +29,13 @@ export class TestTask {
       this.config += `&& export BEFORE_HOOK=true`;
       try {
         await this.execService.call(
-          `${this.config} && ts-node ${process.cwd()}/src/test.ts`
+          `${this.config} && ts-node ${process.cwd()}/src/test.ts`,
         );
       } catch (e) {
         console.error(
           `ERROR: Terminal exited with STATUS ${e} tests will not be runned check ${
             process.argv[4] ? process.argv[4] : '/src/test.ts'
-          }, appropriate exit code is 0`
+          }, appropriate exit code is 0`,
         );
         process.exit(1);
       }
@@ -47,17 +47,19 @@ export class TestTask {
           await this.execService.call(
             `nodemon --watch '${process.cwd()}/src/**/*.ts' --ignore '${
               this.configService.config.config.schema.introspectionOutputFolder
-            }/' --exec '${this.config} && npm run lint && jest' ${this.verbose}`
+            }/' --exec '${this.config} && npm run lint && jest' ${this.verbose}`,
           );
           // this.startTask.run();
           // await execService.call(`${this.config} && jest --watchAll`);
         } catch (e) {
+          console.error(e);
           process.exit(1);
         }
       } else {
         try {
           await this.execService.call(`${this.config} && npm run lint && jest`);
         } catch (e) {
+          console.error(e);
           return process.exit(1);
         }
       }
@@ -72,16 +74,15 @@ export class TestTask {
   setConfig() {
     if (this.argsService.args[3]) {
       const currentConfigKey = this.argsService.args[3].replace('--', '');
-      const currentConfiguration = this.configService.config.config.test[
-        currentConfigKey
-      ];
+      const currentConfiguration =
+        this.configService.config.config.test[currentConfigKey];
       if (currentConfiguration) {
         this.extendOrDefault(currentConfiguration);
         console.log(`'${currentConfigKey}' configuration loaded!`);
       } else {
         if (currentConfigKey !== 'watch' && currentConfigKey !== 'before') {
           console.log(
-            `Missing '${currentConfigKey}' argument configuration inside gapi-cli.conf.yml > config > test switching to 'local' configuration.`
+            `Missing '${currentConfigKey}' argument configuration inside gapi-cli.conf.yml > config > test switching to 'local' configuration.`,
           );
         }
         this.extendOrDefault(this.configService.config.config.test.local);
@@ -97,7 +98,7 @@ export class TestTask {
       currentConfiguration.includes('extends')
     ) {
       this.config = this.environmentService.setVariables(
-        this.extendConfig(currentConfiguration)
+        this.extendConfig(currentConfiguration),
       );
     } else {
       this.config = this.environmentService.setVariables(currentConfiguration);
@@ -107,9 +108,8 @@ export class TestTask {
   extendConfig(config) {
     const splitted = config.split(' ');
     const argum = splitted[1].split('/');
-    const extendedConfiguration = this.configService.config.config[argum[0]][
-      argum[1]
-    ];
+    const extendedConfiguration =
+      this.configService.config.config[argum[0]][argum[1]];
     if (!extendedConfiguration) {
       throw new Error(`Cannot extend current configuration ${config}`);
     }

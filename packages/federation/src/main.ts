@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Bootstrap, Container } from '@rxdi/core';
 import { ContextFunction } from 'apollo-server-core';
 import { existsSync, readFileSync } from 'fs';

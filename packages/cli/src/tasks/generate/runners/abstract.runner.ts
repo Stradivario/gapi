@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import chalk from 'chalk';
 import { ChildProcess, spawn, SpawnOptions } from 'child_process';
 
@@ -10,7 +9,7 @@ export class AbstractRunner {
   public async run(
     command: string,
     collect = false,
-    cwd: string = process.cwd()
+    cwd: string = process.cwd(),
   ): Promise<null | string> {
     const args: string[] = [command];
     const options: SpawnOptions = {
@@ -22,7 +21,7 @@ export class AbstractRunner {
       const child: ChildProcess = spawn(`${this.binary}`, args, options);
       if (collect) {
         child.stdout!.on('data', (data) =>
-          resolve(data.toString().replace(/\r\n|\n/, ''))
+          resolve(data.toString().replace(/\r\n|\n/, '')),
         );
       }
       child.on('close', (code) => {
@@ -31,8 +30,8 @@ export class AbstractRunner {
         } else {
           console.error(
             chalk.red(
-              messages.RUNNER_EXECUTION_ERROR(`${this.binary} ${command}`)
-            )
+              messages.RUNNER_EXECUTION_ERROR(`${this.binary} ${command}`),
+            ),
           );
           reject();
         }

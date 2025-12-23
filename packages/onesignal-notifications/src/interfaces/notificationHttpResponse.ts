@@ -26,15 +26,15 @@ export interface SendNotificationHttpResponse {
   method: any;
   rawHeaders: Array<{ [key: string]: string }>;
   rawTrailers: Array<any>;
-  read: Function;
+  read: (size?: number) => Buffer | null;
   readable: boolean;
   req: ClientRequest;
   request: Request;
   socket: TLSSocket;
   statusCode: number;
   statusMessage: string;
-  toJSON: Function;
   trailers: Record<string, any>;
+  toJSON: () => Record<string, any>;
   upgrade: boolean;
   url: string;
 }

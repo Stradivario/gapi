@@ -95,7 +95,7 @@ export class GenerateTask {
           args[1]
         } --force=${force} --dryRun=${dryRun} ${
           schematicsConfig.hasSpec || hasSpec ? '--spec' : ''
-        } --language='${language}' --sourceRoot='${sourceRoot}' ${internalArguments}`
+        } --language='${language}' --sourceRoot='${sourceRoot}' ${internalArguments}`,
       );
     } catch (e) {
       console.log(e);

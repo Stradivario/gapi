@@ -7,10 +7,12 @@ import { Environment } from './app.constants';
 
 export const CommandsToken = new InjectionToken();
 export const EnumToken = new InjectionToken();
-export const SubscriptionQuery = new InjectionToken<NetworkItem>();
+export const SubscriptionQuery =
+  new InjectionToken<NetworkItem>();
 
 export type SubscriptionQuery = NetworkItem;
-export const MachineStatusQuery = new InjectionToken<NetworkItem>();
+export const MachineStatusQuery =
+  new InjectionToken<NetworkItem>();
 
 export type MachineStatusQuery = NetworkItem;
 
@@ -27,7 +29,7 @@ export const machineHash = createHash('md5')
 export class Network {
   subscription: NetworkItem = {
     query: gql`
-      subscription($machineHash: String, $label: String) {
+      subscription ($machineHash: String, $label: String) {
         registerWorker(
           machineHash: $machineHash
           label: $label

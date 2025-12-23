@@ -14,7 +14,7 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
-import { isNullOrUndefined } from 'util';
+
 import {
   DeclarationOptions,
   ModuleDeclarator,
@@ -42,7 +42,7 @@ function transform(source: ServiceOptions): ServiceOptions {
   target.metadata = 'effects';
   target.type = 'effect';
 
-  if (isNullOrUndefined(target.name)) {
+  if (target.name === null || target.name === undefined) {
     throw new SchematicsException('Option (name) is required.');
   }
   const location: Location = new NameParser().parse(target);
@@ -59,7 +59,7 @@ function transform(source: ServiceOptions): ServiceOptions {
 function generate(options: ServiceOptions) {
   return (context: SchematicContext) =>
     apply(url(join('./files' as Path, options.language)), [
-      options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
+      options.spec ? noop() : filter((path) => !path.endsWith('.spec.ts')),
       template({
         ...strings,
         ...options,

@@ -25,7 +25,7 @@ export class ServerController {
   constructor(
     private listService: ListService,
     private daemonService: DaemonService,
-    private pubsub: PubSubService
+    private pubsub: PubSubService,
   ) {
     let count = 0;
     setInterval(() => {
@@ -35,7 +35,7 @@ export class ServerController {
 
   @Type(LinkListType)
   @Subscribe((self: ServerController) =>
-    self.pubsub.asyncIterator('CREATE_SIGNAL_BASIC')
+    self.pubsub.asyncIterator('CREATE_SIGNAL_BASIC'),
   )
   @Interceptor(NotifyInterceptor)
   @Subscription()

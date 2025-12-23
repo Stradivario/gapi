@@ -47,7 +47,7 @@ export class CLIBuilder {
   public static forRoot<C, T = unknown, K = unknown>(
     commands: GenericEnum<C, T, K>,
     enumerables,
-    network: Network = new Network()
+    network: Network = new Network(),
   ): ModuleWithProviders {
     return {
       module: CLIBuilder,
@@ -99,7 +99,7 @@ export class CLIBuilder {
                               new GraphqlEnumType({
                                 name: 'Commands',
                                 values: enumerables,
-                              })
+                              }),
                             ),
                           },
                           args: {
@@ -119,10 +119,10 @@ export class CLIBuilder {
                             cmd: string;
                             args: string[];
                             cwd: string;
-                          }
+                          },
                         ) =>
                           executeAction<number, string[]>(
-                            cmd
+                            cmd,
                           )(args, cwd),
                       },
                     }),
@@ -132,9 +132,10 @@ export class CLIBuilder {
             }),
         },
       ],
-      controllers: Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI
-        ? []
-        : [AppController],
+      controllers:
+        Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI
+          ? []
+          : [AppController],
     };
   }
 }

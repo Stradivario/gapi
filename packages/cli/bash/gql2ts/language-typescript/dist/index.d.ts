@@ -22,7 +22,7 @@ export declare const DEFAULT_TYPE_BUILDER: InterfaceAndTypeBuilder;
 export declare const DEFAULT_TYPE_JOINER: TypeJoiner;
 export declare const DEFAULT_TYPE_NAMER: WrapType;
 export declare const interfaceExtendListToString: (
-  extensions: string[]
+  extensions: string[],
 ) => string;
 export declare const ADD_INTERFACE_EXTENSIONS: InterfaceNameWithExtensions;
 export declare const DEFAULT_NAME_FRAGMENT: WrapType;

@@ -14,7 +14,7 @@ export type Union<
   Roles,
   Resolvers,
   Actions,
-  Context = unknown
+  Context = unknown,
 > = GenericEnumType<
   Roles,
   {

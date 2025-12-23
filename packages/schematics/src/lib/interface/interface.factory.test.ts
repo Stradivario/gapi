@@ -3,6 +3,7 @@ import {
   UnitTestTree,
 } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
+
 import { InterfaceOptions } from './interface.schema';
 
 describe('Interface Factory', () => {
@@ -18,7 +19,7 @@ describe('Interface Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interface', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo.interface.ts'),
+      files.find((filename) => filename === '/foo.interface.ts'),
     ).toBeDefined();
     expect(tree.readContent('/foo.interface.ts')).toEqual(
       'export interface Foo {}\n',
@@ -32,7 +33,7 @@ describe('Interface Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interface', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar/foo.interface.ts'),
+      files.find((filename) => filename === '/bar/foo.interface.ts'),
     ).toBeDefined();
     expect(tree.readContent('/bar/foo.interface.ts')).toEqual(
       'export interface Foo {}\n',
@@ -47,7 +48,7 @@ describe('Interface Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interface', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/baz/foo.interface.ts'),
+      files.find((filename) => filename === '/baz/foo.interface.ts'),
     ).toBeDefined();
     expect(tree.readContent('/baz/foo.interface.ts')).toEqual(
       'export interface Foo {}\n',
@@ -61,7 +62,7 @@ describe('Interface Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interface', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo-bar.interface.ts'),
+      files.find((filename) => filename === '/foo-bar.interface.ts'),
     ).toBeDefined();
     expect(tree.readContent('/foo-bar.interface.ts')).toEqual(
       'export interface FooBar {}\n',
@@ -75,7 +76,7 @@ describe('Interface Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('interface', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar-baz/foo.interface.ts'),
+      files.find((filename) => filename === '/bar-baz/foo.interface.ts'),
     ).toBeDefined();
     expect(tree.readContent('/bar-baz/foo.interface.ts')).toEqual(
       'export interface Foo {}\n',

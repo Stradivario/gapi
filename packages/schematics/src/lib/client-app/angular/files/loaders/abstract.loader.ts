@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AbstractHttpAdapter } from '@nestjs/core';
 import { join } from 'path';
+
 import { AngularModuleOptions } from '../interfaces/angular-options.interface';
 
 @Injectable()

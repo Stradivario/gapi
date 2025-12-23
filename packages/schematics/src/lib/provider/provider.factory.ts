@@ -14,6 +14,7 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
+
 import {
   DeclarationOptions,
   ModuleDeclarator,
@@ -57,7 +58,7 @@ function transform(options: ProviderOptions): ProviderOptions {
 function generate(options: ProviderOptions) {
   return (context: SchematicContext) =>
     apply(url(join('./files' as Path, options.language)), [
-      options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
+      options.spec ? noop() : filter((path) => !path.endsWith('.spec.ts')),
       template({
         ...strings,
         ...options,

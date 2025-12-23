@@ -77,15 +77,15 @@ export interface PostBody {
   include_player_ids: string[];
 }
 
-interface ClientNotification {
-  postBody: PostBody;
-  setContent(contents): void;
-  setExcludedSegments(excludedSegments: string[]): void;
-  setFilters(filters: string): void;
-  setIncludedSegments(includedSegments: string[]): void;
-  setParameter(name: string, value: any): void;
-  setTargetDevices(include_player_ids: string[]): void;
-}
+// interface ClientNotification {
+//   postBody: PostBody;
+//   setContent(contents): void;
+//   setExcludedSegments(excludedSegments: string[]): void;
+//   setFilters(filters: string): void;
+//   setIncludedSegments(includedSegments: string[]): void;
+//   setParameter(name: string, value: any): void;
+//   setTargetDevices(include_player_ids: string[]): void;
+// }
 
 export class Notification {
   public initialBody: {
@@ -124,7 +124,7 @@ export class Notification {
     }
 
     throw new Error(
-      'Body must include one of the following fields: contents, content_available, template_id'
+      'Body must include one of the following fields: contents, content_available, template_id',
     );
   }
 
@@ -137,7 +137,7 @@ export class Notification {
           name +
           '" is not present in documentation. You should add a ' +
           'exclamation mark to the begging of the name, if you want to set it : !' +
-          name
+          name,
       );
     }
     this.postBody[name] = value;

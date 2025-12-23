@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { Injectable, Metadata } from '@rxdi/core';
 import { exists, readFileSync, writeFile } from 'fs';
 import { of } from 'rxjs';
@@ -12,11 +11,12 @@ import {
   GAPI_DAEMON_PLUGINS_FOLDER,
   IPFS_HASHED_MODULES,
 } from '../../daemon.config';
-import { IpfsHashMapService } from './ipfs-hash-map.service';
 import { ExternalImporter } from './ipfs/external-importer';
 import { ExternalModuleConfiguration } from './ipfs/external-importer-config';
+import { IpfsHashMapService } from './ipfs-hash-map.service';
 import { PluginWatcherService } from './plugin-watcher.service';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 interface CustomMetadata extends Function {
   metadata: Metadata;
 }
@@ -27,7 +27,8 @@ export class PluginLoader {
   private defaultDownloadFilename = 'gapi-plugin';
   private filterDups = (modules: CustomMetadata[]) =>
     [...new Set(modules.map((i) => i.metadata.moduleHash))].map(
-      (m) => this.cache[m]
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (m: any) => this.cache[m],
     );
 
   cache: { [key: string]: CustomMetadata } = {};
@@ -35,7 +36,7 @@ export class PluginLoader {
     private externalImporterService: ExternalImporter,
     private fileService: FileService,
     private pluginWatcherService: PluginWatcherService,
-    private ipfsHashMapService: IpfsHashMapService
+    private ipfsHashMapService: IpfsHashMapService,
   ) {}
 
   loadPlugins() {
@@ -46,23 +47,26 @@ export class PluginLoader {
       map((p) =>
         [...new Set(p)].map((path) =>
           !new RegExp(/^(.(?!.*\.js$))*$/g).test(path)
-            ? this.loadModule(require(path))
-            : null
-        )
+            ? // eslint-disable-next-line @typescript-eslint/no-require-imports
+              this.loadModule(require(path))
+            : null,
+        ),
       ),
       switchMap((pluginModules) =>
         of(null).pipe(
           combineLatest(
             [...new Set(this.loadIpfsHashes())].map((hash) =>
-              this.getModule(hash)
-            )
+              this.getModule(hash as never),
+            ),
           ),
-          map((externalModules) => externalModules.concat(pluginModules)),
-          map((m) => m.filter((i) => !!i)),
+          map((externalModules) =>
+            externalModules.concat(pluginModules as never),
+          ),
+          map((m) => m.filter((i) => !!i) as never),
           map((modules: CustomMetadata[]) => this.filterDups(modules)),
-          tap(() => this.ipfsHashMapService.writeHashMapToFile())
-        )
-      )
+          tap(() => this.ipfsHashMapService.writeHashMapToFile()),
+        ),
+      ),
     );
   }
 
@@ -70,9 +74,11 @@ export class PluginLoader {
     let hashes = [];
     try {
       hashes = JSON.parse(
-        readFileSync(IPFS_HASHED_MODULES, { encoding: 'utf8' })
+        readFileSync(IPFS_HASHED_MODULES, { encoding: 'utf8' }),
       );
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
     return hashes;
   }
 
@@ -86,7 +92,7 @@ export class PluginLoader {
         take(1),
         tap((externalModule: ExternalModuleConfiguration) => {
           const isPresent = this.ipfsHashMapService.hashMap.filter(
-            (h) => h.hash === hash
+            (h) => h.hash === hash,
           ).length;
           if (!isPresent) {
             this.ipfsHashMapService.hashMap.push({
@@ -111,24 +117,27 @@ export class PluginLoader {
               link: `${this.defaultIpfsProvider}${externalModule.module}`,
             },
             externalModule.name,
-            { folderOverride: `//` }
-          )
+            { folderOverride: `//` },
+          ),
         ),
-        map((data: Function) => this.loadModule(data))
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+        map((data: Function) => this.loadModule(data)),
       );
   }
 
   private cacheModule(currentModule: CustomMetadata) {
     if (!currentModule.metadata) {
       throw new Error(
-        'Missing metadata for module maybe it is not from @rxdi infrastructure ?'
+        'Missing metadata for module maybe it is not from @rxdi infrastructure ?',
       );
     }
-    return (this.cache[currentModule.metadata.moduleHash] = currentModule);
+    return (this.cache[currentModule.metadata.moduleHash as never] =
+      currentModule);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   private loadModule(m: Function): CustomMetadata {
-    const currentModule: CustomMetadata = m[Object.keys(m)[0]];
+    const currentModule: CustomMetadata = m[Object.keys(m)[0] as never];
     if (!currentModule) {
       throw new Error(`Missing cache module ${JSON.stringify(m)}`);
     }
@@ -140,7 +149,7 @@ export class PluginLoader {
       await promisify(writeFile)(
         IPFS_HASHED_MODULES,
         JSON.stringify([], null, 4),
-        { encoding: 'utf8' }
+        { encoding: 'utf8' },
       );
     }
   }
@@ -150,7 +159,7 @@ export class PluginLoader {
       switchMap(() => this.fileService.mkdirp(GAPI_DAEMON_IPFS_PLUGINS_FOLDER)),
       switchMap(() => this.fileService.mkdirp(GAPI_DAEMON_HTTP_PLUGINS_FOLDER)),
       switchMap(() => this.fileService.mkdirp(GAPI_DAEMON_PLUGINS_FOLDER)),
-      switchMap(() => this.makeIpfsHashFile())
+      switchMap(() => this.makeIpfsHashFile()),
     );
   }
 }

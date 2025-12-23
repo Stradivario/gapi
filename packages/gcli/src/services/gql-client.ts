@@ -180,7 +180,7 @@ export class GraphqlClienAPI {
           ({
             ...logs,
             data: LZWService.decompress(logs.data),
-          } as IFissionLogsType),
+          }) as IFissionLogsType,
       ),
     );
   }
@@ -202,7 +202,7 @@ export class GraphqlClienAPI {
           ({
             ...logs,
             data: LZWService.decompress(logs.data),
-          } as IFissionLogsType),
+          }) as IFissionLogsType,
       ),
     );
   }
@@ -224,7 +224,7 @@ export class GraphqlClienAPI {
           ({
             ...logs,
             data: LZWService.decompress(logs.data),
-          } as IFissionLogsType),
+          }) as IFissionLogsType,
       ),
     );
   }
@@ -246,7 +246,7 @@ export class GraphqlClienAPI {
           ({
             ...logs,
             data: LZWService.decompress(logs.data),
-          } as IFissionLogsType),
+          }) as IFissionLogsType,
       ),
     );
   }

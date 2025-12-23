@@ -13,7 +13,7 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class NotifyInterceptor implements InterceptResolver {
   intercept(
-    chainable$: Observable<any>
+    chainable$: Observable<any>,
     // context,
     // payload: ILinkListType,
     // descriptor: GenericGapiResolversType
@@ -27,7 +27,7 @@ export class NotifyInterceptor implements InterceptResolver {
     // });
     const now = Date.now();
     return chainable$.pipe(
-      tap(() => console.log(`After... ${Date.now() - now}ms`))
+      tap(() => console.log(`After... ${Date.now() - now}ms`)),
       // tap(() => notifier.notify({
       //     'title': 'Daemon finished!',
       //     'message': `Request took ${Date.now() - now}ms`,

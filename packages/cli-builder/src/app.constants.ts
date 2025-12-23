@@ -18,7 +18,7 @@ export const includes = (i: Commands) =>
 export const nextOrDefault = (
   i: Commands,
   fb: unknown = true,
-  type = (p) => p
+  type = (p) => p,
 ) => {
   if (process.argv.toString().includes(i)) {
     const isNextArgumentPresent =

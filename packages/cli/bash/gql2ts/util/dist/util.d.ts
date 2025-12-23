@@ -1,4 +1,4 @@
 export declare const filterAndJoinArray: <T>(
   arr: T[],
-  joinChar?: string
+  joinChar?: string,
 ) => string;

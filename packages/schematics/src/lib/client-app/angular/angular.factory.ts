@@ -16,6 +16,7 @@ import {
 import { join } from 'path';
 import * as ts from 'ts-morph';
 import { Path } from 'typescript';
+
 import {
   DeclarationOptions,
   ModuleDeclarator,
@@ -88,7 +89,7 @@ function addDeclarationToModule(options: AngularOptions): Rule {
     const declarator: ModuleDeclarator = new ModuleDeclarator();
 
     const rootPath = `${options.directory}/dist/${options.directory}`;
-    const declarationOptions = ({
+    const declarationOptions = {
       ...options,
       staticOptions: {
         name: 'forRoot',
@@ -96,7 +97,7 @@ function addDeclarationToModule(options: AngularOptions): Rule {
           rootPath,
         },
       },
-    } as unknown) as DeclarationOptions;
+    } as unknown as DeclarationOptions;
     tree.overwrite(
       options.module,
       declarator.declare(content, declarationOptions),
@@ -119,10 +120,10 @@ function addGlobalPrefix(): Rule {
     });
     const tsFile = tsProject.addExistingSourceFile(mainFilePath);
     const bootstrapFunction = tsFile.getFunction('bootstrap');
-    const listenStatement = bootstrapFunction.getStatement(node =>
+    const listenStatement = bootstrapFunction.getStatement((node) =>
       node.getText().includes('listen'),
     );
-    const setPrefixStatement = bootstrapFunction.getStatement(node =>
+    const setPrefixStatement = bootstrapFunction.getStatement((node) =>
       node.getText().includes('setGlobalPrefix'),
     );
     if (!listenStatement || setPrefixStatement) {

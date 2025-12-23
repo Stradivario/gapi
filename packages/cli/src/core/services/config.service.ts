@@ -103,7 +103,7 @@ export class ConfigService {
         headers: '',
         pattern: '',
       },
-      this.config.config.schema
+      this.config.config.schema,
     );
     this.config.config.schematics =
       this.config.config.schematics || ({} as any);
@@ -121,7 +121,7 @@ export class ConfigService {
   }
   genericError(command: string) {
     throw new Error(
-      `You cannot define command '${command}' they are restricted!`
+      `You cannot define command '${command}' they are restricted!`,
     );
   }
 }

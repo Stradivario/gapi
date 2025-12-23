@@ -1,17 +1,17 @@
-export { readFile, writeToFile, safeJSONParse } from './fileIO';
+export { readFile, safeJSONParse, writeToFile } from './fileIO';
 export {
-  PossibleIntrospectionInputs,
-  PossibleSchemaInput,
+  buildDocumentation,
+  getDocTags,
+  IFieldDocumentation,
+  IJSDocTag,
+} from './parser';
+export {
+  isEnum,
   isIntrospectionResult,
-  schemaFromInputs,
   isList,
   isNonNullable,
-  isEnum,
+  PossibleIntrospectionInputs,
+  PossibleSchemaInput,
+  schemaFromInputs,
 } from './schema';
-export {
-  getDocTags,
-  IJSDocTag,
-  buildDocumentation,
-  IFieldDocumentation,
-} from './parser';
 export { filterAndJoinArray } from './util';

@@ -200,13 +200,12 @@ export const createOrUpdateLambda = (
     )
     .toPromise();
 
-export const createCommand = (command: string) => (
-  options: [string, string][],
-) => (program: Command) => {
-  const cmd = program.command(command);
+export const createCommand =
+  (command: string) => (options: [string, string][]) => (program: Command) => {
+    const cmd = program.command(command);
 
-  for (const option of options) {
-    cmd.option(...option);
-  }
-  return cmd as Command;
-};
+    for (const option of options) {
+      cmd.option(...option);
+    }
+    return cmd as Command;
+  };

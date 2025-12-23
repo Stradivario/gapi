@@ -12,7 +12,7 @@ export interface ProcessReturn {
 export const executeCommand = (
   command: string,
   args: string[] = [],
-  options?: SpawnOptionsWithoutStdio
+  options?: SpawnOptionsWithoutStdio,
 ) => {
   return new Promise<ProcessReturn>((resolve, reject) => {
     const child = spawn(command, args, options);

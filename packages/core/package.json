@@ -26,10 +26,10 @@
   },
   "dependencies": {
     "@gapi/daemon": "^1.8.169",
-    "@rxdi/core": "^0.7.193",
-    "@rxdi/graphql": "^0.7.193",
-    "@rxdi/graphql-pubsub": "^0.7.193",
-    "@rxdi/hapi": "^0.7.193",
+    "@rxdi/core": "^0.7.194",
+    "@rxdi/graphql": "^0.7.194",
+    "@rxdi/graphql-pubsub": "^0.7.194",
+    "@rxdi/hapi": "^0.7.194",
     "graphql": "^16.12.0",
     "graphql-geojson": "^1.0.0",
     "graphql-tools": "^5.0.0"

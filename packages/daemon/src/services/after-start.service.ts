@@ -6,10 +6,10 @@ import { DaemonService } from './daemon.service';
 export class AfterStart {
   constructor(
     private afterStarterService: AfterStarterService,
-    private daemonService: DaemonService
+    private daemonService: DaemonService,
   ) {
     this.afterStarterService.appStarted.subscribe(() =>
-      this.daemonService.notifyDaemon()
+      this.daemonService.notifyDaemon(),
     );
   }
 }

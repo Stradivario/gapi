@@ -24,7 +24,7 @@ export class DaemonExecutorService {
               }
             `,
       },
-      this.daemonLink
+      this.daemonLink,
     );
   }
 }

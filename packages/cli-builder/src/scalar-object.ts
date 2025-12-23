@@ -12,7 +12,7 @@ function ensureObject(value) {
     Array.isArray(value)
   ) {
     throw new TypeError(
-      `JSONObject cannot represent non-object value: ${value}`
+      `JSONObject cannot represent non-object value: ${value}`,
     );
   }
 
@@ -22,10 +22,9 @@ function ensureObject(value) {
 function parseObject(ast, variables) {
   const value = Object.create(null);
   ast.fields.forEach((field) => {
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     value[field.name.value] = parseLiteral(
       field.value,
-      variables
+      variables,
     );
   });
 
@@ -44,7 +43,7 @@ function parseLiteral(ast, variables) {
       return parseObject(ast, variables);
     case Kind.LIST:
       return ast.values.map((n) =>
-        parseLiteral(n, variables)
+        parseLiteral(n, variables),
       );
     case Kind.NULL:
       return null;

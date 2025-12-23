@@ -303,412 +303,439 @@ export const DOCUMENTS = {
       value: 'subscribeToUserMessagesBasic.subscription.graphql',
     },
   },
-  'node_modules/graphql-document-collector/example/fragments/onFilm/Movie.graphql': {
-    kind: 'Document',
-    definitions: [
-      {
-        kind: 'FragmentDefinition',
-        name: { kind: 'Name', value: 'Movie', loc: { start: 9, end: 14 } },
-        typeCondition: {
-          kind: 'NamedType',
-          name: { kind: 'Name', value: 'Film', loc: { start: 18, end: 22 } },
-          loc: { start: 18, end: 22 },
-        },
-        directives: [],
-        selectionSet: {
-          kind: 'SelectionSet',
-          selections: [
-            {
-              kind: 'Field',
-              alias: null,
-              name: { kind: 'Name', value: 'id', loc: { start: 27, end: 29 } },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 27, end: 29 },
-            },
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'title',
+  'node_modules/graphql-document-collector/example/fragments/onFilm/Movie.graphql':
+    {
+      kind: 'Document',
+      definitions: [
+        {
+          kind: 'FragmentDefinition',
+          name: { kind: 'Name', value: 'Movie', loc: { start: 9, end: 14 } },
+          typeCondition: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'Film', loc: { start: 18, end: 22 } },
+            loc: { start: 18, end: 22 },
+          },
+          directives: [],
+          selectionSet: {
+            kind: 'SelectionSet',
+            selections: [
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'id',
+                  loc: { start: 27, end: 29 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+                loc: { start: 27, end: 29 },
+              },
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'title',
+                  loc: { start: 32, end: 37 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 32, end: 37 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 32, end: 37 },
-            },
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'director',
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'director',
+                  loc: { start: 40, end: 48 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 40, end: 48 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 40, end: 48 },
-            },
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'planetConnection',
-                loc: { start: 51, end: 67 },
-              },
-              arguments: [],
-              directives: [],
-              selectionSet: {
-                kind: 'SelectionSet',
-                selections: [
-                  {
-                    kind: 'Field',
-                    alias: null,
-                    name: {
-                      kind: 'Name',
-                      value: 'planets',
-                      loc: { start: 74, end: 81 },
-                    },
-                    arguments: [],
-                    directives: [],
-                    selectionSet: {
-                      kind: 'SelectionSet',
-                      selections: [
-                        {
-                          kind: 'FragmentSpread',
-                          name: {
-                            kind: 'Name',
-                            value: 'Place',
-                            loc: { start: 93, end: 98 },
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'planetConnection',
+                  loc: { start: 51, end: 67 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: {
+                  kind: 'SelectionSet',
+                  selections: [
+                    {
+                      kind: 'Field',
+                      alias: null,
+                      name: {
+                        kind: 'Name',
+                        value: 'planets',
+                        loc: { start: 74, end: 81 },
+                      },
+                      arguments: [],
+                      directives: [],
+                      selectionSet: {
+                        kind: 'SelectionSet',
+                        selections: [
+                          {
+                            kind: 'FragmentSpread',
+                            name: {
+                              kind: 'Name',
+                              value: 'Place',
+                              loc: { start: 93, end: 98 },
+                            },
+                            directives: [],
+                            loc: { start: 90, end: 98 },
                           },
-                          directives: [],
-                          loc: { start: 90, end: 98 },
-                        },
-                      ],
-                      loc: { start: 82, end: 104 },
+                        ],
+                        loc: { start: 82, end: 104 },
+                      },
+                      loc: { start: 74, end: 104 },
                     },
-                    loc: { start: 74, end: 104 },
-                  },
-                ],
-                loc: { start: 68, end: 108 },
+                  ],
+                  loc: { start: 68, end: 108 },
+                },
+                loc: { start: 51, end: 108 },
               },
-              loc: { start: 51, end: 108 },
+            ],
+            loc: { start: 23, end: 110 },
+          },
+          loc: { start: 0, end: 110 },
+        },
+        {
+          kind: 'FragmentDefinition',
+          name: { kind: 'Name', value: 'Place', loc: { start: 9, end: 14 } },
+          typeCondition: {
+            kind: 'NamedType',
+            name: {
+              kind: 'Name',
+              value: 'Planet',
+              loc: { start: 18, end: 24 },
             },
-          ],
-          loc: { start: 23, end: 110 },
-        },
-        loc: { start: 0, end: 110 },
-      },
-      {
-        kind: 'FragmentDefinition',
-        name: { kind: 'Name', value: 'Place', loc: { start: 9, end: 14 } },
-        typeCondition: {
-          kind: 'NamedType',
-          name: { kind: 'Name', value: 'Planet', loc: { start: 18, end: 24 } },
-          loc: { start: 18, end: 24 },
-        },
-        directives: [],
-        selectionSet: {
-          kind: 'SelectionSet',
-          selections: [
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'name',
+            loc: { start: 18, end: 24 },
+          },
+          directives: [],
+          selectionSet: {
+            kind: 'SelectionSet',
+            selections: [
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'name',
+                  loc: { start: 29, end: 33 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 29, end: 33 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 29, end: 33 },
-            },
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'climates',
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'climates',
+                  loc: { start: 36, end: 44 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 36, end: 44 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 36, end: 44 },
+            ],
+            loc: { start: 25, end: 46 },
+          },
+          loc: { start: 0, end: 46 },
+        },
+      ],
+      loc: { start: 0, end: 111 },
+      name: { kind: 'Name', value: 'Movie.graphql' },
+    },
+  'node_modules/graphql-document-collector/example/fragments/onPlanet/Place.graphql':
+    {
+      kind: 'Document',
+      definitions: [
+        {
+          kind: 'FragmentDefinition',
+          name: { kind: 'Name', value: 'Place', loc: { start: 9, end: 14 } },
+          typeCondition: {
+            kind: 'NamedType',
+            name: {
+              kind: 'Name',
+              value: 'Planet',
+              loc: { start: 18, end: 24 },
             },
-          ],
-          loc: { start: 25, end: 46 },
-        },
-        loc: { start: 0, end: 46 },
-      },
-    ],
-    loc: { start: 0, end: 111 },
-    name: { kind: 'Name', value: 'Movie.graphql' },
-  },
-  'node_modules/graphql-document-collector/example/fragments/onPlanet/Place.graphql': {
-    kind: 'Document',
-    definitions: [
-      {
-        kind: 'FragmentDefinition',
-        name: { kind: 'Name', value: 'Place', loc: { start: 9, end: 14 } },
-        typeCondition: {
-          kind: 'NamedType',
-          name: { kind: 'Name', value: 'Planet', loc: { start: 18, end: 24 } },
-          loc: { start: 18, end: 24 },
-        },
-        directives: [],
-        selectionSet: {
-          kind: 'SelectionSet',
-          selections: [
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'name',
+            loc: { start: 18, end: 24 },
+          },
+          directives: [],
+          selectionSet: {
+            kind: 'SelectionSet',
+            selections: [
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'name',
+                  loc: { start: 29, end: 33 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 29, end: 33 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 29, end: 33 },
-            },
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'climates',
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'climates',
+                  loc: { start: 36, end: 44 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 36, end: 44 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 36, end: 44 },
-            },
-          ],
-          loc: { start: 25, end: 46 },
+            ],
+            loc: { start: 25, end: 46 },
+          },
+          loc: { start: 0, end: 46 },
         },
-        loc: { start: 0, end: 46 },
-      },
-    ],
-    loc: { start: 0, end: 47 },
-    name: { kind: 'Name', value: 'Place.graphql' },
-  },
-  'node_modules/graphql-document-collector/example/queries/ListMovies.graphql': {
-    kind: 'Document',
-    definitions: [
-      {
-        kind: 'OperationDefinition',
-        operation: 'query',
-        name: { kind: 'Name', value: 'ListMovies', loc: { start: 6, end: 16 } },
-        variableDefinitions: [],
-        directives: [],
-        selectionSet: {
-          kind: 'SelectionSet',
-          selections: [
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'allFilms',
-                loc: { start: 21, end: 29 },
-              },
-              arguments: [],
-              directives: [],
-              selectionSet: {
-                kind: 'SelectionSet',
-                selections: [
-                  {
-                    kind: 'Field',
-                    alias: null,
-                    name: {
-                      kind: 'Name',
-                      value: 'films',
-                      loc: { start: 36, end: 41 },
-                    },
-                    arguments: [],
-                    directives: [],
-                    selectionSet: {
-                      kind: 'SelectionSet',
-                      selections: [
-                        {
-                          kind: 'FragmentSpread',
-                          name: {
-                            kind: 'Name',
-                            value: 'Movie',
-                            loc: { start: 53, end: 58 },
+      ],
+      loc: { start: 0, end: 47 },
+      name: { kind: 'Name', value: 'Place.graphql' },
+    },
+  'node_modules/graphql-document-collector/example/queries/ListMovies.graphql':
+    {
+      kind: 'Document',
+      definitions: [
+        {
+          kind: 'OperationDefinition',
+          operation: 'query',
+          name: {
+            kind: 'Name',
+            value: 'ListMovies',
+            loc: { start: 6, end: 16 },
+          },
+          variableDefinitions: [],
+          directives: [],
+          selectionSet: {
+            kind: 'SelectionSet',
+            selections: [
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'allFilms',
+                  loc: { start: 21, end: 29 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: {
+                  kind: 'SelectionSet',
+                  selections: [
+                    {
+                      kind: 'Field',
+                      alias: null,
+                      name: {
+                        kind: 'Name',
+                        value: 'films',
+                        loc: { start: 36, end: 41 },
+                      },
+                      arguments: [],
+                      directives: [],
+                      selectionSet: {
+                        kind: 'SelectionSet',
+                        selections: [
+                          {
+                            kind: 'FragmentSpread',
+                            name: {
+                              kind: 'Name',
+                              value: 'Movie',
+                              loc: { start: 53, end: 58 },
+                            },
+                            directives: [],
+                            loc: { start: 50, end: 58 },
                           },
-                          directives: [],
-                          loc: { start: 50, end: 58 },
-                        },
-                      ],
-                      loc: { start: 42, end: 64 },
+                        ],
+                        loc: { start: 42, end: 64 },
+                      },
+                      loc: { start: 36, end: 64 },
                     },
-                    loc: { start: 36, end: 64 },
-                  },
-                ],
-                loc: { start: 30, end: 68 },
+                  ],
+                  loc: { start: 30, end: 68 },
+                },
+                loc: { start: 21, end: 68 },
               },
-              loc: { start: 21, end: 68 },
-            },
-          ],
-          loc: { start: 17, end: 70 },
+            ],
+            loc: { start: 17, end: 70 },
+          },
+          loc: { start: 0, end: 70 },
         },
-        loc: { start: 0, end: 70 },
-      },
-      {
-        kind: 'FragmentDefinition',
-        name: { kind: 'Name', value: 'Movie', loc: { start: 9, end: 14 } },
-        typeCondition: {
-          kind: 'NamedType',
-          name: { kind: 'Name', value: 'Film', loc: { start: 18, end: 22 } },
-          loc: { start: 18, end: 22 },
-        },
-        directives: [],
-        selectionSet: {
-          kind: 'SelectionSet',
-          selections: [
-            {
-              kind: 'Field',
-              alias: null,
-              name: { kind: 'Name', value: 'id', loc: { start: 27, end: 29 } },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 27, end: 29 },
-            },
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'title',
+        {
+          kind: 'FragmentDefinition',
+          name: { kind: 'Name', value: 'Movie', loc: { start: 9, end: 14 } },
+          typeCondition: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'Film', loc: { start: 18, end: 22 } },
+            loc: { start: 18, end: 22 },
+          },
+          directives: [],
+          selectionSet: {
+            kind: 'SelectionSet',
+            selections: [
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'id',
+                  loc: { start: 27, end: 29 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+                loc: { start: 27, end: 29 },
+              },
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'title',
+                  loc: { start: 32, end: 37 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 32, end: 37 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 32, end: 37 },
-            },
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'director',
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'director',
+                  loc: { start: 40, end: 48 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 40, end: 48 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 40, end: 48 },
-            },
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'planetConnection',
-                loc: { start: 51, end: 67 },
-              },
-              arguments: [],
-              directives: [],
-              selectionSet: {
-                kind: 'SelectionSet',
-                selections: [
-                  {
-                    kind: 'Field',
-                    alias: null,
-                    name: {
-                      kind: 'Name',
-                      value: 'planets',
-                      loc: { start: 74, end: 81 },
-                    },
-                    arguments: [],
-                    directives: [],
-                    selectionSet: {
-                      kind: 'SelectionSet',
-                      selections: [
-                        {
-                          kind: 'FragmentSpread',
-                          name: {
-                            kind: 'Name',
-                            value: 'Place',
-                            loc: { start: 93, end: 98 },
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'planetConnection',
+                  loc: { start: 51, end: 67 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: {
+                  kind: 'SelectionSet',
+                  selections: [
+                    {
+                      kind: 'Field',
+                      alias: null,
+                      name: {
+                        kind: 'Name',
+                        value: 'planets',
+                        loc: { start: 74, end: 81 },
+                      },
+                      arguments: [],
+                      directives: [],
+                      selectionSet: {
+                        kind: 'SelectionSet',
+                        selections: [
+                          {
+                            kind: 'FragmentSpread',
+                            name: {
+                              kind: 'Name',
+                              value: 'Place',
+                              loc: { start: 93, end: 98 },
+                            },
+                            directives: [],
+                            loc: { start: 90, end: 98 },
                           },
-                          directives: [],
-                          loc: { start: 90, end: 98 },
-                        },
-                      ],
-                      loc: { start: 82, end: 104 },
+                        ],
+                        loc: { start: 82, end: 104 },
+                      },
+                      loc: { start: 74, end: 104 },
                     },
-                    loc: { start: 74, end: 104 },
-                  },
-                ],
-                loc: { start: 68, end: 108 },
+                  ],
+                  loc: { start: 68, end: 108 },
+                },
+                loc: { start: 51, end: 108 },
               },
-              loc: { start: 51, end: 108 },
+            ],
+            loc: { start: 23, end: 110 },
+          },
+          loc: { start: 0, end: 110 },
+        },
+        {
+          kind: 'FragmentDefinition',
+          name: { kind: 'Name', value: 'Place', loc: { start: 9, end: 14 } },
+          typeCondition: {
+            kind: 'NamedType',
+            name: {
+              kind: 'Name',
+              value: 'Planet',
+              loc: { start: 18, end: 24 },
             },
-          ],
-          loc: { start: 23, end: 110 },
-        },
-        loc: { start: 0, end: 110 },
-      },
-      {
-        kind: 'FragmentDefinition',
-        name: { kind: 'Name', value: 'Place', loc: { start: 9, end: 14 } },
-        typeCondition: {
-          kind: 'NamedType',
-          name: { kind: 'Name', value: 'Planet', loc: { start: 18, end: 24 } },
-          loc: { start: 18, end: 24 },
-        },
-        directives: [],
-        selectionSet: {
-          kind: 'SelectionSet',
-          selections: [
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'name',
+            loc: { start: 18, end: 24 },
+          },
+          directives: [],
+          selectionSet: {
+            kind: 'SelectionSet',
+            selections: [
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'name',
+                  loc: { start: 29, end: 33 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 29, end: 33 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 29, end: 33 },
-            },
-            {
-              kind: 'Field',
-              alias: null,
-              name: {
-                kind: 'Name',
-                value: 'climates',
+              {
+                kind: 'Field',
+                alias: null,
+                name: {
+                  kind: 'Name',
+                  value: 'climates',
+                  loc: { start: 36, end: 44 },
+                },
+                arguments: [],
+                directives: [],
+                selectionSet: null,
                 loc: { start: 36, end: 44 },
               },
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-              loc: { start: 36, end: 44 },
-            },
-          ],
-          loc: { start: 25, end: 46 },
+            ],
+            loc: { start: 25, end: 46 },
+          },
+          loc: { start: 0, end: 46 },
         },
-        loc: { start: 0, end: 46 },
-      },
-    ],
-    loc: { start: 0, end: 71 },
-    name: { kind: 'Name', value: 'ListMovies.graphql' },
-  },
+      ],
+      loc: { start: 0, end: 71 },
+      name: { kind: 'Name', value: 'ListMovies.graphql' },
+    },
   'src/core/services/daemon-executor/queries/getLinkList.query.graphql': {
     kind: 'Document',
     definitions: [

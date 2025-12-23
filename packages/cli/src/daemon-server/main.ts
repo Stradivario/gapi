@@ -39,7 +39,7 @@ Container.get(PluginLoader)
           ServerModule,
         ],
         providers: [PluginWatcherService],
-      })
-    )
+      }),
+    ),
   )
   .subscribe(() => console.log('Server started'), console.error.bind(console));

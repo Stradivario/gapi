@@ -14,9 +14,11 @@ export class ListService {
       this.linkedList = JSON.parse(
         await promisify(readFile)(GAPI_DAEMON_PROCESS_LIST_FOLDER, {
           encoding: 'utf-8',
-        })
+        }),
       );
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
     return this.linkedList;
   }
 
@@ -30,7 +32,7 @@ export class ListService {
         (await this.readList()).filter((l) => l.linkName === linkName),
       exclude: async (isNotLike: string) =>
         (await this.readList()).filter(
-          (l) => l.linkName === linkName && l.repoPath !== isNotLike
+          (l) => l.linkName === linkName && l.repoPath !== isNotLike,
         ),
     };
   }

@@ -13,6 +13,7 @@ import {
   template,
   url,
 } from '@angular-devkit/schematics';
+
 import { Location, NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { FilterOptions } from './filter.schema';
@@ -41,7 +42,7 @@ function transform(options: FilterOptions): FilterOptions {
 function generate(options: FilterOptions): Source {
   return (context: SchematicContext) =>
     apply(url(join('./files' as Path, options.language)), [
-      options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
+      options.spec ? noop() : filter((path) => !path.endsWith('.spec.ts')),
       template({
         ...strings,
         ...options,

@@ -4,8 +4,8 @@ import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { OpenAI } from './openai.tokens';
-import { CreateCompletionInputType } from './types/create-completion-input.type';
 import { CreateCompletionType } from './types/create-completion.type';
+import { CreateCompletionInputType } from './types/create-completion-input.type';
 
 @Controller()
 export class OpenAIController {

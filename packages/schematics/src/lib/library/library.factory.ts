@@ -18,6 +18,7 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
+
 import { DEFAULT_LANGUAGE, DEFAULT_LIB_PATH } from '../defaults';
 import { LibraryOptions } from './library.schema';
 
@@ -68,7 +69,7 @@ function updateJsonFile<T>(
   if (source) {
     const sourceText = source.toString('utf-8');
     const json = parseJson(sourceText);
-    callback((json as {}) as T);
+    callback(json as {} as T);
     host.overwrite(path, JSON.stringify(json, null, 2));
   }
 
