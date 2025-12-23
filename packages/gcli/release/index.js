@@ -211191,7 +211191,7 @@ var init_js_yaml = __esm({
         decimal: function(obj) {
           return obj.toString(10);
         },
-        /* eslint-disable max-len */
+         
         hexadecimal: function(obj) {
           return obj >= 0 ? "0x" + obj.toString(16).toUpperCase() : "-0x" + obj.toString(16).toUpperCase().slice(1);
         }

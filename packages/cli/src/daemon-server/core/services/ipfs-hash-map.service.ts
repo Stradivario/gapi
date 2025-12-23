@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/class-name-casing */
 import { Injectable } from '@rxdi/core';
 import { exists, readFile, writeFile } from 'fs';
 import { promisify } from 'util';
@@ -19,20 +18,22 @@ export class IpfsHashMapService {
     await promisify(writeFile)(
       IPFS_HASHED_MODULES_MAP,
       JSON.stringify(this.hashMap, null, 4),
-      { encoding: 'utf8' }
+      { encoding: 'utf8' },
     );
   }
 
   async readHashMap() {
     if (await promisify(exists)(IPFS_HASHED_MODULES_MAP)) {
       this.hashMap = JSON.parse(
-        await promisify(readFile)(IPFS_HASHED_MODULES_MAP, { encoding: 'utf8' })
+        await promisify(readFile)(IPFS_HASHED_MODULES_MAP, {
+          encoding: 'utf8',
+        }),
       );
     } else {
       await promisify(writeFile)(
         IPFS_HASHED_MODULES_MAP,
         JSON.stringify([], null, 4),
-        { encoding: 'utf8' }
+        { encoding: 'utf8' },
       );
     }
   }

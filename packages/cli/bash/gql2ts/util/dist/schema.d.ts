@@ -17,13 +17,13 @@ export declare type PossibleSchemaInput =
   | string
   | PossibleIntrospectionInputs;
 export declare function isIntrospectionResult(
-  schema: PossibleIntrospectionInputs
+  schema: PossibleIntrospectionInputs,
 ): schema is IntrospectionQuery;
 export declare const schemaFromInputs: (
-  schema: PossibleSchemaInput
+  schema: PossibleSchemaInput,
 ) => GraphQLSchema;
 export declare function isNonNullable(
-  type: GraphQLType
+  type: GraphQLType,
 ): type is GraphQLNonNull<any>;
 export declare function isList(type: GraphQLType): type is GraphQLList<any>;
 export declare function isEnum(type: GraphQLType): type is GraphQLEnumType;

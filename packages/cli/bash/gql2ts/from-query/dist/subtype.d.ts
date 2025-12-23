@@ -7,6 +7,6 @@ export interface ISubtypeMetadata {
 export declare type SubtypeNamerAndDedupe = (
   selection: FieldNode,
   declaration: string,
-  generateSubTypeInterfaceName: GenerateSubTypeInterface
+  generateSubTypeInterfaceName: GenerateSubTypeInterface,
 ) => ISubtypeMetadata | null;
 export declare const GenerateSubtypeCache: () => SubtypeNamerAndDedupe;

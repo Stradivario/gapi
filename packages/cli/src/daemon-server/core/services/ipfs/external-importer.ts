@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable */
+import { Injector, Service } from '@rxdi/core';
 import {
   BehaviorSubject,
   combineLatest,
@@ -8,6 +9,7 @@ import {
   timer,
 } from 'rxjs';
 import { filter, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import SystemJS from 'systemjs';
 
 import { FileService } from '../../../../core/services/file';
 import {
@@ -15,11 +17,8 @@ import {
   ExternalImporterIpfsConfig,
   ExternalModuleConfiguration,
 } from './external-importer-config';
-import { IPFS_PROVIDERS } from './providers';
-import SystemJS = require('systemjs');
-import { Injector, Service } from '@rxdi/core';
-
 import { NpmService } from './npm-service';
+import { IPFS_PROVIDERS } from './providers';
 import { RequestService } from './request';
 
 export interface PackagesConfig {
@@ -36,9 +35,8 @@ export class ExternalImporter {
   @Injector(FileService) private fileService: FileService;
   @Injector(NpmService) private npmService: NpmService;
 
-  providers: BehaviorSubject<
-    { name: IPFS_PROVIDERS; link: string }[]
-  > = new BehaviorSubject(IPFS_PROVIDERS);
+  providers: BehaviorSubject<{ name: IPFS_PROVIDERS; link: string }[]> =
+    new BehaviorSubject(IPFS_PROVIDERS);
   defaultProvider: string = this.getProvider('main-ipfs-node');
   defaultNamespaceFolder = '@types';
   defaultOutputFolder = 'node_modules';
@@ -77,7 +75,7 @@ export class ExternalImporter {
     let tsConfig: { compilerOptions?: { typeRoots?: string[] } } = {};
     try {
       tsConfig = this.fileService.readFile(
-        this.defaultTypescriptConfigJsonFolder
+        this.defaultTypescriptConfigJsonFolder,
       );
     } catch (e) {
       console.error(`
@@ -96,7 +94,7 @@ export class ExternalImporter {
     const defaultNamespace = `./${this.defaultOutputFolder}/@types/${namespace}`;
     const tsConfig = this.loadTypescriptConfigJson();
     const foundNamespace = tsConfig.compilerOptions.typeRoots.filter(
-      (t) => t === defaultNamespace
+      (t) => t === defaultNamespace,
     ).length;
     if (!foundNamespace) {
       tsConfig.compilerOptions.typeRoots.push(defaultNamespace);
@@ -180,8 +178,8 @@ export class ExternalImporter {
     if (dups.length) {
       throw new Error(
         `There are packages which are with the same hash ${JSON.stringify(
-          dups
-        )}`
+          dups,
+        )}`,
       );
     }
     return dups.length;
@@ -203,7 +201,7 @@ export class ExternalImporter {
     }
     if (this.isModulePresent(hash)) {
       console.log(
-        `Package with hash: ${hash} present and will not be downloaded!`
+        `Package with hash: ${hash} present and will not be downloaded!`,
       );
     } else {
       ipfsConfig[0].dependencies.push(hash);
@@ -225,7 +223,7 @@ export class ExternalImporter {
           throw new Error(
             'Recieved undefined from provided address' +
               config.provider +
-              config.hash
+              config.hash,
           );
         }
         let res = r;
@@ -243,18 +241,18 @@ export class ExternalImporter {
           res = JSON.parse(r as string);
         } catch (e) {}
         return res as ExternalModuleConfiguration;
-      })
+      }),
     );
   }
 
   private combineDependencies(
     dependencies: any[],
-    config: ExternalImporterIpfsConfig
+    config: ExternalImporterIpfsConfig,
   ) {
     return combineLatest([
       ...(dependencies.length
         ? dependencies.map((h) =>
-            this.downloadIpfsModule({ provider: config.provider, hash: h })
+            this.downloadIpfsModule({ provider: config.provider, hash: h }),
           )
         : [of('')]),
     ]);
@@ -262,13 +260,13 @@ export class ExternalImporter {
 
   private writeFakeIndexIfMultiModule(
     folder: string,
-    nameSpaceFakeIndex: string[]
+    nameSpaceFakeIndex: string[],
   ) {
     if (nameSpaceFakeIndex.length === 2) {
       return this.fileService.writeFileAsyncP(
         `${folder}${this.defaultNamespaceFolder}/${nameSpaceFakeIndex[0]}`,
         'index.d.ts',
-        ''
+        '',
       );
     } else {
       return of(true);
@@ -296,7 +294,7 @@ export class ExternalImporter {
       tap((res) => {
         if (!res['module']) {
           console.log(
-            'Todo: create logic to load module which is not from rxdi infrastructure for now can be used useDynamic which will do the same job!'
+            'Todo: create logic to load module which is not from rxdi infrastructure for now can be used useDynamic which will do the same job!',
           );
         }
       }),
@@ -315,19 +313,19 @@ export class ExternalImporter {
         isRegular = isNamespace ? moduleName : moduleName.split('/')[0];
         console.log(
           `Package config for module ${moduleName} downloaded! ${JSON.stringify(
-            externalModule
-          )}`
+            externalModule,
+          )}`,
         );
         return externalModule;
       }),
       switchMap((externalModule) =>
-        this.combineDependencies(externalModule.dependencies, config)
+        this.combineDependencies(externalModule.dependencies, config),
       ),
       switchMap(() => {
         console.log(`--------------------${moduleName}--------------------`);
         console.log(`\nDownloading... ${configLink} `);
         console.log(
-          `Config: ${JSON.stringify(originalModuleConfig, null, 2)} \n`
+          `Config: ${JSON.stringify(originalModuleConfig, null, 2)} \n`,
         );
         return this.requestService.get(moduleLink);
       }),
@@ -336,8 +334,8 @@ export class ExternalImporter {
           folder + moduleName,
           'index.js',
           moduleName,
-          file
-        )
+          file,
+        ),
       ),
       switchMap(() => this.requestService.get(moduleTypings)),
       switchMap((file) =>
@@ -345,8 +343,8 @@ export class ExternalImporter {
           folder + `${this.defaultNamespaceFolder}/${isRegular}`,
           'index.d.ts',
           moduleName,
-          file
-        )
+          file,
+        ),
       ),
       tap(() => {
         if (process.env.WRITE_FAKE_INDEX) {
@@ -366,7 +364,7 @@ export class ExternalImporter {
         if (originalModuleConfig.packages.length) {
           this.npmService.installPackages();
         }
-      })
+      }),
     );
   }
 
@@ -374,7 +372,7 @@ export class ExternalImporter {
     moduleLink: string,
     folder: string,
     fileName: string,
-    config: ExternalImporterConfig
+    config: ExternalImporterConfig,
   ) {
     if (!moduleLink) {
       return of(true);
@@ -390,16 +388,16 @@ export class ExternalImporter {
           folder,
           fileName,
           config.typingsFileName,
-          res
-        )
-      )
+          res,
+        ),
+      ),
     );
   }
 
   importModule(
     config: ExternalImporterConfig,
     token: string,
-    { folderOverride, waitUntil } = {} as any
+    { folderOverride, waitUntil } = {} as any,
   ): Promise<any> {
     const timer$ = timer(waitUntil || 20 * 1000);
     this.validateConfig(config);
@@ -411,8 +409,8 @@ export class ExternalImporter {
               [token]: config.link,
             },
           },
-          config.SystemJsConfig
-        )
+          config.SystemJsConfig,
+        ),
       );
       return SystemJS.import(config.link);
     }
@@ -440,7 +438,7 @@ export class ExternalImporter {
 
       if (this.fileService.isPresent(fileFullPath)) {
         console.log(
-          `Bootstrap -> @Service('${moduleName}'): present inside .${modulesFolder}${moduleNamespace}/${moduleName}.${moduleExtension} folder and loaded from there`
+          `Bootstrap -> @Service('${moduleName}'): present inside .${modulesFolder}${moduleNamespace}/${moduleName}.${moduleExtension} folder and loaded from there`,
         );
         this.importExternalModule(moduleName)
           .pipe(take(1))
@@ -452,14 +450,14 @@ export class ExternalImporter {
             (err) => {
               observer.error(err);
               observer.complete();
-            }
+            },
           );
       } else {
         console.log(
-          `Bootstrap -> @Service('${moduleName}'): will be downloaded inside .${modulesFolder}${moduleNamespace}/${moduleName}.${moduleExtension} folder and loaded from there`
+          `Bootstrap -> @Service('${moduleName}'): will be downloaded inside .${modulesFolder}${moduleNamespace}/${moduleName}.${moduleExtension} folder and loaded from there`,
         );
         console.log(
-          `Bootstrap -> @Service('${moduleName}'): ${moduleLink} downloading...`
+          `Bootstrap -> @Service('${moduleName}'): ${moduleLink} downloading...`,
         );
         this.requestService
           .get(moduleLink)
@@ -467,12 +465,17 @@ export class ExternalImporter {
             take(1),
             tap(() => console.log(`Done!`)),
             switchMap((res) =>
-              this.fileService.writeFile(folder, fileName, config.fileName, res)
+              this.fileService.writeFile(
+                folder,
+                fileName,
+                config.fileName,
+                res,
+              ),
             ),
             switchMap(() =>
-              this.downloadTypings(config.typings, folder, fileName, config)
+              this.downloadTypings(config.typings, folder, fileName, config),
             ),
-            switchMap(() => this.importExternalModule(moduleName))
+            switchMap(() => this.importExternalModule(moduleName)),
           )
           .subscribe(
             (m) => {
@@ -482,7 +485,7 @@ export class ExternalImporter {
             (err) => {
               observer.error(err);
               observer.complete();
-            }
+            },
           );
       }
     })

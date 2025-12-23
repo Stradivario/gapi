@@ -1,3 +1,4 @@
+/* eslint-disable */
 import 'jest';
 
 import { AccessControl } from '../src/index';

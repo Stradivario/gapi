@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 import { Maybe } from 'graphql/jsutils/Maybe';
 
-interface GraphqlEnumTypeConfig<T = {}> {
+interface GraphqlEnumTypeConfig<T = object> {
   name: string;
   description?: Maybe<string>;
   values: T;

@@ -3,6 +3,7 @@ import {
   UnitTestTree,
 } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
+
 import { FilterOptions } from './filter.schema';
 
 describe('Filter Factory', () => {
@@ -17,7 +18,9 @@ describe('Filter Factory', () => {
     };
     const tree: UnitTestTree = runner.runSchematic('filter', options);
     const files: string[] = tree.files;
-    expect(files.find(filename => filename === '/foo.filter.ts')).toBeDefined();
+    expect(
+      files.find((filename) => filename === '/foo.filter.ts'),
+    ).toBeDefined();
     expect(tree.readContent('/foo.filter.ts')).toEqual(
       "import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';\n" +
         '\n' +
@@ -35,7 +38,7 @@ describe('Filter Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('filter', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar/foo.filter.ts'),
+      files.find((filename) => filename === '/bar/foo.filter.ts'),
     ).toBeDefined();
     expect(tree.readContent('/bar/foo.filter.ts')).toEqual(
       "import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';\n" +
@@ -55,7 +58,7 @@ describe('Filter Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('filter', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/baz/foo.filter.ts'),
+      files.find((filename) => filename === '/baz/foo.filter.ts'),
     ).toBeDefined();
     expect(tree.readContent('/baz/foo.filter.ts')).toEqual(
       "import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';\n" +
@@ -74,7 +77,7 @@ describe('Filter Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('filter', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo-bar.filter.ts'),
+      files.find((filename) => filename === '/foo-bar.filter.ts'),
     ).toBeDefined();
     expect(tree.readContent('/foo-bar.filter.ts')).toEqual(
       "import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';\n" +
@@ -93,7 +96,7 @@ describe('Filter Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('filter', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar-baz/foo.filter.ts'),
+      files.find((filename) => filename === '/bar-baz/foo.filter.ts'),
     ).toBeDefined();
     expect(tree.readContent('/bar-baz/foo.filter.ts')).toEqual(
       "import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';\n" +
@@ -112,7 +115,9 @@ describe('Filter Factory', () => {
     };
     const tree: UnitTestTree = runner.runSchematic('filter', options);
     const files: string[] = tree.files;
-    expect(files.find(filename => filename === '/foo.filter.js')).toBeDefined();
+    expect(
+      files.find((filename) => filename === '/foo.filter.js'),
+    ).toBeDefined();
     expect(tree.readContent('/foo.filter.js')).toEqual(
       "import { Catch } from '@nestjs/common';\n" +
         '\n' +
@@ -133,7 +138,7 @@ describe('Filter Factory', () => {
 
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/src/foo.filter.js'),
+      files.find((filename) => filename === '/src/foo.filter.js'),
     ).toBeDefined();
     expect(tree.readContent('/src/foo.filter.js')).toEqual(
       "import { Catch } from '@nestjs/common';\n" +

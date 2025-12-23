@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { Container, Service } from '@rxdi/core';
 
 import { ReadlineService } from '../core/services/readline.service';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const chalk = require('chalk');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const Spinner = require('cli-spinner').Spinner;
 
 function strEnum<T extends string>(o: Array<T>): { [K in T]: K } {
@@ -47,7 +48,7 @@ export class DeployTask implements Tasks, Questions {
       await this.projectQuestion();
       console.log('Deploy Success!');
     } catch (e) {
-      console.log('Deploy Error!');
+      console.log('Deploy Error!', e);
     }
     process.exit(0);
   }
@@ -55,7 +56,7 @@ export class DeployTask implements Tasks, Questions {
   async passwordQuestion() {
     await this.readlineService.createQuestion(
       'Password: ',
-      this.passwordTask.bind(this)
+      this.passwordTask.bind(this),
     );
     await this.validateUserConfig(QuestionsType.password);
   }
@@ -63,7 +64,7 @@ export class DeployTask implements Tasks, Questions {
   async projectQuestion() {
     await this.readlineService.createQuestion(
       'Project name: ',
-      this.projectTask.bind(this)
+      this.projectTask.bind(this),
     );
     await this.validateUserConfig(QuestionsType.project);
   }
@@ -71,7 +72,7 @@ export class DeployTask implements Tasks, Questions {
   async usernameQuestion() {
     await this.readlineService.createQuestion(
       'Username: ',
-      this.usernameTask.bind(this)
+      this.usernameTask.bind(this),
     );
     await this.validateUserConfig(QuestionsType.username);
   }
@@ -94,12 +95,12 @@ export class DeployTask implements Tasks, Questions {
       `Current configuration: ${JSON.stringify(
         this.deploy_config,
         null,
-        4
-      )} \n\n\n\n\n`
+        4,
+      )} \n\n\n\n\n`,
     );
     if (!this.deploy_config[question]) {
       console.log(
-        chalk.red(`Missing ${question} please fill your ${question}!`)
+        chalk.red(`Missing ${question} please fill your ${question}!`),
       );
       await this[`${question}Question`]();
       await this.validateUserConfig(question);

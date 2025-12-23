@@ -8,7 +8,7 @@ import { VoyagerGapiHapiPlugin } from './voyager-plugin';
 })
 export class VoyagerModule {
   static forRoot(
-    config: VoyagerConfigModel = new VoyagerConfigModel()
+    config: VoyagerConfigModel = new VoyagerConfigModel(),
   ): ModuleWithServices {
     return {
       module: VoyagerModule,
@@ -22,5 +22,5 @@ export class VoyagerModule {
   }
 }
 
-export * from './voyager-plugin';
 export * from './voyager-config';
+export * from './voyager-plugin';

@@ -37,7 +37,7 @@ export class RequestService {
         });
       }
     }).pipe(
-      tap((res) => this.cache.cacheLayer.putItem({ key: link, data: res }))
+      tap((res) => this.cache.cacheLayer.putItem({ key: link, data: res })),
     );
   }
 }

@@ -1,5 +1,6 @@
 import { DynamicModule, Inject, Module, OnModuleInit } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
+
 import {
   ANGULAR_MODULE_OPTIONS,
   DEFAULT_RENDER_PATH,

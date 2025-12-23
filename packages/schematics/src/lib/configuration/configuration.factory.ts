@@ -8,6 +8,7 @@ import {
   template,
   url,
 } from '@angular-devkit/schematics';
+
 import { DEFAULT_LANGUAGE } from '../defaults';
 import { ConfigurationOptions } from './configuration.schema';
 

@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Container } from '@rxdi/core';
 import { load } from 'yamljs';
@@ -15,7 +16,9 @@ const configService = Container.get(ConfigService);
 let config: GapiConfig = {} as any;
 try {
   config = load('gapi-cli.conf.yml');
-} catch (e) {}
+} catch (e) {
+  console.error(e);
+}
 configService.setCustomConfig(config);
 argsService.setArguments(process.argv);
 rootService
@@ -23,5 +26,5 @@ rootService
   .then()
   .catch((e) => console.error(e));
 console.log(
-  chalk.default.yellow(figlet.textSync('Gapi', { horizontalLayout: 'full' }))
+  chalk.default.yellow(figlet.textSync('Gapi', { horizontalLayout: 'full' })),
 );

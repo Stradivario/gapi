@@ -11,6 +11,7 @@ import {
   template,
   url,
 } from '@angular-devkit/schematics';
+
 import { Location, NameParser } from '../../utils/name.parser';
 import { mergeSourceRoot } from '../../utils/source-root.helpers';
 import { DecoratorOptions } from './decorator.schema';

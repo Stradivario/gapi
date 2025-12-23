@@ -17,7 +17,7 @@ export class AuthInternalService {
     const decipher = createDecipheriv(
       this.config.cyper.algorithm,
       this.config.cyper.privateKey,
-      this.config.cyper.iv
+      this.config.cyper.iv,
     );
     let dec = decipher.update(password, 'hex', 'utf8');
     dec += decipher.final('utf8');
@@ -28,7 +28,7 @@ export class AuthInternalService {
     const cipher = createCipheriv(
       this.config.cyper.algorithm,
       this.config.cyper.privateKey,
-      this.config.cyper.iv
+      this.config.cyper.iv,
     );
     let crypted = cipher.update(password, 'utf8', 'hex');
     crypted += cipher.final('hex');

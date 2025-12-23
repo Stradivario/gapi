@@ -3,6 +3,7 @@ import {
   UnitTestTree,
 } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
+
 import { PipeOptions } from './pipe.schema';
 
 describe('Pipe Factory', () => {
@@ -18,7 +19,7 @@ describe('Pipe Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('pipe', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo/foo.pipe.ts'),
+      files.find((filename) => filename === '/foo/foo.pipe.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/foo/foo.pipe.ts')).toEqual(
       "import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';\n" +
@@ -39,7 +40,7 @@ describe('Pipe Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('pipe', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar/foo/foo.pipe.ts'),
+      files.find((filename) => filename === '/bar/foo/foo.pipe.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/bar/foo/foo.pipe.ts')).toEqual(
       "import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';\n" +
@@ -61,7 +62,7 @@ describe('Pipe Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('pipe', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/baz/foo/foo.pipe.ts'),
+      files.find((filename) => filename === '/baz/foo/foo.pipe.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/baz/foo/foo.pipe.ts')).toEqual(
       "import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';\n" +
@@ -82,7 +83,7 @@ describe('Pipe Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('pipe', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo-bar/foo-bar.pipe.ts'),
+      files.find((filename) => filename === '/foo-bar/foo-bar.pipe.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/foo-bar/foo-bar.pipe.ts')).toEqual(
       "import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';\n" +
@@ -103,7 +104,7 @@ describe('Pipe Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('pipe', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar-baz/foo/foo.pipe.ts'),
+      files.find((filename) => filename === '/bar-baz/foo/foo.pipe.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/bar-baz/foo/foo.pipe.ts')).toEqual(
       "import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';\n" +
@@ -125,7 +126,7 @@ describe('Pipe Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('pipe', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo/foo.pipe.js'),
+      files.find((filename) => filename === '/foo/foo.pipe.js'),
     ).not.toBeUndefined();
     expect(tree.readContent('/foo/foo.pipe.js')).toEqual(
       "import { Injectable } from '@nestjs/common';\n" +

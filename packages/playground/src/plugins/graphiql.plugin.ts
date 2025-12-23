@@ -9,7 +9,7 @@ import { PLAYGROUND_CONFIG, PlaygroundConfig } from '../palyground.config';
 export class GraphiQLPlaygroundPlugin {
   constructor(
     @Inject(HAPI_SERVER) private server: Server,
-    @Inject(PLAYGROUND_CONFIG) private config: PlaygroundConfig
+    @Inject(PLAYGROUND_CONFIG) private config: PlaygroundConfig,
   ) {}
 
   async register() {

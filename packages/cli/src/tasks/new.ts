@@ -54,7 +54,7 @@ export class NewTask {
     } else {
       await this.exec(
         this.repoLinks.basic,
-        'echo basic example uses ts-node and @gapi/cli installed internally because of Heroku easy deployment button. To uninstall ts-node and @gapi/cli type "npm uninstall ts-node @gapi/cli"'
+        'echo basic example uses ts-node and @gapi/cli installed internally because of Heroku easy deployment button. To uninstall ts-node and @gapi/cli type "npm uninstall ts-node @gapi/cli"',
       );
     }
   }
@@ -63,7 +63,7 @@ export class NewTask {
     await this.execService.call(
       `git clone ${repoLink} ${process.argv[3]} && cd ./${
         process.argv[3]
-      } && npm install ${args ? `&& ${args}` : ''}`
+      } && npm install ${args ? `&& ${args}` : ''}`,
     );
   }
 }

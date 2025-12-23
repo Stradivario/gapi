@@ -13,6 +13,6 @@ export class OneSignalModule {
   }
 }
 
-export * from './notification';
 export * from './client';
 export * from './interfaces/index';
+export * from './notification';

@@ -1,4 +1,5 @@
 import { normalize, Path } from '@angular-devkit/core';
+
 import { DeclarationOptions } from './module.declarator';
 import { PathSolver } from './path.solver';
 
@@ -14,11 +15,11 @@ export class ModuleImportDeclarator {
   }
 
   private findImports(content: string): string[] {
-    return content.split('\n').filter(line => line.match(/import {/));
+    return content.split('\n').filter((line) => line.match(/import {/));
   }
 
   private findOtherLines(content: string, importLines: string[]) {
-    return content.split('\n').filter(line => importLines.indexOf(line) < 0);
+    return content.split('\n').filter((line) => importLines.indexOf(line) < 0);
   }
 
   private buildLineToInsert(options: DeclarationOptions): string {

@@ -18,7 +18,7 @@ function checkCredential(credentialName, credential): boolean {
     if (ALLOWED_CREDENTIALS[i].name === credentialName) {
       if (typeof credential !== ALLOWED_CREDENTIALS[i].type) {
         throw new Error(
-          credentialName + ' must be a ' + ALLOWED_CREDENTIALS[i].type
+          credentialName + ' must be a ' + ALLOWED_CREDENTIALS[i].type,
         );
       }
       if (ALLOWED_CREDENTIALS[i].requiredFields) {
@@ -27,7 +27,7 @@ function checkCredential(credentialName, credential): boolean {
             throw new Error(
               credentialName +
                 ' must contain ' +
-                ALLOWED_CREDENTIALS[i].requiredFields[j]
+                ALLOWED_CREDENTIALS[i].requiredFields[j],
             );
           }
         }
@@ -93,7 +93,7 @@ export class OneSignalClientService implements OneSignalClient {
     url: string,
     apiKey: string,
     method: 'PUT' | 'POST' | 'GET' | 'DELETE',
-    body
+    body,
   ): Promise<any> {
     const options = {
       url: url,
@@ -132,11 +132,11 @@ export class OneSignalClientService implements OneSignalClient {
   }
 
   async sendNotification(
-    notification: Notification
+    notification: Notification,
   ): Promise<SendNotificationResponse> {
     if (!notification || !notification.postBody) {
       throw new Error(
-        'notification parameter must be a typeof Notification object.'
+        'notification parameter must be a typeof Notification object.',
       );
     }
     const postBody = notification.postBody;
@@ -146,7 +146,7 @@ export class OneSignalClientService implements OneSignalClient {
         this.API_URI + Constants.NOTIFICATIONS_PATH,
         this.userAuthKey,
         'POST',
-        postBody
+        postBody,
       );
     }
     if (this.app) {
@@ -155,7 +155,7 @@ export class OneSignalClientService implements OneSignalClient {
         this.API_URI + Constants.NOTIFICATIONS_PATH,
         this.app.appAuthKey,
         'POST',
-        postBody
+        postBody,
       );
     }
     throw new Error('You must set either an "app" or "apps" on Client');
@@ -176,7 +176,7 @@ export class OneSignalClientService implements OneSignalClient {
       notificationUri,
       this.app.appAuthKey,
       'DELETE',
-      null
+      null,
     );
   }
 
@@ -195,7 +195,7 @@ export class OneSignalClientService implements OneSignalClient {
       notificationUri,
       this.app.appAuthKey,
       'GET',
-      null
+      null,
     );
   }
 
@@ -224,7 +224,7 @@ export class OneSignalClientService implements OneSignalClient {
       this.API_URI + Constants.APPS_PATH,
       this.userAuthKey,
       'GET',
-      null
+      null,
     );
   }
 
@@ -236,7 +236,7 @@ export class OneSignalClientService implements OneSignalClient {
       this.API_URI + Constants.APPS_PATH + '/' + appId,
       this.userAuthKey,
       'GET',
-      null
+      null,
     );
   }
 
@@ -251,7 +251,7 @@ export class OneSignalClientService implements OneSignalClient {
       this.API_URI + Constants.APPS_PATH,
       this.userAuthKey,
       'POST',
-      body
+      body,
     );
   }
 
@@ -266,7 +266,7 @@ export class OneSignalClientService implements OneSignalClient {
       this.API_URI + Constants.APPS_PATH + '/' + this.app.appId,
       this.userAuthKey,
       'PUT',
-      body
+      body,
     );
   }
 
@@ -312,7 +312,7 @@ export class OneSignalClientService implements OneSignalClient {
       this.API_URI + Constants.DEVICES_PATH,
       this.app.appAuthKey,
       'POST',
-      body
+      body,
     );
   }
 
@@ -324,7 +324,7 @@ export class OneSignalClientService implements OneSignalClient {
       this.API_URI + Constants.DEVICES_PATH + '/' + deviceId,
       this.app.appAuthKey,
       'PUT',
-      body
+      body,
     );
   }
 
@@ -339,7 +339,7 @@ export class OneSignalClientService implements OneSignalClient {
       this.API_URI + Constants.NOTIFICATIONS_PATH + '/' + notificationId,
       this.app.appAuthKey,
       'PUT',
-      body
+      body,
     );
   }
 

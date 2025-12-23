@@ -1,5 +1,9 @@
-import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
+import {
+  SchematicTestRunner,
+  UnitTestTree,
+} from '@angular-devkit/schematics/testing';
 import * as path from 'path';
+
 import { ApplicationOptions } from './application.schema';
 
 describe('Application Factory', () => {

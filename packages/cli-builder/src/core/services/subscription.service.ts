@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import {
   Container,
   Inject,
@@ -23,7 +22,9 @@ import {
 import { executeAction } from '../executors/commands';
 import { getNetworkIP } from './get-ip-adresses';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const webSocketImpl = require('ws');
+
 interface MachineStatus {
   machineHash: string;
   label: string;
@@ -47,14 +48,14 @@ export class SubscriptionService {
     @Inject(SubscriptionQuery)
     private subscriptionsQuery: SubscriptionQuery,
     @Inject(MachineStatusQuery)
-    private machineStatusQuery: MachineStatusQuery
+    private machineStatusQuery: MachineStatusQuery,
   ) {
     if (Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI) {
       this.subscribe(
         Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI,
         Environment.GRAPHQL_RUNNER_SECRET,
         Environment.GRAPHQL_RUNNER_TYPE,
-        Environment.GRAPHQL_RUNNER_LABEL
+        Environment.GRAPHQL_RUNNER_LABEL,
       );
     }
   }
@@ -62,7 +63,7 @@ export class SubscriptionService {
     uri: string,
     authorization?: string,
     worker_type?: string,
-    label?: string
+    label?: string,
   ) {
     this.currentSubscriptionUri = uri;
     this.link = new WebSocketLink({
@@ -77,7 +78,7 @@ export class SubscriptionService {
             Environment.GRAPHQL_RUNNER_NAT_IP ||
             (await getNetworkIP()),
           networkInterfaces: JSON.stringify(
-            networkInterfaces()
+            networkInterfaces(),
           ),
         },
         reconnect: true,
@@ -90,37 +91,46 @@ export class SubscriptionService {
     }>(
       this.subscriptionsQuery.query,
       this.subscriptionsQuery.variables,
-      this.link
+      this.link,
     )
       .pipe(
-        map(({ data }) => this.subscriptionsQuery.map(data))
+        map(({ data }) =>
+          this.subscriptionsQuery.map(data),
+        ),
       )
-      .subscribe(async ({ args, command, cwd }) => {
-        const cmd = Container.get(EnumToken)[command];
-        if (!cmd) {
-          console.log('Missing command');
-          throw new Error('Missing command');
-        }
-        try {
-          const data = await executeAction(command)(
-            JSON.parse(args),
-            cwd
-          );
-          await this.sendStatus({
-            label,
-            machineHash,
-            data: JSON.stringify(data),
-          });
-        } catch (error) {
-          console.log(error);
-          await this.sendStatus({
-            label,
-            machineHash,
-            data: '',
-            error: JSON.stringify(error),
-          });
-        }
-      }, console.error);
+      .subscribe(
+        async ({
+          args,
+          command,
+          cwd,
+        }: IInstanceConnectionType) => {
+          const cmd = Container.get(EnumToken)[command];
+          if (!cmd) {
+            console.log('Missing command');
+            throw new Error('Missing command');
+          }
+          try {
+            const data = await executeAction(command)(
+              JSON.parse(args),
+              cwd,
+            );
+            await this.sendStatus({
+              label,
+              machineHash,
+              data: JSON.stringify(data),
+            });
+          } catch (error) {
+            console.log(error);
+            await this.sendStatus({
+              label,
+              machineHash,
+              data: '',
+              error: JSON.stringify(error),
+            });
+          }
+        },
+        console.error,
+      );
     return this.subscription;
   }
 

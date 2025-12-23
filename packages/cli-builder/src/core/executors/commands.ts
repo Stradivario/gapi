@@ -14,16 +14,16 @@ type GenericEnumType<T, K, A> = {
 export type GenericEnum<
   C,
   T = any,
-  K = any
+  K = any,
 > = GenericEnumType<C, T, K>;
 
-export const getAction = <T = {}, K = {}>(
-  cmd: string | number
+export const getAction = <T = object, K = object>(
+  cmd: string | number,
 ): ((args: K, cwd?: string) => Promise<T>) =>
   Container.get(CommandsToken)[
     Container.get(EnumToken)[cmd]
   ];
 
-export const executeAction = <T = {}, K = {}>(
-  action: string | number
+export const executeAction = <T = object, K = object>(
+  action: string | number,
 ) => getAction<T, K>(action);

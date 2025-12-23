@@ -44,12 +44,12 @@ export class NestCollection extends AbstractCollection {
 
   private validate(name: string) {
     const schematic = NestCollection.schematics.find(
-      (s) => s.name === name || s.alias === name
+      (s) => s.name === name || s.alias === name,
     );
 
     if (schematic === undefined || schematic === null) {
       throw new Error(
-        `Invalid schematic "${name}". Please, ensure that "${name}" really exists in this collection.`
+        `Invalid schematic "${name}". Please, ensure that "${name}" really exists in this collection.`,
       );
     }
     return schematic.name;

@@ -24,9 +24,11 @@ export class SystemDService {
     let file: SystemDServiceInterface[] = [];
     try {
       file = JSON.parse(
-        readFileSync(`${GAPI_DAEMON_FOLDER}/services`, { encoding: 'utf8' })
+        readFileSync(`${GAPI_DAEMON_FOLDER}/services`, { encoding: 'utf8' }),
       );
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
     return file;
   }
 
@@ -40,7 +42,7 @@ export class SystemDService {
     await promisify(writeFile)(
       `${GAPI_DAEMON_FOLDER}/services`,
       JSON.stringify(this.services),
-      { encoding: 'utf8' }
+      { encoding: 'utf8' },
     );
   }
 }

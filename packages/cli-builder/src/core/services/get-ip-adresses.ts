@@ -4,7 +4,7 @@ export const getIpAdresses = (
   network: Record<
     string,
     { family: string; internal: boolean; address: string }[]
-  >
+  >,
 ) =>
   Object.values(network).reduce((acc, interfaces) => {
     let alias = 0;

@@ -9,6 +9,7 @@ import {
   template,
   url,
 } from '@angular-devkit/schematics';
+
 import {
   DEFAULT_AUTHOR,
   DEFAULT_DESCRIPTION,

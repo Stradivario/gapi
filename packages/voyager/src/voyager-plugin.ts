@@ -12,7 +12,7 @@ export class VoyagerGapiHapiPlugin implements PluginInterface {
 
   constructor(
     @Inject(VoyagerConfig) private config: VoyagerConfigModel,
-    @Inject(HAPI_SERVER) private server: Server
+    @Inject(HAPI_SERVER) private server: Server,
   ) {}
 
   async register() {

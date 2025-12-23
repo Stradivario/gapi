@@ -36,7 +36,7 @@ Bootstrap(
       DOCKER: async (args: string[]) => {
         console.log(
           '[RUN_DOCKER]: started arguments: ',
-          args
+          args,
         );
         console.log('[RUN_DOCKER]: exited');
         return 1;
@@ -44,26 +44,26 @@ Bootstrap(
       DOCKER_COMPOSE2: async (args: string[]) => {
         console.log(
           '[RUN_DOCKER_COMPOSE]: started arguments: ',
-          args
+          args,
         );
         console.log('[RUN_DOCKER_COMPOSE]: exited');
         return 1;
       },
     },
-    Commands
-  )
+    Commands,
+  ),
 ).subscribe(() => {
   if (Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI) {
     console.log(
       'STARTED_SUBSCRIPTIONS:',
-      Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI
+      Environment.GRAPHQL_RUNNER_SUBSCRIPTION_URI,
     );
   } else {
     console.log(
       'SIGNAL_MAIN_API_STARTED',
       `Running at http://localhost:${
         Container.get<Server>(HAPI_SERVER).info.port
-      }`
+      }`,
     );
   }
 });

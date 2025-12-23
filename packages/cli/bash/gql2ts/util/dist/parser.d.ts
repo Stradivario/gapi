@@ -18,7 +18,7 @@ export declare type BuildDocumentation = (
     | GraphQLField<any, any>
     | GraphQLInputField
     | GraphQLEnumValue
-    | GraphQLArgument
+    | GraphQLArgument,
 ) => IFieldDocumentation;
 export declare const getDocTags: null;
 export declare const buildDocumentation: BuildDocumentation;

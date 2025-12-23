@@ -1,7 +1,7 @@
 import { InjectionToken } from '@rxdi/core';
 
 export const AUTH_MODULE_CONFIG = new InjectionToken(
-  'gapi-auth-module-config-injection-token'
+  'gapi-auth-module-config-injection-token',
 );
 
 export interface AuthInterface {

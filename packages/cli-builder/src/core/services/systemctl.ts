@@ -18,21 +18,32 @@ export class SystemctlService {
       await this.install(
         service_description,
         service,
-        executableBinary
+        executableBinary,
       );
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
     try {
       await this.reload();
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
     try {
       await this.enable(service);
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
+
     try {
       await this.stop(service);
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
     try {
       await this.start(service);
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   async enable(name: string) {
@@ -41,7 +52,7 @@ export class SystemctlService {
 
   generateConfig(
     description = 'Graphql Runner',
-    executable = 'runner-linux'
+    executable = 'runner-linux',
   ) {
     return `
 [Unit]
@@ -56,7 +67,7 @@ ${Object.entries(Environment)
         'GRAPHQL_SYSTEM_SERVICE',
         'GRAPHQL_SYSTEM_SERVICE_NAME',
         'GRAPHQL_SYSTEM_SERVICE_DESCRIPTION',
-      ].includes(key) && !!value
+      ].includes(key) && !!value,
   )
   .map(([key, value]) => `Environment="${key}=${value}"`)
   .join('\n')}
@@ -71,25 +82,23 @@ WantedBy=multi-user.target
   async install(
     description = 'Graphql Runner',
     name = defaultRunnerName,
-    executable = 'runner-linux'
+    executable = 'runner-linux',
   ) {
-    await promisify(
-      writeFile
-    )(
+    await promisify(writeFile)(
       `/etc/systemd/system/${name}.service`,
       this.generateConfig(description, executable),
-      { encoding: 'utf-8' }
+      { encoding: 'utf-8' },
     );
   }
   async reload() {
     const data = await promisify(exec)(
-      `systemctl daemon-reload`
+      `systemctl daemon-reload`,
     );
     console.log(data);
   }
   async start(name = defaultRunnerName) {
     const data = await promisify(exec)(
-      `systemctl start ${name}`
+      `systemctl start ${name}`,
     );
     console.log(data);
   }
@@ -101,13 +110,13 @@ WantedBy=multi-user.target
   }
   async stop(name = defaultRunnerName) {
     const data = await promisify(exec)(
-      `systemctl stop ${name}`
+      `systemctl stop ${name}`,
     );
     console.log(data);
   }
   async status(name = defaultRunnerName) {
     const data = await promisify(exec)(
-      `systemctl status ${name}`
+      `systemctl status ${name}`,
     );
     console.log(data);
   }

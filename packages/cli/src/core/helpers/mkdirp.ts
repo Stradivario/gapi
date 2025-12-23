@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { mkdir, mkdirSync, stat, statSync } from 'fs';
 import { dirname, resolve } from 'path';
 const _0777 = parseInt('0777', 8);

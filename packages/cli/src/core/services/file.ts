@@ -19,10 +19,10 @@ export class FileService {
     return this.mkdirp(folder).pipe(
       tap(() => {
         console.log(
-          `Bootstrap: @Service('${moduleName}'): Saved inside ${folder}`
+          `Bootstrap: @Service('${moduleName}'): Saved inside ${folder}`,
         );
       }),
-      switchMap(() => this.writeFileAsyncP(folder, fileName, file))
+      switchMap(() => this.writeFileAsyncP(folder, fileName, file)),
     );
   }
 
@@ -31,10 +31,10 @@ export class FileService {
       switchMap(() => this.writeFileAsyncP(folder, fileName, file)),
       map(() => {
         console.log(
-          `Bootstrap: external @Module('${moduleName}') namespace: Saved inside ${folder}`
+          `Bootstrap: external @Module('${moduleName}') namespace: Saved inside ${folder}`,
         );
         return `${folder}/${fileName}`;
-      })
+      }),
     );
   }
 
@@ -42,7 +42,7 @@ export class FileService {
     return writeFileSync.bind(null)(
       folder,
       JSON.stringify(file, null, 2) + '\n',
-      { encoding: 'utf-8' }
+      { encoding: 'utf-8' },
     );
   }
 
@@ -56,7 +56,7 @@ export class FileService {
 
   writeFileAsyncP(folder, fileName, content) {
     return new Observable((o) =>
-      writeFile(`${folder}/${fileName}`, content, () => o.next(true))
+      writeFile(`${folder}/${fileName}`, content, () => o.next(true)),
     );
   }
 
@@ -76,7 +76,7 @@ export class FileService {
 
   public fileWalker(
     dir: string,
-    exclude = 'node_modules'
+    exclude = 'node_modules',
   ): Observable<string[]> {
     return new Observable((observer) => {
       this.filewalker(
@@ -89,7 +89,7 @@ export class FileService {
           }
           observer.complete();
         },
-        exclude
+        exclude,
       );
     });
   }
@@ -97,7 +97,7 @@ export class FileService {
   private filewalker(
     dir: string,
     done: (err: NodeJS.ErrnoException, data?) => void,
-    exclude = 'node_modules'
+    exclude = 'node_modules',
   ) {
     let results = [];
     const fileWalker = this.filewalker.bind(this);
@@ -123,7 +123,7 @@ export class FileService {
                     done(null, results);
                   }
                 },
-                exclude
+                exclude,
               );
             } else if (!--pending) {
               done(null, results);

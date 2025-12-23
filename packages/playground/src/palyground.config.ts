@@ -8,5 +8,5 @@ export interface PlaygroundConfig extends RenderPageOptions {
 }
 
 export const PLAYGROUND_CONFIG = new InjectionToken(
-  'gapi-playground-config-token'
+  'gapi-playground-config-token',
 );

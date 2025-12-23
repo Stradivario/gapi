@@ -3,6 +3,7 @@ import {
   UnitTestTree,
 } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
+
 import { ResolverOptions } from './resolver.schema';
 
 describe('Resolver Factory', () => {
@@ -18,12 +19,12 @@ describe('Resolver Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('resolver', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo/foo.resolver.ts'),
+      files.find((filename) => filename === '/foo/foo.resolver.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/foo/foo.resolver.ts')).toEqual(
       "import { Resolver } from '@nestjs/graphql';\n" +
         '\n' +
-        '@Resolver(\'Foo\')\n' +
+        "@Resolver('Foo')\n" +
         'export class FooResolver {}\n',
     );
   });
@@ -35,12 +36,12 @@ describe('Resolver Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('resolver', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar/foo/foo.resolver.ts'),
+      files.find((filename) => filename === '/bar/foo/foo.resolver.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/bar/foo/foo.resolver.ts')).toEqual(
       "import { Resolver } from '@nestjs/graphql';\n" +
         '\n' +
-        '@Resolver(\'Foo\')\n' +
+        "@Resolver('Foo')\n" +
         'export class FooResolver {}\n',
     );
   });
@@ -53,12 +54,12 @@ describe('Resolver Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('resolver', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/baz/foo/foo.resolver.ts'),
+      files.find((filename) => filename === '/baz/foo/foo.resolver.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/baz/foo/foo.resolver.ts')).toEqual(
       "import { Resolver } from '@nestjs/graphql';\n" +
         '\n' +
-        '@Resolver(\'Foo\')\n' +
+        "@Resolver('Foo')\n" +
         'export class FooResolver {}\n',
     );
   });
@@ -70,12 +71,12 @@ describe('Resolver Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('resolver', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo-bar/foo-bar.resolver.ts'),
+      files.find((filename) => filename === '/foo-bar/foo-bar.resolver.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/foo-bar/foo-bar.resolver.ts')).toEqual(
       "import { Resolver } from '@nestjs/graphql';\n" +
         '\n' +
-        '@Resolver(\'FooBar\')\n' +
+        "@Resolver('FooBar')\n" +
         'export class FooBarResolver {}\n',
     );
   });
@@ -87,12 +88,12 @@ describe('Resolver Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('resolver', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/bar-baz/foo/foo.resolver.ts'),
+      files.find((filename) => filename === '/bar-baz/foo/foo.resolver.ts'),
     ).not.toBeUndefined();
     expect(tree.readContent('/bar-baz/foo/foo.resolver.ts')).toEqual(
       "import { Resolver } from '@nestjs/graphql';\n" +
         '\n' +
-        '@Resolver(\'Foo\')\n' +
+        "@Resolver('Foo')\n" +
         'export class FooResolver {}\n',
     );
   });
@@ -105,12 +106,12 @@ describe('Resolver Factory', () => {
     const tree: UnitTestTree = runner.runSchematic('resolver', options);
     const files: string[] = tree.files;
     expect(
-      files.find(filename => filename === '/foo/foo.resolver.js'),
+      files.find((filename) => filename === '/foo/foo.resolver.js'),
     ).not.toBeUndefined();
     expect(tree.readContent('/foo/foo.resolver.js')).toEqual(
       "import { Resolver } from '@nestjs/graphql';\n" +
         '\n' +
-        '@Resolver(\'Foo\')\n' +
+        "@Resolver('Foo')\n" +
         'export class FooResolver {}\n',
     );
   });

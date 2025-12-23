@@ -10,13 +10,13 @@ export class CollectionFactory {
     switch (collection) {
       case Collection.GAPI:
         return new NestCollection(
-          RunnerFactory.create(Runner.SCHEMATIC) as SchematicRunner
+          RunnerFactory.create(Runner.SCHEMATIC) as SchematicRunner,
         );
 
       default:
         return new CustomCollection(
           collection,
-          RunnerFactory.create(Runner.SCHEMATIC) as SchematicRunner
+          RunnerFactory.create(Runner.SCHEMATIC) as SchematicRunner,
         );
     }
   }
