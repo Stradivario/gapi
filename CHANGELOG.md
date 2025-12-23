@@ -1,4 +1,4 @@
-## [1.8.168](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.168) (2025-12-22)
+## [1.8.169](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.169) (2025-12-23)
 
 
 ### Bug Fixes
@@ -59,6 +59,7 @@
 * **sendgrid:** added partial data to options ([0501b12](https://github.com/Stradivario/gapi/commit/0501b12325d5b9ce562dc2d4c704d8ec465a9fce))
 * **sendgrid:** fixed wrong async assignment ([aca38f6](https://github.com/Stradivario/gapi/commit/aca38f6c565131b0e22630f4fe24fd2b1b0780d1))
 * **sendgrid:** html property removed from type and re assigned like it needs to be ([648d411](https://github.com/Stradivario/gapi/commit/648d411171268f55b568c264af96b2949ee6e9b2))
+* **subscriptions:** bumped rxdi subscriptions packages to fix memory leak error ([0113d82](https://github.com/Stradivario/gapi/commit/0113d827d9896d6aea17cabfc4db3e09066199fc))
 * **SystemdDaemon:** removed export from helpers ([77a7c1a](https://github.com/Stradivario/gapi/commit/77a7c1aedb4081d65a07a08929b777d686f797ae))
 * **tests:** missing tests script ([e2c7eef](https://github.com/Stradivario/gapi/commit/e2c7eeff0f8f5f3cb9932b3d5cc5dec6e86ad227))
 * **versions:** mismatched versions 140 instead ot 142 ([dad2d4d](https://github.com/Stradivario/gapi/commit/dad2d4d726cd388c26e28517346eb0af4c622dc7))
