@@ -1,4 +1,4 @@
-## [1.8.170](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.170) (2025-12-23)
+## [1.8.171](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.171) (2025-12-23)
 
 
 ### Bug Fixes
@@ -109,6 +109,7 @@
 * **sandgrid:** added options to last parameter in order to create attachment for the email and add s missing functionalities which restrict this library to be used as a extender of original sendgrid library ([4d7b649](https://github.com/Stradivario/gapi/commit/4d7b6492dee0f038dfbc033465ff8fa57c52d514))
 * **Sendgrid:** added default email from injection ([8a2ab11](https://github.com/Stradivario/gapi/commit/8a2ab119cc88897bd8290abc860e3e20dd113dd0))
 * **Sendgrid:** added sendgrid module to stack ([3cc32e3](https://github.com/Stradivario/gapi/commit/3cc32e37dd0205db91e2f4eee31a566651d547f1))
+* **withFilter:** added re exported withFilter since it was with messed typings not reflecting the actual framework ([68884bf](https://github.com/Stradivario/gapi/commit/68884bf97046039f7693598561e540ab4f75af39))
 * **zip:** added zip upload ([7ba67b4](https://github.com/Stradivario/gapi/commit/7ba67b42c9d9923000b3aad25f648cd16d7f1dee))
 
 
