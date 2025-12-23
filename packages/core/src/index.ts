@@ -71,6 +71,12 @@ export class CoreModule {
 }
 
 export * from 'graphql';
+export {
+  ExecutionResult,
+  buildSchema,
+  extendSchema,
+  isSpecifiedScalarType,
+} from 'graphql';
 export * from 'graphql-tools';
 export * from 'graphql-geojson';
 export * from '@rxdi/graphql-pubsub';

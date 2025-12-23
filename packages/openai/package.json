@@ -29,7 +29,7 @@
     "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
-    "openai": "^4.26.0"
+    "openai": "^6.15.0"
   },
   "peerDependencies": {
     "@gapi/core": "^1.8.144"
@@ -41,7 +41,7 @@
     "@typescript-eslint/parser": "^2.10.0",
     "eslint": "^6.7.2",
     "prettier": "^2.0.4",
-    "typescript": "^3.8.3",
+    "typescript": "^5.9.3",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-simple-import-sort": "^5.0.0",
