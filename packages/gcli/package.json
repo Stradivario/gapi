@@ -34,8 +34,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
-    "@rxdi/compressor": "^0.7.195",
-    "@rxdi/parcel-plugin-shebang": "^0.7.195",
+    "@rxdi/compressor": "^0.7.197",
+    "@rxdi/parcel-plugin-shebang": "^0.7.197",
     "@types/jest": "^25.2.1",
     "@types/js-yaml": "^4.0.3",
     "@types/node": "^25.0.3",
