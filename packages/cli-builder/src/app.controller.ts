@@ -21,7 +21,7 @@ export class AppController {
 
   @Mutation({
     uri: {
-      type: GraphQLNonNull(GraphQLString),
+      type: new GraphQLNonNull(GraphQLString),
     },
     authorization: {
       type: GraphQLString,

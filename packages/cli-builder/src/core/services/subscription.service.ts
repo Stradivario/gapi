@@ -148,7 +148,7 @@ export class SubscriptionService {
 
   sendMachineStatus(variables: MachineStatus) {
     const client = new ApolloClient({
-      link: this.link,
+      link: this.link as never,
       cache: new InMemoryCache(),
     });
     return client.mutate({

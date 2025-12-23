@@ -23,7 +23,7 @@ export class ReadlineService {
           console.error('Missing question internal library error!');
         }
         this.readline.close();
-        resolve();
+        resolve(true);
       });
     });
   }

@@ -38,6 +38,6 @@
   "devDependencies": {
     "@rxdi/core": "^0.7.193",
     "@types/node": "^13.11.1",
-    "typescript": "^3.8.3"
+    "typescript": "^5.9.3"
   }
 }
