@@ -74,6 +74,7 @@ export * from './enum-to-gql';
 export * from '@rxdi/core';
 export * from '@rxdi/graphql';
 export * from '@rxdi/graphql-pubsub';
+export { withFilter } from '@rxdi/graphql-rabbitmq-subscriptions';
 export * from '@rxdi/hapi';
 export * from 'graphql';
 export {
@@ -88,6 +89,5 @@ export {
   PubSubEngine,
   PubSubOptions,
   ResolverFn,
-  withFilter,
 } from 'graphql-subscriptions';
 export * from 'graphql-tools';
