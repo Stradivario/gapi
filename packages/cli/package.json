@@ -35,7 +35,7 @@
   "author": "Kristiyan Tachev (@Stradivario)",
   "license": "MIT",
   "dependencies": {
-    "@rxdi/core": "^0.7.192",
+    "@rxdi/core": "^0.7.193",
     "graphql": "^14.6.0",
     "@gapi/schematics": "^1.8.168",
     "node-fetch": "^2.1.2",
@@ -46,7 +46,7 @@
     "cli-spinner": "0.2.8",
     "commander": "8.2.0",
     "figlet": "1.2.1",
-    "@rxdi/compressor": "^0.7.192",
+    "@rxdi/compressor": "^0.7.193",
     "graphql-document-collector": "0.2.1",
     "systemjs": "0.21.4",
     "node-emoji": "1.10.0",
