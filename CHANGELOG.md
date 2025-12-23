@@ -1,4 +1,4 @@
-## [1.8.171](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.171) (2025-12-23)
+## [1.8.172](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.172) (2025-12-23)
 
 
 ### Bug Fixes
@@ -96,6 +96,7 @@
 * **gcli:** removed archiver as default export ([c79ca75](https://github.com/Stradivario/gapi/commit/c79ca75fcff77893f3b04ade02b66f215fd90a98))
 * **gcli:** scaling options added to yml file ([920eaad](https://github.com/Stradivario/gapi/commit/920eaadc8e4c0df10913c4b083510d68c9b25ac8))
 * **gcli:** single executable ([cf8417e](https://github.com/Stradivario/gapi/commit/cf8417e95ba80c6c5806fbb5306f8cf1f1445768))
+* **graphql-pubsub:** added compatibility between graphql v15 and graphql v16 we want to use v16 but subscriptions are not stable enough ([12209b3](https://github.com/Stradivario/gapi/commit/12209b3fdaf21974f086d33d9089a11213add71a))
 * **GraphqlCli:** init graphql-server cli ([0299494](https://github.com/Stradivario/gapi/commit/0299494966ff1e1ebd19d7bcfe19a6f7a4f75ae9))
 * **Lambda:** generation and deploy for lambda ([05214cc](https://github.com/Stradivario/gapi/commit/05214cce4acbdb6a06e74f7ec877e0d89c176986))
 * **openai:** added more input parameters for the graphql endpoint ([186add6](https://github.com/Stradivario/gapi/commit/186add6fa75a8dd5165b7fa28eab49eaa02b6fed))
