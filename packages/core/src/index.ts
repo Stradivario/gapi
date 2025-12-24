@@ -25,27 +25,13 @@ const DEFAULT_CONFIG: CoreModuleConfig = {
   graphql: {
     path: '/graphql',
     initQuery: true,
-    openBrowser: true,
     writeEffects: false,
-    graphiql: false,
-    graphiQlPlayground: true,
-    graphiQlPath: '/',
     watcherPort: '',
-    graphiqlOptions: {
-      endpointURL: '/graphql',
-      subscriptionsEndpoint: `${process.env.GRAPHIQL_WS_SSH ? 'wss' : 'ws'}://${
-        process.env.GRAPHIQL_WS_PATH || 'localhost'
-      }${
-        process.env.DEPLOY_PLATFORM === 'heroku'
-          ? ''
-          : `:${process.env.API_PORT || process.env.PORT || 9000}`
-      }/subscriptions`,
-      websocketConnectionParams: {
-        token: process.env.GRAPHIQL_TOKEN,
-      },
-    },
     graphqlOptions: {
       schema: null,
+    },
+    altair: {
+      enabled: true,
     },
   },
   daemon: {
