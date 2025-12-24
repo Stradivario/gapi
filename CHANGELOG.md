@@ -1,4 +1,4 @@
-## [1.8.177](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.177) (2025-12-24)
+## [1.8.178](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.178) (2025-12-24)
 
 
 ### Bug Fixes
@@ -32,6 +32,7 @@
 * **commander:** bumped to latest version ([7c0fa34](https://github.com/Stradivario/gapi/commit/7c0fa349773d5c6080f6422db0e58f39775498a0))
 * **core:** added export for graphql-subscriptions ([7c6e42f](https://github.com/Stradivario/gapi/commit/7c6e42f15de5c4d841d009cc9a57e6531e4fa63b))
 * **core:** enum-to-graphql enum ([a87b5cf](https://github.com/Stradivario/gapi/commit/a87b5cf724c233c25abe3dcea9484ba12f3288da))
+* **core:** federation replacer annoying error log removed ([96d341f](https://github.com/Stradivario/gapi/commit/96d341fe929e15c9fed78040eb19bf1e737f0e85))
 * **core:** graphql added to dependencies since 15.0.0 is broken ([7f740bf](https://github.com/Stradivario/gapi/commit/7f740bfa8f68275516359d12e945c18c7e5a0bd9))
 * **eslint:** bumped eslint to latest version leading to many many things... ([7018e90](https://github.com/Stradivario/gapi/commit/7018e9094e5fcbf4b689d57b4b58fe53b355313e))
 * **federation:** full headers are resend to the appropriate service ([c62d273](https://github.com/Stradivario/gapi/commit/c62d273ccf4811e213222711f3d5c8892621f087))
