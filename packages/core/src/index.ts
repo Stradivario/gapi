@@ -1,4 +1,3 @@
-import { DaemonModule } from '@gapi/daemon';
 import { Module, ModuleWithServices } from '@rxdi/core';
 import { GraphQLModule } from '@rxdi/graphql';
 import { GraphQLPubSubModule } from '@rxdi/graphql-pubsub';
@@ -18,7 +17,6 @@ export class CoreModule {
         HapiModule.forRoot({ ...DEFAULT_CONFIG.server, ...config.server }),
         GraphQLModule.forRoot({ ...DEFAULT_CONFIG.graphql, ...config.graphql }),
         GraphQLPubSubModule.forRoot(config.pubsub),
-        DaemonModule.forRoot(config.daemon),
       ],
     };
   }
