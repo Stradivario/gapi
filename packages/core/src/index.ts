@@ -1,43 +1,11 @@
-import { DaemonConfig, DaemonModule } from '@gapi/daemon';
+import { DaemonModule } from '@gapi/daemon';
 import { Module, ModuleWithServices } from '@rxdi/core';
-import { GRAPHQL_PLUGIN_CONFIG, GraphQLModule } from '@rxdi/graphql';
-import {
-  GRAPHQL_PUB_SUB_DI_CONFIG,
-  GraphQLPubSubModule,
-} from '@rxdi/graphql-pubsub';
-import { HapiConfigModel, HapiModule } from '@rxdi/hapi';
+import { GraphQLModule } from '@rxdi/graphql';
+import { GraphQLPubSubModule } from '@rxdi/graphql-pubsub';
+import { HapiModule } from '@rxdi/hapi';
 
 import { FederationController } from './federation.controller';
-
-export interface CoreModuleConfig {
-  server?: HapiConfigModel;
-  graphql?: GRAPHQL_PLUGIN_CONFIG;
-  pubsub?: GRAPHQL_PUB_SUB_DI_CONFIG;
-  daemon?: DaemonConfig;
-}
-
-const DEFAULT_CONFIG: CoreModuleConfig = {
-  server: {
-    hapi: {
-      port: 9000,
-    },
-  },
-  graphql: {
-    path: '/graphql',
-    initQuery: true,
-    writeEffects: false,
-    watcherPort: '',
-    graphqlOptions: {
-      schema: null,
-    },
-    altair: {
-      enabled: true,
-    },
-  },
-  daemon: {
-    activated: false,
-  },
-};
+import { CoreModuleConfig, DEFAULT_CONFIG } from './tokens';
 
 @Module()
 export class CoreModule {
@@ -57,6 +25,7 @@ export class CoreModule {
 }
 
 export * from './enum-to-gql';
+export { GeoJSON } from './geojson.types';
 export * from '@rxdi/core';
 export * from '@rxdi/graphql';
 export * from '@rxdi/graphql-pubsub';
@@ -69,11 +38,9 @@ export {
   extendSchema,
   isSpecifiedScalarType,
 } from 'graphql';
-export * from 'graphql-geojson';
 export {
   FilterFn,
   PubSubEngine,
   PubSubOptions,
   ResolverFn,
 } from 'graphql-subscriptions';
-export * from 'graphql-tools';
