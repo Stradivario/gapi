@@ -1,4 +1,4 @@
-## [1.8.180](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.180) (2025-12-24)
+## [1.8.181](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.181) (2025-12-24)
 
 
 ### Bug Fixes
@@ -108,6 +108,7 @@
 * **openai:** added open ai module with simple graphql mutation ([38304b8](https://github.com/Stradivario/gapi/commit/38304b8c270a97a6333514188481582cab09294d))
 * **openai:** created chat completion node ([7e653cf](https://github.com/Stradivario/gapi/commit/7e653cf3f59866ca33a4a71775da938868710228))
 * removed every occurency for graphiql and replacement with altair ([66732c0](https://github.com/Stradivario/gapi/commit/66732c0937e36d4eff478210c8c95b49f6382aef))
+* removed some more modules and altair ([65c5bc6](https://github.com/Stradivario/gapi/commit/65c5bc61f055dfe58ef8ff1115e54486b3d2d67f))
 * **rxdi:** bumped many versions of rxdi infrastructure ([038179b](https://github.com/Stradivario/gapi/commit/038179bb8fa1f27724325bfe855eca6fb6431791))
 * **rxdi:** bumped rxdi versions due to recent ai changed with description field exposed to graphql query mutation and subscription better schema generation ([0c6869e](https://github.com/Stradivario/gapi/commit/0c6869e6d4a109730938814e6ca8f70aa4d6676f))
 * **rxdi:** bumped version with many removed unused functionalities ([5af1e90](https://github.com/Stradivario/gapi/commit/5af1e904c2a10249ff3da347bd559a5719f3fdf9))
