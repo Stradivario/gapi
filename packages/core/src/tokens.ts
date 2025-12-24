@@ -1,4 +1,3 @@
-import { DaemonConfig } from '@gapi/daemon';
 import { InjectionToken } from '@rxdi/core';
 import { GRAPHQL_PLUGIN_CONFIG } from '@rxdi/graphql';
 import { GRAPHQL_PUB_SUB_DI_CONFIG } from '@rxdi/graphql-pubsub';
@@ -13,7 +12,6 @@ export interface CoreModuleConfig {
   server?: HapiConfigModel;
   graphql?: GRAPHQL_PLUGIN_CONFIG;
   pubsub?: GRAPHQL_PUB_SUB_DI_CONFIG;
-  daemon?: DaemonConfig;
 }
 
 export const DEFAULT_CONFIG: CoreModuleConfig = {
@@ -30,11 +28,5 @@ export const DEFAULT_CONFIG: CoreModuleConfig = {
     graphqlOptions: {
       schema: null,
     },
-    altair: {
-      enabled: true,
-    },
-  },
-  daemon: {
-    activated: false,
   },
 };
