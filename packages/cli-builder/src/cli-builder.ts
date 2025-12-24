@@ -5,11 +5,11 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
-  mergeSchemas,
   Module,
   ModuleWithProviders,
   SCHEMA_OVERRIDE,
 } from '@gapi/core';
+import { mergeSchemas } from '@graphql-tools/schema';
 
 import { Environment } from './app.constants';
 import { AppController } from './app.controller';
@@ -29,7 +29,6 @@ import {
 } from './core/executors/commands';
 import { SystemctlService } from './core/services/systemctl';
 import { GraphQLJSON } from './scalar-object';
-
 process.on('uncaughtException', (err) => {
   console.log('Caught exception: ' + err);
 });

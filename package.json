@@ -109,6 +109,7 @@
     "systemjs": "0.21.4",
     "@types/request": "^2.48.1",
     "request": "^2.88.0",
+    "@graphql-tools/schema": "^10.0.30",
     "graphql-playground-html": "1.6.13",
     "sequelize": "^5.8.2",
     "sequelize-typescript": "^1.1.0",
