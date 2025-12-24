@@ -1,4 +1,4 @@
-## [1.8.181](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.181) (2025-12-24)
+## [1.8.182](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.182) (2025-12-24)
 
 
 ### Bug Fixes
@@ -9,6 +9,7 @@
 * **cli-builder:** added executable environment variable ([9352fcb](https://github.com/Stradivario/gapi/commit/9352fcb37ba9771c6de2cda6e5c155c64f6123c8))
 * **cli-builder:** added handler for error uncaughtException since the workers are stopping for some reason ([a846ea4](https://github.com/Stradivario/gapi/commit/a846ea46060ff3b2210f0df38d1b465f35fbbd04))
 * **cli-builder:** added label fix ([5055bbb](https://github.com/Stradivario/gapi/commit/5055bbbc96dc1583c6b8e315d956d2cba88ac485))
+* **cli-builder:** added separated module for subscriptions @rxdi/graphql-pubsub-test instead directly exported from @gapi/core this reduces space on the main platform ([c1a0d02](https://github.com/Stradivario/gapi/commit/c1a0d02cc171b688997a354f21355bf9085ab093))
 * **cli-builder:** correct adds environment variables to service worker ([29c8eff](https://github.com/Stradivario/gapi/commit/29c8eff132d7b883f8e193d2b3d621f9f92f92d5))
 * **cli-builder:** correct subscription service imported ([0fa9785](https://github.com/Stradivario/gapi/commit/0fa9785cc0a671e5d55ed98696d1bd483e98b72d))
 * **cli-builder:** data added to params ([b2c205d](https://github.com/Stradivario/gapi/commit/b2c205d4ed09e10138da0bb14d49c7ade98b8acf))
