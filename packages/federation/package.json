@@ -12,7 +12,7 @@
     "lint": "npx eslint . --ext .ts",
     "test": "echo Tests",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && tsc || true",
+    "build": "rm -rf dist && tsc",
     "build-single-executable": "gapi build --single-executable",
     "build-stand-alone": "npm run build-single-executable && rm -rf bin && mkdir bin && cp ./dist/index.js ./bin/federation-linux.js && cp ./dist/federation-linux ./bin"
   },

@@ -1,10 +1,8 @@
+import { Container, Inject, Injectable } from '@gapi/core';
 import {
-  Container,
-  Inject,
-  Injectable,
   subscribeToTopic,
   WebSocketLink,
-} from '@gapi/core';
+} from '@rxdi/graphql-pubsub-test';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
 import { networkInterfaces } from 'os';

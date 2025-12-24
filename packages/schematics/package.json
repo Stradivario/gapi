@@ -12,7 +12,7 @@
     "test": "echo test",
     "lint": "echo LINT SCHEMATICS",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && tsc || true && rsync -a --prune-empty-dirs --include '*/' --include '*' --exclude '*' src/ dist/"
+    "build": "rm -rf dist && tsc && rsync -a --prune-empty-dirs --include '*/' --include '*' --exclude '*' src/ dist/"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",
