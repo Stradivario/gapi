@@ -1,5 +1,5 @@
 config:
-# Application configuration
+  # Application configuration
   app:
     local:
       API_PORT: 9000
@@ -7,22 +7,14 @@ config:
       NODE_ENV: development
       AMQP_HOST: 182.10.0.5
       AMQP_PORT: 5672
-      GRAPHIQL: true
-      GRAPHIQL_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg
-      ENDPOINT_TESTING: http://localhost:9000/graphql
-      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
     prod:
       API_PORT: 9000
       API_CERT: ./cert.key
       NODE_ENV: production
       AMQP_HOST: 182.10.0.5
       AMQP_PORT: 5672
-      GRAPHIQL: true
-      GRAPHIQL_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJpZCI6MSwic2NvcGUiOlsiQURNSU4iXSwiaWF0IjoxNTIwMjkxMzkyfQ.9hpIDPkSiGvjTmUEyg_R_izW-ra2RzzLbe3Uh3IFsZg
-      ENDPOINT_TESTING: http://localhost:9000/graphql
-      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
-# Testing configuration for local(dev) or worker(running tests as a separate worker with separate environment)
-  test: 
+  # Testing configuration for local(dev) or worker(running tests as a separate worker with separate environment)
+  test:
     local: extends app/prod
     worker:
       API_PORT: 9000
@@ -30,15 +22,12 @@ config:
       NODE_ENV: production
       AMQP_HOST: 182.10.0.5
       AMQP_PORT: 5672
-      ENDPOINT_TESTING: http://182.10.0.101:9000/graphql
-      TOKEN_TESTING: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtyaXN0aXFuLnRhY2hldkBnbWFpbC5jb20iLCJzY29wZSI6WyJBRE1JTiJdLCJpZCI6MSwiaWF0IjoxNTE2OTk2MzYxfQ.7ANr5VHrViD3NkCaDr0nSWYwk46UAEbOwB52pqye4AM
 
   schema:
     introspectionEndpoint: http://localhost:9000/graphql
     introspectionOutputFolder: ./src/api-introspection
 
 commands:
-
   testing:
     stop:
       - docker rm -f gapi-api-prod-worker-tests-executor
@@ -102,7 +91,7 @@ commands:
     clean:
       - rm -rf dist
       - rm -rf .cache
-# You can define your custom commands for example 
+# You can define your custom commands for example
 # commands:
 #   your-cli:
 #     my-command: 'npm -v'

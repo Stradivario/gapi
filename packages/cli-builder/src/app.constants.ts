@@ -10,7 +10,6 @@ type Commands =
   | '--systemctl-name'
   | '--systemctl-description'
   | '--systemctl-executable'
-  | '--graphiql'
   | '--nat-ip';
 
 export const includes = (i: Commands) =>
@@ -59,10 +58,6 @@ export const Environment = {
   GRAPHQL_RUNNER_RANDOM_PORT:
     process.env.GRAPHQL_RUNNER_RANDOM_PORT ||
     includes('--random-port'),
-  GRAPHQL_RUNNER_GRAPHIQL:
-    true ||
-    process.env.GRAPHQL_RUNNER_GRAPHIQL ||
-    includes('--graphiql'),
   GRAPHQL_RUNNER_TYPE:
     process.env.GRAPHQL_RUNNER_TYPE ||
     nextOrDefault('--runner-type'),

@@ -178,7 +178,7 @@ Bootstrap(
       { name: 'accounts', url: 'http://localhost:9000/graphql' },
       { name: 'products', url: 'http://localhost:9001/graphql' },
     ],
-  })
+  }),
 ).subscribe(() => console.log('started'));
 ```
 
@@ -300,7 +300,7 @@ npm start
 ##### Open browser to
 
 ```bash
-http://localhost:9000/graphiql
+http://localhost:9000/altair
 ```
 
 ### Testing
@@ -417,7 +417,7 @@ describe('User Queries Controller', () => {
         map((res) => {
           expect(res.success).toBeTruthy();
           return res.data.findUser;
-        })
+        }),
       )
       .subscribe(
         async (res) => {
@@ -429,7 +429,7 @@ describe('User Queries Controller', () => {
         (err) => {
           expect(err).toBe(null);
           done();
-        }
+        },
       );
   });
 });
@@ -439,17 +439,17 @@ Filepath: `root/src/app/core/test-util/testing.service.ts`
 
 ```typescript
     disableAuthorization() {
-        this.tester = tester({ url: process.env.ENDPOINT_TESTING, contentType: 'application/json' });
+        this.tester = tester({ url: '', contentType: 'application/json' });
     }
 
     enableAuthorization() {
-        this.tester = tester({ url: process.env.ENDPOINT_TESTING, contentType: 'application/json', authorization: process.env.TOKEN_TESTING});
+        this.tester = tester({ url: '', contentType: 'application/json', authorization: ''});
     }
 
     sendRequest<T>(query: SendRequestQueryType): Observable<Response<T>> {
         if (query.signiture) {
             this.tester = tester({
-                url: process.env.ENDPOINT_TESTING,
+                url: '',
                 contentType: 'application/json',
                 authorization: query.signiture.token
             });
@@ -591,7 +591,7 @@ export class MyHapiPlugin implements PluginInterface {
 
   constructor(
     private testService: TestService,
-    @Inject(HAPI_SERVER) private server: Server
+    @Inject(HAPI_SERVER) private server: Server,
   ) {}
 
   async register() {
@@ -626,7 +626,7 @@ export class MODULE_DI_CONFIG {
 }
 
 const MY_MODULE_CONFIG = new InjectionToken<MODULE_DI_CONFIG>(
-  'my-module-config'
+  'my-module-config',
 );
 
 @Module({
@@ -664,8 +664,7 @@ export class YourModule {
             extension: 'js',
             typings: '',
             outputFolder: '/node_modules/',
-            link:
-              'https://ipfs.infura.io/ipfs/QmdQtC3drfQ6M6GFpDdrhYRKoky8BycKzWbTkc4NEzGLug',
+            link: 'https://ipfs.infura.io/ipfs/QmdQtC3drfQ6M6GFpDdrhYRKoky8BycKzWbTkc4NEzGLug',
           },
         },
       ],
@@ -744,16 +743,7 @@ const GapiCoreModule = CoreModule.forRoot({
   },
   graphql: {
     path: '/graphql',
-    openBrowser: false,
     writeEffects: false,
-    graphiQlPath: '/graphiql',
-    graphiqlOptions: {
-      endpointURL: '/graphql',
-      subscriptionsEndpoint: `ws://localhost:9000/subscriptions`,
-      websocketConnectionParams: {
-        token: process.env.GRAPHIQL_TOKEN,
-      },
-    },
     graphqlOptions: {
       schema: null,
     },
@@ -776,7 +766,7 @@ BootstrapFramework(AppModule, [GapiCoreModule], {
   },
 }).subscribe(
   () => console.log('Started!'),
-  (e) => console.error(e)
+  (e) => console.error(e),
 );
 ```
 
@@ -830,8 +820,7 @@ import { CoreModule } from './core/core.module';
     MicroserviceModule.forRoot([
       {
         name: 'microservice1',
-        link:
-          'https://hkzdqnc1i2.execute-api.us-east-2.amazonaws.com/development/graphql',
+        link: 'https://hkzdqnc1i2.execute-api.us-east-2.amazonaws.com/development/graphql',
       },
     ]),
   ],
@@ -859,24 +848,7 @@ const DEFAULT_CONFIG = {
         path: '/graphql',
         openBrowser: true,
         writeEffects: true,
-        graphiql: true,
-        graphiQlPlayground: false,
-        graphiQlPath: '/graphiql',
         watcherPort: '',
-        graphiqlOptions: {
-            endpointURL: '/graphql',
-            subscriptionsEndpoint: `${
-                process.env.GRAPHIQL_WS_SSH ? 'wss' : 'ws'
-                }://${process.env.GRAPHIQL_WS_PATH || 'localhost'}${
-                process.env.DEPLOY_PLATFORM === 'heroku'
-                    ? ''
-                    : `:${process.env.API_PORT ||
-                    process.env.PORT}`
-                }/subscriptions`,
-            websocketConnectionParams: {
-                token: process.env.GRAPHIQL_TOKEN
-            }
-        },
         graphqlOptions: {
             schema: null
         }
@@ -927,25 +899,7 @@ import { readFileSync } from 'fs';
         openBrowser: process.env.OPEN_BROWSER === 'true' ? true : false,
         watcherPort: 8967,
         writeEffects: process.env.WRITE_EFFECTS === 'true' ? true : false,
-        graphiql: process.env.GRAPHIQL === 'true' ? true : false,
-        graphiQlPlayground:
-          process.env.ENABLE_GRAPHIQL_PLAYGROUND === 'true' ? true : false,
-        graphiQlPath: process.env.GRAPHIQL_PATH,
         authentication: AuthService,
-        graphiqlOptions: {
-          endpointURL: process.env.GRAPHQL_PATH,
-          passHeader: `'Authorization':'${process.env.GRAPHIQL_TOKEN}'`,
-          subscriptionsEndpoint: `${
-            process.env.GRAPHIQL_WS_SSH ? 'wss' : 'ws'
-          }://${process.env.GRAPHIQL_WS_PATH || 'localhost'}${
-            process.env.DEPLOY_PLATFORM === 'heroku'
-              ? ''
-              : `:${process.env.API_PORT || process.env.PORT}`
-          }/subscriptions`,
-          websocketConnectionParams: {
-            token: process.env.GRAPHIQL_TOKEN,
-          },
-        },
         graphqlOptions: {
           schema: null,
         },
@@ -1162,7 +1116,7 @@ import { IUserType, IUserTokenType } from '../core/api-introspection/index';
 export class UserQueriesController {
   constructor(
     private userService: UserService,
-    private authService: AuthPrivateService
+    private authService: AuthPrivateService,
   ) {}
 
   @Type(UserType)
@@ -1236,7 +1190,7 @@ import { GraphQLNonNull, GraphQLString, GraphQLInt } from 'graphql';
 export class UserMutationsController {
   constructor(
     private userService: UserService,
-    private pubsub: PubSubService
+    private pubsub: PubSubService,
   ) {}
 
   @Scope('ADMIN')
@@ -1252,11 +1206,11 @@ export class UserMutationsController {
   })
   publishSignal(root, { message, signal }, context): UserMessage {
     console.log(
-      `${signal} Signal Published message: ${message} by ${context.email}`
+      `${signal} Signal Published message: ${message} by ${context.email}`,
     );
     this.pubsub.publish(
       signal,
-      `${signal} Signal Published message: ${message} by ${context.email}`
+      `${signal} Signal Published message: ${message} by ${context.email}`,
     );
     return { message };
   }
@@ -1316,7 +1270,7 @@ export class UserSubscriptionsController {
   @Type(UserMessage)
   @Public()
   @Subscribe((self: UserSubscriptionsController) =>
-    self.pubsub.asyncIterator('CREATE_SIGNAL_BASIC')
+    self.pubsub.asyncIterator('CREATE_SIGNAL_BASIC'),
   )
   @Subscription()
   subscribeToUserMessagesBasic(message): UserMessage {
@@ -1332,8 +1286,8 @@ export class UserSubscriptionsController {
       (payload, { id }, context) => {
         console.log('Subscribed User: ', id, JSON.stringify(context));
         return true;
-      }
-    )
+      },
+    ),
   )
   @Subscription({
     id: {
@@ -1473,7 +1427,7 @@ BootstrapFramework(AppModule, [CoreModule], {
   },
 }).subscribe(
   () => console.log('Started!'),
-  (e) => console.error(e)
+  (e) => console.error(e),
 );
 ```
 
@@ -1535,7 +1489,7 @@ export class AuthPrivateService {
 
   validateToken(
     token: string,
-    requestType: 'Query' | 'Subscription' = 'Query'
+    requestType: 'Query' | 'Subscription' = 'Query',
   ): UserInfo {
     const user = <UserInfo>this.verifyToken(token);
     user.type = user.scope[0];
@@ -1633,7 +1587,7 @@ export class UserQueriesController {
   constructor(
     @Inject('UserId') private userId: { id: number }, // Value injection
     @Inject(UserIdToken) private userId: UserId, // Token injection
-    @Inject(UserIdToken) private userId: UserId // Class injection
+    @Inject(UserIdToken) private userId: UserId, // Class injection
   ) {
     console.log(this.userId.id);
     // Will print 1
@@ -1672,13 +1626,13 @@ import { PubSubService } from '@rxdi/graphql-pubsub';
 export class UserSubscriptionsController {
   constructor(
     @Inject('Observable') private observable: BehaviorSubject<number>,
-    private pubsub: PubSubService
+    private pubsub: PubSubService,
   ) {
     this.observable.subscribe(() =>
       this.pubsub.publish(
         'CREATE_SIGNAL_BASIC',
-        `Signal Published message: ${this.observable.getValue()}`
-      )
+        `Signal Published message: ${this.observable.getValue()}`,
+      ),
     );
   }
 }
@@ -1718,7 +1672,7 @@ export class UserService {
     @Inject(() => AnotherService) private anotherService: AnotherService
 ```
 
-**You can see the subscription when you subscribe to basic chanel inside GraphiQL dev panel**
+**You can see the subscription when you subscribe to basic chanel inside Altair dev panel**
 
 ```typescript
 subscription {
@@ -1797,7 +1751,7 @@ export class UserWalletType {
   readonly id: number | GraphQLScalarType = GraphQLInt;
   readonly address: string | GraphQLScalarType = GraphQLString;
   readonly settings: string | UserWalletSettingsType = InjectType(
-    UserWalletSettingsType
+    UserWalletSettingsType,
   );
 }
 
@@ -1808,15 +1762,15 @@ export class UserType {
   readonly firstname: string | GraphQLScalarType = GraphQLString;
   readonly lastname: string | GraphQLScalarType = GraphQLString;
   readonly settings: string | UserSettingsType = InjectType(
-    UserWalletSettingsType
+    UserWalletSettingsType,
   );
   readonly wallets: UserWalletType = new GraphQLList(
-    InjectType(UserWalletType)
+    InjectType(UserWalletType),
   );
 }
 ```
 
-##### When you create such a query from graphiql dev tools
+##### When you create such a query
 
 ```typescript
 query {
@@ -2080,7 +2034,7 @@ export class AdminOnly implements CanActivateResolver {
   canActivate(
     context: UserType,
     payload,
-    descriptor: GenericGapiResolversType
+    descriptor: GenericGapiResolversType,
   ) {
     return context.type === 'ADMIN';
   }
@@ -2095,7 +2049,7 @@ export class AdminOnly implements CanActivateResolver {
   canActivate(
     context: UserType,
     payload,
-    descriptor: GenericGapiResolversType
+    descriptor: GenericGapiResolversType,
   ) {
     return Observable.create((o) => o.next(true));
 
@@ -2133,12 +2087,12 @@ export class LoggerInterceptor implements InterceptResolver {
     chainable$: Observable<any>,
     context: UserType,
     payload,
-    descriptor: GenericGapiResolversType
+    descriptor: GenericGapiResolversType,
   ) {
     console.log('Before...');
     const now = Date.now();
     return chainable$.pipe(
-      tap(() => console.log(`After... ${Date.now() - now}ms`))
+      tap(() => console.log(`After... ${Date.now() - now}ms`)),
     );
   }
 }
@@ -2179,7 +2133,7 @@ export class ModifyInterceptor implements InterceptResolver {
     chainable$: Observable<any>,
     context: UserType,
     payload,
-    descriptor: GenericGapiResolversType
+    descriptor: GenericGapiResolversType,
   ) {
     console.log('Before...');
     const now = Date.now();
@@ -2187,7 +2141,7 @@ export class ModifyInterceptor implements InterceptResolver {
       map((res) => {
         console.log(`After... ${Date.now() - now}ms`);
         return res;
-      })
+      }),
     );
   }
 }

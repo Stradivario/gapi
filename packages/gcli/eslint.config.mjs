@@ -6,7 +6,7 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import prettierConfig from 'eslint-config-prettier';
 
 export default defineConfig([
-  globalIgnores(['dist/*', './release', './example']),
+  globalIgnores(['dist/*', './release', './example', 'coverage']),
   {
     files: ['./src/**/*.ts', './src/**/*.tsx'],
     languageOptions: {

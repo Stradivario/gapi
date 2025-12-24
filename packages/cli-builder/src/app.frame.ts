@@ -44,11 +44,6 @@ export class AppFrameModule {
               port: Environment.GRAPHQL_RUNNER_API_PORT,
             },
           },
-          graphql: {
-            graphiQlPlayground:
-              !!Environment.GRAPHQL_RUNNER_GRAPHIQL,
-            openBrowser: false,
-          },
         }),
       ],
     };

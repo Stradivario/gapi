@@ -1,5 +1,4 @@
-import { CoreModule } from '@gapi/core';
-import { Container } from '@gapi/core';
+import { Container, CoreModule } from '@gapi/core';
 import { setup } from '@rxdi/core';
 import { switchMap } from 'rxjs/operators';
 
@@ -19,11 +18,6 @@ Container.get(PluginLoader)
               hapi: {
                 port: 42001,
               },
-            },
-            graphql: {
-              graphiql: true,
-              openBrowser: true,
-              graphiQlPlayground: false,
             },
             // pubsub: {
             //   host: 'localhost',
