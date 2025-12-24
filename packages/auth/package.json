@@ -13,7 +13,7 @@
     "test": "echo test",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && tsc || true"
+    "build": "rm -rf dist && tsc"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",

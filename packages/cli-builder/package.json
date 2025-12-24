@@ -13,7 +13,7 @@
     "test": "jest",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && tsc || true"
+    "build": "rm -rf dist && tsc"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",
@@ -38,7 +38,8 @@
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
     "@graphql-tools/schema": "^10.0.30",
-    "ws": "^7.2.3"
+    "ws": "^7.2.3",
+    "@rxdi/graphql-pubsub-test": "^0.7.202"
   },
   "devDependencies": {
     "jest": "^30.2.0",

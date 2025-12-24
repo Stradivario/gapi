@@ -117,6 +117,7 @@
     "js-yaml": "^4.1.0",
     "openai": "^6.15.0",
     "falkordb": "^6.3.1",
-    "@types/systemjs": "^6.15.4"
+    "@types/systemjs": "^6.15.4",
+    "@rxdi/graphql-pubsub-test": "^0.7.202"
   }
 }
