@@ -9,8 +9,6 @@ export class MainConfig {
   API_CERT?: string;
   DB_NAME?: string;
   TESTS_TOKEN?: string;
-  GRAPHIQL_TOKEN?: string;
-  ENDPOINT_TESTING?: string;
   NODE_ENV?: string;
   GAPI_VERSION?: string;
 }

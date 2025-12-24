@@ -118,15 +118,6 @@
   },
   {
     "id": 14,
-    "repo": "playground",
-    "label": "@gapi/playground",
-    "owner": "Stradivario",
-    "folderName": "gapi-playground",
-    "url": "https://github.com/Stradivario/gapi-playground",
-    "namespace": "gapi"
-  },
-  {
-    "id": 15,
     "repo": "sequelize",
     "label": "@gapi/sequelize",
     "owner": "Stradivario",
@@ -135,7 +126,7 @@
     "namespace": "gapi"
   },
   {
-    "id": 16,
+    "id": 15,
     "repo": "voyager",
     "label": "@gapi/voyager",
     "owner": "Stradivario",

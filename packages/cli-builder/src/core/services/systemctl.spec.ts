@@ -13,9 +13,6 @@ describe('[SystemCTL]: tests', () => {
       config.includes('GRAPHQL_RUNNER_API_PORT=42043'),
     ).toBeTruthy();
     expect(
-      config.includes('GRAPHQL_RUNNER_GRAPHIQL=true'),
-    ).toBeTruthy();
-    expect(
       config.includes('GRAPHQL_RUNNER_TYPE=true'),
     ).toBeTruthy();
     expect(

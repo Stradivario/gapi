@@ -350,11 +350,6 @@ export class DaemonTask {
             port: 42000,
           },
         },
-        graphql: {
-          openBrowser: false,
-          graphiql: false,
-          graphiQlPlayground: false,
-        },
       } as CoreModuleConfig);
     }
     console.log('Missing command for Daemon');

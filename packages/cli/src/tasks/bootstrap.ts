@@ -25,11 +25,6 @@ export class BootstrapTask {
                       port: nextOrDefault('--port', 42000, (p) => Number(p)),
                     },
                   },
-                  graphql: {
-                    openBrowser: false,
-                    graphiql: false,
-                    graphiQlPlayground: false,
-                  },
                   // pubsub: {
                   //   host: 'localhost',
                   //   port: 5672,
