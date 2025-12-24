@@ -27,17 +27,13 @@ export class FederationController {
       query: appSchema.graphqlOptions.schema.getQueryType(),
       mutation: appSchema.graphqlOptions.schema.getMutationType(),
     });
-    let replacer = FedarationReplacer;
-    try {
-      replacer = Container.get(GRAPHQL_FEDERATION_REPLACER);
-    } catch (e) {
-      console.error(e);
-    }
     const sdl = printSchema(schema)
       .replace('_service: GraphqlFederation', '')
       .replace('status: StatusQueryType', '');
     return {
-      sdl: replacer(sdl),
+      sdl: Container.has(GRAPHQL_FEDERATION_REPLACER)
+        ? Container.get(GRAPHQL_FEDERATION_REPLACER)(sdl)
+        : FedarationReplacer(sdl),
     };
   }
 }
