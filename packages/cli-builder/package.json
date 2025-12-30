@@ -39,7 +39,7 @@
     "apollo-client": "^2.6.8",
     "@graphql-tools/schema": "^10.0.30",
     "ws": "^7.2.3",
-    "@rxdi/graphql-pubsub-test": "^0.7.206"
+    "@rxdi/graphql-pubsub-test": "^0.7.208"
   },
   "devDependencies": {
     "jest": "^30.2.0",
