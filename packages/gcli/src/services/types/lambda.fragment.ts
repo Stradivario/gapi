@@ -6,7 +6,7 @@ url
 route
 code
 params
-secret {
+secrets {
  id
  projectId
  name

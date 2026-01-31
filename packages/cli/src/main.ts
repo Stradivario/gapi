@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Container } from '@rxdi/core';
-import { load } from 'yamljs';
+import * as Yaml from 'yamljs';
 
 import { ArgsService } from './core/services/args.service';
 import { ConfigService, GapiConfig } from './core/services/config.service';
@@ -15,7 +15,7 @@ const argsService = Container.get(ArgsService);
 const configService = Container.get(ConfigService);
 let config: GapiConfig = {} as any;
 try {
-  config = load('gapi-cli.conf.yml');
+  config = Yaml.load.bind(Yaml)('gapi-cli.conf.yml');
 } catch (e) {
   console.error(e);
 }
