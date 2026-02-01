@@ -1,4 +1,4 @@
-## [1.8.188](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.188) (2026-01-31)
+## [1.8.189](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.189) (2026-02-01)
 
 
 ### Bug Fixes
@@ -114,6 +114,7 @@
 * **rxdi:** bumped many versions of rxdi infrastructure ([038179b](https://github.com/Stradivario/gapi/commit/038179bb8fa1f27724325bfe855eca6fb6431791))
 * **rxdi:** bumped rxdi for new feature AMQPSusbscribe decorator for complex dead letter queue scenarios ([bb51715](https://github.com/Stradivario/gapi/commit/bb517157bf8a12328f68135f4d4e0bab1b223bf3))
 * **rxdi:** bumped rxdi versions due to recent ai changed with description field exposed to graphql query mutation and subscription better schema generation ([0c6869e](https://github.com/Stradivario/gapi/commit/0c6869e6d4a109730938814e6ca8f70aa4d6676f))
+* **rxdi:** bumped version of rxdi ([8fe964a](https://github.com/Stradivario/gapi/commit/8fe964a1ac987227ca8faf969cb2d3ab8d3f57df))
 * **rxdi:** bumped version of rxdi ([b9aeca1](https://github.com/Stradivario/gapi/commit/b9aeca197143aeffcd034156fd2ad05775231339))
 * **rxdi:** bumped version with many removed unused functionalities ([5af1e90](https://github.com/Stradivario/gapi/commit/5af1e904c2a10249ff3da347bd559a5719f3fdf9))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([a939f01](https://github.com/Stradivario/gapi/commit/a939f01fa3c83ee330ca8affa7ccee1c970be613))
