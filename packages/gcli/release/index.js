@@ -283052,7 +283052,7 @@ var init_helpers2 = __esm({
             method: cmd.method || payload.method || ["GET"],
             packageJson: cmd.packageJson || await ReadFile(payload.package || cmd.package).toPromise() || "{}",
             params: cmd.params || payload.params || [],
-            secret: cmd.secret || payload.secret || "",
+            secrets: cmd.secrets || payload.secrets || [],
             customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || "",
             scaleOptions: {
               executorType: cmd.executorType || ((_a = payload.scaleOptions) == null ? void 0 : _a.executorType) || "poolmgr",
