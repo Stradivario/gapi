@@ -18,7 +18,7 @@ interface ConfigJSON {
   package?: string;
   params?: string[];
   config?: string;
-  secret?: string;
+  secrets?: string[];
   uploadAsZip?: string;
   scaleOptions?: ILambdaScaleInputOptions;
 }

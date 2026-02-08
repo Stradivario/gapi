@@ -1324,7 +1324,7 @@ export
     /**
     description: This is a name of the kubernetes secret
   */
-    secret?: string | null;
+    secrets?: string[] | null;
     /**
     description: This is a name of the kubernetes config
   */

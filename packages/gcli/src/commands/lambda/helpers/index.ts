@@ -39,7 +39,7 @@ export interface CreateOrUpdateLambdaArguments {
   script: string;
   buildBashScript: string;
   config: string;
-  secret: string;
+  secrets: string[];
   env: string;
   method: IHttpMethodsEnum[];
   packageJson: string;
@@ -164,7 +164,7 @@ export const createOrUpdateLambda = (
             (await ReadFile(payload.package || cmd.package).toPromise()) ||
             '{}',
           params: cmd.params || payload.params || [],
-          secret: cmd.secret || payload.secret || '',
+          secrets: cmd.secrets || payload.secrets || [],
           customUploadFileId:
             cmd.customUploadFileId || payload.customUploadFileId || '',
           scaleOptions: {
