@@ -36154,6 +36154,7 @@ var init_gql_client = __esm({
         }).pipe((0, import_operators2.map)((res) => res.listProjectLambdas));
       }
       static createLambda(payload) {
+        console.log(payload);
         return this.query({
           query: gql`mutation createLambda($payload: CreateOrUpdateLambdaInput!) {
         createLambda(payload: $payload) {
@@ -283053,6 +283054,7 @@ var init_helpers2 = __esm({
             packageJson: cmd.packageJson || await ReadFile(payload.package || cmd.package).toPromise() || "{}",
             params: cmd.params || payload.params || [],
             secrets: cmd.secrets || payload.secrets || [],
+            network: cmd.network || payload.network || ["public", "private"],
             customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || "",
             scaleOptions: {
               executorType: cmd.executorType || ((_a = payload.scaleOptions) == null ? void 0 : _a.executorType) || "poolmgr",
