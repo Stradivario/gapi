@@ -1,4 +1,4 @@
-## [1.8.190](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.190) (2026-02-08)
+## [1.8.191](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.191) (2026-02-10)
 
 
 ### Bug Fixes
@@ -56,6 +56,7 @@
 * **gcli:** reverted logic without options request ([0c737f2](https://github.com/Stradivario/gapi/commit/0c737f2c7afc2ebf7485d592ba741299a3535fbe))
 * **InitQuery:** reverted ([f500c5b](https://github.com/Stradivario/gapi/commit/f500c5b8e9ed8b227be93d91e4856c548b10e72b))
 * **login:** added method which converts number to string ([605fe1d](https://github.com/Stradivario/gapi/commit/605fe1dd587c7ed4af37318917be1568fbd4740e))
+* **network:** added ability to specify lambda purpose publicly exposed or privately exposed ([1d812db](https://github.com/Stradivario/gapi/commit/1d812dbce395b4a6f731dd64809335a1d2721b1d))
 * new api introduced with small changes ([7131bd9](https://github.com/Stradivario/gapi/commit/7131bd9d0ff4d9defe2839e679db7ff11e08fc9f))
 * **package.json:** added @rxdi/core dependency ([2b400a2](https://github.com/Stradivario/gapi/commit/2b400a229ad7ed98ebe8c16f3983964336c99402))
 * removal of many things that are not needed ([f9ae717](https://github.com/Stradivario/gapi/commit/f9ae71797f6e86e4601355d5aec4233ae04ffab2))
