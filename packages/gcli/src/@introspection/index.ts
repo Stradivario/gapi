@@ -1325,6 +1325,11 @@ export
     description: This is a name of the kubernetes secret
   */
     secrets?: string[] | null;
+
+  /**
+    description: Expose lambda to 'public' or 'private' or both
+  */
+    network?: string[] | null;
     /**
     description: This is a name of the kubernetes config
   */

@@ -40,6 +40,7 @@ export interface CreateOrUpdateLambdaArguments {
   buildBashScript: string;
   config: string;
   secrets: string[];
+  network: string[];
   env: string;
   method: IHttpMethodsEnum[];
   packageJson: string;
@@ -165,6 +166,7 @@ export const createOrUpdateLambda = (
             '{}',
           params: cmd.params || payload.params || [],
           secrets: cmd.secrets || payload.secrets || [],
+          network: cmd.network || payload.network || ['public', 'private'],
           customUploadFileId:
             cmd.customUploadFileId || payload.customUploadFileId || '',
           scaleOptions: {
