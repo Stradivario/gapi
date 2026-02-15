@@ -1,10 +1,11 @@
+import { IFissionEnvironmentInputType } from '@introspection/index';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Unboxed } from '~/types';
 
-import { loadEnvSpec } from '../lambda/helpers/load-spec';
+import { loadSpec } from '../lambda/helpers/load-spec';
 
 export default (cmd: {
   spec: string;
@@ -17,7 +18,9 @@ export default (cmd: {
       switchMap(async (projectId) => ({
         projectId,
         force: cmd.force,
-        ...(await loadEnvSpec(cmd.spec).toPromise()),
+        ...(await loadSpec<IFissionEnvironmentInputType>(
+          cmd.spec ?? 'env.yaml',
+        ).toPromise()),
       })),
       switchMap(({ projectId, name, force }) =>
         GraphqlClienAPI.deleteEnvironment(name, projectId, force),

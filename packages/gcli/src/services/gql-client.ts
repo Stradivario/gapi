@@ -402,7 +402,7 @@ export class GraphqlClienAPI {
         refresh,
         key,
         timeGenerated,
-        expired: (Date.now() - timeGenerated) / 1000 > 3600,
+        expired: (Date.now() - timeGenerated) / 1000 > 1800,
         uploadUrl,
       })),
       switchMap((config) =>

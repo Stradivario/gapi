@@ -1,5 +1,4 @@
 import {
-  IFissionEnvironmentInputType,
   IHttpMethodsEnum,
   ILambdaScaleInputOptions,
 } from '@introspection/index';
@@ -25,7 +24,7 @@ interface ConfigJSON {
   scaleOptions?: ILambdaScaleInputOptions;
 }
 
-export const loadSpec = (spec?: string) =>
+export const loadSpec = <T = ConfigJSON>(spec?: string) =>
   combineLatest([
     readFileAsObservable(spec).pipe(
       map((spec) => JSON.parse(spec)),
@@ -44,32 +43,4 @@ export const loadSpec = (spec?: string) =>
       map((data) => load(data)),
       catchError(() => of(false)),
     ),
-  ]).pipe(
-    map(([custom, json, yaml]) => (custom || json || yaml) as ConfigJSON),
-  );
-
-export const loadEnvSpec = (spec?: string) =>
-  combineLatest([
-    readFileAsObservable(spec).pipe(
-      map((spec) => JSON.parse(spec)),
-      catchError(() =>
-        from(readFileAsObservable(spec)).pipe(
-          map((file) => load(file)),
-          catchError(() => of(false)),
-        ),
-      ),
-    ),
-    readFileAsObservable('env.json').pipe(
-      map((spec) => JSON.parse(spec)),
-      catchError(() => of(false)),
-    ),
-    readFileAsObservable('env.yaml').pipe(
-      map((data) => load(data)),
-      catchError(() => of(false)),
-    ),
-  ]).pipe(
-    map(
-      ([custom, json, yaml]) =>
-        (custom || json || yaml) as IFissionEnvironmentInputType,
-    ),
-  );
+  ]).pipe(map(([custom, json, yaml]) => (custom || json || yaml) as T));

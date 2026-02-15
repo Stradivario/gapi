@@ -6,14 +6,8 @@ require('esbuild')
     entryPoints: ['./src/main.ts'],
     bundle: true,
     platform: 'node',
-    target: 'node14.4',
+    target: 'node24',
     outfile: './release/index.js',
-    external: ['esbuild'],
-    define: {
-      'process.env.MONGODB_URI': `'${process.env.MONGODB_URI}'`,
-      'process.env.NODE_ENV': `'${process.env.NODE_ENV}'`,
-      'process.env.PORT': `9000`,
-    },
   })
   .then((data) => console.log('SUCCESS', data))
   .catch((e) => {

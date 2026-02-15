@@ -5,20 +5,22 @@ import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Unboxed } from '~/types';
 
-import { loadSpec } from '../lambda/helpers/load-spec';
+import { loadSpec } from '../../lambda/helpers/load-spec';
 
-export default (cmd: { project: string; spec: string; name: string }) =>
+export default (
+  cmd: { spec: string; project: string } & IFissionEnvironmentInputType,
+) =>
   parseProjectId(cmd.project)
     .pipe(
       switchMap(async (projectId) => ({
         projectId,
-        name: cmd.name,
-        ...(await loadSpec<IFissionEnvironmentInputType>(
-          cmd.spec ?? 'env.yaml',
-        ).toPromise()),
+        ...(await loadSpec(cmd.spec || 'trigger.yaml').toPromise()),
       })),
-      switchMap(({ projectId, name }) =>
-        GraphqlClienAPI.getEnvironment(cmd.name ?? name, projectId),
+      switchMap(({ projectId, ...data }) =>
+        GraphqlClienAPI.createEnvironment(projectId, {
+          ...data,
+          ...cmd,
+        }),
       ),
       tap((data) => {
         const columns: (keyof Unboxed<typeof data>)[] = [
@@ -34,7 +36,7 @@ export default (cmd: { project: string; spec: string; name: string }) =>
           'region',
         ];
         console.log('-------------------');
-        console.log('[Action][getEnvironment]');
+        console.log('[Action][createEnvironment]');
         console.table([data], columns);
         console.log('-------------------');
       }),

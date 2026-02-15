@@ -5,7 +5,7 @@ import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Unboxed } from '~/types';
 
-import { loadEnvSpec } from '../lambda/helpers/load-spec';
+import { loadSpec } from '../lambda/helpers/load-spec';
 
 export default (
   cmd: { spec: string; project: string } & IFissionEnvironmentInputType,
@@ -14,7 +14,9 @@ export default (
     .pipe(
       switchMap(async (projectId) => ({
         projectId,
-        ...(await loadEnvSpec(cmd.spec).toPromise()),
+        ...(await loadSpec<IFissionEnvironmentInputType>(
+          cmd.spec ?? 'env.yaml',
+        ).toPromise()),
       })),
       switchMap(({ projectId, ...data }) =>
         GraphqlClienAPI.updateEnvironment(projectId, {

@@ -1,0 +1,7 @@
+{
+  "main": "./release/index.js",
+  "output": "./release/gcli.blob",
+  "assets": {
+    "esbuild-native": "./release/esbuild"
+  }
+}
