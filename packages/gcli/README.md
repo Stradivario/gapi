@@ -1,7 +1,7 @@
 ### Installation
 
 ```bash
-curl -L "https://github.com/Stradivario/gapi/releases/download/v1.8.194/gcli-linux" -o ~/.local/bin/gcli
+curl -L "https://github.com/Stradivario/gapi/releases/download/v1.8.195/gcli-linux" -o ~/.local/bin/gcli
 ```
 
 ```bash
@@ -9,6 +9,8 @@ chmod +x ~/.local/bin/gcli
 ```
 
 Use MCP tool in Claude or any other tool that accepts mcp servers config
+
+The MCP server only works in nodejs bigger than 20 it works perfect in 24
 
 ```json
 {
@@ -22,6 +24,19 @@ Use MCP tool in Claude or any other tool that accepts mcp servers config
 ```
 
 Using regular npm package installed globally `npm install @gapi/gcli -g`
+
+```json
+{
+  "mcpServers": {
+    "lambforge": {
+      "command": "npx",
+      "args": ["gcli", "mcp:start", "--url", "http://localhost:8000/mcp"]
+    }
+  }
+}
+```
+
+Using specific version of nodejs
 
 ```json
 {
