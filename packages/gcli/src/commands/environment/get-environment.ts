@@ -15,7 +15,7 @@ export default (cmd: { project: string; spec: string; name: string }) =>
         ...(await loadEnvSpec(cmd.spec).toPromise()),
       })),
       switchMap(({ projectId, name }) =>
-        GraphqlClienAPI.getEnvironment(name, projectId),
+        GraphqlClienAPI.getEnvironment(cmd.name ?? name, projectId),
       ),
       tap((data) => {
         const columns: (keyof Unboxed<typeof data>)[] = [

@@ -253136,7 +253136,7 @@ var init_get_environment = __esm({
         ...await loadEnvSpec(cmd.spec).toPromise()
       })),
       (0, import_operators10.switchMap)(
-        ({ projectId, name: name2 }) => GraphqlClienAPI.getEnvironment(name2, projectId)
+        ({ projectId, name: name2 }) => GraphqlClienAPI.getEnvironment(cmd.name ?? name2, projectId)
       ),
       (0, import_operators10.tap)((data) => {
         const columns = [
