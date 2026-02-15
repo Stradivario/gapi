@@ -1,4 +1,4 @@
-## [1.8.191](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.191) (2026-02-10)
+## [1.8.192](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.192) (2026-02-15)
 
 
 ### Bug Fixes
@@ -98,6 +98,7 @@
 * **gcli:** added hasOptionsRequest to lambda creation ([b391b19](https://github.com/Stradivario/gapi/commit/b391b1916627c9c6a75c71915b711d8c86c5d011))
 * **gcli:** added multiple scaling options and some documentation inside the cli itself ([312f626](https://github.com/Stradivario/gapi/commit/312f6262114949dd35ee640ddd4791cb05df7e4f))
 * **gcli:** build script added outfile ([e6e6c65](https://github.com/Stradivario/gapi/commit/e6e6c65209979f3cf9a1e5cb890b4d446a7bdbc0))
+* **gcli:** environment crud operations added ([d9e27fc](https://github.com/Stradivario/gapi/commit/d9e27fc4d2a4c45377240906d776dd1a4c2c2baf))
 * **gcli:** npm ignore file added ([5aa9097](https://github.com/Stradivario/gapi/commit/5aa90972c6220bb5e4213efbb0ffebd472bb25e1))
 * **gcli:** readme.md added correct link [ci-skip] ([830fcf4](https://github.com/Stradivario/gapi/commit/830fcf49b605c76953e53c1503a1f18139361ea1))
 * **gcli:** removed archiver as default export ([c79ca75](https://github.com/Stradivario/gapi/commit/c79ca75fcff77893f3b04ade02b66f215fd90a98))
