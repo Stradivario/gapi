@@ -1,0 +1,35 @@
+name: Release GCLI Binary
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install Dependencies
+        run: npx @rxdi/bolt install
+
+      - name: Build GCLI Release
+        working-directory: packages/gcli
+        run: npm run build:release
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: packages/gcli/release/gcli-linux
+          token: ${{ secrets.GITHUB_TOKEN }}
