@@ -17,31 +17,32 @@ import { z } from 'zod';
 
 import { GraphqlClienAPI } from '~/services/gql-client';
 
-const fetchLogger = async (input: RequestInfo | URL, init?: RequestInit) => {
-  try {
-    const res = await fetch(input, init);
-
-    if (res.body) {
-      // Check if it's a Node stream (PassThrough, Readable, etc) and NOT a Web Stream
-      // SDK requires Web Stream for SSE (pipeThrough)
-      if (typeof res.body.pipeThrough !== 'function') {
-        try {
-          const webStream = Readable.toWeb(res.body as never);
-          Object.defineProperty(res, 'body', { value: webStream });
-        } catch (conversionErr) {
-          process.stderr.write(
-            `[WARN] Stream conversion failed: ${conversionErr}\n`,
-          );
+const fetchLogger = (input: RequestInfo | URL, init?: RequestInit) =>
+  lastValueFrom(
+    defer(() => from(fetch(input, init))).pipe(
+      map((res) => {
+        if (res.body) {
+          // Convert Node stream → Web stream if needed
+          if (typeof res.body.pipeThrough !== 'function') {
+            try {
+              const webStream = Readable.toWeb(res.body as never);
+              Object.defineProperty(res, 'body', { value: webStream });
+            } catch (conversionErr) {
+              process.stderr.write(
+                `[WARN] Stream conversion failed: ${conversionErr}\n`,
+              );
+            }
+          }
         }
-      }
-    }
 
-    return res;
-  } catch (e) {
-    process.stderr.write(`[ERROR] Fetch error: ${e.message}\n`);
-    throw e;
-  }
-};
+        return res;
+      }),
+      catchError((e) => {
+        process.stderr.write(`[ERROR] Fetch error: ${e.message}\n`);
+        return throwError(() => e);
+      }),
+    ),
+  );
 
 /**
  * gcli mcp:start --url http://localhost:8000/mcp

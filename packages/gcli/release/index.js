@@ -316917,29 +316917,31 @@ var init_start = __esm({
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
-    fetchLogger = async (input, init) => {
-      try {
-        const res = await fetch(input, init);
-        if (res.body) {
-          if (typeof res.body.pipeThrough !== "function") {
-            try {
-              const webStream = import_stream2.Readable.toWeb(res.body);
-              Object.defineProperty(res, "body", { value: webStream });
-            } catch (conversionErr) {
-              process.stderr.write(
-                `[WARN] Stream conversion failed: ${conversionErr}
+    fetchLogger = (input, init) => (0, import_rxjs17.lastValueFrom)(
+      (0, import_rxjs17.defer)(() => (0, import_rxjs17.from)(fetch(input, init))).pipe(
+        (0, import_operators23.map)((res) => {
+          if (res.body) {
+            if (typeof res.body.pipeThrough !== "function") {
+              try {
+                const webStream = import_stream2.Readable.toWeb(res.body);
+                Object.defineProperty(res, "body", { value: webStream });
+              } catch (conversionErr) {
+                process.stderr.write(
+                  `[WARN] Stream conversion failed: ${conversionErr}
 `
-              );
+                );
+              }
             }
           }
-        }
-        return res;
-      } catch (e) {
-        process.stderr.write(`[ERROR] Fetch error: ${e.message}
+          return res;
+        }),
+        (0, import_operators23.catchError)((e) => {
+          process.stderr.write(`[ERROR] Fetch error: ${e.message}
 `);
-        throw e;
-      }
-    };
+          return (0, import_rxjs17.throwError)(() => e);
+        })
+      )
+    );
   }
 });
 
