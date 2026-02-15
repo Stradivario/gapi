@@ -1,4 +1,5 @@
 import {
+  IFissionEnvironmentInputType,
   IHttpMethodsEnum,
   ILambdaScaleInputOptions,
 } from '@introspection/index';
@@ -45,4 +46,30 @@ export const loadSpec = (spec?: string) =>
     ),
   ]).pipe(
     map(([custom, json, yaml]) => (custom || json || yaml) as ConfigJSON),
+  );
+
+export const loadEnvSpec = (spec?: string) =>
+  combineLatest([
+    readFileAsObservable(spec).pipe(
+      map((spec) => JSON.parse(spec)),
+      catchError(() =>
+        from(readFileAsObservable(spec)).pipe(
+          map((file) => load(file)),
+          catchError(() => of(false)),
+        ),
+      ),
+    ),
+    readFileAsObservable('env.json').pipe(
+      map((spec) => JSON.parse(spec)),
+      catchError(() => of(false)),
+    ),
+    readFileAsObservable('env.yaml').pipe(
+      map((data) => load(data)),
+      catchError(() => of(false)),
+    ),
+  ]).pipe(
+    map(
+      ([custom, json, yaml]) =>
+        (custom || json || yaml) as IFissionEnvironmentInputType,
+    ),
   );
