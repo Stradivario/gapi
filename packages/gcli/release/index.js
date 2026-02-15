@@ -316795,13 +316795,14 @@ __export(start_exports, {
   default: () => startProxy
 });
 async function startProxy(cmd) {
-  const baseUrl = cmd.url || "http://127.0.0.1:8000/mcp";
+  const config2 = await GraphqlClienAPI.getConfig().pipe((0, import_operators23.take)(1)).toPromise();
+  const apiUrl = config2.url.replace(/\/graphql$/, "");
+  const baseUrl = cmd.url || [apiUrl, "/mcp"].join("") || "http://127.0.0.1:8000/mcp";
   const mcpUrl = new URL(baseUrl);
   mcpUrl.searchParams.set("transportType", "streamable-http");
   process.stderr.write(`Starting MCP proxy \u2192 ${mcpUrl}
 `);
   process.stderr.write("Retrieving config for auth...\n");
-  const config2 = await GraphqlClienAPI.getConfig().pipe((0, import_operators23.take)(1)).toPromise();
   if (!config2?.token) {
     throw new Error("User is not authenticated (no token in config)");
   }

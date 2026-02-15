@@ -13,7 +13,12 @@ import { GraphqlClienAPI } from '~/services/gql-client';
  */
 export default async function startProxy(cmd: { url: string }) {
   // const sessionId = randomUUID();
-  const baseUrl = cmd.url || 'http://127.0.0.1:8000/mcp';
+  const config = await GraphqlClienAPI.getConfig().pipe(take(1)).toPromise();
+
+  const apiUrl = config.url.replace(/\/graphql$/, '');
+
+  const baseUrl =
+    cmd.url || [apiUrl, '/mcp'].join('') || 'http://127.0.0.1:8000/mcp';
 
   const mcpUrl = new URL(baseUrl);
   // mcpUrl.searchParams.set('sessionId', sessionId);
@@ -22,7 +27,6 @@ export default async function startProxy(cmd: { url: string }) {
   process.stderr.write(`Starting MCP proxy → ${mcpUrl}\n`);
 
   process.stderr.write('Retrieving config for auth...\n');
-  const config = await GraphqlClienAPI.getConfig().pipe(take(1)).toPromise();
   if (!config?.token) {
     throw new Error('User is not authenticated (no token in config)');
   }

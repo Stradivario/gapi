@@ -1,11 +1,43 @@
 ### Installation
 
 ```bash
-curl -L "https://github.com/Stradivario/gapi/raw/master/packages/gcli/release/gcli-linux" -o ~/.local/bin/gcli
+curl -L "https://github.com/Stradivario/gapi/releases/download/v1.8.194/gcli-linux" -o ~/.local/bin/gcli
 ```
 
 ```bash
 chmod +x ~/.local/bin/gcli
+```
+
+Use MCP tool in Claude or any other tool that accepts mcp servers config
+
+```json
+{
+  "mcpServers": {
+    "lambforge": {
+      "command": "gcli",
+      "args": ["mcp:start", "--url", "http://localhost:8000/mcp"]
+    }
+  }
+}
+```
+
+Using regular npm package installed globally `npm install @gapi/gcli -g`
+
+```json
+{
+  "mcpServers": {
+    "lambforge": {
+      "command": "/home/user/.nvm/versions/node/v24.11.1/bin/node",
+      "args": [
+        "/home/user/.nvm/versions/node/v24.11.1/bin/npx",
+        "gcli",
+        "mcp:start",
+        "--url",
+        "http://localhost:8000/mcp"
+      ]
+    }
+  }
+}
 ```
 
 #### Using NPM

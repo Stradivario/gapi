@@ -19,7 +19,7 @@
     "copy:nodejs": "cp $(command -v node) ./release/gcli-linux",
     "chmod": "chmod +x ./release/gcli-linux",
     "postject": "npx postject ./release/gcli-linux NODE_SEA_BLOB ./release/gcli.blob --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2",
-    "build": "echo BUILD",
+    "build": "npm run esbuild",
     "esbuild": "node build.js",
     "introspect": "gapi schema introspect --collect-documents --collect-types"
   },
