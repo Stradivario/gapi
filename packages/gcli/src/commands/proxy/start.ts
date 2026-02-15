@@ -21,17 +21,15 @@ const fetchLogger = (input: RequestInfo | URL, init?: RequestInit) =>
   lastValueFrom(
     defer(() => from(fetch(input, init))).pipe(
       map((res) => {
-        if (res.body) {
+        if (typeof res?.body?.pipeThrough !== 'function') {
           // Convert Node stream → Web stream if needed
-          if (typeof res.body.pipeThrough !== 'function') {
-            try {
-              const webStream = Readable.toWeb(res.body as never);
-              Object.defineProperty(res, 'body', { value: webStream });
-            } catch (conversionErr) {
-              process.stderr.write(
-                `[WARN] Stream conversion failed: ${conversionErr}\n`,
-              );
-            }
+          try {
+            const webStream = Readable.toWeb(res.body as never);
+            Object.defineProperty(res, 'body', { value: webStream });
+          } catch (conversionErr) {
+            process.stderr.write(
+              `[WARN] Stream conversion failed: ${conversionErr}\n`,
+            );
           }
         }
 
@@ -76,28 +74,21 @@ export default async function startProxy(cmd: { url: string }) {
           `Config retrieved. Token start: ${config.token.substring(0, 5)}\n`,
         );
       }),
-      map((config) => {
-        /**
-         * 1. Create MCP Client (talks to real server)
-         */
-        const client = new Client({
+      map((config) => ({
+        ...config,
+        transport: new StreamableHTTPClientTransport(config.mcpUrl, {
+          requestInit: {
+            headers: {
+              Authorization: config.token,
+            },
+          },
+          fetch: fetchLogger,
+        }),
+        client: new Client({
           name: 'gapi-proxy-client',
           version: '1.0.0',
-        });
-
-        return {
-          ...config,
-          transport: new StreamableHTTPClientTransport(config.mcpUrl, {
-            requestInit: {
-              headers: {
-                Authorization: config.token,
-              },
-            },
-            fetch: fetchLogger,
-          }),
-          client,
-        };
-      }),
+        }),
+      })),
       tap(() => {
         process.stderr.write('Connecting to upstream...\n');
       }),
