@@ -3,6 +3,7 @@ import 'firebase/auth';
 import {
   ICreateOrUpdateLambdaInput,
   IDeleteLambdaInput,
+  IFissionEnvironmentInputType,
   IFissionLogsType,
   IFissionType,
   IMutation,
@@ -26,6 +27,7 @@ import {
   urlDirectory,
 } from '~/types';
 
+import { EnvironmentFragment } from './types/environment.fragment';
 import { LambdaFragment } from './types/lambda.fragment';
 import { ProjectFragment } from './types/project.fragment';
 
@@ -286,6 +288,103 @@ export class GraphqlClienAPI {
       },
     }).pipe(map((res) => res.listProjects));
   }
+
+  public static listEnvironments(projectId: string) {
+    return this.query<IQuery>({
+      query: gql`query listEnvironmentsByProjectId($projectId: String!) {
+        listEnvironmentsByProjectId(projectId: $projectId) {
+          ${EnvironmentFragment}
+        }
+      }`,
+      variables: {
+        projectId,
+      },
+    }).pipe(map((res) => res.listEnvironmentsByProjectId));
+  }
+
+  public static getEnvironment(name: string, projectId: string) {
+    return this.query<IQuery>({
+      query: gql`query getEnvironment($name: String!, $projectId: String!) {
+        getEnvironment(name: $name, projectId: $projectId) {
+          ${EnvironmentFragment}
+        }
+      }`,
+      variables: {
+        name,
+        projectId,
+      },
+    }).pipe(map((res) => res.getEnvironment));
+  }
+
+  public static createEnvironment(
+    projectId: string,
+    payload: IFissionEnvironmentInputType,
+  ) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation createEnvironment(
+          $projectId: String!
+          $payload: FissionEnvironmentInputType!
+        ) {
+          createEnvironment(projectId: $projectId, payload: $payload) {
+            ${EnvironmentFragment}
+          }
+        }
+      `,
+      variables: {
+        projectId,
+        payload,
+      },
+    }).pipe(map((res) => res.createEnvironment));
+  }
+
+  public static deleteEnvironment(
+    name: string,
+    projectId: string,
+    force?: boolean,
+  ) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation deleteEnvironmentByName(
+          $name: String!
+          $projectId: String!
+          $force: Boolean
+        ) {
+          deleteEnvironmentByName(name: $name, projectId: $projectId, force: $force) {
+            ${EnvironmentFragment}
+          }
+        }
+      `,
+      variables: {
+        name,
+        projectId,
+        force,
+      },
+    }).pipe(map((res) => res.deleteEnvironmentByName));
+  }
+
+  public static updateEnvironment(
+    projectId: string,
+    payload: IFissionEnvironmentInputType,
+  ) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation updateEnvironmentByName(
+          $projectId: String!
+          $payload: FissionEnvironmentInputType!
+        ) {
+          updateEnvironmentByName(projectId: $projectId, payload: $payload) {
+            ${EnvironmentFragment}
+          }
+        }
+      `,
+      variables: {
+        projectId,
+        payload,
+      },
+    }).pipe(map((res) => res.updateEnvironmentByName));
+  }
+
   static getConfig() {
     return combineLatest([
       readFileAsObservable(tokenDirectory),
