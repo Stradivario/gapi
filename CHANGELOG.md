@@ -1,4 +1,4 @@
-## [1.8.194](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.194) (2026-02-15)
+## [1.8.195](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.195) (2026-02-15)
 
 
 ### Bug Fixes
@@ -41,6 +41,7 @@
 * **federation:** readme ([da4d035](https://github.com/Stradivario/gapi/commit/da4d0356720829e40ccd4061ae4fe587061e7203))
 * **federation:** rebuilded module and re-deployed ([e4fe17e](https://github.com/Stradivario/gapi/commit/e4fe17ec857dd3fd876a51cf4fdc0751dd090670))
 * **gcli:** added additional options ([dd4958a](https://github.com/Stradivario/gapi/commit/dd4958aa12305ea9cf7c35a43863eacc705c0b5e))
+* **gcli:** added config extraction from the current api url ([1afdf6f](https://github.com/Stradivario/gapi/commit/1afdf6fc5cfadecab5fcc19a417d3939cb60c9dd))
 * **gcli:** added secrets instead of secret due to api change in lamb forge ([9b4b2fe](https://github.com/Stradivario/gapi/commit/9b4b2fe0d1180b946897581bcf2355d84a0fecc5))
 * **gcli:** authorization token passed also to upload lambda logic ([26e5126](https://github.com/Stradivario/gapi/commit/26e512698fd471fb73ecf302e857631609eecc8e))
 * **gcli:** builded again the package with namespace import from all ([f655951](https://github.com/Stradivario/gapi/commit/f6559518341065cef27d9404d8941480ff704ee0))
