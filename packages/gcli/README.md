@@ -282,6 +282,19 @@ To use this with Claude Desktop or other MCP-compatible tools, add the following
 }
 ```
 
+**For logged in users with selected current project**
+
+```json
+{
+  "mcpServers": {
+    "lambforge": {
+      "command": "gcli",
+      "args": ["mcp:start"]
+    }
+  }
+}
+```
+
 ## Build System & Local Development
 
 `gcli` includes a high-performance bundler powered by **esbuild**.
