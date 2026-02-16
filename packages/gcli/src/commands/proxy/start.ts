@@ -17,30 +17,53 @@ import { z } from 'zod';
 
 import { GraphqlClienAPI } from '~/services/gql-client';
 
-const fetchLogger = (input: RequestInfo | URL, init?: RequestInit) =>
-  lastValueFrom(
-    defer(() => from(fetch(input, init))).pipe(
-      map((res) => {
-        if (typeof res?.body?.pipeThrough !== 'function') {
-          // Convert Node stream → Web stream if needed
-          try {
-            const webStream = Readable.toWeb(res.body as never);
-            Object.defineProperty(res, 'body', { value: webStream });
-          } catch (conversionErr) {
+const performFetch = (input: RequestInfo | URL, init?: RequestInit) => {
+  // process.stderr.write(`[DEBUG] performFetch called for ${input}\n`);
+  return from(fetch(input, init)).pipe(
+    switchMap((res) => {
+      // process.stderr.write(`[DEBUG] Fetch status: ${res.status} for ${input}\n`);
+      if (res.status === 401 || res.status === 403) {
+        process.stderr.write(
+          `[DEBUG] Request failed with ${res.status}. Refreshing token...\n`,
+        );
+        return GraphqlClienAPI.getConfig(true).pipe(
+          take(1),
+          switchMap((config) => {
             process.stderr.write(
-              `[WARN] Stream conversion failed: ${conversionErr}\n`,
+              '[DEBUG] Token refreshed. Retrying request...\n',
             );
-          }
+            const headers = new Headers(init?.headers);
+            headers.set('Authorization', config.token);
+            return fetch(input, {
+              ...init,
+              headers,
+            });
+          }),
+        );
+      }
+      return of(res);
+    }),
+    map((res) => {
+      if (typeof res?.body?.pipeThrough !== 'function') {
+        // Convert Node stream → Web stream if needed
+        try {
+          const webStream = Readable.toWeb(res.body as never);
+          Object.defineProperty(res, 'body', { value: webStream });
+        } catch (conversionErr) {
+          process.stderr.write(
+            `[WARN] Stream conversion failed: ${conversionErr}\n`,
+          );
         }
+      }
 
-        return res;
-      }),
-      catchError((e) => {
-        process.stderr.write(`[ERROR] Fetch error: ${e.message}\n`);
-        return throwError(() => e);
-      }),
-    ),
+      return res;
+    }),
+    catchError((e) => {
+      process.stderr.write(`[ERROR] Fetch error: ${e.message}\n`);
+      return throwError(() => e);
+    }),
   );
+};
 
 /**
  * gcli mcp:start --url http://localhost:8000/mcp
@@ -82,7 +105,7 @@ export default async function startProxy(cmd: { url: string }) {
               Authorization: config.token,
             },
           },
-          fetch: fetchLogger,
+          fetch: (input, init) => lastValueFrom(performFetch(input, init)),
         }),
         client: new Client({
           name: 'gapi-proxy-client',

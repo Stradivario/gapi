@@ -385,7 +385,7 @@ export class GraphqlClienAPI {
     }).pipe(map((res) => res.updateEnvironmentByName));
   }
 
-  static getConfig() {
+  static getConfig(force = false) {
     return combineLatest([
       readFileAsObservable(tokenDirectory),
       readFileAsObservable(urlDirectory),
@@ -402,7 +402,7 @@ export class GraphqlClienAPI {
         refresh,
         key,
         timeGenerated,
-        expired: (Date.now() - timeGenerated) / 1000 > 1800,
+        expired: force || (Date.now() - timeGenerated) / 1000 > 1800,
         uploadUrl,
       })),
       switchMap((config) =>

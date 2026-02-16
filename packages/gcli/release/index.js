@@ -36388,7 +36388,7 @@ var init_gql_client = __esm({
           }
         }).pipe((0, import_operators2.map)((res) => res.updateEnvironmentByName));
       }
-      static getConfig() {
+      static getConfig(force = false) {
         return (0, import_rxjs3.combineLatest)([
           readFileAsObservable(tokenDirectory),
           readFileAsObservable(urlDirectory),
@@ -36405,7 +36405,7 @@ var init_gql_client = __esm({
             refresh,
             key,
             timeGenerated,
-            expired: (Date.now() - timeGenerated) / 1e3 > 1800,
+            expired: force || (Date.now() - timeGenerated) / 1e3 > 1800,
             uploadUrl
           })),
           (0, import_operators2.switchMap)(
@@ -316820,24 +316820,21 @@ async function startProxy(cmd) {
 `
       );
     }),
-    (0, import_operators23.map)((config2) => {
-      const client = new Client({
+    (0, import_operators23.map)((config2) => ({
+      ...config2,
+      transport: new StreamableHTTPClientTransport(config2.mcpUrl, {
+        requestInit: {
+          headers: {
+            Authorization: config2.token
+          }
+        },
+        fetch: (input, init) => (0, import_rxjs17.lastValueFrom)(performFetch(input, init))
+      }),
+      client: new Client({
         name: "gapi-proxy-client",
         version: "1.0.0"
-      });
-      return {
-        ...config2,
-        transport: new StreamableHTTPClientTransport(config2.mcpUrl, {
-          requestInit: {
-            headers: {
-              Authorization: config2.token
-            }
-          },
-          fetch: fetchLogger
-        }),
-        client
-      };
-    }),
+      })
+    })),
     (0, import_operators23.tap)(() => {
       process.stderr.write("Connecting to upstream...\n");
     }),
@@ -316905,7 +316902,7 @@ async function startProxy(cmd) {
     }))
   ).toPromise();
 }
-var import_rxjs17, import_operators23, import_stream2, fetchLogger;
+var import_rxjs17, import_operators23, import_stream2, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
@@ -316917,20 +316914,41 @@ var init_start = __esm({
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
-    fetchLogger = (input, init) => (0, import_rxjs17.lastValueFrom)(
-      (0, import_rxjs17.defer)(() => (0, import_rxjs17.from)(fetch(input, init))).pipe(
-        (0, import_operators23.map)((res) => {
-          if (res.body) {
-            if (typeof res.body.pipeThrough !== "function") {
-              try {
-                const webStream = import_stream2.Readable.toWeb(res.body);
-                Object.defineProperty(res, "body", { value: webStream });
-              } catch (conversionErr) {
-                process.stderr.write(
-                  `[WARN] Stream conversion failed: ${conversionErr}
+    performFetch = (input, init) => {
+      return (0, import_rxjs17.from)(fetch(input, init)).pipe(
+        (0, import_operators23.switchMap)((res) => {
+          if (res.status === 401 || res.status === 403) {
+            process.stderr.write(
+              `[DEBUG] Request failed with ${res.status}. Refreshing token...
 `
+            );
+            return GraphqlClienAPI.getConfig(true).pipe(
+              (0, import_operators23.take)(1),
+              (0, import_operators23.switchMap)((config2) => {
+                process.stderr.write(
+                  "[DEBUG] Token refreshed. Retrying request...\n"
                 );
-              }
+                const headers = new Headers(init?.headers);
+                headers.set("Authorization", config2.token);
+                return fetch(input, {
+                  ...init,
+                  headers
+                });
+              })
+            );
+          }
+          return (0, import_rxjs17.of)(res);
+        }),
+        (0, import_operators23.map)((res) => {
+          if (typeof res?.body?.pipeThrough !== "function") {
+            try {
+              const webStream = import_stream2.Readable.toWeb(res.body);
+              Object.defineProperty(res, "body", { value: webStream });
+            } catch (conversionErr) {
+              process.stderr.write(
+                `[WARN] Stream conversion failed: ${conversionErr}
+`
+              );
             }
           }
           return res;
@@ -316940,8 +316958,8 @@ var init_start = __esm({
 `);
           return (0, import_rxjs17.throwError)(() => e);
         })
-      )
-    );
+      );
+    };
   }
 });
 
