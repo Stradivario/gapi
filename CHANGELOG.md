@@ -1,4 +1,4 @@
-## [1.8.196](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.196) (2026-02-15)
+## [1.8.197](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.197) (2026-02-16)
 
 
 ### Bug Fixes
@@ -43,6 +43,7 @@
 * **gcli:** added additional options ([dd4958a](https://github.com/Stradivario/gapi/commit/dd4958aa12305ea9cf7c35a43863eacc705c0b5e))
 * **gcli:** added config extraction from the current api url ([1afdf6f](https://github.com/Stradivario/gapi/commit/1afdf6fc5cfadecab5fcc19a417d3939cb60c9dd))
 * **gcli:** added secrets instead of secret due to api change in lamb forge ([9b4b2fe](https://github.com/Stradivario/gapi/commit/9b4b2fe0d1180b946897581bcf2355d84a0fecc5))
+* **gcli:** async code refactored to rxjs [ci-skip] ([42cf603](https://github.com/Stradivario/gapi/commit/42cf6039547de01381c20db48bda760f3906987f))
 * **gcli:** authorization token passed also to upload lambda logic ([26e5126](https://github.com/Stradivario/gapi/commit/26e512698fd471fb73ecf302e857631609eecc8e))
 * **gcli:** builded again the package with namespace import from all ([f655951](https://github.com/Stradivario/gapi/commit/f6559518341065cef27d9404d8941480ff704ee0))
 * **gcli:** decompress logs ([705241b](https://github.com/Stradivario/gapi/commit/705241b05fcba9d8375c4cf8a73710f1989323e3))
@@ -51,11 +52,13 @@
 * **gcli:** esbuild marked as external but installable inside dependencies ([e8d6b72](https://github.com/Stradivario/gapi/commit/e8d6b72f217123da5e2445fe8987cbeda4fd371c))
 * **gcli:** load spec file default export fix ([1d1c71f](https://github.com/Stradivario/gapi/commit/1d1c71f96813aa59f883bced7e44f655849cb980))
 * **gcli:** login to gcli using integration ci/cd pipeline ([56c2bdd](https://github.com/Stradivario/gapi/commit/56c2bddd73368cc20f21c2f7b819b79ea900b30b))
+* **gcli:** mcp start function changes [ci-skip] ([46c615a](https://github.com/Stradivario/gapi/commit/46c615afc41681896c51cbc42665f1ff1669a3ed))
 * **gcli:** re-build ([fc68cee](https://github.com/Stradivario/gapi/commit/fc68cee7c7d6f81aef54010899903ba8d4e685c1))
 * **gcli:** removed console.log ([2889fb3](https://github.com/Stradivario/gapi/commit/2889fb30019c9a2b23360387fe0d5c8ff9e2f4a8))
 * **gcli:** removed packages from dependencies since we don't want them when installing ([3efb328](https://github.com/Stradivario/gapi/commit/3efb328cd7734d14381d4c3248a28e325ee2fff4))
 * **gcli:** reverted back logic for gcli ([7591194](https://github.com/Stradivario/gapi/commit/759119401dc43665ba45f6b3cc19f09439692995))
 * **gcli:** reverted logic without options request ([f37f092](https://github.com/Stradivario/gapi/commit/f37f0922eaec5c060b80064a508ab12c3da3d48f))
+* **gcli:** token authentication after expire fixed ([fc099eb](https://github.com/Stradivario/gapi/commit/fc099ebd5af0b5094e5b1919f875e9dbdfd035e3))
 * **InitQuery:** reverted ([09a93da](https://github.com/Stradivario/gapi/commit/09a93da16f27e944703f0a99dd7aa2fd3d17f243))
 * **login:** added method which converts number to string ([f3ca052](https://github.com/Stradivario/gapi/commit/f3ca0521ebf9cca22e711c6ec4c2154f181d0694))
 * **network:** added ability to specify lambda purpose publicly exposed or privately exposed ([5bcb6bc](https://github.com/Stradivario/gapi/commit/5bcb6bcd838fc87c3b54ceb7dc96d56d72dc5094))
