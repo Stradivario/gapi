@@ -1,4 +1,4 @@
-## [1.8.198](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.198) (2026-02-16)
+## [1.8.199](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.199) (2026-02-16)
 
 
 ### Bug Fixes
@@ -48,8 +48,10 @@
 * **gcli:** builded again the package with namespace import from all ([f655951](https://github.com/Stradivario/gapi/commit/f6559518341065cef27d9404d8941480ff704ee0))
 * **gcli:** decompress logs ([705241b](https://github.com/Stradivario/gapi/commit/705241b05fcba9d8375c4cf8a73710f1989323e3))
 * **gcli:** default export of form data and stream to buffer ([94800cb](https://github.com/Stradivario/gapi/commit/94800cb9fa946b6843dd9a7517c987007b254821))
+* **gcli:** documentation fix [ci-skip] ([8fd6a46](https://github.com/Stradivario/gapi/commit/8fd6a46c8cc2b417d8edc1121ef4178b7e7e7e29))
 * **gcli:** environment update ([b1815c5](https://github.com/Stradivario/gapi/commit/b1815c599163dc8aeade8409f2941a3a3c4191db))
 * **gcli:** esbuild marked as external but installable inside dependencies ([e8d6b72](https://github.com/Stradivario/gapi/commit/e8d6b72f217123da5e2445fe8987cbeda4fd371c))
+* **gcli:** esbuild was not included into the npm package ([3e30711](https://github.com/Stradivario/gapi/commit/3e30711da0a38856ea82bf0cf60f6d2612a3c5de))
 * **gcli:** load spec file default export fix ([1d1c71f](https://github.com/Stradivario/gapi/commit/1d1c71f96813aa59f883bced7e44f655849cb980))
 * **gcli:** login to gcli using integration ci/cd pipeline ([56c2bdd](https://github.com/Stradivario/gapi/commit/56c2bddd73368cc20f21c2f7b819b79ea900b30b))
 * **gcli:** mcp start function changes [ci-skip] ([46c615a](https://github.com/Stradivario/gapi/commit/46c615afc41681896c51cbc42665f1ff1669a3ed))
