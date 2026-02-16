@@ -49,6 +49,8 @@ import fetch from 'node-fetch';
 
 // Important: commands are imported AFTER setting ESBUILD_BINARY_PATH
 import { commands } from './commands';
+import { outputAllHelp } from './helpers';
+import { Logger } from './services/log';
 
 /**
  * 3. CORE LOGIC
@@ -61,12 +63,17 @@ export const main = (argv: string[]) => {
 
   // Handling invalid commands
   program.on('command:*', () => {
-    console.log();
-    console.log(chalk.red(`Invalid command: ${program.args.join(' ')}`));
-    console.log();
+    Logger.log();
+    Logger.log(chalk.red(`Invalid command: ${program.args.join(' ')}`));
+    Logger.log();
     program.outputHelp();
     process.exit(1);
   });
+
+  if (process.argv.includes('--all-help')) {
+    outputAllHelp(program);
+    process.exit(0);
+  }
 
   program.parse(argv);
 };

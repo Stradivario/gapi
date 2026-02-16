@@ -1,8 +1,8 @@
-import { IFissionEnvironmentInputType } from '@introspection/index';
-import { switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
+import { Logger } from '~/services/log';
 import { Unboxed } from '~/types';
 
 import { loadSpec } from '../lambda/helpers/load-spec';
@@ -15,15 +15,16 @@ export default (cmd: {
 }) =>
   parseProjectId(cmd.project)
     .pipe(
-      switchMap(async (projectId) => ({
-        projectId,
-        force: cmd.force,
-        ...(await loadSpec<IFissionEnvironmentInputType>(
-          cmd.spec ?? 'env.yaml',
-        ).toPromise()),
-      })),
-      switchMap(({ projectId, name, force }) =>
-        GraphqlClienAPI.deleteEnvironment(name, projectId, force),
+      switchMap((projectId) =>
+        loadSpec(cmd.spec ?? 'env.yaml').pipe(
+          map((data) => ({
+            projectId,
+            ...(data?.environment ?? data),
+          })),
+        ),
+      ),
+      switchMap(({ projectId, name }) =>
+        GraphqlClienAPI.deleteEnvironment(name, projectId, cmd.force),
       ),
       tap((data) => {
         const columns: (keyof Unboxed<typeof data>)[] = [
@@ -38,10 +39,10 @@ export default (cmd: {
           'maxMemory',
           'region',
         ];
-        console.log('-------------------');
-        console.log('[Action][deleteEnvironment]');
-        console.table([data], columns);
-        console.log('-------------------');
+        Logger.log('-------------------');
+        Logger.log('[Action][deleteEnvironment]');
+        Logger.table([data], columns);
+        Logger.log('-------------------');
       }),
     )
     .toPromise();

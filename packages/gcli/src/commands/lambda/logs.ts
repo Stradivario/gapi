@@ -4,6 +4,7 @@ import { catchError, switchMap, tap } from 'rxjs/operators';
 
 import { isMongoId, parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
+import { Logger } from '~/services/log';
 
 import { loadSpec } from './helpers/load-spec';
 
@@ -13,7 +14,7 @@ export default async (cmd: {
   project?: string;
   lambda?: string;
 }) => {
-  const result = tap(({ data }: IFissionLogsType) => console.log(data));
+  const result = tap(({ data }: IFissionLogsType) => Logger.log(data));
   if (cmd.lambda) {
     return isMongoId(cmd.lambda)
       .pipe(
@@ -23,7 +24,10 @@ export default async (cmd: {
       .toPromise();
   }
   const spec = await loadSpec(cmd.spec).toPromise();
-  const name = typeof cmd.name === 'string' ? (cmd.name as never) : spec.name;
+  const name =
+    typeof cmd.name === 'string'
+      ? (cmd.name as never)
+      : (spec.function?.name ?? spec.name);
 
   if (name) {
     return parseProjectId(cmd.project)
@@ -31,10 +35,11 @@ export default async (cmd: {
         catchError((error) => {
           if (!cmd.project) {
             return throwError(
-              `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:logs --name ${name} --project your-project-id"`,
+              () =>
+                `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:logs --name ${name} --project your-project-id"`,
             );
           }
-          return throwError(error);
+          return throwError(() => error);
         }),
 
         switchMap((projectId) =>

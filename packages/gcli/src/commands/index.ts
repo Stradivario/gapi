@@ -4,6 +4,7 @@ import { registerEnvironmentCommands } from './environment';
 import { registerLambdaCommands } from './lambda';
 import { registerProjectCommands } from './project';
 import { registerMcpCommands } from './proxy';
+import { startCommands } from './start';
 
 export const commands = [
   registerAuthCommands,
@@ -12,4 +13,5 @@ export const commands = [
   buildCommands,
   registerEnvironmentCommands,
   registerMcpCommands,
+  startCommands,
 ];

@@ -1,8 +1,8 @@
-import { IFissionEnvironmentInputType } from '@introspection/index';
-import { switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
+import { Logger } from '~/services/log';
 import { Unboxed } from '~/types';
 
 import { loadSpec } from '../lambda/helpers/load-spec';
@@ -10,13 +10,14 @@ import { loadSpec } from '../lambda/helpers/load-spec';
 export default (cmd: { project: string; spec: string; name: string }) =>
   parseProjectId(cmd.project)
     .pipe(
-      switchMap(async (projectId) => ({
-        projectId,
-        name: cmd.name,
-        ...(await loadSpec<IFissionEnvironmentInputType>(
-          cmd.spec ?? 'env.yaml',
-        ).toPromise()),
-      })),
+      switchMap((projectId) =>
+        loadSpec(cmd.spec ?? 'env.yaml').pipe(
+          map((data) => ({
+            projectId,
+            ...(data?.environment ?? data),
+          })),
+        ),
+      ),
       switchMap(({ projectId, name }) =>
         GraphqlClienAPI.getEnvironment(cmd.name ?? name, projectId),
       ),
@@ -33,10 +34,10 @@ export default (cmd: { project: string; spec: string; name: string }) =>
           'maxMemory',
           'region',
         ];
-        console.log('-------------------');
-        console.log('[Action][getEnvironment]');
-        console.table([data], columns);
-        console.log('-------------------');
+        Logger.log('-------------------');
+        Logger.log('[Action][getEnvironment]');
+        Logger.table([data], columns);
+        Logger.log('-------------------');
       }),
     )
     .toPromise();

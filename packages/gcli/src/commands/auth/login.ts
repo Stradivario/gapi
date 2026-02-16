@@ -3,6 +3,7 @@ import { combineLatest, from, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { promisify } from 'util';
 
+import { Logger } from '~/services/log';
 import {
   generationTimeDirectory,
   keyDirectory,
@@ -73,7 +74,7 @@ export default (cmd: {
               ]).pipe(map(() => user)),
             ),
             tap((user) =>
-              console.log(
+              Logger.log(
                 'Logged in as',
                 `"${user?.displayName}"`,
                 'with email',

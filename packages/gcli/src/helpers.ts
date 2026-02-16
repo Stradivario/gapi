@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import chalk from 'chalk';
+import { Command } from 'commander';
 import { of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { readFileAsObservable } from './commands/lambda/helpers/read-file';
+import { Logger } from './services/log';
 import { projectDirectory } from './types';
 
 export class CustomError extends Error {
@@ -69,4 +71,12 @@ export function parseProjectId(projectId?: string) {
     ),
     switchMap((id) => isMongoId(id)),
   );
+}
+
+export function outputAllHelp(cmd: Command) {
+  cmd.outputHelp();
+  cmd.commands.forEach((subCmd) => {
+    Logger.info('\n--- Subcommand: ' + subCmd.name() + ' ---');
+    outputAllHelp(subCmd);
+  });
 }

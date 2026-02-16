@@ -1,4 +1,6 @@
 import {
+  ICreateTimeTriggerInput,
+  IFissionEnvironmentInputType,
   IHttpMethodsEnum,
   ILambdaScaleInputOptions,
 } from '@introspection/index';
@@ -24,7 +26,13 @@ interface ConfigJSON {
   scaleOptions?: ILambdaScaleInputOptions;
 }
 
-export const loadSpec = <T = ConfigJSON>(spec?: string) =>
+interface LambForgeConfig extends ConfigJSON {
+  function: ConfigJSON;
+  environment: IFissionEnvironmentInputType;
+  trigger: ICreateTimeTriggerInput;
+}
+
+export const loadSpec = <T = LambForgeConfig>(spec?: string) =>
   combineLatest([
     readFileAsObservable(spec).pipe(
       map((spec) => JSON.parse(spec)),
@@ -35,6 +43,10 @@ export const loadSpec = <T = ConfigJSON>(spec?: string) =>
         ),
       ),
     ),
+    readFileAsObservable('lambforge.yaml').pipe(
+      map((data) => load(data)),
+      catchError(() => of(false)),
+    ),
     readFileAsObservable('spec.json').pipe(
       map((spec) => JSON.parse(spec)),
       catchError(() => of(false)),
@@ -43,4 +55,9 @@ export const loadSpec = <T = ConfigJSON>(spec?: string) =>
       map((data) => load(data)),
       catchError(() => of(false)),
     ),
-  ]).pipe(map(([custom, json, yaml]) => (custom || json || yaml) as T));
+  ]).pipe(
+    map(
+      ([custom, lambforge, json, yaml]) =>
+        (custom || lambforge || json || yaml) as T,
+    ),
+  );

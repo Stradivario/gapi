@@ -4,6 +4,7 @@ import { catchError, switchMap, tap } from 'rxjs/operators';
 
 import { isMongoId, parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
+import { Logger } from '~/services/log';
 
 import { loadSpec } from './helpers/load-spec';
 
@@ -20,10 +21,10 @@ export default async (cmd: {
       'url',
       'method',
     ];
-    console.log('-------------------');
-    console.log('[Action][getLambda]');
-    console.table([data], columns);
-    console.log('-------------------');
+    Logger.log('-------------------');
+    Logger.log('[Action][getLambda]');
+    Logger.table([data], columns);
+    Logger.log('-------------------');
   });
 
   if (cmd.lambda) {
@@ -36,7 +37,10 @@ export default async (cmd: {
   }
   const spec = await loadSpec(cmd.spec).toPromise();
 
-  const name = typeof cmd.name === 'string' ? (cmd.name as never) : spec.name;
+  const name =
+    typeof cmd.name === 'string'
+      ? (cmd.name as never)
+      : (spec.function?.name ?? spec.name);
 
   if (name) {
     return parseProjectId(cmd.project)

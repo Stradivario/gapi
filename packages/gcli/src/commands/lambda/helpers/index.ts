@@ -21,6 +21,7 @@ import { promisify } from 'util';
 
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
+import { Logger } from '~/services/log';
 
 import { loadSpec } from './load-spec';
 import { parseIgnoredFiles } from './parse-ignore';
@@ -80,10 +81,13 @@ export const createOrUpdateLambda = (
       switchMap((projectId) =>
         GraphqlClienAPI.getProject(projectId).pipe(map(() => projectId)),
       ),
-      switchMap(async (projectId) => ({
-        projectId,
-        ...(await loadSpec(cmd.spec).toPromise()),
-      })),
+      switchMap(async (projectId) => {
+        const spec = await loadSpec(cmd.spec).toPromise();
+        return {
+          projectId,
+          ...(spec?.function ?? spec),
+        };
+      }),
       /* Make zip archive */
       /* Get file id */
       switchMap(async (data) => {
@@ -136,7 +140,7 @@ export const createOrUpdateLambda = (
         )
           .pipe(
             switchMap((res) => res.json() as Promise<IGraphqlFile>),
-            tap((res) => console.log(res)),
+            tap((res) => Logger.log(res)),
             map((file) => ({
               ...data,
               customUploadFileId: file.id,

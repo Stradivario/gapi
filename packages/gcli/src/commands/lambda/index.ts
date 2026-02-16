@@ -54,6 +54,10 @@ export function registerLambdaCommands(program: Command) {
     ],
     ['--script <script>', 'Package build script path'],
     ['--params <params>', 'Array from strings which defines route params'],
+    [
+      '--network <network>',
+      'Can be private or public meaning exposed to the router or just for private available can be both also --network private --network public',
+    ],
     ['--route <route>', 'Lambda route in which will be accessible'],
     ['--code <code>', 'URL or local path for single file source code'],
     ['--file <file>', 'Main lambda file'],
