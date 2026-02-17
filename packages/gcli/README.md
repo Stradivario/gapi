@@ -312,6 +312,16 @@ gcli build --files src/index.ts --outfile dist/bundle.js --minify
 gcli start --files src/index.ts
 ```
 
+When using with `lambforge.yaml`
+
+```bash
+# Build a project
+gcli build
+
+# Start includes build and spawns `node bundled-file.js` it uses `function.file` in `lambforge.yaml` config
+gcli start
+```
+
 ### Advanced Watch Options
 
 By default, `gcli start` watches only the entry file passed to the bundle. To watch specific directories or configure advanced options, use the `lambforge.yaml` file:
