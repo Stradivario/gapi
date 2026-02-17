@@ -1,7 +1,7 @@
-import { ChildProcess, exec } from 'node:child_process';
+import { ChildProcess, spawn } from 'node:child_process';
 import { watch } from 'node:fs';
 
-import { from, fromEvent, lastValueFrom, of } from 'rxjs';
+import { from, fromEvent, lastValueFrom, merge, of } from 'rxjs';
 import { debounceTime, filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { Logger } from '~/services/log';
@@ -12,7 +12,7 @@ import { loadSpec } from '../lambda/helpers/load-spec';
 export default async function start(args: BuildArguments) {
   Logger.log('---------------------------------');
   return lastValueFrom(
-    loadSpec<{ options: { bundler: { watch: [] } } }>().pipe(
+    loadSpec().pipe(
       switchMap((config) =>
         of({
           watcher: watch(process.cwd(), {
@@ -21,25 +21,46 @@ export default async function start(args: BuildArguments) {
           whitelist: new Map(
             [
               ...(args?.files ?? []),
+              ...(config.file ? [config.file] : []),
               ...(config?.options?.bundler?.watch ?? []),
-              'index.ts',
-            ].map((name) => [name, '']),
+            ].map((name) => [name, true]),
           ),
           child: null as ChildProcess,
+          outfile:
+            args.outfile ?? config?.options?.bundler?.outfile ?? 'index.js',
+          startCommand: 'node',
         }).pipe(
-          switchMap(({ child, watcher, whitelist }) =>
+          switchMap(({ child, watcher, whitelist, outfile, startCommand }) =>
             from(build(args)).pipe(
               tap(() => {
-                Logger.warn(
-                  `📢 Starting script "node ${args.outfile ?? 'index.js'}"`,
-                );
+                Logger.warn(`📢 Starting script "${startCommand} ${outfile}"`);
                 Logger.log('---------------------------------\n');
               }),
-              map(() => exec(`node ${args.outfile ?? 'index.js'}`)),
-              tap((proc) => {
-                child = proc;
-                child.stdout.pipe(process.stdout);
+              tap(() => {
+                child = spawn(
+                  startCommand,
+                  ['--disable-warning=DEP0040', outfile],
+                  {
+                    stdio: 'inherit',
+                  },
+                );
               }),
+              tap(() =>
+                merge(
+                  fromEvent(process, 'SIGINT'),
+                  fromEvent(process, 'SIGTERM'),
+                  fromEvent(process, 'exit'),
+                )
+                  .pipe(
+                    debounceTime(100),
+                    tap(() => {
+                      Logger.warn('⚠️  Main process shutting down');
+                      child.kill('SIGTERM');
+                      process.exit();
+                    }),
+                  )
+                  .subscribe(),
+              ),
               switchMap(() =>
                 fromEvent(watcher, 'change').pipe(
                   map(([event, filename]: [string, string]) => ({
@@ -58,17 +79,22 @@ export default async function start(args: BuildArguments) {
                   debounceTime(100),
                 ),
               ),
-              tap(async (data) => {
+              tap((data) => {
                 Logger.log('\n---------------------------------');
                 Logger.log(`⟳  Restarting due to change in: ${data.filename}`);
-                child?.kill();
-                await build(args);
-                Logger.warn(
-                  `📢 Starting script "node ${args.outfile ?? 'index.js'}"`,
-                );
+                child?.kill('SIGTERM');
+              }),
+              switchMap(() => build(args)),
+              tap(() => {
+                Logger.warn(`📢 Starting script "${startCommand} ${outfile}"`);
                 Logger.log('---------------------------------\n');
-                child = exec(`node ${args.outfile ?? 'index.js'}`);
-                child.stdout.pipe(process.stdout);
+                child = spawn(
+                  startCommand,
+                  ['--disable-warning=DEP0040', outfile],
+                  {
+                    stdio: 'inherit',
+                  },
+                );
               }),
             ),
           ),

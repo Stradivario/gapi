@@ -26,10 +26,22 @@ interface ConfigJSON {
   scaleOptions?: ILambdaScaleInputOptions;
 }
 
+interface BundlerOptions {
+  bundler: {
+    watch: string[];
+    outfile: string;
+    bundle: boolean;
+    minify: boolean;
+    target: boolean;
+    external: string[];
+  };
+}
+
 interface LambForgeConfig extends ConfigJSON {
   function: ConfigJSON;
   environment: IFissionEnvironmentInputType;
   trigger: ICreateTimeTriggerInput;
+  options: BundlerOptions;
 }
 
 export const loadSpec = <T = LambForgeConfig>(spec?: string) =>

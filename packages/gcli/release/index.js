@@ -8014,9 +8014,9 @@ var require_lib2 = __commonJS({
         throw new TypeError(`${value} is not a legal HTTP header value`);
       }
     }
-    function find(map21, name2) {
+    function find(map22, name2) {
       name2 = name2.toLowerCase();
-      for (const key in map21) {
+      for (const key in map22) {
         if (key.toLowerCase() === name2) {
           return key;
         }
@@ -12138,7 +12138,7 @@ var require_of = __commonJS({
     exports2.of = void 0;
     var args_1 = require_args();
     var from_1 = require_from();
-    function of9() {
+    function of10() {
       var args = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
@@ -12146,7 +12146,7 @@ var require_of = __commonJS({
       var scheduler = args_1.popScheduler(args);
       return from_1.from(args, scheduler);
     }
-    exports2.of = of9;
+    exports2.of = of10;
   }
 });
 
@@ -12281,7 +12281,7 @@ var require_lastValueFrom = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.lastValueFrom = void 0;
     var EmptyError_1 = require_EmptyError();
-    function lastValueFrom3(source, config2) {
+    function lastValueFrom4(source, config2) {
       var hasConfig = typeof config2 === "object";
       return new Promise(function(resolve, reject) {
         var _hasValue = false;
@@ -12304,7 +12304,7 @@ var require_lastValueFrom = __commonJS({
         });
       });
     }
-    exports2.lastValueFrom = lastValueFrom3;
+    exports2.lastValueFrom = lastValueFrom4;
   }
 });
 
@@ -12481,7 +12481,7 @@ var require_map = __commonJS({
     exports2.map = void 0;
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function map21(project, thisArg) {
+    function map22(project, thisArg) {
       return lift_1.operate(function(source, subscriber) {
         var index = 0;
         source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, function(value) {
@@ -12489,7 +12489,7 @@ var require_map = __commonJS({
         }));
       });
     }
-    exports2.map = map21;
+    exports2.map = map22;
   }
 });
 
@@ -13411,7 +13411,7 @@ var require_merge = __commonJS({
     var empty_1 = require_empty();
     var args_1 = require_args();
     var from_1 = require_from();
-    function merge3() {
+    function merge4() {
       var args = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
@@ -13421,7 +13421,7 @@ var require_merge = __commonJS({
       var sources = args;
       return !sources.length ? empty_1.EMPTY : sources.length === 1 ? innerFrom_1.innerFrom(sources[0]) : mergeAll_1.mergeAll(concurrent)(from_1.from(sources, scheduler));
     }
-    exports2.merge = merge3;
+    exports2.merge = merge4;
   }
 });
 
@@ -15539,7 +15539,7 @@ var require_merge2 = __commonJS({
     var mergeAll_1 = require_mergeAll();
     var args_1 = require_args();
     var from_1 = require_from();
-    function merge3() {
+    function merge4() {
       var args = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
@@ -15550,7 +15550,7 @@ var require_merge2 = __commonJS({
         mergeAll_1.mergeAll(concurrent)(from_1.from(__spreadArray2([source], __read2(args)), scheduler)).subscribe(subscriber);
       });
     }
-    exports2.merge = merge3;
+    exports2.merge = merge4;
   }
 });
 
@@ -16538,7 +16538,7 @@ var require_switchMap = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function switchMap19(project, resultSelector) {
+    function switchMap20(project, resultSelector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSubscriber = null;
         var index = 0;
@@ -16562,7 +16562,7 @@ var require_switchMap = __commonJS({
         }));
       });
     }
-    exports2.switchMap = switchMap19;
+    exports2.switchMap = switchMap20;
   }
 });
 
@@ -16682,7 +16682,7 @@ var require_tap = __commonJS({
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var identity_1 = require_identity();
-    function tap17(observerOrNext, error48, complete) {
+    function tap18(observerOrNext, error48, complete) {
       var tapObserver = isFunction_1.isFunction(observerOrNext) || error48 || complete ? { next: observerOrNext, error: error48, complete } : observerOrNext;
       return tapObserver ? lift_1.operate(function(source, subscriber) {
         var _a2;
@@ -16711,7 +16711,7 @@ var require_tap = __commonJS({
         }));
       }) : identity_1.identity;
     }
-    exports2.tap = tap17;
+    exports2.tap = tap18;
   }
 });
 
@@ -19984,7 +19984,7 @@ var require_index_node_cjs = __commonJS({
       }
       return true;
     }
-    function map21(obj, fn, contextObj) {
+    function map22(obj, fn, contextObj) {
       var res = {};
       for (var key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -20474,7 +20474,7 @@ var require_index_node_cjs = __commonJS({
     exports2.isValidTimestamp = isValidTimestamp;
     exports2.issuedAtTime = issuedAtTime;
     exports2.jsonEval = jsonEval;
-    exports2.map = map21;
+    exports2.map = map22;
     exports2.querystring = querystring;
     exports2.querystringDecode = querystringDecode;
     exports2.safeGet = safeGet;
@@ -21381,7 +21381,7 @@ var require_lib3 = __commonJS({
 var require_XMLHttpRequest = __commonJS({
   "../../node_modules/xmlhttprequest/lib/XMLHttpRequest.js"(exports2) {
     var Url = require("url");
-    var spawn = require("child_process").spawn;
+    var spawn2 = require("child_process").spawn;
     var fs = require("fs");
     exports2.XMLHttpRequest = function() {
       "use strict";
@@ -21651,7 +21651,7 @@ var require_XMLHttpRequest = __commonJS({
           var syncFile = ".node-xmlhttprequest-sync-" + process.pid;
           fs.writeFileSync(syncFile, "", "utf8");
           var execString = "var http = require('http'), https = require('https'), fs = require('fs');var doRequest = http" + (ssl ? "s" : "") + ".request;var options = " + JSON.stringify(options) + ";var responseText = '';var req = doRequest(options, function(response) {response.setEncoding('utf8');response.on('data', function(chunk) {  responseText += chunk;});response.on('end', function() {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: null, data: {statusCode: response.statusCode, headers: response.headers, text: responseText}}), 'utf8');fs.unlinkSync('" + syncFile + "');});response.on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});}).on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});" + (data ? "req.write('" + JSON.stringify(data).slice(1, -1).replace(/'/g, "\\'") + "');" : "") + "req.end();";
-          var syncProc = spawn(process.argv[0], ["-e", execString]);
+          var syncProc = spawn2(process.argv[0], ["-e", execString]);
           while (fs.existsSync(syncFile)) {
           }
           var resp = JSON.parse(fs.readFileSync(contentFile, "utf8"));
@@ -24376,7 +24376,7 @@ var require_auth = __commonJS({
         var b = a && (a[mf] ? "phone" : null);
         if (b && a && a[nf]) {
           K(this, "uid", a[nf]);
-          K(this, "displayName", a[of9] || null);
+          K(this, "displayName", a[of10] || null);
           var c = null;
           a[pf] && (c = new Date(a[pf]).toUTCString());
           K(this, "enrollmentTime", c);
@@ -24394,7 +24394,7 @@ var require_auth = __commonJS({
         }
         return b;
       }
-      var of9 = "displayName", pf = "enrolledAt", nf = "mfaEnrollmentId", mf = "phoneInfo";
+      var of10 = "displayName", pf = "enrolledAt", nf = "mfaEnrollmentId", mf = "phoneInfo";
       function rf(a) {
         lf.call(this, a);
         K(this, "phoneNumber", a[mf]);
@@ -27775,7 +27775,7 @@ var require_auth = __commonJS({
           var e = null, f = {};
           if (d) {
             d.uid && (f[nf] = d.uid);
-            d.displayName && (f[of9] = d.displayName);
+            d.displayName && (f[of10] = d.displayName);
             d.enrollmentTime && (f[pf] = new Date(d.enrollmentTime).toISOString());
             d.phoneNumber && (f[mf] = d.phoneNumber);
             try {
@@ -35496,16 +35496,16 @@ var require_encoder = __commonJS({
       }
       return bl(acc);
     }
-    function encodeMap(map21, options, encode3) {
-      const acc = [getHeader(map21.size, 128, 222)];
-      const keys = [...map21.keys()];
+    function encodeMap(map22, options, encode3) {
+      const acc = [getHeader(map22.size, 128, 222)];
+      const keys = [...map22.keys()];
       if (!options.preferMap) {
         if (keys.every((item) => typeof item === "string")) {
           console.warn("Map with string only keys will be deserialized as an object!");
         }
       }
       keys.forEach((key) => {
-        acc.push(encode3(key), encode3(map21.get(key)));
+        acc.push(encode3(key), encode3(map22.get(key)));
       });
       return bl(acc);
     }
@@ -37843,22 +37843,22 @@ var require_source_map_generator = __commonJS({
       }, this);
     };
     SourceMapGenerator.prototype.toJSON = function SourceMapGenerator_toJSON() {
-      var map21 = {
+      var map22 = {
         version: this._version,
         sources: this._sources.toArray(),
         names: this._names.toArray(),
         mappings: this._serializeMappings()
       };
       if (this._file != null) {
-        map21.file = this._file;
+        map22.file = this._file;
       }
       if (this._sourceRoot != null) {
-        map21.sourceRoot = this._sourceRoot;
+        map22.sourceRoot = this._sourceRoot;
       }
       if (this._sourcesContents) {
-        map21.sourcesContent = this._generateSourcesContent(map21.sources, map21.sourceRoot);
+        map22.sourcesContent = this._generateSourcesContent(map22.sources, map22.sourceRoot);
       }
-      return map21;
+      return map22;
     };
     SourceMapGenerator.prototype.toString = function SourceMapGenerator_toString() {
       return JSON.stringify(this.toJSON());
@@ -38751,7 +38751,7 @@ var require_source_node = __commonJS({
         line: 1,
         column: 0
       };
-      var map21 = new SourceMapGenerator(aArgs);
+      var map22 = new SourceMapGenerator(aArgs);
       var sourceMappingActive = false;
       var lastOriginalSource = null;
       var lastOriginalLine = null;
@@ -38761,7 +38761,7 @@ var require_source_node = __commonJS({
         generated.code += chunk;
         if (original.source !== null && original.line !== null && original.column !== null) {
           if (lastOriginalSource !== original.source || lastOriginalLine !== original.line || lastOriginalColumn !== original.column || lastOriginalName !== original.name) {
-            map21.addMapping({
+            map22.addMapping({
               source: original.source,
               original: {
                 line: original.line,
@@ -38780,7 +38780,7 @@ var require_source_node = __commonJS({
           lastOriginalName = original.name;
           sourceMappingActive = true;
         } else if (sourceMappingActive) {
-          map21.addMapping({
+          map22.addMapping({
             generated: {
               line: generated.line,
               column: generated.column
@@ -38797,7 +38797,7 @@ var require_source_node = __commonJS({
               lastOriginalSource = null;
               sourceMappingActive = false;
             } else if (sourceMappingActive) {
-              map21.addMapping({
+              map22.addMapping({
                 source: original.source,
                 original: {
                   line: original.line,
@@ -38816,9 +38816,9 @@ var require_source_node = __commonJS({
         }
       });
       this.walkSourceContents(function(sourceFile, sourceContent) {
-        map21.setSourceContent(sourceFile, sourceContent);
+        map22.setSourceContent(sourceFile, sourceContent);
       });
-      return { code: generated.code, map: map21 };
+      return { code: generated.code, map: map22 };
     };
     exports2.SourceNode = SourceNode;
   }
@@ -41158,7 +41158,7 @@ var require_typescript = __commonJS({
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map21,
+        map: () => map22,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -41802,7 +41802,7 @@ var require_typescript = __commonJS({
       function clear(array2) {
         array2.length = 0;
       }
-      function map21(array2, f) {
+      function map22(array2, f) {
         let result;
         if (array2 !== void 0) {
           result = [];
@@ -41938,12 +41938,12 @@ var require_typescript = __commonJS({
           }
         }
       }
-      function getOrUpdate(map22, key, callback) {
-        if (map22.has(key)) {
-          return map22.get(key);
+      function getOrUpdate(map23, key, callback) {
+        if (map23.has(key)) {
+          return map23.get(key);
         }
         const value = callback();
-        map22.set(key, value);
+        map23.set(key, value);
         return value;
       }
       function tryAddToSet(set3, value) {
@@ -41989,12 +41989,12 @@ var require_typescript = __commonJS({
         }
         return result;
       }
-      function mapEntries(map22, f) {
-        if (map22 === void 0) {
+      function mapEntries(map23, f) {
+        if (map23 === void 0) {
           return void 0;
         }
         const result = /* @__PURE__ */ new Map();
-        map22.forEach((value, key) => {
+        map23.forEach((value, key) => {
           const [newKey, newValue] = f(key, value);
           result.set(newKey, newValue);
         });
@@ -42343,16 +42343,16 @@ var require_typescript = __commonJS({
         return initial;
       }
       var hasOwnProperty = Object.prototype.hasOwnProperty;
-      function hasProperty(map22, key) {
-        return hasOwnProperty.call(map22, key);
+      function hasProperty(map23, key) {
+        return hasOwnProperty.call(map23, key);
       }
-      function getProperty(map22, key) {
-        return hasOwnProperty.call(map22, key) ? map22[key] : void 0;
+      function getProperty(map23, key) {
+        return hasOwnProperty.call(map23, key) ? map23[key] : void 0;
       }
-      function getOwnKeys(map22) {
+      function getOwnKeys(map23) {
         const keys = [];
-        for (const key in map22) {
-          if (hasOwnProperty.call(map22, key)) {
+        for (const key in map23) {
+          if (hasOwnProperty.call(map23, key)) {
             keys.push(key);
           }
         }
@@ -42384,10 +42384,10 @@ var require_typescript = __commonJS({
         }
         return result;
       }
-      function arrayFrom(iterator, map22) {
+      function arrayFrom(iterator, map23) {
         const result = [];
         for (const value of iterator) {
-          result.push(map22 ? map22(value) : value);
+          result.push(map23 ? map23(value) : value);
         }
         return result;
       }
@@ -42492,10 +42492,10 @@ var require_typescript = __commonJS({
         return fn == null ? void 0 : fn.bind(obj);
       }
       function createMultiMap() {
-        const map22 = /* @__PURE__ */ new Map();
-        map22.add = multiMapAdd;
-        map22.remove = multiMapRemove;
-        return map22;
+        const map23 = /* @__PURE__ */ new Map();
+        map23.add = multiMapAdd;
+        map23.remove = multiMapRemove;
+        return map23;
       }
       function multiMapAdd(key, value) {
         let values = this.get(key);
@@ -42711,13 +42711,13 @@ var require_typescript = __commonJS({
         };
       }
       function memoizeOne(callback) {
-        const map22 = /* @__PURE__ */ new Map();
+        const map23 = /* @__PURE__ */ new Map();
         return (arg) => {
           const key = `${typeof arg}:${arg}`;
-          let value = map22.get(key);
-          if (value === void 0 && !map22.has(key)) {
+          let value = map23.get(key);
+          if (value === void 0 && !map23.has(key)) {
             value = callback(arg);
-            map22.set(key, value);
+            map23.set(key, value);
           }
           return value;
         };
@@ -43331,7 +43331,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
         }
         Debug2.getFunctionName = getFunctionName;
         function formatSymbol(symbol2) {
-          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map21(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
+          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map22(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
         }
         Debug2.formatSymbol = formatSymbol;
         function formatEnum(value = 0, enumObject, isFlags) {
@@ -43757,7 +43757,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
               case 1:
                 return zipWith(
                   this.sources,
-                  this.targets || map21(this.sources, () => "any"),
+                  this.targets || map22(this.sources, () => "any"),
                   (s, t) => `${s.__debugTypeToString()} -> ${typeof t === "string" ? t : t.__debugTypeToString()}`
                 ).join(", ");
               case 2:
@@ -44392,10 +44392,10 @@ ${lanes.join("\n")}
         }
       }
       function formatDisjunction(alternatives) {
-        return map21(alternatives, formatAlternative).join(" || ") || "*";
+        return map22(alternatives, formatAlternative).join(" || ") || "*";
       }
       function formatAlternative(comparators) {
-        return map21(comparators, formatComparator).join(" ");
+        return map22(comparators, formatComparator).join(" ");
       }
       function formatComparator(comparator) {
         return `${comparator.operator}${comparator.operand}`;
@@ -51255,20 +51255,20 @@ ${lanes.join("\n")}
       var commentDirectiveRegExSingleLine = /^\/\/\/?\s*@(ts-expect-error|ts-ignore)/;
       var commentDirectiveRegExMultiLine = /^(?:\/|\*)*\s*@(ts-expect-error|ts-ignore)/;
       var jsDocSeeOrLink = /@(?:see|link)/i;
-      function lookupInUnicodeMap(code, map22) {
-        if (code < map22[0]) {
+      function lookupInUnicodeMap(code, map23) {
+        if (code < map23[0]) {
           return false;
         }
         let lo = 0;
-        let hi = map22.length;
+        let hi = map23.length;
         let mid;
         while (lo + 1 < hi) {
           mid = lo + (hi - lo) / 2;
           mid -= mid % 2;
-          if (map22[mid] <= code && code <= map22[mid + 1]) {
+          if (map23[mid] <= code && code <= map23[mid + 1]) {
             return true;
           }
-          if (code < map22[mid]) {
+          if (code < map23[mid]) {
             hi = mid;
           } else {
             lo = mid + 2;
@@ -56072,8 +56072,8 @@ ${lanes.join("\n")}
           node = node.parent;
         }
       }
-      function forEachEntry(map22, callback) {
-        const iterator = map22.entries();
+      function forEachEntry(map23, callback) {
+        const iterator = map23.entries();
         for (const [key, value] of iterator) {
           const result = callback(value, key);
           if (result) {
@@ -56082,8 +56082,8 @@ ${lanes.join("\n")}
         }
         return void 0;
       }
-      function forEachKey(map22, callback) {
-        const iterator = map22.keys();
+      function forEachKey(map23, callback) {
+        const iterator = map23.keys();
         for (const key of iterator) {
           const result = callback(key);
           if (result) {
@@ -61235,28 +61235,28 @@ ${lanes.join("\n")}
         }
         return true;
       }
-      function clearMap(map22, onDeleteValue) {
-        map22.forEach(onDeleteValue);
-        map22.clear();
+      function clearMap(map23, onDeleteValue) {
+        map23.forEach(onDeleteValue);
+        map23.clear();
       }
-      function mutateMapSkippingNewValues(map22, newMap, options) {
+      function mutateMapSkippingNewValues(map23, newMap, options) {
         const { onDeleteValue, onExistingValue } = options;
-        map22.forEach((existingValue, key) => {
+        map23.forEach((existingValue, key) => {
           var _a2;
           if (!(newMap == null ? void 0 : newMap.has(key))) {
-            map22.delete(key);
+            map23.delete(key);
             onDeleteValue(existingValue, key);
           } else if (onExistingValue) {
             onExistingValue(existingValue, (_a2 = newMap.get) == null ? void 0 : _a2.call(newMap, key), key);
           }
         });
       }
-      function mutateMap(map22, newMap, options) {
-        mutateMapSkippingNewValues(map22, newMap, options);
+      function mutateMap(map23, newMap, options) {
+        mutateMapSkippingNewValues(map23, newMap, options);
         const { createNewValue } = options;
         newMap == null ? void 0 : newMap.forEach((valueInNewMap, key) => {
-          if (!map22.has(key)) {
-            map22.set(key, createNewValue(key, valueInNewMap));
+          if (!map23.has(key)) {
+            map23.set(key, createNewValue(key, valueInNewMap));
           }
         });
       }
@@ -62322,7 +62322,7 @@ ${lanes.join("\n")}
         currentDirectory = normalizePath(currentDirectory);
         const absolutePath = combinePaths(currentDirectory, path2);
         return {
-          includeFilePatterns: map21(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
+          includeFilePatterns: map22(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
           includeFilePattern: getRegularExpressionForWildcard(includes, absolutePath, "files"),
           includeDirectoryPattern: getRegularExpressionForWildcard(includes, absolutePath, "directories"),
           excludePattern: getRegularExpressionForWildcard(excludes, absolutePath, "exclude"),
@@ -64832,7 +64832,7 @@ ${lanes.join("\n")}
           if (isObjectBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createObjectLiteralExpression(map21(node.elements, convertToObjectAssignmentElement)),
+                factory2.createObjectLiteralExpression(map22(node.elements, convertToObjectAssignmentElement)),
                 node
               ),
               node
@@ -64844,7 +64844,7 @@ ${lanes.join("\n")}
           if (isArrayBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createArrayLiteralExpression(map21(node.elements, convertToArrayAssignmentElement)),
+                factory2.createArrayLiteralExpression(map22(node.elements, convertToArrayAssignmentElement)),
                 node
               ),
               node
@@ -72205,12 +72205,12 @@ ${lanes.join("\n")}
         if (node.kind === 353) {
           Debug.fail("Should not need to re-set the children of a SyntaxList.");
         }
-        let map22 = sourceFileToNodeChildren.get(sourceFile);
-        if (map22 === void 0) {
-          map22 = /* @__PURE__ */ new WeakMap();
-          sourceFileToNodeChildren.set(sourceFile, map22);
+        let map23 = sourceFileToNodeChildren.get(sourceFile);
+        if (map23 === void 0) {
+          map23 = /* @__PURE__ */ new WeakMap();
+          sourceFileToNodeChildren.set(sourceFile, map23);
         }
-        map22.set(node, children);
+        map23.set(node, children);
         return children;
       }
       function unsetNodeChildren(node, origSourceFile) {
@@ -72221,10 +72221,10 @@ ${lanes.join("\n")}
         (_a2 = sourceFileToNodeChildren.get(origSourceFile)) == null ? void 0 : _a2.delete(node);
       }
       function transferSourceFileChildren(sourceFile, targetSourceFile) {
-        const map22 = sourceFileToNodeChildren.get(sourceFile);
-        if (map22 !== void 0) {
+        const map23 = sourceFileToNodeChildren.get(sourceFile);
+        if (map23 !== void 0) {
           sourceFileToNodeChildren.delete(sourceFile);
-          sourceFileToNodeChildren.set(targetSourceFile, map22);
+          sourceFileToNodeChildren.set(targetSourceFile, map23);
         }
       }
       function createEmptyExports(factory2) {
@@ -72666,7 +72666,7 @@ ${lanes.join("\n")}
               if (some(helperNames)) {
                 helperNames.sort(compareStringsCaseSensitive);
                 const namedBindings = nodeFactory.createNamedImports(
-                  map21(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
+                  map22(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
                     /*isTypeOnly*/
                     false,
                     /*propertyName*/
@@ -82869,7 +82869,7 @@ ${lanes.join("\n")}
               break;
             }
             case "amd-dependency": {
-              context.amdDependencies = map21(
+              context.amdDependencies = map22(
                 toArray2(entryOrList),
                 (x) => ({ name: x.arguments.name, path: x.arguments.path })
               );
@@ -85218,7 +85218,7 @@ ${lanes.join("\n")}
       function convertToTSConfig(configParseResult, configFileName, host) {
         var _a2, _b, _c;
         const getCanonicalFileName = createGetCanonicalFileName(host.useCaseSensitiveFileNames);
-        const files = map21(
+        const files = map22(
           filter3(
             configParseResult.fileNames,
             !((_b = (_a2 = configParseResult.options.configFile) == null ? void 0 : _a2.configFileSpecs) == null ? void 0 : _b.validatedIncludeSpecs) ? returnTrue : matchesSpecs(
@@ -85248,7 +85248,7 @@ ${lanes.join("\n")}
             version: void 0
           },
           watchOptions: watchOptionMap && optionMapToObject(watchOptionMap),
-          references: map21(configParseResult.projectReferences, (r) => ({ ...r, path: r.originalPath ? r.originalPath : "", originalPath: void 0 })),
+          references: map22(configParseResult.projectReferences, (r) => ({ ...r, path: r.originalPath ? r.originalPath : "", originalPath: void 0 })),
           files: length(files) ? files : void 0,
           ...((_c = configParseResult.options.configFile) == null ? void 0 : _c.configFileSpecs) ? {
             include: filterSameAsDefaultInclude(configParseResult.options.configFile.configFileSpecs.validatedIncludeSpecs),
@@ -85536,17 +85536,17 @@ ${lanes.join("\n")}
         function formatValueOrArray(settingName, value) {
           const option = optionDeclarations.filter((c) => c.name === settingName)[0];
           if (!option) Debug.fail(`No option named ${settingName}?`);
-          const map22 = option.type instanceof Map ? option.type : void 0;
+          const map23 = option.type instanceof Map ? option.type : void 0;
           if (isArray(value)) {
             const map32 = "element" in option && option.element.type instanceof Map ? option.element.type : void 0;
             return `[${value.map((v) => formatSingleValue(v, map32)).join(", ")}]`;
           } else {
-            return formatSingleValue(value, map22);
+            return formatSingleValue(value, map23);
           }
         }
-        function formatSingleValue(value, map22) {
-          if (map22) {
-            value = getNameOfCompilerOptionValue(value, map22) ?? Debug.fail(`No matching value of ${value}`);
+        function formatSingleValue(value, map23) {
+          if (map23) {
+            value = getNameOfCompilerOptionValue(value, map23) ?? Debug.fail(`No matching value of ${value}`);
           }
           return JSON.stringify(value);
         }
@@ -85937,7 +85937,7 @@ ${lanes.join("\n")}
             const setPropertyInResultIfNotUndefined = (propertyName) => {
               if (ownConfig.raw[propertyName]) return;
               if (extendsRaw[propertyName]) {
-                result[propertyName] = map21(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
+                result[propertyName] = map22(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
                   relativeDifference || (relativeDifference = convertToRelativePath(getDirectoryPath(extendedConfigPath), basePath, createGetCanonicalFileName(host.useCaseSensitiveFileNames))),
                   path2
                 ));
@@ -86246,7 +86246,7 @@ ${lanes.join("\n")}
         }
       }
       function convertJsonOptionOfListType(option, values, basePath, errors, propertyAssignment, valueExpression, sourceFile) {
-        return filter3(map21(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
+        return filter3(map22(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
       }
       var invalidTrailingRecursionPattern = /(?:^|\/)\*\*\/?$/;
       var wildcardDirectoryPattern = /^[^*?]*(?=\/[^/]*[*?])/;
@@ -86286,7 +86286,7 @@ ${lanes.join("\n")}
                   ".json"
                   /* Json */
                 ));
-                const includeFilePatterns = map21(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
+                const includeFilePatterns = map22(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
                 jsonOnlyIncludeRegexes = includeFilePatterns ? includeFilePatterns.map((pattern) => getRegexFromPattern(pattern, host.useCaseSensitiveFileNames)) : emptyArray;
               }
               const includeIndex = findIndex(jsonOnlyIncludeRegexes, (re) => re.test(file2));
@@ -93586,7 +93586,7 @@ ${lanes.join("\n")}
         }
         const normalizedSourcePaths = getPathsRelativeToRootDirs(sourceDirectory, rootDirs, getCanonicalFileName);
         const relativePaths = flatMap(normalizedSourcePaths, (sourcePath) => {
-          return map21(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
+          return map22(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
         });
         const shortest = min(relativePaths, compareNumberOfDirectorySeparators);
         if (!shortest) {
@@ -96631,7 +96631,7 @@ ${lanes.join("\n")}
               const exportedSymbol = exports22 ? find(symbolsToArray(exports22), (symbol2) => !!getSymbolIfSameReference(symbol2, localSymbol)) : void 0;
               const diagnostic = exportedSymbol ? error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_exported_as_2, moduleName, declarationName, symbolToString(exportedSymbol)) : error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_not_exported, moduleName, declarationName);
               if (localSymbol.declarations) {
-                addRelatedInfo(diagnostic, ...map21(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
+                addRelatedInfo(diagnostic, ...map22(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
               }
             }
           } else {
@@ -99412,7 +99412,7 @@ ${lanes.join("\n")}
               const types = type2.types;
               const templateHead = factory.createTemplateHead(texts[0]);
               const templateSpans = factory.createNodeArray(
-                map21(types, (t, i) => factory.createTemplateLiteralTypeSpan(
+                map22(types, (t, i) => factory.createTemplateLiteralTypeSpan(
                   typeToTypeNodeHelper(t, context),
                   (i < types.length - 1 ? factory.createTemplateMiddle : factory.createTemplateTail)(texts[i + 1])
                 ))
@@ -99781,7 +99781,7 @@ ${lanes.join("\n")}
               }
               const abstractSignatures = filter3(resolved.constructSignatures, (signature) => !!(signature.flags & 4));
               if (some(abstractSignatures)) {
-                const types = map21(abstractSignatures, getOrCreateTypeFromSignature);
+                const types = map22(abstractSignatures, getOrCreateTypeFromSignature);
                 const typeElementCount = resolved.callSignatures.length + (resolved.constructSignatures.length - abstractSignatures.length) + resolved.indexInfos.length + // exclude `prototype` when writing a class expression as a type literal, as per
                 // the logic in `createTypeNodesFromResolvedType`.
                 (context.flags & 2048 ? countWhere(resolved.properties, (p) => !(p.flags & 4194304)) : length(resolved.properties));
@@ -99999,7 +99999,7 @@ ${lanes.join("\n")}
                   const newComponents = filter3(indexInfo.components, (e) => {
                     return !hasLateBindableName(e);
                   });
-                  return map21(newComponents, (e) => {
+                  return map22(newComponents, (e) => {
                     trackComputedName(e.name.expression, context2.enclosingDeclaration, context2);
                     return setTextRange2(
                       context2,
@@ -100808,7 +100808,7 @@ ${lanes.join("\n")}
             const parameterDeclaration = getEffectiveParameterDeclaration(parameterSymbol);
             const parameterType = getTypeOfSymbol(parameterSymbol);
             const parameterTypeNode = serializeTypeForDeclaration(context, parameterDeclaration, parameterType, parameterSymbol);
-            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map21(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
+            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map22(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
             const isRest = parameterDeclaration && isRestParameter(parameterDeclaration) || getCheckFlags(parameterSymbol) & 32768;
             const dotDotDotToken = isRest ? factory.createToken(
               26
@@ -101006,7 +101006,7 @@ ${lanes.join("\n")}
             let typeParameterNodes;
             const targetSymbol = getTargetSymbol(symbol2);
             if (targetSymbol.flags & (32 | 64 | 524288)) {
-              typeParameterNodes = factory.createNodeArray(map21(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
+              typeParameterNodes = factory.createNodeArray(map22(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
             }
             return typeParameterNodes;
           }
@@ -101031,7 +101031,7 @@ ${lanes.join("\n")}
                 const params = getTypeParametersOfClassOrInterface(
                   parentSymbol.flags & 2097152 ? resolveAlias(parentSymbol) : parentSymbol
                 );
-                typeParameterNodes = mapToTypeNodes(map21(params, (t) => getMappedType(t, nextSymbol.links.mapper)), context);
+                typeParameterNodes = mapToTypeNodes(map22(params, (t) => getMappedType(t, nextSymbol.links.mapper)), context);
               } else {
                 typeParameterNodes = typeParametersToTypeParameterDeclarations(symbol2, context);
               }
@@ -101854,7 +101854,7 @@ ${lanes.join("\n")}
             }
             function getNamesOfDeclaration(statement) {
               if (isVariableStatement(statement)) {
-                return filter3(map21(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
+                return filter3(map22(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
               }
               return filter3([getNameOfDeclaration(statement)], isIdentifierAndNotUndefined);
             }
@@ -101880,7 +101880,7 @@ ${lanes.join("\n")}
                           void 0,
                           /*isTypeOnly*/
                           false,
-                          factory.createNamedExports(map21(flatMap(excessExports, (e) => getNamesOfDeclaration(e)), (id) => factory.createExportSpecifier(
+                          factory.createNamedExports(map22(flatMap(excessExports, (e) => getNamesOfDeclaration(e)), (id) => factory.createExportSpecifier(
                             /*isTypeOnly*/
                             false,
                             /*propertyName*/
@@ -102300,7 +102300,7 @@ ${lanes.join("\n")}
               var _a22;
               const aliasType = getDeclaredTypeOfTypeAlias(symbol2);
               const typeParams = getSymbolLinks(symbol2).typeParameters;
-              const typeParamDecls = map21(typeParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map22(typeParams, (p) => typeParameterToDeclaration(p, context));
               const jsdocAliasDecl = (_a22 = symbol2.declarations) == null ? void 0 : _a22.find(isJSDocTypeAlias);
               const commentText = getTextOfJSDocComment(jsdocAliasDecl ? jsdocAliasDecl.comment || jsdocAliasDecl.parent.comment : void 0);
               const restoreFlags = saveRestoreFlags(context);
@@ -102331,7 +102331,7 @@ ${lanes.join("\n")}
               context.approximateLength += 14 + internalSymbolName.length;
               const interfaceType = getDeclaredTypeOfClassOrInterface(symbol2);
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map21(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map22(localParams, (p) => typeParameterToDeclaration(p, context));
               const baseTypes = getBaseTypes(interfaceType);
               const baseType = length(baseTypes) ? getIntersectionType(baseTypes) : void 0;
               const members = serializePropertySymbolsForClassOrInterface(
@@ -102644,7 +102644,7 @@ ${lanes.join("\n")}
                 addingDeclare = oldAddingDeclare;
                 const declarations = results;
                 results = oldResults;
-                const defaultReplaced = map21(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
+                const defaultReplaced = map22(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
                   /*modifiers*/
                   void 0,
                   /*isTypeOnly*/
@@ -102663,7 +102663,7 @@ ${lanes.join("\n")}
                   d,
                   32
                   /* Export */
-                )) ? map21(defaultReplaced, removeExportModifier) : defaultReplaced;
+                )) ? map22(defaultReplaced, removeExportModifier) : defaultReplaced;
                 fakespace = factory.updateModuleDeclaration(
                   fakespace,
                   fakespace.modifiers,
@@ -102711,7 +102711,7 @@ ${lanes.join("\n")}
                 }
                 return cleanup(factory.createExpressionWithTypeArguments(
                   expr,
-                  map21(e.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
+                  map22(e.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
                 ));
                 function cleanup(result2) {
                   context.enclosingDeclaration = oldEnclosing;
@@ -102730,7 +102730,7 @@ ${lanes.join("\n")}
               const oldEnclosing = context.enclosingDeclaration;
               context.enclosingDeclaration = originalDecl || oldEnclosing;
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map21(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map22(localParams, (p) => typeParameterToDeclaration(p, context));
               forEach(localParams, (p) => context.approximateLength += symbolName(p.symbol).length);
               const classType = getTypeWithThisArgument(getDeclaredTypeOfClassOrInterface(symbol2));
               const baseTypes = getBaseTypes(classType);
@@ -102741,7 +102741,7 @@ ${lanes.join("\n")}
               const staticBaseType = isClass ? getBaseConstructorTypeOfClass(staticType) : anyType2;
               context.approximateLength += (length(baseTypes) ? 8 : 0) + (length(implementsExpressions) ? 11 : 0);
               const heritageClauses = [
-                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map21(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
+                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map22(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
                 ...!length(implementsExpressions) ? [] : [factory.createHeritageClause(119, implementsExpressions)]
               ];
               const symbolProps = getNonInheritedProperties(classType, baseTypes, getPropertiesOfType(classType));
@@ -103570,7 +103570,7 @@ ${lanes.join("\n")}
               let typeArgs;
               let reference;
               if (t.target && isSymbolAccessibleByFlags(t.target.symbol, enclosingDeclaration, flags)) {
-                typeArgs = map21(getTypeArguments(t), (t2) => typeToTypeNodeHelper(t2, context));
+                typeArgs = map22(getTypeArguments(t), (t2) => typeToTypeNodeHelper(t2, context));
                 reference = symbolToExpression(
                   t.target.symbol,
                   context,
@@ -104034,7 +104034,7 @@ ${lanes.join("\n")}
         }
         function getTypeOfPrototypeProperty(prototype) {
           const classType = getDeclaredTypeOfSymbol(getParentOfSymbol(prototype));
-          return classType.typeParameters ? createTypeReference(classType, map21(classType.typeParameters, (_2) => anyType2)) : classType;
+          return classType.typeParameters ? createTypeReference(classType, map22(classType.typeParameters, (_2) => anyType2)) : classType;
         }
         function getTypeOfPropertyOfType(type2, name2) {
           const prop = getPropertyOfType(type2, name2);
@@ -104082,7 +104082,7 @@ ${lanes.join("\n")}
           if (source.flags & 1048576) {
             return mapType2(source, (t) => getRestType(t, properties, symbol2));
           }
-          let omitKeyType = getUnionType(map21(properties, getLiteralTypeFromPropertyName));
+          let omitKeyType = getUnionType(map22(properties, getLiteralTypeFromPropertyName));
           const spreadableProperties = [];
           const unspreadableToRestKeys = [];
           for (const prop of getPropertiesOfType(source)) {
@@ -104808,9 +104808,9 @@ ${lanes.join("\n")}
           if (elements.length === 0 || elements.length === 1 && restElement) {
             return languageVersion >= 2 ? createIterableType(anyType2) : anyArrayType;
           }
-          const elementTypes = map21(elements, (e) => isOmittedExpression(e) ? anyType2 : getTypeFromBindingElement(e, includePatternInType, reportErrors2));
+          const elementTypes = map22(elements, (e) => isOmittedExpression(e) ? anyType2 : getTypeFromBindingElement(e, includePatternInType, reportErrors2));
           const minLength = findLastIndex(elements, (e) => !(e === restElement || isOmittedExpression(e) || hasDefaultValue(e)), elements.length - 1) + 1;
-          const elementFlags = map21(
+          const elementFlags = map22(
             elements,
             (e, i) => e === restElement ? 4 : i >= minLength ? 2 : 1
             /* Required */
@@ -105492,7 +105492,7 @@ ${lanes.join("\n")}
         }
         function getInstantiatedConstructorsForTypeArguments(type2, typeArgumentNodes, location) {
           const signatures = getConstructorsForTypeArguments(type2, typeArgumentNodes, location);
-          const typeArguments = map21(typeArgumentNodes, getTypeFromTypeNode);
+          const typeArguments = map22(typeArgumentNodes, getTypeFromTypeNode);
           return sameMap(signatures, (sig) => some(sig.typeParameters) ? getSignatureInstantiation(sig, typeArguments, isInJSFile(location)) : sig);
         }
         function getBaseConstructorTypeOfClass(type2) {
@@ -106323,14 +106323,14 @@ ${lanes.join("\n")}
             if (isTupleType(restType)) {
               return [expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol)];
             } else if (!skipUnionExpanding && restType.flags & 1048576 && every(restType.types, isTupleType)) {
-              return map21(restType.types, (t) => expandSignatureParametersWithTupleMembers(t, restIndex, restSymbol));
+              return map22(restType.types, (t) => expandSignatureParametersWithTupleMembers(t, restIndex, restSymbol));
             }
           }
           return [sig.parameters];
           function expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol) {
             const elementTypes = getTypeArguments(restType);
             const associatedNames = getUniqAssociatedNamesFromTupleType(restType, restSymbol);
-            const restParams = map21(elementTypes, (t, i) => {
+            const restParams = map22(elementTypes, (t, i) => {
               const name2 = associatedNames && associatedNames[i] ? associatedNames[i] : getParameterNameAtPosition(sig, restIndex + i, restType);
               const flags = restType.target.elementFlags[i];
               const checkFlags = flags & 12 ? 32768 : flags & 2 ? 16384 : 0;
@@ -106341,7 +106341,7 @@ ${lanes.join("\n")}
             return concatenate(sig.parameters.slice(0, restIndex), restParams);
           }
           function getUniqAssociatedNamesFromTupleType(type2, restSymbol) {
-            const names = map21(type2.target.labeledElementDeclarations, (labeledElement, i) => getTupleElementLabel(labeledElement, i, type2.target.elementFlags[i], restSymbol));
+            const names = map22(type2.target.labeledElementDeclarations, (labeledElement, i) => getTupleElementLabel(labeledElement, i, type2.target.elementFlags[i], restSymbol));
             if (names) {
               const duplicates = [];
               const uniqueNames = /* @__PURE__ */ new Set();
@@ -106512,7 +106512,7 @@ ${lanes.join("\n")}
               if (signatures !== masterList) {
                 const signature = signatures[0];
                 Debug.assert(!!signature, "getUnionSignatures bails early on empty signature lists and should not have empty lists on second pass");
-                results = !!signature.typeParameters && some(results, (s) => !!s.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s.typeParameters)) ? void 0 : map21(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
+                results = !!signature.typeParameters && some(results, (s) => !!s.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s.typeParameters)) ? void 0 : map22(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
                 if (!results) {
                   break;
                 }
@@ -106635,7 +106635,7 @@ ${lanes.join("\n")}
             for (const info of sourceInfos) {
               const indexType = info.keyType;
               if (every(types, (t) => !!getIndexInfoOfType(t, indexType))) {
-                result.push(createIndexInfo(indexType, getUnionType(map21(types, (t) => getIndexTypeOfType(t, indexType))), some(types, (t) => getIndexInfoOfType(t, indexType).isReadonly)));
+                result.push(createIndexInfo(indexType, getUnionType(map22(types, (t) => getIndexTypeOfType(t, indexType))), some(types, (t) => getIndexInfoOfType(t, indexType).isReadonly)));
               }
             }
             return result;
@@ -106643,12 +106643,12 @@ ${lanes.join("\n")}
           return emptyArray;
         }
         function resolveUnionTypeMembers(type2) {
-          const callSignatures = getUnionSignatures(map21(type2.types, (t) => t === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
+          const callSignatures = getUnionSignatures(map22(type2.types, (t) => t === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
             t,
             0
             /* Call */
           )));
-          const constructSignatures = getUnionSignatures(map21(type2.types, (t) => getSignaturesOfType(
+          const constructSignatures = getUnionSignatures(map22(type2.types, (t) => getSignaturesOfType(
             t,
             1
             /* Construct */
@@ -106665,7 +106665,7 @@ ${lanes.join("\n")}
             1
             /* Construct */
           ).length > 0);
-          const mixinFlags = map21(types, isMixinConstructorType);
+          const mixinFlags = map22(types, isMixinConstructorType);
           if (constructorTypeCount > 0 && constructorTypeCount === countWhere(mixinFlags, (b) => b)) {
             const firstMixinIndex = mixinFlags.indexOf(
               /*searchElement*/
@@ -106706,7 +106706,7 @@ ${lanes.join("\n")}
                 /* Construct */
               );
               if (signatures.length && mixinCount > 0) {
-                signatures = map21(signatures, (s) => {
+                signatures = map22(signatures, (s) => {
                   const clone22 = cloneSignature(s);
                   clone22.resolvedReturnType = includeMixinType(getReturnTypeOfSignature(s), types, mixinFlags, i);
                   return clone22;
@@ -107495,7 +107495,7 @@ ${lanes.join("\n")}
               return getBaseConstraint(getSubstitutionIntersection(t));
             }
             if (isGenericTupleType(t)) {
-              const newElements = map21(getElementTypes(t), (v, i) => {
+              const newElements = map22(getElementTypes(t), (v, i) => {
                 const constraint = v.flags & 262144 && t.target.elementFlags[i] & 8 && getBaseConstraint(v) || v;
                 return constraint !== v && everyType(constraint, (c) => isArrayOrTupleType(c) && !isGenericTupleType(c)) ? constraint : v;
               });
@@ -107931,7 +107931,7 @@ ${lanes.join("\n")}
               }
             }
           }
-          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map21(applicableInfos, (info) => info.type)), reduceLeft(
+          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map22(applicableInfos, (info) => info.type)), reduceLeft(
             applicableInfos,
             (isReadonly, info) => isReadonly && info.isReadonly,
             /*initial*/
@@ -108331,7 +108331,7 @@ ${lanes.join("\n")}
               return errorType;
             }
             let type2 = signature.target ? instantiateType(getReturnTypeOfSignature(signature.target), signature.mapper) : signature.compositeSignatures ? instantiateType(getUnionOrIntersectionType(
-              map21(signature.compositeSignatures, getReturnTypeOfSignature),
+              map22(signature.compositeSignatures, getReturnTypeOfSignature),
               signature.compositeKind,
               2
               /* Subtype */
@@ -108470,7 +108470,7 @@ ${lanes.join("\n")}
         function createCanonicalSignature(signature) {
           return getSignatureInstantiation(
             signature,
-            map21(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
+            map22(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
             isInJSFile(signature.declaration)
           );
         }
@@ -108481,8 +108481,8 @@ ${lanes.join("\n")}
               return signature.baseSignatureCache;
             }
             const typeEraser = createTypeEraser(typeParameters);
-            const baseConstraintMapper = createTypeMapper(typeParameters, map21(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
-            let baseConstraints = map21(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
+            const baseConstraintMapper = createTypeMapper(typeParameters, map22(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
+            let baseConstraints = map22(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
             for (let i = 0; i < typeParameters.length - 1; i++) {
               baseConstraints = instantiateTypes(baseConstraints, baseConstraintMapper);
             }
@@ -108752,7 +108752,7 @@ ${lanes.join("\n")}
               return concatenate(type2.target.outerTypeParameters, (_a2 = type2.target.localTypeParameters) == null ? void 0 : _a2.map(() => errorType)) || emptyArray;
             }
             const node = type2.node;
-            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type2.target.outerTypeParameters, getEffectiveTypeArguments2(node, type2.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map21(node.elements, getTypeFromTypeNode);
+            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type2.target.outerTypeParameters, getEffectiveTypeArguments2(node, type2.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map22(node.elements, getTypeFromTypeNode);
             if (popTypeResolution()) {
               type2.resolvedTypeArguments ?? (type2.resolvedTypeArguments = type2.mapper ? instantiateTypes(typeArguments, type2.mapper) : typeArguments);
             } else {
@@ -109158,7 +109158,7 @@ ${lanes.join("\n")}
           return links.resolvedType;
         }
         function typeArgumentsFromTypeReferenceNode(node) {
-          return map21(node.typeArguments, getTypeFromTypeNode);
+          return map22(node.typeArguments, getTypeFromTypeNode);
         }
         function getTypeFromTypeQueryNode(node) {
           const links = getNodeLinks(node);
@@ -109631,8 +109631,8 @@ ${lanes.join("\n")}
           if (elementType) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const elementFlags = map21(node.elements, getTupleElementFlags);
-          return getTupleTargetType(elementFlags, readonly2, map21(node.elements, memberIfLabeledElementDeclaration));
+          const elementFlags = map22(node.elements, getTupleElementFlags);
+          return getTupleTargetType(elementFlags, readonly2, map22(node.elements, memberIfLabeledElementDeclaration));
         }
         function memberIfLabeledElementDeclaration(member) {
           return isNamedTupleMember(member) || isParameter(member) ? member : void 0;
@@ -109705,7 +109705,7 @@ ${lanes.join("\n")}
                 void 0
               );
             } else {
-              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map21(node.elements, getTypeFromTypeNode);
+              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map22(node.elements, getTypeFromTypeNode);
               links.resolvedType = createNormalizedTypeReference(target, elementTypes);
             }
           }
@@ -109715,7 +109715,7 @@ ${lanes.join("\n")}
           return isTypeOperatorNode(node) && node.operator === 148;
         }
         function createTupleType(elementTypes, elementFlags, readonly2 = false, namedMemberDeclarations = []) {
-          const tupleTarget = getTupleTargetType(elementFlags || map21(
+          const tupleTarget = getTupleTargetType(elementFlags || map22(
             elementTypes,
             (_2) => 1
             /* Required */
@@ -109726,7 +109726,7 @@ ${lanes.join("\n")}
           if (elementFlags.length === 1 && elementFlags[0] & 4) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const key = map21(elementFlags, (f) => f & 1 ? "#" : f & 2 ? "?" : f & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map21(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
+          const key = map22(elementFlags, (f) => f & 1 ? "#" : f & 2 ? "?" : f & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map22(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
           let type2 = tupleTypes.get(key);
           if (!type2) {
             tupleTypes.set(key, type2 = createTupleTargetType(elementFlags, readonly2, namedMemberDeclarations));
@@ -109801,7 +109801,7 @@ ${lanes.join("\n")}
           if (target.combinedFlags & 8) {
             const unionIndex = findIndex(elementTypes, (t, i) => !!(target.elementFlags[i] & 8 && t.flags & (131072 | 1048576)));
             if (unionIndex >= 0) {
-              return checkCrossProductUnion(map21(elementTypes, (t, i) => target.elementFlags[i] & 8 ? t : unknownType2)) ? mapType2(elementTypes[unionIndex], (t) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t))) : errorType;
+              return checkCrossProductUnion(map22(elementTypes, (t, i) => target.elementFlags[i] & 8 ? t : unknownType2)) ? mapType2(elementTypes[unionIndex], (t) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t))) : errorType;
             }
           }
           const expandedTypes = [];
@@ -109971,7 +109971,7 @@ ${lanes.join("\n")}
             const source = types[i];
             if (hasEmptyObject || source.flags & 469499904) {
               if (source.flags & 262144 && getBaseConstraintOrType(source).flags & 1048576) {
-                if (isTypeRelatedTo(source, getUnionType(map21(types, (t) => t === source ? neverType2 : t)), strictSubtypeRelation)) {
+                if (isTypeRelatedTo(source, getUnionType(map22(types, (t) => t === source ? neverType2 : t)), strictSubtypeRelation)) {
                   orderedRemoveItemAt(types, i);
                 }
                 continue;
@@ -110234,7 +110234,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            links.resolvedType = getUnionType(map21(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
+            links.resolvedType = getUnionType(map22(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
           }
           return links.resolvedType;
         }
@@ -110517,7 +110517,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            const types = map21(node.types, getTypeFromTypeNode);
+            const types = map22(node.types, getTypeFromTypeNode);
             const emptyIndex = types.length === 2 ? types.indexOf(emptyTypeLiteralType) : -1;
             const t = emptyIndex >= 0 ? types[1 - emptyIndex] : unknownType2;
             const noSupertypeReduction = !!(t.flags & (4 | 8 | 64) || t.flags & 134217728 && isPatternLiteralType(t));
@@ -110626,8 +110626,8 @@ ${lanes.join("\n")}
         }
         function getLiteralTypeFromProperties(type2, include, includeOrigin) {
           const origin = includeOrigin && (getObjectFlags(type2) & (3 | 4) || type2.aliasSymbol) ? createOriginIndexType(type2) : void 0;
-          const propertyTypes = map21(getPropertiesOfType(type2), (prop) => getLiteralTypeFromProperty(prop, include));
-          const indexKeyTypes = map21(getIndexInfosOfType(type2), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
+          const propertyTypes = map22(getPropertiesOfType(type2), (prop) => getLiteralTypeFromProperty(prop, include));
+          const indexKeyTypes = map22(getIndexInfosOfType(type2), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
           return getUnionType(
             concatenate(propertyTypes, indexKeyTypes),
             1,
@@ -110647,7 +110647,7 @@ ${lanes.join("\n")}
         }
         function getIndexType(type2, indexFlags = 0) {
           type2 = getReducedType(type2);
-          return isNoInferType(type2) ? getNoInferType(getIndexType(type2.baseType, indexFlags)) : shouldDeferIndexType(type2, indexFlags) ? getIndexTypeForGenericType(type2, indexFlags) : type2.flags & 1048576 ? getIntersectionType(map21(type2.types, (t) => getIndexType(t, indexFlags))) : type2.flags & 2097152 ? getUnionType(map21(type2.types, (t) => getIndexType(t, indexFlags))) : getObjectFlags(type2) & 32 ? getIndexTypeForMappedType(type2, indexFlags) : type2 === wildcardType ? wildcardType : type2.flags & 2 ? neverType2 : type2.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
+          return isNoInferType(type2) ? getNoInferType(getIndexType(type2.baseType, indexFlags)) : shouldDeferIndexType(type2, indexFlags) ? getIndexTypeForGenericType(type2, indexFlags) : type2.flags & 1048576 ? getIntersectionType(map22(type2.types, (t) => getIndexType(t, indexFlags))) : type2.flags & 2097152 ? getUnionType(map22(type2.types, (t) => getIndexType(t, indexFlags))) : getObjectFlags(type2) & 32 ? getIndexTypeForMappedType(type2, indexFlags) : type2 === wildcardType ? wildcardType : type2.flags & 2 ? neverType2 : type2.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
             type2,
             (indexFlags & 2 ? 128 : 402653316) | (indexFlags & 1 ? 0 : 296 | 12288),
             indexFlags === 0
@@ -110685,8 +110685,8 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             links.resolvedType = getTemplateLiteralType(
-              [node.head.text, ...map21(node.templateSpans, (span) => span.literal.text)],
-              map21(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
+              [node.head.text, ...map22(node.templateSpans, (span) => span.literal.text)],
+              map22(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
             );
           }
           return links.resolvedType;
@@ -110717,7 +110717,7 @@ ${lanes.join("\n")}
               return newTypes[0];
             }
           }
-          const id = `${getTypeListId(newTypes)}|${map21(newTexts, (t) => t.length).join(",")}|${newTexts.join("")}`;
+          const id = `${getTypeListId(newTypes)}|${map22(newTexts, (t) => t.length).join(",")}|${newTexts.join("")}`;
           let type2 = templateLiteralTypes.get(id);
           if (!type2) {
             templateLiteralTypes.set(id, type2 = createTemplateLiteralType(newTexts, newTypes));
@@ -110947,7 +110947,7 @@ ${lanes.join("\n")}
                   diagnostics.add(createDiagnosticForNode(accessExpression, Diagnostics.Property_0_does_not_exist_on_type_1, indexType.value, typeToString(objectType2)));
                   return undefinedType2;
                 } else if (indexType.flags & (8 | 4)) {
-                  const types = map21(objectType2.properties, (property) => {
+                  const types = map22(objectType2.properties, (property) => {
                     return getTypeOfSymbol(property);
                   });
                   return getUnionType(append(types, undefinedType2));
@@ -111108,13 +111108,13 @@ ${lanes.join("\n")}
         }
         function distributeIndexOverObjectType(objectType2, indexType, writing) {
           if (objectType2.flags & 1048576 || objectType2.flags & 2097152 && !shouldDeferIndexType(objectType2)) {
-            const types = map21(objectType2.types, (t) => getSimplifiedType(getIndexedAccessType(t, indexType), writing));
+            const types = map22(objectType2.types, (t) => getSimplifiedType(getIndexedAccessType(t, indexType), writing));
             return objectType2.flags & 2097152 || writing ? getIntersectionType(types) : getUnionType(types);
           }
         }
         function distributeObjectOverIndexType(objectType2, indexType, writing) {
           if (indexType.flags & 1048576) {
-            const types = map21(indexType.types, (t) => getSimplifiedType(getIndexedAccessType(objectType2, t), writing));
+            const types = map22(indexType.types, (t) => getSimplifiedType(getIndexedAccessType(objectType2, t), writing));
             return writing ? getIntersectionType(types) : getUnionType(types);
           }
         }
@@ -111397,7 +111397,7 @@ ${lanes.join("\n")}
               const newRoot = newType.root;
               if (newRoot.outerTypeParameters) {
                 const typeParamMapper = combineTypeMappers(newType.mapper, newMapper);
-                const typeArguments = map21(newRoot.outerTypeParameters, (t) => getMappedType(t, typeParamMapper));
+                const typeArguments = map22(newRoot.outerTypeParameters, (t) => getMappedType(t, typeParamMapper));
                 const newRootMapper = createTypeMapper(newRoot.outerTypeParameters, typeArguments);
                 const newCheckType = newRoot.isDistributive ? getMappedType(newRoot.checkType, newRootMapper) : void 0;
                 if (!newCheckType || newCheckType === newRoot.checkType || !(newCheckType.flags & (1048576 | 131072))) {
@@ -112058,7 +112058,7 @@ ${lanes.join("\n")}
         }
         function createBackreferenceMapper(context, index) {
           const forwardInferences = context.inferences.slice(index);
-          return createTypeMapper(map21(forwardInferences, (i) => i.typeParameter), map21(forwardInferences, () => unknownType2));
+          return createTypeMapper(map22(forwardInferences, (i) => i.typeParameter), map22(forwardInferences, () => unknownType2));
         }
         function createOuterReturnMapper(context) {
           return context.outerReturnMapper ?? (context.outerReturnMapper = mergeTypeMappers(context.returnMapper, cloneInferenceContext(context).mapper));
@@ -112089,7 +112089,7 @@ ${lanes.join("\n")}
         function instantiateSignature(signature, mapper, eraseTypeParameters) {
           let freshTypeParameters;
           if (signature.typeParameters && !eraseTypeParameters) {
-            freshTypeParameters = map21(signature.typeParameters, cloneTypeParameter);
+            freshTypeParameters = map22(signature.typeParameters, cloneTypeParameter);
             mapper = combineTypeMappers(createTypeMapper(signature.typeParameters, freshTypeParameters), mapper);
             for (const tp of freshTypeParameters) {
               tp.mapper = mapper;
@@ -112161,7 +112161,7 @@ ${lanes.join("\n")}
           }
           if (typeParameters.length) {
             const combinedMapper = combineTypeMappers(type2.mapper, mapper);
-            const typeArguments = map21(typeParameters, (t) => getMappedType(t, combinedMapper));
+            const typeArguments = map22(typeParameters, (t) => getMappedType(t, combinedMapper));
             const newAliasSymbol = aliasSymbol || type2.aliasSymbol;
             const newAliasTypeArguments = aliasSymbol ? aliasTypeArguments : instantiateTypes(type2.aliasTypeArguments, mapper);
             const id = getTypeListId(typeArguments) + getAliasId(newAliasSymbol, newAliasTypeArguments);
@@ -112273,7 +112273,7 @@ ${lanes.join("\n")}
                   return instantiateMappedTupleType(t, type2, typeVariable, mapper);
                 }
                 if (isArrayOrTupleOrIntersection(t)) {
-                  return getIntersectionType(map21(t.types, instantiateConstituent));
+                  return getIntersectionType(map22(t.types, instantiateConstituent));
                 }
               }
               return instantiateAnonymousType(type2, prependTypeMapping(typeVariable, t, mapper));
@@ -112288,12 +112288,12 @@ ${lanes.join("\n")}
           const elementFlags = tupleType2.target.elementFlags;
           const fixedLength = tupleType2.target.fixedLength;
           const fixedMapper = fixedLength ? prependTypeMapping(typeVariable, tupleType2, mapper) : mapper;
-          const newElementTypes = map21(getElementTypes(tupleType2), (type2, i) => {
+          const newElementTypes = map22(getElementTypes(tupleType2), (type2, i) => {
             const flags = elementFlags[i];
             return i < fixedLength ? instantiateMappedTypeTemplate(mappedType, getStringLiteralType("" + i), !!(flags & 2), fixedMapper) : flags & 8 ? instantiateType(mappedType, prependTypeMapping(typeVariable, type2, mapper)) : getElementTypeOfArrayType(instantiateType(mappedType, prependTypeMapping(typeVariable, createArrayType(type2), mapper))) ?? unknownType2;
           });
           const modifiers = getMappedTypeModifiers(mappedType);
-          const newElementFlags = modifiers & 4 ? map21(elementFlags, (f) => f & 1 ? 2 : f) : modifiers & 8 ? map21(elementFlags, (f) => f & 2 ? 1 : f) : elementFlags;
+          const newElementFlags = modifiers & 4 ? map22(elementFlags, (f) => f & 1 ? 2 : f) : modifiers & 8 ? map22(elementFlags, (f) => f & 2 ? 1 : f) : elementFlags;
           const newReadonly = getModifiedReadonlyState(tupleType2.target.readonly, getMappedTypeModifiers(mappedType));
           return contains(newElementTypes, errorType) ? errorType : createTupleType(newElementTypes, newElementFlags, newReadonly, tupleType2.target.labeledElementDeclarations);
         }
@@ -112349,7 +112349,7 @@ ${lanes.join("\n")}
         function getConditionalTypeInstantiation(type2, mapper, forConstraint, aliasSymbol, aliasTypeArguments) {
           const root = type2.root;
           if (root.outerTypeParameters) {
-            const typeArguments = map21(root.outerTypeParameters, (t) => getMappedType(t, mapper));
+            const typeArguments = map22(root.outerTypeParameters, (t) => getMappedType(t, mapper));
             const id = (forConstraint ? "C" : "") + getTypeListId(typeArguments) + getAliasId(aliasSymbol, aliasTypeArguments);
             let result = root.instantiations.get(id);
             if (!result) {
@@ -112581,7 +112581,7 @@ ${lanes.join("\n")}
               return result;
             }
           } else if (type2.flags & 2097152) {
-            return getIntersectionType(map21(type2.types, getTypeWithoutSignatures));
+            return getIntersectionType(map22(type2.types, getTypeWithoutSignatures));
           }
           return type2;
         }
@@ -112737,7 +112737,7 @@ ${lanes.join("\n")}
           }
           const returnExpression = node.body;
           const sourceReturn = getReturnTypeOfSignature(sourceSig);
-          const targetReturn = getUnionType(map21(targetSignatures, getReturnTypeOfSignature));
+          const targetReturn = getUnionType(map22(targetSignatures, getReturnTypeOfSignature));
           if (!checkTypeRelatedTo(
             sourceReturn,
             targetReturn,
@@ -115576,9 +115576,9 @@ ${lanes.join("\n")}
               false
             )) {
               if (props.length > 5) {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map21(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map22(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
               } else {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map21(props, (p) => symbolToString(p)).join(", "));
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map22(props, (p) => symbolToString(p)).join(", "));
               }
               if (shouldSkipElaboration && errorInfo) {
                 overrideNextErrorInfo++;
@@ -117155,7 +117155,7 @@ ${lanes.join("\n")}
           return createInferenceContextWorker(typeParameters.map(createInferenceInfo), signature, flags, compareTypes || compareTypesAssignable);
         }
         function cloneInferenceContext(context, extraFlags = 0) {
-          return context && createInferenceContextWorker(map21(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
+          return context && createInferenceContextWorker(map22(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
         }
         function createInferenceContextWorker(inferences, signature, flags, compareTypes) {
           const context = {
@@ -117173,8 +117173,8 @@ ${lanes.join("\n")}
         }
         function makeFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map21(context.inferences, (i) => i.typeParameter),
-            map21(context.inferences, (inference, i) => () => {
+            map22(context.inferences, (i) => i.typeParameter),
+            map22(context.inferences, (inference, i) => () => {
               if (!inference.isFixed) {
                 inferFromIntraExpressionSites(context);
                 clearCachedInferences(context.inferences);
@@ -117186,8 +117186,8 @@ ${lanes.join("\n")}
         }
         function makeNonFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map21(context.inferences, (i) => i.typeParameter),
-            map21(context.inferences, (_2, i) => () => {
+            map22(context.inferences, (i) => i.typeParameter),
+            map22(context.inferences, (_2, i) => () => {
               return getInferredType(context, i);
             })
           );
@@ -117247,7 +117247,7 @@ ${lanes.join("\n")}
         }
         function cloneInferredPartOfContext(context) {
           const inferences = filter3(context.inferences, hasInferenceCandidates);
-          return inferences.length ? createInferenceContextWorker(map21(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
+          return inferences.length ? createInferenceContextWorker(map22(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
         }
         function getMapperFromContext(context) {
           return context && context.mapper;
@@ -117335,7 +117335,7 @@ ${lanes.join("\n")}
             return createArrayType(elementType, isReadonlyArrayType(source));
           }
           if (isTupleType(source)) {
-            const elementTypes = map21(getElementTypes(source), (t) => inferReverseMappedType(t, target, constraint));
+            const elementTypes = map22(getElementTypes(source), (t) => inferReverseMappedType(t, target, constraint));
             if (!every(elementTypes, (t) => !!t)) {
               return void 0;
             }
@@ -117505,7 +117505,7 @@ ${lanes.join("\n")}
           return false;
         }
         function inferTypesFromTemplateLiteralType(source, target) {
-          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map21(source.types, (s, i) => {
+          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map22(source.types, (s, i) => {
             return isTypeAssignableTo(getBaseConstraintOrType(s), getBaseConstraintOrType(target.types[i])) ? s : getStringLikeTypeForType(s);
           }) : inferFromLiteralPartsToTemplateLiteral(source.texts, source.types, target) : void 0;
         }
@@ -117969,8 +117969,8 @@ ${lanes.join("\n")}
               if (extendedConstraint && inferToMappedType(source, target, extendedConstraint)) {
                 return true;
               }
-              const propTypes = map21(getPropertiesOfType(source), getTypeOfSymbol);
-              const indexTypes = map21(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
+              const propTypes = map22(getPropertiesOfType(source), getTypeOfSymbol);
+              const indexTypes = map22(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
               inferFromTypes(getUnionType(concatenate(propTypes, indexTypes)), getTemplateTypeFromMappedType(target));
               return true;
             }
@@ -118569,7 +118569,7 @@ ${lanes.join("\n")}
           return result;
         }
         function mapTypesByKeyProperty(types, name2) {
-          const map22 = /* @__PURE__ */ new Map();
+          const map23 = /* @__PURE__ */ new Map();
           let count = 0;
           for (const type2 of types) {
             if (type2.flags & (524288 | 2097152 | 58982400)) {
@@ -118581,11 +118581,11 @@ ${lanes.join("\n")}
                 let duplicate = false;
                 forEachType(discriminant, (t) => {
                   const id = getTypeId(getRegularTypeOfLiteralType(t));
-                  const existing = map22.get(id);
+                  const existing = map23.get(id);
                   if (!existing) {
-                    map22.set(id, type2);
+                    map23.set(id, type2);
                   } else if (existing !== unknownType2) {
-                    map22.set(id, unknownType2);
+                    map23.set(id, unknownType2);
                     duplicate = true;
                   }
                 });
@@ -118593,7 +118593,7 @@ ${lanes.join("\n")}
               }
             }
           }
-          return count >= 10 && count * 2 >= types.length ? map22 : void 0;
+          return count >= 10 && count * 2 >= types.length ? map23 : void 0;
         }
         function getKeyPropertyName(unionType2) {
           const types = unionType2.types;
@@ -119057,7 +119057,7 @@ ${lanes.join("\n")}
           ) : type2;
         }
         function mapTypeWithAlias(type2, mapper, aliasSymbol, aliasTypeArguments) {
-          return type2.flags & 1048576 && aliasSymbol ? getUnionType(map21(type2.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type2, mapper);
+          return type2.flags & 1048576 && aliasSymbol ? getUnionType(map22(type2.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type2, mapper);
         }
         function extractTypesOfKind(type2, kind) {
           return filterType(type2, (t) => (t.flags & kind) !== 0);
@@ -119825,7 +119825,7 @@ ${lanes.join("\n")}
           }
           function getUnionOrEvolvingArrayType(types, subtypeReduction) {
             if (isEvolvingArrayTypeList(types)) {
-              return getEvolvingArrayType(getUnionType(map21(types, getElementTypeOfEvolvingArrayType)));
+              return getEvolvingArrayType(getUnionType(map22(types, getElementTypeOfEvolvingArrayType)));
             }
             const result = recombineUnknownType(getUnionType(sameMap(types, finalizeEvolvingArrayType), subtypeReduction));
             if (result !== declaredType && result.flags & declaredType.flags & 1048576 && arrayIsEqualTo(result.types, declaredType.types)) {
@@ -119919,7 +119919,7 @@ ${lanes.join("\n")}
           function narrowTypeBySwitchOnDiscriminantProperty(type2, access, data) {
             if (data.clauseStart < data.clauseEnd && type2.flags & 1048576 && getKeyPropertyName(type2) === getAccessedPropertyName(access)) {
               const clauseTypes = getSwitchClauseTypes(data.switchStatement).slice(data.clauseStart, data.clauseEnd);
-              const candidate = getUnionType(map21(clauseTypes, (t) => getConstituentTypeForKeyType(type2, t) || unknownType2));
+              const candidate = getUnionType(map22(clauseTypes, (t) => getConstituentTypeForKeyType(type2, t) || unknownType2));
               if (candidate !== unknownType2) {
                 return candidate;
               }
@@ -120347,7 +120347,7 @@ ${lanes.join("\n")}
               return filterType(type2, (t) => getTypeFacts(t, notEqualFacts) === notEqualFacts);
             }
             const clauseWitnesses = witnesses.slice(clauseStart, clauseEnd);
-            return getUnionType(map21(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type2, text) : neverType2));
+            return getUnionType(map22(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type2, text) : neverType2));
           }
           function narrowTypeBySwitchOnTrue(type2, { switchStatement, clauseStart, clauseEnd }) {
             const defaultIndex = findIndex(
@@ -120382,7 +120382,7 @@ ${lanes.join("\n")}
               return type2;
             }
             const clauses = switchStatement.caseBlock.clauses.slice(clauseStart, clauseEnd);
-            return getUnionType(map21(clauses, (clause) => clause.kind === 297 ? narrowType(
+            return getUnionType(map22(clauses, (clause) => clause.kind === 297 ? narrowType(
               type2,
               clause.expression,
               /*assumeTrue*/
@@ -120474,7 +120474,7 @@ ${lanes.join("\n")}
               /* Construct */
             );
             if (constructSignatures.length) {
-              return getUnionType(map21(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
+              return getUnionType(map22(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
             }
             return emptyObjectType;
           }
@@ -122644,7 +122644,7 @@ ${lanes.join("\n")}
             getMatchingUnionConstituentForObjectLiteral(contextualType, node) ?? discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map21(
+                map22(
                   filter3(node.properties, (p) => {
                     if (!p.symbol) {
                       return false;
@@ -122659,7 +122659,7 @@ ${lanes.join("\n")}
                   }),
                   (prop) => [() => getContextFreeTypeOfExpression(prop.kind === 304 ? prop.initializer : prop.name), prop.symbol.escapedName]
                 ),
-                map21(
+                map22(
                   filter3(getPropertiesOfType(contextualType), (s) => {
                     var _a2;
                     return !!(s.flags & 16777216) && !!((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members) && !node.symbol.members.has(s.escapedName) && isDiscriminantProperty(contextualType, s.escapedName);
@@ -122681,11 +122681,11 @@ ${lanes.join("\n")}
             discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map21(
+                map22(
                   filter3(node.properties, (p) => !!p.symbol && p.kind === 292 && isDiscriminantProperty(contextualType, p.symbol.escapedName) && (!p.initializer || isPossiblyDiscriminantValue(p.initializer))),
                   (prop) => [!prop.initializer ? () => trueType : () => getContextFreeTypeOfExpression(prop.initializer), prop.symbol.escapedName]
                 ),
-                map21(
+                map22(
                   filter3(getPropertiesOfType(contextualType), (s) => {
                     var _a2;
                     if (!(s.flags & 16777216) || !((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members)) {
@@ -122744,13 +122744,13 @@ ${lanes.join("\n")}
           }
           if (type2.flags & 1048576) {
             return getUnionType(
-              map21(type2.types, (t) => instantiateInstantiableTypes(t, mapper)),
+              map22(type2.types, (t) => instantiateInstantiableTypes(t, mapper)),
               0
               /* None */
             );
           }
           if (type2.flags & 2097152) {
-            return getIntersectionType(map21(type2.types, (t) => instantiateInstantiableTypes(t, mapper)));
+            return getIntersectionType(map22(type2.types, (t) => instantiateInstantiableTypes(t, mapper)));
           }
           return type2;
         }
@@ -124080,7 +124080,7 @@ ${lanes.join("\n")}
             );
           }
           if (signatures.length === 0 && apparentElemType.flags & 1048576) {
-            signatures = getUnionSignatures(map21(apparentElemType.types, (t) => getUninstantiatedJsxSignaturesOfType(t, caller)));
+            signatures = getUnionSignatures(map22(apparentElemType.types, (t) => getUninstantiatedJsxSignaturesOfType(t, caller)));
           }
           return signatures;
         }
@@ -125554,7 +125554,7 @@ ${lanes.join("\n")}
         function checkTypeArguments(signature, typeArgumentNodes, reportErrors2, headMessage) {
           const isJavascript = isInJSFile(signature.declaration);
           const typeParameters = signature.typeParameters;
-          const typeArgumentTypes = fillMissingTypeArguments(map21(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
+          const typeArgumentTypes = fillMissingTypeArguments(map22(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
           let mapper;
           for (let i = 0; i < typeArgumentNodes.length; i++) {
             Debug.assert(typeParameters[i] !== void 0, "Should not call checkTypeArguments with too many type arguments");
@@ -126235,7 +126235,7 @@ ${lanes.join("\n")}
                 const diags = max > 1 ? allDiagnostics[minIndex] : flatten(allDiagnostics);
                 Debug.assert(diags.length > 0, "No errors reported for 3 or fewer overload signatures");
                 let chain = chainDiagnosticMessages(
-                  map21(diags, createDiagnosticMessageChainFromDiagnostic),
+                  map22(diags, createDiagnosticMessageChainFromDiagnostic),
                   Diagnostics.No_overload_matches_this_call
                 );
                 if (headMessage) {
@@ -130803,7 +130803,7 @@ ${lanes.join("\n")}
                   if (returnSignature && !returnSignature.typeParameters && !every(context.inferences, hasInferenceCandidates)) {
                     const uniqueTypeParameters = getUniqueTypeParameters(context, signature.typeParameters);
                     const instantiatedSignature = getSignatureInstantiationWithoutFillingInTypeArguments(signature, uniqueTypeParameters);
-                    const inferences = map21(context.inferences, (info) => createInferenceInfo(info.typeParameter));
+                    const inferences = map22(context.inferences, (info) => createInferenceInfo(info.typeParameter));
                     applyToParameterTypes(instantiatedSignature, contextualSignature, (source, target) => {
                       inferTypes(
                         inferences,
@@ -131751,7 +131751,7 @@ ${lanes.join("\n")}
           return getEffectiveTypeArguments2(node, typeParameters)[index];
         }
         function getEffectiveTypeArguments2(node, typeParameters) {
-          return fillMissingTypeArguments(map21(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
+          return fillMissingTypeArguments(map22(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
         }
         function checkTypeArgumentConstraints(node, typeParameters) {
           let typeArguments;
@@ -132397,7 +132397,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const onfulfilledParameterType = getTypeWithFacts(
-            getUnionType(map21(candidates, getTypeOfFirstParameterOfSignature)),
+            getUnionType(map22(candidates, getTypeOfFirstParameterOfSignature)),
             2097152
             /* NEUndefinedOrNull */
           );
@@ -132416,7 +132416,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           return typeAsPromise.promisedTypeOfPromise = getUnionType(
-            map21(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
+            map22(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
             2
             /* Subtype */
           );
@@ -133182,13 +133182,13 @@ ${lanes.join("\n")}
         function isTypeParameterUnused(typeParameter) {
           return !(getMergedSymbol(typeParameter.symbol).isReferenced & 262144) && !isIdentifierThatStartsWithUnderscore(typeParameter.name);
         }
-        function addToGroup(map22, key, value, getKey) {
+        function addToGroup(map23, key, value, getKey) {
           const keyString = String(getKey(key));
-          const group2 = map22.get(keyString);
+          const group2 = map23.get(keyString);
           if (group2) {
             group2[1].push(value);
           } else {
-            map22.set(keyString, [key, [value]]);
+            map23.set(keyString, [key, [value]]);
           }
         }
         function tryGetRootParameterDeclaration(node) {
@@ -134415,7 +134415,7 @@ ${lanes.join("\n")}
             }
             return noCache ? noIterationTypes : setCachedIterationTypes(type2, resolver.iterableCacheKey, noIterationTypes);
           }
-          const iteratorType = getIntersectionType(map21(validSignatures, getReturnTypeOfSignature));
+          const iteratorType = getIntersectionType(map22(validSignatures, getReturnTypeOfSignature));
           const iterationTypes = getIterationTypesOfIteratorWorker(iteratorType, resolver, errorNode, errorOutputContainer, noCache) ?? noIterationTypes;
           return noCache ? iterationTypes : setCachedIterationTypes(type2, resolver.iterableCacheKey, iterationTypes);
         }
@@ -135634,7 +135634,7 @@ ${lanes.join("\n")}
                 error210(errorNode, Diagnostics.Non_abstract_class_0_does_not_implement_inherited_abstract_member_1_from_class_2, memberInfo.typeName, first(memberInfo.missedProperties), memberInfo.baseTypeName);
               }
             } else if (length(memberInfo.missedProperties) > 5) {
-              const missedProperties = map21(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map22(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
               const remainingMissedProperties = length(memberInfo.missedProperties) - 4;
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1_and_2_more, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
@@ -135642,7 +135642,7 @@ ${lanes.join("\n")}
                 error210(errorNode, Diagnostics.Non_abstract_class_0_is_missing_implementations_for_the_following_members_of_1_Colon_2_and_3_more, memberInfo.typeName, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
               }
             } else {
-              const missedProperties = map21(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map22(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1, memberInfo.baseTypeName, missedProperties);
               } else {
@@ -137757,7 +137757,7 @@ ${lanes.join("\n")}
             } else if (symbol2) {
               const symbolLinks2 = getSymbolLinks(symbol2);
               const declarationList = mapDefined(infos, (i) => i.declaration);
-              const nodeListId = map21(declarationList, getNodeId).join(",");
+              const nodeListId = map22(declarationList, getNodeId).join(",");
               if (!symbolLinks2.filteredIndexSymbolCache) {
                 symbolLinks2.filteredIndexSymbolCache = /* @__PURE__ */ new Map();
               }
@@ -139013,7 +139013,7 @@ ${lanes.join("\n")}
                       const newComponents = filter3(info.components, (e) => {
                         return !hasLateBindableName(e);
                       });
-                      result.push(...map21(newComponents, (e) => {
+                      result.push(...map22(newComponents, (e) => {
                         trackComputedName(e.name.expression);
                         const mods = infoList === staticInfos ? [factory.createModifier(
                           126
@@ -140976,7 +140976,7 @@ ${lanes.join("\n")}
             if (sourceProperties) {
               const sourcePropertiesFiltered = findDiscriminantProperties(sourceProperties, target);
               if (sourcePropertiesFiltered) {
-                const discriminated = discriminateTypeByDiscriminableItems(target, map21(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
+                const discriminated = discriminateTypeByDiscriminableItems(target, map22(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
                 if (discriminated !== target) {
                   return discriminated;
                 }
@@ -143012,13 +143012,13 @@ ${lanes.join("\n")}
           }
           exit();
         }
-        function appendSourceMap(generatedLine, generatedCharacter, map22, sourceMapPath, start2, end) {
+        function appendSourceMap(generatedLine, generatedCharacter, map23, sourceMapPath, start2, end) {
           Debug.assert(generatedLine >= pendingGeneratedLine, "generatedLine cannot backtrack");
           Debug.assert(generatedCharacter >= 0, "generatedCharacter cannot be negative");
           enter();
           const sourceIndexToNewSourceIndexMap = [];
           let nameIndexToNewNameIndexMap;
-          const mappingIterator = decodeMappings(map22.mappings);
+          const mappingIterator = decodeMappings(map23.mappings);
           for (const raw of mappingIterator) {
             if (end && (raw.generatedLine > end.line || raw.generatedLine === end.line && raw.generatedCharacter > end.character)) {
               break;
@@ -143033,21 +143033,21 @@ ${lanes.join("\n")}
             if (raw.sourceIndex !== void 0) {
               newSourceIndex = sourceIndexToNewSourceIndexMap[raw.sourceIndex];
               if (newSourceIndex === void 0) {
-                const rawPath = map22.sources[raw.sourceIndex];
-                const relativePath = map22.sourceRoot ? combinePaths(map22.sourceRoot, rawPath) : rawPath;
+                const rawPath = map23.sources[raw.sourceIndex];
+                const relativePath = map23.sourceRoot ? combinePaths(map23.sourceRoot, rawPath) : rawPath;
                 const combinedPath = combinePaths(getDirectoryPath(sourceMapPath), relativePath);
                 sourceIndexToNewSourceIndexMap[raw.sourceIndex] = newSourceIndex = addSource(combinedPath);
-                if (map22.sourcesContent && typeof map22.sourcesContent[raw.sourceIndex] === "string") {
-                  setSourceContent(newSourceIndex, map22.sourcesContent[raw.sourceIndex]);
+                if (map23.sourcesContent && typeof map23.sourcesContent[raw.sourceIndex] === "string") {
+                  setSourceContent(newSourceIndex, map23.sourcesContent[raw.sourceIndex]);
                 }
               }
               newSourceLine = raw.sourceLine;
               newSourceCharacter = raw.sourceCharacter;
-              if (map22.names && raw.nameIndex !== void 0) {
+              if (map23.names && raw.nameIndex !== void 0) {
                 if (!nameIndexToNewNameIndexMap) nameIndexToNewNameIndexMap = [];
                 newNameIndex = nameIndexToNewNameIndexMap[raw.nameIndex];
                 if (newNameIndex === void 0) {
-                  nameIndexToNewNameIndexMap[raw.nameIndex] = newNameIndex = addName(map22.names[raw.nameIndex]);
+                  nameIndexToNewNameIndexMap[raw.nameIndex] = newNameIndex = addName(map23.names[raw.nameIndex]);
                 }
               }
             }
@@ -143332,12 +143332,12 @@ ${lanes.join("\n")}
       function getGeneratedPositionOfMapping(value) {
         return value.generatedPosition;
       }
-      function createDocumentPositionMapper(host, map22, mapPath) {
+      function createDocumentPositionMapper(host, map23, mapPath) {
         const mapDirectory = getDirectoryPath(mapPath);
-        const sourceRoot = map22.sourceRoot ? getNormalizedAbsolutePath(map22.sourceRoot, mapDirectory) : mapDirectory;
-        const generatedAbsoluteFilePath = getNormalizedAbsolutePath(map22.file, mapDirectory);
+        const sourceRoot = map23.sourceRoot ? getNormalizedAbsolutePath(map23.sourceRoot, mapDirectory) : mapDirectory;
+        const generatedAbsoluteFilePath = getNormalizedAbsolutePath(map23.file, mapDirectory);
         const generatedFile = host.getSourceFileLike(generatedAbsoluteFilePath);
-        const sourceFileAbsolutePaths = map22.sources.map((source) => getNormalizedAbsolutePath(source, sourceRoot));
+        const sourceFileAbsolutePaths = map23.sources.map((source) => getNormalizedAbsolutePath(source, sourceRoot));
         const sourceToSourceIndexMap = new Map(sourceFileAbsolutePaths.map((source, i) => [host.getCanonicalFileName(source), i]));
         let decodedMappings;
         let generatedMappings;
@@ -143358,7 +143358,7 @@ ${lanes.join("\n")}
           let sourcePosition;
           if (isSourceMapping(mapping)) {
             const sourceFile = host.getSourceFileLike(sourceFileAbsolutePaths[mapping.sourceIndex]);
-            source = map22.sources[mapping.sourceIndex];
+            source = map23.sources[mapping.sourceIndex];
             sourcePosition = sourceFile !== void 0 ? getPositionOfLineAndCharacter(
               sourceFile,
               mapping.sourceLine,
@@ -143377,7 +143377,7 @@ ${lanes.join("\n")}
         }
         function getDecodedMappings() {
           if (decodedMappings === void 0) {
-            const decoder = decodeMappings(map22.mappings);
+            const decoder = decodeMappings(map23.mappings);
             const mappings = arrayFrom(decoder, processMapping);
             if (decoder.error !== void 0) {
               if (host.log) {
@@ -143464,7 +143464,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map21(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map22(node.sourceFiles, transformSourceFile));
         }
       }
       function getExportNeedsImportStarHelper(node) {
@@ -143670,12 +143670,12 @@ ${lanes.join("\n")}
         }
         return exportedNames;
       }
-      function multiMapSparseArrayAdd(map22, key, value) {
-        let values = map22[key];
+      function multiMapSparseArrayAdd(map23, key, value) {
+        let values = map23[key];
         if (values) {
           values.push(value);
         } else {
-          map22[key] = values = [value];
+          map23[key] = values = [value];
         }
         return values;
       }
@@ -144413,7 +144413,7 @@ ${lanes.join("\n")}
       }
       function makeArrayAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isArrayBindingOrAssignmentElement);
-        return factory2.createArrayLiteralExpression(map21(elements, factory2.converters.convertToArrayAssignmentElement));
+        return factory2.createArrayLiteralExpression(map22(elements, factory2.converters.convertToArrayAssignmentElement));
       }
       function makeObjectBindingPattern(factory2, elements) {
         Debug.assertEachNode(elements, isBindingElement);
@@ -144421,7 +144421,7 @@ ${lanes.join("\n")}
       }
       function makeObjectAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isObjectBindingOrAssignmentElement);
-        return factory2.createObjectLiteralExpression(map21(elements, factory2.converters.convertToObjectAssignmentElement));
+        return factory2.createObjectLiteralExpression(map22(elements, factory2.converters.convertToObjectAssignmentElement));
       }
       function makeBindingElement(factory2, name2) {
         return factory2.createBindingElement(
@@ -145867,7 +145867,7 @@ ${lanes.join("\n")}
             return setTextRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map21(variables, transformInitializedVariable)
+                  map22(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -146073,7 +146073,7 @@ ${lanes.join("\n")}
           currentNamespaceContainerName = localName;
           const statements = [];
           startLexicalEnvironment();
-          const members = map21(node.members, transformEnumMember);
+          const members = map22(node.members, transformEnumMember);
           insertStatementsAfterStandardPrologue(statements, endLexicalEnvironment());
           addRange(statements, members);
           currentNamespaceContainerName = savedCurrentNamespaceLocalName;
@@ -147984,7 +147984,7 @@ ${lanes.join("\n")}
             if (isDecoratedClassDeclaration) {
               Debug.assertIsDefined(pendingStatements, "Decorated classes transformed by TypeScript are expected to be within a variable declaration.");
               if (some(pendingExpressions)) {
-                addRange(pendingStatements, map21(pendingExpressions, factory2.createExpressionStatement));
+                addRange(pendingStatements, map22(pendingExpressions, factory2.createExpressionStatement));
               }
               if (some(staticPropertiesOrClassStaticBlocks)) {
                 addPropertyOrClassStaticBlockStatements(pendingStatements, staticPropertiesOrClassStaticBlocks, ((_b = node.emitNode) == null ? void 0 : _b.classThis) ?? factory2.getInternalName(node));
@@ -149773,13 +149773,13 @@ ${lanes.join("\n")}
           }
           const { false: decorators, true: metadata } = groupBy(allDecorators.decorators, isSyntheticMetadataDecorator);
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map21(decorators, transformDecorator));
+          addRange(decoratorExpressions, map22(decorators, transformDecorator));
           addRange(decoratorExpressions, flatMap(allDecorators.parameters, transformDecoratorsOfParameter));
-          addRange(decoratorExpressions, map21(metadata, transformDecorator));
+          addRange(decoratorExpressions, map22(metadata, transformDecorator));
           return decoratorExpressions;
         }
         function addClassElementDecorationStatements(statements, node, isStatic2) {
-          addRange(statements, map21(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
+          addRange(statements, map22(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
         }
         function isDecoratedClassElement(member, isStaticElement, parent2) {
           return nodeOrChildIsDecorated(
@@ -151684,7 +151684,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map21(allDecorators.decorators, transformDecorator));
+          addRange(decoratorExpressions, map22(allDecorators.decorators, transformDecorator));
           return decoratorExpressions;
         }
         function transformDecorator(decorator) {
@@ -152357,7 +152357,7 @@ ${lanes.join("\n")}
             }
             return void 0;
           }
-          return factory2.inlineExpressions(map21(variables, transformInitializedVariable));
+          return factory2.inlineExpressions(map22(variables, transformInitializedVariable));
         }
         function hoistVariableDeclarationList(node) {
           forEach(node.declarations, hoistVariable);
@@ -155773,7 +155773,7 @@ ${lanes.join("\n")}
           return target && target >= 5 ? factory2.createObjectLiteralExpression(transformJsxAttributesToProps(attrs, children)) : transformJsxAttributesToExpression(attrs, children);
         }
         function transformJsxAttributesToProps(attrs, children) {
-          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map21(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
+          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map22(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
           if (children) {
             props.push(children);
           }
@@ -159062,7 +159062,7 @@ ${lanes.join("\n")}
               /* NoHoisting */
             )
           );
-          const part = factory2.createVariableDeclarationList(map21(currentState.loopOutParameters, createOutVariable));
+          const part = factory2.createVariableDeclarationList(map22(currentState.loopOutParameters, createOutVariable));
           return { functionName, containsYield, functionDeclaration, part };
         }
         function createFunctionForBodyOfIterationStatement(node, currentState, outerState) {
@@ -159190,7 +159190,7 @@ ${lanes.join("\n")}
             loopFunctionExpressionName,
             /*typeArguments*/
             void 0,
-            map21(state.loopParameters, (p) => p.name)
+            map22(state.loopParameters, (p) => p.name)
           );
           const callResult = containsYield ? factory2.createYieldExpression(
             factory2.createToken(
@@ -159768,7 +159768,7 @@ ${lanes.join("\n")}
           return isSpreadElement(node) ? visitSpanOfSpreads : visitSpanOfNonSpreads;
         }
         function visitSpanOfSpreads(chunk) {
-          return map21(chunk, visitExpressionOfSpread);
+          return map22(chunk, visitExpressionOfSpread);
         }
         function visitExpressionOfSpread(node) {
           Debug.assertNode(node, isSpreadElement);
@@ -160340,7 +160340,7 @@ ${lanes.join("\n")}
             return setSourceMapRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map21(variables, transformInitializedVariable)
+                  map22(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -160898,7 +160898,7 @@ ${lanes.join("\n")}
             const variables = getInitializedVariables(initializer3);
             node = factory2.updateForStatement(
               node,
-              variables.length > 0 ? factory2.inlineExpressions(map21(variables, transformInitializedVariable)) : void 0,
+              variables.length > 0 ? factory2.inlineExpressions(map22(variables, transformInitializedVariable)) : void 0,
               visitNode(node.condition, visitor, isExpression),
               visitNode(node.incrementor, visitor, isExpression),
               visitIterationBody(node.statement, visitor, context)
@@ -164224,7 +164224,7 @@ ${lanes.join("\n")}
             moduleBodyBlock
           );
           const moduleName = tryGetModuleNameFromFile(factory2, node, host, compilerOptions);
-          const dependencies = factory2.createArrayLiteralExpression(map21(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
+          const dependencies = factory2.createArrayLiteralExpression(map22(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
           const updated = setEmitFlags(
             factory2.updateSourceFile(
               node,
@@ -165954,7 +165954,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map21(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map22(node.sourceFiles, transformSourceFile));
         }
       }
       function canProduceDiagnostics(node) {
@@ -166702,7 +166702,7 @@ ${lanes.join("\n")}
             rawLibReferenceDirectives = [];
             let hasNoDefaultLib = false;
             const bundle = factory2.createBundle(
-              map21(node.sourceFiles, (sourceFile) => {
+              map22(node.sourceFiles, (sourceFile) => {
                 if (sourceFile.isDeclarationFile) return void 0;
                 hasNoDefaultLib = hasNoDefaultLib || sourceFile.hasNoDefaultLib;
                 currentSourceFile = sourceFile;
@@ -166813,7 +166813,7 @@ ${lanes.join("\n")}
             getLibReferences()
           );
           function collectFileReferences(sourceFile) {
-            rawReferencedFiles = concatenate(rawReferencedFiles, map21(sourceFile.referencedFiles, (f) => [sourceFile, f]));
+            rawReferencedFiles = concatenate(rawReferencedFiles, map22(sourceFile.referencedFiles, (f) => [sourceFile, f]));
             rawTypeReferenceDirectives = concatenate(rawTypeReferenceDirectives, sourceFile.typeReferenceDirectives);
             rawLibReferenceDirectives = concatenate(rawLibReferenceDirectives, sourceFile.libReferenceDirectives);
           }
@@ -167027,7 +167027,7 @@ ${lanes.join("\n")}
           )) {
             return factory2.createNodeArray();
           }
-          const newParams = map21(params, (p) => ensureParameter(p, modifierMask));
+          const newParams = map22(params, (p) => ensureParameter(p, modifierMask));
           if (!newParams) {
             return factory2.createNodeArray();
           }
@@ -167779,7 +167779,7 @@ ${lanes.join("\n")}
                     void 0,
                     /*isTypeOnly*/
                     false,
-                    factory2.createNamedExports(map21(exportMappings, ([gen, exp]) => {
+                    factory2.createNamedExports(map22(exportMappings, ([gen, exp]) => {
                       return factory2.createExportSpecifier(
                         /*isTypeOnly*/
                         false,
@@ -167987,11 +167987,11 @@ ${lanes.join("\n")}
                   2
                   /* Const */
                 ));
-                const heritageClauses = factory2.createNodeArray(map21(input.heritageClauses, (clause) => {
+                const heritageClauses = factory2.createNodeArray(map22(input.heritageClauses, (clause) => {
                   if (clause.token === 96) {
                     const oldDiag2 = getSymbolAccessibilityDiagnostic;
                     getSymbolAccessibilityDiagnostic = createGetSymbolAccessibilityDiagnosticForNode(clause.types[0]);
-                    const newClause = factory2.updateHeritageClause(clause, map21(clause.types, (t) => factory2.updateExpressionWithTypeArguments(t, newId, visitNodes2(t.typeArguments, visitDeclarationSubtree, isTypeNode))));
+                    const newClause = factory2.updateHeritageClause(clause, map22(clause.types, (t) => factory2.updateExpressionWithTypeArguments(t, newId, visitNodes2(t.typeArguments, visitDeclarationSubtree, isTypeNode))));
                     getSymbolAccessibilityDiagnostic = oldDiag2;
                     return newClause;
                   }
@@ -168153,7 +168153,7 @@ ${lanes.join("\n")}
         }
         function transformHeritageClauses(nodes) {
           return factory2.createNodeArray(filter3(
-            map21(nodes, (clause) => factory2.updateHeritageClause(
+            map22(nodes, (clause) => factory2.updateHeritageClause(
               clause,
               visitNodes2(
                 factory2.createNodeArray(filter3(clause.types, (t) => {
@@ -168275,7 +168275,7 @@ ${lanes.join("\n")}
         const moduleKind = getEmitModuleKind(compilerOptions);
         const useDefineForClassFields = getUseDefineForClassFields(compilerOptions);
         const transformers = [];
-        addRange(transformers, customTransformers && map21(customTransformers.before, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map22(customTransformers.before, wrapScriptTransformerFactory));
         transformers.push(transformTypeScript);
         if (compilerOptions.experimentalDecorators) {
           transformers.push(transformLegacyDecorators);
@@ -168313,13 +168313,13 @@ ${lanes.join("\n")}
           transformers.push(transformGenerators);
         }
         transformers.push(getModuleTransformer(moduleKind));
-        addRange(transformers, customTransformers && map21(customTransformers.after, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map22(customTransformers.after, wrapScriptTransformerFactory));
         return transformers;
       }
       function getDeclarationTransformers(customTransformers) {
         const transformers = [];
         transformers.push(transformDeclarations);
-        addRange(transformers, customTransformers && map21(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
+        addRange(transformers, customTransformers && map22(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
         return transformers;
       }
       function wrapCustomTransformer(transformer) {
@@ -174095,7 +174095,7 @@ ${lanes.join("\n")}
           var _a2;
           if (!host.realpath || ensureTrailingDirectorySeparator(toPath3(host.realpath(rootDir))) === rootDirPath) {
             const resultFromHost = {
-              files: map21(host.readDirectory(
+              files: map22(host.readDirectory(
                 rootDir,
                 /*extensions*/
                 void 0,
@@ -174194,7 +174194,7 @@ ${lanes.join("\n")}
           function getFileSystemEntriesFromHost(dir, path2) {
             if (rootSymLinkResult && path2 === rootDirPath) return rootSymLinkResult;
             const result = {
-              files: map21(host.readDirectory(
+              files: map22(host.readDirectory(
                 dir,
                 /*extensions*/
                 void 0,
@@ -174756,12 +174756,12 @@ ${lanes.join("\n")}
             const value = readFileCache.get(key);
             if (value !== void 0 && value !== data) {
               readFileCache.delete(key);
-              sourceFileCache.forEach((map22) => map22.delete(key));
+              sourceFileCache.forEach((map23) => map23.delete(key));
             } else if (getSourceFileWithCache) {
-              sourceFileCache.forEach((map22) => {
-                const sourceFile = map22.get(key);
+              sourceFileCache.forEach((map23) => {
+                const sourceFile = map23.get(key);
                 if (sourceFile && sourceFile.text !== data) {
-                  map22.delete(key);
+                  map23.delete(key);
                 }
               });
             }
@@ -178768,7 +178768,7 @@ ${lanes.join("\n")}
       ((BuilderState2) => {
         function createManyToManyPathMap() {
           function create2(forward, reverse, deleted) {
-            const map22 = {
+            const map23 = {
               getKeys: (v) => reverse.get(v),
               getValues: (k) => forward.get(k),
               keys: () => forward.keys(),
@@ -178797,10 +178797,10 @@ ${lanes.join("\n")}
                     addToMultimap(reverse, v, k);
                   }
                 });
-                return map22;
+                return map23;
               }
             };
-            return map22;
+            return map23;
           }
           return create2(
             /* @__PURE__ */ new Map(),
@@ -178810,19 +178810,19 @@ ${lanes.join("\n")}
           );
         }
         BuilderState2.createManyToManyPathMap = createManyToManyPathMap;
-        function addToMultimap(map22, k, v) {
-          let set3 = map22.get(k);
+        function addToMultimap(map23, k, v) {
+          let set3 = map23.get(k);
           if (!set3) {
             set3 = /* @__PURE__ */ new Set();
-            map22.set(k, set3);
+            map23.set(k, set3);
           }
           set3.add(v);
         }
-        function deleteFromMultimap(map22, k, v) {
-          const set3 = map22.get(k);
+        function deleteFromMultimap(map23, k, v) {
+          const set3 = map23.get(k);
           if (set3 == null ? void 0 : set3.delete(v)) {
             if (!set3.size) {
-              map22.delete(k);
+              map23.delete(k);
             }
             return true;
           }
@@ -179173,8 +179173,8 @@ ${lanes.join("\n")}
         if (diff & 48) result = result | emitKind & 48;
         return result;
       }
-      function hasSameKeys(map1, map22) {
-        return map1 === map22 || map1 !== void 0 && map22 !== void 0 && map1.size === map22.size && !forEachKey(map1, (key) => !map22.has(key));
+      function hasSameKeys(map1, map23) {
+        return map1 === map23 || map1 !== void 0 && map23 !== void 0 && map1.size === map23.size && !forEachKey(map1, (key) => !map23.has(key));
       }
       function createBuilderProgramState(newProgram, oldState) {
         var _a2, _b;
@@ -180508,7 +180508,7 @@ ${lanes.join("\n")}
         let filePathsSetList;
         const latestChangedDtsFile = buildInfo.latestChangedDtsFile ? toAbsolutePath(buildInfo.latestChangedDtsFile) : void 0;
         const fileInfos = /* @__PURE__ */ new Map();
-        const changedFilesSet = new Set(map21(buildInfo.changeFileSet, toFilePath));
+        const changedFilesSet = new Set(map22(buildInfo.changeFileSet, toFilePath));
         if (isIncrementalBundleEmitBuildInfo(buildInfo)) {
           buildInfo.fileInfos.forEach((fileInfo, index) => {
             const path2 = toFilePath(index + 1);
@@ -180601,10 +180601,10 @@ ${lanes.join("\n")}
           return filePathsSetList[fileIdsListId - 1];
         }
         function toManyToManyPathMap(referenceMap, options) {
-          const map22 = BuilderState.createReferencedMap(options);
-          if (!map22 || !referenceMap) return map22;
-          referenceMap.forEach(([fileId, fileIdListId]) => map22.set(toFilePath(fileId), toFilePathsSet(fileIdListId)));
-          return map22;
+          const map23 = BuilderState.createReferencedMap(options);
+          if (!map23 || !referenceMap) return map23;
+          referenceMap.forEach(([fileId, fileIdListId]) => map23.set(toFilePath(fileId), toFilePathsSet(fileIdListId)));
+          return map23;
         }
         function toPerFileSemanticDiagnostics(diagnostics) {
           const semanticDiagnostics = new Map(
@@ -186433,7 +186433,7 @@ ${lanes.join("\n")}
               return factory.createArrayTypeNode(visitNode(node.type, visitExistingNodeTreeSymbols, isTypeNode));
             }
             if (isJSDocTypeLiteral(node)) {
-              return factory.createTypeLiteralNode(map21(node.jsDocPropertyTags, (t) => {
+              return factory.createTypeLiteralNode(map22(node.jsDocPropertyTags, (t) => {
                 const name2 = visitNode(isIdentifier(t.name) ? t.name : t.name.right, visitExistingNodeTreeSymbols, isIdentifier);
                 const overrideTypeNode = resolver.getJsDocPropertyOverride(context, node, t);
                 return factory.createPropertySignature(
@@ -186499,7 +186499,7 @@ ${lanes.join("\n")}
               } else {
                 return factory.createFunctionTypeNode(
                   visitNodes2(node.typeParameters, visitExistingNodeTreeSymbols, isTypeParameterDeclaration),
-                  map21(node.parameters, (p, i) => factory.createParameterDeclaration(
+                  map22(node.parameters, (p, i) => factory.createParameterDeclaration(
                     /*modifiers*/
                     void 0,
                     getEffectiveDotDotDotForParameter(p),
@@ -190782,7 +190782,7 @@ ${lanes.join("\n")}
         return expression;
       }
       function mapOneOrMany(valueOrArray, f, resultSelector = identity) {
-        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map21(valueOrArray, f)) : f(valueOrArray, 0) : void 0;
+        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map22(valueOrArray, f)) : f(valueOrArray, 0) : void 0;
       }
       function firstOrOnly(valueOrArray) {
         return isArray(valueOrArray) ? first(valueOrArray) : valueOrArray;
@@ -192514,9 +192514,9 @@ ${lanes.join("\n")}
             sourceFilesSet
           );
           if (!referenceEntries) return void 0;
-          const map22 = arrayToMultiMap(referenceEntries.map(ts_FindAllReferences_exports.toHighlightSpan), (e) => e.fileName, (e) => e.span);
+          const map23 = arrayToMultiMap(referenceEntries.map(ts_FindAllReferences_exports.toHighlightSpan), (e) => e.fileName, (e) => e.span);
           const getCanonicalFileName = createGetCanonicalFileName(program2.useCaseSensitiveFileNames());
-          return arrayFrom(mapDefinedIterator(map22.entries(), ([fileName, highlightSpans]) => {
+          return arrayFrom(mapDefinedIterator(map23.entries(), ([fileName, highlightSpans]) => {
             if (!sourceFilesSet.has(fileName)) {
               if (!program2.redirectTargetsMap.has(toPath(fileName, program2.getCurrentDirectory(), getCanonicalFileName))) {
                 return void 0;
@@ -194179,12 +194179,12 @@ ${lanes.join("\n")}
         return void 0;
       }
       function convertDocumentToSourceMapper(host, contents, mapFileName) {
-        const map22 = tryParseRawSourceMap(contents);
-        if (!map22 || !map22.sources || !map22.file || !map22.mappings) {
+        const map23 = tryParseRawSourceMap(contents);
+        if (!map23 || !map23.sources || !map23.file || !map23.mappings) {
           return void 0;
         }
-        if (map22.sourcesContent && map22.sourcesContent.some(isString)) return void 0;
-        return createDocumentPositionMapper(host, map22, mapFileName);
+        if (map23.sourcesContent && map23.sourcesContent.some(isString)) return void 0;
+        return createDocumentPositionMapper(host, map23, mapFileName);
       }
       function createSourceFileLike(text, lineMap) {
         return {
@@ -194716,7 +194716,7 @@ interface Symbol {
         curCancellationToken = cancellationToken;
         curSourceFile = sourceFile;
         try {
-          return map21(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
+          return map22(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
         } finally {
           reset();
         }
@@ -195202,7 +195202,7 @@ interface Symbol {
           return true;
         }
         if (shouldReallyMerge(a.node, b.node, parent2)) {
-          merge3(a, b);
+          merge4(a, b);
           return true;
         }
         return false;
@@ -195237,7 +195237,7 @@ interface Symbol {
         }
         return a.body.kind === b.body.kind && (a.body.kind !== 268 || areSameModule(a.body, b.body));
       }
-      function merge3(target, source) {
+      function merge4(target, source) {
         target.additionalNodes = target.additionalNodes || [];
         target.additionalNodes.push(source.node);
         if (source.additionalNodes) {
@@ -195369,7 +195369,7 @@ interface Symbol {
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
           nameSpan: n.name && getNodeSpan(n.name),
-          childItems: map21(n.children, convertToTree)
+          childItems: map22(n.children, convertToTree)
         };
       }
       function convertToPrimaryNavBarMenuItem(n) {
@@ -195378,7 +195378,7 @@ interface Symbol {
           kind: getNodeKind(n.node),
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
-          childItems: map21(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
+          childItems: map22(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
           indent: n.indent,
           bolded: false,
           grayed: false
@@ -197606,12 +197606,12 @@ interface Symbol {
               "args",
               /*questionToken*/
               void 0,
-              factory.createUnionTypeNode(map21(signatureDeclarations, convertSignatureParametersToTuple))
+              factory.createUnionTypeNode(map22(signatureDeclarations, convertSignatureParametersToTuple))
             )
           ]);
         }
         function convertSignatureParametersToTuple(decl) {
-          const members = map21(decl.parameters, convertParameterToNamedTupleMember);
+          const members = map22(decl.parameters, convertParameterToNamedTupleMember);
           return setEmitFlags(
             factory.createTupleTypeNode(members),
             some(members, (m) => !!length(getSyntheticLeadingComments(m))) ? 0 : 1
@@ -198091,9 +198091,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function doChange5(sourceFile, program2, host, changes, functionDeclaration, groupedReferences) {
         const signature = groupedReferences.signature;
-        const newFunctionDeclarationParams = map21(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
+        const newFunctionDeclarationParams = map22(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
         if (signature) {
-          const newSignatureParams = map21(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
+          const newSignatureParams = map22(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
           replaceParameters(signature, newSignatureParams);
         }
         replaceParameters(functionDeclaration, newFunctionDeclarationParams);
@@ -198156,10 +198156,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         function groupReferences(referenceEntries) {
           const classReferences = { accessExpressions: [], typeUsages: [] };
           const groupedReferences2 = { functionCalls: [], declarations: [], classReferences, valid: true };
-          const functionSymbols = map21(functionNames, getSymbolTargetAtLocation);
-          const classSymbols = map21(classNames, getSymbolTargetAtLocation);
+          const functionSymbols = map22(functionNames, getSymbolTargetAtLocation);
+          const classSymbols = map22(classNames, getSymbolTargetAtLocation);
           const isConstructor = isConstructorDeclaration(functionDeclaration);
-          const contextualSymbols = map21(functionNames, (name2) => getSymbolForContextualType(name2, checker));
+          const contextualSymbols = map22(functionNames, (name2) => getSymbolForContextualType(name2, checker));
           for (const entry of referenceEntries) {
             if (entry.kind === ts_FindAllReferences_exports.EntryKind.Span) {
               groupedReferences2.valid = false;
@@ -198423,7 +198423,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const parameters = getRefactorableParameters(functionDeclaration.parameters);
         const hasRestParameter2 = isRestParameter(last(parameters));
         const nonRestArguments = hasRestParameter2 ? functionArguments.slice(0, parameters.length - 1) : functionArguments;
-        const properties = map21(nonRestArguments, (arg, i) => {
+        const properties = map22(nonRestArguments, (arg, i) => {
           const parameterName = getParameterName(parameters[i]);
           const property = createPropertyOrShorthandAssignment(parameterName, arg);
           suppressLeadingAndTrailingTrivia(property.name);
@@ -198446,7 +198446,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function createNewParameters(functionDeclaration, program2, host) {
         const checker = program2.getTypeChecker();
         const refactorableParameters = getRefactorableParameters(functionDeclaration.parameters);
-        const bindingElements = map21(refactorableParameters, createBindingElementFromParameterDeclaration);
+        const bindingElements = map22(refactorableParameters, createBindingElementFromParameterDeclaration);
         const objectParameterName = factory.createObjectBindingPattern(bindingElements);
         const objectParameterType = createParameterTypeNode(refactorableParameters);
         let objectInitializer;
@@ -198501,7 +198501,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return element;
         }
         function createParameterTypeNode(parameters) {
-          const members = map21(parameters, createPropertySignatureFromParameterDeclaration);
+          const members = map22(parameters, createPropertySignatureFromParameterDeclaration);
           const typeNode = addEmitFlags(
             factory.createTypeLiteralNode(members),
             1
@@ -198776,7 +198776,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           i = newIndex - 1;
           const isLast = i === nodes.length - 1;
           if (isTemplateExpression(currentNode)) {
-            const spans = map21(currentNode.templateSpans, (span, index) => {
+            const spans = map22(currentNode.templateSpans, (span, index) => {
               copyExpressionComments(span);
               const isLastSpan = index === currentNode.templateSpans.length - 1;
               const text = span.literal.text + (isLastSpan ? subsequentText : "");
@@ -200403,8 +200403,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getPropertyAssignmentsForWritesAndVariableDeclarations(exposedVariableDeclarations, writes) {
-        const variableAssignments = map21(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
-        const writeAssignments = map21(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
+        const variableAssignments = map22(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
+        const writeAssignments = map22(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
         return variableAssignments === void 0 ? writeAssignments : writeAssignments === void 0 ? variableAssignments : variableAssignments.concat(writeAssignments);
       }
       function isReadonlyArray(v) {
@@ -201929,7 +201929,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function displayPartsToString(displayParts) {
         if (displayParts) {
-          return map21(displayParts, (displayPart2) => displayPart2.text).join("");
+          return map22(displayParts, (displayPart2) => displayPart2.text).join("");
         }
         return "";
       }
@@ -203292,7 +203292,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             const multiLineCommentStart = /(?:\/\*+\s*)/.source;
             const anyNumberOfSpacesAndAsterisksAtStartOfLine = /(?:^(?:\s|\*)*)/.source;
             const preamble = "(" + anyNumberOfSpacesAndAsterisksAtStartOfLine + "|" + singleLineCommentStart + "|" + multiLineCommentStart + ")";
-            const literals = "(?:" + map21(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
+            const literals = "(?:" + map22(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
             const endOfLineOrEndOfComment = /(?:$|\*\/)/.source;
             const messageRemainder = /(?:.*?)/.source;
             const messagePortion = "(" + literals + messageRemainder + ")";
@@ -204231,9 +204231,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         let declarations;
         if (symbol2 && symbol2.declarations) {
           const indices = indicesOf(symbol2.declarations);
-          const keys = map21(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
+          const keys = map22(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
           indices.sort((a, b) => compareStringsCaseSensitive(keys[a].file, keys[b].file) || keys[a].pos - keys[b].pos);
-          const sortedDeclarations = map21(indices, (i) => symbol2.declarations[i]);
+          const sortedDeclarations = map22(indices, (i) => symbol2.declarations[i]);
           let lastDecl;
           for (const decl of sortedDeclarations) {
             if (isValidCallHierarchyDeclaration(decl)) {
@@ -204369,7 +204369,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return { from: from16, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
-        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map21(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map22(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getIncomingCalls(program2, declaration, cancellationToken) {
         if (isSourceFile(declaration) || isModuleDeclaration(declaration) || isClassStaticBlockDeclaration(declaration)) {
@@ -204555,7 +204555,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return { to, fromSpans };
       }
       function convertCallSiteGroupToOutgoingCall(program2, entries) {
-        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map21(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map22(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getOutgoingCalls(program2, declaration) {
         if (declaration.flags & 33554432 || isMethodSignature(declaration)) {
@@ -204668,7 +204668,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getFixes(context) {
         const diagnostics = getDiagnostics(context);
         const registrations = errorCodeToFixes.get(String(context.errorCode));
-        return flatMap(registrations, (f) => map21(f.getCodeActions(context), removeFixIdIfFixAllUnavailable(f, diagnostics)));
+        return flatMap(registrations, (f) => map22(f.getCodeActions(context), removeFixIdIfFixAllUnavailable(f, diagnostics)));
       }
       function getAllFixes(context) {
         return fixIdToRegistration.get(cast(context.fixId, isString)).getAllCodeActions(context);
@@ -205504,7 +205504,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function transformJSDocTypeLiteral(node) {
-        const typeNode = factory.createTypeLiteralNode(map21(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
+        const typeNode = factory.createTypeLiteralNode(map22(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
           /*modifiers*/
           void 0,
           isIdentifier(tag.name) ? tag.name : tag.name.right,
@@ -206775,7 +206775,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function convertVariableStatement(sourceFile, statement, changes, checker, identifiers, target, quotePreference) {
         const { declarationList } = statement;
         let foundImport = false;
-        const converted = map21(declarationList.declarations, (decl) => {
+        const converted = map22(declarationList.declarations, (decl) => {
           const { name: name2, initializer: initializer3 } = decl;
           if (initializer3) {
             if (isExportsOrModuleExportsOrAlias(sourceFile, initializer3)) {
@@ -207096,9 +207096,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return name2;
       }
       function collectFreeIdentifiers(file2) {
-        const map22 = createMultiMap();
-        forEachFreeIdentifier(file2, (id) => map22.add(id.text, id));
-        return map22;
+        const map23 = createMultiMap();
+        forEachFreeIdentifier(file2, (id) => map23.add(id.text, id));
+        return map23;
       }
       function forEachFreeIdentifier(node, cb) {
         if (isIdentifier(node) && isFreeIdentifier(node)) cb(node);
@@ -209900,7 +209900,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         ));
       }
       function createExportSpecifiers(names, allowTypeModifier) {
-        return factory.createNodeArray(map21(names, (n) => factory.createExportSpecifier(
+        return factory.createNodeArray(map22(names, (n) => factory.createExportSpecifier(
           allowTypeModifier && n.isTypeOnly,
           /*propertyName*/
           void 0,
@@ -210786,7 +210786,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const checker = context.program.getTypeChecker();
         const jsxAttributesNode = info.parentDeclaration.attributes;
         const hasSpreadAttribute = some(jsxAttributesNode.properties, isJsxSpreadAttribute);
-        const attrs = map21(info.attributes, (attr) => {
+        const attrs = map22(info.attributes, (attr) => {
           const value = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(attr), info.parentDeclaration);
           const name2 = factory.createIdentifier(attr.name);
           const jsxAttribute = factory.createJsxAttribute(name2, factory.createJsxExpression(
@@ -210807,7 +210807,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const quotePreference = getQuotePreference(context.sourceFile, context.preferences);
         const target = getEmitScriptTarget(context.program.getCompilerOptions());
         const checker = context.program.getTypeChecker();
-        const props = map21(info.properties, (prop) => {
+        const props = map22(info.properties, (prop) => {
           const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), info.parentDeclaration);
           return factory.createPropertyAssignment(createPropertyNameFromSymbol(prop, target, quotePreference, checker), initializer3);
         });
@@ -210889,7 +210889,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return factory.createArrayLiteralExpression();
         }
         if (isObjectLiteralType(type2)) {
-          const props = map21(checker.getPropertiesOfType(type2), (prop) => {
+          const props = map22(checker.getPropertiesOfType(type2), (prop) => {
             const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), enclosingDeclaration);
             return factory.createPropertyAssignment(prop.name, initializer3);
           });
@@ -211227,7 +211227,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function updateParameters(importAdder, scriptTarget, node, newParameters) {
-        const parameters = map21(node.parameters, (p) => factory.createParameterDeclaration(
+        const parameters = map22(node.parameters, (p) => factory.createParameterDeclaration(
           p.modifiers,
           p.dotDotDotToken,
           p.name,
@@ -211805,7 +211805,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           jsDocParameterTag.isNameFirst,
           jsDocParameterTag.comment
         );
-        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map21(tags, (t) => t === jsDocParameterTag ? newJSDocParameterTag : t)));
+        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map22(tags, (t) => t === jsDocParameterTag ? newJSDocParameterTag : t)));
         return createCodeFixActionWithoutFixAll(renameUnmatchedParameter, changes, [Diagnostics.Rename_param_tag_name_0_to_1, name2.getText(sourceFile), parameterName]);
       }
       function getInfo14(sourceFile, pos) {
@@ -211921,7 +211921,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               const elements = token.parent.elements;
               const diagnostic = [
                 elements.length > 1 ? Diagnostics.Remove_unused_declarations_for_Colon_0 : Diagnostics.Remove_unused_declaration_for_Colon_0,
-                map21(elements, (e) => e.getText(sourceFile)).join(", ")
+                map22(elements, (e) => e.getText(sourceFile)).join(", ")
               ];
               return [
                 createDeleteFix(ts_textChanges_exports.ChangeTracker.with(context, (t) => deleteDestructuringElements(t, sourceFile, token.parent)), diagnostic)
@@ -213882,7 +213882,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             ));
           }
         } else {
-          const paramTags = map21(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
+          const paramTags = map22(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
             /*tagName*/
             void 0,
             name2,
@@ -215016,8 +215016,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const isJs = isInJSFile(contextNode);
         const { typeArguments, arguments: args, parent: parent2 } = call;
         const contextualType = isJs ? void 0 : checker.getContextualType(call);
-        const names = map21(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
-        const instanceTypes = isJs ? [] : map21(args, (arg) => checker.getTypeAtLocation(arg));
+        const names = map22(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
+        const instanceTypes = isJs ? [] : map22(args, (arg) => checker.getTypeAtLocation(arg));
         const { argumentTypeNodes, argumentTypeParameters } = getArgumentTypesAndTypeParameters(
           checker,
           importAdder,
@@ -215325,7 +215325,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function getReturnTypeFromSignatures(signatures, checker, context, enclosingDeclaration) {
         if (length(signatures)) {
-          const type2 = checker.getUnionType(map21(signatures, checker.getReturnTypeOfSignature));
+          const type2 = checker.getUnionType(map22(signatures, checker.getReturnTypeOfSignature));
           return checker.typeToTypeNode(type2, enclosingDeclaration, 1, 8, getNoopSymbolTrackerWithResolver(context));
         }
       }
@@ -217330,7 +217330,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           if (elements.length === 0) {
             return void 0;
           }
-          const newClauses = map21(elements, (element) => factory.createCaseClause(element, []));
+          const newClauses = map22(elements, (element) => factory.createCaseClause(element, []));
           const newLineChar = getNewLineOrDefaultFromHost(host, formatContext == null ? void 0 : formatContext.options);
           const printer = createSnippetPrinter({
             removeComments: true,
@@ -217340,7 +217340,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             newLine: getNewLineKind(newLineChar)
           });
           const printNode = formatContext ? (node) => printer.printAndFormatNode(4, node, sourceFile, formatContext) : (node) => printer.printNode(4, node, sourceFile);
-          const insertText = map21(newClauses, (clause, i) => {
+          const insertText = map22(newClauses, (clause, i) => {
             if (preferences.includeCompletionsWithSnippetText) {
               return `${printNode(clause)}$${i + 1}`;
             }
@@ -220772,17 +220772,17 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         ]: 2
       };
       function createNameAndKindSet() {
-        const map22 = /* @__PURE__ */ new Map();
+        const map23 = /* @__PURE__ */ new Map();
         function add(value) {
-          const existing = map22.get(value.name);
+          const existing = map23.get(value.name);
           if (!existing || kindPrecedence[existing.kind] < kindPrecedence[value.kind]) {
-            map22.set(value.name, value);
+            map23.set(value.name, value);
           }
         }
         return {
           add,
-          has: map22.has.bind(map22),
-          values: map22.values.bind(map22)
+          has: map23.has.bind(map23),
+          values: map23.values.bind(map23)
         };
       }
       function getStringLiteralCompletions(sourceFile, position, contextToken, options, host, program2, log, preferences, includeSymbol) {
@@ -222164,22 +222164,22 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return refs;
       }
       function getDirectImportsMap(sourceFiles, checker, cancellationToken) {
-        const map22 = /* @__PURE__ */ new Map();
+        const map23 = /* @__PURE__ */ new Map();
         for (const sourceFile of sourceFiles) {
           if (cancellationToken) cancellationToken.throwIfCancellationRequested();
           forEachImport(sourceFile, (importDecl, moduleSpecifier) => {
             const moduleSymbol = checker.getSymbolAtLocation(moduleSpecifier);
             if (moduleSymbol) {
               const id = getSymbolId(moduleSymbol).toString();
-              let imports = map22.get(id);
+              let imports = map23.get(id);
               if (!imports) {
-                map22.set(id, imports = []);
+                map23.set(id, imports = []);
               }
               imports.push(importDecl);
             }
           });
         }
-        return map22;
+        return map23;
       }
       function forEachPossibleImportOrExportStatement(sourceFileLike, action) {
         return forEach(sourceFileLike.kind === 308 ? sourceFileLike.statements : sourceFileLike.body.statements, (statement) => (
@@ -222567,7 +222567,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
         }
         const checker = program2.getTypeChecker();
-        return map21(referenceEntries, (entry) => toImplementationLocation(entry, checker));
+        return map22(referenceEntries, (entry) => toImplementationLocation(entry, checker));
       }
       function getImplementationReferenceEntries(program2, cancellationToken, sourceFiles, node, position) {
         if (node.kind === 308) {
@@ -222590,7 +222590,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function findReferenceOrRenameEntries(program2, cancellationToken, sourceFiles, node, position, options, convertEntry) {
-        return map21(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
+        return map22(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
       }
       function getReferenceEntriesForNode(position, node, program2, sourceFiles, cancellationToken, options = {}, sourceFilesSet = new Set(sourceFiles.map((f) => f.fileName))) {
         return flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options, sourceFilesSet));
@@ -224470,7 +224470,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           const staticBlocks = filter3(classDecl.members, isClassStaticBlockDeclaration);
           const containerName = symbol22 ? typeChecker.symbolToString(symbol22, classDecl) : "";
           const sourceFile2 = node.getSourceFile();
-          return map21(staticBlocks, (staticBlock) => {
+          return map22(staticBlocks, (staticBlock) => {
             let { pos } = moveRangePastModifiers(staticBlock);
             pos = skipTrivia(sourceFile2.text, pos);
             return createDefinitionInfoFromName(
@@ -224810,7 +224810,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         const withoutExpandos = filter3(filteredDeclarations, (d) => !isExpandoDeclaration(d));
         const results = some(withoutExpandos) ? withoutExpandos : filteredDeclarations;
-        return map21(results, (declaration) => createDefinitionInfo(
+        return map22(results, (declaration) => createDefinitionInfo(
           declaration,
           typeChecker,
           symbol2,
@@ -226037,7 +226037,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getJSDocTagNameCompletions() {
-        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map21(jsDocTagNames, (tagName) => {
+        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map22(jsDocTagNames, (tagName) => {
           return {
             name: tagName,
             kind: "keyword",
@@ -226048,7 +226048,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       var getJSDocTagNameCompletionDetails = getJSDocTagCompletionDetails;
       function getJSDocTagCompletions() {
-        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map21(jsDocTagNames, (tagName) => {
+        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map22(jsDocTagNames, (tagName) => {
           return {
             name: `@${tagName}`,
             kind: "keyword",
@@ -226880,7 +226880,7 @@ ${content}
         return isString(moduleSpecifierText) && some(sourceFile.moduleAugmentations, (moduleName) => isStringLiteral(moduleName) && moduleName.text === moduleSpecifierText);
       }
       function getNewImportSpecifiers(namedImports) {
-        return flatMap(namedImports, (namedImport) => map21(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
+        return flatMap(namedImports, (namedImport) => map22(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
           importSpecifier,
           importSpecifier.isTypeOnly,
           /*propertyName*/
@@ -228046,7 +228046,7 @@ ${content}
           /*meaning*/
           void 0
         ) : emptyArray;
-        const items = map21(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
+        const items = map22(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
         let selectedItemIndex = 0;
         let itemsSeen = 0;
         for (let i = 0; i < items.length; i++) {
@@ -228106,7 +228106,7 @@ ${content}
       ), spacePart()];
       function getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, checker, enclosingDeclaration, sourceFile) {
         const infos = (isTypeParameterList ? itemInfoForTypeParameters : itemInfoForParameters)(candidateSignature, checker, enclosingDeclaration, sourceFile);
-        return map21(infos, ({ isVariadic, parameters, prefix, suffix }) => {
+        return map22(infos, ({ isVariadic, parameters, prefix, suffix }) => {
           const prefixDisplayParts = [...callTargetDisplayParts, ...prefix];
           const suffixDisplayParts = [...suffix, ...returnTypeToDisplayParts(candidateSignature, enclosingDeclaration, checker)];
           const documentation = candidateSignature.getDocumentationComment(checker);
@@ -228144,7 +228144,7 @@ ${content}
         const parameters = (typeParameters || emptyArray).map((t) => createSignatureHelpParameterForTypeParameter(t, checker, enclosingDeclaration, sourceFile, printer));
         const thisParameter = candidateSignature.thisParameter ? [checker.symbolToParameterDeclaration(candidateSignature.thisParameter, enclosingDeclaration, signatureHelpNodeBuilderFlags)] : [];
         return checker.getExpandedParameters(candidateSignature).map((paramList) => {
-          const params = factory.createNodeArray([...thisParameter, ...map21(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
+          const params = factory.createNodeArray([...thisParameter, ...map22(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
           const parameterParts = mapToDisplayParts((writer) => {
             printer.writeList(2576, params, sourceFile, writer);
           });
@@ -233048,9 +233048,9 @@ ${options.prefix}` : "\n" : options.prefix
         return mask2;
       }
       function createRulesMap(rules) {
-        const map22 = buildMap(rules);
+        const map23 = buildMap(rules);
         return (context) => {
-          const bucket = map22[getRuleBucketIndex(context.currentTokenSpan.kind, context.nextTokenSpan.kind)];
+          const bucket = map23[getRuleBucketIndex(context.currentTokenSpan.kind, context.nextTokenSpan.kind)];
           if (bucket) {
             const rules2 = [];
             let ruleActionMask = 0;
@@ -233068,22 +233068,22 @@ ${options.prefix}` : "\n" : options.prefix
         };
       }
       function buildMap(rules) {
-        const map22 = new Array(mapRowLength * mapRowLength);
-        const rulesBucketConstructionStateList = new Array(map22.length);
+        const map23 = new Array(mapRowLength * mapRowLength);
+        const rulesBucketConstructionStateList = new Array(map23.length);
         for (const rule2 of rules) {
           const specificRule = rule2.leftTokenRange.isSpecific && rule2.rightTokenRange.isSpecific;
           for (const left of rule2.leftTokenRange.tokens) {
             for (const right of rule2.rightTokenRange.tokens) {
               const index = getRuleBucketIndex(left, right);
-              let rulesBucket = map22[index];
+              let rulesBucket = map23[index];
               if (rulesBucket === void 0) {
-                rulesBucket = map22[index] = [];
+                rulesBucket = map23[index] = [];
               }
               addRule(rulesBucket, rule2.rule, specificRule, rulesBucketConstructionStateList, index);
             }
           }
         }
-        return map22;
+        return map23;
       }
       function getRuleBucketIndex(row, column) {
         Debug.assert(row <= 166 && column <= 166, "Must compute formatting context from tokens");
@@ -236661,7 +236661,7 @@ ${options.prefix}` : "\n" : options.prefix
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map21,
+        map: () => map22,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -237776,19 +237776,19 @@ ${options.prefix}` : "\n" : options.prefix
         return fileName;
       }
       function createNormalizedPathMap() {
-        const map22 = /* @__PURE__ */ new Map();
+        const map23 = /* @__PURE__ */ new Map();
         return {
           get(path2) {
-            return map22.get(path2);
+            return map23.get(path2);
           },
           set(path2, value) {
-            map22.set(path2, value);
+            map23.set(path2, value);
           },
           contains(path2) {
-            return map22.has(path2);
+            return map23.has(path2);
           },
           remove(path2) {
-            map22.delete(path2);
+            map23.delete(path2);
           }
         };
       }
@@ -239336,7 +239336,7 @@ ${options.prefix}` : "\n" : options.prefix
           if (!this.languageServiceEnabled) {
             return this.getRootScriptInfos();
           }
-          return map21(this.program.getSourceFiles(), (sourceFile) => {
+          return map22(this.program.getSourceFiles(), (sourceFile) => {
             const scriptInfo = this.projectService.getScriptInfoForPath(sourceFile.resolvedPath);
             Debug.assert(!!scriptInfo, "getScriptInfo", () => `scriptInfo for a file '${sourceFile.fileName}' Path: '${sourceFile.path}' / '${sourceFile.resolvedPath}' is missing.`);
             return scriptInfo;
@@ -241017,17 +241017,17 @@ ${options.prefix}` : "\n" : options.prefix
       var CloseFileWatcherEvent = "closeFileWatcher";
       var ensureProjectForOpenFileSchedule = "*ensureProjectForOpenFiles*";
       function prepareConvertersForEnumLikeCompilerOptions(commandLineOptions) {
-        const map22 = /* @__PURE__ */ new Map();
+        const map23 = /* @__PURE__ */ new Map();
         for (const option of commandLineOptions) {
           if (typeof option.type === "object") {
             const optionMap = option.type;
             optionMap.forEach((value) => {
               Debug.assert(typeof value === "number");
             });
-            map22.set(option.name, optionMap);
+            map23.set(option.name, optionMap);
           }
         }
-        return map22;
+        return map23;
       }
       var compilerOptionConverters = prepareConvertersForEnumLikeCompilerOptions(optionDeclarations);
       var watchOptionsConverters = prepareConvertersForEnumLikeCompilerOptions(optionsForWatch);
@@ -244827,7 +244827,7 @@ Dynamic files must always be opened with service's current directory or service 
         async enableRequestedPluginsWorker(pendingPlugins) {
           Debug.assert(this.currentPluginEnablementPromise === void 0);
           let sendProjectsUpdatedInBackgroundEvent = false;
-          await Promise.all(map21(pendingPlugins, async ([project, promises]) => {
+          await Promise.all(map22(pendingPlugins, async ([project, promises]) => {
             const results = await Promise.all(promises);
             if (project.isClosed() || isProjectDeferredClose(project)) {
               this.logger.info(`Cancelling plugin enabling for ${project.getProjectName()} as it is ${project.isClosed() ? "closed" : "deferred close"}`);
@@ -245163,7 +245163,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source: diag2.source,
-          relatedInformation: map21(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map22(diag2.relatedInformation, formatRelatedInformation)
         };
       }
       function formatRelatedInformation(info) {
@@ -245204,7 +245204,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source,
-          relatedInformation: map21(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map22(diag2.relatedInformation, formatRelatedInformation)
         };
         return includeFileName ? { ...common2, fileName: diag2.file && diag2.file.fileName } : common2;
       }
@@ -245717,7 +245717,7 @@ ${json3}${newLine}`;
               if (!result.some((p) => p.projectErrors && p.projectErrors.length !== 0)) {
                 return this.requiredResponse(result);
               }
-              const converted = map21(result, (p) => {
+              const converted = map22(result, (p) => {
                 if (!p.projectErrors || p.projectErrors.length === 0) {
                   return p;
                 }
@@ -246789,7 +246789,7 @@ ${json3}${newLine}`;
               this.event({
                 triggerFile: event.data.triggerFile,
                 configFile: event.data.configFileName,
-                diagnostics: map21(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
+                diagnostics: map22(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
                   diagnostic,
                   /*includeFileName*/
                   true
@@ -247130,7 +247130,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             concatenate(projectErrors, optionsErrors),
             (diagnostic) => !!diagnostic.file && diagnostic.file.fileName === configFile
           );
-          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map21(
+          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map22(
             diagnosticsForConfigFile,
             (diagnostic) => formatDiagnosticToProtocol(
               diagnostic,
@@ -247155,7 +247155,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             // TODO: GH#18217
             reportsUnnecessary: d.reportsUnnecessary,
             reportsDeprecated: d.reportsDeprecated,
-            relatedInformation: map21(d.relatedInformation, formatRelatedInformation)
+            relatedInformation: map22(d.relatedInformation, formatRelatedInformation)
           }));
         }
         getCompilerOptionsDiagnostics(args) {
@@ -247183,7 +247183,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
               endLocation: scriptInfo && scriptInfo.positionToLineOffset(d.start + d.length),
               reportsUnnecessary: d.reportsUnnecessary,
               reportsDeprecated: d.reportsDeprecated,
-              relatedInformation: map21(d.relatedInformation, formatRelatedInformation)
+              relatedInformation: map22(d.relatedInformation, formatRelatedInformation)
             })
           );
         }
@@ -247763,14 +247763,14 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           }
         }
         toSpanGroups(locations) {
-          const map22 = /* @__PURE__ */ new Map();
+          const map23 = /* @__PURE__ */ new Map();
           for (const { fileName, textSpan, contextSpan, originalContextSpan: _2, originalTextSpan: _3, originalFileName: _1, ...prefixSuffixText } of locations) {
-            let group2 = map22.get(fileName);
-            if (!group2) map22.set(fileName, group2 = { file: fileName, locs: [] });
+            let group2 = map23.get(fileName);
+            if (!group2) map23.set(fileName, group2 = { file: fileName, locs: [] });
             const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(fileName));
             group2.locs.push({ ...toProtocolTextSpanWithContext(textSpan, contextSpan, scriptInfo), ...prefixSuffixText });
           }
-          return arrayFrom(map22.values());
+          return arrayFrom(map23.values());
         }
         getReferences(args, simplifiedResult) {
           const file2 = toNormalizedPath(args.file);
@@ -248090,7 +248090,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             false
           ) })) : result.map((details) => ({
             ...details,
-            codeActions: map21(details.codeActions, (action) => this.mapCodeAction(action)),
+            codeActions: map22(details.codeActions, (action) => this.mapCodeAction(action)),
             documentation: this.mapDisplayParts(details.documentation, project),
             tags: this.mapJSDocTagInfo(details.tags, project, useDisplayParts)
           }));
@@ -248230,7 +248230,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           this.projectService.closeClientFile(file2);
         }
         mapLocationNavigationBarItems(items, scriptInfo) {
-          return map21(items, (item) => ({
+          return map22(items, (item) => ({
             text: item.text,
             kind: item.kind,
             kindModifiers: item.kindModifiers,
@@ -248251,7 +248251,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             kindModifiers: tree.kindModifiers,
             spans: tree.spans.map((span) => toProtocolTextSpan(span, scriptInfo)),
             nameSpan: tree.nameSpan && toProtocolTextSpan(tree.nameSpan, scriptInfo),
-            childItems: map21(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
+            childItems: map22(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
           };
         }
         getNavigationTree(args, simplifiedResult) {
@@ -248643,7 +248643,7 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
           const { locations } = args;
           const { file: file2, languageService } = this.getFileAndLanguageServiceForSyntacticOperation(args);
           const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(file2));
-          return map21(locations, (location) => {
+          return map22(locations, (location) => {
             const pos = this.getPosition(location, scriptInfo);
             const selectionRange = languageService.getSmartSelectionRange(file2, pos);
             return simplifiedResult ? this.mapSelectionRange(selectionRange, scriptInfo) : selectionRange;
@@ -251656,19 +251656,19 @@ is not a problem with esbuild. You need to fix your environment instead.
       };
     };
     function createObjectStash() {
-      const map21 = /* @__PURE__ */ new Map();
+      const map22 = /* @__PURE__ */ new Map();
       let nextID = 0;
       return {
         clear() {
-          map21.clear();
+          map22.clear();
         },
         load(id) {
-          return map21.get(id);
+          return map22.get(id);
         },
         store(value) {
           if (value === void 0) return -1;
           const id = nextID++;
-          map21.set(id, value);
+          map22.set(id, value);
           return id;
         }
       };
@@ -251857,10 +251857,10 @@ ${file2}:${line}:${column}: ERROR: ${pluginText}${e.text}`;
       }
       return result;
     }
-    function sanitizeStringMap(map21, property) {
+    function sanitizeStringMap(map22, property) {
       const result = /* @__PURE__ */ Object.create(null);
-      for (const key in map21) {
-        const value = map21[key];
+      for (const key in map22) {
+        const value = map22[key];
         if (typeof value !== "string") throw new Error(`key ${quote(key)} in object ${quote(property)} must be a string`);
         result[key] = value;
       }
@@ -252520,90 +252520,6 @@ error: ${text}`);
   }
 });
 
-// src/commands/build/build.ts
-var build_exports = {};
-__export(build_exports, {
-  default: () => build_default
-});
-var import_esbuild_decorators, build_default;
-var init_build = __esm({
-  "src/commands/build/build.ts"() {
-    import_esbuild_decorators = __toESM(require_src());
-    init_log();
-    build_default = async (args) => {
-      Logger.info(
-        `\u{1F528} Bundling ${args.files?.length ? args.files.join("") : "index.ts"}`
-      );
-      const time3 = Date.now();
-      return (await Promise.resolve().then(() => __toESM(require_main()))).build({
-        entryPoints: args.files?.length ? args.files : ["index.ts"],
-        bundle: args.bundle ?? true,
-        minify: args.minify ?? false,
-        platform: args.platform ?? "node",
-        target: args.target ?? "node14.4",
-        outfile: args.outfile ?? "index.js",
-        external: args.external ?? [],
-        plugins: [
-          (0, import_esbuild_decorators.esbuildDecorators)({
-            tsconfig: "tsconfig.json",
-            cwd: process.cwd()
-          })
-        ]
-      }).then((data) => {
-        if (data.warnings.length) {
-          Logger.warn(data.warnings);
-        }
-        if (data.errors.length) {
-          Logger.error(data.errors);
-        }
-        Logger.warn(`\u{1F3D7}\uFE0F  Bundling finish in ${Date.now() - time3}ms`);
-        Logger.info(
-          `\u2705 Finished bundling output file ${args.outfile ?? "index.js"}`
-        );
-      }).catch((e) => {
-        console.error(e);
-        process.exit(1);
-      });
-    };
-  }
-});
-
-// src/commands/environment/list-environments.ts
-var list_environments_exports = {};
-__export(list_environments_exports, {
-  default: () => list_environments_default
-});
-var import_operators5, list_environments_default;
-var init_list_environments = __esm({
-  "src/commands/environment/list-environments.ts"() {
-    import_operators5 = __toESM(require_operators());
-    init_helpers();
-    init_gql_client();
-    init_log();
-    list_environments_default = (cmd) => parseProjectId(cmd.project).pipe(
-      (0, import_operators5.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
-      (0, import_operators5.tap)((data) => {
-        const columns = [
-          "id",
-          "name",
-          "image",
-          "builder",
-          "poolSize",
-          "minCpu",
-          "maxCpu",
-          "minMemory",
-          "maxMemory",
-          "region"
-        ];
-        Logger.log("-------------------");
-        Logger.log("[Action][listEnvironments]");
-        Logger.table(data, columns);
-        Logger.log("-------------------");
-      })
-    ).toPromise();
-  }
-});
-
 // ../../node_modules/js-yaml/dist/js-yaml.mjs
 function isNothing(subject) {
   return typeof subject === "undefined" || subject === null;
@@ -252732,11 +252648,11 @@ function makeSnippet(mark, options) {
   }
   return result.replace(/\n$/, "");
 }
-function compileStyleAliases(map21) {
+function compileStyleAliases(map22) {
   var result = {};
-  if (map21 !== null) {
-    Object.keys(map21).forEach(function(style) {
-      map21[style].forEach(function(alias) {
+  if (map22 !== null) {
+    Object.keys(map22).forEach(function(style) {
+      map22[style].forEach(function(alias) {
         result[String(alias)] = style;
       });
     });
@@ -253025,9 +252941,9 @@ function resolveYamlMerge(data) {
 }
 function resolveYamlBinary(data) {
   if (data === null) return false;
-  var code, idx, bitlen = 0, max = data.length, map21 = BASE64_MAP;
+  var code, idx, bitlen = 0, max = data.length, map22 = BASE64_MAP;
   for (idx = 0; idx < max; idx++) {
-    code = map21.indexOf(data.charAt(idx));
+    code = map22.indexOf(data.charAt(idx));
     if (code > 64) continue;
     if (code < 0) return false;
     bitlen += 6;
@@ -253035,14 +252951,14 @@ function resolveYamlBinary(data) {
   return bitlen % 8 === 0;
 }
 function constructYamlBinary(data) {
-  var idx, tailbits, input = data.replace(/[\r\n=]/g, ""), max = input.length, map21 = BASE64_MAP, bits = 0, result = [];
+  var idx, tailbits, input = data.replace(/[\r\n=]/g, ""), max = input.length, map22 = BASE64_MAP, bits = 0, result = [];
   for (idx = 0; idx < max; idx++) {
     if (idx % 4 === 0 && idx) {
       result.push(bits >> 16 & 255);
       result.push(bits >> 8 & 255);
       result.push(bits & 255);
     }
-    bits = bits << 6 | map21.indexOf(input.charAt(idx));
+    bits = bits << 6 | map22.indexOf(input.charAt(idx));
   }
   tailbits = max % 4 * 6;
   if (tailbits === 0) {
@@ -253058,32 +252974,32 @@ function constructYamlBinary(data) {
   return new Uint8Array(result);
 }
 function representYamlBinary(object3) {
-  var result = "", bits = 0, idx, tail, max = object3.length, map21 = BASE64_MAP;
+  var result = "", bits = 0, idx, tail, max = object3.length, map22 = BASE64_MAP;
   for (idx = 0; idx < max; idx++) {
     if (idx % 3 === 0 && idx) {
-      result += map21[bits >> 18 & 63];
-      result += map21[bits >> 12 & 63];
-      result += map21[bits >> 6 & 63];
-      result += map21[bits & 63];
+      result += map22[bits >> 18 & 63];
+      result += map22[bits >> 12 & 63];
+      result += map22[bits >> 6 & 63];
+      result += map22[bits & 63];
     }
     bits = (bits << 8) + object3[idx];
   }
   tail = max % 3;
   if (tail === 0) {
-    result += map21[bits >> 18 & 63];
-    result += map21[bits >> 12 & 63];
-    result += map21[bits >> 6 & 63];
-    result += map21[bits & 63];
+    result += map22[bits >> 18 & 63];
+    result += map22[bits >> 12 & 63];
+    result += map22[bits >> 6 & 63];
+    result += map22[bits & 63];
   } else if (tail === 2) {
-    result += map21[bits >> 10 & 63];
-    result += map21[bits >> 4 & 63];
-    result += map21[bits << 2 & 63];
-    result += map21[64];
+    result += map22[bits >> 10 & 63];
+    result += map22[bits >> 4 & 63];
+    result += map22[bits << 2 & 63];
+    result += map22[64];
   } else if (tail === 1) {
-    result += map21[bits >> 2 & 63];
-    result += map21[bits << 4 & 63];
-    result += map21[64];
-    result += map21[64];
+    result += map22[bits >> 2 & 63];
+    result += map22[bits << 4 & 63];
+    result += map22[64];
+    result += map22[64];
   }
   return result;
 }
@@ -254229,14 +254145,14 @@ function load$1(input, options) {
   }
   throw new exception("expected a single document in the stream, but found more");
 }
-function compileStyleMap(schema2, map21) {
+function compileStyleMap(schema2, map22) {
   var result, keys, index, length, tag, style, type2;
-  if (map21 === null) return {};
+  if (map22 === null) return {};
   result = {};
-  keys = Object.keys(map21);
+  keys = Object.keys(map22);
   for (index = 0, length = keys.length; index < length; index += 1) {
     tag = keys[index];
-    style = String(map21[tag]);
+    style = String(map22[tag]);
     if (tag.slice(0, 2) === "!!") {
       tag = "tag:yaml.org,2002:" + tag.slice(2);
     }
@@ -254783,7 +254699,7 @@ function renamed(from16, to) {
     throw new Error("Function yaml." + from16 + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
   };
 }
-var isNothing_1, isObject_1, toArray_1, repeat_1, isNegativeZero_1, extend_1, common, exception, snippet, TYPE_CONSTRUCTOR_OPTIONS, YAML_NODE_KINDS, type, schema, str, seq, map5, failsafe, _null, bool, int, YAML_FLOAT_PATTERN, SCIENTIFIC_WITHOUT_DOT, float, json, core, YAML_DATE_REGEXP, YAML_TIMESTAMP_REGEXP, timestamp, merge, BASE64_MAP, binary, _hasOwnProperty$3, _toString$2, omap, _toString$1, pairs, _hasOwnProperty$2, set, _default, _hasOwnProperty$1, CONTEXT_FLOW_IN, CONTEXT_FLOW_OUT, CONTEXT_BLOCK_IN, CONTEXT_BLOCK_OUT, CHOMPING_CLIP, CHOMPING_STRIP, CHOMPING_KEEP, PATTERN_NON_PRINTABLE, PATTERN_NON_ASCII_LINE_BREAKS, PATTERN_FLOW_INDICATORS, PATTERN_TAG_HANDLE, PATTERN_TAG_URI, simpleEscapeCheck, simpleEscapeMap, i, directiveHandlers, loadAll_1, load_1, loader, _toString, _hasOwnProperty, CHAR_BOM, CHAR_TAB, CHAR_LINE_FEED, CHAR_CARRIAGE_RETURN, CHAR_SPACE, CHAR_EXCLAMATION, CHAR_DOUBLE_QUOTE, CHAR_SHARP, CHAR_PERCENT, CHAR_AMPERSAND, CHAR_SINGLE_QUOTE, CHAR_ASTERISK, CHAR_COMMA, CHAR_MINUS, CHAR_COLON, CHAR_EQUALS, CHAR_GREATER_THAN, CHAR_QUESTION, CHAR_COMMERCIAL_AT, CHAR_LEFT_SQUARE_BRACKET, CHAR_RIGHT_SQUARE_BRACKET, CHAR_GRAVE_ACCENT, CHAR_LEFT_CURLY_BRACKET, CHAR_VERTICAL_LINE, CHAR_RIGHT_CURLY_BRACKET, ESCAPE_SEQUENCES, DEPRECATED_BOOLEANS_SYNTAX, DEPRECATED_BASE60_SYNTAX, QUOTING_TYPE_SINGLE, QUOTING_TYPE_DOUBLE, STYLE_PLAIN, STYLE_SINGLE, STYLE_LITERAL, STYLE_FOLDED, STYLE_DOUBLE, dump_1, dumper, load, loadAll, dump, safeLoad, safeLoadAll, safeDump;
+var isNothing_1, isObject_1, toArray_1, repeat_1, isNegativeZero_1, extend_1, common, exception, snippet, TYPE_CONSTRUCTOR_OPTIONS, YAML_NODE_KINDS, type, schema, str, seq, map4, failsafe, _null, bool, int, YAML_FLOAT_PATTERN, SCIENTIFIC_WITHOUT_DOT, float, json, core, YAML_DATE_REGEXP, YAML_TIMESTAMP_REGEXP, timestamp, merge, BASE64_MAP, binary, _hasOwnProperty$3, _toString$2, omap, _toString$1, pairs, _hasOwnProperty$2, set, _default, _hasOwnProperty$1, CONTEXT_FLOW_IN, CONTEXT_FLOW_OUT, CONTEXT_BLOCK_IN, CONTEXT_BLOCK_OUT, CHOMPING_CLIP, CHOMPING_STRIP, CHOMPING_KEEP, PATTERN_NON_PRINTABLE, PATTERN_NON_ASCII_LINE_BREAKS, PATTERN_FLOW_INDICATORS, PATTERN_TAG_HANDLE, PATTERN_TAG_URI, simpleEscapeCheck, simpleEscapeMap, i, directiveHandlers, loadAll_1, load_1, loader, _toString, _hasOwnProperty, CHAR_BOM, CHAR_TAB, CHAR_LINE_FEED, CHAR_CARRIAGE_RETURN, CHAR_SPACE, CHAR_EXCLAMATION, CHAR_DOUBLE_QUOTE, CHAR_SHARP, CHAR_PERCENT, CHAR_AMPERSAND, CHAR_SINGLE_QUOTE, CHAR_ASTERISK, CHAR_COMMA, CHAR_MINUS, CHAR_COLON, CHAR_EQUALS, CHAR_GREATER_THAN, CHAR_QUESTION, CHAR_COMMERCIAL_AT, CHAR_LEFT_SQUARE_BRACKET, CHAR_RIGHT_SQUARE_BRACKET, CHAR_GRAVE_ACCENT, CHAR_LEFT_CURLY_BRACKET, CHAR_VERTICAL_LINE, CHAR_RIGHT_CURLY_BRACKET, ESCAPE_SEQUENCES, DEPRECATED_BOOLEANS_SYNTAX, DEPRECATED_BASE60_SYNTAX, QUOTING_TYPE_SINGLE, QUOTING_TYPE_DOUBLE, STYLE_PLAIN, STYLE_SINGLE, STYLE_LITERAL, STYLE_FOLDED, STYLE_DOUBLE, dump_1, dumper, load, loadAll, dump, safeLoad, safeLoadAll, safeDump;
 var init_js_yaml = __esm({
   "../../node_modules/js-yaml/dist/js-yaml.mjs"() {
     isNothing_1 = isNothing;
@@ -254875,7 +254791,7 @@ var init_js_yaml = __esm({
         return data !== null ? data : [];
       }
     });
-    map5 = new type("tag:yaml.org,2002:map", {
+    map4 = new type("tag:yaml.org,2002:map", {
       kind: "mapping",
       construct: function(data) {
         return data !== null ? data : {};
@@ -254885,7 +254801,7 @@ var init_js_yaml = __esm({
       explicit: [
         str,
         seq,
-        map5
+        map4
       ]
     });
     _null = new type("tag:yaml.org,2002:null", {
@@ -255192,40 +255108,147 @@ var init_js_yaml = __esm({
 });
 
 // src/commands/lambda/helpers/load-spec.ts
-var import_rxjs6, import_operators6, loadSpec;
+var import_rxjs5, import_operators4, loadSpec;
 var init_load_spec = __esm({
   "src/commands/lambda/helpers/load-spec.ts"() {
     init_js_yaml();
-    import_rxjs6 = __toESM(require_cjs());
-    import_operators6 = __toESM(require_operators());
+    import_rxjs5 = __toESM(require_cjs());
+    import_operators4 = __toESM(require_operators());
     init_read_file();
-    loadSpec = (spec) => (0, import_rxjs6.combineLatest)([
+    loadSpec = (spec) => (0, import_rxjs5.combineLatest)([
       readFileAsObservable(spec).pipe(
-        (0, import_operators6.map)((spec2) => JSON.parse(spec2)),
-        (0, import_operators6.catchError)(
-          () => (0, import_rxjs6.from)(readFileAsObservable(spec)).pipe(
-            (0, import_operators6.map)((file2) => load(file2)),
-            (0, import_operators6.catchError)(() => (0, import_rxjs6.of)(false))
+        (0, import_operators4.map)((spec2) => JSON.parse(spec2)),
+        (0, import_operators4.catchError)(
+          () => (0, import_rxjs5.from)(readFileAsObservable(spec)).pipe(
+            (0, import_operators4.map)((file2) => load(file2)),
+            (0, import_operators4.catchError)(() => (0, import_rxjs5.of)(false))
           )
         )
       ),
       readFileAsObservable("lambforge.yaml").pipe(
-        (0, import_operators6.map)((data) => load(data)),
-        (0, import_operators6.catchError)(() => (0, import_rxjs6.of)(false))
+        (0, import_operators4.map)((data) => load(data)),
+        (0, import_operators4.catchError)(() => (0, import_rxjs5.of)(false))
       ),
       readFileAsObservable("spec.json").pipe(
-        (0, import_operators6.map)((spec2) => JSON.parse(spec2)),
-        (0, import_operators6.catchError)(() => (0, import_rxjs6.of)(false))
+        (0, import_operators4.map)((spec2) => JSON.parse(spec2)),
+        (0, import_operators4.catchError)(() => (0, import_rxjs5.of)(false))
       ),
       readFileAsObservable("spec.yaml").pipe(
-        (0, import_operators6.map)((data) => load(data)),
-        (0, import_operators6.catchError)(() => (0, import_rxjs6.of)(false))
+        (0, import_operators4.map)((data) => load(data)),
+        (0, import_operators4.catchError)(() => (0, import_rxjs5.of)(false))
       )
     ]).pipe(
-      (0, import_operators6.map)(
+      (0, import_operators4.map)(
         ([custom2, lambforge, json3, yaml]) => custom2 || lambforge || json3 || yaml
       )
     );
+  }
+});
+
+// src/commands/build/build.ts
+var build_exports = {};
+__export(build_exports, {
+  default: () => build_default
+});
+var import_esbuild_decorators, import_esbuild, import_rxjs6, import_operators5, build_default;
+var init_build = __esm({
+  "src/commands/build/build.ts"() {
+    import_esbuild_decorators = __toESM(require_src());
+    import_esbuild = __toESM(require_main());
+    import_rxjs6 = __toESM(require_cjs());
+    import_operators5 = __toESM(require_operators());
+    init_log();
+    init_load_spec();
+    build_default = async (args) => {
+      const time3 = Date.now();
+      return (0, import_rxjs6.lastValueFrom)(
+        loadSpec().pipe(
+          (0, import_operators5.tap)((config2) => {
+            Logger.info(
+              `\u{1F528} Bundling ${args.files?.length ? args.files.join("") : config2?.function?.file ?? config2?.file ?? "index.ts"}`
+            );
+          }),
+          (0, import_operators5.switchMap)(
+            (config2) => (0, import_rxjs6.of)(config2).pipe(
+              (0, import_operators5.map)((config3) => ({
+                esbuild: import_esbuild.default,
+                options: {
+                  entryPoints: args.files?.length ? args.files : [config3?.function?.file ?? config3?.file ?? "index.ts"],
+                  bundle: args.bundle ?? config3?.options?.bundler?.bundle ?? true,
+                  minify: args.minify ?? config3?.options?.bundler?.minify ?? false,
+                  platform: args.platform ?? "node",
+                  target: args.target ?? config3?.options?.bundler?.target ?? "node24",
+                  outfile: args.outfile ?? config3?.options?.bundler?.outfile ?? "index.js",
+                  external: args.external ?? config3?.options?.bundler?.external ?? []
+                },
+                plugins: [
+                  (0, import_esbuild_decorators.esbuildDecorators)({
+                    tsconfig: "tsconfig.json",
+                    cwd: process.cwd()
+                  })
+                ]
+              })),
+              (0, import_operators5.switchMap)(
+                ({ esbuild: esbuild2, options }) => esbuild2.build({
+                  ...options
+                })
+              ),
+              (0, import_operators5.tap)((data) => {
+                if (data.warnings.length) {
+                  Logger.warn(data.warnings);
+                }
+                if (data.errors.length) {
+                  Logger.error(data.errors);
+                }
+                Logger.warn(`\u{1F3D7}\uFE0F  Bundling finish in ${Date.now() - time3}ms`);
+                Logger.info(
+                  `\u2705 Finished bundling output file ${args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js"}`
+                );
+              })
+            )
+          )
+        )
+      ).catch((e) => {
+        console.error(e);
+        process.exit(1);
+      });
+    };
+  }
+});
+
+// src/commands/environment/list-environments.ts
+var list_environments_exports = {};
+__export(list_environments_exports, {
+  default: () => list_environments_default
+});
+var import_operators7, list_environments_default;
+var init_list_environments = __esm({
+  "src/commands/environment/list-environments.ts"() {
+    import_operators7 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    list_environments_default = (cmd) => parseProjectId(cmd.project).pipe(
+      (0, import_operators7.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
+      (0, import_operators7.tap)((data) => {
+        const columns = [
+          "id",
+          "name",
+          "image",
+          "builder",
+          "poolSize",
+          "minCpu",
+          "maxCpu",
+          "minMemory",
+          "maxMemory",
+          "region"
+        ];
+        Logger.log("-------------------");
+        Logger.log("[Action][listEnvironments]");
+        Logger.table(data, columns);
+        Logger.log("-------------------");
+      })
+    ).toPromise();
   }
 });
 
@@ -255234,30 +255257,30 @@ var create_environment_exports = {};
 __export(create_environment_exports, {
   default: () => create_environment_default
 });
-var import_operators7, create_environment_default;
+var import_operators8, create_environment_default;
 var init_create_environment = __esm({
   "src/commands/environment/create-environment.ts"() {
-    import_operators7 = __toESM(require_operators());
+    import_operators8 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     create_environment_default = (cmd) => parseProjectId(cmd.project).pipe(
-      (0, import_operators7.switchMap)(
+      (0, import_operators8.switchMap)(
         (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-          (0, import_operators7.map)((data) => ({
+          (0, import_operators8.map)((data) => ({
             projectId,
             ...data?.environment ?? data
           }))
         )
       ),
-      (0, import_operators7.switchMap)(
+      (0, import_operators8.switchMap)(
         ({ projectId, ...data }) => GraphqlClienAPI.createEnvironment(projectId, {
           ...data,
           ...cmd
         })
       ),
-      (0, import_operators7.tap)((data) => {
+      (0, import_operators8.tap)((data) => {
         const columns = [
           "id",
           "name",
@@ -255284,31 +255307,31 @@ var update_environment_exports = {};
 __export(update_environment_exports, {
   default: () => update_environment_default
 });
-var import_operators8, update_environment_default;
+var import_operators9, update_environment_default;
 var init_update_environment = __esm({
   "src/commands/environment/update-environment.ts"() {
-    import_operators8 = __toESM(require_operators());
+    import_operators9 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     update_environment_default = (cmd) => parseProjectId(cmd.project).pipe(
-      (0, import_operators8.switchMap)(
+      (0, import_operators9.switchMap)(
         (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-          (0, import_operators8.map)((data) => ({
+          (0, import_operators9.map)((data) => ({
             projectId,
             ...data?.environment ?? data
           }))
         )
       ),
-      (0, import_operators8.tap)(Logger.log),
-      (0, import_operators8.switchMap)(
+      (0, import_operators9.tap)(Logger.log),
+      (0, import_operators9.switchMap)(
         ({ projectId, ...data }) => GraphqlClienAPI.updateEnvironment(projectId, {
           ...data,
           ...cmd
         })
       ),
-      (0, import_operators8.tap)((data) => {
+      (0, import_operators9.tap)((data) => {
         const columns = [
           "id",
           "name",
@@ -255335,27 +255358,27 @@ var delete_environment_exports = {};
 __export(delete_environment_exports, {
   default: () => delete_environment_default
 });
-var import_operators9, delete_environment_default;
+var import_operators10, delete_environment_default;
 var init_delete_environment = __esm({
   "src/commands/environment/delete-environment.ts"() {
-    import_operators9 = __toESM(require_operators());
+    import_operators10 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     delete_environment_default = (cmd) => parseProjectId(cmd.project).pipe(
-      (0, import_operators9.switchMap)(
+      (0, import_operators10.switchMap)(
         (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-          (0, import_operators9.map)((data) => ({
+          (0, import_operators10.map)((data) => ({
             projectId,
             ...data?.environment ?? data
           }))
         )
       ),
-      (0, import_operators9.switchMap)(
+      (0, import_operators10.switchMap)(
         ({ projectId, name: name2 }) => GraphqlClienAPI.deleteEnvironment(name2, projectId, cmd.force)
       ),
-      (0, import_operators9.tap)((data) => {
+      (0, import_operators10.tap)((data) => {
         const columns = [
           "id",
           "name",
@@ -255382,27 +255405,27 @@ var get_environment_exports = {};
 __export(get_environment_exports, {
   default: () => get_environment_default
 });
-var import_operators10, get_environment_default;
+var import_operators11, get_environment_default;
 var init_get_environment = __esm({
   "src/commands/environment/get-environment.ts"() {
-    import_operators10 = __toESM(require_operators());
+    import_operators11 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     get_environment_default = (cmd) => parseProjectId(cmd.project).pipe(
-      (0, import_operators10.switchMap)(
+      (0, import_operators11.switchMap)(
         (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-          (0, import_operators10.map)((data) => ({
+          (0, import_operators11.map)((data) => ({
             projectId,
             ...data?.environment ?? data
           }))
         )
       ),
-      (0, import_operators10.switchMap)(
+      (0, import_operators11.switchMap)(
         ({ projectId, name: name2 }) => GraphqlClienAPI.getEnvironment(cmd.name ?? name2, projectId)
       ),
-      (0, import_operators10.tap)((data) => {
+      (0, import_operators11.tap)((data) => {
         const columns = [
           "id",
           "name",
@@ -256735,10 +256758,10 @@ var require_async2 = __commonJS({
         return eachOfImplementation(coll, wrapAsync(iteratee), callback);
       }
       var eachOf$1 = awaitify(eachOf, 3);
-      function map21(coll, iteratee, callback) {
+      function map22(coll, iteratee, callback) {
         return _asyncMap(eachOf$1, coll, iteratee, callback);
       }
-      var map$1 = awaitify(map21, 3);
+      var map$1 = awaitify(map22, 3);
       var applyEach$1 = applyEach(map$1);
       function eachOfSeries(coll, iteratee, callback) {
         return eachOfLimit$2(coll, 1, iteratee, callback);
@@ -261548,8 +261571,8 @@ var require_lodash3 = __commonJS({
         return apply(func, this, otherArgs);
       };
     }
-    function getMapData(map21, key) {
-      var data = map21.__data__;
+    function getMapData(map22, key) {
+      var data = map22.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -261953,8 +261976,8 @@ var require_lodash4 = __commonJS({
     var createSet = !(Set2 && 1 / setToArray(new Set2([, -0]))[1] == INFINITY) ? noop2 : function(values) {
       return new Set2(values);
     };
-    function getMapData(map21, key) {
-      var data = map21.__data__;
+    function getMapData(map22, key) {
+      var data = map22.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -285562,15 +285585,15 @@ function streamToBufferPromise(file2) {
     });
   });
 }
-var import_archiver, import_child_process, import_form_data, import_fs3, import_rxjs8, import_operators12, import_stream_to_buffer, import_util3, ReadFile, createOrUpdateLambda, createCommand;
+var import_archiver, import_child_process, import_form_data, import_fs3, import_rxjs9, import_operators13, import_stream_to_buffer, import_util3, ReadFile, createOrUpdateLambda, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_archiver = __toESM(require_archiver());
     import_child_process = require("child_process");
     import_form_data = __toESM(require_form_data());
     import_fs3 = require("fs");
-    import_rxjs8 = __toESM(require_cjs());
-    import_operators12 = __toESM(require_operators());
+    import_rxjs9 = __toESM(require_cjs());
+    import_operators13 = __toESM(require_operators());
     import_stream_to_buffer = __toESM(require_stream_to_buffer());
     import_util3 = require("util");
     init_helpers();
@@ -285579,12 +285602,12 @@ var init_helpers2 = __esm({
     init_load_spec();
     init_parse_ignore();
     init_read_file();
-    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators12.catchError)(() => (0, import_rxjs8.of)("")));
+    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators13.catchError)(() => (0, import_rxjs9.of)("")));
     createOrUpdateLambda = (cmd, type2) => parseProjectId(cmd.project).pipe(
-      (0, import_operators12.switchMap)(
-        (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators12.map)(() => projectId))
+      (0, import_operators13.switchMap)(
+        (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators13.map)(() => projectId))
       ),
-      (0, import_operators12.switchMap)(async (projectId) => {
+      (0, import_operators13.switchMap)(async (projectId) => {
         const spec = await loadSpec(cmd.spec).toPromise();
         return {
           projectId,
@@ -285593,7 +285616,7 @@ var init_helpers2 = __esm({
       }),
       /* Make zip archive */
       /* Get file id */
-      (0, import_operators12.switchMap)(async (data) => {
+      (0, import_operators13.switchMap)(async (data) => {
         if (!data.uploadAsZip) {
           return { ...data, customUploadFileId: "" };
         }
@@ -285602,16 +285625,16 @@ var init_helpers2 = __esm({
           // Sets the compression level.
         });
         await (0, import_util3.promisify)(import_child_process.exec)(["chmod", "+x", data.script].join(" "));
-        const ignore = await ReadFile(".gignore").pipe((0, import_operators12.map)((ignore2) => parseIgnoredFiles(ignore2))).toPromise();
+        const ignore = await ReadFile(".gignore").pipe((0, import_operators13.map)((ignore2) => parseIgnoredFiles(ignore2))).toPromise();
         archive.glob("**", {
           ignore: [".gcache/**", ...ignore]
         });
         archive.finalize();
-        await (0, import_rxjs8.from)(streamToBufferPromise(archive)).pipe(
-          (0, import_operators12.switchMap)(
-            (buffer) => (0, import_rxjs8.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
-              (0, import_operators12.catchError)(() => (0, import_rxjs8.of)(true)),
-              (0, import_operators12.switchMap)(
+        await (0, import_rxjs9.from)(streamToBufferPromise(archive)).pipe(
+          (0, import_operators13.switchMap)(
+            (buffer) => (0, import_rxjs9.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
+              (0, import_operators13.catchError)(() => (0, import_rxjs9.of)(true)),
+              (0, import_operators13.switchMap)(
                 () => (0, import_util3.promisify)(import_fs3.writeFile)(`.gcache/${data.name}.zip`, buffer, {
                   encoding: "utf-8"
                 })
@@ -285622,7 +285645,7 @@ var init_helpers2 = __esm({
         const body = new import_form_data.default();
         body.append("file[]", (0, import_fs3.createReadStream)(`.gcache/${data.name}.zip`));
         const config2 = await GraphqlClienAPI.getConfig().toPromise();
-        return (0, import_rxjs8.from)(
+        return (0, import_rxjs9.from)(
           fetch(config2.uploadUrl, {
             method: "POST",
             body,
@@ -285634,15 +285657,15 @@ var init_helpers2 = __esm({
             }
           })
         ).pipe(
-          (0, import_operators12.switchMap)((res) => res.json()),
-          (0, import_operators12.tap)((res) => Logger.log(res)),
-          (0, import_operators12.map)((file2) => ({
+          (0, import_operators13.switchMap)((res) => res.json()),
+          (0, import_operators13.tap)((res) => Logger.log(res)),
+          (0, import_operators13.map)((file2) => ({
             ...data,
             customUploadFileId: file2.id
           }))
         ).toPromise();
       }),
-      (0, import_operators12.switchMap)(
+      (0, import_operators13.switchMap)(
         async (payload) => GraphqlClienAPI[type2]({
           code: cmd.code || await ReadFile(payload.file || cmd.file).toPromise() || "",
           name: payload.name || cmd.name || "",
@@ -285673,7 +285696,7 @@ var init_helpers2 = __esm({
           }
         }).toPromise()
       ),
-      (0, import_operators12.tap)((data) => {
+      (0, import_operators13.tap)((data) => {
         console.dir(data, { depth: null, colors: true });
       })
     ).toPromise();
@@ -285692,16 +285715,16 @@ var list_exports = {};
 __export(list_exports, {
   default: () => list_default
 });
-var import_operators13, list_default;
+var import_operators14, list_default;
 var init_list = __esm({
   "src/commands/lambda/list.ts"() {
-    import_operators13 = __toESM(require_operators());
+    import_operators14 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     list_default = (cmd) => parseProjectId(cmd.project).pipe(
-      (0, import_operators13.switchMap)((projectId) => GraphqlClienAPI.listLambdas(projectId)),
-      (0, import_operators13.tap)((data) => {
+      (0, import_operators14.switchMap)((projectId) => GraphqlClienAPI.listLambdas(projectId)),
+      (0, import_operators14.tap)((data) => {
         const columns = ["id", "name", "url"];
         Logger.log("-------------------");
         Logger.log("[Action][listLambdas]");
@@ -285717,17 +285740,17 @@ var get_exports = {};
 __export(get_exports, {
   default: () => get_default
 });
-var import_rxjs9, import_operators14, get_default;
+var import_rxjs10, import_operators15, get_default;
 var init_get = __esm({
   "src/commands/lambda/get.ts"() {
-    import_rxjs9 = __toESM(require_cjs());
-    import_operators14 = __toESM(require_operators());
+    import_rxjs10 = __toESM(require_cjs());
+    import_operators15 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     get_default = async (cmd) => {
-      const table = (0, import_operators14.tap)((data) => {
+      const table = (0, import_operators15.tap)((data) => {
         const columns = [
           "name",
           "projectId",
@@ -285741,7 +285764,7 @@ var init_get = __esm({
       });
       if (cmd.lambda) {
         return isMongoId(cmd.lambda).pipe(
-          (0, import_operators14.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
+          (0, import_operators15.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
           table
         ).toPromise();
       }
@@ -285749,16 +285772,16 @@ var init_get = __esm({
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
         return parseProjectId(cmd.project).pipe(
-          (0, import_operators14.catchError)((error48) => {
+          (0, import_operators15.catchError)((error48) => {
             if (!cmd.project) {
-              return (0, import_rxjs9.throwError)(
+              return (0, import_rxjs10.throwError)(
                 `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
               );
             }
-            return (0, import_rxjs9.throwError)(error48);
+            return (0, import_rxjs10.throwError)(error48);
           }),
-          (0, import_operators14.switchMap)(
+          (0, import_operators15.switchMap)(
             (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId)
           ),
           table
@@ -285800,10 +285823,10 @@ var delete_exports = {};
 __export(delete_exports, {
   default: () => delete_default
 });
-var import_operators15, delete_default;
+var import_operators16, delete_default;
 var init_delete = __esm({
   "src/commands/lambda/delete.ts"() {
-    import_operators15 = __toESM(require_operators());
+    import_operators16 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -285812,10 +285835,10 @@ var init_delete = __esm({
       const spec = await loadSpec(cmd.spec).toPromise();
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       return parseProjectId(cmd.project).pipe(
-        (0, import_operators15.switchMap)(
+        (0, import_operators16.switchMap)(
           (projectId) => GraphqlClienAPI.deleteLambda({ name: name2, projectId })
         ),
-        (0, import_operators15.tap)((data) => {
+        (0, import_operators16.tap)((data) => {
           const columns = [
             "name",
             "projectId",
@@ -285837,20 +285860,20 @@ var logs_exports = {};
 __export(logs_exports, {
   default: () => logs_default
 });
-var import_rxjs10, import_operators16, logs_default;
+var import_rxjs11, import_operators17, logs_default;
 var init_logs = __esm({
   "src/commands/lambda/logs.ts"() {
-    import_rxjs10 = __toESM(require_cjs());
-    import_operators16 = __toESM(require_operators());
+    import_rxjs11 = __toESM(require_cjs());
+    import_operators17 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_default = async (cmd) => {
-      const result = (0, import_operators16.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators17.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
         return isMongoId(cmd.lambda).pipe(
-          (0, import_operators16.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
+          (0, import_operators17.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
           result
         ).toPromise();
       }
@@ -285858,16 +285881,16 @@ var init_logs = __esm({
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
         return parseProjectId(cmd.project).pipe(
-          (0, import_operators16.catchError)((error48) => {
+          (0, import_operators17.catchError)((error48) => {
             if (!cmd.project) {
-              return (0, import_rxjs10.throwError)(
+              return (0, import_rxjs11.throwError)(
                 () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
               );
             }
-            return (0, import_rxjs10.throwError)(() => error48);
+            return (0, import_rxjs11.throwError)(() => error48);
           }),
-          (0, import_operators16.switchMap)(
+          (0, import_operators17.switchMap)(
             (projectId) => GraphqlClienAPI.getLambdaLogsByName(name2, projectId)
           ),
           result
@@ -285883,20 +285906,20 @@ var logs_builder_exports = {};
 __export(logs_builder_exports, {
   default: () => logs_builder_default
 });
-var import_rxjs11, import_operators17, logs_builder_default;
+var import_rxjs12, import_operators18, logs_builder_default;
 var init_logs_builder = __esm({
   "src/commands/lambda/logs-builder.ts"() {
-    import_rxjs11 = __toESM(require_cjs());
-    import_operators17 = __toESM(require_operators());
+    import_rxjs12 = __toESM(require_cjs());
+    import_operators18 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_builder_default = async (cmd) => {
-      const result = (0, import_operators17.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators18.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
         return isMongoId(cmd.lambda).pipe(
-          (0, import_operators17.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
+          (0, import_operators18.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
           result
         ).toPromise();
       }
@@ -285904,16 +285927,16 @@ var init_logs_builder = __esm({
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
         return parseProjectId(cmd.project).pipe(
-          (0, import_operators17.catchError)((error48) => {
+          (0, import_operators18.catchError)((error48) => {
             if (!cmd.project) {
-              return (0, import_rxjs11.throwError)(
+              return (0, import_rxjs12.throwError)(
                 `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
               );
             }
-            return (0, import_rxjs11.throwError)(error48);
+            return (0, import_rxjs12.throwError)(error48);
           }),
-          (0, import_operators17.switchMap)(
+          (0, import_operators18.switchMap)(
             (projectId) => GraphqlClienAPI.getLambdaBuilderLogsByName(name2, projectId)
           ),
           result
@@ -285929,56 +285952,56 @@ var test_exports = {};
 __export(test_exports, {
   default: () => test_default
 });
-var import_rxjs12, import_operators18, test_default;
+var import_rxjs13, import_operators19, test_default;
 var init_test = __esm({
   "src/commands/lambda/test.ts"() {
-    import_rxjs12 = __toESM(require_cjs());
-    import_operators18 = __toESM(require_operators());
+    import_rxjs13 = __toESM(require_cjs());
+    import_operators19 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     test_default = async (cmd) => {
-      const processParameters = (lambda) => (0, import_rxjs12.of)(lambda).pipe(
-        (0, import_operators18.map)((lambda2) => ({
+      const processParameters = (lambda) => (0, import_rxjs13.of)(lambda).pipe(
+        (0, import_operators19.map)((lambda2) => ({
           ...lambda2,
           url: cmd.pathParams ? cmd.pathParams.split(";").map((param) => param.split("=")).reduce(
             (prev, [key, value]) => prev.replace(key, value),
             lambda2.url
           ) : lambda2.url
         })),
-        (0, import_operators18.switchMap)(
-          (lambda2) => (0, import_rxjs12.from)(
+        (0, import_operators19.switchMap)(
+          (lambda2) => (0, import_rxjs13.from)(
             fetch([lambda2.url, cmd.queryParams].filter((i) => !!i).join(""), {
               method: lambda2.method,
               body: cmd.body
             })
-          ).pipe((0, import_operators18.switchMap)((res) => res.json()))
+          ).pipe((0, import_operators19.switchMap)((res) => res.json()))
         ),
-        (0, import_operators18.tap)(Logger.log)
+        (0, import_operators19.tap)(Logger.log)
       );
       if (cmd.lambda) {
         return isMongoId(cmd.lambda).pipe(
-          (0, import_operators18.switchMap)(
+          (0, import_operators19.switchMap)(
             (id) => GraphqlClienAPI.getLambda(id, ["id", "url", "method", "params"])
           ),
-          (0, import_operators18.switchMap)(processParameters)
+          (0, import_operators19.switchMap)(processParameters)
         ).toPromise();
       }
       const spec = await loadSpec(cmd.spec).toPromise();
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
         return parseProjectId(cmd.project).pipe(
-          (0, import_operators18.catchError)((error48) => {
+          (0, import_operators19.catchError)((error48) => {
             if (!cmd.project) {
-              return (0, import_rxjs12.throwError)(
+              return (0, import_rxjs13.throwError)(
                 `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
               );
             }
-            return (0, import_rxjs12.throwError)(error48);
+            return (0, import_rxjs13.throwError)(error48);
           }),
-          (0, import_operators18.switchMap)(
+          (0, import_operators19.switchMap)(
             (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId, [
               "id",
               "url",
@@ -285986,7 +286009,7 @@ var init_test = __esm({
               "params"
             ])
           ),
-          (0, import_operators18.switchMap)(processParameters)
+          (0, import_operators19.switchMap)(processParameters)
         ).toPromise();
       }
       throw new Error("unable-to-load-lambda");
@@ -285999,14 +286022,14 @@ var list_exports2 = {};
 __export(list_exports2, {
   default: () => list_default2
 });
-var import_operators20, list_default2;
+var import_operators21, list_default2;
 var init_list2 = __esm({
   "src/commands/project/list.ts"() {
-    import_operators20 = __toESM(require_operators());
+    import_operators21 = __toESM(require_operators());
     init_gql_client();
     init_log();
     list_default2 = async () => GraphqlClienAPI.listProjects().pipe(
-      (0, import_operators20.tap)((project) => {
+      (0, import_operators21.tap)((project) => {
         const columns = ["id", "name"];
         Logger.log("-------------------");
         Logger.log("[Action][listProjects]");
@@ -286022,23 +286045,23 @@ var use_exports = {};
 __export(use_exports, {
   default: () => use_default
 });
-var import_fs4, import_rxjs14, import_operators21, import_util4, use_default;
+var import_fs4, import_rxjs15, import_operators22, import_util4, use_default;
 var init_use = __esm({
   "src/commands/project/use.ts"() {
     import_fs4 = require("fs");
-    import_rxjs14 = __toESM(require_cjs());
-    import_operators21 = __toESM(require_operators());
+    import_rxjs15 = __toESM(require_cjs());
+    import_operators22 = __toESM(require_operators());
     import_util4 = require("util");
     init_helpers();
     init_gql_client();
     init_types();
     use_default = async (cmd) => {
       return parseProjectId(cmd).pipe(
-        (0, import_operators21.switchMap)(
-          (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators21.map)(() => projectId))
+        (0, import_operators22.switchMap)(
+          (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators22.map)(() => projectId))
         ),
-        (0, import_operators21.switchMap)(
-          (projectId) => (0, import_rxjs14.from)(
+        (0, import_operators22.switchMap)(
+          (projectId) => (0, import_rxjs15.from)(
             (0, import_util4.promisify)(import_fs4.writeFile)(projectDirectory, projectId, {
               encoding: "utf-8"
             })
@@ -286054,14 +286077,14 @@ var clear_exports = {};
 __export(clear_exports, {
   default: () => clear_default
 });
-var import_fs5, import_rxjs15, import_util5, clear_default;
+var import_fs5, import_rxjs16, import_util5, clear_default;
 var init_clear = __esm({
   "src/commands/project/clear.ts"() {
     import_fs5 = require("fs");
-    import_rxjs15 = __toESM(require_cjs());
+    import_rxjs16 = __toESM(require_cjs());
     import_util5 = require("util");
     init_types();
-    clear_default = async () => (0, import_rxjs15.from)((0, import_util5.promisify)(import_fs5.unlink)(projectDirectory)).toPromise();
+    clear_default = async () => (0, import_rxjs16.from)((0, import_util5.promisify)(import_fs5.unlink)(projectDirectory)).toPromise();
   }
 });
 
@@ -286485,8 +286508,8 @@ var init_parseUtil = __esm({
       }
       let errorMessage = "";
       const maps = errorMaps.filter((m) => !!m).slice().reverse();
-      for (const map21 of maps) {
-        errorMessage = map21(fullIssue, { data, defaultError: errorMessage }).message;
+      for (const map22 of maps) {
+        errorMessage = map22(fullIssue, { data, defaultError: errorMessage }).message;
       }
       return {
         ...issueData,
@@ -293008,19 +293031,19 @@ var init_schemas = __esm({
       });
       const disc = cached(() => {
         const opts = def.options;
-        const map21 = /* @__PURE__ */ new Map();
+        const map22 = /* @__PURE__ */ new Map();
         for (const o of opts) {
           const values = o._zod.propValues?.[def.discriminator];
           if (!values || values.size === 0)
             throw new Error(`Invalid discriminated union option at index "${def.options.indexOf(o)}"`);
           for (const v of values) {
-            if (map21.has(v)) {
+            if (map22.has(v)) {
               throw new Error(`Duplicate discriminator value "${String(v)}"`);
             }
-            map21.set(v, o);
+            map22.set(v, o);
           }
         }
-        return map21;
+        return map22;
       });
       inst._zod.parse = (payload, ctx) => {
         const input = payload.value;
@@ -302503,7 +302526,7 @@ __export(schemas_exports3, {
   looseObject: () => looseObject,
   looseRecord: () => looseRecord,
   mac: () => mac2,
-  map: () => map17,
+  map: () => map18,
   meta: () => meta2,
   nan: () => nan,
   nanoid: () => nanoid2,
@@ -302799,7 +302822,7 @@ function looseRecord(keyType, valueType, params) {
     ...util_exports.normalizeParams(params)
   });
 }
-function map17(keyType, valueType, params) {
+function map18(keyType, valueType, params) {
   return new ZodMap2({
     type: "map",
     keyType,
@@ -303641,9 +303664,9 @@ var init_schemas3 = __esm({
 });
 
 // ../../node_modules/zod/v4/classic/compat.js
-function setErrorMap(map21) {
+function setErrorMap(map22) {
   config({
-    customError: map21
+    customError: map22
   });
 }
 function getErrorMap2() {
@@ -304343,7 +304366,7 @@ __export(external_exports3, {
   lt: () => _lt,
   lte: () => _lte,
   mac: () => mac2,
-  map: () => map17,
+  map: () => map18,
   maxLength: () => _maxLength,
   maxSize: () => _maxSize,
   meta: () => meta2,
@@ -316876,31 +316899,31 @@ __export(start_exports, {
 });
 async function startProxy(cmd) {
   return GraphqlClienAPI.getConfig().pipe(
-    (0, import_operators23.take)(1),
-    (0, import_operators23.map)((config2) => ({
+    (0, import_operators24.take)(1),
+    (0, import_operators24.map)((config2) => ({
       ...config2,
       mcpUrl: new URL(
         cmd.url || [config2.url.replace(/\/graphql$/, ""), "/mcp"].join("") || "http://127.0.0.1:8000/mcp"
       )
     })),
-    (0, import_operators23.tap)((config2) => {
+    (0, import_operators24.tap)((config2) => {
       config2.mcpUrl.searchParams.set("transportType", "streamable-http");
       process.stderr.write(`Starting MCP proxy \u2192 ${config2.mcpUrl}
 `);
       process.stderr.write("Retrieving config for auth...\n");
     }),
-    (0, import_operators23.switchMap)(
-      (config2) => config2?.token ? (0, import_rxjs17.of)(config2) : (0, import_rxjs17.throwError)(
+    (0, import_operators24.switchMap)(
+      (config2) => config2?.token ? (0, import_rxjs18.of)(config2) : (0, import_rxjs18.throwError)(
         () => new Error("User is not authenticated (no token in config)")
       )
     ),
-    (0, import_operators23.tap)((config2) => {
+    (0, import_operators24.tap)((config2) => {
       process.stderr.write(
         `Config retrieved. Token start: ${config2.token.substring(0, 5)}
 `
       );
     }),
-    (0, import_operators23.map)((config2) => ({
+    (0, import_operators24.map)((config2) => ({
       ...config2,
       transport: new StreamableHTTPClientTransport(config2.mcpUrl, {
         requestInit: {
@@ -316908,34 +316931,34 @@ async function startProxy(cmd) {
             Authorization: config2.token
           }
         },
-        fetch: (input, init) => (0, import_rxjs17.lastValueFrom)(performFetch(input, init))
+        fetch: (input, init) => (0, import_rxjs18.lastValueFrom)(performFetch(input, init))
       }),
       client: new Client({
         name: "gapi-proxy-client",
         version: "1.0.0"
       })
     })),
-    (0, import_operators23.tap)(() => {
+    (0, import_operators24.tap)(() => {
       process.stderr.write("Connecting to upstream...\n");
     }),
-    (0, import_operators23.switchMap)(
-      (config2) => (0, import_rxjs17.from)(config2.client.connect(config2.transport)).pipe((0, import_operators23.map)(() => config2))
+    (0, import_operators24.switchMap)(
+      (config2) => (0, import_rxjs18.from)(config2.client.connect(config2.transport)).pipe((0, import_operators24.map)(() => config2))
     ),
-    (0, import_operators23.tap)(() => {
+    (0, import_operators24.tap)(() => {
       process.stderr.write("Connected to upstream MCP server\n");
     }),
     // Get capabilities AFTER connection is established
-    (0, import_operators23.map)((config2) => ({
+    (0, import_operators24.map)((config2) => ({
       ...config2,
       capabilities: config2.client.getServerCapabilities()
     })),
-    (0, import_operators23.tap)((config2) => {
+    (0, import_operators24.tap)((config2) => {
       process.stderr.write(
         `Upstream capabilities: ${JSON.stringify(config2.capabilities)}
 `
       );
     }),
-    (0, import_operators23.map)((config2) => {
+    (0, import_operators24.map)((config2) => {
       const server2 = new Server(
         {
           name: "gapi-proxy",
@@ -316945,66 +316968,66 @@ async function startProxy(cmd) {
           capabilities: config2.capabilities || {}
         }
       );
-      server2.fallbackRequestHandler = async (request) => (0, import_rxjs17.lastValueFrom)(
-        (0, import_rxjs17.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
-          (0, import_operators23.catchError)((e) => {
+      server2.fallbackRequestHandler = async (request) => (0, import_rxjs18.lastValueFrom)(
+        (0, import_rxjs18.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
+          (0, import_operators24.catchError)((e) => {
             process.stderr.write(`Upstream error: ${e.message}
 `);
-            return (0, import_rxjs17.throwError)(() => e);
+            return (0, import_rxjs18.throwError)(() => e);
           })
         )
       );
       server2.fallbackNotificationHandler = async (notification) => {
-        await (0, import_rxjs17.lastValueFrom)(
-          (0, import_rxjs17.of)(notification).pipe(
-            (0, import_operators23.filter)((n) => n.method !== "notifications/initialized"),
-            (0, import_operators23.switchMap)(
-              (n) => (0, import_rxjs17.defer)(() => config2.client.notification(n)).pipe(
-                (0, import_operators23.catchError)((e) => {
+        await (0, import_rxjs18.lastValueFrom)(
+          (0, import_rxjs18.of)(notification).pipe(
+            (0, import_operators24.filter)((n) => n.method !== "notifications/initialized"),
+            (0, import_operators24.switchMap)(
+              (n) => (0, import_rxjs18.defer)(() => config2.client.notification(n)).pipe(
+                (0, import_operators24.catchError)((e) => {
                   process.stderr.write(`Notification error: ${e}
 `);
-                  return import_rxjs17.EMPTY;
+                  return import_rxjs18.EMPTY;
                 })
               )
             ),
-            (0, import_operators23.defaultIfEmpty)(null)
+            (0, import_operators24.defaultIfEmpty)(null)
           )
         );
       };
       return server2;
     }),
-    (0, import_operators23.switchMap)((server2) => (0, import_rxjs17.from)(server2.connect(new StdioServerTransport()))),
-    (0, import_operators23.tap)(() => {
+    (0, import_operators24.switchMap)((server2) => (0, import_rxjs18.from)(server2.connect(new StdioServerTransport()))),
+    (0, import_operators24.tap)(() => {
       process.stderr.write("MCP stdio server ready\n");
     }),
     // Keep the process running indefinitely to handle stdio communication
-    (0, import_operators23.switchMap)(() => new Promise(() => {
+    (0, import_operators24.switchMap)(() => new Promise(() => {
     }))
   ).toPromise();
 }
-var import_rxjs17, import_operators23, import_stream2, performFetch;
+var import_rxjs18, import_operators24, import_stream2, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
     init_streamableHttp();
     init_server2();
     init_stdio2();
-    import_rxjs17 = __toESM(require_cjs());
-    import_operators23 = __toESM(require_operators());
+    import_rxjs18 = __toESM(require_cjs());
+    import_operators24 = __toESM(require_operators());
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
     performFetch = (input, init) => {
-      return (0, import_rxjs17.from)(fetch(input, init)).pipe(
-        (0, import_operators23.switchMap)((res) => {
+      return (0, import_rxjs18.from)(fetch(input, init)).pipe(
+        (0, import_operators24.switchMap)((res) => {
           if (res.status === 401 || res.status === 403) {
             process.stderr.write(
               `[DEBUG] Request failed with ${res.status}. Refreshing token...
 `
             );
             return GraphqlClienAPI.getConfig(true).pipe(
-              (0, import_operators23.take)(1),
-              (0, import_operators23.switchMap)((config2) => {
+              (0, import_operators24.take)(1),
+              (0, import_operators24.switchMap)((config2) => {
                 process.stderr.write(
                   "[DEBUG] Token refreshed. Retrying request...\n"
                 );
@@ -317017,9 +317040,9 @@ var init_start = __esm({
               })
             );
           }
-          return (0, import_rxjs17.of)(res);
+          return (0, import_rxjs18.of)(res);
         }),
-        (0, import_operators23.map)((res) => {
+        (0, import_operators24.map)((res) => {
           if (typeof res?.body?.pipeThrough !== "function") {
             try {
               const webStream = import_stream2.Readable.toWeb(res.body);
@@ -317033,10 +317056,10 @@ var init_start = __esm({
           }
           return res;
         }),
-        (0, import_operators23.catchError)((e) => {
+        (0, import_operators24.catchError)((e) => {
           process.stderr.write(`[ERROR] Fetch error: ${e.message}
 `);
-          return (0, import_rxjs17.throwError)(() => e);
+          return (0, import_rxjs18.throwError)(() => e);
         })
       );
     };
@@ -317050,62 +317073,85 @@ __export(start_exports2, {
 });
 async function start(args) {
   Logger.log("---------------------------------");
-  return (0, import_rxjs18.lastValueFrom)(
+  return (0, import_rxjs19.lastValueFrom)(
     loadSpec().pipe(
-      (0, import_operators24.switchMap)(
-        (config2) => (0, import_rxjs18.of)({
+      (0, import_operators25.switchMap)(
+        (config2) => (0, import_rxjs19.of)({
           watcher: (0, import_node_fs.watch)(process.cwd(), {
             recursive: true
           }),
           whitelist: new Map(
             [
               ...args?.files ?? [],
-              ...config2?.options?.bundler?.watch ?? [],
-              "index.ts"
-            ].map((name2) => [name2, ""])
+              ...config2.file ? [config2.file] : [],
+              ...config2?.options?.bundler?.watch ?? []
+            ].map((name2) => [name2, true])
           ),
-          child: null
+          child: null,
+          outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
+          startCommand: "node"
         }).pipe(
-          (0, import_operators24.switchMap)(
-            ({ child, watcher, whitelist }) => (0, import_rxjs18.from)(build_default(args)).pipe(
-              (0, import_operators24.tap)(() => {
-                Logger.warn(
-                  `\u{1F4E2} Starting script "node ${args.outfile ?? "index.js"}"`
-                );
+          (0, import_operators25.switchMap)(
+            ({ child, watcher, whitelist, outfile, startCommand }) => (0, import_rxjs19.from)(build_default(args)).pipe(
+              (0, import_operators25.tap)(() => {
+                Logger.warn(`\u{1F4E2} Starting script "${startCommand} ${outfile}"`);
                 Logger.log("---------------------------------\n");
               }),
-              (0, import_operators24.map)(() => (0, import_node_child_process.exec)(`node ${args.outfile ?? "index.js"}`)),
-              (0, import_operators24.tap)((proc) => {
-                child = proc;
-                child.stdout.pipe(process.stdout);
+              (0, import_operators25.tap)(() => {
+                child = (0, import_node_child_process.spawn)(
+                  startCommand,
+                  ["--disable-warning=DEP0040", outfile],
+                  {
+                    stdio: "inherit"
+                  }
+                );
               }),
-              (0, import_operators24.switchMap)(
-                () => (0, import_rxjs18.fromEvent)(watcher, "change").pipe(
-                  (0, import_operators24.map)(([event, filename]) => ({
+              (0, import_operators25.tap)(
+                () => (0, import_rxjs19.merge)(
+                  (0, import_rxjs19.fromEvent)(process, "SIGINT"),
+                  (0, import_rxjs19.fromEvent)(process, "SIGTERM"),
+                  (0, import_rxjs19.fromEvent)(process, "exit")
+                ).pipe(
+                  (0, import_operators25.debounceTime)(100),
+                  (0, import_operators25.tap)(() => {
+                    Logger.warn("\u26A0\uFE0F  Main process shutting down");
+                    child.kill("SIGTERM");
+                    process.exit();
+                  })
+                ).subscribe()
+              ),
+              (0, import_operators25.switchMap)(
+                () => (0, import_rxjs19.fromEvent)(watcher, "change").pipe(
+                  (0, import_operators25.map)(([event, filename]) => ({
                     event,
                     filename
                   })),
-                  (0, import_operators24.filter)(({ filename }) => {
+                  (0, import_operators25.filter)(({ filename }) => {
                     if (!filename) {
                       return false;
                     }
                     const rootDir = filename.split(/[/\\]/)[0];
                     return whitelist.has(rootDir);
                   }),
-                  (0, import_operators24.debounceTime)(100)
+                  (0, import_operators25.debounceTime)(100)
                 )
               ),
-              (0, import_operators24.tap)(async (data) => {
+              (0, import_operators25.tap)((data) => {
                 Logger.log("\n---------------------------------");
                 Logger.log(`\u27F3  Restarting due to change in: ${data.filename}`);
-                child?.kill();
-                await build_default(args);
-                Logger.warn(
-                  `\u{1F4E2} Starting script "node ${args.outfile ?? "index.js"}"`
-                );
+                child?.kill("SIGTERM");
+              }),
+              (0, import_operators25.switchMap)(() => build_default(args)),
+              (0, import_operators25.tap)(() => {
+                Logger.warn(`\u{1F4E2} Starting script "${startCommand} ${outfile}"`);
                 Logger.log("---------------------------------\n");
-                child = (0, import_node_child_process.exec)(`node ${args.outfile ?? "index.js"}`);
-                child.stdout.pipe(process.stdout);
+                child = (0, import_node_child_process.spawn)(
+                  startCommand,
+                  ["--disable-warning=DEP0040", outfile],
+                  {
+                    stdio: "inherit"
+                  }
+                );
               })
             )
           )
@@ -317114,13 +317160,13 @@ async function start(args) {
     )
   );
 }
-var import_node_child_process, import_node_fs, import_rxjs18, import_operators24;
+var import_node_child_process, import_node_fs, import_rxjs19, import_operators25;
 var init_start2 = __esm({
   "src/commands/start/start.ts"() {
     import_node_child_process = require("node:child_process");
     import_node_fs = require("node:fs");
-    import_rxjs18 = __toESM(require_cjs());
-    import_operators24 = __toESM(require_operators());
+    import_rxjs19 = __toESM(require_cjs());
+    import_operators25 = __toESM(require_operators());
     init_log();
     init_build();
     init_load_spec();
@@ -317151,8 +317197,8 @@ function registerAuthCommands(program2) {
 }
 
 // src/commands/build/index.ts
-var import_rxjs5 = __toESM(require_cjs());
-var import_operators4 = __toESM(require_operators());
+var import_rxjs7 = __toESM(require_cjs());
+var import_operators6 = __toESM(require_operators());
 init_helpers();
 function buildCommands(program2) {
   program2.command("build").description("Build bundle using esbuild https://esbuild.github.io ").option(
@@ -317160,19 +317206,19 @@ function buildCommands(program2) {
     "File or files to bundle defaults to index.ts"
   ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(
     lazy(
-      () => (0, import_rxjs5.from)(Promise.resolve().then(() => (init_build(), build_exports))).pipe((0, import_operators4.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs7.from)(Promise.resolve().then(() => (init_build(), build_exports))).pipe((0, import_operators6.map)((m) => m.default)).toPromise()
     )
   );
 }
 
 // src/commands/environment/index.ts
-var import_rxjs7 = __toESM(require_cjs());
-var import_operators11 = __toESM(require_operators());
+var import_rxjs8 = __toESM(require_cjs());
+var import_operators12 = __toESM(require_operators());
 init_helpers();
 function registerEnvironmentCommands(program2) {
   program2.command("environment:list").description("List of all environments for project").option("-p, --project <project>").action(
     lazy(
-      () => (0, import_rxjs7.from)(Promise.resolve().then(() => (init_list_environments(), list_environments_exports))).pipe((0, import_operators11.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs8.from)(Promise.resolve().then(() => (init_list_environments(), list_environments_exports))).pipe((0, import_operators12.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("environment:create").description("Create environment for project").option("-p, --project <project>").option("-minCpu, --minCpu <minCpu>").option("-maxCpu, --maxCpu <maxCpu>").option("-minMemory, --minMemory <minMemory>").option("-maxMemory, --maxMemory <maxMemory>").option("-poolSize, --poolSize <poolSize>").option("-builder, --builder <builder>").option("-image, --image <image>").option("-name, --name <name>").option("-spec, --spec <spec>").option(
@@ -317180,7 +317226,7 @@ function registerEnvironmentCommands(program2) {
     "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'"
   ).action(
     lazy(
-      () => (0, import_rxjs7.from)(Promise.resolve().then(() => (init_create_environment(), create_environment_exports))).pipe((0, import_operators11.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs8.from)(Promise.resolve().then(() => (init_create_environment(), create_environment_exports))).pipe((0, import_operators12.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("environment:update").description("Update environment for project").option("-p, --project <project>").option("-minCpu, --minCpu <minCpu>").option("-maxCpu, --maxCpu <maxCpu>").option("-minMemory, --minMemory <minMemory>").option("-maxMemory, --maxMemory <maxMemory>").option("-poolSize, --poolSize <poolSize>").option("-builder, --builder <builder>").option("-image, --image <image>").option("-name, --name <name>").option("-spec, --spec <spec>").option(
@@ -317188,24 +317234,24 @@ function registerEnvironmentCommands(program2) {
     "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'"
   ).action(
     lazy(
-      () => (0, import_rxjs7.from)(Promise.resolve().then(() => (init_update_environment(), update_environment_exports))).pipe((0, import_operators11.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs8.from)(Promise.resolve().then(() => (init_update_environment(), update_environment_exports))).pipe((0, import_operators12.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("environment:delete").description("Delete environment for project").option("-p, --project <project>").option("-n, --name <name>").option("-f, --force").option("-spec, --spec <spec>").action(
     lazy(
-      () => (0, import_rxjs7.from)(Promise.resolve().then(() => (init_delete_environment(), delete_environment_exports))).pipe((0, import_operators11.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs8.from)(Promise.resolve().then(() => (init_delete_environment(), delete_environment_exports))).pipe((0, import_operators12.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("environment:get").description("Get environment for project").option("-p, --project <project>").option("-n, --name <name>").action(
     lazy(
-      () => (0, import_rxjs7.from)(Promise.resolve().then(() => (init_get_environment(), get_environment_exports))).pipe((0, import_operators11.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs8.from)(Promise.resolve().then(() => (init_get_environment(), get_environment_exports))).pipe((0, import_operators12.map)((m) => m.default)).toPromise()
     )
   );
 }
 
 // src/commands/lambda/index.ts
-var import_rxjs13 = __toESM(require_cjs());
-var import_operators19 = __toESM(require_operators());
+var import_rxjs14 = __toESM(require_cjs());
+var import_operators20 = __toESM(require_operators());
 init_helpers();
 init_helpers2();
 function registerLambdaCommands(program2) {
@@ -317214,12 +317260,12 @@ function registerLambdaCommands(program2) {
     "Specify custom token generated from the website"
   ).action(
     lazy(
-      () => (0, import_rxjs13.from)(Promise.resolve().then(() => (init_list(), list_exports))).pipe((0, import_operators19.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs14.from)(Promise.resolve().then(() => (init_list(), list_exports))).pipe((0, import_operators20.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("lambda:get").description("Get lambda by id").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-p, --spec <spec>", "get by lambda name").action(
     lazy(
-      () => (0, import_rxjs13.from)(Promise.resolve().then(() => (init_get(), get_exports))).pipe((0, import_operators19.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs14.from)(Promise.resolve().then(() => (init_get(), get_exports))).pipe((0, import_operators20.map)((m) => m.default)).toPromise()
     )
   );
   const createOrUpdateOptions = [
@@ -317297,44 +317343,44 @@ function registerLambdaCommands(program2) {
   ];
   createCommand("lambda:create")(createOrUpdateOptions)(program2).action(
     lazy(
-      () => (0, import_rxjs13.from)(Promise.resolve().then(() => (init_create(), create_exports))).pipe((0, import_operators19.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs14.from)(Promise.resolve().then(() => (init_create(), create_exports))).pipe((0, import_operators20.map)((m) => m.default)).toPromise()
     )
   );
   createCommand("lambda:update")(createOrUpdateOptions)(program2).action(
     lazy(
-      () => (0, import_rxjs13.from)(Promise.resolve().then(() => (init_update(), update_exports))).pipe((0, import_operators19.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs14.from)(Promise.resolve().then(() => (init_update(), update_exports))).pipe((0, import_operators20.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("lambda:delete").description("Get lambda by id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").action(
     lazy(
-      () => (0, import_rxjs13.from)(Promise.resolve().then(() => (init_delete(), delete_exports))).pipe((0, import_operators19.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs14.from)(Promise.resolve().then(() => (init_delete(), delete_exports))).pipe((0, import_operators20.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("lambda:log").description("Get lambda log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").action(
     lazy(
-      () => (0, import_rxjs13.from)(Promise.resolve().then(() => (init_logs(), logs_exports))).pipe((0, import_operators19.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs14.from)(Promise.resolve().then(() => (init_logs(), logs_exports))).pipe((0, import_operators20.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("lambda:build:log").description("Get build log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda project").option("-s, --spec <spec>", "use configuration").action(
     lazy(
-      () => (0, import_rxjs13.from)(Promise.resolve().then(() => (init_logs_builder(), logs_builder_exports))).pipe((0, import_operators19.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs14.from)(Promise.resolve().then(() => (init_logs_builder(), logs_builder_exports))).pipe((0, import_operators20.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("lambda:test").description("Test lambda").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").option("-qp, --queryParams <queryParams>", "Adds query params to request").option("-pp, --pathParams <pathParams>", "Adds query params to request").option("-b, --body <body>", "Add body to request").action(
     lazy(
-      () => (0, import_rxjs13.from)(Promise.resolve().then(() => (init_test(), test_exports))).pipe((0, import_operators19.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs14.from)(Promise.resolve().then(() => (init_test(), test_exports))).pipe((0, import_operators20.map)((m) => m.default)).toPromise()
     )
   );
 }
 
 // src/commands/project/index.ts
-var import_rxjs16 = __toESM(require_cjs());
-var import_operators22 = __toESM(require_operators());
+var import_rxjs17 = __toESM(require_cjs());
+var import_operators23 = __toESM(require_operators());
 init_helpers();
 function registerProjectCommands(program2) {
   program2.command("project:list").description("List of all projects").action(
     lazy(
-      () => (0, import_rxjs16.from)(Promise.resolve().then(() => (init_list2(), list_exports2))).pipe((0, import_operators22.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs17.from)(Promise.resolve().then(() => (init_list2(), list_exports2))).pipe((0, import_operators23.map)((m) => m.default)).toPromise()
     )
   );
   program2.command("project:use").arguments("<project>").description("Adds default project to be used all around the CLI").action(lazy(() => Promise.resolve().then(() => (init_use(), use_exports)).then((m) => m.default)));
@@ -317348,8 +317394,8 @@ function registerMcpCommands(program2) {
 }
 
 // src/commands/start/index.ts
-var import_rxjs19 = __toESM(require_cjs());
-var import_operators25 = __toESM(require_operators());
+var import_rxjs20 = __toESM(require_cjs());
+var import_operators26 = __toESM(require_operators());
 init_helpers();
 function startCommands(program2) {
   program2.command("start").description("Start bundle using esbuild https://esbuild.github.io ").option(
@@ -317357,7 +317403,7 @@ function startCommands(program2) {
     "File or files to bundle defaults to index.ts"
   ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(
     lazy(
-      () => (0, import_rxjs19.from)(Promise.resolve().then(() => (init_start2(), start_exports2))).pipe((0, import_operators25.map)((m) => m.default)).toPromise()
+      () => (0, import_rxjs20.from)(Promise.resolve().then(() => (init_start2(), start_exports2))).pipe((0, import_operators26.map)((m) => m.default)).toPromise()
     )
   );
 }
