@@ -1,4 +1,4 @@
-## [1.8.200](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.200) (2026-02-17)
+## [1.8.201](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.201) (2026-02-17)
 
 
 ### Bug Fixes
@@ -106,6 +106,7 @@
 * **gcli:** added global auth token using a environment variable GCLI_AUTH_TOKEN ([511dd02](https://github.com/Stradivario/gapi/commit/511dd023ae9df4785fec13e57cce44a5a3bc76f5))
 * **gcli:** added hasOptionsRequest to lambda creation ([a4f6d9c](https://github.com/Stradivario/gapi/commit/a4f6d9cf3dfe3c0671499d43aefa1bb5b6d9807d))
 * **gcli:** added multiple scaling options and some documentation inside the cli itself ([0efec0f](https://github.com/Stradivario/gapi/commit/0efec0f8f9221cd73168e6e3be50f6ec4d3376b0))
+* **gcli:** added package command and prepared for rxjs migration by removing toPromise() and throwError accepts function () => error ([84c2cad](https://github.com/Stradivario/gapi/commit/84c2cad586c07e29d5626be714a16dd76f37b090))
 * **gcli:** build script added outfile ([1bea705](https://github.com/Stradivario/gapi/commit/1bea7057543c37999ec2bd23983bc8a0401361f0))
 * **gcli:** bundle binary ([e4ad1a0](https://github.com/Stradivario/gapi/commit/e4ad1a075bb468f014d5cc01cda31227775fe04a))
 * **gcli:** environment crud operations added ([5c4bde8](https://github.com/Stradivario/gapi/commit/5c4bde864e328e97c21f616af5911e3ce0208edf))

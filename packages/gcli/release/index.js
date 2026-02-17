@@ -18710,7 +18710,7 @@ function parseProjectId(projectId) {
     (0, import_operators.catchError)(() => (0, import_rxjs2.of)("")),
     (0, import_operators.map)((currentProjectId) => projectId ? projectId : currentProjectId),
     (0, import_operators.switchMap)(
-      (id) => typeof id !== "string" ? (0, import_rxjs2.throwError)("no-id-provided") : (0, import_rxjs2.of)(id)
+      (id) => typeof id !== "string" ? (0, import_rxjs2.throwError)(() => "no-id-provided") : (0, import_rxjs2.of)(id)
     ),
     (0, import_operators.switchMap)((id) => isMongoId(id))
   );
@@ -18750,7 +18750,7 @@ var init_helpers = __esm({
       (0, import_operators.switchMap)(
         (id) => (0, import_rxjs2.of)(new RegExp("^[0-9a-fA-F]{24}$").test(id)).pipe(
           (0, import_operators.switchMap)(
-            (isMongoId2) => isMongoId2 ? (0, import_rxjs2.of)(id) : (0, import_rxjs2.throwError)(`not-valid-id`)
+            (isMongoId2) => isMongoId2 ? (0, import_rxjs2.of)(id) : (0, import_rxjs2.throwError)(() => `not-valid-id`)
           )
         )
       )
@@ -36168,7 +36168,7 @@ var init_gql_client = __esm({
         }).pipe(
           (0, import_operators2.switchMap)((res) => {
             if (!res.getLambda) {
-              return (0, import_rxjs3.throwError)("missing-lambda");
+              return (0, import_rxjs3.throwError)(() => "missing-lambda");
             }
             return (0, import_rxjs3.of)(res.getLambda);
           })
@@ -36188,7 +36188,7 @@ var init_gql_client = __esm({
         }).pipe(
           (0, import_operators2.switchMap)((res) => {
             if (!res.getLambdaByName) {
-              return (0, import_rxjs3.throwError)("missing-lambda");
+              return (0, import_rxjs3.throwError)(() => "missing-lambda");
             }
             return (0, import_rxjs3.of)(res.getLambdaByName);
           })
@@ -285838,11 +285838,11 @@ var init_get = __esm({
             (0, import_operators16.catchError)((error48) => {
               if (!cmd.project) {
                 return (0, import_rxjs17.throwError)(
-                  `No project id try with "gcli use --project your-project-id" to specify one  
+                  () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs17.throwError)(error48);
+              return (0, import_rxjs17.throwError)(() => error48);
             }),
             (0, import_operators16.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId)
@@ -286004,7 +286004,7 @@ var init_logs_builder = __esm({
             (0, import_operators19.catchError)((error48) => {
               if (!cmd.project) {
                 return (0, import_rxjs20.throwError)(
-                  `No project id try with "gcli use --project your-project-id" to specify one  
+                  () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
@@ -286084,11 +286084,11 @@ var init_test = __esm({
             (0, import_operators20.catchError)((error48) => {
               if (!cmd.project) {
                 return (0, import_rxjs21.throwError)(
-                  `No project id try with "gcli use --project your-project-id" to specify one  
+                  () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs21.throwError)(error48);
+              return (0, import_rxjs21.throwError)(() => error48);
             }),
             (0, import_operators20.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId, [
