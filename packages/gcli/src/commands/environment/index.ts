@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { from } from 'rxjs';
+import { from, lastValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { lazy } from '~/helpers';
@@ -11,9 +11,9 @@ export function registerEnvironmentCommands(program: Command) {
     .option('-p, --project <project>')
     .action(
       lazy(() =>
-        from(import('./list-environments'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(
+          from(import('./list-environments')).pipe(map((m) => m.default)),
+        ),
       ),
     );
 
@@ -36,9 +36,9 @@ export function registerEnvironmentCommands(program: Command) {
     )
     .action(
       lazy(() =>
-        from(import('./create-environment'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(
+          from(import('./create-environment')).pipe(map((m) => m.default)),
+        ),
       ),
     );
 
@@ -61,9 +61,9 @@ export function registerEnvironmentCommands(program: Command) {
     )
     .action(
       lazy(() =>
-        from(import('./update-environment'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(
+          from(import('./update-environment')).pipe(map((m) => m.default)),
+        ),
       ),
     );
 
@@ -76,9 +76,9 @@ export function registerEnvironmentCommands(program: Command) {
     .option('-spec, --spec <spec>')
     .action(
       lazy(() =>
-        from(import('./delete-environment'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(
+          from(import('./delete-environment')).pipe(map((m) => m.default)),
+        ),
       ),
     );
 
@@ -89,9 +89,9 @@ export function registerEnvironmentCommands(program: Command) {
     .option('-n, --name <name>')
     .action(
       lazy(() =>
-        from(import('./get-environment'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(
+          from(import('./get-environment')).pipe(map((m) => m.default)),
+        ),
       ),
     );
 }

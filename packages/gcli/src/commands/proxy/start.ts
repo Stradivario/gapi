@@ -69,8 +69,8 @@ const performFetch = (input: RequestInfo | URL, init?: RequestInit) => {
  * gcli mcp:start --url http://localhost:8000/mcp
  */
 export default async function startProxy(cmd: { url: string }) {
-  return GraphqlClienAPI.getConfig()
-    .pipe(
+  return lastValueFrom(
+    GraphqlClienAPI.getConfig().pipe(
       take(1),
       map((config) => ({
         ...config,
@@ -184,6 +184,6 @@ export default async function startProxy(cmd: { url: string }) {
       }),
       // Keep the process running indefinitely to handle stdio communication
       switchMap(() => new Promise(() => {})),
-    )
-    .toPromise();
+    ),
+  );
 }

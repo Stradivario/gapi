@@ -1,3 +1,4 @@
+import { lastValueFrom } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { parseProjectId } from '~/helpers';
@@ -11,15 +12,15 @@ export default async (cmd: {
   name?: string;
   project?: string;
 }) => {
-  const spec = await loadSpec(cmd.spec).toPromise();
+  const spec = await lastValueFrom(loadSpec(cmd.spec));
 
   const name =
     typeof cmd.name === 'string'
       ? (cmd.name as never)
       : (spec.function?.name ?? spec.name);
 
-  return parseProjectId(cmd.project)
-    .pipe(
+  return lastValueFrom(
+    parseProjectId(cmd.project).pipe(
       switchMap((projectId) =>
         GraphqlClienAPI.deleteLambda({ name, projectId }),
       ),
@@ -35,6 +36,6 @@ export default async (cmd: {
         Logger.table([data], columns);
         Logger.log('-------------------');
       }),
-    )
-    .toPromise();
+    ),
+  );
 };

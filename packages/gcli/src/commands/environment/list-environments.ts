@@ -1,3 +1,4 @@
+import { lastValueFrom } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 import { parseProjectId } from '~/helpers';
@@ -6,8 +7,8 @@ import { Logger } from '~/services/log';
 import { Unboxed } from '~/types';
 
 export default (cmd: { project: string }) =>
-  parseProjectId(cmd.project)
-    .pipe(
+  lastValueFrom(
+    parseProjectId(cmd.project).pipe(
       switchMap((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
       tap((data) => {
         const columns: (keyof Unboxed<typeof data>)[] = [
@@ -27,5 +28,5 @@ export default (cmd: { project: string }) =>
         Logger.table(data, columns);
         Logger.log('-------------------');
       }),
-    )
-    .toPromise();
+    ),
+  );

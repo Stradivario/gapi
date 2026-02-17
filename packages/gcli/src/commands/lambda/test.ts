@@ -1,5 +1,5 @@
-import { IFissionType } from '@introspection/index';
-import { from, of, throwError } from 'rxjs';
+import { IFissionType, IHttpMethodsEnum } from '@introspection/index';
+import { from, lastValueFrom, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { isMongoId, parseProjectId } from '~/helpers';
@@ -15,8 +15,11 @@ export default async (cmd: {
   lambda?: string;
   queryParams?: string;
   pathParams?: string;
+  method?: IHttpMethodsEnum;
   body?: string;
 }) => {
+  const spec = await lastValueFrom(loadSpec(cmd.spec));
+
   const processParameters = (lambda: IFissionType) =>
     of(lambda).pipe(
       map((lambda) => ({
@@ -31,28 +34,37 @@ export default async (cmd: {
               )
           : lambda.url,
       })),
+      tap(() => {
+        Logger.info(
+          `About to hit URL: ${[lambda.url, cmd.queryParams].join('')}`,
+        );
+      }),
       switchMap((lambda) =>
         from(
           fetch([lambda.url, cmd.queryParams].filter((i) => !!i).join(''), {
-            method: lambda.method as never as string,
+            method: cmd?.method ?? 'GET',
             body: cmd.body,
           }),
         ).pipe(switchMap((res) => res.json())),
       ),
-      tap(Logger.log),
+      tap((data) => {
+        if (data.error) {
+          Logger.error(data);
+        } else {
+          Logger.info(data);
+        }
+      }),
     );
   if (cmd.lambda) {
-    return isMongoId(cmd.lambda)
-      .pipe(
+    return lastValueFrom(
+      isMongoId(cmd.lambda).pipe(
         switchMap((id) =>
           GraphqlClienAPI.getLambda(id, ['id', 'url', 'method', 'params']),
         ),
         switchMap(processParameters),
-      )
-      .toPromise();
+      ),
+    );
   }
-
-  const spec = await loadSpec(cmd.spec).toPromise();
 
   const name =
     typeof cmd.name === 'string'
@@ -60,15 +72,16 @@ export default async (cmd: {
       : (spec.function?.name ?? spec.name);
 
   if (name) {
-    return parseProjectId(cmd.project)
-      .pipe(
+    return lastValueFrom(
+      parseProjectId(cmd.project).pipe(
         catchError((error) => {
           if (!cmd.project) {
             return throwError(
-              `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:get --name ${name} --project your-project-id"`,
+              () =>
+                `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:get --name ${name} --project your-project-id"`,
             );
           }
-          return throwError(error);
+          return throwError(() => error);
         }),
         switchMap((projectId) =>
           GraphqlClienAPI.getLambdaByName(name, projectId, [
@@ -79,8 +92,8 @@ export default async (cmd: {
           ]),
         ),
         switchMap(processParameters),
-      )
-      .toPromise();
+      ),
+    );
   }
   throw new Error('unable-to-load-lambda');
 };

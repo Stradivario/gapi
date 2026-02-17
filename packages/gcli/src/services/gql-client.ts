@@ -98,7 +98,7 @@ export class GraphqlClienAPI {
     }).pipe(
       switchMap((res) => {
         if (!res.getLambda) {
-          return throwError('missing-lambda');
+          return throwError(() => 'missing-lambda');
         }
         return of(res.getLambda);
       }),
@@ -123,7 +123,7 @@ export class GraphqlClienAPI {
     }).pipe(
       switchMap((res) => {
         if (!res.getLambdaByName) {
-          return throwError('missing-lambda');
+          return throwError(() => 'missing-lambda');
         }
         return of(res.getLambdaByName);
       }),

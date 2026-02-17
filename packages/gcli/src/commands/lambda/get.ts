@@ -1,5 +1,5 @@
 import { IFissionType } from '@introspection/index';
-import { throwError } from 'rxjs';
+import { lastValueFrom, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 
 import { isMongoId, parseProjectId } from '~/helpers';
@@ -28,14 +28,14 @@ export default async (cmd: {
   });
 
   if (cmd.lambda) {
-    return isMongoId(cmd.lambda)
-      .pipe(
+    return lastValueFrom(
+      isMongoId(cmd.lambda).pipe(
         switchMap((id) => GraphqlClienAPI.getLambda(id)),
         table,
-      )
-      .toPromise();
+      ),
+    );
   }
-  const spec = await loadSpec(cmd.spec).toPromise();
+  const spec = await lastValueFrom(loadSpec(cmd.spec));
 
   const name =
     typeof cmd.name === 'string'
@@ -43,22 +43,23 @@ export default async (cmd: {
       : (spec.function?.name ?? spec.name);
 
   if (name) {
-    return parseProjectId(cmd.project)
-      .pipe(
+    return lastValueFrom(
+      parseProjectId(cmd.project).pipe(
         catchError((error) => {
           if (!cmd.project) {
             return throwError(
-              `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:get --name ${name} --project your-project-id"`,
+              () =>
+                `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:get --name ${name} --project your-project-id"`,
             );
           }
-          return throwError(error);
+          return throwError(() => error);
         }),
         switchMap((projectId) =>
           GraphqlClienAPI.getLambdaByName(name, projectId),
         ),
         table,
-      )
-      .toPromise();
+      ),
+    );
   }
   throw new Error('unable-to-load-lambda');
 };

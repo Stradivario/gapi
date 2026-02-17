@@ -1,5 +1,5 @@
 import { writeFile } from 'fs';
-import { from } from 'rxjs';
+import { from, lastValueFrom } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { promisify } from 'util';
 
@@ -8,8 +8,8 @@ import { GraphqlClienAPI } from '~/services/gql-client';
 import { projectDirectory } from '~/types';
 
 export default async (cmd: string) => {
-  return parseProjectId(cmd)
-    .pipe(
+  return lastValueFrom(
+    parseProjectId(cmd).pipe(
       switchMap((projectId) =>
         GraphqlClienAPI.getProject(projectId).pipe(map(() => projectId)),
       ),
@@ -20,6 +20,6 @@ export default async (cmd: string) => {
           }),
         ),
       ),
-    )
-    .toPromise();
+    ),
+  );
 };

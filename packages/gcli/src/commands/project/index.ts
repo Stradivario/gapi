@@ -1,6 +1,4 @@
 import { Command } from 'commander';
-import { from } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { lazy } from '~/helpers';
 
@@ -8,13 +6,7 @@ export function registerProjectCommands(program: Command) {
   program
     .command('project:list')
     .description('List of all projects')
-    .action(
-      lazy(() =>
-        from(import('./list'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
-      ),
-    );
+    .action(lazy(() => import('./list').then((m) => m.default)));
 
   program
     .command('project:use')

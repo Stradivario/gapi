@@ -3,28 +3,19 @@ import {
   IHttpMethodsEnum,
   ILambdaScaleOptionsExecutorTypeEnum,
 } from '@introspection/index';
-import archiver from 'archiver';
-import { exec } from 'child_process';
 import { Command } from 'commander';
 import FormData from 'form-data';
-import {
-  createReadStream,
-  mkdir,
-  ReadStream,
-  writeFile,
-  WriteStream,
-} from 'fs';
-import { from, Observable, of } from 'rxjs';
+import { createReadStream, ReadStream, WriteStream } from 'fs';
+import { from, lastValueFrom, Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import streamToBuffer from 'stream-to-buffer';
-import { promisify } from 'util';
 
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
+import packageZip from '../package';
 import { loadSpec } from './load-spec';
-import { parseIgnoredFiles } from './parse-ignore';
 import { readFileAsObservable } from './read-file';
 
 const ReadFile = (file: string): Observable<string> =>
@@ -62,7 +53,8 @@ export interface CreateOrUpdateLambdaArguments {
   functionTimeout: number;
   specializationTimeout: number;
 }
-function streamToBufferPromise(file: File | ReadStream | WriteStream) {
+
+export function streamToBufferPromise(file: File | ReadStream | WriteStream) {
   return new Promise<Buffer>((resolve, reject) => {
     streamToBuffer(file, function (err, buffer: Buffer) {
       if (err) {
@@ -72,17 +64,18 @@ function streamToBufferPromise(file: File | ReadStream | WriteStream) {
     });
   });
 }
+
 export const createOrUpdateLambda = (
   cmd: CreateOrUpdateLambdaArguments,
   type: 'createLambda' | 'updateLambda',
 ) =>
-  parseProjectId(cmd.project)
-    .pipe(
+  lastValueFrom(
+    parseProjectId(cmd.project).pipe(
       switchMap((projectId) =>
         GraphqlClienAPI.getProject(projectId).pipe(map(() => projectId)),
       ),
       switchMap(async (projectId) => {
-        const spec = await loadSpec(cmd.spec).toPromise();
+        const spec = await lastValueFrom(loadSpec(cmd.spec));
         return {
           projectId,
           ...(spec?.function ?? spec),
@@ -94,117 +87,93 @@ export const createOrUpdateLambda = (
         if (!data.uploadAsZip) {
           return { ...data, customUploadFileId: '' };
         }
-        const archive = archiver('zip', {
-          zlib: { level: 9 }, // Sets the compression level.
-        });
-        await promisify(exec)(['chmod', '+x', data.script].join(' '));
-        const ignore = await ReadFile('.gignore')
-          .pipe(map((ignore) => parseIgnoredFiles(ignore) as string[]))
-          .toPromise();
 
-        archive.glob('**', {
-          ignore: ['.gcache/**', ...ignore],
-        });
+        await packageZip(cmd);
 
-        archive.finalize();
-
-        await from(streamToBufferPromise(archive))
-          .pipe(
-            switchMap((buffer) =>
-              from(promisify(mkdir)('.gcache')).pipe(
-                catchError(() => of(true)),
-                switchMap(() =>
-                  promisify(writeFile)(`.gcache/${data.name}.zip`, buffer, {
-                    encoding: 'utf-8',
-                  }),
-                ),
-              ),
-            ),
-          )
-          .toPromise();
         const body = new FormData();
         body.append('file[]', createReadStream(`.gcache/${data.name}.zip`));
-        const config = await GraphqlClienAPI.getConfig().toPromise();
+        const config = await lastValueFrom(GraphqlClienAPI.getConfig());
 
-        return from(
-          fetch(config.uploadUrl, {
-            method: 'POST',
-            body: body as never,
-            headers: {
-              ...body.getHeaders(),
-              Authorization: config.token,
-              projectid: data.projectId,
-              lambdaname: data.name,
-            },
-          }),
-        )
-          .pipe(
+        return lastValueFrom(
+          from(
+            fetch(config.uploadUrl, {
+              method: 'POST',
+              body: body as never,
+              headers: {
+                ...body.getHeaders(),
+                Authorization: config.token,
+                projectid: data.projectId,
+                lambdaname: data.name,
+              },
+            }),
+          ).pipe(
             switchMap((res) => res.json() as Promise<IGraphqlFile>),
-            tap((res) => Logger.log(res)),
             map((file) => ({
               ...data,
               customUploadFileId: file.id,
             })),
-          )
-          .toPromise();
+          ),
+        );
       }),
       switchMap(async (payload) =>
-        GraphqlClienAPI[type]({
-          code:
-            cmd.code ||
-            (await ReadFile(payload.file || cmd.file).toPromise()) ||
-            '',
-          name: payload.name || (cmd.name as never) || '',
-          projectId: payload.projectId,
-          route: cmd.route || payload.route || '',
-          buildBashScript:
-            cmd.buildBashScript ||
-            (await ReadFile(payload.script || cmd.script).toPromise()) ||
-            '',
-          config: payload.config || cmd.config || '',
-          env: cmd.env || payload.env || 'nodejs',
-          method: cmd.method || payload.method || ['GET'],
-          packageJson:
-            cmd.packageJson ||
-            (await ReadFile(payload.package || cmd.package).toPromise()) ||
-            '{}',
-          params: cmd.params || payload.params || [],
-          secrets: cmd.secrets || payload.secrets || [],
-          network: cmd.network || payload.network || ['public', 'private'],
-          customUploadFileId:
-            cmd.customUploadFileId || payload.customUploadFileId || '',
-          scaleOptions: {
-            executorType:
-              cmd.executorType ||
-              payload.scaleOptions?.executorType ||
-              'poolmgr',
-            maxCpu: cmd.maxCpu || payload.scaleOptions?.maxCpu || 0,
-            maxMemory: cmd.maxMemory || payload.scaleOptions?.maxMemory || 0,
-            maxScale: cmd.maxScale || payload.scaleOptions?.maxScale || 0,
-            minCpu: cmd.minCpu || payload.scaleOptions?.minCpu || 0,
-            minMemory: cmd.minMemory || payload.scaleOptions?.minMemory || 0,
-            minScale: cmd.minScale || payload.scaleOptions?.minScale || 0,
-            targetCpu: cmd.targetCpu || payload.scaleOptions?.targetCpu || 0,
-            idleTimeout:
-              cmd.idleTimeout || payload.scaleOptions?.idleTimeout || 120,
-            concurrency:
-              cmd.concurrency || payload.scaleOptions?.concurrency || 500,
-            functionTimeout:
-              cmd.functionTimeout ||
-              payload.scaleOptions?.functionTimeout ||
-              60,
-            specializationTimeout:
-              cmd.specializationTimeout ||
-              payload.scaleOptions?.specializationTimeout ||
-              120,
-          },
-        }).toPromise(),
+        lastValueFrom(
+          GraphqlClienAPI[type]({
+            code:
+              cmd.code ||
+              (await lastValueFrom(ReadFile(cmd.file || payload.file))) ||
+              '',
+            name: cmd.name || payload.name || '',
+            projectId: payload.projectId,
+            route: cmd.route || payload.route || '',
+            buildBashScript:
+              cmd.buildBashScript ||
+              (await lastValueFrom(ReadFile(cmd.script || payload.script))) ||
+              '',
+            config: cmd.config || payload.config || '',
+            env: cmd.env || payload.env || 'nodejs',
+            method: cmd.method || payload.method || ['GET'],
+            packageJson:
+              cmd.packageJson ||
+              (await lastValueFrom(ReadFile(cmd.package || payload.package))) ||
+              '{}',
+            params: cmd.params || payload.params || [],
+            secrets: cmd.secrets || payload.secrets || [],
+            network: cmd.network || payload.network || ['public', 'private'],
+            customUploadFileId:
+              cmd.customUploadFileId || payload.customUploadFileId || '',
+            scaleOptions: {
+              executorType:
+                cmd.executorType ||
+                payload.scaleOptions?.executorType ||
+                'poolmgr',
+              maxCpu: cmd.maxCpu || payload.scaleOptions?.maxCpu || 0,
+              maxMemory: cmd.maxMemory || payload.scaleOptions?.maxMemory || 0,
+              maxScale: cmd.maxScale || payload.scaleOptions?.maxScale || 0,
+              minCpu: cmd.minCpu || payload.scaleOptions?.minCpu || 0,
+              minMemory: cmd.minMemory || payload.scaleOptions?.minMemory || 0,
+              minScale: cmd.minScale || payload.scaleOptions?.minScale || 0,
+              targetCpu: cmd.targetCpu || payload.scaleOptions?.targetCpu || 0,
+              idleTimeout:
+                cmd.idleTimeout || payload.scaleOptions?.idleTimeout || 120,
+              concurrency:
+                cmd.concurrency || payload.scaleOptions?.concurrency || 500,
+              functionTimeout:
+                cmd.functionTimeout ||
+                payload.scaleOptions?.functionTimeout ||
+                60,
+              specializationTimeout:
+                cmd.specializationTimeout ||
+                payload.scaleOptions?.specializationTimeout ||
+                120,
+            },
+          }),
+        ),
       ),
       tap((data) => {
-        console.dir(data, { depth: null, colors: true });
+        Logger.info(JSON.stringify(data, null, 2));
       }),
-    )
-    .toPromise();
+    ),
+  );
 
 export const createCommand =
   (command: string) => (options: [string, string][]) => (program: Command) => {

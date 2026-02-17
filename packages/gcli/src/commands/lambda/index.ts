@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { from } from 'rxjs';
+import { from, lastValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { lazy } from '~/helpers';
@@ -16,9 +16,7 @@ export function registerLambdaCommands(program: Command) {
     )
     .action(
       lazy(() =>
-        from(import('./list'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(from(import('./list')).pipe(map((m) => m.default))),
       ),
     );
 
@@ -31,9 +29,7 @@ export function registerLambdaCommands(program: Command) {
     .option('-p, --spec <spec>', 'get by lambda name')
     .action(
       lazy(() =>
-        from(import('./get'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(from(import('./get')).pipe(map((m) => m.default))),
       ),
     );
 
@@ -113,17 +109,13 @@ export function registerLambdaCommands(program: Command) {
 
   createCommand('lambda:create')(createOrUpdateOptions)(program).action(
     lazy(() =>
-      from(import('./create'))
-        .pipe(map((m) => m.default))
-        .toPromise(),
+      lastValueFrom(from(import('./create')).pipe(map((m) => m.default))),
     ),
   );
 
   createCommand('lambda:update')(createOrUpdateOptions)(program).action(
     lazy(() =>
-      from(import('./update'))
-        .pipe(map((m) => m.default))
-        .toPromise(),
+      lastValueFrom(from(import('./update')).pipe(map((m) => m.default))),
     ),
   );
 
@@ -135,9 +127,7 @@ export function registerLambdaCommands(program: Command) {
     .option('-s, --spec <spec>', 'get by lambda name')
     .action(
       lazy(() =>
-        from(import('./delete'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(from(import('./delete')).pipe(map((m) => m.default))),
       ),
     );
 
@@ -150,9 +140,7 @@ export function registerLambdaCommands(program: Command) {
     .option('-s, --spec <spec>', 'get by lambda name')
     .action(
       lazy(() =>
-        from(import('./logs'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(from(import('./logs')).pipe(map((m) => m.default))),
       ),
     );
 
@@ -165,9 +153,9 @@ export function registerLambdaCommands(program: Command) {
     .option('-s, --spec <spec>', 'use configuration')
     .action(
       lazy(() =>
-        from(import('./logs-builder'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(
+          from(import('./logs-builder')).pipe(map((m) => m.default)),
+        ),
       ),
     );
 
@@ -181,11 +169,19 @@ export function registerLambdaCommands(program: Command) {
     .option('-qp, --queryParams <queryParams>', 'Adds query params to request')
     .option('-pp, --pathParams <pathParams>', 'Adds query params to request')
     .option('-b, --body <body>', 'Add body to request')
+    .option(
+      '-m, --method <method>',
+      'HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method',
+    )
     .action(
       lazy(() =>
-        from(import('./test'))
-          .pipe(map((m) => m.default))
-          .toPromise(),
+        lastValueFrom(from(import('./test')).pipe(map((m) => m.default))),
       ),
     );
+
+  createCommand('lambda:package')(createOrUpdateOptions)(program).action(
+    lazy(() =>
+      lastValueFrom(from(import('./package')).pipe(map((m) => m.default))),
+    ),
+  );
 }

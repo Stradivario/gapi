@@ -1,5 +1,5 @@
 import { IFissionLogsType } from '@introspection/index';
-import { throwError } from 'rxjs';
+import { lastValueFrom, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 
 import { isMongoId, parseProjectId } from '~/helpers';
@@ -16,14 +16,14 @@ export default async (cmd: {
 }) => {
   const result = tap(({ data }: IFissionLogsType) => Logger.log(data));
   if (cmd.lambda) {
-    return isMongoId(cmd.lambda)
-      .pipe(
+    return lastValueFrom(
+      isMongoId(cmd.lambda).pipe(
         switchMap((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
         result,
-      )
-      .toPromise();
+      ),
+    );
   }
-  const spec = await loadSpec(cmd.spec).toPromise();
+  const spec = await lastValueFrom(loadSpec(cmd.spec));
 
   const name =
     typeof cmd.name === 'string'
@@ -31,23 +31,24 @@ export default async (cmd: {
       : (spec.function?.name ?? spec.name);
 
   if (name) {
-    return parseProjectId(cmd.project)
-      .pipe(
+    return lastValueFrom(
+      parseProjectId(cmd.project).pipe(
         catchError((error) => {
           if (!cmd.project) {
             return throwError(
-              `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:logs --name ${name} --project your-project-id"`,
+              () =>
+                `No project id try with "gcli use --project your-project-id" to specify one  \n Hint: "gcli lambda:logs --name ${name} --project your-project-id"`,
             );
           }
-          return throwError(error);
+          return throwError(() => error);
         }),
 
         switchMap((projectId) =>
           GraphqlClienAPI.getLambdaBuilderLogsByName(name, projectId),
         ),
         result,
-      )
-      .toPromise();
+      ),
+    );
   }
   throw new Error('unable-to-load-lambda-logs');
 };

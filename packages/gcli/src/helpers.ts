@@ -56,7 +56,7 @@ export const isMongoId = (mongoId: string) =>
     switchMap((id) =>
       of(new RegExp('^[0-9a-fA-F]{24}$').test(id)).pipe(
         switchMap((isMongoId) =>
-          isMongoId ? of(id) : throwError(`not-valid-id`),
+          isMongoId ? of(id) : throwError(() => `not-valid-id`),
         ),
       ),
     ),
@@ -67,7 +67,7 @@ export function parseProjectId(projectId?: string) {
     catchError(() => of('')),
     map((currentProjectId) => (projectId ? projectId : currentProjectId)),
     switchMap((id) =>
-      typeof id !== 'string' ? throwError('no-id-provided') : of(id),
+      typeof id !== 'string' ? throwError(() => 'no-id-provided') : of(id),
     ),
     switchMap((id) => isMongoId(id)),
   );

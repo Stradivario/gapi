@@ -1,3 +1,4 @@
+import { lastValueFrom } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { parseProjectId } from '~/helpers';
@@ -13,8 +14,8 @@ export default (cmd: {
   name: string;
   force: boolean;
 }) =>
-  parseProjectId(cmd.project)
-    .pipe(
+  lastValueFrom(
+    parseProjectId(cmd.project).pipe(
       switchMap((projectId) =>
         loadSpec(cmd.spec ?? 'env.yaml').pipe(
           map((data) => ({
@@ -44,5 +45,5 @@ export default (cmd: {
         Logger.table([data], columns);
         Logger.log('-------------------');
       }),
-    )
-    .toPromise();
+    ),
+  );

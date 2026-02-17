@@ -1,5 +1,5 @@
 import { mkdir, writeFile } from 'fs';
-import { combineLatest, from, of } from 'rxjs';
+import { combineLatest, from, lastValueFrom, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { promisify } from 'util';
 
@@ -23,8 +23,8 @@ export default (cmd: {
   ci: boolean;
   token: string;
 }) =>
-  of(GraphqlClienAPI.init(cmd.key))
-    .pipe(
+  lastValueFrom(
+    of(GraphqlClienAPI.init(cmd.key)).pipe(
       switchMap(() =>
         from(promisify(mkdir)(mainDirectory))
           .pipe(
@@ -83,5 +83,5 @@ export default (cmd: {
             ),
           ),
       ),
-    )
-    .toPromise();
+    ),
+  );

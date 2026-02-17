@@ -55,6 +55,7 @@ export default async function start(args: BuildArguments) {
                     debounceTime(100),
                     tap(() => {
                       Logger.warn('⚠️  Main process shutting down');
+                      watcher.close();
                       child.kill('SIGTERM');
                       process.exit();
                     }),
