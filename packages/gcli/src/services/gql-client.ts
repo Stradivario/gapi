@@ -2,6 +2,7 @@ import 'firebase/auth';
 
 import {
   ICreateOrUpdateLambdaInput,
+  ICreateTimeTriggerInput,
   IDeleteLambdaInput,
   IFissionEnvironmentInputType,
   IFissionLogsType,
@@ -30,6 +31,7 @@ import {
 import { EnvironmentFragment } from './types/environment.fragment';
 import { LambdaFragment } from './types/lambda.fragment';
 import { ProjectFragment } from './types/project.fragment';
+import { TimeTriggerFragment } from './types/time-trigger.fragment';
 
 export function gql(...args) {
   const literals = args[0];
@@ -383,6 +385,51 @@ export class GraphqlClienAPI {
         payload,
       },
     }).pipe(map((res) => res.updateEnvironmentByName));
+  }
+
+  public static listProjectTimeTriggers(projectId: string) {
+    return this.query<IQuery>({
+      query: gql`
+        query listProjectTimeTriggers($projectId: String!) {
+          listProjectTimeTriggers(projectId: $projectId) {
+            ${TimeTriggerFragment}
+          }
+        }
+      `,
+      variables: {
+        projectId,
+      },
+    }).pipe(map((res) => res.listProjectTimeTriggers));
+  }
+
+  public static createTimeTrigger(payload: ICreateTimeTriggerInput) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation createLambdaTimeTrigger($payload: CreateTimeTriggerInput!) {
+          createLambdaTimeTrigger(payload: $payload) {
+            ${TimeTriggerFragment}
+          }
+        }
+      `,
+      variables: {
+        payload,
+      },
+    }).pipe(map((res) => res.createLambdaTimeTrigger));
+  }
+
+  public static deleteLambdaTimeTrigger(lambdaId: string) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation deleteLambdaTimeTrigger($lambdaId: String!) {
+          deleteLambdaTimeTrigger(lambdaId: $lambdaId) {
+            ${TimeTriggerFragment}
+          }
+        }
+      `,
+      variables: {
+        lambdaId,
+      },
+    }).pipe(map((res) => res.deleteLambdaTimeTrigger));
   }
 
   static getConfig(force = false) {

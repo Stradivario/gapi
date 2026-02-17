@@ -5,6 +5,7 @@ import { registerLambdaCommands } from './lambda';
 import { registerProjectCommands } from './project';
 import { registerMcpCommands } from './proxy';
 import { startCommands } from './start';
+import { registerCronTriggerCommands } from './triggers/cron';
 
 export const commands = [
   registerAuthCommands,
@@ -14,4 +15,5 @@ export const commands = [
   registerEnvironmentCommands,
   registerMcpCommands,
   startCommands,
+  registerCronTriggerCommands,
 ];

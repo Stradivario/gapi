@@ -1,6 +1,4 @@
 import { Command } from 'commander';
-import { from, lastValueFrom } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { lazy } from '~/helpers';
 
@@ -18,9 +16,5 @@ export function buildCommands(program: Command) {
     .option('-t, --target <char>', 'Target ', 'node14.4')
     .option('-o, --outfile <char>', 'Outfile name')
     .option('-e, --external <external...>', 'External libraries')
-    .action(
-      lazy(() =>
-        lastValueFrom(from(import('./build')).pipe(map((m) => m.default))),
-      ),
-    );
+    .action(lazy(() => import('./build').then((m) => m.default)));
 }

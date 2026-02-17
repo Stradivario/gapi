@@ -40,7 +40,9 @@ interface BundlerOptions {
 interface LambForgeConfig extends ConfigJSON {
   function: ConfigJSON;
   environment: IFissionEnvironmentInputType;
-  trigger: ICreateTimeTriggerInput;
+  triggers: {
+    time: ICreateTimeTriggerInput;
+  };
   options: BundlerOptions;
 }
 

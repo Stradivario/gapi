@@ -1,6 +1,3 @@
-const dotenvLoad = require('dotenv-load');
-dotenvLoad(process.env.NODE_ENV);
-
 require('esbuild')
   .build({
     entryPoints: ['./src/main.ts'],

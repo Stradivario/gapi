@@ -43,7 +43,6 @@ if (typeof isSea === 'function' && isSea()) {
 /**
  * 2. DEPENDENCY IMPORTS
  */
-import chalk from 'chalk';
 import { program } from 'commander';
 import fetch from 'node-fetch';
 
@@ -63,9 +62,9 @@ export const main = (argv: string[]) => {
 
   // Handling invalid commands
   program.on('command:*', () => {
-    Logger.log();
-    Logger.log(chalk.red(`Invalid command: ${program.args.join(' ')}`));
-    Logger.log();
+    console.log();
+    Logger.error(`Invalid command: ${program.args.join(' ')}`);
+    console.log();
     program.outputHelp();
     process.exit(1);
   });
@@ -79,7 +78,7 @@ export const main = (argv: string[]) => {
 };
 
 // Fetch polyfill (if required for older Node.js versions)
-global.fetch = fetch as never;
+global.fetch = global.fetch ?? (fetch as never);
 
 /* If the command is executed without arguments, show the help page */
 if (process.argv.length === 2) {

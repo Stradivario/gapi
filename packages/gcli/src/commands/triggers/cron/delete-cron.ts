@@ -28,15 +28,13 @@ export default (
               map((lambda) => ({
                 lambdaName: lambda.name,
                 lambdaId: lambda.id,
-                ...(data?.triggers?.time ??
-                  (data as typeof data.triggers.time)),
               })),
             ),
           ),
         ),
       ),
-      switchMap(({ lambdaId, cron, triggerName, lambdaName }) =>
-        GraphqlClienAPI.createTimeTrigger({ lambdaId, cron, triggerName }).pipe(
+      switchMap(({ lambdaId, lambdaName }) =>
+        GraphqlClienAPI.deleteLambdaTimeTrigger(lambdaId).pipe(
           map((data) => ({ ...data, lambdaName })),
         ),
       ),
@@ -46,10 +44,9 @@ export default (
           'lambdaName',
           'triggerName',
           'cron',
-          'createdBy',
         ];
         Logger.log('-------------------');
-        Logger.log('[Action][createTimeTrigger]');
+        Logger.log('[Action][deleteLambdaTimeTrigger]');
         Logger.table([data], columns);
         Logger.log('-------------------');
       }),

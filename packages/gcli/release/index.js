@@ -15,11 +15,11 @@ var __export = (target, all) => {
   for (var name2 in all)
     __defProp(target, name2, { get: all[name2], enumerable: true });
 };
-var __copyProps = (to, from14, except, desc) => {
-  if (from14 && typeof from14 === "object" || typeof from14 === "function") {
-    for (let key of __getOwnPropNames(from14))
+var __copyProps = (to, from11, except, desc) => {
+  if (from11 && typeof from11 === "object" || typeof from11 === "function") {
+    for (let key of __getOwnPropNames(from11))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from14[key], enumerable: !(desc = __getOwnPropDesc(from14, key)) || desc.enumerable });
+        __defProp(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc(from11, key)) || desc.enumerable });
   }
   return to;
 };
@@ -32,1549 +32,6 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// ../../node_modules/escape-string-regexp/index.js
-var require_escape_string_regexp = __commonJS({
-  "../../node_modules/escape-string-regexp/index.js"(exports2, module2) {
-    "use strict";
-    var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
-    module2.exports = function(str2) {
-      if (typeof str2 !== "string") {
-        throw new TypeError("Expected a string");
-      }
-      return str2.replace(matchOperatorsRe, "\\$&");
-    };
-  }
-});
-
-// ../../node_modules/color-convert/node_modules/color-name/index.js
-var require_color_name = __commonJS({
-  "../../node_modules/color-convert/node_modules/color-name/index.js"(exports2, module2) {
-    "use strict";
-    module2.exports = {
-      "aliceblue": [240, 248, 255],
-      "antiquewhite": [250, 235, 215],
-      "aqua": [0, 255, 255],
-      "aquamarine": [127, 255, 212],
-      "azure": [240, 255, 255],
-      "beige": [245, 245, 220],
-      "bisque": [255, 228, 196],
-      "black": [0, 0, 0],
-      "blanchedalmond": [255, 235, 205],
-      "blue": [0, 0, 255],
-      "blueviolet": [138, 43, 226],
-      "brown": [165, 42, 42],
-      "burlywood": [222, 184, 135],
-      "cadetblue": [95, 158, 160],
-      "chartreuse": [127, 255, 0],
-      "chocolate": [210, 105, 30],
-      "coral": [255, 127, 80],
-      "cornflowerblue": [100, 149, 237],
-      "cornsilk": [255, 248, 220],
-      "crimson": [220, 20, 60],
-      "cyan": [0, 255, 255],
-      "darkblue": [0, 0, 139],
-      "darkcyan": [0, 139, 139],
-      "darkgoldenrod": [184, 134, 11],
-      "darkgray": [169, 169, 169],
-      "darkgreen": [0, 100, 0],
-      "darkgrey": [169, 169, 169],
-      "darkkhaki": [189, 183, 107],
-      "darkmagenta": [139, 0, 139],
-      "darkolivegreen": [85, 107, 47],
-      "darkorange": [255, 140, 0],
-      "darkorchid": [153, 50, 204],
-      "darkred": [139, 0, 0],
-      "darksalmon": [233, 150, 122],
-      "darkseagreen": [143, 188, 143],
-      "darkslateblue": [72, 61, 139],
-      "darkslategray": [47, 79, 79],
-      "darkslategrey": [47, 79, 79],
-      "darkturquoise": [0, 206, 209],
-      "darkviolet": [148, 0, 211],
-      "deeppink": [255, 20, 147],
-      "deepskyblue": [0, 191, 255],
-      "dimgray": [105, 105, 105],
-      "dimgrey": [105, 105, 105],
-      "dodgerblue": [30, 144, 255],
-      "firebrick": [178, 34, 34],
-      "floralwhite": [255, 250, 240],
-      "forestgreen": [34, 139, 34],
-      "fuchsia": [255, 0, 255],
-      "gainsboro": [220, 220, 220],
-      "ghostwhite": [248, 248, 255],
-      "gold": [255, 215, 0],
-      "goldenrod": [218, 165, 32],
-      "gray": [128, 128, 128],
-      "green": [0, 128, 0],
-      "greenyellow": [173, 255, 47],
-      "grey": [128, 128, 128],
-      "honeydew": [240, 255, 240],
-      "hotpink": [255, 105, 180],
-      "indianred": [205, 92, 92],
-      "indigo": [75, 0, 130],
-      "ivory": [255, 255, 240],
-      "khaki": [240, 230, 140],
-      "lavender": [230, 230, 250],
-      "lavenderblush": [255, 240, 245],
-      "lawngreen": [124, 252, 0],
-      "lemonchiffon": [255, 250, 205],
-      "lightblue": [173, 216, 230],
-      "lightcoral": [240, 128, 128],
-      "lightcyan": [224, 255, 255],
-      "lightgoldenrodyellow": [250, 250, 210],
-      "lightgray": [211, 211, 211],
-      "lightgreen": [144, 238, 144],
-      "lightgrey": [211, 211, 211],
-      "lightpink": [255, 182, 193],
-      "lightsalmon": [255, 160, 122],
-      "lightseagreen": [32, 178, 170],
-      "lightskyblue": [135, 206, 250],
-      "lightslategray": [119, 136, 153],
-      "lightslategrey": [119, 136, 153],
-      "lightsteelblue": [176, 196, 222],
-      "lightyellow": [255, 255, 224],
-      "lime": [0, 255, 0],
-      "limegreen": [50, 205, 50],
-      "linen": [250, 240, 230],
-      "magenta": [255, 0, 255],
-      "maroon": [128, 0, 0],
-      "mediumaquamarine": [102, 205, 170],
-      "mediumblue": [0, 0, 205],
-      "mediumorchid": [186, 85, 211],
-      "mediumpurple": [147, 112, 219],
-      "mediumseagreen": [60, 179, 113],
-      "mediumslateblue": [123, 104, 238],
-      "mediumspringgreen": [0, 250, 154],
-      "mediumturquoise": [72, 209, 204],
-      "mediumvioletred": [199, 21, 133],
-      "midnightblue": [25, 25, 112],
-      "mintcream": [245, 255, 250],
-      "mistyrose": [255, 228, 225],
-      "moccasin": [255, 228, 181],
-      "navajowhite": [255, 222, 173],
-      "navy": [0, 0, 128],
-      "oldlace": [253, 245, 230],
-      "olive": [128, 128, 0],
-      "olivedrab": [107, 142, 35],
-      "orange": [255, 165, 0],
-      "orangered": [255, 69, 0],
-      "orchid": [218, 112, 214],
-      "palegoldenrod": [238, 232, 170],
-      "palegreen": [152, 251, 152],
-      "paleturquoise": [175, 238, 238],
-      "palevioletred": [219, 112, 147],
-      "papayawhip": [255, 239, 213],
-      "peachpuff": [255, 218, 185],
-      "peru": [205, 133, 63],
-      "pink": [255, 192, 203],
-      "plum": [221, 160, 221],
-      "powderblue": [176, 224, 230],
-      "purple": [128, 0, 128],
-      "rebeccapurple": [102, 51, 153],
-      "red": [255, 0, 0],
-      "rosybrown": [188, 143, 143],
-      "royalblue": [65, 105, 225],
-      "saddlebrown": [139, 69, 19],
-      "salmon": [250, 128, 114],
-      "sandybrown": [244, 164, 96],
-      "seagreen": [46, 139, 87],
-      "seashell": [255, 245, 238],
-      "sienna": [160, 82, 45],
-      "silver": [192, 192, 192],
-      "skyblue": [135, 206, 235],
-      "slateblue": [106, 90, 205],
-      "slategray": [112, 128, 144],
-      "slategrey": [112, 128, 144],
-      "snow": [255, 250, 250],
-      "springgreen": [0, 255, 127],
-      "steelblue": [70, 130, 180],
-      "tan": [210, 180, 140],
-      "teal": [0, 128, 128],
-      "thistle": [216, 191, 216],
-      "tomato": [255, 99, 71],
-      "turquoise": [64, 224, 208],
-      "violet": [238, 130, 238],
-      "wheat": [245, 222, 179],
-      "white": [255, 255, 255],
-      "whitesmoke": [245, 245, 245],
-      "yellow": [255, 255, 0],
-      "yellowgreen": [154, 205, 50]
-    };
-  }
-});
-
-// ../../node_modules/color-convert/conversions.js
-var require_conversions = __commonJS({
-  "../../node_modules/color-convert/conversions.js"(exports2, module2) {
-    var cssKeywords = require_color_name();
-    var reverseKeywords = {};
-    for (key in cssKeywords) {
-      if (cssKeywords.hasOwnProperty(key)) {
-        reverseKeywords[cssKeywords[key]] = key;
-      }
-    }
-    var key;
-    var convert = module2.exports = {
-      rgb: { channels: 3, labels: "rgb" },
-      hsl: { channels: 3, labels: "hsl" },
-      hsv: { channels: 3, labels: "hsv" },
-      hwb: { channels: 3, labels: "hwb" },
-      cmyk: { channels: 4, labels: "cmyk" },
-      xyz: { channels: 3, labels: "xyz" },
-      lab: { channels: 3, labels: "lab" },
-      lch: { channels: 3, labels: "lch" },
-      hex: { channels: 1, labels: ["hex"] },
-      keyword: { channels: 1, labels: ["keyword"] },
-      ansi16: { channels: 1, labels: ["ansi16"] },
-      ansi256: { channels: 1, labels: ["ansi256"] },
-      hcg: { channels: 3, labels: ["h", "c", "g"] },
-      apple: { channels: 3, labels: ["r16", "g16", "b16"] },
-      gray: { channels: 1, labels: ["gray"] }
-    };
-    for (model in convert) {
-      if (convert.hasOwnProperty(model)) {
-        if (!("channels" in convert[model])) {
-          throw new Error("missing channels property: " + model);
-        }
-        if (!("labels" in convert[model])) {
-          throw new Error("missing channel labels property: " + model);
-        }
-        if (convert[model].labels.length !== convert[model].channels) {
-          throw new Error("channel and label counts mismatch: " + model);
-        }
-        channels = convert[model].channels;
-        labels = convert[model].labels;
-        delete convert[model].channels;
-        delete convert[model].labels;
-        Object.defineProperty(convert[model], "channels", { value: channels });
-        Object.defineProperty(convert[model], "labels", { value: labels });
-      }
-    }
-    var channels;
-    var labels;
-    var model;
-    convert.rgb.hsl = function(rgb) {
-      var r = rgb[0] / 255;
-      var g = rgb[1] / 255;
-      var b = rgb[2] / 255;
-      var min = Math.min(r, g, b);
-      var max = Math.max(r, g, b);
-      var delta = max - min;
-      var h;
-      var s;
-      var l;
-      if (max === min) {
-        h = 0;
-      } else if (r === max) {
-        h = (g - b) / delta;
-      } else if (g === max) {
-        h = 2 + (b - r) / delta;
-      } else if (b === max) {
-        h = 4 + (r - g) / delta;
-      }
-      h = Math.min(h * 60, 360);
-      if (h < 0) {
-        h += 360;
-      }
-      l = (min + max) / 2;
-      if (max === min) {
-        s = 0;
-      } else if (l <= 0.5) {
-        s = delta / (max + min);
-      } else {
-        s = delta / (2 - max - min);
-      }
-      return [h, s * 100, l * 100];
-    };
-    convert.rgb.hsv = function(rgb) {
-      var rdif;
-      var gdif;
-      var bdif;
-      var h;
-      var s;
-      var r = rgb[0] / 255;
-      var g = rgb[1] / 255;
-      var b = rgb[2] / 255;
-      var v = Math.max(r, g, b);
-      var diff = v - Math.min(r, g, b);
-      var diffc = function(c) {
-        return (v - c) / 6 / diff + 1 / 2;
-      };
-      if (diff === 0) {
-        h = s = 0;
-      } else {
-        s = diff / v;
-        rdif = diffc(r);
-        gdif = diffc(g);
-        bdif = diffc(b);
-        if (r === v) {
-          h = bdif - gdif;
-        } else if (g === v) {
-          h = 1 / 3 + rdif - bdif;
-        } else if (b === v) {
-          h = 2 / 3 + gdif - rdif;
-        }
-        if (h < 0) {
-          h += 1;
-        } else if (h > 1) {
-          h -= 1;
-        }
-      }
-      return [
-        h * 360,
-        s * 100,
-        v * 100
-      ];
-    };
-    convert.rgb.hwb = function(rgb) {
-      var r = rgb[0];
-      var g = rgb[1];
-      var b = rgb[2];
-      var h = convert.rgb.hsl(rgb)[0];
-      var w = 1 / 255 * Math.min(r, Math.min(g, b));
-      b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
-      return [h, w * 100, b * 100];
-    };
-    convert.rgb.cmyk = function(rgb) {
-      var r = rgb[0] / 255;
-      var g = rgb[1] / 255;
-      var b = rgb[2] / 255;
-      var c;
-      var m;
-      var y;
-      var k;
-      k = Math.min(1 - r, 1 - g, 1 - b);
-      c = (1 - r - k) / (1 - k) || 0;
-      m = (1 - g - k) / (1 - k) || 0;
-      y = (1 - b - k) / (1 - k) || 0;
-      return [c * 100, m * 100, y * 100, k * 100];
-    };
-    function comparativeDistance(x, y) {
-      return Math.pow(x[0] - y[0], 2) + Math.pow(x[1] - y[1], 2) + Math.pow(x[2] - y[2], 2);
-    }
-    convert.rgb.keyword = function(rgb) {
-      var reversed = reverseKeywords[rgb];
-      if (reversed) {
-        return reversed;
-      }
-      var currentClosestDistance = Infinity;
-      var currentClosestKeyword;
-      for (var keyword in cssKeywords) {
-        if (cssKeywords.hasOwnProperty(keyword)) {
-          var value = cssKeywords[keyword];
-          var distance = comparativeDistance(rgb, value);
-          if (distance < currentClosestDistance) {
-            currentClosestDistance = distance;
-            currentClosestKeyword = keyword;
-          }
-        }
-      }
-      return currentClosestKeyword;
-    };
-    convert.keyword.rgb = function(keyword) {
-      return cssKeywords[keyword];
-    };
-    convert.rgb.xyz = function(rgb) {
-      var r = rgb[0] / 255;
-      var g = rgb[1] / 255;
-      var b = rgb[2] / 255;
-      r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
-      g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
-      b = b > 0.04045 ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
-      var x = r * 0.4124 + g * 0.3576 + b * 0.1805;
-      var y = r * 0.2126 + g * 0.7152 + b * 0.0722;
-      var z2 = r * 0.0193 + g * 0.1192 + b * 0.9505;
-      return [x * 100, y * 100, z2 * 100];
-    };
-    convert.rgb.lab = function(rgb) {
-      var xyz = convert.rgb.xyz(rgb);
-      var x = xyz[0];
-      var y = xyz[1];
-      var z2 = xyz[2];
-      var l;
-      var a;
-      var b;
-      x /= 95.047;
-      y /= 100;
-      z2 /= 108.883;
-      x = x > 8856e-6 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;
-      y = y > 8856e-6 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;
-      z2 = z2 > 8856e-6 ? Math.pow(z2, 1 / 3) : 7.787 * z2 + 16 / 116;
-      l = 116 * y - 16;
-      a = 500 * (x - y);
-      b = 200 * (y - z2);
-      return [l, a, b];
-    };
-    convert.hsl.rgb = function(hsl) {
-      var h = hsl[0] / 360;
-      var s = hsl[1] / 100;
-      var l = hsl[2] / 100;
-      var t1;
-      var t2;
-      var t3;
-      var rgb;
-      var val;
-      if (s === 0) {
-        val = l * 255;
-        return [val, val, val];
-      }
-      if (l < 0.5) {
-        t2 = l * (1 + s);
-      } else {
-        t2 = l + s - l * s;
-      }
-      t1 = 2 * l - t2;
-      rgb = [0, 0, 0];
-      for (var i = 0; i < 3; i++) {
-        t3 = h + 1 / 3 * -(i - 1);
-        if (t3 < 0) {
-          t3++;
-        }
-        if (t3 > 1) {
-          t3--;
-        }
-        if (6 * t3 < 1) {
-          val = t1 + (t2 - t1) * 6 * t3;
-        } else if (2 * t3 < 1) {
-          val = t2;
-        } else if (3 * t3 < 2) {
-          val = t1 + (t2 - t1) * (2 / 3 - t3) * 6;
-        } else {
-          val = t1;
-        }
-        rgb[i] = val * 255;
-      }
-      return rgb;
-    };
-    convert.hsl.hsv = function(hsl) {
-      var h = hsl[0];
-      var s = hsl[1] / 100;
-      var l = hsl[2] / 100;
-      var smin = s;
-      var lmin = Math.max(l, 0.01);
-      var sv;
-      var v;
-      l *= 2;
-      s *= l <= 1 ? l : 2 - l;
-      smin *= lmin <= 1 ? lmin : 2 - lmin;
-      v = (l + s) / 2;
-      sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
-      return [h, sv * 100, v * 100];
-    };
-    convert.hsv.rgb = function(hsv) {
-      var h = hsv[0] / 60;
-      var s = hsv[1] / 100;
-      var v = hsv[2] / 100;
-      var hi = Math.floor(h) % 6;
-      var f = h - Math.floor(h);
-      var p = 255 * v * (1 - s);
-      var q = 255 * v * (1 - s * f);
-      var t = 255 * v * (1 - s * (1 - f));
-      v *= 255;
-      switch (hi) {
-        case 0:
-          return [v, t, p];
-        case 1:
-          return [q, v, p];
-        case 2:
-          return [p, v, t];
-        case 3:
-          return [p, q, v];
-        case 4:
-          return [t, p, v];
-        case 5:
-          return [v, p, q];
-      }
-    };
-    convert.hsv.hsl = function(hsv) {
-      var h = hsv[0];
-      var s = hsv[1] / 100;
-      var v = hsv[2] / 100;
-      var vmin = Math.max(v, 0.01);
-      var lmin;
-      var sl;
-      var l;
-      l = (2 - s) * v;
-      lmin = (2 - s) * vmin;
-      sl = s * vmin;
-      sl /= lmin <= 1 ? lmin : 2 - lmin;
-      sl = sl || 0;
-      l /= 2;
-      return [h, sl * 100, l * 100];
-    };
-    convert.hwb.rgb = function(hwb) {
-      var h = hwb[0] / 360;
-      var wh = hwb[1] / 100;
-      var bl = hwb[2] / 100;
-      var ratio = wh + bl;
-      var i;
-      var v;
-      var f;
-      var n;
-      if (ratio > 1) {
-        wh /= ratio;
-        bl /= ratio;
-      }
-      i = Math.floor(6 * h);
-      v = 1 - bl;
-      f = 6 * h - i;
-      if ((i & 1) !== 0) {
-        f = 1 - f;
-      }
-      n = wh + f * (v - wh);
-      var r;
-      var g;
-      var b;
-      switch (i) {
-        default:
-        case 6:
-        case 0:
-          r = v;
-          g = n;
-          b = wh;
-          break;
-        case 1:
-          r = n;
-          g = v;
-          b = wh;
-          break;
-        case 2:
-          r = wh;
-          g = v;
-          b = n;
-          break;
-        case 3:
-          r = wh;
-          g = n;
-          b = v;
-          break;
-        case 4:
-          r = n;
-          g = wh;
-          b = v;
-          break;
-        case 5:
-          r = v;
-          g = wh;
-          b = n;
-          break;
-      }
-      return [r * 255, g * 255, b * 255];
-    };
-    convert.cmyk.rgb = function(cmyk) {
-      var c = cmyk[0] / 100;
-      var m = cmyk[1] / 100;
-      var y = cmyk[2] / 100;
-      var k = cmyk[3] / 100;
-      var r;
-      var g;
-      var b;
-      r = 1 - Math.min(1, c * (1 - k) + k);
-      g = 1 - Math.min(1, m * (1 - k) + k);
-      b = 1 - Math.min(1, y * (1 - k) + k);
-      return [r * 255, g * 255, b * 255];
-    };
-    convert.xyz.rgb = function(xyz) {
-      var x = xyz[0] / 100;
-      var y = xyz[1] / 100;
-      var z2 = xyz[2] / 100;
-      var r;
-      var g;
-      var b;
-      r = x * 3.2406 + y * -1.5372 + z2 * -0.4986;
-      g = x * -0.9689 + y * 1.8758 + z2 * 0.0415;
-      b = x * 0.0557 + y * -0.204 + z2 * 1.057;
-      r = r > 31308e-7 ? 1.055 * Math.pow(r, 1 / 2.4) - 0.055 : r * 12.92;
-      g = g > 31308e-7 ? 1.055 * Math.pow(g, 1 / 2.4) - 0.055 : g * 12.92;
-      b = b > 31308e-7 ? 1.055 * Math.pow(b, 1 / 2.4) - 0.055 : b * 12.92;
-      r = Math.min(Math.max(0, r), 1);
-      g = Math.min(Math.max(0, g), 1);
-      b = Math.min(Math.max(0, b), 1);
-      return [r * 255, g * 255, b * 255];
-    };
-    convert.xyz.lab = function(xyz) {
-      var x = xyz[0];
-      var y = xyz[1];
-      var z2 = xyz[2];
-      var l;
-      var a;
-      var b;
-      x /= 95.047;
-      y /= 100;
-      z2 /= 108.883;
-      x = x > 8856e-6 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;
-      y = y > 8856e-6 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;
-      z2 = z2 > 8856e-6 ? Math.pow(z2, 1 / 3) : 7.787 * z2 + 16 / 116;
-      l = 116 * y - 16;
-      a = 500 * (x - y);
-      b = 200 * (y - z2);
-      return [l, a, b];
-    };
-    convert.lab.xyz = function(lab) {
-      var l = lab[0];
-      var a = lab[1];
-      var b = lab[2];
-      var x;
-      var y;
-      var z2;
-      y = (l + 16) / 116;
-      x = a / 500 + y;
-      z2 = y - b / 200;
-      var y2 = Math.pow(y, 3);
-      var x2 = Math.pow(x, 3);
-      var z22 = Math.pow(z2, 3);
-      y = y2 > 8856e-6 ? y2 : (y - 16 / 116) / 7.787;
-      x = x2 > 8856e-6 ? x2 : (x - 16 / 116) / 7.787;
-      z2 = z22 > 8856e-6 ? z22 : (z2 - 16 / 116) / 7.787;
-      x *= 95.047;
-      y *= 100;
-      z2 *= 108.883;
-      return [x, y, z2];
-    };
-    convert.lab.lch = function(lab) {
-      var l = lab[0];
-      var a = lab[1];
-      var b = lab[2];
-      var hr;
-      var h;
-      var c;
-      hr = Math.atan2(b, a);
-      h = hr * 360 / 2 / Math.PI;
-      if (h < 0) {
-        h += 360;
-      }
-      c = Math.sqrt(a * a + b * b);
-      return [l, c, h];
-    };
-    convert.lch.lab = function(lch) {
-      var l = lch[0];
-      var c = lch[1];
-      var h = lch[2];
-      var a;
-      var b;
-      var hr;
-      hr = h / 360 * 2 * Math.PI;
-      a = c * Math.cos(hr);
-      b = c * Math.sin(hr);
-      return [l, a, b];
-    };
-    convert.rgb.ansi16 = function(args) {
-      var r = args[0];
-      var g = args[1];
-      var b = args[2];
-      var value = 1 in arguments ? arguments[1] : convert.rgb.hsv(args)[2];
-      value = Math.round(value / 50);
-      if (value === 0) {
-        return 30;
-      }
-      var ansi = 30 + (Math.round(b / 255) << 2 | Math.round(g / 255) << 1 | Math.round(r / 255));
-      if (value === 2) {
-        ansi += 60;
-      }
-      return ansi;
-    };
-    convert.hsv.ansi16 = function(args) {
-      return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
-    };
-    convert.rgb.ansi256 = function(args) {
-      var r = args[0];
-      var g = args[1];
-      var b = args[2];
-      if (r === g && g === b) {
-        if (r < 8) {
-          return 16;
-        }
-        if (r > 248) {
-          return 231;
-        }
-        return Math.round((r - 8) / 247 * 24) + 232;
-      }
-      var ansi = 16 + 36 * Math.round(r / 255 * 5) + 6 * Math.round(g / 255 * 5) + Math.round(b / 255 * 5);
-      return ansi;
-    };
-    convert.ansi16.rgb = function(args) {
-      var color = args % 10;
-      if (color === 0 || color === 7) {
-        if (args > 50) {
-          color += 3.5;
-        }
-        color = color / 10.5 * 255;
-        return [color, color, color];
-      }
-      var mult = (~~(args > 50) + 1) * 0.5;
-      var r = (color & 1) * mult * 255;
-      var g = (color >> 1 & 1) * mult * 255;
-      var b = (color >> 2 & 1) * mult * 255;
-      return [r, g, b];
-    };
-    convert.ansi256.rgb = function(args) {
-      if (args >= 232) {
-        var c = (args - 232) * 10 + 8;
-        return [c, c, c];
-      }
-      args -= 16;
-      var rem;
-      var r = Math.floor(args / 36) / 5 * 255;
-      var g = Math.floor((rem = args % 36) / 6) / 5 * 255;
-      var b = rem % 6 / 5 * 255;
-      return [r, g, b];
-    };
-    convert.rgb.hex = function(args) {
-      var integer2 = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
-      var string4 = integer2.toString(16).toUpperCase();
-      return "000000".substring(string4.length) + string4;
-    };
-    convert.hex.rgb = function(args) {
-      var match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
-      if (!match) {
-        return [0, 0, 0];
-      }
-      var colorString = match[0];
-      if (match[0].length === 3) {
-        colorString = colorString.split("").map(function(char) {
-          return char + char;
-        }).join("");
-      }
-      var integer2 = parseInt(colorString, 16);
-      var r = integer2 >> 16 & 255;
-      var g = integer2 >> 8 & 255;
-      var b = integer2 & 255;
-      return [r, g, b];
-    };
-    convert.rgb.hcg = function(rgb) {
-      var r = rgb[0] / 255;
-      var g = rgb[1] / 255;
-      var b = rgb[2] / 255;
-      var max = Math.max(Math.max(r, g), b);
-      var min = Math.min(Math.min(r, g), b);
-      var chroma = max - min;
-      var grayscale;
-      var hue;
-      if (chroma < 1) {
-        grayscale = min / (1 - chroma);
-      } else {
-        grayscale = 0;
-      }
-      if (chroma <= 0) {
-        hue = 0;
-      } else if (max === r) {
-        hue = (g - b) / chroma % 6;
-      } else if (max === g) {
-        hue = 2 + (b - r) / chroma;
-      } else {
-        hue = 4 + (r - g) / chroma + 4;
-      }
-      hue /= 6;
-      hue %= 1;
-      return [hue * 360, chroma * 100, grayscale * 100];
-    };
-    convert.hsl.hcg = function(hsl) {
-      var s = hsl[1] / 100;
-      var l = hsl[2] / 100;
-      var c = 1;
-      var f = 0;
-      if (l < 0.5) {
-        c = 2 * s * l;
-      } else {
-        c = 2 * s * (1 - l);
-      }
-      if (c < 1) {
-        f = (l - 0.5 * c) / (1 - c);
-      }
-      return [hsl[0], c * 100, f * 100];
-    };
-    convert.hsv.hcg = function(hsv) {
-      var s = hsv[1] / 100;
-      var v = hsv[2] / 100;
-      var c = s * v;
-      var f = 0;
-      if (c < 1) {
-        f = (v - c) / (1 - c);
-      }
-      return [hsv[0], c * 100, f * 100];
-    };
-    convert.hcg.rgb = function(hcg) {
-      var h = hcg[0] / 360;
-      var c = hcg[1] / 100;
-      var g = hcg[2] / 100;
-      if (c === 0) {
-        return [g * 255, g * 255, g * 255];
-      }
-      var pure = [0, 0, 0];
-      var hi = h % 1 * 6;
-      var v = hi % 1;
-      var w = 1 - v;
-      var mg = 0;
-      switch (Math.floor(hi)) {
-        case 0:
-          pure[0] = 1;
-          pure[1] = v;
-          pure[2] = 0;
-          break;
-        case 1:
-          pure[0] = w;
-          pure[1] = 1;
-          pure[2] = 0;
-          break;
-        case 2:
-          pure[0] = 0;
-          pure[1] = 1;
-          pure[2] = v;
-          break;
-        case 3:
-          pure[0] = 0;
-          pure[1] = w;
-          pure[2] = 1;
-          break;
-        case 4:
-          pure[0] = v;
-          pure[1] = 0;
-          pure[2] = 1;
-          break;
-        default:
-          pure[0] = 1;
-          pure[1] = 0;
-          pure[2] = w;
-      }
-      mg = (1 - c) * g;
-      return [
-        (c * pure[0] + mg) * 255,
-        (c * pure[1] + mg) * 255,
-        (c * pure[2] + mg) * 255
-      ];
-    };
-    convert.hcg.hsv = function(hcg) {
-      var c = hcg[1] / 100;
-      var g = hcg[2] / 100;
-      var v = c + g * (1 - c);
-      var f = 0;
-      if (v > 0) {
-        f = c / v;
-      }
-      return [hcg[0], f * 100, v * 100];
-    };
-    convert.hcg.hsl = function(hcg) {
-      var c = hcg[1] / 100;
-      var g = hcg[2] / 100;
-      var l = g * (1 - c) + 0.5 * c;
-      var s = 0;
-      if (l > 0 && l < 0.5) {
-        s = c / (2 * l);
-      } else if (l >= 0.5 && l < 1) {
-        s = c / (2 * (1 - l));
-      }
-      return [hcg[0], s * 100, l * 100];
-    };
-    convert.hcg.hwb = function(hcg) {
-      var c = hcg[1] / 100;
-      var g = hcg[2] / 100;
-      var v = c + g * (1 - c);
-      return [hcg[0], (v - c) * 100, (1 - v) * 100];
-    };
-    convert.hwb.hcg = function(hwb) {
-      var w = hwb[1] / 100;
-      var b = hwb[2] / 100;
-      var v = 1 - b;
-      var c = v - w;
-      var g = 0;
-      if (c < 1) {
-        g = (v - c) / (1 - c);
-      }
-      return [hwb[0], c * 100, g * 100];
-    };
-    convert.apple.rgb = function(apple) {
-      return [apple[0] / 65535 * 255, apple[1] / 65535 * 255, apple[2] / 65535 * 255];
-    };
-    convert.rgb.apple = function(rgb) {
-      return [rgb[0] / 255 * 65535, rgb[1] / 255 * 65535, rgb[2] / 255 * 65535];
-    };
-    convert.gray.rgb = function(args) {
-      return [args[0] / 100 * 255, args[0] / 100 * 255, args[0] / 100 * 255];
-    };
-    convert.gray.hsl = convert.gray.hsv = function(args) {
-      return [0, 0, args[0]];
-    };
-    convert.gray.hwb = function(gray) {
-      return [0, 100, gray[0]];
-    };
-    convert.gray.cmyk = function(gray) {
-      return [0, 0, 0, gray[0]];
-    };
-    convert.gray.lab = function(gray) {
-      return [gray[0], 0, 0];
-    };
-    convert.gray.hex = function(gray) {
-      var val = Math.round(gray[0] / 100 * 255) & 255;
-      var integer2 = (val << 16) + (val << 8) + val;
-      var string4 = integer2.toString(16).toUpperCase();
-      return "000000".substring(string4.length) + string4;
-    };
-    convert.rgb.gray = function(rgb) {
-      var val = (rgb[0] + rgb[1] + rgb[2]) / 3;
-      return [val / 255 * 100];
-    };
-  }
-});
-
-// ../../node_modules/color-convert/route.js
-var require_route = __commonJS({
-  "../../node_modules/color-convert/route.js"(exports2, module2) {
-    var conversions = require_conversions();
-    function buildGraph() {
-      var graph = {};
-      var models = Object.keys(conversions);
-      for (var len = models.length, i = 0; i < len; i++) {
-        graph[models[i]] = {
-          // http://jsperf.com/1-vs-infinity
-          // micro-opt, but this is simple.
-          distance: -1,
-          parent: null
-        };
-      }
-      return graph;
-    }
-    function deriveBFS(fromModel) {
-      var graph = buildGraph();
-      var queue = [fromModel];
-      graph[fromModel].distance = 0;
-      while (queue.length) {
-        var current = queue.pop();
-        var adjacents = Object.keys(conversions[current]);
-        for (var len = adjacents.length, i = 0; i < len; i++) {
-          var adjacent = adjacents[i];
-          var node = graph[adjacent];
-          if (node.distance === -1) {
-            node.distance = graph[current].distance + 1;
-            node.parent = current;
-            queue.unshift(adjacent);
-          }
-        }
-      }
-      return graph;
-    }
-    function link(from14, to) {
-      return function(args) {
-        return to(from14(args));
-      };
-    }
-    function wrapConversion(toModel, graph) {
-      var path2 = [graph[toModel].parent, toModel];
-      var fn = conversions[graph[toModel].parent][toModel];
-      var cur = graph[toModel].parent;
-      while (graph[cur].parent) {
-        path2.unshift(graph[cur].parent);
-        fn = link(conversions[graph[cur].parent][cur], fn);
-        cur = graph[cur].parent;
-      }
-      fn.conversion = path2;
-      return fn;
-    }
-    module2.exports = function(fromModel) {
-      var graph = deriveBFS(fromModel);
-      var conversion = {};
-      var models = Object.keys(graph);
-      for (var len = models.length, i = 0; i < len; i++) {
-        var toModel = models[i];
-        var node = graph[toModel];
-        if (node.parent === null) {
-          continue;
-        }
-        conversion[toModel] = wrapConversion(toModel, graph);
-      }
-      return conversion;
-    };
-  }
-});
-
-// ../../node_modules/color-convert/index.js
-var require_color_convert = __commonJS({
-  "../../node_modules/color-convert/index.js"(exports2, module2) {
-    var conversions = require_conversions();
-    var route = require_route();
-    var convert = {};
-    var models = Object.keys(conversions);
-    function wrapRaw(fn) {
-      var wrappedFn = function(args) {
-        if (args === void 0 || args === null) {
-          return args;
-        }
-        if (arguments.length > 1) {
-          args = Array.prototype.slice.call(arguments);
-        }
-        return fn(args);
-      };
-      if ("conversion" in fn) {
-        wrappedFn.conversion = fn.conversion;
-      }
-      return wrappedFn;
-    }
-    function wrapRounded(fn) {
-      var wrappedFn = function(args) {
-        if (args === void 0 || args === null) {
-          return args;
-        }
-        if (arguments.length > 1) {
-          args = Array.prototype.slice.call(arguments);
-        }
-        var result = fn(args);
-        if (typeof result === "object") {
-          for (var len = result.length, i = 0; i < len; i++) {
-            result[i] = Math.round(result[i]);
-          }
-        }
-        return result;
-      };
-      if ("conversion" in fn) {
-        wrappedFn.conversion = fn.conversion;
-      }
-      return wrappedFn;
-    }
-    models.forEach(function(fromModel) {
-      convert[fromModel] = {};
-      Object.defineProperty(convert[fromModel], "channels", { value: conversions[fromModel].channels });
-      Object.defineProperty(convert[fromModel], "labels", { value: conversions[fromModel].labels });
-      var routes = route(fromModel);
-      var routeModels = Object.keys(routes);
-      routeModels.forEach(function(toModel) {
-        var fn = routes[toModel];
-        convert[fromModel][toModel] = wrapRounded(fn);
-        convert[fromModel][toModel].raw = wrapRaw(fn);
-      });
-    });
-    module2.exports = convert;
-  }
-});
-
-// ../../node_modules/chalk/node_modules/ansi-styles/index.js
-var require_ansi_styles = __commonJS({
-  "../../node_modules/chalk/node_modules/ansi-styles/index.js"(exports2, module2) {
-    "use strict";
-    var colorConvert = require_color_convert();
-    var wrapAnsi16 = (fn, offset) => function() {
-      const code = fn.apply(colorConvert, arguments);
-      return `\x1B[${code + offset}m`;
-    };
-    var wrapAnsi256 = (fn, offset) => function() {
-      const code = fn.apply(colorConvert, arguments);
-      return `\x1B[${38 + offset};5;${code}m`;
-    };
-    var wrapAnsi16m = (fn, offset) => function() {
-      const rgb = fn.apply(colorConvert, arguments);
-      return `\x1B[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
-    };
-    function assembleStyles() {
-      const codes = /* @__PURE__ */ new Map();
-      const styles = {
-        modifier: {
-          reset: [0, 0],
-          // 21 isn't widely supported and 22 does the same thing
-          bold: [1, 22],
-          dim: [2, 22],
-          italic: [3, 23],
-          underline: [4, 24],
-          inverse: [7, 27],
-          hidden: [8, 28],
-          strikethrough: [9, 29]
-        },
-        color: {
-          black: [30, 39],
-          red: [31, 39],
-          green: [32, 39],
-          yellow: [33, 39],
-          blue: [34, 39],
-          magenta: [35, 39],
-          cyan: [36, 39],
-          white: [37, 39],
-          gray: [90, 39],
-          // Bright color
-          redBright: [91, 39],
-          greenBright: [92, 39],
-          yellowBright: [93, 39],
-          blueBright: [94, 39],
-          magentaBright: [95, 39],
-          cyanBright: [96, 39],
-          whiteBright: [97, 39]
-        },
-        bgColor: {
-          bgBlack: [40, 49],
-          bgRed: [41, 49],
-          bgGreen: [42, 49],
-          bgYellow: [43, 49],
-          bgBlue: [44, 49],
-          bgMagenta: [45, 49],
-          bgCyan: [46, 49],
-          bgWhite: [47, 49],
-          // Bright color
-          bgBlackBright: [100, 49],
-          bgRedBright: [101, 49],
-          bgGreenBright: [102, 49],
-          bgYellowBright: [103, 49],
-          bgBlueBright: [104, 49],
-          bgMagentaBright: [105, 49],
-          bgCyanBright: [106, 49],
-          bgWhiteBright: [107, 49]
-        }
-      };
-      styles.color.grey = styles.color.gray;
-      for (const groupName of Object.keys(styles)) {
-        const group = styles[groupName];
-        for (const styleName of Object.keys(group)) {
-          const style = group[styleName];
-          styles[styleName] = {
-            open: `\x1B[${style[0]}m`,
-            close: `\x1B[${style[1]}m`
-          };
-          group[styleName] = styles[styleName];
-          codes.set(style[0], style[1]);
-        }
-        Object.defineProperty(styles, groupName, {
-          value: group,
-          enumerable: false
-        });
-        Object.defineProperty(styles, "codes", {
-          value: codes,
-          enumerable: false
-        });
-      }
-      const ansi2ansi = (n) => n;
-      const rgb2rgb = (r, g, b) => [r, g, b];
-      styles.color.close = "\x1B[39m";
-      styles.bgColor.close = "\x1B[49m";
-      styles.color.ansi = {
-        ansi: wrapAnsi16(ansi2ansi, 0)
-      };
-      styles.color.ansi256 = {
-        ansi256: wrapAnsi256(ansi2ansi, 0)
-      };
-      styles.color.ansi16m = {
-        rgb: wrapAnsi16m(rgb2rgb, 0)
-      };
-      styles.bgColor.ansi = {
-        ansi: wrapAnsi16(ansi2ansi, 10)
-      };
-      styles.bgColor.ansi256 = {
-        ansi256: wrapAnsi256(ansi2ansi, 10)
-      };
-      styles.bgColor.ansi16m = {
-        rgb: wrapAnsi16m(rgb2rgb, 10)
-      };
-      for (let key of Object.keys(colorConvert)) {
-        if (typeof colorConvert[key] !== "object") {
-          continue;
-        }
-        const suite = colorConvert[key];
-        if (key === "ansi16") {
-          key = "ansi";
-        }
-        if ("ansi16" in suite) {
-          styles.color.ansi[key] = wrapAnsi16(suite.ansi16, 0);
-          styles.bgColor.ansi[key] = wrapAnsi16(suite.ansi16, 10);
-        }
-        if ("ansi256" in suite) {
-          styles.color.ansi256[key] = wrapAnsi256(suite.ansi256, 0);
-          styles.bgColor.ansi256[key] = wrapAnsi256(suite.ansi256, 10);
-        }
-        if ("rgb" in suite) {
-          styles.color.ansi16m[key] = wrapAnsi16m(suite.rgb, 0);
-          styles.bgColor.ansi16m[key] = wrapAnsi16m(suite.rgb, 10);
-        }
-      }
-      return styles;
-    }
-    Object.defineProperty(module2, "exports", {
-      enumerable: true,
-      get: assembleStyles
-    });
-  }
-});
-
-// ../../node_modules/has-flag/index.js
-var require_has_flag = __commonJS({
-  "../../node_modules/has-flag/index.js"(exports2, module2) {
-    "use strict";
-    module2.exports = (flag, argv) => {
-      argv = argv || process.argv;
-      const prefix = flag.startsWith("-") ? "" : flag.length === 1 ? "-" : "--";
-      const pos = argv.indexOf(prefix + flag);
-      const terminatorPos = argv.indexOf("--");
-      return pos !== -1 && (terminatorPos === -1 ? true : pos < terminatorPos);
-    };
-  }
-});
-
-// ../../node_modules/chalk/node_modules/supports-color/index.js
-var require_supports_color = __commonJS({
-  "../../node_modules/chalk/node_modules/supports-color/index.js"(exports2, module2) {
-    "use strict";
-    var os2 = require("os");
-    var hasFlag = require_has_flag();
-    var env = process.env;
-    var forceColor;
-    if (hasFlag("no-color") || hasFlag("no-colors") || hasFlag("color=false")) {
-      forceColor = false;
-    } else if (hasFlag("color") || hasFlag("colors") || hasFlag("color=true") || hasFlag("color=always")) {
-      forceColor = true;
-    }
-    if ("FORCE_COLOR" in env) {
-      forceColor = env.FORCE_COLOR.length === 0 || parseInt(env.FORCE_COLOR, 10) !== 0;
-    }
-    function translateLevel(level) {
-      if (level === 0) {
-        return false;
-      }
-      return {
-        level,
-        hasBasic: true,
-        has256: level >= 2,
-        has16m: level >= 3
-      };
-    }
-    function supportsColor(stream) {
-      if (forceColor === false) {
-        return 0;
-      }
-      if (hasFlag("color=16m") || hasFlag("color=full") || hasFlag("color=truecolor")) {
-        return 3;
-      }
-      if (hasFlag("color=256")) {
-        return 2;
-      }
-      if (stream && !stream.isTTY && forceColor !== true) {
-        return 0;
-      }
-      const min = forceColor ? 1 : 0;
-      if (process.platform === "win32") {
-        const osRelease = os2.release().split(".");
-        if (Number(process.versions.node.split(".")[0]) >= 8 && Number(osRelease[0]) >= 10 && Number(osRelease[2]) >= 10586) {
-          return Number(osRelease[2]) >= 14931 ? 3 : 2;
-        }
-        return 1;
-      }
-      if ("CI" in env) {
-        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI"].some((sign) => sign in env) || env.CI_NAME === "codeship") {
-          return 1;
-        }
-        return min;
-      }
-      if ("TEAMCITY_VERSION" in env) {
-        return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
-      }
-      if (env.COLORTERM === "truecolor") {
-        return 3;
-      }
-      if ("TERM_PROGRAM" in env) {
-        const version2 = parseInt((env.TERM_PROGRAM_VERSION || "").split(".")[0], 10);
-        switch (env.TERM_PROGRAM) {
-          case "iTerm.app":
-            return version2 >= 3 ? 3 : 2;
-          case "Apple_Terminal":
-            return 2;
-        }
-      }
-      if (/-256(color)?$/i.test(env.TERM)) {
-        return 2;
-      }
-      if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
-        return 1;
-      }
-      if ("COLORTERM" in env) {
-        return 1;
-      }
-      if (env.TERM === "dumb") {
-        return min;
-      }
-      return min;
-    }
-    function getSupportLevel(stream) {
-      const level = supportsColor(stream);
-      return translateLevel(level);
-    }
-    module2.exports = {
-      supportsColor: getSupportLevel,
-      stdout: getSupportLevel(process.stdout),
-      stderr: getSupportLevel(process.stderr)
-    };
-  }
-});
-
-// ../../node_modules/chalk/templates.js
-var require_templates = __commonJS({
-  "../../node_modules/chalk/templates.js"(exports2, module2) {
-    "use strict";
-    var TEMPLATE_REGEX = /(?:\\(u[a-f\d]{4}|x[a-f\d]{2}|.))|(?:\{(~)?(\w+(?:\([^)]*\))?(?:\.\w+(?:\([^)]*\))?)*)(?:[ \t]|(?=\r?\n)))|(\})|((?:.|[\r\n\f])+?)/gi;
-    var STYLE_REGEX = /(?:^|\.)(\w+)(?:\(([^)]*)\))?/g;
-    var STRING_REGEX = /^(['"])((?:\\.|(?!\1)[^\\])*)\1$/;
-    var ESCAPE_REGEX = /\\(u[a-f\d]{4}|x[a-f\d]{2}|.)|([^\\])/gi;
-    var ESCAPES = /* @__PURE__ */ new Map([
-      ["n", "\n"],
-      ["r", "\r"],
-      ["t", "	"],
-      ["b", "\b"],
-      ["f", "\f"],
-      ["v", "\v"],
-      ["0", "\0"],
-      ["\\", "\\"],
-      ["e", "\x1B"],
-      ["a", "\x07"]
-    ]);
-    function unescape2(c) {
-      if (c[0] === "u" && c.length === 5 || c[0] === "x" && c.length === 3) {
-        return String.fromCharCode(parseInt(c.slice(1), 16));
-      }
-      return ESCAPES.get(c) || c;
-    }
-    function parseArguments(name2, args) {
-      const results = [];
-      const chunks = args.trim().split(/\s*,\s*/g);
-      let matches;
-      for (const chunk of chunks) {
-        if (!isNaN(chunk)) {
-          results.push(Number(chunk));
-        } else if (matches = chunk.match(STRING_REGEX)) {
-          results.push(matches[2].replace(ESCAPE_REGEX, (m, escape2, chr) => escape2 ? unescape2(escape2) : chr));
-        } else {
-          throw new Error(`Invalid Chalk template style argument: ${chunk} (in style '${name2}')`);
-        }
-      }
-      return results;
-    }
-    function parseStyle(style) {
-      STYLE_REGEX.lastIndex = 0;
-      const results = [];
-      let matches;
-      while ((matches = STYLE_REGEX.exec(style)) !== null) {
-        const name2 = matches[1];
-        if (matches[2]) {
-          const args = parseArguments(name2, matches[2]);
-          results.push([name2].concat(args));
-        } else {
-          results.push([name2]);
-        }
-      }
-      return results;
-    }
-    function buildStyle(chalk3, styles) {
-      const enabled = {};
-      for (const layer of styles) {
-        for (const style of layer.styles) {
-          enabled[style[0]] = layer.inverse ? null : style.slice(1);
-        }
-      }
-      let current = chalk3;
-      for (const styleName of Object.keys(enabled)) {
-        if (Array.isArray(enabled[styleName])) {
-          if (!(styleName in current)) {
-            throw new Error(`Unknown Chalk style: ${styleName}`);
-          }
-          if (enabled[styleName].length > 0) {
-            current = current[styleName].apply(current, enabled[styleName]);
-          } else {
-            current = current[styleName];
-          }
-        }
-      }
-      return current;
-    }
-    module2.exports = (chalk3, tmp) => {
-      const styles = [];
-      const chunks = [];
-      let chunk = [];
-      tmp.replace(TEMPLATE_REGEX, (m, escapeChar, inverse, style, close, chr) => {
-        if (escapeChar) {
-          chunk.push(unescape2(escapeChar));
-        } else if (style) {
-          const str2 = chunk.join("");
-          chunk = [];
-          chunks.push(styles.length === 0 ? str2 : buildStyle(chalk3, styles)(str2));
-          styles.push({ inverse, styles: parseStyle(style) });
-        } else if (close) {
-          if (styles.length === 0) {
-            throw new Error("Found extraneous } in Chalk template literal");
-          }
-          chunks.push(buildStyle(chalk3, styles)(chunk.join("")));
-          chunk = [];
-          styles.pop();
-        } else {
-          chunk.push(chr);
-        }
-      });
-      chunks.push(chunk.join(""));
-      if (styles.length > 0) {
-        const errMsg = `Chalk template literal is missing ${styles.length} closing bracket${styles.length === 1 ? "" : "s"} (\`}\`)`;
-        throw new Error(errMsg);
-      }
-      return chunks.join("");
-    };
-  }
-});
-
-// ../../node_modules/chalk/index.js
-var require_chalk = __commonJS({
-  "../../node_modules/chalk/index.js"(exports2, module2) {
-    "use strict";
-    var escapeStringRegexp = require_escape_string_regexp();
-    var ansiStyles = require_ansi_styles();
-    var stdoutColor = require_supports_color().stdout;
-    var template = require_templates();
-    var isSimpleWindowsTerm = process.platform === "win32" && !(process.env.TERM || "").toLowerCase().startsWith("xterm");
-    var levelMapping = ["ansi", "ansi", "ansi256", "ansi16m"];
-    var skipModels = /* @__PURE__ */ new Set(["gray"]);
-    var styles = /* @__PURE__ */ Object.create(null);
-    function applyOptions(obj, options) {
-      options = options || {};
-      const scLevel = stdoutColor ? stdoutColor.level : 0;
-      obj.level = options.level === void 0 ? scLevel : options.level;
-      obj.enabled = "enabled" in options ? options.enabled : obj.level > 0;
-    }
-    function Chalk(options) {
-      if (!this || !(this instanceof Chalk) || this.template) {
-        const chalk3 = {};
-        applyOptions(chalk3, options);
-        chalk3.template = function() {
-          const args = [].slice.call(arguments);
-          return chalkTag.apply(null, [chalk3.template].concat(args));
-        };
-        Object.setPrototypeOf(chalk3, Chalk.prototype);
-        Object.setPrototypeOf(chalk3.template, chalk3);
-        chalk3.template.constructor = Chalk;
-        return chalk3.template;
-      }
-      applyOptions(this, options);
-    }
-    if (isSimpleWindowsTerm) {
-      ansiStyles.blue.open = "\x1B[94m";
-    }
-    for (const key of Object.keys(ansiStyles)) {
-      ansiStyles[key].closeRe = new RegExp(escapeStringRegexp(ansiStyles[key].close), "g");
-      styles[key] = {
-        get() {
-          const codes = ansiStyles[key];
-          return build.call(this, this._styles ? this._styles.concat(codes) : [codes], this._empty, key);
-        }
-      };
-    }
-    styles.visible = {
-      get() {
-        return build.call(this, this._styles || [], true, "visible");
-      }
-    };
-    ansiStyles.color.closeRe = new RegExp(escapeStringRegexp(ansiStyles.color.close), "g");
-    for (const model of Object.keys(ansiStyles.color.ansi)) {
-      if (skipModels.has(model)) {
-        continue;
-      }
-      styles[model] = {
-        get() {
-          const level = this.level;
-          return function() {
-            const open = ansiStyles.color[levelMapping[level]][model].apply(null, arguments);
-            const codes = {
-              open,
-              close: ansiStyles.color.close,
-              closeRe: ansiStyles.color.closeRe
-            };
-            return build.call(this, this._styles ? this._styles.concat(codes) : [codes], this._empty, model);
-          };
-        }
-      };
-    }
-    ansiStyles.bgColor.closeRe = new RegExp(escapeStringRegexp(ansiStyles.bgColor.close), "g");
-    for (const model of Object.keys(ansiStyles.bgColor.ansi)) {
-      if (skipModels.has(model)) {
-        continue;
-      }
-      const bgModel = "bg" + model[0].toUpperCase() + model.slice(1);
-      styles[bgModel] = {
-        get() {
-          const level = this.level;
-          return function() {
-            const open = ansiStyles.bgColor[levelMapping[level]][model].apply(null, arguments);
-            const codes = {
-              open,
-              close: ansiStyles.bgColor.close,
-              closeRe: ansiStyles.bgColor.closeRe
-            };
-            return build.call(this, this._styles ? this._styles.concat(codes) : [codes], this._empty, model);
-          };
-        }
-      };
-    }
-    var proto = Object.defineProperties(() => {
-    }, styles);
-    function build(_styles, _empty, key) {
-      const builder = function() {
-        return applyStyle.apply(builder, arguments);
-      };
-      builder._styles = _styles;
-      builder._empty = _empty;
-      const self2 = this;
-      Object.defineProperty(builder, "level", {
-        enumerable: true,
-        get() {
-          return self2.level;
-        },
-        set(level) {
-          self2.level = level;
-        }
-      });
-      Object.defineProperty(builder, "enabled", {
-        enumerable: true,
-        get() {
-          return self2.enabled;
-        },
-        set(enabled) {
-          self2.enabled = enabled;
-        }
-      });
-      builder.hasGrey = this.hasGrey || key === "gray" || key === "grey";
-      builder.__proto__ = proto;
-      return builder;
-    }
-    function applyStyle() {
-      const args = arguments;
-      const argsLen = args.length;
-      let str2 = String(arguments[0]);
-      if (argsLen === 0) {
-        return "";
-      }
-      if (argsLen > 1) {
-        for (let a = 1; a < argsLen; a++) {
-          str2 += " " + args[a];
-        }
-      }
-      if (!this.enabled || this.level <= 0 || !str2) {
-        return this._empty ? "" : str2;
-      }
-      const originalDim = ansiStyles.dim.open;
-      if (isSimpleWindowsTerm && this.hasGrey) {
-        ansiStyles.dim.open = "";
-      }
-      for (const code of this._styles.slice().reverse()) {
-        str2 = code.open + str2.replace(code.closeRe, code.open) + code.close;
-        str2 = str2.replace(/\r?\n/g, `${code.close}$&${code.open}`);
-      }
-      ansiStyles.dim.open = originalDim;
-      return str2;
-    }
-    function chalkTag(chalk3, strings) {
-      if (!Array.isArray(strings)) {
-        return [].slice.call(arguments, 1).join(" ");
-      }
-      const args = [].slice.call(arguments, 2);
-      const parts = [strings.raw[0]];
-      for (let i = 1; i < strings.length; i++) {
-        parts.push(String(args[i - 1]).replace(/[{}\\]/g, "\\$&"));
-        parts.push(String(strings.raw[i]));
-      }
-      return template(chalk3, parts.join(""));
-    }
-    Object.defineProperties(Chalk.prototype, styles);
-    module2.exports = Chalk();
-    module2.exports.supportsColor = stdoutColor;
-    module2.exports.default = module2.exports;
-  }
-});
 
 // ../../node_modules/commander/lib/error.js
 var require_error = __commonJS({
@@ -7511,15 +5968,15 @@ var require_encoding = __commonJS({
     "use strict";
     var iconvLite = require_lib();
     module2.exports.convert = convert;
-    function convert(str2, to, from14) {
-      from14 = checkEncoding(from14 || "UTF-8");
+    function convert(str2, to, from11) {
+      from11 = checkEncoding(from11 || "UTF-8");
       to = checkEncoding(to || "UTF-8");
       str2 = str2 || "";
       var result;
-      if (from14 !== "UTF-8" && typeof str2 === "string") {
+      if (from11 !== "UTF-8" && typeof str2 === "string") {
         str2 = Buffer.from(str2, "binary");
       }
-      if (from14 === to) {
+      if (from11 === to) {
         if (typeof str2 === "string") {
           result = Buffer.from(str2);
         } else {
@@ -7527,7 +5984,7 @@ var require_encoding = __commonJS({
         }
       } else {
         try {
-          result = convertIconvLite(str2, to, from14);
+          result = convertIconvLite(str2, to, from11);
         } catch (E) {
           console.error(E);
           result = str2;
@@ -7538,13 +5995,13 @@ var require_encoding = __commonJS({
       }
       return result;
     }
-    function convertIconvLite(str2, to, from14) {
+    function convertIconvLite(str2, to, from11) {
       if (to === "UTF-8") {
-        return iconvLite.decode(str2, from14);
-      } else if (from14 === "UTF-8") {
+        return iconvLite.decode(str2, from11);
+      } else if (from11 === "UTF-8") {
         return iconvLite.encode(str2, to);
       } else {
-        return iconvLite.encode(iconvLite.decode(str2, from14), to);
+        return iconvLite.encode(iconvLite.decode(str2, from11), to);
       }
     }
     function checkEncoding(name2) {
@@ -8807,9 +7264,9 @@ var require_Subscription = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -8990,9 +7447,9 @@ var require_timeoutProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9750,9 +8207,9 @@ var require_animationFrameProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10350,9 +8807,9 @@ var require_intervalProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10559,9 +9016,9 @@ var require_immediateProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12123,10 +10580,10 @@ var require_from = __commonJS({
     exports2.from = void 0;
     var scheduled_1 = require_scheduled();
     var innerFrom_1 = require_innerFrom();
-    function from14(input, scheduler) {
+    function from11(input, scheduler) {
       return scheduler ? scheduled_1.scheduled(input, scheduler) : innerFrom_1.innerFrom(input);
     }
-    exports2.from = from14;
+    exports2.from = from11;
   }
 });
 
@@ -12514,9 +10971,9 @@ var require_mapOneOrManyArgs = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12556,9 +11013,9 @@ var require_bindCallbackInternals = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12732,7 +11189,7 @@ var require_combineLatest = __commonJS({
     var createObject_1 = require_createObject();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var executeSchedule_1 = require_executeSchedule();
-    function combineLatest4() {
+    function combineLatest5() {
       var args = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
@@ -12748,7 +11205,7 @@ var require_combineLatest = __commonJS({
       } : identity_1.identity));
       return resultSelector ? result.pipe(mapOneOrManyArgs_1.mapOneOrManyArgs(resultSelector)) : result;
     }
-    exports2.combineLatest = combineLatest4;
+    exports2.combineLatest = combineLatest5;
     function combineLatestInit(observables, scheduler, valueTransform) {
       if (valueTransform === void 0) {
         valueTransform = identity_1.identity;
@@ -13690,9 +12147,9 @@ var require_zip = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14320,9 +12777,9 @@ var require_combineLatest2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14333,17 +12790,17 @@ var require_combineLatest2 = __commonJS({
     var mapOneOrManyArgs_1 = require_mapOneOrManyArgs();
     var pipe_1 = require_pipe();
     var args_1 = require_args();
-    function combineLatest4() {
+    function combineLatest5() {
       var args = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
       }
       var resultSelector = args_1.popResultSelector(args);
-      return resultSelector ? pipe_1.pipe(combineLatest4.apply(void 0, __spreadArray2([], __read2(args))), mapOneOrManyArgs_1.mapOneOrManyArgs(resultSelector)) : lift_1.operate(function(source, subscriber) {
+      return resultSelector ? pipe_1.pipe(combineLatest5.apply(void 0, __spreadArray2([], __read2(args))), mapOneOrManyArgs_1.mapOneOrManyArgs(resultSelector)) : lift_1.operate(function(source, subscriber) {
         combineLatest_1.combineLatestInit(__spreadArray2([source], __read2(argsOrArgArray_1.argsOrArgArray(args))))(subscriber);
       });
     }
-    exports2.combineLatest = combineLatest4;
+    exports2.combineLatest = combineLatest5;
   }
 });
 
@@ -14368,9 +12825,9 @@ var require_combineLatestWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14442,9 +12899,9 @@ var require_concat2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14488,9 +12945,9 @@ var require_concatWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14981,9 +13438,9 @@ var require_endWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15528,9 +13985,9 @@ var require_merge2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15575,9 +14032,9 @@ var require_mergeWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15660,9 +14117,9 @@ var require_onErrorResumeNextWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15844,9 +14301,9 @@ var require_raceWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16242,9 +14699,9 @@ var require_share = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16538,7 +14995,7 @@ var require_switchMap = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function switchMap21(project, resultSelector) {
+    function switchMap24(project, resultSelector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSubscriber = null;
         var index = 0;
@@ -16562,7 +15019,7 @@ var require_switchMap = __commonJS({
         }));
       });
     }
-    exports2.switchMap = switchMap21;
+    exports2.switchMap = switchMap24;
   }
 });
 
@@ -16682,7 +15139,7 @@ var require_tap = __commonJS({
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var identity_1 = require_identity();
-    function tap18(observerOrNext, error48, complete) {
+    function tap21(observerOrNext, error48, complete) {
       var tapObserver = isFunction_1.isFunction(observerOrNext) || error48 || complete ? { next: observerOrNext, error: error48, complete } : observerOrNext;
       return tapObserver ? lift_1.operate(function(source, subscriber) {
         var _a2;
@@ -16711,7 +15168,7 @@ var require_tap = __commonJS({
         }));
       }) : identity_1.identity;
     }
-    exports2.tap = tap18;
+    exports2.tap = tap21;
   }
 });
 
@@ -17244,9 +15701,9 @@ var require_withLatestFrom = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17330,9 +15787,9 @@ var require_zip2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17373,9 +15830,9 @@ var require_zipWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -18141,9 +16598,9 @@ var require_race2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from14) {
-      for (var i = 0, il = from14.length, j = to.length; i < il; i++, j++)
-        to[j] = from14[i];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i = 0, il = from11.length, j = to.length; i < il; i++, j++)
+        to[j] = from11[i];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -18681,16 +17138,10 @@ var init_types = __esm({
 // src/helpers.ts
 function exitWithError(error48) {
   if (error48 instanceof ExitCodeError) {
-    process.stderr.write(`
-${import_chalk.default.red(error48.message)}
-
-`);
+    Logger.error(error48.message);
     process.exit(error48.code);
   } else {
-    process.stderr.write(`
-${import_chalk.default.red(`${error48}`)}
-
-`);
+    Logger.error(error48);
     process.exit(1);
   }
 }
@@ -18722,10 +17173,9 @@ function outputAllHelp(cmd) {
     outputAllHelp(subCmd);
   });
 }
-var import_chalk, import_rxjs2, import_operators, CustomError, ExitCodeError, isMongoId;
+var import_rxjs2, import_operators, CustomError, ExitCodeError, isMongoId;
 var init_helpers = __esm({
   "src/helpers.ts"() {
-    import_chalk = __toESM(require_chalk());
     import_rxjs2 = __toESM(require_cjs());
     import_operators = __toESM(require_operators());
     init_read_file();
@@ -31397,7 +29847,7 @@ var require_from2 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors().codes.ERR_INVALID_ARG_TYPE;
-    function from14(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -31436,7 +29886,7 @@ var require_from2 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from14;
+    module2.exports = from11;
   }
 });
 
@@ -31480,7 +29930,7 @@ var require_stream_readable = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from14;
+    var from11;
     require_inherits()(Readable2, Stream);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -32162,10 +30612,10 @@ var require_stream_readable = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from14 === void 0) {
-          from14 = require_from2();
+        if (from11 === void 0) {
+          from11 = require_from2();
         }
-        return from14(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x) {
@@ -32345,8 +30795,8 @@ var require_pipeline = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from14, to) {
-      return from14.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop2;
@@ -34124,7 +32574,7 @@ var require_from3 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors2().codes.ERR_INVALID_ARG_TYPE;
-    function from14(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -34163,7 +32613,7 @@ var require_from3 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from14;
+    module2.exports = from11;
   }
 });
 
@@ -34207,7 +32657,7 @@ var require_stream_readable2 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from14;
+    var from11;
     require_inherits()(Readable2, Stream);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -34889,10 +33339,10 @@ var require_stream_readable2 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from14 === void 0) {
-          from14 = require_from3();
+        if (from11 === void 0) {
+          from11 = require_from3();
         }
-        return from14(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x) {
@@ -35072,8 +33522,8 @@ var require_pipeline2 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from14, to) {
-      return from14.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop2;
@@ -36098,6 +34548,21 @@ uniqueProjectID
   }
 });
 
+// src/services/types/time-trigger.fragment.ts
+var TimeTriggerFragment;
+var init_time_trigger_fragment = __esm({
+  "src/services/types/time-trigger.fragment.ts"() {
+    TimeTriggerFragment = `
+id
+triggerName
+createdBy
+projectId
+lambdaId
+cron
+`;
+  }
+});
+
 // src/services/gql-client.ts
 function gql(...args) {
   const literals = args[0];
@@ -36125,6 +34590,7 @@ var init_gql_client = __esm({
     init_environment_fragment();
     init_lambda_fragment();
     init_project_fragment();
+    init_time_trigger_fragment();
     GraphqlClienAPI = class {
       static query({
         query,
@@ -36419,6 +34885,48 @@ var init_gql_client = __esm({
             payload
           }
         }).pipe((0, import_operators2.map)((res) => res.updateEnvironmentByName));
+      }
+      static listProjectTimeTriggers(projectId) {
+        return this.query({
+          query: gql`
+        query listProjectTimeTriggers($projectId: String!) {
+          listProjectTimeTriggers(projectId: $projectId) {
+            ${TimeTriggerFragment}
+          }
+        }
+      `,
+          variables: {
+            projectId
+          }
+        }).pipe((0, import_operators2.map)((res) => res.listProjectTimeTriggers));
+      }
+      static createTimeTrigger(payload) {
+        return this.query({
+          query: gql`
+        mutation createLambdaTimeTrigger($payload: CreateTimeTriggerInput!) {
+          createLambdaTimeTrigger(payload: $payload) {
+            ${TimeTriggerFragment}
+          }
+        }
+      `,
+          variables: {
+            payload
+          }
+        }).pipe((0, import_operators2.map)((res) => res.createLambdaTimeTrigger));
+      }
+      static deleteLambdaTimeTrigger(lambdaId) {
+        return this.query({
+          query: gql`
+        mutation deleteLambdaTimeTrigger($lambdaId: String!) {
+          deleteLambdaTimeTrigger(lambdaId: $lambdaId) {
+            ${TimeTriggerFragment}
+          }
+        }
+      `,
+          variables: {
+            lambdaId
+          }
+        }).pipe((0, import_operators2.map)((res) => res.deleteLambdaTimeTrigger));
       }
       static getConfig(force = false) {
         return (0, import_rxjs3.combineLatest)([
@@ -36819,14 +35327,14 @@ function __spreadArrays() {
       r[k] = a[j];
   return r;
 }
-function __spreadArray(to, from14, pack) {
-  if (pack || arguments.length === 2) for (var i = 0, l = from14.length, ar; i < l; i++) {
-    if (ar || !(i in from14)) {
-      if (!ar) ar = Array.prototype.slice.call(from14, 0, i);
-      ar[i] = from14[i];
+function __spreadArray(to, from11, pack) {
+  if (pack || arguments.length === 2) for (var i = 0, l = from11.length, ar; i < l; i++) {
+    if (ar || !(i in from11)) {
+      if (!ar) ar = Array.prototype.slice.call(from11, 0, i);
+      ar[i] = from11[i];
     }
   }
-  return to.concat(ar || Array.prototype.slice.call(from14));
+  return to.concat(ar || Array.prototype.slice.call(from11));
 }
 function __await(v) {
   return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -39350,11 +37858,11 @@ var require_typescript = __commonJS({
         for (var name2 in all)
           __defProp2(target, name2, { get: all[name2], enumerable: true });
       };
-      var __copyProps2 = (to, from14, except, desc) => {
-        if (from14 && typeof from14 === "object" || typeof from14 === "function") {
-          for (let key of __getOwnPropNames2(from14))
+      var __copyProps2 = (to, from11, except, desc) => {
+        if (from11 && typeof from11 === "object" || typeof from11 === "function") {
+          for (let key of __getOwnPropNames2(from11))
             if (!__hasOwnProp2.call(to, key) && key !== except)
-              __defProp2(to, key, { get: () => from14[key], enumerable: !(desc = __getOwnPropDesc2(from14, key)) || desc.enumerable });
+              __defProp2(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc2(from11, key)) || desc.enumerable });
         }
         return to;
       };
@@ -42198,14 +40706,14 @@ var require_typescript = __commonJS({
       function toOffset(array2, offset) {
         return offset < 0 ? array2.length + offset : offset;
       }
-      function addRange(to, from14, start2, end) {
-        if (from14 === void 0 || from14.length === 0) return to;
-        if (to === void 0) return from14.slice(start2, end);
-        start2 = start2 === void 0 ? 0 : toOffset(from14, start2);
-        end = end === void 0 ? from14.length : toOffset(from14, end);
-        for (let i = start2; i < end && i < from14.length; i++) {
-          if (from14[i] !== void 0) {
-            to.push(from14[i]);
+      function addRange(to, from11, start2, end) {
+        if (from11 === void 0 || from11.length === 0) return to;
+        if (to === void 0) return from11.slice(start2, end);
+        start2 = start2 === void 0 ? 0 : toOffset(from11, start2);
+        end = end === void 0 ? from11.length : toOffset(from11, end);
+        for (let i = start2; i < end && i < from11.length; i++) {
+          if (from11[i] !== void 0) {
+            to.push(from11[i]);
           }
         }
         return to;
@@ -48714,8 +47222,8 @@ ${lanes.join("\n")}
         const canonicalDirectoryName = getCanonicalFileName(directoryName);
         return startsWith(canonicalFileName, canonicalDirectoryName + "/") || startsWith(canonicalFileName, canonicalDirectoryName + "\\");
       }
-      function getPathComponentsRelativeTo(from14, to, stringEqualityComparer, getCanonicalFileName) {
-        const fromComponents = reducePathComponents(getPathComponents(from14));
+      function getPathComponentsRelativeTo(from11, to, stringEqualityComparer, getCanonicalFileName) {
+        const fromComponents = reducePathComponents(getPathComponents(from11));
         const toComponents = reducePathComponents(getPathComponents(to));
         let start2;
         for (start2 = 0; start2 < fromComponents.length && start2 < toComponents.length; start2++) {
@@ -48751,8 +47259,8 @@ ${lanes.join("\n")}
           false
         );
       }
-      function getRelativePathFromFile(from14, to, getCanonicalFileName) {
-        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from14), to, getCanonicalFileName));
+      function getRelativePathFromFile(from11, to, getCanonicalFileName) {
+        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from11), to, getCanonicalFileName));
       }
       function getRelativePathToDirectoryOrUrl(directoryPathOrUrl, relativeOrAbsolutePath, currentDirectory, getCanonicalFileName, isAbsolutePathAnUrl) {
         const pathComponents2 = getPathComponentsRelativeTo(
@@ -56303,15 +54811,15 @@ ${lanes.join("\n")}
         if (!nodeArray || isArray(child) || !isElement(child)) return false;
         return contains(nodeArray, child);
       }
-      function insertStatementsAfterPrologue(to, from14, isPrologueDirective2) {
-        if (from14 === void 0 || from14.length === 0) return to;
+      function insertStatementsAfterPrologue(to, from11, isPrologueDirective2) {
+        if (from11 === void 0 || from11.length === 0) return to;
         let statementIndex = 0;
         for (; statementIndex < to.length; ++statementIndex) {
           if (!isPrologueDirective2(to[statementIndex])) {
             break;
           }
         }
-        to.splice(statementIndex, 0, ...from14);
+        to.splice(statementIndex, 0, ...from11);
         return to;
       }
       function insertStatementAfterPrologue(to, statement, isPrologueDirective2) {
@@ -56328,11 +54836,11 @@ ${lanes.join("\n")}
       function isAnyPrologueDirective(node) {
         return isPrologueDirective(node) || !!(getEmitFlags(node) & 2097152);
       }
-      function insertStatementsAfterStandardPrologue(to, from14) {
-        return insertStatementsAfterPrologue(to, from14, isPrologueDirective);
+      function insertStatementsAfterStandardPrologue(to, from11) {
+        return insertStatementsAfterPrologue(to, from11, isPrologueDirective);
       }
-      function insertStatementsAfterCustomPrologue(to, from14) {
-        return insertStatementsAfterPrologue(to, from14, isAnyPrologueDirective);
+      function insertStatementsAfterCustomPrologue(to, from11) {
+        return insertStatementsAfterPrologue(to, from11, isAnyPrologueDirective);
       }
       function insertStatementAfterStandardPrologue(to, statement) {
         return insertStatementAfterPrologue(to, statement, isPrologueDirective);
@@ -70811,13 +69319,13 @@ ${lanes.join("\n")}
             [cooked, raw]
           );
         }
-        function createSpreadArrayHelper(to, from14, packFrom) {
+        function createSpreadArrayHelper(to, from11, packFrom) {
           context.requestEmitHelper(spreadArrayHelper);
           return factory2.createCallExpression(
             getUnscopedHelperName("__spreadArray"),
             /*typeArguments*/
             void 0,
-            [to, from14, packFrom ? immutableTrue() : immutableFalse()]
+            [to, from11, packFrom ? immutableTrue() : immutableFalse()]
           );
         }
         function createPropKeyHelper(expr) {
@@ -203181,8 +201689,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           } else {
             for (const pos2 of positions) {
-              const from14 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
-              const offset = text.substr(from14, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
+              const from11 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
+              const offset = text.substr(from11, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
               textChanges2.push({
                 newText: "",
                 span: {
@@ -204367,8 +202875,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getCallSiteGroupKey(entry) {
         return getNodeId(entry.declaration);
       }
-      function createCallHierarchyIncomingCall(from14, fromSpans) {
-        return { from: from14, fromSpans };
+      function createCallHierarchyIncomingCall(from11, fromSpans) {
+        return { from: from11, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
         return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map21(entries, (entry) => createTextSpanFromRange(entry.range)));
@@ -207542,11 +206050,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const rightSibling = currentNodeIndex < maxChildIndex ? commentNode.getChildAt(currentNodeIndex + 1) : void 0;
         return { leftSibling, rightSibling };
       }
-      function findEndOfTextBetween(jsDocComment, from14, to) {
-        const comment = jsDocComment.getText().substring(from14 - jsDocComment.getStart(), to - jsDocComment.getStart());
+      function findEndOfTextBetween(jsDocComment, from11, to) {
+        const comment = jsDocComment.getText().substring(from11 - jsDocComment.getStart(), to - jsDocComment.getStart());
         for (let i = comment.length; i > 0; i--) {
           if (!/[*/\s]/.test(comment.substring(i - 1, i))) {
-            return from14 + i;
+            return from11 + i;
           }
         }
         return to;
@@ -232622,9 +231130,9 @@ ${options.prefix}` : "\n" : options.prefix
       function toTokenRange(arg) {
         return typeof arg === "number" ? tokenRangeFrom([arg]) : isArray(arg) ? tokenRangeFrom(arg) : arg;
       }
-      function tokenRangeFromRange(from14, to, except = []) {
+      function tokenRangeFromRange(from11, to, except = []) {
         const tokens = [];
-        for (let token = from14; token <= to; token++) {
+        for (let token = from11; token <= to; token++) {
           if (!contains(except, token)) {
             tokens.push(token);
           }
@@ -250321,11 +248829,11 @@ var require_main = __commonJS({
       for (var name2 in all)
         __defProp2(target, name2, { get: all[name2], enumerable: true });
     };
-    var __copyProps2 = (to, from14, except, desc) => {
-      if (from14 && typeof from14 === "object" || typeof from14 === "function") {
-        for (let key of __getOwnPropNames2(from14))
+    var __copyProps2 = (to, from11, except, desc) => {
+      if (from11 && typeof from11 === "object" || typeof from11 === "function") {
+        for (let key of __getOwnPropNames2(from11))
           if (!__hasOwnProp2.call(to, key) && key !== except)
-            __defProp2(to, key, { get: () => from14[key], enumerable: !(desc = __getOwnPropDesc2(from14, key)) || desc.enumerable });
+            __defProp2(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc2(from11, key)) || desc.enumerable });
       }
       return to;
     };
@@ -254696,9 +253204,9 @@ function dump$1(input, options) {
   if (writeNode(state, 0, value, true, true)) return state.dump + "\n";
   return "";
 }
-function renamed(from14, to) {
+function renamed(from11, to) {
   return function() {
-    throw new Error("Function yaml." + from14 + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
+    throw new Error("Function yaml." + from11 + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
   };
 }
 var isNothing_1, isObject_1, toArray_1, repeat_1, isNegativeZero_1, extend_1, common, exception, snippet, TYPE_CONSTRUCTOR_OPTIONS, YAML_NODE_KINDS, type, schema, str, seq, map4, failsafe, _null, bool, int, YAML_FLOAT_PATTERN, SCIENTIFIC_WITHOUT_DOT, float, json, core, YAML_DATE_REGEXP, YAML_TIMESTAMP_REGEXP, timestamp, merge, BASE64_MAP, binary, _hasOwnProperty$3, _toString$2, omap, _toString$1, pairs, _hasOwnProperty$2, set, _default, _hasOwnProperty$1, CONTEXT_FLOW_IN, CONTEXT_FLOW_OUT, CONTEXT_BLOCK_IN, CONTEXT_BLOCK_OUT, CHOMPING_CLIP, CHOMPING_STRIP, CHOMPING_KEEP, PATTERN_NON_PRINTABLE, PATTERN_NON_ASCII_LINE_BREAKS, PATTERN_FLOW_INDICATORS, PATTERN_TAG_HANDLE, PATTERN_TAG_URI, simpleEscapeCheck, simpleEscapeMap, i, directiveHandlers, loadAll_1, load_1, loader, _toString, _hasOwnProperty, CHAR_BOM, CHAR_TAB, CHAR_LINE_FEED, CHAR_CARRIAGE_RETURN, CHAR_SPACE, CHAR_EXCLAMATION, CHAR_DOUBLE_QUOTE, CHAR_SHARP, CHAR_PERCENT, CHAR_AMPERSAND, CHAR_SINGLE_QUOTE, CHAR_ASTERISK, CHAR_COMMA, CHAR_MINUS, CHAR_COLON, CHAR_EQUALS, CHAR_GREATER_THAN, CHAR_QUESTION, CHAR_COMMERCIAL_AT, CHAR_LEFT_SQUARE_BRACKET, CHAR_RIGHT_SQUARE_BRACKET, CHAR_GRAVE_ACCENT, CHAR_LEFT_CURLY_BRACKET, CHAR_VERTICAL_LINE, CHAR_RIGHT_CURLY_BRACKET, ESCAPE_SEQUENCES, DEPRECATED_BOOLEANS_SYNTAX, DEPRECATED_BASE60_SYNTAX, QUOTING_TYPE_SINGLE, QUOTING_TYPE_DOUBLE, STYLE_PLAIN, STYLE_SINGLE, STYLE_LITERAL, STYLE_FOLDED, STYLE_DOUBLE, dump_1, dumper, load, loadAll, dump, safeLoad, safeLoadAll, safeDump;
@@ -255223,18 +253731,18 @@ var list_environments_exports = {};
 __export(list_environments_exports, {
   default: () => list_environments_default
 });
-var import_rxjs8, import_operators7, list_environments_default;
+var import_rxjs7, import_operators6, list_environments_default;
 var init_list_environments = __esm({
   "src/commands/environment/list-environments.ts"() {
-    import_rxjs8 = __toESM(require_cjs());
-    import_operators7 = __toESM(require_operators());
+    import_rxjs7 = __toESM(require_cjs());
+    import_operators6 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_environments_default = (cmd) => (0, import_rxjs8.lastValueFrom)(
+    list_environments_default = (cmd) => (0, import_rxjs7.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators7.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
-        (0, import_operators7.tap)((data) => {
+        (0, import_operators6.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
+        (0, import_operators6.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -255262,32 +253770,32 @@ var create_environment_exports = {};
 __export(create_environment_exports, {
   default: () => create_environment_default
 });
-var import_rxjs9, import_operators8, create_environment_default;
+var import_rxjs8, import_operators7, create_environment_default;
 var init_create_environment = __esm({
   "src/commands/environment/create-environment.ts"() {
-    import_rxjs9 = __toESM(require_cjs());
-    import_operators8 = __toESM(require_operators());
+    import_rxjs8 = __toESM(require_cjs());
+    import_operators7 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_environment_default = (cmd) => (0, import_rxjs9.lastValueFrom)(
+    create_environment_default = (cmd) => (0, import_rxjs8.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators8.switchMap)(
+        (0, import_operators7.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators8.map)((data) => ({
+            (0, import_operators7.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators8.switchMap)(
+        (0, import_operators7.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.createEnvironment(projectId, {
             ...data,
             ...cmd
           })
         ),
-        (0, import_operators8.tap)((data) => {
+        (0, import_operators7.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -255315,33 +253823,33 @@ var update_environment_exports = {};
 __export(update_environment_exports, {
   default: () => update_environment_default
 });
-var import_rxjs10, import_operators9, update_environment_default;
+var import_rxjs9, import_operators8, update_environment_default;
 var init_update_environment = __esm({
   "src/commands/environment/update-environment.ts"() {
-    import_rxjs10 = __toESM(require_cjs());
-    import_operators9 = __toESM(require_operators());
+    import_rxjs9 = __toESM(require_cjs());
+    import_operators8 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    update_environment_default = (cmd) => (0, import_rxjs10.lastValueFrom)(
+    update_environment_default = (cmd) => (0, import_rxjs9.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators9.switchMap)(
+        (0, import_operators8.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators9.map)((data) => ({
+            (0, import_operators8.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators9.tap)(Logger.log),
-        (0, import_operators9.switchMap)(
+        (0, import_operators8.tap)(Logger.log),
+        (0, import_operators8.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.updateEnvironment(projectId, {
             ...data,
             ...cmd
           })
         ),
-        (0, import_operators9.tap)((data) => {
+        (0, import_operators8.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -255369,29 +253877,29 @@ var delete_environment_exports = {};
 __export(delete_environment_exports, {
   default: () => delete_environment_default
 });
-var import_rxjs11, import_operators10, delete_environment_default;
+var import_rxjs10, import_operators9, delete_environment_default;
 var init_delete_environment = __esm({
   "src/commands/environment/delete-environment.ts"() {
-    import_rxjs11 = __toESM(require_cjs());
-    import_operators10 = __toESM(require_operators());
+    import_rxjs10 = __toESM(require_cjs());
+    import_operators9 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_environment_default = (cmd) => (0, import_rxjs11.lastValueFrom)(
+    delete_environment_default = (cmd) => (0, import_rxjs10.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators10.switchMap)(
+        (0, import_operators9.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators10.map)((data) => ({
+            (0, import_operators9.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators10.switchMap)(
+        (0, import_operators9.switchMap)(
           ({ projectId, name: name2 }) => GraphqlClienAPI.deleteEnvironment(name2, projectId, cmd.force)
         ),
-        (0, import_operators10.tap)((data) => {
+        (0, import_operators9.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -255419,29 +253927,29 @@ var get_environment_exports = {};
 __export(get_environment_exports, {
   default: () => get_environment_default
 });
-var import_rxjs12, import_operators11, get_environment_default;
+var import_rxjs11, import_operators10, get_environment_default;
 var init_get_environment = __esm({
   "src/commands/environment/get-environment.ts"() {
-    import_rxjs12 = __toESM(require_cjs());
-    import_operators11 = __toESM(require_operators());
+    import_rxjs11 = __toESM(require_cjs());
+    import_operators10 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    get_environment_default = (cmd) => (0, import_rxjs12.lastValueFrom)(
+    get_environment_default = (cmd) => (0, import_rxjs11.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators11.switchMap)(
+        (0, import_operators10.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators11.map)((data) => ({
+            (0, import_operators10.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators11.switchMap)(
+        (0, import_operators10.switchMap)(
           ({ projectId, name: name2 }) => GraphqlClienAPI.getEnvironment(cmd.name ?? name2, projectId)
         ),
-        (0, import_operators11.tap)((data) => {
+        (0, import_operators10.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -264127,9 +262635,9 @@ var require_mime_types = __commonJS({
         for (var i = 0; i < exts.length; i++) {
           var extension2 = exts[i];
           if (types[extension2]) {
-            var from14 = preference.indexOf(db[types[extension2]].source);
+            var from11 = preference.indexOf(db[types[extension2]].source);
             var to = preference.indexOf(mime.source);
-            if (types[extension2] !== "application/octet-stream" && (from14 > to || from14 === to && types[extension2].substr(0, 12) === "application/")) {
+            if (types[extension2] !== "application/octet-stream" && (from11 > to || from11 === to && types[extension2].substr(0, 12) === "application/")) {
               continue;
             }
           }
@@ -267608,15 +266116,15 @@ var require_polyfills = __commonJS({
       }
       if (platform === "win32") {
         fs.rename = /* @__PURE__ */ (function(fs$rename) {
-          return function(from14, to, cb) {
+          return function(from11, to, cb) {
             var start2 = Date.now();
             var backoff = 0;
-            fs$rename(from14, to, function CB(er) {
+            fs$rename(from11, to, function CB(er) {
               if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start2 < 6e4) {
                 setTimeout(function() {
                   fs.stat(to, function(stater, st) {
                     if (stater && stater.code === "ENOENT")
-                      fs$rename(from14, to, CB);
+                      fs$rename(from11, to, CB);
                     else
                       cb(er);
                   });
@@ -274524,7 +273032,7 @@ var require_from4 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors3().codes.ERR_INVALID_ARG_TYPE;
-    function from14(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -274563,7 +273071,7 @@ var require_from4 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from14;
+    module2.exports = from11;
   }
 });
 
@@ -274607,7 +273115,7 @@ var require_stream_readable4 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from14;
+    var from11;
     require_inherits()(Readable2, Stream);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -275289,10 +273797,10 @@ var require_stream_readable4 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from14 === void 0) {
-          from14 = require_from4();
+        if (from11 === void 0) {
+          from11 = require_from4();
         }
-        return from14(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x) {
@@ -275472,8 +273980,8 @@ var require_pipeline3 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from14, to) {
-      return from14.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop2;
@@ -277866,7 +276374,7 @@ var require_from5 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors4().codes.ERR_INVALID_ARG_TYPE;
-    function from14(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -277905,7 +276413,7 @@ var require_from5 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from14;
+    module2.exports = from11;
   }
 });
 
@@ -277949,7 +276457,7 @@ var require_stream_readable5 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from14;
+    var from11;
     require_inherits()(Readable2, Stream);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -278631,10 +277139,10 @@ var require_stream_readable5 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from14 === void 0) {
-          from14 = require_from5();
+        if (from11 === void 0) {
+          from11 = require_from5();
         }
-        return from14(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x) {
@@ -278814,8 +277322,8 @@ var require_pipeline4 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from14, to) {
-      return from14.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop2;
@@ -280638,7 +279146,7 @@ var require_from6 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors5().codes.ERR_INVALID_ARG_TYPE;
-    function from14(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -280677,7 +279185,7 @@ var require_from6 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from14;
+    module2.exports = from11;
   }
 });
 
@@ -280721,7 +279229,7 @@ var require_stream_readable6 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from14;
+    var from11;
     require_inherits()(Readable2, Stream);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -281403,10 +279911,10 @@ var require_stream_readable6 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from14 === void 0) {
-          from14 = require_from6();
+        if (from11 === void 0) {
+          from11 = require_from6();
         }
-        return from14(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x) {
@@ -281586,8 +280094,8 @@ var require_pipeline5 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from14, to) {
-      return from14.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop2;
@@ -283875,7 +282383,7 @@ var require_from7 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors6().codes.ERR_INVALID_ARG_TYPE;
-    function from14(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -283914,7 +282422,7 @@ var require_from7 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from14;
+    module2.exports = from11;
   }
 });
 
@@ -283958,7 +282466,7 @@ var require_stream_readable7 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from14;
+    var from11;
     require_inherits()(Readable2, Stream);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -284640,10 +283148,10 @@ var require_stream_readable7 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from14 === void 0) {
-          from14 = require_from7();
+        if (from11 === void 0) {
+          from11 = require_from7();
         }
-        return from14(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x) {
@@ -284823,8 +283331,8 @@ var require_pipeline6 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from14, to) {
-      return from14.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop2;
@@ -285596,45 +284104,45 @@ var package_exports = {};
 __export(package_exports, {
   default: () => package_default
 });
-var import_archiver, import_child_process, import_fs3, import_rxjs14, import_operators13, import_util3, ReadFile, package_default;
+var import_archiver, import_child_process, import_fs3, import_rxjs12, import_operators11, import_util3, ReadFile, package_default;
 var init_package = __esm({
   "src/commands/lambda/package.ts"() {
     import_archiver = __toESM(require_archiver());
     import_child_process = require("child_process");
     import_fs3 = require("fs");
-    import_rxjs14 = __toESM(require_cjs());
-    import_operators13 = __toESM(require_operators());
+    import_rxjs12 = __toESM(require_cjs());
+    import_operators11 = __toESM(require_operators());
     import_util3 = require("util");
     init_helpers2();
     init_load_spec();
     init_parse_ignore();
     init_read_file();
-    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators13.catchError)(() => (0, import_rxjs14.of)("")));
+    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators11.catchError)(() => (0, import_rxjs12.of)("")));
     package_default = (cmd) => {
-      return (0, import_rxjs14.lastValueFrom)(
+      return (0, import_rxjs12.lastValueFrom)(
         loadSpec(cmd.spec).pipe(
-          (0, import_operators13.map)((spec) => spec?.function ?? spec),
-          (0, import_operators13.switchMap)(async (data) => {
+          (0, import_operators11.map)((spec) => spec?.function ?? spec),
+          (0, import_operators11.switchMap)(async (data) => {
             const archive = (0, import_archiver.default)("zip", {
               zlib: { level: 9 }
               // Sets the compression level.
             });
             await (0, import_util3.promisify)(import_child_process.exec)(["chmod", "+x", data.script].join(" "));
-            const ignore = await (0, import_rxjs14.lastValueFrom)(
+            const ignore = await (0, import_rxjs12.lastValueFrom)(
               ReadFile(".gignore").pipe(
-                (0, import_operators13.map)((ignore2) => parseIgnoredFiles(ignore2))
+                (0, import_operators11.map)((ignore2) => parseIgnoredFiles(ignore2))
               )
             );
             archive.glob("**", {
               ignore: [".gcache/**", ...ignore]
             });
             archive.finalize();
-            return (0, import_rxjs14.lastValueFrom)(
-              (0, import_rxjs14.from)(streamToBufferPromise(archive)).pipe(
-                (0, import_operators13.switchMap)(
-                  (buffer) => (0, import_rxjs14.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
-                    (0, import_operators13.catchError)(() => (0, import_rxjs14.of)(true)),
-                    (0, import_operators13.switchMap)(
+            return (0, import_rxjs12.lastValueFrom)(
+              (0, import_rxjs12.from)(streamToBufferPromise(archive)).pipe(
+                (0, import_operators11.switchMap)(
+                  (buffer) => (0, import_rxjs12.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
+                    (0, import_operators11.catchError)(() => (0, import_rxjs12.of)(true)),
+                    (0, import_operators11.switchMap)(
                       () => (0, import_util3.promisify)(import_fs3.writeFile)(`.gcache/${data.name}.zip`, buffer, {
                         encoding: "utf-8"
                       })
@@ -285661,13 +284169,13 @@ function streamToBufferPromise(file2) {
     });
   });
 }
-var import_form_data, import_fs4, import_rxjs15, import_operators14, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
+var import_form_data, import_fs4, import_rxjs13, import_operators12, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
     import_fs4 = require("fs");
-    import_rxjs15 = __toESM(require_cjs());
-    import_operators14 = __toESM(require_operators());
+    import_rxjs13 = __toESM(require_cjs());
+    import_operators12 = __toESM(require_operators());
     import_stream_to_buffer = __toESM(require_stream_to_buffer());
     init_helpers();
     init_gql_client();
@@ -285675,14 +284183,14 @@ var init_helpers2 = __esm({
     init_package();
     init_load_spec();
     init_read_file();
-    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators14.catchError)(() => (0, import_rxjs15.of)("")));
-    createOrUpdateLambda = (cmd, type2) => (0, import_rxjs15.lastValueFrom)(
+    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators12.catchError)(() => (0, import_rxjs13.of)("")));
+    createOrUpdateLambda = (cmd, type2) => (0, import_rxjs13.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators14.switchMap)(
-          (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators14.map)(() => projectId))
+        (0, import_operators12.switchMap)(
+          (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators12.map)(() => projectId))
         ),
-        (0, import_operators14.switchMap)(async (projectId) => {
-          const spec = await (0, import_rxjs15.lastValueFrom)(loadSpec(cmd.spec));
+        (0, import_operators12.switchMap)(async (projectId) => {
+          const spec = await (0, import_rxjs13.lastValueFrom)(loadSpec(cmd.spec));
           return {
             projectId,
             ...spec?.function ?? spec
@@ -285690,16 +284198,16 @@ var init_helpers2 = __esm({
         }),
         /* Make zip archive */
         /* Get file id */
-        (0, import_operators14.switchMap)(async (data) => {
+        (0, import_operators12.switchMap)(async (data) => {
           if (!data.uploadAsZip) {
             return { ...data, customUploadFileId: "" };
           }
           await package_default(cmd);
           const body = new import_form_data.default();
           body.append("file[]", (0, import_fs4.createReadStream)(`.gcache/${data.name}.zip`));
-          const config2 = await (0, import_rxjs15.lastValueFrom)(GraphqlClienAPI.getConfig());
-          return (0, import_rxjs15.lastValueFrom)(
-            (0, import_rxjs15.from)(
+          const config2 = await (0, import_rxjs13.lastValueFrom)(GraphqlClienAPI.getConfig());
+          return (0, import_rxjs13.lastValueFrom)(
+            (0, import_rxjs13.from)(
               fetch(config2.uploadUrl, {
                 method: "POST",
                 body,
@@ -285711,26 +284219,26 @@ var init_helpers2 = __esm({
                 }
               })
             ).pipe(
-              (0, import_operators14.switchMap)((res) => res.json()),
-              (0, import_operators14.map)((file2) => ({
+              (0, import_operators12.switchMap)((res) => res.json()),
+              (0, import_operators12.map)((file2) => ({
                 ...data,
                 customUploadFileId: file2.id
               }))
             )
           );
         }),
-        (0, import_operators14.switchMap)(
-          async (payload) => (0, import_rxjs15.lastValueFrom)(
+        (0, import_operators12.switchMap)(
+          async (payload) => (0, import_rxjs13.lastValueFrom)(
             GraphqlClienAPI[type2]({
-              code: cmd.code || await (0, import_rxjs15.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
+              code: cmd.code || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
               name: cmd.name || payload.name || "",
               projectId: payload.projectId,
               route: cmd.route || payload.route || "",
-              buildBashScript: cmd.buildBashScript || await (0, import_rxjs15.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
+              buildBashScript: cmd.buildBashScript || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
               config: cmd.config || payload.config || "",
               env: cmd.env || payload.env || "nodejs",
               method: cmd.method || payload.method || ["GET"],
-              packageJson: cmd.packageJson || await (0, import_rxjs15.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
+              packageJson: cmd.packageJson || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
               network: cmd.network || payload.network || ["public", "private"],
@@ -285752,7 +284260,7 @@ var init_helpers2 = __esm({
             })
           )
         ),
-        (0, import_operators14.tap)((data) => {
+        (0, import_operators12.tap)((data) => {
           Logger.info(JSON.stringify(data, null, 2));
         })
       )
@@ -285772,18 +284280,18 @@ var list_exports = {};
 __export(list_exports, {
   default: () => list_default
 });
-var import_rxjs16, import_operators15, list_default;
+var import_rxjs14, import_operators13, list_default;
 var init_list = __esm({
   "src/commands/lambda/list.ts"() {
-    import_rxjs16 = __toESM(require_cjs());
-    import_operators15 = __toESM(require_operators());
+    import_rxjs14 = __toESM(require_cjs());
+    import_operators13 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default = (cmd) => (0, import_rxjs16.lastValueFrom)(
+    list_default = (cmd) => (0, import_rxjs14.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators15.switchMap)((projectId) => GraphqlClienAPI.listLambdas(projectId)),
-        (0, import_operators15.tap)((data) => {
+        (0, import_operators13.switchMap)((projectId) => GraphqlClienAPI.listLambdas(projectId)),
+        (0, import_operators13.tap)((data) => {
           const columns = ["id", "name", "url"];
           Logger.log("-------------------");
           Logger.log("[Action][listLambdas]");
@@ -285800,17 +284308,17 @@ var get_exports = {};
 __export(get_exports, {
   default: () => get_default
 });
-var import_rxjs17, import_operators16, get_default;
+var import_rxjs15, import_operators14, get_default;
 var init_get = __esm({
   "src/commands/lambda/get.ts"() {
-    import_rxjs17 = __toESM(require_cjs());
-    import_operators16 = __toESM(require_operators());
+    import_rxjs15 = __toESM(require_cjs());
+    import_operators14 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     get_default = async (cmd) => {
-      const table = (0, import_operators16.tap)((data) => {
+      const table = (0, import_operators14.tap)((data) => {
         const columns = [
           "name",
           "projectId",
@@ -285823,28 +284331,28 @@ var init_get = __esm({
         Logger.log("-------------------");
       });
       if (cmd.lambda) {
-        return (0, import_rxjs17.lastValueFrom)(
+        return (0, import_rxjs15.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators16.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
+            (0, import_operators14.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
             table
           )
         );
       }
-      const spec = await (0, import_rxjs17.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs15.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs17.lastValueFrom)(
+        return (0, import_rxjs15.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators16.catchError)((error48) => {
+            (0, import_operators14.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs17.throwError)(
+                return (0, import_rxjs15.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs17.throwError)(() => error48);
+              return (0, import_rxjs15.throwError)(() => error48);
             }),
-            (0, import_operators16.switchMap)(
+            (0, import_operators14.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId)
             ),
             table
@@ -285887,24 +284395,24 @@ var delete_exports = {};
 __export(delete_exports, {
   default: () => delete_default
 });
-var import_rxjs18, import_operators17, delete_default;
+var import_rxjs16, import_operators15, delete_default;
 var init_delete = __esm({
   "src/commands/lambda/delete.ts"() {
-    import_rxjs18 = __toESM(require_cjs());
-    import_operators17 = __toESM(require_operators());
+    import_rxjs16 = __toESM(require_cjs());
+    import_operators15 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     delete_default = async (cmd) => {
-      const spec = await (0, import_rxjs18.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs16.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
-      return (0, import_rxjs18.lastValueFrom)(
+      return (0, import_rxjs16.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators17.switchMap)(
+          (0, import_operators15.switchMap)(
             (projectId) => GraphqlClienAPI.deleteLambda({ name: name2, projectId })
           ),
-          (0, import_operators17.tap)((data) => {
+          (0, import_operators15.tap)((data) => {
             const columns = [
               "name",
               "projectId",
@@ -285927,40 +284435,40 @@ var logs_exports = {};
 __export(logs_exports, {
   default: () => logs_default
 });
-var import_rxjs19, import_operators18, logs_default;
+var import_rxjs17, import_operators16, logs_default;
 var init_logs = __esm({
   "src/commands/lambda/logs.ts"() {
-    import_rxjs19 = __toESM(require_cjs());
-    import_operators18 = __toESM(require_operators());
+    import_rxjs17 = __toESM(require_cjs());
+    import_operators16 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_default = async (cmd) => {
-      const result = (0, import_operators18.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators16.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs19.lastValueFrom)(
+        return (0, import_rxjs17.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators18.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
+            (0, import_operators16.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs19.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs17.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs19.lastValueFrom)(
+        return (0, import_rxjs17.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators18.catchError)((error48) => {
+            (0, import_operators16.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs19.throwError)(
+                return (0, import_rxjs17.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs19.throwError)(() => error48);
+              return (0, import_rxjs17.throwError)(() => error48);
             }),
-            (0, import_operators18.switchMap)(
+            (0, import_operators16.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaLogsByName(name2, projectId)
             ),
             result
@@ -285977,40 +284485,40 @@ var logs_builder_exports = {};
 __export(logs_builder_exports, {
   default: () => logs_builder_default
 });
-var import_rxjs20, import_operators19, logs_builder_default;
+var import_rxjs18, import_operators17, logs_builder_default;
 var init_logs_builder = __esm({
   "src/commands/lambda/logs-builder.ts"() {
-    import_rxjs20 = __toESM(require_cjs());
-    import_operators19 = __toESM(require_operators());
+    import_rxjs18 = __toESM(require_cjs());
+    import_operators17 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_builder_default = async (cmd) => {
-      const result = (0, import_operators19.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators17.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs20.lastValueFrom)(
+        return (0, import_rxjs18.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators19.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
+            (0, import_operators17.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs20.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs18.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs20.lastValueFrom)(
+        return (0, import_rxjs18.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators19.catchError)((error48) => {
+            (0, import_operators17.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs20.throwError)(
+                return (0, import_rxjs18.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs20.throwError)(() => error48);
+              return (0, import_rxjs18.throwError)(() => error48);
             }),
-            (0, import_operators19.switchMap)(
+            (0, import_operators17.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaBuilderLogsByName(name2, projectId)
             ),
             result
@@ -286027,39 +284535,39 @@ var test_exports = {};
 __export(test_exports, {
   default: () => test_default
 });
-var import_rxjs21, import_operators20, test_default;
+var import_rxjs19, import_operators18, test_default;
 var init_test = __esm({
   "src/commands/lambda/test.ts"() {
-    import_rxjs21 = __toESM(require_cjs());
-    import_operators20 = __toESM(require_operators());
+    import_rxjs19 = __toESM(require_cjs());
+    import_operators18 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     test_default = async (cmd) => {
-      const spec = await (0, import_rxjs21.lastValueFrom)(loadSpec(cmd.spec));
-      const processParameters = (lambda) => (0, import_rxjs21.of)(lambda).pipe(
-        (0, import_operators20.map)((lambda2) => ({
+      const spec = await (0, import_rxjs19.lastValueFrom)(loadSpec(cmd.spec));
+      const processParameters = (lambda) => (0, import_rxjs19.of)(lambda).pipe(
+        (0, import_operators18.map)((lambda2) => ({
           ...lambda2,
           url: cmd.pathParams ? cmd.pathParams.split(";").map((param) => param.split("=")).reduce(
             (prev, [key, value]) => prev.replace(key, value),
             lambda2.url
           ) : lambda2.url
         })),
-        (0, import_operators20.tap)(() => {
+        (0, import_operators18.tap)(() => {
           Logger.info(
             `About to hit URL: ${[lambda.url, cmd.queryParams].join("")}`
           );
         }),
-        (0, import_operators20.switchMap)(
-          (lambda2) => (0, import_rxjs21.from)(
+        (0, import_operators18.switchMap)(
+          (lambda2) => (0, import_rxjs19.from)(
             fetch([lambda2.url, cmd.queryParams].filter((i) => !!i).join(""), {
               method: cmd?.method ?? "GET",
               body: cmd.body
             })
-          ).pipe((0, import_operators20.switchMap)((res) => res.json()))
+          ).pipe((0, import_operators18.switchMap)((res) => res.json()))
         ),
-        (0, import_operators20.tap)((data) => {
+        (0, import_operators18.tap)((data) => {
           if (data.error) {
             Logger.error(data);
           } else {
@@ -286068,29 +284576,29 @@ var init_test = __esm({
         })
       );
       if (cmd.lambda) {
-        return (0, import_rxjs21.lastValueFrom)(
+        return (0, import_rxjs19.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators20.switchMap)(
+            (0, import_operators18.switchMap)(
               (id) => GraphqlClienAPI.getLambda(id, ["id", "url", "method", "params"])
             ),
-            (0, import_operators20.switchMap)(processParameters)
+            (0, import_operators18.switchMap)(processParameters)
           )
         );
       }
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs21.lastValueFrom)(
+        return (0, import_rxjs19.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators20.catchError)((error48) => {
+            (0, import_operators18.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs21.throwError)(
+                return (0, import_rxjs19.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs21.throwError)(() => error48);
+              return (0, import_rxjs19.throwError)(() => error48);
             }),
-            (0, import_operators20.switchMap)(
+            (0, import_operators18.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId, [
                 "id",
                 "url",
@@ -286098,7 +284606,7 @@ var init_test = __esm({
                 "params"
               ])
             ),
-            (0, import_operators20.switchMap)(processParameters)
+            (0, import_operators18.switchMap)(processParameters)
           )
         );
       }
@@ -286112,16 +284620,16 @@ var list_exports2 = {};
 __export(list_exports2, {
   default: () => list_default2
 });
-var import_rxjs23, import_operators22, list_default2;
+var import_rxjs20, import_operators19, list_default2;
 var init_list2 = __esm({
   "src/commands/project/list.ts"() {
-    import_rxjs23 = __toESM(require_cjs());
-    import_operators22 = __toESM(require_operators());
+    import_rxjs20 = __toESM(require_cjs());
+    import_operators19 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default2 = async () => (0, import_rxjs23.lastValueFrom)(
+    list_default2 = async () => (0, import_rxjs20.lastValueFrom)(
       GraphqlClienAPI.listProjects().pipe(
-        (0, import_operators22.tap)((project) => {
+        (0, import_operators19.tap)((project) => {
           const columns = ["id", "name"];
           Logger.log("-------------------");
           Logger.log("[Action][listProjects]");
@@ -286138,24 +284646,24 @@ var use_exports = {};
 __export(use_exports, {
   default: () => use_default
 });
-var import_fs5, import_rxjs24, import_operators23, import_util4, use_default;
+var import_fs5, import_rxjs21, import_operators20, import_util4, use_default;
 var init_use = __esm({
   "src/commands/project/use.ts"() {
     import_fs5 = require("fs");
-    import_rxjs24 = __toESM(require_cjs());
-    import_operators23 = __toESM(require_operators());
+    import_rxjs21 = __toESM(require_cjs());
+    import_operators20 = __toESM(require_operators());
     import_util4 = require("util");
     init_helpers();
     init_gql_client();
     init_types();
     use_default = async (cmd) => {
-      return (0, import_rxjs24.lastValueFrom)(
+      return (0, import_rxjs21.lastValueFrom)(
         parseProjectId(cmd).pipe(
-          (0, import_operators23.switchMap)(
-            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators23.map)(() => projectId))
+          (0, import_operators20.switchMap)(
+            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators20.map)(() => projectId))
           ),
-          (0, import_operators23.switchMap)(
-            (projectId) => (0, import_rxjs24.from)(
+          (0, import_operators20.switchMap)(
+            (projectId) => (0, import_rxjs21.from)(
               (0, import_util4.promisify)(import_fs5.writeFile)(projectDirectory, projectId, {
                 encoding: "utf-8"
               })
@@ -302620,7 +301128,7 @@ __export(schemas_exports3, {
   looseObject: () => looseObject,
   looseRecord: () => looseRecord,
   mac: () => mac2,
-  map: () => map18,
+  map: () => map15,
   meta: () => meta2,
   nan: () => nan,
   nanoid: () => nanoid2,
@@ -302916,7 +301424,7 @@ function looseRecord(keyType, valueType, params) {
     ...util_exports.normalizeParams(params)
   });
 }
-function map18(keyType, valueType, params) {
+function map15(keyType, valueType, params) {
   return new ZodMap2({
     type: "map",
     keyType,
@@ -304460,7 +302968,7 @@ __export(external_exports3, {
   lt: () => _lt,
   lte: () => _lte,
   mac: () => mac2,
-  map: () => map18,
+  map: () => map15,
   maxLength: () => _maxLength,
   maxSize: () => _maxSize,
   meta: () => meta2,
@@ -308026,17 +306534,17 @@ var require_codegen = __commonJS({
       }
     };
     var ForRange = class extends For {
-      constructor(varKind, name2, from14, to) {
+      constructor(varKind, name2, from11, to) {
         super();
         this.varKind = varKind;
         this.name = name2;
-        this.from = from14;
+        this.from = from11;
         this.to = to;
       }
       render(opts) {
         const varKind = opts.es5 ? scope_1.varKinds.var : this.varKind;
-        const { name: name2, from: from14, to } = this;
-        return `for(${varKind} ${name2}=${from14}; ${name2}<${to}; ${name2}++)` + super.render(opts);
+        const { name: name2, from: from11, to } = this;
+        return `for(${varKind} ${name2}=${from11}; ${name2}<${to}; ${name2}++)` + super.render(opts);
       }
       get names() {
         const names = addExprNames(super.names, this.from);
@@ -308255,9 +306763,9 @@ var require_codegen = __commonJS({
         return this._for(new ForLoop(iteration), forBody);
       }
       // `for` statement for a range of values
-      forRange(nameOrPrefix, from14, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
+      forRange(nameOrPrefix, from11, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
         const name2 = this._scope.toName(nameOrPrefix);
-        return this._for(new ForRange(varKind, name2, from14, to), () => forBody(name2));
+        return this._for(new ForRange(varKind, name2, from11, to), () => forBody(name2));
       }
       // `for-of` statement (in es5 mode replace with a normal for loop)
       forOf(nameOrPrefix, iterable, forBody, varKind = scope_1.varKinds.const) {
@@ -308396,13 +306904,13 @@ var require_codegen = __commonJS({
       }
     };
     exports2.CodeGen = CodeGen;
-    function addNames(names, from14) {
-      for (const n in from14)
-        names[n] = (names[n] || 0) + (from14[n] || 0);
+    function addNames(names, from11) {
+      for (const n in from11)
+        names[n] = (names[n] || 0) + (from11[n] || 0);
       return names;
     }
-    function addExprNames(names, from14) {
-      return from14 instanceof code_1._CodeOrName ? addNames(names, from14.names) : names;
+    function addExprNames(names, from11) {
+      return from11 instanceof code_1._CodeOrName ? addNames(names, from11.names) : names;
     }
     function optimizeExpr(expr, names, constants) {
       if (expr instanceof code_1.Name)
@@ -308429,9 +306937,9 @@ var require_codegen = __commonJS({
         return e instanceof code_1._Code && e._items.some((c) => c instanceof code_1.Name && names[c.str] === 1 && constants[c.str] !== void 0);
       }
     }
-    function subtractNames(names, from14) {
-      for (const n in from14)
-        names[n] = (names[n] || 0) - (from14[n] || 0);
+    function subtractNames(names, from11) {
+      for (const n in from11)
+        names[n] = (names[n] || 0) - (from11[n] || 0);
     }
     function not(x) {
       return typeof x == "boolean" || typeof x == "number" || x === null ? !x : (0, code_1._)`!${par(x)}`;
@@ -308549,31 +307057,31 @@ var require_util5 = __commonJS({
     }
     exports2.eachItem = eachItem;
     function makeMergeEvaluated({ mergeNames, mergeToName, mergeValues: mergeValues3, resultToName }) {
-      return (gen, from14, to, toName) => {
-        const res = to === void 0 ? from14 : to instanceof codegen_1.Name ? (from14 instanceof codegen_1.Name ? mergeNames(gen, from14, to) : mergeToName(gen, from14, to), to) : from14 instanceof codegen_1.Name ? (mergeToName(gen, to, from14), from14) : mergeValues3(from14, to);
+      return (gen, from11, to, toName) => {
+        const res = to === void 0 ? from11 : to instanceof codegen_1.Name ? (from11 instanceof codegen_1.Name ? mergeNames(gen, from11, to) : mergeToName(gen, from11, to), to) : from11 instanceof codegen_1.Name ? (mergeToName(gen, to, from11), from11) : mergeValues3(from11, to);
         return toName === codegen_1.Name && !(res instanceof codegen_1.Name) ? resultToName(gen, res) : res;
       };
     }
     exports2.mergeEvaluated = {
       props: makeMergeEvaluated({
-        mergeNames: (gen, from14, to) => gen.if((0, codegen_1._)`${to} !== true && ${from14} !== undefined`, () => {
-          gen.if((0, codegen_1._)`${from14} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from14})`));
+        mergeNames: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true && ${from11} !== undefined`, () => {
+          gen.if((0, codegen_1._)`${from11} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from11})`));
         }),
-        mergeToName: (gen, from14, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
-          if (from14 === true) {
+        mergeToName: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
+          if (from11 === true) {
             gen.assign(to, true);
           } else {
             gen.assign(to, (0, codegen_1._)`${to} || {}`);
-            setEvaluated(gen, to, from14);
+            setEvaluated(gen, to, from11);
           }
         }),
-        mergeValues: (from14, to) => from14 === true ? true : { ...from14, ...to },
+        mergeValues: (from11, to) => from11 === true ? true : { ...from11, ...to },
         resultToName: evaluatedPropsToName
       }),
       items: makeMergeEvaluated({
-        mergeNames: (gen, from14, to) => gen.if((0, codegen_1._)`${to} !== true && ${from14} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from14} === true ? true : ${to} > ${from14} ? ${to} : ${from14}`)),
-        mergeToName: (gen, from14, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from14 === true ? true : (0, codegen_1._)`${to} > ${from14} ? ${to} : ${from14}`)),
-        mergeValues: (from14, to) => from14 === true ? true : Math.max(from14, to),
+        mergeNames: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true && ${from11} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from11} === true ? true : ${to} > ${from11} ? ${to} : ${from11}`)),
+        mergeToName: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from11 === true ? true : (0, codegen_1._)`${to} > ${from11} ? ${to} : ${from11}`)),
+        mergeValues: (from11, to) => from11 === true ? true : Math.max(from11, to),
         resultToName: (gen, items) => gen.var("items", items)
       })
     };
@@ -316992,33 +315500,33 @@ __export(start_exports, {
   default: () => startProxy
 });
 async function startProxy(cmd) {
-  return (0, import_rxjs25.lastValueFrom)(
+  return (0, import_rxjs22.lastValueFrom)(
     GraphqlClienAPI.getConfig().pipe(
-      (0, import_operators24.take)(1),
-      (0, import_operators24.map)((config2) => ({
+      (0, import_operators21.take)(1),
+      (0, import_operators21.map)((config2) => ({
         ...config2,
         mcpUrl: new URL(
           cmd.url || [config2.url.replace(/\/graphql$/, ""), "/mcp"].join("") || "http://127.0.0.1:8000/mcp"
         )
       })),
-      (0, import_operators24.tap)((config2) => {
+      (0, import_operators21.tap)((config2) => {
         config2.mcpUrl.searchParams.set("transportType", "streamable-http");
         process.stderr.write(`Starting MCP proxy \u2192 ${config2.mcpUrl}
 `);
         process.stderr.write("Retrieving config for auth...\n");
       }),
-      (0, import_operators24.switchMap)(
-        (config2) => config2?.token ? (0, import_rxjs25.of)(config2) : (0, import_rxjs25.throwError)(
+      (0, import_operators21.switchMap)(
+        (config2) => config2?.token ? (0, import_rxjs22.of)(config2) : (0, import_rxjs22.throwError)(
           () => new Error("User is not authenticated (no token in config)")
         )
       ),
-      (0, import_operators24.tap)((config2) => {
+      (0, import_operators21.tap)((config2) => {
         process.stderr.write(
           `Config retrieved. Token start: ${config2.token.substring(0, 5)}
 `
         );
       }),
-      (0, import_operators24.map)((config2) => ({
+      (0, import_operators21.map)((config2) => ({
         ...config2,
         transport: new StreamableHTTPClientTransport(config2.mcpUrl, {
           requestInit: {
@@ -317026,34 +315534,34 @@ async function startProxy(cmd) {
               Authorization: config2.token
             }
           },
-          fetch: (input, init) => (0, import_rxjs25.lastValueFrom)(performFetch(input, init))
+          fetch: (input, init) => (0, import_rxjs22.lastValueFrom)(performFetch(input, init))
         }),
         client: new Client({
           name: "gapi-proxy-client",
           version: "1.0.0"
         })
       })),
-      (0, import_operators24.tap)(() => {
+      (0, import_operators21.tap)(() => {
         process.stderr.write("Connecting to upstream...\n");
       }),
-      (0, import_operators24.switchMap)(
-        (config2) => (0, import_rxjs25.from)(config2.client.connect(config2.transport)).pipe((0, import_operators24.map)(() => config2))
+      (0, import_operators21.switchMap)(
+        (config2) => (0, import_rxjs22.from)(config2.client.connect(config2.transport)).pipe((0, import_operators21.map)(() => config2))
       ),
-      (0, import_operators24.tap)(() => {
+      (0, import_operators21.tap)(() => {
         process.stderr.write("Connected to upstream MCP server\n");
       }),
       // Get capabilities AFTER connection is established
-      (0, import_operators24.map)((config2) => ({
+      (0, import_operators21.map)((config2) => ({
         ...config2,
         capabilities: config2.client.getServerCapabilities()
       })),
-      (0, import_operators24.tap)((config2) => {
+      (0, import_operators21.tap)((config2) => {
         process.stderr.write(
           `Upstream capabilities: ${JSON.stringify(config2.capabilities)}
 `
         );
       }),
-      (0, import_operators24.map)((config2) => {
+      (0, import_operators21.map)((config2) => {
         const server2 = new Server(
           {
             name: "gapi-proxy",
@@ -317063,67 +315571,67 @@ async function startProxy(cmd) {
             capabilities: config2.capabilities || {}
           }
         );
-        server2.fallbackRequestHandler = async (request) => (0, import_rxjs25.lastValueFrom)(
-          (0, import_rxjs25.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
-            (0, import_operators24.catchError)((e) => {
+        server2.fallbackRequestHandler = async (request) => (0, import_rxjs22.lastValueFrom)(
+          (0, import_rxjs22.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
+            (0, import_operators21.catchError)((e) => {
               process.stderr.write(`Upstream error: ${e.message}
 `);
-              return (0, import_rxjs25.throwError)(() => e);
+              return (0, import_rxjs22.throwError)(() => e);
             })
           )
         );
         server2.fallbackNotificationHandler = async (notification) => {
-          await (0, import_rxjs25.lastValueFrom)(
-            (0, import_rxjs25.of)(notification).pipe(
-              (0, import_operators24.filter)((n) => n.method !== "notifications/initialized"),
-              (0, import_operators24.switchMap)(
-                (n) => (0, import_rxjs25.defer)(() => config2.client.notification(n)).pipe(
-                  (0, import_operators24.catchError)((e) => {
+          await (0, import_rxjs22.lastValueFrom)(
+            (0, import_rxjs22.of)(notification).pipe(
+              (0, import_operators21.filter)((n) => n.method !== "notifications/initialized"),
+              (0, import_operators21.switchMap)(
+                (n) => (0, import_rxjs22.defer)(() => config2.client.notification(n)).pipe(
+                  (0, import_operators21.catchError)((e) => {
                     process.stderr.write(`Notification error: ${e}
 `);
-                    return import_rxjs25.EMPTY;
+                    return import_rxjs22.EMPTY;
                   })
                 )
               ),
-              (0, import_operators24.defaultIfEmpty)(null)
+              (0, import_operators21.defaultIfEmpty)(null)
             )
           );
         };
         return server2;
       }),
-      (0, import_operators24.switchMap)((server2) => (0, import_rxjs25.from)(server2.connect(new StdioServerTransport()))),
-      (0, import_operators24.tap)(() => {
+      (0, import_operators21.switchMap)((server2) => (0, import_rxjs22.from)(server2.connect(new StdioServerTransport()))),
+      (0, import_operators21.tap)(() => {
         process.stderr.write("MCP stdio server ready\n");
       }),
       // Keep the process running indefinitely to handle stdio communication
-      (0, import_operators24.switchMap)(() => new Promise(() => {
+      (0, import_operators21.switchMap)(() => new Promise(() => {
       }))
     )
   );
 }
-var import_rxjs25, import_operators24, import_stream2, performFetch;
+var import_rxjs22, import_operators21, import_stream2, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
     init_streamableHttp();
     init_server2();
     init_stdio2();
-    import_rxjs25 = __toESM(require_cjs());
-    import_operators24 = __toESM(require_operators());
+    import_rxjs22 = __toESM(require_cjs());
+    import_operators21 = __toESM(require_operators());
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
     performFetch = (input, init) => {
-      return (0, import_rxjs25.from)(fetch(input, init)).pipe(
-        (0, import_operators24.switchMap)((res) => {
+      return (0, import_rxjs22.from)(fetch(input, init)).pipe(
+        (0, import_operators21.switchMap)((res) => {
           if (res.status === 401 || res.status === 403) {
             process.stderr.write(
               `[DEBUG] Request failed with ${res.status}. Refreshing token...
 `
             );
             return GraphqlClienAPI.getConfig(true).pipe(
-              (0, import_operators24.take)(1),
-              (0, import_operators24.switchMap)((config2) => {
+              (0, import_operators21.take)(1),
+              (0, import_operators21.switchMap)((config2) => {
                 process.stderr.write(
                   "[DEBUG] Token refreshed. Retrying request...\n"
                 );
@@ -317136,9 +315644,9 @@ var init_start = __esm({
               })
             );
           }
-          return (0, import_rxjs25.of)(res);
+          return (0, import_rxjs22.of)(res);
         }),
-        (0, import_operators24.map)((res) => {
+        (0, import_operators21.map)((res) => {
           if (typeof res?.body?.pipeThrough !== "function") {
             try {
               const webStream = import_stream2.Readable.toWeb(res.body);
@@ -317152,10 +315660,10 @@ var init_start = __esm({
           }
           return res;
         }),
-        (0, import_operators24.catchError)((e) => {
+        (0, import_operators21.catchError)((e) => {
           process.stderr.write(`[ERROR] Fetch error: ${e.message}
 `);
-          return (0, import_rxjs25.throwError)(() => e);
+          return (0, import_rxjs22.throwError)(() => e);
         })
       );
     };
@@ -317169,10 +315677,10 @@ __export(start_exports2, {
 });
 async function start(args) {
   Logger.log("---------------------------------");
-  return (0, import_rxjs26.lastValueFrom)(
+  return (0, import_rxjs23.lastValueFrom)(
     loadSpec().pipe(
-      (0, import_operators25.switchMap)(
-        (config2) => (0, import_rxjs26.of)({
+      (0, import_operators22.switchMap)(
+        (config2) => (0, import_rxjs23.of)({
           watcher: (0, import_node_fs.watch)(process.cwd(), {
             recursive: true
           }),
@@ -317187,13 +315695,13 @@ async function start(args) {
           outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
           startCommand: "node"
         }).pipe(
-          (0, import_operators25.switchMap)(
-            ({ child, watcher, whitelist, outfile, startCommand }) => (0, import_rxjs26.from)(build_default(args)).pipe(
-              (0, import_operators25.tap)(() => {
+          (0, import_operators22.switchMap)(
+            ({ child, watcher, whitelist, outfile, startCommand }) => (0, import_rxjs23.from)(build_default(args)).pipe(
+              (0, import_operators22.tap)(() => {
                 Logger.warn(`\u{1F4E2} Starting script "${startCommand} ${outfile}"`);
                 Logger.log("---------------------------------\n");
               }),
-              (0, import_operators25.tap)(() => {
+              (0, import_operators22.tap)(() => {
                 child = (0, import_node_child_process.spawn)(
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
@@ -317202,14 +315710,14 @@ async function start(args) {
                   }
                 );
               }),
-              (0, import_operators25.tap)(
-                () => (0, import_rxjs26.merge)(
-                  (0, import_rxjs26.fromEvent)(process, "SIGINT"),
-                  (0, import_rxjs26.fromEvent)(process, "SIGTERM"),
-                  (0, import_rxjs26.fromEvent)(process, "exit")
+              (0, import_operators22.tap)(
+                () => (0, import_rxjs23.merge)(
+                  (0, import_rxjs23.fromEvent)(process, "SIGINT"),
+                  (0, import_rxjs23.fromEvent)(process, "SIGTERM"),
+                  (0, import_rxjs23.fromEvent)(process, "exit")
                 ).pipe(
-                  (0, import_operators25.debounceTime)(100),
-                  (0, import_operators25.tap)(() => {
+                  (0, import_operators22.debounceTime)(100),
+                  (0, import_operators22.tap)(() => {
                     Logger.warn("\u26A0\uFE0F  Main process shutting down");
                     watcher.close();
                     child.kill("SIGTERM");
@@ -317217,29 +315725,29 @@ async function start(args) {
                   })
                 ).subscribe()
               ),
-              (0, import_operators25.switchMap)(
-                () => (0, import_rxjs26.fromEvent)(watcher, "change").pipe(
-                  (0, import_operators25.map)(([event, filename]) => ({
+              (0, import_operators22.switchMap)(
+                () => (0, import_rxjs23.fromEvent)(watcher, "change").pipe(
+                  (0, import_operators22.map)(([event, filename]) => ({
                     event,
                     filename
                   })),
-                  (0, import_operators25.filter)(({ filename }) => {
+                  (0, import_operators22.filter)(({ filename }) => {
                     if (!filename) {
                       return false;
                     }
                     const rootDir = filename.split(/[/\\]/)[0];
                     return whitelist.has(rootDir);
                   }),
-                  (0, import_operators25.debounceTime)(100)
+                  (0, import_operators22.debounceTime)(100)
                 )
               ),
-              (0, import_operators25.tap)((data) => {
+              (0, import_operators22.tap)((data) => {
                 Logger.log("\n---------------------------------");
                 Logger.log(`\u27F3  Restarting due to change in: ${data.filename}`);
                 child?.kill("SIGTERM");
               }),
-              (0, import_operators25.switchMap)(() => build_default(args)),
-              (0, import_operators25.tap)(() => {
+              (0, import_operators22.switchMap)(() => build_default(args)),
+              (0, import_operators22.tap)(() => {
                 Logger.warn(`\u{1F4E2} Starting script "${startCommand} ${outfile}"`);
                 Logger.log("---------------------------------\n");
                 child = (0, import_node_child_process.spawn)(
@@ -317257,16 +315765,168 @@ async function start(args) {
     )
   );
 }
-var import_node_child_process, import_node_fs, import_rxjs26, import_operators25;
+var import_node_child_process, import_node_fs, import_rxjs23, import_operators22;
 var init_start2 = __esm({
   "src/commands/start/start.ts"() {
     import_node_child_process = require("node:child_process");
     import_node_fs = require("node:fs");
-    import_rxjs26 = __toESM(require_cjs());
-    import_operators25 = __toESM(require_operators());
+    import_rxjs23 = __toESM(require_cjs());
+    import_operators22 = __toESM(require_operators());
     init_log();
     init_build();
     init_load_spec();
+  }
+});
+
+// src/commands/triggers/cron/create-cron.ts
+var create_cron_exports = {};
+__export(create_cron_exports, {
+  default: () => create_cron_default
+});
+var import_rxjs24, import_operators23, create_cron_default;
+var init_create_cron = __esm({
+  "src/commands/triggers/cron/create-cron.ts"() {
+    import_rxjs24 = __toESM(require_cjs());
+    import_operators23 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    init_load_spec();
+    create_cron_default = (cmd) => (0, import_rxjs24.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators23.switchMap)(
+          (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
+            (0, import_operators23.switchMap)(
+              (data) => GraphqlClienAPI.getLambdaByName(
+                cmd?.lambdaName ?? data?.function?.name ?? data?.name,
+                projectId
+              ).pipe(
+                (0, import_operators23.map)((lambda) => ({
+                  lambdaName: lambda.name,
+                  lambdaId: lambda.id,
+                  ...data?.triggers?.time ?? data
+                }))
+              )
+            )
+          )
+        ),
+        (0, import_operators23.switchMap)(
+          ({ lambdaId, cron, triggerName, lambdaName }) => GraphqlClienAPI.createTimeTrigger({ lambdaId, cron, triggerName }).pipe(
+            (0, import_operators23.map)((data) => ({ ...data, lambdaName }))
+          )
+        ),
+        (0, import_operators23.tap)((data) => {
+          const columns = [
+            "id",
+            "lambdaName",
+            "triggerName",
+            "cron",
+            "createdBy"
+          ];
+          Logger.log("-------------------");
+          Logger.log("[Action][createTimeTrigger]");
+          Logger.table([data], columns);
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/triggers/cron/delete-cron.ts
+var delete_cron_exports = {};
+__export(delete_cron_exports, {
+  default: () => delete_cron_default
+});
+var import_rxjs25, import_operators24, delete_cron_default;
+var init_delete_cron = __esm({
+  "src/commands/triggers/cron/delete-cron.ts"() {
+    import_rxjs25 = __toESM(require_cjs());
+    import_operators24 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    init_load_spec();
+    delete_cron_default = (cmd) => (0, import_rxjs25.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators24.switchMap)(
+          (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
+            (0, import_operators24.switchMap)(
+              (data) => GraphqlClienAPI.getLambdaByName(
+                cmd?.lambdaName ?? data?.function?.name ?? data?.name,
+                projectId
+              ).pipe(
+                (0, import_operators24.map)((lambda) => ({
+                  lambdaName: lambda.name,
+                  lambdaId: lambda.id
+                }))
+              )
+            )
+          )
+        ),
+        (0, import_operators24.switchMap)(
+          ({ lambdaId, lambdaName }) => GraphqlClienAPI.deleteLambdaTimeTrigger(lambdaId).pipe(
+            (0, import_operators24.map)((data) => ({ ...data, lambdaName }))
+          )
+        ),
+        (0, import_operators24.tap)((data) => {
+          const columns = [
+            "id",
+            "lambdaName",
+            "triggerName",
+            "cron"
+          ];
+          Logger.log("-------------------");
+          Logger.log("[Action][deleteLambdaTimeTrigger]");
+          Logger.table([data], columns);
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/triggers/cron/list-crons.ts
+var list_crons_exports = {};
+__export(list_crons_exports, {
+  default: () => list_crons_default
+});
+var import_rxjs26, import_operators25, list_crons_default;
+var init_list_crons = __esm({
+  "src/commands/triggers/cron/list-crons.ts"() {
+    import_rxjs26 = __toESM(require_cjs());
+    import_operators25 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    list_crons_default = (cmd) => (0, import_rxjs26.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators25.switchMap)(
+          (projectId) => (0, import_rxjs26.combineLatest)([
+            GraphqlClienAPI.listProjectTimeTriggers(projectId),
+            GraphqlClienAPI.listLambdas(projectId)
+          ])
+        ),
+        (0, import_operators25.map)(
+          ([triggers, lambdas]) => triggers.map((v) => ({
+            lambdaName: lambdas.find((l) => l.id === v.lambdaId)?.name,
+            ...v
+          }))
+        ),
+        (0, import_operators25.tap)((data) => {
+          const columns = [
+            "id",
+            "triggerName",
+            "lambdaName",
+            "cron"
+          ];
+          Logger.log("-------------------");
+          Logger.log("[Action][listProjectTimeTriggers]");
+          Logger.table(data, columns);
+          Logger.log("-------------------");
+        })
+      )
+    );
   }
 });
 
@@ -317280,7 +315940,6 @@ var import_node_fs2 = require("node:fs");
 var import_node_os = __toESM(require("node:os"));
 var import_node_path = __toESM(require("node:path"));
 var import_node_sea = require("node:sea");
-var import_chalk2 = __toESM(require_chalk());
 var import_commander = __toESM(require_commander());
 var import_node_fetch = __toESM(require_lib2());
 
@@ -317294,87 +315953,39 @@ function registerAuthCommands(program2) {
 }
 
 // src/commands/build/index.ts
-var import_rxjs7 = __toESM(require_cjs());
-var import_operators6 = __toESM(require_operators());
 init_helpers();
 function buildCommands(program2) {
   program2.command("build").description("Build bundle using esbuild https://esbuild.github.io ").option(
     "-f, --files <files...>",
     "File or files to bundle defaults to index.ts"
-  ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(
-    lazy(
-      () => (0, import_rxjs7.lastValueFrom)((0, import_rxjs7.from)(Promise.resolve().then(() => (init_build(), build_exports))).pipe((0, import_operators6.map)((m) => m.default)))
-    )
-  );
+  ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(lazy(() => Promise.resolve().then(() => (init_build(), build_exports)).then((m) => m.default)));
 }
 
 // src/commands/environment/index.ts
-var import_rxjs13 = __toESM(require_cjs());
-var import_operators12 = __toESM(require_operators());
 init_helpers();
 function registerEnvironmentCommands(program2) {
-  program2.command("environment:list").description("List of all environments for project").option("-p, --project <project>").action(
-    lazy(
-      () => (0, import_rxjs13.lastValueFrom)(
-        (0, import_rxjs13.from)(Promise.resolve().then(() => (init_list_environments(), list_environments_exports))).pipe((0, import_operators12.map)((m) => m.default))
-      )
-    )
-  );
+  program2.command("environment:list").description("List of all environments for project").option("-p, --project <project>").action(lazy(() => Promise.resolve().then(() => (init_list_environments(), list_environments_exports)).then((m) => m.default)));
   program2.command("environment:create").description("Create environment for project").option("-p, --project <project>").option("-minCpu, --minCpu <minCpu>").option("-maxCpu, --maxCpu <maxCpu>").option("-minMemory, --minMemory <minMemory>").option("-maxMemory, --maxMemory <maxMemory>").option("-poolSize, --poolSize <poolSize>").option("-builder, --builder <builder>").option("-image, --image <image>").option("-name, --name <name>").option("-spec, --spec <spec>").option(
     "-r, --region <region>",
     "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'"
-  ).action(
-    lazy(
-      () => (0, import_rxjs13.lastValueFrom)(
-        (0, import_rxjs13.from)(Promise.resolve().then(() => (init_create_environment(), create_environment_exports))).pipe((0, import_operators12.map)((m) => m.default))
-      )
-    )
-  );
+  ).action(lazy(() => Promise.resolve().then(() => (init_create_environment(), create_environment_exports)).then((m) => m.default)));
   program2.command("environment:update").description("Update environment for project").option("-p, --project <project>").option("-minCpu, --minCpu <minCpu>").option("-maxCpu, --maxCpu <maxCpu>").option("-minMemory, --minMemory <minMemory>").option("-maxMemory, --maxMemory <maxMemory>").option("-poolSize, --poolSize <poolSize>").option("-builder, --builder <builder>").option("-image, --image <image>").option("-name, --name <name>").option("-spec, --spec <spec>").option(
     "-r, --region <region>",
     "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'"
-  ).action(
-    lazy(
-      () => (0, import_rxjs13.lastValueFrom)(
-        (0, import_rxjs13.from)(Promise.resolve().then(() => (init_update_environment(), update_environment_exports))).pipe((0, import_operators12.map)((m) => m.default))
-      )
-    )
-  );
-  program2.command("environment:delete").description("Delete environment for project").option("-p, --project <project>").option("-n, --name <name>").option("-f, --force").option("-spec, --spec <spec>").action(
-    lazy(
-      () => (0, import_rxjs13.lastValueFrom)(
-        (0, import_rxjs13.from)(Promise.resolve().then(() => (init_delete_environment(), delete_environment_exports))).pipe((0, import_operators12.map)((m) => m.default))
-      )
-    )
-  );
-  program2.command("environment:get").description("Get environment for project").option("-p, --project <project>").option("-n, --name <name>").action(
-    lazy(
-      () => (0, import_rxjs13.lastValueFrom)(
-        (0, import_rxjs13.from)(Promise.resolve().then(() => (init_get_environment(), get_environment_exports))).pipe((0, import_operators12.map)((m) => m.default))
-      )
-    )
-  );
+  ).action(lazy(() => Promise.resolve().then(() => (init_update_environment(), update_environment_exports)).then((m) => m.default)));
+  program2.command("environment:delete").description("Delete environment for project").option("-p, --project <project>").option("-n, --name <name>").option("-f, --force").option("-spec, --spec <spec>").action(lazy(() => Promise.resolve().then(() => (init_delete_environment(), delete_environment_exports)).then((m) => m.default)));
+  program2.command("environment:get").description("Get environment for project").option("-p, --project <project>").option("-n, --name <name>").action(lazy(() => Promise.resolve().then(() => (init_get_environment(), get_environment_exports)).then((m) => m.default)));
 }
 
 // src/commands/lambda/index.ts
-var import_rxjs22 = __toESM(require_cjs());
-var import_operators21 = __toESM(require_operators());
 init_helpers();
 init_helpers2();
 function registerLambdaCommands(program2) {
   program2.command("lambda:list").description("List of all lambdas for project").option(
     "-p, --project <project>",
     "Specify custom token generated from the website"
-  ).action(
-    lazy(
-      () => (0, import_rxjs22.lastValueFrom)((0, import_rxjs22.from)(Promise.resolve().then(() => (init_list(), list_exports))).pipe((0, import_operators21.map)((m) => m.default)))
-    )
-  );
-  program2.command("lambda:get").description("Get lambda by id").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-p, --spec <spec>", "get by lambda name").action(
-    lazy(
-      () => (0, import_rxjs22.lastValueFrom)((0, import_rxjs22.from)(Promise.resolve().then(() => (init_get(), get_exports))).pipe((0, import_operators21.map)((m) => m.default)))
-    )
-  );
+  ).action(lazy(() => Promise.resolve().then(() => (init_list(), list_exports)).then((m) => m.default)));
+  program2.command("lambda:get").description("Get lambda by id").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-p, --spec <spec>", "get by lambda name").action(lazy(() => Promise.resolve().then(() => (init_get(), get_exports)).then((m) => m.default)));
   const createOrUpdateOptions = [
     ["--name <name>", "Function name"],
     ["--project <project>", "Project in which this lambda is defined"],
@@ -317449,44 +316060,20 @@ function registerLambdaCommands(program2) {
     ]
   ];
   createCommand("lambda:create")(createOrUpdateOptions)(program2).action(
-    lazy(
-      () => (0, import_rxjs22.lastValueFrom)((0, import_rxjs22.from)(Promise.resolve().then(() => (init_create(), create_exports))).pipe((0, import_operators21.map)((m) => m.default)))
-    )
+    lazy(() => Promise.resolve().then(() => (init_create(), create_exports)).then((m) => m.default))
   );
   createCommand("lambda:update")(createOrUpdateOptions)(program2).action(
-    lazy(
-      () => (0, import_rxjs22.lastValueFrom)((0, import_rxjs22.from)(Promise.resolve().then(() => (init_update(), update_exports))).pipe((0, import_operators21.map)((m) => m.default)))
-    )
+    lazy(() => Promise.resolve().then(() => (init_update(), update_exports)).then((m) => m.default))
   );
-  program2.command("lambda:delete").description("Get lambda by id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").action(
-    lazy(
-      () => (0, import_rxjs22.lastValueFrom)((0, import_rxjs22.from)(Promise.resolve().then(() => (init_delete(), delete_exports))).pipe((0, import_operators21.map)((m) => m.default)))
-    )
-  );
-  program2.command("lambda:log").description("Get lambda log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").action(
-    lazy(
-      () => (0, import_rxjs22.lastValueFrom)((0, import_rxjs22.from)(Promise.resolve().then(() => (init_logs(), logs_exports))).pipe((0, import_operators21.map)((m) => m.default)))
-    )
-  );
-  program2.command("lambda:build:log").description("Get build log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda project").option("-s, --spec <spec>", "use configuration").action(
-    lazy(
-      () => (0, import_rxjs22.lastValueFrom)(
-        (0, import_rxjs22.from)(Promise.resolve().then(() => (init_logs_builder(), logs_builder_exports))).pipe((0, import_operators21.map)((m) => m.default))
-      )
-    )
-  );
+  program2.command("lambda:delete").description("Get lambda by id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").action(lazy(() => Promise.resolve().then(() => (init_delete(), delete_exports)).then((m) => m.default)));
+  program2.command("lambda:log").description("Get lambda log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").action(lazy(() => Promise.resolve().then(() => (init_logs(), logs_exports)).then((m) => m.default)));
+  program2.command("lambda:build:log").description("Get build log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda project").option("-s, --spec <spec>", "use configuration").action(lazy(() => Promise.resolve().then(() => (init_logs_builder(), logs_builder_exports)).then((m) => m.default)));
   program2.command("lambda:test").description("Test lambda").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").option("-qp, --queryParams <queryParams>", "Adds query params to request").option("-pp, --pathParams <pathParams>", "Adds query params to request").option("-b, --body <body>", "Add body to request").option(
     "-m, --method <method>",
     "HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method"
-  ).action(
-    lazy(
-      () => (0, import_rxjs22.lastValueFrom)((0, import_rxjs22.from)(Promise.resolve().then(() => (init_test(), test_exports))).pipe((0, import_operators21.map)((m) => m.default)))
-    )
-  );
+  ).action(lazy(() => Promise.resolve().then(() => (init_test(), test_exports)).then((m) => m.default)));
   createCommand("lambda:package")(createOrUpdateOptions)(program2).action(
-    lazy(
-      () => (0, import_rxjs22.lastValueFrom)((0, import_rxjs22.from)(Promise.resolve().then(() => (init_package(), package_exports))).pipe((0, import_operators21.map)((m) => m.default)))
-    )
+    lazy(() => Promise.resolve().then(() => (init_package(), package_exports)).then((m) => m.default))
   );
 }
 
@@ -317513,6 +316100,14 @@ function startCommands(program2) {
   ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(lazy(() => Promise.resolve().then(() => (init_start2(), start_exports2)).then((m) => m.default)));
 }
 
+// src/commands/triggers/cron/index.ts
+init_helpers();
+function registerCronTriggerCommands(program2) {
+  program2.command("cron:create").description("Create cron").option("-p, --project <project>").option("-l, --lambdaName <lambdaName>").option("-t, --triggerName <triggerName>").option("-c, --cron <cron>").action(lazy(() => Promise.resolve().then(() => (init_create_cron(), create_cron_exports)).then((m) => m.default)));
+  program2.command("cron:delete").description("Delete cron").option("-p, --project <project>").option("-l, --lambdaName <lambdaName>").action(lazy(() => Promise.resolve().then(() => (init_delete_cron(), delete_cron_exports)).then((m) => m.default)));
+  program2.command("cron:list").description("List of all cron jobs for project").option("-p, --project <project>").action(lazy(() => Promise.resolve().then(() => (init_list_crons(), list_crons_exports)).then((m) => m.default)));
+}
+
 // src/commands/index.ts
 var commands = [
   registerAuthCommands,
@@ -317521,7 +316116,8 @@ var commands = [
   buildCommands,
   registerEnvironmentCommands,
   registerMcpCommands,
-  startCommands
+  startCommands,
+  registerCronTriggerCommands
 ];
 
 // src/main.ts
@@ -317553,9 +316149,9 @@ var main = (argv) => {
   import_commander.program.name("gcli").version("0.0.1");
   commands.map((command) => command(import_commander.program));
   import_commander.program.on("command:*", () => {
-    Logger.log();
-    Logger.log(import_chalk2.default.red(`Invalid command: ${import_commander.program.args.join(" ")}`));
-    Logger.log();
+    console.log();
+    Logger.error(`Invalid command: ${import_commander.program.args.join(" ")}`);
+    console.log();
     import_commander.program.outputHelp();
     process.exit(1);
   });
@@ -317565,7 +316161,7 @@ var main = (argv) => {
   }
   import_commander.program.parse(argv);
 };
-global.fetch = import_node_fetch.default;
+global.fetch = global.fetch ?? import_node_fetch.default;
 if (process.argv.length === 2) {
   process.argv.push("-h");
 }

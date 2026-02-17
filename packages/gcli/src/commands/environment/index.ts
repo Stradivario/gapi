@@ -1,6 +1,4 @@
 import { Command } from 'commander';
-import { from, lastValueFrom } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { lazy } from '~/helpers';
 
@@ -9,13 +7,7 @@ export function registerEnvironmentCommands(program: Command) {
     .command('environment:list')
     .description('List of all environments for project')
     .option('-p, --project <project>')
-    .action(
-      lazy(() =>
-        lastValueFrom(
-          from(import('./list-environments')).pipe(map((m) => m.default)),
-        ),
-      ),
-    );
+    .action(lazy(() => import('./list-environments').then((m) => m.default)));
 
   program
     .command('environment:create')
@@ -34,13 +26,7 @@ export function registerEnvironmentCommands(program: Command) {
       '-r, --region <region>',
       "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'",
     )
-    .action(
-      lazy(() =>
-        lastValueFrom(
-          from(import('./create-environment')).pipe(map((m) => m.default)),
-        ),
-      ),
-    );
+    .action(lazy(() => import('./create-environment').then((m) => m.default)));
 
   program
     .command('environment:update')
@@ -59,13 +45,7 @@ export function registerEnvironmentCommands(program: Command) {
       '-r, --region <region>',
       "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'",
     )
-    .action(
-      lazy(() =>
-        lastValueFrom(
-          from(import('./update-environment')).pipe(map((m) => m.default)),
-        ),
-      ),
-    );
+    .action(lazy(() => import('./update-environment').then((m) => m.default)));
 
   program
     .command('environment:delete')
@@ -74,24 +54,12 @@ export function registerEnvironmentCommands(program: Command) {
     .option('-n, --name <name>')
     .option('-f, --force')
     .option('-spec, --spec <spec>')
-    .action(
-      lazy(() =>
-        lastValueFrom(
-          from(import('./delete-environment')).pipe(map((m) => m.default)),
-        ),
-      ),
-    );
+    .action(lazy(() => import('./delete-environment').then((m) => m.default)));
 
   program
     .command('environment:get')
     .description('Get environment for project')
     .option('-p, --project <project>')
     .option('-n, --name <name>')
-    .action(
-      lazy(() =>
-        lastValueFrom(
-          from(import('./get-environment')).pipe(map((m) => m.default)),
-        ),
-      ),
-    );
+    .action(lazy(() => import('./get-environment').then((m) => m.default)));
 }

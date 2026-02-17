@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import chalk from 'chalk';
 import { Command } from 'commander';
 import { of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -29,10 +28,10 @@ export class ExitCodeError extends CustomError {
 
 export function exitWithError(error: Error): never {
   if (error instanceof ExitCodeError) {
-    process.stderr.write(`\n${chalk.red(error.message)}\n\n`);
+    Logger.error(error.message);
     process.exit(error.code);
   } else {
-    process.stderr.write(`\n${chalk.red(`${error}`)}\n\n`);
+    Logger.error(error);
     process.exit(1);
   }
 }
