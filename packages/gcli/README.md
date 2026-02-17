@@ -198,6 +198,11 @@ environment:
 options:
   bundler:
     watch: ['src']
+    outfile: 'index.js'
+    bundle: true
+    minify: false
+    target: node24
+    external: []
 ```
 
 ### Configuration Auto-Discovery (Zero-Argument Commands)
@@ -315,6 +320,11 @@ By default, `gcli start` watches only the entry file passed to the bundle. To wa
 options:
   bundler:
     watch: ['src', 'lib']
+    outfile: 'index.js'
+    bundle: true
+    minify: false
+    target: node24
+    external: []
 ```
 
 ---
