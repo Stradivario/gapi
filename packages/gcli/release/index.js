@@ -2398,6 +2398,50 @@ var require_commander = __commonJS({
   }
 });
 
+// ../../node_modules/data-uri-to-buffer/dist/index.js
+function dataUriToBuffer(uri) {
+  if (!/^data:/i.test(uri)) {
+    throw new TypeError('`uri` does not appear to be a Data URI (must begin with "data:")');
+  }
+  uri = uri.replace(/\r?\n/g, "");
+  const firstComma = uri.indexOf(",");
+  if (firstComma === -1 || firstComma <= 4) {
+    throw new TypeError("malformed data: URI");
+  }
+  const meta3 = uri.substring(5, firstComma).split(";");
+  let charset = "";
+  let base643 = false;
+  const type2 = meta3[0] || "text/plain";
+  let typeFull = type2;
+  for (let i2 = 1; i2 < meta3.length; i2++) {
+    if (meta3[i2] === "base64") {
+      base643 = true;
+    } else if (meta3[i2]) {
+      typeFull += `;${meta3[i2]}`;
+      if (meta3[i2].indexOf("charset=") === 0) {
+        charset = meta3[i2].substring(8);
+      }
+    }
+  }
+  if (!meta3[0] && !charset.length) {
+    typeFull += ";charset=US-ASCII";
+    charset = "US-ASCII";
+  }
+  const encoding = base643 ? "base64" : "ascii";
+  const data = unescape(uri.substring(firstComma + 1));
+  const buffer = Buffer.from(data, encoding);
+  buffer.type = type2;
+  buffer.typeFull = typeFull;
+  buffer.charset = charset;
+  return buffer;
+}
+var dist_default;
+var init_dist = __esm({
+  "../../node_modules/data-uri-to-buffer/dist/index.js"() {
+    dist_default = dataUriToBuffer;
+  }
+});
+
 // ../../node_modules/web-streams-polyfill/dist/ponyfill.es2018.js
 var require_ponyfill_es2018 = __commonJS({
   "../../node_modules/web-streams-polyfill/dist/ponyfill.es2018.js"(exports2, module2) {
@@ -7064,6 +7108,75 @@ var init_esm_min = __esm({
   }
 });
 
+// ../../node_modules/node-fetch/src/errors/base.js
+var FetchBaseError;
+var init_base = __esm({
+  "../../node_modules/node-fetch/src/errors/base.js"() {
+    FetchBaseError = class extends Error {
+      constructor(message, type2) {
+        super(message);
+        Error.captureStackTrace(this, this.constructor);
+        this.type = type2;
+      }
+      get name() {
+        return this.constructor.name;
+      }
+      get [Symbol.toStringTag]() {
+        return this.constructor.name;
+      }
+    };
+  }
+});
+
+// ../../node_modules/node-fetch/src/errors/fetch-error.js
+var FetchError;
+var init_fetch_error = __esm({
+  "../../node_modules/node-fetch/src/errors/fetch-error.js"() {
+    init_base();
+    FetchError = class extends FetchBaseError {
+      /**
+       * @param  {string} message -      Error message for human
+       * @param  {string} [type] -        Error type for machine
+       * @param  {SystemError} [systemError] - For Node.js system error
+       */
+      constructor(message, type2, systemError) {
+        super(message, type2);
+        if (systemError) {
+          this.code = this.errno = systemError.code;
+          this.erroredSysCall = systemError.syscall;
+        }
+      }
+    };
+  }
+});
+
+// ../../node_modules/node-fetch/src/utils/is.js
+var NAME, isURLSearchParameters, isBlob, isAbortSignal, isDomainOrSubdomain, isSameProtocol;
+var init_is = __esm({
+  "../../node_modules/node-fetch/src/utils/is.js"() {
+    NAME = Symbol.toStringTag;
+    isURLSearchParameters = (object3) => {
+      return typeof object3 === "object" && typeof object3.append === "function" && typeof object3.delete === "function" && typeof object3.get === "function" && typeof object3.getAll === "function" && typeof object3.has === "function" && typeof object3.set === "function" && typeof object3.sort === "function" && object3[NAME] === "URLSearchParams";
+    };
+    isBlob = (object3) => {
+      return object3 && typeof object3 === "object" && typeof object3.arrayBuffer === "function" && typeof object3.type === "string" && typeof object3.stream === "function" && typeof object3.constructor === "function" && /^(Blob|File)$/.test(object3[NAME]);
+    };
+    isAbortSignal = (object3) => {
+      return typeof object3 === "object" && (object3[NAME] === "AbortSignal" || object3[NAME] === "EventTarget");
+    };
+    isDomainOrSubdomain = (destination, original) => {
+      const orig = new URL(original).hostname;
+      const dest = new URL(destination).hostname;
+      return orig === dest || orig.endsWith(`.${dest}`);
+    };
+    isSameProtocol = (destination, original) => {
+      const orig = new URL(original).protocol;
+      const dest = new URL(destination).protocol;
+      return orig === dest;
+    };
+  }
+});
+
 // ../../node_modules/node-domexception/index.js
 var require_node_domexception = __commonJS({
   "../../node_modules/node-domexception/index.js"(exports2, module2) {
@@ -7450,6 +7563,1256 @@ var init_multipart_parser = __esm({
         }
       }
     };
+  }
+});
+
+// ../../node_modules/node-fetch/src/body.js
+async function consumeBody(data) {
+  if (data[INTERNALS].disturbed) {
+    throw new TypeError(`body used already for: ${data.url}`);
+  }
+  data[INTERNALS].disturbed = true;
+  if (data[INTERNALS].error) {
+    throw data[INTERNALS].error;
+  }
+  const { body } = data;
+  if (body === null) {
+    return import_node_buffer.Buffer.alloc(0);
+  }
+  if (!(body instanceof import_node_stream.default)) {
+    return import_node_buffer.Buffer.alloc(0);
+  }
+  const accum = [];
+  let accumBytes = 0;
+  try {
+    for await (const chunk of body) {
+      if (data.size > 0 && accumBytes + chunk.length > data.size) {
+        const error48 = new FetchError(`content size at ${data.url} over limit: ${data.size}`, "max-size");
+        body.destroy(error48);
+        throw error48;
+      }
+      accumBytes += chunk.length;
+      accum.push(chunk);
+    }
+  } catch (error48) {
+    const error_ = error48 instanceof FetchBaseError ? error48 : new FetchError(`Invalid response body while trying to fetch ${data.url}: ${error48.message}`, "system", error48);
+    throw error_;
+  }
+  if (body.readableEnded === true || body._readableState.ended === true) {
+    try {
+      if (accum.every((c) => typeof c === "string")) {
+        return import_node_buffer.Buffer.from(accum.join(""));
+      }
+      return import_node_buffer.Buffer.concat(accum, accumBytes);
+    } catch (error48) {
+      throw new FetchError(`Could not create Buffer from response body for ${data.url}: ${error48.message}`, "system", error48);
+    }
+  } else {
+    throw new FetchError(`Premature close of server response while trying to fetch ${data.url}`);
+  }
+}
+var import_node_stream, import_node_util, import_node_buffer, pipeline, INTERNALS, Body, clone, getNonSpecFormDataBoundary, extractContentType, getTotalBytes, writeToStream;
+var init_body = __esm({
+  "../../node_modules/node-fetch/src/body.js"() {
+    import_node_stream = __toESM(require("node:stream"), 1);
+    import_node_util = require("node:util");
+    import_node_buffer = require("node:buffer");
+    init_fetch_blob();
+    init_esm_min();
+    init_fetch_error();
+    init_base();
+    init_is();
+    pipeline = (0, import_node_util.promisify)(import_node_stream.default.pipeline);
+    INTERNALS = /* @__PURE__ */ Symbol("Body internals");
+    Body = class {
+      constructor(body, {
+        size = 0
+      } = {}) {
+        let boundary = null;
+        if (body === null) {
+          body = null;
+        } else if (isURLSearchParameters(body)) {
+          body = import_node_buffer.Buffer.from(body.toString());
+        } else if (isBlob(body)) {
+        } else if (import_node_buffer.Buffer.isBuffer(body)) {
+        } else if (import_node_util.types.isAnyArrayBuffer(body)) {
+          body = import_node_buffer.Buffer.from(body);
+        } else if (ArrayBuffer.isView(body)) {
+          body = import_node_buffer.Buffer.from(body.buffer, body.byteOffset, body.byteLength);
+        } else if (body instanceof import_node_stream.default) {
+        } else if (body instanceof FormData) {
+          body = formDataToBlob(body);
+          boundary = body.type.split("=")[1];
+        } else {
+          body = import_node_buffer.Buffer.from(String(body));
+        }
+        let stream = body;
+        if (import_node_buffer.Buffer.isBuffer(body)) {
+          stream = import_node_stream.default.Readable.from(body);
+        } else if (isBlob(body)) {
+          stream = import_node_stream.default.Readable.from(body.stream());
+        }
+        this[INTERNALS] = {
+          body,
+          stream,
+          boundary,
+          disturbed: false,
+          error: null
+        };
+        this.size = size;
+        if (body instanceof import_node_stream.default) {
+          body.on("error", (error_) => {
+            const error48 = error_ instanceof FetchBaseError ? error_ : new FetchError(`Invalid response body while trying to fetch ${this.url}: ${error_.message}`, "system", error_);
+            this[INTERNALS].error = error48;
+          });
+        }
+      }
+      get body() {
+        return this[INTERNALS].stream;
+      }
+      get bodyUsed() {
+        return this[INTERNALS].disturbed;
+      }
+      /**
+       * Decode response as ArrayBuffer
+       *
+       * @return  Promise
+       */
+      async arrayBuffer() {
+        const { buffer, byteOffset, byteLength } = await consumeBody(this);
+        return buffer.slice(byteOffset, byteOffset + byteLength);
+      }
+      async formData() {
+        const ct = this.headers.get("content-type");
+        if (ct.startsWith("application/x-www-form-urlencoded")) {
+          const formData = new FormData();
+          const parameters = new URLSearchParams(await this.text());
+          for (const [name2, value] of parameters) {
+            formData.append(name2, value);
+          }
+          return formData;
+        }
+        const { toFormData: toFormData2 } = await Promise.resolve().then(() => (init_multipart_parser(), multipart_parser_exports));
+        return toFormData2(this.body, ct);
+      }
+      /**
+       * Return raw response as Blob
+       *
+       * @return Promise
+       */
+      async blob() {
+        const ct = this.headers && this.headers.get("content-type") || this[INTERNALS].body && this[INTERNALS].body.type || "";
+        const buf = await this.arrayBuffer();
+        return new fetch_blob_default([buf], {
+          type: ct
+        });
+      }
+      /**
+       * Decode response as json
+       *
+       * @return  Promise
+       */
+      async json() {
+        const text = await this.text();
+        return JSON.parse(text);
+      }
+      /**
+       * Decode response as text
+       *
+       * @return  Promise
+       */
+      async text() {
+        const buffer = await consumeBody(this);
+        return new TextDecoder().decode(buffer);
+      }
+      /**
+       * Decode response as buffer (non-spec api)
+       *
+       * @return  Promise
+       */
+      buffer() {
+        return consumeBody(this);
+      }
+    };
+    Body.prototype.buffer = (0, import_node_util.deprecate)(Body.prototype.buffer, "Please use 'response.arrayBuffer()' instead of 'response.buffer()'", "node-fetch#buffer");
+    Object.defineProperties(Body.prototype, {
+      body: { enumerable: true },
+      bodyUsed: { enumerable: true },
+      arrayBuffer: { enumerable: true },
+      blob: { enumerable: true },
+      json: { enumerable: true },
+      text: { enumerable: true },
+      data: { get: (0, import_node_util.deprecate)(
+        () => {
+        },
+        "data doesn't exist, use json(), text(), arrayBuffer(), or body instead",
+        "https://github.com/node-fetch/node-fetch/issues/1000 (response)"
+      ) }
+    });
+    clone = (instance, highWaterMark) => {
+      let p1;
+      let p2;
+      let { body } = instance[INTERNALS];
+      if (instance.bodyUsed) {
+        throw new Error("cannot clone body after it is used");
+      }
+      if (body instanceof import_node_stream.default && typeof body.getBoundary !== "function") {
+        p1 = new import_node_stream.PassThrough({ highWaterMark });
+        p2 = new import_node_stream.PassThrough({ highWaterMark });
+        body.pipe(p1);
+        body.pipe(p2);
+        instance[INTERNALS].stream = p1;
+        body = p2;
+      }
+      return body;
+    };
+    getNonSpecFormDataBoundary = (0, import_node_util.deprecate)(
+      (body) => body.getBoundary(),
+      "form-data doesn't follow the spec and requires special treatment. Use alternative package",
+      "https://github.com/node-fetch/node-fetch/issues/1167"
+    );
+    extractContentType = (body, request) => {
+      if (body === null) {
+        return null;
+      }
+      if (typeof body === "string") {
+        return "text/plain;charset=UTF-8";
+      }
+      if (isURLSearchParameters(body)) {
+        return "application/x-www-form-urlencoded;charset=UTF-8";
+      }
+      if (isBlob(body)) {
+        return body.type || null;
+      }
+      if (import_node_buffer.Buffer.isBuffer(body) || import_node_util.types.isAnyArrayBuffer(body) || ArrayBuffer.isView(body)) {
+        return null;
+      }
+      if (body instanceof FormData) {
+        return `multipart/form-data; boundary=${request[INTERNALS].boundary}`;
+      }
+      if (body && typeof body.getBoundary === "function") {
+        return `multipart/form-data;boundary=${getNonSpecFormDataBoundary(body)}`;
+      }
+      if (body instanceof import_node_stream.default) {
+        return null;
+      }
+      return "text/plain;charset=UTF-8";
+    };
+    getTotalBytes = (request) => {
+      const { body } = request[INTERNALS];
+      if (body === null) {
+        return 0;
+      }
+      if (isBlob(body)) {
+        return body.size;
+      }
+      if (import_node_buffer.Buffer.isBuffer(body)) {
+        return body.length;
+      }
+      if (body && typeof body.getLengthSync === "function") {
+        return body.hasKnownLength && body.hasKnownLength() ? body.getLengthSync() : null;
+      }
+      return null;
+    };
+    writeToStream = async (dest, { body }) => {
+      if (body === null) {
+        dest.end();
+      } else {
+        await pipeline(body, dest);
+      }
+    };
+  }
+});
+
+// ../../node_modules/node-fetch/src/headers.js
+function fromRawHeaders(headers = []) {
+  return new Headers2(
+    headers.reduce((result, value, index, array2) => {
+      if (index % 2 === 0) {
+        result.push(array2.slice(index, index + 2));
+      }
+      return result;
+    }, []).filter(([name2, value]) => {
+      try {
+        validateHeaderName(name2);
+        validateHeaderValue(name2, String(value));
+        return true;
+      } catch {
+        return false;
+      }
+    })
+  );
+}
+var import_node_util2, import_node_http, validateHeaderName, validateHeaderValue, Headers2;
+var init_headers = __esm({
+  "../../node_modules/node-fetch/src/headers.js"() {
+    import_node_util2 = require("node:util");
+    import_node_http = __toESM(require("node:http"), 1);
+    validateHeaderName = typeof import_node_http.default.validateHeaderName === "function" ? import_node_http.default.validateHeaderName : (name2) => {
+      if (!/^[\^`\-\w!#$%&'*+.|~]+$/.test(name2)) {
+        const error48 = new TypeError(`Header name must be a valid HTTP token [${name2}]`);
+        Object.defineProperty(error48, "code", { value: "ERR_INVALID_HTTP_TOKEN" });
+        throw error48;
+      }
+    };
+    validateHeaderValue = typeof import_node_http.default.validateHeaderValue === "function" ? import_node_http.default.validateHeaderValue : (name2, value) => {
+      if (/[^\t\u0020-\u007E\u0080-\u00FF]/.test(value)) {
+        const error48 = new TypeError(`Invalid character in header content ["${name2}"]`);
+        Object.defineProperty(error48, "code", { value: "ERR_INVALID_CHAR" });
+        throw error48;
+      }
+    };
+    Headers2 = class _Headers extends URLSearchParams {
+      /**
+       * Headers class
+       *
+       * @constructor
+       * @param {HeadersInit} [init] - Response headers
+       */
+      constructor(init) {
+        let result = [];
+        if (init instanceof _Headers) {
+          const raw = init.raw();
+          for (const [name2, values] of Object.entries(raw)) {
+            result.push(...values.map((value) => [name2, value]));
+          }
+        } else if (init == null) {
+        } else if (typeof init === "object" && !import_node_util2.types.isBoxedPrimitive(init)) {
+          const method = init[Symbol.iterator];
+          if (method == null) {
+            result.push(...Object.entries(init));
+          } else {
+            if (typeof method !== "function") {
+              throw new TypeError("Header pairs must be iterable");
+            }
+            result = [...init].map((pair) => {
+              if (typeof pair !== "object" || import_node_util2.types.isBoxedPrimitive(pair)) {
+                throw new TypeError("Each header pair must be an iterable object");
+              }
+              return [...pair];
+            }).map((pair) => {
+              if (pair.length !== 2) {
+                throw new TypeError("Each header pair must be a name/value tuple");
+              }
+              return [...pair];
+            });
+          }
+        } else {
+          throw new TypeError("Failed to construct 'Headers': The provided value is not of type '(sequence<sequence<ByteString>> or record<ByteString, ByteString>)");
+        }
+        result = result.length > 0 ? result.map(([name2, value]) => {
+          validateHeaderName(name2);
+          validateHeaderValue(name2, String(value));
+          return [String(name2).toLowerCase(), String(value)];
+        }) : void 0;
+        super(result);
+        return new Proxy(this, {
+          get(target, p, receiver) {
+            switch (p) {
+              case "append":
+              case "set":
+                return (name2, value) => {
+                  validateHeaderName(name2);
+                  validateHeaderValue(name2, String(value));
+                  return URLSearchParams.prototype[p].call(
+                    target,
+                    String(name2).toLowerCase(),
+                    String(value)
+                  );
+                };
+              case "delete":
+              case "has":
+              case "getAll":
+                return (name2) => {
+                  validateHeaderName(name2);
+                  return URLSearchParams.prototype[p].call(
+                    target,
+                    String(name2).toLowerCase()
+                  );
+                };
+              case "keys":
+                return () => {
+                  target.sort();
+                  return new Set(URLSearchParams.prototype.keys.call(target)).keys();
+                };
+              default:
+                return Reflect.get(target, p, receiver);
+            }
+          }
+        });
+      }
+      get [Symbol.toStringTag]() {
+        return this.constructor.name;
+      }
+      toString() {
+        return Object.prototype.toString.call(this);
+      }
+      get(name2) {
+        const values = this.getAll(name2);
+        if (values.length === 0) {
+          return null;
+        }
+        let value = values.join(", ");
+        if (/^content-encoding$/i.test(name2)) {
+          value = value.toLowerCase();
+        }
+        return value;
+      }
+      forEach(callback, thisArg = void 0) {
+        for (const name2 of this.keys()) {
+          Reflect.apply(callback, thisArg, [this.get(name2), name2, this]);
+        }
+      }
+      *values() {
+        for (const name2 of this.keys()) {
+          yield this.get(name2);
+        }
+      }
+      /**
+       * @type {() => IterableIterator<[string, string]>}
+       */
+      *entries() {
+        for (const name2 of this.keys()) {
+          yield [name2, this.get(name2)];
+        }
+      }
+      [Symbol.iterator]() {
+        return this.entries();
+      }
+      /**
+       * Node-fetch non-spec method
+       * returning all headers and their values as array
+       * @returns {Record<string, string[]>}
+       */
+      raw() {
+        return [...this.keys()].reduce((result, key) => {
+          result[key] = this.getAll(key);
+          return result;
+        }, {});
+      }
+      /**
+       * For better console.log(headers) and also to convert Headers into Node.js Request compatible format
+       */
+      [/* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom")]() {
+        return [...this.keys()].reduce((result, key) => {
+          const values = this.getAll(key);
+          if (key === "host") {
+            result[key] = values[0];
+          } else {
+            result[key] = values.length > 1 ? values : values[0];
+          }
+          return result;
+        }, {});
+      }
+    };
+    Object.defineProperties(
+      Headers2.prototype,
+      ["get", "entries", "forEach", "values"].reduce((result, property) => {
+        result[property] = { enumerable: true };
+        return result;
+      }, {})
+    );
+  }
+});
+
+// ../../node_modules/node-fetch/src/utils/is-redirect.js
+var redirectStatus, isRedirect;
+var init_is_redirect = __esm({
+  "../../node_modules/node-fetch/src/utils/is-redirect.js"() {
+    redirectStatus = /* @__PURE__ */ new Set([301, 302, 303, 307, 308]);
+    isRedirect = (code) => {
+      return redirectStatus.has(code);
+    };
+  }
+});
+
+// ../../node_modules/node-fetch/src/response.js
+var INTERNALS2, Response2;
+var init_response = __esm({
+  "../../node_modules/node-fetch/src/response.js"() {
+    init_headers();
+    init_body();
+    init_is_redirect();
+    INTERNALS2 = /* @__PURE__ */ Symbol("Response internals");
+    Response2 = class _Response extends Body {
+      constructor(body = null, options = {}) {
+        super(body, options);
+        const status = options.status != null ? options.status : 200;
+        const headers = new Headers2(options.headers);
+        if (body !== null && !headers.has("Content-Type")) {
+          const contentType = extractContentType(body, this);
+          if (contentType) {
+            headers.append("Content-Type", contentType);
+          }
+        }
+        this[INTERNALS2] = {
+          type: "default",
+          url: options.url,
+          status,
+          statusText: options.statusText || "",
+          headers,
+          counter: options.counter,
+          highWaterMark: options.highWaterMark
+        };
+      }
+      get type() {
+        return this[INTERNALS2].type;
+      }
+      get url() {
+        return this[INTERNALS2].url || "";
+      }
+      get status() {
+        return this[INTERNALS2].status;
+      }
+      /**
+       * Convenience property representing if the request ended normally
+       */
+      get ok() {
+        return this[INTERNALS2].status >= 200 && this[INTERNALS2].status < 300;
+      }
+      get redirected() {
+        return this[INTERNALS2].counter > 0;
+      }
+      get statusText() {
+        return this[INTERNALS2].statusText;
+      }
+      get headers() {
+        return this[INTERNALS2].headers;
+      }
+      get highWaterMark() {
+        return this[INTERNALS2].highWaterMark;
+      }
+      /**
+       * Clone this response
+       *
+       * @return  Response
+       */
+      clone() {
+        return new _Response(clone(this, this.highWaterMark), {
+          type: this.type,
+          url: this.url,
+          status: this.status,
+          statusText: this.statusText,
+          headers: this.headers,
+          ok: this.ok,
+          redirected: this.redirected,
+          size: this.size,
+          highWaterMark: this.highWaterMark
+        });
+      }
+      /**
+       * @param {string} url    The URL that the new response is to originate from.
+       * @param {number} status An optional status code for the response (e.g., 302.)
+       * @returns {Response}    A Response object.
+       */
+      static redirect(url2, status = 302) {
+        if (!isRedirect(status)) {
+          throw new RangeError('Failed to execute "redirect" on "response": Invalid status code');
+        }
+        return new _Response(null, {
+          headers: {
+            location: new URL(url2).toString()
+          },
+          status
+        });
+      }
+      static error() {
+        const response = new _Response(null, { status: 0, statusText: "" });
+        response[INTERNALS2].type = "error";
+        return response;
+      }
+      static json(data = void 0, init = {}) {
+        const body = JSON.stringify(data);
+        if (body === void 0) {
+          throw new TypeError("data is not JSON serializable");
+        }
+        const headers = new Headers2(init && init.headers);
+        if (!headers.has("content-type")) {
+          headers.set("content-type", "application/json");
+        }
+        return new _Response(body, {
+          ...init,
+          headers
+        });
+      }
+      get [Symbol.toStringTag]() {
+        return "Response";
+      }
+    };
+    Object.defineProperties(Response2.prototype, {
+      type: { enumerable: true },
+      url: { enumerable: true },
+      status: { enumerable: true },
+      ok: { enumerable: true },
+      redirected: { enumerable: true },
+      statusText: { enumerable: true },
+      headers: { enumerable: true },
+      clone: { enumerable: true }
+    });
+  }
+});
+
+// ../../node_modules/node-fetch/src/utils/get-search.js
+var getSearch;
+var init_get_search = __esm({
+  "../../node_modules/node-fetch/src/utils/get-search.js"() {
+    getSearch = (parsedURL) => {
+      if (parsedURL.search) {
+        return parsedURL.search;
+      }
+      const lastOffset = parsedURL.href.length - 1;
+      const hash2 = parsedURL.hash || (parsedURL.href[lastOffset] === "#" ? "#" : "");
+      return parsedURL.href[lastOffset - hash2.length] === "?" ? "?" : "";
+    };
+  }
+});
+
+// ../../node_modules/node-fetch/src/utils/referrer.js
+function stripURLForUseAsAReferrer(url2, originOnly = false) {
+  if (url2 == null) {
+    return "no-referrer";
+  }
+  url2 = new URL(url2);
+  if (/^(about|blob|data):$/.test(url2.protocol)) {
+    return "no-referrer";
+  }
+  url2.username = "";
+  url2.password = "";
+  url2.hash = "";
+  if (originOnly) {
+    url2.pathname = "";
+    url2.search = "";
+  }
+  return url2;
+}
+function validateReferrerPolicy(referrerPolicy) {
+  if (!ReferrerPolicy.has(referrerPolicy)) {
+    throw new TypeError(`Invalid referrerPolicy: ${referrerPolicy}`);
+  }
+  return referrerPolicy;
+}
+function isOriginPotentiallyTrustworthy(url2) {
+  if (/^(http|ws)s:$/.test(url2.protocol)) {
+    return true;
+  }
+  const hostIp = url2.host.replace(/(^\[)|(]$)/g, "");
+  const hostIPVersion = (0, import_node_net.isIP)(hostIp);
+  if (hostIPVersion === 4 && /^127\./.test(hostIp)) {
+    return true;
+  }
+  if (hostIPVersion === 6 && /^(((0+:){7})|(::(0+:){0,6}))0*1$/.test(hostIp)) {
+    return true;
+  }
+  if (url2.host === "localhost" || url2.host.endsWith(".localhost")) {
+    return false;
+  }
+  if (url2.protocol === "file:") {
+    return true;
+  }
+  return false;
+}
+function isUrlPotentiallyTrustworthy(url2) {
+  if (/^about:(blank|srcdoc)$/.test(url2)) {
+    return true;
+  }
+  if (url2.protocol === "data:") {
+    return true;
+  }
+  if (/^(blob|filesystem):$/.test(url2.protocol)) {
+    return true;
+  }
+  return isOriginPotentiallyTrustworthy(url2);
+}
+function determineRequestsReferrer(request, { referrerURLCallback, referrerOriginCallback } = {}) {
+  if (request.referrer === "no-referrer" || request.referrerPolicy === "") {
+    return null;
+  }
+  const policy = request.referrerPolicy;
+  if (request.referrer === "about:client") {
+    return "no-referrer";
+  }
+  const referrerSource = request.referrer;
+  let referrerURL = stripURLForUseAsAReferrer(referrerSource);
+  let referrerOrigin = stripURLForUseAsAReferrer(referrerSource, true);
+  if (referrerURL.toString().length > 4096) {
+    referrerURL = referrerOrigin;
+  }
+  if (referrerURLCallback) {
+    referrerURL = referrerURLCallback(referrerURL);
+  }
+  if (referrerOriginCallback) {
+    referrerOrigin = referrerOriginCallback(referrerOrigin);
+  }
+  const currentURL = new URL(request.url);
+  switch (policy) {
+    case "no-referrer":
+      return "no-referrer";
+    case "origin":
+      return referrerOrigin;
+    case "unsafe-url":
+      return referrerURL;
+    case "strict-origin":
+      if (isUrlPotentiallyTrustworthy(referrerURL) && !isUrlPotentiallyTrustworthy(currentURL)) {
+        return "no-referrer";
+      }
+      return referrerOrigin.toString();
+    case "strict-origin-when-cross-origin":
+      if (referrerURL.origin === currentURL.origin) {
+        return referrerURL;
+      }
+      if (isUrlPotentiallyTrustworthy(referrerURL) && !isUrlPotentiallyTrustworthy(currentURL)) {
+        return "no-referrer";
+      }
+      return referrerOrigin;
+    case "same-origin":
+      if (referrerURL.origin === currentURL.origin) {
+        return referrerURL;
+      }
+      return "no-referrer";
+    case "origin-when-cross-origin":
+      if (referrerURL.origin === currentURL.origin) {
+        return referrerURL;
+      }
+      return referrerOrigin;
+    case "no-referrer-when-downgrade":
+      if (isUrlPotentiallyTrustworthy(referrerURL) && !isUrlPotentiallyTrustworthy(currentURL)) {
+        return "no-referrer";
+      }
+      return referrerURL;
+    default:
+      throw new TypeError(`Invalid referrerPolicy: ${policy}`);
+  }
+}
+function parseReferrerPolicyFromHeader(headers) {
+  const policyTokens = (headers.get("referrer-policy") || "").split(/[,\s]+/);
+  let policy = "";
+  for (const token of policyTokens) {
+    if (token && ReferrerPolicy.has(token)) {
+      policy = token;
+    }
+  }
+  return policy;
+}
+var import_node_net, ReferrerPolicy, DEFAULT_REFERRER_POLICY;
+var init_referrer = __esm({
+  "../../node_modules/node-fetch/src/utils/referrer.js"() {
+    import_node_net = require("node:net");
+    ReferrerPolicy = /* @__PURE__ */ new Set([
+      "",
+      "no-referrer",
+      "no-referrer-when-downgrade",
+      "same-origin",
+      "origin",
+      "strict-origin",
+      "origin-when-cross-origin",
+      "strict-origin-when-cross-origin",
+      "unsafe-url"
+    ]);
+    DEFAULT_REFERRER_POLICY = "strict-origin-when-cross-origin";
+  }
+});
+
+// ../../node_modules/node-fetch/src/request.js
+var import_node_url, import_node_util3, INTERNALS3, isRequest, doBadDataWarn, Request2, getNodeRequestOptions;
+var init_request = __esm({
+  "../../node_modules/node-fetch/src/request.js"() {
+    import_node_url = require("node:url");
+    import_node_util3 = require("node:util");
+    init_headers();
+    init_body();
+    init_is();
+    init_get_search();
+    init_referrer();
+    INTERNALS3 = /* @__PURE__ */ Symbol("Request internals");
+    isRequest = (object3) => {
+      return typeof object3 === "object" && typeof object3[INTERNALS3] === "object";
+    };
+    doBadDataWarn = (0, import_node_util3.deprecate)(
+      () => {
+      },
+      ".data is not a valid RequestInit property, use .body instead",
+      "https://github.com/node-fetch/node-fetch/issues/1000 (request)"
+    );
+    Request2 = class _Request extends Body {
+      constructor(input, init = {}) {
+        let parsedURL;
+        if (isRequest(input)) {
+          parsedURL = new URL(input.url);
+        } else {
+          parsedURL = new URL(input);
+          input = {};
+        }
+        if (parsedURL.username !== "" || parsedURL.password !== "") {
+          throw new TypeError(`${parsedURL} is an url with embedded credentials.`);
+        }
+        let method = init.method || input.method || "GET";
+        if (/^(delete|get|head|options|post|put)$/i.test(method)) {
+          method = method.toUpperCase();
+        }
+        if (!isRequest(init) && "data" in init) {
+          doBadDataWarn();
+        }
+        if ((init.body != null || isRequest(input) && input.body !== null) && (method === "GET" || method === "HEAD")) {
+          throw new TypeError("Request with GET/HEAD method cannot have body");
+        }
+        const inputBody = init.body ? init.body : isRequest(input) && input.body !== null ? clone(input) : null;
+        super(inputBody, {
+          size: init.size || input.size || 0
+        });
+        const headers = new Headers2(init.headers || input.headers || {});
+        if (inputBody !== null && !headers.has("Content-Type")) {
+          const contentType = extractContentType(inputBody, this);
+          if (contentType) {
+            headers.set("Content-Type", contentType);
+          }
+        }
+        let signal = isRequest(input) ? input.signal : null;
+        if ("signal" in init) {
+          signal = init.signal;
+        }
+        if (signal != null && !isAbortSignal(signal)) {
+          throw new TypeError("Expected signal to be an instanceof AbortSignal or EventTarget");
+        }
+        let referrer = init.referrer == null ? input.referrer : init.referrer;
+        if (referrer === "") {
+          referrer = "no-referrer";
+        } else if (referrer) {
+          const parsedReferrer = new URL(referrer);
+          referrer = /^about:(\/\/)?client$/.test(parsedReferrer) ? "client" : parsedReferrer;
+        } else {
+          referrer = void 0;
+        }
+        this[INTERNALS3] = {
+          method,
+          redirect: init.redirect || input.redirect || "follow",
+          headers,
+          parsedURL,
+          signal,
+          referrer
+        };
+        this.follow = init.follow === void 0 ? input.follow === void 0 ? 20 : input.follow : init.follow;
+        this.compress = init.compress === void 0 ? input.compress === void 0 ? true : input.compress : init.compress;
+        this.counter = init.counter || input.counter || 0;
+        this.agent = init.agent || input.agent;
+        this.highWaterMark = init.highWaterMark || input.highWaterMark || 16384;
+        this.insecureHTTPParser = init.insecureHTTPParser || input.insecureHTTPParser || false;
+        this.referrerPolicy = init.referrerPolicy || input.referrerPolicy || "";
+      }
+      /** @returns {string} */
+      get method() {
+        return this[INTERNALS3].method;
+      }
+      /** @returns {string} */
+      get url() {
+        return (0, import_node_url.format)(this[INTERNALS3].parsedURL);
+      }
+      /** @returns {Headers} */
+      get headers() {
+        return this[INTERNALS3].headers;
+      }
+      get redirect() {
+        return this[INTERNALS3].redirect;
+      }
+      /** @returns {AbortSignal} */
+      get signal() {
+        return this[INTERNALS3].signal;
+      }
+      // https://fetch.spec.whatwg.org/#dom-request-referrer
+      get referrer() {
+        if (this[INTERNALS3].referrer === "no-referrer") {
+          return "";
+        }
+        if (this[INTERNALS3].referrer === "client") {
+          return "about:client";
+        }
+        if (this[INTERNALS3].referrer) {
+          return this[INTERNALS3].referrer.toString();
+        }
+        return void 0;
+      }
+      get referrerPolicy() {
+        return this[INTERNALS3].referrerPolicy;
+      }
+      set referrerPolicy(referrerPolicy) {
+        this[INTERNALS3].referrerPolicy = validateReferrerPolicy(referrerPolicy);
+      }
+      /**
+       * Clone this request
+       *
+       * @return  Request
+       */
+      clone() {
+        return new _Request(this);
+      }
+      get [Symbol.toStringTag]() {
+        return "Request";
+      }
+    };
+    Object.defineProperties(Request2.prototype, {
+      method: { enumerable: true },
+      url: { enumerable: true },
+      headers: { enumerable: true },
+      redirect: { enumerable: true },
+      clone: { enumerable: true },
+      signal: { enumerable: true },
+      referrer: { enumerable: true },
+      referrerPolicy: { enumerable: true }
+    });
+    getNodeRequestOptions = (request) => {
+      const { parsedURL } = request[INTERNALS3];
+      const headers = new Headers2(request[INTERNALS3].headers);
+      if (!headers.has("Accept")) {
+        headers.set("Accept", "*/*");
+      }
+      let contentLengthValue = null;
+      if (request.body === null && /^(post|put)$/i.test(request.method)) {
+        contentLengthValue = "0";
+      }
+      if (request.body !== null) {
+        const totalBytes = getTotalBytes(request);
+        if (typeof totalBytes === "number" && !Number.isNaN(totalBytes)) {
+          contentLengthValue = String(totalBytes);
+        }
+      }
+      if (contentLengthValue) {
+        headers.set("Content-Length", contentLengthValue);
+      }
+      if (request.referrerPolicy === "") {
+        request.referrerPolicy = DEFAULT_REFERRER_POLICY;
+      }
+      if (request.referrer && request.referrer !== "no-referrer") {
+        request[INTERNALS3].referrer = determineRequestsReferrer(request);
+      } else {
+        request[INTERNALS3].referrer = "no-referrer";
+      }
+      if (request[INTERNALS3].referrer instanceof URL) {
+        headers.set("Referer", request.referrer);
+      }
+      if (!headers.has("User-Agent")) {
+        headers.set("User-Agent", "node-fetch");
+      }
+      if (request.compress && !headers.has("Accept-Encoding")) {
+        headers.set("Accept-Encoding", "gzip, deflate, br");
+      }
+      let { agent } = request;
+      if (typeof agent === "function") {
+        agent = agent(parsedURL);
+      }
+      const search = getSearch(parsedURL);
+      const options = {
+        // Overwrite search to retain trailing ? (issue #776)
+        path: parsedURL.pathname + search,
+        // The following options are not expressed in the URL
+        method: request.method,
+        headers: headers[/* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom")](),
+        insecureHTTPParser: request.insecureHTTPParser,
+        agent
+      };
+      return {
+        /** @type {URL} */
+        parsedURL,
+        options
+      };
+    };
+  }
+});
+
+// ../../node_modules/node-fetch/src/errors/abort-error.js
+var AbortError;
+var init_abort_error = __esm({
+  "../../node_modules/node-fetch/src/errors/abort-error.js"() {
+    init_base();
+    AbortError = class extends FetchBaseError {
+      constructor(message, type2 = "aborted") {
+        super(message, type2);
+      }
+    };
+  }
+});
+
+// ../../node_modules/node-fetch/src/index.js
+async function fetch2(url2, options_) {
+  return new Promise((resolve, reject) => {
+    const request = new Request2(url2, options_);
+    const { parsedURL, options } = getNodeRequestOptions(request);
+    if (!supportedSchemas.has(parsedURL.protocol)) {
+      throw new TypeError(`node-fetch cannot load ${url2}. URL scheme "${parsedURL.protocol.replace(/:$/, "")}" is not supported.`);
+    }
+    if (parsedURL.protocol === "data:") {
+      const data = dist_default(request.url);
+      const response2 = new Response2(data, { headers: { "Content-Type": data.typeFull } });
+      resolve(response2);
+      return;
+    }
+    const send = (parsedURL.protocol === "https:" ? import_node_https.default : import_node_http2.default).request;
+    const { signal } = request;
+    let response = null;
+    const abort = () => {
+      const error48 = new AbortError("The operation was aborted.");
+      reject(error48);
+      if (request.body && request.body instanceof import_node_stream2.default.Readable) {
+        request.body.destroy(error48);
+      }
+      if (!response || !response.body) {
+        return;
+      }
+      response.body.emit("error", error48);
+    };
+    if (signal && signal.aborted) {
+      abort();
+      return;
+    }
+    const abortAndFinalize = () => {
+      abort();
+      finalize2();
+    };
+    const request_ = send(parsedURL.toString(), options);
+    if (signal) {
+      signal.addEventListener("abort", abortAndFinalize);
+    }
+    const finalize2 = () => {
+      request_.abort();
+      if (signal) {
+        signal.removeEventListener("abort", abortAndFinalize);
+      }
+    };
+    request_.on("error", (error48) => {
+      reject(new FetchError(`request to ${request.url} failed, reason: ${error48.message}`, "system", error48));
+      finalize2();
+    });
+    fixResponseChunkedTransferBadEnding(request_, (error48) => {
+      if (response && response.body) {
+        response.body.destroy(error48);
+      }
+    });
+    if (process.version < "v14") {
+      request_.on("socket", (s2) => {
+        let endedWithEventsCount;
+        s2.prependListener("end", () => {
+          endedWithEventsCount = s2._eventsCount;
+        });
+        s2.prependListener("close", (hadError) => {
+          if (response && endedWithEventsCount < s2._eventsCount && !hadError) {
+            const error48 = new Error("Premature close");
+            error48.code = "ERR_STREAM_PREMATURE_CLOSE";
+            response.body.emit("error", error48);
+          }
+        });
+      });
+    }
+    request_.on("response", (response_) => {
+      request_.setTimeout(0);
+      const headers = fromRawHeaders(response_.rawHeaders);
+      if (isRedirect(response_.statusCode)) {
+        const location = headers.get("Location");
+        let locationURL = null;
+        try {
+          locationURL = location === null ? null : new URL(location, request.url);
+        } catch {
+          if (request.redirect !== "manual") {
+            reject(new FetchError(`uri requested responds with an invalid redirect URL: ${location}`, "invalid-redirect"));
+            finalize2();
+            return;
+          }
+        }
+        switch (request.redirect) {
+          case "error":
+            reject(new FetchError(`uri requested responds with a redirect, redirect mode is set to error: ${request.url}`, "no-redirect"));
+            finalize2();
+            return;
+          case "manual":
+            break;
+          case "follow": {
+            if (locationURL === null) {
+              break;
+            }
+            if (request.counter >= request.follow) {
+              reject(new FetchError(`maximum redirect reached at: ${request.url}`, "max-redirect"));
+              finalize2();
+              return;
+            }
+            const requestOptions = {
+              headers: new Headers2(request.headers),
+              follow: request.follow,
+              counter: request.counter + 1,
+              agent: request.agent,
+              compress: request.compress,
+              method: request.method,
+              body: clone(request),
+              signal: request.signal,
+              size: request.size,
+              referrer: request.referrer,
+              referrerPolicy: request.referrerPolicy
+            };
+            if (!isDomainOrSubdomain(request.url, locationURL) || !isSameProtocol(request.url, locationURL)) {
+              for (const name2 of ["authorization", "www-authenticate", "cookie", "cookie2"]) {
+                requestOptions.headers.delete(name2);
+              }
+            }
+            if (response_.statusCode !== 303 && request.body && options_.body instanceof import_node_stream2.default.Readable) {
+              reject(new FetchError("Cannot follow redirect with body being a readable stream", "unsupported-redirect"));
+              finalize2();
+              return;
+            }
+            if (response_.statusCode === 303 || (response_.statusCode === 301 || response_.statusCode === 302) && request.method === "POST") {
+              requestOptions.method = "GET";
+              requestOptions.body = void 0;
+              requestOptions.headers.delete("content-length");
+            }
+            const responseReferrerPolicy = parseReferrerPolicyFromHeader(headers);
+            if (responseReferrerPolicy) {
+              requestOptions.referrerPolicy = responseReferrerPolicy;
+            }
+            resolve(fetch2(new Request2(locationURL, requestOptions)));
+            finalize2();
+            return;
+          }
+          default:
+            return reject(new TypeError(`Redirect option '${request.redirect}' is not a valid value of RequestRedirect`));
+        }
+      }
+      if (signal) {
+        response_.once("end", () => {
+          signal.removeEventListener("abort", abortAndFinalize);
+        });
+      }
+      let body = (0, import_node_stream2.pipeline)(response_, new import_node_stream2.PassThrough(), (error48) => {
+        if (error48) {
+          reject(error48);
+        }
+      });
+      if (process.version < "v12.10") {
+        response_.on("aborted", abortAndFinalize);
+      }
+      const responseOptions = {
+        url: request.url,
+        status: response_.statusCode,
+        statusText: response_.statusMessage,
+        headers,
+        size: request.size,
+        counter: request.counter,
+        highWaterMark: request.highWaterMark
+      };
+      const codings = headers.get("Content-Encoding");
+      if (!request.compress || request.method === "HEAD" || codings === null || response_.statusCode === 204 || response_.statusCode === 304) {
+        response = new Response2(body, responseOptions);
+        resolve(response);
+        return;
+      }
+      const zlibOptions = {
+        flush: import_node_zlib.default.Z_SYNC_FLUSH,
+        finishFlush: import_node_zlib.default.Z_SYNC_FLUSH
+      };
+      if (codings === "gzip" || codings === "x-gzip") {
+        body = (0, import_node_stream2.pipeline)(body, import_node_zlib.default.createGunzip(zlibOptions), (error48) => {
+          if (error48) {
+            reject(error48);
+          }
+        });
+        response = new Response2(body, responseOptions);
+        resolve(response);
+        return;
+      }
+      if (codings === "deflate" || codings === "x-deflate") {
+        const raw = (0, import_node_stream2.pipeline)(response_, new import_node_stream2.PassThrough(), (error48) => {
+          if (error48) {
+            reject(error48);
+          }
+        });
+        raw.once("data", (chunk) => {
+          if ((chunk[0] & 15) === 8) {
+            body = (0, import_node_stream2.pipeline)(body, import_node_zlib.default.createInflate(), (error48) => {
+              if (error48) {
+                reject(error48);
+              }
+            });
+          } else {
+            body = (0, import_node_stream2.pipeline)(body, import_node_zlib.default.createInflateRaw(), (error48) => {
+              if (error48) {
+                reject(error48);
+              }
+            });
+          }
+          response = new Response2(body, responseOptions);
+          resolve(response);
+        });
+        raw.once("end", () => {
+          if (!response) {
+            response = new Response2(body, responseOptions);
+            resolve(response);
+          }
+        });
+        return;
+      }
+      if (codings === "br") {
+        body = (0, import_node_stream2.pipeline)(body, import_node_zlib.default.createBrotliDecompress(), (error48) => {
+          if (error48) {
+            reject(error48);
+          }
+        });
+        response = new Response2(body, responseOptions);
+        resolve(response);
+        return;
+      }
+      response = new Response2(body, responseOptions);
+      resolve(response);
+    });
+    writeToStream(request_, request).catch(reject);
+  });
+}
+function fixResponseChunkedTransferBadEnding(request, errorCallback) {
+  const LAST_CHUNK = import_node_buffer2.Buffer.from("0\r\n\r\n");
+  let isChunkedTransfer = false;
+  let properLastChunkReceived = false;
+  let previousChunk;
+  request.on("response", (response) => {
+    const { headers } = response;
+    isChunkedTransfer = headers["transfer-encoding"] === "chunked" && !headers["content-length"];
+  });
+  request.on("socket", (socket) => {
+    const onSocketClose = () => {
+      if (isChunkedTransfer && !properLastChunkReceived) {
+        const error48 = new Error("Premature close");
+        error48.code = "ERR_STREAM_PREMATURE_CLOSE";
+        errorCallback(error48);
+      }
+    };
+    const onData = (buf) => {
+      properLastChunkReceived = import_node_buffer2.Buffer.compare(buf.slice(-5), LAST_CHUNK) === 0;
+      if (!properLastChunkReceived && previousChunk) {
+        properLastChunkReceived = import_node_buffer2.Buffer.compare(previousChunk.slice(-3), LAST_CHUNK.slice(0, 3)) === 0 && import_node_buffer2.Buffer.compare(buf.slice(-2), LAST_CHUNK.slice(3)) === 0;
+      }
+      previousChunk = buf;
+    };
+    socket.prependListener("close", onSocketClose);
+    socket.on("data", onData);
+    request.on("close", () => {
+      socket.removeListener("close", onSocketClose);
+      socket.removeListener("data", onData);
+    });
+  });
+}
+var import_node_http2, import_node_https, import_node_zlib, import_node_stream2, import_node_buffer2, supportedSchemas;
+var init_src = __esm({
+  "../../node_modules/node-fetch/src/index.js"() {
+    import_node_http2 = __toESM(require("node:http"), 1);
+    import_node_https = __toESM(require("node:https"), 1);
+    import_node_zlib = __toESM(require("node:zlib"), 1);
+    import_node_stream2 = __toESM(require("node:stream"), 1);
+    import_node_buffer2 = require("node:buffer");
+    init_dist();
+    init_body();
+    init_response();
+    init_headers();
+    init_request();
+    init_fetch_error();
+    init_abort_error();
+    init_is_redirect();
+    init_esm_min();
+    init_is();
+    init_referrer();
+    init_from();
+    supportedSchemas = /* @__PURE__ */ new Set(["data:", "http:", "https:"]);
   }
 });
 
@@ -285513,9 +286876,7 @@ var init_package = __esm({
                   (buffer) => (0, import_rxjs12.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
                     (0, import_operators11.catchError)(() => (0, import_rxjs12.of)(true)),
                     (0, import_operators11.switchMap)(
-                      () => (0, import_util3.promisify)(import_fs3.writeFile)(`.gcache/${data.name}.zip`, buffer, {
-                        encoding: "utf-8"
-                      })
+                      () => (0, import_util3.promisify)(import_fs3.writeFile)(`.gcache/${data.name}.zip`, buffer)
                     )
                   )
                 )
@@ -285544,6 +286905,7 @@ var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
     import_fs4 = require("fs");
+    init_src();
     import_rxjs13 = __toESM(require_cjs());
     import_operators12 = __toESM(require_operators());
     import_stream_to_buffer = __toESM(require_stream_to_buffer());
@@ -285578,7 +286940,7 @@ var init_helpers2 = __esm({
           const config2 = await (0, import_rxjs13.lastValueFrom)(GraphqlClienAPI.getConfig());
           return (0, import_rxjs13.lastValueFrom)(
             (0, import_rxjs13.from)(
-              fetch(config2.uploadUrl, {
+              fetch2(config2.uploadUrl, {
                 method: "POST",
                 body,
                 headers: {
@@ -296176,7 +297538,7 @@ function is_default() {
   };
 }
 var error20;
-var init_is = __esm({
+var init_is2 = __esm({
   "../../node_modules/zod/v4/locales/is.js"() {
     init_util2();
     error20 = () => {
@@ -299651,7 +301013,7 @@ var init_locales = __esm({
     init_hu();
     init_hy();
     init_id();
-    init_is();
+    init_is2();
     init_it();
     init_ja();
     init_ka();
@@ -315841,7 +317203,7 @@ function splitLines(chunk) {
   return [lines, incompleteLine];
 }
 var ParseError;
-var init_dist = __esm({
+var init_dist2 = __esm({
   "../../node_modules/eventsource-parser/dist/index.js"() {
     ParseError = class extends Error {
       constructor(message, options) {
@@ -315855,7 +317217,7 @@ var init_dist = __esm({
 var EventSourceParserStream;
 var init_stream = __esm({
   "../../node_modules/eventsource-parser/dist/stream.js"() {
-    init_dist();
+    init_dist2();
     EventSourceParserStream = class extends TransformStream {
       constructor({ onError, onRetry, onComment } = {}) {
         let parser;
@@ -317311,1287 +318673,7 @@ var import_node_os = __toESM(require("node:os"));
 var import_node_path = __toESM(require("node:path"));
 var import_node_sea = require("node:sea");
 var import_commander = __toESM(require_commander());
-
-// ../../node_modules/node-fetch/src/index.js
-var import_node_http2 = __toESM(require("node:http"), 1);
-var import_node_https = __toESM(require("node:https"), 1);
-var import_node_zlib = __toESM(require("node:zlib"), 1);
-var import_node_stream2 = __toESM(require("node:stream"), 1);
-var import_node_buffer2 = require("node:buffer");
-
-// ../../node_modules/data-uri-to-buffer/dist/index.js
-function dataUriToBuffer(uri) {
-  if (!/^data:/i.test(uri)) {
-    throw new TypeError('`uri` does not appear to be a Data URI (must begin with "data:")');
-  }
-  uri = uri.replace(/\r?\n/g, "");
-  const firstComma = uri.indexOf(",");
-  if (firstComma === -1 || firstComma <= 4) {
-    throw new TypeError("malformed data: URI");
-  }
-  const meta3 = uri.substring(5, firstComma).split(";");
-  let charset = "";
-  let base643 = false;
-  const type2 = meta3[0] || "text/plain";
-  let typeFull = type2;
-  for (let i2 = 1; i2 < meta3.length; i2++) {
-    if (meta3[i2] === "base64") {
-      base643 = true;
-    } else if (meta3[i2]) {
-      typeFull += `;${meta3[i2]}`;
-      if (meta3[i2].indexOf("charset=") === 0) {
-        charset = meta3[i2].substring(8);
-      }
-    }
-  }
-  if (!meta3[0] && !charset.length) {
-    typeFull += ";charset=US-ASCII";
-    charset = "US-ASCII";
-  }
-  const encoding = base643 ? "base64" : "ascii";
-  const data = unescape(uri.substring(firstComma + 1));
-  const buffer = Buffer.from(data, encoding);
-  buffer.type = type2;
-  buffer.typeFull = typeFull;
-  buffer.charset = charset;
-  return buffer;
-}
-var dist_default = dataUriToBuffer;
-
-// ../../node_modules/node-fetch/src/body.js
-var import_node_stream = __toESM(require("node:stream"), 1);
-var import_node_util = require("node:util");
-var import_node_buffer = require("node:buffer");
-init_fetch_blob();
-init_esm_min();
-
-// ../../node_modules/node-fetch/src/errors/base.js
-var FetchBaseError = class extends Error {
-  constructor(message, type2) {
-    super(message);
-    Error.captureStackTrace(this, this.constructor);
-    this.type = type2;
-  }
-  get name() {
-    return this.constructor.name;
-  }
-  get [Symbol.toStringTag]() {
-    return this.constructor.name;
-  }
-};
-
-// ../../node_modules/node-fetch/src/errors/fetch-error.js
-var FetchError = class extends FetchBaseError {
-  /**
-   * @param  {string} message -      Error message for human
-   * @param  {string} [type] -        Error type for machine
-   * @param  {SystemError} [systemError] - For Node.js system error
-   */
-  constructor(message, type2, systemError) {
-    super(message, type2);
-    if (systemError) {
-      this.code = this.errno = systemError.code;
-      this.erroredSysCall = systemError.syscall;
-    }
-  }
-};
-
-// ../../node_modules/node-fetch/src/utils/is.js
-var NAME = Symbol.toStringTag;
-var isURLSearchParameters = (object3) => {
-  return typeof object3 === "object" && typeof object3.append === "function" && typeof object3.delete === "function" && typeof object3.get === "function" && typeof object3.getAll === "function" && typeof object3.has === "function" && typeof object3.set === "function" && typeof object3.sort === "function" && object3[NAME] === "URLSearchParams";
-};
-var isBlob = (object3) => {
-  return object3 && typeof object3 === "object" && typeof object3.arrayBuffer === "function" && typeof object3.type === "string" && typeof object3.stream === "function" && typeof object3.constructor === "function" && /^(Blob|File)$/.test(object3[NAME]);
-};
-var isAbortSignal = (object3) => {
-  return typeof object3 === "object" && (object3[NAME] === "AbortSignal" || object3[NAME] === "EventTarget");
-};
-var isDomainOrSubdomain = (destination, original) => {
-  const orig = new URL(original).hostname;
-  const dest = new URL(destination).hostname;
-  return orig === dest || orig.endsWith(`.${dest}`);
-};
-var isSameProtocol = (destination, original) => {
-  const orig = new URL(original).protocol;
-  const dest = new URL(destination).protocol;
-  return orig === dest;
-};
-
-// ../../node_modules/node-fetch/src/body.js
-var pipeline = (0, import_node_util.promisify)(import_node_stream.default.pipeline);
-var INTERNALS = /* @__PURE__ */ Symbol("Body internals");
-var Body = class {
-  constructor(body, {
-    size = 0
-  } = {}) {
-    let boundary = null;
-    if (body === null) {
-      body = null;
-    } else if (isURLSearchParameters(body)) {
-      body = import_node_buffer.Buffer.from(body.toString());
-    } else if (isBlob(body)) {
-    } else if (import_node_buffer.Buffer.isBuffer(body)) {
-    } else if (import_node_util.types.isAnyArrayBuffer(body)) {
-      body = import_node_buffer.Buffer.from(body);
-    } else if (ArrayBuffer.isView(body)) {
-      body = import_node_buffer.Buffer.from(body.buffer, body.byteOffset, body.byteLength);
-    } else if (body instanceof import_node_stream.default) {
-    } else if (body instanceof FormData) {
-      body = formDataToBlob(body);
-      boundary = body.type.split("=")[1];
-    } else {
-      body = import_node_buffer.Buffer.from(String(body));
-    }
-    let stream = body;
-    if (import_node_buffer.Buffer.isBuffer(body)) {
-      stream = import_node_stream.default.Readable.from(body);
-    } else if (isBlob(body)) {
-      stream = import_node_stream.default.Readable.from(body.stream());
-    }
-    this[INTERNALS] = {
-      body,
-      stream,
-      boundary,
-      disturbed: false,
-      error: null
-    };
-    this.size = size;
-    if (body instanceof import_node_stream.default) {
-      body.on("error", (error_) => {
-        const error48 = error_ instanceof FetchBaseError ? error_ : new FetchError(`Invalid response body while trying to fetch ${this.url}: ${error_.message}`, "system", error_);
-        this[INTERNALS].error = error48;
-      });
-    }
-  }
-  get body() {
-    return this[INTERNALS].stream;
-  }
-  get bodyUsed() {
-    return this[INTERNALS].disturbed;
-  }
-  /**
-   * Decode response as ArrayBuffer
-   *
-   * @return  Promise
-   */
-  async arrayBuffer() {
-    const { buffer, byteOffset, byteLength } = await consumeBody(this);
-    return buffer.slice(byteOffset, byteOffset + byteLength);
-  }
-  async formData() {
-    const ct = this.headers.get("content-type");
-    if (ct.startsWith("application/x-www-form-urlencoded")) {
-      const formData = new FormData();
-      const parameters = new URLSearchParams(await this.text());
-      for (const [name2, value] of parameters) {
-        formData.append(name2, value);
-      }
-      return formData;
-    }
-    const { toFormData: toFormData2 } = await Promise.resolve().then(() => (init_multipart_parser(), multipart_parser_exports));
-    return toFormData2(this.body, ct);
-  }
-  /**
-   * Return raw response as Blob
-   *
-   * @return Promise
-   */
-  async blob() {
-    const ct = this.headers && this.headers.get("content-type") || this[INTERNALS].body && this[INTERNALS].body.type || "";
-    const buf = await this.arrayBuffer();
-    return new fetch_blob_default([buf], {
-      type: ct
-    });
-  }
-  /**
-   * Decode response as json
-   *
-   * @return  Promise
-   */
-  async json() {
-    const text = await this.text();
-    return JSON.parse(text);
-  }
-  /**
-   * Decode response as text
-   *
-   * @return  Promise
-   */
-  async text() {
-    const buffer = await consumeBody(this);
-    return new TextDecoder().decode(buffer);
-  }
-  /**
-   * Decode response as buffer (non-spec api)
-   *
-   * @return  Promise
-   */
-  buffer() {
-    return consumeBody(this);
-  }
-};
-Body.prototype.buffer = (0, import_node_util.deprecate)(Body.prototype.buffer, "Please use 'response.arrayBuffer()' instead of 'response.buffer()'", "node-fetch#buffer");
-Object.defineProperties(Body.prototype, {
-  body: { enumerable: true },
-  bodyUsed: { enumerable: true },
-  arrayBuffer: { enumerable: true },
-  blob: { enumerable: true },
-  json: { enumerable: true },
-  text: { enumerable: true },
-  data: { get: (0, import_node_util.deprecate)(
-    () => {
-    },
-    "data doesn't exist, use json(), text(), arrayBuffer(), or body instead",
-    "https://github.com/node-fetch/node-fetch/issues/1000 (response)"
-  ) }
-});
-async function consumeBody(data) {
-  if (data[INTERNALS].disturbed) {
-    throw new TypeError(`body used already for: ${data.url}`);
-  }
-  data[INTERNALS].disturbed = true;
-  if (data[INTERNALS].error) {
-    throw data[INTERNALS].error;
-  }
-  const { body } = data;
-  if (body === null) {
-    return import_node_buffer.Buffer.alloc(0);
-  }
-  if (!(body instanceof import_node_stream.default)) {
-    return import_node_buffer.Buffer.alloc(0);
-  }
-  const accum = [];
-  let accumBytes = 0;
-  try {
-    for await (const chunk of body) {
-      if (data.size > 0 && accumBytes + chunk.length > data.size) {
-        const error48 = new FetchError(`content size at ${data.url} over limit: ${data.size}`, "max-size");
-        body.destroy(error48);
-        throw error48;
-      }
-      accumBytes += chunk.length;
-      accum.push(chunk);
-    }
-  } catch (error48) {
-    const error_ = error48 instanceof FetchBaseError ? error48 : new FetchError(`Invalid response body while trying to fetch ${data.url}: ${error48.message}`, "system", error48);
-    throw error_;
-  }
-  if (body.readableEnded === true || body._readableState.ended === true) {
-    try {
-      if (accum.every((c) => typeof c === "string")) {
-        return import_node_buffer.Buffer.from(accum.join(""));
-      }
-      return import_node_buffer.Buffer.concat(accum, accumBytes);
-    } catch (error48) {
-      throw new FetchError(`Could not create Buffer from response body for ${data.url}: ${error48.message}`, "system", error48);
-    }
-  } else {
-    throw new FetchError(`Premature close of server response while trying to fetch ${data.url}`);
-  }
-}
-var clone = (instance, highWaterMark) => {
-  let p1;
-  let p2;
-  let { body } = instance[INTERNALS];
-  if (instance.bodyUsed) {
-    throw new Error("cannot clone body after it is used");
-  }
-  if (body instanceof import_node_stream.default && typeof body.getBoundary !== "function") {
-    p1 = new import_node_stream.PassThrough({ highWaterMark });
-    p2 = new import_node_stream.PassThrough({ highWaterMark });
-    body.pipe(p1);
-    body.pipe(p2);
-    instance[INTERNALS].stream = p1;
-    body = p2;
-  }
-  return body;
-};
-var getNonSpecFormDataBoundary = (0, import_node_util.deprecate)(
-  (body) => body.getBoundary(),
-  "form-data doesn't follow the spec and requires special treatment. Use alternative package",
-  "https://github.com/node-fetch/node-fetch/issues/1167"
-);
-var extractContentType = (body, request) => {
-  if (body === null) {
-    return null;
-  }
-  if (typeof body === "string") {
-    return "text/plain;charset=UTF-8";
-  }
-  if (isURLSearchParameters(body)) {
-    return "application/x-www-form-urlencoded;charset=UTF-8";
-  }
-  if (isBlob(body)) {
-    return body.type || null;
-  }
-  if (import_node_buffer.Buffer.isBuffer(body) || import_node_util.types.isAnyArrayBuffer(body) || ArrayBuffer.isView(body)) {
-    return null;
-  }
-  if (body instanceof FormData) {
-    return `multipart/form-data; boundary=${request[INTERNALS].boundary}`;
-  }
-  if (body && typeof body.getBoundary === "function") {
-    return `multipart/form-data;boundary=${getNonSpecFormDataBoundary(body)}`;
-  }
-  if (body instanceof import_node_stream.default) {
-    return null;
-  }
-  return "text/plain;charset=UTF-8";
-};
-var getTotalBytes = (request) => {
-  const { body } = request[INTERNALS];
-  if (body === null) {
-    return 0;
-  }
-  if (isBlob(body)) {
-    return body.size;
-  }
-  if (import_node_buffer.Buffer.isBuffer(body)) {
-    return body.length;
-  }
-  if (body && typeof body.getLengthSync === "function") {
-    return body.hasKnownLength && body.hasKnownLength() ? body.getLengthSync() : null;
-  }
-  return null;
-};
-var writeToStream = async (dest, { body }) => {
-  if (body === null) {
-    dest.end();
-  } else {
-    await pipeline(body, dest);
-  }
-};
-
-// ../../node_modules/node-fetch/src/headers.js
-var import_node_util2 = require("node:util");
-var import_node_http = __toESM(require("node:http"), 1);
-var validateHeaderName = typeof import_node_http.default.validateHeaderName === "function" ? import_node_http.default.validateHeaderName : (name2) => {
-  if (!/^[\^`\-\w!#$%&'*+.|~]+$/.test(name2)) {
-    const error48 = new TypeError(`Header name must be a valid HTTP token [${name2}]`);
-    Object.defineProperty(error48, "code", { value: "ERR_INVALID_HTTP_TOKEN" });
-    throw error48;
-  }
-};
-var validateHeaderValue = typeof import_node_http.default.validateHeaderValue === "function" ? import_node_http.default.validateHeaderValue : (name2, value) => {
-  if (/[^\t\u0020-\u007E\u0080-\u00FF]/.test(value)) {
-    const error48 = new TypeError(`Invalid character in header content ["${name2}"]`);
-    Object.defineProperty(error48, "code", { value: "ERR_INVALID_CHAR" });
-    throw error48;
-  }
-};
-var Headers2 = class _Headers extends URLSearchParams {
-  /**
-   * Headers class
-   *
-   * @constructor
-   * @param {HeadersInit} [init] - Response headers
-   */
-  constructor(init) {
-    let result = [];
-    if (init instanceof _Headers) {
-      const raw = init.raw();
-      for (const [name2, values] of Object.entries(raw)) {
-        result.push(...values.map((value) => [name2, value]));
-      }
-    } else if (init == null) {
-    } else if (typeof init === "object" && !import_node_util2.types.isBoxedPrimitive(init)) {
-      const method = init[Symbol.iterator];
-      if (method == null) {
-        result.push(...Object.entries(init));
-      } else {
-        if (typeof method !== "function") {
-          throw new TypeError("Header pairs must be iterable");
-        }
-        result = [...init].map((pair) => {
-          if (typeof pair !== "object" || import_node_util2.types.isBoxedPrimitive(pair)) {
-            throw new TypeError("Each header pair must be an iterable object");
-          }
-          return [...pair];
-        }).map((pair) => {
-          if (pair.length !== 2) {
-            throw new TypeError("Each header pair must be a name/value tuple");
-          }
-          return [...pair];
-        });
-      }
-    } else {
-      throw new TypeError("Failed to construct 'Headers': The provided value is not of type '(sequence<sequence<ByteString>> or record<ByteString, ByteString>)");
-    }
-    result = result.length > 0 ? result.map(([name2, value]) => {
-      validateHeaderName(name2);
-      validateHeaderValue(name2, String(value));
-      return [String(name2).toLowerCase(), String(value)];
-    }) : void 0;
-    super(result);
-    return new Proxy(this, {
-      get(target, p, receiver) {
-        switch (p) {
-          case "append":
-          case "set":
-            return (name2, value) => {
-              validateHeaderName(name2);
-              validateHeaderValue(name2, String(value));
-              return URLSearchParams.prototype[p].call(
-                target,
-                String(name2).toLowerCase(),
-                String(value)
-              );
-            };
-          case "delete":
-          case "has":
-          case "getAll":
-            return (name2) => {
-              validateHeaderName(name2);
-              return URLSearchParams.prototype[p].call(
-                target,
-                String(name2).toLowerCase()
-              );
-            };
-          case "keys":
-            return () => {
-              target.sort();
-              return new Set(URLSearchParams.prototype.keys.call(target)).keys();
-            };
-          default:
-            return Reflect.get(target, p, receiver);
-        }
-      }
-    });
-  }
-  get [Symbol.toStringTag]() {
-    return this.constructor.name;
-  }
-  toString() {
-    return Object.prototype.toString.call(this);
-  }
-  get(name2) {
-    const values = this.getAll(name2);
-    if (values.length === 0) {
-      return null;
-    }
-    let value = values.join(", ");
-    if (/^content-encoding$/i.test(name2)) {
-      value = value.toLowerCase();
-    }
-    return value;
-  }
-  forEach(callback, thisArg = void 0) {
-    for (const name2 of this.keys()) {
-      Reflect.apply(callback, thisArg, [this.get(name2), name2, this]);
-    }
-  }
-  *values() {
-    for (const name2 of this.keys()) {
-      yield this.get(name2);
-    }
-  }
-  /**
-   * @type {() => IterableIterator<[string, string]>}
-   */
-  *entries() {
-    for (const name2 of this.keys()) {
-      yield [name2, this.get(name2)];
-    }
-  }
-  [Symbol.iterator]() {
-    return this.entries();
-  }
-  /**
-   * Node-fetch non-spec method
-   * returning all headers and their values as array
-   * @returns {Record<string, string[]>}
-   */
-  raw() {
-    return [...this.keys()].reduce((result, key) => {
-      result[key] = this.getAll(key);
-      return result;
-    }, {});
-  }
-  /**
-   * For better console.log(headers) and also to convert Headers into Node.js Request compatible format
-   */
-  [/* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom")]() {
-    return [...this.keys()].reduce((result, key) => {
-      const values = this.getAll(key);
-      if (key === "host") {
-        result[key] = values[0];
-      } else {
-        result[key] = values.length > 1 ? values : values[0];
-      }
-      return result;
-    }, {});
-  }
-};
-Object.defineProperties(
-  Headers2.prototype,
-  ["get", "entries", "forEach", "values"].reduce((result, property) => {
-    result[property] = { enumerable: true };
-    return result;
-  }, {})
-);
-function fromRawHeaders(headers = []) {
-  return new Headers2(
-    headers.reduce((result, value, index, array2) => {
-      if (index % 2 === 0) {
-        result.push(array2.slice(index, index + 2));
-      }
-      return result;
-    }, []).filter(([name2, value]) => {
-      try {
-        validateHeaderName(name2);
-        validateHeaderValue(name2, String(value));
-        return true;
-      } catch {
-        return false;
-      }
-    })
-  );
-}
-
-// ../../node_modules/node-fetch/src/utils/is-redirect.js
-var redirectStatus = /* @__PURE__ */ new Set([301, 302, 303, 307, 308]);
-var isRedirect = (code) => {
-  return redirectStatus.has(code);
-};
-
-// ../../node_modules/node-fetch/src/response.js
-var INTERNALS2 = /* @__PURE__ */ Symbol("Response internals");
-var Response2 = class _Response extends Body {
-  constructor(body = null, options = {}) {
-    super(body, options);
-    const status = options.status != null ? options.status : 200;
-    const headers = new Headers2(options.headers);
-    if (body !== null && !headers.has("Content-Type")) {
-      const contentType = extractContentType(body, this);
-      if (contentType) {
-        headers.append("Content-Type", contentType);
-      }
-    }
-    this[INTERNALS2] = {
-      type: "default",
-      url: options.url,
-      status,
-      statusText: options.statusText || "",
-      headers,
-      counter: options.counter,
-      highWaterMark: options.highWaterMark
-    };
-  }
-  get type() {
-    return this[INTERNALS2].type;
-  }
-  get url() {
-    return this[INTERNALS2].url || "";
-  }
-  get status() {
-    return this[INTERNALS2].status;
-  }
-  /**
-   * Convenience property representing if the request ended normally
-   */
-  get ok() {
-    return this[INTERNALS2].status >= 200 && this[INTERNALS2].status < 300;
-  }
-  get redirected() {
-    return this[INTERNALS2].counter > 0;
-  }
-  get statusText() {
-    return this[INTERNALS2].statusText;
-  }
-  get headers() {
-    return this[INTERNALS2].headers;
-  }
-  get highWaterMark() {
-    return this[INTERNALS2].highWaterMark;
-  }
-  /**
-   * Clone this response
-   *
-   * @return  Response
-   */
-  clone() {
-    return new _Response(clone(this, this.highWaterMark), {
-      type: this.type,
-      url: this.url,
-      status: this.status,
-      statusText: this.statusText,
-      headers: this.headers,
-      ok: this.ok,
-      redirected: this.redirected,
-      size: this.size,
-      highWaterMark: this.highWaterMark
-    });
-  }
-  /**
-   * @param {string} url    The URL that the new response is to originate from.
-   * @param {number} status An optional status code for the response (e.g., 302.)
-   * @returns {Response}    A Response object.
-   */
-  static redirect(url2, status = 302) {
-    if (!isRedirect(status)) {
-      throw new RangeError('Failed to execute "redirect" on "response": Invalid status code');
-    }
-    return new _Response(null, {
-      headers: {
-        location: new URL(url2).toString()
-      },
-      status
-    });
-  }
-  static error() {
-    const response = new _Response(null, { status: 0, statusText: "" });
-    response[INTERNALS2].type = "error";
-    return response;
-  }
-  static json(data = void 0, init = {}) {
-    const body = JSON.stringify(data);
-    if (body === void 0) {
-      throw new TypeError("data is not JSON serializable");
-    }
-    const headers = new Headers2(init && init.headers);
-    if (!headers.has("content-type")) {
-      headers.set("content-type", "application/json");
-    }
-    return new _Response(body, {
-      ...init,
-      headers
-    });
-  }
-  get [Symbol.toStringTag]() {
-    return "Response";
-  }
-};
-Object.defineProperties(Response2.prototype, {
-  type: { enumerable: true },
-  url: { enumerable: true },
-  status: { enumerable: true },
-  ok: { enumerable: true },
-  redirected: { enumerable: true },
-  statusText: { enumerable: true },
-  headers: { enumerable: true },
-  clone: { enumerable: true }
-});
-
-// ../../node_modules/node-fetch/src/request.js
-var import_node_url = require("node:url");
-var import_node_util3 = require("node:util");
-
-// ../../node_modules/node-fetch/src/utils/get-search.js
-var getSearch = (parsedURL) => {
-  if (parsedURL.search) {
-    return parsedURL.search;
-  }
-  const lastOffset = parsedURL.href.length - 1;
-  const hash2 = parsedURL.hash || (parsedURL.href[lastOffset] === "#" ? "#" : "");
-  return parsedURL.href[lastOffset - hash2.length] === "?" ? "?" : "";
-};
-
-// ../../node_modules/node-fetch/src/utils/referrer.js
-var import_node_net = require("node:net");
-function stripURLForUseAsAReferrer(url2, originOnly = false) {
-  if (url2 == null) {
-    return "no-referrer";
-  }
-  url2 = new URL(url2);
-  if (/^(about|blob|data):$/.test(url2.protocol)) {
-    return "no-referrer";
-  }
-  url2.username = "";
-  url2.password = "";
-  url2.hash = "";
-  if (originOnly) {
-    url2.pathname = "";
-    url2.search = "";
-  }
-  return url2;
-}
-var ReferrerPolicy = /* @__PURE__ */ new Set([
-  "",
-  "no-referrer",
-  "no-referrer-when-downgrade",
-  "same-origin",
-  "origin",
-  "strict-origin",
-  "origin-when-cross-origin",
-  "strict-origin-when-cross-origin",
-  "unsafe-url"
-]);
-var DEFAULT_REFERRER_POLICY = "strict-origin-when-cross-origin";
-function validateReferrerPolicy(referrerPolicy) {
-  if (!ReferrerPolicy.has(referrerPolicy)) {
-    throw new TypeError(`Invalid referrerPolicy: ${referrerPolicy}`);
-  }
-  return referrerPolicy;
-}
-function isOriginPotentiallyTrustworthy(url2) {
-  if (/^(http|ws)s:$/.test(url2.protocol)) {
-    return true;
-  }
-  const hostIp = url2.host.replace(/(^\[)|(]$)/g, "");
-  const hostIPVersion = (0, import_node_net.isIP)(hostIp);
-  if (hostIPVersion === 4 && /^127\./.test(hostIp)) {
-    return true;
-  }
-  if (hostIPVersion === 6 && /^(((0+:){7})|(::(0+:){0,6}))0*1$/.test(hostIp)) {
-    return true;
-  }
-  if (url2.host === "localhost" || url2.host.endsWith(".localhost")) {
-    return false;
-  }
-  if (url2.protocol === "file:") {
-    return true;
-  }
-  return false;
-}
-function isUrlPotentiallyTrustworthy(url2) {
-  if (/^about:(blank|srcdoc)$/.test(url2)) {
-    return true;
-  }
-  if (url2.protocol === "data:") {
-    return true;
-  }
-  if (/^(blob|filesystem):$/.test(url2.protocol)) {
-    return true;
-  }
-  return isOriginPotentiallyTrustworthy(url2);
-}
-function determineRequestsReferrer(request, { referrerURLCallback, referrerOriginCallback } = {}) {
-  if (request.referrer === "no-referrer" || request.referrerPolicy === "") {
-    return null;
-  }
-  const policy = request.referrerPolicy;
-  if (request.referrer === "about:client") {
-    return "no-referrer";
-  }
-  const referrerSource = request.referrer;
-  let referrerURL = stripURLForUseAsAReferrer(referrerSource);
-  let referrerOrigin = stripURLForUseAsAReferrer(referrerSource, true);
-  if (referrerURL.toString().length > 4096) {
-    referrerURL = referrerOrigin;
-  }
-  if (referrerURLCallback) {
-    referrerURL = referrerURLCallback(referrerURL);
-  }
-  if (referrerOriginCallback) {
-    referrerOrigin = referrerOriginCallback(referrerOrigin);
-  }
-  const currentURL = new URL(request.url);
-  switch (policy) {
-    case "no-referrer":
-      return "no-referrer";
-    case "origin":
-      return referrerOrigin;
-    case "unsafe-url":
-      return referrerURL;
-    case "strict-origin":
-      if (isUrlPotentiallyTrustworthy(referrerURL) && !isUrlPotentiallyTrustworthy(currentURL)) {
-        return "no-referrer";
-      }
-      return referrerOrigin.toString();
-    case "strict-origin-when-cross-origin":
-      if (referrerURL.origin === currentURL.origin) {
-        return referrerURL;
-      }
-      if (isUrlPotentiallyTrustworthy(referrerURL) && !isUrlPotentiallyTrustworthy(currentURL)) {
-        return "no-referrer";
-      }
-      return referrerOrigin;
-    case "same-origin":
-      if (referrerURL.origin === currentURL.origin) {
-        return referrerURL;
-      }
-      return "no-referrer";
-    case "origin-when-cross-origin":
-      if (referrerURL.origin === currentURL.origin) {
-        return referrerURL;
-      }
-      return referrerOrigin;
-    case "no-referrer-when-downgrade":
-      if (isUrlPotentiallyTrustworthy(referrerURL) && !isUrlPotentiallyTrustworthy(currentURL)) {
-        return "no-referrer";
-      }
-      return referrerURL;
-    default:
-      throw new TypeError(`Invalid referrerPolicy: ${policy}`);
-  }
-}
-function parseReferrerPolicyFromHeader(headers) {
-  const policyTokens = (headers.get("referrer-policy") || "").split(/[,\s]+/);
-  let policy = "";
-  for (const token of policyTokens) {
-    if (token && ReferrerPolicy.has(token)) {
-      policy = token;
-    }
-  }
-  return policy;
-}
-
-// ../../node_modules/node-fetch/src/request.js
-var INTERNALS3 = /* @__PURE__ */ Symbol("Request internals");
-var isRequest = (object3) => {
-  return typeof object3 === "object" && typeof object3[INTERNALS3] === "object";
-};
-var doBadDataWarn = (0, import_node_util3.deprecate)(
-  () => {
-  },
-  ".data is not a valid RequestInit property, use .body instead",
-  "https://github.com/node-fetch/node-fetch/issues/1000 (request)"
-);
-var Request2 = class _Request extends Body {
-  constructor(input, init = {}) {
-    let parsedURL;
-    if (isRequest(input)) {
-      parsedURL = new URL(input.url);
-    } else {
-      parsedURL = new URL(input);
-      input = {};
-    }
-    if (parsedURL.username !== "" || parsedURL.password !== "") {
-      throw new TypeError(`${parsedURL} is an url with embedded credentials.`);
-    }
-    let method = init.method || input.method || "GET";
-    if (/^(delete|get|head|options|post|put)$/i.test(method)) {
-      method = method.toUpperCase();
-    }
-    if (!isRequest(init) && "data" in init) {
-      doBadDataWarn();
-    }
-    if ((init.body != null || isRequest(input) && input.body !== null) && (method === "GET" || method === "HEAD")) {
-      throw new TypeError("Request with GET/HEAD method cannot have body");
-    }
-    const inputBody = init.body ? init.body : isRequest(input) && input.body !== null ? clone(input) : null;
-    super(inputBody, {
-      size: init.size || input.size || 0
-    });
-    const headers = new Headers2(init.headers || input.headers || {});
-    if (inputBody !== null && !headers.has("Content-Type")) {
-      const contentType = extractContentType(inputBody, this);
-      if (contentType) {
-        headers.set("Content-Type", contentType);
-      }
-    }
-    let signal = isRequest(input) ? input.signal : null;
-    if ("signal" in init) {
-      signal = init.signal;
-    }
-    if (signal != null && !isAbortSignal(signal)) {
-      throw new TypeError("Expected signal to be an instanceof AbortSignal or EventTarget");
-    }
-    let referrer = init.referrer == null ? input.referrer : init.referrer;
-    if (referrer === "") {
-      referrer = "no-referrer";
-    } else if (referrer) {
-      const parsedReferrer = new URL(referrer);
-      referrer = /^about:(\/\/)?client$/.test(parsedReferrer) ? "client" : parsedReferrer;
-    } else {
-      referrer = void 0;
-    }
-    this[INTERNALS3] = {
-      method,
-      redirect: init.redirect || input.redirect || "follow",
-      headers,
-      parsedURL,
-      signal,
-      referrer
-    };
-    this.follow = init.follow === void 0 ? input.follow === void 0 ? 20 : input.follow : init.follow;
-    this.compress = init.compress === void 0 ? input.compress === void 0 ? true : input.compress : init.compress;
-    this.counter = init.counter || input.counter || 0;
-    this.agent = init.agent || input.agent;
-    this.highWaterMark = init.highWaterMark || input.highWaterMark || 16384;
-    this.insecureHTTPParser = init.insecureHTTPParser || input.insecureHTTPParser || false;
-    this.referrerPolicy = init.referrerPolicy || input.referrerPolicy || "";
-  }
-  /** @returns {string} */
-  get method() {
-    return this[INTERNALS3].method;
-  }
-  /** @returns {string} */
-  get url() {
-    return (0, import_node_url.format)(this[INTERNALS3].parsedURL);
-  }
-  /** @returns {Headers} */
-  get headers() {
-    return this[INTERNALS3].headers;
-  }
-  get redirect() {
-    return this[INTERNALS3].redirect;
-  }
-  /** @returns {AbortSignal} */
-  get signal() {
-    return this[INTERNALS3].signal;
-  }
-  // https://fetch.spec.whatwg.org/#dom-request-referrer
-  get referrer() {
-    if (this[INTERNALS3].referrer === "no-referrer") {
-      return "";
-    }
-    if (this[INTERNALS3].referrer === "client") {
-      return "about:client";
-    }
-    if (this[INTERNALS3].referrer) {
-      return this[INTERNALS3].referrer.toString();
-    }
-    return void 0;
-  }
-  get referrerPolicy() {
-    return this[INTERNALS3].referrerPolicy;
-  }
-  set referrerPolicy(referrerPolicy) {
-    this[INTERNALS3].referrerPolicy = validateReferrerPolicy(referrerPolicy);
-  }
-  /**
-   * Clone this request
-   *
-   * @return  Request
-   */
-  clone() {
-    return new _Request(this);
-  }
-  get [Symbol.toStringTag]() {
-    return "Request";
-  }
-};
-Object.defineProperties(Request2.prototype, {
-  method: { enumerable: true },
-  url: { enumerable: true },
-  headers: { enumerable: true },
-  redirect: { enumerable: true },
-  clone: { enumerable: true },
-  signal: { enumerable: true },
-  referrer: { enumerable: true },
-  referrerPolicy: { enumerable: true }
-});
-var getNodeRequestOptions = (request) => {
-  const { parsedURL } = request[INTERNALS3];
-  const headers = new Headers2(request[INTERNALS3].headers);
-  if (!headers.has("Accept")) {
-    headers.set("Accept", "*/*");
-  }
-  let contentLengthValue = null;
-  if (request.body === null && /^(post|put)$/i.test(request.method)) {
-    contentLengthValue = "0";
-  }
-  if (request.body !== null) {
-    const totalBytes = getTotalBytes(request);
-    if (typeof totalBytes === "number" && !Number.isNaN(totalBytes)) {
-      contentLengthValue = String(totalBytes);
-    }
-  }
-  if (contentLengthValue) {
-    headers.set("Content-Length", contentLengthValue);
-  }
-  if (request.referrerPolicy === "") {
-    request.referrerPolicy = DEFAULT_REFERRER_POLICY;
-  }
-  if (request.referrer && request.referrer !== "no-referrer") {
-    request[INTERNALS3].referrer = determineRequestsReferrer(request);
-  } else {
-    request[INTERNALS3].referrer = "no-referrer";
-  }
-  if (request[INTERNALS3].referrer instanceof URL) {
-    headers.set("Referer", request.referrer);
-  }
-  if (!headers.has("User-Agent")) {
-    headers.set("User-Agent", "node-fetch");
-  }
-  if (request.compress && !headers.has("Accept-Encoding")) {
-    headers.set("Accept-Encoding", "gzip, deflate, br");
-  }
-  let { agent } = request;
-  if (typeof agent === "function") {
-    agent = agent(parsedURL);
-  }
-  const search = getSearch(parsedURL);
-  const options = {
-    // Overwrite search to retain trailing ? (issue #776)
-    path: parsedURL.pathname + search,
-    // The following options are not expressed in the URL
-    method: request.method,
-    headers: headers[/* @__PURE__ */ Symbol.for("nodejs.util.inspect.custom")](),
-    insecureHTTPParser: request.insecureHTTPParser,
-    agent
-  };
-  return {
-    /** @type {URL} */
-    parsedURL,
-    options
-  };
-};
-
-// ../../node_modules/node-fetch/src/errors/abort-error.js
-var AbortError = class extends FetchBaseError {
-  constructor(message, type2 = "aborted") {
-    super(message, type2);
-  }
-};
-
-// ../../node_modules/node-fetch/src/index.js
-init_esm_min();
-init_from();
-var supportedSchemas = /* @__PURE__ */ new Set(["data:", "http:", "https:"]);
-async function fetch2(url2, options_) {
-  return new Promise((resolve, reject) => {
-    const request = new Request2(url2, options_);
-    const { parsedURL, options } = getNodeRequestOptions(request);
-    if (!supportedSchemas.has(parsedURL.protocol)) {
-      throw new TypeError(`node-fetch cannot load ${url2}. URL scheme "${parsedURL.protocol.replace(/:$/, "")}" is not supported.`);
-    }
-    if (parsedURL.protocol === "data:") {
-      const data = dist_default(request.url);
-      const response2 = new Response2(data, { headers: { "Content-Type": data.typeFull } });
-      resolve(response2);
-      return;
-    }
-    const send = (parsedURL.protocol === "https:" ? import_node_https.default : import_node_http2.default).request;
-    const { signal } = request;
-    let response = null;
-    const abort = () => {
-      const error48 = new AbortError("The operation was aborted.");
-      reject(error48);
-      if (request.body && request.body instanceof import_node_stream2.default.Readable) {
-        request.body.destroy(error48);
-      }
-      if (!response || !response.body) {
-        return;
-      }
-      response.body.emit("error", error48);
-    };
-    if (signal && signal.aborted) {
-      abort();
-      return;
-    }
-    const abortAndFinalize = () => {
-      abort();
-      finalize2();
-    };
-    const request_ = send(parsedURL.toString(), options);
-    if (signal) {
-      signal.addEventListener("abort", abortAndFinalize);
-    }
-    const finalize2 = () => {
-      request_.abort();
-      if (signal) {
-        signal.removeEventListener("abort", abortAndFinalize);
-      }
-    };
-    request_.on("error", (error48) => {
-      reject(new FetchError(`request to ${request.url} failed, reason: ${error48.message}`, "system", error48));
-      finalize2();
-    });
-    fixResponseChunkedTransferBadEnding(request_, (error48) => {
-      if (response && response.body) {
-        response.body.destroy(error48);
-      }
-    });
-    if (process.version < "v14") {
-      request_.on("socket", (s2) => {
-        let endedWithEventsCount;
-        s2.prependListener("end", () => {
-          endedWithEventsCount = s2._eventsCount;
-        });
-        s2.prependListener("close", (hadError) => {
-          if (response && endedWithEventsCount < s2._eventsCount && !hadError) {
-            const error48 = new Error("Premature close");
-            error48.code = "ERR_STREAM_PREMATURE_CLOSE";
-            response.body.emit("error", error48);
-          }
-        });
-      });
-    }
-    request_.on("response", (response_) => {
-      request_.setTimeout(0);
-      const headers = fromRawHeaders(response_.rawHeaders);
-      if (isRedirect(response_.statusCode)) {
-        const location = headers.get("Location");
-        let locationURL = null;
-        try {
-          locationURL = location === null ? null : new URL(location, request.url);
-        } catch {
-          if (request.redirect !== "manual") {
-            reject(new FetchError(`uri requested responds with an invalid redirect URL: ${location}`, "invalid-redirect"));
-            finalize2();
-            return;
-          }
-        }
-        switch (request.redirect) {
-          case "error":
-            reject(new FetchError(`uri requested responds with a redirect, redirect mode is set to error: ${request.url}`, "no-redirect"));
-            finalize2();
-            return;
-          case "manual":
-            break;
-          case "follow": {
-            if (locationURL === null) {
-              break;
-            }
-            if (request.counter >= request.follow) {
-              reject(new FetchError(`maximum redirect reached at: ${request.url}`, "max-redirect"));
-              finalize2();
-              return;
-            }
-            const requestOptions = {
-              headers: new Headers2(request.headers),
-              follow: request.follow,
-              counter: request.counter + 1,
-              agent: request.agent,
-              compress: request.compress,
-              method: request.method,
-              body: clone(request),
-              signal: request.signal,
-              size: request.size,
-              referrer: request.referrer,
-              referrerPolicy: request.referrerPolicy
-            };
-            if (!isDomainOrSubdomain(request.url, locationURL) || !isSameProtocol(request.url, locationURL)) {
-              for (const name2 of ["authorization", "www-authenticate", "cookie", "cookie2"]) {
-                requestOptions.headers.delete(name2);
-              }
-            }
-            if (response_.statusCode !== 303 && request.body && options_.body instanceof import_node_stream2.default.Readable) {
-              reject(new FetchError("Cannot follow redirect with body being a readable stream", "unsupported-redirect"));
-              finalize2();
-              return;
-            }
-            if (response_.statusCode === 303 || (response_.statusCode === 301 || response_.statusCode === 302) && request.method === "POST") {
-              requestOptions.method = "GET";
-              requestOptions.body = void 0;
-              requestOptions.headers.delete("content-length");
-            }
-            const responseReferrerPolicy = parseReferrerPolicyFromHeader(headers);
-            if (responseReferrerPolicy) {
-              requestOptions.referrerPolicy = responseReferrerPolicy;
-            }
-            resolve(fetch2(new Request2(locationURL, requestOptions)));
-            finalize2();
-            return;
-          }
-          default:
-            return reject(new TypeError(`Redirect option '${request.redirect}' is not a valid value of RequestRedirect`));
-        }
-      }
-      if (signal) {
-        response_.once("end", () => {
-          signal.removeEventListener("abort", abortAndFinalize);
-        });
-      }
-      let body = (0, import_node_stream2.pipeline)(response_, new import_node_stream2.PassThrough(), (error48) => {
-        if (error48) {
-          reject(error48);
-        }
-      });
-      if (process.version < "v12.10") {
-        response_.on("aborted", abortAndFinalize);
-      }
-      const responseOptions = {
-        url: request.url,
-        status: response_.statusCode,
-        statusText: response_.statusMessage,
-        headers,
-        size: request.size,
-        counter: request.counter,
-        highWaterMark: request.highWaterMark
-      };
-      const codings = headers.get("Content-Encoding");
-      if (!request.compress || request.method === "HEAD" || codings === null || response_.statusCode === 204 || response_.statusCode === 304) {
-        response = new Response2(body, responseOptions);
-        resolve(response);
-        return;
-      }
-      const zlibOptions = {
-        flush: import_node_zlib.default.Z_SYNC_FLUSH,
-        finishFlush: import_node_zlib.default.Z_SYNC_FLUSH
-      };
-      if (codings === "gzip" || codings === "x-gzip") {
-        body = (0, import_node_stream2.pipeline)(body, import_node_zlib.default.createGunzip(zlibOptions), (error48) => {
-          if (error48) {
-            reject(error48);
-          }
-        });
-        response = new Response2(body, responseOptions);
-        resolve(response);
-        return;
-      }
-      if (codings === "deflate" || codings === "x-deflate") {
-        const raw = (0, import_node_stream2.pipeline)(response_, new import_node_stream2.PassThrough(), (error48) => {
-          if (error48) {
-            reject(error48);
-          }
-        });
-        raw.once("data", (chunk) => {
-          if ((chunk[0] & 15) === 8) {
-            body = (0, import_node_stream2.pipeline)(body, import_node_zlib.default.createInflate(), (error48) => {
-              if (error48) {
-                reject(error48);
-              }
-            });
-          } else {
-            body = (0, import_node_stream2.pipeline)(body, import_node_zlib.default.createInflateRaw(), (error48) => {
-              if (error48) {
-                reject(error48);
-              }
-            });
-          }
-          response = new Response2(body, responseOptions);
-          resolve(response);
-        });
-        raw.once("end", () => {
-          if (!response) {
-            response = new Response2(body, responseOptions);
-            resolve(response);
-          }
-        });
-        return;
-      }
-      if (codings === "br") {
-        body = (0, import_node_stream2.pipeline)(body, import_node_zlib.default.createBrotliDecompress(), (error48) => {
-          if (error48) {
-            reject(error48);
-          }
-        });
-        response = new Response2(body, responseOptions);
-        resolve(response);
-        return;
-      }
-      response = new Response2(body, responseOptions);
-      resolve(response);
-    });
-    writeToStream(request_, request).catch(reject);
-  });
-}
-function fixResponseChunkedTransferBadEnding(request, errorCallback) {
-  const LAST_CHUNK = import_node_buffer2.Buffer.from("0\r\n\r\n");
-  let isChunkedTransfer = false;
-  let properLastChunkReceived = false;
-  let previousChunk;
-  request.on("response", (response) => {
-    const { headers } = response;
-    isChunkedTransfer = headers["transfer-encoding"] === "chunked" && !headers["content-length"];
-  });
-  request.on("socket", (socket) => {
-    const onSocketClose = () => {
-      if (isChunkedTransfer && !properLastChunkReceived) {
-        const error48 = new Error("Premature close");
-        error48.code = "ERR_STREAM_PREMATURE_CLOSE";
-        errorCallback(error48);
-      }
-    };
-    const onData = (buf) => {
-      properLastChunkReceived = import_node_buffer2.Buffer.compare(buf.slice(-5), LAST_CHUNK) === 0;
-      if (!properLastChunkReceived && previousChunk) {
-        properLastChunkReceived = import_node_buffer2.Buffer.compare(previousChunk.slice(-3), LAST_CHUNK.slice(0, 3)) === 0 && import_node_buffer2.Buffer.compare(buf.slice(-2), LAST_CHUNK.slice(3)) === 0;
-      }
-      previousChunk = buf;
-    };
-    socket.prependListener("close", onSocketClose);
-    socket.on("data", onData);
-    request.on("close", () => {
-      socket.removeListener("close", onSocketClose);
-      socket.removeListener("data", onData);
-    });
-  });
-}
+init_src();
 
 // src/commands/auth/index.ts
 init_helpers();

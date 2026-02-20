@@ -1,4 +1,4 @@
-## [1.8.202](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.202) (2026-02-17)
+## [1.8.203](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.203) (2026-02-20)
 
 
 ### Bug Fixes
@@ -61,6 +61,7 @@
 * **gcli:** reverted back logic for gcli ([7591194](https://github.com/Stradivario/gapi/commit/759119401dc43665ba45f6b3cc19f09439692995))
 * **gcli:** reverted logic without options request ([f37f092](https://github.com/Stradivario/gapi/commit/f37f0922eaec5c060b80064a508ab12c3da3d48f))
 * **gcli:** token authentication after expire fixed ([fc099eb](https://github.com/Stradivario/gapi/commit/fc099ebd5af0b5094e5b1919f875e9dbdfd035e3))
+* **gcli:** upload lambda was not working due to attempt to use native node fetch but it does not handle very well multipart form data... ([9652c3b](https://github.com/Stradivario/gapi/commit/9652c3b7c5ac18b9242a3e18d250d54687eafbcb))
 * **InitQuery:** reverted ([09a93da](https://github.com/Stradivario/gapi/commit/09a93da16f27e944703f0a99dd7aa2fd3d17f243))
 * **login:** added method which converts number to string ([f3ca052](https://github.com/Stradivario/gapi/commit/f3ca0521ebf9cca22e711c6ec4c2154f181d0694))
 * **network:** added ability to specify lambda purpose publicly exposed or privately exposed ([5bcb6bc](https://github.com/Stradivario/gapi/commit/5bcb6bcd838fc87c3b54ceb7dc96d56d72dc5094))
