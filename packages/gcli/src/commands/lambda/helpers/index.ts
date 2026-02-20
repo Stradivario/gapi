@@ -6,6 +6,7 @@ import {
 import { Command } from 'commander';
 import FormData from 'form-data';
 import { createReadStream, ReadStream, WriteStream } from 'fs';
+import fetch from 'node-fetch';
 import { from, lastValueFrom, Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import streamToBuffer from 'stream-to-buffer';

@@ -43,9 +43,7 @@ export default (cmd: CreateOrUpdateLambdaArguments) => {
               from(promisify(mkdir)('.gcache')).pipe(
                 catchError(() => of(true)),
                 switchMap(() =>
-                  promisify(writeFile)(`.gcache/${data.name}.zip`, buffer, {
-                    encoding: 'utf-8',
-                  }),
+                  promisify(writeFile)(`.gcache/${data.name}.zip`, buffer),
                 ),
               ),
             ),
