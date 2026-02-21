@@ -1,4 +1,4 @@
-## [1.8.204](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.204) (2026-02-21)
+## [1.8.205](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.205) (2026-02-21)
 
 
 ### Bug Fixes
@@ -107,6 +107,7 @@
 * **gcli:** added exit strategies for the child process and added configuration for build scripts unified ([ea75254](https://github.com/Stradivario/gapi/commit/ea752545a4a805e8cfbe2d65b18647207c93d76d))
 * **gcli:** added global auth token using a environment variable GCLI_AUTH_TOKEN ([511dd02](https://github.com/Stradivario/gapi/commit/511dd023ae9df4785fec13e57cce44a5a3bc76f5))
 * **gcli:** added hasOptionsRequest to lambda creation ([a4f6d9c](https://github.com/Stradivario/gapi/commit/a4f6d9cf3dfe3c0671499d43aefa1bb5b6d9807d))
+* **gcli:** added ignore folders so we can safely execute commands changing files without interrupting the server to restart for example for schema introspection of the graphql queries ([a5da7ba](https://github.com/Stradivario/gapi/commit/a5da7bad7e0153251b6cc3b9d6c4f282936cfb64))
 * **gcli:** added multiple scaling options and some documentation inside the cli itself ([0efec0f](https://github.com/Stradivario/gapi/commit/0efec0f8f9221cd73168e6e3be50f6ec4d3376b0))
 * **gcli:** added package command and prepared for rxjs migration by removing toPromise() and throwError accepts function () => error ([84c2cad](https://github.com/Stradivario/gapi/commit/84c2cad586c07e29d5626be714a16dd76f37b090))
 * **gcli:** build script added outfile ([1bea705](https://github.com/Stradivario/gapi/commit/1bea7057543c37999ec2bd23983bc8a0401361f0))
