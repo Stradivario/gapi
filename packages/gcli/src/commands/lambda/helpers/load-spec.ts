@@ -29,6 +29,7 @@ interface ConfigJSON {
 interface BundlerOptions {
   bundler: {
     watch: string[];
+    ignore: string[];
     outfile: string;
     bundle: boolean;
     minify: boolean;

@@ -15,6 +15,10 @@ export function startCommands(program: Command) {
     .option('-p, --platform <char>', 'Platform ', 'node')
     .option('-t, --target <char>', 'Target ', 'node14.4')
     .option('-o, --outfile <char>', 'Outfile name')
+    .option(
+      '-i, --ignore <ignore...>',
+      'Ignore folders from triggering restarts',
+    )
     .option('-e, --external <external...>', 'External libraries')
     .action(lazy(() => import('./start').then((m) => m.default)));
 }

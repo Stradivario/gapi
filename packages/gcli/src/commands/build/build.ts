@@ -16,6 +16,7 @@ export interface BuildArguments {
   target: string;
   outfile: string;
   external: string[];
+  ignore?: string[];
 }
 
 export default async (args: BuildArguments) => {

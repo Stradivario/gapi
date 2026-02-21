@@ -25,79 +25,105 @@ export default async function start(args: BuildArguments) {
               ...(config?.options?.bundler?.watch ?? []),
             ].map((name) => [name, true]),
           ),
+          ignorelist: new Map(
+            [
+              ...(args?.ignore ?? []),
+              ...(config?.options?.bundler?.ignore ?? []),
+            ].map((name) => [name, true]),
+          ),
           child: null as ChildProcess,
           outfile:
             args.outfile ?? config?.options?.bundler?.outfile ?? 'index.js',
           startCommand: 'node',
         }).pipe(
-          switchMap(({ child, watcher, whitelist, outfile, startCommand }) =>
-            from(build(args)).pipe(
-              tap(() => {
-                Logger.warn(`📢 Starting script "${startCommand} ${outfile}"`);
-                Logger.log('---------------------------------\n');
-              }),
-              tap(() => {
-                child = spawn(
-                  startCommand,
-                  ['--disable-warning=DEP0040', outfile],
-                  {
-                    stdio: 'inherit',
-                  },
-                );
-              }),
-              tap(() =>
-                merge(
-                  fromEvent(process, 'SIGINT'),
-                  fromEvent(process, 'SIGTERM'),
-                  fromEvent(process, 'exit'),
-                )
-                  .pipe(
-                    debounceTime(100),
-                    tap(() => {
-                      Logger.warn('⚠️  Main process shutting down');
-                      watcher.close();
-                      child.kill('SIGTERM');
-                      process.exit();
-                    }),
+          switchMap(
+            ({
+              child,
+              watcher,
+              whitelist,
+              outfile,
+              startCommand,
+              ignorelist,
+            }) =>
+              from(build(args)).pipe(
+                tap(() => {
+                  Logger.warn(
+                    `📢 Starting script "${startCommand} ${outfile}"`,
+                  );
+                  Logger.log('---------------------------------\n');
+                }),
+                tap(() => {
+                  child = spawn(
+                    startCommand,
+                    ['--disable-warning=DEP0040', outfile],
+                    {
+                      stdio: 'inherit',
+                    },
+                  );
+                }),
+                tap(() =>
+                  merge(
+                    fromEvent(process, 'SIGINT'),
+                    fromEvent(process, 'SIGTERM'),
+                    fromEvent(process, 'exit'),
                   )
-                  .subscribe(),
-              ),
-              switchMap(() =>
-                fromEvent(watcher, 'change').pipe(
-                  map(([event, filename]: [string, string]) => ({
-                    event,
-                    filename,
-                  })),
-                  filter(({ filename }) => {
-                    if (!filename) {
-                      return false;
-                    }
-
-                    const rootDir = filename.split(/[/\\]/)[0];
-
-                    return whitelist.has(rootDir);
-                  }),
-                  debounceTime(100),
+                    .pipe(
+                      debounceTime(100),
+                      tap(() => {
+                        Logger.warn('⚠️  Main process shutting down');
+                        watcher.close();
+                        child.kill('SIGTERM');
+                        process.exit();
+                      }),
+                    )
+                    .subscribe(),
                 ),
+                switchMap(() =>
+                  fromEvent(watcher, 'change').pipe(
+                    map(([event, filename]: [string, string]) => ({
+                      event,
+                      filename,
+                    })),
+                    filter(({ filename }) => {
+                      if (!filename) {
+                        return false;
+                      }
+
+                      for (const ignorePath of ignorelist.keys()) {
+                        if (filename.startsWith(ignorePath)) {
+                          return false;
+                        }
+                      }
+
+                      const rootDir = filename.split(/[/\\]/)[0];
+
+                      return whitelist.has(rootDir);
+                    }),
+                    debounceTime(100),
+                  ),
+                ),
+                tap((data) => {
+                  Logger.log('\n---------------------------------');
+                  Logger.log(
+                    `⟳  Restarting due to change in: ${data.filename}`,
+                  );
+                  child?.kill('SIGTERM');
+                }),
+                switchMap(() => build(args)),
+                tap(() => {
+                  Logger.warn(
+                    `📢 Starting script "${startCommand} ${outfile}"`,
+                  );
+                  Logger.log('---------------------------------\n');
+                  child = spawn(
+                    startCommand,
+                    ['--disable-warning=DEP0040', outfile],
+                    {
+                      stdio: 'inherit',
+                    },
+                  );
+                }),
               ),
-              tap((data) => {
-                Logger.log('\n---------------------------------');
-                Logger.log(`⟳  Restarting due to change in: ${data.filename}`);
-                child?.kill('SIGTERM');
-              }),
-              switchMap(() => build(args)),
-              tap(() => {
-                Logger.warn(`📢 Starting script "${startCommand} ${outfile}"`);
-                Logger.log('---------------------------------\n');
-                child = spawn(
-                  startCommand,
-                  ['--disable-warning=DEP0040', outfile],
-                  {
-                    stdio: 'inherit',
-                  },
-                );
-              }),
-            ),
           ),
         ),
       ),

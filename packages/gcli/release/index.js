@@ -318423,14 +318423,29 @@ async function start(args) {
               ...config2?.options?.bundler?.watch ?? []
             ].map((name2) => [name2, true])
           ),
+          ignorelist: new Map(
+            [
+              ...args?.ignore ?? [],
+              ...config2?.options?.bundler?.ignore ?? []
+            ].map((name2) => [name2, true])
+          ),
           child: null,
           outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
           startCommand: "node"
         }).pipe(
           (0, import_operators22.switchMap)(
-            ({ child, watcher, whitelist, outfile, startCommand }) => (0, import_rxjs23.from)(build_default(args)).pipe(
+            ({
+              child,
+              watcher,
+              whitelist,
+              outfile,
+              startCommand,
+              ignorelist
+            }) => (0, import_rxjs23.from)(build_default(args)).pipe(
               (0, import_operators22.tap)(() => {
-                Logger.warn(`\u{1F4E2} Starting script "${startCommand} ${outfile}"`);
+                Logger.warn(
+                  `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
+                );
                 Logger.log("---------------------------------\n");
               }),
               (0, import_operators22.tap)(() => {
@@ -318467,6 +318482,11 @@ async function start(args) {
                     if (!filename) {
                       return false;
                     }
+                    for (const ignorePath of ignorelist.keys()) {
+                      if (filename.startsWith(ignorePath)) {
+                        return false;
+                      }
+                    }
                     const rootDir = filename.split(/[/\\]/)[0];
                     return whitelist.has(rootDir);
                   }),
@@ -318475,12 +318495,16 @@ async function start(args) {
               ),
               (0, import_operators22.tap)((data) => {
                 Logger.log("\n---------------------------------");
-                Logger.log(`\u27F3  Restarting due to change in: ${data.filename}`);
+                Logger.log(
+                  `\u27F3  Restarting due to change in: ${data.filename}`
+                );
                 child?.kill("SIGTERM");
               }),
               (0, import_operators22.switchMap)(() => build_default(args)),
               (0, import_operators22.tap)(() => {
-                Logger.warn(`\u{1F4E2} Starting script "${startCommand} ${outfile}"`);
+                Logger.warn(
+                  `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
+                );
                 Logger.log("---------------------------------\n");
                 child = (0, import_node_child_process.spawn)(
                   startCommand,
@@ -318829,7 +318853,10 @@ function startCommands(program2) {
   program2.command("start").description("Start bundle using esbuild https://esbuild.github.io ").option(
     "-f, --files <files...>",
     "File or files to bundle defaults to index.ts"
-  ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(lazy(() => Promise.resolve().then(() => (init_start2(), start_exports2)).then((m2) => m2.default)));
+  ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option(
+    "-i, --ignore <ignore...>",
+    "Ignore folders from triggering restarts"
+  ).option("-e, --external <external...>", "External libraries").action(lazy(() => Promise.resolve().then(() => (init_start2(), start_exports2)).then((m2) => m2.default)));
 }
 
 // src/commands/triggers/cron/index.ts
