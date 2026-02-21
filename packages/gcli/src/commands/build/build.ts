@@ -20,7 +20,6 @@ export interface BuildArguments {
 
 export default async (args: BuildArguments) => {
   const time = Date.now();
-
   return lastValueFrom(
     loadSpec().pipe(
       tap((config) => {
@@ -46,16 +45,16 @@ export default async (args: BuildArguments) => {
               external:
                 args.external ?? config?.options?.bundler?.external ?? [],
             } as BuildOptions,
-            plugins: [
-              esbuildDecorators({
-                tsconfig: 'tsconfig.json',
-                cwd: process.cwd(),
-              }),
-            ],
           })),
           switchMap(({ esbuild, options }) =>
             esbuild.build({
               ...options,
+              plugins: [
+                esbuildDecorators({
+                  tsconfig: './tsconfig.json',
+                  cwd: process.cwd(),
+                }),
+              ],
             }),
           ),
           tap((data) => {
