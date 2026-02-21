@@ -255346,17 +255346,17 @@ var init_build = __esm({
                   target: args.target ?? config3?.options?.bundler?.target ?? "node24",
                   outfile: args.outfile ?? config3?.options?.bundler?.outfile ?? "index.js",
                   external: args.external ?? config3?.options?.bundler?.external ?? []
-                },
-                plugins: [
-                  (0, import_esbuild_decorators.esbuildDecorators)({
-                    tsconfig: "tsconfig.json",
-                    cwd: process.cwd()
-                  })
-                ]
+                }
               })),
               (0, import_operators5.switchMap)(
                 ({ esbuild: esbuild2, options }) => esbuild2.build({
-                  ...options
+                  ...options,
+                  plugins: [
+                    (0, import_esbuild_decorators.esbuildDecorators)({
+                      tsconfig: "./tsconfig.json",
+                      cwd: process.cwd()
+                    })
+                  ]
                 })
               ),
               (0, import_operators5.tap)((data) => {

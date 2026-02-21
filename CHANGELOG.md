@@ -1,4 +1,4 @@
-## [1.8.203](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.203) (2026-02-20)
+## [1.8.204](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.204) (2026-02-21)
 
 
 ### Bug Fixes
@@ -60,6 +60,7 @@
 * **gcli:** removed packages from dependencies since we don't want them when installing ([3efb328](https://github.com/Stradivario/gapi/commit/3efb328cd7734d14381d4c3248a28e325ee2fff4))
 * **gcli:** reverted back logic for gcli ([7591194](https://github.com/Stradivario/gapi/commit/759119401dc43665ba45f6b3cc19f09439692995))
 * **gcli:** reverted logic without options request ([f37f092](https://github.com/Stradivario/gapi/commit/f37f0922eaec5c060b80064a508ab12c3da3d48f))
+* **gcli:** spread operator was breaking plugin initialization ([f2e6745](https://github.com/Stradivario/gapi/commit/f2e674513a29b9c13fdfe79fe8aba2b6e07e53a1))
 * **gcli:** token authentication after expire fixed ([fc099eb](https://github.com/Stradivario/gapi/commit/fc099ebd5af0b5094e5b1919f875e9dbdfd035e3))
 * **gcli:** upload lambda was not working due to attempt to use native node fetch but it does not handle very well multipart form data... ([9652c3b](https://github.com/Stradivario/gapi/commit/9652c3b7c5ac18b9242a3e18d250d54687eafbcb))
 * **InitQuery:** reverted ([09a93da](https://github.com/Stradivario/gapi/commit/09a93da16f27e944703f0a99dd7aa2fd3d17f243))
