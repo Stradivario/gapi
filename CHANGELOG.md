@@ -1,4 +1,4 @@
-## [1.8.205](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.205) (2026-02-21)
+## [1.8.206](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.206) (2026-03-09)
 
 
 ### Bug Fixes
@@ -55,6 +55,7 @@
 * **gcli:** load spec file default export fix ([1d1c71f](https://github.com/Stradivario/gapi/commit/1d1c71f96813aa59f883bced7e44f655849cb980))
 * **gcli:** login to gcli using integration ci/cd pipeline ([56c2bdd](https://github.com/Stradivario/gapi/commit/56c2bddd73368cc20f21c2f7b819b79ea900b30b))
 * **gcli:** mcp start function changes [ci-skip] ([46c615a](https://github.com/Stradivario/gapi/commit/46c615afc41681896c51cbc42665f1ff1669a3ed))
+* **gcli:** passed environment variables to the child process ([d0ec671](https://github.com/Stradivario/gapi/commit/d0ec6718c467658a8b5b46ed408f1ca866ef5fff))
 * **gcli:** re-build ([fc68cee](https://github.com/Stradivario/gapi/commit/fc68cee7c7d6f81aef54010899903ba8d4e685c1))
 * **gcli:** removed console.log ([2889fb3](https://github.com/Stradivario/gapi/commit/2889fb30019c9a2b23360387fe0d5c8ff9e2f4a8))
 * **gcli:** removed packages from dependencies since we don't want them when installing ([3efb328](https://github.com/Stradivario/gapi/commit/3efb328cd7734d14381d4c3248a28e325ee2fff4))
