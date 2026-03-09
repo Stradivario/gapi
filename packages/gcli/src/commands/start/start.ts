@@ -58,6 +58,7 @@ export default async function start(args: BuildArguments) {
                     ['--disable-warning=DEP0040', outfile],
                     {
                       stdio: 'inherit',
+                      env: process.env,
                     },
                   );
                 }),
@@ -120,6 +121,7 @@ export default async function start(args: BuildArguments) {
                     ['--disable-warning=DEP0040', outfile],
                     {
                       stdio: 'inherit',
+                      env: process.env,
                     },
                   );
                 }),

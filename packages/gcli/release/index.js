@@ -318453,7 +318453,8 @@ async function start(args) {
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
                   {
-                    stdio: "inherit"
+                    stdio: "inherit",
+                    env: process.env
                   }
                 );
               }),
@@ -318510,7 +318511,8 @@ async function start(args) {
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
                   {
-                    stdio: "inherit"
+                    stdio: "inherit",
+                    env: process.env
                   }
                 );
               })
