@@ -1,7 +1,6 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { BuildOptions, Platform } from 'esbuild';
 import esbuild from 'esbuild';
-import { join } from 'path';
 import { from, lastValueFrom } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
@@ -25,7 +24,6 @@ async function getEsbuild() {
     const esbuildWasm = await import('esbuild-wasm');
     await esbuildWasm.initialize({
       worker: false,
-      wasmURL: join(__dirname, 'esbuild.wasm'),
     });
     return esbuildWasm;
   } else {

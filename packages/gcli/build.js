@@ -5,6 +5,7 @@ require('esbuild')
     platform: 'node',
     target: 'node24',
     outfile: './release/index.js',
+    external: ["esbuild-wasm"]
   })
   .then((data) => console.log('SUCCESS', data))
   .catch((e) => {
