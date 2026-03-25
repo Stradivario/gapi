@@ -1,4 +1,4 @@
-## [1.8.209](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.209) (2026-03-25)
+## [1.8.210](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.210) (2026-03-25)
 
 
 ### Bug Fixes
@@ -59,6 +59,7 @@
 * **gcli:** re-build ([fc68cee](https://github.com/Stradivario/gapi/commit/fc68cee7c7d6f81aef54010899903ba8d4e685c1))
 * **gcli:** removed console.log ([2889fb3](https://github.com/Stradivario/gapi/commit/2889fb30019c9a2b23360387fe0d5c8ff9e2f4a8))
 * **gcli:** removed packages from dependencies since we don't want them when installing ([3efb328](https://github.com/Stradivario/gapi/commit/3efb328cd7734d14381d4c3248a28e325ee2fff4))
+* **gcli:** removed wasm esbuild from optional dependencies since we want zero dependency library ([e8f943b](https://github.com/Stradivario/gapi/commit/e8f943b35053ef17568ffd3e4732c55390e8a6b6))
 * **gcli:** reverted back logic for gcli ([7591194](https://github.com/Stradivario/gapi/commit/759119401dc43665ba45f6b3cc19f09439692995))
 * **gcli:** reverted logic without options request ([f37f092](https://github.com/Stradivario/gapi/commit/f37f0922eaec5c060b80064a508ab12c3da3d48f))
 * **gcli:** spread operator was breaking plugin initialization ([f2e6745](https://github.com/Stradivario/gapi/commit/f2e674513a29b9c13fdfe79fe8aba2b6e07e53a1))
