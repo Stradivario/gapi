@@ -5,7 +5,7 @@ require('esbuild')
     platform: 'node',
     target: 'node24',
     outfile: './release/index.js',
-    external: ["esbuild-wasm"]
+    external: process.env.BINARY_BUILD ? [] : ["esbuild"]
   })
   .then((data) => console.log('SUCCESS', data))
   .catch((e) => {

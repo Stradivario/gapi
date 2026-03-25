@@ -15,11 +15,11 @@ var __export = (target, all) => {
   for (var name2 in all)
     __defProp(target, name2, { get: all[name2], enumerable: true });
 };
-var __copyProps = (to, from12, except, desc) => {
-  if (from12 && typeof from12 === "object" || typeof from12 === "function") {
-    for (let key of __getOwnPropNames(from12))
+var __copyProps = (to, from11, except, desc) => {
+  if (from11 && typeof from11 === "object" || typeof from11 === "function") {
+    for (let key of __getOwnPropNames(from11))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from12[key], enumerable: !(desc = __getOwnPropDesc(from12, key)) || desc.enumerable });
+        __defProp(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc(from11, key)) || desc.enumerable });
   }
   return to;
 };
@@ -8917,9 +8917,9 @@ var require_Subscription = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9100,9 +9100,9 @@ var require_timeoutProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9860,9 +9860,9 @@ var require_animationFrameProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10460,9 +10460,9 @@ var require_intervalProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10669,9 +10669,9 @@ var require_immediateProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12233,10 +12233,10 @@ var require_from = __commonJS({
     exports2.from = void 0;
     var scheduled_1 = require_scheduled();
     var innerFrom_1 = require_innerFrom();
-    function from12(input, scheduler) {
+    function from11(input, scheduler) {
       return scheduler ? scheduled_1.scheduled(input, scheduler) : innerFrom_1.innerFrom(input);
     }
-    exports2.from = from12;
+    exports2.from = from11;
   }
 });
 
@@ -12248,7 +12248,7 @@ var require_of = __commonJS({
     exports2.of = void 0;
     var args_1 = require_args();
     var from_1 = require_from();
-    function of10() {
+    function of11() {
       var args = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
@@ -12256,7 +12256,7 @@ var require_of = __commonJS({
       var scheduler = args_1.popScheduler(args);
       return from_1.from(args, scheduler);
     }
-    exports2.of = of10;
+    exports2.of = of11;
   }
 });
 
@@ -12624,9 +12624,9 @@ var require_mapOneOrManyArgs = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12666,9 +12666,9 @@ var require_bindCallbackInternals = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -13800,9 +13800,9 @@ var require_zip = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14430,9 +14430,9 @@ var require_combineLatest2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14478,9 +14478,9 @@ var require_combineLatestWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14552,9 +14552,9 @@ var require_concat2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14598,9 +14598,9 @@ var require_concatWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15091,9 +15091,9 @@ var require_endWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15638,9 +15638,9 @@ var require_merge2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15685,9 +15685,9 @@ var require_mergeWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15770,9 +15770,9 @@ var require_onErrorResumeNextWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15954,9 +15954,9 @@ var require_raceWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16352,9 +16352,9 @@ var require_share = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17354,9 +17354,9 @@ var require_withLatestFrom = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17440,9 +17440,9 @@ var require_zip2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17483,9 +17483,9 @@ var require_zipWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -18251,9 +18251,9 @@ var require_race2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
-      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from12[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
+      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from11[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -24479,7 +24479,7 @@ var require_auth = __commonJS({
         var b = a && (a[mf] ? "phone" : null);
         if (b && a && a[nf]) {
           K(this, "uid", a[nf]);
-          K(this, "displayName", a[of10] || null);
+          K(this, "displayName", a[of11] || null);
           var c = null;
           a[pf] && (c = new Date(a[pf]).toUTCString());
           K(this, "enrollmentTime", c);
@@ -24497,7 +24497,7 @@ var require_auth = __commonJS({
         }
         return b;
       }
-      var of10 = "displayName", pf = "enrolledAt", nf = "mfaEnrollmentId", mf = "phoneInfo";
+      var of11 = "displayName", pf = "enrolledAt", nf = "mfaEnrollmentId", mf = "phoneInfo";
       function rf(a) {
         lf.call(this, a);
         K(this, "phoneNumber", a[mf]);
@@ -27878,7 +27878,7 @@ var require_auth = __commonJS({
           var e2 = null, f3 = {};
           if (d) {
             d.uid && (f3[nf] = d.uid);
-            d.displayName && (f3[of10] = d.displayName);
+            d.displayName && (f3[of11] = d.displayName);
             d.enrollmentTime && (f3[pf] = new Date(d.enrollmentTime).toISOString());
             d.phoneNumber && (f3[mf] = d.phoneNumber);
             try {
@@ -31500,7 +31500,7 @@ var require_from2 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors().codes.ERR_INVALID_ARG_TYPE;
-    function from12(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -31539,7 +31539,7 @@ var require_from2 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from12;
+    module2.exports = from11;
   }
 });
 
@@ -31583,7 +31583,7 @@ var require_stream_readable = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from12;
+    var from11;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -32265,10 +32265,10 @@ var require_stream_readable = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from12 === void 0) {
-          from12 = require_from2();
+        if (from11 === void 0) {
+          from11 = require_from2();
         }
-        return from12(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -32448,8 +32448,8 @@ var require_pipeline = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from12, to) {
-      return from12.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -34227,7 +34227,7 @@ var require_from3 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors2().codes.ERR_INVALID_ARG_TYPE;
-    function from12(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -34266,7 +34266,7 @@ var require_from3 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from12;
+    module2.exports = from11;
   }
 });
 
@@ -34310,7 +34310,7 @@ var require_stream_readable2 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from12;
+    var from11;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -34992,10 +34992,10 @@ var require_stream_readable2 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from12 === void 0) {
-          from12 = require_from3();
+        if (from11 === void 0) {
+          from11 = require_from3();
         }
-        return from12(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -35175,8 +35175,8 @@ var require_pipeline2 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from12, to) {
-      return from12.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -36995,14 +36995,14 @@ function __spreadArrays() {
       r2[k] = a[j];
   return r2;
 }
-function __spreadArray(to, from12, pack) {
-  if (pack || arguments.length === 2) for (var i2 = 0, l = from12.length, ar; i2 < l; i2++) {
-    if (ar || !(i2 in from12)) {
-      if (!ar) ar = Array.prototype.slice.call(from12, 0, i2);
-      ar[i2] = from12[i2];
+function __spreadArray(to, from11, pack) {
+  if (pack || arguments.length === 2) for (var i2 = 0, l = from11.length, ar; i2 < l; i2++) {
+    if (ar || !(i2 in from11)) {
+      if (!ar) ar = Array.prototype.slice.call(from11, 0, i2);
+      ar[i2] = from11[i2];
     }
   }
-  return to.concat(ar || Array.prototype.slice.call(from12));
+  return to.concat(ar || Array.prototype.slice.call(from11));
 }
 function __await(v) {
   return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -39526,11 +39526,11 @@ var require_typescript = __commonJS({
         for (var name2 in all)
           __defProp2(target, name2, { get: all[name2], enumerable: true });
       };
-      var __copyProps2 = (to, from12, except, desc) => {
-        if (from12 && typeof from12 === "object" || typeof from12 === "function") {
-          for (let key of __getOwnPropNames2(from12))
+      var __copyProps2 = (to, from11, except, desc) => {
+        if (from11 && typeof from11 === "object" || typeof from11 === "function") {
+          for (let key of __getOwnPropNames2(from11))
             if (!__hasOwnProp2.call(to, key) && key !== except)
-              __defProp2(to, key, { get: () => from12[key], enumerable: !(desc = __getOwnPropDesc2(from12, key)) || desc.enumerable });
+              __defProp2(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc2(from11, key)) || desc.enumerable });
         }
         return to;
       };
@@ -42374,14 +42374,14 @@ var require_typescript = __commonJS({
       function toOffset(array2, offset) {
         return offset < 0 ? array2.length + offset : offset;
       }
-      function addRange(to, from12, start2, end) {
-        if (from12 === void 0 || from12.length === 0) return to;
-        if (to === void 0) return from12.slice(start2, end);
-        start2 = start2 === void 0 ? 0 : toOffset(from12, start2);
-        end = end === void 0 ? from12.length : toOffset(from12, end);
-        for (let i2 = start2; i2 < end && i2 < from12.length; i2++) {
-          if (from12[i2] !== void 0) {
-            to.push(from12[i2]);
+      function addRange(to, from11, start2, end) {
+        if (from11 === void 0 || from11.length === 0) return to;
+        if (to === void 0) return from11.slice(start2, end);
+        start2 = start2 === void 0 ? 0 : toOffset(from11, start2);
+        end = end === void 0 ? from11.length : toOffset(from11, end);
+        for (let i2 = start2; i2 < end && i2 < from11.length; i2++) {
+          if (from11[i2] !== void 0) {
+            to.push(from11[i2]);
           }
         }
         return to;
@@ -48890,8 +48890,8 @@ ${lanes.join("\n")}
         const canonicalDirectoryName = getCanonicalFileName(directoryName);
         return startsWith(canonicalFileName, canonicalDirectoryName + "/") || startsWith(canonicalFileName, canonicalDirectoryName + "\\");
       }
-      function getPathComponentsRelativeTo(from12, to, stringEqualityComparer, getCanonicalFileName) {
-        const fromComponents = reducePathComponents(getPathComponents(from12));
+      function getPathComponentsRelativeTo(from11, to, stringEqualityComparer, getCanonicalFileName) {
+        const fromComponents = reducePathComponents(getPathComponents(from11));
         const toComponents = reducePathComponents(getPathComponents(to));
         let start2;
         for (start2 = 0; start2 < fromComponents.length && start2 < toComponents.length; start2++) {
@@ -48927,8 +48927,8 @@ ${lanes.join("\n")}
           false
         );
       }
-      function getRelativePathFromFile(from12, to, getCanonicalFileName) {
-        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from12), to, getCanonicalFileName));
+      function getRelativePathFromFile(from11, to, getCanonicalFileName) {
+        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from11), to, getCanonicalFileName));
       }
       function getRelativePathToDirectoryOrUrl(directoryPathOrUrl, relativeOrAbsolutePath, currentDirectory, getCanonicalFileName, isAbsolutePathAnUrl) {
         const pathComponents2 = getPathComponentsRelativeTo(
@@ -56479,15 +56479,15 @@ ${lanes.join("\n")}
         if (!nodeArray || isArray(child) || !isElement(child)) return false;
         return contains(nodeArray, child);
       }
-      function insertStatementsAfterPrologue(to, from12, isPrologueDirective2) {
-        if (from12 === void 0 || from12.length === 0) return to;
+      function insertStatementsAfterPrologue(to, from11, isPrologueDirective2) {
+        if (from11 === void 0 || from11.length === 0) return to;
         let statementIndex = 0;
         for (; statementIndex < to.length; ++statementIndex) {
           if (!isPrologueDirective2(to[statementIndex])) {
             break;
           }
         }
-        to.splice(statementIndex, 0, ...from12);
+        to.splice(statementIndex, 0, ...from11);
         return to;
       }
       function insertStatementAfterPrologue(to, statement, isPrologueDirective2) {
@@ -56504,11 +56504,11 @@ ${lanes.join("\n")}
       function isAnyPrologueDirective(node) {
         return isPrologueDirective(node) || !!(getEmitFlags(node) & 2097152);
       }
-      function insertStatementsAfterStandardPrologue(to, from12) {
-        return insertStatementsAfterPrologue(to, from12, isPrologueDirective);
+      function insertStatementsAfterStandardPrologue(to, from11) {
+        return insertStatementsAfterPrologue(to, from11, isPrologueDirective);
       }
-      function insertStatementsAfterCustomPrologue(to, from12) {
-        return insertStatementsAfterPrologue(to, from12, isAnyPrologueDirective);
+      function insertStatementsAfterCustomPrologue(to, from11) {
+        return insertStatementsAfterPrologue(to, from11, isAnyPrologueDirective);
       }
       function insertStatementAfterStandardPrologue(to, statement) {
         return insertStatementAfterPrologue(to, statement, isPrologueDirective);
@@ -70987,13 +70987,13 @@ ${lanes.join("\n")}
             [cooked, raw]
           );
         }
-        function createSpreadArrayHelper(to, from12, packFrom) {
+        function createSpreadArrayHelper(to, from11, packFrom) {
           context.requestEmitHelper(spreadArrayHelper);
           return factory2.createCallExpression(
             getUnscopedHelperName("__spreadArray"),
             /*typeArguments*/
             void 0,
-            [to, from12, packFrom ? immutableTrue() : immutableFalse()]
+            [to, from11, packFrom ? immutableTrue() : immutableFalse()]
           );
         }
         function createPropKeyHelper(expr) {
@@ -203357,8 +203357,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           } else {
             for (const pos2 of positions) {
-              const from12 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
-              const offset = text.substr(from12, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
+              const from11 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
+              const offset = text.substr(from11, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
               textChanges2.push({
                 newText: "",
                 span: {
@@ -204543,8 +204543,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getCallSiteGroupKey(entry) {
         return getNodeId(entry.declaration);
       }
-      function createCallHierarchyIncomingCall(from12, fromSpans) {
-        return { from: from12, fromSpans };
+      function createCallHierarchyIncomingCall(from11, fromSpans) {
+        return { from: from11, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
         return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map21(entries, (entry) => createTextSpanFromRange(entry.range)));
@@ -207718,11 +207718,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const rightSibling = currentNodeIndex < maxChildIndex ? commentNode.getChildAt(currentNodeIndex + 1) : void 0;
         return { leftSibling, rightSibling };
       }
-      function findEndOfTextBetween(jsDocComment, from12, to) {
-        const comment = jsDocComment.getText().substring(from12 - jsDocComment.getStart(), to - jsDocComment.getStart());
+      function findEndOfTextBetween(jsDocComment, from11, to) {
+        const comment = jsDocComment.getText().substring(from11 - jsDocComment.getStart(), to - jsDocComment.getStart());
         for (let i2 = comment.length; i2 > 0; i2--) {
           if (!/[*/\s]/.test(comment.substring(i2 - 1, i2))) {
-            return from12 + i2;
+            return from11 + i2;
           }
         }
         return to;
@@ -232798,9 +232798,9 @@ ${options.prefix}` : "\n" : options.prefix
       function toTokenRange(arg) {
         return typeof arg === "number" ? tokenRangeFrom([arg]) : isArray(arg) ? tokenRangeFrom(arg) : arg;
       }
-      function tokenRangeFromRange(from12, to, except = []) {
+      function tokenRangeFromRange(from11, to, except = []) {
         const tokens = [];
-        for (let token = from12; token <= to; token++) {
+        for (let token = from11; token <= to; token++) {
           if (!contains(except, token)) {
             tokens.push(token);
           }
@@ -250497,11 +250497,11 @@ var require_main = __commonJS({
       for (var name2 in all)
         __defProp2(target, name2, { get: all[name2], enumerable: true });
     };
-    var __copyProps2 = (to, from12, except, desc) => {
-      if (from12 && typeof from12 === "object" || typeof from12 === "function") {
-        for (let key of __getOwnPropNames2(from12))
+    var __copyProps2 = (to, from11, except, desc) => {
+      if (from11 && typeof from11 === "object" || typeof from11 === "function") {
+        for (let key of __getOwnPropNames2(from11))
           if (!__hasOwnProp2.call(to, key) && key !== except)
-            __defProp2(to, key, { get: () => from12[key], enumerable: !(desc = __getOwnPropDesc2(from12, key)) || desc.enumerable });
+            __defProp2(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc2(from11, key)) || desc.enumerable });
       }
       return to;
     };
@@ -254875,9 +254875,9 @@ function dump$1(input, options) {
   if (writeNode(state, 0, value, true, true)) return state.dump + "\n";
   return "";
 }
-function renamed(from12, to) {
+function renamed(from11, to) {
   return function() {
-    throw new Error("Function yaml." + from12 + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
+    throw new Error("Function yaml." + from11 + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
   };
 }
 var isNothing_1, isObject_1, toArray_1, repeat_1, isNegativeZero_1, extend_1, common, exception, snippet, TYPE_CONSTRUCTOR_OPTIONS, YAML_NODE_KINDS, type, schema, str, seq, map4, failsafe, _null, bool, int, YAML_FLOAT_PATTERN, SCIENTIFIC_WITHOUT_DOT, float, json, core, YAML_DATE_REGEXP, YAML_TIMESTAMP_REGEXP, timestamp, merge, BASE64_MAP, binary, _hasOwnProperty$3, _toString$2, omap, _toString$1, pairs, _hasOwnProperty$2, set, _default, _hasOwnProperty$1, CONTEXT_FLOW_IN, CONTEXT_FLOW_OUT, CONTEXT_BLOCK_IN, CONTEXT_BLOCK_OUT, CHOMPING_CLIP, CHOMPING_STRIP, CHOMPING_KEEP, PATTERN_NON_PRINTABLE, PATTERN_NON_ASCII_LINE_BREAKS, PATTERN_FLOW_INDICATORS, PATTERN_TAG_HANDLE, PATTERN_TAG_URI, simpleEscapeCheck, simpleEscapeMap, i2, directiveHandlers, loadAll_1, load_1, loader, _toString, _hasOwnProperty, CHAR_BOM, CHAR_TAB, CHAR_LINE_FEED, CHAR_CARRIAGE_RETURN, CHAR_SPACE, CHAR_EXCLAMATION, CHAR_DOUBLE_QUOTE, CHAR_SHARP, CHAR_PERCENT, CHAR_AMPERSAND, CHAR_SINGLE_QUOTE, CHAR_ASTERISK, CHAR_COMMA, CHAR_MINUS, CHAR_COLON, CHAR_EQUALS, CHAR_GREATER_THAN, CHAR_QUESTION, CHAR_COMMERCIAL_AT, CHAR_LEFT_SQUARE_BRACKET, CHAR_RIGHT_SQUARE_BRACKET, CHAR_GRAVE_ACCENT, CHAR_LEFT_CURLY_BRACKET, CHAR_VERTICAL_LINE, CHAR_RIGHT_CURLY_BRACKET, ESCAPE_SEQUENCES, DEPRECATED_BOOLEANS_SYNTAX, DEPRECATED_BASE60_SYNTAX, QUOTING_TYPE_SINGLE, QUOTING_TYPE_DOUBLE, STYLE_PLAIN, STYLE_SINGLE, STYLE_LITERAL, STYLE_FOLDED, STYLE_DOUBLE, dump_1, dumper, load, loadAll, dump, safeLoad, safeLoadAll, safeDump;
@@ -255331,17 +255331,6 @@ var build_exports = {};
 __export(build_exports, {
   default: () => build_default
 });
-async function getEsbuild() {
-  if (!!process.versions.webcontainer) {
-    const esbuildWasm = await import("esbuild-wasm");
-    await esbuildWasm.initialize({
-      worker: false
-    });
-    return esbuildWasm;
-  } else {
-    return import_esbuild.default;
-  }
-}
 var import_esbuild_decorators, import_esbuild, import_rxjs6, import_operators5, build_default;
 var init_build = __esm({
   "src/commands/build/build.ts"() {
@@ -255361,17 +255350,17 @@ var init_build = __esm({
             );
           }),
           (0, import_operators5.switchMap)(
-            (config2) => (0, import_rxjs6.from)(getEsbuild()).pipe(
-              (0, import_operators5.map)((esbuild2) => ({
-                esbuild: esbuild2,
+            (config2) => (0, import_rxjs6.of)(config2).pipe(
+              (0, import_operators5.map)((config3) => ({
+                esbuild: import_esbuild.default,
                 options: {
-                  entryPoints: args.files?.length ? args.files : [config2?.function?.file ?? config2?.file ?? "index.ts"],
-                  bundle: args.bundle ?? config2?.options?.bundler?.bundle ?? true,
-                  minify: args.minify ?? config2?.options?.bundler?.minify ?? false,
+                  entryPoints: args.files?.length ? args.files : [config3?.function?.file ?? config3?.file ?? "index.ts"],
+                  bundle: args.bundle ?? config3?.options?.bundler?.bundle ?? true,
+                  minify: args.minify ?? config3?.options?.bundler?.minify ?? false,
                   platform: args.platform ?? "node",
-                  target: args.target ?? config2?.options?.bundler?.target ?? "node24",
-                  outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
-                  external: args.external ?? config2?.options?.bundler?.external ?? []
+                  target: args.target ?? config3?.options?.bundler?.target ?? "node24",
+                  outfile: args.outfile ?? config3?.options?.bundler?.outfile ?? "index.js",
+                  external: args.external ?? config3?.options?.bundler?.external ?? []
                 }
               })),
               (0, import_operators5.switchMap)(
@@ -264317,9 +264306,9 @@ var require_mime_types = __commonJS({
         for (var i2 = 0; i2 < exts.length; i2++) {
           var extension2 = exts[i2];
           if (types3[extension2]) {
-            var from12 = preference.indexOf(db[types3[extension2]].source);
+            var from11 = preference.indexOf(db[types3[extension2]].source);
             var to = preference.indexOf(mime.source);
-            if (types3[extension2] !== "application/octet-stream" && (from12 > to || from12 === to && types3[extension2].substr(0, 12) === "application/")) {
+            if (types3[extension2] !== "application/octet-stream" && (from11 > to || from11 === to && types3[extension2].substr(0, 12) === "application/")) {
               continue;
             }
           }
@@ -268875,15 +268864,15 @@ var require_polyfills = __commonJS({
       }
       if (platform === "win32") {
         fs2.rename = /* @__PURE__ */ (function(fs$rename) {
-          return function(from12, to, cb) {
+          return function(from11, to, cb) {
             var start2 = Date.now();
             var backoff = 0;
-            fs$rename(from12, to, function CB(er) {
+            fs$rename(from11, to, function CB(er) {
               if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start2 < 6e4) {
                 setTimeout(function() {
                   fs2.stat(to, function(stater, st) {
                     if (stater && stater.code === "ENOENT")
-                      fs$rename(from12, to, CB);
+                      fs$rename(from11, to, CB);
                     else
                       cb(er);
                   });
@@ -275791,7 +275780,7 @@ var require_from4 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors3().codes.ERR_INVALID_ARG_TYPE;
-    function from12(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -275830,7 +275819,7 @@ var require_from4 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from12;
+    module2.exports = from11;
   }
 });
 
@@ -275874,7 +275863,7 @@ var require_stream_readable4 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from12;
+    var from11;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -276556,10 +276545,10 @@ var require_stream_readable4 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from12 === void 0) {
-          from12 = require_from4();
+        if (from11 === void 0) {
+          from11 = require_from4();
         }
-        return from12(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -276739,8 +276728,8 @@ var require_pipeline3 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from12, to) {
-      return from12.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -279133,7 +279122,7 @@ var require_from5 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors4().codes.ERR_INVALID_ARG_TYPE;
-    function from12(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -279172,7 +279161,7 @@ var require_from5 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from12;
+    module2.exports = from11;
   }
 });
 
@@ -279216,7 +279205,7 @@ var require_stream_readable5 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from12;
+    var from11;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -279898,10 +279887,10 @@ var require_stream_readable5 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from12 === void 0) {
-          from12 = require_from5();
+        if (from11 === void 0) {
+          from11 = require_from5();
         }
-        return from12(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -280081,8 +280070,8 @@ var require_pipeline4 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from12, to) {
-      return from12.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -281905,7 +281894,7 @@ var require_from6 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors5().codes.ERR_INVALID_ARG_TYPE;
-    function from12(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -281944,7 +281933,7 @@ var require_from6 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from12;
+    module2.exports = from11;
   }
 });
 
@@ -281988,7 +281977,7 @@ var require_stream_readable6 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from12;
+    var from11;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -282670,10 +282659,10 @@ var require_stream_readable6 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from12 === void 0) {
-          from12 = require_from6();
+        if (from11 === void 0) {
+          from11 = require_from6();
         }
-        return from12(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -282853,8 +282842,8 @@ var require_pipeline5 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from12, to) {
-      return from12.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -285142,7 +285131,7 @@ var require_from7 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors6().codes.ERR_INVALID_ARG_TYPE;
-    function from12(Readable2, iterable, opts) {
+    function from11(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -285181,7 +285170,7 @@ var require_from7 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from12;
+    module2.exports = from11;
   }
 });
 
@@ -285225,7 +285214,7 @@ var require_stream_readable7 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from12;
+    var from11;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -285907,10 +285896,10 @@ var require_stream_readable7 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from12 === void 0) {
-          from12 = require_from7();
+        if (from11 === void 0) {
+          from11 = require_from7();
         }
-        return from12(Readable2, iterable, opts);
+        return from11(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -286090,8 +286079,8 @@ var require_pipeline6 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from12, to) {
-      return from12.pipe(to);
+    function pipe2(from11, to) {
+      return from11.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -309292,17 +309281,17 @@ var require_codegen = __commonJS({
       }
     };
     var ForRange = class extends For {
-      constructor(varKind, name2, from12, to) {
+      constructor(varKind, name2, from11, to) {
         super();
         this.varKind = varKind;
         this.name = name2;
-        this.from = from12;
+        this.from = from11;
         this.to = to;
       }
       render(opts) {
         const varKind = opts.es5 ? scope_1.varKinds.var : this.varKind;
-        const { name: name2, from: from12, to } = this;
-        return `for(${varKind} ${name2}=${from12}; ${name2}<${to}; ${name2}++)` + super.render(opts);
+        const { name: name2, from: from11, to } = this;
+        return `for(${varKind} ${name2}=${from11}; ${name2}<${to}; ${name2}++)` + super.render(opts);
       }
       get names() {
         const names = addExprNames(super.names, this.from);
@@ -309521,9 +309510,9 @@ var require_codegen = __commonJS({
         return this._for(new ForLoop(iteration), forBody);
       }
       // `for` statement for a range of values
-      forRange(nameOrPrefix, from12, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
+      forRange(nameOrPrefix, from11, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
         const name2 = this._scope.toName(nameOrPrefix);
-        return this._for(new ForRange(varKind, name2, from12, to), () => forBody(name2));
+        return this._for(new ForRange(varKind, name2, from11, to), () => forBody(name2));
       }
       // `for-of` statement (in es5 mode replace with a normal for loop)
       forOf(nameOrPrefix, iterable, forBody, varKind = scope_1.varKinds.const) {
@@ -309662,13 +309651,13 @@ var require_codegen = __commonJS({
       }
     };
     exports2.CodeGen = CodeGen;
-    function addNames(names, from12) {
-      for (const n in from12)
-        names[n] = (names[n] || 0) + (from12[n] || 0);
+    function addNames(names, from11) {
+      for (const n in from11)
+        names[n] = (names[n] || 0) + (from11[n] || 0);
       return names;
     }
-    function addExprNames(names, from12) {
-      return from12 instanceof code_1._CodeOrName ? addNames(names, from12.names) : names;
+    function addExprNames(names, from11) {
+      return from11 instanceof code_1._CodeOrName ? addNames(names, from11.names) : names;
     }
     function optimizeExpr(expr, names, constants) {
       if (expr instanceof code_1.Name)
@@ -309695,9 +309684,9 @@ var require_codegen = __commonJS({
         return e2 instanceof code_1._Code && e2._items.some((c) => c instanceof code_1.Name && names[c.str] === 1 && constants[c.str] !== void 0);
       }
     }
-    function subtractNames(names, from12) {
-      for (const n in from12)
-        names[n] = (names[n] || 0) - (from12[n] || 0);
+    function subtractNames(names, from11) {
+      for (const n in from11)
+        names[n] = (names[n] || 0) - (from11[n] || 0);
     }
     function not(x2) {
       return typeof x2 == "boolean" || typeof x2 == "number" || x2 === null ? !x2 : (0, code_1._)`!${par(x2)}`;
@@ -309815,31 +309804,31 @@ var require_util5 = __commonJS({
     }
     exports2.eachItem = eachItem;
     function makeMergeEvaluated({ mergeNames, mergeToName, mergeValues: mergeValues3, resultToName }) {
-      return (gen, from12, to, toName) => {
-        const res = to === void 0 ? from12 : to instanceof codegen_1.Name ? (from12 instanceof codegen_1.Name ? mergeNames(gen, from12, to) : mergeToName(gen, from12, to), to) : from12 instanceof codegen_1.Name ? (mergeToName(gen, to, from12), from12) : mergeValues3(from12, to);
+      return (gen, from11, to, toName) => {
+        const res = to === void 0 ? from11 : to instanceof codegen_1.Name ? (from11 instanceof codegen_1.Name ? mergeNames(gen, from11, to) : mergeToName(gen, from11, to), to) : from11 instanceof codegen_1.Name ? (mergeToName(gen, to, from11), from11) : mergeValues3(from11, to);
         return toName === codegen_1.Name && !(res instanceof codegen_1.Name) ? resultToName(gen, res) : res;
       };
     }
     exports2.mergeEvaluated = {
       props: makeMergeEvaluated({
-        mergeNames: (gen, from12, to) => gen.if((0, codegen_1._)`${to} !== true && ${from12} !== undefined`, () => {
-          gen.if((0, codegen_1._)`${from12} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from12})`));
+        mergeNames: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true && ${from11} !== undefined`, () => {
+          gen.if((0, codegen_1._)`${from11} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from11})`));
         }),
-        mergeToName: (gen, from12, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
-          if (from12 === true) {
+        mergeToName: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
+          if (from11 === true) {
             gen.assign(to, true);
           } else {
             gen.assign(to, (0, codegen_1._)`${to} || {}`);
-            setEvaluated(gen, to, from12);
+            setEvaluated(gen, to, from11);
           }
         }),
-        mergeValues: (from12, to) => from12 === true ? true : { ...from12, ...to },
+        mergeValues: (from11, to) => from11 === true ? true : { ...from11, ...to },
         resultToName: evaluatedPropsToName
       }),
       items: makeMergeEvaluated({
-        mergeNames: (gen, from12, to) => gen.if((0, codegen_1._)`${to} !== true && ${from12} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from12} === true ? true : ${to} > ${from12} ? ${to} : ${from12}`)),
-        mergeToName: (gen, from12, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from12 === true ? true : (0, codegen_1._)`${to} > ${from12} ? ${to} : ${from12}`)),
-        mergeValues: (from12, to) => from12 === true ? true : Math.max(from12, to),
+        mergeNames: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true && ${from11} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from11} === true ? true : ${to} > ${from11} ? ${to} : ${from11}`)),
+        mergeToName: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from11 === true ? true : (0, codegen_1._)`${to} > ${from11} ? ${to} : ${from11}`)),
+        mergeValues: (from11, to) => from11 === true ? true : Math.max(from11, to),
         resultToName: (gen, items) => gen.var("items", items)
       })
     };
