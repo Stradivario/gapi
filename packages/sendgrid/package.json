@@ -1,6 +1,6 @@
 {
   "name": "@gapi/sendgrid",
-  "version": "1.8.207",
+  "version": "1.8.208",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
@@ -29,7 +29,7 @@
     "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
-    "@gapi/core": "^1.8.207",
+    "@gapi/core": "^1.8.208",
     "@sendgrid/mail": "6.5.2"
   },
   "devDependencies": {

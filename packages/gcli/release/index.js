@@ -257669,7 +257669,6 @@ var init_build = __esm({
     import_operators5 = __toESM(require_operators());
     init_log();
     init_load_spec();
-    console.log((0, import_path.join)(__dirname, "esbuild.wasm"));
     build_default = async (args) => {
       const time3 = Date.now();
       return (0, import_rxjs6.lastValueFrom)(

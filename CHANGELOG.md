@@ -1,4 +1,4 @@
-## [1.8.207](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.207) (2026-03-25)
+## [1.8.208](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.208) (2026-03-25)
 
 
 ### Bug Fixes
@@ -111,6 +111,7 @@
 * **gcli:** added ignore folders so we can safely execute commands changing files without interrupting the server to restart for example for schema introspection of the graphql queries ([a5da7ba](https://github.com/Stradivario/gapi/commit/a5da7bad7e0153251b6cc3b9d6c4f282936cfb64))
 * **gcli:** added multiple scaling options and some documentation inside the cli itself ([0efec0f](https://github.com/Stradivario/gapi/commit/0efec0f8f9221cd73168e6e3be50f6ec4d3376b0))
 * **gcli:** added package command and prepared for rxjs migration by removing toPromise() and throwError accepts function () => error ([84c2cad](https://github.com/Stradivario/gapi/commit/84c2cad586c07e29d5626be714a16dd76f37b090))
+* **gcli:** added Web Assembly esbuild.wasm file so we can compile from webassembly aka browser based ([f2537ef](https://github.com/Stradivario/gapi/commit/f2537ef7565bf2b4090b79fee28e653a7b755ee3))
 * **gcli:** build script added outfile ([1bea705](https://github.com/Stradivario/gapi/commit/1bea7057543c37999ec2bd23983bc8a0401361f0))
 * **gcli:** bundle binary ([e4ad1a0](https://github.com/Stradivario/gapi/commit/e4ad1a075bb468f014d5cc01cda31227775fe04a))
 * **gcli:** environment crud operations added ([5c4bde8](https://github.com/Stradivario/gapi/commit/5c4bde864e328e97c21f616af5911e3ce0208edf))
