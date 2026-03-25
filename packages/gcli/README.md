@@ -347,3 +347,11 @@ For a complete list of commands and options, use the built-in help:
 gcli --help
 gcli lambda:create --help
 ```
+
+## Running in WebContainer using wasm
+
+Install `esbuild-wasm` dependency inside your package.json if the project will be running in WebContainer
+
+```bash
+npm install esbuild-wasm
+```
