@@ -1104,70 +1104,6 @@
               "deprecationReason": null
             },
             {
-              "name": "search_knowledge_vector",
-              "description": "PRIMARY KNOWLEDGE SEARCH TOOL.\n          Use this for ANY question about 'Who', 'What', 'Where', 'Ownership', or 'Concepts' stored in the system.\n          It uses Vector Search + GraphRAG to find nodes AND their relationships (e.g. \"Who owns X\").\n          Finds: Companies, Websites, Code, Concepts, and their connections.\n          ",
-              "args": [
-                {
-                  "name": "query",
-                  "description": "The natural language query to find similar nodes for.",
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "limit",
-                  "description": "Max results to return",
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "SCALAR",
-                "name": "JSON",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "search_graph",
-              "description": "Search the knowledge graph using a Cypher query. Use this to find information about concept key-values, code, or previous conversations.\n  Schema:\n  (:User {idString})\n  (:Chat {idString, createdAtNumber})\n  (:Message {idString, roleString, contentString, createdAtNumber})\n  (User)-[:OWNS]->(Chat)\n  (Chat)-[:HAS_MESSAGE]->(Message)\n  (Message)-[:NEXT]->(Message)\n\n  AND Dynamic Knowledge Nodes created via add_knowledge:\n  (:Concept {name, id}), (:Fact {name, id}), (:Entity {name, id}), (:Company {name, id}), etc.\n  Relationships are dynamic.\n  Use 'name' for semantic search and 'id' for exact lookup.\n  ",
-              "args": [
-                {
-                  "name": "query",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "SCALAR",
-                "name": "JSON",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "listAvailableModels",
               "description": null,
               "args": [],
@@ -1309,6 +1245,30 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "Chat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "stripeConfiguration",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "StripeConfiguration",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "paymentMethods",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "PaymentMethodResponse",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -8581,6 +8541,174 @@
         },
         {
           "kind": "OBJECT",
+          "name": "StripeConfiguration",
+          "description": null,
+          "fields": [
+            {
+              "name": "publishableKey",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "PaymentMethodResponse",
+          "description": null,
+          "fields": [
+            {
+              "name": "paymentMethods",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PaymentMethod",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "defaultPaymentMethodId",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "PaymentMethod",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "link",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "card",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "PaymentMethodCard",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "PaymentMethodCard",
+          "description": null,
+          "fields": [
+            {
+              "name": "brand",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "last4",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "exp_month",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "exp_year",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "MigrationType",
           "description": null,
           "fields": [
@@ -9376,13 +9504,17 @@
               "deprecationReason": null
             },
             {
-              "name": "config",
-              "description": "This is a name of the kubernetes config",
+              "name": "configs",
+              "description": "\n      This is a name of the kubernetes secret can be used in the lambda code section as follows\n\n      const environment = await context.getSecret('environment');\n\n      ",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "KubectlConfig",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -16089,112 +16221,6 @@
               "deprecationReason": null
             },
             {
-              "name": "add_knowledge",
-              "description": "Add a new node to the knowledge graph.\n          Use this to PROACTIVELY save useful information, especially:\n          1. **Code Snippets**: If the user says \"I like this code\", save it as a 'CodeSnippet'.\n          2. **Notes**: General facts or preferences.\n          3. **Concepts**: Abstract ideas or definitions.\n\n          Common labels: CodeSnippet, Note, Concept, Document.\n          IMPORTANT: An 'id' (UUID) is automatically generated if not provided.\n          Recommended: Always provide a 'name' property for easier human-readable search.\n          Auto-Embedding: The content will be automatically embedded for vector search.\n          ",
-              "args": [
-                {
-                  "name": "label",
-                  "description": "The label for the node (e.g. Concept, CodeSnippet)",
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "properties",
-                  "description": "Key-value pairs for the node properties. Ensure text content is in a property like \"text\", \"description\", or \"content\" for best embedding.",
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "JSONObject",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "SCALAR",
-                "name": "JSON",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "create_relationship",
-              "description": "Create a relationship between two nodes in the knowledge graph.\n          Use this to link concepts, e.g. (Company)-[:OWNS]->(Website).\n          Nodes are identified by their 'id' OR 'name' property.\n          ",
-              "args": [
-                {
-                  "name": "fromId",
-                  "description": "The id or name of the source node",
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "toId",
-                  "description": "The id or name of the target node",
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "relationship",
-                  "description": "The relationship type (e.g. OWNS, RELATED_TO)",
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "properties",
-                  "description": "Key-value pairs for the relationship properties",
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "JSONObject",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "SCALAR",
-                "name": "JSON",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "createChatAssistant",
               "description": null,
               "args": [
@@ -16503,6 +16529,110 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "ChatMessage",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createPaymentIntent",
+              "description": null,
+              "args": [
+                {
+                  "name": "amount",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Int",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "currency",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "paymentMethodId",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "invoiceId",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "CreatePaymentIntent",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createSetupIntent",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "CreateSetupIntent",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "setDefaultPaymentMethod",
+              "description": null,
+              "args": [
+                {
+                  "name": "paymentMethodId",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "SetDefaultPaymentMethodResponse",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -21650,6 +21780,99 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CreatePaymentIntent",
+          "description": null,
+          "fields": [
+            {
+              "name": "clientSecret",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CreateSetupIntent",
+          "description": null,
+          "fields": [
+            {
+              "name": "clientSecret",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "SetDefaultPaymentMethodResponse",
+          "description": null,
+          "fields": [
+            {
+              "name": "success",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "CreateCompletionType",
           "description": null,
           "fields": [
@@ -22306,12 +22529,16 @@
               "defaultValue": null
             },
             {
-              "name": "config",
-              "description": "This is a name of the kubernetes config",
+              "name": "configs",
+              "description": "List of kubernetes config names",
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "defaultValue": null
             },

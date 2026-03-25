@@ -1,7 +1,8 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { BuildOptions, Platform } from 'esbuild';
 import esbuild from 'esbuild';
-import { lastValueFrom, of } from 'rxjs';
+import { join } from 'path';
+import { from, lastValueFrom } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { Logger } from '~/services/log';
@@ -19,6 +20,19 @@ export interface BuildArguments {
   ignore?: string[];
 }
 
+async function getEsbuild() {
+  if (!!process.versions.webcontainer) {
+    const esbuildWasm = await import('esbuild-wasm');
+    await esbuildWasm.initialize({
+      worker: false,
+      wasmURL: join(__dirname, 'esbuild.wasm'),
+    });
+    return esbuildWasm;
+  } else {
+    return esbuild;
+  }
+}
+
 export default async (args: BuildArguments) => {
   const time = Date.now();
   return lastValueFrom(
@@ -29,8 +43,8 @@ export default async (args: BuildArguments) => {
         );
       }),
       switchMap((config) =>
-        of(config).pipe(
-          map((config) => ({
+        from(getEsbuild()).pipe(
+          map((esbuild) => ({
             esbuild,
             options: {
               entryPoints: args.files?.length

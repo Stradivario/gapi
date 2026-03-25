@@ -15,11 +15,11 @@ var __export = (target, all) => {
   for (var name2 in all)
     __defProp(target, name2, { get: all[name2], enumerable: true });
 };
-var __copyProps = (to, from11, except, desc) => {
-  if (from11 && typeof from11 === "object" || typeof from11 === "function") {
-    for (let key of __getOwnPropNames(from11))
+var __copyProps = (to, from12, except, desc) => {
+  if (from12 && typeof from12 === "object" || typeof from12 === "function") {
+    for (let key of __getOwnPropNames(from12))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc(from11, key)) || desc.enumerable });
+        __defProp(to, key, { get: () => from12[key], enumerable: !(desc = __getOwnPropDesc(from12, key)) || desc.enumerable });
   }
   return to;
 };
@@ -8917,9 +8917,9 @@ var require_Subscription = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9100,9 +9100,9 @@ var require_timeoutProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9860,9 +9860,9 @@ var require_animationFrameProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10460,9 +10460,9 @@ var require_intervalProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10669,9 +10669,9 @@ var require_immediateProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12233,10 +12233,10 @@ var require_from = __commonJS({
     exports2.from = void 0;
     var scheduled_1 = require_scheduled();
     var innerFrom_1 = require_innerFrom();
-    function from11(input, scheduler) {
+    function from12(input, scheduler) {
       return scheduler ? scheduled_1.scheduled(input, scheduler) : innerFrom_1.innerFrom(input);
     }
-    exports2.from = from11;
+    exports2.from = from12;
   }
 });
 
@@ -12248,7 +12248,7 @@ var require_of = __commonJS({
     exports2.of = void 0;
     var args_1 = require_args();
     var from_1 = require_from();
-    function of11() {
+    function of10() {
       var args = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
@@ -12256,7 +12256,7 @@ var require_of = __commonJS({
       var scheduler = args_1.popScheduler(args);
       return from_1.from(args, scheduler);
     }
-    exports2.of = of11;
+    exports2.of = of10;
   }
 });
 
@@ -12624,9 +12624,9 @@ var require_mapOneOrManyArgs = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12666,9 +12666,9 @@ var require_bindCallbackInternals = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -13800,9 +13800,9 @@ var require_zip = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14430,9 +14430,9 @@ var require_combineLatest2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14478,9 +14478,9 @@ var require_combineLatestWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14552,9 +14552,9 @@ var require_concat2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14598,9 +14598,9 @@ var require_concatWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15091,9 +15091,9 @@ var require_endWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15638,9 +15638,9 @@ var require_merge2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15685,9 +15685,9 @@ var require_mergeWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15770,9 +15770,9 @@ var require_onErrorResumeNextWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15954,9 +15954,9 @@ var require_raceWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16352,9 +16352,9 @@ var require_share = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17354,9 +17354,9 @@ var require_withLatestFrom = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17440,9 +17440,9 @@ var require_zip2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17483,9 +17483,9 @@ var require_zipWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -18251,9 +18251,9 @@ var require_race2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from11) {
-      for (var i2 = 0, il = from11.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from11[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from12) {
+      for (var i2 = 0, il = from12.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from12[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -24479,7 +24479,7 @@ var require_auth = __commonJS({
         var b = a && (a[mf] ? "phone" : null);
         if (b && a && a[nf]) {
           K(this, "uid", a[nf]);
-          K(this, "displayName", a[of11] || null);
+          K(this, "displayName", a[of10] || null);
           var c = null;
           a[pf] && (c = new Date(a[pf]).toUTCString());
           K(this, "enrollmentTime", c);
@@ -24497,7 +24497,7 @@ var require_auth = __commonJS({
         }
         return b;
       }
-      var of11 = "displayName", pf = "enrolledAt", nf = "mfaEnrollmentId", mf = "phoneInfo";
+      var of10 = "displayName", pf = "enrolledAt", nf = "mfaEnrollmentId", mf = "phoneInfo";
       function rf(a) {
         lf.call(this, a);
         K(this, "phoneNumber", a[mf]);
@@ -27878,7 +27878,7 @@ var require_auth = __commonJS({
           var e2 = null, f3 = {};
           if (d) {
             d.uid && (f3[nf] = d.uid);
-            d.displayName && (f3[of11] = d.displayName);
+            d.displayName && (f3[of10] = d.displayName);
             d.enrollmentTime && (f3[pf] = new Date(d.enrollmentTime).toISOString());
             d.phoneNumber && (f3[mf] = d.phoneNumber);
             try {
@@ -29982,7 +29982,7 @@ var require_buffer_list = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -31500,7 +31500,7 @@ var require_from2 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors().codes.ERR_INVALID_ARG_TYPE;
-    function from11(Readable2, iterable, opts) {
+    function from12(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -31539,7 +31539,7 @@ var require_from2 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from11;
+    module2.exports = from12;
   }
 });
 
@@ -31583,7 +31583,7 @@ var require_stream_readable = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from11;
+    var from12;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -32265,10 +32265,10 @@ var require_stream_readable = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from11 === void 0) {
-          from11 = require_from2();
+        if (from12 === void 0) {
+          from12 = require_from2();
         }
-        return from11(Readable2, iterable, opts);
+        return from12(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -32448,8 +32448,8 @@ var require_pipeline = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from11, to) {
-      return from11.pipe(to);
+    function pipe2(from12, to) {
+      return from12.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -33000,7 +33000,7 @@ var require_buffer_list2 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -34227,7 +34227,7 @@ var require_from3 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors2().codes.ERR_INVALID_ARG_TYPE;
-    function from11(Readable2, iterable, opts) {
+    function from12(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -34266,7 +34266,7 @@ var require_from3 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from11;
+    module2.exports = from12;
   }
 });
 
@@ -34310,7 +34310,7 @@ var require_stream_readable2 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from11;
+    var from12;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -34992,10 +34992,10 @@ var require_stream_readable2 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from11 === void 0) {
-          from11 = require_from3();
+        if (from12 === void 0) {
+          from12 = require_from3();
         }
-        return from11(Readable2, iterable, opts);
+        return from12(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -35175,8 +35175,8 @@ var require_pipeline2 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from11, to) {
-      return from11.pipe(to);
+    function pipe2(from12, to) {
+      return from12.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -36157,7 +36157,22 @@ secrets {
  }
  type
 }
-config
+config {
+ id
+ projectId
+ name
+ apiVersion
+ data
+ kind
+ metadata {
+  creationTimestamp
+  name
+  namespace
+  resourceVersion
+  uid
+ }
+ type
+}
 env
 method
 createdBy
@@ -36980,14 +36995,14 @@ function __spreadArrays() {
       r2[k] = a[j];
   return r2;
 }
-function __spreadArray(to, from11, pack) {
-  if (pack || arguments.length === 2) for (var i2 = 0, l = from11.length, ar; i2 < l; i2++) {
-    if (ar || !(i2 in from11)) {
-      if (!ar) ar = Array.prototype.slice.call(from11, 0, i2);
-      ar[i2] = from11[i2];
+function __spreadArray(to, from12, pack) {
+  if (pack || arguments.length === 2) for (var i2 = 0, l = from12.length, ar; i2 < l; i2++) {
+    if (ar || !(i2 in from12)) {
+      if (!ar) ar = Array.prototype.slice.call(from12, 0, i2);
+      ar[i2] = from12[i2];
     }
   }
-  return to.concat(ar || Array.prototype.slice.call(from11));
+  return to.concat(ar || Array.prototype.slice.call(from12));
 }
 function __await(v) {
   return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -37432,7 +37447,7 @@ var require_util = __commonJS({
       return path2;
     }
     exports2.normalize = normalize;
-    function join(aRoot, aPath) {
+    function join2(aRoot, aPath) {
       if (aRoot === "") {
         aRoot = ".";
       }
@@ -37464,7 +37479,7 @@ var require_util = __commonJS({
       }
       return joined;
     }
-    exports2.join = join;
+    exports2.join = join2;
     exports2.isAbsolute = function(aPath) {
       return aPath.charAt(0) === "/" || urlRegexp.test(aPath);
     };
@@ -37637,7 +37652,7 @@ var require_util = __commonJS({
             parsed.path = parsed.path.substring(0, index + 1);
           }
         }
-        sourceURL = join(urlGenerate(parsed), sourceURL);
+        sourceURL = join2(urlGenerate(parsed), sourceURL);
       }
       return normalize(sourceURL);
     }
@@ -39511,11 +39526,11 @@ var require_typescript = __commonJS({
         for (var name2 in all)
           __defProp2(target, name2, { get: all[name2], enumerable: true });
       };
-      var __copyProps2 = (to, from11, except, desc) => {
-        if (from11 && typeof from11 === "object" || typeof from11 === "function") {
-          for (let key of __getOwnPropNames2(from11))
+      var __copyProps2 = (to, from12, except, desc) => {
+        if (from12 && typeof from12 === "object" || typeof from12 === "function") {
+          for (let key of __getOwnPropNames2(from12))
             if (!__hasOwnProp2.call(to, key) && key !== except)
-              __defProp2(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc2(from11, key)) || desc.enumerable });
+              __defProp2(to, key, { get: () => from12[key], enumerable: !(desc = __getOwnPropDesc2(from12, key)) || desc.enumerable });
         }
         return to;
       };
@@ -42359,14 +42374,14 @@ var require_typescript = __commonJS({
       function toOffset(array2, offset) {
         return offset < 0 ? array2.length + offset : offset;
       }
-      function addRange(to, from11, start2, end) {
-        if (from11 === void 0 || from11.length === 0) return to;
-        if (to === void 0) return from11.slice(start2, end);
-        start2 = start2 === void 0 ? 0 : toOffset(from11, start2);
-        end = end === void 0 ? from11.length : toOffset(from11, end);
-        for (let i2 = start2; i2 < end && i2 < from11.length; i2++) {
-          if (from11[i2] !== void 0) {
-            to.push(from11[i2]);
+      function addRange(to, from12, start2, end) {
+        if (from12 === void 0 || from12.length === 0) return to;
+        if (to === void 0) return from12.slice(start2, end);
+        start2 = start2 === void 0 ? 0 : toOffset(from12, start2);
+        end = end === void 0 ? from12.length : toOffset(from12, end);
+        for (let i2 = start2; i2 < end && i2 < from12.length; i2++) {
+          if (from12[i2] !== void 0) {
+            to.push(from12[i2]);
           }
         }
         return to;
@@ -48875,8 +48890,8 @@ ${lanes.join("\n")}
         const canonicalDirectoryName = getCanonicalFileName(directoryName);
         return startsWith(canonicalFileName, canonicalDirectoryName + "/") || startsWith(canonicalFileName, canonicalDirectoryName + "\\");
       }
-      function getPathComponentsRelativeTo(from11, to, stringEqualityComparer, getCanonicalFileName) {
-        const fromComponents = reducePathComponents(getPathComponents(from11));
+      function getPathComponentsRelativeTo(from12, to, stringEqualityComparer, getCanonicalFileName) {
+        const fromComponents = reducePathComponents(getPathComponents(from12));
         const toComponents = reducePathComponents(getPathComponents(to));
         let start2;
         for (start2 = 0; start2 < fromComponents.length && start2 < toComponents.length; start2++) {
@@ -48912,8 +48927,8 @@ ${lanes.join("\n")}
           false
         );
       }
-      function getRelativePathFromFile(from11, to, getCanonicalFileName) {
-        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from11), to, getCanonicalFileName));
+      function getRelativePathFromFile(from12, to, getCanonicalFileName) {
+        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from12), to, getCanonicalFileName));
       }
       function getRelativePathToDirectoryOrUrl(directoryPathOrUrl, relativeOrAbsolutePath, currentDirectory, getCanonicalFileName, isAbsolutePathAnUrl) {
         const pathComponents2 = getPathComponentsRelativeTo(
@@ -56464,15 +56479,15 @@ ${lanes.join("\n")}
         if (!nodeArray || isArray(child) || !isElement(child)) return false;
         return contains(nodeArray, child);
       }
-      function insertStatementsAfterPrologue(to, from11, isPrologueDirective2) {
-        if (from11 === void 0 || from11.length === 0) return to;
+      function insertStatementsAfterPrologue(to, from12, isPrologueDirective2) {
+        if (from12 === void 0 || from12.length === 0) return to;
         let statementIndex = 0;
         for (; statementIndex < to.length; ++statementIndex) {
           if (!isPrologueDirective2(to[statementIndex])) {
             break;
           }
         }
-        to.splice(statementIndex, 0, ...from11);
+        to.splice(statementIndex, 0, ...from12);
         return to;
       }
       function insertStatementAfterPrologue(to, statement, isPrologueDirective2) {
@@ -56489,11 +56504,11 @@ ${lanes.join("\n")}
       function isAnyPrologueDirective(node) {
         return isPrologueDirective(node) || !!(getEmitFlags(node) & 2097152);
       }
-      function insertStatementsAfterStandardPrologue(to, from11) {
-        return insertStatementsAfterPrologue(to, from11, isPrologueDirective);
+      function insertStatementsAfterStandardPrologue(to, from12) {
+        return insertStatementsAfterPrologue(to, from12, isPrologueDirective);
       }
-      function insertStatementsAfterCustomPrologue(to, from11) {
-        return insertStatementsAfterPrologue(to, from11, isAnyPrologueDirective);
+      function insertStatementsAfterCustomPrologue(to, from12) {
+        return insertStatementsAfterPrologue(to, from12, isAnyPrologueDirective);
       }
       function insertStatementAfterStandardPrologue(to, statement) {
         return insertStatementAfterPrologue(to, statement, isPrologueDirective);
@@ -70972,13 +70987,13 @@ ${lanes.join("\n")}
             [cooked, raw]
           );
         }
-        function createSpreadArrayHelper(to, from11, packFrom) {
+        function createSpreadArrayHelper(to, from12, packFrom) {
           context.requestEmitHelper(spreadArrayHelper);
           return factory2.createCallExpression(
             getUnscopedHelperName("__spreadArray"),
             /*typeArguments*/
             void 0,
-            [to, from11, packFrom ? immutableTrue() : immutableFalse()]
+            [to, from12, packFrom ? immutableTrue() : immutableFalse()]
           );
         }
         function createPropKeyHelper(expr) {
@@ -203342,8 +203357,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           } else {
             for (const pos2 of positions) {
-              const from11 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
-              const offset = text.substr(from11, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
+              const from12 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
+              const offset = text.substr(from12, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
               textChanges2.push({
                 newText: "",
                 span: {
@@ -204528,8 +204543,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getCallSiteGroupKey(entry) {
         return getNodeId(entry.declaration);
       }
-      function createCallHierarchyIncomingCall(from11, fromSpans) {
-        return { from: from11, fromSpans };
+      function createCallHierarchyIncomingCall(from12, fromSpans) {
+        return { from: from12, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
         return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map21(entries, (entry) => createTextSpanFromRange(entry.range)));
@@ -207703,11 +207718,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const rightSibling = currentNodeIndex < maxChildIndex ? commentNode.getChildAt(currentNodeIndex + 1) : void 0;
         return { leftSibling, rightSibling };
       }
-      function findEndOfTextBetween(jsDocComment, from11, to) {
-        const comment = jsDocComment.getText().substring(from11 - jsDocComment.getStart(), to - jsDocComment.getStart());
+      function findEndOfTextBetween(jsDocComment, from12, to) {
+        const comment = jsDocComment.getText().substring(from12 - jsDocComment.getStart(), to - jsDocComment.getStart());
         for (let i2 = comment.length; i2 > 0; i2--) {
           if (!/[*/\s]/.test(comment.substring(i2 - 1, i2))) {
-            return from11 + i2;
+            return from12 + i2;
           }
         }
         return to;
@@ -232783,9 +232798,9 @@ ${options.prefix}` : "\n" : options.prefix
       function toTokenRange(arg) {
         return typeof arg === "number" ? tokenRangeFrom([arg]) : isArray(arg) ? tokenRangeFrom(arg) : arg;
       }
-      function tokenRangeFromRange(from11, to, except = []) {
+      function tokenRangeFromRange(from12, to, except = []) {
         const tokens = [];
-        for (let token = from11; token <= to; token++) {
+        for (let token = from12; token <= to; token++) {
           if (!contains(except, token)) {
             tokens.push(token);
           }
@@ -250482,11 +250497,11 @@ var require_main = __commonJS({
       for (var name2 in all)
         __defProp2(target, name2, { get: all[name2], enumerable: true });
     };
-    var __copyProps2 = (to, from11, except, desc) => {
-      if (from11 && typeof from11 === "object" || typeof from11 === "function") {
-        for (let key of __getOwnPropNames2(from11))
+    var __copyProps2 = (to, from12, except, desc) => {
+      if (from12 && typeof from12 === "object" || typeof from12 === "function") {
+        for (let key of __getOwnPropNames2(from12))
           if (!__hasOwnProp2.call(to, key) && key !== except)
-            __defProp2(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc2(from11, key)) || desc.enumerable });
+            __defProp2(to, key, { get: () => from12[key], enumerable: !(desc = __getOwnPropDesc2(from12, key)) || desc.enumerable });
       }
       return to;
     };
@@ -252134,7 +252149,7 @@ ${file2}:${line}:${column}: ERROR: ${pluginText}${e2.text}`;
       const esbuildLibDir = path2.dirname(require.resolve("esbuild"));
       return path2.join(esbuildLibDir, `downloaded-${pkg.replace("/", "-")}-${path2.basename(subpath)}`);
     }
-    function generateBinPath() {
+    function generateBinPath2() {
       if (isValidBinaryPath(ESBUILD_BINARY_PATH)) {
         if (!fs2.existsSync(ESBUILD_BINARY_PATH)) {
           console.warn(`[esbuild] Ignoring bad configuration: ESBUILD_BINARY_PATH=${ESBUILD_BINARY_PATH}`);
@@ -252272,7 +252287,7 @@ More information: The file containing the code for esbuild's JavaScript API (${_
       if (false) {
         return ["node", [path22.join(__dirname, "..", "bin", "esbuild")]];
       } else {
-        const { binPath, isWASM } = generateBinPath();
+        const { binPath, isWASM } = generateBinPath2();
         if (isWASM) {
           return ["node", [binPath]];
         } else {
@@ -254860,9 +254875,9 @@ function dump$1(input, options) {
   if (writeNode(state, 0, value, true, true)) return state.dump + "\n";
   return "";
 }
-function renamed(from11, to) {
+function renamed(from12, to) {
   return function() {
-    throw new Error("Function yaml." + from11 + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
+    throw new Error("Function yaml." + from12 + " is removed in js-yaml 4. Use yaml." + to + " instead, which is now safe by default.");
   };
 }
 var isNothing_1, isObject_1, toArray_1, repeat_1, isNegativeZero_1, extend_1, common, exception, snippet, TYPE_CONSTRUCTOR_OPTIONS, YAML_NODE_KINDS, type, schema, str, seq, map4, failsafe, _null, bool, int, YAML_FLOAT_PATTERN, SCIENTIFIC_WITHOUT_DOT, float, json, core, YAML_DATE_REGEXP, YAML_TIMESTAMP_REGEXP, timestamp, merge, BASE64_MAP, binary, _hasOwnProperty$3, _toString$2, omap, _toString$1, pairs, _hasOwnProperty$2, set, _default, _hasOwnProperty$1, CONTEXT_FLOW_IN, CONTEXT_FLOW_OUT, CONTEXT_BLOCK_IN, CONTEXT_BLOCK_OUT, CHOMPING_CLIP, CHOMPING_STRIP, CHOMPING_KEEP, PATTERN_NON_PRINTABLE, PATTERN_NON_ASCII_LINE_BREAKS, PATTERN_FLOW_INDICATORS, PATTERN_TAG_HANDLE, PATTERN_TAG_URI, simpleEscapeCheck, simpleEscapeMap, i2, directiveHandlers, loadAll_1, load_1, loader, _toString, _hasOwnProperty, CHAR_BOM, CHAR_TAB, CHAR_LINE_FEED, CHAR_CARRIAGE_RETURN, CHAR_SPACE, CHAR_EXCLAMATION, CHAR_DOUBLE_QUOTE, CHAR_SHARP, CHAR_PERCENT, CHAR_AMPERSAND, CHAR_SINGLE_QUOTE, CHAR_ASTERISK, CHAR_COMMA, CHAR_MINUS, CHAR_COLON, CHAR_EQUALS, CHAR_GREATER_THAN, CHAR_QUESTION, CHAR_COMMERCIAL_AT, CHAR_LEFT_SQUARE_BRACKET, CHAR_RIGHT_SQUARE_BRACKET, CHAR_GRAVE_ACCENT, CHAR_LEFT_CURLY_BRACKET, CHAR_VERTICAL_LINE, CHAR_RIGHT_CURLY_BRACKET, ESCAPE_SEQUENCES, DEPRECATED_BOOLEANS_SYNTAX, DEPRECATED_BASE60_SYNTAX, QUOTING_TYPE_SINGLE, QUOTING_TYPE_DOUBLE, STYLE_PLAIN, STYLE_SINGLE, STYLE_LITERAL, STYLE_FOLDED, STYLE_DOUBLE, dump_1, dumper, load, loadAll, dump, safeLoad, safeLoadAll, safeDump;
@@ -255311,20 +255326,2350 @@ var init_load_spec = __esm({
   }
 });
 
+// ../../node_modules/esbuild-wasm/lib/main.js
+var require_main2 = __commonJS({
+  "../../node_modules/esbuild-wasm/lib/main.js"(exports2, module2) {
+    "use strict";
+    var __defProp2 = Object.defineProperty;
+    var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+    var __getOwnPropNames2 = Object.getOwnPropertyNames;
+    var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+    var __export2 = (target, all) => {
+      for (var name2 in all)
+        __defProp2(target, name2, { get: all[name2], enumerable: true });
+    };
+    var __copyProps2 = (to, from12, except, desc) => {
+      if (from12 && typeof from12 === "object" || typeof from12 === "function") {
+        for (let key of __getOwnPropNames2(from12))
+          if (!__hasOwnProp2.call(to, key) && key !== except)
+            __defProp2(to, key, { get: () => from12[key], enumerable: !(desc = __getOwnPropDesc2(from12, key)) || desc.enumerable });
+      }
+      return to;
+    };
+    var __toCommonJS2 = (mod) => __copyProps2(__defProp2({}, "__esModule", { value: true }), mod);
+    var node_exports = {};
+    __export2(node_exports, {
+      analyzeMetafile: () => analyzeMetafile,
+      analyzeMetafileSync: () => analyzeMetafileSync,
+      build: () => build,
+      buildSync: () => buildSync,
+      context: () => context,
+      default: () => node_default,
+      formatMessages: () => formatMessages,
+      formatMessagesSync: () => formatMessagesSync,
+      initialize: () => initialize,
+      stop: () => stop,
+      transform: () => transform2,
+      transformSync: () => transformSync,
+      version: () => version2
+    });
+    module2.exports = __toCommonJS2(node_exports);
+    function encodePacket(packet) {
+      let visit = (value) => {
+        if (value === null) {
+          bb.write8(0);
+        } else if (typeof value === "boolean") {
+          bb.write8(1);
+          bb.write8(+value);
+        } else if (typeof value === "number") {
+          bb.write8(2);
+          bb.write32(value | 0);
+        } else if (typeof value === "string") {
+          bb.write8(3);
+          bb.write(encodeUTF8(value));
+        } else if (value instanceof Uint8Array) {
+          bb.write8(4);
+          bb.write(value);
+        } else if (value instanceof Array) {
+          bb.write8(5);
+          bb.write32(value.length);
+          for (let item of value) {
+            visit(item);
+          }
+        } else {
+          let keys = Object.keys(value);
+          bb.write8(6);
+          bb.write32(keys.length);
+          for (let key of keys) {
+            bb.write(encodeUTF8(key));
+            visit(value[key]);
+          }
+        }
+      };
+      let bb = new ByteBuffer();
+      bb.write32(0);
+      bb.write32(packet.id << 1 | +!packet.isRequest);
+      visit(packet.value);
+      writeUInt32LE(bb.buf, bb.len - 4, 0);
+      return bb.buf.subarray(0, bb.len);
+    }
+    function decodePacket(bytes) {
+      let visit = () => {
+        switch (bb.read8()) {
+          case 0:
+            return null;
+          case 1:
+            return !!bb.read8();
+          case 2:
+            return bb.read32();
+          case 3:
+            return decodeUTF8(bb.read());
+          case 4:
+            return bb.read();
+          case 5: {
+            let count = bb.read32();
+            let value2 = [];
+            for (let i2 = 0; i2 < count; i2++) {
+              value2.push(visit());
+            }
+            return value2;
+          }
+          case 6: {
+            let count = bb.read32();
+            let value2 = {};
+            for (let i2 = 0; i2 < count; i2++) {
+              value2[decodeUTF8(bb.read())] = visit();
+            }
+            return value2;
+          }
+          default:
+            throw new Error("Invalid packet");
+        }
+      };
+      let bb = new ByteBuffer(bytes);
+      let id = bb.read32();
+      let isRequest2 = (id & 1) === 0;
+      id >>>= 1;
+      let value = visit();
+      if (bb.ptr !== bytes.length) {
+        throw new Error("Invalid packet");
+      }
+      return { id, isRequest: isRequest2, value };
+    }
+    var ByteBuffer = class {
+      constructor(buf = new Uint8Array(1024)) {
+        this.buf = buf;
+        this.len = 0;
+        this.ptr = 0;
+      }
+      _write(delta) {
+        if (this.len + delta > this.buf.length) {
+          let clone3 = new Uint8Array((this.len + delta) * 2);
+          clone3.set(this.buf);
+          this.buf = clone3;
+        }
+        this.len += delta;
+        return this.len - delta;
+      }
+      write8(value) {
+        let offset = this._write(1);
+        this.buf[offset] = value;
+      }
+      write32(value) {
+        let offset = this._write(4);
+        writeUInt32LE(this.buf, value, offset);
+      }
+      write(bytes) {
+        let offset = this._write(4 + bytes.length);
+        writeUInt32LE(this.buf, bytes.length, offset);
+        this.buf.set(bytes, offset + 4);
+      }
+      _read(delta) {
+        if (this.ptr + delta > this.buf.length) {
+          throw new Error("Invalid packet");
+        }
+        this.ptr += delta;
+        return this.ptr - delta;
+      }
+      read8() {
+        return this.buf[this._read(1)];
+      }
+      read32() {
+        return readUInt32LE(this.buf, this._read(4));
+      }
+      read() {
+        let length = this.read32();
+        let bytes = new Uint8Array(length);
+        let ptr = this._read(bytes.length);
+        bytes.set(this.buf.subarray(ptr, ptr + length));
+        return bytes;
+      }
+    };
+    var encodeUTF8;
+    var decodeUTF8;
+    var encodeInvariant;
+    if (typeof TextEncoder !== "undefined" && typeof TextDecoder !== "undefined") {
+      let encoder = new TextEncoder();
+      let decoder = new TextDecoder();
+      encodeUTF8 = (text) => encoder.encode(text);
+      decodeUTF8 = (bytes) => decoder.decode(bytes);
+      encodeInvariant = 'new TextEncoder().encode("")';
+    } else if (typeof Buffer !== "undefined") {
+      encodeUTF8 = (text) => Buffer.from(text);
+      decodeUTF8 = (bytes) => {
+        let { buffer, byteOffset, byteLength } = bytes;
+        return Buffer.from(buffer, byteOffset, byteLength).toString();
+      };
+      encodeInvariant = 'Buffer.from("")';
+    } else {
+      throw new Error("No UTF-8 codec found");
+    }
+    if (!(encodeUTF8("") instanceof Uint8Array))
+      throw new Error(`Invariant violation: "${encodeInvariant} instanceof Uint8Array" is incorrectly false
+
+This indicates that your JavaScript environment is broken. You cannot use
+esbuild in this environment because esbuild relies on this invariant. This
+is not a problem with esbuild. You need to fix your environment instead.
+`);
+    function readUInt32LE(buffer, offset) {
+      return (buffer[offset++] | buffer[offset++] << 8 | buffer[offset++] << 16 | buffer[offset++] << 24) >>> 0;
+    }
+    function writeUInt32LE(buffer, value, offset) {
+      buffer[offset++] = value;
+      buffer[offset++] = value >> 8;
+      buffer[offset++] = value >> 16;
+      buffer[offset++] = value >> 24;
+    }
+    var fromCharCode = String.fromCharCode;
+    function throwSyntaxError(bytes, index, message) {
+      const c = bytes[index];
+      let line = 1;
+      let column = 0;
+      for (let i2 = 0; i2 < index; i2++) {
+        if (bytes[i2] === 10) {
+          line++;
+          column = 0;
+        } else {
+          column++;
+        }
+      }
+      throw new SyntaxError(
+        message ? message : index === bytes.length ? "Unexpected end of input while parsing JSON" : c >= 32 && c <= 126 ? `Unexpected character ${fromCharCode(c)} in JSON at position ${index} (line ${line}, column ${column})` : `Unexpected byte 0x${c.toString(16)} in JSON at position ${index} (line ${line}, column ${column})`
+      );
+    }
+    function JSON_parse(bytes) {
+      if (!(bytes instanceof Uint8Array)) {
+        throw new Error(`JSON input must be a Uint8Array`);
+      }
+      const propertyStack = [];
+      const objectStack = [];
+      const stateStack = [];
+      const length = bytes.length;
+      let property = null;
+      let state = 0;
+      let object3;
+      let i2 = 0;
+      while (i2 < length) {
+        let c = bytes[i2++];
+        if (c <= 32) {
+          continue;
+        }
+        let value;
+        if (state === 2 && property === null && c !== 34 && c !== 125) {
+          throwSyntaxError(bytes, --i2);
+        }
+        switch (c) {
+          // True
+          case 116: {
+            if (bytes[i2++] !== 114 || bytes[i2++] !== 117 || bytes[i2++] !== 101) {
+              throwSyntaxError(bytes, --i2);
+            }
+            value = true;
+            break;
+          }
+          // False
+          case 102: {
+            if (bytes[i2++] !== 97 || bytes[i2++] !== 108 || bytes[i2++] !== 115 || bytes[i2++] !== 101) {
+              throwSyntaxError(bytes, --i2);
+            }
+            value = false;
+            break;
+          }
+          // Null
+          case 110: {
+            if (bytes[i2++] !== 117 || bytes[i2++] !== 108 || bytes[i2++] !== 108) {
+              throwSyntaxError(bytes, --i2);
+            }
+            value = null;
+            break;
+          }
+          // Number begin
+          case 45:
+          case 46:
+          case 48:
+          case 49:
+          case 50:
+          case 51:
+          case 52:
+          case 53:
+          case 54:
+          case 55:
+          case 56:
+          case 57: {
+            let index = i2;
+            value = fromCharCode(c);
+            c = bytes[i2];
+            while (true) {
+              switch (c) {
+                case 43:
+                case 45:
+                case 46:
+                case 48:
+                case 49:
+                case 50:
+                case 51:
+                case 52:
+                case 53:
+                case 54:
+                case 55:
+                case 56:
+                case 57:
+                case 101:
+                case 69: {
+                  value += fromCharCode(c);
+                  c = bytes[++i2];
+                  continue;
+                }
+              }
+              break;
+            }
+            value = +value;
+            if (isNaN(value)) {
+              throwSyntaxError(bytes, --index, "Invalid number");
+            }
+            break;
+          }
+          // String begin
+          case 34: {
+            value = "";
+            while (true) {
+              if (i2 >= length) {
+                throwSyntaxError(bytes, length);
+              }
+              c = bytes[i2++];
+              if (c === 34) {
+                break;
+              } else if (c === 92) {
+                switch (bytes[i2++]) {
+                  // Normal escape sequence
+                  case 34:
+                    value += '"';
+                    break;
+                  case 47:
+                    value += "/";
+                    break;
+                  case 92:
+                    value += "\\";
+                    break;
+                  case 98:
+                    value += "\b";
+                    break;
+                  case 102:
+                    value += "\f";
+                    break;
+                  case 110:
+                    value += "\n";
+                    break;
+                  case 114:
+                    value += "\r";
+                    break;
+                  case 116:
+                    value += "	";
+                    break;
+                  // Unicode escape sequence
+                  case 117: {
+                    let code = 0;
+                    for (let j = 0; j < 4; j++) {
+                      c = bytes[i2++];
+                      code <<= 4;
+                      if (c >= 48 && c <= 57) code |= c - 48;
+                      else if (c >= 97 && c <= 102) code |= c + (10 - 97);
+                      else if (c >= 65 && c <= 70) code |= c + (10 - 65);
+                      else throwSyntaxError(bytes, --i2);
+                    }
+                    value += fromCharCode(code);
+                    break;
+                  }
+                  // Invalid escape sequence
+                  default:
+                    throwSyntaxError(bytes, --i2);
+                    break;
+                }
+              } else if (c <= 127) {
+                value += fromCharCode(c);
+              } else if ((c & 224) === 192) {
+                value += fromCharCode((c & 31) << 6 | bytes[i2++] & 63);
+              } else if ((c & 240) === 224) {
+                value += fromCharCode((c & 15) << 12 | (bytes[i2++] & 63) << 6 | bytes[i2++] & 63);
+              } else if ((c & 248) == 240) {
+                let codePoint = (c & 7) << 18 | (bytes[i2++] & 63) << 12 | (bytes[i2++] & 63) << 6 | bytes[i2++] & 63;
+                if (codePoint > 65535) {
+                  codePoint -= 65536;
+                  value += fromCharCode(codePoint >> 10 & 1023 | 55296);
+                  codePoint = 56320 | codePoint & 1023;
+                }
+                value += fromCharCode(codePoint);
+              }
+            }
+            value[0];
+            break;
+          }
+          // Array begin
+          case 91: {
+            value = [];
+            propertyStack.push(property);
+            objectStack.push(object3);
+            stateStack.push(state);
+            property = null;
+            object3 = value;
+            state = 1;
+            continue;
+          }
+          // Object begin
+          case 123: {
+            value = {};
+            propertyStack.push(property);
+            objectStack.push(object3);
+            stateStack.push(state);
+            property = null;
+            object3 = value;
+            state = 2;
+            continue;
+          }
+          // Array end
+          case 93: {
+            if (state !== 1) {
+              throwSyntaxError(bytes, --i2);
+            }
+            value = object3;
+            property = propertyStack.pop();
+            object3 = objectStack.pop();
+            state = stateStack.pop();
+            break;
+          }
+          // Object end
+          case 125: {
+            if (state !== 2) {
+              throwSyntaxError(bytes, --i2);
+            }
+            value = object3;
+            property = propertyStack.pop();
+            object3 = objectStack.pop();
+            state = stateStack.pop();
+            break;
+          }
+          default: {
+            throwSyntaxError(bytes, --i2);
+          }
+        }
+        c = bytes[i2];
+        while (c <= 32) {
+          c = bytes[++i2];
+        }
+        switch (state) {
+          case 0: {
+            if (i2 === length) {
+              return value;
+            }
+            break;
+          }
+          case 1: {
+            object3.push(value);
+            if (c === 44) {
+              i2++;
+              continue;
+            }
+            if (c === 93) {
+              continue;
+            }
+            break;
+          }
+          case 2: {
+            if (property === null) {
+              property = value;
+              if (c === 58) {
+                i2++;
+                continue;
+              }
+            } else {
+              object3[property] = value;
+              property = null;
+              if (c === 44) {
+                i2++;
+                continue;
+              }
+              if (c === 125) {
+                continue;
+              }
+            }
+            break;
+          }
+        }
+        break;
+      }
+      throwSyntaxError(bytes, i2);
+    }
+    var quote = JSON.stringify;
+    var buildLogLevelDefault = "warning";
+    var transformLogLevelDefault = "silent";
+    function validateAndJoinStringArray(values, what) {
+      const toJoin = [];
+      for (const value of values) {
+        validateStringValue(value, what);
+        if (value.indexOf(",") >= 0) throw new Error(`Invalid ${what}: ${value}`);
+        toJoin.push(value);
+      }
+      return toJoin.join(",");
+    }
+    var canBeAnything = () => null;
+    var mustBeBoolean = (value) => typeof value === "boolean" ? null : "a boolean";
+    var mustBeString = (value) => typeof value === "string" ? null : "a string";
+    var mustBeRegExp = (value) => value instanceof RegExp ? null : "a RegExp object";
+    var mustBeInteger = (value) => typeof value === "number" && value === (value | 0) ? null : "an integer";
+    var mustBeValidPortNumber = (value) => typeof value === "number" && value === (value | 0) && value >= 0 && value <= 65535 ? null : "a valid port number";
+    var mustBeFunction = (value) => typeof value === "function" ? null : "a function";
+    var mustBeArray = (value) => Array.isArray(value) ? null : "an array";
+    var mustBeArrayOfStrings = (value) => Array.isArray(value) && value.every((x2) => typeof x2 === "string") ? null : "an array of strings";
+    var mustBeObject = (value) => typeof value === "object" && value !== null && !Array.isArray(value) ? null : "an object";
+    var mustBeEntryPoints = (value) => typeof value === "object" && value !== null ? null : "an array or an object";
+    var mustBeWebAssemblyModule = (value) => value instanceof WebAssembly.Module ? null : "a WebAssembly.Module";
+    var mustBeObjectOrNull = (value) => typeof value === "object" && !Array.isArray(value) ? null : "an object or null";
+    var mustBeStringOrBoolean = (value) => typeof value === "string" || typeof value === "boolean" ? null : "a string or a boolean";
+    var mustBeStringOrObject = (value) => typeof value === "string" || typeof value === "object" && value !== null && !Array.isArray(value) ? null : "a string or an object";
+    var mustBeStringOrArrayOfStrings = (value) => typeof value === "string" || Array.isArray(value) && value.every((x2) => typeof x2 === "string") ? null : "a string or an array of strings";
+    var mustBeStringOrUint8Array = (value) => typeof value === "string" || value instanceof Uint8Array ? null : "a string or a Uint8Array";
+    var mustBeStringOrURL = (value) => typeof value === "string" || value instanceof URL ? null : "a string or a URL";
+    function getFlag(object3, keys, key, mustBeFn) {
+      let value = object3[key];
+      keys[key + ""] = true;
+      if (value === void 0) return void 0;
+      let mustBe = mustBeFn(value);
+      if (mustBe !== null) throw new Error(`${quote(key)} must be ${mustBe}`);
+      return value;
+    }
+    function checkForInvalidFlags(object3, keys, where) {
+      for (let key in object3) {
+        if (!(key in keys)) {
+          throw new Error(`Invalid option ${where}: ${quote(key)}`);
+        }
+      }
+    }
+    function validateInitializeOptions(options) {
+      let keys = /* @__PURE__ */ Object.create(null);
+      let wasmURL = getFlag(options, keys, "wasmURL", mustBeStringOrURL);
+      let wasmModule = getFlag(options, keys, "wasmModule", mustBeWebAssemblyModule);
+      let worker = getFlag(options, keys, "worker", mustBeBoolean);
+      checkForInvalidFlags(options, keys, "in initialize() call");
+      return {
+        wasmURL,
+        wasmModule,
+        worker
+      };
+    }
+    function validateMangleCache(mangleCache) {
+      let validated;
+      if (mangleCache !== void 0) {
+        validated = /* @__PURE__ */ Object.create(null);
+        for (let key in mangleCache) {
+          let value = mangleCache[key];
+          if (typeof value === "string" || value === false) {
+            validated[key] = value;
+          } else {
+            throw new Error(`Expected ${quote(key)} in mangle cache to map to either a string or false`);
+          }
+        }
+      }
+      return validated;
+    }
+    function pushLogFlags(flags, options, keys, isTTY2, logLevelDefault) {
+      let color = getFlag(options, keys, "color", mustBeBoolean);
+      let logLevel = getFlag(options, keys, "logLevel", mustBeString);
+      let logLimit = getFlag(options, keys, "logLimit", mustBeInteger);
+      if (color !== void 0) flags.push(`--color=${color}`);
+      else if (isTTY2) flags.push(`--color=true`);
+      flags.push(`--log-level=${logLevel || logLevelDefault}`);
+      flags.push(`--log-limit=${logLimit || 0}`);
+    }
+    function validateStringValue(value, what, key) {
+      if (typeof value !== "string") {
+        throw new Error(`Expected value for ${what}${key !== void 0 ? " " + quote(key) : ""} to be a string, got ${typeof value} instead`);
+      }
+      return value;
+    }
+    function pushCommonFlags(flags, options, keys) {
+      let legalComments = getFlag(options, keys, "legalComments", mustBeString);
+      let sourceRoot = getFlag(options, keys, "sourceRoot", mustBeString);
+      let sourcesContent = getFlag(options, keys, "sourcesContent", mustBeBoolean);
+      let target = getFlag(options, keys, "target", mustBeStringOrArrayOfStrings);
+      let format = getFlag(options, keys, "format", mustBeString);
+      let globalName = getFlag(options, keys, "globalName", mustBeString);
+      let mangleProps = getFlag(options, keys, "mangleProps", mustBeRegExp);
+      let reserveProps = getFlag(options, keys, "reserveProps", mustBeRegExp);
+      let mangleQuoted = getFlag(options, keys, "mangleQuoted", mustBeBoolean);
+      let minify = getFlag(options, keys, "minify", mustBeBoolean);
+      let minifySyntax = getFlag(options, keys, "minifySyntax", mustBeBoolean);
+      let minifyWhitespace = getFlag(options, keys, "minifyWhitespace", mustBeBoolean);
+      let minifyIdentifiers = getFlag(options, keys, "minifyIdentifiers", mustBeBoolean);
+      let lineLimit = getFlag(options, keys, "lineLimit", mustBeInteger);
+      let drop = getFlag(options, keys, "drop", mustBeArrayOfStrings);
+      let dropLabels = getFlag(options, keys, "dropLabels", mustBeArrayOfStrings);
+      let charset = getFlag(options, keys, "charset", mustBeString);
+      let treeShaking = getFlag(options, keys, "treeShaking", mustBeBoolean);
+      let ignoreAnnotations = getFlag(options, keys, "ignoreAnnotations", mustBeBoolean);
+      let jsx = getFlag(options, keys, "jsx", mustBeString);
+      let jsxFactory = getFlag(options, keys, "jsxFactory", mustBeString);
+      let jsxFragment = getFlag(options, keys, "jsxFragment", mustBeString);
+      let jsxImportSource = getFlag(options, keys, "jsxImportSource", mustBeString);
+      let jsxDev = getFlag(options, keys, "jsxDev", mustBeBoolean);
+      let jsxSideEffects = getFlag(options, keys, "jsxSideEffects", mustBeBoolean);
+      let define2 = getFlag(options, keys, "define", mustBeObject);
+      let logOverride = getFlag(options, keys, "logOverride", mustBeObject);
+      let supported = getFlag(options, keys, "supported", mustBeObject);
+      let pure = getFlag(options, keys, "pure", mustBeArrayOfStrings);
+      let keepNames = getFlag(options, keys, "keepNames", mustBeBoolean);
+      let platform = getFlag(options, keys, "platform", mustBeString);
+      let tsconfigRaw = getFlag(options, keys, "tsconfigRaw", mustBeStringOrObject);
+      let absPaths = getFlag(options, keys, "absPaths", mustBeArrayOfStrings);
+      if (legalComments) flags.push(`--legal-comments=${legalComments}`);
+      if (sourceRoot !== void 0) flags.push(`--source-root=${sourceRoot}`);
+      if (sourcesContent !== void 0) flags.push(`--sources-content=${sourcesContent}`);
+      if (target) flags.push(`--target=${validateAndJoinStringArray(Array.isArray(target) ? target : [target], "target")}`);
+      if (format) flags.push(`--format=${format}`);
+      if (globalName) flags.push(`--global-name=${globalName}`);
+      if (platform) flags.push(`--platform=${platform}`);
+      if (tsconfigRaw) flags.push(`--tsconfig-raw=${typeof tsconfigRaw === "string" ? tsconfigRaw : JSON.stringify(tsconfigRaw)}`);
+      if (minify) flags.push("--minify");
+      if (minifySyntax) flags.push("--minify-syntax");
+      if (minifyWhitespace) flags.push("--minify-whitespace");
+      if (minifyIdentifiers) flags.push("--minify-identifiers");
+      if (lineLimit) flags.push(`--line-limit=${lineLimit}`);
+      if (charset) flags.push(`--charset=${charset}`);
+      if (treeShaking !== void 0) flags.push(`--tree-shaking=${treeShaking}`);
+      if (ignoreAnnotations) flags.push(`--ignore-annotations`);
+      if (drop) for (let what of drop) flags.push(`--drop:${validateStringValue(what, "drop")}`);
+      if (dropLabels) flags.push(`--drop-labels=${validateAndJoinStringArray(dropLabels, "drop label")}`);
+      if (absPaths) flags.push(`--abs-paths=${validateAndJoinStringArray(absPaths, "abs paths")}`);
+      if (mangleProps) flags.push(`--mangle-props=${jsRegExpToGoRegExp(mangleProps)}`);
+      if (reserveProps) flags.push(`--reserve-props=${jsRegExpToGoRegExp(reserveProps)}`);
+      if (mangleQuoted !== void 0) flags.push(`--mangle-quoted=${mangleQuoted}`);
+      if (jsx) flags.push(`--jsx=${jsx}`);
+      if (jsxFactory) flags.push(`--jsx-factory=${jsxFactory}`);
+      if (jsxFragment) flags.push(`--jsx-fragment=${jsxFragment}`);
+      if (jsxImportSource) flags.push(`--jsx-import-source=${jsxImportSource}`);
+      if (jsxDev) flags.push(`--jsx-dev`);
+      if (jsxSideEffects) flags.push(`--jsx-side-effects`);
+      if (define2) {
+        for (let key in define2) {
+          if (key.indexOf("=") >= 0) throw new Error(`Invalid define: ${key}`);
+          flags.push(`--define:${key}=${validateStringValue(define2[key], "define", key)}`);
+        }
+      }
+      if (logOverride) {
+        for (let key in logOverride) {
+          if (key.indexOf("=") >= 0) throw new Error(`Invalid log override: ${key}`);
+          flags.push(`--log-override:${key}=${validateStringValue(logOverride[key], "log override", key)}`);
+        }
+      }
+      if (supported) {
+        for (let key in supported) {
+          if (key.indexOf("=") >= 0) throw new Error(`Invalid supported: ${key}`);
+          const value = supported[key];
+          if (typeof value !== "boolean") throw new Error(`Expected value for supported ${quote(key)} to be a boolean, got ${typeof value} instead`);
+          flags.push(`--supported:${key}=${value}`);
+        }
+      }
+      if (pure) for (let fn of pure) flags.push(`--pure:${validateStringValue(fn, "pure")}`);
+      if (keepNames) flags.push(`--keep-names`);
+    }
+    function flagsForBuildOptions(callName, options, isTTY2, logLevelDefault, writeDefault) {
+      var _a22;
+      let flags = [];
+      let entries = [];
+      let keys = /* @__PURE__ */ Object.create(null);
+      let stdinContents = null;
+      let stdinResolveDir = null;
+      pushLogFlags(flags, options, keys, isTTY2, logLevelDefault);
+      pushCommonFlags(flags, options, keys);
+      let sourcemap = getFlag(options, keys, "sourcemap", mustBeStringOrBoolean);
+      let bundle = getFlag(options, keys, "bundle", mustBeBoolean);
+      let splitting = getFlag(options, keys, "splitting", mustBeBoolean);
+      let preserveSymlinks = getFlag(options, keys, "preserveSymlinks", mustBeBoolean);
+      let metafile = getFlag(options, keys, "metafile", mustBeBoolean);
+      let outfile = getFlag(options, keys, "outfile", mustBeString);
+      let outdir = getFlag(options, keys, "outdir", mustBeString);
+      let outbase = getFlag(options, keys, "outbase", mustBeString);
+      let tsconfig = getFlag(options, keys, "tsconfig", mustBeString);
+      let resolveExtensions = getFlag(options, keys, "resolveExtensions", mustBeArrayOfStrings);
+      let nodePathsInput = getFlag(options, keys, "nodePaths", mustBeArrayOfStrings);
+      let mainFields = getFlag(options, keys, "mainFields", mustBeArrayOfStrings);
+      let conditions = getFlag(options, keys, "conditions", mustBeArrayOfStrings);
+      let external = getFlag(options, keys, "external", mustBeArrayOfStrings);
+      let packages = getFlag(options, keys, "packages", mustBeString);
+      let alias = getFlag(options, keys, "alias", mustBeObject);
+      let loader2 = getFlag(options, keys, "loader", mustBeObject);
+      let outExtension = getFlag(options, keys, "outExtension", mustBeObject);
+      let publicPath = getFlag(options, keys, "publicPath", mustBeString);
+      let entryNames = getFlag(options, keys, "entryNames", mustBeString);
+      let chunkNames = getFlag(options, keys, "chunkNames", mustBeString);
+      let assetNames = getFlag(options, keys, "assetNames", mustBeString);
+      let inject = getFlag(options, keys, "inject", mustBeArrayOfStrings);
+      let banner = getFlag(options, keys, "banner", mustBeObject);
+      let footer = getFlag(options, keys, "footer", mustBeObject);
+      let entryPoints = getFlag(options, keys, "entryPoints", mustBeEntryPoints);
+      let absWorkingDir = getFlag(options, keys, "absWorkingDir", mustBeString);
+      let stdin = getFlag(options, keys, "stdin", mustBeObject);
+      let write = (_a22 = getFlag(options, keys, "write", mustBeBoolean)) != null ? _a22 : writeDefault;
+      let allowOverwrite = getFlag(options, keys, "allowOverwrite", mustBeBoolean);
+      let mangleCache = getFlag(options, keys, "mangleCache", mustBeObject);
+      keys.plugins = true;
+      checkForInvalidFlags(options, keys, `in ${callName}() call`);
+      if (sourcemap) flags.push(`--sourcemap${sourcemap === true ? "" : `=${sourcemap}`}`);
+      if (bundle) flags.push("--bundle");
+      if (allowOverwrite) flags.push("--allow-overwrite");
+      if (splitting) flags.push("--splitting");
+      if (preserveSymlinks) flags.push("--preserve-symlinks");
+      if (metafile) flags.push(`--metafile`);
+      if (outfile) flags.push(`--outfile=${outfile}`);
+      if (outdir) flags.push(`--outdir=${outdir}`);
+      if (outbase) flags.push(`--outbase=${outbase}`);
+      if (tsconfig) flags.push(`--tsconfig=${tsconfig}`);
+      if (packages) flags.push(`--packages=${packages}`);
+      if (resolveExtensions) flags.push(`--resolve-extensions=${validateAndJoinStringArray(resolveExtensions, "resolve extension")}`);
+      if (publicPath) flags.push(`--public-path=${publicPath}`);
+      if (entryNames) flags.push(`--entry-names=${entryNames}`);
+      if (chunkNames) flags.push(`--chunk-names=${chunkNames}`);
+      if (assetNames) flags.push(`--asset-names=${assetNames}`);
+      if (mainFields) flags.push(`--main-fields=${validateAndJoinStringArray(mainFields, "main field")}`);
+      if (conditions) flags.push(`--conditions=${validateAndJoinStringArray(conditions, "condition")}`);
+      if (external) for (let name2 of external) flags.push(`--external:${validateStringValue(name2, "external")}`);
+      if (alias) {
+        for (let old in alias) {
+          if (old.indexOf("=") >= 0) throw new Error(`Invalid package name in alias: ${old}`);
+          flags.push(`--alias:${old}=${validateStringValue(alias[old], "alias", old)}`);
+        }
+      }
+      if (banner) {
+        for (let type2 in banner) {
+          if (type2.indexOf("=") >= 0) throw new Error(`Invalid banner file type: ${type2}`);
+          flags.push(`--banner:${type2}=${validateStringValue(banner[type2], "banner", type2)}`);
+        }
+      }
+      if (footer) {
+        for (let type2 in footer) {
+          if (type2.indexOf("=") >= 0) throw new Error(`Invalid footer file type: ${type2}`);
+          flags.push(`--footer:${type2}=${validateStringValue(footer[type2], "footer", type2)}`);
+        }
+      }
+      if (inject) for (let path3 of inject) flags.push(`--inject:${validateStringValue(path3, "inject")}`);
+      if (loader2) {
+        for (let ext in loader2) {
+          if (ext.indexOf("=") >= 0) throw new Error(`Invalid loader extension: ${ext}`);
+          flags.push(`--loader:${ext}=${validateStringValue(loader2[ext], "loader", ext)}`);
+        }
+      }
+      if (outExtension) {
+        for (let ext in outExtension) {
+          if (ext.indexOf("=") >= 0) throw new Error(`Invalid out extension: ${ext}`);
+          flags.push(`--out-extension:${ext}=${validateStringValue(outExtension[ext], "out extension", ext)}`);
+        }
+      }
+      if (entryPoints) {
+        if (Array.isArray(entryPoints)) {
+          for (let i2 = 0, n = entryPoints.length; i2 < n; i2++) {
+            let entryPoint = entryPoints[i2];
+            if (typeof entryPoint === "object" && entryPoint !== null) {
+              let entryPointKeys = /* @__PURE__ */ Object.create(null);
+              let input = getFlag(entryPoint, entryPointKeys, "in", mustBeString);
+              let output = getFlag(entryPoint, entryPointKeys, "out", mustBeString);
+              checkForInvalidFlags(entryPoint, entryPointKeys, "in entry point at index " + i2);
+              if (input === void 0) throw new Error('Missing property "in" for entry point at index ' + i2);
+              if (output === void 0) throw new Error('Missing property "out" for entry point at index ' + i2);
+              entries.push([output, input]);
+            } else {
+              entries.push(["", validateStringValue(entryPoint, "entry point at index " + i2)]);
+            }
+          }
+        } else {
+          for (let key in entryPoints) {
+            entries.push([key, validateStringValue(entryPoints[key], "entry point", key)]);
+          }
+        }
+      }
+      if (stdin) {
+        let stdinKeys = /* @__PURE__ */ Object.create(null);
+        let contents = getFlag(stdin, stdinKeys, "contents", mustBeStringOrUint8Array);
+        let resolveDir = getFlag(stdin, stdinKeys, "resolveDir", mustBeString);
+        let sourcefile = getFlag(stdin, stdinKeys, "sourcefile", mustBeString);
+        let loader22 = getFlag(stdin, stdinKeys, "loader", mustBeString);
+        checkForInvalidFlags(stdin, stdinKeys, 'in "stdin" object');
+        if (sourcefile) flags.push(`--sourcefile=${sourcefile}`);
+        if (loader22) flags.push(`--loader=${loader22}`);
+        if (resolveDir) stdinResolveDir = resolveDir;
+        if (typeof contents === "string") stdinContents = encodeUTF8(contents);
+        else if (contents instanceof Uint8Array) stdinContents = contents;
+      }
+      let nodePaths = [];
+      if (nodePathsInput) {
+        for (let value of nodePathsInput) {
+          value += "";
+          nodePaths.push(value);
+        }
+      }
+      return {
+        entries,
+        flags,
+        write,
+        stdinContents,
+        stdinResolveDir,
+        absWorkingDir,
+        nodePaths,
+        mangleCache: validateMangleCache(mangleCache)
+      };
+    }
+    function flagsForTransformOptions(callName, options, isTTY2, logLevelDefault) {
+      let flags = [];
+      let keys = /* @__PURE__ */ Object.create(null);
+      pushLogFlags(flags, options, keys, isTTY2, logLevelDefault);
+      pushCommonFlags(flags, options, keys);
+      let sourcemap = getFlag(options, keys, "sourcemap", mustBeStringOrBoolean);
+      let sourcefile = getFlag(options, keys, "sourcefile", mustBeString);
+      let loader2 = getFlag(options, keys, "loader", mustBeString);
+      let banner = getFlag(options, keys, "banner", mustBeString);
+      let footer = getFlag(options, keys, "footer", mustBeString);
+      let mangleCache = getFlag(options, keys, "mangleCache", mustBeObject);
+      checkForInvalidFlags(options, keys, `in ${callName}() call`);
+      if (sourcemap) flags.push(`--sourcemap=${sourcemap === true ? "external" : sourcemap}`);
+      if (sourcefile) flags.push(`--sourcefile=${sourcefile}`);
+      if (loader2) flags.push(`--loader=${loader2}`);
+      if (banner) flags.push(`--banner=${banner}`);
+      if (footer) flags.push(`--footer=${footer}`);
+      return {
+        flags,
+        mangleCache: validateMangleCache(mangleCache)
+      };
+    }
+    function createChannel(streamIn) {
+      const requestCallbacksByKey = {};
+      const closeData = { didClose: false, reason: "" };
+      let responseCallbacks = {};
+      let nextRequestID = 0;
+      let nextBuildKey = 0;
+      let stdout = new Uint8Array(16 * 1024);
+      let stdoutUsed = 0;
+      let readFromStdout = (chunk) => {
+        let limit = stdoutUsed + chunk.length;
+        if (limit > stdout.length) {
+          let swap = new Uint8Array(limit * 2);
+          swap.set(stdout);
+          stdout = swap;
+        }
+        stdout.set(chunk, stdoutUsed);
+        stdoutUsed += chunk.length;
+        let offset = 0;
+        while (offset + 4 <= stdoutUsed) {
+          let length = readUInt32LE(stdout, offset);
+          if (offset + 4 + length > stdoutUsed) {
+            break;
+          }
+          offset += 4;
+          handleIncomingPacket(stdout.subarray(offset, offset + length));
+          offset += length;
+        }
+        if (offset > 0) {
+          stdout.copyWithin(0, offset, stdoutUsed);
+          stdoutUsed -= offset;
+        }
+      };
+      let afterClose = (error48) => {
+        closeData.didClose = true;
+        if (error48) closeData.reason = ": " + (error48.message || error48);
+        const text = "The service was stopped" + closeData.reason;
+        for (let id in responseCallbacks) {
+          responseCallbacks[id](text, null);
+        }
+        responseCallbacks = {};
+      };
+      let sendRequest = (refs, value, callback) => {
+        if (closeData.didClose) return callback("The service is no longer running" + closeData.reason, null);
+        let id = nextRequestID++;
+        responseCallbacks[id] = (error48, response) => {
+          try {
+            callback(error48, response);
+          } finally {
+            if (refs) refs.unref();
+          }
+        };
+        if (refs) refs.ref();
+        streamIn.writeToStdin(encodePacket({ id, isRequest: true, value }));
+      };
+      let sendResponse = (id, value) => {
+        if (closeData.didClose) throw new Error("The service is no longer running" + closeData.reason);
+        streamIn.writeToStdin(encodePacket({ id, isRequest: false, value }));
+      };
+      let handleRequest = async (id, request) => {
+        try {
+          if (request.command === "ping") {
+            sendResponse(id, {});
+            return;
+          }
+          if (typeof request.key === "number") {
+            const requestCallbacks = requestCallbacksByKey[request.key];
+            if (!requestCallbacks) {
+              return;
+            }
+            const callback = requestCallbacks[request.command];
+            if (callback) {
+              await callback(id, request);
+              return;
+            }
+          }
+          throw new Error(`Invalid command: ` + request.command);
+        } catch (e2) {
+          const errors = [extractErrorMessageV8(e2, streamIn, null, void 0, "")];
+          try {
+            sendResponse(id, { errors });
+          } catch {
+          }
+        }
+      };
+      let isFirstPacket = true;
+      let handleIncomingPacket = (bytes) => {
+        if (isFirstPacket) {
+          isFirstPacket = false;
+          let binaryVersion = String.fromCharCode(...bytes);
+          if (binaryVersion !== "0.27.4") {
+            throw new Error(`Cannot start service: Host version "${"0.27.4"}" does not match binary version ${quote(binaryVersion)}`);
+          }
+          return;
+        }
+        let packet = decodePacket(bytes);
+        if (packet.isRequest) {
+          handleRequest(packet.id, packet.value);
+        } else {
+          let callback = responseCallbacks[packet.id];
+          delete responseCallbacks[packet.id];
+          if (packet.value.error) callback(packet.value.error, {});
+          else callback(null, packet.value);
+        }
+      };
+      let buildOrContext = ({ callName, refs, options, isTTY: isTTY2, defaultWD: defaultWD2, callback }) => {
+        let refCount = 0;
+        const buildKey = nextBuildKey++;
+        const requestCallbacks = {};
+        const buildRefs = {
+          ref() {
+            if (++refCount === 1) {
+              if (refs) refs.ref();
+            }
+          },
+          unref() {
+            if (--refCount === 0) {
+              delete requestCallbacksByKey[buildKey];
+              if (refs) refs.unref();
+            }
+          }
+        };
+        requestCallbacksByKey[buildKey] = requestCallbacks;
+        buildRefs.ref();
+        buildOrContextImpl(
+          callName,
+          buildKey,
+          sendRequest,
+          sendResponse,
+          buildRefs,
+          streamIn,
+          requestCallbacks,
+          options,
+          isTTY2,
+          defaultWD2,
+          (err, res) => {
+            try {
+              callback(err, res);
+            } finally {
+              buildRefs.unref();
+            }
+          }
+        );
+      };
+      let transform22 = ({ callName, refs, input, options, isTTY: isTTY2, fs: fs3, callback }) => {
+        const details = createObjectStash();
+        let start2 = (inputPath) => {
+          try {
+            if (typeof input !== "string" && !(input instanceof Uint8Array))
+              throw new Error('The input to "transform" must be a string or a Uint8Array');
+            let {
+              flags,
+              mangleCache
+            } = flagsForTransformOptions(callName, options, isTTY2, transformLogLevelDefault);
+            let request = {
+              command: "transform",
+              flags,
+              inputFS: inputPath !== null,
+              input: inputPath !== null ? encodeUTF8(inputPath) : typeof input === "string" ? encodeUTF8(input) : input
+            };
+            if (mangleCache) request.mangleCache = mangleCache;
+            sendRequest(refs, request, (error48, response) => {
+              if (error48) return callback(new Error(error48), null);
+              let errors = replaceDetailsInMessages(response.errors, details);
+              let warnings = replaceDetailsInMessages(response.warnings, details);
+              let outstanding = 1;
+              let next = () => {
+                if (--outstanding === 0) {
+                  let result = {
+                    warnings,
+                    code: response.code,
+                    map: response.map,
+                    mangleCache: void 0,
+                    legalComments: void 0
+                  };
+                  if ("legalComments" in response) result.legalComments = response == null ? void 0 : response.legalComments;
+                  if (response.mangleCache) result.mangleCache = response == null ? void 0 : response.mangleCache;
+                  callback(null, result);
+                }
+              };
+              if (errors.length > 0) return callback(failureErrorWithLog("Transform failed", errors, warnings), null);
+              if (response.codeFS) {
+                outstanding++;
+                fs3.readFile(response.code, (err, contents) => {
+                  if (err !== null) {
+                    callback(err, null);
+                  } else {
+                    response.code = contents;
+                    next();
+                  }
+                });
+              }
+              if (response.mapFS) {
+                outstanding++;
+                fs3.readFile(response.map, (err, contents) => {
+                  if (err !== null) {
+                    callback(err, null);
+                  } else {
+                    response.map = contents;
+                    next();
+                  }
+                });
+              }
+              next();
+            });
+          } catch (e2) {
+            let flags = [];
+            try {
+              pushLogFlags(flags, options, {}, isTTY2, transformLogLevelDefault);
+            } catch {
+            }
+            const error48 = extractErrorMessageV8(e2, streamIn, details, void 0, "");
+            sendRequest(refs, { command: "error", flags, error: error48 }, () => {
+              error48.detail = details.load(error48.detail);
+              callback(failureErrorWithLog("Transform failed", [error48], []), null);
+            });
+          }
+        };
+        if ((typeof input === "string" || input instanceof Uint8Array) && input.length > 1024 * 1024) {
+          let next = start2;
+          start2 = () => fs3.writeFile(input, next);
+        }
+        start2(null);
+      };
+      let formatMessages2 = ({ callName, refs, messages, options, callback }) => {
+        if (!options) throw new Error(`Missing second argument in ${callName}() call`);
+        let keys = {};
+        let kind = getFlag(options, keys, "kind", mustBeString);
+        let color = getFlag(options, keys, "color", mustBeBoolean);
+        let terminalWidth = getFlag(options, keys, "terminalWidth", mustBeInteger);
+        checkForInvalidFlags(options, keys, `in ${callName}() call`);
+        if (kind === void 0) throw new Error(`Missing "kind" in ${callName}() call`);
+        if (kind !== "error" && kind !== "warning") throw new Error(`Expected "kind" to be "error" or "warning" in ${callName}() call`);
+        let request = {
+          command: "format-msgs",
+          messages: sanitizeMessages(messages, "messages", null, "", terminalWidth),
+          isWarning: kind === "warning"
+        };
+        if (color !== void 0) request.color = color;
+        if (terminalWidth !== void 0) request.terminalWidth = terminalWidth;
+        sendRequest(refs, request, (error48, response) => {
+          if (error48) return callback(new Error(error48), null);
+          callback(null, response.messages);
+        });
+      };
+      let analyzeMetafile2 = ({ callName, refs, metafile, options, callback }) => {
+        if (options === void 0) options = {};
+        let keys = {};
+        let color = getFlag(options, keys, "color", mustBeBoolean);
+        let verbose = getFlag(options, keys, "verbose", mustBeBoolean);
+        checkForInvalidFlags(options, keys, `in ${callName}() call`);
+        let request = {
+          command: "analyze-metafile",
+          metafile
+        };
+        if (color !== void 0) request.color = color;
+        if (verbose !== void 0) request.verbose = verbose;
+        sendRequest(refs, request, (error48, response) => {
+          if (error48) return callback(new Error(error48), null);
+          callback(null, response.result);
+        });
+      };
+      return {
+        readFromStdout,
+        afterClose,
+        service: {
+          buildOrContext,
+          transform: transform22,
+          formatMessages: formatMessages2,
+          analyzeMetafile: analyzeMetafile2
+        }
+      };
+    }
+    function buildOrContextImpl(callName, buildKey, sendRequest, sendResponse, refs, streamIn, requestCallbacks, options, isTTY2, defaultWD2, callback) {
+      const details = createObjectStash();
+      const isContext = callName === "context";
+      const handleError = (e2, pluginName) => {
+        const flags = [];
+        try {
+          pushLogFlags(flags, options, {}, isTTY2, buildLogLevelDefault);
+        } catch {
+        }
+        const message = extractErrorMessageV8(e2, streamIn, details, void 0, pluginName);
+        sendRequest(refs, { command: "error", flags, error: message }, () => {
+          message.detail = details.load(message.detail);
+          callback(failureErrorWithLog(isContext ? "Context failed" : "Build failed", [message], []), null);
+        });
+      };
+      let plugins;
+      if (typeof options === "object") {
+        const value = options.plugins;
+        if (value !== void 0) {
+          if (!Array.isArray(value)) return handleError(new Error(`"plugins" must be an array`), "");
+          plugins = value;
+        }
+      }
+      if (plugins && plugins.length > 0) {
+        if (streamIn.isSync) return handleError(new Error("Cannot use plugins in synchronous API calls"), "");
+        handlePlugins(
+          buildKey,
+          sendRequest,
+          sendResponse,
+          refs,
+          streamIn,
+          requestCallbacks,
+          options,
+          plugins,
+          details
+        ).then(
+          (result) => {
+            if (!result.ok) return handleError(result.error, result.pluginName);
+            try {
+              buildOrContextContinue(result.requestPlugins, result.runOnEndCallbacks, result.scheduleOnDisposeCallbacks);
+            } catch (e2) {
+              handleError(e2, "");
+            }
+          },
+          (e2) => handleError(e2, "")
+        );
+        return;
+      }
+      try {
+        buildOrContextContinue(null, (result, done) => done([], []), () => {
+        });
+      } catch (e2) {
+        handleError(e2, "");
+      }
+      function buildOrContextContinue(requestPlugins, runOnEndCallbacks, scheduleOnDisposeCallbacks) {
+        const writeDefault = streamIn.hasFS;
+        const {
+          entries,
+          flags,
+          write,
+          stdinContents,
+          stdinResolveDir,
+          absWorkingDir,
+          nodePaths,
+          mangleCache
+        } = flagsForBuildOptions(callName, options, isTTY2, buildLogLevelDefault, writeDefault);
+        if (write && !streamIn.hasFS) throw new Error(`The "write" option is unavailable in this environment`);
+        const request = {
+          command: "build",
+          key: buildKey,
+          entries,
+          flags,
+          write,
+          stdinContents,
+          stdinResolveDir,
+          absWorkingDir: absWorkingDir || defaultWD2,
+          nodePaths,
+          context: isContext
+        };
+        if (requestPlugins) request.plugins = requestPlugins;
+        if (mangleCache) request.mangleCache = mangleCache;
+        const buildResponseToResult = (response, callback2) => {
+          const result = {
+            errors: replaceDetailsInMessages(response.errors, details),
+            warnings: replaceDetailsInMessages(response.warnings, details),
+            outputFiles: void 0,
+            metafile: void 0,
+            mangleCache: void 0
+          };
+          const originalErrors = result.errors.slice();
+          const originalWarnings = result.warnings.slice();
+          if (response.outputFiles) result.outputFiles = response.outputFiles.map(convertOutputFiles);
+          if (response.metafile) result.metafile = parseJSON(response.metafile);
+          if (response.mangleCache) result.mangleCache = response.mangleCache;
+          if (response.writeToStdout !== void 0) console.log(decodeUTF8(response.writeToStdout).replace(/\n$/, ""));
+          runOnEndCallbacks(result, (onEndErrors, onEndWarnings) => {
+            if (originalErrors.length > 0 || onEndErrors.length > 0) {
+              const error48 = failureErrorWithLog("Build failed", originalErrors.concat(onEndErrors), originalWarnings.concat(onEndWarnings));
+              return callback2(error48, null, onEndErrors, onEndWarnings);
+            }
+            callback2(null, result, onEndErrors, onEndWarnings);
+          });
+        };
+        let latestResultPromise;
+        let provideLatestResult;
+        if (isContext)
+          requestCallbacks["on-end"] = (id, request2) => new Promise((resolve) => {
+            buildResponseToResult(request2, (err, result, onEndErrors, onEndWarnings) => {
+              const response = {
+                errors: onEndErrors,
+                warnings: onEndWarnings
+              };
+              if (provideLatestResult) provideLatestResult(err, result);
+              latestResultPromise = void 0;
+              provideLatestResult = void 0;
+              sendResponse(id, response);
+              resolve();
+            });
+          });
+        sendRequest(refs, request, (error48, response) => {
+          if (error48) return callback(new Error(error48), null);
+          if (!isContext) {
+            return buildResponseToResult(response, (err, res) => {
+              scheduleOnDisposeCallbacks();
+              return callback(err, res);
+            });
+          }
+          if (response.errors.length > 0) {
+            return callback(failureErrorWithLog("Context failed", response.errors, response.warnings), null);
+          }
+          let didDispose = false;
+          const result = {
+            rebuild: () => {
+              if (!latestResultPromise) latestResultPromise = new Promise((resolve, reject) => {
+                let settlePromise;
+                provideLatestResult = (err, result2) => {
+                  if (!settlePromise) settlePromise = () => err ? reject(err) : resolve(result2);
+                };
+                const triggerAnotherBuild = () => {
+                  const request2 = {
+                    command: "rebuild",
+                    key: buildKey
+                  };
+                  sendRequest(refs, request2, (error210, response2) => {
+                    if (error210) {
+                      reject(new Error(error210));
+                    } else if (settlePromise) {
+                      settlePromise();
+                    } else {
+                      triggerAnotherBuild();
+                    }
+                  });
+                };
+                triggerAnotherBuild();
+              });
+              return latestResultPromise;
+            },
+            watch: (options2 = {}) => new Promise((resolve, reject) => {
+              if (!streamIn.hasFS) throw new Error(`Cannot use the "watch" API in this environment`);
+              const keys = {};
+              const delay = getFlag(options2, keys, "delay", mustBeInteger);
+              checkForInvalidFlags(options2, keys, `in watch() call`);
+              const request2 = {
+                command: "watch",
+                key: buildKey
+              };
+              if (delay) request2.delay = delay;
+              sendRequest(refs, request2, (error210) => {
+                if (error210) reject(new Error(error210));
+                else resolve(void 0);
+              });
+            }),
+            serve: (options2 = {}) => new Promise((resolve, reject) => {
+              if (!streamIn.hasFS) throw new Error(`Cannot use the "serve" API in this environment`);
+              const keys = {};
+              const port = getFlag(options2, keys, "port", mustBeValidPortNumber);
+              const host = getFlag(options2, keys, "host", mustBeString);
+              const servedir = getFlag(options2, keys, "servedir", mustBeString);
+              const keyfile = getFlag(options2, keys, "keyfile", mustBeString);
+              const certfile = getFlag(options2, keys, "certfile", mustBeString);
+              const fallback = getFlag(options2, keys, "fallback", mustBeString);
+              const cors = getFlag(options2, keys, "cors", mustBeObject);
+              const onRequest = getFlag(options2, keys, "onRequest", mustBeFunction);
+              checkForInvalidFlags(options2, keys, `in serve() call`);
+              const request2 = {
+                command: "serve",
+                key: buildKey,
+                onRequest: !!onRequest
+              };
+              if (port !== void 0) request2.port = port;
+              if (host !== void 0) request2.host = host;
+              if (servedir !== void 0) request2.servedir = servedir;
+              if (keyfile !== void 0) request2.keyfile = keyfile;
+              if (certfile !== void 0) request2.certfile = certfile;
+              if (fallback !== void 0) request2.fallback = fallback;
+              if (cors) {
+                const corsKeys = {};
+                const origin = getFlag(cors, corsKeys, "origin", mustBeStringOrArrayOfStrings);
+                checkForInvalidFlags(cors, corsKeys, `on "cors" object`);
+                if (Array.isArray(origin)) request2.corsOrigin = origin;
+                else if (origin !== void 0) request2.corsOrigin = [origin];
+              }
+              sendRequest(refs, request2, (error210, response2) => {
+                if (error210) return reject(new Error(error210));
+                if (onRequest) {
+                  requestCallbacks["serve-request"] = (id, request3) => {
+                    onRequest(request3.args);
+                    sendResponse(id, {});
+                  };
+                }
+                resolve(response2);
+              });
+            }),
+            cancel: () => new Promise((resolve) => {
+              if (didDispose) return resolve();
+              const request2 = {
+                command: "cancel",
+                key: buildKey
+              };
+              sendRequest(refs, request2, () => {
+                resolve();
+              });
+            }),
+            dispose: () => new Promise((resolve) => {
+              if (didDispose) return resolve();
+              didDispose = true;
+              const request2 = {
+                command: "dispose",
+                key: buildKey
+              };
+              sendRequest(refs, request2, () => {
+                resolve();
+                scheduleOnDisposeCallbacks();
+                refs.unref();
+              });
+            })
+          };
+          refs.ref();
+          callback(null, result);
+        });
+      }
+    }
+    var handlePlugins = async (buildKey, sendRequest, sendResponse, refs, streamIn, requestCallbacks, initialOptions, plugins, details) => {
+      let onStartCallbacks = [];
+      let onEndCallbacks = [];
+      let onResolveCallbacks = {};
+      let onLoadCallbacks = {};
+      let onDisposeCallbacks = [];
+      let nextCallbackID = 0;
+      let i2 = 0;
+      let requestPlugins = [];
+      let isSetupDone = false;
+      plugins = [...plugins];
+      for (let item of plugins) {
+        let keys = {};
+        if (typeof item !== "object") throw new Error(`Plugin at index ${i2} must be an object`);
+        const name2 = getFlag(item, keys, "name", mustBeString);
+        if (typeof name2 !== "string" || name2 === "") throw new Error(`Plugin at index ${i2} is missing a name`);
+        try {
+          let setup = getFlag(item, keys, "setup", mustBeFunction);
+          if (typeof setup !== "function") throw new Error(`Plugin is missing a setup function`);
+          checkForInvalidFlags(item, keys, `on plugin ${quote(name2)}`);
+          let plugin = {
+            name: name2,
+            onStart: false,
+            onEnd: false,
+            onResolve: [],
+            onLoad: []
+          };
+          i2++;
+          let resolve = (path3, options = {}) => {
+            if (!isSetupDone) throw new Error('Cannot call "resolve" before plugin setup has completed');
+            if (typeof path3 !== "string") throw new Error(`The path to resolve must be a string`);
+            let keys2 = /* @__PURE__ */ Object.create(null);
+            let pluginName = getFlag(options, keys2, "pluginName", mustBeString);
+            let importer = getFlag(options, keys2, "importer", mustBeString);
+            let namespace = getFlag(options, keys2, "namespace", mustBeString);
+            let resolveDir = getFlag(options, keys2, "resolveDir", mustBeString);
+            let kind = getFlag(options, keys2, "kind", mustBeString);
+            let pluginData = getFlag(options, keys2, "pluginData", canBeAnything);
+            let importAttributes = getFlag(options, keys2, "with", mustBeObject);
+            checkForInvalidFlags(options, keys2, "in resolve() call");
+            return new Promise((resolve2, reject) => {
+              const request = {
+                command: "resolve",
+                path: path3,
+                key: buildKey,
+                pluginName: name2
+              };
+              if (pluginName != null) request.pluginName = pluginName;
+              if (importer != null) request.importer = importer;
+              if (namespace != null) request.namespace = namespace;
+              if (resolveDir != null) request.resolveDir = resolveDir;
+              if (kind != null) request.kind = kind;
+              else throw new Error(`Must specify "kind" when calling "resolve"`);
+              if (pluginData != null) request.pluginData = details.store(pluginData);
+              if (importAttributes != null) request.with = sanitizeStringMap(importAttributes, "with");
+              sendRequest(refs, request, (error48, response) => {
+                if (error48 !== null) reject(new Error(error48));
+                else resolve2({
+                  errors: replaceDetailsInMessages(response.errors, details),
+                  warnings: replaceDetailsInMessages(response.warnings, details),
+                  path: response.path,
+                  external: response.external,
+                  sideEffects: response.sideEffects,
+                  namespace: response.namespace,
+                  suffix: response.suffix,
+                  pluginData: details.load(response.pluginData)
+                });
+              });
+            });
+          };
+          let promise2 = setup({
+            initialOptions,
+            resolve,
+            onStart(callback) {
+              let registeredText = `This error came from the "onStart" callback registered here:`;
+              let registeredNote = extractCallerV8(new Error(registeredText), streamIn, "onStart");
+              onStartCallbacks.push({ name: name2, callback, note: registeredNote });
+              plugin.onStart = true;
+            },
+            onEnd(callback) {
+              let registeredText = `This error came from the "onEnd" callback registered here:`;
+              let registeredNote = extractCallerV8(new Error(registeredText), streamIn, "onEnd");
+              onEndCallbacks.push({ name: name2, callback, note: registeredNote });
+              plugin.onEnd = true;
+            },
+            onResolve(options, callback) {
+              let registeredText = `This error came from the "onResolve" callback registered here:`;
+              let registeredNote = extractCallerV8(new Error(registeredText), streamIn, "onResolve");
+              let keys2 = {};
+              let filter3 = getFlag(options, keys2, "filter", mustBeRegExp);
+              let namespace = getFlag(options, keys2, "namespace", mustBeString);
+              checkForInvalidFlags(options, keys2, `in onResolve() call for plugin ${quote(name2)}`);
+              if (filter3 == null) throw new Error(`onResolve() call is missing a filter`);
+              let id = nextCallbackID++;
+              onResolveCallbacks[id] = { name: name2, callback, note: registeredNote };
+              plugin.onResolve.push({ id, filter: jsRegExpToGoRegExp(filter3), namespace: namespace || "" });
+            },
+            onLoad(options, callback) {
+              let registeredText = `This error came from the "onLoad" callback registered here:`;
+              let registeredNote = extractCallerV8(new Error(registeredText), streamIn, "onLoad");
+              let keys2 = {};
+              let filter3 = getFlag(options, keys2, "filter", mustBeRegExp);
+              let namespace = getFlag(options, keys2, "namespace", mustBeString);
+              checkForInvalidFlags(options, keys2, `in onLoad() call for plugin ${quote(name2)}`);
+              if (filter3 == null) throw new Error(`onLoad() call is missing a filter`);
+              let id = nextCallbackID++;
+              onLoadCallbacks[id] = { name: name2, callback, note: registeredNote };
+              plugin.onLoad.push({ id, filter: jsRegExpToGoRegExp(filter3), namespace: namespace || "" });
+            },
+            onDispose(callback) {
+              onDisposeCallbacks.push(callback);
+            },
+            esbuild: streamIn.esbuild
+          });
+          if (promise2) await promise2;
+          requestPlugins.push(plugin);
+        } catch (e2) {
+          return { ok: false, error: e2, pluginName: name2 };
+        }
+      }
+      requestCallbacks["on-start"] = async (id, request) => {
+        details.clear();
+        let response = { errors: [], warnings: [] };
+        await Promise.all(onStartCallbacks.map(async ({ name: name2, callback, note }) => {
+          try {
+            let result = await callback();
+            if (result != null) {
+              if (typeof result !== "object") throw new Error(`Expected onStart() callback in plugin ${quote(name2)} to return an object`);
+              let keys = {};
+              let errors = getFlag(result, keys, "errors", mustBeArray);
+              let warnings = getFlag(result, keys, "warnings", mustBeArray);
+              checkForInvalidFlags(result, keys, `from onStart() callback in plugin ${quote(name2)}`);
+              if (errors != null) response.errors.push(...sanitizeMessages(errors, "errors", details, name2, void 0));
+              if (warnings != null) response.warnings.push(...sanitizeMessages(warnings, "warnings", details, name2, void 0));
+            }
+          } catch (e2) {
+            response.errors.push(extractErrorMessageV8(e2, streamIn, details, note && note(), name2));
+          }
+        }));
+        sendResponse(id, response);
+      };
+      requestCallbacks["on-resolve"] = async (id, request) => {
+        let response = {}, name2 = "", callback, note;
+        for (let id2 of request.ids) {
+          try {
+            ({ name: name2, callback, note } = onResolveCallbacks[id2]);
+            let result = await callback({
+              path: request.path,
+              importer: request.importer,
+              namespace: request.namespace,
+              resolveDir: request.resolveDir,
+              kind: request.kind,
+              pluginData: details.load(request.pluginData),
+              with: request.with
+            });
+            if (result != null) {
+              if (typeof result !== "object") throw new Error(`Expected onResolve() callback in plugin ${quote(name2)} to return an object`);
+              let keys = {};
+              let pluginName = getFlag(result, keys, "pluginName", mustBeString);
+              let path3 = getFlag(result, keys, "path", mustBeString);
+              let namespace = getFlag(result, keys, "namespace", mustBeString);
+              let suffix = getFlag(result, keys, "suffix", mustBeString);
+              let external = getFlag(result, keys, "external", mustBeBoolean);
+              let sideEffects = getFlag(result, keys, "sideEffects", mustBeBoolean);
+              let pluginData = getFlag(result, keys, "pluginData", canBeAnything);
+              let errors = getFlag(result, keys, "errors", mustBeArray);
+              let warnings = getFlag(result, keys, "warnings", mustBeArray);
+              let watchFiles = getFlag(result, keys, "watchFiles", mustBeArrayOfStrings);
+              let watchDirs = getFlag(result, keys, "watchDirs", mustBeArrayOfStrings);
+              checkForInvalidFlags(result, keys, `from onResolve() callback in plugin ${quote(name2)}`);
+              response.id = id2;
+              if (pluginName != null) response.pluginName = pluginName;
+              if (path3 != null) response.path = path3;
+              if (namespace != null) response.namespace = namespace;
+              if (suffix != null) response.suffix = suffix;
+              if (external != null) response.external = external;
+              if (sideEffects != null) response.sideEffects = sideEffects;
+              if (pluginData != null) response.pluginData = details.store(pluginData);
+              if (errors != null) response.errors = sanitizeMessages(errors, "errors", details, name2, void 0);
+              if (warnings != null) response.warnings = sanitizeMessages(warnings, "warnings", details, name2, void 0);
+              if (watchFiles != null) response.watchFiles = sanitizeStringArray(watchFiles, "watchFiles");
+              if (watchDirs != null) response.watchDirs = sanitizeStringArray(watchDirs, "watchDirs");
+              break;
+            }
+          } catch (e2) {
+            response = { id: id2, errors: [extractErrorMessageV8(e2, streamIn, details, note && note(), name2)] };
+            break;
+          }
+        }
+        sendResponse(id, response);
+      };
+      requestCallbacks["on-load"] = async (id, request) => {
+        let response = {}, name2 = "", callback, note;
+        for (let id2 of request.ids) {
+          try {
+            ({ name: name2, callback, note } = onLoadCallbacks[id2]);
+            let result = await callback({
+              path: request.path,
+              namespace: request.namespace,
+              suffix: request.suffix,
+              pluginData: details.load(request.pluginData),
+              with: request.with
+            });
+            if (result != null) {
+              if (typeof result !== "object") throw new Error(`Expected onLoad() callback in plugin ${quote(name2)} to return an object`);
+              let keys = {};
+              let pluginName = getFlag(result, keys, "pluginName", mustBeString);
+              let contents = getFlag(result, keys, "contents", mustBeStringOrUint8Array);
+              let resolveDir = getFlag(result, keys, "resolveDir", mustBeString);
+              let pluginData = getFlag(result, keys, "pluginData", canBeAnything);
+              let loader2 = getFlag(result, keys, "loader", mustBeString);
+              let errors = getFlag(result, keys, "errors", mustBeArray);
+              let warnings = getFlag(result, keys, "warnings", mustBeArray);
+              let watchFiles = getFlag(result, keys, "watchFiles", mustBeArrayOfStrings);
+              let watchDirs = getFlag(result, keys, "watchDirs", mustBeArrayOfStrings);
+              checkForInvalidFlags(result, keys, `from onLoad() callback in plugin ${quote(name2)}`);
+              response.id = id2;
+              if (pluginName != null) response.pluginName = pluginName;
+              if (contents instanceof Uint8Array) response.contents = contents;
+              else if (contents != null) response.contents = encodeUTF8(contents);
+              if (resolveDir != null) response.resolveDir = resolveDir;
+              if (pluginData != null) response.pluginData = details.store(pluginData);
+              if (loader2 != null) response.loader = loader2;
+              if (errors != null) response.errors = sanitizeMessages(errors, "errors", details, name2, void 0);
+              if (warnings != null) response.warnings = sanitizeMessages(warnings, "warnings", details, name2, void 0);
+              if (watchFiles != null) response.watchFiles = sanitizeStringArray(watchFiles, "watchFiles");
+              if (watchDirs != null) response.watchDirs = sanitizeStringArray(watchDirs, "watchDirs");
+              break;
+            }
+          } catch (e2) {
+            response = { id: id2, errors: [extractErrorMessageV8(e2, streamIn, details, note && note(), name2)] };
+            break;
+          }
+        }
+        sendResponse(id, response);
+      };
+      let runOnEndCallbacks = (result, done) => done([], []);
+      if (onEndCallbacks.length > 0) {
+        runOnEndCallbacks = (result, done) => {
+          (async () => {
+            const onEndErrors = [];
+            const onEndWarnings = [];
+            for (const { name: name2, callback, note } of onEndCallbacks) {
+              let newErrors;
+              let newWarnings;
+              try {
+                const value = await callback(result);
+                if (value != null) {
+                  if (typeof value !== "object") throw new Error(`Expected onEnd() callback in plugin ${quote(name2)} to return an object`);
+                  let keys = {};
+                  let errors = getFlag(value, keys, "errors", mustBeArray);
+                  let warnings = getFlag(value, keys, "warnings", mustBeArray);
+                  checkForInvalidFlags(value, keys, `from onEnd() callback in plugin ${quote(name2)}`);
+                  if (errors != null) newErrors = sanitizeMessages(errors, "errors", details, name2, void 0);
+                  if (warnings != null) newWarnings = sanitizeMessages(warnings, "warnings", details, name2, void 0);
+                }
+              } catch (e2) {
+                newErrors = [extractErrorMessageV8(e2, streamIn, details, note && note(), name2)];
+              }
+              if (newErrors) {
+                onEndErrors.push(...newErrors);
+                try {
+                  result.errors.push(...newErrors);
+                } catch {
+                }
+              }
+              if (newWarnings) {
+                onEndWarnings.push(...newWarnings);
+                try {
+                  result.warnings.push(...newWarnings);
+                } catch {
+                }
+              }
+            }
+            done(onEndErrors, onEndWarnings);
+          })();
+        };
+      }
+      let scheduleOnDisposeCallbacks = () => {
+        for (const cb of onDisposeCallbacks) {
+          setTimeout(() => cb(), 0);
+        }
+      };
+      isSetupDone = true;
+      return {
+        ok: true,
+        requestPlugins,
+        runOnEndCallbacks,
+        scheduleOnDisposeCallbacks
+      };
+    };
+    function createObjectStash() {
+      const map21 = /* @__PURE__ */ new Map();
+      let nextID = 0;
+      return {
+        clear() {
+          map21.clear();
+        },
+        load(id) {
+          return map21.get(id);
+        },
+        store(value) {
+          if (value === void 0) return -1;
+          const id = nextID++;
+          map21.set(id, value);
+          return id;
+        }
+      };
+    }
+    function extractCallerV8(e2, streamIn, ident) {
+      let note;
+      let tried = false;
+      return () => {
+        if (tried) return note;
+        tried = true;
+        try {
+          let lines = (e2.stack + "").split("\n");
+          lines.splice(1, 1);
+          let location = parseStackLinesV8(streamIn, lines, ident);
+          if (location) {
+            note = { text: e2.message, location };
+            return note;
+          }
+        } catch {
+        }
+      };
+    }
+    function extractErrorMessageV8(e2, streamIn, stash, note, pluginName) {
+      let text = "Internal error";
+      let location = null;
+      try {
+        text = (e2 && e2.message || e2) + "";
+      } catch {
+      }
+      try {
+        location = parseStackLinesV8(streamIn, (e2.stack + "").split("\n"), "");
+      } catch {
+      }
+      return { id: "", pluginName, text, location, notes: note ? [note] : [], detail: stash ? stash.store(e2) : -1 };
+    }
+    function parseStackLinesV8(streamIn, lines, ident) {
+      let at = "    at ";
+      if (streamIn.readFileSync && !lines[0].startsWith(at) && lines[1].startsWith(at)) {
+        for (let i2 = 1; i2 < lines.length; i2++) {
+          let line = lines[i2];
+          if (!line.startsWith(at)) continue;
+          line = line.slice(at.length);
+          while (true) {
+            let match = /^(?:new |async )?\S+ \((.*)\)$/.exec(line);
+            if (match) {
+              line = match[1];
+              continue;
+            }
+            match = /^eval at \S+ \((.*)\)(?:, \S+:\d+:\d+)?$/.exec(line);
+            if (match) {
+              line = match[1];
+              continue;
+            }
+            match = /^(\S+):(\d+):(\d+)$/.exec(line);
+            if (match) {
+              let contents;
+              try {
+                contents = streamIn.readFileSync(match[1], "utf8");
+              } catch {
+                break;
+              }
+              let lineText = contents.split(/\r\n|\r|\n|\u2028|\u2029/)[+match[2] - 1] || "";
+              let column = +match[3] - 1;
+              let length = lineText.slice(column, column + ident.length) === ident ? ident.length : 0;
+              return {
+                file: match[1],
+                namespace: "file",
+                line: +match[2],
+                column: encodeUTF8(lineText.slice(0, column)).length,
+                length: encodeUTF8(lineText.slice(column, column + length)).length,
+                lineText: lineText + "\n" + lines.slice(1).join("\n"),
+                suggestion: ""
+              };
+            }
+            break;
+          }
+        }
+      }
+      return null;
+    }
+    function failureErrorWithLog(text, errors, warnings) {
+      let limit = 5;
+      text += errors.length < 1 ? "" : ` with ${errors.length} error${errors.length < 2 ? "" : "s"}:` + errors.slice(0, limit + 1).map((e2, i2) => {
+        if (i2 === limit) return "\n...";
+        if (!e2.location) return `
+error: ${e2.text}`;
+        let { file: file2, line, column } = e2.location;
+        let pluginText = e2.pluginName ? `[plugin: ${e2.pluginName}] ` : "";
+        return `
+${file2}:${line}:${column}: ERROR: ${pluginText}${e2.text}`;
+      }).join("");
+      let error48 = new Error(text);
+      for (const [key, value] of [["errors", errors], ["warnings", warnings]]) {
+        Object.defineProperty(error48, key, {
+          configurable: true,
+          enumerable: true,
+          get: () => value,
+          set: (value2) => Object.defineProperty(error48, key, {
+            configurable: true,
+            enumerable: true,
+            value: value2
+          })
+        });
+      }
+      return error48;
+    }
+    function replaceDetailsInMessages(messages, stash) {
+      for (const message of messages) {
+        message.detail = stash.load(message.detail);
+      }
+      return messages;
+    }
+    function sanitizeLocation(location, where, terminalWidth) {
+      if (location == null) return null;
+      let keys = {};
+      let file2 = getFlag(location, keys, "file", mustBeString);
+      let namespace = getFlag(location, keys, "namespace", mustBeString);
+      let line = getFlag(location, keys, "line", mustBeInteger);
+      let column = getFlag(location, keys, "column", mustBeInteger);
+      let length = getFlag(location, keys, "length", mustBeInteger);
+      let lineText = getFlag(location, keys, "lineText", mustBeString);
+      let suggestion = getFlag(location, keys, "suggestion", mustBeString);
+      checkForInvalidFlags(location, keys, where);
+      if (lineText) {
+        const relevantASCII = lineText.slice(
+          0,
+          (column && column > 0 ? column : 0) + (length && length > 0 ? length : 0) + (terminalWidth && terminalWidth > 0 ? terminalWidth : 80)
+        );
+        if (!/[\x7F-\uFFFF]/.test(relevantASCII) && !/\n/.test(lineText)) {
+          lineText = relevantASCII;
+        }
+      }
+      return {
+        file: file2 || "",
+        namespace: namespace || "",
+        line: line || 0,
+        column: column || 0,
+        length: length || 0,
+        lineText: lineText || "",
+        suggestion: suggestion || ""
+      };
+    }
+    function sanitizeMessages(messages, property, stash, fallbackPluginName, terminalWidth) {
+      let messagesClone = [];
+      let index = 0;
+      for (const message of messages) {
+        let keys = {};
+        let id = getFlag(message, keys, "id", mustBeString);
+        let pluginName = getFlag(message, keys, "pluginName", mustBeString);
+        let text = getFlag(message, keys, "text", mustBeString);
+        let location = getFlag(message, keys, "location", mustBeObjectOrNull);
+        let notes = getFlag(message, keys, "notes", mustBeArray);
+        let detail = getFlag(message, keys, "detail", canBeAnything);
+        let where = `in element ${index} of "${property}"`;
+        checkForInvalidFlags(message, keys, where);
+        let notesClone = [];
+        if (notes) {
+          for (const note of notes) {
+            let noteKeys = {};
+            let noteText = getFlag(note, noteKeys, "text", mustBeString);
+            let noteLocation = getFlag(note, noteKeys, "location", mustBeObjectOrNull);
+            checkForInvalidFlags(note, noteKeys, where);
+            notesClone.push({
+              text: noteText || "",
+              location: sanitizeLocation(noteLocation, where, terminalWidth)
+            });
+          }
+        }
+        messagesClone.push({
+          id: id || "",
+          pluginName: pluginName || fallbackPluginName,
+          text: text || "",
+          location: sanitizeLocation(location, where, terminalWidth),
+          notes: notesClone,
+          detail: stash ? stash.store(detail) : -1
+        });
+        index++;
+      }
+      return messagesClone;
+    }
+    function sanitizeStringArray(values, property) {
+      const result = [];
+      for (const value of values) {
+        if (typeof value !== "string") throw new Error(`${quote(property)} must be an array of strings`);
+        result.push(value);
+      }
+      return result;
+    }
+    function sanitizeStringMap(map21, property) {
+      const result = /* @__PURE__ */ Object.create(null);
+      for (const key in map21) {
+        const value = map21[key];
+        if (typeof value !== "string") throw new Error(`key ${quote(key)} in object ${quote(property)} must be a string`);
+        result[key] = value;
+      }
+      return result;
+    }
+    function convertOutputFiles({ path: path3, contents, hash: hash2 }) {
+      let text = null;
+      return {
+        path: path3,
+        contents,
+        hash: hash2,
+        get text() {
+          const binary2 = this.contents;
+          if (text === null || binary2 !== contents) {
+            contents = binary2;
+            text = decodeUTF8(binary2);
+          }
+          return text;
+        }
+      };
+    }
+    function jsRegExpToGoRegExp(regexp) {
+      let result = regexp.source;
+      if (regexp.flags) result = `(?${regexp.flags})${result}`;
+      return result;
+    }
+    function parseJSON(bytes) {
+      let text;
+      try {
+        text = decodeUTF8(bytes);
+      } catch {
+        return JSON_parse(bytes);
+      }
+      return JSON.parse(text);
+    }
+    var fs2 = require("fs");
+    var os2 = require("os");
+    var path2 = require("path");
+    var ESBUILD_BINARY_PATH = process.env.ESBUILD_BINARY_PATH || ESBUILD_BINARY_PATH;
+    var child_process = require("child_process");
+    var crypto2 = require("crypto");
+    var path22 = require("path");
+    var fs22 = require("fs");
+    var os22 = require("os");
+    var tty = require("tty");
+    var worker_threads;
+    if (process.env.ESBUILD_WORKER_THREADS !== "0") {
+      try {
+        worker_threads = require("worker_threads");
+      } catch {
+      }
+      let [major, minor] = process.versions.node.split(".");
+      if (
+        // <v12.17.0 does not work
+        +major < 12 || +major === 12 && +minor < 17 || +major === 13 && +minor < 13
+      ) {
+        worker_threads = void 0;
+      }
+    }
+    var _a2;
+    var isInternalWorkerThread = ((_a2 = worker_threads == null ? void 0 : worker_threads.workerData) == null ? void 0 : _a2.esbuildVersion) === "0.27.4";
+    var esbuildCommandAndArgs = () => {
+      if ((!ESBUILD_BINARY_PATH || true) && (path22.basename(__filename) !== "main.js" || path22.basename(__dirname) !== "lib")) {
+        throw new Error(
+          `The esbuild JavaScript API cannot be bundled. Please mark the "esbuild" package as external so it's not included in the bundle.
+
+More information: The file containing the code for esbuild's JavaScript API (${__filename}) does not appear to be inside the esbuild package on the file system, which usually means that the esbuild package was bundled into another file. This is problematic because the API needs to run a binary executable inside the esbuild package which is located using a relative path from the API code to the executable. If the esbuild package is bundled, the relative path will be incorrect and the executable won't be found.`
+        );
+      }
+      if (true) {
+        return ["node", [path22.join(__dirname, "..", "bin", "esbuild")]];
+      } else {
+        const { binPath, isWASM } = generateBinPath();
+        if (isWASM) {
+          return ["node", [binPath]];
+        } else {
+          return [binPath, []];
+        }
+      }
+    };
+    var isTTY = () => tty.isatty(2);
+    var fsSync = {
+      readFile(tempFile, callback) {
+        try {
+          let contents = fs22.readFileSync(tempFile, "utf8");
+          try {
+            fs22.unlinkSync(tempFile);
+          } catch {
+          }
+          callback(null, contents);
+        } catch (err) {
+          callback(err, null);
+        }
+      },
+      writeFile(contents, callback) {
+        try {
+          let tempFile = randomFileName();
+          fs22.writeFileSync(tempFile, contents);
+          callback(tempFile);
+        } catch {
+          callback(null);
+        }
+      }
+    };
+    var fsAsync = {
+      readFile(tempFile, callback) {
+        try {
+          fs22.readFile(tempFile, "utf8", (err, contents) => {
+            try {
+              fs22.unlink(tempFile, () => callback(err, contents));
+            } catch {
+              callback(err, contents);
+            }
+          });
+        } catch (err) {
+          callback(err, null);
+        }
+      },
+      writeFile(contents, callback) {
+        try {
+          let tempFile = randomFileName();
+          fs22.writeFile(tempFile, contents, (err) => err !== null ? callback(null) : callback(tempFile));
+        } catch {
+          callback(null);
+        }
+      }
+    };
+    var version2 = "0.27.4";
+    var build = (options) => ensureServiceIsRunning().build(options);
+    var context = (buildOptions) => ensureServiceIsRunning().context(buildOptions);
+    var transform2 = (input, options) => ensureServiceIsRunning().transform(input, options);
+    var formatMessages = (messages, options) => ensureServiceIsRunning().formatMessages(messages, options);
+    var analyzeMetafile = (messages, options) => ensureServiceIsRunning().analyzeMetafile(messages, options);
+    var buildSync = (options) => {
+      if (worker_threads && !isInternalWorkerThread) {
+        if (!workerThreadService) workerThreadService = startWorkerThreadService(worker_threads);
+        return workerThreadService.buildSync(options);
+      }
+      let result;
+      runServiceSync((service) => service.buildOrContext({
+        callName: "buildSync",
+        refs: null,
+        options,
+        isTTY: isTTY(),
+        defaultWD,
+        callback: (err, res) => {
+          if (err) throw err;
+          result = res;
+        }
+      }));
+      return result;
+    };
+    var transformSync = (input, options) => {
+      if (worker_threads && !isInternalWorkerThread) {
+        if (!workerThreadService) workerThreadService = startWorkerThreadService(worker_threads);
+        return workerThreadService.transformSync(input, options);
+      }
+      let result;
+      runServiceSync((service) => service.transform({
+        callName: "transformSync",
+        refs: null,
+        input,
+        options: options || {},
+        isTTY: isTTY(),
+        fs: fsSync,
+        callback: (err, res) => {
+          if (err) throw err;
+          result = res;
+        }
+      }));
+      return result;
+    };
+    var formatMessagesSync = (messages, options) => {
+      if (worker_threads && !isInternalWorkerThread) {
+        if (!workerThreadService) workerThreadService = startWorkerThreadService(worker_threads);
+        return workerThreadService.formatMessagesSync(messages, options);
+      }
+      let result;
+      runServiceSync((service) => service.formatMessages({
+        callName: "formatMessagesSync",
+        refs: null,
+        messages,
+        options,
+        callback: (err, res) => {
+          if (err) throw err;
+          result = res;
+        }
+      }));
+      return result;
+    };
+    var analyzeMetafileSync = (metafile, options) => {
+      if (worker_threads && !isInternalWorkerThread) {
+        if (!workerThreadService) workerThreadService = startWorkerThreadService(worker_threads);
+        return workerThreadService.analyzeMetafileSync(metafile, options);
+      }
+      let result;
+      runServiceSync((service) => service.analyzeMetafile({
+        callName: "analyzeMetafileSync",
+        refs: null,
+        metafile: typeof metafile === "string" ? metafile : JSON.stringify(metafile),
+        options,
+        callback: (err, res) => {
+          if (err) throw err;
+          result = res;
+        }
+      }));
+      return result;
+    };
+    var stop = () => {
+      if (stopService) stopService();
+      if (workerThreadService) workerThreadService.stop();
+      return Promise.resolve();
+    };
+    var initializeWasCalled = false;
+    var initialize = (options) => {
+      options = validateInitializeOptions(options || {});
+      if (options.wasmURL) throw new Error(`The "wasmURL" option only works in the browser`);
+      if (options.wasmModule) throw new Error(`The "wasmModule" option only works in the browser`);
+      if (options.worker) throw new Error(`The "worker" option only works in the browser`);
+      if (initializeWasCalled) throw new Error('Cannot call "initialize" more than once');
+      ensureServiceIsRunning();
+      initializeWasCalled = true;
+      return Promise.resolve();
+    };
+    var defaultWD = process.cwd();
+    var longLivedService;
+    var stopService;
+    var ensureServiceIsRunning = () => {
+      if (longLivedService) return longLivedService;
+      let [command, args] = esbuildCommandAndArgs();
+      let child = child_process.spawn(command, args.concat(`--service=${"0.27.4"}`, "--ping"), {
+        windowsHide: true,
+        stdio: ["pipe", "pipe", "inherit"],
+        cwd: defaultWD
+      });
+      let { readFromStdout, afterClose, service } = createChannel({
+        writeToStdin(bytes) {
+          child.stdin.write(bytes, (err) => {
+            if (err) afterClose(err);
+          });
+        },
+        readFileSync: fs22.readFileSync,
+        isSync: false,
+        hasFS: true,
+        esbuild: node_exports
+      });
+      child.stdin.on("error", afterClose);
+      child.on("error", afterClose);
+      const stdin = child.stdin;
+      const stdout = child.stdout;
+      stdout.on("data", readFromStdout);
+      stdout.on("end", afterClose);
+      stopService = () => {
+        stdin.destroy();
+        stdout.destroy();
+        child.kill();
+        initializeWasCalled = false;
+        longLivedService = void 0;
+        stopService = void 0;
+      };
+      let refCount = 0;
+      child.unref();
+      if (stdin.unref) {
+        stdin.unref();
+      }
+      if (stdout.unref) {
+        stdout.unref();
+      }
+      const refs = {
+        ref() {
+          if (++refCount === 1) child.ref();
+        },
+        unref() {
+          if (--refCount === 0) child.unref();
+        }
+      };
+      longLivedService = {
+        build: (options) => new Promise((resolve, reject) => {
+          service.buildOrContext({
+            callName: "build",
+            refs,
+            options,
+            isTTY: isTTY(),
+            defaultWD,
+            callback: (err, res) => err ? reject(err) : resolve(res)
+          });
+        }),
+        context: (options) => new Promise((resolve, reject) => service.buildOrContext({
+          callName: "context",
+          refs,
+          options,
+          isTTY: isTTY(),
+          defaultWD,
+          callback: (err, res) => err ? reject(err) : resolve(res)
+        })),
+        transform: (input, options) => new Promise((resolve, reject) => service.transform({
+          callName: "transform",
+          refs,
+          input,
+          options: options || {},
+          isTTY: isTTY(),
+          fs: fsAsync,
+          callback: (err, res) => err ? reject(err) : resolve(res)
+        })),
+        formatMessages: (messages, options) => new Promise((resolve, reject) => service.formatMessages({
+          callName: "formatMessages",
+          refs,
+          messages,
+          options,
+          callback: (err, res) => err ? reject(err) : resolve(res)
+        })),
+        analyzeMetafile: (metafile, options) => new Promise((resolve, reject) => service.analyzeMetafile({
+          callName: "analyzeMetafile",
+          refs,
+          metafile: typeof metafile === "string" ? metafile : JSON.stringify(metafile),
+          options,
+          callback: (err, res) => err ? reject(err) : resolve(res)
+        }))
+      };
+      return longLivedService;
+    };
+    var runServiceSync = (callback) => {
+      let [command, args] = esbuildCommandAndArgs();
+      let stdin = new Uint8Array();
+      let { readFromStdout, afterClose, service } = createChannel({
+        writeToStdin(bytes) {
+          if (stdin.length !== 0) throw new Error("Must run at most one command");
+          stdin = bytes;
+        },
+        isSync: true,
+        hasFS: true,
+        esbuild: node_exports
+      });
+      callback(service);
+      let stdout = child_process.execFileSync(command, args.concat(`--service=${"0.27.4"}`), {
+        cwd: defaultWD,
+        windowsHide: true,
+        input: stdin,
+        // We don't know how large the output could be. If it's too large, the
+        // command will fail with ENOBUFS. Reserve 16mb for now since that feels
+        // like it should be enough. Also allow overriding this with an environment
+        // variable.
+        maxBuffer: +process.env.ESBUILD_MAX_BUFFER || 16 * 1024 * 1024
+      });
+      readFromStdout(stdout);
+      afterClose(null);
+    };
+    var randomFileName = () => {
+      return path22.join(os22.tmpdir(), `esbuild-${crypto2.randomBytes(32).toString("hex")}`);
+    };
+    var workerThreadService = null;
+    var startWorkerThreadService = (worker_threads2) => {
+      let { port1: mainPort, port2: workerPort } = new worker_threads2.MessageChannel();
+      let worker = new worker_threads2.Worker(__filename, {
+        workerData: { workerPort, defaultWD, esbuildVersion: "0.27.4" },
+        transferList: [workerPort],
+        // From node's documentation: https://nodejs.org/api/worker_threads.html
+        //
+        //   Take care when launching worker threads from preload scripts (scripts loaded
+        //   and run using the `-r` command line flag). Unless the `execArgv` option is
+        //   explicitly set, new Worker threads automatically inherit the command line flags
+        //   from the running process and will preload the same preload scripts as the main
+        //   thread. If the preload script unconditionally launches a worker thread, every
+        //   thread spawned will spawn another until the application crashes.
+        //
+        execArgv: []
+      });
+      let nextID = 0;
+      let fakeBuildError = (text) => {
+        let error48 = new Error(`Build failed with 1 error:
+error: ${text}`);
+        let errors = [{ id: "", pluginName: "", text, location: null, notes: [], detail: void 0 }];
+        error48.errors = errors;
+        error48.warnings = [];
+        return error48;
+      };
+      let validateBuildSyncOptions = (options) => {
+        if (!options) return;
+        let plugins = options.plugins;
+        if (plugins && plugins.length > 0) throw fakeBuildError(`Cannot use plugins in synchronous API calls`);
+      };
+      let applyProperties = (object3, properties) => {
+        for (let key in properties) {
+          object3[key] = properties[key];
+        }
+      };
+      let runCallSync = (command, args) => {
+        let id = nextID++;
+        let sharedBuffer = new SharedArrayBuffer(8);
+        let sharedBufferView = new Int32Array(sharedBuffer);
+        let msg = { sharedBuffer, id, command, args };
+        worker.postMessage(msg);
+        let status = Atomics.wait(sharedBufferView, 0, 0);
+        if (status !== "ok" && status !== "not-equal") throw new Error("Internal error: Atomics.wait() failed: " + status);
+        let { message: { id: id2, resolve, reject, properties } } = worker_threads2.receiveMessageOnPort(mainPort);
+        if (id !== id2) throw new Error(`Internal error: Expected id ${id} but got id ${id2}`);
+        if (reject) {
+          applyProperties(reject, properties);
+          throw reject;
+        }
+        return resolve;
+      };
+      worker.unref();
+      return {
+        buildSync(options) {
+          validateBuildSyncOptions(options);
+          return runCallSync("build", [options]);
+        },
+        transformSync(input, options) {
+          return runCallSync("transform", [input, options]);
+        },
+        formatMessagesSync(messages, options) {
+          return runCallSync("formatMessages", [messages, options]);
+        },
+        analyzeMetafileSync(metafile, options) {
+          return runCallSync("analyzeMetafile", [metafile, options]);
+        },
+        stop() {
+          worker.terminate();
+          workerThreadService = null;
+        }
+      };
+    };
+    var startSyncServiceWorker = () => {
+      let workerPort = worker_threads.workerData.workerPort;
+      let parentPort = worker_threads.parentPort;
+      let extractProperties = (object3) => {
+        let properties = {};
+        if (object3 && typeof object3 === "object") {
+          for (let key in object3) {
+            properties[key] = object3[key];
+          }
+        }
+        return properties;
+      };
+      try {
+        let service = ensureServiceIsRunning();
+        defaultWD = worker_threads.workerData.defaultWD;
+        parentPort.on("message", (msg) => {
+          (async () => {
+            let { sharedBuffer, id, command, args } = msg;
+            let sharedBufferView = new Int32Array(sharedBuffer);
+            try {
+              switch (command) {
+                case "build":
+                  workerPort.postMessage({ id, resolve: await service.build(args[0]) });
+                  break;
+                case "transform":
+                  workerPort.postMessage({ id, resolve: await service.transform(args[0], args[1]) });
+                  break;
+                case "formatMessages":
+                  workerPort.postMessage({ id, resolve: await service.formatMessages(args[0], args[1]) });
+                  break;
+                case "analyzeMetafile":
+                  workerPort.postMessage({ id, resolve: await service.analyzeMetafile(args[0], args[1]) });
+                  break;
+                default:
+                  throw new Error(`Invalid command: ${command}`);
+              }
+            } catch (reject) {
+              workerPort.postMessage({ id, reject, properties: extractProperties(reject) });
+            }
+            Atomics.add(sharedBufferView, 0, 1);
+            Atomics.notify(sharedBufferView, 0, Infinity);
+          })();
+        });
+      } catch (reject) {
+        parentPort.on("message", (msg) => {
+          let { sharedBuffer, id } = msg;
+          let sharedBufferView = new Int32Array(sharedBuffer);
+          workerPort.postMessage({ id, reject, properties: extractProperties(reject) });
+          Atomics.add(sharedBufferView, 0, 1);
+          Atomics.notify(sharedBufferView, 0, Infinity);
+        });
+      }
+    };
+    if (isInternalWorkerThread) {
+      startSyncServiceWorker();
+    }
+    var node_default = node_exports;
+  }
+});
+
 // src/commands/build/build.ts
 var build_exports = {};
 __export(build_exports, {
   default: () => build_default
 });
-var import_esbuild_decorators, import_esbuild, import_rxjs6, import_operators5, build_default;
+async function getEsbuild() {
+  if (!!process.versions.webcontainer) {
+    const esbuildWasm = await Promise.resolve().then(() => __toESM(require_main2()));
+    await esbuildWasm.initialize({
+      worker: false,
+      wasmURL: (0, import_path.join)(__dirname, "esbuild.wasm")
+    });
+    return esbuildWasm;
+  } else {
+    return import_esbuild.default;
+  }
+}
+var import_esbuild_decorators, import_esbuild, import_path, import_rxjs6, import_operators5, build_default;
 var init_build = __esm({
   "src/commands/build/build.ts"() {
     import_esbuild_decorators = __toESM(require_src());
     import_esbuild = __toESM(require_main());
+    import_path = require("path");
     import_rxjs6 = __toESM(require_cjs());
     import_operators5 = __toESM(require_operators());
     init_log();
     init_load_spec();
+    console.log((0, import_path.join)(__dirname, "esbuild.wasm"));
     build_default = async (args) => {
       const time3 = Date.now();
       return (0, import_rxjs6.lastValueFrom)(
@@ -255335,17 +257680,17 @@ var init_build = __esm({
             );
           }),
           (0, import_operators5.switchMap)(
-            (config2) => (0, import_rxjs6.of)(config2).pipe(
-              (0, import_operators5.map)((config3) => ({
-                esbuild: import_esbuild.default,
+            (config2) => (0, import_rxjs6.from)(getEsbuild()).pipe(
+              (0, import_operators5.map)((esbuild2) => ({
+                esbuild: esbuild2,
                 options: {
-                  entryPoints: args.files?.length ? args.files : [config3?.function?.file ?? config3?.file ?? "index.ts"],
-                  bundle: args.bundle ?? config3?.options?.bundler?.bundle ?? true,
-                  minify: args.minify ?? config3?.options?.bundler?.minify ?? false,
+                  entryPoints: args.files?.length ? args.files : [config2?.function?.file ?? config2?.file ?? "index.ts"],
+                  bundle: args.bundle ?? config2?.options?.bundler?.bundle ?? true,
+                  minify: args.minify ?? config2?.options?.bundler?.minify ?? false,
                   platform: args.platform ?? "node",
-                  target: args.target ?? config3?.options?.bundler?.target ?? "node24",
-                  outfile: args.outfile ?? config3?.options?.bundler?.outfile ?? "index.js",
-                  external: args.external ?? config3?.options?.bundler?.external ?? []
+                  target: args.target ?? config2?.options?.bundler?.target ?? "node24",
+                  outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
+                  external: args.external ?? config2?.options?.bundler?.external ?? []
                 }
               })),
               (0, import_operators5.switchMap)(
@@ -264291,9 +266636,9 @@ var require_mime_types = __commonJS({
         for (var i2 = 0; i2 < exts.length; i2++) {
           var extension2 = exts[i2];
           if (types3[extension2]) {
-            var from11 = preference.indexOf(db[types3[extension2]].source);
+            var from12 = preference.indexOf(db[types3[extension2]].source);
             var to = preference.indexOf(mime.source);
-            if (types3[extension2] !== "application/octet-stream" && (from11 > to || from11 === to && types3[extension2].substr(0, 12) === "application/")) {
+            if (types3[extension2] !== "application/octet-stream" && (from12 > to || from12 === to && types3[extension2].substr(0, 12) === "application/")) {
               continue;
             }
           }
@@ -268849,15 +271194,15 @@ var require_polyfills = __commonJS({
       }
       if (platform === "win32") {
         fs2.rename = /* @__PURE__ */ (function(fs$rename) {
-          return function(from11, to, cb) {
+          return function(from12, to, cb) {
             var start2 = Date.now();
             var backoff = 0;
-            fs$rename(from11, to, function CB(er) {
+            fs$rename(from12, to, function CB(er) {
               if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start2 < 6e4) {
                 setTimeout(function() {
                   fs2.stat(to, function(stater, st) {
                     if (stater && stater.code === "ENOENT")
-                      fs$rename(from11, to, CB);
+                      fs$rename(from12, to, CB);
                     else
                       cb(er);
                   });
@@ -269738,7 +272083,7 @@ var require_BufferList2 = __commonJS({
         this.head = this.tail = null;
         this.length = 0;
       };
-      BufferList.prototype.join = function join(s2) {
+      BufferList.prototype.join = function join2(s2) {
         if (this.length === 0) return "";
         var p = this.head;
         var ret = "" + p.data;
@@ -274538,7 +276883,7 @@ var require_buffer_list3 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -275765,7 +278110,7 @@ var require_from4 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors3().codes.ERR_INVALID_ARG_TYPE;
-    function from11(Readable2, iterable, opts) {
+    function from12(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -275804,7 +278149,7 @@ var require_from4 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from11;
+    module2.exports = from12;
   }
 });
 
@@ -275848,7 +278193,7 @@ var require_stream_readable4 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from11;
+    var from12;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -276530,10 +278875,10 @@ var require_stream_readable4 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from11 === void 0) {
-          from11 = require_from4();
+        if (from12 === void 0) {
+          from12 = require_from4();
         }
-        return from11(Readable2, iterable, opts);
+        return from12(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -276713,8 +279058,8 @@ var require_pipeline3 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from11, to) {
-      return from11.pipe(to);
+    function pipe2(from12, to) {
+      return from12.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -277880,7 +280225,7 @@ var require_buffer_list4 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -279107,7 +281452,7 @@ var require_from5 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors4().codes.ERR_INVALID_ARG_TYPE;
-    function from11(Readable2, iterable, opts) {
+    function from12(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -279146,7 +281491,7 @@ var require_from5 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from11;
+    module2.exports = from12;
   }
 });
 
@@ -279190,7 +281535,7 @@ var require_stream_readable5 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from11;
+    var from12;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -279872,10 +282217,10 @@ var require_stream_readable5 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from11 === void 0) {
-          from11 = require_from5();
+        if (from12 === void 0) {
+          from12 = require_from5();
         }
-        return from11(Readable2, iterable, opts);
+        return from12(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -280055,8 +282400,8 @@ var require_pipeline4 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from11, to) {
-      return from11.pipe(to);
+    function pipe2(from12, to) {
+      return from12.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -280652,7 +282997,7 @@ var require_buffer_list5 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -281879,7 +284224,7 @@ var require_from6 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors5().codes.ERR_INVALID_ARG_TYPE;
-    function from11(Readable2, iterable, opts) {
+    function from12(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -281918,7 +284263,7 @@ var require_from6 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from11;
+    module2.exports = from12;
   }
 });
 
@@ -281962,7 +284307,7 @@ var require_stream_readable6 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from11;
+    var from12;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -282644,10 +284989,10 @@ var require_stream_readable6 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from11 === void 0) {
-          from11 = require_from6();
+        if (from12 === void 0) {
+          from12 = require_from6();
         }
-        return from11(Readable2, iterable, opts);
+        return from12(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -282827,8 +285172,8 @@ var require_pipeline5 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from11, to) {
-      return from11.pipe(to);
+    function pipe2(from12, to) {
+      return from12.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -283889,7 +286234,7 @@ var require_buffer_list6 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -285116,7 +287461,7 @@ var require_from7 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors6().codes.ERR_INVALID_ARG_TYPE;
-    function from11(Readable2, iterable, opts) {
+    function from12(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -285155,7 +287500,7 @@ var require_from7 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from11;
+    module2.exports = from12;
   }
 });
 
@@ -285199,7 +287544,7 @@ var require_stream_readable7 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from11;
+    var from12;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -285881,10 +288226,10 @@ var require_stream_readable7 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from11 === void 0) {
-          from11 = require_from7();
+        if (from12 === void 0) {
+          from12 = require_from7();
         }
-        return from11(Readable2, iterable, opts);
+        return from12(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -286064,8 +288409,8 @@ var require_pipeline6 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from11, to) {
-      return from11.pipe(to);
+    function pipe2(from12, to) {
+      return from12.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -286967,7 +289312,7 @@ var init_helpers2 = __esm({
               projectId: payload.projectId,
               route: cmd.route || payload.route || "",
               buildBashScript: cmd.buildBashScript || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
-              config: cmd.config || payload.config || "",
+              configs: cmd.configs || payload.configs || [],
               env: cmd.env || payload.env || "nodejs",
               method: cmd.method || payload.method || ["GET"],
               packageJson: cmd.packageJson || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
@@ -309266,17 +311611,17 @@ var require_codegen = __commonJS({
       }
     };
     var ForRange = class extends For {
-      constructor(varKind, name2, from11, to) {
+      constructor(varKind, name2, from12, to) {
         super();
         this.varKind = varKind;
         this.name = name2;
-        this.from = from11;
+        this.from = from12;
         this.to = to;
       }
       render(opts) {
         const varKind = opts.es5 ? scope_1.varKinds.var : this.varKind;
-        const { name: name2, from: from11, to } = this;
-        return `for(${varKind} ${name2}=${from11}; ${name2}<${to}; ${name2}++)` + super.render(opts);
+        const { name: name2, from: from12, to } = this;
+        return `for(${varKind} ${name2}=${from12}; ${name2}<${to}; ${name2}++)` + super.render(opts);
       }
       get names() {
         const names = addExprNames(super.names, this.from);
@@ -309495,9 +311840,9 @@ var require_codegen = __commonJS({
         return this._for(new ForLoop(iteration), forBody);
       }
       // `for` statement for a range of values
-      forRange(nameOrPrefix, from11, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
+      forRange(nameOrPrefix, from12, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
         const name2 = this._scope.toName(nameOrPrefix);
-        return this._for(new ForRange(varKind, name2, from11, to), () => forBody(name2));
+        return this._for(new ForRange(varKind, name2, from12, to), () => forBody(name2));
       }
       // `for-of` statement (in es5 mode replace with a normal for loop)
       forOf(nameOrPrefix, iterable, forBody, varKind = scope_1.varKinds.const) {
@@ -309636,13 +311981,13 @@ var require_codegen = __commonJS({
       }
     };
     exports2.CodeGen = CodeGen;
-    function addNames(names, from11) {
-      for (const n in from11)
-        names[n] = (names[n] || 0) + (from11[n] || 0);
+    function addNames(names, from12) {
+      for (const n in from12)
+        names[n] = (names[n] || 0) + (from12[n] || 0);
       return names;
     }
-    function addExprNames(names, from11) {
-      return from11 instanceof code_1._CodeOrName ? addNames(names, from11.names) : names;
+    function addExprNames(names, from12) {
+      return from12 instanceof code_1._CodeOrName ? addNames(names, from12.names) : names;
     }
     function optimizeExpr(expr, names, constants) {
       if (expr instanceof code_1.Name)
@@ -309669,9 +312014,9 @@ var require_codegen = __commonJS({
         return e2 instanceof code_1._Code && e2._items.some((c) => c instanceof code_1.Name && names[c.str] === 1 && constants[c.str] !== void 0);
       }
     }
-    function subtractNames(names, from11) {
-      for (const n in from11)
-        names[n] = (names[n] || 0) - (from11[n] || 0);
+    function subtractNames(names, from12) {
+      for (const n in from12)
+        names[n] = (names[n] || 0) - (from12[n] || 0);
     }
     function not(x2) {
       return typeof x2 == "boolean" || typeof x2 == "number" || x2 === null ? !x2 : (0, code_1._)`!${par(x2)}`;
@@ -309789,31 +312134,31 @@ var require_util5 = __commonJS({
     }
     exports2.eachItem = eachItem;
     function makeMergeEvaluated({ mergeNames, mergeToName, mergeValues: mergeValues3, resultToName }) {
-      return (gen, from11, to, toName) => {
-        const res = to === void 0 ? from11 : to instanceof codegen_1.Name ? (from11 instanceof codegen_1.Name ? mergeNames(gen, from11, to) : mergeToName(gen, from11, to), to) : from11 instanceof codegen_1.Name ? (mergeToName(gen, to, from11), from11) : mergeValues3(from11, to);
+      return (gen, from12, to, toName) => {
+        const res = to === void 0 ? from12 : to instanceof codegen_1.Name ? (from12 instanceof codegen_1.Name ? mergeNames(gen, from12, to) : mergeToName(gen, from12, to), to) : from12 instanceof codegen_1.Name ? (mergeToName(gen, to, from12), from12) : mergeValues3(from12, to);
         return toName === codegen_1.Name && !(res instanceof codegen_1.Name) ? resultToName(gen, res) : res;
       };
     }
     exports2.mergeEvaluated = {
       props: makeMergeEvaluated({
-        mergeNames: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true && ${from11} !== undefined`, () => {
-          gen.if((0, codegen_1._)`${from11} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from11})`));
+        mergeNames: (gen, from12, to) => gen.if((0, codegen_1._)`${to} !== true && ${from12} !== undefined`, () => {
+          gen.if((0, codegen_1._)`${from12} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from12})`));
         }),
-        mergeToName: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
-          if (from11 === true) {
+        mergeToName: (gen, from12, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
+          if (from12 === true) {
             gen.assign(to, true);
           } else {
             gen.assign(to, (0, codegen_1._)`${to} || {}`);
-            setEvaluated(gen, to, from11);
+            setEvaluated(gen, to, from12);
           }
         }),
-        mergeValues: (from11, to) => from11 === true ? true : { ...from11, ...to },
+        mergeValues: (from12, to) => from12 === true ? true : { ...from12, ...to },
         resultToName: evaluatedPropsToName
       }),
       items: makeMergeEvaluated({
-        mergeNames: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true && ${from11} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from11} === true ? true : ${to} > ${from11} ? ${to} : ${from11}`)),
-        mergeToName: (gen, from11, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from11 === true ? true : (0, codegen_1._)`${to} > ${from11} ? ${to} : ${from11}`)),
-        mergeValues: (from11, to) => from11 === true ? true : Math.max(from11, to),
+        mergeNames: (gen, from12, to) => gen.if((0, codegen_1._)`${to} !== true && ${from12} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from12} === true ? true : ${to} > ${from12} ? ${to} : ${from12}`)),
+        mergeToName: (gen, from12, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from12 === true ? true : (0, codegen_1._)`${to} > ${from12} ? ${to} : ${from12}`)),
+        mergeValues: (from12, to) => from12 === true ? true : Math.max(from12, to),
         resultToName: (gen, items) => gen.var("items", items)
       })
     };
@@ -318888,23 +321233,26 @@ var tempBinaryPath = import_node_path.default.join(
   import_node_os.default.tmpdir(),
   "esbuild-gcli-" + import_node_os.default.userInfo().username
 );
-if (typeof import_node_sea.isSea === "function" && (0, import_node_sea.isSea)()) {
-  try {
-    const assetArrayBuffer = (0, import_node_sea.getAsset)("esbuild-native");
-    if (assetArrayBuffer) {
-      const assetBuffer = Buffer.from(assetArrayBuffer);
-      if (!(0, import_node_fs3.existsSync)(tempBinaryPath)) {
-        (0, import_node_fs3.writeFileSync)(tempBinaryPath, assetBuffer, { mode: 493 });
+var isWebContainer = !!process.versions.webcontainer;
+if (!isWebContainer) {
+  if (typeof import_node_sea.isSea === "function" && (0, import_node_sea.isSea)()) {
+    try {
+      const assetArrayBuffer = (0, import_node_sea.getAsset)("esbuild-native");
+      if (assetArrayBuffer) {
+        const assetBuffer = Buffer.from(assetArrayBuffer);
+        if (!(0, import_node_fs3.existsSync)(tempBinaryPath)) {
+          (0, import_node_fs3.writeFileSync)(tempBinaryPath, assetBuffer, { mode: 493 });
+        }
+        process.env.ESBUILD_BINARY_PATH = tempBinaryPath;
       }
-      process.env.ESBUILD_BINARY_PATH = tempBinaryPath;
+    } catch (e2) {
+      if (e2.code !== "ERR_NOT_IN_SINGLE_EXECUTABLE_APPLICATION") {
+        console.error("SEA Initialization Error:", e2);
+      }
     }
-  } catch (e2) {
-    if (e2.code !== "ERR_NOT_IN_SINGLE_EXECUTABLE_APPLICATION") {
-      console.error("SEA Initialization Error:", e2);
-    }
+  } else {
+    process.env.ESBUILD_BINARY_PATH = import_node_path.default.join(__dirname, "esbuild");
   }
-} else {
-  process.env.ESBUILD_BINARY_PATH = import_node_path.default.join(__dirname, "esbuild");
 }
 var main = (argv) => {
   import_commander.program.name("gcli").version("0.0.1");

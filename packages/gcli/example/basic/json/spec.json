@@ -5,8 +5,8 @@
   "script": "build.sh",
   "package": "package.json",
   "params": [],
-  "config": "",
-  "secret": "",
+  "configs": [],
+  "secrets": [],
   "env": "nodejs",
   "method": ["GET"]
 }

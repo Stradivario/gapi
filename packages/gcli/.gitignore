@@ -7,3 +7,4 @@ release
 
 !release/index.js
 !release/gcli-linux
+!release/esbuild.wasm

@@ -4,8 +4,8 @@ file: ./src/index.ts
 script: build.sh
 package: package.json
 params: ['test', 'proba']
-config: ''
-secret: 'test'
+configs: []
+secrets: ['test']
 env: nodejs
 method: ['GET']
 uploadAsZip: true

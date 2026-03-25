@@ -31,7 +31,7 @@ export interface CreateOrUpdateLambdaArguments {
   route: string;
   script: string;
   buildBashScript: string;
-  config: string;
+  configs: string[];
   secrets: string[];
   network: string[];
   env: string;
@@ -130,7 +130,7 @@ export const createOrUpdateLambda = (
               cmd.buildBashScript ||
               (await lastValueFrom(ReadFile(cmd.script || payload.script))) ||
               '',
-            config: cmd.config || payload.config || '',
+            configs: cmd.configs || payload.configs || [],
             env: cmd.env || payload.env || 'nodejs',
             method: cmd.method || payload.method || ['GET'],
             packageJson:

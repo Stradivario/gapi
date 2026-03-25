@@ -1,6 +1,7 @@
 release/**/*
 !release/index.js
 !release/esbuild
+!release/esbuild.wasm
 
 dist
 node_modules

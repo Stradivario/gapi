@@ -19,7 +19,7 @@ interface ConfigJSON {
   script?: string;
   package?: string;
   params?: string[];
-  config?: string;
+  configs?: string[];
   secrets?: string[];
   network?: string[];
   uploadAsZip?: string;

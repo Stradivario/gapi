@@ -22,7 +22,22 @@ secrets {
  }
  type
 }
-config
+config {
+ id
+ projectId
+ name
+ apiVersion
+ data
+ kind
+ metadata {
+  creationTimestamp
+  name
+  namespace
+  resourceVersion
+  uid
+ }
+ type
+}
 env
 method
 createdBy

@@ -69,37 +69,14 @@
     listDevices?: Array<IIotDeviceType> | null;
     listFlows?: Array<IIotFlowType> | null;
     getFlow?: IIotFlowType | null;
-    /**
-    description?: PRIMARY KNOWLEDGE SEARCH TOOL.
-          Use this for ANY question about 'Who', 'What', 'Where', 'Ownership', or 'Concepts' stored in the system.
-          It uses Vector Search + GraphRAG to find nodes AND their relationships (e.g. "Who owns X").
-          Finds?: Companies, Websites, Code, Concepts, and their connections.
-          
-  */
-    search_knowledge_vector?: any | null;
-    /**
-    description?: Search the knowledge graph using a Cypher query. Use this to find information about concept key-values, code, or previous conversations.
-  Schema?:
-  (?:User {idString})
-  (?:Chat {idString, createdAtNumber})
-  (?:Message {idString, roleString, contentString, createdAtNumber})
-  (User)-[?:OWNS]->(Chat)
-  (Chat)-[?:HAS_MESSAGE]->(Message)
-  (Message)-[?:NEXT]->(Message)
-
-  AND Dynamic Knowledge Nodes created via add_knowledge?:
-  (?:Concept {name, id}), (?:Fact {name, id}), (?:Entity {name, id}), (?:Company {name, id}), etc.
-  Relationships are dynamic.
-  Use 'name' for semantic search and 'id' for exact lookup.
-  
-  */
-    search_graph?: any | null;
     listAvailableModels?: Array<string> | null;
     listChats?: Array<IChat> | null;
     listChatsPerProject?: Array<IChat> | null;
     listChatMessages?: Array<IChatMessage> | null;
     getChat?: IChat | null;
     getChatByProjectId?: IChat | null;
+    stripeConfiguration?: IStripeConfiguration | null;
+    paymentMethods?: IPaymentMethodResponse | null;
     getLambdaEditors?: Array<IUserType> | null;
     listMigrations?: Array<IMigrationType> | null;
     removeMigration?: IMigrationType | null;
@@ -866,6 +843,36 @@ export
 }
 
   
+  export interface IStripeConfiguration {
+    __typename?: "StripeConfiguration";
+    publishableKey?: string | null;
+}
+
+  
+  export interface IPaymentMethodResponse {
+    __typename?: "PaymentMethodResponse";
+    paymentMethods?: Array<IPaymentMethod> | null;
+    defaultPaymentMethodId?: string | null;
+}
+
+  
+  export interface IPaymentMethod {
+    __typename?: "PaymentMethod";
+    id?: string | null;
+    link?: boolean | null;
+    card?: IPaymentMethodCard | null;
+}
+
+  
+  export interface IPaymentMethodCard {
+    __typename?: "PaymentMethodCard";
+    brand?: string | null;
+    last4?: string | null;
+    exp_month?: number | null;
+    exp_year?: number | null;
+}
+
+  
   export interface IMigrationType {
     __typename?: "MigrationType";
     id?: string | null;
@@ -1057,9 +1064,14 @@ export
   */
     secrets?: Array<IKubectlConfig> | null;
     /**
-    description?: This is a name of the kubernetes config
+    description?: 
+      This is a name of the kubernetes secret can be used in the lambda code section as follows
+
+      const environment = await context.getSecret('environment');
+
+      
   */
-    config?: string | null;
+    configs?: Array<IKubectlConfig> | null;
     /**
     description?: Environment can be for now only on NODEJS
   */
@@ -1794,27 +1806,6 @@ export
     createFlow?: IIotFlowType | null;
     setFlowArguments?: IIotFlowType | null;
     updateFlow?: IIotFlowType | null;
-    /**
-    description?: Add a new node to the knowledge graph.
-          Use this to PROACTIVELY save useful information, especially?:
-          1. **Code Snippets**?: If the user says "I like this code", save it as a 'CodeSnippet'.
-          2. **Notes**?: General facts or preferences.
-          3. **Concepts**?: Abstract ideas or definitions.
-
-          Common labels?: CodeSnippet, Note, Concept, Document.
-          IMPORTANT?: An 'id' (UUID) is automatically generated if not provided.
-          Recommended?: Always provide a 'name' property for easier human-readable search.
-          Auto-Embedding?: The content will be automatically embedded for vector search.
-          
-  */
-    add_knowledge?: any | null;
-    /**
-    description?: Create a relationship between two nodes in the knowledge graph.
-          Use this to link concepts, e.g. (Company)-[?:OWNS]->(Website).
-          Nodes are identified by their 'id' OR 'name' property.
-          
-  */
-    create_relationship?: any | null;
     createChatAssistant?: IChat | null;
     sendChatAssistantMessage?: IChatMessage | null;
     createCompletionGemini?: ICreateCompletionGeminiType | null;
@@ -1825,6 +1816,9 @@ export
     removeChatMember?: IChat | null;
     deleteChat?: IChat | null;
     sendChatMessage?: IChatMessage | null;
+    createPaymentIntent?: ICreatePaymentIntent | null;
+    createSetupIntent?: ICreateSetupIntent | null;
+    setDefaultPaymentMethod?: ISetDefaultPaymentMethodResponse | null;
     createCompletion?: ICreateCompletionType | null;
     createChatCompletion?: ICreateCompletionType | null;
     migrateUp?: IProcessGenericType | null;
@@ -2335,6 +2329,26 @@ export
 }
 
   
+  export interface ICreatePaymentIntent {
+    __typename?: "CreatePaymentIntent";
+    clientSecret?: string | null;
+    status?: string | null;
+}
+
+  
+  export interface ICreateSetupIntent {
+    __typename?: "CreateSetupIntent";
+    clientSecret?: string | null;
+    status?: string | null;
+}
+
+  
+  export interface ISetDefaultPaymentMethodResponse {
+    __typename?: "SetDefaultPaymentMethodResponse";
+    success?: boolean | null;
+}
+
+  
   export interface ICreateCompletionType {
     __typename?: "CreateCompletionType";
     id?: string | null;
@@ -2686,9 +2700,9 @@ IMPORTANT: Always install "@gapi/core": "^1.8.184" inside package.json when grap
   */
     secrets?: Array<string> | null;
     /**
-    description: This is a name of the kubernetes config
+    description: List of kubernetes config names
   */
-    config?: string | null;
+    configs?: Array<string> | null;
     /**
     description: 
   When we create lambdas we define parameters here as a array ['id', 'name'] 

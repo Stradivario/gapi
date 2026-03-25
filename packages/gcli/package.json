@@ -64,7 +64,8 @@
     "typescript": "^5.9.3",
     "@anatine/esbuild-decorators": "^0.2.19",
     "@modelcontextprotocol/sdk": "^1.24.3",
-    "esbuild": "^0.27.3"
+    "esbuild": "^0.27.3",
+    "esbuild-wasm": "^0.27.3"
   },
   "bin": {
     "gcli": "./release/index.js"

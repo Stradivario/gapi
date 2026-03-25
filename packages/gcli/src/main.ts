@@ -14,30 +14,34 @@ const tempBinaryPath = path.join(
   'esbuild-gcli-' + os.userInfo().username,
 );
 
-if (typeof isSea === 'function' && isSea()) {
-  try {
-    const assetArrayBuffer = getAsset('esbuild-native');
+const isWebContainer = !!process.versions.webcontainer;
 
-    if (assetArrayBuffer) {
-      const assetBuffer = Buffer.from(assetArrayBuffer);
+if (!isWebContainer) {
+  if (typeof isSea === 'function' && isSea()) {
+    try {
+      const assetArrayBuffer = getAsset('esbuild-native');
 
-      // Write the binary file to the temp directory if it doesn't already exist
-      if (!existsSync(tempBinaryPath)) {
-        writeFileSync(tempBinaryPath, assetBuffer, { mode: 0o755 });
+      if (assetArrayBuffer) {
+        const assetBuffer = Buffer.from(assetArrayBuffer);
+
+        // Write the binary file to the temp directory if it doesn't already exist
+        if (!existsSync(tempBinaryPath)) {
+          writeFileSync(tempBinaryPath, assetBuffer, { mode: 0o755 });
+        }
+
+        // Instruct esbuild where to find its native core before it's loaded
+        process.env.ESBUILD_BINARY_PATH = tempBinaryPath;
       }
-
-      // Instruct esbuild where to find its native core before it's loaded
-      process.env.ESBUILD_BINARY_PATH = tempBinaryPath;
+    } catch (e) {
+      if (e.code !== 'ERR_NOT_IN_SINGLE_EXECUTABLE_APPLICATION') {
+        console.error('SEA Initialization Error:', e);
+      }
+      // In development mode (node index.js), we simply continue normally
     }
-  } catch (e) {
-    if (e.code !== 'ERR_NOT_IN_SINGLE_EXECUTABLE_APPLICATION') {
-      console.error('SEA Initialization Error:', e);
-    }
-    // In development mode (node index.js), we simply continue normally
+  } else {
+    // Fallback for development/npm mode
+    process.env.ESBUILD_BINARY_PATH = path.join(__dirname, 'esbuild');
   }
-} else {
-  // Fallback for development/npm mode
-  process.env.ESBUILD_BINARY_PATH = path.join(__dirname, 'esbuild');
 }
 
 /**
