@@ -1,4 +1,4 @@
-## [1.8.206](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.206) (2026-03-09)
+## [1.8.207](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.207) (2026-03-25)
 
 
 ### Bug Fixes
@@ -124,6 +124,7 @@
 * **gcli:** updated mcp server to be with rxjs instead of imperative code ([4337cad](https://github.com/Stradivario/gapi/commit/4337cad4a5091700b1f31ab1e01028ee96b6a096))
 * **geojson:** removed package geojson and instead re-exported from the library itself one less library for @gapi/core ([5d76d0f](https://github.com/Stradivario/gapi/commit/5d76d0f98ef70317bf82245512be9d0db8113d5b))
 * **graphql-pubsub:** added compatibility between graphql v15 and graphql v16 we want to use v16 but subscriptions are not stable enough ([b94d7a7](https://github.com/Stradivario/gapi/commit/b94d7a748856d64a952ac4f837db1d5d1b0437a2))
+* **graphql:** added option to disable query suggestion on client facing errors so attacker cannot guess what the next queries might be ([7eb4b0e](https://github.com/Stradivario/gapi/commit/7eb4b0ed89c61045ec0cf6cf51d76304288eaece))
 * **GraphqlCli:** init graphql-server cli ([9819b46](https://github.com/Stradivario/gapi/commit/9819b46458e6f732443b8d4ea8822cfa8f776a89))
 * **Lambda:** generation and deploy for lambda ([900e7dc](https://github.com/Stradivario/gapi/commit/900e7dcde5dc00af994adae9c8a5e808334b7bb9))
 * **openai:** added more input parameters for the graphql endpoint ([9fdee60](https://github.com/Stradivario/gapi/commit/9fdee607ee26e2c9715768539c7079db6d206f43))
