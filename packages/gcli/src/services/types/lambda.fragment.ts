@@ -22,7 +22,7 @@ secrets {
  }
  type
 }
-config {
+configs {
  id
  projectId
  name
