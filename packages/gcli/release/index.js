@@ -316708,7 +316708,6 @@ if (!isWebContainer) {
       }
     }
   } else {
-    process.env.ESBUILD_BINARY_PATH = import_node_path.default.join(__dirname, "esbuild");
   }
 }
 var main = (argv) => {

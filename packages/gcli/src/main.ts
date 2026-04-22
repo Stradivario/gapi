@@ -40,7 +40,7 @@ if (!isWebContainer) {
     }
   } else {
     // Fallback for development/npm mode
-    process.env.ESBUILD_BINARY_PATH = path.join(__dirname, 'esbuild');
+    // process.env.ESBUILD_BINARY_PATH = path.join(__dirname, 'esbuild');
   }
 }
 
