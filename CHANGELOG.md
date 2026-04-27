@@ -1,4 +1,4 @@
-## [1.8.216](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.216) (2026-04-22)
+## [1.8.217](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.217) (2026-04-27)
 
 
 ### Bug Fixes
@@ -132,6 +132,7 @@
 * **graphql-pubsub:** added compatibility between graphql v15 and graphql v16 we want to use v16 but subscriptions are not stable enough ([b94d7a7](https://github.com/Stradivario/gapi/commit/b94d7a748856d64a952ac4f837db1d5d1b0437a2))
 * **graphql:** added option to disable query suggestion on client facing errors so attacker cannot guess what the next queries might be ([7eb4b0e](https://github.com/Stradivario/gapi/commit/7eb4b0ed89c61045ec0cf6cf51d76304288eaece))
 * **GraphqlCli:** init graphql-server cli ([9819b46](https://github.com/Stradivario/gapi/commit/9819b46458e6f732443b8d4ea8822cfa8f776a89))
+* **graphql:** dynamic schema merging ([c53591c](https://github.com/Stradivario/gapi/commit/c53591ce7d525c3d637bd62da200cb34ed742c90))
 * **Lambda:** generation and deploy for lambda ([900e7dc](https://github.com/Stradivario/gapi/commit/900e7dcde5dc00af994adae9c8a5e808334b7bb9))
 * **openai:** added more input parameters for the graphql endpoint ([9fdee60](https://github.com/Stradivario/gapi/commit/9fdee607ee26e2c9715768539c7079db6d206f43))
 * **openai:** added new version of openai and modified a little bit the code to fit new api ([44f606b](https://github.com/Stradivario/gapi/commit/44f606bf44b6e470066701242bad91bb36a8b739))
