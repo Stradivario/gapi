@@ -1,4 +1,4 @@
-## [1.8.217](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.217) (2026-04-27)
+## [1.8.218](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.218) (2026-04-29)
 
 
 ### Bug Fixes
@@ -143,6 +143,7 @@
 * **rxdi:** bumped many versions of rxdi infrastructure ([56cf598](https://github.com/Stradivario/gapi/commit/56cf5981ce2f5d14d514fdd88fafe753d802bc5d))
 * **rxdi:** bumped rxdi for new feature AMQPSusbscribe decorator for complex dead letter queue scenarios ([ef0b247](https://github.com/Stradivario/gapi/commit/ef0b247db094623d790e2f53ad5969ac6706ceeb))
 * **rxdi:** bumped rxdi versions due to recent ai changed with description field exposed to graphql query mutation and subscription better schema generation ([c6a4c35](https://github.com/Stradivario/gapi/commit/c6a4c35a007ba094c4bafc5c346ecc97a766181d))
+* **rxdi:** bumped version of rxdi ([7b489c4](https://github.com/Stradivario/gapi/commit/7b489c4a395584d077ef8fdd13843639225e7b06))
 * **rxdi:** bumped version of rxdi ([9abf554](https://github.com/Stradivario/gapi/commit/9abf5546fb3d5f84682026f427f68d6a99f45f8a))
 * **rxdi:** bumped version of rxdi ([d998039](https://github.com/Stradivario/gapi/commit/d998039963d256391682b03e5f0dcc89bbf921d7))
 * **rxdi:** bumped version with many removed unused functionalities ([637d781](https://github.com/Stradivario/gapi/commit/637d7814f9c906d75d7f42a8847417ed4d098ddd))
