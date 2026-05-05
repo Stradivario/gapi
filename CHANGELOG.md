@@ -1,4 +1,4 @@
-## [1.8.218](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.218) (2026-04-29)
+## [1.8.219](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.219) (2026-05-05)
 
 
 ### Bug Fixes
@@ -146,6 +146,7 @@
 * **rxdi:** bumped version of rxdi ([7b489c4](https://github.com/Stradivario/gapi/commit/7b489c4a395584d077ef8fdd13843639225e7b06))
 * **rxdi:** bumped version of rxdi ([9abf554](https://github.com/Stradivario/gapi/commit/9abf5546fb3d5f84682026f427f68d6a99f45f8a))
 * **rxdi:** bumped version of rxdi ([d998039](https://github.com/Stradivario/gapi/commit/d998039963d256391682b03e5f0dcc89bbf921d7))
+* **rxdi:** bumped version of rxdi to remove strange logs ([3667ae1](https://github.com/Stradivario/gapi/commit/3667ae1cb6dd07f81bf3bbea31fb66ea04766898))
 * **rxdi:** bumped version with many removed unused functionalities ([637d781](https://github.com/Stradivario/gapi/commit/637d7814f9c906d75d7f42a8847417ed4d098ddd))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([95657c7](https://github.com/Stradivario/gapi/commit/95657c7be828623fc1d2ecd8119539f4ba84a743))
 * **rxdi:** introduced options for altair ([b85ebb7](https://github.com/Stradivario/gapi/commit/b85ebb748859b0542d21c4da14109c06bce67866))
