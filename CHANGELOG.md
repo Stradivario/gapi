@@ -1,4 +1,4 @@
-## [1.8.219](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.219) (2026-05-05)
+## [1.8.220](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.220) (2026-05-14)
 
 
 ### Bug Fixes
@@ -70,6 +70,7 @@
 * **gcli:** wrong graphql type ([30f1af2](https://github.com/Stradivario/gapi/commit/30f1af28a022bbeaff0da1da80da7e7c91b0e7b7))
 * **InitQuery:** reverted ([09a93da](https://github.com/Stradivario/gapi/commit/09a93da16f27e944703f0a99dd7aa2fd3d17f243))
 * **login:** added method which converts number to string ([f3ca052](https://github.com/Stradivario/gapi/commit/f3ca0521ebf9cca22e711c6ec4c2154f181d0694))
+* **nats:** graphql nats when subscribing to pubsub via nats was not working due to not lazy loaded graphql nats class ([d3a47ac](https://github.com/Stradivario/gapi/commit/d3a47acb2123934ee53ee85c942b9ae21f9b5b3b))
 * **network:** added ability to specify lambda purpose publicly exposed or privately exposed ([5bcb6bc](https://github.com/Stradivario/gapi/commit/5bcb6bcd838fc87c3b54ceb7dc96d56d72dc5094))
 * new api introduced with small changes ([f893e44](https://github.com/Stradivario/gapi/commit/f893e44e18fdb5c05899e06fe7397bb6852b13a1))
 * **package.json:** added @rxdi/core dependency ([76ee663](https://github.com/Stradivario/gapi/commit/76ee663d790f232fa13ae60693fe2dd1037fa0e7))
