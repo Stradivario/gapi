@@ -1,4 +1,4 @@
-## [1.8.220](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.220) (2026-05-14)
+## [1.8.221](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.221) (2026-05-14)
 
 
 ### Bug Fixes
@@ -150,6 +150,7 @@
 * **rxdi:** bumped version of rxdi to remove strange logs ([3667ae1](https://github.com/Stradivario/gapi/commit/3667ae1cb6dd07f81bf3bbea31fb66ea04766898))
 * **rxdi:** bumped version with many removed unused functionalities ([637d781](https://github.com/Stradivario/gapi/commit/637d7814f9c906d75d7f42a8847417ed4d098ddd))
 * **rxdi:** global prefetch count for rabbitmq pubsub ([95657c7](https://github.com/Stradivario/gapi/commit/95657c7be828623fc1d2ecd8119539f4ba84a743))
+* **rxdi:** graphql package type decorator now accepts graphql union type ([6b56df2](https://github.com/Stradivario/gapi/commit/6b56df29de3b4820defdb8d0c3f7f32b8b628fcf))
 * **rxdi:** introduced options for altair ([b85ebb7](https://github.com/Stradivario/gapi/commit/b85ebb748859b0542d21c4da14109c06bce67866))
 * **rxdi:** whole infrastructure bumped ([0a5c1c7](https://github.com/Stradivario/gapi/commit/0a5c1c7db76e4726e017da655aa5cd47cb36a7f1))
 * **sandgrid:** added options to last parameter in order to create attachment for the email and add s missing functionalities which restrict this library to be used as a extender of original sendgrid library ([63dc5bf](https://github.com/Stradivario/gapi/commit/63dc5bf21eeac37f31755a4c21347260c00845d2))
