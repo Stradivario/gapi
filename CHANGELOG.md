@@ -1,4 +1,4 @@
-## [1.8.221](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.221) (2026-05-14)
+## [1.8.222](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.222) (2026-05-23)
 
 
 ### Bug Fixes
@@ -135,6 +135,7 @@
 * **GraphqlCli:** init graphql-server cli ([9819b46](https://github.com/Stradivario/gapi/commit/9819b46458e6f732443b8d4ea8822cfa8f776a89))
 * **graphql:** dynamic schema merging ([c53591c](https://github.com/Stradivario/gapi/commit/c53591ce7d525c3d637bd62da200cb34ed742c90))
 * **Lambda:** generation and deploy for lambda ([900e7dc](https://github.com/Stradivario/gapi/commit/900e7dcde5dc00af994adae9c8a5e808334b7bb9))
+* **nats:** bumped version of rxdi due to nats changes ([5c05748](https://github.com/Stradivario/gapi/commit/5c057486eb6ba925f034136c59f194097107be3f))
 * **openai:** added more input parameters for the graphql endpoint ([9fdee60](https://github.com/Stradivario/gapi/commit/9fdee607ee26e2c9715768539c7079db6d206f43))
 * **openai:** added new version of openai and modified a little bit the code to fit new api ([44f606b](https://github.com/Stradivario/gapi/commit/44f606bf44b6e470066701242bad91bb36a8b739))
 * **openai:** added open ai module with simple graphql mutation ([ec660f9](https://github.com/Stradivario/gapi/commit/ec660f9542909f16b5b8bda19ae39dee00c48352))
