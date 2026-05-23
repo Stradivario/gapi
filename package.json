@@ -1,6 +1,6 @@
 {
   "name": "gapi",
-  "version": "1.8.221",
+  "version": "1.8.222",
   "description": "Graphql Scalable API",
   "bolt": {
     "workspaces": [
