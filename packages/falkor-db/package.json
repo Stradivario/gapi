@@ -32,7 +32,7 @@
     "falkordb": "^6.3.1"
   },
   "devDependencies": {
-    "@rxdi/core": "^0.7.244",
+    "@rxdi/core": "^0.7.245",
     "@types/node": "^25.0.3"
   },
   "main": "./dist/index.js",

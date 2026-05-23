@@ -30,6 +30,17 @@ export * from '@rxdi/graphql-pubsub';
 export { withFilter } from '@rxdi/graphql-rabbitmq-subscriptions';
 export * from '@rxdi/hapi';
 export * from 'graphql';
+// Explicit re-export of the lambda-aware Bootstrap MUST come after the
+// `export * from '@rxdi/core'` above so it shadows the upstream Bootstrap.
+// Outside Lambforge (LAMBFORGE_RUNTIME unset), this delegates verbatim.
+export {
+  awaitLambdaModule,
+  Bootstrap,
+  deliverLambdaModule,
+  isLambdaModuleDelivered,
+  isLambdaRuntime,
+  resetLambdaBridge,
+} from './lambda-bridge';
 export {
   buildSchema,
   ExecutionResult,
