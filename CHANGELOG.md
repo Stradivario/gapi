@@ -1,4 +1,4 @@
-## [1.8.222](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.222) (2026-05-23)
+## [1.8.223](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.223) (2026-05-23)
 
 
 ### Bug Fixes
@@ -134,6 +134,7 @@
 * **graphql:** added option to disable query suggestion on client facing errors so attacker cannot guess what the next queries might be ([7eb4b0e](https://github.com/Stradivario/gapi/commit/7eb4b0ed89c61045ec0cf6cf51d76304288eaece))
 * **GraphqlCli:** init graphql-server cli ([9819b46](https://github.com/Stradivario/gapi/commit/9819b46458e6f732443b8d4ea8822cfa8f776a89))
 * **graphql:** dynamic schema merging ([c53591c](https://github.com/Stradivario/gapi/commit/c53591ce7d525c3d637bd62da200cb34ed742c90))
+* **lambda:** added functions to test lambda enviornment and to not initialize settings ([fa41948](https://github.com/Stradivario/gapi/commit/fa419484f6c4ed99e745e85b51e3029c8b8a5056))
 * **Lambda:** generation and deploy for lambda ([900e7dc](https://github.com/Stradivario/gapi/commit/900e7dcde5dc00af994adae9c8a5e808334b7bb9))
 * **nats:** bumped version of rxdi due to nats changes ([5c05748](https://github.com/Stradivario/gapi/commit/5c057486eb6ba925f034136c59f194097107be3f))
 * **openai:** added more input parameters for the graphql endpoint ([9fdee60](https://github.com/Stradivario/gapi/commit/9fdee607ee26e2c9715768539c7079db6d206f43))
