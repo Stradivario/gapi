@@ -1,4 +1,4 @@
-## [1.8.223](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.223) (2026-05-23)
+## [1.8.224](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.224) (2026-05-24)
 
 
 ### Bug Fixes
@@ -76,6 +76,7 @@
 * **package.json:** added @rxdi/core dependency ([76ee663](https://github.com/Stradivario/gapi/commit/76ee663d790f232fa13ae60693fe2dd1037fa0e7))
 * **release:** added new job for releasing binary in gcli ([8e9f181](https://github.com/Stradivario/gapi/commit/8e9f181925fc3950b850cfc311fda3303aa6f502))
 * removal of many things that are not needed ([270dbe5](https://github.com/Stradivario/gapi/commit/270dbe59c0b143f162a72e62561c1da1db5e38bf))
+* **rxdi:** bumped packages ([27e3563](https://github.com/Stradivario/gapi/commit/27e3563182967af04f3f6a52e35bc156031d6579))
 * **rxdi:** graphql was not checking when method is GET if payload exists which is for POST requests ([efc3984](https://github.com/Stradivario/gapi/commit/efc3984717025c321db60589c18228327be2c81d))
 * **rxdi:** reverted back changes ([a10be18](https://github.com/Stradivario/gapi/commit/a10be18fe20b02aa686f43604f62484454aeeea7))
 * **rxdi:** reverted back old logic ([1cabde3](https://github.com/Stradivario/gapi/commit/1cabde384fd589e53144316c141f6f29203cba31))
