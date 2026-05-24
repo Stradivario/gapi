@@ -25,10 +25,10 @@
     "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
-    "@rxdi/core": "^0.7.245",
-    "@rxdi/graphql": "^0.7.245",
-    "@rxdi/graphql-pubsub": "^0.7.245",
-    "@rxdi/hapi": "^0.7.245",
+    "@rxdi/core": "^0.7.246",
+    "@rxdi/graphql": "^0.7.246",
+    "@rxdi/graphql-pubsub": "^0.7.246",
+    "@rxdi/hapi": "^0.7.246",
     "graphql": "^16.12.0"
   },
   "main": "./dist/index.js",
