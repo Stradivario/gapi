@@ -1,4 +1,4 @@
-## [1.8.225](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.225) (2026-05-27)
+## [1.8.226](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.226) (2026-05-28)
 
 
 ### Bug Fixes
@@ -75,6 +75,7 @@
 * **network:** added ability to specify lambda purpose publicly exposed or privately exposed ([5bcb6bc](https://github.com/Stradivario/gapi/commit/5bcb6bcd838fc87c3b54ceb7dc96d56d72dc5094))
 * new api introduced with small changes ([f893e44](https://github.com/Stradivario/gapi/commit/f893e44e18fdb5c05899e06fe7397bb6852b13a1))
 * **package.json:** added @rxdi/core dependency ([76ee663](https://github.com/Stradivario/gapi/commit/76ee663d790f232fa13ae60693fe2dd1037fa0e7))
+* **pubsub:** added checks for pubsub ([8584937](https://github.com/Stradivario/gapi/commit/858493785b73c345d9c285e2701b7e4c258b5fdc))
 * **release:** added new job for releasing binary in gcli ([8e9f181](https://github.com/Stradivario/gapi/commit/8e9f181925fc3950b850cfc311fda3303aa6f502))
 * removal of many things that are not needed ([270dbe5](https://github.com/Stradivario/gapi/commit/270dbe59c0b143f162a72e62561c1da1db5e38bf))
 * **rxdi:** bumped packages ([27e3563](https://github.com/Stradivario/gapi/commit/27e3563182967af04f3f6a52e35bc156031d6579))
