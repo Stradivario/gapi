@@ -36181,6 +36181,8 @@ updatedAt
 packageJson
 buildBashScript
 customUploadFileId
+federation
+subgraphs
 scaleOptions {
   minCpu
   maxCpu
@@ -284761,8 +284763,9 @@ var init_helpers2 = __esm({
             )
           );
         }),
-        (0, import_operators12.switchMap)(
-          async (payload) => (0, import_rxjs13.lastValueFrom)(
+        (0, import_operators12.switchMap)(async (payload) => {
+          const fed = payload;
+          return (0, import_rxjs13.lastValueFrom)(
             GraphqlClienAPI[type2]({
               code: cmd.code || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
               name: cmd.name || payload.name || "",
@@ -284776,6 +284779,13 @@ var init_helpers2 = __esm({
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
               network: cmd.network || payload.network || ["public", "private"],
+              /* Apollo Federation gateway — only sent when configured in
+                 lambforge.yaml, so non-federation lambdas keep the exact same
+                 payload (no regression for existing deploys). */
+              ...fed.federation || fed.subgraphs?.length ? {
+                federation: !!fed.federation,
+                subgraphs: fed.subgraphs ?? []
+              } : {},
               customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || "",
               scaleOptions: {
                 executorType: cmd.executorType || payload.scaleOptions?.executorType || "poolmgr",
@@ -284792,8 +284802,8 @@ var init_helpers2 = __esm({
                 specializationTimeout: cmd.specializationTimeout || payload.scaleOptions?.specializationTimeout || 120
               }
             })
-          )
-        ),
+          );
+        }),
         (0, import_operators12.tap)((data) => {
           Logger.info(JSON.stringify(data, null, 2));
         })

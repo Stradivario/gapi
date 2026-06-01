@@ -23,6 +23,8 @@ interface ConfigJSON {
   secrets?: string[];
   network?: string[];
   uploadAsZip?: string;
+  federation?: string;
+  subgraphs?: string[];
   scaleOptions?: ILambdaScaleInputOptions;
 }
 

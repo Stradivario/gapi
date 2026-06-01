@@ -40,6 +40,9 @@ export interface CreateOrUpdateLambdaArguments {
   package: string;
   params: string[];
   customUploadFileId: string;
+  /* Apollo Federation gateway (from lambforge.yaml `function.federation` / `function.subgraphs`) */
+  federation?: boolean;
+  subgraphs?: string[];
   /* Scale options */
   minCpu: number;
   maxCpu: number;
@@ -116,8 +119,8 @@ export const createOrUpdateLambda = (
           ),
         );
       }),
-      switchMap(async (payload) =>
-        lastValueFrom(
+      switchMap(async (payload) => {
+        return lastValueFrom(
           GraphqlClienAPI[type]({
             code:
               cmd.code ||
@@ -140,6 +143,12 @@ export const createOrUpdateLambda = (
             params: cmd.params || payload.params || [],
             secrets: cmd.secrets || payload.secrets || [],
             network: cmd.network || payload.network || ['public', 'private'],
+            ...(payload.federation || payload.subgraphs?.length
+              ? {
+                  federation: !!payload.federation,
+                  subgraphs: payload.subgraphs ?? [],
+                }
+              : {}),
             customUploadFileId:
               cmd.customUploadFileId || payload.customUploadFileId || '',
             scaleOptions: {
@@ -168,8 +177,8 @@ export const createOrUpdateLambda = (
                 120,
             },
           }),
-        ),
-      ),
+        );
+      }),
       tap((data) => {
         Logger.info(JSON.stringify(data, null, 2));
       }),

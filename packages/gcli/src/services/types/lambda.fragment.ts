@@ -46,6 +46,8 @@ updatedAt
 packageJson
 buildBashScript
 customUploadFileId
+federation
+subgraphs
 scaleOptions {
   minCpu
   maxCpu

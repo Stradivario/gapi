@@ -92,6 +92,10 @@
     getLambdaLogsByName?: IFissionLogsType | null;
     getLambdaBuilderLogs?: IFissionLogsType | null;
     getLambdaBuilderLogsByName?: IFissionLogsType | null;
+    getAvailableLogDates?: Array<IAvailableLogDates> | null;
+    getSecretMap?: IKubectlConfig | null;
+    getSecretMapById?: IKubectlConfig | null;
+    listProjectSecrets?: Array<IKubectlConfig> | null;
     getRouterUrl?: IFissionType | null;
     listProjectLambdas?: Array<IFissionType> | null;
     listMyLambdas?: Array<IFissionType> | null;
@@ -100,9 +104,6 @@
     getConfigMap?: IKubectlConfig | null;
     getConfigMapById?: IKubectlConfig | null;
     listProjectConfigs?: Array<IKubectlConfig> | null;
-    getSecretMap?: IKubectlConfig | null;
-    getSecretMapById?: IKubectlConfig | null;
-    listProjectSecrets?: Array<IKubectlConfig> | null;
     listAtlasConnectors?: Array<IMongoAtlasConnector> | null;
     findRabbitMqInstance?: IRabbitMq | null;
     listQueuesPerProject?: Array<IRabbitMqQueue> | null;
@@ -121,6 +122,15 @@
     listInvoices?: Array<IInvoice> | null;
     listProjectInvoices?: Array<IInvoice> | null;
     podCostBreakdown?: Array<IPodCostBreakdown> | null;
+    listAvailablePlugins?: Array<IPlugin> | null;
+    getPlugin?: IPlugin | null;
+    listInstalledPlugins?: Array<IInstalledPlugin> | null;
+    isPluginInstalled?: string | null;
+    getAllProjectsSummary?: Array<IProjectSummary> | null;
+    getClusterStatistics?: IClusterStatistics | null;
+    getResourceLimitAlerts?: Array<IResourceLimitAlert> | null;
+    listAllInvoices?: Array<IInvoice> | null;
+    listAllUsers?: Array<IUser> | null;
 }
 
   
@@ -1002,10 +1012,83 @@ export
     cron?: string | null;
 }
 
+export   
+  type ICompressionTypeEnum = 'GZIP' | 'LZW';
+
+  
+  export interface ILambdaLogsPagination {
+    year?: string | null;
+    month?: string | null;
+    day?: string | null;
+    hour?: string | null;
+    pod?: string | null;
+}
+
   
   export interface IFissionLogsType {
     __typename?: "FissionLogsType";
     data?: string | null;
+}
+
+  
+  export interface IAvailableLogDates {
+    __typename?: "AvailableLogDates";
+    year?: string | null;
+    months?: Array<IAvailableLogMonth> | null;
+}
+
+  
+  export interface IAvailableLogMonth {
+    __typename?: "AvailableLogMonth";
+    month?: string | null;
+    days?: Array<IAvailableLogDay> | null;
+}
+
+  
+  export interface IAvailableLogDay {
+    __typename?: "AvailableLogDay";
+    day?: string | null;
+    hours?: Array<IAvailableLogHour> | null;
+}
+
+  
+  export interface IAvailableLogHour {
+    __typename?: "AvailableLogHour";
+    hour?: string | null;
+    pods?: Array<string> | null;
+}
+
+  
+  export interface IGenericKubectName {
+    name?: string;
+    projectId?: string;
+}
+
+  
+  export interface IKubectlConfig {
+    __typename?: "KubectlConfig";
+    id?: string | null;
+    projectId?: string | null;
+    immutable?: boolean | null;
+    name?: string | null;
+    apiVersion?: string | null;
+    data?: any | null;
+    kind?: string | null;
+    metadata?: IKubectlConfigMapMetadata | null;
+    type?: string | null;
+}
+
+  
+  export interface IKubectlConfigMapMetadata {
+    __typename?: "KubectlConfigMapMetadata";
+    creationTimestamp?: string | null;
+    name?: string | null;
+    namespace?: string | null;
+    resourceVersion?: string | null;
+    uid?: string | null;
+    labels?: any | null;
+    finalizers?: Array<string> | null;
+    annotations?: any | null;
 }
 
   
@@ -1120,6 +1203,7 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
       
   */
     customUploadFileId?: string | null;
+    customUploadFile?: IGraphqlLambdaFile | null;
     /**
     description?: Who is the creator of this lambda it is ObjectId in mongodb
   */
@@ -1136,6 +1220,14 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
     description?: Disable external traffic to hit the lambda function using http
   */
     network?: Array<string> | null;
+    /**
+    description?: When true this lambda is provisioned as an Apollo Federation gateway
+  */
+    federation?: boolean | null;
+    /**
+    description?: Lambda names (same project) exposed as subgraphs of the federation gateway
+  */
+    subgraphs?: Array<string> | null;
     /**
     description?: 
         Default scale options for "poolmgr" are these and are defined in JSON 
@@ -1180,35 +1272,15 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
     logs?: ILambdaLogs | null;
 }
 
-  
-  export interface IKubectlConfig {
-    __typename?: "KubectlConfig";
-    id?: string | null;
-    projectId?: string | null;
-    immutable?: boolean | null;
-    name?: string | null;
-    apiVersion?: string | null;
-    data?: any | null;
-    kind?: string | null;
-    metadata?: IKubectlConfigMapMetadata | null;
-    type?: string | null;
-}
-
-  
-  export interface IKubectlConfigMapMetadata {
-    __typename?: "KubectlConfigMapMetadata";
-    creationTimestamp?: string | null;
-    name?: string | null;
-    namespace?: string | null;
-    resourceVersion?: string | null;
-    uid?: string | null;
-    labels?: any | null;
-    finalizers?: Array<string> | null;
-    annotations?: any | null;
-}
-
 export   
   type IHttpMethodsEnum = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS';
+
+  
+  export interface IGraphqlLambdaFile {
+    __typename?: "GraphqlLambdaFile";
+    id?: string | null;
+    url?: string | null;
+}
 
   
   export interface ILambdaScaleOptions {
@@ -1308,12 +1380,6 @@ export
     __typename?: "LambdaLogs";
     builder?: IFissionLogsType | null;
     function?: IFissionLogsType | null;
-}
-
-  
-  export interface IGenericKubectName {
-    name?: string;
-    projectId?: string;
 }
 
   
@@ -1656,6 +1722,7 @@ export
     disabled?: boolean | null;
     autoDefault?: boolean | null;
     disabledWhen?: IFieldDependency | null;
+    bindWith?: IFieldBindWith | null;
     layout?: string | null;
 }
 
@@ -1684,6 +1751,15 @@ export
 }
 
   
+  export interface IFieldBindWith {
+    __typename?: "FieldBindWith";
+    sourceField?: string | null;
+    transform?: string | null;
+    transformArgs?: any | null;
+    disableTarget?: boolean | null;
+}
+
+  
   export interface IInvoice {
     __typename?: "Invoice";
     id?: string | null;
@@ -1695,11 +1771,11 @@ export
     tax?: number | null;
     total?: number | null;
     status?: string | null;
-    issuedAt?: string | null;
+    issuedAt?: number | null;
     paidAt?: string | null;
     pdfUrl?: string | null;
-    createdAt?: string | null;
-    updatedAt?: string | null;
+    createdAt?: number | null;
+    updatedAt?: number | null;
 }
 
   
@@ -1728,6 +1804,79 @@ export
     ramCost?: number | null;
     pvCost?: number | null;
     efficiency?: number | null;
+}
+
+  
+  export interface IPlugin {
+    __typename?: "Plugin";
+    id?: string | null;
+    name?: string | null;
+    description?: string | null;
+    documentation?: string | null;
+    logo?: string | null;
+    pluginType?: IPluginTypeEnum | null;
+    isActive?: boolean | null;
+    configSchema?: any | null;
+}
+
+export   
+  type IPluginTypeEnum = 'kubernetes' | 'helm' | 'external';
+
+  
+  export interface IInstalledPlugin {
+    __typename?: "InstalledPlugin";
+    plugin?: IPlugin | null;
+    installedAt?: string | null;
+    config?: any | null;
+}
+
+  
+  export interface IProjectSummary {
+    __typename?: "ProjectSummary";
+    id?: string | null;
+    name?: string | null;
+    ownerEmail?: string | null;
+    tierName?: string | null;
+    lambdaCount?: string | null;
+    suspended?: string | null;
+    cost7Days?: string | null;
+    cost30Days?: string | null;
+}
+
+  
+  export interface IClusterStatistics {
+    __typename?: "ClusterStatistics";
+    nodeCount?: string | null;
+    totalCpu?: string | null;
+    totalMemory?: string | null;
+    cpuUtilizationPercent?: string | null;
+    memoryUtilizationPercent?: string | null;
+}
+
+  
+  export interface IResourceLimitAlert {
+    __typename?: "ResourceLimitAlert";
+    projectId?: string | null;
+    projectName?: string | null;
+    resourceType?: string | null;
+    used?: string | null;
+    quota?: string | null;
+    percentage?: string | null;
+    severity?: string | null;
+}
+
+  
+  export interface IUser {
+    __typename?: "User";
+    id?: string | null;
+    email?: string | null;
+    lastActiveDate?: string | null;
+    active?: boolean | null;
+    tag?: string | null;
+    user_id?: string | null;
+    name?: string | null;
+    photoURL?: string | null;
+    scopes?: Array<string> | null;
 }
 
   
@@ -1771,6 +1920,9 @@ export
     createFirebaseUser?: IUserType | null;
     updateProfile?: IUserType | null;
     setOnlineStatus?: IUserType | null;
+    disableUser?: IUserType | null;
+    enableUser?: IUserType | null;
+    impersonateUser?: IUserCustomTokenType | null;
     createTeam?: ITeamType | null;
     deleteTeam?: ITeamType | null;
     generateCodeSession?: ISessionType | null;
@@ -1840,6 +1992,10 @@ export
     stopLogStreaming?: IFissionLogsType | null;
     openLambda?: IFissionType | null;
     closeLambda?: IFissionType | null;
+    createSecretMap?: IKubectlConfig | null;
+    updateSecretMap?: IKubectlConfig | null;
+    updateSecretMapById?: IKubectlConfig | null;
+    deleteSecretMap?: IKubectlConfig | null;
     createLambda?: IFissionType | null;
     /**
     description?: 
@@ -1856,10 +2012,6 @@ export
     updateConfigMap?: IKubectlConfig | null;
     updateConfigMapById?: IKubectlConfig | null;
     deleteConfigMap?: IKubectlConfig | null;
-    createSecretMap?: IKubectlConfig | null;
-    updateSecretMap?: IKubectlConfig | null;
-    updateSecretMapById?: IKubectlConfig | null;
-    deleteSecretMap?: IKubectlConfig | null;
     connectAtlasMongo?: IMongoAtlasConnector | null;
     updateAtlasMongo?: IMongoAtlasConnector | null;
     disconnectAtlasMongo?: IMongoAtlasConnector | null;
@@ -1871,6 +2023,7 @@ export
     createNamespace?: IKubectlNamespace | null;
     updateNamespaceResources?: IKubectlNamespace | null;
     suspendNamespace?: IKubectlNamespace | null;
+    resumeNamespace?: IKubectlNamespace | null;
     deleteNamespace?: IKubectlNamespace | null;
     applyNetworkPolicy?: IKubectlNamespace | null;
     allowNamespaceAccess?: IKubectlNamespace | null;
@@ -1878,6 +2031,9 @@ export
     deleteNetworkPolicy?: IKubectlNamespace | null;
     generateInvoice?: IInvoice | null;
     updateInvoiceStatus?: IInvoice | null;
+    installPlugin?: IInstalledPlugin | null;
+    uninstallPlugin?: string | null;
+    updateProjectTierAdmin?: string | null;
 }
 
   
@@ -2485,6 +2641,29 @@ export
 }
 
   
+  export interface IGenericKubectConfig {
+    /**
+    description?: Name of the kubernetes secret it can be "envirnoment" or any other but follow "my-environment" pattern for creating names
+  */
+    name?: string;
+    /**
+    description?: Project mapped to this specific lambda function
+  */
+    projectId?: string;
+    /**
+    description?: Key value pari mapped to this config or secret
+        returns JSON string like this?:
+        {
+        "MY_SECRET"?:"first",
+        "MY_SECRET_SECOND"?:"second",
+        "MY_SECRET_THIRD"?:"third"
+        }
+      
+  */
+    pairs?: any;
+}
+
+  
   export interface ICreateOrUpdateLambdaInput {
     /**
     description: Name of the lambda function it can be for example "my-lambda-function" 
@@ -2760,6 +2939,23 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
     description: Disable external traffic to hit the lambda function using http
   */
     network?: Array<string> | null;
+    /**
+    description: 
+        When "true" this lambda is provisioned as an Apollo Federation gateway instead of a
+        regular function. The selected "subgraphs" are composed into a single supergraph and the
+        exported "code" function is executed before every request to build the gateway context
+        (authentication). The "env" must point to the federation runtime image.
+      
+  */
+    federation?: boolean | null;
+    /**
+    description: 
+        Only used when "federation" is true. List of lambda names (within the same project) to expose
+        as subgraphs of the federation gateway. The backend resolves each name to its internal router
+        URL and generates the GATEWAY_SERVICE_LIST consumed by the gateway.
+      
+  */
+    subgraphs?: Array<string> | null;
 }
 
   
@@ -2855,29 +3051,6 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
   export interface IDeleteLambdaInput {
     name?: string;
     projectId?: string;
-}
-
-  
-  export interface IGenericKubectConfig {
-    /**
-    description?: Name of the kubernetes secret it can be "envirnoment" or any other but follow "my-environment" pattern for creating names
-  */
-    name?: string;
-    /**
-    description?: Project mapped to this specific lambda function
-  */
-    projectId?: string;
-    /**
-    description?: Key value pari mapped to this config or secret
-        returns JSON string like this?:
-        {
-        "MY_SECRET"?:"first",
-        "MY_SECRET_SECOND"?:"second",
-        "MY_SECRET_THIRD"?:"third"
-        }
-      
-  */
-    pairs?: any;
 }
 
   
