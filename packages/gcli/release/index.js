@@ -284764,7 +284764,6 @@ var init_helpers2 = __esm({
           );
         }),
         (0, import_operators12.switchMap)(async (payload) => {
-          const fed = payload;
           return (0, import_rxjs13.lastValueFrom)(
             GraphqlClienAPI[type2]({
               code: cmd.code || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
@@ -284779,12 +284778,9 @@ var init_helpers2 = __esm({
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
               network: cmd.network || payload.network || ["public", "private"],
-              /* Apollo Federation gateway — only sent when configured in
-                 lambforge.yaml, so non-federation lambdas keep the exact same
-                 payload (no regression for existing deploys). */
-              ...fed.federation || fed.subgraphs?.length ? {
-                federation: !!fed.federation,
-                subgraphs: fed.subgraphs ?? []
+              ...payload.federation || payload.subgraphs?.length ? {
+                federation: !!payload.federation,
+                subgraphs: payload.subgraphs ?? []
               } : {},
               customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || "",
               scaleOptions: {

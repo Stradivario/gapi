@@ -1,4 +1,4 @@
-## [1.8.226](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.226) (2026-05-28)
+## [1.8.227](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.227) (2026-06-01)
 
 
 ### Bug Fixes
@@ -115,6 +115,7 @@
 * **gcli:** added esbuild as a script with decorators ([35148c7](https://github.com/Stradivario/gapi/commit/35148c72809a5aaef07947ad49cdb78b0b97e4c2))
 * **gcli:** added esbuild as dependency since we want to automatically use the binary for the available architecture for SEA bundle we use the actual binary ([eacc12a](https://github.com/Stradivario/gapi/commit/eacc12a2d26d1b47358882cc9a6ce79ffde9e964))
 * **gcli:** added exit strategies for the child process and added configuration for build scripts unified ([ea75254](https://github.com/Stradivario/gapi/commit/ea752545a4a805e8cfbe2d65b18647207c93d76d))
+* **gcli:** added federation support ([6ea64a6](https://github.com/Stradivario/gapi/commit/6ea64a628e7399abce2ded45a1c89b45c6d30a8f))
 * **gcli:** added global auth token using a environment variable GCLI_AUTH_TOKEN ([511dd02](https://github.com/Stradivario/gapi/commit/511dd023ae9df4785fec13e57cce44a5a3bc76f5))
 * **gcli:** added hasOptionsRequest to lambda creation ([a4f6d9c](https://github.com/Stradivario/gapi/commit/a4f6d9cf3dfe3c0671499d43aefa1bb5b6d9807d))
 * **gcli:** added ignore folders so we can safely execute commands changing files without interrupting the server to restart for example for schema introspection of the graphql queries ([a5da7ba](https://github.com/Stradivario/gapi/commit/a5da7bad7e0153251b6cc3b9d6c4f282936cfb64))
