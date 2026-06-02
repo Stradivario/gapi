@@ -1,4 +1,4 @@
-## [1.8.228](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.228) (2026-06-02)
+## [1.8.229](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.229) (2026-06-02)
 
 
 ### Bug Fixes
@@ -42,6 +42,7 @@
 * **federation:** rebuilded module and re-deployed ([e4fe17e](https://github.com/Stradivario/gapi/commit/e4fe17ec857dd3fd876a51cf4fdc0751dd090670))
 * **gcli:** added additional options ([dd4958a](https://github.com/Stradivario/gapi/commit/dd4958aa12305ea9cf7c35a43863eacc705c0b5e))
 * **gcli:** added config extraction from the current api url ([1afdf6f](https://github.com/Stradivario/gapi/commit/1afdf6fc5cfadecab5fcc19a417d3939cb60c9dd))
+* **gcli:** added missing envSecrets in lambda fragment ([c14b9e5](https://github.com/Stradivario/gapi/commit/c14b9e5aaaca1c09e85e1acd228ede8d79b66646))
 * **gcli:** added secrets instead of secret due to api change in lamb forge ([9b4b2fe](https://github.com/Stradivario/gapi/commit/9b4b2fe0d1180b946897581bcf2355d84a0fecc5))
 * **gcli:** async code refactored to rxjs [ci-skip] ([42cf603](https://github.com/Stradivario/gapi/commit/42cf6039547de01381c20db48bda760f3906987f))
 * **gcli:** authorization token passed also to upload lambda logic ([26e5126](https://github.com/Stradivario/gapi/commit/26e512698fd471fb73ecf302e857631609eecc8e))

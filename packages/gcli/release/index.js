@@ -36183,6 +36183,7 @@ buildBashScript
 customUploadFileId
 federation
 subgraphs
+envSecrets
 scaleOptions {
   minCpu
   maxCpu
