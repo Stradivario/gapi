@@ -1,4 +1,4 @@
-## [1.8.227](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.227) (2026-06-01)
+## [1.8.228](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.228) (2026-06-02)
 
 
 ### Bug Fixes
@@ -125,6 +125,7 @@
 * **gcli:** build script added outfile ([1bea705](https://github.com/Stradivario/gapi/commit/1bea7057543c37999ec2bd23983bc8a0401361f0))
 * **gcli:** bundle binary ([e4ad1a0](https://github.com/Stradivario/gapi/commit/e4ad1a075bb468f014d5cc01cda31227775fe04a))
 * **gcli:** environment crud operations added ([5c4bde8](https://github.com/Stradivario/gapi/commit/5c4bde864e328e97c21f616af5911e3ce0208edf))
+* **gcli:** federation and envSecret are adopted to the cli ([244b451](https://github.com/Stradivario/gapi/commit/244b4515ae93fddbc9aace6cef917181982f9f06))
 * **gcli:** logging is now on a single place introduced new configuration lambforge.yaml and start bundling capabilities using esbuild really amazing commitgit add .! ([064cd2a](https://github.com/Stradivario/gapi/commit/064cd2a7bb1b33951869961624df81f3b4c097ad))
 * **gcli:** npm ignore file added ([15530eb](https://github.com/Stradivario/gapi/commit/15530eb085653d26f53e01fd9d7902bdfd99b734))
 * **gcli:** readme.md added correct link [ci-skip] ([ff79521](https://github.com/Stradivario/gapi/commit/ff7952137b93a50e57ca51f15d3dbd71565c348d))
