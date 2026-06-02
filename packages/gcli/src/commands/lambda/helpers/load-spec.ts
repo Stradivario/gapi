@@ -21,9 +21,10 @@ interface ConfigJSON {
   params?: string[];
   configs?: string[];
   secrets?: string[];
+  envSecrets?: string[];
   network?: string[];
   uploadAsZip?: string;
-  federation?: string;
+  federation?: boolean;
   subgraphs?: string[];
   scaleOptions?: ILambdaScaleInputOptions;
 }

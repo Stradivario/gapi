@@ -33,6 +33,7 @@ export interface CreateOrUpdateLambdaArguments {
   buildBashScript: string;
   configs: string[];
   secrets: string[];
+  envSecrets: string[];
   network: string[];
   env: string;
   method: IHttpMethodsEnum[];
@@ -40,7 +41,7 @@ export interface CreateOrUpdateLambdaArguments {
   package: string;
   params: string[];
   customUploadFileId: string;
-  /* Apollo Federation gateway (from lambforge.yaml `function.federation` / `function.subgraphs`) */
+  /* Federation gateway (from lambforge.yaml `function.federation` / `function.subgraphs`) */
   federation?: boolean;
   subgraphs?: string[];
   /* Scale options */
@@ -142,13 +143,11 @@ export const createOrUpdateLambda = (
               '{}',
             params: cmd.params || payload.params || [],
             secrets: cmd.secrets || payload.secrets || [],
+            envSecrets: cmd.envSecrets || payload.envSecrets || [],
+
             network: cmd.network || payload.network || ['public', 'private'],
-            ...(payload.federation || payload.subgraphs?.length
-              ? {
-                  federation: !!payload.federation,
-                  subgraphs: payload.subgraphs ?? [],
-                }
-              : {}),
+            federation: cmd.federation ?? !!payload.federation,
+            subgraphs: cmd.subgraphs || payload.subgraphs || [],
             customUploadFileId:
               cmd.customUploadFileId || payload.customUploadFileId || '',
             scaleOptions: {

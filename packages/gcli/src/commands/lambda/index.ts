@@ -31,6 +31,7 @@ export function registerLambdaCommands(program: Command) {
       '--method <method...>',
       'HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method',
     ],
+
     ['--spec <spec>', 'Spec file yml or json path'],
     ['--packageJson <packageJson>', 'Define packageJson in string format'],
     ['--package <package>', 'Path to package.json'],
@@ -40,6 +41,12 @@ export function registerLambdaCommands(program: Command) {
     ],
     ['--script <script>', 'Package build script path'],
     ['--params <params>', 'Array from strings which defines route params'],
+    ['--configs <configs...>', 'List of kubernetes config names'],
+    ['--secrets <secrets...>', 'List of kubernetes secret names'],
+    [
+      '--envSecrets <envSecrets...>',
+      'List of kubernetes secret names projected into process.env (graphql environment only)',
+    ],
     [
       '--network <network>',
       'Can be private or public meaning exposed to the router or just for private available can be both also --network private --network public',
@@ -47,6 +54,18 @@ export function registerLambdaCommands(program: Command) {
     ['--route <route>', 'Lambda route in which will be accessible'],
     ['--code <code>', 'URL or local path for single file source code'],
     ['--file <file>', 'Main lambda file'],
+    [
+      '--customUploadFileId <customUploadFileId>',
+      'Id of a pre-uploaded archive to use as the lambda source',
+    ],
+    [
+      '--federation',
+      'Provision this lambda as a GraphQL Federation gateway instead of a regular function',
+    ],
+    [
+      '--subgraphs <subgraphs...>',
+      'Lambda names (within the project) to expose as subgraphs of the federation gateway',
+    ],
     [
       '--executorType <executorType>',
       "Executor type for execution; one of 'poolmgr', 'newdeploy'",

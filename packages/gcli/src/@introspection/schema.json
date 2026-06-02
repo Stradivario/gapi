@@ -1797,101 +1797,6 @@
               "deprecationReason": null
             },
             {
-              "name": "getSecretMap",
-              "description": null,
-              "args": [
-                {
-                  "name": "payload",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "GenericKubectName",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "KubectlConfig",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "getSecretMapById",
-              "description": null,
-              "args": [
-                {
-                  "name": "secretId",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "KubectlConfig",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "listProjectSecrets",
-              "description": null,
-              "args": [
-                {
-                  "name": "projectId",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "immutable",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Boolean",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "KubectlConfig",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "getRouterUrl",
               "description": null,
               "args": [],
@@ -2087,6 +1992,101 @@
                       "name": "String",
                       "ofType": null
                     }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "KubectlConfig",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "getSecretMap",
+              "description": null,
+              "args": [
+                {
+                  "name": "payload",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "GenericKubectName",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "KubectlConfig",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "getSecretMapById",
+              "description": null,
+              "args": [
+                {
+                  "name": "secretId",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "KubectlConfig",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "listProjectSecrets",
+              "description": null,
+              "args": [
+                {
+                  "name": "projectId",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "immutable",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
                   },
                   "defaultValue": null
                 }
@@ -9887,30 +9887,76 @@
           "possibleTypes": null
         },
         {
-          "kind": "INPUT_OBJECT",
-          "name": "GenericKubectName",
+          "kind": "OBJECT",
+          "name": "FissionType",
           "description": null,
-          "fields": null,
-          "inputFields": [
+          "fields": [
             {
-              "name": "name",
+              "name": "id",
               "description": null,
+              "args": [],
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
-              "defaultValue": null
+              "isDeprecated": false,
+              "deprecationReason": null
             },
             {
               "name": "projectId",
-              "description": null,
+              "description": "Project mapped to this specific lambda function",
+              "args": [],
               "type": {
-                "kind": "NON_NULL",
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "Name of the lambda function it can be for example \"my-lambda-function\" ",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "url",
+              "description": "This is the URL in which the lambda is exposed to public",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "route",
+              "description": "Route on which lambda will be served for example it can be the same as name of the lambda \"my-lambda-function\"",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "params",
+              "description": "\n        Route params for example /{projectId}/{objectId} will be defined as \"projectId,objectId\" inside the input\n        The parameters can then be used inside the lambda as follow:\n        \"context.getRouteParams()\" will return Object with {projectId: '', objectId: ''}\n      ",
+              "args": [],
+              "type": {
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
@@ -9918,10 +9964,341 @@
                   "ofType": null
                 }
               },
-              "defaultValue": null
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "code",
+              "description": ".\n        Basic code example on how basic lambda should look a like in javascript/nodejs\n        \n        ****** Basic\n          export default async function (context) {\n            return {\n              status: 200,\n              body: 'Hello, world!',\n              headers: {\n                'Access-Control-Allow-Origin': 'https://graphql-server.com',\n              },\n            };\n          };\n        ******\n\n        ****** Advanced Graphql using @gapi/core\n          import {\n            Bootstrap,\n            Controller,\n            CoreModule,\n            GraphQLObjectType,\n            GraphQLString,\n            Module,\n            Query,\n            Type,\n          } from '@gapi/core';\n\n          @Controller()\n          class Appcontroller {\n            @Type(\n              new GraphQLObjectType({\n                name: 'UserType',\n                fields: () => ({\n                  id: { type: GraphQLString },\n                  name: { type: GraphQLString },\n                }),\n              }),\n            )\n            @Query()\n            getUser() {\n              return {\n                id: 1,\n                name: 'Hello World',\n              };\n            }\n          }\n\n          @Module({\n            imports: [CoreModule.forRoot()],\n            controllers: [Appcontroller],\n          })\n          class AppModule {}\n\n          Bootstrap(AppModule).subscribe();\n        ******\n\n\n      ",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "secrets",
+              "description": "\n      This is a name of the kubernetes secret can be used in the lambda code section as follows\n\n      const environment = await context.getSecret('environment');\n\n      ",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "KubectlConfig",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "envSecrets",
+              "description": "\n      # envSecrets (read by the nodejs-graphql runtime BEFORE the bundle loads)\n      # projects all keys of these mounted secrets into process.env, so the existing\n      # process.env-based ENVIRONMENT (src/app/app.constants.ts) works unchanged.\n      currently only usable in graphql environment\n            ",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "configs",
+              "description": "\n      This is a name of the kubernetes secret can be used in the lambda code section as follows\n\n      const environment = await context.getSecret('environment');\n\n      ",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "KubectlConfig",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "env",
+              "description": "Environment can be for now only on NODEJS",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "environment",
+              "description": "Environment can be for now only on NODEJS",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "FissionEnvironmentType",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "method",
+              "description": "Can be one of the http methods GET,POST,UPDATE,DELETE,PUT",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "HttpMethods",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "packageJson",
+              "description": "Can be defined as json object in string like this \"{\"dependencies\":{}}\"",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "buildBashScript",
+              "description": "\n        This is the script which will be executed on build job before lambda initialization\n\n**** START SCRIPT ****\n#!/bin/sh\ncd ${SRC_PKG}\n\nnpm install\n\nmv index.js index.ts\nnpx @gapi/gcli build\n\nrm -rf node_modules\ncp -r ${SRC_PKG} ${DEPLOY_PKG}\n**** END SCRIPT ****\n\n        It can be null and it will build the function automatically with the script above\n        This is just for reference so we can learn how to structure buildBashScript\n\n      ",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "customUploadFileId",
+              "description": "\n      This is handled by the @gapi/gcli npm library and we can upload whole archive in S3 Amazon\n      This archive will be then fetched by the function and used\n      The idea is that we can deploy using CI/CD and we can bundle our code to a single index.js file\n      And then this code will be used to initiate the lambda creation\n      ",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "customUploadFile",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GraphqlLambdaFile",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdBy",
+              "description": "Who is the creator of this lambda it is ObjectId in mongodb",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdAt",
+              "description": "When this lambda is created",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatedAt",
+              "description": "When this lambda is updated",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "network",
+              "description": "Disable external traffic to hit the lambda function using http",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "federation",
+              "description": "When true this lambda is provisioned as an Graphql Federation gateway",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "subgraphs",
+              "description": "Lambda names (same project) exposed as subgraphs of the federation gateway",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "scaleOptions",
+              "description": "\n        Default scale options for \"poolmgr\" are these and are defined in JSON \n        {\n            \"minCpu\": 0,\n            \"maxCpu\": 0,\n            \"minMemory\": 0,\n            \"maxMemory\": 0,\n            \"minScale\": 0,\n            \"maxScale\": 0,\n            \"targetCpu\": 0,\n            \"executorType\": \"poolmgr\",\n            \"concurrency\": 1,\n            \"functionTimeout\": 60,\n            \"idleTimeout\": 120,\n            \"specializationTimeout\": 120\n            \"retainPods\": 0,\n            \"requestPerPod\": 1000\n        }\n        IMPORTANT: When \"executorType\" is set to \"poolmgr\" minScale,maxScale,targetCpu,minCpu,maxCpu,minMemory,maxMemory are DISABLED for EDIT and should ALWAYS be 0!\n        IMPORTANT: When \"executorType\" is set to \"poolmgr\" these settings are defined inside the Environment Pool instead and managed by the pool not per lambda\n        \"scaleOptions\" field can be left null and it will default to specific values\n      ",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "LambdaScaleOptions",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "trigger",
+              "description": "\n        This is cronjob aka time trigger attached to the lambda \n        Especially usefull if you want to create a recurrent jobs like \n        Do this in @every hour or do this @daily or @monthly or @weekly\n\n        @yearly | Once a year, midnight, Jan. 1st |0 0 0 1 1 *|\n        @monthly| Once a month, midnight, first of month |0 0 0 1 * *|\n        @weekly | Once a week, midnight between Sat/Sun |0 0 0 * * 0|\n        @daily | Once a day, midnight |0 0 0 * * *|\n        @hourly | Once an hour, beginning of hour |0 0 * * * *|\n        ",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "FissionTimeTriggerType",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "revision",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "JSON",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "revisions",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "JSON",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "logs",
+              "description": null,
+              "args": [
+                {
+                  "name": "year",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "month",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "day",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "hour",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "LambdaLogs",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
-          "interfaces": null,
+          "inputFields": null,
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -10162,406 +10539,6 @@
           "fields": null,
           "inputFields": null,
           "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "OBJECT",
-          "name": "FissionType",
-          "description": null,
-          "fields": [
-            {
-              "name": "id",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "projectId",
-              "description": "Project mapped to this specific lambda function",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "name",
-              "description": "Name of the lambda function it can be for example \"my-lambda-function\" ",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "url",
-              "description": "This is the URL in which the lambda is exposed to public",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "route",
-              "description": "Route on which lambda will be served for example it can be the same as name of the lambda \"my-lambda-function\"",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "params",
-              "description": "\n        Route params for example /{projectId}/{objectId} will be defined as \"projectId,objectId\" inside the input\n        The parameters can then be used inside the lambda as follow:\n        \"context.getRouteParams()\" will return Object with {projectId: '', objectId: ''}\n      ",
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "code",
-              "description": ".\n        Basic code example on how basic lambda should look a like in javascript/nodejs\n        \n        ****** Basic\n        export default async function (context) {\n          return {\n            status: 200,\n            body: 'Hello, world!',\n            headers: {\n              'Access-Control-Allow-Origin': 'https://graphql-server.com',\n            },\n          };\n        };\n        ******\n      ",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "secrets",
-              "description": "\n      This is a name of the kubernetes secret can be used in the lambda code section as follows\n\n      const environment = await context.getSecret('environment');\n\n      ",
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "KubectlConfig",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "configs",
-              "description": "\n      This is a name of the kubernetes secret can be used in the lambda code section as follows\n\n      const environment = await context.getSecret('environment');\n\n      ",
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "KubectlConfig",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "env",
-              "description": "Environment can be for now only on NODEJS",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "environment",
-              "description": "Environment can be for now only on NODEJS",
-              "args": [],
-              "type": {
-                "kind": "OBJECT",
-                "name": "FissionEnvironmentType",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "method",
-              "description": "Can be one of the http methods GET,POST,UPDATE,DELETE,PUT",
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "HttpMethods",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "packageJson",
-              "description": "Can be defined as json object in string like this \"{\"dependencies\":{}}\"",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "buildBashScript",
-              "description": "\n        This is the script which will be executed on build job before lambda initialization\n\n**** START SCRIPT ****\n#!/bin/sh\ncd ${SRC_PKG}\n\nnpm install\n\nmv index.js index.ts\nnpx @gapi/gcli build\n\nrm -rf node_modules\ncp -r ${SRC_PKG} ${DEPLOY_PKG}\n**** END SCRIPT ****\n\n        It can be null and it will build the function automatically with the script above\n        This is just for reference so we can learn how to structure buildBashScript\n\n      ",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "customUploadFileId",
-              "description": "\n      This is handled by the @gapi/gcli npm library and we can upload whole archive in S3 Amazon\n      This archive will be then fetched by the function and used\n      The idea is that we can deploy using CI/CD and we can bundle our code to a single index.js file\n      And then this code will be used to initiate the lambda creation\n      ",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "customUploadFile",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "OBJECT",
-                "name": "GraphqlLambdaFile",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "createdBy",
-              "description": "Who is the creator of this lambda it is ObjectId in mongodb",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "createdAt",
-              "description": "When this lambda is created",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "updatedAt",
-              "description": "When this lambda is updated",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "network",
-              "description": "Disable external traffic to hit the lambda function using http",
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "federation",
-              "description": "When true this lambda is provisioned as an Apollo Federation gateway",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "subgraphs",
-              "description": "Lambda names (same project) exposed as subgraphs of the federation gateway",
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "scaleOptions",
-              "description": "\n        Default scale options for \"poolmgr\" are these and are defined in JSON \n        {\n            \"minCpu\": 0,\n            \"maxCpu\": 0,\n            \"minMemory\": 0,\n            \"maxMemory\": 0,\n            \"minScale\": 0,\n            \"maxScale\": 0,\n            \"targetCpu\": 0,\n            \"executorType\": \"poolmgr\",\n            \"concurrency\": 1,\n            \"functionTimeout\": 60,\n            \"idleTimeout\": 120,\n            \"specializationTimeout\": 120\n            \"retainPods\": 0,\n            \"requestPerPod\": 1000\n        }\n        IMPORTANT: When \"executorType\" is set to \"poolmgr\" minScale,maxScale,targetCpu,minCpu,maxCpu,minMemory,maxMemory are DISABLED for EDIT and should ALWAYS be 0!\n        IMPORTANT: When \"executorType\" is set to \"poolmgr\" these settings are defined inside the Environment Pool instead and managed by the pool not per lambda\n        \"scaleOptions\" field can be left null and it will default to specific values\n      ",
-              "args": [],
-              "type": {
-                "kind": "OBJECT",
-                "name": "LambdaScaleOptions",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "trigger",
-              "description": "\n        This is cronjob aka time trigger attached to the lambda \n        Especially usefull if you want to create a recurrent jobs like \n        Do this in @every hour or do this @daily or @monthly or @weekly\n\n        @yearly | Once a year, midnight, Jan. 1st |0 0 0 1 1 *|\n        @monthly| Once a month, midnight, first of month |0 0 0 1 * *|\n        @weekly | Once a week, midnight between Sat/Sun |0 0 0 * * 0|\n        @daily | Once a day, midnight |0 0 0 * * *|\n        @hourly | Once an hour, beginning of hour |0 0 * * * *|\n        ",
-              "args": [],
-              "type": {
-                "kind": "OBJECT",
-                "name": "FissionTimeTriggerType",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "revision",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "JSON",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "revisions",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "JSON",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "logs",
-              "description": null,
-              "args": [
-                {
-                  "name": "year",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "month",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "day",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "hour",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "LambdaLogs",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -10890,6 +10867,45 @@
           ],
           "inputFields": null,
           "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "GenericKubectName",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "name",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "projectId",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
           "enumValues": null,
           "possibleTypes": null
         },
@@ -18700,128 +18716,6 @@
               "deprecationReason": null
             },
             {
-              "name": "createSecretMap",
-              "description": null,
-              "args": [
-                {
-                  "name": "payload",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "GenericKubectConfig",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "KubectlConfig",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "updateSecretMap",
-              "description": null,
-              "args": [
-                {
-                  "name": "payload",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "GenericKubectConfig",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "KubectlConfig",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "updateSecretMapById",
-              "description": null,
-              "args": [
-                {
-                  "name": "secretId",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "String",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "pairs",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "JSONObject",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "KubectlConfig",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "deleteSecretMap",
-              "description": null,
-              "args": [
-                {
-                  "name": "payload",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "GenericKubectName",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "KubectlConfig",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "createLambda",
               "description": null,
               "args": [
@@ -19064,6 +18958,128 @@
             },
             {
               "name": "deleteConfigMap",
+              "description": null,
+              "args": [
+                {
+                  "name": "payload",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "GenericKubectName",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "KubectlConfig",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createSecretMap",
+              "description": null,
+              "args": [
+                {
+                  "name": "payload",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "GenericKubectConfig",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "KubectlConfig",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateSecretMap",
+              "description": null,
+              "args": [
+                {
+                  "name": "payload",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "GenericKubectConfig",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "KubectlConfig",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateSecretMapById",
+              "description": null,
+              "args": [
+                {
+                  "name": "secretId",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pairs",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "JSONObject",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "KubectlConfig",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteSecretMap",
               "description": null,
               "args": [
                 {
@@ -23976,59 +23992,6 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "GenericKubectConfig",
-          "description": null,
-          "fields": null,
-          "inputFields": [
-            {
-              "name": "name",
-              "description": "Name of the kubernetes secret it can be \"envirnoment\" or any other but follow \"my-environment\" pattern for creating names",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "projectId",
-              "description": "Project mapped to this specific lambda function",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "pairs",
-              "description": "Key value pari mapped to this config or secret\n        returns JSON string like this:\n        {\n        \"MY_SECRET\":\"first\",\n        \"MY_SECRET_SECOND\":\"second\",\n        \"MY_SECRET_THIRD\":\"third\"\n        }\n      ",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "JSONObject",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            }
-          ],
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INPUT_OBJECT",
           "name": "CreateOrUpdateLambdaInput",
           "description": null,
           "fields": null,
@@ -24073,7 +24036,7 @@
             },
             {
               "name": "code",
-              "description": ".\n        Basic code example on how basic lambda should look a like in javascript/nodejs\n\n---BEGIN BASIC EXAMPLE---\nexport default async function (context) {\n  return {\n    status: 200,\n    body: 'Hello, world!',\n    headers: {\n      'Access-Control-Allow-Origin': 'https://graphql-server.com',\n    },\n  };\n};\n---END BASIC EXAMPLE---\n\nThe \"context\" argument is following this interface below called \"LambdaContext\"\n\ninterface LambdaContext {\n  request: {\n    path: string;\n    query: string;\n    method: string;\n    body: unknown;\n    headers: Headers\n  };\n  response: Response;\n  getSecret<T = Record<string, string>>(secret: string): Promise<T>;\n  getConfig(secret: string): Promise<Record<string, string>>;\n  getLambdaInfo(): {\n    name: string;\n    namespace: string;\n    resourceVersion: string;\n    uid: string;\n  };\n  getQueryParams(): Record<string, string>;\n  getBodyParams(): Record<string, string>;\n  getRouteParams(): Record<string, string>;\n}\n\n\n---BEGIN GRAPHQL EXAMPLE---\nimport {\n  Bootstrap,\n  Container,\n  Controller,\n  CoreModule,\n  GraphQLInt,\n  GraphQLNonNull,\n  GraphQLObjectType,\n  HAPI_SERVER,\n  Module,\n  Query,\n  Type,\n} from '@gapi/core';\nimport { lastValueFrom, tap } from 'rxjs';\nimport { format } from 'url';\n\nexport interface Context {\n  request: {\n    url: string;\n    query: string;\n    method: string;\n    body: unknown;\n    headers: Headers;\n  };\n  response: Response;\n  getSecret<T = Record<string, string>>(secret: string): Promise<T>;\n  getConfig(secret: string): Promise<Record<string, string>>;\n  getLambdaInfo(): {\n    name: string;\n    namespace: string;\n    resourceVersion: string;\n    uid: string;\n  };\n  getQueryParams(): Record<string, string>;\n  getBodyParams(): Record<string, string>;\n  getRouteParams(): Record<string, string>;\n}\n\nexport const UserType = new GraphQLObjectType({\n  name: 'UserType',\n  fields: () => ({\n    id: {\n      type: GraphQLInt,\n    },\n  }),\n});\n\n@Controller()\nexport class UserQueriesController {\n  @Type(UserType)\n  @Query({\n    id: {\n      type: new GraphQLNonNull(GraphQLInt),\n    },\n  })\n  findUser(root, { id }, context) {\n    return { id: id };\n  }\n}\n\n@Module({\n  imports: [\n    CoreModule.forRoot({\n      server: {\n        hapi: {\n          port: 9000,\n          routes: {\n            cors: {\n              origin: ['*'],\n              additionalHeaders: [\n                'Host',\n                'User-Agent',\n                'Accept',\n                'Accept-Language',\n                'Accept-Encoding',\n                'Access-Control-Request-Method',\n                'Access-Control-Allow-Origin',\n                'Access-Control-Request-Headers',\n                'Origin',\n                'Connection',\n                'Pragma',\n                'cardId',\n                'Cache-Control',\n              ],\n            },\n          },\n        },\n      },\n      graphql: {\n        path: '/graphql',\n        initQuery: true,\n        openBrowser: false,\n        graphqlOptions: {\n          tracing: false,\n          schema: null,\n        },\n      },\n    }),\n  ],\n  controllers: [UserQueriesController],\n})\nexport class AppModule {}\n\nconst Main = lastValueFrom(\n  Bootstrap(AppModule).pipe(\n    tap(() => {\n      console.log('[Bootstrap]: Started');\n    }),\n  ),\n);\n\nexport default async function handler(context: Context) {\n  const request = context.request;\n  const headers = {\n    'Content-type': 'application/json',\n    'Access-Control-Allow-Origin': '*',\n    'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT',\n  };\n  await Main;\n\n  const url = format({\n    pathname: '/graphql',\n    query: request.query,\n  });\n  const options = {\n    method: request.method,\n    url,\n    payload: request.body,\n    headers: request.headers,\n    validate: false,\n  };\n  let res = {\n    statusCode: 502,\n    result: null,\n  };\n  console.log('Request Options: ', options);\n  try {\n    res = await Container.get(HAPI_SERVER).inject(options);\n  } catch (e) {\n    console.error('ERROR', JSON.stringify(e));\n  }\n  return {\n    status: res.statusCode,\n    body: res.result,\n    headers,\n  };\n}\n---END GRAPHQL EXAMPLE---\nIMPORTANT: Always install \"@gapi/core\": \"^1.8.184\" inside package.json when graphql example is asked tell the user what you are going to do!!\n      ",
+              "description": "Basic code example on how basic lambda should look a like in javascript/nodejs ---BEGIN BASIC EXAMPLE--- export default async function (context) { return { status: 200, body: 'Hello, world!', headers: { 'Access-Control-Allow-Origin': 'https://graphql-server.com', }, }; }; ---END BASIC EXAMPLE--- The \"context\" argument is following this interface below called \"LambdaContext\" interface LambdaContext { request: { path: string; query: string; method: string; body: unknown; headers: Headers }; response: Response; getSecret<T = Record<string, string>>(secret: string): Promise<T>; getConfig(secret: string): Promise<Record<string, string>>; getLambdaInfo(): { name: string; namespace: string; resourceVersion: string; uid: string; }; getQueryParams(): Record<string, string>; getBodyParams(): Record<string, string>; getRouteParams(): Record<string, string>; } ---BEGIN GRAPHQL EXAMPLE using classic REST nodejs image and fastify--- import { Bootstrap, Container, Controller, CoreModule, GraphQLInt, GraphQLNonNull, GraphQLObjectType, HAPI_SERVER, Module, Query, Type, } from '@gapi/core'; import { lastValueFrom, tap } from 'rxjs'; import { format } from 'url'; export interface Context { request: { url: string; query: string; method: string; body: unknown; headers: Headers; }; response: Response; getSecret<T = Record<string, string>>(secret: string): Promise<T>; getConfig(secret: string): Promise<Record<string, string>>; getLambdaInfo(): { name: string; namespace: string; resourceVersion: string; uid: string; }; getQueryParams(): Record<string, string>; getBodyParams(): Record<string, string>; getRouteParams(): Record<string, string>; } export const UserType = new GraphQLObjectType({ name: 'UserType', fields: () => ({ id: { type: GraphQLInt, }, }), }); @Controller() export class UserQueriesController { @Type(UserType) @Query({ id: { type: new GraphQLNonNull(GraphQLInt), }, }) findUser(root, { id }, context) { return { id: id }; } } @Module({ imports: [ CoreModule.forRoot({ server: { hapi: { port: 9000, routes: { cors: { origin: ['*'], additionalHeaders: [ 'Host', 'User-Agent', 'Accept', 'Accept-Language', 'Accept-Encoding', 'Access-Control-Request-Method', 'Access-Control-Allow-Origin', 'Access-Control-Request-Headers', 'Origin', 'Connection', 'Pragma', 'cardId', 'Cache-Control', ], }, }, }, }, graphql: { path: '/graphql', initQuery: true, openBrowser: false, graphqlOptions: { tracing: false, schema: null, }, }, }), ], controllers: [UserQueriesController], }) export class AppModule {} const Main = lastValueFrom( Bootstrap(AppModule).pipe( tap(() => { console.log('[Bootstrap]: Started'); }), ), ); export default async function handler(context: Context) { const request = context.request; const headers = { 'Content-type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT', }; await Main; const url = format({ pathname: '/graphql', query: request.query, }); const options = { method: request.method, url, payload: request.body, headers: request.headers, validate: false, }; let res = { statusCode: 502, result: null, }; console.log('Request Options: ', options); try { res = await Container.get(HAPI_SERVER).inject(options); } catch (e) { console.error('ERROR', JSON.stringify(e)); } return { status: res.statusCode, body: res.result, headers, }; } ---END GRAPHQL EXAMPLE--- IMPORTANT: Always install \"@gapi/core\": \"^1.8.184\" inside package.json when graphql example is asked tell the user what you are going to do!! ---BEGIN NEW MODERN UP TO DATE GRAPHQL @gapi/core example without the need of external dependencies import { Bootstrap, Controller, CoreModule, GraphQLObjectType, GraphQLString, Module, Query, Type, } from '@gapi/core'; @Controller() class Appcontroller { @Type( new GraphQLObjectType({ name: 'UserType', fields: () => ({ id: { type: GraphQLString }, name: { type: GraphQLString }, }), }), ) @Query() getUser() { return { id: 1, name: 'Hello World', }; } } @Module({ imports: [CoreModule.forRoot()], controllers: [Appcontroller], }) class AppModule {} Bootstrap(AppModule).subscribe(); IMPORTANT: This example requires environment of \"rxdi/fission-nodejs-graphql:0.0.83\" This environment helps us to create and use @gapi/core without dependencies When using this example unfortunately we need to strip out all the external dependencies and build only our code so buildBashScript will become #!/bin/sh cd ${SRC_PKG} npm install #Use gcli for typescript transpilation mv index.js index.ts npx @gapi/gcli@1.8.226 build --bundle false --external @gapi/core --external @rxdi/core --external @rxdi/graphql --external @rxdi/graphql-pubsub --external @rxdi/graphql-rabbitmq-subscriptions --external @rxdi/hapi --external @rxdi/nats --external @rxdi/rabbitmq-pubsub --external @hapi/hapi --external @hapi/boom --external @hapi/inert --external @abraham/reflection --external graphql --external graphql-subscriptions --external subscriptions-transport-ws --external reflect-metadata --external rxjs #rm -rf node_modules cp -r ${SRC_PKG} ${DEPLOY_PKG} This way we can deploy @gapi/core lambda without even installing external dependencies in package.json! Pure simple @gapi/core + nodejs utilities!\n*** NO AUTH BASIC PROXY LOGIC *** /** * Example federation authentication function — passthrough (no dependencies). * * The leanest possible function: it adds no verification of its own and simply * forwards the incoming Authorization header (and the request domain) to the * subgraphs, which then enforce their own access rules. Useful when each subgraph * already authenticates the forwarded token itself. * * No \"Package JSON\" dependencies required. *\\/ /** * Context handed to the user's authentication function on every gateway request. * The function returns the object that becomes the GraphQL gateway context — every * key of which is forwarded to the subgraphs as a request header (see * buildForwardingDataSource). * * The runtime bakes in NO authentication. Users install their own auth library * (firebase, jose, …) via the lambda's package.json and verify the request here. *\\/ export interface FederationContext { request: Request; getSecret: <T = Record<string, string>>(name: string) => Promise<T>; getConfig: <T = Record<string, string>>(name: string) => Promise<T>; getQueryParams: () => Record<string, unknown>; getBodyParams: () => unknown; getRouteParams: () => Record<string, string>; getLambdaInfo: () => { name?: string; namespace?: string; resourceVersion?: string; uid?: string; url?: string; }; } function readHeader(value: string | string[] | undefined): string { return (Array.isArray(value) ? value[0] : value) ?? \"\"; } export default async function (context: FederationContext) { const headers = context.request.headers; /* Every returned key is forwarded to each subgraph as a request header. *\\/ return { authorization: readHeader(headers[\"authorization\"]), domain: readHeader(headers[\"domain\"]), }; } *** JWT-AUTH Example /** * Example federation authentication function — generic JWT (no Firebase). * * Verifies a bearer JWT with a shared secret and forwards the decoded claims to * the subgraphs. Use this as a template for any auth library — swap jsonwebtoken * for jose, Auth0, Clerk, etc. * * Install on the lambda via \"Package JSON\": * { \"dependencies\": { \"jsonwebtoken\": \"^9.0.2\" } } * * Provide the signing key through a Kubernetes secret selected on the lambda * (here named \"gateway-auth\", key \"jwtSecret\"). *\\/ import * as jwt from \"jsonwebtoken\"; /** * Context handed to the user's authentication function on every gateway request. * The function returns the object that becomes the GraphQL gateway context — every * key of which is forwarded to the subgraphs as a request header (see * buildForwardingDataSource). * * The runtime bakes in NO authentication. Users install their own auth library * (firebase, jose, …) via the lambda's package.json and verify the request here. *\\/ export interface FederationContext { request: Request; getSecret: <T = Record<string, string>>(name: string) => Promise<T>; getConfig: <T = Record<string, string>>(name: string) => Promise<T>; getQueryParams: () => Record<string, unknown>; getBodyParams: () => unknown; getRouteParams: () => Record<string, string>; getLambdaInfo: () => { name?: string; namespace?: string; resourceVersion?: string; uid?: string; url?: string; }; } function readHeader(value: string | string[] | undefined): string { return (Array.isArray(value) ? value[0] : value) ?? \"\"; } export default async function (context: FederationContext) { const token = readHeader(context.request.headers[\"authorization\"]).replace( /^Bearers+/i, \"\", ); if (!token || token === \"undefined\") { return {}; } const { jwtSecret } = await context.getSecret<{ jwtSecret: string }>( \"gateway-auth\", ); if (!jwtSecret) { throw new Error('missing \"gateway-auth\" secret with a \"jwtSecret\" key'); } try { const claims = jwt.verify(token, jwtSecret) as Record<string, unknown>; /* Every returned key is forwarded to each subgraph as a request header. *\\/ return { authorization: token, user: JSON.stringify(claims), \"x-user-id\": String(claims.sub ?? \"\"), }; } catch (error) { console.error(\"[auth] invalid jwt:\", (error as Error).message); throw new Error(\"unauthenticated\"); } } *** FIREBASE EXAMPLE /** * Example federation authentication function — Firebase. * * This is the code you paste into the lambda's \"Code\" field when \"Federation\" is * ticked. It runs ONCE per gateway request, before the request fans out to the * subgraphs. Whatever object it returns becomes the gateway context, and EVERY * key of that object is forwarded to each subgraph as a request header (string * values as-is, anything else JSON-stringified). * * Install the dependency on the same lambda via \"Package JSON\": * { \"dependencies\": { \"firebase-admin\": \"^12.0.0\" } } * * Provide the Firebase service-account JSON through a Kubernetes secret selected * on the lambda (here named \"firebase\", key \"serviceAccount\"). *\\/ import * as admin from \"firebase-admin\"; /** * Context handed to the user's authentication function on every gateway request. * The function returns the object that becomes the GraphQL gateway context — every * key of which is forwarded to the subgraphs as a request header (see * buildForwardingDataSource). * * The runtime bakes in NO authentication. Users install their own auth library * (firebase, jose, …) via the lambda's package.json and verify the request here. *\\/ export interface FederationContext { request: Request; getSecret: <T = Record<string, string>>(name: string) => Promise<T>; getConfig: <T = Record<string, string>>(name: string) => Promise<T>; getQueryParams: () => Record<string, unknown>; getBodyParams: () => unknown; getRouteParams: () => Record<string, string>; getLambdaInfo: () => { name?: string; namespace?: string; resourceVersion?: string; uid?: string; url?: string; }; } /* Initialise the Admin SDK once (the bundle is required once at specialize, but the default export runs per request — so guard against re-initialising). *\\/ async function ensureFirebase(context: FederationContext): Promise<void> { if (admin.apps.length) { return; } const secret = await context.getSecret<{ serviceAccount: string }>(\"firebase\"); if (!secret.serviceAccount) { throw new Error('missing \"firebase\" secret with a \"serviceAccount\" key'); } admin.initializeApp({ credential: admin.credential.cert(JSON.parse(secret.serviceAccount)), }); } function readHeader(value: string | string[] | undefined): string { return (Array.isArray(value) ? value[0] : value) ?? \"\"; } export default async function (context: FederationContext) { const token = readHeader( context.request.headers[\"authorization\"] ?? context.request.headers[\"Authorization\"], ).replace(/^Bearers+/i, \"\"); /* Anonymous request — forward nothing; each subgraph decides what is public. *\\/ if (!token || token === \"undefined\") { return {}; } await ensureFirebase(context); try { const decoded = await admin.auth().verifyIdToken(token); /* These keys are forwarded to every subgraph as request headers. Subgraphs read user / authorization to authorise the operation. *\\/ return { authorization: token, user: JSON.stringify({ uid: decoded.uid, email: decoded.email, emailVerified: decoded.email_verified, }), }; } catch (error) { console.error(\"[auth] invalid firebase token:\", (error as Error).message); /* Reject the whole request. Return {} instead to let it through as anonymous and let each subgraph enforce its own access rules. *\\/ throw new Error(\"unauthenticated\"); } } KEEP IN MIND THAT ANY EXTERNAL DEPENDENCY needs to be installed inside \"package.json\" Then the build script will be #!/bin/sh cd ${SRC_PKG} npm install #Use gcli for typescript transpilation (built-in inside the builder image uses esbuild) mv index.js index.ts npx gcli build rm -rf node_modules cp -r ${SRC_PKG} ${DEPLOY_PKG} ENSURE BEFORE USING FEDERATION that \"federation\" is set to \"true\" when creating lambda also we need subgraphs so \"subgraphs\" field represents lambda names as string[] on the frontend we filter out only lambdas which are created in graphql environment so ONLY ALLOWED lambdas are these created with environment image rxdi/fission-nodejs-graphql Before we create federation we must have AT LEAST 1 RUNNING GRAPHQL LAMBDA!!",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -24130,6 +24093,20 @@
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "envSecrets",
+              "description": "\n  # envSecrets (read by the nodejs-graphql runtime BEFORE the bundle loads)\n  # projects all keys of these mounted secrets into process.env, so the existing\n  # process.env-based ENVIRONMENT (src/app/app.constants.ts) works unchanged.\n  currently only usable in graphql environment\n        ",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "defaultValue": null
             },
@@ -24203,7 +24180,7 @@
             },
             {
               "name": "federation",
-              "description": "\n        When \"true\" this lambda is provisioned as an Apollo Federation gateway instead of a\n        regular function. The selected \"subgraphs\" are composed into a single supergraph and the\n        exported \"code\" function is executed before every request to build the gateway context\n        (authentication). The \"env\" must point to the federation runtime image.\n      ",
+              "description": "\n        When \"true\" this lambda is provisioned as an Graphql Federation gateway instead of a\n        regular function. The selected \"subgraphs\" are composed into a single supergraph and the\n        exported \"code\" function is executed before every request to build the gateway context\n        (authentication). The \"env\" must point to the federation runtime image.\n      ",
               "type": {
                 "kind": "SCALAR",
                 "name": "Boolean",
@@ -24410,6 +24387,59 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "GenericKubectConfig",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "name",
+              "description": "Name of the kubernetes secret it can be \"envirnoment\" or any other but follow \"my-environment\" pattern for creating names",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "projectId",
+              "description": "Project mapped to this specific lambda function",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "pairs",
+              "description": "Key value pari mapped to this config or secret\n        returns JSON string like this:\n        {\n        \"MY_SECRET\":\"first\",\n        \"MY_SECRET_SECOND\":\"second\",\n        \"MY_SECRET_THIRD\":\"third\"\n        }\n      ",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "JSONObject",
                   "ofType": null
                 }
               },

@@ -93,9 +93,6 @@
     getLambdaBuilderLogs?: IFissionLogsType | null;
     getLambdaBuilderLogsByName?: IFissionLogsType | null;
     getAvailableLogDates?: Array<IAvailableLogDates> | null;
-    getSecretMap?: IKubectlConfig | null;
-    getSecretMapById?: IKubectlConfig | null;
-    listProjectSecrets?: Array<IKubectlConfig> | null;
     getRouterUrl?: IFissionType | null;
     listProjectLambdas?: Array<IFissionType> | null;
     listMyLambdas?: Array<IFissionType> | null;
@@ -104,6 +101,9 @@
     getConfigMap?: IKubectlConfig | null;
     getConfigMapById?: IKubectlConfig | null;
     listProjectConfigs?: Array<IKubectlConfig> | null;
+    getSecretMap?: IKubectlConfig | null;
+    getSecretMapById?: IKubectlConfig | null;
+    listProjectSecrets?: Array<IKubectlConfig> | null;
     listAtlasConnectors?: Array<IMongoAtlasConnector> | null;
     findRabbitMqInstance?: IRabbitMq | null;
     listQueuesPerProject?: Array<IRabbitMqQueue> | null;
@@ -1059,39 +1059,6 @@ export
 }
 
   
-  export interface IGenericKubectName {
-    name?: string;
-    projectId?: string;
-}
-
-  
-  export interface IKubectlConfig {
-    __typename?: "KubectlConfig";
-    id?: string | null;
-    projectId?: string | null;
-    immutable?: boolean | null;
-    name?: string | null;
-    apiVersion?: string | null;
-    data?: any | null;
-    kind?: string | null;
-    metadata?: IKubectlConfigMapMetadata | null;
-    type?: string | null;
-}
-
-  
-  export interface IKubectlConfigMapMetadata {
-    __typename?: "KubectlConfigMapMetadata";
-    creationTimestamp?: string | null;
-    name?: string | null;
-    namespace?: string | null;
-    resourceVersion?: string | null;
-    uid?: string | null;
-    labels?: any | null;
-    finalizers?: Array<string> | null;
-    annotations?: any | null;
-}
-
-  
   export interface IFissionType {
     __typename?: "FissionType";
     id?: string | null;
@@ -1124,16 +1091,59 @@ export
         Basic code example on how basic lambda should look a like in javascript/nodejs
         
         ****** Basic
-        export default async function (context) {
-          return {
-            status?: 200,
-            body?: 'Hello, world!',
-            headers?: {
-              'Access-Control-Allow-Origin'?: 'https?://graphql-server.com',
-            },
+          export default async function (context) {
+            return {
+              status?: 200,
+              body?: 'Hello, world!',
+              headers?: {
+                'Access-Control-Allow-Origin'?: 'https?://graphql-server.com',
+              },
+            };
           };
-        };
         ******
+
+        ****** Advanced Graphql using @gapi/core
+          import {
+            Bootstrap,
+            Controller,
+            CoreModule,
+            GraphQLObjectType,
+            GraphQLString,
+            Module,
+            Query,
+            Type,
+          } from '@gapi/core';
+
+          @Controller()
+          class Appcontroller {
+            @Type(
+              new GraphQLObjectType({
+                name?: 'UserType',
+                fields?: () => ({
+                  id?: { type?: GraphQLString },
+                  name?: { type?: GraphQLString },
+                }),
+              }),
+            )
+            @Query()
+            getUser() {
+              return {
+                id?: 1,
+                name?: 'Hello World',
+              };
+            }
+          }
+
+          @Module({
+            imports?: [CoreModule.forRoot()],
+            controllers?: [Appcontroller],
+          })
+          class AppModule {}
+
+          Bootstrap(AppModule).subscribe();
+        ******
+
+
       
   */
     code?: string | null;
@@ -1146,6 +1156,15 @@ export
       
   */
     secrets?: Array<IKubectlConfig> | null;
+    /**
+    description?: 
+      # envSecrets (read by the nodejs-graphql runtime BEFORE the bundle loads)
+      # projects all keys of these mounted secrets into process.env, so the existing
+      # process.env-based ENVIRONMENT (src/app/app.constants.ts) works unchanged.
+      currently only usable in graphql environment
+            
+  */
+    envSecrets?: Array<string> | null;
     /**
     description?: 
       This is a name of the kubernetes secret can be used in the lambda code section as follows
@@ -1221,7 +1240,7 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
   */
     network?: Array<string> | null;
     /**
-    description?: When true this lambda is provisioned as an Apollo Federation gateway
+    description?: When true this lambda is provisioned as an Graphql Federation gateway
   */
     federation?: boolean | null;
     /**
@@ -1270,6 +1289,33 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
     revision?: any | null;
     revisions?: any | null;
     logs?: ILambdaLogs | null;
+}
+
+  
+  export interface IKubectlConfig {
+    __typename?: "KubectlConfig";
+    id?: string | null;
+    projectId?: string | null;
+    immutable?: boolean | null;
+    name?: string | null;
+    apiVersion?: string | null;
+    data?: any | null;
+    kind?: string | null;
+    metadata?: IKubectlConfigMapMetadata | null;
+    type?: string | null;
+}
+
+  
+  export interface IKubectlConfigMapMetadata {
+    __typename?: "KubectlConfigMapMetadata";
+    creationTimestamp?: string | null;
+    name?: string | null;
+    namespace?: string | null;
+    resourceVersion?: string | null;
+    uid?: string | null;
+    labels?: any | null;
+    finalizers?: Array<string> | null;
+    annotations?: any | null;
 }
 
 export   
@@ -1380,6 +1426,12 @@ export
     __typename?: "LambdaLogs";
     builder?: IFissionLogsType | null;
     function?: IFissionLogsType | null;
+}
+
+  
+  export interface IGenericKubectName {
+    name?: string;
+    projectId?: string;
 }
 
   
@@ -1992,10 +2044,6 @@ export
     stopLogStreaming?: IFissionLogsType | null;
     openLambda?: IFissionType | null;
     closeLambda?: IFissionType | null;
-    createSecretMap?: IKubectlConfig | null;
-    updateSecretMap?: IKubectlConfig | null;
-    updateSecretMapById?: IKubectlConfig | null;
-    deleteSecretMap?: IKubectlConfig | null;
     createLambda?: IFissionType | null;
     /**
     description?: 
@@ -2012,6 +2060,10 @@ export
     updateConfigMap?: IKubectlConfig | null;
     updateConfigMapById?: IKubectlConfig | null;
     deleteConfigMap?: IKubectlConfig | null;
+    createSecretMap?: IKubectlConfig | null;
+    updateSecretMap?: IKubectlConfig | null;
+    updateSecretMapById?: IKubectlConfig | null;
+    deleteSecretMap?: IKubectlConfig | null;
     connectAtlasMongo?: IMongoAtlasConnector | null;
     updateAtlasMongo?: IMongoAtlasConnector | null;
     disconnectAtlasMongo?: IMongoAtlasConnector | null;
@@ -2641,29 +2693,6 @@ export
 }
 
   
-  export interface IGenericKubectConfig {
-    /**
-    description?: Name of the kubernetes secret it can be "envirnoment" or any other but follow "my-environment" pattern for creating names
-  */
-    name?: string;
-    /**
-    description?: Project mapped to this specific lambda function
-  */
-    projectId?: string;
-    /**
-    description?: Key value pari mapped to this config or secret
-        returns JSON string like this?:
-        {
-        "MY_SECRET"?:"first",
-        "MY_SECRET_SECOND"?:"second",
-        "MY_SECRET_THIRD"?:"third"
-        }
-      
-  */
-    pairs?: any;
-}
-
-  
   export interface ICreateOrUpdateLambdaInput {
     /**
     description: Name of the lambda function it can be for example "my-lambda-function" 
@@ -2681,197 +2710,8 @@ export
   */
     projectId: string;
     /**
-    description: .
-        Basic code example on how basic lambda should look a like in javascript/nodejs
-
----BEGIN BASIC EXAMPLE---
-export default async function (context) {
-  return {
-    status: 200,
-    body: 'Hello, world!',
-    headers: {
-      'Access-Control-Allow-Origin': 'https://graphql-server.com',
-    },
-  };
-};
----END BASIC EXAMPLE---
-
-The "context" argument is following this export interface below called "LambdaContext"
-
-export interface LambdaContext {
-  request: {
-    path: string;
-    query: string;
-    method: string;
-    body: unknown;
-    headers: Headers
-  };
-  response: Response;
-  getSecret<T = Record<string, string>>(secret: string): Promise<T>;
-  getConfig(secret: string): Promise<Record<string, string>>;
-  getLambdaInfo(): {
-    name: string;
-    namespace: string;
-    resourceVersion: string;
-    uid: string;
-  };
-  getQueryParams(): Record<string, string>;
-  getBodyParams(): Record<string, string>;
-  getRouteParams(): Record<string, string>;
-}
-
-
----BEGIN GRAPHQL EXAMPLE---
-import {
-  Bootstrap,
-  Container,
-  Controller,
-  CoreModule,
-  GraphQLInt,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  HAPI_SERVER,
-  Module,
-  Query,
-  Type,
-} from '@gapi/core';
-import { lastValueFrom, tap } from 'rxjs';
-import { format } from 'url';
-
-export export interface Context {
-  request: {
-    url: string;
-    query: string;
-    method: string;
-    body: unknown;
-    headers: Headers;
-  };
-  response: Response;
-  getSecret<T = Record<string, string>>(secret: string): Promise<T>;
-  getConfig(secret: string): Promise<Record<string, string>>;
-  getLambdaInfo(): {
-    name: string;
-    namespace: string;
-    resourceVersion: string;
-    uid: string;
-  };
-  getQueryParams(): Record<string, string>;
-  getBodyParams(): Record<string, string>;
-  getRouteParams(): Record<string, string>;
-}
-
-export const UserType = new GraphQLObjectType({
-  name: 'UserType',
-  fields: () => ({
-    id: {
-      type: GraphQLInt,
-    },
-  }),
-});
-
-@Controller()
-export class UserQueriesController {
-  @Type(UserType)
-  @Query({
-    id: {
-      type: new GraphQLNonNull(GraphQLInt),
-    },
-  })
-  findUser(root, { id }, context) {
-    return { id: id };
-  }
-}
-
-@Module({
-  imports: [
-    CoreModule.forRoot({
-      server: {
-        hapi: {
-          port: 9000,
-          routes: {
-            cors: {
-              origin: ['*'],
-              additionalHeaders: [
-                'Host',
-                'User-Agent',
-                'Accept',
-                'Accept-Language',
-                'Accept-Encoding',
-                'Access-Control-Request-Method',
-                'Access-Control-Allow-Origin',
-                'Access-Control-Request-Headers',
-                'Origin',
-                'Connection',
-                'Pragma',
-                'cardId',
-                'Cache-Control',
-              ],
-            },
-          },
-        },
-      },
-      graphql: {
-        path: '/graphql',
-        initQuery: true,
-        openBrowser: false,
-        graphqlOptions: {
-          tracing: false,
-          schema: null,
-        },
-      },
-    }),
-  ],
-  controllers: [UserQueriesController],
-})
-export class AppModule {}
-
-const Main = lastValueFrom(
-  Bootstrap(AppModule).pipe(
-    tap(() => {
-      console.log('[Bootstrap]: Started');
-    }),
-  ),
-);
-
-export default async function handler(context: Context) {
-  const request = context.request;
-  const headers = {
-    'Content-type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT',
-  };
-  await Main;
-
-  const url = format({
-    pathname: '/graphql',
-    query: request.query,
-  });
-  const options = {
-    method: request.method,
-    url,
-    payload: request.body,
-    headers: request.headers,
-    validate: false,
-  };
-  let res = {
-    statusCode: 502,
-    result: null,
-  };
-  console.log('Request Options: ', options);
-  try {
-    res = await Container.get(HAPI_SERVER).inject(options);
-  } catch (e) {
-    console.error('ERROR', JSON.stringify(e));
-  }
-  return {
-    status: res.statusCode,
-    body: res.result,
-    headers,
-  };
-}
----END GRAPHQL EXAMPLE---
-IMPORTANT: Always install "@gapi/core": "^1.8.184" inside package.json when graphql example is asked tell the user what you are going to do!!
-      
+    description: Basic code example on how basic lambda should look a like in javascript/nodejs ---BEGIN BASIC EXAMPLE--- export default async function (context) { return { status: 200, body: 'Hello, world!', headers: { 'Access-Control-Allow-Origin': 'https://graphql-server.com', }, }; }; ---END BASIC EXAMPLE--- The "context" argument is following this export interface below called "LambdaContext" export interface LambdaContext { request: { path: string; query: string; method: string; body: unknown; headers: Headers }; response: Response; getSecret<T = Record<string, string>>(secret: string): Promise<T>; getConfig(secret: string): Promise<Record<string, string>>; getLambdaInfo(): { name: string; namespace: string; resourceVersion: string; uid: string; }; getQueryParams(): Record<string, string>; getBodyParams(): Record<string, string>; getRouteParams(): Record<string, string>; } ---BEGIN GRAPHQL EXAMPLE using classic REST nodejs image and fastify--- import { Bootstrap, Container, Controller, CoreModule, GraphQLInt, GraphQLNonNull, GraphQLObjectType, HAPI_SERVER, Module, Query, Type, } from '@gapi/core'; import { lastValueFrom, tap } from 'rxjs'; import { format } from 'url'; export export interface Context { request: { url: string; query: string; method: string; body: unknown; headers: Headers; }; response: Response; getSecret<T = Record<string, string>>(secret: string): Promise<T>; getConfig(secret: string): Promise<Record<string, string>>; getLambdaInfo(): { name: string; namespace: string; resourceVersion: string; uid: string; }; getQueryParams(): Record<string, string>; getBodyParams(): Record<string, string>; getRouteParams(): Record<string, string>; } export const UserType = new GraphQLObjectType({ name: 'UserType', fields: () => ({ id: { type: GraphQLInt, }, }), }); @Controller() export class UserQueriesController { @Type(UserType) @Query({ id: { type: new GraphQLNonNull(GraphQLInt), }, }) findUser(root, { id }, context) { return { id: id }; } } @Module({ imports: [ CoreModule.forRoot({ server: { hapi: { port: 9000, routes: { cors: { origin: ['*'], additionalHeaders: [ 'Host', 'User-Agent', 'Accept', 'Accept-Language', 'Accept-Encoding', 'Access-Control-Request-Method', 'Access-Control-Allow-Origin', 'Access-Control-Request-Headers', 'Origin', 'Connection', 'Pragma', 'cardId', 'Cache-Control', ], }, }, }, }, graphql: { path: '/graphql', initQuery: true, openBrowser: false, graphqlOptions: { tracing: false, schema: null, }, }, }), ], controllers: [UserQueriesController], }) export class AppModule {} const Main = lastValueFrom( Bootstrap(AppModule).pipe( tap(() => { console.log('[Bootstrap]: Started'); }), ), ); export default async function handler(context: Context) { const request = context.request; const headers = { 'Content-type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT', }; await Main; const url = format({ pathname: '/graphql', query: request.query, }); const options = { method: request.method, url, payload: request.body, headers: request.headers, validate: false, }; let res = { statusCode: 502, result: null, }; console.log('Request Options: ', options); try { res = await Container.get(HAPI_SERVER).inject(options); } catch (e) { console.error('ERROR', JSON.stringify(e)); } return { status: res.statusCode, body: res.result, headers, }; } ---END GRAPHQL EXAMPLE--- IMPORTANT: Always install "@gapi/core": "^1.8.184" inside package.json when graphql example is asked tell the user what you are going to do!! ---BEGIN NEW MODERN UP TO DATE GRAPHQL @gapi/core example without the need of external dependencies import { Bootstrap, Controller, CoreModule, GraphQLObjectType, GraphQLString, Module, Query, Type, } from '@gapi/core'; @Controller() class Appcontroller { @Type( new GraphQLObjectType({ name: 'UserType', fields: () => ({ id: { type: GraphQLString }, name: { type: GraphQLString }, }), }), ) @Query() getUser() { return { id: 1, name: 'Hello World', }; } } @Module({ imports: [CoreModule.forRoot()], controllers: [Appcontroller], }) class AppModule {} Bootstrap(AppModule).subscribe(); IMPORTANT: This example requires environment of "rxdi/fission-nodejs-graphql:0.0.83" This environment helps us to create and use @gapi/core without dependencies When using this example unfortunately we need to strip out all the external dependencies and build only our code so buildBashScript will become #!/bin/sh cd ${SRC_PKG} npm install #Use gcli for typescript transpilation mv index.js index.ts npx @gapi/gcli@1.8.226 build --bundle false --external @gapi/core --external @rxdi/core --external @rxdi/graphql --external @rxdi/graphql-pubsub --external @rxdi/graphql-rabbitmq-subscriptions --external @rxdi/hapi --external @rxdi/nats --external @rxdi/rabbitmq-pubsub --external @hapi/hapi --external @hapi/boom --external @hapi/inert --external @abraham/reflection --external graphql --external graphql-subscriptions --external subscriptions-transport-ws --external reflect-metadata --external rxjs #rm -rf node_modules cp -r ${SRC_PKG} ${DEPLOY_PKG} This way we can deploy @gapi/core lambda without even installing external dependencies in package.json! Pure simple @gapi/core + nodejs utilities!
+*** NO AUTH BASIC PROXY LOGIC *** /** * Example federation authentication function — passthrough (no dependencies). * * The leanest possible function: it adds no verification of its own and simply * forwards the incoming Authorization header (and the request domain) to the * subgraphs, which then enforce their own access rules. Useful when each subgraph * already authenticates the forwarded token itself. * * No "Package JSON" dependencies required. *\/ /** * Context handed to the user's authentication function on every gateway request. * The function returns the object that becomes the GraphQL gateway context — every * key of which is forwarded to the subgraphs as a request header (see * buildForwardingDataSource). * * The runtime bakes in NO authentication. Users install their own auth library * (firebase, jose, …) via the lambda's package.json and verify the request here. *\/ export export interface FederationContext { request: Request; getSecret: <T = Record<string, string>>(name: string) => Promise<T>; getConfig: <T = Record<string, string>>(name: string) => Promise<T>; getQueryParams: () => Record<string, unknown>; getBodyParams: () => unknown; getRouteParams: () => Record<string, string>; getLambdaInfo: () => { name?: string; namespace?: string; resourceVersion?: string; uid?: string; url?: string; }; } function readHeader(value: string | string[] | undefined): string { return (Array.isArray(value) ? value[0] : value) ?? ""; } export default async function (context: FederationContext) { const headers = context.request.headers; /* Every returned key is forwarded to each subgraph as a request header. *\/ return { authorization: readHeader(headers["authorization"]), domain: readHeader(headers["domain"]), }; } *** JWT-AUTH Example /** * Example federation authentication function — generic JWT (no Firebase). * * Verifies a bearer JWT with a shared secret and forwards the decoded claims to * the subgraphs. Use this as a template for any auth library — swap jsonwebtoken * for jose, Auth0, Clerk, etc. * * Install on the lambda via "Package JSON": * { "dependencies": { "jsonwebtoken": "^9.0.2" } } * * Provide the signing key through a Kubernetes secret selected on the lambda * (here named "gateway-auth", key "jwtSecret"). *\/ import * as jwt from "jsonwebtoken"; /** * Context handed to the user's authentication function on every gateway request. * The function returns the object that becomes the GraphQL gateway context — every * key of which is forwarded to the subgraphs as a request header (see * buildForwardingDataSource). * * The runtime bakes in NO authentication. Users install their own auth library * (firebase, jose, …) via the lambda's package.json and verify the request here. *\/ export export interface FederationContext { request: Request; getSecret: <T = Record<string, string>>(name: string) => Promise<T>; getConfig: <T = Record<string, string>>(name: string) => Promise<T>; getQueryParams: () => Record<string, unknown>; getBodyParams: () => unknown; getRouteParams: () => Record<string, string>; getLambdaInfo: () => { name?: string; namespace?: string; resourceVersion?: string; uid?: string; url?: string; }; } function readHeader(value: string | string[] | undefined): string { return (Array.isArray(value) ? value[0] : value) ?? ""; } export default async function (context: FederationContext) { const token = readHeader(context.request.headers["authorization"]).replace( /^Bearers+/i, "", ); if (!token || token === "undefined") { return {}; } const { jwtSecret } = await context.getSecret<{ jwtSecret: string }>( "gateway-auth", ); if (!jwtSecret) { throw new Error('missing "gateway-auth" secret with a "jwtSecret" key'); } try { const claims = jwt.verify(token, jwtSecret) as Record<string, unknown>; /* Every returned key is forwarded to each subgraph as a request header. *\/ return { authorization: token, user: JSON.stringify(claims), "x-user-id": String(claims.sub ?? ""), }; } catch (error) { console.error("[auth] invalid jwt:", (error as Error).message); throw new Error("unauthenticated"); } } *** FIREBASE EXAMPLE /** * Example federation authentication function — Firebase. * * This is the code you paste into the lambda's "Code" field when "Federation" is * ticked. It runs ONCE per gateway request, before the request fans out to the * subgraphs. Whatever object it returns becomes the gateway context, and EVERY * key of that object is forwarded to each subgraph as a request header (string * values as-is, anything else JSON-stringified). * * Install the dependency on the same lambda via "Package JSON": * { "dependencies": { "firebase-admin": "^12.0.0" } } * * Provide the Firebase service-account JSON through a Kubernetes secret selected * on the lambda (here named "firebase", key "serviceAccount"). *\/ import * as admin from "firebase-admin"; /** * Context handed to the user's authentication function on every gateway request. * The function returns the object that becomes the GraphQL gateway context — every * key of which is forwarded to the subgraphs as a request header (see * buildForwardingDataSource). * * The runtime bakes in NO authentication. Users install their own auth library * (firebase, jose, …) via the lambda's package.json and verify the request here. *\/ export export interface FederationContext { request: Request; getSecret: <T = Record<string, string>>(name: string) => Promise<T>; getConfig: <T = Record<string, string>>(name: string) => Promise<T>; getQueryParams: () => Record<string, unknown>; getBodyParams: () => unknown; getRouteParams: () => Record<string, string>; getLambdaInfo: () => { name?: string; namespace?: string; resourceVersion?: string; uid?: string; url?: string; }; } /* Initialise the Admin SDK once (the bundle is required once at specialize, but the default export runs per request — so guard against re-initialising). *\/ async function ensureFirebase(context: FederationContext): Promise<void> { if (admin.apps.length) { return; } const secret = await context.getSecret<{ serviceAccount: string }>("firebase"); if (!secret.serviceAccount) { throw new Error('missing "firebase" secret with a "serviceAccount" key'); } admin.initializeApp({ credential: admin.credential.cert(JSON.parse(secret.serviceAccount)), }); } function readHeader(value: string | string[] | undefined): string { return (Array.isArray(value) ? value[0] : value) ?? ""; } export default async function (context: FederationContext) { const token = readHeader( context.request.headers["authorization"] ?? context.request.headers["Authorization"], ).replace(/^Bearers+/i, ""); /* Anonymous request — forward nothing; each subgraph decides what is public. *\/ if (!token || token === "undefined") { return {}; } await ensureFirebase(context); try { const decoded = await admin.auth().verifyIdToken(token); /* These keys are forwarded to every subgraph as request headers. Subgraphs read user / authorization to authorise the operation. *\/ return { authorization: token, user: JSON.stringify({ uid: decoded.uid, email: decoded.email, emailVerified: decoded.email_verified, }), }; } catch (error) { console.error("[auth] invalid firebase token:", (error as Error).message); /* Reject the whole request. Return {} instead to let it through as anonymous and let each subgraph enforce its own access rules. *\/ throw new Error("unauthenticated"); } } KEEP IN MIND THAT ANY EXTERNAL DEPENDENCY needs to be installed inside "package.json" Then the build script will be #!/bin/sh cd ${SRC_PKG} npm install #Use gcli for typescript transpilation (built-in inside the builder image uses esbuild) mv index.js index.ts npx gcli build rm -rf node_modules cp -r ${SRC_PKG} ${DEPLOY_PKG} ENSURE BEFORE USING FEDERATION that "federation" is set to "true" when creating lambda also we need subgraphs so "subgraphs" field represents lambda names as string[] on the frontend we filter out only lambdas which are created in graphql environment so ONLY ALLOWED lambdas are these created with environment image rxdi/fission-nodejs-graphql Before we create federation we must have AT LEAST 1 RUNNING GRAPHQL LAMBDA!!
   */
     code?: string | null;
     /**
@@ -2893,6 +2733,15 @@ IMPORTANT: Always install "@gapi/core": "^1.8.184" inside package.json when grap
     description: The environment in which this lambda will execute defaults to "nodejs" available only "nodejs" at this moment
   */
     env?: string | null;
+    /**
+    description: 
+  # envSecrets (read by the nodejs-graphql runtime BEFORE the bundle loads)
+  # projects all keys of these mounted secrets into process.env, so the existing
+  # process.env-based ENVIRONMENT (src/app/app.constants.ts) works unchanged.
+  currently only usable in graphql environment
+        
+  */
+    envSecrets?: Array<string> | null;
     /**
     description: Can be one of the http methods GET,POST,UPDATE,DELETE,PUT defaults to GET if not defined
   */
@@ -2941,7 +2790,7 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
     network?: Array<string> | null;
     /**
     description: 
-        When "true" this lambda is provisioned as an Apollo Federation gateway instead of a
+        When "true" this lambda is provisioned as an Graphql Federation gateway instead of a
         regular function. The selected "subgraphs" are composed into a single supergraph and the
         exported "code" function is executed before every request to build the gateway context
         (authentication). The "env" must point to the federation runtime image.
@@ -3051,6 +2900,29 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
   export interface IDeleteLambdaInput {
     name?: string;
     projectId?: string;
+}
+
+  
+  export interface IGenericKubectConfig {
+    /**
+    description?: Name of the kubernetes secret it can be "envirnoment" or any other but follow "my-environment" pattern for creating names
+  */
+    name?: string;
+    /**
+    description?: Project mapped to this specific lambda function
+  */
+    projectId?: string;
+    /**
+    description?: Key value pari mapped to this config or secret
+        returns JSON string like this?:
+        {
+        "MY_SECRET"?:"first",
+        "MY_SECRET_SECOND"?:"second",
+        "MY_SECRET_THIRD"?:"third"
+        }
+      
+  */
+    pairs?: any;
 }
 
   

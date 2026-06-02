@@ -284777,11 +284777,10 @@ var init_helpers2 = __esm({
               packageJson: cmd.packageJson || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
+              envSecrets: cmd.envSecrets || payload.envSecrets || [],
               network: cmd.network || payload.network || ["public", "private"],
-              ...payload.federation || payload.subgraphs?.length ? {
-                federation: !!payload.federation,
-                subgraphs: payload.subgraphs ?? []
-              } : {},
+              federation: cmd.federation ?? !!payload.federation,
+              subgraphs: cmd.subgraphs || payload.subgraphs || [],
               customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || "",
               scaleOptions: {
                 executorType: cmd.executorType || payload.scaleOptions?.executorType || "poolmgr",
@@ -316569,6 +316568,12 @@ function registerLambdaCommands(program2) {
     ],
     ["--script <script>", "Package build script path"],
     ["--params <params>", "Array from strings which defines route params"],
+    ["--configs <configs...>", "List of kubernetes config names"],
+    ["--secrets <secrets...>", "List of kubernetes secret names"],
+    [
+      "--envSecrets <envSecrets...>",
+      "List of kubernetes secret names projected into process.env (graphql environment only)"
+    ],
     [
       "--network <network>",
       "Can be private or public meaning exposed to the router or just for private available can be both also --network private --network public"
@@ -316576,6 +316581,18 @@ function registerLambdaCommands(program2) {
     ["--route <route>", "Lambda route in which will be accessible"],
     ["--code <code>", "URL or local path for single file source code"],
     ["--file <file>", "Main lambda file"],
+    [
+      "--customUploadFileId <customUploadFileId>",
+      "Id of a pre-uploaded archive to use as the lambda source"
+    ],
+    [
+      "--federation",
+      "Provision this lambda as a GraphQL Federation gateway instead of a regular function"
+    ],
+    [
+      "--subgraphs <subgraphs...>",
+      "Lambda names (within the project) to expose as subgraphs of the federation gateway"
+    ],
     [
       "--executorType <executorType>",
       "Executor type for execution; one of 'poolmgr', 'newdeploy'"
