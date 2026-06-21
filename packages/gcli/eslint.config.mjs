@@ -8,7 +8,12 @@ import prettierConfig from 'eslint-config-prettier';
 export default defineConfig([
   globalIgnores(['dist/*', './release', './example', 'coverage']),
   {
-    files: ['./src/**/*.ts', './src/**/*.tsx'],
+    files: [
+      './src/**/*.ts',
+      './src/**/*.tsx',
+      './test/**/*.ts',
+      './test/**/*.tsx',
+    ],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2018,

@@ -4,11 +4,11 @@ import {
   IHttpMethodsEnum,
   ILambdaScaleInputOptions,
 } from '@introspection/index';
-import { load } from 'js-yaml';
 import { combineLatest, from, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { readFileAsObservable } from './read-file';
+import { loadYaml } from './yaml-schema';
 
 interface ConfigJSON {
   name: string;
@@ -56,13 +56,13 @@ export const loadSpec = <T = LambForgeConfig>(spec?: string) =>
       map((spec) => JSON.parse(spec)),
       catchError(() =>
         from(readFileAsObservable(spec)).pipe(
-          map((file) => load(file)),
+          map((file) => loadYaml(file)),
           catchError(() => of(false)),
         ),
       ),
     ),
     readFileAsObservable('lambforge.yaml').pipe(
-      map((data) => load(data)),
+      map((data) => loadYaml(data)),
       catchError(() => of(false)),
     ),
     readFileAsObservable('spec.json').pipe(
@@ -70,7 +70,7 @@ export const loadSpec = <T = LambForgeConfig>(spec?: string) =>
       catchError(() => of(false)),
     ),
     readFileAsObservable('spec.yaml').pipe(
-      map((data) => load(data)),
+      map((data) => loadYaml(data)),
       catchError(() => of(false)),
     ),
   ]).pipe(

@@ -205,6 +205,246 @@ options:
     external: []
 ```
 
+### Conditional Configuration (Environment-Aware Specs)
+
+A single spec can describe **many deploy variants** without duplicating the file. The bundler/loader understands a small set of conditional tags that are resolved at load time from external environment variables, plus native YAML references (`&anchor` / `*alias`) and merge keys (`<<`) for de-duplication.
+
+This is how you ship the **same code to two different targets** — e.g. the legacy Docker servers (where everything must be bundled) and the new [lambforge.com](https://www.lambforge.com) platform (where the `@gapi/core` framework is preinstalled in the environment image, so it must stay _external_ to avoid double-bundling).
+
+#### Supported tags
+
+| Tag | Form | Resolves to |
+| --- | --- | --- |
+| `!env` | `!env VAR` | `process.env.VAR` (or `null` when unset) |
+| `!env` | `!env [VAR, default]` | `process.env.VAR ?? default` |
+| `!switch` | `!switch { var, default, cases }` | `cases[process.env[var] ?? default]` |
+| `!if` | `!if { when, then, else }` | `then` when `when` is truthy, else `else` |
+| `!if` | `!if { var, equals, default, then, else }` | `then` when `process.env[var] ?? default === equals`, else `else` |
+
+Notes:
+
+- `!switch` requires a `var`. When the selected value has no matching case it falls back to `cases[default]`, otherwise `null`.
+- `!if` truthiness treats `null`, `false`, `''`, `"false"` and `"0"` as **falsy**.
+- Tags work **anywhere** in the file (any field — `external`, `scaleOptions`, `image`, `network`, …), and may be nested (e.g. an `!env` inside an `!if`).
+- Specs that use **no** tags keep parsing exactly as before.
+
+#### Recipes
+
+##### 1. One file, two deploys (the flagship use case)
+
+Select the bundler externals at build/deploy time. The new lambforge.com platform ships the framework preinstalled (keep it external), while the legacy Docker image ships nothing (bundle everything).
+
+```yaml
+# Framework packages shipped preinstalled by the lambforge.com env image.
+# Declared once as an anchor and reused below.
+.frameworkExternals: &frameworkExternals
+  - '@gapi/core'
+  - '@rxdi/core'
+  - 'graphql'
+  - 'rxjs'
+  - 'reflect-metadata'
+  # ...the rest of the preinstalled packages
+
+options:
+  bundler:
+    bundle: true
+    target: node24
+    outfile: 'index.js'
+    external: !switch
+      var: LAMBFORGE_TARGET
+      default: lambforge # unset => new platform => keep framework external
+      cases:
+        lambforge: *frameworkExternals
+        docker: [] # legacy servers => nothing preinstalled => bundle everything
+```
+
+```bash
+# New lambforge.com platform (default) — framework stays external, slim bundle
+gcli lambda:create
+
+# Legacy Docker servers — bundle every dependency
+LAMBFORGE_TARGET=docker gcli lambda:create
+```
+
+##### 2. Per-stage autoscaling (anchors + merge keys for DRY)
+
+Define a base block once, then override only what changes per stage. Branches that are YAML literals keep their type (numbers stay numbers).
+
+```yaml
+# Shared baseline, declared once.
+.baseScale: &baseScale
+  minCpu: 30
+  maxCpu: 500
+  minMemory: 128
+  maxMemory: 1024
+  targetCpu: 80
+  executorType: newdeploy
+  concurrency: 1000
+  functionTimeout: 120
+
+function:
+  name: graphql-server-lambdas
+  scaleOptions:
+    <<: *baseScale # merge in the shared baseline…
+    # …and override per environment
+    minScale: !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 2, staging: 1, dev: 0 } }
+    maxScale: !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 10, staging: 4, dev: 2 } }
+```
+
+##### 3. Region / image / builder selection (strings with sane defaults)
+
+```yaml
+environment:
+  name: nodejs-graphql-lambdas
+  # `!env [VAR, default]` — falls back to the default when the var is unset.
+  image: !env [ENV_IMAGE, 'rxdi/fission-nodejs-graphql-lambdas:0.0.4']
+  builder: !env [ENV_BUILDER, 'rxdi/fission-node-builder:1.0.8']
+  region: !switch
+    var: REGION
+    default: eu
+    cases:
+      eu: EU_CENTRAL
+      us: US_EAST
+```
+
+##### 4. Network visibility & secrets per stage
+
+```yaml
+function:
+  # Public only in dev; private everywhere else.
+  network: !switch
+    var: DEPLOY_ENV
+    default: prod
+    cases:
+      dev: ['public']
+      staging: ['private']
+      prod: ['private']
+  # Swap the mounted secret set per stage.
+  secrets: !switch
+    var: DEPLOY_ENV
+    default: prod
+    cases:
+      dev: ['environment-dev']
+      prod: ['environment']
+```
+
+##### 5. Build toggles (minify only in production)
+
+```yaml
+options:
+  bundler:
+    target: !env [BUILD_TARGET, node24]
+    # `!if { var, equals }` returns real booleans.
+    minify: !if { var: NODE_ENV, equals: production, then: true, else: false }
+    bundle: !if { var: NO_BUNDLE, equals: 'true', then: false, else: true }
+```
+
+##### 6. Feature flags with `!if` truthiness
+
+`!if { when }` branches on the truthiness of a value. `!env DEBUG` resolves to `null` when unset and to the string when set; `null`, `''`, `"false"` and `"0"` are treated as falsy.
+
+```yaml
+options:
+  bundler:
+    # Ship sourcemaps-style verbose build only when DEBUG is set to a truthy value.
+    minify: !if { when: !env DEBUG, then: false, else: true }
+```
+
+##### 7. Nested conditionals
+
+Tags compose — a `!switch` branch can itself be an `!if`, an `!env`, or another `!switch`.
+
+```yaml
+environment:
+  region: !switch
+    var: DEPLOY_ENV
+    default: dev
+    cases:
+      # In prod, pick the region from REGION; everywhere else stay in EU.
+      prod: !if { var: REGION, equals: us, then: US_EAST, else: EU_CENTRAL }
+      dev: EU_CENTRAL
+```
+
+##### 8. Putting it together — a multi-stage spec
+
+```yaml
+.frameworkExternals: &frameworkExternals
+  - '@gapi/core'
+  - 'rxjs'
+  - 'graphql'
+  - 'reflect-metadata'
+
+.baseScale: &baseScale
+  minCpu: 30
+  maxCpu: 500
+  minMemory: 128
+  maxMemory: 1024
+
+function:
+  name: graphql-server-lambdas
+  route: graphql-server-lambdas
+  file: ./src/main.ts
+  network: !switch { var: DEPLOY_ENV, default: prod, cases: { dev: ['public'], prod: ['private'] } }
+  scaleOptions:
+    <<: *baseScale
+    minScale: !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 2, dev: 0 } }
+    maxScale: !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 10, dev: 2 } }
+
+options:
+  bundler:
+    target: node24
+    minify: !if { var: DEPLOY_ENV, equals: prod, then: true, else: false }
+    external: !switch
+      var: LAMBFORGE_TARGET
+      default: lambforge
+      cases:
+        lambforge: *frameworkExternals
+        docker: []
+```
+
+```bash
+# Production deploy to the new platform
+DEPLOY_ENV=prod gcli lambda:update
+
+# Dev deploy, still bundling everything for a local Docker run
+DEPLOY_ENV=dev LAMBFORGE_TARGET=docker gcli lambda:create
+```
+
+#### Setting the variables
+
+The tags read from `process.env` at the moment `gcli` loads the spec (i.e. at build/deploy time), so set them however that process is launched:
+
+```bash
+# Inline for a single command
+LAMBFORGE_TARGET=docker gcli build
+
+# Exported for a whole shell session / script
+export DEPLOY_ENV=prod
+gcli lambda:update
+```
+
+```yaml
+# GitHub Actions — per step or job
+- run: npx gcli lambda:update
+  env:
+    DEPLOY_ENV: prod
+    # LAMBFORGE_TARGET left unset => defaults to the new platform
+```
+
+```dockerfile
+# Dockerfile — bake the legacy target into the image build
+ENV LAMBFORGE_TARGET=docker
+RUN npm run build:es   # gcli build runs here and reads the value
+```
+
+#### Types & gotchas
+
+- **`!env` is always a string.** `process.env` values are strings, so `!env [PORT, 8080]` yields the number `8080` when unset but the string `"3000"` when `PORT=3000`. For numeric/boolean fields prefer `!switch`/`!if` with YAML literal branches (e.g. `cases: { prod: 10, dev: 2 }`) — those preserve real numbers and booleans.
+- **`!if { equals }` compares as strings**, so `equals: 'true'` matches the string `"true"`.
+- **`!switch` requires `var`** and falls back to `cases[default]` (then `null`) when the resolved value has no case.
+- **Define anchors before use.** `&anchor` must appear earlier in the file than the `*alias` that references it. A common convention is a leading `.`-prefixed key (e.g. `.frameworkExternals:`), which consumers ignore.
+- **Custom tags require the `gcli` loader.** Other YAML tooling that reads the file with a vanilla parser will error on `!switch` / `!if` / `!env` (`unknown mapping tag`). The CLI itself always understands them.
+
 ### Configuration Auto-Discovery (Zero-Argument Commands)
 
 `gcli` is designed to be context-aware. If a configuration file (`lambforge.yaml`, `spec.yaml`, or `env.yaml`) is present in your current directory, you can run commands without arguments.
