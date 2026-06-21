@@ -1,4 +1,4 @@
-## [1.8.230](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.230) (2026-06-19)
+## [1.8.231](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.231) (2026-06-21)
 
 
 ### Bug Fixes
@@ -113,6 +113,7 @@
 * **federation:** added missing apollo server configs ([cc6edfe](https://github.com/Stradivario/gapi/commit/cc6edfecb02315ed11e156cf63616a983a5b82a7))
 * **federation:** added willSendRequest and context lambdas in order to manage authentication outside the scope of the library ([5f597ab](https://github.com/Stradivario/gapi/commit/5f597ab2504b127ed9838ef84e2ea678927c6b32))
 * **Federation:** removed _service and status from schema sdl when processing _service graph, removed ethereum, ipfs related modules with packages ([cd4d74d](https://github.com/Stradivario/gapi/commit/cd4d74d1296ac5a38416f9ced93ea2caf00f1be7))
+* **gcli:** added additional neat features to yaml parser so we can have conditionals and assignments and things like that ([406bc19](https://github.com/Stradivario/gapi/commit/406bc199c5c7f279b0d34bc339ff57c097061dba))
 * **gcli:** added esbuild as a script with decorators ([35148c7](https://github.com/Stradivario/gapi/commit/35148c72809a5aaef07947ad49cdb78b0b97e4c2))
 * **gcli:** added esbuild as dependency since we want to automatically use the binary for the available architecture for SEA bundle we use the actual binary ([eacc12a](https://github.com/Stradivario/gapi/commit/eacc12a2d26d1b47358882cc9a6ce79ffde9e964))
 * **gcli:** added exit strategies for the child process and added configuration for build scripts unified ([ea75254](https://github.com/Stradivario/gapi/commit/ea752545a4a805e8cfbe2d65b18647207c93d76d))
