@@ -67,6 +67,14 @@ export function registerLambdaCommands(program: Command) {
       'Lambda names (within the project) to expose as subgraphs of the federation gateway',
     ],
     [
+      '--mcp',
+      'Provision this lambda as an Apollo MCP Server in front of a federation graph',
+    ],
+    [
+      '--mcpGraph <mcpGraph>',
+      'Federation gateway lambda name the MCP server connects to (operations/headers via spec yaml)',
+    ],
+    [
       '--executorType <executorType>',
       "Executor type for execution; one of 'poolmgr', 'newdeploy'",
     ],

@@ -2805,9 +2805,46 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
       
   */
     subgraphs?: Array<string> | null;
+    /**
+    description: When "true" this lambda is provisioned as an Apollo MCP Server in front of a federation graph
+  */
+    mcp?: boolean | null;
+    /**
+    description: Only used when "mcp" is true. Name of the federation gateway lambda the MCP server connects to
+  */
+    mcpGraph?: string | null;
+    /**
+    description: Only used when "mcp" is true. Curated GraphQL operations exposed as MCP tools (name derived from the operation)
+  */
+    mcpOperations?: Array<IMcpOperationInput> | null;
+    /**
+    description: Only used when "mcp" is true. Static headers added to every request to the federation endpoint
+  */
+    mcpHeaders?: Array<IMcpHeaderInput> | null;
+    /**
+    description: Only used when "mcp" is true. Additional request headers forwarded from the caller (Authorization always forwarded)
+  */
+    mcpForwardHeaders?: Array<IMcpForwardHeaderInput> | null;
 }
 
-  
+
+  export interface IMcpOperationInput {
+    query: string;
+    name?: string | null;
+}
+
+
+  export interface IMcpHeaderInput {
+    name: string;
+    value: string;
+}
+
+
+  export interface IMcpForwardHeaderInput {
+    name: string;
+}
+
+
   export interface ILambdaScaleInputOptions {
     /**
     description: 

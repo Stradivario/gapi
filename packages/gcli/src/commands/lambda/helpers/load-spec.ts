@@ -3,6 +3,9 @@ import {
   IFissionEnvironmentInputType,
   IHttpMethodsEnum,
   ILambdaScaleInputOptions,
+  IMcpForwardHeaderInput,
+  IMcpHeaderInput,
+  IMcpOperationInput,
 } from '@introspection/index';
 import { combineLatest, from, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -26,6 +29,12 @@ interface ConfigJSON {
   uploadAsZip?: string;
   federation?: boolean;
   subgraphs?: string[];
+  /* MCP server (from lambforge.yaml `function.mcp*`) */
+  mcp?: boolean;
+  mcpGraph?: string;
+  mcpOperations?: IMcpOperationInput[];
+  mcpHeaders?: IMcpHeaderInput[];
+  mcpForwardHeaders?: IMcpForwardHeaderInput[];
   scaleOptions?: ILambdaScaleInputOptions;
 }
 

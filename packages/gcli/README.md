@@ -205,6 +205,59 @@ options:
     external: []
 ```
 
+### MCP Server Functions
+
+A function can be provisioned as an **MCP Server** in front of a **federation graph** by setting `mcp: true`. The MCP lambda has **no source code** — it is fully described by config: the selected `mcpGraph` (a federation lambda in the same project) is resolved to its internal router URL and **introspected** (single source of truth, no schema file), and the curated `mcpOperations` become MCP tools. Use the MCP runtime image and `newdeploy` + `minScale: 1` (MCP holds long-lived streamable-HTTP sessions).
+
+```yaml
+function:
+  name: my-mcp
+  route: mcp
+  method: ['GET', 'POST'] # streamable HTTP needs both
+  network: ['public']
+  env: nodejs-graphql-mcp # the MCP runtime image
+
+  mcp: true
+  mcpGraph: my-federation-gateway # an existing federation lambda in this project
+
+  # Curated operations exposed as MCP tools. The tool name is the OPERATION name (must be named);
+  # optional — the introspection/search/execute tools work without any.
+  mcpOperations:
+    - query: |
+        query GetUser($id: ID!) { user(id: $id) { id name email } }
+
+  # Static headers sent on EVERY upstream request (e.g. a fixed API key / service token).
+  mcpHeaders:
+    - name: X-Api-Key
+      value: replace-me
+
+  # Extra request headers forwarded from the caller (Authorization is ALWAYS forwarded).
+  mcpForwardHeaders:
+    - name: X-Tenant-Id
+
+  scaleOptions:
+    executorType: newdeploy
+    minScale: 1
+    maxScale: 4
+    targetCpu: 70
+
+environment:
+  name: nodejs-graphql-mcp
+  image: rxdi/fission-nodejs-graphql-mcp:0.0.2
+  builder: rxdi/fission-node-builder:1.0.8
+  poolSize: 0
+  region: EU_CENTRAL
+```
+
+```bash
+gcli lambda:create --project <projectId> --spec ./lambforge.yaml
+```
+
+`--mcp` and `--mcpGraph <name>` are also available as CLI flags; the array fields
+(`mcpOperations`, `mcpHeaders`, `mcpForwardHeaders`) are spec-only. A full annotated example lives in
+[`example/mcp/lambforge.yaml`](./example/mcp/lambforge.yaml). Client connects at
+`https://<host>/<projectId>/<route>/mcp`.
+
 ### Conditional Configuration (Environment-Aware Specs)
 
 A single spec can describe **many deploy variants** without duplicating the file. The bundler/loader understands a small set of conditional tags that are resolved at load time from external environment variables, plus native YAML references (`&anchor` / `*alias`) and merge keys (`<<`) for de-duplication.
@@ -213,13 +266,13 @@ This is how you ship the **same code to two different targets** — e.g. the leg
 
 #### Supported tags
 
-| Tag | Form | Resolves to |
-| --- | --- | --- |
-| `!env` | `!env VAR` | `process.env.VAR` (or `null` when unset) |
-| `!env` | `!env [VAR, default]` | `process.env.VAR ?? default` |
-| `!switch` | `!switch { var, default, cases }` | `cases[process.env[var] ?? default]` |
-| `!if` | `!if { when, then, else }` | `then` when `when` is truthy, else `else` |
-| `!if` | `!if { var, equals, default, then, else }` | `then` when `process.env[var] ?? default === equals`, else `else` |
+| Tag       | Form                                       | Resolves to                                                       |
+| --------- | ------------------------------------------ | ----------------------------------------------------------------- |
+| `!env`    | `!env VAR`                                 | `process.env.VAR` (or `null` when unset)                          |
+| `!env`    | `!env [VAR, default]`                      | `process.env.VAR ?? default`                                      |
+| `!switch` | `!switch { var, default, cases }`          | `cases[process.env[var] ?? default]`                              |
+| `!if`     | `!if { when, then, else }`                 | `then` when `when` is truthy, else `else`                         |
+| `!if`     | `!if { var, equals, default, then, else }` | `then` when `process.env[var] ?? default === equals`, else `else` |
 
 Notes:
 
@@ -287,8 +340,18 @@ function:
   scaleOptions:
     <<: *baseScale # merge in the shared baseline…
     # …and override per environment
-    minScale: !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 2, staging: 1, dev: 0 } }
-    maxScale: !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 10, staging: 4, dev: 2 } }
+    minScale:
+      !switch {
+        var: DEPLOY_ENV,
+        default: dev,
+        cases: { prod: 2, staging: 1, dev: 0 },
+      }
+    maxScale:
+      !switch {
+        var: DEPLOY_ENV,
+        default: dev,
+        cases: { prod: 10, staging: 4, dev: 2 },
+      }
 ```
 
 ##### 3. Region / image / builder selection (strings with sane defaults)
@@ -384,11 +447,18 @@ function:
   name: graphql-server-lambdas
   route: graphql-server-lambdas
   file: ./src/main.ts
-  network: !switch { var: DEPLOY_ENV, default: prod, cases: { dev: ['public'], prod: ['private'] } }
+  network:
+    !switch {
+      var: DEPLOY_ENV,
+      default: prod,
+      cases: { dev: ['public'], prod: ['private'] },
+    }
   scaleOptions:
     <<: *baseScale
-    minScale: !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 2, dev: 0 } }
-    maxScale: !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 10, dev: 2 } }
+    minScale:
+      !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 2, dev: 0 } }
+    maxScale:
+      !switch { var: DEPLOY_ENV, default: dev, cases: { prod: 10, dev: 2 } }
 
 options:
   bundler:

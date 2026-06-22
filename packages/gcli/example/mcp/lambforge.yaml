@@ -1,0 +1,82 @@
+# Example lambforge.yaml that provisions an Apollo MCP Server as a lambda.
+#
+#   gcli lambda:create --project <projectId> --spec ./lambforge.yaml
+#   gcli lambda:update --project <projectId> --spec ./lambforge.yaml
+#
+# An MCP lambda has NO source code — it is fully described by config below. The selected federation
+# graph is introspected at specialize time (single source of truth) and the curated operations become
+# MCP tools. See graphql-server-lambdas/docs/mcp-lambdas.md.
+
+function:
+  name: my-mcp
+  route: mcp
+  # MCP streamable HTTP needs both GET (server→client SSE stream) and POST (client→server).
+  method: ['GET', 'POST']
+  # Public exposes it through the router; the client connects at https://<host>/<projectId>/mcp
+  network: ['public']
+  # Must be the MCP runtime environment image (registered below / in the project).
+  env: nodejs-graphql-mcp
+
+  # --- MCP configuration ----------------------------------------------------------------------------
+  mcp: true
+  # Name of an existing FEDERATION lambda in the same project. Resolved to its internal Fission router
+  # URL and stored as MCP_ENDPOINT; its schema is introspected automatically (no schema file).
+  mcpGraph: my-federation-gateway
+
+  # Curated GraphQL operations exposed as MCP tools. The tool name is the OPERATION name in the
+  # document (e.g. "GetUser") — the operation MUST be named. Optional: the introspection / search /
+  # execute tools work without any curated operations.
+  mcpOperations:
+    - query: |
+        query GetUser($id: ID!) {
+          user(id: $id) {
+            id
+            name
+            email
+          }
+        }
+    - query: |
+        query ListProducts($first: Int = 20) {
+          products(first: $first) {
+            id
+            title
+            price
+          }
+        }
+
+  # Static headers added to EVERY upstream request to the graph (e.g. a fixed API key / service token).
+  mcpHeaders:
+    - name: X-Api-Key
+      value: replace-me-or-use-a-secret
+
+  # Additional request headers forwarded from the caller to the graph. "Authorization" is ALWAYS
+  # forwarded automatically — list extra ones here.
+  mcpForwardHeaders:
+    - name: X-Tenant-Id
+    - name: X-Request-Id
+
+  # MCP servers hold long-lived sessions — use newdeploy + minScale >= 1 (always warm, HPA-scaled).
+  scaleOptions:
+    executorType: newdeploy
+    minScale: 1
+    maxScale: 4
+    targetCpu: 70
+    minCpu: 50
+    maxCpu: 500
+    minMemory: 128
+    maxMemory: 512
+    idleTimeout: 120
+    functionTimeout: 60
+    specializationTimeout: 120
+
+# Register the MCP runtime environment in the project (once). poolSize 0 — newdeploy needs no warm pool.
+environment:
+  name: nodejs-graphql-mcp
+  image: rxdi/fission-nodejs-graphql-mcp:0.0.2
+  builder: rxdi/fission-node-builder:1.0.8
+  poolSize: 0
+  minCpu: 0
+  maxCpu: 0
+  minMemory: 0
+  maxMemory: 0
+  region: EU_CENTRAL

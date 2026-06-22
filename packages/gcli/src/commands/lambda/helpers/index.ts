@@ -44,6 +44,9 @@ export interface CreateOrUpdateLambdaArguments {
   /* Federation gateway (from lambforge.yaml `function.federation` / `function.subgraphs`) */
   federation?: boolean;
   subgraphs?: string[];
+  /* MCP server (from lambforge.yaml `function.mcp*`). Operations/headers are spec-only (yaml/json). */
+  mcp?: boolean;
+  mcpGraph?: string;
   /* Scale options */
   minCpu: number;
   maxCpu: number;
@@ -148,6 +151,12 @@ export const createOrUpdateLambda = (
             network: cmd.network || payload.network || ['public', 'private'],
             federation: cmd.federation ?? !!payload.federation,
             subgraphs: cmd.subgraphs || payload.subgraphs || [],
+            /* MCP server — operations/headers come from the spec (yaml/json); mcp/mcpGraph also accept flags */
+            mcp: cmd.mcp ?? !!payload.mcp,
+            mcpGraph: cmd.mcpGraph || payload.mcpGraph || '',
+            mcpOperations: payload.mcpOperations || [],
+            mcpHeaders: payload.mcpHeaders || [],
+            mcpForwardHeaders: payload.mcpForwardHeaders || [],
             customUploadFileId:
               cmd.customUploadFileId || payload.customUploadFileId || '',
             scaleOptions: {

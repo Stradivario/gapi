@@ -48,6 +48,19 @@ buildBashScript
 customUploadFileId
 federation
 subgraphs
+mcp
+mcpGraph
+mcpOperations {
+  name
+  query
+}
+mcpHeaders {
+  name
+  value
+}
+mcpForwardHeaders {
+  name
+}
 envSecrets
 scaleOptions {
   minCpu

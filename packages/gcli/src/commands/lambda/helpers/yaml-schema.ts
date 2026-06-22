@@ -1,3 +1,18 @@
+/* =============================================================================
+ * ⚠️  SHARED PARSER — KEEP IN SYNC ACROSS REPOS  ⚠️
+ *
+ * This is the CANONICAL copy, shipped by the @gapi/gcli CLI. The lambforge
+ * runtime images parse `lambforge.yaml` in-cluster with the SAME tags, so
+ * byte-for-byte identical copies live in the fission-node runtime (only the
+ * notice at the top of each file differs):
+ *
+ *   - fission-node/nodejs/lambforge-yaml.ts
+ *   - fission-node/nodejs-graphql/src/app/core/lambforge-yaml.ts
+ *
+ * If you change the tags or resolution logic below, port the EXACT change to
+ * those files (and vice-versa). Otherwise a spec that builds fine with the CLI
+ * will fail to parse in-cluster (`unknown tag !<!switch>`) and break the lambda.
+ * ============================================================================= */
 import {
   CORE_SCHEMA,
   defineMappingTag,
