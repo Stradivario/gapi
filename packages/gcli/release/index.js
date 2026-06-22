@@ -36183,6 +36183,19 @@ buildBashScript
 customUploadFileId
 federation
 subgraphs
+mcp
+mcpGraph
+mcpOperations {
+  name
+  query
+}
+mcpHeaders {
+  name
+  value
+}
+mcpForwardHeaders {
+  name
+}
 envSecrets
 scaleOptions {
   minCpu
@@ -284493,6 +284506,12 @@ var init_helpers2 = __esm({
               network: cmd.network || payload.network || ["public", "private"],
               federation: cmd.federation ?? !!payload.federation,
               subgraphs: cmd.subgraphs || payload.subgraphs || [],
+              /* MCP server — operations/headers come from the spec (yaml/json); mcp/mcpGraph also accept flags */
+              mcp: cmd.mcp ?? !!payload.mcp,
+              mcpGraph: cmd.mcpGraph || payload.mcpGraph || "",
+              mcpOperations: payload.mcpOperations || [],
+              mcpHeaders: payload.mcpHeaders || [],
+              mcpForwardHeaders: payload.mcpForwardHeaders || [],
               customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || "",
               scaleOptions: {
                 executorType: cmd.executorType || payload.scaleOptions?.executorType || "poolmgr",
@@ -316304,6 +316323,14 @@ function registerLambdaCommands(program2) {
     [
       "--subgraphs <subgraphs...>",
       "Lambda names (within the project) to expose as subgraphs of the federation gateway"
+    ],
+    [
+      "--mcp",
+      "Provision this lambda as an Apollo MCP Server in front of a federation graph"
+    ],
+    [
+      "--mcpGraph <mcpGraph>",
+      "Federation gateway lambda name the MCP server connects to (operations/headers via spec yaml)"
     ],
     [
       "--executorType <executorType>",
