@@ -16,6 +16,8 @@ import {
 
 import { GraphqlClienAPI } from '../../services/gql-client';
 
+const MainLambforgeAPI = 'https://api.lambforge.com';
+
 export default (cmd: {
   key: string;
   url: string;
@@ -38,15 +40,27 @@ export default (cmd: {
                     encoding: 'utf-8',
                   },
                 ),
-                promisify(writeFile)(urlDirectory, cmd.url, {
-                  encoding: 'utf-8',
-                }),
+                promisify(writeFile)(
+                  urlDirectory,
+                  cmd.url ? cmd.url : MainLambforgeAPI,
+                  {
+                    encoding: 'utf-8',
+                  },
+                ),
                 promisify(writeFile)(keyDirectory, cmd.key, {
                   encoding: 'utf-8',
                 }),
-                promisify(writeFile)(uploadUrlDirectory, cmd.uploadUrl, {
-                  encoding: 'utf-8',
-                }),
+                promisify(writeFile)(
+                  uploadUrlDirectory,
+                  cmd.uploadUrl
+                    ? cmd.uploadUrl
+                    : cmd.url
+                      ? `${cmd.url}/upload-lambda`
+                      : `${MainLambforgeAPI}/upload-lambda`,
+                  {
+                    encoding: 'utf-8',
+                  },
+                ),
               ]),
             ),
           )
