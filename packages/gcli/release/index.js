@@ -36684,7 +36684,7 @@ var login_exports = {};
 __export(login_exports, {
   default: () => login_default
 });
-var import_fs2, import_rxjs4, import_operators3, import_util2, login_default;
+var import_fs2, import_rxjs4, import_operators3, import_util2, MainLambforgeAPI, login_default;
 var init_login = __esm({
   "src/commands/auth/login.ts"() {
     import_fs2 = require("fs");
@@ -36694,6 +36694,7 @@ var init_login = __esm({
     init_log();
     init_types();
     init_gql_client();
+    MainLambforgeAPI = "https://api.lambforge.com";
     login_default = (cmd) => (0, import_rxjs4.lastValueFrom)(
       (0, import_rxjs4.of)(GraphqlClienAPI.init(cmd.key)).pipe(
         (0, import_operators3.switchMap)(
@@ -36708,15 +36709,23 @@ var init_login = __esm({
                     encoding: "utf-8"
                   }
                 ),
-                (0, import_util2.promisify)(import_fs2.writeFile)(urlDirectory, cmd.url, {
-                  encoding: "utf-8"
-                }),
+                (0, import_util2.promisify)(import_fs2.writeFile)(
+                  urlDirectory,
+                  cmd.url ? cmd.url : MainLambforgeAPI,
+                  {
+                    encoding: "utf-8"
+                  }
+                ),
                 (0, import_util2.promisify)(import_fs2.writeFile)(keyDirectory, cmd.key, {
                   encoding: "utf-8"
                 }),
-                (0, import_util2.promisify)(import_fs2.writeFile)(uploadUrlDirectory, cmd.uploadUrl, {
-                  encoding: "utf-8"
-                })
+                (0, import_util2.promisify)(import_fs2.writeFile)(
+                  uploadUrlDirectory,
+                  cmd.uploadUrl ? cmd.uploadUrl : cmd.url ? `${cmd.url}/upload-lambda` : `${MainLambforgeAPI}/upload-lambda`,
+                  {
+                    encoding: "utf-8"
+                  }
+                )
               ])
             )
           ).pipe(
