@@ -1,4 +1,4 @@
-## [1.8.233](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.233) (2026-06-26)
+## [1.8.234](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.234) (2026-07-02)
 
 
 ### Bug Fixes
@@ -73,6 +73,7 @@
 * **login:** added method which converts number to string ([f3ca052](https://github.com/Stradivario/gapi/commit/f3ca0521ebf9cca22e711c6ec4c2154f181d0694))
 * **nats:** graphql nats when subscribing to pubsub via nats was not working due to not lazy loaded graphql nats class ([d3a47ac](https://github.com/Stradivario/gapi/commit/d3a47acb2123934ee53ee85c942b9ae21f9b5b3b))
 * **nats:** updated core dependencies to fix nats request returning error which should rethrow correctly ([0ad32db](https://github.com/Stradivario/gapi/commit/0ad32db782c0f23a7eec5f189e0c3e7d45be88ac))
+* **nats:** used text encoder instead of regular to string ([2749822](https://github.com/Stradivario/gapi/commit/27498225b99c15c360109cac85249b1a99b4b0c0))
 * **network:** added ability to specify lambda purpose publicly exposed or privately exposed ([5bcb6bc](https://github.com/Stradivario/gapi/commit/5bcb6bcd838fc87c3b54ceb7dc96d56d72dc5094))
 * new api introduced with small changes ([f893e44](https://github.com/Stradivario/gapi/commit/f893e44e18fdb5c05899e06fe7397bb6852b13a1))
 * **package.json:** added @rxdi/core dependency ([76ee663](https://github.com/Stradivario/gapi/commit/76ee663d790f232fa13ae60693fe2dd1037fa0e7))
