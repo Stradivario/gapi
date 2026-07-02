@@ -38,7 +38,7 @@
     "url": "https://github.com/Stradivario/gapi/issues"
   },
   "devDependencies": {
-    "@rxdi/compressor": "^0.7.249",
+    "@rxdi/compressor": "^0.7.250",
     "@types/jest": "^25.2.1",
     "@types/node": "^25.0.3",
     "@types/node-fetch": "^2.5.7",

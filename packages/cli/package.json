@@ -36,8 +36,8 @@
   "license": "MIT",
   "dependencies": {
     "@gapi/schematics": "^1.8.233",
-    "@rxdi/compressor": "^0.7.249",
-    "@rxdi/core": "^0.7.249",
+    "@rxdi/compressor": "^0.7.250",
+    "@rxdi/core": "^0.7.250",
     "@zeit/ncc": "^0.22.1",
     "apollo-codegen": "0.20.2",
     "chalk": "2.4.2",
