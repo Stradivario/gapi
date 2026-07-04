@@ -35,6 +35,7 @@ interface ConfigJSON {
   mcpOperations?: IMcpOperationInput[];
   mcpHeaders?: IMcpHeaderInput[];
   mcpForwardHeaders?: IMcpForwardHeaderInput[];
+  cache?: boolean;
   scaleOptions?: ILambdaScaleInputOptions;
 }
 

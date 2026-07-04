@@ -62,6 +62,7 @@
     getFeatureFlag?: IFeatureFlag | null;
     listInstances?: IInstanceType | null;
     getInstance?: IInstanceType | null;
+    getAiUsageSummary?: IAiUsageSummary | null;
     listRepositories?: Array<IRepositoriesType> | null;
     getLastTemperature?: IIotTemperatureSensorData | null;
     getTemperatureHistory?: IIotTemperatureDeviceArray | null;
@@ -69,12 +70,61 @@
     listDevices?: Array<IIotDeviceType> | null;
     listFlows?: Array<IIotFlowType> | null;
     getFlow?: IIotFlowType | null;
-    listAvailableModels?: Array<string> | null;
+    /**
+    description?: PRIMARY KNOWLEDGE SEARCH TOOL.
+          Use this for ANY question about 'Who', 'What', 'Where', 'Ownership', or 'Concepts' stored in the system.
+          It uses Vector Search + GraphRAG to find nodes AND their relationships (e.g. "Who owns X").
+          Finds?: Companies, Websites, Code, Concepts, and their connections.
+          
+  */
+    search_knowledge_vector?: any | null;
+    /**
+    description?: Search THIS PROJECT'S saved memory/knowledge (Vector + GraphRAG).
+          Use for anything the user or their team saved to project memory?:
+          project-specific preferences, decisions, snippets and facts.
+          ALWAYS pass the projectId from your context. This complements
+          search_knowledge_vector, which searches the GLOBAL built-in docs.
+  */
+    search_project_memory?: any | null;
+    /**
+    description?: List ALL saved memory entries for THIS PROJECT (newest first),
+          each with its 'id', 'label' and properties. Use this to show the user
+          their project memory, or to find the 'id' of an entry you then want to
+          edit with update_project_memory or remove with delete_project_memory.
+  */
+    list_project_memory?: any | null;
+    /**
+    description?: Search the knowledge graph. You can provide either a plain-text query (e.g. "Lambda environment configurations") or a Cypher query. For plain text, it searches across node name, content, description, and text fields.
+
+  Schema?:
+  (?:User {idString})
+  (?:Chat {idString, createdAtNumber})
+  (?:Message {idString, roleString, contentString, createdAtNumber})
+  (User)-[?:OWNS]->(Chat)
+  (Chat)-[?:HAS_MESSAGE]->(Message)
+  (Message)-[?:NEXT]->(Message)
+
+  AND Dynamic Knowledge Nodes created via add_knowledge?:
+  (?:Concept {name, id}), (?:Fact {name, id}), (?:Entity {name, id}), (?:Company {name, id}), etc.
+  Relationships are dynamic.
+  Use plain text to search, or a Cypher query for advanced queries.
+  
+  */
+    search_graph?: any | null;
+    listDocumentation?: Array<IDocumentationNode> | null;
+    listAvailableModels?: Array<IAvailableModels> | null;
+    listAllowedModels?: Array<IAvailableModels> | null;
     listChats?: Array<IChat> | null;
     listChatsPerProject?: Array<IChat> | null;
     listChatMessages?: Array<IChatMessage> | null;
     getChat?: IChat | null;
     getChatByProjectId?: IChat | null;
+    listMcpTools?: Array<IMcpTool> | null;
+    listAgents?: Array<IAgent> | null;
+    listAgentTypes?: Array<IAgentTypeInfo> | null;
+    getAgent?: IAgent | null;
+    getAgentTask?: IAgentTask | null;
+    listAgentTasks?: Array<IAgentTask> | null;
     stripeConfiguration?: IStripeConfiguration | null;
     paymentMethods?: IPaymentMethodResponse | null;
     getLambdaEditors?: Array<IUserType> | null;
@@ -95,9 +145,14 @@
     getAvailableLogDates?: Array<IAvailableLogDates> | null;
     getRouterUrl?: IFissionType | null;
     listProjectLambdas?: Array<IFissionType> | null;
+    /**
+    description?: Introspect a federation graph (by graphName, via the internal router) or an arbitrary GraphQL endpoint (endpointUrl) and generate one candidate MCP operation per root field. Powers the operations browser when configuring an MCP lambda. Provide authToken if the endpoint requires authentication to introspect.
+  */
+    listGraphOperations?: Array<IGeneratedMcpOperationType> | null;
     listMyLambdas?: Array<IFissionType> | null;
     getLambda?: IFissionType | null;
     getLambdaByName?: IFissionType | null;
+    lambdaCodeDocs?: Array<ILambdaDocChunk> | null;
     getConfigMap?: IKubectlConfig | null;
     getConfigMapById?: IKubectlConfig | null;
     listProjectConfigs?: Array<IKubectlConfig> | null;
@@ -117,6 +172,9 @@
     getFunctionColdStarts?: IPrometheusData | null;
     getFunctionStatistics?: ILambdaFunctionStatistics | null;
     getAccumulatedPricing?: Array<ICostEstimateResult> | null;
+    getProjectEntitlement?: IProjectEntitlement | null;
+    listTierEntitlements?: Array<IProjectEntitlement> | null;
+    listProjectOverrides?: Array<IProjectEntitlement> | null;
     getFormByName?: IFormDefinition | null;
     getInvoice?: IInvoice | null;
     listInvoices?: Array<IInvoice> | null;
@@ -131,6 +189,42 @@
     getResourceLimitAlerts?: Array<IResourceLimitAlert> | null;
     listAllInvoices?: Array<IInvoice> | null;
     listAllUsers?: Array<IUser> | null;
+    /**
+    description?: Describe this code sandbox. Returns a JSON string with its capabilities, the two code contracts an agent may follow (snippet mode?: async function body + `return`; project mode?: a virtual filesystem of `files` run as ES modules + `export default`), the available host tools, and the enforced resource limits. Call this before executeCode to learn how to format code.
+  */
+    metadata?: string | null;
+    /**
+    description?: List the project's deployed lambdas so you can pick one to import. Each item's `source` tells you how importLambda will virtualize it?: 'archive' (a customUploadFileId .zip) or 'code' (its code/packageJson/buildBashScript fields as files). Requires the "s3" persistence backend.
+  */
+    listLambdas?: Array<ILambdaSummary>;
+    /**
+    description?: List every persistent workspace directory in a project, most-recently created first — use this to recover a `workdir` name you lost track of (there is no other server-side index). Returns each workdir name + when it was created; then inspect one with listFiles/getFile. Requires workspace persistence to be enabled.
+  */
+    listWorkdirs?: Array<IWorkdirSummary>;
+    /**
+    description?: List the files stored in a persistent workspace (path/size/lastModified — no content; use getFile to read one). Requires workspace persistence to be enabled.
+  */
+    listFiles?: Array<IWorkspaceFile>;
+    /**
+    description?: Read one file (content included) from a persistent workspace; null when it does not exist. Requires workspace persistence to be enabled.
+  */
+    getFile?: IWorkspaceFile | null;
+    /**
+    description?: Bulk read?: the contents of many (or ALL) workspace files in one call — use this instead of repeated getFile when hydrating a whole workspace. Missing paths are skipped. Requires workspace persistence to be enabled.
+  */
+    getFiles?: Array<IWorkspaceFile>;
+    /**
+    description?: List the project's published archives (from publishProject), newest first — the deploy history. Retention is two-tier?: the newest few per workspace (WORKSPACE_ARTIFACT_RETENTION, default 4) and at most WORKSPACE_PROJECT_ARTIFACT_RETENTION per project (default 30); archives a lambda deploys from are never pruned. Older entries double as rollback points?: pass an entry's customUploadFileId to the lambda update flow to redeploy that version. Requires the "s3" persistence backend.
+  */
+    listArtifacts?: Array<IWorkspaceArtifact>;
+    /**
+    description?: List a project's saved plans (the Documents section), most-recently updated first. Each item's `content` is null — read one with getPlan. Optionally filter by status. Requires the "s3" persistence backend.
+  */
+    listPlans?: Array<IPlan>;
+    /**
+    description?: Read one saved plan, markdown `content` included. Scoped to the project. Requires the "s3" persistence backend.
+  */
+    getPlan?: IPlan | null;
 }
 
   
@@ -661,7 +755,7 @@ export
 }
 
 export   
-  type UnionMessagesType = IProjectNotifications | IMachineNotifications;
+  type UnionMessagesType = IProjectNotifications | IMachineNotifications | IQuotaNotifications;
 
 
 
@@ -725,6 +819,39 @@ export
 }
 
   
+  export interface IQuotaNotifications {
+    __typename?: "QuotaNotifications";
+    projectName?: string | null;
+    projectId?: string | null;
+    message?: QuotaNotificationsDataUnion | null;
+}
+
+export   
+  type QuotaNotificationsDataUnion = IQuotaNotificationsExceeded | IQuotaNotificationsApproaching;
+
+
+
+  
+  export interface IQuotaNotificationsExceeded {
+    __typename?: "QuotaNotificationsExceeded";
+    kind?: string | null;
+    severity?: string | null;
+    resource?: string | null;
+    summary?: string | null;
+    description?: string | null;
+}
+
+  
+  export interface IQuotaNotificationsApproaching {
+    __typename?: "QuotaNotificationsApproaching";
+    resource?: string | null;
+    severity?: string | null;
+    usedPercent?: string | null;
+    summary?: string | null;
+    description?: string | null;
+}
+
+  
   export interface IStackscriptType {
     __typename?: "StackscriptType";
     id?: number | null;
@@ -775,6 +902,20 @@ export
 }
 
   
+  export interface IAiUsageSummary {
+    __typename?: "AiUsageSummary";
+    projectId?: string | null;
+    allowAiChat?: boolean | null;
+    allowedAiProviders?: Array<string> | null;
+    dailyUsed?: number | null;
+    dailyLimit?: number | null;
+    weeklyUsed?: number | null;
+    weeklyLimit?: number | null;
+    monthlyUsed?: number | null;
+    monthlyLimit?: number | null;
+}
+
+  
   export interface IIotTemperatureSensorData {
     __typename?: "IotTemperatureSensorData";
     createdAt?: string | null;
@@ -819,6 +960,25 @@ export
 }
 
   
+  export interface IDocumentationNode {
+    __typename?: "DocumentationNode";
+    id?: string | null;
+    name?: string | null;
+    title?: string | null;
+    content?: string | null;
+    source?: string | null;
+    createdAt?: number | null;
+    updatedAt?: number | null;
+}
+
+  
+  export interface IAvailableModels {
+    __typename?: "AvailableModels";
+    value?: string | null;
+    label?: string | null;
+}
+
+  
   export interface IChat {
     __typename?: "Chat";
     id?: string | null;
@@ -827,6 +987,7 @@ export
     participants?: Array<IUserType> | null;
     messages?: Array<IChatMessage> | null;
     attachments?: Array<IGraphqlFile> | null;
+    activeRun?: IChatRun | null;
 }
 
   
@@ -839,7 +1000,22 @@ export
     chatId?: string | null;
     chat?: IChat | null;
     thoughts?: Array<string> | null;
+    model?: string | null;
+    createdAt?: string | null;
     usageMetadata?: IUsageMetadataOutput | null;
+    parentMessageId?: string | null;
+    /**
+    description?: True when this message is a sub-agent (worker) result produced by spawnAgent — the UI renders it as a compact task card, not a bubble
+  */
+    worker?: boolean | null;
+    /**
+    description?: Agent type of the worker (LAMBDA, PLAN, CHAT)
+  */
+    workerType?: string | null;
+    /**
+    description?: The task prompt the worker was spawned with
+  */
+    workerPrompt?: string | null;
     attachments?: Array<IGraphqlFile> | null;
 }
 
@@ -850,6 +1026,124 @@ export
     candidatesTokenCount?: number | null;
     totalTokenCount?: number | null;
     cachedContentTokenCount?: number | null;
+}
+
+  
+  export interface IChatRun {
+    __typename?: "ChatRun";
+    chatId?: string;
+    status?: string;
+    modelName?: string | null;
+    thoughts?: Array<string> | null;
+    startedAt?: string | null;
+}
+
+  
+  export interface IMcpTool {
+    __typename?: "McpTool";
+    /**
+    description?: MCP tool name (the GraphQL operation name)
+  */
+    name?: string | null;
+    /**
+    description?: Short tool description reported by the MCP server
+  */
+    description?: string | null;
+}
+
+  
+  export interface IAgent {
+    __typename?: "Agent";
+    /**
+    description?: Unique identifier for the agent
+  */
+    id?: string | null;
+    /**
+    description?: Human-readable agent name
+  */
+    name?: string | null;
+    /**
+    description?: Agent type slug — an uppercase identifier such as LAMBDA, PLAN, CHAT, AUTO, FINANCE, PLUGINS. Free-form so new specialized worker types can be created from the admin panel
+  */
+    type?: string | null;
+    /**
+    description?: One-line summary of what this agent specializes in — shown in the chat mode selector and given to the AUTO orchestrator so it can pick the right worker
+  */
+    description?: string | null;
+    /**
+    description?: System prompt / instructions given to the agent
+  */
+    instructions?: string | null;
+    /**
+    description?: List of MCP tool names available to this agent
+  */
+    tools?: Array<string> | null;
+    /**
+    description?: Whether this agent is currently active
+  */
+    isActive?: boolean | null;
+    /**
+    description?: Optional AI model override for this agent
+  */
+    modelName?: string | null;
+    /**
+    description?: Timestamp when the agent was created
+  */
+    createdAt?: number | null;
+    /**
+    description?: Timestamp when the agent was last updated
+  */
+    updatedAt?: number | null;
+}
+
+  
+  export interface IAgentTypeInfo {
+    __typename?: "AgentTypeInfo";
+    /**
+    description?: Agent type slug (LAMBDA, PLAN, CHAT, AUTO, ...)
+  */
+    type?: string | null;
+    /**
+    description?: Human-readable agent name
+  */
+    name?: string | null;
+    /**
+    description?: One-line summary of what this agent specializes in
+  */
+    description?: string | null;
+}
+
+  
+  export interface IAgentTask {
+    __typename?: "AgentTask";
+    /**
+    description?: Chat conversation ID
+  */
+    chatId?: string | null;
+    /**
+    description?: Unique task identifier
+  */
+    taskId?: string | null;
+    /**
+    description?: Message ID associated with the task
+  */
+    messageId?: string | null;
+    /**
+    description?: Task status?: running, completed, cancelled, or error
+  */
+    status?: string | null;
+    /**
+    description?: Current reasoning/thought from the running agent
+  */
+    thought?: string | null;
+    /**
+    description?: Final result summary when completed
+  */
+    summary?: string | null;
+    /**
+    description?: ISO timestamp when the task started
+  */
+    startedAt?: string | null;
 }
 
   
@@ -973,6 +1267,31 @@ export
       
   */
     poolSize?: number | null;
+    /**
+    description?: 
+      Hard cap on the TOTAL number of "poolmgr" pods this environment may have at once?:
+      the warm pool (poolSize) plus every specialized (function) pod across all functions in it.
+      Once the cap is reached the executor refuses to specialize a new pod and the invocation
+      fails fast with HTTP 429 instead of provisioning more pods. This prevents a flood of
+      invocations (e.g. a misconfigured KEDA/message-queue trigger) from provisioning unbounded
+      pods and exhausting the cluster.
+      0 (the default) means unlimited. Only applies to "poolmgr" functions ("newdeploy" is already
+      bounded by its own HPA maxScale). Should be >= poolSize.
+      
+  */
+    maxPods?: number | null;
+    /**
+    description?: Maximum number of builder pods for this environment. Builder pods are provisioned on demand (one per concurrent build) up to this cap, then scaled back to zero when idle. Building one lambda uses one pod regardless of this value. Default is 1
+  */
+    builderPoolSize?: number | null;
+    /**
+    description?: Builds a single builder pod will accept (MAX_PARALLEL_BUILDS). Default is 1 (one build per pod); independent of builderPoolSize
+  */
+    builderMaxParallelBuilds?: number | null;
+    /**
+    description?: Seconds a builder pod stays up after its last build before scaling to zero. 0 = never scale down. Default is 600 (10 minutes)
+  */
+    builderIdleTimeout?: number | null;
     maxCpu?: number | null;
     maxMemory?: number | null;
     minCpu?: number | null;
@@ -1096,7 +1415,7 @@ export
               status?: 200,
               body?: 'Hello, world!',
               headers?: {
-                'Access-Control-Allow-Origin'?: 'https?://graphql-server.com',
+                'Access-Control-Allow-Origin'?: 'https?://lambforge.com',
               },
             };
           };
@@ -1248,6 +1567,30 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
   */
     subgraphs?: Array<string> | null;
     /**
+    description?: When true this lambda is provisioned as an MCP Server in front of a federation graph
+  */
+    mcp?: boolean | null;
+    /**
+    description?: Name of the federation gateway lambda the MCP server connects to
+  */
+    mcpGraph?: string | null;
+    /**
+    description?: Curated GraphQL operations exposed as MCP tools
+  */
+    mcpOperations?: Array<IMcpOperationType> | null;
+    /**
+    description?: Static headers added to every request the MCP server makes to the federation endpoint
+  */
+    mcpHeaders?: Array<IMcpHeaderType> | null;
+    /**
+    description?: Additional request headers forwarded from the caller to the federation endpoint (Authorization is always forwarded)
+  */
+    mcpForwardHeaders?: Array<IMcpForwardHeaderType> | null;
+    /**
+    description?: Enable Cloudflare CDN caching for this lambda. When enabled, responses will be cached at Cloudflare's edge network, reducing origin requests and improving latency for repeated requests.
+  */
+    cache?: boolean | null;
+    /**
     description?: 
         Default scale options for "poolmgr" are these and are defined in JSON 
         {
@@ -1326,6 +1669,26 @@ export
     __typename?: "GraphqlLambdaFile";
     id?: string | null;
     url?: string | null;
+}
+
+  
+  export interface IMcpOperationType {
+    __typename?: "McpOperationType";
+    name?: string | null;
+    query?: string | null;
+}
+
+  
+  export interface IMcpHeaderType {
+    __typename?: "McpHeaderType";
+    name?: string | null;
+    value?: string | null;
+}
+
+  
+  export interface IMcpForwardHeaderType {
+    __typename?: "McpForwardHeaderType";
+    name?: string | null;
 }
 
   
@@ -1426,6 +1789,42 @@ export
     __typename?: "LambdaLogs";
     builder?: IFissionLogsType | null;
     function?: IFissionLogsType | null;
+}
+
+  
+  export interface IGeneratedMcpOperationType {
+    __typename?: "GeneratedMcpOperationType";
+    /**
+    description?: PascalCase root field name — becomes the MCP tool name.
+  */
+    name?: string | null;
+    /**
+    description?: The root field this operation targets.
+  */
+    rootField?: string | null;
+    /**
+    description?: "query" or "mutation".
+  */
+    kind?: string | null;
+    /**
+    description?: The complete, named GraphQL operation document.
+  */
+    query?: string | null;
+    /**
+    description?: Field description from the schema, if any.
+  */
+    description?: string | null;
+}
+
+  
+  export interface ILambdaDocChunk {
+    __typename?: "LambdaDocChunk";
+    name?: string | null;
+    title?: string | null;
+    content?: string | null;
+    category?: string | null;
+    keywords?: string | null;
+    relatedTo?: Array<string> | null;
 }
 
   
@@ -1741,6 +2140,53 @@ export
 }
 
   
+  export interface IProjectEntitlement {
+    __typename?: "ProjectEntitlement";
+    scope?: string | null;
+    tierId?: string | null;
+    projectId?: string | null;
+    maxEnvironments?: number | null;
+    maxFunctions?: number | null;
+    maxWarmPools?: number | null;
+    maxNewDeployFunctions?: number | null;
+    maxReplicasPerFunction?: number | null;
+    maxStorageGb?: number | null;
+    maxMemoryMb?: number | null;
+    maxCpuCores?: number | null;
+    maxFunctionTimeout?: number | null;
+    maxSpecializationTimeout?: number | null;
+    maxConcurrency?: number | null;
+    maxRequestsPerPod?: number | null;
+    allowedBuilderImages?: Array<string> | null;
+    allowedRunnerImages?: Array<string> | null;
+    maxPoolSize?: number | null;
+    maxEnvironmentPods?: number | null;
+    maxBuilderPoolSize?: number | null;
+    maxBuilderParallelBuilds?: number | null;
+    maxBuilderIdleTimeout?: number | null;
+    allowHttpTriggers?: boolean | null;
+    allowCronTriggers?: boolean | null;
+    allowMqTriggers?: boolean | null;
+    allowEventTriggers?: boolean | null;
+    allowRabbitMqConnector?: boolean | null;
+    allowMongoAtlasConnector?: boolean | null;
+    allowPostgresConnector?: boolean | null;
+    allowRedisConnector?: boolean | null;
+    allowMarketplace?: boolean | null;
+    allowedMarketplaceCategories?: Array<string> | null;
+    allowedMarketplaceApps?: Array<string> | null;
+    deniedMarketplaceApps?: Array<string> | null;
+    allowCiCdTokens?: boolean | null;
+    maxCiCdTokens?: number | null;
+    allowAiChat?: boolean | null;
+    allowedAiProviders?: Array<string> | null;
+    dailyAiTokenQuota?: number | null;
+    weeklyAiTokenQuota?: number | null;
+    monthlyAiTokenQuota?: number | null;
+    customFeatures?: any | null;
+}
+
+  
   export interface IFormDefinition {
     __typename?: "FormDefinition";
     name?: string | null;
@@ -1773,13 +2219,15 @@ export
     visibleWhen?: IFieldDependency | null;
     disabled?: boolean | null;
     autoDefault?: boolean | null;
+    toggle?: boolean | null;
     disabledWhen?: IFieldDependency | null;
     bindWith?: IFieldBindWith | null;
     layout?: string | null;
+    step?: number | null;
 }
 
 export   
-  type IFormInputTypeEnum = 'text' | 'number' | 'password' | 'email' | 'select' | 'array' | 'textarea' | 'json' | 'bash' | 'code' | 'dropdown' | 'object' | 'checkbox' | 'radio';
+  type IFormInputTypeEnum = 'text' | 'number' | 'password' | 'email' | 'select' | 'array' | 'textarea' | 'json' | 'bash' | 'code' | 'dropdown' | 'object' | 'checkbox' | 'radio' | 'mcp_operations';
 
   
   export interface IFormFieldValidator {
@@ -1888,6 +2336,7 @@ export
     id?: string | null;
     name?: string | null;
     ownerEmail?: string | null;
+    projectId?: string | null;
     tierName?: string | null;
     lambdaCount?: string | null;
     suspended?: string | null;
@@ -1931,6 +2380,200 @@ export
     scopes?: Array<string> | null;
 }
 
+  /**
+    description?: One deployed lambda in a project (from listLambdas). `source` tells you how importLambda will virtualize it?: 'archive' (a customUploadFileId .zip) or 'code' (the code/packageJson/buildBashScript fields).
+  */
+  export interface ILambdaSummary {
+    __typename?: "LambdaSummary";
+    /**
+    description?: The lambda document id.
+  */
+    id?: string;
+    /**
+    description?: Pass this as importLambda(lambdaName).
+  */
+    name?: string;
+    route?: string | null;
+    /**
+    description?: 'archive' when the lambda has a customUploadFileId (.zip), else 'code'.
+  */
+    source?: string;
+    /**
+    description?: The uploaded-archive file id, when the lambda has one.
+  */
+    customUploadFileId?: string | null;
+    deployStatus?: string | null;
+    /**
+    description?: The lambda environment/runtime.
+  */
+    runtime?: string | null;
+    federation?: boolean | null;
+    mcp?: boolean | null;
+}
+
+  /**
+    description?: One persistent workspace directory in a project (from listWorkdirs), most-recently created first. Use this to recover a `workdir` name you lost track of, then target it with listFiles/getFile/writeFile/executeCode/publishProject.
+  */
+  export interface IWorkdirSummary {
+    __typename?: "WorkdirSummary";
+    /**
+    description?: The workspace directory name, e.g. "ws-1f2e3d4c5b6a7089". Pass it as `workdir` in later calls.
+  */
+    workdir?: string;
+    /**
+    description?: ISO timestamp the workdir was minted, when tracked.
+  */
+    createdAt?: string | null;
+    /**
+    description?: Set when the workspace was seeded from a deployed lambda via importLambda — the natural target for re-deploying a publishProject artifact.
+  */
+    origin?: IWorkspaceOrigin | null;
+}
+
+  /**
+    description?: Provenance of a workspace that was seeded from a deployed lambda (importLambda). Lets a client offer "re-deploy to the origin lambda" after publishProject?: attach the published customUploadFileId to this lambda and redeploy. Reflects the LAST import into the workdir.
+  */
+  export interface IWorkspaceOrigin {
+    __typename?: "WorkspaceOrigin";
+    /**
+    description?: Mongo `lambda` document id, when the import was resolved by lambdaName.
+  */
+    lambdaId?: string | null;
+    /**
+    description?: The deployed lambda the workspace was imported from.
+  */
+    lambdaName?: string | null;
+    /**
+    description?: Mongo `file` id of the unpacked archive (archive source only).
+  */
+    fileId?: string | null;
+    /**
+    description?: How the lambda was virtualized into the workspace?: 'archive' or 'code'.
+  */
+    source?: string | null;
+    /**
+    description?: ISO timestamp of the import.
+  */
+    importedAt?: string | null;
+}
+
+  /**
+    description?: One file in a persistent workspace (projects/<projectId>/<workdir>/<path>).
+  */
+  export interface IWorkspaceFile {
+    __typename?: "WorkspaceFile";
+    /**
+    description?: Path relative to the workdir root, e.g. "lib/math.js".
+  */
+    path?: string;
+    /**
+    description?: Content size in bytes (UTF-8).
+  */
+    size?: number | null;
+    /**
+    description?: ISO timestamp of the last write, when the backend tracks one.
+  */
+    lastModified?: string | null;
+    /**
+    description?: The file content. Populated by getFile and writeFile; null in listFiles (fetch files individually to read them).
+  */
+    content?: string | null;
+    /**
+    description?: Paths that were NOT persisted because they exceeded the per-file size limit. Present on writeFile when the quota is hit.
+  */
+    skippedFiles?: Array<string>;
+}
+
+  /**
+    description?: One published archive of a workspace (from listArtifacts), newest first. publishProject prunes on two tiers — per workspace (WORKSPACE_ARTIFACT_RETENTION, default 4) and per project overall (WORKSPACE_PROJECT_ARTIFACT_RETENTION, default 30) — except archives a lambda currently deploys from. Redeploy an older one by passing its `customUploadFileId` to the lambda update flow.
+  */
+  export interface IWorkspaceArtifact {
+    __typename?: "WorkspaceArtifact";
+    /**
+    description?: Mongo `file` id — pass to the lambda create/update flow to deploy this exact archive.
+  */
+    customUploadFileId?: string;
+    /**
+    description?: S3 object key of the zip.
+  */
+    key?: string | null;
+    bucket?: string | null;
+    /**
+    description?: Zip size in bytes.
+  */
+    bytes?: number | null;
+    /**
+    description?: SHA-256 of the zip.
+  */
+    sha256?: string | null;
+    /**
+    description?: The artifact name it was published under.
+  */
+    lambdaName?: string | null;
+    /**
+    description?: The workspace it was published from.
+  */
+    workdir?: string | null;
+    /**
+    description?: ISO timestamp of the publish.
+  */
+    createdAt?: string | null;
+    /**
+    description?: Set when a lambda currently deploys from this archive — its document id.
+  */
+    attachedLambdaId?: string | null;
+    /**
+    description?: Name of the lambda currently deploying from this archive.
+  */
+    attachedLambdaName?: string | null;
+}
+
+  /**
+    description?: A saved plan document for a project (a `file` doc with additionalMetadata.kind="plan", stored under plans/<projectId>/<planId>.md). Listed in the Documents section and related to the chat that produced it. `content` is populated by getPlan; null in listPlans.
+  */
+  export interface IPlan {
+    __typename?: "Plan";
+    /**
+    description?: The plan's Mongo `file` id — pass to getPlan/updatePlan.
+  */
+    planId?: string;
+    /**
+    description?: Human title shown in the Documents list.
+  */
+    title?: string;
+    /**
+    description?: Lifecycle?: 'draft' | 'polished' | 'feature' ('feature' = the user saved it as a tracked feature).
+  */
+    status?: string;
+    /**
+    description?: The chat that produced the plan, when saved with one.
+  */
+    chatId?: string | null;
+    /**
+    description?: Bumped each time the content is updated.
+  */
+    version?: number | null;
+    /**
+    description?: The plan markdown. Populated by getPlan/savePlan-input; null in listPlans (fetch one with getPlan).
+  */
+    content?: string | null;
+    /**
+    description?: Content size in bytes (UTF-8).
+  */
+    bytes?: number | null;
+    /**
+    description?: SHA-256 of the content.
+  */
+    sha256?: string | null;
+    /**
+    description?: S3 object key (plans/<projectId>/<planId>.md).
+  */
+    key?: string | null;
+    bucket?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+}
+
   
   export interface IMutation {
     __typename?: "Mutation";
@@ -1967,6 +2610,10 @@ export
     removeProjectMember?: IUserType | null;
     deleteProject?: IProjectType | null;
     updateProjectTier?: IProjectType | null;
+    createProjectTier?: IProjectTierType | null;
+    updateProjectTierFields?: IProjectTierType | null;
+    setDefaultProjectTier?: IProjectTierType | null;
+    deleteProjectTier?: boolean | null;
     createUser?: IUserType | null;
     generateCustomToken?: IUserCustomTokenType | null;
     createFirebaseUser?: IUserType | null;
@@ -1984,7 +2631,6 @@ export
     stopSession?: ISessionType | null;
     generateCLIToken?: ICLITokenType | null;
     revokeCLIToken?: ICLITokenType | null;
-    publishSignal?: IGenericReturn | null;
     readNotification?: INotifications | null;
     createStackScript?: IStackscriptType | null;
     createLinode?: ILinodeInstanceType | null;
@@ -2010,16 +2656,68 @@ export
     createFlow?: IIotFlowType | null;
     setFlowArguments?: IIotFlowType | null;
     updateFlow?: IIotFlowType | null;
+    /**
+    description?: Add a new node to the knowledge graph.
+          Use this to PROACTIVELY save useful information, especially?:
+          1. **Code Snippets**?: If the user says "I like this code", save it as a 'CodeSnippet'.
+          2. **Notes**?: General facts or preferences.
+          3. **Concepts**?: Abstract ideas or definitions.
+
+          Common labels?: CodeSnippet, Note, Concept, Document.
+          IMPORTANT?: An 'id' (UUID) is automatically generated if not provided.
+          Recommended?: Always provide a 'name' property for easier human-readable search.
+          Auto-Embedding?: The content will be automatically embedded for vector search.
+          
+  */
+    add_knowledge?: any | null;
+    /**
+    description?: Save a fact/snippet/preference to THIS PROJECT'S shared memory
+          (visible to everyone with access to the project).
+          Use this CONSERVATIVELY — only when the user explicitly asks to remember
+          something, praises code YOU generated, or states a durable
+          project-specific decision/preference clearly worth recalling later.
+          ASK before saving unless the user already told you to. ALWAYS pass the
+          projectId from your context. (Global knowledge is admin-only.)
+  */
+    save_project_memory?: any | null;
+    /**
+    description?: Edit/adjust an existing project memory entry by id. Use this to
+          correct or refine something already saved (e.g. fix a fact, reword a
+          note). Find the id first via list_project_memory or search_project_memory.
+  */
+    update_project_memory?: any | null;
+    /**
+    description?: Delete a project memory entry by id. This is DESTRUCTIVE —
+          ALWAYS confirm with the user before calling it. Find the id first via
+          list_project_memory or search_project_memory.
+  */
+    delete_project_memory?: any | null;
+    /**
+    description?: Create a relationship between two nodes in the knowledge graph.
+          Use this to link concepts, e.g. (Company)-[?:OWNS]->(Website).
+          Nodes are identified by their 'id' OR 'name' property.
+          
+  */
+    create_relationship?: any | null;
+    seed_lambda_docs?: any | null;
+    addDocumentation?: IDocumentationNode | null;
+    updateDocumentation?: IDocumentationNode | null;
+    deleteDocumentation?: boolean | null;
     createChatAssistant?: IChat | null;
     sendChatAssistantMessage?: IChatMessage | null;
     createCompletionGemini?: ICreateCompletionGeminiType | null;
     createCompletionLambdasGemini?: ICreateCompletionGeminiType | null;
+    stopChatRun?: IGenericReturn | null;
     setAiOptimizationConfig?: IAiOptimizationConfigType | null;
     createChat?: IChat | null;
     addChatMember?: IChat | null;
     removeChatMember?: IChat | null;
     deleteChat?: IChat | null;
     sendChatMessage?: IChatMessage | null;
+    createAgent?: IAgent | null;
+    updateAgent?: IAgent | null;
+    deleteAgent?: boolean | null;
+    spawnAgent?: ISpawnAgentResponse | null;
     createPaymentIntent?: ICreatePaymentIntent | null;
     createSetupIntent?: ICreateSetupIntent | null;
     setDefaultPaymentMethod?: ISetDefaultPaymentMethodResponse | null;
@@ -2081,11 +2779,54 @@ export
     allowNamespaceAccess?: IKubectlNamespace | null;
     revokeNamespaceAccess?: IKubectlNamespace | null;
     deleteNetworkPolicy?: IKubectlNamespace | null;
+    updateTierEntitlement?: IProjectEntitlement | null;
+    setProjectEntitlementOverride?: IProjectEntitlement | null;
+    removeProjectEntitlementOverride?: boolean | null;
     generateInvoice?: IInvoice | null;
     updateInvoiceStatus?: IInvoice | null;
     installPlugin?: IInstalledPlugin | null;
     uninstallPlugin?: string | null;
     updateProjectTierAdmin?: string | null;
+    /**
+    description?: Run JavaScript in a fresh, isolated, resource-limited QuickJS (WASM) sandbox and return its result, console output, timing and any error. Supports a per-run in-memory virtual filesystem (multi-file ES modules + node?:fs via options.files) and Programmatic Tool Calling via the awaitable `tools.*` namespace. Built for AI agents to write and verify code before deploying it. Stateless by default (nothing persisted between calls); with workspace persistence enabled, options.projectId + options.workdir target a durable server-side workspace instead (call the metadata query for the contract).
+  */
+    executeCode?: IExecutionResult | null;
+    /**
+    description?: Destroy an entire persistent workspace (all files + the marker), INCLUDING its published archives — except any archive a lambda currently deploys from, which survives as rollback history. Returns false when the workdir was already gone. Requires workspace persistence to be enabled.
+  */
+    deleteWorkspace?: boolean | null;
+    /**
+    description?: Mint a fresh, empty, persistent workspace directory for a project and return its random `workdir` name. Track that name in your conversation — files written under it survive across executeCode calls, pods and chat sessions (when the s3 backend is active). Requires workspace persistence to be enabled (WORKSPACE_PERSISTENCE=s3|memory); the default deployment is stateless.
+  */
+    createWorkdir?: IWorkdir | null;
+    /**
+    description?: Create or update one file in a persistent workspace without re-sending the rest of the project. Quota-limited per file and per workspace. Requires workspace persistence to be enabled.
+  */
+    writeFile?: IWorkspaceFile | null;
+    /**
+    description?: Delete one file from a persistent workspace; returns false when it did not exist. Requires workspace persistence to be enabled.
+  */
+    deleteFile?: boolean | null;
+    /**
+    description?: Zip a verified workspace as-is, upload it to the artifacts prefix, and mint the `customUploadFileId` the lambda-creation flow deploys verbatim. Requires the "s3" persistence backend.
+  */
+    publishProject?: IPublishedProjectArtifact | null;
+    /**
+    description?: Import a DEPLOYED lambda into a workspace so you can edit it and re-publish — the inverse of publishProject. Handles BOTH kinds?: an archive lambda (customUploadFileId .zip) is unzipped; a regular code lambda is virtualized as index.js/package.json/build.sh from its code/packageJson/buildBashScript fields. The returned `source` says which. Give lambdaName (from listLambdas) or fileId; omit workdir for a fresh one. Then edit with writeFile/executeCode and publishProject for a new customUploadFileId. Requires the "s3" persistence backend.
+  */
+    importLambda?: IImportedLambda | null;
+    /**
+    description?: Save a plan as a durable document (a `file` doc under plans/<projectId>/, related to the chat). Defaults to status 'draft'. Returns the plan summary (no content). Requires the "s3" persistence backend.
+  */
+    savePlan?: IPlan | null;
+    /**
+    description?: Update a saved plan's content, title and/or status (at least one). A content change bumps its version; set status to 'feature' to save it as a feature. Scoped to the project. Requires the "s3" persistence backend.
+  */
+    updatePlan?: IPlan | null;
+    /**
+    description?: Delete a saved plan by id. Removes the S3 object and the Mongo `file` document. Scoped to the project. Requires the "s3" persistence backend.
+  */
+    deletePlan?: boolean | null;
 }
 
   
@@ -2281,6 +3022,55 @@ export
 }
 
   
+  export interface IProjectTierInput {
+    name: string;
+    price?: number | null;
+    currency?: string | null;
+    description?: string | null;
+    isDefault?: boolean | null;
+    quotas?: IProjectTierQuotasInput | null;
+    limits?: IProjectTierLimitsInput | null;
+}
+
+  
+  export interface IProjectTierQuotasInput {
+    pods?: string | null;
+    services?: string | null;
+    configmaps?: string | null;
+    secrets?: string | null;
+    requestsCpu?: string | null;
+    requestsMemory?: string | null;
+    limitsCpu?: string | null;
+    limitsMemory?: string | null;
+}
+
+  
+  export interface IProjectTierLimitsInput {
+    container?: IProjectTierContainerLimitsInput | null;
+}
+
+  
+  export interface IProjectTierContainerLimitsInput {
+    maxCpu?: string | null;
+    maxMemory?: string | null;
+    defaultCpu?: string | null;
+    defaultMemory?: string | null;
+    defaultRequestCpu?: string | null;
+    defaultRequestMemory?: string | null;
+}
+
+  
+  export interface IProjectTierUpdateInput {
+    name?: string | null;
+    price?: number | null;
+    currency?: string | null;
+    description?: string | null;
+    isDefault?: boolean | null;
+    quotas?: IProjectTierQuotasInput | null;
+    limits?: IProjectTierLimitsInput | null;
+}
+
+  
   export interface IUserCustomTokenType {
     __typename?: "UserCustomTokenType";
     /**
@@ -2306,12 +3096,6 @@ export
     token?: string | null;
     user_id?: string | null;
     active?: boolean | null;
-}
-
-  
-  export interface IGenericReturn {
-    __typename?: "GenericReturn";
-    status?: string | null;
 }
 
   
@@ -2351,6 +3135,12 @@ export
 
 export   
   type IInstanceCommandsEnum = 'START_VS_CODE' | 'REMOVE_VS_CODE' | 'CLONE_PROJECT' | 'REMOVE_PROJECT';
+
+  
+  export interface IGenericReturn {
+    __typename?: "GenericReturn";
+    status?: string | null;
+}
 
   
   export interface IRemoveVsCodeInputArguments {
@@ -2409,6 +3199,16 @@ export
 }
 
   
+  export interface ILambdaDocChunkInput {
+    name: string;
+    title: string;
+    content: string;
+    category?: string | null;
+    keywords?: string | null;
+    relatedTo?: Array<string> | null;
+}
+
+  
   export interface IChatPayload {
     name: string;
     participants?: Array<string> | null;
@@ -2421,6 +3221,8 @@ export
     content?: string | null;
     model?: string | null;
     attachments?: Array<string> | null;
+    revertMessageId?: string | null;
+    agentType?: string | null;
 }
 
   
@@ -2537,6 +3339,119 @@ export
 }
 
   
+  export interface ICreateAgentInput {
+    /**
+    description: Human-readable agent name
+  */
+    name: string;
+    /**
+    description: Agent type slug — uppercase identifier (letters, digits, underscores), e.g. LAMBDA, PLAN, CHAT, AUTO, FINANCE, PLUGINS, MQ, TIME_TRIGGERS
+  */
+    type: string;
+    /**
+    description: One-line summary of what this agent specializes in — shown in the chat mode selector and used by the AUTO orchestrator
+  */
+    description?: string | null;
+    /**
+    description: System prompt / instructions for the agent
+  */
+    instructions: string;
+    /**
+    description: List of MCP tool names available to this agent
+  */
+    tools?: Array<string> | null;
+    /**
+    description: Whether the agent is active
+  */
+    isActive?: boolean | null;
+    /**
+    description: Optional AI model override
+  */
+    modelName?: string | null;
+}
+
+  
+  export interface IUpdateAgentInput {
+    /**
+    description: Human-readable agent name
+  */
+    name?: string | null;
+    /**
+    description: Agent type slug — uppercase identifier (letters, digits, underscores), e.g. LAMBDA, PLAN, CHAT, AUTO, FINANCE, PLUGINS, MQ, TIME_TRIGGERS
+  */
+    type?: string | null;
+    /**
+    description: One-line summary of what this agent specializes in
+  */
+    description?: string | null;
+    /**
+    description: System prompt / instructions for the agent
+  */
+    instructions?: string | null;
+    /**
+    description: List of MCP tool names available to this agent
+  */
+    tools?: Array<string> | null;
+    /**
+    description: Whether the agent is active
+  */
+    isActive?: boolean | null;
+    /**
+    description: Optional AI model override
+  */
+    modelName?: string | null;
+}
+
+  
+  export interface ISpawnAgentInput {
+    /**
+    description: The chat conversation ID this sub-agent belongs to
+  */
+    chatId: string;
+    /**
+    description: The task instructions for the sub-agent
+  */
+    prompt: string;
+    /**
+    description: Agent type slug of the worker to provision (e.g. LAMBDA, PLAN, CHAT, FINANCE). The set is admin-managed and dynamic — your instructions list the currently available worker types; only use types from that list
+  */
+    type: string;
+    /**
+    description: AI model id for this sub-agent. Pass your own currentModel (from your context) so the worker runs on the same model you do; the worker's own configured model, if an admin set one, overrides this. Never guess or invent model ids — only forward your currentModel
+  */
+    model?: string | null;
+    /**
+    description: Links the sub-agent result back to the triggering message
+  */
+    parentMessageId?: string | null;
+}
+
+  
+  export interface ISpawnAgentResponse {
+    __typename?: "SpawnAgentResponse";
+    /**
+    description?: Chat conversation ID
+  */
+    chatId?: string | null;
+    /**
+    description?: Unique task identifier for the spawned agent
+  */
+    taskId?: string | null;
+    /**
+    description?: Message ID of the sub-agent response
+  */
+    messageId?: string | null;
+    /**
+    description?: Task status?: completed, cancelled, or error
+  */
+    status?: string | null;
+    /**
+    description?: Result summary from the sub-agent
+  */
+    summary?: string | null;
+}
+
+  
   export interface ICreatePaymentIntent {
     __typename?: "CreatePaymentIntent";
     clientSecret?: string | null;
@@ -2626,6 +3541,22 @@ export
   */
     poolSize?: number | null;
     /**
+    description: Hard cap on the TOTAL number of "poolmgr" pods for this environment (warm pool + all specialized function pods). At the cap the executor refuses to specialize a new pod (HTTP 429), preventing an invocation flood (e.g. KEDA) from provisioning unbounded pods. 0 (default) means unlimited; only applies to "poolmgr"; should be >= poolSize
+  */
+    maxPods?: number | null;
+    /**
+    description: Maximum number of builder pods for this environment. Builder pods are provisioned on demand (one per concurrent build) up to this cap, then scaled back to zero when idle. Building one lambda uses one pod regardless of this value. Default is 1
+  */
+    builderPoolSize?: number | null;
+    /**
+    description: Builds a single builder pod will accept (MAX_PARALLEL_BUILDS). Default is 1 (one build per pod); independent of builderPoolSize
+  */
+    builderMaxParallelBuilds?: number | null;
+    /**
+    description: Seconds a builder pod stays up after its last build before scaling to zero. 0 = never scale down. Default is 600 (10 minutes)
+  */
+    builderIdleTimeout?: number | null;
+    /**
     description: Default maxCpu is 500
   */
     maxCpu?: number | null;
@@ -2710,8 +3641,8 @@ export
   */
     projectId: string;
     /**
-    description: Basic code example on how basic lambda should look a like in javascript/nodejs ---BEGIN BASIC EXAMPLE--- export default async function (context) { return { status: 200, body: 'Hello, world!', headers: { 'Access-Control-Allow-Origin': 'https://graphql-server.com', }, }; }; ---END BASIC EXAMPLE--- The "context" argument is following this export interface below called "LambdaContext" export interface LambdaContext { request: { path: string; query: string; method: string; body: unknown; headers: Headers }; response: Response; getSecret<T = Record<string, string>>(secret: string): Promise<T>; getConfig(secret: string): Promise<Record<string, string>>; getLambdaInfo(): { name: string; namespace: string; resourceVersion: string; uid: string; }; getQueryParams(): Record<string, string>; getBodyParams(): Record<string, string>; getRouteParams(): Record<string, string>; } ---BEGIN GRAPHQL EXAMPLE using classic REST nodejs image and fastify--- import { Bootstrap, Container, Controller, CoreModule, GraphQLInt, GraphQLNonNull, GraphQLObjectType, HAPI_SERVER, Module, Query, Type, } from '@gapi/core'; import { lastValueFrom, tap } from 'rxjs'; import { format } from 'url'; export export interface Context { request: { url: string; query: string; method: string; body: unknown; headers: Headers; }; response: Response; getSecret<T = Record<string, string>>(secret: string): Promise<T>; getConfig(secret: string): Promise<Record<string, string>>; getLambdaInfo(): { name: string; namespace: string; resourceVersion: string; uid: string; }; getQueryParams(): Record<string, string>; getBodyParams(): Record<string, string>; getRouteParams(): Record<string, string>; } export const UserType = new GraphQLObjectType({ name: 'UserType', fields: () => ({ id: { type: GraphQLInt, }, }), }); @Controller() export class UserQueriesController { @Type(UserType) @Query({ id: { type: new GraphQLNonNull(GraphQLInt), }, }) findUser(root, { id }, context) { return { id: id }; } } @Module({ imports: [ CoreModule.forRoot({ server: { hapi: { port: 9000, routes: { cors: { origin: ['*'], additionalHeaders: [ 'Host', 'User-Agent', 'Accept', 'Accept-Language', 'Accept-Encoding', 'Access-Control-Request-Method', 'Access-Control-Allow-Origin', 'Access-Control-Request-Headers', 'Origin', 'Connection', 'Pragma', 'cardId', 'Cache-Control', ], }, }, }, }, graphql: { path: '/graphql', initQuery: true, openBrowser: false, graphqlOptions: { tracing: false, schema: null, }, }, }), ], controllers: [UserQueriesController], }) export class AppModule {} const Main = lastValueFrom( Bootstrap(AppModule).pipe( tap(() => { console.log('[Bootstrap]: Started'); }), ), ); export default async function handler(context: Context) { const request = context.request; const headers = { 'Content-type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT', }; await Main; const url = format({ pathname: '/graphql', query: request.query, }); const options = { method: request.method, url, payload: request.body, headers: request.headers, validate: false, }; let res = { statusCode: 502, result: null, }; console.log('Request Options: ', options); try { res = await Container.get(HAPI_SERVER).inject(options); } catch (e) { console.error('ERROR', JSON.stringify(e)); } return { status: res.statusCode, body: res.result, headers, }; } ---END GRAPHQL EXAMPLE--- IMPORTANT: Always install "@gapi/core": "^1.8.184" inside package.json when graphql example is asked tell the user what you are going to do!! ---BEGIN NEW MODERN UP TO DATE GRAPHQL @gapi/core example without the need of external dependencies import { Bootstrap, Controller, CoreModule, GraphQLObjectType, GraphQLString, Module, Query, Type, } from '@gapi/core'; @Controller() class Appcontroller { @Type( new GraphQLObjectType({ name: 'UserType', fields: () => ({ id: { type: GraphQLString }, name: { type: GraphQLString }, }), }), ) @Query() getUser() { return { id: 1, name: 'Hello World', }; } } @Module({ imports: [CoreModule.forRoot()], controllers: [Appcontroller], }) class AppModule {} Bootstrap(AppModule).subscribe(); IMPORTANT: This example requires environment of "rxdi/fission-nodejs-graphql:0.0.83" This environment helps us to create and use @gapi/core without dependencies When using this example unfortunately we need to strip out all the external dependencies and build only our code so buildBashScript will become #!/bin/sh cd ${SRC_PKG} npm install #Use gcli for typescript transpilation mv index.js index.ts npx @gapi/gcli@1.8.226 build --bundle false --external @gapi/core --external @rxdi/core --external @rxdi/graphql --external @rxdi/graphql-pubsub --external @rxdi/graphql-rabbitmq-subscriptions --external @rxdi/hapi --external @rxdi/nats --external @rxdi/rabbitmq-pubsub --external @hapi/hapi --external @hapi/boom --external @hapi/inert --external @abraham/reflection --external graphql --external graphql-subscriptions --external subscriptions-transport-ws --external reflect-metadata --external rxjs #rm -rf node_modules cp -r ${SRC_PKG} ${DEPLOY_PKG} This way we can deploy @gapi/core lambda without even installing external dependencies in package.json! Pure simple @gapi/core + nodejs utilities!
-*** NO AUTH BASIC PROXY LOGIC *** /** * Example federation authentication function — passthrough (no dependencies). * * The leanest possible function: it adds no verification of its own and simply * forwards the incoming Authorization header (and the request domain) to the * subgraphs, which then enforce their own access rules. Useful when each subgraph * already authenticates the forwarded token itself. * * No "Package JSON" dependencies required. *\/ /** * Context handed to the user's authentication function on every gateway request. * The function returns the object that becomes the GraphQL gateway context — every * key of which is forwarded to the subgraphs as a request header (see * buildForwardingDataSource). * * The runtime bakes in NO authentication. Users install their own auth library * (firebase, jose, …) via the lambda's package.json and verify the request here. *\/ export export interface FederationContext { request: Request; getSecret: <T = Record<string, string>>(name: string) => Promise<T>; getConfig: <T = Record<string, string>>(name: string) => Promise<T>; getQueryParams: () => Record<string, unknown>; getBodyParams: () => unknown; getRouteParams: () => Record<string, string>; getLambdaInfo: () => { name?: string; namespace?: string; resourceVersion?: string; uid?: string; url?: string; }; } function readHeader(value: string | string[] | undefined): string { return (Array.isArray(value) ? value[0] : value) ?? ""; } export default async function (context: FederationContext) { const headers = context.request.headers; /* Every returned key is forwarded to each subgraph as a request header. *\/ return { authorization: readHeader(headers["authorization"]), domain: readHeader(headers["domain"]), }; } *** JWT-AUTH Example /** * Example federation authentication function — generic JWT (no Firebase). * * Verifies a bearer JWT with a shared secret and forwards the decoded claims to * the subgraphs. Use this as a template for any auth library — swap jsonwebtoken * for jose, Auth0, Clerk, etc. * * Install on the lambda via "Package JSON": * { "dependencies": { "jsonwebtoken": "^9.0.2" } } * * Provide the signing key through a Kubernetes secret selected on the lambda * (here named "gateway-auth", key "jwtSecret"). *\/ import * as jwt from "jsonwebtoken"; /** * Context handed to the user's authentication function on every gateway request. * The function returns the object that becomes the GraphQL gateway context — every * key of which is forwarded to the subgraphs as a request header (see * buildForwardingDataSource). * * The runtime bakes in NO authentication. Users install their own auth library * (firebase, jose, …) via the lambda's package.json and verify the request here. *\/ export export interface FederationContext { request: Request; getSecret: <T = Record<string, string>>(name: string) => Promise<T>; getConfig: <T = Record<string, string>>(name: string) => Promise<T>; getQueryParams: () => Record<string, unknown>; getBodyParams: () => unknown; getRouteParams: () => Record<string, string>; getLambdaInfo: () => { name?: string; namespace?: string; resourceVersion?: string; uid?: string; url?: string; }; } function readHeader(value: string | string[] | undefined): string { return (Array.isArray(value) ? value[0] : value) ?? ""; } export default async function (context: FederationContext) { const token = readHeader(context.request.headers["authorization"]).replace( /^Bearers+/i, "", ); if (!token || token === "undefined") { return {}; } const { jwtSecret } = await context.getSecret<{ jwtSecret: string }>( "gateway-auth", ); if (!jwtSecret) { throw new Error('missing "gateway-auth" secret with a "jwtSecret" key'); } try { const claims = jwt.verify(token, jwtSecret) as Record<string, unknown>; /* Every returned key is forwarded to each subgraph as a request header. *\/ return { authorization: token, user: JSON.stringify(claims), "x-user-id": String(claims.sub ?? ""), }; } catch (error) { console.error("[auth] invalid jwt:", (error as Error).message); throw new Error("unauthenticated"); } } *** FIREBASE EXAMPLE /** * Example federation authentication function — Firebase. * * This is the code you paste into the lambda's "Code" field when "Federation" is * ticked. It runs ONCE per gateway request, before the request fans out to the * subgraphs. Whatever object it returns becomes the gateway context, and EVERY * key of that object is forwarded to each subgraph as a request header (string * values as-is, anything else JSON-stringified). * * Install the dependency on the same lambda via "Package JSON": * { "dependencies": { "firebase-admin": "^12.0.0" } } * * Provide the Firebase service-account JSON through a Kubernetes secret selected * on the lambda (here named "firebase", key "serviceAccount"). *\/ import * as admin from "firebase-admin"; /** * Context handed to the user's authentication function on every gateway request. * The function returns the object that becomes the GraphQL gateway context — every * key of which is forwarded to the subgraphs as a request header (see * buildForwardingDataSource). * * The runtime bakes in NO authentication. Users install their own auth library * (firebase, jose, …) via the lambda's package.json and verify the request here. *\/ export export interface FederationContext { request: Request; getSecret: <T = Record<string, string>>(name: string) => Promise<T>; getConfig: <T = Record<string, string>>(name: string) => Promise<T>; getQueryParams: () => Record<string, unknown>; getBodyParams: () => unknown; getRouteParams: () => Record<string, string>; getLambdaInfo: () => { name?: string; namespace?: string; resourceVersion?: string; uid?: string; url?: string; }; } /* Initialise the Admin SDK once (the bundle is required once at specialize, but the default export runs per request — so guard against re-initialising). *\/ async function ensureFirebase(context: FederationContext): Promise<void> { if (admin.apps.length) { return; } const secret = await context.getSecret<{ serviceAccount: string }>("firebase"); if (!secret.serviceAccount) { throw new Error('missing "firebase" secret with a "serviceAccount" key'); } admin.initializeApp({ credential: admin.credential.cert(JSON.parse(secret.serviceAccount)), }); } function readHeader(value: string | string[] | undefined): string { return (Array.isArray(value) ? value[0] : value) ?? ""; } export default async function (context: FederationContext) { const token = readHeader( context.request.headers["authorization"] ?? context.request.headers["Authorization"], ).replace(/^Bearers+/i, ""); /* Anonymous request — forward nothing; each subgraph decides what is public. *\/ if (!token || token === "undefined") { return {}; } await ensureFirebase(context); try { const decoded = await admin.auth().verifyIdToken(token); /* These keys are forwarded to every subgraph as request headers. Subgraphs read user / authorization to authorise the operation. *\/ return { authorization: token, user: JSON.stringify({ uid: decoded.uid, email: decoded.email, emailVerified: decoded.email_verified, }), }; } catch (error) { console.error("[auth] invalid firebase token:", (error as Error).message); /* Reject the whole request. Return {} instead to let it through as anonymous and let each subgraph enforce its own access rules. *\/ throw new Error("unauthenticated"); } } KEEP IN MIND THAT ANY EXTERNAL DEPENDENCY needs to be installed inside "package.json" Then the build script will be #!/bin/sh cd ${SRC_PKG} npm install #Use gcli for typescript transpilation (built-in inside the builder image uses esbuild) mv index.js index.ts npx gcli build rm -rf node_modules cp -r ${SRC_PKG} ${DEPLOY_PKG} ENSURE BEFORE USING FEDERATION that "federation" is set to "true" when creating lambda also we need subgraphs so "subgraphs" field represents lambda names as string[] on the frontend we filter out only lambdas which are created in graphql environment so ONLY ALLOWED lambdas are these created with environment image rxdi/fission-nodejs-graphql Before we create federation we must have AT LEAST 1 RUNNING GRAPHQL LAMBDA!!
+    description: JavaScript/Node.js source for the lambda handler, e.g. "export default async function (context) { ... }".
+The full @gapi/core code examples, the LambdaContext export interface, and the GraphQL federation gateway setup are NOT inlined here (they bloat every request). Retrieve them on demand via the knowledge search tool, e.g. search_knowledge_vector("lambda code example") or search_knowledge_vector("graphql federation gateway"), before writing lambda code.
   */
     code?: string | null;
     /**
@@ -2806,45 +3737,52 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
   */
     subgraphs?: Array<string> | null;
     /**
-    description: When "true" this lambda is provisioned as an Apollo MCP Server in front of a federation graph
+    description: 
+        When "true" this lambda is provisioned as an Apollo MCP Server in front of a federation graph
+        instead of a regular function. The selected "mcpGraph" is resolved to its internal router URL,
+        its schema is introspected (single source of truth) and the "mcpOperations" are exposed as MCP
+        tools. The "env" must point to the MCP runtime image.
+      
   */
     mcp?: boolean | null;
     /**
-    description: Only used when "mcp" is true. Name of the federation gateway lambda the MCP server connects to
+    description: 
+        Only used when "mcp" is true. Name of the federation gateway lambda (within the same project)
+        the MCP server connects to. The backend resolves it to its internal router URL and stores it as
+        MCP_ENDPOINT in the auto-managed <lambda>-mcp secret.
+      
   */
     mcpGraph?: string | null;
     /**
-    description: Only used when "mcp" is true. Curated GraphQL operations exposed as MCP tools (name derived from the operation)
+    description: 
+        Only used when "mcp" is true. Curated GraphQL operations exposed as MCP tools. Stored in the
+        auto-managed <lambda>-mcp-operations ConfigMap and mounted into the MCP runtime. Optional — the
+        introspection/search/execute tools work without any curated operations.
+      
   */
     mcpOperations?: Array<IMcpOperationInput> | null;
     /**
-    description: Only used when "mcp" is true. Static headers added to every request to the federation endpoint
+    description: 
+        Only used when "mcp" is true. Additional request headers the MCP server forwards from the caller
+        to the federation endpoint. "Authorization" is ALWAYS forwarded; list extra headers here.
+      
+  */
+    mcpForwardHeaders?: Array<IMcpForwardHeaderInput> | null;
+    /**
+    description: 
+        Only used when "mcp" is true. Static headers added to every request the MCP server makes to the
+        federation endpoint (e.g. a fixed API key / service token). Stored in the <lambda>-mcp secret and
+        rendered as Apollo "headers:". Distinct from mcpForwardHeaders, which forward the caller's headers.
+      
   */
     mcpHeaders?: Array<IMcpHeaderInput> | null;
     /**
-    description: Only used when "mcp" is true. Additional request headers forwarded from the caller (Authorization always forwarded)
+    description: Enable Cloudflare CDN caching for this lambda. When enabled, responses will be cached at Cloudflare's edge network, reducing origin requests and improving latency for repeated requests.
   */
-    mcpForwardHeaders?: Array<IMcpForwardHeaderInput> | null;
+    cache?: boolean | null;
 }
 
-
-  export interface IMcpOperationInput {
-    query: string;
-    name?: string | null;
-}
-
-
-  export interface IMcpHeaderInput {
-    name: string;
-    value: string;
-}
-
-
-  export interface IMcpForwardHeaderInput {
-    name: string;
-}
-
-
+  
   export interface ILambdaScaleInputOptions {
     /**
     description: 
@@ -2934,6 +3872,38 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
 }
 
   
+  export interface IMcpOperationInput {
+    /**
+    description: The named GraphQL operation document exposed as an MCP tool, e.g. "query GetUser($id: ID!) { … }". The operation name becomes the tool name.
+  */
+    query: string;
+    /**
+    description: Optional. Derived from the operation name in "query" when omitted; used as the .graphql file name.
+  */
+    name?: string | null;
+}
+
+  
+  export interface IMcpForwardHeaderInput {
+    /**
+    description?: Header name forwarded from the incoming request, e.g. "X-Tenant-Id".
+  */
+    name?: string;
+}
+
+  
+  export interface IMcpHeaderInput {
+    /**
+    description?: Header name, e.g. "X-Api-Key" or "Authorization".
+  */
+    name?: string;
+    /**
+    description?: Header value sent verbatim to the endpoint.
+  */
+    value?: string;
+}
+
+  
   export interface IDeleteLambdaInput {
     name?: string;
     projectId?: string;
@@ -3018,6 +3988,147 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
   export interface IKubectlNamespace {
     __typename?: "KubectlNamespace";
     projectId?: string | null;
+}
+
+  /**
+    description?: Outcome of one sandboxed code execution?: the returned value, captured console output, timing, and any error.
+  */
+  export interface IExecutionResult {
+    __typename?: "ExecutionResult";
+    /**
+    description?: True when the code ran to completion; false when it threw, failed to compile, or hit the time/memory limit.
+  */
+    success?: boolean;
+    /**
+    description?: The value the code returned, as native JSON (number, string, boolean, object, array or null). Null when the code did not `return` anything, or on failure. Non-serializable values (functions, undefined, symbols, BigInt) appear as null.
+  */
+    result?: any | null;
+    /**
+    description?: When `success` is false, `{ name, message, stack? }` describing what went wrong (e.g. a thrown error, a SyntaxError, or `interrupted` on timeout).
+  */
+    error?: any | null;
+    /**
+    description?: Everything the sandbox wrote to console.{log,info,warn,error,debug}, in order, each line prefixed with its level.
+  */
+    logs?: Array<string>;
+    /**
+    description?: Wall-clock duration of the run in milliseconds (includes time spent awaiting host tool calls).
+  */
+    executionTimeMs?: number | null;
+    /**
+    description?: Project mode only (when `options.files` was provided)?: a `{ path?: content }` map of the virtual filesystem after the run — every file present at the end, including ones the code wrote via `node?:fs`. Null in snippet mode. The filesystem is in-memory and discarded after the run; this snapshot is the only way to read back what the code produced. In workspace mode (options.projectId + options.workdir) this is instead the DELTA?: only files the run created or modified relative to the workspace.
+  */
+    changedFiles?: any | null;
+    /**
+    description?: True when the `changedFiles` snapshot hit the operator byte ceiling and files were dropped from it — treat the map as incomplete, never as evidence a missing file was deleted.
+  */
+    changedFilesTruncated?: boolean | null;
+    /**
+    description?: Workspace mode only (options.projectId + options.workdir with persistence enabled)?: `{ projectId, workdir, persistedFiles?: [path], deletedFiles?: [path], skippedDeletionCheck?: boolean }` describing what was written back to durable storage after the run. Null in stateless runs.
+  */
+    persistence?: any | null;
+}
+
+  /**
+    description?: A freshly minted workspace directory. Track the `workdir` name in your chat history — every later call (listFiles/getFile/writeFile/deleteFile/executeCode/publishProject) targets the workspace by projectId + workdir, from any session.
+  */
+  export interface IWorkdir {
+    __typename?: "Workdir";
+    projectId?: string;
+    /**
+    description?: Random directory name, e.g. "ws-1f2e3d4c5b6a7089".
+  */
+    workdir?: string;
+    createdAt?: string | null;
+    /**
+    description?: Which persistence backend minted it?: "s3" (durable) or "memory" (single-pod dev/test backend — NOT durable across pods or restarts).
+  */
+    backend?: string | null;
+}
+
+  /**
+    description?: A workspace zipped and registered as a deployable archive. Pass `customUploadFileId` to the lambda-creation flow to deploy it as-is.
+  */
+  export interface IPublishedProjectArtifact {
+    __typename?: "PublishedProjectArtifact";
+    /**
+    description?: Mongo `file` document id the lambda-creation flow accepts as customUploadFileId.
+  */
+    customUploadFileId?: string;
+    /**
+    description?: S3 object key of the uploaded zip.
+  */
+    key?: string;
+    bucket?: string | null;
+    /**
+    description?: Zip size in bytes.
+  */
+    bytes?: number | null;
+    /**
+    description?: SHA-256 of the zip.
+  */
+    sha256?: string | null;
+    /**
+    description?: Number of files archived.
+  */
+    files?: number | null;
+}
+
+  /**
+    description?: A DEPLOYED lambda archive fetched from S3 and unzipped into a workspace, ready to edit and re-publish (the inverse of publishProject). Track `workdir` — edit files with writeFile/executeCode, then publishProject(projectId, workdir, lambdaName) to mint a new customUploadFileId.
+  */
+  export interface IImportedLambda {
+    __typename?: "ImportedLambda";
+    projectId?: string;
+    /**
+    description?: The workspace the archive was unpacked into (freshly minted unless you passed one). Every later call targets it by projectId + workdir.
+  */
+    workdir?: string;
+    /**
+    description?: True when a fresh workdir was minted for this import.
+  */
+    mintedWorkdir?: boolean | null;
+    /**
+    description?: The lambda name whose deploy key was read, when given.
+  */
+    lambdaName?: string | null;
+    /**
+    description?: Mongo `lambda` document id, when the import was resolved by lambdaName — pass the artifact from a later publishProject back to this lambda to re-deploy it.
+  */
+    lambdaId?: string | null;
+    /**
+    description?: How the lambda was virtualized?: 'archive' (a customUploadFileId .zip, unzipped) or 'code' (the code/packageJson/buildBashScript fields, written as index.js/package.json/build.sh).
+  */
+    source?: string;
+    /**
+    description?: Archive source only?: the Mongo `file` id the archive was read from — the lambda's customUploadFileId when fetched by name, or the fileId you passed.
+  */
+    fileId?: string | null;
+    /**
+    description?: Archive source only?: S3 object key the archive was read from.
+  */
+    key?: string | null;
+    bucket?: string | null;
+    /**
+    description?: Fetched archive size in bytes.
+  */
+    bytes?: number | null;
+    /**
+    description?: SHA-256 of the fetched archive.
+  */
+    sha256?: string | null;
+    /**
+    description?: Number of files imported into the workspace.
+  */
+    files?: number | null;
+    /**
+    description?: The file paths imported into the workspace.
+  */
+    paths?: Array<string>;
+    /**
+    description?: Archive entries NOT imported — binary files or paths that failed workspace validation. They are not in the workspace.
+  */
+    skippedFiles?: Array<string>;
 }
 
   

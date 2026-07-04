@@ -12,6 +12,9 @@ export const introspectionQueryResultData = {
           },
           {
             "name": "MachineNotifications"
+          },
+          {
+            "name": "QuotaNotifications"
           }
         ]
       },
@@ -39,6 +42,18 @@ export const introspectionQueryResultData = {
           },
           {
             "name": "MachineNotificationsStopped"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "QuotaNotificationsDataUnion",
+        "possibleTypes": [
+          {
+            "name": "QuotaNotificationsExceeded"
+          },
+          {
+            "name": "QuotaNotificationsApproaching"
           }
         ]
       }

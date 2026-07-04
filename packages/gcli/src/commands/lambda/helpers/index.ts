@@ -47,6 +47,7 @@ export interface CreateOrUpdateLambdaArguments {
   /* MCP server (from lambforge.yaml `function.mcp*`). Operations/headers are spec-only (yaml/json). */
   mcp?: boolean;
   mcpGraph?: string;
+  cache?: boolean;
   /* Scale options */
   minCpu: number;
   maxCpu: number;
@@ -157,6 +158,7 @@ export const createOrUpdateLambda = (
             mcpOperations: payload.mcpOperations || [],
             mcpHeaders: payload.mcpHeaders || [],
             mcpForwardHeaders: payload.mcpForwardHeaders || [],
+            cache: cmd.cache || payload.cache || false,
             customUploadFileId:
               cmd.customUploadFileId || payload.customUploadFileId || '',
             scaleOptions: {
