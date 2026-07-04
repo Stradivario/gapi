@@ -284521,6 +284521,7 @@ var init_helpers2 = __esm({
               mcpOperations: payload.mcpOperations || [],
               mcpHeaders: payload.mcpHeaders || [],
               mcpForwardHeaders: payload.mcpForwardHeaders || [],
+              cache: cmd.cache || payload.cache || false,
               customUploadFileId: cmd.customUploadFileId || payload.customUploadFileId || "",
               scaleOptions: {
                 executorType: cmd.executorType || payload.scaleOptions?.executorType || "poolmgr",
