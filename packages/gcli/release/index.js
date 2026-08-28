@@ -9108,16 +9108,16 @@ var require_timeoutProvider = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.timeoutProvider = void 0;
     exports2.timeoutProvider = {
-      setTimeout: function(handler, timeout) {
+      setTimeout: function(handler, timeout2) {
         var args = [];
         for (var _i = 2; _i < arguments.length; _i++) {
           args[_i - 2] = arguments[_i];
         }
         var delegate = exports2.timeoutProvider.delegate;
         if (delegate === null || delegate === void 0 ? void 0 : delegate.setTimeout) {
-          return delegate.setTimeout.apply(delegate, __spreadArray2([handler, timeout], __read2(args)));
+          return delegate.setTimeout.apply(delegate, __spreadArray2([handler, timeout2], __read2(args)));
         }
-        return setTimeout.apply(void 0, __spreadArray2([handler, timeout], __read2(args)));
+        return setTimeout.apply(void 0, __spreadArray2([handler, timeout2], __read2(args)));
       },
       clearTimeout: function(handle) {
         var delegate = exports2.timeoutProvider.delegate;
@@ -10468,16 +10468,16 @@ var require_intervalProvider = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.intervalProvider = void 0;
     exports2.intervalProvider = {
-      setInterval: function(handler, timeout) {
+      setInterval: function(handler, timeout2) {
         var args = [];
         for (var _i = 2; _i < arguments.length; _i++) {
           args[_i - 2] = arguments[_i];
         }
         var delegate = exports2.intervalProvider.delegate;
         if (delegate === null || delegate === void 0 ? void 0 : delegate.setInterval) {
-          return delegate.setInterval.apply(delegate, __spreadArray2([handler, timeout], __read2(args)));
+          return delegate.setInterval.apply(delegate, __spreadArray2([handler, timeout2], __read2(args)));
         }
-        return setInterval.apply(void 0, __spreadArray2([handler, timeout], __read2(args)));
+        return setInterval.apply(void 0, __spreadArray2([handler, timeout2], __read2(args)));
       },
       clearInterval: function(handle) {
         var delegate = exports2.intervalProvider.delegate;
@@ -12248,7 +12248,7 @@ var require_of = __commonJS({
     exports2.of = void 0;
     var args_1 = require_args();
     var from_1 = require_from();
-    function of11() {
+    function of13() {
       var args = [];
       for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
@@ -12256,7 +12256,7 @@ var require_of = __commonJS({
       var scheduler = args_1.popScheduler(args);
       return from_1.from(args, scheduler);
     }
-    exports2.of = of11;
+    exports2.of = of13;
   }
 });
 
@@ -12268,7 +12268,7 @@ var require_throwError = __commonJS({
     exports2.throwError = void 0;
     var Observable_1 = require_Observable();
     var isFunction_1 = require_isFunction();
-    function throwError9(errorOrErrorFactory, scheduler) {
+    function throwError10(errorOrErrorFactory, scheduler) {
       var errorFactory = isFunction_1.isFunction(errorOrErrorFactory) ? errorOrErrorFactory : function() {
         return errorOrErrorFactory;
       };
@@ -12279,7 +12279,7 @@ var require_throwError = __commonJS({
         return scheduler.schedule(init, 0, subscriber);
       } : init);
     }
-    exports2.throwError = throwError9;
+    exports2.throwError = throwError10;
   }
 });
 
@@ -12391,7 +12391,7 @@ var require_lastValueFrom = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.lastValueFrom = void 0;
     var EmptyError_1 = require_EmptyError();
-    function lastValueFrom23(source, config2) {
+    function lastValueFrom34(source, config2) {
       var hasConfig = typeof config2 === "object";
       return new Promise(function(resolve, reject) {
         var _hasValue = false;
@@ -12414,7 +12414,7 @@ var require_lastValueFrom = __commonJS({
         });
       });
     }
-    exports2.lastValueFrom = lastValueFrom23;
+    exports2.lastValueFrom = lastValueFrom34;
   }
 });
 
@@ -12426,7 +12426,7 @@ var require_firstValueFrom = __commonJS({
     exports2.firstValueFrom = void 0;
     var EmptyError_1 = require_EmptyError();
     var Subscriber_1 = require_Subscriber();
-    function firstValueFrom(source, config2) {
+    function firstValueFrom2(source, config2) {
       var hasConfig = typeof config2 === "object";
       return new Promise(function(resolve, reject) {
         var subscriber = new Subscriber_1.SafeSubscriber({
@@ -12446,7 +12446,7 @@ var require_firstValueFrom = __commonJS({
         source.subscribe(subscriber);
       });
     }
-    exports2.firstValueFrom = firstValueFrom;
+    exports2.firstValueFrom = firstValueFrom2;
   }
 });
 
@@ -12538,9 +12538,9 @@ var require_timeout = __commonJS({
         this.info = info;
       };
     });
-    function timeout(config2, schedulerArg) {
-      var _a2 = isDate_1.isValidDate(config2) ? { first: config2 } : typeof config2 === "number" ? { each: config2 } : config2, first = _a2.first, each = _a2.each, _b = _a2.with, _with = _b === void 0 ? timeoutErrorFactory : _b, _c = _a2.scheduler, scheduler = _c === void 0 ? schedulerArg !== null && schedulerArg !== void 0 ? schedulerArg : async_1.asyncScheduler : _c, _d = _a2.meta, meta3 = _d === void 0 ? null : _d;
-      if (first == null && each == null) {
+    function timeout2(config2, schedulerArg) {
+      var _a2 = isDate_1.isValidDate(config2) ? { first: config2 } : typeof config2 === "number" ? { each: config2 } : config2, first2 = _a2.first, each = _a2.each, _b = _a2.with, _with = _b === void 0 ? timeoutErrorFactory : _b, _c = _a2.scheduler, scheduler = _c === void 0 ? schedulerArg !== null && schedulerArg !== void 0 ? schedulerArg : async_1.asyncScheduler : _c, _d = _a2.meta, meta3 = _d === void 0 ? null : _d;
+      if (first2 == null && each == null) {
         throw new TypeError("No timeout provided.");
       }
       return lift_1.operate(function(source, subscriber) {
@@ -12573,10 +12573,10 @@ var require_timeout = __commonJS({
           }
           lastValue = null;
         }));
-        !seen && startTimer(first != null ? typeof first === "number" ? first : +first - scheduler.now() : each);
+        !seen && startTimer(first2 != null ? typeof first2 === "number" ? first2 : +first2 - scheduler.now() : each);
       });
     }
-    exports2.timeout = timeout;
+    exports2.timeout = timeout2;
     function timeoutErrorFactory(info) {
       throw new exports2.TimeoutError(info);
     }
@@ -12591,7 +12591,7 @@ var require_map = __commonJS({
     exports2.map = void 0;
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function map20(project, thisArg) {
+    function map24(project, thisArg) {
       return lift_1.operate(function(source, subscriber) {
         var index = 0;
         source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, function(value) {
@@ -12599,7 +12599,7 @@ var require_map = __commonJS({
         }));
       });
     }
-    exports2.map = map20;
+    exports2.map = map24;
   }
 });
 
@@ -13449,7 +13449,7 @@ var require_timer = __commonJS({
     var async_1 = require_async();
     var isScheduler_1 = require_isScheduler();
     var isDate_1 = require_isDate();
-    function timer(dueTime, intervalOrScheduler, scheduler) {
+    function timer2(dueTime, intervalOrScheduler, scheduler) {
       if (dueTime === void 0) {
         dueTime = 0;
       }
@@ -13482,7 +13482,7 @@ var require_timer = __commonJS({
         }, due);
       });
     }
-    exports2.timer = timer;
+    exports2.timer = timer2;
   }
 });
 
@@ -14276,13 +14276,13 @@ var require_catchError = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var lift_1 = require_lift();
-    function catchError11(selector) {
+    function catchError12(selector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSub = null;
         var syncUnsub = false;
         var handledResult;
         innerSub = source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, void 0, void 0, function(err) {
-          handledResult = innerFrom_1.innerFrom(selector(err, catchError11(selector)(source)));
+          handledResult = innerFrom_1.innerFrom(selector(err, catchError12(selector)(source)));
           if (innerSub) {
             innerSub.unsubscribe();
             innerSub = null;
@@ -14298,7 +14298,7 @@ var require_catchError = __commonJS({
         }
       });
     }
-    exports2.catchError = catchError11;
+    exports2.catchError = catchError12;
   }
 });
 
@@ -14978,11 +14978,11 @@ var require_distinctUntilChanged = __commonJS({
       comparator = comparator !== null && comparator !== void 0 ? comparator : defaultCompare;
       return lift_1.operate(function(source, subscriber) {
         var previousKey;
-        var first = true;
+        var first2 = true;
         source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, function(value) {
           var currentKey = keySelector(value);
-          if (first || !comparator(previousKey, currentKey)) {
-            first = false;
+          if (first2 || !comparator(previousKey, currentKey)) {
+            first2 = false;
             previousKey = currentKey;
             subscriber.next(value);
           }
@@ -15307,7 +15307,7 @@ var require_first = __commonJS({
     var defaultIfEmpty_1 = require_defaultIfEmpty();
     var throwIfEmpty_1 = require_throwIfEmpty();
     var identity_1 = require_identity();
-    function first(predicate, defaultValue) {
+    function first2(predicate, defaultValue) {
       var hasDefaultValue = arguments.length >= 2;
       return function(source) {
         return source.pipe(predicate ? filter_1.filter(function(v, i2) {
@@ -15317,7 +15317,7 @@ var require_first = __commonJS({
         }));
       };
     }
-    exports2.first = first;
+    exports2.first = first2;
   }
 });
 
@@ -16648,7 +16648,7 @@ var require_switchMap = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function switchMap24(project, resultSelector) {
+    function switchMap35(project, resultSelector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSubscriber = null;
         var index = 0;
@@ -16672,7 +16672,7 @@ var require_switchMap = __commonJS({
         }));
       });
     }
-    exports2.switchMap = switchMap24;
+    exports2.switchMap = switchMap35;
   }
 });
 
@@ -16792,7 +16792,7 @@ var require_tap = __commonJS({
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var identity_1 = require_identity();
-    function tap21(observerOrNext, error48, complete) {
+    function tap33(observerOrNext, error48, complete) {
       var tapObserver = isFunction_1.isFunction(observerOrNext) || error48 || complete ? { next: observerOrNext, error: error48, complete } : observerOrNext;
       return tapObserver ? lift_1.operate(function(source, subscriber) {
         var _a2;
@@ -16821,7 +16821,7 @@ var require_tap = __commonJS({
         }));
       }) : identity_1.identity;
     }
-    exports2.tap = tap21;
+    exports2.tap = tap33;
   }
 });
 
@@ -16946,12 +16946,12 @@ var require_timeoutWith = __commonJS({
     var isDate_1 = require_isDate();
     var timeout_1 = require_timeout();
     function timeoutWith(due, withObservable, scheduler) {
-      var first;
+      var first2;
       var each;
       var _with;
       scheduler = scheduler !== null && scheduler !== void 0 ? scheduler : async_1.async;
       if (isDate_1.isValidDate(due)) {
-        first = due;
+        first2 = due;
       } else if (typeof due === "number") {
         each = due;
       }
@@ -16962,11 +16962,11 @@ var require_timeoutWith = __commonJS({
       } else {
         throw new TypeError("No observable provided to switch to");
       }
-      if (first == null && each == null) {
+      if (first2 == null && each == null) {
         throw new TypeError("No timeout provided.");
       }
       return timeout_1.timeout({
-        first,
+        first: first2,
         each,
         scheduler,
         with: _with
@@ -20087,7 +20087,7 @@ var require_index_node_cjs = __commonJS({
       }
       return true;
     }
-    function map20(obj, fn, contextObj) {
+    function map24(obj, fn, contextObj) {
       var res = {};
       for (var key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -20577,7 +20577,7 @@ var require_index_node_cjs = __commonJS({
     exports2.isValidTimestamp = isValidTimestamp;
     exports2.issuedAtTime = issuedAtTime;
     exports2.jsonEval = jsonEval;
-    exports2.map = map20;
+    exports2.map = map24;
     exports2.querystring = querystring;
     exports2.querystringDecode = querystringDecode;
     exports2.safeGet = safeGet;
@@ -24479,7 +24479,7 @@ var require_auth = __commonJS({
         var b = a && (a[mf] ? "phone" : null);
         if (b && a && a[nf]) {
           K(this, "uid", a[nf]);
-          K(this, "displayName", a[of11] || null);
+          K(this, "displayName", a[of13] || null);
           var c = null;
           a[pf] && (c = new Date(a[pf]).toUTCString());
           K(this, "enrollmentTime", c);
@@ -24497,7 +24497,7 @@ var require_auth = __commonJS({
         }
         return b;
       }
-      var of11 = "displayName", pf = "enrolledAt", nf = "mfaEnrollmentId", mf = "phoneInfo";
+      var of13 = "displayName", pf = "enrolledAt", nf = "mfaEnrollmentId", mf = "phoneInfo";
       function rf(a) {
         lf.call(this, a);
         K(this, "phoneNumber", a[mf]);
@@ -27878,7 +27878,7 @@ var require_auth = __commonJS({
           var e2 = null, f3 = {};
           if (d) {
             d.uid && (f3[nf] = d.uid);
-            d.displayName && (f3[of11] = d.displayName);
+            d.displayName && (f3[of13] = d.displayName);
             d.enrollmentTime && (f3[pf] = new Date(d.enrollmentTime).toISOString());
             d.phoneNumber && (f3[mf] = d.phoneNumber);
             try {
@@ -30022,7 +30022,7 @@ var require_buffer_list = __commonJS({
         }
       }, {
         key: "first",
-        value: function first() {
+        value: function first2() {
           return this.head.data;
         }
         // Consumes a specified amount of characters from the buffered data.
@@ -33040,7 +33040,7 @@ var require_buffer_list2 = __commonJS({
         }
       }, {
         key: "first",
-        value: function first() {
+        value: function first2() {
           return this.head.data;
         }
         // Consumes a specified amount of characters from the buffered data.
@@ -35382,29 +35382,29 @@ var require_decoder = __commonJS({
         if (buf.length <= initialOffset) return null;
         const bufLength = buf.length - initialOffset;
         let offset = initialOffset;
-        const first = buf.readUInt8(offset);
+        const first2 = buf.readUInt8(offset);
         offset += 1;
-        const size = SIZES[first] || -1;
+        const size = SIZES[first2] || -1;
         if (bufLength < size) return null;
-        const inRange = (start2, end) => first >= start2 && first <= end;
-        if (first < 128) return [first, 1];
-        if ((first & 240) === 128) {
-          const length = first & 15;
+        const inRange = (start2, end) => first2 >= start2 && first2 <= end;
+        if (first2 < 128) return [first2, 1];
+        if ((first2 & 240) === 128) {
+          const length = first2 & 15;
           const headerSize = offset - initialOffset;
           return decodeMap(buf, offset, length, headerSize, options);
         }
-        if ((first & 240) === 144) {
-          const length = first & 15;
+        if ((first2 & 240) === 144) {
+          const length = first2 & 15;
           const headerSize = offset - initialOffset;
           return decodeArray(buf, offset, length, headerSize);
         }
-        if ((first & 224) === 160) {
-          const length = first & 31;
+        if ((first2 & 224) === 160) {
+          const length = first2 & 31;
           if (!isValidDataSize(length, bufLength, 1)) return null;
           const result = buf.toString("utf8", offset, offset + length);
           return [result, length + 1];
         }
-        if (inRange(192, 195)) return decodeConstants(first);
+        if (inRange(192, 195)) return decodeConstants(first2);
         if (inRange(196, 198)) {
           const length = buf.readUIntBE(offset, size - 1);
           offset += size - 1;
@@ -35442,7 +35442,7 @@ var require_decoder = __commonJS({
         }
         if (inRange(222, 223)) {
           let length;
-          switch (first) {
+          switch (first2) {
             case 222:
               length = buf.readUInt16BE(offset);
               offset += 2;
@@ -35453,7 +35453,7 @@ var require_decoder = __commonJS({
               return decodeMap(buf, offset, length, 5, options);
           }
         }
-        if (first >= 224) return [first - 256, 1];
+        if (first2 >= 224) return [first2 - 256, 1];
         throw new Error("not implemented yet");
       }
       function decodeArray(buf, initialOffset, length, headerLength) {
@@ -35529,10 +35529,10 @@ var require_decoder = __commonJS({
         }
         return [result, size + 1];
       }
-      function decodeConstants(first) {
-        if (first === 192) return [null, 1];
-        if (first === 194) return [false, 1];
-        if (first === 195) return [true, 1];
+      function decodeConstants(first2) {
+        if (first2 === 192) return [null, 1];
+        if (first2 === 194) return [false, 1];
+        if (first2 === 195) return [true, 1];
       }
       function decodeSigned(buf, offset, size) {
         let result;
@@ -35599,16 +35599,16 @@ var require_encoder = __commonJS({
       }
       return bl(acc);
     }
-    function encodeMap(map20, options, encode3) {
-      const acc = [getHeader(map20.size, 128, 222)];
-      const keys = [...map20.keys()];
+    function encodeMap(map24, options, encode3) {
+      const acc = [getHeader(map24.size, 128, 222)];
+      const keys = [...map24.keys()];
       if (!options.preferMap) {
         if (keys.every((item) => typeof item === "string")) {
           console.warn("Map with string only keys will be deserialized as an object!");
         }
       }
       keys.forEach((key) => {
-        acc.push(encode3(key), encode3(map20.get(key)));
+        acc.push(encode3(key), encode3(map24.get(key)));
       });
       return bl(acc);
     }
@@ -36109,6 +36109,29 @@ var require_index_cjs3 = __commonJS({
   }
 });
 
+// src/services/types/cluster.fragment.ts
+var ClusterFragment;
+var init_cluster_fragment = __esm({
+  "src/services/types/cluster.fragment.ts"() {
+    ClusterFragment = `
+id
+projectId
+name
+status
+provider
+region
+serverType
+imageId
+topology {
+  workers
+  singleNode
+}
+endpoint
+error
+`;
+  }
+});
+
 // src/services/types/environment.fragment.ts
 var EnvironmentFragment;
 var init_environment_fragment = __esm({
@@ -36125,6 +36148,8 @@ maxCpu
 minMemory
 maxMemory
 region
+clusterId
+clusterName
 `;
   }
 });
@@ -36215,6 +36240,32 @@ scaleOptions {
   }
 });
 
+// src/services/types/plugin.fragment.ts
+var PluginFragment, InstalledPluginFragment;
+var init_plugin_fragment = __esm({
+  "src/services/types/plugin.fragment.ts"() {
+    PluginFragment = `
+id
+name
+description
+documentation
+logo
+pluginType
+isActive
+configSchema
+`;
+    InstalledPluginFragment = `
+plugin {
+  ${PluginFragment}
+}
+installedAt
+config
+clusterId
+clusterName
+`;
+  }
+});
+
 // src/services/types/project.fragment.ts
 var ProjectFragment;
 var init_project_fragment = __esm({
@@ -36228,6 +36279,33 @@ url
 user_id
 description
 uniqueProjectID
+`;
+  }
+});
+
+// src/services/types/rabbitmq.fragment.ts
+var RabbitMqFragment;
+var init_rabbitmq_fragment = __esm({
+  "src/services/types/rabbitmq.fragment.ts"() {
+    RabbitMqFragment = `
+id
+name
+description
+projectId
+region
+storage {
+  enabled
+  size
+}
+clusterId
+clusterName
+queues {
+  id
+  name
+  vhost
+  durable
+  auto_delete
+}
 `;
   }
 });
@@ -36271,9 +36349,12 @@ var init_gql_client = __esm({
     import_operators2 = __toESM(require_operators());
     init_read_file();
     init_types();
+    init_cluster_fragment();
     init_environment_fragment();
     init_lambda_fragment();
+    init_plugin_fragment();
     init_project_fragment();
+    init_rabbitmq_fragment();
     init_time_trigger_fragment();
     GraphqlClienAPI = class {
       static query({
@@ -36611,6 +36692,187 @@ var init_gql_client = __esm({
             lambdaId
           }
         }).pipe((0, import_operators2.map)((res) => res.deleteLambdaTimeTrigger));
+      }
+      // --------------------------------------------------------------------
+      // Cluster (project-level; resolved by cluster-provisioner via the
+      // federation gateway - flat scalar mutation args, NOT a nested input
+      // object, confirmed against cluster.controller.ts)
+      // --------------------------------------------------------------------
+      static provisionProjectCluster(projectId, input) {
+        return this.query({
+          query: gql`
+        mutation provisionProjectCluster(
+          $projectId: String!
+          $name: String!
+          $imageId: String!
+          $serverType: String!
+          $location: String!
+          $workers: Int
+          $singleNode: Boolean
+        ) {
+          provisionProjectCluster(
+            projectId: $projectId
+            name: $name
+            imageId: $imageId
+            serverType: $serverType
+            location: $location
+            workers: $workers
+            singleNode: $singleNode
+          ) {
+            ${ClusterFragment}
+          }
+        }
+      `,
+          variables: { projectId, ...input }
+        }).pipe((0, import_operators2.map)((res) => res.provisionProjectCluster));
+      }
+      static projectClusters(projectId) {
+        return this.query({
+          query: gql`
+        query projectClusters($projectId: String!) {
+          projectClusters(projectId: $projectId) {
+            ${ClusterFragment}
+          }
+        }
+      `,
+          variables: { projectId }
+        }).pipe((0, import_operators2.map)((res) => res.projectClusters));
+      }
+      static teardownProjectCluster(projectId, clusterId) {
+        return this.query({
+          query: gql`
+        mutation teardownProjectCluster(
+          $projectId: String!
+          $clusterId: String!
+        ) {
+          teardownProjectCluster(projectId: $projectId, clusterId: $clusterId) {
+            ${ClusterFragment}
+          }
+        }
+      `,
+          variables: { projectId, clusterId }
+        }).pipe((0, import_operators2.map)((res) => res.teardownProjectCluster));
+      }
+      static clusterKubeconfig(projectId, clusterId) {
+        return this.query({
+          query: gql`
+        query clusterKubeconfig($projectId: String!, $clusterId: String!) {
+          clusterKubeconfig(projectId: $projectId, clusterId: $clusterId)
+        }
+      `,
+          variables: { projectId, clusterId }
+        }).pipe((0, import_operators2.map)((res) => res.clusterKubeconfig));
+      }
+      // --------------------------------------------------------------------
+      // RabbitMQ brokers (graphql-server-lambdas) - a project may have
+      // several, each optionally scoped to a private cluster.
+      // --------------------------------------------------------------------
+      static installRabbitMq(projectId, payload) {
+        return this.query({
+          query: gql`
+        mutation installRabbitMq(
+          $projectId: String!
+          $payload: RabbitMqInstallPayload!
+        ) {
+          installRabbitMq(projectId: $projectId, payload: $payload) {
+            ${RabbitMqFragment}
+          }
+        }
+      `,
+          variables: { projectId, payload }
+        }).pipe((0, import_operators2.map)((res) => res.installRabbitMq));
+      }
+      static listRabbitMqInstances(projectId) {
+        return this.query({
+          query: gql`
+        query listRabbitMqInstances($projectId: String!) {
+          listRabbitMqInstances(projectId: $projectId) {
+            ${RabbitMqFragment}
+          }
+        }
+      `,
+          variables: { projectId }
+        }).pipe((0, import_operators2.map)((res) => res.listRabbitMqInstances));
+      }
+      static uninstallRabbitMq(id, projectId) {
+        return this.query({
+          query: gql`
+        mutation uninstallRabbitMq($id: String!, $projectId: String!) {
+          uninstallRabbitMq(id: $id, projectId: $projectId) {
+            ${RabbitMqFragment}
+          }
+        }
+      `,
+          variables: { id, projectId }
+        }).pipe((0, import_operators2.map)((res) => res.uninstallRabbitMq));
+      }
+      // --------------------------------------------------------------------
+      // Marketplace plugins (graphql-server-lambdas) - a project may have the
+      // same plugin installed on several clusters simultaneously.
+      // --------------------------------------------------------------------
+      static listAvailablePlugins() {
+        return this.query({
+          query: gql`
+        query listAvailablePlugins {
+          listAvailablePlugins {
+            ${PluginFragment}
+          }
+        }
+      `,
+          variables: {}
+        }).pipe((0, import_operators2.map)((res) => res.listAvailablePlugins));
+      }
+      static listInstalledPlugins(projectId) {
+        return this.query({
+          query: gql`
+        query listInstalledPlugins($projectId: String!) {
+          listInstalledPlugins(projectId: $projectId) {
+            ${InstalledPluginFragment}
+          }
+        }
+      `,
+          variables: { projectId }
+        }).pipe((0, import_operators2.map)((res) => res.listInstalledPlugins));
+      }
+      static installPlugin(projectId, pluginName, config2, clusterId) {
+        return this.query({
+          query: gql`
+        mutation installPlugin(
+          $projectId: String!
+          $pluginName: String!
+          $config: JSON
+          $clusterId: String
+        ) {
+          installPlugin(
+            projectId: $projectId
+            pluginName: $pluginName
+            config: $config
+            clusterId: $clusterId
+          ) {
+            ${InstalledPluginFragment}
+          }
+        }
+      `,
+          variables: { projectId, pluginName, config: config2, clusterId }
+        }).pipe((0, import_operators2.map)((res) => res.installPlugin));
+      }
+      static uninstallPlugin(projectId, pluginName, clusterId) {
+        return this.query({
+          query: gql`
+        mutation uninstallPlugin(
+          $projectId: String!
+          $pluginName: String!
+          $clusterId: String
+        ) {
+          uninstallPlugin(
+            projectId: $projectId
+            pluginName: $pluginName
+            clusterId: $clusterId
+          )
+        }
+      `,
+          variables: { projectId, pluginName, clusterId }
+        }).pipe((0, import_operators2.map)((res) => res.uninstallPlugin));
       }
       static getConfig(force = false) {
         return (0, import_rxjs3.combineLatest)([
@@ -38046,22 +38308,22 @@ var require_source_map_generator = __commonJS({
       }, this);
     };
     SourceMapGenerator.prototype.toJSON = function SourceMapGenerator_toJSON() {
-      var map20 = {
+      var map24 = {
         version: this._version,
         sources: this._sources.toArray(),
         names: this._names.toArray(),
         mappings: this._serializeMappings()
       };
       if (this._file != null) {
-        map20.file = this._file;
+        map24.file = this._file;
       }
       if (this._sourceRoot != null) {
-        map20.sourceRoot = this._sourceRoot;
+        map24.sourceRoot = this._sourceRoot;
       }
       if (this._sourcesContents) {
-        map20.sourcesContent = this._generateSourcesContent(map20.sources, map20.sourceRoot);
+        map24.sourcesContent = this._generateSourcesContent(map24.sources, map24.sourceRoot);
       }
-      return map20;
+      return map24;
     };
     SourceMapGenerator.prototype.toString = function SourceMapGenerator_toString() {
       return JSON.stringify(this.toJSON());
@@ -38954,7 +39216,7 @@ var require_source_node = __commonJS({
         line: 1,
         column: 0
       };
-      var map20 = new SourceMapGenerator(aArgs);
+      var map24 = new SourceMapGenerator(aArgs);
       var sourceMappingActive = false;
       var lastOriginalSource = null;
       var lastOriginalLine = null;
@@ -38964,7 +39226,7 @@ var require_source_node = __commonJS({
         generated.code += chunk;
         if (original.source !== null && original.line !== null && original.column !== null) {
           if (lastOriginalSource !== original.source || lastOriginalLine !== original.line || lastOriginalColumn !== original.column || lastOriginalName !== original.name) {
-            map20.addMapping({
+            map24.addMapping({
               source: original.source,
               original: {
                 line: original.line,
@@ -38983,7 +39245,7 @@ var require_source_node = __commonJS({
           lastOriginalName = original.name;
           sourceMappingActive = true;
         } else if (sourceMappingActive) {
-          map20.addMapping({
+          map24.addMapping({
             generated: {
               line: generated.line,
               column: generated.column
@@ -39000,7 +39262,7 @@ var require_source_node = __commonJS({
               lastOriginalSource = null;
               sourceMappingActive = false;
             } else if (sourceMappingActive) {
-              map20.addMapping({
+              map24.addMapping({
                 source: original.source,
                 original: {
                   line: original.line,
@@ -39019,9 +39281,9 @@ var require_source_node = __commonJS({
         }
       });
       this.walkSourceContents(function(sourceFile, sourceContent) {
-        map20.setSourceContent(sourceFile, sourceContent);
+        map24.setSourceContent(sourceFile, sourceContent);
       });
-      return { code: generated.code, map: map20 };
+      return { code: generated.code, map: map24 };
     };
     exports2.SourceNode = SourceNode;
   }
@@ -40101,7 +40363,7 @@ var require_typescript = __commonJS({
         findSuperStatementIndexPath: () => findSuperStatementIndexPath,
         findTokenOnLeftOfPosition: () => findTokenOnLeftOfPosition,
         findUseStrictPrologue: () => findUseStrictPrologue,
-        first: () => first,
+        first: () => first2,
         firstDefined: () => firstDefined,
         firstDefinedIterator: () => firstDefinedIterator,
         firstIterator: () => firstIterator,
@@ -41361,7 +41623,7 @@ var require_typescript = __commonJS({
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map20,
+        map: () => map24,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -42005,7 +42267,7 @@ var require_typescript = __commonJS({
       function clear(array2) {
         array2.length = 0;
       }
-      function map20(array2, f3) {
+      function map24(array2, f3) {
         let result;
         if (array2 !== void 0) {
           result = [];
@@ -42141,12 +42403,12 @@ var require_typescript = __commonJS({
           }
         }
       }
-      function getOrUpdate(map22, key, callback) {
-        if (map22.has(key)) {
-          return map22.get(key);
+      function getOrUpdate(map25, key, callback) {
+        if (map25.has(key)) {
+          return map25.get(key);
         }
         const value = callback();
-        map22.set(key, value);
+        map25.set(key, value);
         return value;
       }
       function tryAddToSet(set2, value) {
@@ -42192,12 +42454,12 @@ var require_typescript = __commonJS({
         }
         return result;
       }
-      function mapEntries(map22, f3) {
-        if (map22 === void 0) {
+      function mapEntries(map25, f3) {
+        if (map25 === void 0) {
           return void 0;
         }
         const result = /* @__PURE__ */ new Map();
-        map22.forEach((value, key) => {
+        map25.forEach((value, key) => {
           const [newKey, newValue] = f3(key, value);
           result.set(newKey, newValue);
         });
@@ -42467,7 +42729,7 @@ var require_typescript = __commonJS({
         }
         return void 0;
       }
-      function first(array2) {
+      function first2(array2) {
         Debug.assert(array2.length !== 0);
         return array2[0];
       }
@@ -42546,16 +42808,16 @@ var require_typescript = __commonJS({
         return initial;
       }
       var hasOwnProperty = Object.prototype.hasOwnProperty;
-      function hasProperty(map22, key) {
-        return hasOwnProperty.call(map22, key);
+      function hasProperty(map25, key) {
+        return hasOwnProperty.call(map25, key);
       }
-      function getProperty(map22, key) {
-        return hasOwnProperty.call(map22, key) ? map22[key] : void 0;
+      function getProperty(map25, key) {
+        return hasOwnProperty.call(map25, key) ? map25[key] : void 0;
       }
-      function getOwnKeys(map22) {
+      function getOwnKeys(map25) {
         const keys = [];
-        for (const key in map22) {
-          if (hasOwnProperty.call(map22, key)) {
+        for (const key in map25) {
+          if (hasOwnProperty.call(map25, key)) {
             keys.push(key);
           }
         }
@@ -42587,10 +42849,10 @@ var require_typescript = __commonJS({
         }
         return result;
       }
-      function arrayFrom(iterator, map22) {
+      function arrayFrom(iterator, map25) {
         const result = [];
         for (const value of iterator) {
-          result.push(map22 ? map22(value) : value);
+          result.push(map25 ? map25(value) : value);
         }
         return result;
       }
@@ -42670,24 +42932,24 @@ var require_typescript = __commonJS({
         }
         return result;
       }
-      function extend2(first2, second) {
+      function extend2(first22, second) {
         const result = {};
         for (const id in second) {
           if (hasOwnProperty.call(second, id)) {
             result[id] = second[id];
           }
         }
-        for (const id in first2) {
-          if (hasOwnProperty.call(first2, id)) {
-            result[id] = first2[id];
+        for (const id in first22) {
+          if (hasOwnProperty.call(first22, id)) {
+            result[id] = first22[id];
           }
         }
         return result;
       }
-      function copyProperties(first2, second) {
+      function copyProperties(first22, second) {
         for (const id in second) {
           if (hasOwnProperty.call(second, id)) {
-            first2[id] = second[id];
+            first22[id] = second[id];
           }
         }
       }
@@ -42695,10 +42957,10 @@ var require_typescript = __commonJS({
         return fn == null ? void 0 : fn.bind(obj);
       }
       function createMultiMap() {
-        const map22 = /* @__PURE__ */ new Map();
-        map22.add = multiMapAdd;
-        map22.remove = multiMapRemove;
-        return map22;
+        const map25 = /* @__PURE__ */ new Map();
+        map25.add = multiMapAdd;
+        map25.remove = multiMapRemove;
+        return map25;
       }
       function multiMapAdd(key, value) {
         let values = this.get(key);
@@ -42914,13 +43176,13 @@ var require_typescript = __commonJS({
         };
       }
       function memoizeOne(callback) {
-        const map22 = /* @__PURE__ */ new Map();
+        const map25 = /* @__PURE__ */ new Map();
         return (arg) => {
           const key = `${typeof arg}:${arg}`;
-          let value = map22.get(key);
-          if (value === void 0 && !map22.has(key)) {
+          let value = map25.get(key);
+          if (value === void 0 && !map25.has(key)) {
             value = callback(arg);
-            map22.set(key, value);
+            map25.set(key, value);
           }
           return value;
         };
@@ -43534,7 +43796,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
         }
         Debug2.getFunctionName = getFunctionName;
         function formatSymbol(symbol2) {
-          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map20(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
+          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map24(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
         }
         Debug2.formatSymbol = formatSymbol;
         function formatEnum(value = 0, enumObject, isFlags) {
@@ -43960,7 +44222,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
               case 1:
                 return zipWith(
                   this.sources,
-                  this.targets || map20(this.sources, () => "any"),
+                  this.targets || map24(this.sources, () => "any"),
                   (s2, t2) => `${s2.__debugTypeToString()} -> ${typeof t2 === "string" ? t2 : t2.__debugTypeToString()}`
                 ).join(", ");
               case 2:
@@ -44595,10 +44857,10 @@ ${lanes.join("\n")}
         }
       }
       function formatDisjunction(alternatives) {
-        return map20(alternatives, formatAlternative).join(" || ") || "*";
+        return map24(alternatives, formatAlternative).join(" || ") || "*";
       }
       function formatAlternative(comparators) {
-        return map20(comparators, formatComparator).join(" ");
+        return map24(comparators, formatComparator).join(" ");
       }
       function formatComparator(comparator) {
         return `${comparator.operator}${comparator.operand}`;
@@ -51458,20 +51720,20 @@ ${lanes.join("\n")}
       var commentDirectiveRegExSingleLine = /^\/\/\/?\s*@(ts-expect-error|ts-ignore)/;
       var commentDirectiveRegExMultiLine = /^(?:\/|\*)*\s*@(ts-expect-error|ts-ignore)/;
       var jsDocSeeOrLink = /@(?:see|link)/i;
-      function lookupInUnicodeMap(code, map22) {
-        if (code < map22[0]) {
+      function lookupInUnicodeMap(code, map25) {
+        if (code < map25[0]) {
           return false;
         }
         let lo = 0;
-        let hi = map22.length;
+        let hi = map25.length;
         let mid;
         while (lo + 1 < hi) {
           mid = lo + (hi - lo) / 2;
           mid -= mid % 2;
-          if (map22[mid] <= code && code <= map22[mid + 1]) {
+          if (map25[mid] <= code && code <= map25[mid + 1]) {
             return true;
           }
-          if (code < map22[mid]) {
+          if (code < map25[mid]) {
             hi = mid;
           } else {
             lo = mid + 2;
@@ -56275,8 +56537,8 @@ ${lanes.join("\n")}
           node = node.parent;
         }
       }
-      function forEachEntry(map22, callback) {
-        const iterator = map22.entries();
+      function forEachEntry(map25, callback) {
+        const iterator = map25.entries();
         for (const [key, value] of iterator) {
           const result = callback(value, key);
           if (result) {
@@ -56285,8 +56547,8 @@ ${lanes.join("\n")}
         }
         return void 0;
       }
-      function forEachKey(map22, callback) {
-        const iterator = map22.keys();
+      function forEachKey(map25, callback) {
+        const iterator = map25.keys();
         for (const key of iterator) {
           const result = callback(key);
           if (result) {
@@ -56590,9 +56852,9 @@ ${lanes.join("\n")}
         }
         if (node.kind === 353) {
           sourceFile ?? (sourceFile = getSourceFileOfNode(node));
-          const first2 = firstOrUndefined(getNodeChildren(node, sourceFile));
-          if (first2) {
-            return getTokenPosOfNode(first2, sourceFile, includeJsDoc);
+          const first22 = firstOrUndefined(getNodeChildren(node, sourceFile));
+          if (first22) {
+            return getTokenPosOfNode(first22, sourceFile, includeJsDoc);
           }
         }
         return skipTrivia(
@@ -61438,28 +61700,28 @@ ${lanes.join("\n")}
         }
         return true;
       }
-      function clearMap(map22, onDeleteValue) {
-        map22.forEach(onDeleteValue);
-        map22.clear();
+      function clearMap(map25, onDeleteValue) {
+        map25.forEach(onDeleteValue);
+        map25.clear();
       }
-      function mutateMapSkippingNewValues(map22, newMap, options) {
+      function mutateMapSkippingNewValues(map25, newMap, options) {
         const { onDeleteValue, onExistingValue } = options;
-        map22.forEach((existingValue, key) => {
+        map25.forEach((existingValue, key) => {
           var _a2;
           if (!(newMap == null ? void 0 : newMap.has(key))) {
-            map22.delete(key);
+            map25.delete(key);
             onDeleteValue(existingValue, key);
           } else if (onExistingValue) {
             onExistingValue(existingValue, (_a2 = newMap.get) == null ? void 0 : _a2.call(newMap, key), key);
           }
         });
       }
-      function mutateMap(map22, newMap, options) {
-        mutateMapSkippingNewValues(map22, newMap, options);
+      function mutateMap(map25, newMap, options) {
+        mutateMapSkippingNewValues(map25, newMap, options);
         const { createNewValue } = options;
         newMap == null ? void 0 : newMap.forEach((valueInNewMap, key) => {
-          if (!map22.has(key)) {
-            map22.set(key, createNewValue(key, valueInNewMap));
+          if (!map25.has(key)) {
+            map25.set(key, createNewValue(key, valueInNewMap));
           }
         });
       }
@@ -62525,7 +62787,7 @@ ${lanes.join("\n")}
         currentDirectory = normalizePath(currentDirectory);
         const absolutePath = combinePaths(currentDirectory, path2);
         return {
-          includeFilePatterns: map20(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
+          includeFilePatterns: map24(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
           includeFilePattern: getRegularExpressionForWildcard(includes, absolutePath, "files"),
           includeDirectoryPattern: getRegularExpressionForWildcard(includes, absolutePath, "directories"),
           excludePattern: getRegularExpressionForWildcard(excludes, absolutePath, "exclude"),
@@ -63160,10 +63422,10 @@ ${lanes.join("\n")}
       }
       function arrayIsHomogeneous(array2, comparer = equateValues) {
         if (array2.length < 2) return true;
-        const first2 = array2[0];
+        const first22 = array2[0];
         for (let i2 = 1, length2 = array2.length; i2 < length2; i2++) {
           const target = array2[i2];
-          if (!comparer(first2, target)) return false;
+          if (!comparer(first22, target)) return false;
         }
         return true;
       }
@@ -65035,7 +65297,7 @@ ${lanes.join("\n")}
           if (isObjectBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createObjectLiteralExpression(map20(node.elements, convertToObjectAssignmentElement)),
+                factory2.createObjectLiteralExpression(map24(node.elements, convertToObjectAssignmentElement)),
                 node
               ),
               node
@@ -65047,7 +65309,7 @@ ${lanes.join("\n")}
           if (isArrayBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createArrayLiteralExpression(map20(node.elements, convertToArrayAssignmentElement)),
+                factory2.createArrayLiteralExpression(map24(node.elements, convertToArrayAssignmentElement)),
                 node
               ),
               node
@@ -72408,12 +72670,12 @@ ${lanes.join("\n")}
         if (node.kind === 353) {
           Debug.fail("Should not need to re-set the children of a SyntaxList.");
         }
-        let map22 = sourceFileToNodeChildren.get(sourceFile);
-        if (map22 === void 0) {
-          map22 = /* @__PURE__ */ new WeakMap();
-          sourceFileToNodeChildren.set(sourceFile, map22);
+        let map25 = sourceFileToNodeChildren.get(sourceFile);
+        if (map25 === void 0) {
+          map25 = /* @__PURE__ */ new WeakMap();
+          sourceFileToNodeChildren.set(sourceFile, map25);
         }
-        map22.set(node, children);
+        map25.set(node, children);
         return children;
       }
       function unsetNodeChildren(node, origSourceFile) {
@@ -72424,10 +72686,10 @@ ${lanes.join("\n")}
         (_a2 = sourceFileToNodeChildren.get(origSourceFile)) == null ? void 0 : _a2.delete(node);
       }
       function transferSourceFileChildren(sourceFile, targetSourceFile) {
-        const map22 = sourceFileToNodeChildren.get(sourceFile);
-        if (map22 !== void 0) {
+        const map25 = sourceFileToNodeChildren.get(sourceFile);
+        if (map25 !== void 0) {
           sourceFileToNodeChildren.delete(sourceFile);
-          sourceFileToNodeChildren.set(targetSourceFile, map22);
+          sourceFileToNodeChildren.set(targetSourceFile, map25);
         }
       }
       function createEmptyExports(factory2) {
@@ -72537,7 +72799,7 @@ ${lanes.join("\n")}
       }
       function createForOfBindingStatement(factory2, node, boundValue) {
         if (isVariableDeclarationList(node)) {
-          const firstDeclaration = first(node.declarations);
+          const firstDeclaration = first2(node.declarations);
           const updatedDeclaration = factory2.updateVariableDeclaration(
             firstDeclaration,
             firstDeclaration.name,
@@ -72869,7 +73131,7 @@ ${lanes.join("\n")}
               if (some(helperNames)) {
                 helperNames.sort(compareStringsCaseSensitive);
                 const namedBindings = nodeFactory.createNamedImports(
-                  map20(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
+                  map24(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
                     /*isTypeOnly*/
                     false,
                     /*propertyName*/
@@ -78055,9 +78317,9 @@ ${lanes.join("\n")}
               return 0;
             }
           }
-          const first2 = token();
+          const first22 = token();
           const second = nextToken();
-          if (first2 === 21) {
+          if (first22 === 21) {
             if (second === 22) {
               const third = nextToken();
               switch (third) {
@@ -78101,7 +78363,7 @@ ${lanes.join("\n")}
             return 0;
           } else {
             Debug.assert(
-              first2 === 30
+              first22 === 30
               /* LessThanToken */
             );
             if (!isIdentifier2() && token() !== 87) {
@@ -83072,7 +83334,7 @@ ${lanes.join("\n")}
               break;
             }
             case "amd-dependency": {
-              context.amdDependencies = map20(
+              context.amdDependencies = map24(
                 toArray(entryOrList),
                 (x2) => ({ name: x2.arguments.name, path: x2.arguments.path })
               );
@@ -85421,7 +85683,7 @@ ${lanes.join("\n")}
       function convertToTSConfig(configParseResult, configFileName, host) {
         var _a2, _b, _c;
         const getCanonicalFileName = createGetCanonicalFileName(host.useCaseSensitiveFileNames);
-        const files = map20(
+        const files = map24(
           filter3(
             configParseResult.fileNames,
             !((_b = (_a2 = configParseResult.options.configFile) == null ? void 0 : _a2.configFileSpecs) == null ? void 0 : _b.validatedIncludeSpecs) ? returnTrue : matchesSpecs(
@@ -85451,7 +85713,7 @@ ${lanes.join("\n")}
             version: void 0
           },
           watchOptions: watchOptionMap && optionMapToObject(watchOptionMap),
-          references: map20(configParseResult.projectReferences, (r2) => ({ ...r2, path: r2.originalPath ? r2.originalPath : "", originalPath: void 0 })),
+          references: map24(configParseResult.projectReferences, (r2) => ({ ...r2, path: r2.originalPath ? r2.originalPath : "", originalPath: void 0 })),
           files: length(files) ? files : void 0,
           ...((_c = configParseResult.options.configFile) == null ? void 0 : _c.configFileSpecs) ? {
             include: filterSameAsDefaultInclude(configParseResult.options.configFile.configFileSpecs.validatedIncludeSpecs),
@@ -85739,17 +86001,17 @@ ${lanes.join("\n")}
         function formatValueOrArray(settingName, value) {
           const option = optionDeclarations.filter((c) => c.name === settingName)[0];
           if (!option) Debug.fail(`No option named ${settingName}?`);
-          const map22 = option.type instanceof Map ? option.type : void 0;
+          const map25 = option.type instanceof Map ? option.type : void 0;
           if (isArray(value)) {
             const map32 = "element" in option && option.element.type instanceof Map ? option.element.type : void 0;
             return `[${value.map((v) => formatSingleValue(v, map32)).join(", ")}]`;
           } else {
-            return formatSingleValue(value, map22);
+            return formatSingleValue(value, map25);
           }
         }
-        function formatSingleValue(value, map22) {
-          if (map22) {
-            value = getNameOfCompilerOptionValue(value, map22) ?? Debug.fail(`No matching value of ${value}`);
+        function formatSingleValue(value, map25) {
+          if (map25) {
+            value = getNameOfCompilerOptionValue(value, map25) ?? Debug.fail(`No matching value of ${value}`);
           }
           return JSON.stringify(value);
         }
@@ -86140,7 +86402,7 @@ ${lanes.join("\n")}
             const setPropertyInResultIfNotUndefined = (propertyName) => {
               if (ownConfig.raw[propertyName]) return;
               if (extendsRaw[propertyName]) {
-                result[propertyName] = map20(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
+                result[propertyName] = map24(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
                   relativeDifference || (relativeDifference = convertToRelativePath(getDirectoryPath(extendedConfigPath), basePath, createGetCanonicalFileName(host.useCaseSensitiveFileNames))),
                   path2
                 ));
@@ -86449,7 +86711,7 @@ ${lanes.join("\n")}
         }
       }
       function convertJsonOptionOfListType(option, values, basePath, errors, propertyAssignment, valueExpression, sourceFile) {
-        return filter3(map20(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
+        return filter3(map24(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
       }
       var invalidTrailingRecursionPattern = /(?:^|\/)\*\*\/?$/;
       var wildcardDirectoryPattern = /^[^*?]*(?=\/[^/]*[*?])/;
@@ -86489,7 +86751,7 @@ ${lanes.join("\n")}
                   ".json"
                   /* Json */
                 ));
-                const includeFilePatterns = map20(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
+                const includeFilePatterns = map24(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
                 jsonOnlyIncludeRegexes = includeFilePatterns ? includeFilePatterns.map((pattern) => getRegexFromPattern(pattern, host.useCaseSensitiveFileNames)) : emptyArray;
               }
               const includeIndex = findIndex(jsonOnlyIncludeRegexes, (re) => re.test(file2));
@@ -93789,7 +94051,7 @@ ${lanes.join("\n")}
         }
         const normalizedSourcePaths = getPathsRelativeToRootDirs(sourceDirectory, rootDirs, getCanonicalFileName);
         const relativePaths = flatMap(normalizedSourcePaths, (sourcePath) => {
-          return map20(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
+          return map24(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
         });
         const shortest = min(relativePaths, compareNumberOfDirectorySeparators);
         if (!shortest) {
@@ -95654,11 +95916,11 @@ ${lanes.join("\n")}
             addRelatedInfo(err, !length(err.relatedInformation) ? leadingMessage : followOnMessage);
           }
         }
-        function combineSymbolTables(first2, second) {
-          if (!(first2 == null ? void 0 : first2.size)) return second;
-          if (!(second == null ? void 0 : second.size)) return first2;
+        function combineSymbolTables(first22, second) {
+          if (!(first22 == null ? void 0 : first22.size)) return second;
+          if (!(second == null ? void 0 : second.size)) return first22;
           const combined = createSymbolTable();
-          mergeSymbolTable(combined, first2);
+          mergeSymbolTable(combined, first22);
           mergeSymbolTable(combined, second);
           return combined;
         }
@@ -96834,7 +97096,7 @@ ${lanes.join("\n")}
               const exportedSymbol = exports22 ? find(symbolsToArray(exports22), (symbol2) => !!getSymbolIfSameReference(symbol2, localSymbol)) : void 0;
               const diagnostic = exportedSymbol ? error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_exported_as_2, moduleName, declarationName, symbolToString(exportedSymbol)) : error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_not_exported, moduleName, declarationName);
               if (localSymbol.declarations) {
-                addRelatedInfo(diagnostic, ...map20(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
+                addRelatedInfo(diagnostic, ...map24(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
               }
             }
           } else {
@@ -97994,7 +98256,7 @@ ${lanes.join("\n")}
           }
         }
         function getVariableDeclarationOfObjectLiteral(symbol2, meaning) {
-          const firstDecl = !!length(symbol2.declarations) && first(symbol2.declarations);
+          const firstDecl = !!length(symbol2.declarations) && first2(symbol2.declarations);
           if (meaning & 111551 && firstDecl && firstDecl.parent && isVariableDeclaration(firstDecl.parent)) {
             if (isObjectLiteralExpression(firstDecl) && firstDecl === firstDecl.parent.initializer || isTypeLiteralNode(firstDecl) && firstDecl === firstDecl.parent.type) {
               return getSymbolOfDeclaration(firstDecl.parent);
@@ -99615,7 +99877,7 @@ ${lanes.join("\n")}
               const types3 = type.types;
               const templateHead = factory.createTemplateHead(texts[0]);
               const templateSpans = factory.createNodeArray(
-                map20(types3, (t2, i2) => factory.createTemplateLiteralTypeSpan(
+                map24(types3, (t2, i2) => factory.createTemplateLiteralTypeSpan(
                   typeToTypeNodeHelper(t2, context),
                   (i2 < types3.length - 1 ? factory.createTemplateMiddle : factory.createTemplateTail)(texts[i2 + 1])
                 ))
@@ -99984,7 +100246,7 @@ ${lanes.join("\n")}
               }
               const abstractSignatures = filter3(resolved.constructSignatures, (signature) => !!(signature.flags & 4));
               if (some(abstractSignatures)) {
-                const types3 = map20(abstractSignatures, getOrCreateTypeFromSignature);
+                const types3 = map24(abstractSignatures, getOrCreateTypeFromSignature);
                 const typeElementCount = resolved.callSignatures.length + (resolved.constructSignatures.length - abstractSignatures.length) + resolved.indexInfos.length + // exclude `prototype` when writing a class expression as a type literal, as per
                 // the logic in `createTypeNodesFromResolvedType`.
                 (context.flags & 2048 ? countWhere(resolved.properties, (p) => !(p.flags & 4194304)) : length(resolved.properties));
@@ -100202,7 +100464,7 @@ ${lanes.join("\n")}
                   const newComponents = filter3(indexInfo.components, (e2) => {
                     return !hasLateBindableName(e2);
                   });
-                  return map20(newComponents, (e2) => {
+                  return map24(newComponents, (e2) => {
                     trackComputedName(e2.name.expression, context2.enclosingDeclaration, context2);
                     return setTextRange2(
                       context2,
@@ -100337,7 +100599,7 @@ ${lanes.join("\n")}
             context.enclosingDeclaration = void 0;
             if (context.tracker.canTrackSymbol && isLateBoundName(propertySymbol.escapedName)) {
               if (propertySymbol.declarations) {
-                const decl = first(propertySymbol.declarations);
+                const decl = first2(propertySymbol.declarations);
                 if (hasLateBindableName(decl)) {
                   if (isBinaryExpression(decl)) {
                     const name2 = getNameOfDeclaration(decl);
@@ -101011,7 +101273,7 @@ ${lanes.join("\n")}
             const parameterDeclaration = getEffectiveParameterDeclaration(parameterSymbol);
             const parameterType = getTypeOfSymbol(parameterSymbol);
             const parameterTypeNode = serializeTypeForDeclaration(context, parameterDeclaration, parameterType, parameterSymbol);
-            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map20(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
+            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map24(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
             const isRest = parameterDeclaration && isRestParameter(parameterDeclaration) || getCheckFlags(parameterSymbol) & 32768;
             const dotDotDotToken = isRest ? factory.createToken(
               26
@@ -101209,7 +101471,7 @@ ${lanes.join("\n")}
             let typeParameterNodes;
             const targetSymbol = getTargetSymbol(symbol2);
             if (targetSymbol.flags & (32 | 64 | 524288)) {
-              typeParameterNodes = factory.createNodeArray(map20(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
+              typeParameterNodes = factory.createNodeArray(map24(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
             }
             return typeParameterNodes;
           }
@@ -101234,7 +101496,7 @@ ${lanes.join("\n")}
                 const params = getTypeParametersOfClassOrInterface(
                   parentSymbol.flags & 2097152 ? resolveAlias(parentSymbol) : parentSymbol
                 );
-                typeParameterNodes = mapToTypeNodes(map20(params, (t2) => getMappedType(t2, nextSymbol.links.mapper)), context);
+                typeParameterNodes = mapToTypeNodes(map24(params, (t2) => getMappedType(t2, nextSymbol.links.mapper)), context);
               } else {
                 typeParameterNodes = typeParametersToTypeParameterDeclarations(symbol2, context);
               }
@@ -101288,7 +101550,7 @@ ${lanes.join("\n")}
               const isBundle2 = !!compilerOptions.outFile;
               const { moduleResolverHost } = context.tracker;
               const specifierCompilerOptions = isBundle2 ? { ...compilerOptions, baseUrl: moduleResolverHost.getCommonSourceDirectory() } : compilerOptions;
-              specifier = first(getModuleSpecifiers(
+              specifier = first2(getModuleSpecifiers(
                 symbol2,
                 checker,
                 specifierCompilerOptions,
@@ -102057,7 +102319,7 @@ ${lanes.join("\n")}
             }
             function getNamesOfDeclaration(statement) {
               if (isVariableStatement(statement)) {
-                return filter3(map20(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
+                return filter3(map24(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
               }
               return filter3([getNameOfDeclaration(statement)], isIdentifierAndNotUndefined);
             }
@@ -102083,7 +102345,7 @@ ${lanes.join("\n")}
                           void 0,
                           /*isTypeOnly*/
                           false,
-                          factory.createNamedExports(map20(flatMap(excessExports, (e2) => getNamesOfDeclaration(e2)), (id) => factory.createExportSpecifier(
+                          factory.createNamedExports(map24(flatMap(excessExports, (e2) => getNamesOfDeclaration(e2)), (id) => factory.createExportSpecifier(
                             /*isTypeOnly*/
                             false,
                             /*propertyName*/
@@ -102503,7 +102765,7 @@ ${lanes.join("\n")}
               var _a22;
               const aliasType = getDeclaredTypeOfTypeAlias(symbol2);
               const typeParams = getSymbolLinks(symbol2).typeParameters;
-              const typeParamDecls = map20(typeParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map24(typeParams, (p) => typeParameterToDeclaration(p, context));
               const jsdocAliasDecl = (_a22 = symbol2.declarations) == null ? void 0 : _a22.find(isJSDocTypeAlias);
               const commentText = getTextOfJSDocComment(jsdocAliasDecl ? jsdocAliasDecl.comment || jsdocAliasDecl.parent.comment : void 0);
               const restoreFlags = saveRestoreFlags(context);
@@ -102534,7 +102796,7 @@ ${lanes.join("\n")}
               context.approximateLength += 14 + internalSymbolName.length;
               const interfaceType = getDeclaredTypeOfClassOrInterface(symbol2);
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map20(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map24(localParams, (p) => typeParameterToDeclaration(p, context));
               const baseTypes = getBaseTypes(interfaceType);
               const baseType = length(baseTypes) ? getIntersectionType(baseTypes) : void 0;
               const members = serializePropertySymbolsForClassOrInterface(
@@ -102847,7 +103109,7 @@ ${lanes.join("\n")}
                 addingDeclare = oldAddingDeclare;
                 const declarations = results;
                 results = oldResults;
-                const defaultReplaced = map20(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
+                const defaultReplaced = map24(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
                   /*modifiers*/
                   void 0,
                   /*isTypeOnly*/
@@ -102866,7 +103128,7 @@ ${lanes.join("\n")}
                   d,
                   32
                   /* Export */
-                )) ? map20(defaultReplaced, removeExportModifier) : defaultReplaced;
+                )) ? map24(defaultReplaced, removeExportModifier) : defaultReplaced;
                 fakespace = factory.updateModuleDeclaration(
                   fakespace,
                   fakespace.modifiers,
@@ -102914,7 +103176,7 @@ ${lanes.join("\n")}
                 }
                 return cleanup(factory.createExpressionWithTypeArguments(
                   expr,
-                  map20(e2.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
+                  map24(e2.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
                 ));
                 function cleanup(result2) {
                   context.enclosingDeclaration = oldEnclosing;
@@ -102933,7 +103195,7 @@ ${lanes.join("\n")}
               const oldEnclosing = context.enclosingDeclaration;
               context.enclosingDeclaration = originalDecl || oldEnclosing;
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map20(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map24(localParams, (p) => typeParameterToDeclaration(p, context));
               forEach(localParams, (p) => context.approximateLength += symbolName(p.symbol).length);
               const classType = getTypeWithThisArgument(getDeclaredTypeOfClassOrInterface(symbol2));
               const baseTypes = getBaseTypes(classType);
@@ -102944,7 +103206,7 @@ ${lanes.join("\n")}
               const staticBaseType = isClass ? getBaseConstructorTypeOfClass(staticType) : anyType2;
               context.approximateLength += (length(baseTypes) ? 8 : 0) + (length(implementsExpressions) ? 11 : 0);
               const heritageClauses = [
-                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map20(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
+                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map24(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
                 ...!length(implementsExpressions) ? [] : [factory.createHeritageClause(119, implementsExpressions)]
               ];
               const symbolProps = getNonInheritedProperties(classType, baseTypes, getPropertiesOfType(classType));
@@ -103334,9 +103596,9 @@ ${lanes.join("\n")}
               );
               if (target && length(target.declarations) && some(target.declarations, (d) => getSourceFileOfNode(d) === getSourceFileOfNode(enclosingDeclaration))) {
                 const expr = aliasDecl && (isExportAssignment(aliasDecl) || isBinaryExpression(aliasDecl) ? getExportAssignmentExpression(aliasDecl) : getPropertyAssignmentAliasLikeExpression(aliasDecl));
-                const first2 = expr && isEntityNameExpression(expr) ? getFirstNonModuleExportsIdentifier(expr) : void 0;
-                const referenced = first2 && resolveEntityName(
-                  first2,
+                const first22 = expr && isEntityNameExpression(expr) ? getFirstNonModuleExportsIdentifier(expr) : void 0;
+                const referenced = first22 && resolveEntityName(
+                  first22,
                   -1,
                   /*ignoreErrors*/
                   true,
@@ -103363,8 +103625,8 @@ ${lanes.join("\n")}
                     )
                   ));
                 } else {
-                  if (first2 === expr && first2) {
-                    serializeExportSpecifier(name2, idText(first2));
+                  if (first22 === expr && first22) {
+                    serializeExportSpecifier(name2, idText(first22));
                   } else if (expr && isClassExpression(expr)) {
                     serializeExportSpecifier(name2, getInternalSymbolName(target, symbolName(target)));
                   } else {
@@ -103773,7 +104035,7 @@ ${lanes.join("\n")}
               let typeArgs;
               let reference;
               if (t2.target && isSymbolAccessibleByFlags(t2.target.symbol, enclosingDeclaration, flags)) {
-                typeArgs = map20(getTypeArguments(t2), (t22) => typeToTypeNodeHelper(t22, context));
+                typeArgs = map24(getTypeArguments(t2), (t22) => typeToTypeNodeHelper(t22, context));
                 reference = symbolToExpression(
                   t2.target.symbol,
                   context,
@@ -104237,7 +104499,7 @@ ${lanes.join("\n")}
         }
         function getTypeOfPrototypeProperty(prototype) {
           const classType = getDeclaredTypeOfSymbol(getParentOfSymbol(prototype));
-          return classType.typeParameters ? createTypeReference(classType, map20(classType.typeParameters, (_2) => anyType2)) : classType;
+          return classType.typeParameters ? createTypeReference(classType, map24(classType.typeParameters, (_2) => anyType2)) : classType;
         }
         function getTypeOfPropertyOfType(type, name2) {
           const prop = getPropertyOfType(type, name2);
@@ -104285,7 +104547,7 @@ ${lanes.join("\n")}
           if (source.flags & 1048576) {
             return mapType2(source, (t2) => getRestType(t2, properties, symbol2));
           }
-          let omitKeyType = getUnionType(map20(properties, getLiteralTypeFromPropertyName));
+          let omitKeyType = getUnionType(map24(properties, getLiteralTypeFromPropertyName));
           const spreadableProperties = [];
           const unspreadableToRestKeys = [];
           for (const prop of getPropertiesOfType(source)) {
@@ -105011,9 +105273,9 @@ ${lanes.join("\n")}
           if (elements.length === 0 || elements.length === 1 && restElement) {
             return languageVersion >= 2 ? createIterableType(anyType2) : anyArrayType;
           }
-          const elementTypes = map20(elements, (e2) => isOmittedExpression(e2) ? anyType2 : getTypeFromBindingElement(e2, includePatternInType, reportErrors2));
+          const elementTypes = map24(elements, (e2) => isOmittedExpression(e2) ? anyType2 : getTypeFromBindingElement(e2, includePatternInType, reportErrors2));
           const minLength = findLastIndex(elements, (e2) => !(e2 === restElement || isOmittedExpression(e2) || hasDefaultValue(e2)), elements.length - 1) + 1;
-          const elementFlags = map20(
+          const elementFlags = map24(
             elements,
             (e2, i2) => e2 === restElement ? 4 : i2 >= minLength ? 2 : 1
             /* Required */
@@ -105695,7 +105957,7 @@ ${lanes.join("\n")}
         }
         function getInstantiatedConstructorsForTypeArguments(type, typeArgumentNodes, location) {
           const signatures = getConstructorsForTypeArguments(type, typeArgumentNodes, location);
-          const typeArguments = map20(typeArgumentNodes, getTypeFromTypeNode);
+          const typeArguments = map24(typeArgumentNodes, getTypeFromTypeNode);
           return sameMap(signatures, (sig) => some(sig.typeParameters) ? getSignatureInstantiation(sig, typeArguments, isInJSFile(location)) : sig);
         }
         function getBaseConstructorTypeOfClass(type) {
@@ -106526,14 +106788,14 @@ ${lanes.join("\n")}
             if (isTupleType(restType)) {
               return [expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol)];
             } else if (!skipUnionExpanding && restType.flags & 1048576 && every(restType.types, isTupleType)) {
-              return map20(restType.types, (t2) => expandSignatureParametersWithTupleMembers(t2, restIndex, restSymbol));
+              return map24(restType.types, (t2) => expandSignatureParametersWithTupleMembers(t2, restIndex, restSymbol));
             }
           }
           return [sig.parameters];
           function expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol) {
             const elementTypes = getTypeArguments(restType);
             const associatedNames = getUniqAssociatedNamesFromTupleType(restType, restSymbol);
-            const restParams = map20(elementTypes, (t2, i2) => {
+            const restParams = map24(elementTypes, (t2, i2) => {
               const name2 = associatedNames && associatedNames[i2] ? associatedNames[i2] : getParameterNameAtPosition(sig, restIndex + i2, restType);
               const flags = restType.target.elementFlags[i2];
               const checkFlags = flags & 12 ? 32768 : flags & 2 ? 16384 : 0;
@@ -106544,7 +106806,7 @@ ${lanes.join("\n")}
             return concatenate(sig.parameters.slice(0, restIndex), restParams);
           }
           function getUniqAssociatedNamesFromTupleType(type, restSymbol) {
-            const names = map20(type.target.labeledElementDeclarations, (labeledElement, i2) => getTupleElementLabel(labeledElement, i2, type.target.elementFlags[i2], restSymbol));
+            const names = map24(type.target.labeledElementDeclarations, (labeledElement, i2) => getTupleElementLabel(labeledElement, i2, type.target.elementFlags[i2], restSymbol));
             if (names) {
               const duplicates = [];
               const uniqueNames = /* @__PURE__ */ new Set();
@@ -106715,7 +106977,7 @@ ${lanes.join("\n")}
               if (signatures !== masterList) {
                 const signature = signatures[0];
                 Debug.assert(!!signature, "getUnionSignatures bails early on empty signature lists and should not have empty lists on second pass");
-                results = !!signature.typeParameters && some(results, (s2) => !!s2.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s2.typeParameters)) ? void 0 : map20(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
+                results = !!signature.typeParameters && some(results, (s2) => !!s2.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s2.typeParameters)) ? void 0 : map24(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
                 if (!results) {
                   break;
                 }
@@ -106838,7 +107100,7 @@ ${lanes.join("\n")}
             for (const info of sourceInfos) {
               const indexType = info.keyType;
               if (every(types3, (t2) => !!getIndexInfoOfType(t2, indexType))) {
-                result.push(createIndexInfo(indexType, getUnionType(map20(types3, (t2) => getIndexTypeOfType(t2, indexType))), some(types3, (t2) => getIndexInfoOfType(t2, indexType).isReadonly)));
+                result.push(createIndexInfo(indexType, getUnionType(map24(types3, (t2) => getIndexTypeOfType(t2, indexType))), some(types3, (t2) => getIndexInfoOfType(t2, indexType).isReadonly)));
               }
             }
             return result;
@@ -106846,12 +107108,12 @@ ${lanes.join("\n")}
           return emptyArray;
         }
         function resolveUnionTypeMembers(type) {
-          const callSignatures = getUnionSignatures(map20(type.types, (t2) => t2 === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
+          const callSignatures = getUnionSignatures(map24(type.types, (t2) => t2 === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
             t2,
             0
             /* Call */
           )));
-          const constructSignatures = getUnionSignatures(map20(type.types, (t2) => getSignaturesOfType(
+          const constructSignatures = getUnionSignatures(map24(type.types, (t2) => getSignaturesOfType(
             t2,
             1
             /* Construct */
@@ -106868,7 +107130,7 @@ ${lanes.join("\n")}
             1
             /* Construct */
           ).length > 0);
-          const mixinFlags = map20(types3, isMixinConstructorType);
+          const mixinFlags = map24(types3, isMixinConstructorType);
           if (constructorTypeCount > 0 && constructorTypeCount === countWhere(mixinFlags, (b) => b)) {
             const firstMixinIndex = mixinFlags.indexOf(
               /*searchElement*/
@@ -106909,7 +107171,7 @@ ${lanes.join("\n")}
                 /* Construct */
               );
               if (signatures.length && mixinCount > 0) {
-                signatures = map20(signatures, (s2) => {
+                signatures = map24(signatures, (s2) => {
                   const clone22 = cloneSignature(s2);
                   clone22.resolvedReturnType = includeMixinType(getReturnTypeOfSignature(s2), types3, mixinFlags, i2);
                   return clone22;
@@ -107698,7 +107960,7 @@ ${lanes.join("\n")}
               return getBaseConstraint(getSubstitutionIntersection(t2));
             }
             if (isGenericTupleType(t2)) {
-              const newElements = map20(getElementTypes(t2), (v, i2) => {
+              const newElements = map24(getElementTypes(t2), (v, i2) => {
                 const constraint = v.flags & 262144 && t2.target.elementFlags[i2] & 8 && getBaseConstraint(v) || v;
                 return constraint !== v && everyType(constraint, (c) => isArrayOrTupleType(c) && !isGenericTupleType(c)) ? constraint : v;
               });
@@ -108134,7 +108396,7 @@ ${lanes.join("\n")}
               }
             }
           }
-          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map20(applicableInfos, (info) => info.type)), reduceLeft(
+          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map24(applicableInfos, (info) => info.type)), reduceLeft(
             applicableInfos,
             (isReadonly, info) => isReadonly && info.isReadonly,
             /*initial*/
@@ -108534,7 +108796,7 @@ ${lanes.join("\n")}
               return errorType;
             }
             let type = signature.target ? instantiateType(getReturnTypeOfSignature(signature.target), signature.mapper) : signature.compositeSignatures ? instantiateType(getUnionOrIntersectionType(
-              map20(signature.compositeSignatures, getReturnTypeOfSignature),
+              map24(signature.compositeSignatures, getReturnTypeOfSignature),
               signature.compositeKind,
               2
               /* Subtype */
@@ -108673,7 +108935,7 @@ ${lanes.join("\n")}
         function createCanonicalSignature(signature) {
           return getSignatureInstantiation(
             signature,
-            map20(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
+            map24(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
             isInJSFile(signature.declaration)
           );
         }
@@ -108684,8 +108946,8 @@ ${lanes.join("\n")}
               return signature.baseSignatureCache;
             }
             const typeEraser = createTypeEraser(typeParameters);
-            const baseConstraintMapper = createTypeMapper(typeParameters, map20(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
-            let baseConstraints = map20(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
+            const baseConstraintMapper = createTypeMapper(typeParameters, map24(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
+            let baseConstraints = map24(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
             for (let i2 = 0; i2 < typeParameters.length - 1; i2++) {
               baseConstraints = instantiateTypes(baseConstraints, baseConstraintMapper);
             }
@@ -108955,7 +109217,7 @@ ${lanes.join("\n")}
               return concatenate(type.target.outerTypeParameters, (_a2 = type.target.localTypeParameters) == null ? void 0 : _a2.map(() => errorType)) || emptyArray;
             }
             const node = type.node;
-            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type.target.outerTypeParameters, getEffectiveTypeArguments2(node, type.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map20(node.elements, getTypeFromTypeNode);
+            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type.target.outerTypeParameters, getEffectiveTypeArguments2(node, type.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map24(node.elements, getTypeFromTypeNode);
             if (popTypeResolution()) {
               type.resolvedTypeArguments ?? (type.resolvedTypeArguments = type.mapper ? instantiateTypes(typeArguments, type.mapper) : typeArguments);
             } else {
@@ -109361,7 +109623,7 @@ ${lanes.join("\n")}
           return links.resolvedType;
         }
         function typeArgumentsFromTypeReferenceNode(node) {
-          return map20(node.typeArguments, getTypeFromTypeNode);
+          return map24(node.typeArguments, getTypeFromTypeNode);
         }
         function getTypeFromTypeQueryNode(node) {
           const links = getNodeLinks(node);
@@ -109834,8 +110096,8 @@ ${lanes.join("\n")}
           if (elementType) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const elementFlags = map20(node.elements, getTupleElementFlags);
-          return getTupleTargetType(elementFlags, readonly2, map20(node.elements, memberIfLabeledElementDeclaration));
+          const elementFlags = map24(node.elements, getTupleElementFlags);
+          return getTupleTargetType(elementFlags, readonly2, map24(node.elements, memberIfLabeledElementDeclaration));
         }
         function memberIfLabeledElementDeclaration(member) {
           return isNamedTupleMember(member) || isParameter(member) ? member : void 0;
@@ -109908,7 +110170,7 @@ ${lanes.join("\n")}
                 void 0
               );
             } else {
-              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map20(node.elements, getTypeFromTypeNode);
+              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map24(node.elements, getTypeFromTypeNode);
               links.resolvedType = createNormalizedTypeReference(target, elementTypes);
             }
           }
@@ -109918,7 +110180,7 @@ ${lanes.join("\n")}
           return isTypeOperatorNode(node) && node.operator === 148;
         }
         function createTupleType(elementTypes, elementFlags, readonly2 = false, namedMemberDeclarations = []) {
-          const tupleTarget = getTupleTargetType(elementFlags || map20(
+          const tupleTarget = getTupleTargetType(elementFlags || map24(
             elementTypes,
             (_2) => 1
             /* Required */
@@ -109929,7 +110191,7 @@ ${lanes.join("\n")}
           if (elementFlags.length === 1 && elementFlags[0] & 4) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const key = map20(elementFlags, (f3) => f3 & 1 ? "#" : f3 & 2 ? "?" : f3 & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map20(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
+          const key = map24(elementFlags, (f3) => f3 & 1 ? "#" : f3 & 2 ? "?" : f3 & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map24(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
           let type = tupleTypes.get(key);
           if (!type) {
             tupleTypes.set(key, type = createTupleTargetType(elementFlags, readonly2, namedMemberDeclarations));
@@ -110004,7 +110266,7 @@ ${lanes.join("\n")}
           if (target.combinedFlags & 8) {
             const unionIndex = findIndex(elementTypes, (t2, i2) => !!(target.elementFlags[i2] & 8 && t2.flags & (131072 | 1048576)));
             if (unionIndex >= 0) {
-              return checkCrossProductUnion(map20(elementTypes, (t2, i2) => target.elementFlags[i2] & 8 ? t2 : unknownType2)) ? mapType2(elementTypes[unionIndex], (t2) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t2))) : errorType;
+              return checkCrossProductUnion(map24(elementTypes, (t2, i2) => target.elementFlags[i2] & 8 ? t2 : unknownType2)) ? mapType2(elementTypes[unionIndex], (t2) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t2))) : errorType;
             }
           }
           const expandedTypes = [];
@@ -110174,7 +110436,7 @@ ${lanes.join("\n")}
             const source = types3[i2];
             if (hasEmptyObject || source.flags & 469499904) {
               if (source.flags & 262144 && getBaseConstraintOrType(source).flags & 1048576) {
-                if (isTypeRelatedTo(source, getUnionType(map20(types3, (t2) => t2 === source ? neverType2 : t2)), strictSubtypeRelation)) {
+                if (isTypeRelatedTo(source, getUnionType(map24(types3, (t2) => t2 === source ? neverType2 : t2)), strictSubtypeRelation)) {
                   orderedRemoveItemAt(types3, i2);
                 }
                 continue;
@@ -110437,7 +110699,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            links.resolvedType = getUnionType(map20(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
+            links.resolvedType = getUnionType(map24(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
           }
           return links.resolvedType;
         }
@@ -110720,7 +110982,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            const types3 = map20(node.types, getTypeFromTypeNode);
+            const types3 = map24(node.types, getTypeFromTypeNode);
             const emptyIndex = types3.length === 2 ? types3.indexOf(emptyTypeLiteralType) : -1;
             const t2 = emptyIndex >= 0 ? types3[1 - emptyIndex] : unknownType2;
             const noSupertypeReduction = !!(t2.flags & (4 | 8 | 64) || t2.flags & 134217728 && isPatternLiteralType(t2));
@@ -110829,8 +111091,8 @@ ${lanes.join("\n")}
         }
         function getLiteralTypeFromProperties(type, include, includeOrigin) {
           const origin = includeOrigin && (getObjectFlags(type) & (3 | 4) || type.aliasSymbol) ? createOriginIndexType(type) : void 0;
-          const propertyTypes = map20(getPropertiesOfType(type), (prop) => getLiteralTypeFromProperty(prop, include));
-          const indexKeyTypes = map20(getIndexInfosOfType(type), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
+          const propertyTypes = map24(getPropertiesOfType(type), (prop) => getLiteralTypeFromProperty(prop, include));
+          const indexKeyTypes = map24(getIndexInfosOfType(type), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
           return getUnionType(
             concatenate(propertyTypes, indexKeyTypes),
             1,
@@ -110850,7 +111112,7 @@ ${lanes.join("\n")}
         }
         function getIndexType(type, indexFlags = 0) {
           type = getReducedType(type);
-          return isNoInferType(type) ? getNoInferType(getIndexType(type.baseType, indexFlags)) : shouldDeferIndexType(type, indexFlags) ? getIndexTypeForGenericType(type, indexFlags) : type.flags & 1048576 ? getIntersectionType(map20(type.types, (t2) => getIndexType(t2, indexFlags))) : type.flags & 2097152 ? getUnionType(map20(type.types, (t2) => getIndexType(t2, indexFlags))) : getObjectFlags(type) & 32 ? getIndexTypeForMappedType(type, indexFlags) : type === wildcardType ? wildcardType : type.flags & 2 ? neverType2 : type.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
+          return isNoInferType(type) ? getNoInferType(getIndexType(type.baseType, indexFlags)) : shouldDeferIndexType(type, indexFlags) ? getIndexTypeForGenericType(type, indexFlags) : type.flags & 1048576 ? getIntersectionType(map24(type.types, (t2) => getIndexType(t2, indexFlags))) : type.flags & 2097152 ? getUnionType(map24(type.types, (t2) => getIndexType(t2, indexFlags))) : getObjectFlags(type) & 32 ? getIndexTypeForMappedType(type, indexFlags) : type === wildcardType ? wildcardType : type.flags & 2 ? neverType2 : type.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
             type,
             (indexFlags & 2 ? 128 : 402653316) | (indexFlags & 1 ? 0 : 296 | 12288),
             indexFlags === 0
@@ -110888,8 +111150,8 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             links.resolvedType = getTemplateLiteralType(
-              [node.head.text, ...map20(node.templateSpans, (span) => span.literal.text)],
-              map20(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
+              [node.head.text, ...map24(node.templateSpans, (span) => span.literal.text)],
+              map24(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
             );
           }
           return links.resolvedType;
@@ -110920,7 +111182,7 @@ ${lanes.join("\n")}
               return newTypes[0];
             }
           }
-          const id = `${getTypeListId(newTypes)}|${map20(newTexts, (t2) => t2.length).join(",")}|${newTexts.join("")}`;
+          const id = `${getTypeListId(newTypes)}|${map24(newTexts, (t2) => t2.length).join(",")}|${newTexts.join("")}`;
           let type = templateLiteralTypes.get(id);
           if (!type) {
             templateLiteralTypes.set(id, type = createTemplateLiteralType(newTexts, newTypes));
@@ -111150,7 +111412,7 @@ ${lanes.join("\n")}
                   diagnostics.add(createDiagnosticForNode(accessExpression, Diagnostics.Property_0_does_not_exist_on_type_1, indexType.value, typeToString(objectType2)));
                   return undefinedType2;
                 } else if (indexType.flags & (8 | 4)) {
-                  const types3 = map20(objectType2.properties, (property) => {
+                  const types3 = map24(objectType2.properties, (property) => {
                     return getTypeOfSymbol(property);
                   });
                   return getUnionType(append(types3, undefinedType2));
@@ -111311,13 +111573,13 @@ ${lanes.join("\n")}
         }
         function distributeIndexOverObjectType(objectType2, indexType, writing) {
           if (objectType2.flags & 1048576 || objectType2.flags & 2097152 && !shouldDeferIndexType(objectType2)) {
-            const types3 = map20(objectType2.types, (t2) => getSimplifiedType(getIndexedAccessType(t2, indexType), writing));
+            const types3 = map24(objectType2.types, (t2) => getSimplifiedType(getIndexedAccessType(t2, indexType), writing));
             return objectType2.flags & 2097152 || writing ? getIntersectionType(types3) : getUnionType(types3);
           }
         }
         function distributeObjectOverIndexType(objectType2, indexType, writing) {
           if (indexType.flags & 1048576) {
-            const types3 = map20(indexType.types, (t2) => getSimplifiedType(getIndexedAccessType(objectType2, t2), writing));
+            const types3 = map24(indexType.types, (t2) => getSimplifiedType(getIndexedAccessType(objectType2, t2), writing));
             return writing ? getIntersectionType(types3) : getUnionType(types3);
           }
         }
@@ -111600,7 +111862,7 @@ ${lanes.join("\n")}
               const newRoot = newType.root;
               if (newRoot.outerTypeParameters) {
                 const typeParamMapper = combineTypeMappers(newType.mapper, newMapper);
-                const typeArguments = map20(newRoot.outerTypeParameters, (t2) => getMappedType(t2, typeParamMapper));
+                const typeArguments = map24(newRoot.outerTypeParameters, (t2) => getMappedType(t2, typeParamMapper));
                 const newRootMapper = createTypeMapper(newRoot.outerTypeParameters, typeArguments);
                 const newCheckType = newRoot.isDistributive ? getMappedType(newRoot.checkType, newRootMapper) : void 0;
                 if (!newCheckType || newCheckType === newRoot.checkType || !(newCheckType.flags & (1048576 | 131072))) {
@@ -112261,7 +112523,7 @@ ${lanes.join("\n")}
         }
         function createBackreferenceMapper(context, index) {
           const forwardInferences = context.inferences.slice(index);
-          return createTypeMapper(map20(forwardInferences, (i2) => i2.typeParameter), map20(forwardInferences, () => unknownType2));
+          return createTypeMapper(map24(forwardInferences, (i2) => i2.typeParameter), map24(forwardInferences, () => unknownType2));
         }
         function createOuterReturnMapper(context) {
           return context.outerReturnMapper ?? (context.outerReturnMapper = mergeTypeMappers(context.returnMapper, cloneInferenceContext(context).mapper));
@@ -112292,7 +112554,7 @@ ${lanes.join("\n")}
         function instantiateSignature(signature, mapper, eraseTypeParameters) {
           let freshTypeParameters;
           if (signature.typeParameters && !eraseTypeParameters) {
-            freshTypeParameters = map20(signature.typeParameters, cloneTypeParameter);
+            freshTypeParameters = map24(signature.typeParameters, cloneTypeParameter);
             mapper = combineTypeMappers(createTypeMapper(signature.typeParameters, freshTypeParameters), mapper);
             for (const tp of freshTypeParameters) {
               tp.mapper = mapper;
@@ -112364,7 +112626,7 @@ ${lanes.join("\n")}
           }
           if (typeParameters.length) {
             const combinedMapper = combineTypeMappers(type.mapper, mapper);
-            const typeArguments = map20(typeParameters, (t2) => getMappedType(t2, combinedMapper));
+            const typeArguments = map24(typeParameters, (t2) => getMappedType(t2, combinedMapper));
             const newAliasSymbol = aliasSymbol || type.aliasSymbol;
             const newAliasTypeArguments = aliasSymbol ? aliasTypeArguments : instantiateTypes(type.aliasTypeArguments, mapper);
             const id = getTypeListId(typeArguments) + getAliasId(newAliasSymbol, newAliasTypeArguments);
@@ -112476,7 +112738,7 @@ ${lanes.join("\n")}
                   return instantiateMappedTupleType(t2, type, typeVariable, mapper);
                 }
                 if (isArrayOrTupleOrIntersection(t2)) {
-                  return getIntersectionType(map20(t2.types, instantiateConstituent));
+                  return getIntersectionType(map24(t2.types, instantiateConstituent));
                 }
               }
               return instantiateAnonymousType(type, prependTypeMapping(typeVariable, t2, mapper));
@@ -112491,12 +112753,12 @@ ${lanes.join("\n")}
           const elementFlags = tupleType2.target.elementFlags;
           const fixedLength = tupleType2.target.fixedLength;
           const fixedMapper = fixedLength ? prependTypeMapping(typeVariable, tupleType2, mapper) : mapper;
-          const newElementTypes = map20(getElementTypes(tupleType2), (type, i2) => {
+          const newElementTypes = map24(getElementTypes(tupleType2), (type, i2) => {
             const flags = elementFlags[i2];
             return i2 < fixedLength ? instantiateMappedTypeTemplate(mappedType, getStringLiteralType("" + i2), !!(flags & 2), fixedMapper) : flags & 8 ? instantiateType(mappedType, prependTypeMapping(typeVariable, type, mapper)) : getElementTypeOfArrayType(instantiateType(mappedType, prependTypeMapping(typeVariable, createArrayType(type), mapper))) ?? unknownType2;
           });
           const modifiers = getMappedTypeModifiers(mappedType);
-          const newElementFlags = modifiers & 4 ? map20(elementFlags, (f3) => f3 & 1 ? 2 : f3) : modifiers & 8 ? map20(elementFlags, (f3) => f3 & 2 ? 1 : f3) : elementFlags;
+          const newElementFlags = modifiers & 4 ? map24(elementFlags, (f3) => f3 & 1 ? 2 : f3) : modifiers & 8 ? map24(elementFlags, (f3) => f3 & 2 ? 1 : f3) : elementFlags;
           const newReadonly = getModifiedReadonlyState(tupleType2.target.readonly, getMappedTypeModifiers(mappedType));
           return contains(newElementTypes, errorType) ? errorType : createTupleType(newElementTypes, newElementFlags, newReadonly, tupleType2.target.labeledElementDeclarations);
         }
@@ -112552,7 +112814,7 @@ ${lanes.join("\n")}
         function getConditionalTypeInstantiation(type, mapper, forConstraint, aliasSymbol, aliasTypeArguments) {
           const root = type.root;
           if (root.outerTypeParameters) {
-            const typeArguments = map20(root.outerTypeParameters, (t2) => getMappedType(t2, mapper));
+            const typeArguments = map24(root.outerTypeParameters, (t2) => getMappedType(t2, mapper));
             const id = (forConstraint ? "C" : "") + getTypeListId(typeArguments) + getAliasId(aliasSymbol, aliasTypeArguments);
             let result = root.instantiations.get(id);
             if (!result) {
@@ -112784,7 +113046,7 @@ ${lanes.join("\n")}
               return result;
             }
           } else if (type.flags & 2097152) {
-            return getIntersectionType(map20(type.types, getTypeWithoutSignatures));
+            return getIntersectionType(map24(type.types, getTypeWithoutSignatures));
           }
           return type;
         }
@@ -112940,7 +113202,7 @@ ${lanes.join("\n")}
           }
           const returnExpression = node.body;
           const sourceReturn = getReturnTypeOfSignature(sourceSig);
-          const targetReturn = getUnionType(map20(targetSignatures, getReturnTypeOfSignature));
+          const targetReturn = getUnionType(map24(targetSignatures, getReturnTypeOfSignature));
           if (!checkTypeRelatedTo(
             sourceReturn,
             targetReturn,
@@ -115779,9 +116041,9 @@ ${lanes.join("\n")}
               false
             )) {
               if (props.length > 5) {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map20(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map24(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
               } else {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map20(props, (p) => symbolToString(p)).join(", "));
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map24(props, (p) => symbolToString(p)).join(", "));
               }
               if (shouldSkipElaboration && errorInfo) {
                 overrideNextErrorInfo++;
@@ -116021,8 +116283,8 @@ ${lanes.join("\n")}
               }
             } else if (sourceSignatures.length === 1 && targetSignatures.length === 1) {
               const eraseGenerics = relation === comparableRelation;
-              const sourceSignature = first(sourceSignatures);
-              const targetSignature = first(targetSignatures);
+              const sourceSignature = first2(sourceSignatures);
+              const targetSignature = first2(targetSignatures);
               result2 = signatureRelatedTo(sourceSignature, targetSignature, eraseGenerics, reportErrors2, intersectionState, incompatibleReporter(sourceSignature, targetSignature));
               if (!result2 && reportErrors2 && kind === 1 && sourceObjectFlags & targetObjectFlags && (((_a22 = targetSignature.declaration) == null ? void 0 : _a22.kind) === 177 || ((_b = sourceSignature.declaration) == null ? void 0 : _b.kind) === 177)) {
                 const constructSignatureToString = (signature) => signatureToString(
@@ -117358,7 +117620,7 @@ ${lanes.join("\n")}
           return createInferenceContextWorker(typeParameters.map(createInferenceInfo), signature, flags, compareTypes || compareTypesAssignable);
         }
         function cloneInferenceContext(context, extraFlags = 0) {
-          return context && createInferenceContextWorker(map20(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
+          return context && createInferenceContextWorker(map24(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
         }
         function createInferenceContextWorker(inferences, signature, flags, compareTypes) {
           const context = {
@@ -117376,8 +117638,8 @@ ${lanes.join("\n")}
         }
         function makeFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map20(context.inferences, (i2) => i2.typeParameter),
-            map20(context.inferences, (inference, i2) => () => {
+            map24(context.inferences, (i2) => i2.typeParameter),
+            map24(context.inferences, (inference, i2) => () => {
               if (!inference.isFixed) {
                 inferFromIntraExpressionSites(context);
                 clearCachedInferences(context.inferences);
@@ -117389,8 +117651,8 @@ ${lanes.join("\n")}
         }
         function makeNonFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map20(context.inferences, (i2) => i2.typeParameter),
-            map20(context.inferences, (_2, i2) => () => {
+            map24(context.inferences, (i2) => i2.typeParameter),
+            map24(context.inferences, (_2, i2) => () => {
               return getInferredType(context, i2);
             })
           );
@@ -117450,7 +117712,7 @@ ${lanes.join("\n")}
         }
         function cloneInferredPartOfContext(context) {
           const inferences = filter3(context.inferences, hasInferenceCandidates);
-          return inferences.length ? createInferenceContextWorker(map20(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
+          return inferences.length ? createInferenceContextWorker(map24(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
         }
         function getMapperFromContext(context) {
           return context && context.mapper;
@@ -117538,7 +117800,7 @@ ${lanes.join("\n")}
             return createArrayType(elementType, isReadonlyArrayType(source));
           }
           if (isTupleType(source)) {
-            const elementTypes = map20(getElementTypes(source), (t2) => inferReverseMappedType(t2, target, constraint));
+            const elementTypes = map24(getElementTypes(source), (t2) => inferReverseMappedType(t2, target, constraint));
             if (!every(elementTypes, (t2) => !!t2)) {
               return void 0;
             }
@@ -117708,7 +117970,7 @@ ${lanes.join("\n")}
           return false;
         }
         function inferTypesFromTemplateLiteralType(source, target) {
-          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map20(source.types, (s2, i2) => {
+          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map24(source.types, (s2, i2) => {
             return isTypeAssignableTo(getBaseConstraintOrType(s2), getBaseConstraintOrType(target.types[i2])) ? s2 : getStringLikeTypeForType(s2);
           }) : inferFromLiteralPartsToTemplateLiteral(source.texts, source.types, target) : void 0;
         }
@@ -118172,8 +118434,8 @@ ${lanes.join("\n")}
               if (extendedConstraint && inferToMappedType(source, target, extendedConstraint)) {
                 return true;
               }
-              const propTypes = map20(getPropertiesOfType(source), getTypeOfSymbol);
-              const indexTypes = map20(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
+              const propTypes = map24(getPropertiesOfType(source), getTypeOfSymbol);
+              const indexTypes = map24(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
               inferFromTypes(getUnionType(concatenate(propTypes, indexTypes)), getTemplateTypeFromMappedType(target));
               return true;
             }
@@ -118772,7 +119034,7 @@ ${lanes.join("\n")}
           return result;
         }
         function mapTypesByKeyProperty(types3, name2) {
-          const map22 = /* @__PURE__ */ new Map();
+          const map25 = /* @__PURE__ */ new Map();
           let count = 0;
           for (const type of types3) {
             if (type.flags & (524288 | 2097152 | 58982400)) {
@@ -118784,11 +119046,11 @@ ${lanes.join("\n")}
                 let duplicate = false;
                 forEachType(discriminant, (t2) => {
                   const id = getTypeId(getRegularTypeOfLiteralType(t2));
-                  const existing = map22.get(id);
+                  const existing = map25.get(id);
                   if (!existing) {
-                    map22.set(id, type);
+                    map25.set(id, type);
                   } else if (existing !== unknownType2) {
-                    map22.set(id, unknownType2);
+                    map25.set(id, unknownType2);
                     duplicate = true;
                   }
                 });
@@ -118796,7 +119058,7 @@ ${lanes.join("\n")}
               }
             }
           }
-          return count >= 10 && count * 2 >= types3.length ? map22 : void 0;
+          return count >= 10 && count * 2 >= types3.length ? map25 : void 0;
         }
         function getKeyPropertyName(unionType2) {
           const types3 = unionType2.types;
@@ -119260,7 +119522,7 @@ ${lanes.join("\n")}
           ) : type;
         }
         function mapTypeWithAlias(type, mapper, aliasSymbol, aliasTypeArguments) {
-          return type.flags & 1048576 && aliasSymbol ? getUnionType(map20(type.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type, mapper);
+          return type.flags & 1048576 && aliasSymbol ? getUnionType(map24(type.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type, mapper);
         }
         function extractTypesOfKind(type, kind) {
           return filterType(type, (t2) => (t2.flags & kind) !== 0);
@@ -120028,7 +120290,7 @@ ${lanes.join("\n")}
           }
           function getUnionOrEvolvingArrayType(types3, subtypeReduction) {
             if (isEvolvingArrayTypeList(types3)) {
-              return getEvolvingArrayType(getUnionType(map20(types3, getElementTypeOfEvolvingArrayType)));
+              return getEvolvingArrayType(getUnionType(map24(types3, getElementTypeOfEvolvingArrayType)));
             }
             const result = recombineUnknownType(getUnionType(sameMap(types3, finalizeEvolvingArrayType), subtypeReduction));
             if (result !== declaredType && result.flags & declaredType.flags & 1048576 && arrayIsEqualTo(result.types, declaredType.types)) {
@@ -120122,7 +120384,7 @@ ${lanes.join("\n")}
           function narrowTypeBySwitchOnDiscriminantProperty(type, access, data) {
             if (data.clauseStart < data.clauseEnd && type.flags & 1048576 && getKeyPropertyName(type) === getAccessedPropertyName(access)) {
               const clauseTypes = getSwitchClauseTypes(data.switchStatement).slice(data.clauseStart, data.clauseEnd);
-              const candidate = getUnionType(map20(clauseTypes, (t2) => getConstituentTypeForKeyType(type, t2) || unknownType2));
+              const candidate = getUnionType(map24(clauseTypes, (t2) => getConstituentTypeForKeyType(type, t2) || unknownType2));
               if (candidate !== unknownType2) {
                 return candidate;
               }
@@ -120550,7 +120812,7 @@ ${lanes.join("\n")}
               return filterType(type, (t2) => getTypeFacts(t2, notEqualFacts) === notEqualFacts);
             }
             const clauseWitnesses = witnesses.slice(clauseStart, clauseEnd);
-            return getUnionType(map20(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type, text) : neverType2));
+            return getUnionType(map24(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type, text) : neverType2));
           }
           function narrowTypeBySwitchOnTrue(type, { switchStatement, clauseStart, clauseEnd }) {
             const defaultIndex = findIndex(
@@ -120585,7 +120847,7 @@ ${lanes.join("\n")}
               return type;
             }
             const clauses = switchStatement.caseBlock.clauses.slice(clauseStart, clauseEnd);
-            return getUnionType(map20(clauses, (clause) => clause.kind === 297 ? narrowType(
+            return getUnionType(map24(clauses, (clause) => clause.kind === 297 ? narrowType(
               type,
               clause.expression,
               /*assumeTrue*/
@@ -120677,7 +120939,7 @@ ${lanes.join("\n")}
               /* Construct */
             );
             if (constructSignatures.length) {
-              return getUnionType(map20(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
+              return getUnionType(map24(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
             }
             return emptyObjectType;
           }
@@ -122728,14 +122990,14 @@ ${lanes.join("\n")}
           return void 0;
         }
         function getSpreadIndices(elements) {
-          let first2, last2;
+          let first22, last2;
           for (let i2 = 0; i2 < elements.length; i2++) {
             if (isSpreadElement(elements[i2])) {
-              first2 ?? (first2 = i2);
+              first22 ?? (first22 = i2);
               last2 = i2;
             }
           }
-          return { first: first2, last: last2 };
+          return { first: first22, last: last2 };
         }
         function getContextualTypeForElementExpression(type, index, length2, firstSpreadIndex, lastSpreadIndex) {
           return type && mapType2(
@@ -122847,7 +123109,7 @@ ${lanes.join("\n")}
             getMatchingUnionConstituentForObjectLiteral(contextualType, node) ?? discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map20(
+                map24(
                   filter3(node.properties, (p) => {
                     if (!p.symbol) {
                       return false;
@@ -122862,7 +123124,7 @@ ${lanes.join("\n")}
                   }),
                   (prop) => [() => getContextFreeTypeOfExpression(prop.kind === 304 ? prop.initializer : prop.name), prop.symbol.escapedName]
                 ),
-                map20(
+                map24(
                   filter3(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     return !!(s2.flags & 16777216) && !!((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members) && !node.symbol.members.has(s2.escapedName) && isDiscriminantProperty(contextualType, s2.escapedName);
@@ -122884,11 +123146,11 @@ ${lanes.join("\n")}
             discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map20(
+                map24(
                   filter3(node.properties, (p) => !!p.symbol && p.kind === 292 && isDiscriminantProperty(contextualType, p.symbol.escapedName) && (!p.initializer || isPossiblyDiscriminantValue(p.initializer))),
                   (prop) => [!prop.initializer ? () => trueType : () => getContextFreeTypeOfExpression(prop.initializer), prop.symbol.escapedName]
                 ),
-                map20(
+                map24(
                   filter3(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     if (!(s2.flags & 16777216) || !((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members)) {
@@ -122947,13 +123209,13 @@ ${lanes.join("\n")}
           }
           if (type.flags & 1048576) {
             return getUnionType(
-              map20(type.types, (t2) => instantiateInstantiableTypes(t2, mapper)),
+              map24(type.types, (t2) => instantiateInstantiableTypes(t2, mapper)),
               0
               /* None */
             );
           }
           if (type.flags & 2097152) {
-            return getIntersectionType(map20(type.types, (t2) => instantiateInstantiableTypes(t2, mapper)));
+            return getIntersectionType(map24(type.types, (t2) => instantiateInstantiableTypes(t2, mapper)));
           }
           return type;
         }
@@ -124283,7 +124545,7 @@ ${lanes.join("\n")}
             );
           }
           if (signatures.length === 0 && apparentElemType.flags & 1048576) {
-            signatures = getUnionSignatures(map20(apparentElemType.types, (t2) => getUninstantiatedJsxSignaturesOfType(t2, caller)));
+            signatures = getUnionSignatures(map24(apparentElemType.types, (t2) => getUninstantiatedJsxSignaturesOfType(t2, caller)));
           }
           return signatures;
         }
@@ -125757,7 +126019,7 @@ ${lanes.join("\n")}
         function checkTypeArguments(signature, typeArgumentNodes, reportErrors2, headMessage) {
           const isJavascript = isInJSFile(signature.declaration);
           const typeParameters = signature.typeParameters;
-          const typeArgumentTypes = fillMissingTypeArguments(map20(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
+          const typeArgumentTypes = fillMissingTypeArguments(map24(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
           let mapper;
           for (let i2 = 0; i2 < typeArgumentNodes.length; i2++) {
             Debug.assert(typeParameters[i2] !== void 0, "Should not call checkTypeArguments with too many type arguments");
@@ -126232,7 +126494,7 @@ ${lanes.join("\n")}
             return diagnostic;
           } else {
             const errorSpan = factory.createNodeArray(args.slice(max));
-            const pos = first(errorSpan).pos;
+            const pos = first2(errorSpan).pos;
             let end = last(errorSpan).end;
             if (end === pos) {
               end++;
@@ -126438,7 +126700,7 @@ ${lanes.join("\n")}
                 const diags = max > 1 ? allDiagnostics[minIndex] : flatten(allDiagnostics);
                 Debug.assert(diags.length > 0, "No errors reported for 3 or fewer overload signatures");
                 let chain = chainDiagnosticMessages(
-                  map20(diags, createDiagnosticMessageChainFromDiagnostic),
+                  map24(diags, createDiagnosticMessageChainFromDiagnostic),
                   Diagnostics.No_overload_matches_this_call
                 );
                 if (headMessage) {
@@ -126662,7 +126924,7 @@ ${lanes.join("\n")}
           ));
         }
         function createCombinedSymbolForOverloadFailure(sources, type) {
-          return createSymbolWithType(first(sources), type);
+          return createSymbolWithType(first2(sources), type);
         }
         function pickLongestCandidateSignature(node, candidates, args, checkMode) {
           const bestIndex = getLongestCandidateIndex(candidates, apparentArgumentCount === void 0 ? args.length : apparentArgumentCount);
@@ -131006,7 +131268,7 @@ ${lanes.join("\n")}
                   if (returnSignature && !returnSignature.typeParameters && !every(context.inferences, hasInferenceCandidates)) {
                     const uniqueTypeParameters = getUniqueTypeParameters(context, signature.typeParameters);
                     const instantiatedSignature = getSignatureInstantiationWithoutFillingInTypeArguments(signature, uniqueTypeParameters);
-                    const inferences = map20(context.inferences, (info) => createInferenceInfo(info.typeParameter));
+                    const inferences = map24(context.inferences, (info) => createInferenceInfo(info.typeParameter));
                     applyToParameterTypes(instantiatedSignature, contextualSignature, (source, target) => {
                       inferTypes(
                         inferences,
@@ -131954,7 +132216,7 @@ ${lanes.join("\n")}
           return getEffectiveTypeArguments2(node, typeParameters)[index];
         }
         function getEffectiveTypeArguments2(node, typeParameters) {
-          return fillMissingTypeArguments(map20(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
+          return fillMissingTypeArguments(map24(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
         }
         function checkTypeArgumentConstraints(node, typeParameters) {
           let typeArguments;
@@ -132600,7 +132862,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const onfulfilledParameterType = getTypeWithFacts(
-            getUnionType(map20(candidates, getTypeOfFirstParameterOfSignature)),
+            getUnionType(map24(candidates, getTypeOfFirstParameterOfSignature)),
             2097152
             /* NEUndefinedOrNull */
           );
@@ -132619,7 +132881,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           return typeAsPromise.promisedTypeOfPromise = getUnionType(
-            map20(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
+            map24(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
             2
             /* Subtype */
           );
@@ -133385,13 +133647,13 @@ ${lanes.join("\n")}
         function isTypeParameterUnused(typeParameter) {
           return !(getMergedSymbol(typeParameter.symbol).isReferenced & 262144) && !isIdentifierThatStartsWithUnderscore(typeParameter.name);
         }
-        function addToGroup(map22, key, value, getKey) {
+        function addToGroup(map25, key, value, getKey) {
           const keyString = String(getKey(key));
-          const group2 = map22.get(keyString);
+          const group2 = map25.get(keyString);
           if (group2) {
             group2[1].push(value);
           } else {
-            map22.set(keyString, [key, [value]]);
+            map25.set(keyString, [key, [value]]);
           }
         }
         function tryGetRootParameterDeclaration(node) {
@@ -133457,7 +133719,7 @@ ${lanes.join("\n")}
               addDiagnostic(
                 importDecl,
                 0,
-                unuseds.length === 1 ? createDiagnosticForNode(importDecl, Diagnostics._0_is_declared_but_its_value_is_never_read, idText(first(unuseds).name)) : createDiagnosticForNode(importDecl, Diagnostics.All_imports_in_import_declaration_are_unused)
+                unuseds.length === 1 ? createDiagnosticForNode(importDecl, Diagnostics._0_is_declared_but_its_value_is_never_read, idText(first2(unuseds).name)) : createDiagnosticForNode(importDecl, Diagnostics.All_imports_in_import_declaration_are_unused)
               );
             } else {
               for (const unused of unuseds) errorUnusedLocal(unused, idText(unused.name), addDiagnostic);
@@ -133472,7 +133734,7 @@ ${lanes.join("\n")}
                 addDiagnostic(
                   bindingPattern,
                   kind,
-                  bindingElements.length === 1 ? createDiagnosticForNode(bindingPattern, Diagnostics._0_is_declared_but_its_value_is_never_read, bindingNameText(first(bindingElements).name)) : createDiagnosticForNode(bindingPattern, Diagnostics.All_destructured_elements_are_unused)
+                  bindingElements.length === 1 ? createDiagnosticForNode(bindingPattern, Diagnostics._0_is_declared_but_its_value_is_never_read, bindingNameText(first2(bindingElements).name)) : createDiagnosticForNode(bindingPattern, Diagnostics.All_destructured_elements_are_unused)
                 );
               }
             } else {
@@ -133486,7 +133748,7 @@ ${lanes.join("\n")}
               addDiagnostic(
                 declarationList,
                 0,
-                declarations.length === 1 ? createDiagnosticForNode(first(declarations).name, Diagnostics._0_is_declared_but_its_value_is_never_read, bindingNameText(first(declarations).name)) : createDiagnosticForNode(declarationList.parent.kind === 244 ? declarationList.parent : declarationList, Diagnostics.All_variables_are_unused)
+                declarations.length === 1 ? createDiagnosticForNode(first2(declarations).name, Diagnostics._0_is_declared_but_its_value_is_never_read, bindingNameText(first2(declarations).name)) : createDiagnosticForNode(declarationList.parent.kind === 244 ? declarationList.parent : declarationList, Diagnostics.All_variables_are_unused)
               );
             } else {
               for (const decl of declarations) {
@@ -133518,7 +133780,7 @@ ${lanes.join("\n")}
               return idText(name2);
             case 208:
             case 207:
-              return bindingNameText(cast(first(name2.elements), isBindingElement).name);
+              return bindingNameText(cast(first2(name2.elements), isBindingElement).name);
             default:
               return Debug.assertNever(name2);
           }
@@ -134618,7 +134880,7 @@ ${lanes.join("\n")}
             }
             return noCache ? noIterationTypes : setCachedIterationTypes(type, resolver.iterableCacheKey, noIterationTypes);
           }
-          const iteratorType = getIntersectionType(map20(validSignatures, getReturnTypeOfSignature));
+          const iteratorType = getIntersectionType(map24(validSignatures, getReturnTypeOfSignature));
           const iterationTypes = getIterationTypesOfIteratorWorker(iteratorType, resolver, errorNode, errorOutputContainer, noCache) ?? noIterationTypes;
           return noCache ? iterationTypes : setCachedIterationTypes(type, resolver.iterableCacheKey, iterationTypes);
         }
@@ -135532,7 +135794,7 @@ ${lanes.join("\n")}
         function checkMembersForOverrideModifier(node, type, typeWithThis, staticType) {
           const baseTypeNode = getEffectiveBaseTypeNode(node);
           const baseTypes = baseTypeNode && getBaseTypes(type);
-          const baseWithThis = (baseTypes == null ? void 0 : baseTypes.length) ? getTypeWithThisArgument(first(baseTypes), type.thisType) : void 0;
+          const baseWithThis = (baseTypes == null ? void 0 : baseTypes.length) ? getTypeWithThisArgument(first2(baseTypes), type.thisType) : void 0;
           const baseStaticType = getBaseConstructorTypeOfClass(type);
           for (const member of node.members) {
             if (hasAmbientModifier(member)) {
@@ -135716,7 +135978,7 @@ ${lanes.join("\n")}
           const staticType = getTypeOfSymbol(classSymbol);
           const baseTypeNode = getEffectiveBaseTypeNode(node);
           const baseTypes = baseTypeNode && getBaseTypes(type);
-          const baseWithThis = (baseTypes == null ? void 0 : baseTypes.length) ? getTypeWithThisArgument(first(baseTypes), type.thisType) : void 0;
+          const baseWithThis = (baseTypes == null ? void 0 : baseTypes.length) ? getTypeWithThisArgument(first2(baseTypes), type.thisType) : void 0;
           const baseStaticType = getBaseConstructorTypeOfClass(type);
           const memberHasOverrideModifier = member.parent ? hasOverrideModifier(member) : hasSyntacticModifier(
             member,
@@ -135832,12 +136094,12 @@ ${lanes.join("\n")}
           for (const [errorNode, memberInfo] of notImplementedInfo) {
             if (length(memberInfo.missedProperties) === 1) {
               if (isClassExpression(errorNode)) {
-                error210(errorNode, Diagnostics.Non_abstract_class_expression_does_not_implement_inherited_abstract_member_0_from_class_1, first(memberInfo.missedProperties), memberInfo.baseTypeName);
+                error210(errorNode, Diagnostics.Non_abstract_class_expression_does_not_implement_inherited_abstract_member_0_from_class_1, first2(memberInfo.missedProperties), memberInfo.baseTypeName);
               } else {
-                error210(errorNode, Diagnostics.Non_abstract_class_0_does_not_implement_inherited_abstract_member_1_from_class_2, memberInfo.typeName, first(memberInfo.missedProperties), memberInfo.baseTypeName);
+                error210(errorNode, Diagnostics.Non_abstract_class_0_does_not_implement_inherited_abstract_member_1_from_class_2, memberInfo.typeName, first2(memberInfo.missedProperties), memberInfo.baseTypeName);
               }
             } else if (length(memberInfo.missedProperties) > 5) {
-              const missedProperties = map20(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map24(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
               const remainingMissedProperties = length(memberInfo.missedProperties) - 4;
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1_and_2_more, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
@@ -135845,7 +136107,7 @@ ${lanes.join("\n")}
                 error210(errorNode, Diagnostics.Non_abstract_class_0_is_missing_implementations_for_the_following_members_of_1_Colon_2_and_3_more, memberInfo.typeName, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
               }
             } else {
-              const missedProperties = map20(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map24(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1, memberInfo.baseTypeName, missedProperties);
               } else {
@@ -137960,7 +138222,7 @@ ${lanes.join("\n")}
             } else if (symbol2) {
               const symbolLinks2 = getSymbolLinks(symbol2);
               const declarationList = mapDefined(infos, (i2) => i2.declaration);
-              const nodeListId = map20(declarationList, getNodeId).join(",");
+              const nodeListId = map24(declarationList, getNodeId).join(",");
               if (!symbolLinks2.filteredIndexSymbolCache) {
                 symbolLinks2.filteredIndexSymbolCache = /* @__PURE__ */ new Map();
               }
@@ -139216,7 +139478,7 @@ ${lanes.join("\n")}
                       const newComponents = filter3(info.components, (e2) => {
                         return !hasLateBindableName(e2);
                       });
-                      result.push(...map20(newComponents, (e2) => {
+                      result.push(...map24(newComponents, (e2) => {
                         trackComputedName(e2.name.expression);
                         const mods = infoList === staticInfos ? [factory.createModifier(
                           126
@@ -140593,7 +140855,7 @@ ${lanes.join("\n")}
           }
           if (node.kind === 175) {
             if (node.parent.kind === 211) {
-              if (node.modifiers && !(node.modifiers.length === 1 && first(node.modifiers).kind === 134)) {
+              if (node.modifiers && !(node.modifiers.length === 1 && first2(node.modifiers).kind === 134)) {
                 return grammarErrorOnFirstToken(node, Diagnostics.Modifiers_cannot_appear_here);
               } else if (checkGrammarForInvalidQuestionMark(node.questionToken, Diagnostics.An_object_member_cannot_be_declared_optional)) {
                 return true;
@@ -141179,7 +141441,7 @@ ${lanes.join("\n")}
             if (sourceProperties) {
               const sourcePropertiesFiltered = findDiscriminantProperties(sourceProperties, target);
               if (sourcePropertiesFiltered) {
-                const discriminated = discriminateTypeByDiscriminableItems(target, map20(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
+                const discriminated = discriminateTypeByDiscriminableItems(target, map24(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
                 if (discriminated !== target) {
                   return discriminated;
                 }
@@ -143215,13 +143477,13 @@ ${lanes.join("\n")}
           }
           exit();
         }
-        function appendSourceMap(generatedLine, generatedCharacter, map22, sourceMapPath, start2, end) {
+        function appendSourceMap(generatedLine, generatedCharacter, map25, sourceMapPath, start2, end) {
           Debug.assert(generatedLine >= pendingGeneratedLine, "generatedLine cannot backtrack");
           Debug.assert(generatedCharacter >= 0, "generatedCharacter cannot be negative");
           enter();
           const sourceIndexToNewSourceIndexMap = [];
           let nameIndexToNewNameIndexMap;
-          const mappingIterator = decodeMappings(map22.mappings);
+          const mappingIterator = decodeMappings(map25.mappings);
           for (const raw of mappingIterator) {
             if (end && (raw.generatedLine > end.line || raw.generatedLine === end.line && raw.generatedCharacter > end.character)) {
               break;
@@ -143236,21 +143498,21 @@ ${lanes.join("\n")}
             if (raw.sourceIndex !== void 0) {
               newSourceIndex = sourceIndexToNewSourceIndexMap[raw.sourceIndex];
               if (newSourceIndex === void 0) {
-                const rawPath = map22.sources[raw.sourceIndex];
-                const relativePath = map22.sourceRoot ? combinePaths(map22.sourceRoot, rawPath) : rawPath;
+                const rawPath = map25.sources[raw.sourceIndex];
+                const relativePath = map25.sourceRoot ? combinePaths(map25.sourceRoot, rawPath) : rawPath;
                 const combinedPath = combinePaths(getDirectoryPath(sourceMapPath), relativePath);
                 sourceIndexToNewSourceIndexMap[raw.sourceIndex] = newSourceIndex = addSource(combinedPath);
-                if (map22.sourcesContent && typeof map22.sourcesContent[raw.sourceIndex] === "string") {
-                  setSourceContent(newSourceIndex, map22.sourcesContent[raw.sourceIndex]);
+                if (map25.sourcesContent && typeof map25.sourcesContent[raw.sourceIndex] === "string") {
+                  setSourceContent(newSourceIndex, map25.sourcesContent[raw.sourceIndex]);
                 }
               }
               newSourceLine = raw.sourceLine;
               newSourceCharacter = raw.sourceCharacter;
-              if (map22.names && raw.nameIndex !== void 0) {
+              if (map25.names && raw.nameIndex !== void 0) {
                 if (!nameIndexToNewNameIndexMap) nameIndexToNewNameIndexMap = [];
                 newNameIndex = nameIndexToNewNameIndexMap[raw.nameIndex];
                 if (newNameIndex === void 0) {
-                  nameIndexToNewNameIndexMap[raw.nameIndex] = newNameIndex = addName(map22.names[raw.nameIndex]);
+                  nameIndexToNewNameIndexMap[raw.nameIndex] = newNameIndex = addName(map25.names[raw.nameIndex]);
                 }
               }
             }
@@ -143535,12 +143797,12 @@ ${lanes.join("\n")}
       function getGeneratedPositionOfMapping(value) {
         return value.generatedPosition;
       }
-      function createDocumentPositionMapper(host, map22, mapPath) {
+      function createDocumentPositionMapper(host, map25, mapPath) {
         const mapDirectory = getDirectoryPath(mapPath);
-        const sourceRoot = map22.sourceRoot ? getNormalizedAbsolutePath(map22.sourceRoot, mapDirectory) : mapDirectory;
-        const generatedAbsoluteFilePath = getNormalizedAbsolutePath(map22.file, mapDirectory);
+        const sourceRoot = map25.sourceRoot ? getNormalizedAbsolutePath(map25.sourceRoot, mapDirectory) : mapDirectory;
+        const generatedAbsoluteFilePath = getNormalizedAbsolutePath(map25.file, mapDirectory);
         const generatedFile = host.getSourceFileLike(generatedAbsoluteFilePath);
-        const sourceFileAbsolutePaths = map22.sources.map((source) => getNormalizedAbsolutePath(source, sourceRoot));
+        const sourceFileAbsolutePaths = map25.sources.map((source) => getNormalizedAbsolutePath(source, sourceRoot));
         const sourceToSourceIndexMap = new Map(sourceFileAbsolutePaths.map((source, i2) => [host.getCanonicalFileName(source), i2]));
         let decodedMappings;
         let generatedMappings;
@@ -143561,7 +143823,7 @@ ${lanes.join("\n")}
           let sourcePosition;
           if (isSourceMapping(mapping)) {
             const sourceFile = host.getSourceFileLike(sourceFileAbsolutePaths[mapping.sourceIndex]);
-            source = map22.sources[mapping.sourceIndex];
+            source = map25.sources[mapping.sourceIndex];
             sourcePosition = sourceFile !== void 0 ? getPositionOfLineAndCharacter(
               sourceFile,
               mapping.sourceLine,
@@ -143580,7 +143842,7 @@ ${lanes.join("\n")}
         }
         function getDecodedMappings() {
           if (decodedMappings === void 0) {
-            const decoder = decodeMappings(map22.mappings);
+            const decoder = decodeMappings(map25.mappings);
             const mappings = arrayFrom(decoder, processMapping);
             if (decoder.error !== void 0) {
               if (host.log) {
@@ -143667,7 +143929,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map20(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map24(node.sourceFiles, transformSourceFile));
         }
       }
       function getExportNeedsImportStarHelper(node) {
@@ -143873,12 +144135,12 @@ ${lanes.join("\n")}
         }
         return exportedNames;
       }
-      function multiMapSparseArrayAdd(map22, key, value) {
-        let values = map22[key];
+      function multiMapSparseArrayAdd(map25, key, value) {
+        let values = map25[key];
         if (values) {
           values.push(value);
         } else {
-          map22[key] = values = [value];
+          map25[key] = values = [value];
         }
         return values;
       }
@@ -144616,7 +144878,7 @@ ${lanes.join("\n")}
       }
       function makeArrayAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isArrayBindingOrAssignmentElement);
-        return factory2.createArrayLiteralExpression(map20(elements, factory2.converters.convertToArrayAssignmentElement));
+        return factory2.createArrayLiteralExpression(map24(elements, factory2.converters.convertToArrayAssignmentElement));
       }
       function makeObjectBindingPattern(factory2, elements) {
         Debug.assertEachNode(elements, isBindingElement);
@@ -144624,7 +144886,7 @@ ${lanes.join("\n")}
       }
       function makeObjectAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isObjectBindingOrAssignmentElement);
-        return factory2.createObjectLiteralExpression(map20(elements, factory2.converters.convertToObjectAssignmentElement));
+        return factory2.createObjectLiteralExpression(map24(elements, factory2.converters.convertToObjectAssignmentElement));
       }
       function makeBindingElement(factory2, name2) {
         return factory2.createBindingElement(
@@ -146070,7 +146332,7 @@ ${lanes.join("\n")}
             return setTextRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map20(variables, transformInitializedVariable)
+                  map24(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -146276,7 +146538,7 @@ ${lanes.join("\n")}
           currentNamespaceContainerName = localName;
           const statements = [];
           startLexicalEnvironment();
-          const members = map20(node.members, transformEnumMember);
+          const members = map24(node.members, transformEnumMember);
           insertStatementsAfterStandardPrologue(statements, endLexicalEnvironment());
           addRange(statements, members);
           currentNamespaceContainerName = savedCurrentNamespaceLocalName;
@@ -148187,7 +148449,7 @@ ${lanes.join("\n")}
             if (isDecoratedClassDeclaration) {
               Debug.assertIsDefined(pendingStatements, "Decorated classes transformed by TypeScript are expected to be within a variable declaration.");
               if (some(pendingExpressions)) {
-                addRange(pendingStatements, map20(pendingExpressions, factory2.createExpressionStatement));
+                addRange(pendingStatements, map24(pendingExpressions, factory2.createExpressionStatement));
               }
               if (some(staticPropertiesOrClassStaticBlocks)) {
                 addPropertyOrClassStaticBlockStatements(pendingStatements, staticPropertiesOrClassStaticBlocks, ((_b = node.emitNode) == null ? void 0 : _b.classThis) ?? factory2.getInternalName(node));
@@ -149976,13 +150238,13 @@ ${lanes.join("\n")}
           }
           const { false: decorators, true: metadata } = groupBy(allDecorators.decorators, isSyntheticMetadataDecorator);
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map20(decorators, transformDecorator));
+          addRange(decoratorExpressions, map24(decorators, transformDecorator));
           addRange(decoratorExpressions, flatMap(allDecorators.parameters, transformDecoratorsOfParameter));
-          addRange(decoratorExpressions, map20(metadata, transformDecorator));
+          addRange(decoratorExpressions, map24(metadata, transformDecorator));
           return decoratorExpressions;
         }
         function addClassElementDecorationStatements(statements, node, isStatic2) {
-          addRange(statements, map20(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
+          addRange(statements, map24(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
         }
         function isDecoratedClassElement(member, isStaticElement, parent2) {
           return nodeOrChildIsDecorated(
@@ -151887,7 +152149,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map20(allDecorators.decorators, transformDecorator));
+          addRange(decoratorExpressions, map24(allDecorators.decorators, transformDecorator));
           return decoratorExpressions;
         }
         function transformDecorator(decorator) {
@@ -152560,7 +152822,7 @@ ${lanes.join("\n")}
             }
             return void 0;
           }
-          return factory2.inlineExpressions(map20(variables, transformInitializedVariable));
+          return factory2.inlineExpressions(map24(variables, transformInitializedVariable));
         }
         function hoistVariableDeclarationList(node) {
           forEach(node.declarations, hoistVariable);
@@ -155976,7 +156238,7 @@ ${lanes.join("\n")}
           return target && target >= 5 ? factory2.createObjectLiteralExpression(transformJsxAttributesToProps(attrs, children)) : transformJsxAttributesToExpression(attrs, children);
         }
         function transformJsxAttributesToProps(attrs, children) {
-          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map20(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
+          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map24(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
           if (children) {
             props.push(children);
           }
@@ -159265,7 +159527,7 @@ ${lanes.join("\n")}
               /* NoHoisting */
             )
           );
-          const part = factory2.createVariableDeclarationList(map20(currentState.loopOutParameters, createOutVariable));
+          const part = factory2.createVariableDeclarationList(map24(currentState.loopOutParameters, createOutVariable));
           return { functionName, containsYield, functionDeclaration, part };
         }
         function createFunctionForBodyOfIterationStatement(node, currentState, outerState) {
@@ -159393,7 +159655,7 @@ ${lanes.join("\n")}
             loopFunctionExpressionName,
             /*typeArguments*/
             void 0,
-            map20(state.loopParameters, (p) => p.name)
+            map24(state.loopParameters, (p) => p.name)
           );
           const callResult = containsYield ? factory2.createYieldExpression(
             factory2.createToken(
@@ -159772,14 +160034,14 @@ ${lanes.join("\n")}
         }
         function visitTypeScriptClassWrapper(node) {
           const body = cast(cast(skipOuterExpressions(node.expression), isArrowFunction).body, isBlock);
-          const isVariableStatementWithInitializer = (stmt) => isVariableStatement(stmt) && !!first(stmt.declarationList.declarations).initializer;
+          const isVariableStatementWithInitializer = (stmt) => isVariableStatement(stmt) && !!first2(stmt.declarationList.declarations).initializer;
           const savedConvertedLoopState = convertedLoopState;
           convertedLoopState = void 0;
           const bodyStatements = visitNodes2(body.statements, classWrapperStatementVisitor, isStatement);
           convertedLoopState = savedConvertedLoopState;
           const classStatements = filter3(bodyStatements, isVariableStatementWithInitializer);
           const remainingStatements = filter3(bodyStatements, (stmt) => !isVariableStatementWithInitializer(stmt));
-          const varStatement = cast(first(classStatements), isVariableStatement);
+          const varStatement = cast(first2(classStatements), isVariableStatement);
           const variable = varStatement.declarationList.declarations[0];
           const initializer3 = skipOuterExpressions(variable.initializer);
           let aliasAssignment = tryCast(initializer3, isAssignmentExpression);
@@ -159971,7 +160233,7 @@ ${lanes.join("\n")}
           return isSpreadElement(node) ? visitSpanOfSpreads : visitSpanOfNonSpreads;
         }
         function visitSpanOfSpreads(chunk) {
-          return map20(chunk, visitExpressionOfSpread);
+          return map24(chunk, visitExpressionOfSpread);
         }
         function visitExpressionOfSpread(node) {
           Debug.assertNode(node, isSpreadElement);
@@ -160543,7 +160805,7 @@ ${lanes.join("\n")}
             return setSourceMapRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map20(variables, transformInitializedVariable)
+                  map24(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -161101,7 +161363,7 @@ ${lanes.join("\n")}
             const variables = getInitializedVariables(initializer3);
             node = factory2.updateForStatement(
               node,
-              variables.length > 0 ? factory2.inlineExpressions(map20(variables, transformInitializedVariable)) : void 0,
+              variables.length > 0 ? factory2.inlineExpressions(map24(variables, transformInitializedVariable)) : void 0,
               visitNode(node.condition, visitor, isExpression),
               visitNode(node.incrementor, visitor, isExpression),
               visitIterationBody(node.statement, visitor, context)
@@ -164427,7 +164689,7 @@ ${lanes.join("\n")}
             moduleBodyBlock
           );
           const moduleName = tryGetModuleNameFromFile(factory2, node, host, compilerOptions);
-          const dependencies = factory2.createArrayLiteralExpression(map20(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
+          const dependencies = factory2.createArrayLiteralExpression(map24(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
           const updated = setEmitFlags(
             factory2.updateSourceFile(
               node,
@@ -166157,7 +166419,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map20(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map24(node.sourceFiles, transformSourceFile));
         }
       }
       function canProduceDiagnostics(node) {
@@ -166905,7 +167167,7 @@ ${lanes.join("\n")}
             rawLibReferenceDirectives = [];
             let hasNoDefaultLib = false;
             const bundle = factory2.createBundle(
-              map20(node.sourceFiles, (sourceFile) => {
+              map24(node.sourceFiles, (sourceFile) => {
                 if (sourceFile.isDeclarationFile) return void 0;
                 hasNoDefaultLib = hasNoDefaultLib || sourceFile.hasNoDefaultLib;
                 currentSourceFile = sourceFile;
@@ -167016,7 +167278,7 @@ ${lanes.join("\n")}
             getLibReferences()
           );
           function collectFileReferences(sourceFile) {
-            rawReferencedFiles = concatenate(rawReferencedFiles, map20(sourceFile.referencedFiles, (f3) => [sourceFile, f3]));
+            rawReferencedFiles = concatenate(rawReferencedFiles, map24(sourceFile.referencedFiles, (f3) => [sourceFile, f3]));
             rawTypeReferenceDirectives = concatenate(rawTypeReferenceDirectives, sourceFile.typeReferenceDirectives);
             rawLibReferenceDirectives = concatenate(rawLibReferenceDirectives, sourceFile.libReferenceDirectives);
           }
@@ -167230,7 +167492,7 @@ ${lanes.join("\n")}
           )) {
             return factory2.createNodeArray();
           }
-          const newParams = map20(params, (p) => ensureParameter(p, modifierMask));
+          const newParams = map24(params, (p) => ensureParameter(p, modifierMask));
           if (!newParams) {
             return factory2.createNodeArray();
           }
@@ -167982,7 +168244,7 @@ ${lanes.join("\n")}
                     void 0,
                     /*isTypeOnly*/
                     false,
-                    factory2.createNamedExports(map20(exportMappings, ([gen, exp]) => {
+                    factory2.createNamedExports(map24(exportMappings, ([gen, exp]) => {
                       return factory2.createExportSpecifier(
                         /*isTypeOnly*/
                         false,
@@ -168190,11 +168452,11 @@ ${lanes.join("\n")}
                   2
                   /* Const */
                 ));
-                const heritageClauses = factory2.createNodeArray(map20(input.heritageClauses, (clause) => {
+                const heritageClauses = factory2.createNodeArray(map24(input.heritageClauses, (clause) => {
                   if (clause.token === 96) {
                     const oldDiag2 = getSymbolAccessibilityDiagnostic;
                     getSymbolAccessibilityDiagnostic = createGetSymbolAccessibilityDiagnosticForNode(clause.types[0]);
-                    const newClause = factory2.updateHeritageClause(clause, map20(clause.types, (t2) => factory2.updateExpressionWithTypeArguments(t2, newId, visitNodes2(t2.typeArguments, visitDeclarationSubtree, isTypeNode))));
+                    const newClause = factory2.updateHeritageClause(clause, map24(clause.types, (t2) => factory2.updateExpressionWithTypeArguments(t2, newId, visitNodes2(t2.typeArguments, visitDeclarationSubtree, isTypeNode))));
                     getSymbolAccessibilityDiagnostic = oldDiag2;
                     return newClause;
                   }
@@ -168356,7 +168618,7 @@ ${lanes.join("\n")}
         }
         function transformHeritageClauses(nodes) {
           return factory2.createNodeArray(filter3(
-            map20(nodes, (clause) => factory2.updateHeritageClause(
+            map24(nodes, (clause) => factory2.updateHeritageClause(
               clause,
               visitNodes2(
                 factory2.createNodeArray(filter3(clause.types, (t2) => {
@@ -168478,7 +168740,7 @@ ${lanes.join("\n")}
         const moduleKind = getEmitModuleKind(compilerOptions);
         const useDefineForClassFields = getUseDefineForClassFields(compilerOptions);
         const transformers = [];
-        addRange(transformers, customTransformers && map20(customTransformers.before, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map24(customTransformers.before, wrapScriptTransformerFactory));
         transformers.push(transformTypeScript);
         if (compilerOptions.experimentalDecorators) {
           transformers.push(transformLegacyDecorators);
@@ -168516,13 +168778,13 @@ ${lanes.join("\n")}
           transformers.push(transformGenerators);
         }
         transformers.push(getModuleTransformer(moduleKind));
-        addRange(transformers, customTransformers && map20(customTransformers.after, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map24(customTransformers.after, wrapScriptTransformerFactory));
         return transformers;
       }
       function getDeclarationTransformers(customTransformers) {
         const transformers = [];
         transformers.push(transformDeclarations);
-        addRange(transformers, customTransformers && map20(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
+        addRange(transformers, customTransformers && map24(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
         return transformers;
       }
       function wrapCustomTransformer(transformer) {
@@ -174298,7 +174560,7 @@ ${lanes.join("\n")}
           var _a2;
           if (!host.realpath || ensureTrailingDirectorySeparator(toPath3(host.realpath(rootDir))) === rootDirPath) {
             const resultFromHost = {
-              files: map20(host.readDirectory(
+              files: map24(host.readDirectory(
                 rootDir,
                 /*extensions*/
                 void 0,
@@ -174397,7 +174659,7 @@ ${lanes.join("\n")}
           function getFileSystemEntriesFromHost(dir, path2) {
             if (rootSymLinkResult && path2 === rootDirPath) return rootSymLinkResult;
             const result = {
-              files: map20(host.readDirectory(
+              files: map24(host.readDirectory(
                 dir,
                 /*extensions*/
                 void 0,
@@ -174959,12 +175221,12 @@ ${lanes.join("\n")}
             const value = readFileCache.get(key);
             if (value !== void 0 && value !== data) {
               readFileCache.delete(key);
-              sourceFileCache.forEach((map22) => map22.delete(key));
+              sourceFileCache.forEach((map25) => map25.delete(key));
             } else if (getSourceFileWithCache) {
-              sourceFileCache.forEach((map22) => {
-                const sourceFile = map22.get(key);
+              sourceFileCache.forEach((map25) => {
+                const sourceFile = map25.get(key);
                 if (sourceFile && sourceFile.text !== data) {
-                  map22.delete(key);
+                  map25.delete(key);
                 }
               });
             }
@@ -178971,7 +179233,7 @@ ${lanes.join("\n")}
       ((BuilderState2) => {
         function createManyToManyPathMap() {
           function create2(forward, reverse, deleted) {
-            const map22 = {
+            const map25 = {
               getKeys: (v) => reverse.get(v),
               getValues: (k) => forward.get(k),
               keys: () => forward.keys(),
@@ -179000,10 +179262,10 @@ ${lanes.join("\n")}
                     addToMultimap(reverse, v, k);
                   }
                 });
-                return map22;
+                return map25;
               }
             };
-            return map22;
+            return map25;
           }
           return create2(
             /* @__PURE__ */ new Map(),
@@ -179013,19 +179275,19 @@ ${lanes.join("\n")}
           );
         }
         BuilderState2.createManyToManyPathMap = createManyToManyPathMap;
-        function addToMultimap(map22, k, v) {
-          let set2 = map22.get(k);
+        function addToMultimap(map25, k, v) {
+          let set2 = map25.get(k);
           if (!set2) {
             set2 = /* @__PURE__ */ new Set();
-            map22.set(k, set2);
+            map25.set(k, set2);
           }
           set2.add(v);
         }
-        function deleteFromMultimap(map22, k, v) {
-          const set2 = map22.get(k);
+        function deleteFromMultimap(map25, k, v) {
+          const set2 = map25.get(k);
           if (set2 == null ? void 0 : set2.delete(v)) {
             if (!set2.size) {
-              map22.delete(k);
+              map25.delete(k);
             }
             return true;
           }
@@ -179376,8 +179638,8 @@ ${lanes.join("\n")}
         if (diff & 48) result = result | emitKind & 48;
         return result;
       }
-      function hasSameKeys(map1, map22) {
-        return map1 === map22 || map1 !== void 0 && map22 !== void 0 && map1.size === map22.size && !forEachKey(map1, (key) => !map22.has(key));
+      function hasSameKeys(map1, map25) {
+        return map1 === map25 || map1 !== void 0 && map25 !== void 0 && map1.size === map25.size && !forEachKey(map1, (key) => !map25.has(key));
       }
       function createBuilderProgramState(newProgram, oldState) {
         var _a2, _b;
@@ -180711,7 +180973,7 @@ ${lanes.join("\n")}
         let filePathsSetList;
         const latestChangedDtsFile = buildInfo.latestChangedDtsFile ? toAbsolutePath(buildInfo.latestChangedDtsFile) : void 0;
         const fileInfos = /* @__PURE__ */ new Map();
-        const changedFilesSet = new Set(map20(buildInfo.changeFileSet, toFilePath));
+        const changedFilesSet = new Set(map24(buildInfo.changeFileSet, toFilePath));
         if (isIncrementalBundleEmitBuildInfo(buildInfo)) {
           buildInfo.fileInfos.forEach((fileInfo, index) => {
             const path2 = toFilePath(index + 1);
@@ -180804,10 +181066,10 @@ ${lanes.join("\n")}
           return filePathsSetList[fileIdsListId - 1];
         }
         function toManyToManyPathMap(referenceMap, options) {
-          const map22 = BuilderState.createReferencedMap(options);
-          if (!map22 || !referenceMap) return map22;
-          referenceMap.forEach(([fileId, fileIdListId]) => map22.set(toFilePath(fileId), toFilePathsSet(fileIdListId)));
-          return map22;
+          const map25 = BuilderState.createReferencedMap(options);
+          if (!map25 || !referenceMap) return map25;
+          referenceMap.forEach(([fileId, fileIdListId]) => map25.set(toFilePath(fileId), toFilePathsSet(fileIdListId)));
+          return map25;
         }
         function toPerFileSemanticDiagnostics(diagnostics) {
           const semanticDiagnostics = new Map(
@@ -186636,7 +186898,7 @@ ${lanes.join("\n")}
               return factory.createArrayTypeNode(visitNode(node.type, visitExistingNodeTreeSymbols, isTypeNode));
             }
             if (isJSDocTypeLiteral(node)) {
-              return factory.createTypeLiteralNode(map20(node.jsDocPropertyTags, (t2) => {
+              return factory.createTypeLiteralNode(map24(node.jsDocPropertyTags, (t2) => {
                 const name2 = visitNode(isIdentifier(t2.name) ? t2.name : t2.name.right, visitExistingNodeTreeSymbols, isIdentifier);
                 const overrideTypeNode = resolver.getJsDocPropertyOverride(context, node, t2);
                 return factory.createPropertySignature(
@@ -186702,7 +186964,7 @@ ${lanes.join("\n")}
               } else {
                 return factory.createFunctionTypeNode(
                   visitNodes2(node.typeParameters, visitExistingNodeTreeSymbols, isTypeParameterDeclaration),
-                  map20(node.parameters, (p, i2) => factory.createParameterDeclaration(
+                  map24(node.parameters, (p, i2) => factory.createParameterDeclaration(
                     /*modifiers*/
                     void 0,
                     getEffectiveDotDotDotForParameter(p),
@@ -190985,10 +191247,10 @@ ${lanes.join("\n")}
         return expression;
       }
       function mapOneOrMany(valueOrArray, f3, resultSelector = identity) {
-        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map20(valueOrArray, f3)) : f3(valueOrArray, 0) : void 0;
+        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map24(valueOrArray, f3)) : f3(valueOrArray, 0) : void 0;
       }
       function firstOrOnly(valueOrArray) {
-        return isArray(valueOrArray) ? first(valueOrArray) : valueOrArray;
+        return isArray(valueOrArray) ? first2(valueOrArray) : valueOrArray;
       }
       function getNameForExportedSymbol(symbol2, scriptTarget, preferCapitalized) {
         if (symbol2.escapedName === "export=" || symbol2.escapedName === "default") {
@@ -192717,9 +192979,9 @@ ${lanes.join("\n")}
             sourceFilesSet
           );
           if (!referenceEntries) return void 0;
-          const map22 = arrayToMultiMap(referenceEntries.map(ts_FindAllReferences_exports.toHighlightSpan), (e2) => e2.fileName, (e2) => e2.span);
+          const map25 = arrayToMultiMap(referenceEntries.map(ts_FindAllReferences_exports.toHighlightSpan), (e2) => e2.fileName, (e2) => e2.span);
           const getCanonicalFileName = createGetCanonicalFileName(program2.useCaseSensitiveFileNames());
-          return arrayFrom(mapDefinedIterator(map22.entries(), ([fileName, highlightSpans]) => {
+          return arrayFrom(mapDefinedIterator(map25.entries(), ([fileName, highlightSpans]) => {
             if (!sourceFilesSet.has(fileName)) {
               if (!program2.redirectTargetsMap.has(toPath(fileName, program2.getCurrentDirectory(), getCanonicalFileName))) {
                 return void 0;
@@ -194382,12 +194644,12 @@ ${lanes.join("\n")}
         return void 0;
       }
       function convertDocumentToSourceMapper(host, contents, mapFileName) {
-        const map22 = tryParseRawSourceMap(contents);
-        if (!map22 || !map22.sources || !map22.file || !map22.mappings) {
+        const map25 = tryParseRawSourceMap(contents);
+        if (!map25 || !map25.sources || !map25.file || !map25.mappings) {
           return void 0;
         }
-        if (map22.sourcesContent && map22.sourcesContent.some(isString)) return void 0;
-        return createDocumentPositionMapper(host, map22, mapFileName);
+        if (map25.sourcesContent && map25.sourcesContent.some(isString)) return void 0;
+        return createDocumentPositionMapper(host, map25, mapFileName);
       }
       function createSourceFileLike(text, lineMap) {
         return {
@@ -194919,7 +195181,7 @@ interface Symbol {
         curCancellationToken = cancellationToken;
         curSourceFile = sourceFile;
         try {
-          return map20(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
+          return map24(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
         } finally {
           reset();
         }
@@ -195572,7 +195834,7 @@ interface Symbol {
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
           nameSpan: n.name && getNodeSpan(n.name),
-          childItems: map20(n.children, convertToTree)
+          childItems: map24(n.children, convertToTree)
         };
       }
       function convertToPrimaryNavBarMenuItem(n) {
@@ -195581,7 +195843,7 @@ interface Symbol {
           kind: getNodeKind(n.node),
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
-          childItems: map20(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
+          childItems: map24(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
           indent: n.indent,
           bolded: false,
           grayed: false
@@ -195812,7 +196074,7 @@ interface Symbol {
             if (!(vs.declarationList.flags & 2) || vs.declarationList.declarations.length !== 1) {
               return void 0;
             }
-            const decl = first(vs.declarationList.declarations);
+            const decl = first2(vs.declarationList.declarations);
             if (!decl.initializer) return void 0;
             Debug.assert(!wasDefault, "Can't have a default flag here");
             return noSymbolError(decl.name) || { exportNode: vs, exportName: decl.name, wasDefault, exportingModuleSymbol };
@@ -195865,7 +196127,7 @@ interface Symbol {
               ));
               break;
             case 244:
-              const decl = first(exportNode.declarationList.declarations);
+              const decl = first2(exportNode.declarationList.declarations);
               if (!ts_FindAllReferences_exports.Core.isSymbolReferencedInFile(exportName, checker, exportingSourceFile) && !decl.type) {
                 changes.replaceNode(exportingSourceFile, exportNode, factory.createExportDefault(Debug.checkDefined(decl.initializer, "Initializer was previously known to be present")));
                 break;
@@ -196705,8 +196967,8 @@ interface Symbol {
         }
       }
       function deleteMovedStatements(sourceFile, moved, changes) {
-        for (const { first: first2, afterLast } of moved) {
-          changes.deleteNodeRangeExcludingEnd(sourceFile, first2, afterLast);
+        for (const { first: first22, afterLast } of moved) {
+          changes.deleteNodeRangeExcludingEnd(sourceFile, first22, afterLast);
         }
       }
       function deleteUnusedOldImports(oldFile, toMove, toDelete, importAdder) {
@@ -197809,12 +198071,12 @@ interface Symbol {
               "args",
               /*questionToken*/
               void 0,
-              factory.createUnionTypeNode(map20(signatureDeclarations, convertSignatureParametersToTuple))
+              factory.createUnionTypeNode(map24(signatureDeclarations, convertSignatureParametersToTuple))
             )
           ]);
         }
         function convertSignatureParametersToTuple(decl) {
-          const members = map20(decl.parameters, convertParameterToNamedTupleMember);
+          const members = map24(decl.parameters, convertParameterToNamedTupleMember);
           return setEmitFlags(
             factory.createTupleTypeNode(members),
             some(members, (m2) => !!length(getSyntheticLeadingComments(m2))) ? 0 : 1
@@ -198025,7 +198287,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         if (refactorKindBeginsWith(addBracesAction.kind, kind) && isExpression(func.body)) {
           return { func, addBraces: true, expression: func.body };
         } else if (refactorKindBeginsWith(removeBracesAction.kind, kind) && isBlock(func.body) && func.body.statements.length === 1) {
-          const firstStatement = first(func.body.statements);
+          const firstStatement = first2(func.body.statements);
           if (isReturnStatement(firstStatement)) {
             const expression = firstStatement.expression && isObjectLiteralExpression(getLeftmostExpression(
               firstStatement.expression,
@@ -198159,7 +198421,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         if (!isSingleVariableDeclaration(parent2)) {
           return void 0;
         }
-        const variableDeclaration = isVariableDeclaration(parent2) ? parent2 : first(parent2.declarations);
+        const variableDeclaration = isVariableDeclaration(parent2) ? parent2 : first2(parent2.declarations);
         const initializer3 = variableDeclaration.initializer;
         if (initializer3 && (isArrowFunction(initializer3) || isFunctionExpression(initializer3) && !isFunctionReferencedInFile(sourceFile, typeChecker, initializer3))) {
           return initializer3;
@@ -198294,9 +198556,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function doChange5(sourceFile, program2, host, changes, functionDeclaration, groupedReferences) {
         const signature = groupedReferences.signature;
-        const newFunctionDeclarationParams = map20(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
+        const newFunctionDeclarationParams = map24(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
         if (signature) {
-          const newSignatureParams = map20(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
+          const newSignatureParams = map24(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
           replaceParameters(signature, newSignatureParams);
         }
         replaceParameters(functionDeclaration, newFunctionDeclarationParams);
@@ -198314,7 +198576,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             );
             changes.replaceNodeRange(
               getSourceFileOfNode(call),
-              first(call.arguments),
+              first2(call.arguments),
               last(call.arguments),
               newArgument,
               { leadingTriviaOption: ts_textChanges_exports.LeadingTriviaOption.IncludeAll, trailingTriviaOption: ts_textChanges_exports.TrailingTriviaOption.Include }
@@ -198324,7 +198586,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         function replaceParameters(declarationOrSignature, parameterDeclarations) {
           changes.replaceNodeRangeWithNodes(
             sourceFile,
-            first(declarationOrSignature.parameters),
+            first2(declarationOrSignature.parameters),
             last(declarationOrSignature.parameters),
             parameterDeclarations,
             {
@@ -198359,10 +198621,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         function groupReferences(referenceEntries) {
           const classReferences = { accessExpressions: [], typeUsages: [] };
           const groupedReferences2 = { functionCalls: [], declarations: [], classReferences, valid: true };
-          const functionSymbols = map20(functionNames, getSymbolTargetAtLocation);
-          const classSymbols = map20(classNames, getSymbolTargetAtLocation);
+          const functionSymbols = map24(functionNames, getSymbolTargetAtLocation);
+          const classSymbols = map24(classNames, getSymbolTargetAtLocation);
           const isConstructor = isConstructorDeclaration(functionDeclaration);
-          const contextualSymbols = map20(functionNames, (name2) => getSymbolForContextualType(name2, checker));
+          const contextualSymbols = map24(functionNames, (name2) => getSymbolForContextualType(name2, checker));
           for (const entry of referenceEntries) {
             if (entry.kind === ts_FindAllReferences_exports.EntryKind.Span) {
               groupedReferences2.valid = false;
@@ -198626,7 +198888,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const parameters = getRefactorableParameters(functionDeclaration.parameters);
         const hasRestParameter2 = isRestParameter(last(parameters));
         const nonRestArguments = hasRestParameter2 ? functionArguments.slice(0, parameters.length - 1) : functionArguments;
-        const properties = map20(nonRestArguments, (arg, i2) => {
+        const properties = map24(nonRestArguments, (arg, i2) => {
           const parameterName = getParameterName(parameters[i2]);
           const property = createPropertyOrShorthandAssignment(parameterName, arg);
           suppressLeadingAndTrailingTrivia(property.name);
@@ -198649,7 +198911,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function createNewParameters(functionDeclaration, program2, host) {
         const checker = program2.getTypeChecker();
         const refactorableParameters = getRefactorableParameters(functionDeclaration.parameters);
-        const bindingElements = map20(refactorableParameters, createBindingElementFromParameterDeclaration);
+        const bindingElements = map24(refactorableParameters, createBindingElementFromParameterDeclaration);
         const objectParameterName = factory.createObjectBindingPattern(bindingElements);
         const objectParameterType = createParameterTypeNode(refactorableParameters);
         let objectInitializer;
@@ -198704,7 +198966,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return element;
         }
         function createParameterTypeNode(parameters) {
-          const members = map20(parameters, createPropertySignatureFromParameterDeclaration);
+          const members = map24(parameters, createPropertySignatureFromParameterDeclaration);
           const typeNode = addEmitFlags(
             factory.createTypeLiteralNode(members),
             1
@@ -198979,7 +199241,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           i2 = newIndex - 1;
           const isLast = i2 === nodes.length - 1;
           if (isTemplateExpression(currentNode)) {
-            const spans = map20(currentNode.templateSpans, (span, index) => {
+            const spans = map24(currentNode.templateSpans, (span, index) => {
               copyExpressionComments(span);
               const isLastSpan = index === currentNode.templateSpans.length - 1;
               const text = span.literal.text + (isLastSpan ? subsequentText : "");
@@ -199740,7 +200002,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return isArrowFunction(node) ? isFunctionBody(node.body) : isFunctionLikeDeclaration(node) || isSourceFile(node) || isModuleBlock(node) || isClassLike(node);
       }
       function collectEnclosingScopes(range) {
-        let current = isReadonlyArray(range.range) ? first(range.range) : range.range;
+        let current = isReadonlyArray(range.range) ? first2(range.range) : range.range;
         if (range.facts & 8 && !(range.facts & 16)) {
           const containingClass = getContainingClass(current);
           if (containingClass) {
@@ -200182,12 +200444,12 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
         }
         if (isReadonlyArray(range.range)) {
-          changeTracker.replaceNodeRangeWithNodes(context.file, first(range.range), last(range.range), newNodes);
+          changeTracker.replaceNodeRangeWithNodes(context.file, first2(range.range), last(range.range), newNodes);
         } else {
           changeTracker.replaceNodeWithNodes(context.file, range.range, newNodes);
         }
         const edits = changeTracker.getChanges();
-        const renameRange = isReadonlyArray(range.range) ? first(range.range) : range.range;
+        const renameRange = isReadonlyArray(range.range) ? first2(range.range) : range.range;
         const renameFilename = renameRange.getSourceFile().fileName;
         const renameLocation = getRenameLocation(
           edits,
@@ -200606,15 +200868,15 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getPropertyAssignmentsForWritesAndVariableDeclarations(exposedVariableDeclarations, writes) {
-        const variableAssignments = map20(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
-        const writeAssignments = map20(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
+        const variableAssignments = map24(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
+        const writeAssignments = map24(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
         return variableAssignments === void 0 ? writeAssignments : writeAssignments === void 0 ? variableAssignments : variableAssignments.concat(writeAssignments);
       }
       function isReadonlyArray(v) {
         return isArray(v);
       }
       function getEnclosingTextRange(targetRange, sourceFile) {
-        return isReadonlyArray(targetRange.range) ? { pos: first(targetRange.range).getStart(sourceFile), end: last(targetRange.range).getEnd() } : targetRange.range;
+        return isReadonlyArray(targetRange.range) ? { pos: first2(targetRange.range).getStart(sourceFile), end: last(targetRange.range).getEnd() } : targetRange.range;
       }
       function collectReadsAndWrites(targetRange, scopes, enclosingTextRange, sourceFile, checker, cancellationToken) {
         const allTypeParameterUsages = /* @__PURE__ */ new Map();
@@ -200630,7 +200892,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         let expressionDiagnostic;
         if (expression === void 0) {
           const statements = targetRange.range;
-          const start2 = first(statements).getStart();
+          const start2 = first2(statements).getStart();
           const end = last(statements).end;
           expressionDiagnostic = createFileDiagnostic(sourceFile, start2, end - start2, Messages.expressionExpected);
         } else if (checker.getTypeAtLocation(expression).flags & (16384 | 131072)) {
@@ -200654,7 +200916,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         const seenUsages = /* @__PURE__ */ new Map();
         const target = isReadonlyArray(targetRange.range) ? factory.createBlock(targetRange.range) : targetRange.range;
-        const unmodifiedNode = isReadonlyArray(targetRange.range) ? first(targetRange.range) : targetRange.range;
+        const unmodifiedNode = isReadonlyArray(targetRange.range) ? first2(targetRange.range) : targetRange.range;
         const inGenericContext = isInGenericContext(unmodifiedNode);
         collectUsages(target);
         if (inGenericContext && !isReadonlyArray(targetRange.range) && !isJsxAttribute(targetRange.range)) {
@@ -201015,7 +201277,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function doChange7(sourceFile, changes, declaration, typeNode) {
         const closeParen = findChildOfKind(declaration, 22, sourceFile);
         const needParens = isArrowFunction(declaration) && closeParen === void 0;
-        const endNode2 = needParens ? first(declaration.parameters) : closeParen;
+        const endNode2 = needParens ? first2(declaration.parameters) : closeParen;
         if (endNode2) {
           if (needParens) {
             changes.insertNodeBefore(sourceFile, endNode2, factory.createToken(
@@ -202132,7 +202394,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function displayPartsToString(displayParts) {
         if (displayParts) {
-          return map20(displayParts, (displayPart2) => displayPart2.text).join("");
+          return map24(displayParts, (displayPart2) => displayPart2.text).join("");
         }
         return "";
       }
@@ -203495,7 +203757,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             const multiLineCommentStart = /(?:\/\*+\s*)/.source;
             const anyNumberOfSpacesAndAsterisksAtStartOfLine = /(?:^(?:\s|\*)*)/.source;
             const preamble = "(" + anyNumberOfSpacesAndAsterisksAtStartOfLine + "|" + singleLineCommentStart + "|" + multiLineCommentStart + ")";
-            const literals = "(?:" + map20(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
+            const literals = "(?:" + map24(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
             const endOfLineOrEndOfComment = /(?:$|\*\/)/.source;
             const messageRemainder = /(?:.*?)/.source;
             const messagePortion = "(" + literals + messageRemainder + ")";
@@ -203759,7 +204021,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             false
           );
           if (properties && properties.length === 1) {
-            return first(properties);
+            return first2(properties);
           }
         }
         return checker.getSymbolAtLocation(node);
@@ -204434,9 +204696,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         let declarations;
         if (symbol2 && symbol2.declarations) {
           const indices = indicesOf(symbol2.declarations);
-          const keys = map20(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
+          const keys = map24(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
           indices.sort((a, b) => compareStringsCaseSensitive(keys[a].file, keys[b].file) || keys[a].pos - keys[b].pos);
-          const sortedDeclarations = map20(indices, (i2) => symbol2.declarations[i2]);
+          const sortedDeclarations = map24(indices, (i2) => symbol2.declarations[i2]);
           let lastDecl;
           for (const decl of sortedDeclarations) {
             if (isValidCallHierarchyDeclaration(decl)) {
@@ -204572,7 +204834,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return { from: from11, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
-        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map20(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map24(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getIncomingCalls(program2, declaration, cancellationToken) {
         if (isSourceFile(declaration) || isModuleDeclaration(declaration) || isClassStaticBlockDeclaration(declaration)) {
@@ -204758,7 +205020,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return { to, fromSpans };
       }
       function convertCallSiteGroupToOutgoingCall(program2, entries) {
-        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map20(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map24(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getOutgoingCalls(program2, declaration) {
         if (declaration.flags & 33554432 || isMethodSignature(declaration)) {
@@ -204871,7 +205133,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getFixes(context) {
         const diagnostics = getDiagnostics(context);
         const registrations = errorCodeToFixes.get(String(context.errorCode));
-        return flatMap(registrations, (f3) => map20(f3.getCodeActions(context), removeFixIdIfFixAllUnavailable(f3, diagnostics)));
+        return flatMap(registrations, (f3) => map24(f3.getCodeActions(context), removeFixIdIfFixAllUnavailable(f3, diagnostics)));
       }
       function getAllFixes(context) {
         return fixIdToRegistration.get(cast(context.fixId, isString)).getAllCodeActions(context);
@@ -205645,7 +205907,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             if (typeParameters.length) changes.insertTypeParameters(sourceFile, decl, typeParameters);
           }
           const needParens = isArrowFunction(decl) && !findChildOfKind(decl, 21, sourceFile);
-          if (needParens) changes.insertNodeBefore(sourceFile, first(decl.parameters), factory.createToken(
+          if (needParens) changes.insertNodeBefore(sourceFile, first2(decl.parameters), factory.createToken(
             21
             /* OpenParenToken */
           ));
@@ -205707,7 +205969,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function transformJSDocTypeLiteral(node) {
-        const typeNode = factory.createTypeLiteralNode(map20(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
+        const typeNode = factory.createTypeLiteralNode(map24(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
           /*modifiers*/
           void 0,
           isIdentifier(tag.name) ? tag.name : tag.name.right,
@@ -206978,7 +207240,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function convertVariableStatement(sourceFile, statement, changes, checker, identifiers, target, quotePreference) {
         const { declarationList } = statement;
         let foundImport = false;
-        const converted = map20(declarationList.declarations, (decl) => {
+        const converted = map24(declarationList.declarations, (decl) => {
           const { name: name2, initializer: initializer3 } = decl;
           if (initializer3) {
             if (isExportsOrModuleExportsOrAlias(sourceFile, initializer3)) {
@@ -207299,9 +207561,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return name2;
       }
       function collectFreeIdentifiers(file2) {
-        const map22 = createMultiMap();
-        forEachFreeIdentifier(file2, (id) => map22.add(id.text, id));
-        return map22;
+        const map25 = createMultiMap();
+        forEachFreeIdentifier(file2, (id) => map25.add(id.text, id));
+        return map25;
       }
       function forEachFreeIdentifier(node, cb) {
         if (isIdentifier(node) && isFreeIdentifier(node)) cb(node);
@@ -208073,12 +208335,12 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         function addImportForUnresolvedIdentifier(context, symbolToken, useAutoImportProvider2) {
           const info = getFixInfosWithoutDiagnostic(context, symbolToken, useAutoImportProvider2);
           if (!info || !info.length) return;
-          addImport(first(info));
+          addImport(first2(info));
         }
         function addImportFromDiagnostic(diagnostic, context) {
           const info = getFixInfos(context, diagnostic.code, diagnostic.start, useAutoImportProvider);
           if (!info || !info.length) return;
-          addImport(first(info));
+          addImport(first2(info));
         }
         function addImportFromExportedSymbol(exportedSymbol, isValidTypeOnlyUseSite, referenceImport) {
           var _a2, _b;
@@ -208193,7 +208455,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             fix = {
               kind: 3,
               moduleSpecifierKind: existingFix !== void 0 ? existingFix.moduleSpecifierKind : moduleSpecifierResult.kind,
-              moduleSpecifier: existingFix !== void 0 ? existingFix.moduleSpecifier : first(moduleSpecifierResult.moduleSpecifiers),
+              moduleSpecifier: existingFix !== void 0 ? existingFix.moduleSpecifier : first2(moduleSpecifierResult.moduleSpecifiers),
               importKind,
               addAsTypeOnly,
               useRequire
@@ -210103,7 +210365,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         ));
       }
       function createExportSpecifiers(names, allowTypeModifier) {
-        return factory.createNodeArray(map20(names, (n) => factory.createExportSpecifier(
+        return factory.createNodeArray(map24(names, (n) => factory.createExportSpecifier(
           allowTypeModifier && n.isTypeOnly,
           /*propertyName*/
           void 0,
@@ -210358,7 +210620,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function getFixInfo(checker, declaration, expectType, isFunctionType) {
         if (!declaration.body || !isBlock(declaration.body) || length(declaration.body.statements) !== 1) return void 0;
-        const firstStatement = first(declaration.body.statements);
+        const firstStatement = first2(declaration.body.statements);
         if (isExpressionStatement(firstStatement) && checkFixedAssignableTo(checker, declaration, checker.getTypeAtLocation(firstStatement.expression), expectType, isFunctionType)) {
           return {
             declaration,
@@ -210386,7 +210648,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             };
           }
         } else if (isBlock(firstStatement) && length(firstStatement.statements) === 1) {
-          const firstBlockStatement = first(firstStatement.statements);
+          const firstBlockStatement = first2(firstStatement.statements);
           if (isLabeledStatement(firstBlockStatement) && isExpressionStatement(firstBlockStatement.statement)) {
             const node = factory.createObjectLiteralExpression([factory.createPropertyAssignment(firstBlockStatement.label, firstBlockStatement.statement.expression)]);
             const nodeType = createObjectTypeFromLabeledExpression(checker, firstBlockStatement.label, firstBlockStatement.statement.expression);
@@ -210989,7 +211251,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const checker = context.program.getTypeChecker();
         const jsxAttributesNode = info.parentDeclaration.attributes;
         const hasSpreadAttribute = some(jsxAttributesNode.properties, isJsxSpreadAttribute);
-        const attrs = map20(info.attributes, (attr) => {
+        const attrs = map24(info.attributes, (attr) => {
           const value = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(attr), info.parentDeclaration);
           const name2 = factory.createIdentifier(attr.name);
           const jsxAttribute = factory.createJsxAttribute(name2, factory.createJsxExpression(
@@ -211010,7 +211272,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const quotePreference = getQuotePreference(context.sourceFile, context.preferences);
         const target = getEmitScriptTarget(context.program.getCompilerOptions());
         const checker = context.program.getTypeChecker();
-        const props = map20(info.properties, (prop) => {
+        const props = map24(info.properties, (prop) => {
           const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), info.parentDeclaration);
           return factory.createPropertyAssignment(createPropertyNameFromSymbol(prop, target, quotePreference, checker), initializer3);
         });
@@ -211092,7 +211354,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return factory.createArrayLiteralExpression();
         }
         if (isObjectLiteralType(type)) {
-          const props = map20(checker.getPropertiesOfType(type), (prop) => {
+          const props = map24(checker.getPropertiesOfType(type), (prop) => {
             const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), enclosingDeclaration);
             return factory.createPropertyAssignment(prop.name, initializer3);
           });
@@ -211396,7 +211658,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           if (length(declaration.parameters)) {
             changes.replaceNodeRangeWithNodes(
               sourceFile,
-              first(declaration.parameters),
+              first2(declaration.parameters),
               last(declaration.parameters),
               updateParameters(importAdder, scriptTarget, declaration, newParameters),
               {
@@ -211430,7 +211692,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function updateParameters(importAdder, scriptTarget, node, newParameters) {
-        const parameters = map20(node.parameters, (p) => factory.createParameterDeclaration(
+        const parameters = map24(node.parameters, (p) => factory.createParameterDeclaration(
           p.modifiers,
           p.dotDotDotToken,
           p.name,
@@ -211601,7 +211863,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         importAdder.writeFixes(changeTracker);
       }
       function symbolPointsToNonPrivateAndAbstractMember(symbol2) {
-        const flags = getSyntacticModifierFlags(first(symbol2.getDeclarations()));
+        const flags = getSyntacticModifierFlags(first2(symbol2.getDeclarations()));
         return !(flags & 2) && !!(flags & 64);
       }
       var fixId27 = "classSuperMustPrecedeThisAccess";
@@ -212008,7 +212270,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           jsDocParameterTag.isNameFirst,
           jsDocParameterTag.comment
         );
-        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map20(tags, (t2) => t2 === jsDocParameterTag ? newJSDocParameterTag : t2)));
+        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map24(tags, (t2) => t2 === jsDocParameterTag ? newJSDocParameterTag : t2)));
         return createCodeFixActionWithoutFixAll(renameUnmatchedParameter, changes, [Diagnostics.Rename_param_tag_name_0_to_1, name2.getText(sourceFile), parameterName]);
       }
       function getInfo14(sourceFile, pos) {
@@ -212124,7 +212386,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               const elements = token.parent.elements;
               const diagnostic = [
                 elements.length > 1 ? Diagnostics.Remove_unused_declarations_for_Colon_0 : Diagnostics.Remove_unused_declaration_for_Colon_0,
-                map20(elements, (e2) => e2.getText(sourceFile)).join(", ")
+                map24(elements, (e2) => e2.getText(sourceFile)).join(", ")
               ];
               return [
                 createDeleteFix(ts_textChanges_exports.ChangeTracker.with(context, (t2) => deleteDestructuringElements(t2, sourceFile, token.parent)), diagnostic)
@@ -212264,7 +212526,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return token.kind === 102 ? tryCast(token.parent, isImportDeclaration) : void 0;
       }
       function canDeleteEntireVariableStatement(sourceFile, token) {
-        return isVariableDeclarationList(token.parent) && first(token.parent.getChildren(sourceFile)) === token;
+        return isVariableDeclarationList(token.parent) && first2(token.parent.getChildren(sourceFile)) === token;
       }
       function deleteEntireVariableStatement(changes, sourceFile, node) {
         changes.delete(sourceFile, node.parent.kind === 244 ? node.parent : node);
@@ -212445,7 +212707,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           Debug.fail("Token and statement should start at the same point. " + logData);
         }
         const container = (isBlock(statement.parent) ? statement.parent : statement).parent;
-        if (!isBlock(statement.parent) || statement === first(statement.parent.statements)) {
+        if (!isBlock(statement.parent) || statement === first2(statement.parent.statements)) {
           switch (container.kind) {
             case 246:
               if (container.elseStatement) {
@@ -213657,7 +213919,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             break;
           case 220:
             const kind = containingFunction.typeParameters ? 30 : 21;
-            insertBefore = findChildOfKind(containingFunction, kind, sourceFile) || first(containingFunction.parameters);
+            insertBefore = findChildOfKind(containingFunction, kind, sourceFile) || first2(containingFunction.parameters);
             break;
           default:
             return;
@@ -213939,7 +214201,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           annotateJSDocParameters(changes, sourceFile, parameterInferences, program2, host);
         } else {
           const needParens = isArrowFunction(containingFunction) && !findChildOfKind(containingFunction, 21, sourceFile);
-          if (needParens) changes.insertNodeBefore(sourceFile, first(containingFunction.parameters), factory.createToken(
+          if (needParens) changes.insertNodeBefore(sourceFile, first2(containingFunction.parameters), factory.createToken(
             21
             /* OpenParenToken */
           ));
@@ -214060,7 +214322,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         if (isArrowFunction(signature) || isFunctionExpression(signature)) {
           const needParens = isArrowFunction(signature) && !findChildOfKind(signature, 21, sourceFile);
           if (needParens) {
-            changes.insertNodeBefore(sourceFile, first(signature.parameters), factory.createToken(
+            changes.insertNodeBefore(sourceFile, first2(signature.parameters), factory.createToken(
               21
               /* OpenParenToken */
             ));
@@ -214085,7 +214347,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             ));
           }
         } else {
-          const paramTags = map20(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
+          const paramTags = map24(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
             /*tagName*/
             void 0,
             name2,
@@ -215219,8 +215481,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const isJs = isInJSFile(contextNode);
         const { typeArguments, arguments: args, parent: parent2 } = call;
         const contextualType = isJs ? void 0 : checker.getContextualType(call);
-        const names = map20(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
-        const instanceTypes = isJs ? [] : map20(args, (arg) => checker.getTypeAtLocation(arg));
+        const names = map24(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
+        const instanceTypes = isJs ? [] : map24(args, (arg) => checker.getTypeAtLocation(arg));
         const { argumentTypeNodes, argumentTypeParameters } = getArgumentTypesAndTypeParameters(
           checker,
           importAdder,
@@ -215528,7 +215790,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function getReturnTypeFromSignatures(signatures, checker, context, enclosingDeclaration) {
         if (length(signatures)) {
-          const type = checker.getUnionType(map20(signatures, checker.getReturnTypeOfSignature));
+          const type = checker.getUnionType(map24(signatures, checker.getReturnTypeOfSignature));
           return checker.typeToTypeNode(type, enclosingDeclaration, 1, 8, getNoopSymbolTrackerWithResolver(context));
         }
       }
@@ -216178,7 +216440,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const defaultImportName = tryCast(decl.name, isIdentifier);
         const namedImports = isObjectBindingPattern(decl.name) ? tryCreateNamedImportsFromObjectBindingPattern(decl.name) : void 0;
         if (defaultImportName || namedImports) {
-          const moduleSpecifier = first(parent2.arguments);
+          const moduleSpecifier = first2(parent2.arguments);
           return {
             allowSyntheticDefaults: getAllowSyntheticDefaultImports(program2.getCompilerOptions()),
             defaultImportName,
@@ -216402,7 +216664,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function doChange39(changes, sourceFile, { indexSignature, container }) {
         const members = isInterfaceDeclaration(container) ? container.members : container.type.members;
         const otherMembers = members.filter((member) => !isIndexSignatureDeclaration(member));
-        const parameter = first(indexSignature.parameters);
+        const parameter = first2(indexSignature.parameters);
         const mappedTypeParameter = factory.createTypeParameterDeclaration(
           /*modifiers*/
           void 0,
@@ -217533,7 +217795,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           if (elements.length === 0) {
             return void 0;
           }
-          const newClauses = map20(elements, (element) => factory.createCaseClause(element, []));
+          const newClauses = map24(elements, (element) => factory.createCaseClause(element, []));
           const newLineChar = getNewLineOrDefaultFromHost(host, formatContext == null ? void 0 : formatContext.options);
           const printer = createSnippetPrinter({
             removeComments: true,
@@ -217543,7 +217805,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             newLine: getNewLineKind(newLineChar)
           });
           const printNode = formatContext ? (node) => printer.printAndFormatNode(4, node, sourceFile, formatContext) : (node) => printer.printNode(4, node, sourceFile);
-          const insertText = map20(newClauses, (clause, i2) => {
+          const insertText = map24(newClauses, (clause, i2) => {
             if (preferences.includeCompletionsWithSnippetText) {
               return `${printNode(clause)}$${i2 + 1}`;
             }
@@ -218880,7 +219142,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           /*useOnlyExternalAliasing*/
           false
         );
-        if (chain) return first(chain);
+        if (chain) return first2(chain);
         return symbol2.parent && (isModuleSymbol(symbol2.parent) ? symbol2 : getFirstSymbolInChain(symbol2.parent, enclosingDeclaration, checker));
       }
       function isModuleSymbol(symbol2) {
@@ -220975,17 +221237,17 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         ]: 2
       };
       function createNameAndKindSet() {
-        const map22 = /* @__PURE__ */ new Map();
+        const map25 = /* @__PURE__ */ new Map();
         function add(value) {
-          const existing = map22.get(value.name);
+          const existing = map25.get(value.name);
           if (!existing || kindPrecedence[existing.kind] < kindPrecedence[value.kind]) {
-            map22.set(value.name, value);
+            map25.set(value.name, value);
           }
         }
         return {
           add,
-          has: map22.has.bind(map22),
-          values: map22.values.bind(map22)
+          has: map25.has.bind(map25),
+          values: map25.values.bind(map25)
         };
       }
       function getStringLiteralCompletions(sourceFile, position, contextToken, options, host, program2, log, preferences, includeSymbol) {
@@ -222367,22 +222629,22 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return refs;
       }
       function getDirectImportsMap(sourceFiles, checker, cancellationToken) {
-        const map22 = /* @__PURE__ */ new Map();
+        const map25 = /* @__PURE__ */ new Map();
         for (const sourceFile of sourceFiles) {
           if (cancellationToken) cancellationToken.throwIfCancellationRequested();
           forEachImport(sourceFile, (importDecl, moduleSpecifier) => {
             const moduleSymbol = checker.getSymbolAtLocation(moduleSpecifier);
             if (moduleSymbol) {
               const id = getSymbolId(moduleSymbol).toString();
-              let imports = map22.get(id);
+              let imports = map25.get(id);
               if (!imports) {
-                map22.set(id, imports = []);
+                map25.set(id, imports = []);
               }
               imports.push(importDecl);
             }
           });
         }
-        return map22;
+        return map25;
       }
       function forEachPossibleImportOrExportStatement(sourceFileLike, action) {
         return forEach(sourceFileLike.kind === 308 ? sourceFileLike.statements : sourceFileLike.body.statements, (statement) => (
@@ -222770,7 +223032,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
         }
         const checker = program2.getTypeChecker();
-        return map20(referenceEntries, (entry) => toImplementationLocation(entry, checker));
+        return map24(referenceEntries, (entry) => toImplementationLocation(entry, checker));
       }
       function getImplementationReferenceEntries(program2, cancellationToken, sourceFiles, node, position) {
         if (node.kind === 308) {
@@ -222793,7 +223055,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function findReferenceOrRenameEntries(program2, cancellationToken, sourceFiles, node, position, options, convertEntry) {
-        return map20(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
+        return map24(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
       }
       function getReferenceEntriesForNode(position, node, program2, sourceFiles, cancellationToken, options = {}, sourceFilesSet = new Set(sourceFiles.map((f3) => f3.fileName))) {
         return flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options, sourceFilesSet));
@@ -223720,7 +223982,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         Core2.isSymbolReferencedInFile = isSymbolReferencedInFile;
         function eachSymbolReferenceInFile(definition, checker, sourceFile, cb, searchContainer = sourceFile) {
-          const symbol2 = isParameterPropertyDeclaration(definition.parent, definition.parent.parent) ? first(checker.getSymbolsOfParameterPropertyDeclaration(definition.parent, definition.text)) : checker.getSymbolAtLocation(definition);
+          const symbol2 = isParameterPropertyDeclaration(definition.parent, definition.parent.parent) ? first2(checker.getSymbolsOfParameterPropertyDeclaration(definition.parent, definition.text)) : checker.getSymbolAtLocation(definition);
           if (!symbol2) return void 0;
           for (const token of getPossibleSymbolReferenceNodes(sourceFile, symbol2.name, searchContainer)) {
             if (!isIdentifier(token) || token === definition || token.escapedText !== definition.escapedText) continue;
@@ -224673,7 +224935,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           const staticBlocks = filter3(classDecl.members, isClassStaticBlockDeclaration);
           const containerName = symbol22 ? typeChecker.symbolToString(symbol22, classDecl) : "";
           const sourceFile2 = node.getSourceFile();
-          return map20(staticBlocks, (staticBlock) => {
+          return map24(staticBlocks, (staticBlock) => {
             let { pos } = moveRangePastModifiers(staticBlock);
             pos = skipTrivia(sourceFile2.text, pos);
             return createDefinitionInfoFromName(
@@ -224951,7 +225213,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         if (type.symbol === symbol2 || // At `const f = () => {}`, the symbol is `f` and the type symbol is at `() => {}`
         symbol2.valueDeclaration && type.symbol && isVariableDeclaration(symbol2.valueDeclaration) && symbol2.valueDeclaration.initializer === type.symbol.valueDeclaration) {
           const sigs = type.getCallSignatures();
-          if (sigs.length === 1) return checker.getReturnTypeOfSignature(first(sigs));
+          if (sigs.length === 1) return checker.getReturnTypeOfSignature(first2(sigs));
         }
         return void 0;
       }
@@ -225013,7 +225275,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         const withoutExpandos = filter3(filteredDeclarations, (d) => !isExpandoDeclaration(d));
         const results = some(withoutExpandos) ? withoutExpandos : filteredDeclarations;
-        return map20(results, (declaration) => createDefinitionInfo(
+        return map24(results, (declaration) => createDefinitionInfo(
           declaration,
           typeChecker,
           symbol2,
@@ -226240,7 +226502,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getJSDocTagNameCompletions() {
-        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map20(jsDocTagNames, (tagName) => {
+        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map24(jsDocTagNames, (tagName) => {
           return {
             name: tagName,
             kind: "keyword",
@@ -226251,7 +226513,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       var getJSDocTagNameCompletionDetails = getJSDocTagCompletionDetails;
       function getJSDocTagCompletions() {
-        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map20(jsDocTagNames, (tagName) => {
+        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map24(jsDocTagNames, (tagName) => {
           return {
             name: `@${tagName}`,
             kind: "keyword",
@@ -227083,7 +227345,7 @@ ${content}
         return isString(moduleSpecifierText) && some(sourceFile.moduleAugmentations, (moduleName) => isStringLiteral(moduleName) && moduleName.text === moduleSpecifierText);
       }
       function getNewImportSpecifiers(namedImports) {
-        return flatMap(namedImports, (namedImport) => map20(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
+        return flatMap(namedImports, (namedImport) => map24(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
           importSpecifier,
           importSpecifier.isTypeOnly,
           /*propertyName*/
@@ -227898,7 +228160,7 @@ ${content}
               return void 0;
             }
             const candidates = getPossibleGenericSignatures(called, argumentCount, checker);
-            if (candidates.length !== 0) return { kind: 0, candidates, resolvedSignature: first(candidates) };
+            if (candidates.length !== 0) return { kind: 0, candidates, resolvedSignature: first2(candidates) };
             const symbol2 = checker.getSymbolAtLocation(called);
             return symbol2 && { kind: 1, symbol: symbol2 };
           }
@@ -228249,7 +228511,7 @@ ${content}
           /*meaning*/
           void 0
         ) : emptyArray;
-        const items = map20(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
+        const items = map24(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
         let selectedItemIndex = 0;
         let itemsSeen = 0;
         for (let i2 = 0; i2 < items.length; i2++) {
@@ -228309,7 +228571,7 @@ ${content}
       ), spacePart()];
       function getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, checker, enclosingDeclaration, sourceFile) {
         const infos = (isTypeParameterList ? itemInfoForTypeParameters : itemInfoForParameters)(candidateSignature, checker, enclosingDeclaration, sourceFile);
-        return map20(infos, ({ isVariadic, parameters, prefix, suffix }) => {
+        return map24(infos, ({ isVariadic, parameters, prefix, suffix }) => {
           const prefixDisplayParts = [...callTargetDisplayParts, ...prefix];
           const suffixDisplayParts = [...suffix, ...returnTypeToDisplayParts(candidateSignature, enclosingDeclaration, checker)];
           const documentation = candidateSignature.getDocumentationComment(checker);
@@ -228347,7 +228609,7 @@ ${content}
         const parameters = (typeParameters || emptyArray).map((t2) => createSignatureHelpParameterForTypeParameter(t2, checker, enclosingDeclaration, sourceFile, printer));
         const thisParameter = candidateSignature.thisParameter ? [checker.symbolToParameterDeclaration(candidateSignature.thisParameter, enclosingDeclaration, signatureHelpNodeBuilderFlags)] : [];
         return checker.getExpandedParameters(candidateSignature).map((paramList) => {
-          const params = factory.createNodeArray([...thisParameter, ...map20(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
+          const params = factory.createNodeArray([...thisParameter, ...map24(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
           const parameterParts = mapToDisplayParts((writer) => {
             printer.writeList(2576, params, sourceFile, writer);
           });
@@ -228449,12 +228711,12 @@ ${content}
                 let start2 = isBetweenMultiLineBookends ? prevNode.getEnd() : node.getStart();
                 const end = isBetweenMultiLineBookends ? nextNode.getStart() : getEndPos(sourceFile, node);
                 if (hasJSDocNodes(node) && ((_a2 = node.jsDoc) == null ? void 0 : _a2.length)) {
-                  pushSelectionRange(first(node.jsDoc).getStart(), end);
+                  pushSelectionRange(first2(node.jsDoc).getStart(), end);
                 }
                 if (isSyntaxList(node)) {
                   const firstChild = node.getChildren()[0];
                   if (firstChild && hasJSDocNodes(firstChild) && ((_b = firstChild.jsDoc) == null ? void 0 : _b.length) && firstChild.getStart() !== node.pos) {
-                    start2 = Math.min(start2, first(firstChild.jsDoc).getStart());
+                    start2 = Math.min(start2, first2(firstChild.jsDoc).getStart());
                   }
                 }
                 pushSelectionRange(start2, end);
@@ -228664,7 +228926,7 @@ ${content}
       }
       function getSymbolKindOfConstructorPropertyMethodAccessorFunctionOrVar(typeChecker, symbol2, location) {
         const roots = typeChecker.getRootSymbols(symbol2);
-        if (roots.length === 1 && first(roots).flags & 8192 && typeChecker.getTypeOfSymbolAtLocation(symbol2, location).getNonNullableType().getCallSignatures().length !== 0) {
+        if (roots.length === 1 && first2(roots).flags & 8192 && typeChecker.getTypeOfSymbolAtLocation(symbol2, location).getNonNullableType().getCallSignatures().length !== 0) {
           return "method";
         }
         if (typeChecker.isUndefinedSymbol(symbol2)) {
@@ -229941,7 +230203,7 @@ ${content}
           this.insertNodeAt(sourceFile, getAdjustedStartPosition(sourceFile, before, options), newNode, this.getOptionsForInsertNodeBefore(before, newNode, blankLineBetween));
         }
         insertNodesBefore(sourceFile, before, newNodes, blankLineBetween = false, options = {}) {
-          this.insertNodesAt(sourceFile, getAdjustedStartPosition(sourceFile, before, options), newNodes, this.getOptionsForInsertNodeBefore(before, first(newNodes), blankLineBetween));
+          this.insertNodesAt(sourceFile, getAdjustedStartPosition(sourceFile, before, options), newNodes, this.getOptionsForInsertNodeBefore(before, first2(newNodes), blankLineBetween));
         }
         insertModifierAt(sourceFile, pos, modifier, options = {}) {
           this.insertNodeAt(sourceFile, pos, factory.createToken(modifier), options);
@@ -230012,7 +230274,7 @@ ${content}
             endNode2 = findChildOfKind(node, 22, sourceFile);
             if (!endNode2) {
               if (!isArrowFunction(node)) return false;
-              endNode2 = first(node.parameters);
+              endNode2 = first2(node.parameters);
             }
           } else {
             endNode2 = (node.kind === 261 ? node.exclamationToken : node.questionToken) ?? node.name;
@@ -230026,7 +230288,7 @@ ${content}
           this.insertNodeAt(sourceFile, start2, type, { prefix: "this: ", suffix });
         }
         insertTypeParameters(sourceFile, node, typeParameters) {
-          const start2 = (findChildOfKind(node, 21, sourceFile) || first(node.parameters)).getStart(sourceFile);
+          const start2 = (findChildOfKind(node, 21, sourceFile) || first2(node.parameters)).getStart(sourceFile);
           this.insertNodesAt(sourceFile, start2, typeParameters, { prefix: "<", suffix: ">", joiner: ", " });
         }
         getOptionsForInsertNodeBefore(before, inserted, blankLineBetween) {
@@ -230144,7 +230406,7 @@ ${content}
           this.insertNodeAt(sourceFile, list.end, newNode, { prefix: ", " });
         }
         insertNodesAfter(sourceFile, after, newNodes) {
-          const endPosition = this.insertNodeAfterWorker(sourceFile, after, first(newNodes));
+          const endPosition = this.insertNodeAfterWorker(sourceFile, after, first2(newNodes));
           this.insertNodesAt(sourceFile, endPosition, newNodes, this.getInsertNodeAfterOptions(sourceFile, after));
         }
         insertNodeAfterWorker(sourceFile, after, newNode) {
@@ -230199,7 +230461,7 @@ ${options.prefix}` : "\n" : options.prefix
               ), factory.createIdentifier(name2)], { joiner: " " });
               deleteNode(this, sourceFile, arrow);
             } else {
-              this.insertText(sourceFile, first(node.parameters).getStart(sourceFile), `function ${name2}(`);
+              this.insertText(sourceFile, first2(node.parameters).getStart(sourceFile), `function ${name2}(`);
               this.replaceRange(sourceFile, arrow, factory.createToken(
                 22
                 /* CloseParenToken */
@@ -230867,7 +231129,7 @@ ${options.prefix}` : "\n" : options.prefix
             }
             case 273:
             case 272:
-              const isFirstImport = sourceFile.imports.length && node === first(sourceFile.imports).parent || node === find(sourceFile.statements, isAnyImportSyntax);
+              const isFirstImport = sourceFile.imports.length && node === first2(sourceFile.imports).parent || node === find(sourceFile.statements, isAnyImportSyntax);
               deleteNode(changes, sourceFile, node, {
                 leadingTriviaOption: isFirstImport ? 0 : hasJSDocNodes(node) ? 2 : 3
                 /* StartLine */
@@ -233251,9 +233513,9 @@ ${options.prefix}` : "\n" : options.prefix
         return mask2;
       }
       function createRulesMap(rules) {
-        const map22 = buildMap(rules);
+        const map25 = buildMap(rules);
         return (context) => {
-          const bucket = map22[getRuleBucketIndex(context.currentTokenSpan.kind, context.nextTokenSpan.kind)];
+          const bucket = map25[getRuleBucketIndex(context.currentTokenSpan.kind, context.nextTokenSpan.kind)];
           if (bucket) {
             const rules2 = [];
             let ruleActionMask = 0;
@@ -233271,22 +233533,22 @@ ${options.prefix}` : "\n" : options.prefix
         };
       }
       function buildMap(rules) {
-        const map22 = new Array(mapRowLength * mapRowLength);
-        const rulesBucketConstructionStateList = new Array(map22.length);
+        const map25 = new Array(mapRowLength * mapRowLength);
+        const rulesBucketConstructionStateList = new Array(map25.length);
         for (const rule2 of rules) {
           const specificRule = rule2.leftTokenRange.isSpecific && rule2.rightTokenRange.isSpecific;
           for (const left of rule2.leftTokenRange.tokens) {
             for (const right of rule2.rightTokenRange.tokens) {
               const index = getRuleBucketIndex(left, right);
-              let rulesBucket = map22[index];
+              let rulesBucket = map25[index];
               if (rulesBucket === void 0) {
-                rulesBucket = map22[index] = [];
+                rulesBucket = map25[index] = [];
               }
               addRule(rulesBucket, rule2.rule, specificRule, rulesBucketConstructionStateList, index);
             }
           }
         }
-        return map22;
+        return map25;
       }
       function getRuleBucketIndex(row, column) {
         Debug.assert(row <= 166 && column <= 166, "Must compute formatting context from tokens");
@@ -235604,7 +235866,7 @@ ${options.prefix}` : "\n" : options.prefix
         findSuperStatementIndexPath: () => findSuperStatementIndexPath,
         findTokenOnLeftOfPosition: () => findTokenOnLeftOfPosition,
         findUseStrictPrologue: () => findUseStrictPrologue,
-        first: () => first,
+        first: () => first2,
         firstDefined: () => firstDefined,
         firstDefinedIterator: () => firstDefinedIterator,
         firstIterator: () => firstIterator,
@@ -236864,7 +237126,7 @@ ${options.prefix}` : "\n" : options.prefix
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map20,
+        map: () => map24,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -237979,19 +238241,19 @@ ${options.prefix}` : "\n" : options.prefix
         return fileName;
       }
       function createNormalizedPathMap() {
-        const map22 = /* @__PURE__ */ new Map();
+        const map25 = /* @__PURE__ */ new Map();
         return {
           get(path2) {
-            return map22.get(path2);
+            return map25.get(path2);
           },
           set(path2, value) {
-            map22.set(path2, value);
+            map25.set(path2, value);
           },
           contains(path2) {
-            return map22.has(path2);
+            return map25.has(path2);
           },
           remove(path2) {
-            map22.delete(path2);
+            map25.delete(path2);
           }
         };
       }
@@ -239539,7 +239801,7 @@ ${options.prefix}` : "\n" : options.prefix
           if (!this.languageServiceEnabled) {
             return this.getRootScriptInfos();
           }
-          return map20(this.program.getSourceFiles(), (sourceFile) => {
+          return map24(this.program.getSourceFiles(), (sourceFile) => {
             const scriptInfo = this.projectService.getScriptInfoForPath(sourceFile.resolvedPath);
             Debug.assert(!!scriptInfo, "getScriptInfo", () => `scriptInfo for a file '${sourceFile.fileName}' Path: '${sourceFile.path}' / '${sourceFile.resolvedPath}' is missing.`);
             return scriptInfo;
@@ -241220,17 +241482,17 @@ ${options.prefix}` : "\n" : options.prefix
       var CloseFileWatcherEvent = "closeFileWatcher";
       var ensureProjectForOpenFileSchedule = "*ensureProjectForOpenFiles*";
       function prepareConvertersForEnumLikeCompilerOptions(commandLineOptions) {
-        const map22 = /* @__PURE__ */ new Map();
+        const map25 = /* @__PURE__ */ new Map();
         for (const option of commandLineOptions) {
           if (typeof option.type === "object") {
             const optionMap = option.type;
             optionMap.forEach((value) => {
               Debug.assert(typeof value === "number");
             });
-            map22.set(option.name, optionMap);
+            map25.set(option.name, optionMap);
           }
         }
-        return map22;
+        return map25;
       }
       var compilerOptionConverters = prepareConvertersForEnumLikeCompilerOptions(optionDeclarations);
       var watchOptionsConverters = prepareConvertersForEnumLikeCompilerOptions(optionsForWatch);
@@ -245030,7 +245292,7 @@ Dynamic files must always be opened with service's current directory or service 
         async enableRequestedPluginsWorker(pendingPlugins) {
           Debug.assert(this.currentPluginEnablementPromise === void 0);
           let sendProjectsUpdatedInBackgroundEvent = false;
-          await Promise.all(map20(pendingPlugins, async ([project, promises]) => {
+          await Promise.all(map24(pendingPlugins, async ([project, promises]) => {
             const results = await Promise.all(promises);
             if (project.isClosed() || isProjectDeferredClose(project)) {
               this.logger.info(`Cancelling plugin enabling for ${project.getProjectName()} as it is ${project.isClosed() ? "closed" : "deferred close"}`);
@@ -245366,7 +245628,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source: diag2.source,
-          relatedInformation: map20(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map24(diag2.relatedInformation, formatRelatedInformation)
         };
       }
       function formatRelatedInformation(info) {
@@ -245407,7 +245669,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source,
-          relatedInformation: map20(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map24(diag2.relatedInformation, formatRelatedInformation)
         };
         return includeFileName ? { ...common, fileName: diag2.file && diag2.file.fileName } : common;
       }
@@ -245920,7 +246182,7 @@ ${json2}${newLine}`;
               if (!result.some((p) => p.projectErrors && p.projectErrors.length !== 0)) {
                 return this.requiredResponse(result);
               }
-              const converted = map20(result, (p) => {
+              const converted = map24(result, (p) => {
                 if (!p.projectErrors || p.projectErrors.length === 0) {
                   return p;
                 }
@@ -246992,7 +247254,7 @@ ${json2}${newLine}`;
               this.event({
                 triggerFile: event.data.triggerFile,
                 configFile: event.data.configFileName,
-                diagnostics: map20(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
+                diagnostics: map24(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
                   diagnostic,
                   /*includeFileName*/
                   true
@@ -247333,7 +247595,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             concatenate(projectErrors, optionsErrors),
             (diagnostic) => !!diagnostic.file && diagnostic.file.fileName === configFile
           );
-          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map20(
+          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map24(
             diagnosticsForConfigFile,
             (diagnostic) => formatDiagnosticToProtocol(
               diagnostic,
@@ -247358,7 +247620,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             // TODO: GH#18217
             reportsUnnecessary: d.reportsUnnecessary,
             reportsDeprecated: d.reportsDeprecated,
-            relatedInformation: map20(d.relatedInformation, formatRelatedInformation)
+            relatedInformation: map24(d.relatedInformation, formatRelatedInformation)
           }));
         }
         getCompilerOptionsDiagnostics(args) {
@@ -247386,7 +247648,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
               endLocation: scriptInfo && scriptInfo.positionToLineOffset(d.start + d.length),
               reportsUnnecessary: d.reportsUnnecessary,
               reportsDeprecated: d.reportsDeprecated,
-              relatedInformation: map20(d.relatedInformation, formatRelatedInformation)
+              relatedInformation: map24(d.relatedInformation, formatRelatedInformation)
             })
           );
         }
@@ -247966,14 +248228,14 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           }
         }
         toSpanGroups(locations) {
-          const map22 = /* @__PURE__ */ new Map();
+          const map25 = /* @__PURE__ */ new Map();
           for (const { fileName, textSpan, contextSpan, originalContextSpan: _2, originalTextSpan: _3, originalFileName: _1, ...prefixSuffixText } of locations) {
-            let group2 = map22.get(fileName);
-            if (!group2) map22.set(fileName, group2 = { file: fileName, locs: [] });
+            let group2 = map25.get(fileName);
+            if (!group2) map25.set(fileName, group2 = { file: fileName, locs: [] });
             const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(fileName));
             group2.locs.push({ ...toProtocolTextSpanWithContext(textSpan, contextSpan, scriptInfo), ...prefixSuffixText });
           }
-          return arrayFrom(map22.values());
+          return arrayFrom(map25.values());
         }
         getReferences(args, simplifiedResult) {
           const file2 = toNormalizedPath(args.file);
@@ -248293,7 +248555,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             false
           ) })) : result.map((details) => ({
             ...details,
-            codeActions: map20(details.codeActions, (action) => this.mapCodeAction(action)),
+            codeActions: map24(details.codeActions, (action) => this.mapCodeAction(action)),
             documentation: this.mapDisplayParts(details.documentation, project),
             tags: this.mapJSDocTagInfo(details.tags, project, useDisplayParts)
           }));
@@ -248433,7 +248695,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           this.projectService.closeClientFile(file2);
         }
         mapLocationNavigationBarItems(items, scriptInfo) {
-          return map20(items, (item) => ({
+          return map24(items, (item) => ({
             text: item.text,
             kind: item.kind,
             kindModifiers: item.kindModifiers,
@@ -248454,7 +248716,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             kindModifiers: tree.kindModifiers,
             spans: tree.spans.map((span) => toProtocolTextSpan(span, scriptInfo)),
             nameSpan: tree.nameSpan && toProtocolTextSpan(tree.nameSpan, scriptInfo),
-            childItems: map20(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
+            childItems: map24(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
           };
         }
         getNavigationTree(args, simplifiedResult) {
@@ -248846,7 +249108,7 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
           const { locations } = args;
           const { file: file2, languageService } = this.getFileAndLanguageServiceForSyntacticOperation(args);
           const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(file2));
-          return map20(locations, (location) => {
+          return map24(locations, (location) => {
             const pos = this.getPosition(location, scriptInfo);
             const selectionRange = languageService.getSmartSelectionRange(file2, pos);
             return simplifiedResult ? this.mapSelectionRange(selectionRange, scriptInfo) : selectionRange;
@@ -249193,7 +249455,7 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
       }
       function convertNewFileTextChangeToCodeEdit(textChanges2) {
         Debug.assert(textChanges2.textChanges.length === 1);
-        const change = first(textChanges2.textChanges);
+        const change = first2(textChanges2.textChanges);
         Debug.assert(change.span.start === 0 && change.span.length === 0);
         return { fileName: textChanges2.fileName, textChanges: [{ start: { line: 0, offset: 0 }, end: { line: 0, offset: 0 }, newText: change.newText }] };
       }
@@ -251044,8 +251306,8 @@ function getBlockValue(input, start2, end, indent, chomping, folded) {
       continue;
     }
     const content = line.slice(textIndent);
-    const first = content.charCodeAt(0);
-    if (folded) if (first === 32 || first === 9) {
+    const first2 = content.charCodeAt(0);
+    if (folded) if (first2 === 32 || first2 === 9) {
       atMoreIndented = true;
       result += "\n".repeat(didReadContent ? 1 + emptyLines : emptyLines);
     } else if (atMoreIndented) {
@@ -251646,17 +251908,17 @@ function readBlockScalar(state, parentIndent, props) {
     const linePosition = state.position;
     let column = 0;
     while (state.input.charCodeAt(linePosition + column) === 32) column++;
-    const first = state.input.charCodeAt(linePosition + column);
-    if (first === 0) {
+    const first2 = state.input.charCodeAt(linePosition + column);
+    if (first2 === 0) {
       if (contentIndent >= 0) {
         if (column > contentIndent) valueEnd = linePosition + column;
       } else if (column > 0) valueEnd = linePosition + column;
       break;
     }
     if (linePosition === state.lineStart && testDocumentSeparator(state, linePosition)) break;
-    if (!detectedIndent && contentIndent === -1 && isEol(first)) maxLeadingIndent = Math.max(maxLeadingIndent, column);
-    if (!detectedIndent && contentIndent === -1 && !isEol(first)) {
-      if (first === 9 && column < parentIndent) {
+    if (!detectedIndent && contentIndent === -1 && isEol(first2)) maxLeadingIndent = Math.max(maxLeadingIndent, column);
+    if (!detectedIndent && contentIndent === -1 && !isEol(first2)) {
+      if (first2 === 9 && column < parentIndent) {
         state.position = linePosition + column;
         throwError3(state, "tab characters must not be used in indentation");
       }
@@ -251665,14 +251927,14 @@ function readBlockScalar(state, parentIndent, props) {
         throwError3(state, "bad indentation of a mapping entry");
       }
     }
-    if (contentIndent === -1 && first !== 0 && !isEol(first) && column < parentIndent) {
+    if (contentIndent === -1 && first2 !== 0 && !isEol(first2) && column < parentIndent) {
       state.lineIndent = column;
       state.position = linePosition + column;
       break;
     }
-    if (!detectedIndent && first !== 0 && !isEol(first) && contentIndent === -1) contentIndent = column;
+    if (!detectedIndent && first2 !== 0 && !isEol(first2) && contentIndent === -1) contentIndent = column;
     const requiredIndent = contentIndent === -1 ? parentIndent + 1 : contentIndent;
-    if (first !== 0 && !isEol(first) && column < requiredIndent) {
+    if (first2 !== 0 && !isEol(first2) && column < requiredIndent) {
       state.lineIndent = column;
       state.position = linePosition + column;
       break;
@@ -252406,9 +252668,9 @@ var init_js_yaml = __esm({
       create: () => ({}),
       identify: isPlainObject,
       represent: (o) => {
-        const map20 = /* @__PURE__ */ new Map();
-        for (const key of Object.keys(o)) map20.set(key, o[key]);
-        return map20;
+        const map24 = /* @__PURE__ */ new Map();
+        for (const key of Object.keys(o)) map24.set(key, o[key]);
+        return map24;
       },
       addPair: (container, key, value) => {
         if (key !== null && typeof key === "object") return "object-based map does not support complex keys";
@@ -252433,9 +252695,9 @@ var init_js_yaml = __esm({
       create: () => /* @__PURE__ */ new Set(),
       identify: (data) => data instanceof Set,
       represent: (data) => {
-        const map20 = /* @__PURE__ */ new Map();
-        for (const key of data) map20.set(key, null);
-        return map20;
+        const map24 = /* @__PURE__ */ new Map();
+        for (const key of data) map24.set(key, null);
+        return map24;
       },
       addPair: (container, key, value) => {
         if (value !== null) return "cannot resolve a set item";
@@ -252548,19 +252810,19 @@ var init_js_yaml = __esm({
       identify: (data) => data instanceof Map || isPlainObject(data),
       represent: (data) => {
         if (data instanceof Map) return data;
-        const map20 = /* @__PURE__ */ new Map();
+        const map24 = /* @__PURE__ */ new Map();
         const obj = data;
-        for (const key of Object.keys(obj)) map20.set(key, obj[key]);
-        return map20;
+        for (const key of Object.keys(obj)) map24.set(key, obj[key]);
+        return map24;
       }
     });
     legacyMapTag = defineMappingTag("tag:yaml.org,2002:map", {
       create: () => ({}),
       identify: isPlainObject,
       represent: (o) => {
-        const map20 = /* @__PURE__ */ new Map();
-        for (const key of Object.keys(o)) map20.set(key, o[key]);
-        return map20;
+        const map24 = /* @__PURE__ */ new Map();
+        for (const key of Object.keys(o)) map24.set(key, o[key]);
+        return map24;
       },
       addPair: (container, key, value) => {
         const normalizedKey = normalizeKey(key);
@@ -252920,23 +253182,248 @@ var init_build = __esm({
   }
 });
 
+// src/commands/cluster/helpers/poll-until-ready.ts
+function pollUntilReady(projectId, clusterId, { intervalMs = 5e3, timeoutMs = 20 * 60 * 1e3 } = {}) {
+  return (0, import_rxjs7.firstValueFrom)(
+    (0, import_rxjs7.timer)(0, intervalMs).pipe(
+      (0, import_operators6.switchMap)(() => GraphqlClienAPI.projectClusters(projectId)),
+      (0, import_operators6.switchMap)((clusters) => {
+        const cluster = (clusters || []).find((c) => c.id === clusterId);
+        if (!cluster) {
+          throw new Error(`cluster ${clusterId} not found`);
+        }
+        return [cluster];
+      }),
+      (0, import_operators6.tap)(
+        (cluster) => Logger.info(`[cluster ${clusterId}] status: ${cluster.status}`)
+      ),
+      (0, import_operators6.first)((cluster) => TERMINAL_STATUSES.includes(cluster.status)),
+      (0, import_operators6.timeout)({
+        each: timeoutMs,
+        with: () => (0, import_rxjs7.throwError)(
+          () => new Error(
+            `Timed out after ${timeoutMs}ms waiting for cluster ${clusterId} to reach a terminal status.`
+          )
+        )
+      })
+    )
+  );
+}
+var import_rxjs7, import_operators6, TERMINAL_STATUSES;
+var init_poll_until_ready = __esm({
+  "src/commands/cluster/helpers/poll-until-ready.ts"() {
+    import_rxjs7 = __toESM(require_cjs());
+    import_operators6 = __toESM(require_operators());
+    init_gql_client();
+    init_log();
+    TERMINAL_STATUSES = ["ready", "error", "deleted"];
+  }
+});
+
+// src/commands/cluster/create.ts
+var create_exports = {};
+__export(create_exports, {
+  default: () => create_default
+});
+var import_rxjs8, import_operators7, create_default;
+var init_create = __esm({
+  "src/commands/cluster/create.ts"() {
+    import_rxjs8 = __toESM(require_cjs());
+    import_operators7 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    init_load_spec();
+    init_poll_until_ready();
+    create_default = async (cmd) => {
+      const result = await (0, import_rxjs8.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators7.switchMap)(
+            (projectId) => loadSpec(
+              cmd.spec ?? "cluster.yaml"
+            ).pipe(
+              (0, import_operators7.map)((data) => ({
+                projectId,
+                ...data ? data.cluster ?? data : {}
+              }))
+            )
+          ),
+          (0, import_operators7.switchMap)(
+            ({ projectId, ...data }) => GraphqlClienAPI.provisionProjectCluster(projectId, {
+              name: cmd.name || data.name,
+              imageId: cmd.imageId || data.imageId,
+              serverType: cmd.serverType || data.serverType,
+              location: cmd.location || data.location,
+              workers: cmd.workers ?? data.workers,
+              singleNode: cmd.singleNode ?? data.singleNode
+            }).pipe((0, import_operators7.map)((cluster) => ({ projectId, cluster })))
+          ),
+          (0, import_operators7.tap)(({ cluster }) => {
+            Logger.log("-------------------");
+            Logger.log("[Action][provisionProjectCluster]");
+            Logger.table([cluster]);
+            Logger.log("-------------------");
+            if (!cmd.wait) {
+              Logger.info(
+                `Provisioning runs in the background - this takes several minutes. Re-run with --wait to block until it's ready, or 'cluster:list --project ${cluster.projectId}' to check progress.`
+              );
+            }
+          })
+        )
+      );
+      if (!cmd.wait) {
+        return result.cluster;
+      }
+      Logger.info(`Waiting for cluster ${result.cluster.id} to become ready...`);
+      const finalCluster = await pollUntilReady(
+        result.projectId,
+        result.cluster.id
+      );
+      Logger.log("-------------------");
+      Logger.log(
+        `[Action][provisionProjectCluster] final status: ${finalCluster.status}`
+      );
+      Logger.table([finalCluster]);
+      Logger.log("-------------------");
+      return finalCluster;
+    };
+  }
+});
+
+// src/commands/cluster/list.ts
+var list_exports = {};
+__export(list_exports, {
+  default: () => list_default
+});
+var import_rxjs9, import_operators8, list_default;
+var init_list = __esm({
+  "src/commands/cluster/list.ts"() {
+    import_rxjs9 = __toESM(require_cjs());
+    import_operators8 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    list_default = (cmd) => (0, import_rxjs9.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators8.switchMap)((projectId) => GraphqlClienAPI.projectClusters(projectId)),
+        (0, import_operators8.tap)((clusters) => {
+          Logger.log("-------------------");
+          Logger.log("[Action][projectClusters]");
+          if (!clusters?.length) {
+            Logger.info(
+              "No private clusters for this project yet - this project runs on the shared cluster. See cluster:create."
+            );
+          } else {
+            Logger.table(clusters, [
+              "id",
+              "name",
+              "status",
+              "region",
+              "serverType",
+              "endpoint"
+            ]);
+          }
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/cluster/teardown.ts
+var teardown_exports = {};
+__export(teardown_exports, {
+  default: () => teardown_default
+});
+var import_rxjs10, import_operators9, teardown_default;
+var init_teardown = __esm({
+  "src/commands/cluster/teardown.ts"() {
+    import_rxjs10 = __toESM(require_cjs());
+    import_operators9 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    init_poll_until_ready();
+    teardown_default = async (cmd) => {
+      const { projectId, cluster } = await (0, import_rxjs10.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators9.switchMap)(
+            (projectId2) => GraphqlClienAPI.teardownProjectCluster(projectId2, cmd.cluster).pipe(
+              (0, import_operators9.map)((cluster2) => ({ projectId: projectId2, cluster: cluster2 }))
+            )
+          ),
+          (0, import_operators9.tap)(({ cluster: cluster2 }) => {
+            Logger.log("-------------------");
+            Logger.log("[Action][teardownProjectCluster]");
+            Logger.table([cluster2]);
+            Logger.log("-------------------");
+            if (!cmd.wait) {
+              Logger.info(
+                "Teardown runs in the background - this takes a few minutes. Re-run with --wait to block until it's gone, or cluster:list to check progress."
+              );
+            }
+          })
+        )
+      );
+      if (!cmd.wait) {
+        return cluster;
+      }
+      Logger.info(`Waiting for cluster ${cluster.id} to finish tearing down...`);
+      const finalCluster = await pollUntilReady(projectId, cluster.id);
+      Logger.log(
+        `[Action][teardownProjectCluster] final status: ${finalCluster.status}`
+      );
+      return finalCluster;
+    };
+  }
+});
+
+// src/commands/cluster/kubeconfig.ts
+var kubeconfig_exports = {};
+__export(kubeconfig_exports, {
+  default: () => kubeconfig_default
+});
+var import_rxjs11, import_operators10, kubeconfig_default;
+var init_kubeconfig = __esm({
+  "src/commands/cluster/kubeconfig.ts"() {
+    import_rxjs11 = __toESM(require_cjs());
+    import_operators10 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    init_read_file();
+    kubeconfig_default = (cmd) => (0, import_rxjs11.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators10.switchMap)(
+          (projectId) => GraphqlClienAPI.clusterKubeconfig(projectId, cmd.cluster)
+        ),
+        (0, import_operators10.switchMap)(
+          (kubeconfig) => cmd.output ? writeFileAsObservable(cmd.output, kubeconfig).pipe(
+            (0, import_operators10.tap)(() => Logger.info(`Wrote kubeconfig to ${cmd.output}`))
+          ) : (0, import_rxjs11.of)(kubeconfig).pipe((0, import_operators10.tap)((value) => Logger.log(value)))
+        )
+      )
+    );
+  }
+});
+
 // src/commands/environment/list-environments.ts
 var list_environments_exports = {};
 __export(list_environments_exports, {
   default: () => list_environments_default
 });
-var import_rxjs7, import_operators6, list_environments_default;
+var import_rxjs12, import_operators11, list_environments_default;
 var init_list_environments = __esm({
   "src/commands/environment/list-environments.ts"() {
-    import_rxjs7 = __toESM(require_cjs());
-    import_operators6 = __toESM(require_operators());
+    import_rxjs12 = __toESM(require_cjs());
+    import_operators11 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_environments_default = (cmd) => (0, import_rxjs7.lastValueFrom)(
+    list_environments_default = (cmd) => (0, import_rxjs12.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators6.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
-        (0, import_operators6.tap)((data) => {
+        (0, import_operators11.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
+        (0, import_operators11.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -252947,7 +253434,9 @@ var init_list_environments = __esm({
             "maxCpu",
             "minMemory",
             "maxMemory",
-            "region"
+            "region",
+            "clusterId",
+            "clusterName"
           ];
           Logger.log("-------------------");
           Logger.log("[Action][listEnvironments]");
@@ -252964,32 +253453,32 @@ var create_environment_exports = {};
 __export(create_environment_exports, {
   default: () => create_environment_default
 });
-var import_rxjs8, import_operators7, create_environment_default;
+var import_rxjs13, import_operators12, create_environment_default;
 var init_create_environment = __esm({
   "src/commands/environment/create-environment.ts"() {
-    import_rxjs8 = __toESM(require_cjs());
-    import_operators7 = __toESM(require_operators());
+    import_rxjs13 = __toESM(require_cjs());
+    import_operators12 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_environment_default = (cmd) => (0, import_rxjs8.lastValueFrom)(
+    create_environment_default = (cmd) => (0, import_rxjs13.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators7.switchMap)(
+        (0, import_operators12.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators7.map)((data) => ({
+            (0, import_operators12.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators7.switchMap)(
+        (0, import_operators12.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.createEnvironment(projectId, {
             ...data,
             ...cmd
           })
         ),
-        (0, import_operators7.tap)((data) => {
+        (0, import_operators12.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -253000,7 +253489,9 @@ var init_create_environment = __esm({
             "maxCpu",
             "minMemory",
             "maxMemory",
-            "region"
+            "region",
+            "clusterId",
+            "clusterName"
           ];
           Logger.log("-------------------");
           Logger.log("[Action][createEnvironment]");
@@ -253017,33 +253508,33 @@ var update_environment_exports = {};
 __export(update_environment_exports, {
   default: () => update_environment_default
 });
-var import_rxjs9, import_operators8, update_environment_default;
+var import_rxjs14, import_operators13, update_environment_default;
 var init_update_environment = __esm({
   "src/commands/environment/update-environment.ts"() {
-    import_rxjs9 = __toESM(require_cjs());
-    import_operators8 = __toESM(require_operators());
+    import_rxjs14 = __toESM(require_cjs());
+    import_operators13 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    update_environment_default = (cmd) => (0, import_rxjs9.lastValueFrom)(
+    update_environment_default = (cmd) => (0, import_rxjs14.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators8.switchMap)(
+        (0, import_operators13.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators8.map)((data) => ({
+            (0, import_operators13.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators8.tap)(Logger.log),
-        (0, import_operators8.switchMap)(
+        (0, import_operators13.tap)(Logger.log),
+        (0, import_operators13.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.updateEnvironment(projectId, {
             ...data,
             ...cmd
           })
         ),
-        (0, import_operators8.tap)((data) => {
+        (0, import_operators13.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -253054,7 +253545,9 @@ var init_update_environment = __esm({
             "maxCpu",
             "minMemory",
             "maxMemory",
-            "region"
+            "region",
+            "clusterId",
+            "clusterName"
           ];
           Logger.log("-------------------");
           Logger.log("[Action][updateEnvironment]");
@@ -253071,29 +253564,29 @@ var delete_environment_exports = {};
 __export(delete_environment_exports, {
   default: () => delete_environment_default
 });
-var import_rxjs10, import_operators9, delete_environment_default;
+var import_rxjs15, import_operators14, delete_environment_default;
 var init_delete_environment = __esm({
   "src/commands/environment/delete-environment.ts"() {
-    import_rxjs10 = __toESM(require_cjs());
-    import_operators9 = __toESM(require_operators());
+    import_rxjs15 = __toESM(require_cjs());
+    import_operators14 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_environment_default = (cmd) => (0, import_rxjs10.lastValueFrom)(
+    delete_environment_default = (cmd) => (0, import_rxjs15.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators9.switchMap)(
+        (0, import_operators14.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators9.map)((data) => ({
+            (0, import_operators14.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators9.switchMap)(
+        (0, import_operators14.switchMap)(
           ({ projectId, name: name2 }) => GraphqlClienAPI.deleteEnvironment(name2, projectId, cmd.force)
         ),
-        (0, import_operators9.tap)((data) => {
+        (0, import_operators14.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -253121,29 +253614,29 @@ var get_environment_exports = {};
 __export(get_environment_exports, {
   default: () => get_environment_default
 });
-var import_rxjs11, import_operators10, get_environment_default;
+var import_rxjs16, import_operators15, get_environment_default;
 var init_get_environment = __esm({
   "src/commands/environment/get-environment.ts"() {
-    import_rxjs11 = __toESM(require_cjs());
-    import_operators10 = __toESM(require_operators());
+    import_rxjs16 = __toESM(require_cjs());
+    import_operators15 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    get_environment_default = (cmd) => (0, import_rxjs11.lastValueFrom)(
+    get_environment_default = (cmd) => (0, import_rxjs16.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators10.switchMap)(
+        (0, import_operators15.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators10.map)((data) => ({
+            (0, import_operators15.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators10.switchMap)(
+        (0, import_operators15.switchMap)(
           ({ projectId, name: name2 }) => GraphqlClienAPI.getEnvironment(cmd.name ?? name2, projectId)
         ),
-        (0, import_operators10.tap)((data) => {
+        (0, import_operators15.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -253154,7 +253647,9 @@ var init_get_environment = __esm({
             "maxCpu",
             "minMemory",
             "maxMemory",
-            "region"
+            "region",
+            "clusterId",
+            "clusterName"
           ];
           Logger.log("-------------------");
           Logger.log("[Action][getEnvironment]");
@@ -262924,11 +263419,11 @@ var require_get_intrinsic = __commonJS({
     var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
     var reEscapeChar = /\\(\\)?/g;
     var stringToPath = function stringToPath2(string4) {
-      var first = $strSlice(string4, 0, 1);
+      var first2 = $strSlice(string4, 0, 1);
       var last = $strSlice(string4, -1);
-      if (first === "%" && last !== "%") {
+      if (first2 === "%" && last !== "%") {
         throw new $SyntaxError("invalid intrinsic syntax, expected closing `%`");
-      } else if (last === "%" && first !== "%") {
+      } else if (last === "%" && first2 !== "%") {
         throw new $SyntaxError("invalid intrinsic syntax, expected opening `%`");
       }
       var result = [];
@@ -262983,9 +263478,9 @@ var require_get_intrinsic = __commonJS({
       }
       for (var i2 = 1, isOwn = true; i2 < parts.length; i2 += 1) {
         var part = parts[i2];
-        var first = $strSlice(part, 0, 1);
+        var first2 = $strSlice(part, 0, 1);
         var last = $strSlice(part, -1);
-        if ((first === '"' || first === "'" || first === "`" || (last === '"' || last === "'" || last === "`")) && first !== last) {
+        if ((first2 === '"' || first2 === "'" || first2 === "`" || (last === '"' || last === "'" || last === "`")) && first2 !== last) {
           throw new $SyntaxError("property names with quotes must have matching quotes");
         }
         if (part === "constructor" || !isOwn) {
@@ -264813,10 +265308,10 @@ var require_async3 = __commonJS({
         return eachOfImplementation(coll, wrapAsync(iteratee), callback);
       }
       var eachOf$1 = awaitify(eachOf, 3);
-      function map20(coll, iteratee, callback) {
+      function map24(coll, iteratee, callback) {
         return _asyncMap(eachOf$1, coll, iteratee, callback);
       }
-      var map$1 = awaitify(map20, 3);
+      var map$1 = awaitify(map24, 3);
       var applyEach$1 = applyEach(map$1);
       function eachOfSeries(coll, iteratee, callback) {
         return eachOfLimit$2(coll, 1, iteratee, callback);
@@ -265985,11 +266480,11 @@ var require_async3 = __commonJS({
         }
       }
       var sortBy$1 = awaitify(sortBy, 3);
-      function timeout(asyncFn, milliseconds, info) {
+      function timeout2(asyncFn, milliseconds, info) {
         var fn = wrapAsync(asyncFn);
         return initialParams((args, callback) => {
           var timedOut = false;
-          var timer;
+          var timer2;
           function timeoutCallback() {
             var name2 = asyncFn.name || "anonymous";
             var error48 = new Error('Callback function "' + name2 + '" timed out.');
@@ -266003,10 +266498,10 @@ var require_async3 = __commonJS({
           args.push((...cbArgs) => {
             if (!timedOut) {
               callback(...cbArgs);
-              clearTimeout(timer);
+              clearTimeout(timer2);
             }
           });
-          timer = setTimeout(timeoutCallback, milliseconds);
+          timer2 = setTimeout(timeoutCallback, milliseconds);
           fn(...args);
         });
       }
@@ -266172,7 +266667,7 @@ var require_async3 = __commonJS({
         someLimit: someLimit$1,
         someSeries: someSeries$1,
         sortBy: sortBy$1,
-        timeout,
+        timeout: timeout2,
         times,
         timesLimit,
         timesSeries,
@@ -266278,7 +266773,7 @@ var require_async3 = __commonJS({
       exports3.someLimit = someLimit$1;
       exports3.someSeries = someSeries$1;
       exports3.sortBy = sortBy$1;
-      exports3.timeout = timeout;
+      exports3.timeout = timeout2;
       exports3.times = times;
       exports3.timesLimit = timesLimit;
       exports3.timesSeries = timesSeries;
@@ -269626,8 +270121,8 @@ var require_lodash3 = __commonJS({
         return apply(func, this, otherArgs);
       };
     }
-    function getMapData(map20, key) {
-      var data = map20.__data__;
+    function getMapData(map24, key) {
+      var data = map24.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -270031,8 +270526,8 @@ var require_lodash4 = __commonJS({
     var createSet = !(Set2 && 1 / setToArray(new Set2([, -0]))[1] == INFINITY) ? noop3 : function(values) {
       return new Set2(values);
     };
-    function getMapData(map20, key) {
-      var data = map20.__data__;
+    function getMapData(map24, key) {
+      var data = map24.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -272116,7 +272611,7 @@ var require_buffer_list3 = __commonJS({
         }
       }, {
         key: "first",
-        value: function first() {
+        value: function first2() {
           return this.head.data;
         }
         // Consumes a specified amount of characters from the buffered data.
@@ -275458,7 +275953,7 @@ var require_buffer_list4 = __commonJS({
         }
       }, {
         key: "first",
-        value: function first() {
+        value: function first2() {
           return this.head.data;
         }
         // Consumes a specified amount of characters from the buffered data.
@@ -278230,7 +278725,7 @@ var require_buffer_list5 = __commonJS({
         }
       }, {
         key: "first",
-        value: function first() {
+        value: function first2() {
           return this.head.data;
         }
         // Consumes a specified amount of characters from the buffered data.
@@ -281467,7 +281962,7 @@ var require_buffer_list6 = __commonJS({
         }
       }, {
         key: "first",
-        value: function first() {
+        value: function first2() {
           return this.head.data;
         }
         // Consumes a specified amount of characters from the buffered data.
@@ -284375,45 +284870,45 @@ var package_exports = {};
 __export(package_exports, {
   default: () => package_default
 });
-var import_archiver, import_child_process, import_fs3, import_rxjs12, import_operators11, import_util3, ReadFile, package_default;
+var import_archiver, import_child_process, import_fs3, import_rxjs17, import_operators16, import_util3, ReadFile, package_default;
 var init_package = __esm({
   "src/commands/lambda/package.ts"() {
     import_archiver = __toESM(require_archiver());
     import_child_process = require("child_process");
     import_fs3 = require("fs");
-    import_rxjs12 = __toESM(require_cjs());
-    import_operators11 = __toESM(require_operators());
+    import_rxjs17 = __toESM(require_cjs());
+    import_operators16 = __toESM(require_operators());
     import_util3 = require("util");
     init_helpers2();
     init_load_spec();
     init_parse_ignore();
     init_read_file();
-    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators11.catchError)(() => (0, import_rxjs12.of)("")));
+    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators16.catchError)(() => (0, import_rxjs17.of)("")));
     package_default = (cmd) => {
-      return (0, import_rxjs12.lastValueFrom)(
+      return (0, import_rxjs17.lastValueFrom)(
         loadSpec(cmd.spec).pipe(
-          (0, import_operators11.map)((spec) => spec?.function ?? spec),
-          (0, import_operators11.switchMap)(async (data) => {
+          (0, import_operators16.map)((spec) => spec?.function ?? spec),
+          (0, import_operators16.switchMap)(async (data) => {
             const archive = (0, import_archiver.default)("zip", {
               zlib: { level: 9 }
               // Sets the compression level.
             });
             await (0, import_util3.promisify)(import_child_process.exec)(["chmod", "+x", data.script].join(" "));
-            const ignore = await (0, import_rxjs12.lastValueFrom)(
+            const ignore = await (0, import_rxjs17.lastValueFrom)(
               ReadFile(".gignore").pipe(
-                (0, import_operators11.map)((ignore2) => parseIgnoredFiles(ignore2))
+                (0, import_operators16.map)((ignore2) => parseIgnoredFiles(ignore2))
               )
             );
             archive.glob("**", {
               ignore: [".gcache/**", ...ignore]
             });
             archive.finalize();
-            return (0, import_rxjs12.lastValueFrom)(
-              (0, import_rxjs12.from)(streamToBufferPromise(archive)).pipe(
-                (0, import_operators11.switchMap)(
-                  (buffer) => (0, import_rxjs12.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
-                    (0, import_operators11.catchError)(() => (0, import_rxjs12.of)(true)),
-                    (0, import_operators11.switchMap)(
+            return (0, import_rxjs17.lastValueFrom)(
+              (0, import_rxjs17.from)(streamToBufferPromise(archive)).pipe(
+                (0, import_operators16.switchMap)(
+                  (buffer) => (0, import_rxjs17.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
+                    (0, import_operators16.catchError)(() => (0, import_rxjs17.of)(true)),
+                    (0, import_operators16.switchMap)(
                       () => (0, import_util3.promisify)(import_fs3.writeFile)(`.gcache/${data.name}.zip`, buffer)
                     )
                   )
@@ -284438,14 +284933,14 @@ function streamToBufferPromise(file2) {
     });
   });
 }
-var import_form_data, import_fs4, import_rxjs13, import_operators12, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
+var import_form_data, import_fs4, import_rxjs18, import_operators17, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
     import_fs4 = require("fs");
     init_src();
-    import_rxjs13 = __toESM(require_cjs());
-    import_operators12 = __toESM(require_operators());
+    import_rxjs18 = __toESM(require_cjs());
+    import_operators17 = __toESM(require_operators());
     import_stream_to_buffer = __toESM(require_stream_to_buffer());
     init_helpers();
     init_gql_client();
@@ -284453,14 +284948,14 @@ var init_helpers2 = __esm({
     init_package();
     init_load_spec();
     init_read_file();
-    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators12.catchError)(() => (0, import_rxjs13.of)("")));
-    createOrUpdateLambda = (cmd, type) => (0, import_rxjs13.lastValueFrom)(
+    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators17.catchError)(() => (0, import_rxjs18.of)("")));
+    createOrUpdateLambda = (cmd, type) => (0, import_rxjs18.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators12.switchMap)(
-          (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators12.map)(() => projectId))
+        (0, import_operators17.switchMap)(
+          (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators17.map)(() => projectId))
         ),
-        (0, import_operators12.switchMap)(async (projectId) => {
-          const spec = await (0, import_rxjs13.lastValueFrom)(loadSpec(cmd.spec));
+        (0, import_operators17.switchMap)(async (projectId) => {
+          const spec = await (0, import_rxjs18.lastValueFrom)(loadSpec(cmd.spec));
           return {
             projectId,
             ...spec?.function ?? spec
@@ -284468,16 +284963,16 @@ var init_helpers2 = __esm({
         }),
         /* Make zip archive */
         /* Get file id */
-        (0, import_operators12.switchMap)(async (data) => {
+        (0, import_operators17.switchMap)(async (data) => {
           if (!data.uploadAsZip) {
             return { ...data, customUploadFileId: "" };
           }
           await package_default(cmd);
           const body = new import_form_data.default();
           body.append("file[]", (0, import_fs4.createReadStream)(`.gcache/${data.name}.zip`));
-          const config2 = await (0, import_rxjs13.lastValueFrom)(GraphqlClienAPI.getConfig());
-          return (0, import_rxjs13.lastValueFrom)(
-            (0, import_rxjs13.from)(
+          const config2 = await (0, import_rxjs18.lastValueFrom)(GraphqlClienAPI.getConfig());
+          return (0, import_rxjs18.lastValueFrom)(
+            (0, import_rxjs18.from)(
               fetch2(config2.uploadUrl, {
                 method: "POST",
                 body,
@@ -284489,26 +284984,26 @@ var init_helpers2 = __esm({
                 }
               })
             ).pipe(
-              (0, import_operators12.switchMap)((res) => res.json()),
-              (0, import_operators12.map)((file2) => ({
+              (0, import_operators17.switchMap)((res) => res.json()),
+              (0, import_operators17.map)((file2) => ({
                 ...data,
                 customUploadFileId: file2.id
               }))
             )
           );
         }),
-        (0, import_operators12.switchMap)(async (payload) => {
-          return (0, import_rxjs13.lastValueFrom)(
+        (0, import_operators17.switchMap)(async (payload) => {
+          return (0, import_rxjs18.lastValueFrom)(
             GraphqlClienAPI[type]({
-              code: cmd.code || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
+              code: cmd.code || await (0, import_rxjs18.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
               name: cmd.name || payload.name || "",
               projectId: payload.projectId,
               route: cmd.route || payload.route || "",
-              buildBashScript: cmd.buildBashScript || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
+              buildBashScript: cmd.buildBashScript || await (0, import_rxjs18.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
               configs: cmd.configs || payload.configs || [],
               env: cmd.env || payload.env || "nodejs",
               method: cmd.method || payload.method || ["GET"],
-              packageJson: cmd.packageJson || await (0, import_rxjs13.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
+              packageJson: cmd.packageJson || await (0, import_rxjs18.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
               envSecrets: cmd.envSecrets || payload.envSecrets || [],
@@ -284540,7 +285035,7 @@ var init_helpers2 = __esm({
             })
           );
         }),
-        (0, import_operators12.tap)((data) => {
+        (0, import_operators17.tap)((data) => {
           Logger.info(JSON.stringify(data, null, 2));
         })
       )
@@ -284556,22 +285051,22 @@ var init_helpers2 = __esm({
 });
 
 // src/commands/lambda/list.ts
-var list_exports = {};
-__export(list_exports, {
-  default: () => list_default
+var list_exports2 = {};
+__export(list_exports2, {
+  default: () => list_default2
 });
-var import_rxjs14, import_operators13, list_default;
-var init_list = __esm({
+var import_rxjs19, import_operators18, list_default2;
+var init_list2 = __esm({
   "src/commands/lambda/list.ts"() {
-    import_rxjs14 = __toESM(require_cjs());
-    import_operators13 = __toESM(require_operators());
+    import_rxjs19 = __toESM(require_cjs());
+    import_operators18 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default = (cmd) => (0, import_rxjs14.lastValueFrom)(
+    list_default2 = (cmd) => (0, import_rxjs19.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators13.switchMap)((projectId) => GraphqlClienAPI.listLambdas(projectId)),
-        (0, import_operators13.tap)((data) => {
+        (0, import_operators18.switchMap)((projectId) => GraphqlClienAPI.listLambdas(projectId)),
+        (0, import_operators18.tap)((data) => {
           const columns = ["id", "name", "url"];
           Logger.log("-------------------");
           Logger.log("[Action][listLambdas]");
@@ -284588,17 +285083,17 @@ var get_exports = {};
 __export(get_exports, {
   default: () => get_default
 });
-var import_rxjs15, import_operators14, get_default;
+var import_rxjs20, import_operators19, get_default;
 var init_get = __esm({
   "src/commands/lambda/get.ts"() {
-    import_rxjs15 = __toESM(require_cjs());
-    import_operators14 = __toESM(require_operators());
+    import_rxjs20 = __toESM(require_cjs());
+    import_operators19 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     get_default = async (cmd) => {
-      const table = (0, import_operators14.tap)((data) => {
+      const table = (0, import_operators19.tap)((data) => {
         const columns = [
           "name",
           "projectId",
@@ -284611,28 +285106,28 @@ var init_get = __esm({
         Logger.log("-------------------");
       });
       if (cmd.lambda) {
-        return (0, import_rxjs15.lastValueFrom)(
+        return (0, import_rxjs20.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators14.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
+            (0, import_operators19.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
             table
           )
         );
       }
-      const spec = await (0, import_rxjs15.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs20.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs15.lastValueFrom)(
+        return (0, import_rxjs20.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators14.catchError)((error48) => {
+            (0, import_operators19.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs15.throwError)(
+                return (0, import_rxjs20.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs15.throwError)(() => error48);
+              return (0, import_rxjs20.throwError)(() => error48);
             }),
-            (0, import_operators14.switchMap)(
+            (0, import_operators19.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId)
             ),
             table
@@ -284645,15 +285140,15 @@ var init_get = __esm({
 });
 
 // src/commands/lambda/create.ts
-var create_exports = {};
-__export(create_exports, {
-  default: () => create_default
+var create_exports2 = {};
+__export(create_exports2, {
+  default: () => create_default2
 });
-var create_default;
-var init_create = __esm({
+var create_default2;
+var init_create2 = __esm({
   "src/commands/lambda/create.ts"() {
     init_helpers2();
-    create_default = (cmd) => createOrUpdateLambda(cmd, "createLambda");
+    create_default2 = (cmd) => createOrUpdateLambda(cmd, "createLambda");
   }
 });
 
@@ -284675,24 +285170,24 @@ var delete_exports = {};
 __export(delete_exports, {
   default: () => delete_default
 });
-var import_rxjs16, import_operators15, delete_default;
+var import_rxjs21, import_operators20, delete_default;
 var init_delete = __esm({
   "src/commands/lambda/delete.ts"() {
-    import_rxjs16 = __toESM(require_cjs());
-    import_operators15 = __toESM(require_operators());
+    import_rxjs21 = __toESM(require_cjs());
+    import_operators20 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     delete_default = async (cmd) => {
-      const spec = await (0, import_rxjs16.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs21.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
-      return (0, import_rxjs16.lastValueFrom)(
+      return (0, import_rxjs21.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators15.switchMap)(
+          (0, import_operators20.switchMap)(
             (projectId) => GraphqlClienAPI.deleteLambda({ name: name2, projectId })
           ),
-          (0, import_operators15.tap)((data) => {
+          (0, import_operators20.tap)((data) => {
             const columns = [
               "name",
               "projectId",
@@ -284715,40 +285210,40 @@ var logs_exports = {};
 __export(logs_exports, {
   default: () => logs_default
 });
-var import_rxjs17, import_operators16, logs_default;
+var import_rxjs22, import_operators21, logs_default;
 var init_logs = __esm({
   "src/commands/lambda/logs.ts"() {
-    import_rxjs17 = __toESM(require_cjs());
-    import_operators16 = __toESM(require_operators());
+    import_rxjs22 = __toESM(require_cjs());
+    import_operators21 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_default = async (cmd) => {
-      const result = (0, import_operators16.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators21.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs17.lastValueFrom)(
+        return (0, import_rxjs22.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators16.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
+            (0, import_operators21.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs17.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs22.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs17.lastValueFrom)(
+        return (0, import_rxjs22.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators16.catchError)((error48) => {
+            (0, import_operators21.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs17.throwError)(
+                return (0, import_rxjs22.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs17.throwError)(() => error48);
+              return (0, import_rxjs22.throwError)(() => error48);
             }),
-            (0, import_operators16.switchMap)(
+            (0, import_operators21.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaLogsByName(name2, projectId)
             ),
             result
@@ -284765,40 +285260,40 @@ var logs_builder_exports = {};
 __export(logs_builder_exports, {
   default: () => logs_builder_default
 });
-var import_rxjs18, import_operators17, logs_builder_default;
+var import_rxjs23, import_operators22, logs_builder_default;
 var init_logs_builder = __esm({
   "src/commands/lambda/logs-builder.ts"() {
-    import_rxjs18 = __toESM(require_cjs());
-    import_operators17 = __toESM(require_operators());
+    import_rxjs23 = __toESM(require_cjs());
+    import_operators22 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_builder_default = async (cmd) => {
-      const result = (0, import_operators17.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators22.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs18.lastValueFrom)(
+        return (0, import_rxjs23.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators17.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
+            (0, import_operators22.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs18.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs23.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs18.lastValueFrom)(
+        return (0, import_rxjs23.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators17.catchError)((error48) => {
+            (0, import_operators22.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs18.throwError)(
+                return (0, import_rxjs23.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs18.throwError)(() => error48);
+              return (0, import_rxjs23.throwError)(() => error48);
             }),
-            (0, import_operators17.switchMap)(
+            (0, import_operators22.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaBuilderLogsByName(name2, projectId)
             ),
             result
@@ -284815,39 +285310,39 @@ var test_exports = {};
 __export(test_exports, {
   default: () => test_default
 });
-var import_rxjs19, import_operators18, test_default;
+var import_rxjs24, import_operators23, test_default;
 var init_test = __esm({
   "src/commands/lambda/test.ts"() {
-    import_rxjs19 = __toESM(require_cjs());
-    import_operators18 = __toESM(require_operators());
+    import_rxjs24 = __toESM(require_cjs());
+    import_operators23 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     test_default = async (cmd) => {
-      const spec = await (0, import_rxjs19.lastValueFrom)(loadSpec(cmd.spec));
-      const processParameters = (lambda) => (0, import_rxjs19.of)(lambda).pipe(
-        (0, import_operators18.map)((lambda2) => ({
+      const spec = await (0, import_rxjs24.lastValueFrom)(loadSpec(cmd.spec));
+      const processParameters = (lambda) => (0, import_rxjs24.of)(lambda).pipe(
+        (0, import_operators23.map)((lambda2) => ({
           ...lambda2,
           url: cmd.pathParams ? cmd.pathParams.split(";").map((param) => param.split("=")).reduce(
             (prev, [key, value]) => prev.replace(key, value),
             lambda2.url
           ) : lambda2.url
         })),
-        (0, import_operators18.tap)(() => {
+        (0, import_operators23.tap)(() => {
           Logger.info(
             `About to hit URL: ${[lambda.url, cmd.queryParams].join("")}`
           );
         }),
-        (0, import_operators18.switchMap)(
-          (lambda2) => (0, import_rxjs19.from)(
+        (0, import_operators23.switchMap)(
+          (lambda2) => (0, import_rxjs24.from)(
             fetch([lambda2.url, cmd.queryParams].filter((i2) => !!i2).join(""), {
               method: cmd?.method ?? "GET",
               body: cmd.body
             })
-          ).pipe((0, import_operators18.switchMap)((res) => res.json()))
+          ).pipe((0, import_operators23.switchMap)((res) => res.json()))
         ),
-        (0, import_operators18.tap)((data) => {
+        (0, import_operators23.tap)((data) => {
           if (data.error) {
             Logger.error(data);
           } else {
@@ -284856,29 +285351,29 @@ var init_test = __esm({
         })
       );
       if (cmd.lambda) {
-        return (0, import_rxjs19.lastValueFrom)(
+        return (0, import_rxjs24.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators18.switchMap)(
+            (0, import_operators23.switchMap)(
               (id) => GraphqlClienAPI.getLambda(id, ["id", "url", "method", "params"])
             ),
-            (0, import_operators18.switchMap)(processParameters)
+            (0, import_operators23.switchMap)(processParameters)
           )
         );
       }
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs19.lastValueFrom)(
+        return (0, import_rxjs24.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators18.catchError)((error48) => {
+            (0, import_operators23.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs19.throwError)(
+                return (0, import_rxjs24.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs19.throwError)(() => error48);
+              return (0, import_rxjs24.throwError)(() => error48);
             }),
-            (0, import_operators18.switchMap)(
+            (0, import_operators23.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId, [
                 "id",
                 "url",
@@ -284886,7 +285381,7 @@ var init_test = __esm({
                 "params"
               ])
             ),
-            (0, import_operators18.switchMap)(processParameters)
+            (0, import_operators23.switchMap)(processParameters)
           )
         );
       }
@@ -284895,21 +285390,169 @@ var init_test = __esm({
   }
 });
 
-// src/commands/project/list.ts
-var list_exports2 = {};
-__export(list_exports2, {
-  default: () => list_default2
+// src/commands/plugin/list.ts
+var list_exports3 = {};
+__export(list_exports3, {
+  default: () => list_default3
 });
-var import_rxjs20, import_operators19, list_default2;
-var init_list2 = __esm({
-  "src/commands/project/list.ts"() {
-    import_rxjs20 = __toESM(require_cjs());
-    import_operators19 = __toESM(require_operators());
+var import_rxjs25, import_operators24, list_default3;
+var init_list3 = __esm({
+  "src/commands/plugin/list.ts"() {
+    import_rxjs25 = __toESM(require_cjs());
+    import_operators24 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default2 = async () => (0, import_rxjs20.lastValueFrom)(
+    list_default3 = () => (0, import_rxjs25.lastValueFrom)(
+      GraphqlClienAPI.listAvailablePlugins().pipe(
+        (0, import_operators24.tap)((plugins) => {
+          Logger.log("-------------------");
+          Logger.log("[Action][listAvailablePlugins]");
+          Logger.table(
+            (plugins || []).map((p) => ({
+              name: p.name,
+              pluginType: p.pluginType,
+              isActive: p.isActive,
+              description: p.description
+            }))
+          );
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/plugin/installed.ts
+var installed_exports = {};
+__export(installed_exports, {
+  default: () => installed_default
+});
+var import_rxjs26, import_operators25, installed_default;
+var init_installed = __esm({
+  "src/commands/plugin/installed.ts"() {
+    import_rxjs26 = __toESM(require_cjs());
+    import_operators25 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    installed_default = (cmd) => (0, import_rxjs26.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators25.switchMap)((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
+        (0, import_operators25.tap)((installed) => {
+          Logger.log("-------------------");
+          Logger.log("[Action][listInstalledPlugins]");
+          if (!installed?.length) {
+            Logger.info(
+              "No plugins installed for this project yet. See plugin:install."
+            );
+          } else {
+            Logger.table(
+              installed.map((i2) => ({
+                name: i2.plugin?.name,
+                clusterName: i2.clusterName ?? "Shared",
+                installedAt: i2.installedAt
+              }))
+            );
+          }
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/plugin/install.ts
+var install_exports = {};
+__export(install_exports, {
+  default: () => install_default
+});
+var import_rxjs27, import_operators26, install_default;
+var init_install = __esm({
+  "src/commands/plugin/install.ts"() {
+    import_rxjs27 = __toESM(require_cjs());
+    import_operators26 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    init_load_spec();
+    install_default = (cmd) => (0, import_rxjs27.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators26.switchMap)(
+          (projectId) => loadSpec(
+            cmd.spec ?? "plugin.yaml"
+          ).pipe(
+            // No spec file is required at all if --name/--cluster fully
+            // cover it (unlike every other resource here, a plugin install
+            // is often just "install this by name", no YAML needed).
+            (0, import_operators26.catchError)(() => (0, import_rxjs27.of)(void 0)),
+            (0, import_operators26.map)((data) => ({
+              projectId,
+              ...data ? data.plugin ?? data : {}
+            }))
+          )
+        ),
+        (0, import_operators26.switchMap)(
+          ({ projectId, ...data }) => GraphqlClienAPI.installPlugin(
+            projectId,
+            cmd.name || data.name,
+            data.config,
+            cmd.cluster || data.clusterId
+          )
+        ),
+        (0, import_operators26.tap)((installed) => {
+          Logger.log("-------------------");
+          Logger.log("[Action][installPlugin]");
+          Logger.table([installed]);
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/plugin/uninstall.ts
+var uninstall_exports = {};
+__export(uninstall_exports, {
+  default: () => uninstall_default
+});
+var import_rxjs28, import_operators27, uninstall_default;
+var init_uninstall = __esm({
+  "src/commands/plugin/uninstall.ts"() {
+    import_rxjs28 = __toESM(require_cjs());
+    import_operators27 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    uninstall_default = (cmd) => (0, import_rxjs28.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators27.switchMap)(
+          (projectId) => GraphqlClienAPI.uninstallPlugin(projectId, cmd.name, cmd.cluster)
+        ),
+        (0, import_operators27.tap)((pluginName) => {
+          Logger.log("-------------------");
+          Logger.log(`[Action][uninstallPlugin] removed ${pluginName}`);
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/project/list.ts
+var list_exports4 = {};
+__export(list_exports4, {
+  default: () => list_default4
+});
+var import_rxjs29, import_operators28, list_default4;
+var init_list4 = __esm({
+  "src/commands/project/list.ts"() {
+    import_rxjs29 = __toESM(require_cjs());
+    import_operators28 = __toESM(require_operators());
+    init_gql_client();
+    init_log();
+    list_default4 = async () => (0, import_rxjs29.lastValueFrom)(
       GraphqlClienAPI.listProjects().pipe(
-        (0, import_operators19.tap)((project) => {
+        (0, import_operators28.tap)((project) => {
           const columns = ["id", "name"];
           Logger.log("-------------------");
           Logger.log("[Action][listProjects]");
@@ -284926,24 +285569,24 @@ var use_exports = {};
 __export(use_exports, {
   default: () => use_default
 });
-var import_fs5, import_rxjs21, import_operators20, import_util4, use_default;
+var import_fs5, import_rxjs30, import_operators29, import_util4, use_default;
 var init_use = __esm({
   "src/commands/project/use.ts"() {
     import_fs5 = require("fs");
-    import_rxjs21 = __toESM(require_cjs());
-    import_operators20 = __toESM(require_operators());
+    import_rxjs30 = __toESM(require_cjs());
+    import_operators29 = __toESM(require_operators());
     import_util4 = require("util");
     init_helpers();
     init_gql_client();
     init_types();
     use_default = async (cmd) => {
-      return (0, import_rxjs21.lastValueFrom)(
+      return (0, import_rxjs30.lastValueFrom)(
         parseProjectId(cmd).pipe(
-          (0, import_operators20.switchMap)(
-            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators20.map)(() => projectId))
+          (0, import_operators29.switchMap)(
+            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators29.map)(() => projectId))
           ),
-          (0, import_operators20.switchMap)(
-            (projectId) => (0, import_rxjs21.from)(
+          (0, import_operators29.switchMap)(
+            (projectId) => (0, import_rxjs30.from)(
               (0, import_util4.promisify)(import_fs5.writeFile)(projectDirectory, projectId, {
                 encoding: "utf-8"
               })
@@ -285033,9 +285676,9 @@ var init_util = __esm({
       };
     })(util || (util = {}));
     (function(objectUtil2) {
-      objectUtil2.mergeShapes = (first, second) => {
+      objectUtil2.mergeShapes = (first2, second) => {
         return {
-          ...first,
+          ...first2,
           ...second
           // second overwrites first
         };
@@ -285390,8 +286033,8 @@ var init_parseUtil = __esm({
       }
       let errorMessage = "";
       const maps = errorMaps.filter((m2) => !!m2).slice().reverse();
-      for (const map20 of maps) {
-        errorMessage = map20(fullIssue, { data, defaultError: errorMessage }).message;
+      for (const map24 of maps) {
+        errorMessage = map24(fullIssue, { data, defaultError: errorMessage }).message;
       }
       return {
         ...issueData,
@@ -288001,10 +288644,10 @@ var init_types2 = __esm({
       get element() {
         return this._def.valueType;
       }
-      static create(first, second, third) {
+      static create(first2, second, third) {
         if (second instanceof ZodType) {
           return new _ZodRecord({
-            keyType: first,
+            keyType: first2,
             valueType: second,
             typeName: ZodFirstPartyTypeKind.ZodRecord,
             ...processCreateParams(third)
@@ -288012,7 +288655,7 @@ var init_types2 = __esm({
         }
         return new _ZodRecord({
           keyType: ZodString.create(),
-          valueType: first,
+          valueType: first2,
           typeName: ZodFirstPartyTypeKind.ZodRecord,
           ...processCreateParams(second)
         });
@@ -291833,10 +292476,10 @@ var init_schemas = __esm({
         return void 0;
       });
       const single = def.options.length === 1;
-      const first = def.options[0]._zod.run;
+      const first2 = def.options[0]._zod.run;
       inst._zod.parse = (payload, ctx) => {
         if (single) {
-          return first(payload, ctx);
+          return first2(payload, ctx);
         }
         let async = false;
         const results = [];
@@ -291865,10 +292508,10 @@ var init_schemas = __esm({
       $ZodUnion.init(inst, def);
       def.inclusive = false;
       const single = def.options.length === 1;
-      const first = def.options[0]._zod.run;
+      const first2 = def.options[0]._zod.run;
       inst._zod.parse = (payload, ctx) => {
         if (single) {
-          return first(payload, ctx);
+          return first2(payload, ctx);
         }
         let async = false;
         const results = [];
@@ -291913,19 +292556,19 @@ var init_schemas = __esm({
       });
       const disc = cached(() => {
         const opts = def.options;
-        const map20 = /* @__PURE__ */ new Map();
+        const map24 = /* @__PURE__ */ new Map();
         for (const o of opts) {
           const values = o._zod.propValues?.[def.discriminator];
           if (!values || values.size === 0)
             throw new Error(`Invalid discriminated union option at index "${def.options.indexOf(o)}"`);
           for (const v of values) {
-            if (map20.has(v)) {
+            if (map24.has(v)) {
               throw new Error(`Duplicate discriminator value "${String(v)}"`);
             }
-            map20.set(v, o);
+            map24.set(v, o);
           }
         }
-        return map20;
+        return map24;
       });
       inst._zod.parse = (payload, ctx) => {
         const input = payload.value;
@@ -301408,7 +302051,7 @@ __export(schemas_exports3, {
   looseObject: () => looseObject,
   looseRecord: () => looseRecord,
   mac: () => mac2,
-  map: () => map14,
+  map: () => map17,
   meta: () => meta2,
   nan: () => nan,
   nanoid: () => nanoid2,
@@ -301704,7 +302347,7 @@ function looseRecord(keyType, valueType, params) {
     ...util_exports.normalizeParams(params)
   });
 }
-function map14(keyType, valueType, params) {
+function map17(keyType, valueType, params) {
   return new ZodMap2({
     type: "map",
     keyType,
@@ -302546,9 +303189,9 @@ var init_schemas3 = __esm({
 });
 
 // ../../node_modules/zod/v4/classic/compat.js
-function setErrorMap(map20) {
+function setErrorMap(map24) {
   config({
-    customError: map20
+    customError: map24
   });
 }
 function getErrorMap2() {
@@ -303248,7 +303891,7 @@ __export(external_exports3, {
   lt: () => _lt,
   lte: () => _lte,
   mac: () => mac2,
-  map: () => map14,
+  map: () => map17,
   maxLength: () => _maxLength,
   maxSize: () => _maxSize,
   meta: () => meta2,
@@ -305432,11 +306075,11 @@ var init_protocol = __esm({
         const controller = this._requestHandlerAbortControllers.get(notification.params.requestId);
         controller?.abort(notification.params.reason);
       }
-      _setupTimeout(messageId, timeout, maxTotalTimeout, onTimeout, resetTimeoutOnProgress = false) {
+      _setupTimeout(messageId, timeout2, maxTotalTimeout, onTimeout, resetTimeoutOnProgress = false) {
         this._timeoutInfo.set(messageId, {
-          timeoutId: setTimeout(onTimeout, timeout),
+          timeoutId: setTimeout(onTimeout, timeout2),
           startTime: Date.now(),
-          timeout,
+          timeout: timeout2,
           maxTotalTimeout,
           resetTimeoutOnProgress,
           onTimeout
@@ -305892,9 +306535,9 @@ var init_protocol = __esm({
           options?.signal?.addEventListener("abort", () => {
             cancel(options?.signal?.reason);
           });
-          const timeout = options?.timeout ?? DEFAULT_REQUEST_TIMEOUT_MSEC;
-          const timeoutHandler = () => cancel(McpError.fromError(ErrorCode.RequestTimeout, "Request timed out", { timeout }));
-          this._setupTimeout(messageId, timeout, options?.maxTotalTimeout, timeoutHandler, options?.resetTimeoutOnProgress ?? false);
+          const timeout2 = options?.timeout ?? DEFAULT_REQUEST_TIMEOUT_MSEC;
+          const timeoutHandler = () => cancel(McpError.fromError(ErrorCode.RequestTimeout, "Request timed out", { timeout: timeout2 }));
+          this._setupTimeout(messageId, timeout2, options?.maxTotalTimeout, timeoutHandler, options?.resetTimeoutOnProgress ?? false);
           const relatedTaskId = relatedTask?.taskId;
           if (relatedTaskId) {
             const responseResolver = (response) => {
@@ -313782,8 +314425,8 @@ var init_client2 = __esm({
             if (existingTimer) {
               clearTimeout(existingTimer);
             }
-            const timer = setTimeout(refresh, debounceMs);
-            this._listChangedDebounceTimers.set(listType, timer);
+            const timer2 = setTimeout(refresh, debounceMs);
+            this._listChangedDebounceTimers.set(listType, timer2);
           } else {
             refresh();
           }
@@ -315780,33 +316423,33 @@ __export(start_exports, {
   default: () => startProxy
 });
 async function startProxy(cmd) {
-  return (0, import_rxjs22.lastValueFrom)(
+  return (0, import_rxjs31.lastValueFrom)(
     GraphqlClienAPI.getConfig().pipe(
-      (0, import_operators21.take)(1),
-      (0, import_operators21.map)((config2) => ({
+      (0, import_operators30.take)(1),
+      (0, import_operators30.map)((config2) => ({
         ...config2,
         mcpUrl: new URL(
           cmd.url || [config2.url.replace(/\/graphql$/, ""), "/mcp"].join("") || "http://127.0.0.1:8000/mcp"
         )
       })),
-      (0, import_operators21.tap)((config2) => {
+      (0, import_operators30.tap)((config2) => {
         config2.mcpUrl.searchParams.set("transportType", "streamable-http");
         process.stderr.write(`Starting MCP proxy \u2192 ${config2.mcpUrl}
 `);
         process.stderr.write("Retrieving config for auth...\n");
       }),
-      (0, import_operators21.switchMap)(
-        (config2) => config2?.token ? (0, import_rxjs22.of)(config2) : (0, import_rxjs22.throwError)(
+      (0, import_operators30.switchMap)(
+        (config2) => config2?.token ? (0, import_rxjs31.of)(config2) : (0, import_rxjs31.throwError)(
           () => new Error("User is not authenticated (no token in config)")
         )
       ),
-      (0, import_operators21.tap)((config2) => {
+      (0, import_operators30.tap)((config2) => {
         process.stderr.write(
           `Config retrieved. Token start: ${config2.token.substring(0, 5)}
 `
         );
       }),
-      (0, import_operators21.map)((config2) => ({
+      (0, import_operators30.map)((config2) => ({
         ...config2,
         transport: new StreamableHTTPClientTransport(config2.mcpUrl, {
           requestInit: {
@@ -315814,34 +316457,34 @@ async function startProxy(cmd) {
               Authorization: config2.token
             }
           },
-          fetch: (input, init) => (0, import_rxjs22.lastValueFrom)(performFetch(input, init))
+          fetch: (input, init) => (0, import_rxjs31.lastValueFrom)(performFetch(input, init))
         }),
         client: new Client({
           name: "gapi-proxy-client",
           version: "1.0.0"
         })
       })),
-      (0, import_operators21.tap)(() => {
+      (0, import_operators30.tap)(() => {
         process.stderr.write("Connecting to upstream...\n");
       }),
-      (0, import_operators21.switchMap)(
-        (config2) => (0, import_rxjs22.from)(config2.client.connect(config2.transport)).pipe((0, import_operators21.map)(() => config2))
+      (0, import_operators30.switchMap)(
+        (config2) => (0, import_rxjs31.from)(config2.client.connect(config2.transport)).pipe((0, import_operators30.map)(() => config2))
       ),
-      (0, import_operators21.tap)(() => {
+      (0, import_operators30.tap)(() => {
         process.stderr.write("Connected to upstream MCP server\n");
       }),
       // Get capabilities AFTER connection is established
-      (0, import_operators21.map)((config2) => ({
+      (0, import_operators30.map)((config2) => ({
         ...config2,
         capabilities: config2.client.getServerCapabilities()
       })),
-      (0, import_operators21.tap)((config2) => {
+      (0, import_operators30.tap)((config2) => {
         process.stderr.write(
           `Upstream capabilities: ${JSON.stringify(config2.capabilities)}
 `
         );
       }),
-      (0, import_operators21.map)((config2) => {
+      (0, import_operators30.map)((config2) => {
         const server2 = new Server(
           {
             name: "gapi-proxy",
@@ -315851,67 +316494,67 @@ async function startProxy(cmd) {
             capabilities: config2.capabilities || {}
           }
         );
-        server2.fallbackRequestHandler = async (request) => (0, import_rxjs22.lastValueFrom)(
-          (0, import_rxjs22.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
-            (0, import_operators21.catchError)((e2) => {
+        server2.fallbackRequestHandler = async (request) => (0, import_rxjs31.lastValueFrom)(
+          (0, import_rxjs31.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
+            (0, import_operators30.catchError)((e2) => {
               process.stderr.write(`Upstream error: ${e2.message}
 `);
-              return (0, import_rxjs22.throwError)(() => e2);
+              return (0, import_rxjs31.throwError)(() => e2);
             })
           )
         );
         server2.fallbackNotificationHandler = async (notification) => {
-          await (0, import_rxjs22.lastValueFrom)(
-            (0, import_rxjs22.of)(notification).pipe(
-              (0, import_operators21.filter)((n) => n.method !== "notifications/initialized"),
-              (0, import_operators21.switchMap)(
-                (n) => (0, import_rxjs22.defer)(() => config2.client.notification(n)).pipe(
-                  (0, import_operators21.catchError)((e2) => {
+          await (0, import_rxjs31.lastValueFrom)(
+            (0, import_rxjs31.of)(notification).pipe(
+              (0, import_operators30.filter)((n) => n.method !== "notifications/initialized"),
+              (0, import_operators30.switchMap)(
+                (n) => (0, import_rxjs31.defer)(() => config2.client.notification(n)).pipe(
+                  (0, import_operators30.catchError)((e2) => {
                     process.stderr.write(`Notification error: ${e2}
 `);
-                    return import_rxjs22.EMPTY;
+                    return import_rxjs31.EMPTY;
                   })
                 )
               ),
-              (0, import_operators21.defaultIfEmpty)(null)
+              (0, import_operators30.defaultIfEmpty)(null)
             )
           );
         };
         return server2;
       }),
-      (0, import_operators21.switchMap)((server2) => (0, import_rxjs22.from)(server2.connect(new StdioServerTransport()))),
-      (0, import_operators21.tap)(() => {
+      (0, import_operators30.switchMap)((server2) => (0, import_rxjs31.from)(server2.connect(new StdioServerTransport()))),
+      (0, import_operators30.tap)(() => {
         process.stderr.write("MCP stdio server ready\n");
       }),
       // Keep the process running indefinitely to handle stdio communication
-      (0, import_operators21.switchMap)(() => new Promise(() => {
+      (0, import_operators30.switchMap)(() => new Promise(() => {
       }))
     )
   );
 }
-var import_rxjs22, import_operators21, import_stream2, performFetch;
+var import_rxjs31, import_operators30, import_stream2, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
     init_streamableHttp();
     init_server2();
     init_stdio2();
-    import_rxjs22 = __toESM(require_cjs());
-    import_operators21 = __toESM(require_operators());
+    import_rxjs31 = __toESM(require_cjs());
+    import_operators30 = __toESM(require_operators());
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
     performFetch = (input, init) => {
-      return (0, import_rxjs22.from)(fetch(input, init)).pipe(
-        (0, import_operators21.switchMap)((res) => {
+      return (0, import_rxjs31.from)(fetch(input, init)).pipe(
+        (0, import_operators30.switchMap)((res) => {
           if (res.status === 401 || res.status === 403) {
             process.stderr.write(
               `[DEBUG] Request failed with ${res.status}. Refreshing token...
 `
             );
             return GraphqlClienAPI.getConfig(true).pipe(
-              (0, import_operators21.take)(1),
-              (0, import_operators21.switchMap)((config2) => {
+              (0, import_operators30.take)(1),
+              (0, import_operators30.switchMap)((config2) => {
                 process.stderr.write(
                   "[DEBUG] Token refreshed. Retrying request...\n"
                 );
@@ -315924,9 +316567,9 @@ var init_start = __esm({
               })
             );
           }
-          return (0, import_rxjs22.of)(res);
+          return (0, import_rxjs31.of)(res);
         }),
-        (0, import_operators21.map)((res) => {
+        (0, import_operators30.map)((res) => {
           if (typeof res?.body?.pipeThrough !== "function") {
             try {
               const webStream = import_stream2.Readable.toWeb(res.body);
@@ -315940,13 +316583,133 @@ var init_start = __esm({
           }
           return res;
         }),
-        (0, import_operators21.catchError)((e2) => {
+        (0, import_operators30.catchError)((e2) => {
           process.stderr.write(`[ERROR] Fetch error: ${e2.message}
 `);
-          return (0, import_rxjs22.throwError)(() => e2);
+          return (0, import_rxjs31.throwError)(() => e2);
         })
       );
     };
+  }
+});
+
+// src/commands/rabbitmq/create.ts
+var create_exports3 = {};
+__export(create_exports3, {
+  default: () => create_default3
+});
+var import_rxjs32, import_operators31, create_default3;
+var init_create3 = __esm({
+  "src/commands/rabbitmq/create.ts"() {
+    import_rxjs32 = __toESM(require_cjs());
+    import_operators31 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    init_load_spec();
+    create_default3 = (cmd) => (0, import_rxjs32.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators31.switchMap)(
+          (projectId) => loadSpec(
+            cmd.spec ?? "rabbitmq.yaml"
+          ).pipe(
+            (0, import_operators31.map)((data) => ({
+              projectId,
+              ...data ? data.rabbitmq ?? data : {}
+            }))
+          )
+        ),
+        (0, import_operators31.switchMap)(
+          ({ projectId, ...data }) => GraphqlClienAPI.installRabbitMq(projectId, {
+            name: cmd.name || data.name,
+            description: cmd.description || data.description,
+            user: cmd.user || data.user,
+            password: cmd.password || data.password,
+            region: cmd.region || data.region,
+            storage: data.storage,
+            clusterId: cmd.cluster || data.clusterId
+          })
+        ),
+        (0, import_operators31.tap)((broker) => {
+          Logger.log("-------------------");
+          Logger.log("[Action][installRabbitMq]");
+          Logger.table([broker]);
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/rabbitmq/list.ts
+var list_exports5 = {};
+__export(list_exports5, {
+  default: () => list_default5
+});
+var import_rxjs33, import_operators32, list_default5;
+var init_list5 = __esm({
+  "src/commands/rabbitmq/list.ts"() {
+    import_rxjs33 = __toESM(require_cjs());
+    import_operators32 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    list_default5 = (cmd) => (0, import_rxjs33.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators32.switchMap)(
+          (projectId) => GraphqlClienAPI.listRabbitMqInstances(projectId)
+        ),
+        (0, import_operators32.tap)((brokers) => {
+          Logger.log("-------------------");
+          Logger.log("[Action][listRabbitMqInstances]");
+          if (!brokers?.length) {
+            Logger.info(
+              "No RabbitMQ brokers for this project yet. See rabbitmq:create."
+            );
+          } else {
+            Logger.table(
+              brokers.map((b) => ({
+                id: b.id,
+                name: b.name,
+                region: b.region,
+                clusterName: b.clusterName ?? "Shared",
+                queues: b.queues?.length ?? 0
+              }))
+            );
+          }
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/rabbitmq/delete.ts
+var delete_exports2 = {};
+__export(delete_exports2, {
+  default: () => delete_default2
+});
+var import_rxjs34, import_operators33, delete_default2;
+var init_delete2 = __esm({
+  "src/commands/rabbitmq/delete.ts"() {
+    import_rxjs34 = __toESM(require_cjs());
+    import_operators33 = __toESM(require_operators());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    delete_default2 = (cmd) => (0, import_rxjs34.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators33.switchMap)(
+          (projectId) => GraphqlClienAPI.uninstallRabbitMq(cmd.id, projectId)
+        ),
+        (0, import_operators33.tap)((broker) => {
+          Logger.log("-------------------");
+          Logger.log("[Action][uninstallRabbitMq]");
+          Logger.table([broker]);
+          Logger.log("-------------------");
+        })
+      )
+    );
   }
 });
 
@@ -315957,10 +316720,10 @@ __export(start_exports2, {
 });
 async function start(args) {
   Logger.log("---------------------------------");
-  return (0, import_rxjs23.lastValueFrom)(
+  return (0, import_rxjs35.lastValueFrom)(
     loadSpec().pipe(
-      (0, import_operators22.switchMap)(
-        (config2) => (0, import_rxjs23.of)({
+      (0, import_operators34.switchMap)(
+        (config2) => (0, import_rxjs35.of)({
           watcher: (0, import_node_fs2.watch)(process.cwd(), {
             recursive: true
           }),
@@ -315981,7 +316744,7 @@ async function start(args) {
           outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
           startCommand: "node"
         }).pipe(
-          (0, import_operators22.switchMap)(
+          (0, import_operators34.switchMap)(
             ({
               child,
               watcher,
@@ -315989,14 +316752,14 @@ async function start(args) {
               outfile,
               startCommand,
               ignorelist
-            }) => (0, import_rxjs23.from)(build_default(args)).pipe(
-              (0, import_operators22.tap)(() => {
+            }) => (0, import_rxjs35.from)(build_default(args)).pipe(
+              (0, import_operators34.tap)(() => {
                 Logger.warn(
                   `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
                 );
                 Logger.log("---------------------------------\n");
               }),
-              (0, import_operators22.tap)(() => {
+              (0, import_operators34.tap)(() => {
                 child = (0, import_node_child_process.spawn)(
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
@@ -316006,14 +316769,14 @@ async function start(args) {
                   }
                 );
               }),
-              (0, import_operators22.tap)(
-                () => (0, import_rxjs23.merge)(
-                  (0, import_rxjs23.fromEvent)(process, "SIGINT"),
-                  (0, import_rxjs23.fromEvent)(process, "SIGTERM"),
-                  (0, import_rxjs23.fromEvent)(process, "exit")
+              (0, import_operators34.tap)(
+                () => (0, import_rxjs35.merge)(
+                  (0, import_rxjs35.fromEvent)(process, "SIGINT"),
+                  (0, import_rxjs35.fromEvent)(process, "SIGTERM"),
+                  (0, import_rxjs35.fromEvent)(process, "exit")
                 ).pipe(
-                  (0, import_operators22.debounceTime)(100),
-                  (0, import_operators22.tap)(() => {
+                  (0, import_operators34.debounceTime)(100),
+                  (0, import_operators34.tap)(() => {
                     Logger.warn("\u26A0\uFE0F  Main process shutting down");
                     watcher.close();
                     child.kill("SIGTERM");
@@ -316021,13 +316784,13 @@ async function start(args) {
                   })
                 ).subscribe()
               ),
-              (0, import_operators22.switchMap)(
-                () => (0, import_rxjs23.fromEvent)(watcher, "change").pipe(
-                  (0, import_operators22.map)(([event, filename]) => ({
+              (0, import_operators34.switchMap)(
+                () => (0, import_rxjs35.fromEvent)(watcher, "change").pipe(
+                  (0, import_operators34.map)(([event, filename]) => ({
                     event,
                     filename
                   })),
-                  (0, import_operators22.filter)(({ filename }) => {
+                  (0, import_operators34.filter)(({ filename }) => {
                     if (!filename) {
                       return false;
                     }
@@ -316039,18 +316802,18 @@ async function start(args) {
                     const rootDir = filename.split(/[/\\]/)[0];
                     return whitelist.has(rootDir);
                   }),
-                  (0, import_operators22.debounceTime)(100)
+                  (0, import_operators34.debounceTime)(100)
                 )
               ),
-              (0, import_operators22.tap)((data) => {
+              (0, import_operators34.tap)((data) => {
                 Logger.log("\n---------------------------------");
                 Logger.log(
                   `\u27F3  Restarting due to change in: ${data.filename}`
                 );
                 child?.kill("SIGTERM");
               }),
-              (0, import_operators22.switchMap)(() => build_default(args)),
-              (0, import_operators22.tap)(() => {
+              (0, import_operators34.switchMap)(() => build_default(args)),
+              (0, import_operators34.tap)(() => {
                 Logger.warn(
                   `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
                 );
@@ -316071,13 +316834,13 @@ async function start(args) {
     )
   );
 }
-var import_node_child_process, import_node_fs2, import_rxjs23, import_operators22;
+var import_node_child_process, import_node_fs2, import_rxjs35, import_operators34;
 var init_start2 = __esm({
   "src/commands/start/start.ts"() {
     import_node_child_process = require("node:child_process");
     import_node_fs2 = require("node:fs");
-    import_rxjs23 = __toESM(require_cjs());
-    import_operators22 = __toESM(require_operators());
+    import_rxjs35 = __toESM(require_cjs());
+    import_operators34 = __toESM(require_operators());
     init_log();
     init_build();
     init_load_spec();
@@ -316089,25 +316852,25 @@ var create_cron_exports = {};
 __export(create_cron_exports, {
   default: () => create_cron_default
 });
-var import_rxjs24, import_operators23, create_cron_default;
+var import_rxjs36, import_operators35, create_cron_default;
 var init_create_cron = __esm({
   "src/commands/triggers/cron/create-cron.ts"() {
-    import_rxjs24 = __toESM(require_cjs());
-    import_operators23 = __toESM(require_operators());
+    import_rxjs36 = __toESM(require_cjs());
+    import_operators35 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_cron_default = (cmd) => (0, import_rxjs24.lastValueFrom)(
+    create_cron_default = (cmd) => (0, import_rxjs36.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators23.switchMap)(
+        (0, import_operators35.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators23.switchMap)(
+            (0, import_operators35.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators23.map)((lambda) => ({
+                (0, import_operators35.map)((lambda) => ({
                   lambdaName: lambda.name,
                   lambdaId: lambda.id,
                   ...data?.triggers?.time ?? data
@@ -316116,12 +316879,12 @@ var init_create_cron = __esm({
             )
           )
         ),
-        (0, import_operators23.switchMap)(
+        (0, import_operators35.switchMap)(
           ({ lambdaId, cron, triggerName, lambdaName }) => GraphqlClienAPI.createTimeTrigger({ lambdaId, cron, triggerName }).pipe(
-            (0, import_operators23.map)((data) => ({ ...data, lambdaName }))
+            (0, import_operators35.map)((data) => ({ ...data, lambdaName }))
           )
         ),
-        (0, import_operators23.tap)((data) => {
+        (0, import_operators35.tap)((data) => {
           const columns = [
             "id",
             "lambdaName",
@@ -316144,25 +316907,25 @@ var delete_cron_exports = {};
 __export(delete_cron_exports, {
   default: () => delete_cron_default
 });
-var import_rxjs25, import_operators24, delete_cron_default;
+var import_rxjs37, import_operators36, delete_cron_default;
 var init_delete_cron = __esm({
   "src/commands/triggers/cron/delete-cron.ts"() {
-    import_rxjs25 = __toESM(require_cjs());
-    import_operators24 = __toESM(require_operators());
+    import_rxjs37 = __toESM(require_cjs());
+    import_operators36 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_cron_default = (cmd) => (0, import_rxjs25.lastValueFrom)(
+    delete_cron_default = (cmd) => (0, import_rxjs37.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators24.switchMap)(
+        (0, import_operators36.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators24.switchMap)(
+            (0, import_operators36.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators24.map)((lambda) => ({
+                (0, import_operators36.map)((lambda) => ({
                   lambdaName: lambda.name,
                   lambdaId: lambda.id
                 }))
@@ -316170,12 +316933,12 @@ var init_delete_cron = __esm({
             )
           )
         ),
-        (0, import_operators24.switchMap)(
+        (0, import_operators36.switchMap)(
           ({ lambdaId, lambdaName }) => GraphqlClienAPI.deleteLambdaTimeTrigger(lambdaId).pipe(
-            (0, import_operators24.map)((data) => ({ ...data, lambdaName }))
+            (0, import_operators36.map)((data) => ({ ...data, lambdaName }))
           )
         ),
-        (0, import_operators24.tap)((data) => {
+        (0, import_operators36.tap)((data) => {
           const columns = [
             "id",
             "lambdaName",
@@ -316197,29 +316960,29 @@ var list_crons_exports = {};
 __export(list_crons_exports, {
   default: () => list_crons_default
 });
-var import_rxjs26, import_operators25, list_crons_default;
+var import_rxjs38, import_operators37, list_crons_default;
 var init_list_crons = __esm({
   "src/commands/triggers/cron/list-crons.ts"() {
-    import_rxjs26 = __toESM(require_cjs());
-    import_operators25 = __toESM(require_operators());
+    import_rxjs38 = __toESM(require_cjs());
+    import_operators37 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_crons_default = (cmd) => (0, import_rxjs26.lastValueFrom)(
+    list_crons_default = (cmd) => (0, import_rxjs38.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators25.switchMap)(
-          (projectId) => (0, import_rxjs26.combineLatest)([
+        (0, import_operators37.switchMap)(
+          (projectId) => (0, import_rxjs38.combineLatest)([
             GraphqlClienAPI.listProjectTimeTriggers(projectId),
             GraphqlClienAPI.listLambdas(projectId)
           ])
         ),
-        (0, import_operators25.map)(
+        (0, import_operators37.map)(
           ([triggers, lambdas]) => triggers.map((v) => ({
             lambdaName: lambdas.find((l) => l.id === v.lambdaId)?.name,
             ...v
           }))
         ),
-        (0, import_operators25.tap)((data) => {
+        (0, import_operators37.tap)((data) => {
           const columns = [
             "id",
             "triggerName",
@@ -316267,6 +317030,23 @@ function buildCommands(program2) {
   ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(lazy(() => Promise.resolve().then(() => (init_build(), build_exports)).then((m2) => m2.default)));
 }
 
+// src/commands/cluster/index.ts
+init_helpers();
+function registerClusterCommands(program2) {
+  program2.command("cluster:create").description(
+    "Provision a private Talos cluster for a project (runs in the background - takes several minutes; use --wait to block)"
+  ).option("-p, --project <project>").option("-spec, --spec <spec>").option("-n, --name <name>").option("--imageId <imageId>", "hcloud Talos snapshot id").option("--serverType <serverType>").option("-l, --location <location>").option("--workers <workers>", "Worker count (ignored when --singleNode)").option("--singleNode", "Control plane carries the workload too").option("--wait", "Block until the cluster is ready (or errors)").action(lazy(() => Promise.resolve().then(() => (init_create(), create_exports)).then((m2) => m2.default)));
+  program2.command("cluster:list").description(
+    "List every private cluster this project has (it may have several - dev/stage/prod, ...)"
+  ).option("-p, --project <project>").action(lazy(() => Promise.resolve().then(() => (init_list(), list_exports)).then((m2) => m2.default)));
+  program2.command("cluster:teardown").description(
+    "Tear down one of a project's clusters (runs in the background - use --wait to block)"
+  ).option("-p, --project <project>").option("-c, --cluster <cluster>", "Cluster id (see cluster:list)").option("--wait", "Block until the cluster is gone (or errors)").action(lazy(() => Promise.resolve().then(() => (init_teardown(), teardown_exports)).then((m2) => m2.default)));
+  program2.command("cluster:kubeconfig").description(
+    "Print (or save) a cluster's raw kubeconfig YAML - only available once it's 'ready'"
+  ).option("-p, --project <project>").option("-c, --cluster <cluster>", "Cluster id (see cluster:list)").option("-o, --output <output>", "Write to this file instead of stdout").action(lazy(() => Promise.resolve().then(() => (init_kubeconfig(), kubeconfig_exports)).then((m2) => m2.default)));
+}
+
 // src/commands/environment/index.ts
 init_helpers();
 function registerEnvironmentCommands(program2) {
@@ -316274,6 +317054,9 @@ function registerEnvironmentCommands(program2) {
   program2.command("environment:create").description("Create environment for project").option("-p, --project <project>").option("-minCpu, --minCpu <minCpu>").option("-maxCpu, --maxCpu <maxCpu>").option("-minMemory, --minMemory <minMemory>").option("-maxMemory, --maxMemory <maxMemory>").option("-poolSize, --poolSize <poolSize>").option("-builder, --builder <builder>").option("-image, --image <image>").option("-name, --name <name>").option("-spec, --spec <spec>").option(
     "-r, --region <region>",
     "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'"
+  ).option(
+    "-cid, --clusterId <clusterId>",
+    "Private cluster this environment should run on (see cluster:list); omit for the shared cluster. Immutable after creation."
   ).action(lazy(() => Promise.resolve().then(() => (init_create_environment(), create_environment_exports)).then((m2) => m2.default)));
   program2.command("environment:update").description("Update environment for project").option("-p, --project <project>").option("-minCpu, --minCpu <minCpu>").option("-maxCpu, --maxCpu <maxCpu>").option("-minMemory, --minMemory <minMemory>").option("-maxMemory, --maxMemory <maxMemory>").option("-poolSize, --poolSize <poolSize>").option("-builder, --builder <builder>").option("-image, --image <image>").option("-name, --name <name>").option("-spec, --spec <spec>").option(
     "-r, --region <region>",
@@ -316290,7 +317073,7 @@ function registerLambdaCommands(program2) {
   program2.command("lambda:list").description("List of all lambdas for project").option(
     "-p, --project <project>",
     "Specify custom token generated from the website"
-  ).action(lazy(() => Promise.resolve().then(() => (init_list(), list_exports)).then((m2) => m2.default)));
+  ).action(lazy(() => Promise.resolve().then(() => (init_list2(), list_exports2)).then((m2) => m2.default)));
   program2.command("lambda:get").description("Get lambda by id").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-p, --spec <spec>", "get by lambda name").action(lazy(() => Promise.resolve().then(() => (init_get(), get_exports)).then((m2) => m2.default)));
   const createOrUpdateOptions = [
     ["--name <name>", "Function name"],
@@ -316392,7 +317175,7 @@ function registerLambdaCommands(program2) {
     ]
   ];
   createCommand("lambda:create")(createOrUpdateOptions)(program2).action(
-    lazy(() => Promise.resolve().then(() => (init_create(), create_exports)).then((m2) => m2.default))
+    lazy(() => Promise.resolve().then(() => (init_create2(), create_exports2)).then((m2) => m2.default))
   );
   createCommand("lambda:update")(createOrUpdateOptions)(program2).action(
     lazy(() => Promise.resolve().then(() => (init_update(), update_exports)).then((m2) => m2.default))
@@ -316409,10 +317192,26 @@ function registerLambdaCommands(program2) {
   );
 }
 
+// src/commands/plugin/index.ts
+init_helpers();
+function registerPluginCommands(program2) {
+  program2.command("plugin:list").description("List every plugin available in the marketplace catalog").action(lazy(() => Promise.resolve().then(() => (init_list3(), list_exports3)).then((m2) => m2.default)));
+  program2.command("plugin:installed").description(
+    "List plugins installed for a project (may include the same plugin on several clusters)"
+  ).option("-p, --project <project>").action(lazy(() => Promise.resolve().then(() => (init_installed(), installed_exports)).then((m2) => m2.default)));
+  program2.command("plugin:install").description("Install a marketplace plugin for a project").option("-p, --project <project>").option("-spec, --spec <spec>").option("-n, --name <name>", "Plugin name, e.g. redis-plugin").option(
+    "-c, --cluster <cluster>",
+    "Which private cluster to install into; omit for the shared cluster"
+  ).action(lazy(() => Promise.resolve().then(() => (init_install(), install_exports)).then((m2) => m2.default)));
+  program2.command("plugin:uninstall").description(
+    "Uninstall a plugin from a project (--cluster picks which installation, if it's on several)"
+  ).option("-p, --project <project>").option("-n, --name <name>", "Plugin name").option("-c, --cluster <cluster>").action(lazy(() => Promise.resolve().then(() => (init_uninstall(), uninstall_exports)).then((m2) => m2.default)));
+}
+
 // src/commands/project/index.ts
 init_helpers();
 function registerProjectCommands(program2) {
-  program2.command("project:list").description("List of all projects").action(lazy(() => Promise.resolve().then(() => (init_list2(), list_exports2)).then((m2) => m2.default)));
+  program2.command("project:list").description("List of all projects").action(lazy(() => Promise.resolve().then(() => (init_list4(), list_exports4)).then((m2) => m2.default)));
   program2.command("project:use").arguments("<project>").description("Adds default project to be used all around the CLI").action(lazy(() => Promise.resolve().then(() => (init_use(), use_exports)).then((m2) => m2.default)));
   program2.command("project:clear").description("Clears default project to be used all around the CLI").action(lazy(() => Promise.resolve().then(() => (init_clear(), clear_exports)).then((m2) => m2.default)));
 }
@@ -316421,6 +317220,19 @@ function registerProjectCommands(program2) {
 init_helpers();
 function registerMcpCommands(program2) {
   program2.command("mcp:start").description("Start mcp proxy server").option("-u, --url <url>", "Specify mcp api url").action(lazy(() => Promise.resolve().then(() => (init_start(), start_exports)).then((m2) => m2.default)));
+}
+
+// src/commands/rabbitmq/index.ts
+init_helpers();
+function registerRabbitMqCommands(program2) {
+  program2.command("rabbitmq:create").description(
+    "Provision a RabbitMQ broker for a project (a project may have several)"
+  ).option("-p, --project <project>").option("-spec, --spec <spec>").option("-n, --name <name>").option("-d, --description <description>").option("-u, --user <user>").option("--password <password>").option("-r, --region <region>", "'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'").option(
+    "-c, --cluster <cluster>",
+    "Which private cluster to provision this broker on; omit for the shared cluster"
+  ).action(lazy(() => Promise.resolve().then(() => (init_create3(), create_exports3)).then((m2) => m2.default)));
+  program2.command("rabbitmq:list").description("List every RabbitMQ broker for a project").option("-p, --project <project>").action(lazy(() => Promise.resolve().then(() => (init_list5(), list_exports5)).then((m2) => m2.default)));
+  program2.command("rabbitmq:delete").description("Delete a RabbitMQ broker").option("-p, --project <project>").option("--id <id>", "Broker id (see rabbitmq:list)").action(lazy(() => Promise.resolve().then(() => (init_delete2(), delete_exports2)).then((m2) => m2.default)));
 }
 
 // src/commands/start/index.ts
@@ -316452,7 +317264,10 @@ var commands = [
   registerEnvironmentCommands,
   registerMcpCommands,
   startCommands,
-  registerCronTriggerCommands
+  registerCronTriggerCommands,
+  registerClusterCommands,
+  registerRabbitMqCommands,
+  registerPluginCommands
 ];
 
 // src/main.ts

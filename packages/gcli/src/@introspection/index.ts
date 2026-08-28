@@ -184,6 +184,10 @@
     getPlugin?: IPlugin | null;
     listInstalledPlugins?: Array<IInstalledPlugin> | null;
     isPluginInstalled?: string | null;
+    /** Every live cluster this project has - it may have several (dev/stage/prod, ...). */
+    projectClusters?: Array<ICluster> | null;
+    /** Raw kubeconfig YAML for one of a project's clusters; only available once 'ready'. */
+    clusterKubeconfig?: string | null;
     getAllProjectsSummary?: Array<IProjectSummary> | null;
     getClusterStatistics?: IClusterStatistics | null;
     getResourceLimitAlerts?: Array<IResourceLimitAlert> | null;
@@ -1297,9 +1301,13 @@ export
     minCpu?: number | null;
     minMemory?: number | null;
     region?: IEnvironmentRegionEnum | null;
+    /** The private cluster this environment runs on; null = the shared cluster. */
+    clusterId?: string | null;
+    /** Human-readable name of the cluster this environment runs on; null = shared. */
+    clusterName?: string | null;
 }
 
-export   
+export
   type IEnvironmentRegionEnum = 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL';
 
   
@@ -1861,6 +1869,10 @@ export
     region?: IEnvironmentRegionEnum | null;
     storage?: IRabbitMqStorageOutput | null;
     queues?: Array<IRabbitMqQueue> | null;
+    /** The private cluster this broker lives on; null = the shared cluster. */
+    clusterId?: string | null;
+    /** Human-readable name of the cluster this broker lives on; null = shared. */
+    clusterName?: string | null;
 }
 
   
@@ -2328,9 +2340,36 @@ export
     plugin?: IPlugin | null;
     installedAt?: string | null;
     config?: any | null;
+    /** Which installation this is - a project may have the same plugin on several clusters. Null = shared. */
+    clusterId?: string | null;
+    clusterName?: string | null;
 }
 
-  
+
+  export interface ICluster {
+    __typename?: "Cluster";
+    id?: string | null;
+    projectId?: string | null;
+    name?: string | null;
+    provider?: string | null;
+    status?: IClusterStatusEnum | null;
+    region?: string | null;
+    serverType?: string | null;
+    topology?: IClusterTopology | null;
+    imageId?: string | null;
+    endpoint?: string | null;
+    error?: string | null;
+}
+
+  type IClusterStatusEnum = 'pending' | 'provisioning' | 'ready' | 'tearing-down' | 'error' | 'deleted';
+
+  export interface IClusterTopology {
+    __typename?: "ClusterTopology";
+    workers?: number | null;
+    singleNode?: boolean | null;
+}
+
+
   export interface IProjectSummary {
     __typename?: "ProjectSummary";
     id?: string | null;
@@ -2786,6 +2825,8 @@ export
     updateInvoiceStatus?: IInvoice | null;
     installPlugin?: IInstalledPlugin | null;
     uninstallPlugin?: string | null;
+    provisionProjectCluster?: ICluster | null;
+    teardownProjectCluster?: ICluster | null;
     updateProjectTierAdmin?: string | null;
     /**
     description?: Run JavaScript in a fresh, isolated, resource-limited QuickJS (WASM) sandbox and return its result, console output, timing and any error. Supports a per-run in-memory virtual filesystem (multi-file ES modules + node?:fs via options.files) and Programmatic Tool Calling via the awaitable `tools.*` namespace. Built for AI agents to write and verify code before deploying it. Stateless by default (nothing persisted between calls); with workspace persistence enabled, options.projectId + options.workdir target a durable server-side workspace instead (call the metadata query for the contract).
@@ -3576,9 +3617,13 @@ export
     description: Default region is eu-central
   */
     region?: IEnvironmentRegionEnum | null;
+    /**
+    description: The private cluster this environment should run on; omit for the shared cluster. Immutable after creation.
+  */
+    clusterId?: string | null;
 }
 
-  
+
   export interface IMessageQueueTriggerInput {
     name?: string | null;
     lambdaName?: string | null;
@@ -3963,6 +4008,8 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
     region: IEnvironmentRegionEnum;
     storage?: IRabbitMqStorageInput | null;
     queues?: Array<IRabbitMqInputQueue> | null;
+    /** Which private cluster to provision this broker on; omit for the shared cluster. */
+    clusterId?: string | null;
 }
 
   

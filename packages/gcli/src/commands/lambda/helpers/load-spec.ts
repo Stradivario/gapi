@@ -6,6 +6,7 @@ import {
   IMcpForwardHeaderInput,
   IMcpHeaderInput,
   IMcpOperationInput,
+  IRabbitMqStorageSizeEnum,
 } from '@introspection/index';
 import { combineLatest, from, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -51,6 +52,37 @@ interface BundlerOptions {
   };
 }
 
+/** Provisions a private Talos cluster - see `cluster:create`. */
+interface ClusterConfig {
+  name: string;
+  imageId: string;
+  serverType: string;
+  location: string;
+  workers?: number;
+  singleNode?: boolean;
+}
+
+/** Provisions a RabbitMQ broker - see `rabbitmq:create`. A project may have
+    several; `clusterId` targets a private cluster, omitted = shared. */
+interface RabbitMqConfig {
+  name: string;
+  description?: string;
+  user: string;
+  password: string;
+  region: string;
+  storage?: { enabled: boolean; size?: IRabbitMqStorageSizeEnum };
+  clusterId?: string;
+}
+
+/** Installs a marketplace plugin - see `plugin:install`. `clusterId` targets
+    a private cluster, omitted = shared; a project may install the same
+    plugin on several clusters at once. */
+interface PluginConfig {
+  name: string;
+  clusterId?: string;
+  config?: Record<string, unknown>;
+}
+
 interface LambForgeConfig extends ConfigJSON {
   function: ConfigJSON;
   environment: IFissionEnvironmentInputType;
@@ -58,6 +90,9 @@ interface LambForgeConfig extends ConfigJSON {
     time: ICreateTimeTriggerInput;
   };
   options: BundlerOptions;
+  cluster: ClusterConfig;
+  rabbitmq: RabbitMqConfig;
+  plugin: PluginConfig;
 }
 
 export const loadSpec = <T = LambForgeConfig>(spec?: string) =>

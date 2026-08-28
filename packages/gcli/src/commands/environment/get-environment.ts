@@ -34,6 +34,8 @@ export default (cmd: { project: string; spec: string; name: string }) =>
           'minMemory',
           'maxMemory',
           'region',
+          'clusterId',
+          'clusterName',
         ];
         Logger.log('-------------------');
         Logger.log('[Action][getEnvironment]');

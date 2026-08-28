@@ -89,6 +89,84 @@ gcli environment:create --name 'staging' --minCpu 100 --maxCpu 500 --minMemory 1
 
 # Get environment details
 gcli environment:get --name 'staging'
+
+# Target an environment at a private cluster instead of the shared one
+# (omit --clusterId to use the shared cluster - the default). Immutable
+# after creation.
+gcli environment:create --name 'staging' --clusterId '<clusterId>'
+```
+
+### Private Clusters
+
+A project isn't limited to the shared cluster - it can provision its own private, single-tenant Talos cluster on Hetzner (gated by your plan's entitlements). Environments, RabbitMQ brokers, and plugins can each independently target the shared cluster or any of a project's private clusters.
+
+```bash
+# Provision a cluster (runs in the background - takes several minutes)
+gcli cluster:create --name 'prod' --imageId '<hcloud-image-id>' \
+  --serverType 'cpx22' --location 'nbg1' --workers 2
+
+# Same, but block until it's ready (or errors) instead of returning immediately
+gcli cluster:create --spec cluster.yaml --wait
+
+# List every cluster this project has (it may have several - dev/stage/prod)
+gcli cluster:list
+
+# Download a ready cluster's kubeconfig
+gcli cluster:kubeconfig --cluster '<clusterId>' --output ./kubeconfig.yaml
+
+# Tear one down
+gcli cluster:teardown --cluster '<clusterId>' --wait
+```
+
+`cluster.yaml`:
+
+```yaml
+name: prod
+imageId: <hcloud-image-id>
+serverType: cpx22
+location: nbg1
+workers: 2
+singleNode: false
+```
+
+### RabbitMQ Brokers
+
+A project may have several RabbitMQ brokers, each optionally scoped to one of its private clusters.
+
+```bash
+# Provision a broker on the shared cluster
+gcli rabbitmq:create --spec rabbitmq.yaml
+
+# Provision a broker on a private cluster instead
+gcli rabbitmq:create --spec rabbitmq.yaml --cluster '<clusterId>'
+
+gcli rabbitmq:list
+gcli rabbitmq:delete --id '<brokerId>'
+```
+
+`rabbitmq.yaml`:
+
+```yaml
+name: events-broker
+description: Async event bus for order processing
+user: admin
+password: <secret>
+region: EU_CENTRAL
+storage:
+  enabled: true
+  size: SMALL
+```
+
+### Marketplace Plugins
+
+Plugins (Redis, MongoDB, NATS, FalkorDB, ...) can be installed on the shared cluster or on any private cluster - the same plugin can be installed on several clusters at once.
+
+```bash
+gcli plugin:list                                  # browse the catalog
+gcli plugin:install --name 'redis-plugin'          # installs on the shared cluster
+gcli plugin:install --name 'redis-plugin' --cluster '<clusterId>'
+gcli plugin:installed                              # what's installed, and where
+gcli plugin:uninstall --name 'redis-plugin' --cluster '<clusterId>'
 ```
 
 ## Serverless Functions (Lambdas)
@@ -194,6 +272,7 @@ environment:
   minMemory: 0
   maxMemory: 0
   region: EU_BALKANS
+  clusterId: '' # omit/empty for the shared cluster; see cluster:list
 
 options:
   bundler:
@@ -203,6 +282,31 @@ options:
     minify: false
     target: node24
     external: []
+```
+
+The same file can also carry `cluster:`, `rabbitmq:`, and `plugin:` sections, read by `cluster:create`, `rabbitmq:create`, and `plugin:install` respectively (each also accepts its own dedicated `--spec` file, e.g. `cluster.yaml`, if you'd rather keep them separate):
+
+```yaml
+cluster:
+  name: prod
+  imageId: <hcloud-image-id>
+  serverType: cpx22
+  location: nbg1
+  workers: 2
+
+rabbitmq:
+  name: events-broker
+  user: admin
+  password: <secret>
+  region: EU_CENTRAL
+  storage:
+    enabled: true
+    size: SMALL
+  clusterId: '' # targets whichever cluster this project's cluster:create produced
+
+plugin:
+  name: redis-plugin
+  clusterId: ''
 ```
 
 ### MCP Server Functions

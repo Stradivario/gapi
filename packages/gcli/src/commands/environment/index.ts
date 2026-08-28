@@ -26,6 +26,10 @@ export function registerEnvironmentCommands(program: Command) {
       '-r, --region <region>',
       "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'",
     )
+    .option(
+      '-cid, --clusterId <clusterId>',
+      'Private cluster this environment should run on (see cluster:list); omit for the shared cluster. Immutable after creation.',
+    )
     .action(lazy(() => import('./create-environment').then((m) => m.default)));
 
   program

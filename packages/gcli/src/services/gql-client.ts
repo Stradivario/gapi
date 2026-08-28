@@ -9,6 +9,7 @@ import {
   IFissionType,
   IMutation,
   IQuery,
+  IRabbitMqInstallPayload,
 } from '@introspection/index';
 import { LZWService } from '@rxdi/compressor';
 import * as firebase from 'firebase/app';
@@ -28,9 +29,15 @@ import {
   urlDirectory,
 } from '~/types';
 
+import { ClusterFragment } from './types/cluster.fragment';
 import { EnvironmentFragment } from './types/environment.fragment';
 import { LambdaFragment } from './types/lambda.fragment';
+import {
+  InstalledPluginFragment,
+  PluginFragment,
+} from './types/plugin.fragment';
 import { ProjectFragment } from './types/project.fragment';
+import { RabbitMqFragment } from './types/rabbitmq.fragment';
 import { TimeTriggerFragment } from './types/time-trigger.fragment';
 
 export function gql(...args) {
@@ -430,6 +437,223 @@ export class GraphqlClienAPI {
         lambdaId,
       },
     }).pipe(map((res) => res.deleteLambdaTimeTrigger));
+  }
+
+  // --------------------------------------------------------------------
+  // Cluster (project-level; resolved by cluster-provisioner via the
+  // federation gateway - flat scalar mutation args, NOT a nested input
+  // object, confirmed against cluster.controller.ts)
+  // --------------------------------------------------------------------
+
+  public static provisionProjectCluster(
+    projectId: string,
+    input: {
+      name: string;
+      imageId: string;
+      serverType: string;
+      location: string;
+      workers?: number;
+      singleNode?: boolean;
+    },
+  ) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation provisionProjectCluster(
+          $projectId: String!
+          $name: String!
+          $imageId: String!
+          $serverType: String!
+          $location: String!
+          $workers: Int
+          $singleNode: Boolean
+        ) {
+          provisionProjectCluster(
+            projectId: $projectId
+            name: $name
+            imageId: $imageId
+            serverType: $serverType
+            location: $location
+            workers: $workers
+            singleNode: $singleNode
+          ) {
+            ${ClusterFragment}
+          }
+        }
+      `,
+      variables: { projectId, ...input },
+    }).pipe(map((res) => res.provisionProjectCluster));
+  }
+
+  public static projectClusters(projectId: string) {
+    return this.query<IQuery>({
+      query: gql`
+        query projectClusters($projectId: String!) {
+          projectClusters(projectId: $projectId) {
+            ${ClusterFragment}
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.projectClusters));
+  }
+
+  public static teardownProjectCluster(projectId: string, clusterId: string) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation teardownProjectCluster(
+          $projectId: String!
+          $clusterId: String!
+        ) {
+          teardownProjectCluster(projectId: $projectId, clusterId: $clusterId) {
+            ${ClusterFragment}
+          }
+        }
+      `,
+      variables: { projectId, clusterId },
+    }).pipe(map((res) => res.teardownProjectCluster));
+  }
+
+  public static clusterKubeconfig(projectId: string, clusterId: string) {
+    return this.query<IQuery>({
+      query: gql`
+        query clusterKubeconfig($projectId: String!, $clusterId: String!) {
+          clusterKubeconfig(projectId: $projectId, clusterId: $clusterId)
+        }
+      `,
+      variables: { projectId, clusterId },
+    }).pipe(map((res) => res.clusterKubeconfig));
+  }
+
+  // --------------------------------------------------------------------
+  // RabbitMQ brokers (graphql-server-lambdas) - a project may have
+  // several, each optionally scoped to a private cluster.
+  // --------------------------------------------------------------------
+
+  public static installRabbitMq(
+    projectId: string,
+    payload: IRabbitMqInstallPayload & { clusterId?: string },
+  ) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation installRabbitMq(
+          $projectId: String!
+          $payload: RabbitMqInstallPayload!
+        ) {
+          installRabbitMq(projectId: $projectId, payload: $payload) {
+            ${RabbitMqFragment}
+          }
+        }
+      `,
+      variables: { projectId, payload },
+    }).pipe(map((res) => res.installRabbitMq));
+  }
+
+  public static listRabbitMqInstances(projectId: string) {
+    return this.query<IQuery>({
+      query: gql`
+        query listRabbitMqInstances($projectId: String!) {
+          listRabbitMqInstances(projectId: $projectId) {
+            ${RabbitMqFragment}
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.listRabbitMqInstances));
+  }
+
+  public static uninstallRabbitMq(id: string, projectId: string) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation uninstallRabbitMq($id: String!, $projectId: String!) {
+          uninstallRabbitMq(id: $id, projectId: $projectId) {
+            ${RabbitMqFragment}
+          }
+        }
+      `,
+      variables: { id, projectId },
+    }).pipe(map((res) => res.uninstallRabbitMq));
+  }
+
+  // --------------------------------------------------------------------
+  // Marketplace plugins (graphql-server-lambdas) - a project may have the
+  // same plugin installed on several clusters simultaneously.
+  // --------------------------------------------------------------------
+
+  public static listAvailablePlugins() {
+    return this.query<IQuery>({
+      query: gql`
+        query listAvailablePlugins {
+          listAvailablePlugins {
+            ${PluginFragment}
+          }
+        }
+      `,
+      variables: {},
+    }).pipe(map((res) => res.listAvailablePlugins));
+  }
+
+  public static listInstalledPlugins(projectId: string) {
+    return this.query<IQuery>({
+      query: gql`
+        query listInstalledPlugins($projectId: String!) {
+          listInstalledPlugins(projectId: $projectId) {
+            ${InstalledPluginFragment}
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.listInstalledPlugins));
+  }
+
+  public static installPlugin(
+    projectId: string,
+    pluginName: string,
+    config?: Record<string, unknown>,
+    clusterId?: string,
+  ) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation installPlugin(
+          $projectId: String!
+          $pluginName: String!
+          $config: JSON
+          $clusterId: String
+        ) {
+          installPlugin(
+            projectId: $projectId
+            pluginName: $pluginName
+            config: $config
+            clusterId: $clusterId
+          ) {
+            ${InstalledPluginFragment}
+          }
+        }
+      `,
+      variables: { projectId, pluginName, config, clusterId },
+    }).pipe(map((res) => res.installPlugin));
+  }
+
+  public static uninstallPlugin(
+    projectId: string,
+    pluginName: string,
+    clusterId?: string,
+  ) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation uninstallPlugin(
+          $projectId: String!
+          $pluginName: String!
+          $clusterId: String
+        ) {
+          uninstallPlugin(
+            projectId: $projectId
+            pluginName: $pluginName
+            clusterId: $clusterId
+          )
+        }
+      `,
+      variables: { projectId, pluginName, clusterId },
+    }).pipe(map((res) => res.uninstallPlugin));
   }
 
   static getConfig(force = false) {

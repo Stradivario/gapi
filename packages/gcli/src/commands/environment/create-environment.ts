@@ -40,6 +40,8 @@ export default (
           'minMemory',
           'maxMemory',
           'region',
+          'clusterId',
+          'clusterName',
         ];
         Logger.log('-------------------');
         Logger.log('[Action][createEnvironment]');

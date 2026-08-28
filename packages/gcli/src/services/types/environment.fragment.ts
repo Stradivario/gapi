@@ -10,4 +10,6 @@ maxCpu
 minMemory
 maxMemory
 region
+clusterId
+clusterName
 `;
