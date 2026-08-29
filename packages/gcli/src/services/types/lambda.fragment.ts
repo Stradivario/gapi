@@ -39,6 +39,8 @@ configs {
  type
 }
 env
+clusterId
+clusterName
 method
 createdBy
 createdAt

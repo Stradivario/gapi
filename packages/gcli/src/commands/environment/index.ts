@@ -30,6 +30,10 @@ export function registerEnvironmentCommands(program: Command) {
       '-cid, --clusterId <clusterId>',
       'Private cluster this environment should run on (see cluster:list); omit for the shared cluster. Immutable after creation.',
     )
+    .option(
+      '-cn, --clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name; --clusterId wins if both are given. Can also be set as `clusterName` in env.yaml.",
+    )
     .action(lazy(() => import('./create-environment').then((m) => m.default)));
 
   program
@@ -49,6 +53,14 @@ export function registerEnvironmentCommands(program: Command) {
       '-r, --region <region>',
       "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'",
     )
+    .option(
+      '-cid, --clusterId <clusterId>',
+      'Disambiguates which environment to update when --name matches more than one across different clusters (clusterId itself is immutable and never changed by this command).',
+    )
+    .option(
+      '-cn, --clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name; --clusterId wins if both are given",
+    )
     .action(lazy(() => import('./update-environment').then((m) => m.default)));
 
   program
@@ -58,6 +70,14 @@ export function registerEnvironmentCommands(program: Command) {
     .option('-n, --name <name>')
     .option('-f, --force')
     .option('-spec, --spec <spec>')
+    .option(
+      '-cid, --clusterId <clusterId>',
+      'Disambiguates which environment to delete when --name matches more than one across different clusters',
+    )
+    .option(
+      '-cn, --clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name; --clusterId wins if both are given",
+    )
     .action(lazy(() => import('./delete-environment').then((m) => m.default)));
 
   program
@@ -65,5 +85,13 @@ export function registerEnvironmentCommands(program: Command) {
     .description('Get environment for project')
     .option('-p, --project <project>')
     .option('-n, --name <name>')
+    .option(
+      '-cid, --clusterId <clusterId>',
+      'Disambiguates which environment to fetch when --name matches more than one across different clusters',
+    )
+    .option(
+      '-cn, --clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name; --clusterId wins if both are given",
+    )
     .action(lazy(() => import('./get-environment').then((m) => m.default)));
 }

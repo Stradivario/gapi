@@ -2,7 +2,7 @@ import { IFissionLogsType } from '@introspection/index';
 import { lastValueFrom, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 
-import { isMongoId, parseProjectId } from '~/helpers';
+import { isMongoId, parseProjectId, resolveClusterId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
@@ -13,6 +13,8 @@ export default async (cmd: {
   name?: string;
   project?: string;
   lambda?: string;
+  clusterId?: string;
+  clusterName?: string;
 }) => {
   const result = tap(({ data }: IFissionLogsType) => Logger.log(data));
   if (cmd.lambda) {
@@ -43,7 +45,14 @@ export default async (cmd: {
         }),
 
         switchMap((projectId) =>
-          GraphqlClienAPI.getLambdaLogsByName(name, projectId),
+          resolveClusterId(projectId, {
+            clusterId: cmd.clusterId,
+            clusterName: cmd.clusterName,
+          }).pipe(
+            switchMap((clusterId) =>
+              GraphqlClienAPI.getLambdaLogsByName(name, projectId, clusterId),
+            ),
+          ),
         ),
         result,
       ),

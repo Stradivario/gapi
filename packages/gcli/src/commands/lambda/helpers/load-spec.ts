@@ -19,6 +19,13 @@ interface ConfigJSON {
   route: string;
   file: string;
   env: string;
+  /* Explicit disambiguation hint: which of the project's clusters `env`
+     lives on (omit for the shared cluster) - see lambda:create's own
+     --clusterId flag doc. clusterId is authoritative and wins if both are
+     set; clusterName is a human-readable alternative for a more readable
+     lambforge.yaml (a project's cluster names are unique too). */
+  clusterId?: string;
+  clusterName?: string;
   method?: IHttpMethodsEnum[];
   script?: string;
   package?: string;
@@ -85,7 +92,10 @@ interface PluginConfig {
 
 interface LambForgeConfig extends ConfigJSON {
   function: ConfigJSON;
-  environment: IFissionEnvironmentInputType;
+  /* clusterName is gcli-only convenience (resolved to the real clusterId
+     client-side, see resolveClusterId) - not part of the actual backend
+     FissionEnvironmentInputType schema. */
+  environment: IFissionEnvironmentInputType & { clusterName?: string };
   triggers: {
     time: ICreateTimeTriggerInput;
   };

@@ -1,14 +1,20 @@
 import { lastValueFrom } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { parseProjectId } from '~/helpers';
+import { parseProjectId, resolveClusterId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 import { Unboxed } from '~/types';
 
 import { loadSpec } from '../lambda/helpers/load-spec';
 
-export default (cmd: { project: string; spec: string; name: string }) =>
+export default (cmd: {
+  project: string;
+  spec: string;
+  name: string;
+  clusterId?: string;
+  clusterName?: string;
+}) =>
   lastValueFrom(
     parseProjectId(cmd.project).pipe(
       switchMap((projectId) =>
@@ -20,7 +26,18 @@ export default (cmd: { project: string; spec: string; name: string }) =>
         ),
       ),
       switchMap(({ projectId, name }) =>
-        GraphqlClienAPI.getEnvironment(cmd.name ?? name, projectId),
+        resolveClusterId(projectId, {
+          clusterId: cmd.clusterId,
+          clusterName: cmd.clusterName,
+        }).pipe(
+          switchMap((clusterId) =>
+            GraphqlClienAPI.getEnvironment(
+              cmd.name ?? name,
+              projectId,
+              clusterId,
+            ),
+          ),
+        ),
       ),
       tap((data) => {
         const columns: (keyof Unboxed<typeof data>)[] = [

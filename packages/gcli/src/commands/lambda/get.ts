@@ -2,7 +2,7 @@ import { IFissionType } from '@introspection/index';
 import { lastValueFrom, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 
-import { isMongoId, parseProjectId } from '~/helpers';
+import { isMongoId, parseProjectId, resolveClusterId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
@@ -13,6 +13,8 @@ export default async (cmd: {
   name?: string;
   project?: string;
   lambda?: string;
+  clusterId?: string;
+  clusterName?: string;
 }) => {
   const table = tap((data: IFissionType) => {
     const columns: (keyof typeof data)[] = [
@@ -20,6 +22,8 @@ export default async (cmd: {
       'projectId',
       'url',
       'method',
+      'clusterId',
+      'clusterName',
     ];
     Logger.log('-------------------');
     Logger.log('[Action][getLambda]');
@@ -55,7 +59,19 @@ export default async (cmd: {
           return throwError(() => error);
         }),
         switchMap((projectId) =>
-          GraphqlClienAPI.getLambdaByName(name, projectId),
+          resolveClusterId(projectId, {
+            clusterId: cmd.clusterId,
+            clusterName: cmd.clusterName,
+          }).pipe(
+            switchMap((clusterId) =>
+              GraphqlClienAPI.getLambdaByName(
+                name,
+                projectId,
+                undefined,
+                clusterId,
+              ),
+            ),
+          ),
         ),
         table,
       ),

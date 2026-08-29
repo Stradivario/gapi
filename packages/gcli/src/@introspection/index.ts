@@ -1506,6 +1506,14 @@ export
   */
     env?: string | null;
     /**
+    description?: The private cluster this lambda runs on (denormalized from its environment at creation time); null = the shared cluster.
+  */
+    clusterId?: string | null;
+    /**
+    description?: Human-readable name of the cluster this lambda runs on; null = shared.
+  */
+    clusterName?: string | null;
+    /**
     description?: Environment can be for now only on NODEJS
   */
     environment?: IFissionEnvironmentType | null;
@@ -3710,7 +3718,11 @@ The full @gapi/core code examples, the LambdaContext export interface, and the G
   */
     env?: string | null;
     /**
-    description: 
+    description: Explicit disambiguation hint: which of the project's clusters the "env" environment lives on (omit/null for the shared platform cluster). Only needed when the project has more than one environment sharing the same "env" name across different clusters - strongly recommended once a project has private clusters, since a duplicate-named environment (e.g. after migrating resources to a new cluster) makes name-only resolution ambiguous.
+  */
+    clusterId?: string | null;
+    /**
+    description:
   # envSecrets (read by the nodejs-graphql runtime BEFORE the bundle loads)
   # projects all keys of these mounted secrets into process.env, so the existing
   # process.env-based ENVIRONMENT (src/app/app.constants.ts) works unchanged.
@@ -3952,6 +3964,14 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
   export interface IDeleteLambdaInput {
     name?: string;
     projectId?: string;
+    /**
+    description?: Disambiguates which lambda to delete when the project has more than one with this name across different environments/clusters. Omitting it falls back to a {projectId, name} lookup.
+  */
+    env?: string;
+    /**
+    description?: Explicit disambiguation hint: which of the project's clusters this lambda lives on (omit/null for the shared platform cluster).
+  */
+    clusterId?: string | null;
 }
 
   
@@ -3972,9 +3992,13 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
         "MY_SECRET_SECOND"?:"second",
         "MY_SECRET_THIRD"?:"third"
         }
-      
+
   */
     pairs?: any;
+    /**
+    description?: Which of the project's private clusters this resource is applied to. Omit/empty for the shared cluster. Only honored at CREATE time - a resource's cluster is immutable.
+  */
+    clusterId?: string | null;
 }
 
   

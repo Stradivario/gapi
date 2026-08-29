@@ -118,16 +118,18 @@ export class GraphqlClienAPI {
     name: string,
     projectId: string,
     fragments?: (keyof IFissionType)[],
+    clusterId?: string,
   ) {
     return this.query<IQuery>({
-      query: gql`query getLambdaByName($projectId: String!, $name: String!) {
-        getLambdaByName(projectId: $projectId, name: $name) {
+      query: gql`query getLambdaByName($projectId: String!, $name: String!, $clusterId: String) {
+        getLambdaByName(projectId: $projectId, name: $name, clusterId: $clusterId) {
           ${fragments?.join(' ') || LambdaFragment}
         }
       }`,
       variables: {
         name,
         projectId,
+        clusterId,
       },
     }).pipe(
       switchMap((res) => {
@@ -139,15 +141,16 @@ export class GraphqlClienAPI {
     );
   }
 
-  public static listLambdas(projectId: string) {
+  public static listLambdas(projectId: string, clusterId?: string) {
     return this.query<IQuery>({
-      query: gql`query listProjectLambdas($projectId: String!){
-        listProjectLambdas(projectId: $projectId) {
+      query: gql`query listProjectLambdas($projectId: String!, $clusterId: String){
+        listProjectLambdas(projectId: $projectId, clusterId: $clusterId) {
           ${LambdaFragment}
         }
       }`,
       variables: {
         projectId,
+        clusterId,
       },
     }).pipe(map((res) => res.listProjectLambdas));
   }
@@ -196,16 +199,28 @@ export class GraphqlClienAPI {
     );
   }
 
-  public static getLambdaLogsByName(name: string, projectId: string) {
+  public static getLambdaLogsByName(
+    name: string,
+    projectId: string,
+    clusterId?: string,
+  ) {
     return this.query<IQuery>({
       query: gql`
-        query getLambdaLogsByName($projectId: String!, $name: String!) {
-          getLambdaLogsByName(projectId: $projectId, name: $name) {
+        query getLambdaLogsByName(
+          $projectId: String!
+          $name: String!
+          $clusterId: String
+        ) {
+          getLambdaLogsByName(
+            projectId: $projectId
+            name: $name
+            clusterId: $clusterId
+          ) {
             data
           }
         }
       `,
-      variables: { name, projectId },
+      variables: { name, projectId, clusterId },
     }).pipe(
       map((res) => res.getLambdaLogsByName),
       map(
@@ -240,16 +255,28 @@ export class GraphqlClienAPI {
     );
   }
 
-  public static getLambdaBuilderLogsByName(name: string, projectId: string) {
+  public static getLambdaBuilderLogsByName(
+    name: string,
+    projectId: string,
+    clusterId?: string,
+  ) {
     return this.query<IQuery>({
       query: gql`
-        query getLambdaBuilderLogsByName($projectId: String!, $name: String!) {
-          getLambdaBuilderLogsByName(projectId: $projectId, name: $name) {
+        query getLambdaBuilderLogsByName(
+          $projectId: String!
+          $name: String!
+          $clusterId: String
+        ) {
+          getLambdaBuilderLogsByName(
+            projectId: $projectId
+            name: $name
+            clusterId: $clusterId
+          ) {
             data
           }
         }
       `,
-      variables: { name, projectId },
+      variables: { name, projectId, clusterId },
     }).pipe(
       map((res) => res.getLambdaBuilderLogsByName),
       map(
@@ -311,16 +338,21 @@ export class GraphqlClienAPI {
     }).pipe(map((res) => res.listEnvironmentsByProjectId));
   }
 
-  public static getEnvironment(name: string, projectId: string) {
+  public static getEnvironment(
+    name: string,
+    projectId: string,
+    clusterId?: string,
+  ) {
     return this.query<IQuery>({
-      query: gql`query getEnvironment($name: String!, $projectId: String!) {
-        getEnvironment(name: $name, projectId: $projectId) {
+      query: gql`query getEnvironment($name: String!, $projectId: String!, $clusterId: String) {
+        getEnvironment(name: $name, projectId: $projectId, clusterId: $clusterId) {
           ${EnvironmentFragment}
         }
       }`,
       variables: {
         name,
         projectId,
+        clusterId,
       },
     }).pipe(map((res) => res.getEnvironment));
   }
@@ -351,6 +383,7 @@ export class GraphqlClienAPI {
     name: string,
     projectId: string,
     force?: boolean,
+    clusterId?: string,
   ) {
     return this.query<IMutation>({
       query: gql`
@@ -358,8 +391,9 @@ export class GraphqlClienAPI {
           $name: String!
           $projectId: String!
           $force: Boolean
+          $clusterId: String
         ) {
-          deleteEnvironmentByName(name: $name, projectId: $projectId, force: $force) {
+          deleteEnvironmentByName(name: $name, projectId: $projectId, force: $force, clusterId: $clusterId) {
             ${EnvironmentFragment}
           }
         }
@@ -368,6 +402,7 @@ export class GraphqlClienAPI {
         name,
         projectId,
         force,
+        clusterId,
       },
     }).pipe(map((res) => res.deleteEnvironmentByName));
   }

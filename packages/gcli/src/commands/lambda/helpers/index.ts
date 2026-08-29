@@ -11,7 +11,7 @@ import { from, lastValueFrom, Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import streamToBuffer from 'stream-to-buffer';
 
-import { parseProjectId } from '~/helpers';
+import { parseProjectId, resolveClusterId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
@@ -36,6 +36,15 @@ export interface CreateOrUpdateLambdaArguments {
   envSecrets: string[];
   network: string[];
   env: string;
+  /* Explicit disambiguation hint: which of the project's clusters `env`
+     lives on (omit for the shared cluster). Only needed once a project has
+     private clusters and a duplicate-named environment across them (e.g.
+     after a resource migration) makes name-only resolution ambiguous.
+     clusterId is authoritative and wins if both are given; clusterName is a
+     human-readable alternative (a project's cluster names are unique too -
+     see resolveClusterId) for a more readable lambforge.yaml/flag. */
+  clusterId?: string;
+  clusterName?: string;
   method: IHttpMethodsEnum[];
   packageJson: string;
   package: string;
@@ -125,6 +134,12 @@ export const createOrUpdateLambda = (
         );
       }),
       switchMap(async (payload) => {
+        const clusterId = await lastValueFrom(
+          resolveClusterId(payload.projectId, {
+            clusterId: cmd.clusterId || payload.clusterId,
+            clusterName: cmd.clusterName || payload.clusterName,
+          }),
+        );
         return lastValueFrom(
           GraphqlClienAPI[type]({
             code:
@@ -148,6 +163,7 @@ export const createOrUpdateLambda = (
             params: cmd.params || payload.params || [],
             secrets: cmd.secrets || payload.secrets || [],
             envSecrets: cmd.envSecrets || payload.envSecrets || [],
+            clusterId,
 
             network: cmd.network || payload.network || ['public', 'private'],
             federation: cmd.federation ?? !!payload.federation,

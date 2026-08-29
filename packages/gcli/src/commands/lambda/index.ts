@@ -12,6 +12,14 @@ export function registerLambdaCommands(program: Command) {
       '-p, --project <project>',
       'Specify custom token generated from the website',
     )
+    .option(
+      '-cid, --clusterId <clusterId>',
+      'Only lambdas whose environment targets this cluster (empty string for shared-cluster-only; omit for all)',
+    )
+    .option(
+      '-cn, --clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name (see cluster:list) - resolved to its id before the request; --clusterId wins if both are given",
+    )
     .action(lazy(() => import('./list').then((m) => m.default)));
 
   program
@@ -21,12 +29,28 @@ export function registerLambdaCommands(program: Command) {
     .option('-n, --name <name>', 'get by lambda name')
     .option('-p, --project <project>', 'get by lambda name')
     .option('-p, --spec <spec>', 'get by lambda name')
+    .option(
+      '-cid, --clusterId <clusterId>',
+      'Disambiguates which lambda to fetch when --name matches more than one across different clusters',
+    )
+    .option(
+      '-cn, --clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given",
+    )
     .action(lazy(() => import('./get').then((m) => m.default)));
 
   const createOrUpdateOptions: [string, string][] = [
     ['--name <name>', 'Function name'],
     ['--project <project>', 'Project in which this lambda is defined'],
     ['--env <env>', 'Environment name for function can be NODEJS'],
+    [
+      '--clusterId <clusterId>',
+      "Disambiguation hint: which of the project's clusters --env lives on (see cluster:list); omit for the shared cluster. Only needed once a project has private clusters and a duplicate-named environment across them.",
+    ],
+    [
+      '--clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given. Can also be set as `clusterName` in the lambforge.yaml spec's function block.",
+    ],
     [
       '--method <method...>',
       'HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method',
@@ -138,6 +162,18 @@ export function registerLambdaCommands(program: Command) {
     .option('-n, --name <name>', 'get by lambda name')
     .option('-p, --project <project>', 'get by lambda name')
     .option('-s, --spec <spec>', 'get by lambda name')
+    .option(
+      '-e, --env <env>',
+      'disambiguates which lambda to delete when --name matches more than one across environments/clusters',
+    )
+    .option(
+      '-cid, --clusterId <clusterId>',
+      'disambiguates which lambda to delete when --name matches more than one across different clusters',
+    )
+    .option(
+      '-cn, --clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given",
+    )
     .action(lazy(() => import('./delete').then((m) => m.default)));
 
   program
@@ -147,6 +183,14 @@ export function registerLambdaCommands(program: Command) {
     .option('-n, --name <name>', 'get by lambda name')
     .option('-p, --project <project>', 'get by lambda name')
     .option('-s, --spec <spec>', 'get by lambda name')
+    .option(
+      '-cid, --clusterId <clusterId>',
+      'disambiguates which lambda to fetch logs for when --name matches more than one across different clusters',
+    )
+    .option(
+      '-cn, --clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given",
+    )
     .action(lazy(() => import('./logs').then((m) => m.default)));
 
   program
@@ -156,6 +200,14 @@ export function registerLambdaCommands(program: Command) {
     .option('-n, --name <name>', 'get by lambda name')
     .option('-p, --project <project>', 'get by lambda project')
     .option('-s, --spec <spec>', 'use configuration')
+    .option(
+      '-cid, --clusterId <clusterId>',
+      'disambiguates which lambda to fetch build logs for when --name matches more than one across different clusters',
+    )
+    .option(
+      '-cn, --clusterName <clusterName>',
+      "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given",
+    )
     .action(lazy(() => import('./logs-builder').then((m) => m.default)));
 
   program

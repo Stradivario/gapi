@@ -1,7 +1,7 @@
 import { lastValueFrom } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { parseProjectId } from '~/helpers';
+import { parseProjectId, resolveClusterId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
@@ -11,6 +11,9 @@ export default async (cmd: {
   spec?: string;
   name?: string;
   project?: string;
+  env?: string;
+  clusterId?: string;
+  clusterName?: string;
 }) => {
   const spec = await lastValueFrom(loadSpec(cmd.spec));
 
@@ -18,11 +21,23 @@ export default async (cmd: {
     typeof cmd.name === 'string'
       ? (cmd.name as never)
       : (spec.function?.name ?? spec.name);
+  const env = cmd.env ?? spec.function?.env ?? spec.env;
+  const clusterIdHint =
+    cmd.clusterId ?? spec.function?.clusterId ?? spec.clusterId;
+  const clusterNameHint =
+    cmd.clusterName ?? spec.function?.clusterName ?? spec.clusterName;
 
   return lastValueFrom(
     parseProjectId(cmd.project).pipe(
       switchMap((projectId) =>
-        GraphqlClienAPI.deleteLambda({ name, projectId }),
+        resolveClusterId(projectId, {
+          clusterId: clusterIdHint,
+          clusterName: clusterNameHint,
+        }).pipe(
+          switchMap((clusterId) =>
+            GraphqlClienAPI.deleteLambda({ name, projectId, env, clusterId }),
+          ),
+        ),
       ),
       tap((data) => {
         const columns: (keyof typeof data)[] = [
