@@ -9498,19 +9498,19 @@ var require_Observable = __commonJS({
     var config_1 = require_config();
     var isFunction_1 = require_isFunction();
     var errorContext_1 = require_errorContext();
-    var Observable3 = (function() {
-      function Observable4(subscribe) {
+    var Observable4 = (function() {
+      function Observable5(subscribe) {
         if (subscribe) {
           this._subscribe = subscribe;
         }
       }
-      Observable4.prototype.lift = function(operator) {
-        var observable = new Observable4();
+      Observable5.prototype.lift = function(operator) {
+        var observable = new Observable5();
         observable.source = this;
         observable.operator = operator;
         return observable;
       };
-      Observable4.prototype.subscribe = function(observerOrNext, error48, complete) {
+      Observable5.prototype.subscribe = function(observerOrNext, error48, complete) {
         var _this = this;
         var subscriber = isSubscriber(observerOrNext) ? observerOrNext : new Subscriber_1.SafeSubscriber(observerOrNext, error48, complete);
         errorContext_1.errorContext(function() {
@@ -9519,14 +9519,14 @@ var require_Observable = __commonJS({
         });
         return subscriber;
       };
-      Observable4.prototype._trySubscribe = function(sink) {
+      Observable5.prototype._trySubscribe = function(sink) {
         try {
           return this._subscribe(sink);
         } catch (err) {
           sink.error(err);
         }
       };
-      Observable4.prototype.forEach = function(next, promiseCtor) {
+      Observable5.prototype.forEach = function(next, promiseCtor) {
         var _this = this;
         promiseCtor = getPromiseCtor(promiseCtor);
         return new promiseCtor(function(resolve, reject) {
@@ -9545,21 +9545,21 @@ var require_Observable = __commonJS({
           _this.subscribe(subscriber);
         });
       };
-      Observable4.prototype._subscribe = function(subscriber) {
+      Observable5.prototype._subscribe = function(subscriber) {
         var _a2;
         return (_a2 = this.source) === null || _a2 === void 0 ? void 0 : _a2.subscribe(subscriber);
       };
-      Observable4.prototype[observable_1.observable] = function() {
+      Observable5.prototype[observable_1.observable] = function() {
         return this;
       };
-      Observable4.prototype.pipe = function() {
+      Observable5.prototype.pipe = function() {
         var operations = [];
         for (var _i = 0; _i < arguments.length; _i++) {
           operations[_i] = arguments[_i];
         }
         return pipe_1.pipeFromArray(operations)(this);
       };
-      Observable4.prototype.toPromise = function(promiseCtor) {
+      Observable5.prototype.toPromise = function(promiseCtor) {
         var _this = this;
         promiseCtor = getPromiseCtor(promiseCtor);
         return new promiseCtor(function(resolve, reject) {
@@ -9573,12 +9573,12 @@ var require_Observable = __commonJS({
           });
         });
       };
-      Observable4.create = function(subscribe) {
-        return new Observable4(subscribe);
+      Observable5.create = function(subscribe) {
+        return new Observable5(subscribe);
       };
-      return Observable4;
+      return Observable5;
     })();
-    exports2.Observable = Observable3;
+    exports2.Observable = Observable4;
     function getPromiseCtor(promiseCtor) {
       var _a2;
       return (_a2 = promiseCtor !== null && promiseCtor !== void 0 ? promiseCtor : config_1.config.Promise) !== null && _a2 !== void 0 ? _a2 : Promise;
@@ -18743,121 +18743,6 @@ var init_read_file = __esm({
     import_util = require("util");
     readFileAsObservable = (file2) => (0, import_rxjs.from)((0, import_util.promisify)(import_fs.readFile)(file2, { encoding: "utf-8" }));
     writeFileAsObservable = (file2, body) => (0, import_rxjs.from)((0, import_util.promisify)(import_fs.writeFile)(file2, body, { encoding: "utf-8" }));
-  }
-});
-
-// src/services/log.ts
-var Logger;
-var init_log = __esm({
-  "src/services/log.ts"() {
-    Logger = class {
-      static log(...data) {
-        console.log("\x1B[32m%s\x1B[0m", ...data);
-      }
-      static error(...data) {
-        console.error("\x1B[31m%s\x1B[0m", ...data);
-      }
-      static info(...data) {
-        console.info("\x1B[36m%s\x1B[0m", ...data);
-      }
-      static warn(...data) {
-        console.warn("\x1B[33m%s\x1B[0m", ...data);
-      }
-      static table(...data) {
-        console.table(...data);
-      }
-    };
-  }
-});
-
-// src/types.ts
-var import_os, mainDirectory, tokenDirectory, refreshTokenDirectory, urlDirectory, keyDirectory, projectDirectory, generationTimeDirectory, uploadUrlDirectory;
-var init_types = __esm({
-  "src/types.ts"() {
-    import_os = require("os");
-    mainDirectory = [(0, import_os.homedir)(), ".graphql-server"].join("/");
-    tokenDirectory = [mainDirectory, "token"].join("/");
-    refreshTokenDirectory = [mainDirectory, "refresh"].join("/");
-    urlDirectory = [mainDirectory, "url"].join("/");
-    keyDirectory = [mainDirectory, "key"].join("/");
-    projectDirectory = [mainDirectory, "project"].join("/");
-    generationTimeDirectory = [mainDirectory, "generation-time"].join(
-      "/"
-    );
-    uploadUrlDirectory = [mainDirectory, "upload-url"].join("/");
-  }
-});
-
-// src/helpers.ts
-function exitWithError(error48) {
-  if (error48 instanceof ExitCodeError) {
-    Logger.error(error48.message);
-    process.exit(error48.code);
-  } else {
-    Logger.error(error48);
-    process.exit(1);
-  }
-}
-function lazy(getActionFunc) {
-  return async (...args) => {
-    try {
-      const actionFunc = await getActionFunc();
-      await actionFunc(...args);
-      process.exit(0);
-    } catch (error48) {
-      exitWithError(error48);
-    }
-  };
-}
-function parseProjectId(projectId) {
-  return readFileAsObservable(projectDirectory).pipe(
-    (0, import_operators.catchError)(() => (0, import_rxjs2.of)("")),
-    (0, import_operators.map)((currentProjectId) => projectId ? projectId : currentProjectId),
-    (0, import_operators.switchMap)(
-      (id) => typeof id !== "string" ? (0, import_rxjs2.throwError)(() => "no-id-provided") : (0, import_rxjs2.of)(id)
-    ),
-    (0, import_operators.switchMap)((id) => isMongoId(id))
-  );
-}
-function outputAllHelp(cmd) {
-  cmd.outputHelp();
-  cmd.commands.forEach((subCmd) => {
-    Logger.info("\n--- Subcommand: " + subCmd.name() + " ---");
-    outputAllHelp(subCmd);
-  });
-}
-var import_rxjs2, import_operators, CustomError, ExitCodeError, isMongoId;
-var init_helpers = __esm({
-  "src/helpers.ts"() {
-    import_rxjs2 = __toESM(require_cjs());
-    import_operators = __toESM(require_operators());
-    init_read_file();
-    init_log();
-    init_types();
-    CustomError = class extends Error {
-      get name() {
-        return this.constructor.name;
-      }
-    };
-    ExitCodeError = class extends CustomError {
-      constructor(code, command) {
-        if (command) {
-          super(`Command '${command}' exited with code ${code}`);
-        } else {
-          super(`Child exited with code ${code}`);
-        }
-        this.code = code;
-      }
-    };
-    isMongoId = (mongoId) => (0, import_rxjs2.of)(mongoId.trim()).pipe(
-      (0, import_operators.switchMap)(
-        (id) => (0, import_rxjs2.of)(new RegExp("^[0-9a-fA-F]{24}$").test(id)).pipe(
-          (0, import_operators.switchMap)(
-            (isMongoId2) => isMongoId2 ? (0, import_rxjs2.of)(id) : (0, import_rxjs2.throwError)(() => `not-valid-id`)
-          )
-        )
-      )
-    );
   }
 });
 
@@ -36109,6 +35994,24 @@ var require_index_cjs3 = __commonJS({
   }
 });
 
+// src/types.ts
+var import_os, mainDirectory, tokenDirectory, refreshTokenDirectory, urlDirectory, keyDirectory, projectDirectory, generationTimeDirectory, uploadUrlDirectory;
+var init_types = __esm({
+  "src/types.ts"() {
+    import_os = require("os");
+    mainDirectory = [(0, import_os.homedir)(), ".graphql-server"].join("/");
+    tokenDirectory = [mainDirectory, "token"].join("/");
+    refreshTokenDirectory = [mainDirectory, "refresh"].join("/");
+    urlDirectory = [mainDirectory, "url"].join("/");
+    keyDirectory = [mainDirectory, "key"].join("/");
+    projectDirectory = [mainDirectory, "project"].join("/");
+    generationTimeDirectory = [mainDirectory, "generation-time"].join(
+      "/"
+    );
+    uploadUrlDirectory = [mainDirectory, "upload-url"].join("/");
+  }
+});
+
 // src/services/types/cluster.fragment.ts
 var ClusterFragment;
 var init_cluster_fragment = __esm({
@@ -36199,6 +36102,8 @@ configs {
  type
 }
 env
+clusterId
+clusterName
 method
 createdBy
 createdAt
@@ -36339,14 +36244,14 @@ function gql(...args) {
   }
   return result;
 }
-var import_compressor, firebase, import_rxjs3, import_operators2, GraphqlClienAPI;
+var import_compressor, firebase, import_rxjs2, import_operators, GraphqlClienAPI;
 var init_gql_client = __esm({
   "src/services/gql-client.ts"() {
     init_index_cjs();
     import_compressor = __toESM(require_dist());
     firebase = __toESM(require_index_cjs3());
-    import_rxjs3 = __toESM(require_cjs());
-    import_operators2 = __toESM(require_operators());
+    import_rxjs2 = __toESM(require_cjs());
+    import_operators = __toESM(require_operators());
     init_read_file();
     init_types();
     init_cluster_fragment();
@@ -36362,8 +36267,8 @@ var init_gql_client = __esm({
         variables
       }) {
         return this.getConfig().pipe(
-          (0, import_operators2.switchMap)(
-            ({ token, url: url2 }) => (0, import_rxjs3.from)(
+          (0, import_operators.switchMap)(
+            ({ token, url: url2 }) => (0, import_rxjs2.from)(
               fetch(url2, {
                 method: "POST",
                 headers: {
@@ -36374,8 +36279,8 @@ var init_gql_client = __esm({
                 body: JSON.stringify({ query, variables })
               })
             ).pipe(
-              (0, import_operators2.switchMap)((res) => res.json()),
-              (0, import_operators2.map)(({ data, errors }) => {
+              (0, import_operators.switchMap)((res) => res.json()),
+              (0, import_operators.map)(({ data, errors }) => {
                 if (errors?.length) {
                   throw new Error(JSON.stringify(errors, null, 2));
                 }
@@ -36397,45 +36302,47 @@ var init_gql_client = __esm({
       }`,
           variables: { lambdaId }
         }).pipe(
-          (0, import_operators2.switchMap)((res) => {
+          (0, import_operators.switchMap)((res) => {
             if (!res.getLambda) {
-              return (0, import_rxjs3.throwError)(() => "missing-lambda");
+              return (0, import_rxjs2.throwError)(() => "missing-lambda");
             }
-            return (0, import_rxjs3.of)(res.getLambda);
+            return (0, import_rxjs2.of)(res.getLambda);
           })
         );
       }
-      static getLambdaByName(name2, projectId, fragments) {
+      static getLambdaByName(name2, projectId, fragments, clusterId) {
         return this.query({
-          query: gql`query getLambdaByName($projectId: String!, $name: String!) {
-        getLambdaByName(projectId: $projectId, name: $name) {
+          query: gql`query getLambdaByName($projectId: String!, $name: String!, $clusterId: String) {
+        getLambdaByName(projectId: $projectId, name: $name, clusterId: $clusterId) {
           ${fragments?.join(" ") || LambdaFragment}
         }
       }`,
           variables: {
             name: name2,
-            projectId
+            projectId,
+            clusterId
           }
         }).pipe(
-          (0, import_operators2.switchMap)((res) => {
+          (0, import_operators.switchMap)((res) => {
             if (!res.getLambdaByName) {
-              return (0, import_rxjs3.throwError)(() => "missing-lambda");
+              return (0, import_rxjs2.throwError)(() => "missing-lambda");
             }
-            return (0, import_rxjs3.of)(res.getLambdaByName);
+            return (0, import_rxjs2.of)(res.getLambdaByName);
           })
         );
       }
-      static listLambdas(projectId) {
+      static listLambdas(projectId, clusterId) {
         return this.query({
-          query: gql`query listProjectLambdas($projectId: String!){
-        listProjectLambdas(projectId: $projectId) {
+          query: gql`query listProjectLambdas($projectId: String!, $clusterId: String){
+        listProjectLambdas(projectId: $projectId, clusterId: $clusterId) {
           ${LambdaFragment}
         }
       }`,
           variables: {
-            projectId
+            projectId,
+            clusterId
           }
-        }).pipe((0, import_operators2.map)((res) => res.listProjectLambdas));
+        }).pipe((0, import_operators.map)((res) => res.listProjectLambdas));
       }
       static createLambda(payload) {
         return this.query({
@@ -36445,7 +36352,7 @@ var init_gql_client = __esm({
         }
       }`,
           variables: { payload }
-        }).pipe((0, import_operators2.map)((res) => res.createLambda));
+        }).pipe((0, import_operators.map)((res) => res.createLambda));
       }
       static updateLambda(payload) {
         return this.query({
@@ -36455,7 +36362,7 @@ var init_gql_client = __esm({
         }
       }`,
           variables: { payload }
-        }).pipe((0, import_operators2.map)((res) => res.updateLambda));
+        }).pipe((0, import_operators.map)((res) => res.updateLambda));
       }
       static getLambdaLogs(lambdaId) {
         return this.query({
@@ -36468,8 +36375,8 @@ var init_gql_client = __esm({
       `,
           variables: { lambdaId }
         }).pipe(
-          (0, import_operators2.map)((res) => res.getLambdaLogs),
-          (0, import_operators2.map)(
+          (0, import_operators.map)((res) => res.getLambdaLogs),
+          (0, import_operators.map)(
             (logs) => ({
               ...logs,
               data: import_compressor.LZWService.decompress(logs.data)
@@ -36477,19 +36384,27 @@ var init_gql_client = __esm({
           )
         );
       }
-      static getLambdaLogsByName(name2, projectId) {
+      static getLambdaLogsByName(name2, projectId, clusterId) {
         return this.query({
           query: gql`
-        query getLambdaLogsByName($projectId: String!, $name: String!) {
-          getLambdaLogsByName(projectId: $projectId, name: $name) {
+        query getLambdaLogsByName(
+          $projectId: String!
+          $name: String!
+          $clusterId: String
+        ) {
+          getLambdaLogsByName(
+            projectId: $projectId
+            name: $name
+            clusterId: $clusterId
+          ) {
             data
           }
         }
       `,
-          variables: { name: name2, projectId }
+          variables: { name: name2, projectId, clusterId }
         }).pipe(
-          (0, import_operators2.map)((res) => res.getLambdaLogsByName),
-          (0, import_operators2.map)(
+          (0, import_operators.map)((res) => res.getLambdaLogsByName),
+          (0, import_operators.map)(
             (logs) => ({
               ...logs,
               data: import_compressor.LZWService.decompress(logs.data)
@@ -36508,8 +36423,8 @@ var init_gql_client = __esm({
       `,
           variables: { lambdaId }
         }).pipe(
-          (0, import_operators2.map)((res) => res.getLambdaBuilderLogs),
-          (0, import_operators2.map)(
+          (0, import_operators.map)((res) => res.getLambdaBuilderLogs),
+          (0, import_operators.map)(
             (logs) => ({
               ...logs,
               data: import_compressor.LZWService.decompress(logs.data)
@@ -36517,19 +36432,27 @@ var init_gql_client = __esm({
           )
         );
       }
-      static getLambdaBuilderLogsByName(name2, projectId) {
+      static getLambdaBuilderLogsByName(name2, projectId, clusterId) {
         return this.query({
           query: gql`
-        query getLambdaBuilderLogsByName($projectId: String!, $name: String!) {
-          getLambdaBuilderLogsByName(projectId: $projectId, name: $name) {
+        query getLambdaBuilderLogsByName(
+          $projectId: String!
+          $name: String!
+          $clusterId: String
+        ) {
+          getLambdaBuilderLogsByName(
+            projectId: $projectId
+            name: $name
+            clusterId: $clusterId
+          ) {
             data
           }
         }
       `,
-          variables: { name: name2, projectId }
+          variables: { name: name2, projectId, clusterId }
         }).pipe(
-          (0, import_operators2.map)((res) => res.getLambdaBuilderLogsByName),
-          (0, import_operators2.map)(
+          (0, import_operators.map)((res) => res.getLambdaBuilderLogsByName),
+          (0, import_operators.map)(
             (logs) => ({
               ...logs,
               data: import_compressor.LZWService.decompress(logs.data)
@@ -36547,7 +36470,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { payload }
-        }).pipe((0, import_operators2.map)((res) => res.deleteLambda));
+        }).pipe((0, import_operators.map)((res) => res.deleteLambda));
       }
       static listProjects() {
         return this.query({
@@ -36556,7 +36479,7 @@ var init_gql_client = __esm({
           ${ProjectFragment}
         }
       }`
-        }).pipe((0, import_operators2.map)((res) => res.listProjects));
+        }).pipe((0, import_operators.map)((res) => res.listProjects));
       }
       static getProject(id) {
         return this.query({
@@ -36568,7 +36491,7 @@ var init_gql_client = __esm({
           variables: {
             id
           }
-        }).pipe((0, import_operators2.map)((res) => res.listProjects));
+        }).pipe((0, import_operators.map)((res) => res.listProjects));
       }
       static listEnvironments(projectId) {
         return this.query({
@@ -36580,20 +36503,21 @@ var init_gql_client = __esm({
           variables: {
             projectId
           }
-        }).pipe((0, import_operators2.map)((res) => res.listEnvironmentsByProjectId));
+        }).pipe((0, import_operators.map)((res) => res.listEnvironmentsByProjectId));
       }
-      static getEnvironment(name2, projectId) {
+      static getEnvironment(name2, projectId, clusterId) {
         return this.query({
-          query: gql`query getEnvironment($name: String!, $projectId: String!) {
-        getEnvironment(name: $name, projectId: $projectId) {
+          query: gql`query getEnvironment($name: String!, $projectId: String!, $clusterId: String) {
+        getEnvironment(name: $name, projectId: $projectId, clusterId: $clusterId) {
           ${EnvironmentFragment}
         }
       }`,
           variables: {
             name: name2,
-            projectId
+            projectId,
+            clusterId
           }
-        }).pipe((0, import_operators2.map)((res) => res.getEnvironment));
+        }).pipe((0, import_operators.map)((res) => res.getEnvironment));
       }
       static createEnvironment(projectId, payload) {
         return this.query({
@@ -36611,17 +36535,18 @@ var init_gql_client = __esm({
             projectId,
             payload
           }
-        }).pipe((0, import_operators2.map)((res) => res.createEnvironment));
+        }).pipe((0, import_operators.map)((res) => res.createEnvironment));
       }
-      static deleteEnvironment(name2, projectId, force) {
+      static deleteEnvironment(name2, projectId, force, clusterId) {
         return this.query({
           query: gql`
         mutation deleteEnvironmentByName(
           $name: String!
           $projectId: String!
           $force: Boolean
+          $clusterId: String
         ) {
-          deleteEnvironmentByName(name: $name, projectId: $projectId, force: $force) {
+          deleteEnvironmentByName(name: $name, projectId: $projectId, force: $force, clusterId: $clusterId) {
             ${EnvironmentFragment}
           }
         }
@@ -36629,9 +36554,10 @@ var init_gql_client = __esm({
           variables: {
             name: name2,
             projectId,
-            force
+            force,
+            clusterId
           }
-        }).pipe((0, import_operators2.map)((res) => res.deleteEnvironmentByName));
+        }).pipe((0, import_operators.map)((res) => res.deleteEnvironmentByName));
       }
       static updateEnvironment(projectId, payload) {
         return this.query({
@@ -36649,7 +36575,7 @@ var init_gql_client = __esm({
             projectId,
             payload
           }
-        }).pipe((0, import_operators2.map)((res) => res.updateEnvironmentByName));
+        }).pipe((0, import_operators.map)((res) => res.updateEnvironmentByName));
       }
       static listProjectTimeTriggers(projectId) {
         return this.query({
@@ -36663,7 +36589,7 @@ var init_gql_client = __esm({
           variables: {
             projectId
           }
-        }).pipe((0, import_operators2.map)((res) => res.listProjectTimeTriggers));
+        }).pipe((0, import_operators.map)((res) => res.listProjectTimeTriggers));
       }
       static createTimeTrigger(payload) {
         return this.query({
@@ -36677,7 +36603,7 @@ var init_gql_client = __esm({
           variables: {
             payload
           }
-        }).pipe((0, import_operators2.map)((res) => res.createLambdaTimeTrigger));
+        }).pipe((0, import_operators.map)((res) => res.createLambdaTimeTrigger));
       }
       static deleteLambdaTimeTrigger(lambdaId) {
         return this.query({
@@ -36691,7 +36617,7 @@ var init_gql_client = __esm({
           variables: {
             lambdaId
           }
-        }).pipe((0, import_operators2.map)((res) => res.deleteLambdaTimeTrigger));
+        }).pipe((0, import_operators.map)((res) => res.deleteLambdaTimeTrigger));
       }
       // --------------------------------------------------------------------
       // Cluster (project-level; resolved by cluster-provisioner via the
@@ -36724,7 +36650,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { projectId, ...input }
-        }).pipe((0, import_operators2.map)((res) => res.provisionProjectCluster));
+        }).pipe((0, import_operators.map)((res) => res.provisionProjectCluster));
       }
       static projectClusters(projectId) {
         return this.query({
@@ -36736,7 +36662,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { projectId }
-        }).pipe((0, import_operators2.map)((res) => res.projectClusters));
+        }).pipe((0, import_operators.map)((res) => res.projectClusters));
       }
       static teardownProjectCluster(projectId, clusterId) {
         return this.query({
@@ -36751,7 +36677,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { projectId, clusterId }
-        }).pipe((0, import_operators2.map)((res) => res.teardownProjectCluster));
+        }).pipe((0, import_operators.map)((res) => res.teardownProjectCluster));
       }
       static clusterKubeconfig(projectId, clusterId) {
         return this.query({
@@ -36761,7 +36687,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { projectId, clusterId }
-        }).pipe((0, import_operators2.map)((res) => res.clusterKubeconfig));
+        }).pipe((0, import_operators.map)((res) => res.clusterKubeconfig));
       }
       // --------------------------------------------------------------------
       // RabbitMQ brokers (graphql-server-lambdas) - a project may have
@@ -36780,7 +36706,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { projectId, payload }
-        }).pipe((0, import_operators2.map)((res) => res.installRabbitMq));
+        }).pipe((0, import_operators.map)((res) => res.installRabbitMq));
       }
       static listRabbitMqInstances(projectId) {
         return this.query({
@@ -36792,7 +36718,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { projectId }
-        }).pipe((0, import_operators2.map)((res) => res.listRabbitMqInstances));
+        }).pipe((0, import_operators.map)((res) => res.listRabbitMqInstances));
       }
       static uninstallRabbitMq(id, projectId) {
         return this.query({
@@ -36804,7 +36730,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { id, projectId }
-        }).pipe((0, import_operators2.map)((res) => res.uninstallRabbitMq));
+        }).pipe((0, import_operators.map)((res) => res.uninstallRabbitMq));
       }
       // --------------------------------------------------------------------
       // Marketplace plugins (graphql-server-lambdas) - a project may have the
@@ -36820,7 +36746,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: {}
-        }).pipe((0, import_operators2.map)((res) => res.listAvailablePlugins));
+        }).pipe((0, import_operators.map)((res) => res.listAvailablePlugins));
       }
       static listInstalledPlugins(projectId) {
         return this.query({
@@ -36832,7 +36758,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { projectId }
-        }).pipe((0, import_operators2.map)((res) => res.listInstalledPlugins));
+        }).pipe((0, import_operators.map)((res) => res.listInstalledPlugins));
       }
       static installPlugin(projectId, pluginName, config2, clusterId) {
         return this.query({
@@ -36854,7 +36780,7 @@ var init_gql_client = __esm({
         }
       `,
           variables: { projectId, pluginName, config: config2, clusterId }
-        }).pipe((0, import_operators2.map)((res) => res.installPlugin));
+        }).pipe((0, import_operators.map)((res) => res.installPlugin));
       }
       static uninstallPlugin(projectId, pluginName, clusterId) {
         return this.query({
@@ -36872,20 +36798,20 @@ var init_gql_client = __esm({
         }
       `,
           variables: { projectId, pluginName, clusterId }
-        }).pipe((0, import_operators2.map)((res) => res.uninstallPlugin));
+        }).pipe((0, import_operators.map)((res) => res.uninstallPlugin));
       }
       static getConfig(force = false) {
-        return (0, import_rxjs3.combineLatest)([
+        return (0, import_rxjs2.combineLatest)([
           readFileAsObservable(tokenDirectory),
           readFileAsObservable(urlDirectory),
           readFileAsObservable(refreshTokenDirectory),
           readFileAsObservable(keyDirectory),
           readFileAsObservable(generationTimeDirectory).pipe(
-            (0, import_operators2.map)((date5) => Number(date5))
+            (0, import_operators.map)((date5) => Number(date5))
           ),
           readFileAsObservable(uploadUrlDirectory)
         ]).pipe(
-          (0, import_operators2.map)(([token, url2, refresh, key, timeGenerated, uploadUrl]) => ({
+          (0, import_operators.map)(([token, url2, refresh, key, timeGenerated, uploadUrl]) => ({
             token,
             url: url2,
             refresh,
@@ -36894,15 +36820,15 @@ var init_gql_client = __esm({
             expired: force || (Date.now() - timeGenerated) / 1e3 > 1800,
             uploadUrl
           })),
-          (0, import_operators2.switchMap)(
+          (0, import_operators.switchMap)(
             (config2) => config2.expired ? this.refreshToken(config2.key, config2.refresh).pipe(
-              (0, import_operators2.map)(({ id_token }) => ({ ...config2, token: id_token }))
-            ) : (0, import_rxjs3.of)(config2)
+              (0, import_operators.map)(({ id_token }) => ({ ...config2, token: id_token }))
+            ) : (0, import_rxjs2.of)(config2)
           )
         );
       }
       static refreshToken(key, refresh_token) {
-        return (0, import_rxjs3.from)(
+        return (0, import_rxjs2.from)(
           fetch(`https://securetoken.googleapis.com/v1/token?key=${key}`, {
             method: "POST",
             body: JSON.stringify({
@@ -36911,23 +36837,23 @@ var init_gql_client = __esm({
             })
           })
         ).pipe(
-          (0, import_operators2.switchMap)(
+          (0, import_operators.switchMap)(
             (res) => res.json()
           ),
-          (0, import_operators2.switchMap)(
-            (cfg) => (0, import_rxjs3.combineLatest)([
+          (0, import_operators.switchMap)(
+            (cfg) => (0, import_rxjs2.combineLatest)([
               writeFileAsObservable(tokenDirectory, cfg.id_token),
               writeFileAsObservable(refreshTokenDirectory, cfg.refresh_token),
               writeFileAsObservable(generationTimeDirectory, Date.now().toString())
-            ]).pipe((0, import_operators2.map)(() => cfg))
+            ]).pipe((0, import_operators.map)(() => cfg))
           )
         );
       }
       static signIn(customToken) {
-        return (0, import_rxjs3.from)(firebase.auth().signInWithCustomToken(customToken)).pipe(
-          (0, import_operators2.switchMap)(
-            ({ user }) => (0, import_rxjs3.combineLatest)([user.getIdToken(), (0, import_rxjs3.of)(user.refreshToken)]).pipe(
-              (0, import_operators2.map)(([token, refresh]) => ({ user, token, refresh }))
+        return (0, import_rxjs2.from)(firebase.auth().signInWithCustomToken(customToken)).pipe(
+          (0, import_operators.switchMap)(
+            ({ user }) => (0, import_rxjs2.combineLatest)([user.getIdToken(), (0, import_rxjs2.of)(user.refreshToken)]).pipe(
+              (0, import_operators.map)(([token, refresh]) => ({ user, token, refresh }))
             )
           )
         );
@@ -36938,6 +36864,121 @@ var init_gql_client = __esm({
         });
       }
     };
+  }
+});
+
+// src/services/log.ts
+var Logger;
+var init_log = __esm({
+  "src/services/log.ts"() {
+    Logger = class {
+      static log(...data) {
+        console.log("\x1B[32m%s\x1B[0m", ...data);
+      }
+      static error(...data) {
+        console.error("\x1B[31m%s\x1B[0m", ...data);
+      }
+      static info(...data) {
+        console.info("\x1B[36m%s\x1B[0m", ...data);
+      }
+      static warn(...data) {
+        console.warn("\x1B[33m%s\x1B[0m", ...data);
+      }
+      static table(...data) {
+        console.table(...data);
+      }
+    };
+  }
+});
+
+// src/helpers.ts
+function exitWithError(error48) {
+  if (error48 instanceof ExitCodeError) {
+    Logger.error(error48.message);
+    process.exit(error48.code);
+  } else {
+    Logger.error(error48);
+    process.exit(1);
+  }
+}
+function lazy(getActionFunc) {
+  return async (...args) => {
+    try {
+      const actionFunc = await getActionFunc();
+      await actionFunc(...args);
+      process.exit(0);
+    } catch (e2) {
+      const error48 = e2;
+      exitWithError(error48);
+    }
+  };
+}
+function parseProjectId(projectId) {
+  return readFileAsObservable(projectDirectory).pipe(
+    (0, import_operators2.catchError)(() => (0, import_rxjs3.of)("")),
+    (0, import_operators2.map)((currentProjectId) => projectId ? projectId : currentProjectId),
+    (0, import_operators2.switchMap)(
+      (id) => typeof id !== "string" ? (0, import_rxjs3.throwError)(() => "no-id-provided") : (0, import_rxjs3.of)(id)
+    ),
+    (0, import_operators2.switchMap)((id) => isMongoId(id))
+  );
+}
+function resolveClusterId(projectId, hint) {
+  if (hint.clusterId != null) {
+    return (0, import_rxjs3.of)(hint.clusterId);
+  }
+  if (!hint.clusterName) {
+    return (0, import_rxjs3.of)(void 0);
+  }
+  return GraphqlClienAPI.projectClusters(projectId).pipe(
+    (0, import_operators2.map)((clusters) => clusters.find((c) => c.name === hint.clusterName)),
+    (0, import_operators2.switchMap)(
+      (cluster) => cluster?.id ? (0, import_rxjs3.of)(cluster.id) : (0, import_rxjs3.throwError)(
+        () => `No cluster named "${hint.clusterName}" found in this project - run "gcli cluster:list --project ${projectId}" to see available clusters.`
+      )
+    )
+  );
+}
+function outputAllHelp(cmd) {
+  cmd.outputHelp();
+  cmd.commands.forEach((subCmd) => {
+    Logger.info("\n--- Subcommand: " + subCmd.name() + " ---");
+    outputAllHelp(subCmd);
+  });
+}
+var import_rxjs3, import_operators2, CustomError, ExitCodeError, isMongoId;
+var init_helpers = __esm({
+  "src/helpers.ts"() {
+    import_rxjs3 = __toESM(require_cjs());
+    import_operators2 = __toESM(require_operators());
+    init_read_file();
+    init_gql_client();
+    init_log();
+    init_types();
+    CustomError = class extends Error {
+      get name() {
+        return this.constructor.name;
+      }
+    };
+    ExitCodeError = class extends CustomError {
+      constructor(code, command) {
+        if (command) {
+          super(`Command '${command}' exited with code ${code}`);
+        } else {
+          super(`Child exited with code ${code}`);
+        }
+        this.code = code;
+      }
+    };
+    isMongoId = (mongoId) => (0, import_rxjs3.of)(mongoId.trim()).pipe(
+      (0, import_operators2.switchMap)(
+        (id) => (0, import_rxjs3.of)(new RegExp("^[0-9a-fA-F]{24}$").test(id)).pipe(
+          (0, import_operators2.switchMap)(
+            (isMongoId2) => isMongoId2 ? (0, import_rxjs3.of)(id) : (0, import_rxjs3.throwError)(() => `not-valid-id`)
+          )
+        )
+      )
+    );
   }
 });
 
@@ -253462,44 +253503,55 @@ var init_create_environment = __esm({
     init_gql_client();
     init_log();
     init_load_spec();
-    create_environment_default = (cmd) => (0, import_rxjs13.lastValueFrom)(
-      parseProjectId(cmd.project).pipe(
-        (0, import_operators12.switchMap)(
-          (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators12.map)((data) => ({
-              projectId,
-              ...data?.environment ?? data
-            }))
-          )
-        ),
-        (0, import_operators12.switchMap)(
-          ({ projectId, ...data }) => GraphqlClienAPI.createEnvironment(projectId, {
-            ...data,
-            ...cmd
+    create_environment_default = (cmd) => {
+      const { clusterName: cmdClusterName, ...cmdRest } = cmd;
+      return (0, import_rxjs13.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators12.switchMap)(
+            (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
+              (0, import_operators12.map)((data) => ({
+                projectId,
+                ...data?.environment ?? data
+              }))
+            )
+          ),
+          (0, import_operators12.switchMap)(
+            ({ projectId, clusterName: dataClusterName, ...data }) => resolveClusterId(projectId, {
+              clusterId: cmdRest.clusterId || data.clusterId,
+              clusterName: cmdClusterName || dataClusterName
+            }).pipe(
+              (0, import_operators12.switchMap)(
+                (clusterId) => GraphqlClienAPI.createEnvironment(projectId, {
+                  ...data,
+                  ...cmdRest,
+                  clusterId
+                })
+              )
+            )
+          ),
+          (0, import_operators12.tap)((data) => {
+            const columns = [
+              "id",
+              "name",
+              "image",
+              "builder",
+              "poolSize",
+              "minCpu",
+              "maxCpu",
+              "minMemory",
+              "maxMemory",
+              "region",
+              "clusterId",
+              "clusterName"
+            ];
+            Logger.log("-------------------");
+            Logger.log("[Action][createEnvironment]");
+            Logger.table([data], columns);
+            Logger.log("-------------------");
           })
-        ),
-        (0, import_operators12.tap)((data) => {
-          const columns = [
-            "id",
-            "name",
-            "image",
-            "builder",
-            "poolSize",
-            "minCpu",
-            "maxCpu",
-            "minMemory",
-            "maxMemory",
-            "region",
-            "clusterId",
-            "clusterName"
-          ];
-          Logger.log("-------------------");
-          Logger.log("[Action][createEnvironment]");
-          Logger.table([data], columns);
-          Logger.log("-------------------");
-        })
-      )
-    );
+        )
+      );
+    };
   }
 });
 
@@ -253517,45 +253569,56 @@ var init_update_environment = __esm({
     init_gql_client();
     init_log();
     init_load_spec();
-    update_environment_default = (cmd) => (0, import_rxjs14.lastValueFrom)(
-      parseProjectId(cmd.project).pipe(
-        (0, import_operators13.switchMap)(
-          (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators13.map)((data) => ({
-              projectId,
-              ...data?.environment ?? data
-            }))
-          )
-        ),
-        (0, import_operators13.tap)(Logger.log),
-        (0, import_operators13.switchMap)(
-          ({ projectId, ...data }) => GraphqlClienAPI.updateEnvironment(projectId, {
-            ...data,
-            ...cmd
+    update_environment_default = (cmd) => {
+      const { clusterName: cmdClusterName, ...cmdRest } = cmd;
+      return (0, import_rxjs14.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators13.switchMap)(
+            (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
+              (0, import_operators13.map)((data) => ({
+                projectId,
+                ...data?.environment ?? data
+              }))
+            )
+          ),
+          (0, import_operators13.tap)(Logger.log),
+          (0, import_operators13.switchMap)(
+            ({ projectId, clusterName: dataClusterName, ...data }) => resolveClusterId(projectId, {
+              clusterId: cmdRest.clusterId || data.clusterId,
+              clusterName: cmdClusterName || dataClusterName
+            }).pipe(
+              (0, import_operators13.switchMap)(
+                (clusterId) => GraphqlClienAPI.updateEnvironment(projectId, {
+                  ...data,
+                  ...cmdRest,
+                  clusterId
+                })
+              )
+            )
+          ),
+          (0, import_operators13.tap)((data) => {
+            const columns = [
+              "id",
+              "name",
+              "image",
+              "builder",
+              "poolSize",
+              "minCpu",
+              "maxCpu",
+              "minMemory",
+              "maxMemory",
+              "region",
+              "clusterId",
+              "clusterName"
+            ];
+            Logger.log("-------------------");
+            Logger.log("[Action][updateEnvironment]");
+            Logger.table([data], columns);
+            Logger.log("-------------------");
           })
-        ),
-        (0, import_operators13.tap)((data) => {
-          const columns = [
-            "id",
-            "name",
-            "image",
-            "builder",
-            "poolSize",
-            "minCpu",
-            "maxCpu",
-            "minMemory",
-            "maxMemory",
-            "region",
-            "clusterId",
-            "clusterName"
-          ];
-          Logger.log("-------------------");
-          Logger.log("[Action][updateEnvironment]");
-          Logger.table([data], columns);
-          Logger.log("-------------------");
-        })
-      )
-    );
+        )
+      );
+    };
   }
 });
 
@@ -253584,7 +253647,19 @@ var init_delete_environment = __esm({
           )
         ),
         (0, import_operators14.switchMap)(
-          ({ projectId, name: name2 }) => GraphqlClienAPI.deleteEnvironment(name2, projectId, cmd.force)
+          ({ projectId, name: name2 }) => resolveClusterId(projectId, {
+            clusterId: cmd.clusterId,
+            clusterName: cmd.clusterName
+          }).pipe(
+            (0, import_operators14.switchMap)(
+              (clusterId) => GraphqlClienAPI.deleteEnvironment(
+                name2,
+                projectId,
+                cmd.force,
+                clusterId
+              )
+            )
+          )
         ),
         (0, import_operators14.tap)((data) => {
           const columns = [
@@ -253634,7 +253709,18 @@ var init_get_environment = __esm({
           )
         ),
         (0, import_operators15.switchMap)(
-          ({ projectId, name: name2 }) => GraphqlClienAPI.getEnvironment(cmd.name ?? name2, projectId)
+          ({ projectId, name: name2 }) => resolveClusterId(projectId, {
+            clusterId: cmd.clusterId,
+            clusterName: cmd.clusterName
+          }).pipe(
+            (0, import_operators15.switchMap)(
+              (clusterId) => GraphqlClienAPI.getEnvironment(
+                cmd.name ?? name2,
+                projectId,
+                clusterId
+              )
+            )
+          )
         ),
         (0, import_operators15.tap)((data) => {
           const columns = [
@@ -284993,6 +285079,12 @@ var init_helpers2 = __esm({
           );
         }),
         (0, import_operators17.switchMap)(async (payload) => {
+          const clusterId = await (0, import_rxjs18.lastValueFrom)(
+            resolveClusterId(payload.projectId, {
+              clusterId: cmd.clusterId || payload.clusterId,
+              clusterName: cmd.clusterName || payload.clusterName
+            })
+          );
           return (0, import_rxjs18.lastValueFrom)(
             GraphqlClienAPI[type]({
               code: cmd.code || await (0, import_rxjs18.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
@@ -285007,6 +285099,7 @@ var init_helpers2 = __esm({
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
               envSecrets: cmd.envSecrets || payload.envSecrets || [],
+              clusterId,
               network: cmd.network || payload.network || ["public", "private"],
               federation: cmd.federation ?? !!payload.federation,
               subgraphs: cmd.subgraphs || payload.subgraphs || [],
@@ -285065,9 +285158,24 @@ var init_list2 = __esm({
     init_log();
     list_default2 = (cmd) => (0, import_rxjs19.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators18.switchMap)((projectId) => GraphqlClienAPI.listLambdas(projectId)),
+        (0, import_operators18.switchMap)(
+          (projectId) => resolveClusterId(projectId, {
+            clusterId: cmd.clusterId,
+            clusterName: cmd.clusterName
+          }).pipe(
+            (0, import_operators18.switchMap)(
+              (clusterId) => GraphqlClienAPI.listLambdas(projectId, clusterId)
+            )
+          )
+        ),
         (0, import_operators18.tap)((data) => {
-          const columns = ["id", "name", "url"];
+          const columns = [
+            "id",
+            "name",
+            "url",
+            "clusterId",
+            "clusterName"
+          ];
           Logger.log("-------------------");
           Logger.log("[Action][listLambdas]");
           Logger.table(data, columns);
@@ -285098,7 +285206,9 @@ var init_get = __esm({
           "name",
           "projectId",
           "url",
-          "method"
+          "method",
+          "clusterId",
+          "clusterName"
         ];
         Logger.log("-------------------");
         Logger.log("[Action][getLambda]");
@@ -285128,7 +285238,19 @@ var init_get = __esm({
               return (0, import_rxjs20.throwError)(() => error48);
             }),
             (0, import_operators19.switchMap)(
-              (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId)
+              (projectId) => resolveClusterId(projectId, {
+                clusterId: cmd.clusterId,
+                clusterName: cmd.clusterName
+              }).pipe(
+                (0, import_operators19.switchMap)(
+                  (clusterId) => GraphqlClienAPI.getLambdaByName(
+                    name2,
+                    projectId,
+                    void 0,
+                    clusterId
+                  )
+                )
+              )
             ),
             table
           )
@@ -285182,10 +285304,20 @@ var init_delete = __esm({
     delete_default = async (cmd) => {
       const spec = await (0, import_rxjs21.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
+      const env = cmd.env ?? spec.function?.env ?? spec.env;
+      const clusterIdHint = cmd.clusterId ?? spec.function?.clusterId ?? spec.clusterId;
+      const clusterNameHint = cmd.clusterName ?? spec.function?.clusterName ?? spec.clusterName;
       return (0, import_rxjs21.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators20.switchMap)(
-            (projectId) => GraphqlClienAPI.deleteLambda({ name: name2, projectId })
+            (projectId) => resolveClusterId(projectId, {
+              clusterId: clusterIdHint,
+              clusterName: clusterNameHint
+            }).pipe(
+              (0, import_operators20.switchMap)(
+                (clusterId) => GraphqlClienAPI.deleteLambda({ name: name2, projectId, env, clusterId })
+              )
+            )
           ),
           (0, import_operators20.tap)((data) => {
             const columns = [
@@ -285244,7 +285376,14 @@ var init_logs = __esm({
               return (0, import_rxjs22.throwError)(() => error48);
             }),
             (0, import_operators21.switchMap)(
-              (projectId) => GraphqlClienAPI.getLambdaLogsByName(name2, projectId)
+              (projectId) => resolveClusterId(projectId, {
+                clusterId: cmd.clusterId,
+                clusterName: cmd.clusterName
+              }).pipe(
+                (0, import_operators21.switchMap)(
+                  (clusterId) => GraphqlClienAPI.getLambdaLogsByName(name2, projectId, clusterId)
+                )
+              )
             ),
             result
           )
@@ -285294,7 +285433,18 @@ var init_logs_builder = __esm({
               return (0, import_rxjs23.throwError)(() => error48);
             }),
             (0, import_operators22.switchMap)(
-              (projectId) => GraphqlClienAPI.getLambdaBuilderLogsByName(name2, projectId)
+              (projectId) => resolveClusterId(projectId, {
+                clusterId: cmd.clusterId,
+                clusterName: cmd.clusterName
+              }).pipe(
+                (0, import_operators22.switchMap)(
+                  (clusterId) => GraphqlClienAPI.getLambdaBuilderLogsByName(
+                    name2,
+                    projectId,
+                    clusterId
+                  )
+                )
+              )
             ),
             result
           )
@@ -317057,13 +317207,34 @@ function registerEnvironmentCommands(program2) {
   ).option(
     "-cid, --clusterId <clusterId>",
     "Private cluster this environment should run on (see cluster:list); omit for the shared cluster. Immutable after creation."
+  ).option(
+    "-cn, --clusterName <clusterName>",
+    "Same as --clusterId but by the cluster's human-readable name; --clusterId wins if both are given. Can also be set as `clusterName` in env.yaml."
   ).action(lazy(() => Promise.resolve().then(() => (init_create_environment(), create_environment_exports)).then((m2) => m2.default)));
   program2.command("environment:update").description("Update environment for project").option("-p, --project <project>").option("-minCpu, --minCpu <minCpu>").option("-maxCpu, --maxCpu <maxCpu>").option("-minMemory, --minMemory <minMemory>").option("-maxMemory, --maxMemory <maxMemory>").option("-poolSize, --poolSize <poolSize>").option("-builder, --builder <builder>").option("-image, --image <image>").option("-name, --name <name>").option("-spec, --spec <spec>").option(
     "-r, --region <region>",
     "Default region is eu-central 'DEFAULT' | 'EU_BALKANS' | 'EU_CENTRAL'"
+  ).option(
+    "-cid, --clusterId <clusterId>",
+    "Disambiguates which environment to update when --name matches more than one across different clusters (clusterId itself is immutable and never changed by this command)."
+  ).option(
+    "-cn, --clusterName <clusterName>",
+    "Same as --clusterId but by the cluster's human-readable name; --clusterId wins if both are given"
   ).action(lazy(() => Promise.resolve().then(() => (init_update_environment(), update_environment_exports)).then((m2) => m2.default)));
-  program2.command("environment:delete").description("Delete environment for project").option("-p, --project <project>").option("-n, --name <name>").option("-f, --force").option("-spec, --spec <spec>").action(lazy(() => Promise.resolve().then(() => (init_delete_environment(), delete_environment_exports)).then((m2) => m2.default)));
-  program2.command("environment:get").description("Get environment for project").option("-p, --project <project>").option("-n, --name <name>").action(lazy(() => Promise.resolve().then(() => (init_get_environment(), get_environment_exports)).then((m2) => m2.default)));
+  program2.command("environment:delete").description("Delete environment for project").option("-p, --project <project>").option("-n, --name <name>").option("-f, --force").option("-spec, --spec <spec>").option(
+    "-cid, --clusterId <clusterId>",
+    "Disambiguates which environment to delete when --name matches more than one across different clusters"
+  ).option(
+    "-cn, --clusterName <clusterName>",
+    "Same as --clusterId but by the cluster's human-readable name; --clusterId wins if both are given"
+  ).action(lazy(() => Promise.resolve().then(() => (init_delete_environment(), delete_environment_exports)).then((m2) => m2.default)));
+  program2.command("environment:get").description("Get environment for project").option("-p, --project <project>").option("-n, --name <name>").option(
+    "-cid, --clusterId <clusterId>",
+    "Disambiguates which environment to fetch when --name matches more than one across different clusters"
+  ).option(
+    "-cn, --clusterName <clusterName>",
+    "Same as --clusterId but by the cluster's human-readable name; --clusterId wins if both are given"
+  ).action(lazy(() => Promise.resolve().then(() => (init_get_environment(), get_environment_exports)).then((m2) => m2.default)));
 }
 
 // src/commands/lambda/index.ts
@@ -317073,12 +317244,32 @@ function registerLambdaCommands(program2) {
   program2.command("lambda:list").description("List of all lambdas for project").option(
     "-p, --project <project>",
     "Specify custom token generated from the website"
+  ).option(
+    "-cid, --clusterId <clusterId>",
+    "Only lambdas whose environment targets this cluster (empty string for shared-cluster-only; omit for all)"
+  ).option(
+    "-cn, --clusterName <clusterName>",
+    "Same as --clusterId but by the cluster's human-readable name (see cluster:list) - resolved to its id before the request; --clusterId wins if both are given"
   ).action(lazy(() => Promise.resolve().then(() => (init_list2(), list_exports2)).then((m2) => m2.default)));
-  program2.command("lambda:get").description("Get lambda by id").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-p, --spec <spec>", "get by lambda name").action(lazy(() => Promise.resolve().then(() => (init_get(), get_exports)).then((m2) => m2.default)));
+  program2.command("lambda:get").description("Get lambda by id").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-p, --spec <spec>", "get by lambda name").option(
+    "-cid, --clusterId <clusterId>",
+    "Disambiguates which lambda to fetch when --name matches more than one across different clusters"
+  ).option(
+    "-cn, --clusterName <clusterName>",
+    "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given"
+  ).action(lazy(() => Promise.resolve().then(() => (init_get(), get_exports)).then((m2) => m2.default)));
   const createOrUpdateOptions = [
     ["--name <name>", "Function name"],
     ["--project <project>", "Project in which this lambda is defined"],
     ["--env <env>", "Environment name for function can be NODEJS"],
+    [
+      "--clusterId <clusterId>",
+      "Disambiguation hint: which of the project's clusters --env lives on (see cluster:list); omit for the shared cluster. Only needed once a project has private clusters and a duplicate-named environment across them."
+    ],
+    [
+      "--clusterName <clusterName>",
+      "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given. Can also be set as `clusterName` in the lambforge.yaml spec's function block."
+    ],
     [
       "--method <method...>",
       "HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method"
@@ -317180,9 +317371,30 @@ function registerLambdaCommands(program2) {
   createCommand("lambda:update")(createOrUpdateOptions)(program2).action(
     lazy(() => Promise.resolve().then(() => (init_update(), update_exports)).then((m2) => m2.default))
   );
-  program2.command("lambda:delete").description("Get lambda by id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").action(lazy(() => Promise.resolve().then(() => (init_delete(), delete_exports)).then((m2) => m2.default)));
-  program2.command("lambda:log").description("Get lambda log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").action(lazy(() => Promise.resolve().then(() => (init_logs(), logs_exports)).then((m2) => m2.default)));
-  program2.command("lambda:build:log").description("Get build log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda project").option("-s, --spec <spec>", "use configuration").action(lazy(() => Promise.resolve().then(() => (init_logs_builder(), logs_builder_exports)).then((m2) => m2.default)));
+  program2.command("lambda:delete").description("Get lambda by id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").option(
+    "-e, --env <env>",
+    "disambiguates which lambda to delete when --name matches more than one across environments/clusters"
+  ).option(
+    "-cid, --clusterId <clusterId>",
+    "disambiguates which lambda to delete when --name matches more than one across different clusters"
+  ).option(
+    "-cn, --clusterName <clusterName>",
+    "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given"
+  ).action(lazy(() => Promise.resolve().then(() => (init_delete(), delete_exports)).then((m2) => m2.default)));
+  program2.command("lambda:log").description("Get lambda log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").option(
+    "-cid, --clusterId <clusterId>",
+    "disambiguates which lambda to fetch logs for when --name matches more than one across different clusters"
+  ).option(
+    "-cn, --clusterName <clusterName>",
+    "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given"
+  ).action(lazy(() => Promise.resolve().then(() => (init_logs(), logs_exports)).then((m2) => m2.default)));
+  program2.command("lambda:build:log").description("Get build log").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda project").option("-s, --spec <spec>", "use configuration").option(
+    "-cid, --clusterId <clusterId>",
+    "disambiguates which lambda to fetch build logs for when --name matches more than one across different clusters"
+  ).option(
+    "-cn, --clusterName <clusterName>",
+    "Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given"
+  ).action(lazy(() => Promise.resolve().then(() => (init_logs_builder(), logs_builder_exports)).then((m2) => m2.default)));
   program2.command("lambda:test").description("Test lambda").option("-l, --lambda <lambda>", "get by lambda id").option("-n, --name <name>", "get by lambda name").option("-p, --project <project>", "get by lambda name").option("-s, --spec <spec>", "get by lambda name").option("-qp, --queryParams <queryParams>", "Adds query params to request").option("-pp, --pathParams <pathParams>", "Adds query params to request").option("-b, --body <body>", "Add body to request").option(
     "-m, --method <method>",
     "HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method"
