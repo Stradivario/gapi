@@ -105,11 +105,26 @@ const fakeOllama = () => {
             details: { parameter_size: '32.8B', quantization_level: 'Q4_K_M' },
           },
           { name: 'gemma3:1b', digest: 'b', details: {} },
+          // a retired Ollama cloud model: listed, but /api/show answers 410
+          { name: 'glm-5.1:cloud', digest: 'c', details: {} },
+        ],
+      });
+    }
+    if (url.endsWith('/api/ps')) {
+      // qwen is loaded (with a context smaller than its max); gemma is not
+      return json({
+        models: [
+          { name: 'qwen3:32b', model: 'qwen3:32b', context_length: 65536 },
         ],
       });
     }
     if (url.endsWith('/api/show')) {
       const { model } = JSON.parse(init.body as string);
+      if (model === 'glm-5.1:cloud') {
+        return new Response(JSON.stringify({ error: 'glm-5.1 was retired' }), {
+          status: 410,
+        });
+      }
       return json({
         capabilities:
           model === 'qwen3:32b'
@@ -201,6 +216,7 @@ describe('[runner] connection', () => {
           family: undefined,
           capabilities: ['completion', 'tools', 'thinking'],
           contextLength: 40960,
+          runtimeContextLength: 65536,
         },
         expect.objectContaining({
           name: 'gemma3:1b',

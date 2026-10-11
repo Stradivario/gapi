@@ -34,7 +34,14 @@ Ollama: `--ollama` > `$OLLAMA_HOST` (scheme optional, `0.0.0.0` -> `127.0.0.1`)
   sequentially. `RunnerAuthError` = token refused -> exit 1 with a `--reset` hint.
 - `ollama.ts` - `ALLOWED_REQUESTS` (only `POST /v1/chat/completions`; the
   backend has its own copy), `OllamaModels` (`/api/tags` + cached
-  `/api/show` per digest; drops models without the `completion` capability).
+  `/api/show` per digest; drops models without the `completion` capability
+  and models `/api/show` answers 404/410 for - e.g. retired `:cloud`
+  models, cached so they aren't re-asked every heartbeat). Each heartbeat
+  also reads `/api/ps` and reports `runtimeContextLength` - the window a
+  LOADED model actually runs with (OLLAMA_CONTEXT_LENGTH / Ollama default).
+  The backend fits every request to it, because Ollama silently drops the
+  oldest messages of a prompt that is too long (see the canonical doc,
+  "Context window").
 - `config.ts` (saved runner, URL derivation), `start.ts`, `list.ts`,
   `models.ts`, `delete.ts`, `index.ts` (command registration), `types.ts`.
 - `src/services/gql-client.ts` - `createLocalRunner`, `listLocalRunners`,
