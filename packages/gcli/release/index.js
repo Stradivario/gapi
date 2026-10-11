@@ -317007,12 +317007,41 @@ var init_ollama = __esm({
           throw new Error(`Ollama /api/tags returned ${res.status}`);
         }
         const { models = [] } = await res.json();
-        const described = await Promise.all(
-          models.map((tag) => this.describe(tag))
-        );
-        return described.filter(
+        const [described, loaded] = await Promise.all([
+          Promise.all(models.map((tag) => this.describe(tag))),
+          this.loadedContextLengths()
+        ]);
+        for (const model of described) {
+          model.runtimeContextLength = loaded.get(model.name);
+        }
+        return described.filter((m2) => !m2.unusable).filter(
           (m2) => !m2.capabilities.length || m2.capabilities.includes("completion")
-        );
+        ).map((m2) => {
+          delete m2.unusable;
+          return m2;
+        });
+      }
+      /**
+       * The context window each LOADED model actually runs with (`/api/ps`,
+       * what `ollama ps` shows) - OLLAMA_CONTEXT_LENGTH / Ollama's VRAM-based
+       * default, usually far below the model's own `contextLength`. Ollama
+       * silently drops the oldest messages of a prompt that doesn't fit, so the
+       * backend sizes requests with this. Unloaded models aren't listed; the
+       * backend keeps the last known value.
+       */
+      async loadedContextLengths() {
+        try {
+          const res = await this.fetchFn(`${this.baseUrl}/api/ps`);
+          if (!res.ok) {
+            return /* @__PURE__ */ new Map();
+          }
+          const { models = [] } = await res.json();
+          return new Map(
+            models.filter((m2) => typeof m2.context_length === "number").map((m2) => [m2.name ?? m2.model, m2.context_length])
+          );
+        } catch {
+          return /* @__PURE__ */ new Map();
+        }
       }
       async describe(tag) {
         const show = await this.show(tag);
@@ -317020,6 +317049,7 @@ var init_ollama = __esm({
           ([key]) => key.endsWith(".context_length")
         )?.[1];
         return {
+          unusable: show?.unusable,
           name: tag.name,
           family: tag.details?.family,
           parameterSize: tag.details?.parameter_size,
@@ -317039,6 +317069,11 @@ var init_ollama = __esm({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ model: tag.name })
           });
+          if (res.status === 404 || res.status === 410) {
+            const gone = { unusable: true };
+            this.showCache.set(key, gone);
+            return gone;
+          }
           if (!res.ok) {
             return void 0;
           }

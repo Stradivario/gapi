@@ -1,4 +1,4 @@
-## [1.8.238](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.238) (2026-10-11)
+## [1.8.239](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.239) (2026-10-11)
 
 
 ### Bug Fixes
@@ -64,6 +64,7 @@
 * **gcli:** removed wasm esbuild from optional dependencies since we want zero dependency library ([e8f943b](https://github.com/Stradivario/gapi/commit/e8f943b35053ef17568ffd3e4732c55390e8a6b6))
 * **gcli:** reverted back logic for gcli ([7591194](https://github.com/Stradivario/gapi/commit/759119401dc43665ba45f6b3cc19f09439692995))
 * **gcli:** reverted logic without options request ([f37f092](https://github.com/Stradivario/gapi/commit/f37f0922eaec5c060b80064a508ab12c3da3d48f))
+* **gcli:** runner reports each model's loaded context window ([7176790](https://github.com/Stradivario/gapi/commit/7176790c900f94768eb2d65e395bcf3fd83456b0))
 * **gcli:** spread operator was breaking plugin initialization ([f2e6745](https://github.com/Stradivario/gapi/commit/f2e674513a29b9c13fdfe79fe8aba2b6e07e53a1))
 * **gcli:** token authentication after expire fixed ([fc099eb](https://github.com/Stradivario/gapi/commit/fc099ebd5af0b5094e5b1919f875e9dbdfd035e3))
 * **gcli:** upload lambda was not working due to attempt to use native node fetch but it does not handle very well multipart form data... ([9652c3b](https://github.com/Stradivario/gapi/commit/9652c3b7c5ac18b9242a3e18d250d54687eafbcb))
