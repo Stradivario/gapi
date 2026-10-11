@@ -1,4 +1,4 @@
-## [1.8.239](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.239) (2026-10-11)
+## [1.8.240](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.240) (2026-10-11)
 
 
 ### Bug Fixes
@@ -137,6 +137,7 @@
 * **gcli:** npm ignore file added ([15530eb](https://github.com/Stradivario/gapi/commit/15530eb085653d26f53e01fd9d7902bdfd99b734))
 * **gcli:** readme.md added correct link [ci-skip] ([ff79521](https://github.com/Stradivario/gapi/commit/ff7952137b93a50e57ca51f15d3dbd71565c348d))
 * **gcli:** removed archiver as default export ([7ea3f62](https://github.com/Stradivario/gapi/commit/7ea3f6265dc58dc1f37d9177b1c8dd7ca2c91551))
+* **gcli:** run the local AI runner as a systemd user service ([1598b44](https://github.com/Stradivario/gapi/commit/1598b442c8711bfd3bd89321d2eb1f755ac98b57))
 * **gcli:** runner commands bridge a local Ollama to the Lambforge chat ([b41c0b3](https://github.com/Stradivario/gapi/commit/b41c0b37ece02e18be87b632dc4b8e840d5eda28))
 * **gcli:** scaling options added to yml file ([3c01cdc](https://github.com/Stradivario/gapi/commit/3c01cdc7b3f7d0bce572b1a64af2b718075a93dc))
 * **gcli:** single executable ([8697dc6](https://github.com/Stradivario/gapi/commit/8697dc63dd03f9a4247238f21a3d77e604f0c360))

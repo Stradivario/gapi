@@ -8037,7 +8037,7 @@ var init_response = __esm({
     Response2 = class _Response extends Body {
       constructor(body = null, options = {}) {
         super(body, options);
-        const status = options.status != null ? options.status : 200;
+        const status2 = options.status != null ? options.status : 200;
         const headers = new Headers2(options.headers);
         if (body !== null && !headers.has("Content-Type")) {
           const contentType = extractContentType(body, this);
@@ -8048,7 +8048,7 @@ var init_response = __esm({
         this[INTERNALS2] = {
           type: "default",
           url: options.url,
-          status,
+          status: status2,
           statusText: options.statusText || "",
           headers,
           counter: options.counter,
@@ -8105,15 +8105,15 @@ var init_response = __esm({
        * @param {number} status An optional status code for the response (e.g., 302.)
        * @returns {Response}    A Response object.
        */
-      static redirect(url2, status = 302) {
-        if (!isRedirect(status)) {
+      static redirect(url2, status2 = 302) {
+        if (!isRedirect(status2)) {
           throw new RangeError('Failed to execute "redirect" on "response": Invalid status code');
         }
         return new _Response(null, {
           headers: {
             location: new URL(url2).toString()
           },
-          status
+          status: status2
         });
       }
       static error() {
@@ -21369,7 +21369,7 @@ var require_lib = __commonJS({
 var require_XMLHttpRequest = __commonJS({
   "../../node_modules/xmlhttprequest/lib/XMLHttpRequest.js"(exports2) {
     var Url = require("url");
-    var spawn2 = require("child_process").spawn;
+    var spawn3 = require("child_process").spawn;
     var fs2 = require("fs");
     exports2.XMLHttpRequest = function() {
       "use strict";
@@ -21639,7 +21639,7 @@ var require_XMLHttpRequest = __commonJS({
           var syncFile = ".node-xmlhttprequest-sync-" + process.pid;
           fs2.writeFileSync(syncFile, "", "utf8");
           var execString = "var http = require('http'), https = require('https'), fs = require('fs');var doRequest = http" + (ssl ? "s" : "") + ".request;var options = " + JSON.stringify(options) + ";var responseText = '';var req = doRequest(options, function(response) {response.setEncoding('utf8');response.on('data', function(chunk) {  responseText += chunk;});response.on('end', function() {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: null, data: {statusCode: response.statusCode, headers: response.headers, text: responseText}}), 'utf8');fs.unlinkSync('" + syncFile + "');});response.on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});}).on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});" + (data ? "req.write('" + JSON.stringify(data).slice(1, -1).replace(/'/g, "\\'") + "');" : "") + "req.end();";
-          var syncProc = spawn2(process.argv[0], ["-e", execString]);
+          var syncProc = spawn3(process.argv[0], ["-e", execString]);
           while (fs2.existsSync(syncFile)) {
           }
           var resp = JSON.parse(fs2.readFileSync(contentFile, "utf8"));
@@ -27839,7 +27839,7 @@ var require_auth = __commonJS({
         this.a = this.c;
         qm(this, true);
       };
-      function rm2(a, b) {
+      function rm3(a, b) {
         if (b) return a.a = a.c, a.g();
         b = a.a;
         a.a *= 2;
@@ -27848,7 +27848,7 @@ var require_auth = __commonJS({
       }
       function qm(a, b) {
         a.stop();
-        a.b = Bd(rm2(a, b)).then(function() {
+        a.b = Bd(rm3(a, b)).then(function() {
           return Ye();
         }).then(function() {
           return a.h();
@@ -29867,7 +29867,7 @@ var require_buffer_list = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -32885,7 +32885,7 @@ var require_buffer_list2 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -36402,9 +36402,9 @@ var init_gql_client = __esm({
         }).pipe(
           (0, import_operators.map)((res) => res.getLambdaLogs),
           (0, import_operators.map)(
-            (logs) => ({
-              ...logs,
-              data: import_compressor.LZWService.decompress(logs.data)
+            (logs2) => ({
+              ...logs2,
+              data: import_compressor.LZWService.decompress(logs2.data)
             })
           )
         );
@@ -36430,9 +36430,9 @@ var init_gql_client = __esm({
         }).pipe(
           (0, import_operators.map)((res) => res.getLambdaLogsByName),
           (0, import_operators.map)(
-            (logs) => ({
-              ...logs,
-              data: import_compressor.LZWService.decompress(logs.data)
+            (logs2) => ({
+              ...logs2,
+              data: import_compressor.LZWService.decompress(logs2.data)
             })
           )
         );
@@ -36450,9 +36450,9 @@ var init_gql_client = __esm({
         }).pipe(
           (0, import_operators.map)((res) => res.getLambdaBuilderLogs),
           (0, import_operators.map)(
-            (logs) => ({
-              ...logs,
-              data: import_compressor.LZWService.decompress(logs.data)
+            (logs2) => ({
+              ...logs2,
+              data: import_compressor.LZWService.decompress(logs2.data)
             })
           )
         );
@@ -36478,9 +36478,9 @@ var init_gql_client = __esm({
         }).pipe(
           (0, import_operators.map)((res) => res.getLambdaBuilderLogsByName),
           (0, import_operators.map)(
-            (logs) => ({
-              ...logs,
-              data: import_compressor.LZWService.decompress(logs.data)
+            (logs2) => ({
+              ...logs2,
+              data: import_compressor.LZWService.decompress(logs2.data)
             })
           )
         );
@@ -37850,7 +37850,7 @@ var require_util = __commonJS({
       return path2;
     }
     exports2.normalize = normalize;
-    function join(aRoot, aPath) {
+    function join2(aRoot, aPath) {
       if (aRoot === "") {
         aRoot = ".";
       }
@@ -37882,7 +37882,7 @@ var require_util = __commonJS({
       }
       return joined;
     }
-    exports2.join = join;
+    exports2.join = join2;
     exports2.isAbsolute = function(aPath) {
       return aPath.charAt(0) === "/" || urlRegexp.test(aPath);
     };
@@ -38055,7 +38055,7 @@ var require_util = __commonJS({
             parsed.path = parsed.path.substring(0, index + 1);
           }
         }
-        sourceURL = join(urlGenerate(parsed), sourceURL);
+        sourceURL = join2(urlGenerate(parsed), sourceURL);
       }
       return normalize(sourceURL);
     }
@@ -42181,7 +42181,7 @@ var require_typescript = __commonJS({
         walkUpParenthesizedTypesAndGetParentAndChild: () => walkUpParenthesizedTypesAndGetParentAndChild,
         whitespaceOrMapCommentRegExp: () => whitespaceOrMapCommentRegExp,
         writeCommentRange: () => writeCommentRange,
-        writeFile: () => writeFile6,
+        writeFile: () => writeFile7,
         writeFileEnsuringDirectories: () => writeFileEnsuringDirectories,
         zipWith: () => zipWith
       });
@@ -60824,7 +60824,7 @@ ${lanes.join("\n")}
         sourceFilePath = isSourceFileInCommonSourceDirectory ? sourceFilePath.substring(commonSourceDirectory.length) : sourceFilePath;
         return combinePaths(newDirPath, sourceFilePath);
       }
-      function writeFile6(host, diagnostics, fileName, text, writeByteOrderMark, sourceFiles, data) {
+      function writeFile7(host, diagnostics, fileName, text, writeByteOrderMark, sourceFiles, data) {
         host.writeFile(
           fileName,
           text,
@@ -113498,8 +113498,8 @@ ${lanes.join("\n")}
             void 0
           ) : void 0;
           let reportedError = false;
-          for (let status = iterator.next(); !status.done; status = iterator.next()) {
-            const { errorNode: prop, innerExpression: next, nameType, errorMessage } = status.value;
+          for (let status2 = iterator.next(); !status2.done; status2 = iterator.next()) {
+            const { errorNode: prop, innerExpression: next, nameType, errorMessage } = status2.value;
             let targetPropType = iterationType;
             const targetIndexedPropType = tupleOrArrayLikeTargetParts !== neverType2 ? getBestMatchIndexedAccessTypeOrUndefined(source, tupleOrArrayLikeTargetParts, nameType) : void 0;
             if (targetIndexedPropType && !(targetIndexedPropType.flags & 8388608)) {
@@ -118360,9 +118360,9 @@ ${lanes.join("\n")}
           }
           function invokeOnce(source, target, action) {
             const key = source.id + "," + target.id;
-            const status = visited && visited.get(key);
-            if (status !== void 0) {
-              inferencePriority = Math.min(inferencePriority, status);
+            const status2 = visited && visited.get(key);
+            if (status2 !== void 0) {
+              inferencePriority = Math.min(inferencePriority, status2);
               return;
             }
             (visited || (visited = /* @__PURE__ */ new Map())).set(
@@ -169575,7 +169575,7 @@ ${lanes.join("\n")}
             return;
           }
           const buildInfo = host.getBuildInfo() || { version: version2 };
-          writeFile6(
+          writeFile7(
             host,
             emitterDiagnostics,
             buildInfoPath,
@@ -169787,7 +169787,7 @@ ${lanes.join("\n")}
             }
             if (sourceMapFilePath) {
               const sourceMap = sourceMapGenerator.toString();
-              writeFile6(
+              writeFile7(
                 host,
                 emitterDiagnostics,
                 sourceMapFilePath,
@@ -169802,7 +169802,7 @@ ${lanes.join("\n")}
           }
           const text = writer.getText();
           const data = { sourceMapUrlPos, diagnostics: transform22.diagnostics };
-          writeFile6(host, emitterDiagnostics, jsFilePath, text, !!compilerOptions.emitBOM, sourceFiles, data);
+          writeFile7(host, emitterDiagnostics, jsFilePath, text, !!compilerOptions.emitBOM, sourceFiles, data);
           writer.clear();
           return !data.skippedDtsWrite;
         }
@@ -184329,7 +184329,7 @@ ${lanes.join("\n")}
           }
         };
       }
-      function createBuildOrUpdateInvalidedProject(state, project, projectPath, projectIndex, config2, status, buildOrder) {
+      function createBuildOrUpdateInvalidedProject(state, project, projectPath, projectIndex, config2, status2, buildOrder) {
         let step = 0;
         let program2;
         let buildResult;
@@ -184500,7 +184500,7 @@ ${lanes.join("\n")}
             void 0,
             customTransformers || ((_b = (_a2 = state.host).getCustomTransformers) == null ? void 0 : _b.call(_a2, project))
           );
-          if ((!options.noEmitOnError || !diagnostics.length) && (emittedOutputs.size || status.type !== 8)) {
+          if ((!options.noEmitOnError || !diagnostics.length) && (emittedOutputs.size || status2.type !== 8)) {
             updateOutputTimestampsWorker(state, config2, projectPath, Diagnostics.Updating_unchanged_output_timestamps_of_project_0, emittedOutputs);
           }
           state.projectErrorsReported.set(projectPath, true);
@@ -184580,10 +184580,10 @@ ${lanes.join("\n")}
             watchInputFiles(state, project, projectPath, config2);
             watchPackageJsonFiles(state, project, projectPath, config2);
           }
-          const status = getUpToDateStatus(state, config2, projectPath);
+          const status2 = getUpToDateStatus(state, config2, projectPath);
           if (!options.force) {
-            if (status.type === 1) {
-              verboseReportProjectStatus(state, project, status);
+            if (status2.type === 1) {
+              verboseReportProjectStatus(state, project, status2);
               reportAndStoreErrors(state, projectPath, getConfigFileParsingDiagnostics(config2));
               projectPendingBuild.delete(projectPath);
               if (options.dry) {
@@ -184591,11 +184591,11 @@ ${lanes.join("\n")}
               }
               continue;
             }
-            if (status.type === 2 || status.type === 15) {
+            if (status2.type === 2 || status2.type === 15) {
               reportAndStoreErrors(state, projectPath, getConfigFileParsingDiagnostics(config2));
               return {
                 kind: 1,
-                status,
+                status: status2,
                 project,
                 projectPath,
                 projectIndex,
@@ -184603,29 +184603,29 @@ ${lanes.join("\n")}
               };
             }
           }
-          if (status.type === 12) {
-            verboseReportProjectStatus(state, project, status);
+          if (status2.type === 12) {
+            verboseReportProjectStatus(state, project, status2);
             reportAndStoreErrors(state, projectPath, getConfigFileParsingDiagnostics(config2));
             projectPendingBuild.delete(projectPath);
             if (options.verbose) {
               reportStatus(
                 state,
-                status.upstreamProjectBlocked ? Diagnostics.Skipping_build_of_project_0_because_its_dependency_1_was_not_built : Diagnostics.Skipping_build_of_project_0_because_its_dependency_1_has_errors,
+                status2.upstreamProjectBlocked ? Diagnostics.Skipping_build_of_project_0_because_its_dependency_1_was_not_built : Diagnostics.Skipping_build_of_project_0_because_its_dependency_1_has_errors,
                 project,
-                status.upstreamProjectName
+                status2.upstreamProjectName
               );
             }
             continue;
           }
-          if (status.type === 16) {
-            verboseReportProjectStatus(state, project, status);
+          if (status2.type === 16) {
+            verboseReportProjectStatus(state, project, status2);
             reportAndStoreErrors(state, projectPath, getConfigFileParsingDiagnostics(config2));
             projectPendingBuild.delete(projectPath);
             continue;
           }
           return {
             kind: 0,
-            status,
+            status: status2,
             project,
             projectPath,
             projectIndex,
@@ -185079,12 +185079,12 @@ ${lanes.join("\n")}
           for (const ref of nextProjectConfig.projectReferences) {
             const resolvedRefPath = resolveProjectName(state, ref.path);
             if (toResolvedConfigFilePath(state, resolvedRefPath) !== projectPath) continue;
-            const status = state.projectStatus.get(nextProjectPath);
-            if (status) {
-              switch (status.type) {
+            const status2 = state.projectStatus.get(nextProjectPath);
+            if (status2) {
+              switch (status2.type) {
                 case 1:
                   if (buildResult & 2) {
-                    status.type = 2;
+                    status2.type = 2;
                     break;
                   }
                 // falls through
@@ -185093,13 +185093,13 @@ ${lanes.join("\n")}
                   if (!(buildResult & 2)) {
                     state.projectStatus.set(nextProjectPath, {
                       type: 6,
-                      outOfDateOutputFileName: status.oldestOutputFileName,
+                      outOfDateOutputFileName: status2.oldestOutputFileName,
                       newerProjectName: project
                     });
                   }
                   break;
                 case 12:
-                  if (toResolvedConfigFilePath(state, resolveProjectName(state, status.upstreamProjectName)) === projectPath) {
+                  if (toResolvedConfigFilePath(state, resolveProjectName(state, status2.upstreamProjectName)) === projectPath) {
                     clearProjectStatus(state, nextProjectPath);
                   }
                   break;
@@ -185525,75 +185525,75 @@ ${lanes.join("\n")}
           reportStatus(state, Diagnostics.Projects_in_this_build_Colon_0, buildQueue.map((s2) => "\r\n    * " + relName(state, s2)).join(""));
         }
       }
-      function reportUpToDateStatus(state, configFileName, status) {
-        switch (status.type) {
+      function reportUpToDateStatus(state, configFileName, status2) {
+        switch (status2.type) {
           case 5:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_output_1_is_older_than_input_2,
               relName(state, configFileName),
-              relName(state, status.outOfDateOutputFileName),
-              relName(state, status.newerInputFileName)
+              relName(state, status2.outOfDateOutputFileName),
+              relName(state, status2.newerInputFileName)
             );
           case 6:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_output_1_is_older_than_input_2,
               relName(state, configFileName),
-              relName(state, status.outOfDateOutputFileName),
-              relName(state, status.newerProjectName)
+              relName(state, status2.outOfDateOutputFileName),
+              relName(state, status2.newerProjectName)
             );
           case 3:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_output_file_1_does_not_exist,
               relName(state, configFileName),
-              relName(state, status.missingOutputFileName)
+              relName(state, status2.missingOutputFileName)
             );
           case 4:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_there_was_error_reading_file_1,
               relName(state, configFileName),
-              relName(state, status.fileName)
+              relName(state, status2.fileName)
             );
           case 7:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_buildinfo_file_1_indicates_that_some_of_the_changes_were_not_emitted,
               relName(state, configFileName),
-              relName(state, status.buildInfoFile)
+              relName(state, status2.buildInfoFile)
             );
           case 8:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_buildinfo_file_1_indicates_that_program_needs_to_report_errors,
               relName(state, configFileName),
-              relName(state, status.buildInfoFile)
+              relName(state, status2.buildInfoFile)
             );
           case 9:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_buildinfo_file_1_indicates_there_is_change_in_compilerOptions,
               relName(state, configFileName),
-              relName(state, status.buildInfoFile)
+              relName(state, status2.buildInfoFile)
             );
           case 10:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_buildinfo_file_1_indicates_that_file_2_was_root_file_of_compilation_but_not_any_more,
               relName(state, configFileName),
-              relName(state, status.buildInfoFile),
-              relName(state, status.inputFile)
+              relName(state, status2.buildInfoFile),
+              relName(state, status2.inputFile)
             );
           case 1:
-            if (status.newestInputFileTime !== void 0) {
+            if (status2.newestInputFileTime !== void 0) {
               return reportStatus(
                 state,
                 Diagnostics.Project_0_is_up_to_date_because_newest_input_1_is_older_than_output_2,
                 relName(state, configFileName),
-                relName(state, status.newestInputFileName || ""),
-                relName(state, status.oldestOutputFileName || "")
+                relName(state, status2.newestInputFileName || ""),
+                relName(state, status2.oldestOutputFileName || "")
               );
             }
             break;
@@ -185614,28 +185614,28 @@ ${lanes.join("\n")}
               state,
               Diagnostics.Project_0_is_out_of_date_because_its_dependency_1_is_out_of_date,
               relName(state, configFileName),
-              relName(state, status.upstreamProjectName)
+              relName(state, status2.upstreamProjectName)
             );
           case 12:
             return reportStatus(
               state,
-              status.upstreamProjectBlocked ? Diagnostics.Project_0_can_t_be_built_because_its_dependency_1_was_not_built : Diagnostics.Project_0_can_t_be_built_because_its_dependency_1_has_errors,
+              status2.upstreamProjectBlocked ? Diagnostics.Project_0_can_t_be_built_because_its_dependency_1_was_not_built : Diagnostics.Project_0_can_t_be_built_because_its_dependency_1_has_errors,
               relName(state, configFileName),
-              relName(state, status.upstreamProjectName)
+              relName(state, status2.upstreamProjectName)
             );
           case 0:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_1,
               relName(state, configFileName),
-              status.reason
+              status2.reason
             );
           case 14:
             return reportStatus(
               state,
               Diagnostics.Project_0_is_out_of_date_because_output_for_it_was_generated_with_version_1_that_differs_with_current_version_2,
               relName(state, configFileName),
-              status.version,
+              status2.version,
               version2
             );
           case 17:
@@ -185650,12 +185650,12 @@ ${lanes.join("\n")}
           case 13:
             break;
           default:
-            assertType(status);
+            assertType(status2);
         }
       }
-      function verboseReportProjectStatus(state, configFileName, status) {
+      function verboseReportProjectStatus(state, configFileName, status2) {
         if (state.options.verbose) {
-          reportUpToDateStatus(state, configFileName, status);
+          reportUpToDateStatus(state, configFileName, status2);
         }
       }
       var StatisticType = /* @__PURE__ */ ((StatisticType2) => {
@@ -237684,7 +237684,7 @@ ${options.prefix}` : "\n" : options.prefix
         walkUpParenthesizedTypesAndGetParentAndChild: () => walkUpParenthesizedTypesAndGetParentAndChild,
         whitespaceOrMapCommentRegExp: () => whitespaceOrMapCommentRegExp,
         writeCommentRange: () => writeCommentRange,
-        writeFile: () => writeFile6,
+        writeFile: () => writeFile7,
         writeFileEnsuringDirectories: () => writeFileEnsuringDirectories,
         zipWith: () => zipWith
       });
@@ -237915,12 +237915,12 @@ ${options.prefix}` : "\n" : options.prefix
           return void 0;
         }
       }
-      function installNpmPackages(npmPath, tsVersion, packageNames, install) {
+      function installNpmPackages(npmPath, tsVersion, packageNames, install2) {
         let hasError = false;
         for (let remaining = packageNames.length; remaining > 0; ) {
           const result = getNpmCommandForInstallation(npmPath, tsVersion, packageNames, remaining);
           remaining = result.remaining;
-          hasError = install(result.command) || hasError;
+          hasError = install2(result.command) || hasError;
         }
         return hasError;
       }
@@ -267482,8 +267482,8 @@ var require_graceful_fs = __commonJS({
         }
       }
       var fs$writeFile = fs3.writeFile;
-      fs3.writeFile = writeFile6;
-      function writeFile6(path2, data, options, cb) {
+      fs3.writeFile = writeFile7;
+      function writeFile7(path2, data, options, cb) {
         if (typeof options === "function")
           cb = options, options = null;
         return go$writeFile(path2, data, options, cb);
@@ -267932,7 +267932,7 @@ var require_BufferList2 = __commonJS({
         this.head = this.tail = null;
         this.length = 0;
       };
-      BufferList.prototype.join = function join(s2) {
+      BufferList.prototype.join = function join2(s2) {
         if (this.length === 0) return "";
         var p = this.head;
         var ret = "" + p.data;
@@ -270850,7 +270850,7 @@ var require_old = __commonJS({
       splitRootRe = /^[\/]*/;
     }
     var splitRootRe;
-    exports2.realpathSync = function realpathSync(p, cache) {
+    exports2.realpathSync = function realpathSync2(p, cache) {
       p = pathModule.resolve(p);
       if (cache && Object.prototype.hasOwnProperty.call(cache, p)) {
         return cache[p];
@@ -271003,8 +271003,8 @@ var require_fs = __commonJS({
   "../../node_modules/fs.realpath/index.js"(exports2, module2) {
     module2.exports = realpath;
     realpath.realpath = realpath;
-    realpath.sync = realpathSync;
-    realpath.realpathSync = realpathSync;
+    realpath.sync = realpathSync2;
+    realpath.realpathSync = realpathSync2;
     realpath.monkeypatch = monkeypatch;
     realpath.unmonkeypatch = unmonkeypatch;
     var fs2 = require("fs");
@@ -271032,7 +271032,7 @@ var require_fs = __commonJS({
         }
       });
     }
-    function realpathSync(p, cache) {
+    function realpathSync2(p, cache) {
       if (ok) {
         return origRealpathSync(p, cache);
       }
@@ -271048,7 +271048,7 @@ var require_fs = __commonJS({
     }
     function monkeypatch() {
       fs2.realpath = realpath;
-      fs2.realpathSync = realpathSync;
+      fs2.realpathSync = realpathSync2;
     }
     function unmonkeypatch() {
       fs2.realpath = origRealpath;
@@ -272732,7 +272732,7 @@ var require_buffer_list3 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -276074,7 +276074,7 @@ var require_buffer_list4 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -278846,7 +278846,7 @@ var require_buffer_list5 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -282083,7 +282083,7 @@ var require_buffer_list6 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join(s2) {
+        value: function join2(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -286279,18 +286279,18 @@ var init_parseUtil = __esm({
         if (this.value !== "aborted")
           this.value = "aborted";
       }
-      static mergeArray(status, results) {
+      static mergeArray(status2, results) {
         const arrayValue = [];
         for (const s2 of results) {
           if (s2.status === "aborted")
             return INVALID;
           if (s2.status === "dirty")
-            status.dirty();
+            status2.dirty();
           arrayValue.push(s2.value);
         }
-        return { status: status.value, value: arrayValue };
+        return { status: status2.value, value: arrayValue };
       }
-      static async mergeObjectAsync(status, pairs) {
+      static async mergeObjectAsync(status2, pairs) {
         const syncPairs = [];
         for (const pair of pairs) {
           const key = await pair.key;
@@ -286300,9 +286300,9 @@ var init_parseUtil = __esm({
             value
           });
         }
-        return _ParseStatus.mergeObjectSync(status, syncPairs);
+        return _ParseStatus.mergeObjectSync(status2, syncPairs);
       }
-      static mergeObjectSync(status, pairs) {
+      static mergeObjectSync(status2, pairs) {
         const finalObject = {};
         for (const pair of pairs) {
           const { key, value } = pair;
@@ -286311,14 +286311,14 @@ var init_parseUtil = __esm({
           if (value.status === "aborted")
             return INVALID;
           if (key.status === "dirty")
-            status.dirty();
+            status2.dirty();
           if (value.status === "dirty")
-            status.dirty();
+            status2.dirty();
           if (key.value !== "__proto__" && (typeof value.value !== "undefined" || pair.alwaysSet)) {
             finalObject[key.value] = value.value;
           }
         }
-        return { status: status.value, value: finalObject };
+        return { status: status2.value, value: finalObject };
       }
     };
     INVALID = Object.freeze({
@@ -286876,7 +286876,7 @@ var init_types2 = __esm({
           });
           return INVALID;
         }
-        const status = new ParseStatus();
+        const status2 = new ParseStatus();
         let ctx = void 0;
         for (const check2 of this._def.checks) {
           if (check2.kind === "min") {
@@ -286890,7 +286890,7 @@ var init_types2 = __esm({
                 exact: false,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "max") {
             if (input.data.length > check2.value) {
@@ -286903,7 +286903,7 @@ var init_types2 = __esm({
                 exact: false,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "length") {
             const tooBig = input.data.length > check2.value;
@@ -286929,7 +286929,7 @@ var init_types2 = __esm({
                   message: check2.message
                 });
               }
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "email") {
             if (!emailRegex.test(input.data)) {
@@ -286939,7 +286939,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "emoji") {
             if (!emojiRegex) {
@@ -286952,7 +286952,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "uuid") {
             if (!uuidRegex.test(input.data)) {
@@ -286962,7 +286962,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "nanoid") {
             if (!nanoidRegex.test(input.data)) {
@@ -286972,7 +286972,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "cuid") {
             if (!cuidRegex.test(input.data)) {
@@ -286982,7 +286982,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "cuid2") {
             if (!cuid2Regex.test(input.data)) {
@@ -286992,7 +286992,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "ulid") {
             if (!ulidRegex.test(input.data)) {
@@ -287002,7 +287002,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "url") {
             try {
@@ -287014,7 +287014,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "regex") {
             check2.regex.lastIndex = 0;
@@ -287026,7 +287026,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "trim") {
             input.data = input.data.trim();
@@ -287038,7 +287038,7 @@ var init_types2 = __esm({
                 validation: { includes: check2.value, position: check2.position },
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "toLowerCase") {
             input.data = input.data.toLowerCase();
@@ -287052,7 +287052,7 @@ var init_types2 = __esm({
                 validation: { startsWith: check2.value },
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "endsWith") {
             if (!input.data.endsWith(check2.value)) {
@@ -287062,7 +287062,7 @@ var init_types2 = __esm({
                 validation: { endsWith: check2.value },
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "datetime") {
             const regex = datetimeRegex(check2);
@@ -287073,7 +287073,7 @@ var init_types2 = __esm({
                 validation: "datetime",
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "date") {
             const regex = dateRegex;
@@ -287084,7 +287084,7 @@ var init_types2 = __esm({
                 validation: "date",
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "time") {
             const regex = timeRegex(check2);
@@ -287095,7 +287095,7 @@ var init_types2 = __esm({
                 validation: "time",
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "duration") {
             if (!durationRegex.test(input.data)) {
@@ -287105,7 +287105,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "ip") {
             if (!isValidIP(input.data, check2.version)) {
@@ -287115,7 +287115,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "jwt") {
             if (!isValidJWT(input.data, check2.alg)) {
@@ -287125,7 +287125,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "cidr") {
             if (!isValidCidr(input.data, check2.version)) {
@@ -287135,7 +287135,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "base64") {
             if (!base64Regex.test(input.data)) {
@@ -287145,7 +287145,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "base64url") {
             if (!base64urlRegex.test(input.data)) {
@@ -287155,13 +287155,13 @@ var init_types2 = __esm({
                 code: ZodIssueCode.invalid_string,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else {
             util.assertNever(check2);
           }
         }
-        return { status: status.value, value: input.data };
+        return { status: status2.value, value: input.data };
       }
       _regex(regex, validation, message) {
         return this.refinement((data) => regex.test(data), {
@@ -287429,7 +287429,7 @@ var init_types2 = __esm({
           return INVALID;
         }
         let ctx = void 0;
-        const status = new ParseStatus();
+        const status2 = new ParseStatus();
         for (const check2 of this._def.checks) {
           if (check2.kind === "int") {
             if (!util.isInteger(input.data)) {
@@ -287440,7 +287440,7 @@ var init_types2 = __esm({
                 received: "float",
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "min") {
             const tooSmall = check2.inclusive ? input.data < check2.value : input.data <= check2.value;
@@ -287454,7 +287454,7 @@ var init_types2 = __esm({
                 exact: false,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "max") {
             const tooBig = check2.inclusive ? input.data > check2.value : input.data >= check2.value;
@@ -287468,7 +287468,7 @@ var init_types2 = __esm({
                 exact: false,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "multipleOf") {
             if (floatSafeRemainder(input.data, check2.value) !== 0) {
@@ -287478,7 +287478,7 @@ var init_types2 = __esm({
                 multipleOf: check2.value,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "finite") {
             if (!Number.isFinite(input.data)) {
@@ -287487,13 +287487,13 @@ var init_types2 = __esm({
                 code: ZodIssueCode.not_finite,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else {
             util.assertNever(check2);
           }
         }
-        return { status: status.value, value: input.data };
+        return { status: status2.value, value: input.data };
       }
       gte(value, message) {
         return this.setLimit("min", value, true, errorUtil.toString(message));
@@ -287658,7 +287658,7 @@ var init_types2 = __esm({
           return this._getInvalidInput(input);
         }
         let ctx = void 0;
-        const status = new ParseStatus();
+        const status2 = new ParseStatus();
         for (const check2 of this._def.checks) {
           if (check2.kind === "min") {
             const tooSmall = check2.inclusive ? input.data < check2.value : input.data <= check2.value;
@@ -287671,7 +287671,7 @@ var init_types2 = __esm({
                 inclusive: check2.inclusive,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "max") {
             const tooBig = check2.inclusive ? input.data > check2.value : input.data >= check2.value;
@@ -287684,7 +287684,7 @@ var init_types2 = __esm({
                 inclusive: check2.inclusive,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "multipleOf") {
             if (input.data % check2.value !== BigInt(0)) {
@@ -287694,13 +287694,13 @@ var init_types2 = __esm({
                 multipleOf: check2.value,
                 message: check2.message
               });
-              status.dirty();
+              status2.dirty();
             }
           } else {
             util.assertNever(check2);
           }
         }
-        return { status: status.value, value: input.data };
+        return { status: status2.value, value: input.data };
       }
       _getInvalidInput(input) {
         const ctx = this._getOrReturnCtx(input);
@@ -287858,7 +287858,7 @@ var init_types2 = __esm({
           });
           return INVALID;
         }
-        const status = new ParseStatus();
+        const status2 = new ParseStatus();
         let ctx = void 0;
         for (const check2 of this._def.checks) {
           if (check2.kind === "min") {
@@ -287872,7 +287872,7 @@ var init_types2 = __esm({
                 minimum: check2.value,
                 type: "date"
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (check2.kind === "max") {
             if (input.data.getTime() > check2.value) {
@@ -287885,14 +287885,14 @@ var init_types2 = __esm({
                 maximum: check2.value,
                 type: "date"
               });
-              status.dirty();
+              status2.dirty();
             }
           } else {
             util.assertNever(check2);
           }
         }
         return {
-          status: status.value,
+          status: status2.value,
           value: new Date(input.data.getTime())
         };
       }
@@ -288078,7 +288078,7 @@ var init_types2 = __esm({
     };
     ZodArray = class _ZodArray extends ZodType {
       _parse(input) {
-        const { ctx, status } = this._processInputParams(input);
+        const { ctx, status: status2 } = this._processInputParams(input);
         const def = this._def;
         if (ctx.parsedType !== ZodParsedType.array) {
           addIssueToContext(ctx, {
@@ -288101,7 +288101,7 @@ var init_types2 = __esm({
               exact: true,
               message: def.exactLength.message
             });
-            status.dirty();
+            status2.dirty();
           }
         }
         if (def.minLength !== null) {
@@ -288114,7 +288114,7 @@ var init_types2 = __esm({
               exact: false,
               message: def.minLength.message
             });
-            status.dirty();
+            status2.dirty();
           }
         }
         if (def.maxLength !== null) {
@@ -288127,20 +288127,20 @@ var init_types2 = __esm({
               exact: false,
               message: def.maxLength.message
             });
-            status.dirty();
+            status2.dirty();
           }
         }
         if (ctx.common.async) {
           return Promise.all([...ctx.data].map((item, i2) => {
             return def.type._parseAsync(new ParseInputLazyPath(ctx, item, ctx.path, i2));
           })).then((result2) => {
-            return ParseStatus.mergeArray(status, result2);
+            return ParseStatus.mergeArray(status2, result2);
           });
         }
         const result = [...ctx.data].map((item, i2) => {
           return def.type._parseSync(new ParseInputLazyPath(ctx, item, ctx.path, i2));
         });
-        return ParseStatus.mergeArray(status, result);
+        return ParseStatus.mergeArray(status2, result);
       }
       get element() {
         return this._def.type;
@@ -288203,7 +288203,7 @@ var init_types2 = __esm({
           });
           return INVALID;
         }
-        const { status, ctx } = this._processInputParams(input);
+        const { status: status2, ctx } = this._processInputParams(input);
         const { shape, keys: shapeKeys } = this._getCached();
         const extraKeys = [];
         if (!(this._def.catchall instanceof ZodNever && this._def.unknownKeys === "strip")) {
@@ -288238,7 +288238,7 @@ var init_types2 = __esm({
                 code: ZodIssueCode.unrecognized_keys,
                 keys: extraKeys
               });
-              status.dirty();
+              status2.dirty();
             }
           } else if (unknownKeys === "strip") {
           } else {
@@ -288272,10 +288272,10 @@ var init_types2 = __esm({
             }
             return syncPairs;
           }).then((syncPairs) => {
-            return ParseStatus.mergeObjectSync(status, syncPairs);
+            return ParseStatus.mergeObjectSync(status2, syncPairs);
           });
         } else {
-          return ParseStatus.mergeObjectSync(status, pairs);
+          return ParseStatus.mergeObjectSync(status2, pairs);
         }
       }
       get shape() {
@@ -288715,7 +288715,7 @@ var init_types2 = __esm({
     };
     ZodIntersection = class extends ZodType {
       _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
+        const { status: status2, ctx } = this._processInputParams(input);
         const handleParsed = (parsedLeft, parsedRight) => {
           if (isAborted(parsedLeft) || isAborted(parsedRight)) {
             return INVALID;
@@ -288728,9 +288728,9 @@ var init_types2 = __esm({
             return INVALID;
           }
           if (isDirty(parsedLeft) || isDirty(parsedRight)) {
-            status.dirty();
+            status2.dirty();
           }
-          return { status: status.value, value: merged.data };
+          return { status: status2.value, value: merged.data };
         };
         if (ctx.common.async) {
           return Promise.all([
@@ -288768,7 +288768,7 @@ var init_types2 = __esm({
     };
     ZodTuple = class _ZodTuple extends ZodType {
       _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
+        const { status: status2, ctx } = this._processInputParams(input);
         if (ctx.parsedType !== ZodParsedType.array) {
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_type,
@@ -288796,7 +288796,7 @@ var init_types2 = __esm({
             exact: false,
             type: "array"
           });
-          status.dirty();
+          status2.dirty();
         }
         const items = [...ctx.data].map((item, itemIndex) => {
           const schema = this._def.items[itemIndex] || this._def.rest;
@@ -288806,10 +288806,10 @@ var init_types2 = __esm({
         }).filter((x2) => !!x2);
         if (ctx.common.async) {
           return Promise.all(items).then((results) => {
-            return ParseStatus.mergeArray(status, results);
+            return ParseStatus.mergeArray(status2, results);
           });
         } else {
-          return ParseStatus.mergeArray(status, items);
+          return ParseStatus.mergeArray(status2, items);
         }
       }
       get items() {
@@ -288841,7 +288841,7 @@ var init_types2 = __esm({
         return this._def.valueType;
       }
       _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
+        const { status: status2, ctx } = this._processInputParams(input);
         if (ctx.parsedType !== ZodParsedType.object) {
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_type,
@@ -288861,9 +288861,9 @@ var init_types2 = __esm({
           });
         }
         if (ctx.common.async) {
-          return ParseStatus.mergeObjectAsync(status, pairs);
+          return ParseStatus.mergeObjectAsync(status2, pairs);
         } else {
-          return ParseStatus.mergeObjectSync(status, pairs);
+          return ParseStatus.mergeObjectSync(status2, pairs);
         }
       }
       get element() {
@@ -288894,7 +288894,7 @@ var init_types2 = __esm({
         return this._def.valueType;
       }
       _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
+        const { status: status2, ctx } = this._processInputParams(input);
         if (ctx.parsedType !== ZodParsedType.map) {
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_type,
@@ -288921,11 +288921,11 @@ var init_types2 = __esm({
                 return INVALID;
               }
               if (key.status === "dirty" || value.status === "dirty") {
-                status.dirty();
+                status2.dirty();
               }
               finalMap.set(key.value, value.value);
             }
-            return { status: status.value, value: finalMap };
+            return { status: status2.value, value: finalMap };
           });
         } else {
           const finalMap = /* @__PURE__ */ new Map();
@@ -288936,11 +288936,11 @@ var init_types2 = __esm({
               return INVALID;
             }
             if (key.status === "dirty" || value.status === "dirty") {
-              status.dirty();
+              status2.dirty();
             }
             finalMap.set(key.value, value.value);
           }
-          return { status: status.value, value: finalMap };
+          return { status: status2.value, value: finalMap };
         }
       }
     };
@@ -288954,7 +288954,7 @@ var init_types2 = __esm({
     };
     ZodSet = class _ZodSet extends ZodType {
       _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
+        const { status: status2, ctx } = this._processInputParams(input);
         if (ctx.parsedType !== ZodParsedType.set) {
           addIssueToContext(ctx, {
             code: ZodIssueCode.invalid_type,
@@ -288974,7 +288974,7 @@ var init_types2 = __esm({
               exact: false,
               message: def.minSize.message
             });
-            status.dirty();
+            status2.dirty();
           }
         }
         if (def.maxSize !== null) {
@@ -288987,7 +288987,7 @@ var init_types2 = __esm({
               exact: false,
               message: def.maxSize.message
             });
-            status.dirty();
+            status2.dirty();
           }
         }
         const valueType = this._def.valueType;
@@ -288997,10 +288997,10 @@ var init_types2 = __esm({
             if (element.status === "aborted")
               return INVALID;
             if (element.status === "dirty")
-              status.dirty();
+              status2.dirty();
             parsedSet.add(element.value);
           }
-          return { status: status.value, value: parsedSet };
+          return { status: status2.value, value: parsedSet };
         }
         const elements = [...ctx.data.values()].map((item, i2) => valueType._parse(new ParseInputLazyPath(ctx, item, ctx.path, i2)));
         if (ctx.common.async) {
@@ -289324,15 +289324,15 @@ var init_types2 = __esm({
         return this._def.schema._def.typeName === ZodFirstPartyTypeKind.ZodEffects ? this._def.schema.sourceType() : this._def.schema;
       }
       _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
+        const { status: status2, ctx } = this._processInputParams(input);
         const effect = this._def.effect || null;
         const checkCtx = {
           addIssue: (arg) => {
             addIssueToContext(ctx, arg);
             if (arg.fatal) {
-              status.abort();
+              status2.abort();
             } else {
-              status.dirty();
+              status2.dirty();
             }
           },
           get path() {
@@ -289344,7 +289344,7 @@ var init_types2 = __esm({
           const processed = effect.transform(ctx.data, checkCtx);
           if (ctx.common.async) {
             return Promise.resolve(processed).then(async (processed2) => {
-              if (status.value === "aborted")
+              if (status2.value === "aborted")
                 return INVALID;
               const result = await this._def.schema._parseAsync({
                 data: processed2,
@@ -289355,12 +289355,12 @@ var init_types2 = __esm({
                 return INVALID;
               if (result.status === "dirty")
                 return DIRTY(result.value);
-              if (status.value === "dirty")
+              if (status2.value === "dirty")
                 return DIRTY(result.value);
               return result;
             });
           } else {
-            if (status.value === "aborted")
+            if (status2.value === "aborted")
               return INVALID;
             const result = this._def.schema._parseSync({
               data: processed,
@@ -289371,7 +289371,7 @@ var init_types2 = __esm({
               return INVALID;
             if (result.status === "dirty")
               return DIRTY(result.value);
-            if (status.value === "dirty")
+            if (status2.value === "dirty")
               return DIRTY(result.value);
             return result;
           }
@@ -289396,17 +289396,17 @@ var init_types2 = __esm({
             if (inner.status === "aborted")
               return INVALID;
             if (inner.status === "dirty")
-              status.dirty();
+              status2.dirty();
             executeRefinement(inner.value);
-            return { status: status.value, value: inner.value };
+            return { status: status2.value, value: inner.value };
           } else {
             return this._def.schema._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx }).then((inner) => {
               if (inner.status === "aborted")
                 return INVALID;
               if (inner.status === "dirty")
-                status.dirty();
+                status2.dirty();
               return executeRefinement(inner.value).then(() => {
-                return { status: status.value, value: inner.value };
+                return { status: status2.value, value: inner.value };
               });
             });
           }
@@ -289424,13 +289424,13 @@ var init_types2 = __esm({
             if (result instanceof Promise) {
               throw new Error(`Asynchronous transform encountered during synchronous parse operation. Use .parseAsync instead.`);
             }
-            return { status: status.value, value: result };
+            return { status: status2.value, value: result };
           } else {
             return this._def.schema._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx }).then((base) => {
               if (!isValid(base))
                 return INVALID;
               return Promise.resolve(effect.transform(base.value, checkCtx)).then((result) => ({
-                status: status.value,
+                status: status2.value,
                 value: result
               }));
             });
@@ -289608,7 +289608,7 @@ var init_types2 = __esm({
     };
     ZodPipeline = class _ZodPipeline extends ZodType {
       _parse(input) {
-        const { status, ctx } = this._processInputParams(input);
+        const { status: status2, ctx } = this._processInputParams(input);
         if (ctx.common.async) {
           const handleAsync = async () => {
             const inResult = await this._def.in._parseAsync({
@@ -289619,7 +289619,7 @@ var init_types2 = __esm({
             if (inResult.status === "aborted")
               return INVALID;
             if (inResult.status === "dirty") {
-              status.dirty();
+              status2.dirty();
               return DIRTY(inResult.value);
             } else {
               return this._def.out._parseAsync({
@@ -289639,7 +289639,7 @@ var init_types2 = __esm({
           if (inResult.status === "aborted")
             return INVALID;
           if (inResult.status === "dirty") {
-            status.dirty();
+            status2.dirty();
             return {
               status: "dirty",
               value: inResult.value
@@ -305749,8 +305749,8 @@ var init_types3 = __esm({
 });
 
 // ../../node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js
-function isTerminal(status) {
-  return status === "completed" || status === "failed" || status === "cancelled";
+function isTerminal(status2) {
+  return status2 === "completed" || status2 === "failed" || status2 === "cancelled";
 }
 var init_interfaces = __esm({
   "../../node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js"() {
@@ -307046,8 +307046,8 @@ var init_protocol = __esm({
             }
             return task;
           },
-          storeTaskResult: async (taskId, status, result) => {
-            await taskStore.storeTaskResult(taskId, status, result, sessionId);
+          storeTaskResult: async (taskId, status2, result) => {
+            await taskStore.storeTaskResult(taskId, status2, result, sessionId);
             const task = await taskStore.getTask(taskId, sessionId);
             if (task) {
               const notification = TaskStatusNotificationSchema.parse({
@@ -307063,15 +307063,15 @@ var init_protocol = __esm({
           getTaskResult: (taskId) => {
             return taskStore.getTaskResult(taskId, sessionId);
           },
-          updateTaskStatus: async (taskId, status, statusMessage) => {
+          updateTaskStatus: async (taskId, status2, statusMessage) => {
             const task = await taskStore.getTask(taskId, sessionId);
             if (!task) {
               throw new McpError(ErrorCode.InvalidParams, `Task "${taskId}" not found - it may have been cleaned up`);
             }
             if (isTerminal(task.status)) {
-              throw new McpError(ErrorCode.InvalidParams, `Cannot update task "${taskId}" from terminal status "${task.status}" to "${status}". Terminal states (completed, failed, cancelled) cannot transition to other states.`);
+              throw new McpError(ErrorCode.InvalidParams, `Cannot update task "${taskId}" from terminal status "${task.status}" to "${status2}". Terminal states (completed, failed, cancelled) cannot transition to other states.`);
             }
-            await taskStore.updateTaskStatus(taskId, status, statusMessage, sessionId);
+            await taskStore.updateTaskStatus(taskId, status2, statusMessage, sessionId);
             const updatedTask = await taskStore.getTask(taskId, sessionId);
             if (updatedTask) {
               const notification = TaskStatusNotificationSchema.parse({
@@ -317442,21 +317442,141 @@ var init_connection = __esm({
   }
 });
 
+// src/commands/runner/daemon.ts
+var import_child_process2, import_fs7, import_promises2, import_os2, import_path, import_util11, DEFAULT_SERVICE_NAME, RUNNER_AUTH_EXIT_CODE, systemdQuote, unitPath, buildUnit, resolveGcliCommand, defaultExec, SystemdUserService, assertSystemdAvailable;
+var init_daemon = __esm({
+  "src/commands/runner/daemon.ts"() {
+    import_child_process2 = require("child_process");
+    import_fs7 = require("fs");
+    import_promises2 = require("fs/promises");
+    import_os2 = require("os");
+    import_path = require("path");
+    import_util11 = require("util");
+    DEFAULT_SERVICE_NAME = "lambforge-runner";
+    RUNNER_AUTH_EXIT_CODE = 78;
+    systemdQuote = (word) => /^[A-Za-z0-9_@%+=:,./-]+$/.test(word) ? word : `"${word.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
+    unitPath = (serviceName, home = (0, import_os2.homedir)()) => (0, import_path.join)(home, ".config", "systemd", "user", `${serviceName}.service`);
+    buildUnit = ({
+      serviceName,
+      execStart,
+      env = {},
+      description = "Lambforge local AI runner"
+    }) => [
+      "[Unit]",
+      `Description=${description} (${serviceName})`,
+      "After=network-online.target",
+      "Wants=network-online.target",
+      "",
+      "[Service]",
+      "Type=simple",
+      `ExecStart=${execStart.map(systemdQuote).join(" ")}`,
+      ...Object.entries(env).map(
+        ([key, value]) => `Environment=${systemdQuote(`${key}=${value}`)}`
+      ),
+      "Restart=always",
+      "RestartSec=5",
+      // A refused token won't fix itself - don't hammer the API with it.
+      `RestartPreventExitStatus=${RUNNER_AUTH_EXIT_CODE}`,
+      "",
+      "[Install]",
+      "WantedBy=default.target",
+      ""
+    ].join("\n");
+    resolveGcliCommand = (argv = process.argv, execPath = process.execPath, isSeaBinary = (() => {
+      try {
+        return require("node:sea").isSea();
+      } catch {
+        return false;
+      }
+    })()) => {
+      if (isSeaBinary) {
+        return { command: [execPath] };
+      }
+      let script = argv[1];
+      try {
+        script = (0, import_fs7.realpathSync)(script);
+      } catch {
+      }
+      const ephemeral = /[/\\]_npx[/\\]|[/\\]\.npm[/\\]_cacache/.test(script);
+      return {
+        command: [execPath, script],
+        warning: ephemeral ? `gcli is running from the npx cache (${script}), which npm may clean up and break the service. Install it globally first: npm i -g @gapi/gcli, then re-run this command with \`gcli\`.` : void 0
+      };
+    };
+    defaultExec = (file2, args) => (0, import_util11.promisify)(import_child_process2.execFile)(file2, args, { encoding: "utf8" });
+    SystemdUserService = class {
+      constructor(serviceName = DEFAULT_SERVICE_NAME, exec2 = defaultExec, home = (0, import_os2.homedir)()) {
+        this.serviceName = serviceName;
+        this.exec = exec2;
+        this.home = home;
+      }
+      get unit() {
+        return `${this.serviceName}.service`;
+      }
+      /** install -> daemon-reload -> enable -> restart (picks up a changed unit). */
+      async install(unitContent) {
+        const path2 = unitPath(this.serviceName, this.home);
+        await (0, import_promises2.mkdir)((0, import_path.join)(path2, ".."), { recursive: true });
+        await (0, import_promises2.writeFile)(path2, unitContent, "utf-8");
+        await this.systemctl("daemon-reload");
+        await this.systemctl("enable", this.unit);
+        await this.systemctl("restart", this.unit);
+        return path2;
+      }
+      async uninstall() {
+        await this.systemctl("disable", "--now", this.unit).catch(() => void 0);
+        const path2 = unitPath(this.serviceName, this.home);
+        await (0, import_promises2.rm)(path2, { force: true });
+        await this.systemctl("daemon-reload");
+        return path2;
+      }
+      async status() {
+        return this.systemctl("status", "--no-pager", "--lines=15", this.unit).then((r2) => r2.stdout).catch((e2) => e2.stdout || e2.message);
+      }
+      /** Whether the service keeps running after logout / starts at boot. */
+      async lingerEnabled(user = process.env.USER) {
+        try {
+          const { stdout } = await this.exec("loginctl", [
+            "show-user",
+            user,
+            "--property=Linger"
+          ]);
+          return /Linger=yes/.test(stdout);
+        } catch {
+          return false;
+        }
+      }
+      systemctl(...args) {
+        return this.exec("systemctl", ["--user", ...args]);
+      }
+    };
+    assertSystemdAvailable = () => {
+      if (process.platform !== "linux") {
+        throw new Error(
+          `runner:daemon uses systemd and is Linux-only for now (this is ${process.platform}). Run \`gcli runner:start\` under your own process manager meanwhile.`
+        );
+      }
+    };
+  }
+});
+
 // src/commands/runner/start.ts
 var start_exports2 = {};
 __export(start_exports2, {
   RUNNER_VERSION: () => RUNNER_VERSION,
-  default: () => start_default
+  default: () => start_default,
+  resolveRunner: () => resolveRunner
 });
-var import_os2, import_rxjs35, RUNNER_VERSION, resolveRunner, start_default;
+var import_os3, import_rxjs35, RUNNER_VERSION, resolveRunner, start_default;
 var init_start2 = __esm({
   "src/commands/runner/start.ts"() {
-    import_os2 = require("os");
+    import_os3 = require("os");
     import_rxjs35 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
     init_connection();
+    init_daemon();
     init_ollama();
     RUNNER_VERSION = "gcli-runner/1";
     resolveRunner = async (cmd) => {
@@ -317470,7 +317590,7 @@ var init_start2 = __esm({
       if (saved) {
         return saved;
       }
-      const name2 = cmd.name || (0, import_os2.hostname)();
+      const name2 = cmd.name || (0, import_os3.hostname)();
       Logger.info(`Registering this machine as local runner "${name2}"...`);
       const { runner, token } = await (0, import_rxjs35.lastValueFrom)(
         GraphqlClienAPI.createLocalRunner(name2)
@@ -317513,10 +317633,103 @@ var init_start2 = __esm({
       } catch (e2) {
         if (e2 instanceof RunnerAuthError) {
           Logger.error(e2.message);
-          process.exit(1);
+          process.exit(RUNNER_AUTH_EXIT_CODE);
         }
         throw e2;
       }
+    };
+  }
+});
+
+// src/commands/runner/daemon-commands.ts
+var daemon_commands_exports = {};
+__export(daemon_commands_exports, {
+  install: () => install,
+  logs: () => logs,
+  status: () => status,
+  uninstall: () => uninstall
+});
+var import_child_process3, install, uninstall, status, logs;
+var init_daemon_commands = __esm({
+  "src/commands/runner/daemon-commands.ts"() {
+    import_child_process3 = require("child_process");
+    init_log();
+    init_config();
+    init_daemon();
+    init_ollama();
+    init_start2();
+    install = async (cmd) => {
+      assertSystemdAvailable();
+      const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
+      const { command, warning } = resolveGcliCommand();
+      if (warning) {
+        Logger.warn(warning);
+      }
+      const ollamaUrl = resolveOllamaUrl(cmd.ollama);
+      const execStart = [
+        ...command,
+        "runner:start",
+        "--ollama",
+        ollamaUrl,
+        ...cmd.wsUrl ? ["--wsUrl", cmd.wsUrl] : []
+      ];
+      const unit = buildUnit({ serviceName, execStart });
+      if (cmd.dryRun) {
+        Logger.info(`Would write ${unitPath(serviceName)}:`);
+        console.log(unit);
+        return;
+      }
+      if (cmd.token) {
+        if (cmd.reset) {
+          await forgetRunner();
+        }
+        await saveRunner({
+          id: "(from --token)",
+          name: cmd.name ?? "",
+          token: cmd.token,
+          wsUrl: cmd.wsUrl
+        });
+      } else {
+        await resolveRunner({ name: cmd.name, reset: cmd.reset });
+      }
+      const runner = await readSavedRunner();
+      const systemd = new SystemdUserService(serviceName);
+      const path2 = await systemd.install(unit);
+      Logger.log(
+        `Runner "${runner?.name || runner?.id}" installed as systemd user service ${serviceName} (${path2}) and started.`
+      );
+      Logger.info(
+        `Status: gcli runner:daemon:status   Logs: gcli runner:daemon:logs`
+      );
+      if (!await systemd.lingerEnabled()) {
+        Logger.warn(
+          `It stops when you log out and starts at your next login. To keep it running and start it at boot: sudo loginctl enable-linger ${process.env.USER ?? "$USER"}`
+        );
+      }
+    };
+    uninstall = async (cmd) => {
+      assertSystemdAvailable();
+      const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
+      const path2 = await new SystemdUserService(serviceName).uninstall();
+      Logger.log(
+        `Stopped and removed ${serviceName} (${path2}). The runner itself is still registered - \`gcli runner:delete\` revokes it.`
+      );
+    };
+    status = async (cmd) => {
+      assertSystemdAvailable();
+      const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
+      console.log(await new SystemdUserService(serviceName).status());
+    };
+    logs = (cmd) => {
+      assertSystemdAvailable();
+      const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
+      return new Promise((resolve) => {
+        (0, import_child_process3.spawn)(
+          "journalctl",
+          ["--user", "-u", `${serviceName}.service`, "-f", "-n", cmd.lines || "50"],
+          { stdio: "inherit" }
+        ).on("exit", () => resolve());
+      });
     };
   }
 });
@@ -318259,6 +318472,23 @@ function registerRunnerCommands(program2) {
     "--ollama <url>",
     "Ollama URL (default: $OLLAMA_HOST or http://127.0.0.1:11434)"
   ).option("--wsUrl <url>", "Lambforge subscriptions endpoint override").option("--reset", "Forget the saved runner and register a new one").action(lazy(() => Promise.resolve().then(() => (init_start2(), start_exports2)).then((m2) => m2.default)));
+  program2.command("runner:daemon:install").alias("runner:start:daemon").description(
+    "Run the runner in the background as a systemd user service: starts with your session, restarts on failure (Linux)"
+  ).option(
+    "-n, --name <name>",
+    "Runner name when registering (default: hostname)"
+  ).option(
+    "-t, --token <token>",
+    "Runner token for a machine without `gcli login`"
+  ).option(
+    "--ollama <url>",
+    "Ollama URL (default: $OLLAMA_HOST or http://127.0.0.1:11434)"
+  ).option("--wsUrl <url>", "Lambforge subscriptions endpoint override").option("--reset", "Forget the saved runner and register a new one").option("--service <name>", "systemd unit name (default: lambforge-runner)").option("--dry-run", "Print the unit file instead of installing it").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.install)));
+  program2.command("runner:daemon:status").description("Show the runner service status (systemctl --user status)").option("--service <name>", "systemd unit name (default: lambforge-runner)").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.status)));
+  program2.command("runner:daemon:logs").description("Follow the runner service log (journalctl --user -f)").option("--service <name>", "systemd unit name (default: lambforge-runner)").option("--lines <n>", "Lines of history to show first (default 50)").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.logs)));
+  program2.command("runner:daemon:uninstall").description(
+    "Stop and remove the runner service (the runner stays registered)"
+  ).option("--service <name>", "systemd unit name (default: lambforge-runner)").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.uninstall)));
   program2.command("runner:list").description("List your local AI runners and the models they serve").action(lazy(() => Promise.resolve().then(() => (init_list6(), list_exports6)).then((m2) => m2.default)));
   program2.command("runner:models").description(
     "Choose which of a runner's models appear in the chat model picker (no flags: list them)"
