@@ -5,6 +5,9 @@ export interface LocalRunnerModel {
   family?: string;
   capabilities: string[];
   contextLength?: number;
+  // The context window the model is loaded with right now (`/api/ps`);
+  // undefined when it isn't loaded.
+  runtimeContextLength?: number;
 }
 
 export interface LocalRunner {
