@@ -12391,7 +12391,7 @@ var require_lastValueFrom = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.lastValueFrom = void 0;
     var EmptyError_1 = require_EmptyError();
-    function lastValueFrom34(source, config2) {
+    function lastValueFrom38(source, config2) {
       var hasConfig = typeof config2 === "object";
       return new Promise(function(resolve, reject) {
         var _hasValue = false;
@@ -12414,7 +12414,7 @@ var require_lastValueFrom = __commonJS({
         });
       });
     }
-    exports2.lastValueFrom = lastValueFrom34;
+    exports2.lastValueFrom = lastValueFrom38;
   }
 });
 
@@ -16792,7 +16792,7 @@ var require_tap = __commonJS({
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var identity_1 = require_identity();
-    function tap33(observerOrNext, error48, complete) {
+    function tap34(observerOrNext, error48, complete) {
       var tapObserver = isFunction_1.isFunction(observerOrNext) || error48 || complete ? { next: observerOrNext, error: error48, complete } : observerOrNext;
       return tapObserver ? lift_1.operate(function(source, subscriber) {
         var _a2;
@@ -16821,7 +16821,7 @@ var require_tap = __commonJS({
         }));
       }) : identity_1.identity;
     }
-    exports2.tap = tap33;
+    exports2.tap = tap34;
   }
 });
 
@@ -27839,7 +27839,7 @@ var require_auth = __commonJS({
         this.a = this.c;
         qm(this, true);
       };
-      function rm(a, b) {
+      function rm2(a, b) {
         if (b) return a.a = a.c, a.g();
         b = a.a;
         a.a *= 2;
@@ -27848,7 +27848,7 @@ var require_auth = __commonJS({
       }
       function qm(a, b) {
         a.stop();
-        a.b = Bd(rm(a, b)).then(function() {
+        a.b = Bd(rm2(a, b)).then(function() {
           return Ye();
         }).then(function() {
           return a.h();
@@ -35995,7 +35995,7 @@ var require_index_cjs3 = __commonJS({
 });
 
 // src/types.ts
-var import_os, mainDirectory, tokenDirectory, refreshTokenDirectory, urlDirectory, keyDirectory, projectDirectory, generationTimeDirectory, uploadUrlDirectory;
+var import_os, mainDirectory, tokenDirectory, refreshTokenDirectory, urlDirectory, keyDirectory, projectDirectory, generationTimeDirectory, uploadUrlDirectory, runnerDirectory;
 var init_types = __esm({
   "src/types.ts"() {
     import_os = require("os");
@@ -36009,6 +36009,7 @@ var init_types = __esm({
       "/"
     );
     uploadUrlDirectory = [mainDirectory, "upload-url"].join("/");
+    runnerDirectory = [mainDirectory, "runner.json"].join("/");
   }
 });
 
@@ -36145,6 +36146,29 @@ scaleOptions {
   }
 });
 
+// src/services/types/local-runner.fragment.ts
+var LocalRunnerFragment;
+var init_local_runner_fragment = __esm({
+  "src/services/types/local-runner.fragment.ts"() {
+    LocalRunnerFragment = `
+  id
+  name
+  tokenPrefix
+  online
+  lastSeenAt
+  runnerVersion
+  createdAt
+  enabledModels
+  models {
+    name
+    parameterSize
+    quantization
+    capabilities
+  }
+`;
+  }
+});
+
 // src/services/types/plugin.fragment.ts
 var PluginFragment, InstalledPluginFragment;
 var init_plugin_fragment = __esm({
@@ -36257,6 +36281,7 @@ var init_gql_client = __esm({
     init_cluster_fragment();
     init_environment_fragment();
     init_lambda_fragment();
+    init_local_runner_fragment();
     init_plugin_fragment();
     init_project_fragment();
     init_rabbitmq_fragment();
@@ -36651,6 +36676,56 @@ var init_gql_client = __esm({
       `,
           variables: { projectId, ...input }
         }).pipe((0, import_operators.map)((res) => res.provisionProjectCluster));
+      }
+      static listLocalRunners() {
+        return this.query({
+          query: gql`
+        query listLocalRunners {
+          listLocalRunners {
+            ${LocalRunnerFragment}
+          }
+        }
+      `
+        }).pipe((0, import_operators.map)((res) => res.listLocalRunners));
+      }
+      static createLocalRunner(name2) {
+        return this.query({
+          query: gql`
+        mutation createLocalRunner($name: String!) {
+          createLocalRunner(name: $name) {
+            token
+            runner {
+              ${LocalRunnerFragment}
+            }
+          }
+        }
+      `,
+          variables: { name: name2 }
+        }).pipe((0, import_operators.map)((res) => res.createLocalRunner));
+      }
+      static setLocalRunnerModels(runnerId, models) {
+        return this.query({
+          query: gql`
+        mutation setLocalRunnerModels($runnerId: String!, $models: [String!]) {
+          setLocalRunnerModels(runnerId: $runnerId, models: $models) {
+            ${LocalRunnerFragment}
+          }
+        }
+      `,
+          variables: { runnerId, models }
+        }).pipe((0, import_operators.map)((res) => res.setLocalRunnerModels));
+      }
+      static deleteLocalRunner(runnerId) {
+        return this.query({
+          query: gql`
+        mutation deleteLocalRunner($runnerId: String!) {
+          deleteLocalRunner(runnerId: $runnerId) {
+            status
+          }
+        }
+      `,
+          variables: { runnerId }
+        }).pipe((0, import_operators.map)((res) => res.deleteLocalRunner));
       }
       static projectClusters(projectId) {
         return this.query({
@@ -42106,7 +42181,7 @@ var require_typescript = __commonJS({
         walkUpParenthesizedTypesAndGetParentAndChild: () => walkUpParenthesizedTypesAndGetParentAndChild,
         whitespaceOrMapCommentRegExp: () => whitespaceOrMapCommentRegExp,
         writeCommentRange: () => writeCommentRange,
-        writeFile: () => writeFile5,
+        writeFile: () => writeFile6,
         writeFileEnsuringDirectories: () => writeFileEnsuringDirectories,
         zipWith: () => zipWith
       });
@@ -48438,7 +48513,7 @@ ${lanes.join("\n")}
             writeOutputIsTTY() {
               return process.stdout.isTTY;
             },
-            readFile: readFile2,
+            readFile: readFile3,
             writeFile: writeFile22,
             watchFile: watchFile2,
             watchDirectory,
@@ -48644,7 +48719,7 @@ ${lanes.join("\n")}
               callback
             );
           }
-          function readFile2(fileName, _encoding) {
+          function readFile3(fileName, _encoding) {
             let buffer;
             try {
               buffer = _fs.readFileSync(fileName);
@@ -60749,7 +60824,7 @@ ${lanes.join("\n")}
         sourceFilePath = isSourceFileInCommonSourceDirectory ? sourceFilePath.substring(commonSourceDirectory.length) : sourceFilePath;
         return combinePaths(newDirPath, sourceFilePath);
       }
-      function writeFile5(host, diagnostics, fileName, text, writeByteOrderMark, sourceFiles, data) {
+      function writeFile6(host, diagnostics, fileName, text, writeByteOrderMark, sourceFiles, data) {
         host.writeFile(
           fileName,
           text,
@@ -85200,7 +85275,7 @@ ${lanes.join("\n")}
         const possibleOption = getSpellingSuggestion(unknownOption, diagnostics.optionDeclarations, getOptionName);
         return possibleOption ? createDiagnosticForNodeInSourceFileOrCompilerDiagnostic(sourceFile, node, diagnostics.unknownDidYouMeanDiagnostic, unknownOptionErrorText || unknownOption, possibleOption.name) : createDiagnosticForNodeInSourceFileOrCompilerDiagnostic(sourceFile, node, diagnostics.unknownOptionDiagnostic, unknownOptionErrorText || unknownOption);
       }
-      function parseCommandLineWorker(diagnostics, commandLine, readFile2) {
+      function parseCommandLineWorker(diagnostics, commandLine, readFile3) {
         const options = {};
         let watchOptions;
         const fileNames = [];
@@ -85248,7 +85323,7 @@ ${lanes.join("\n")}
           }
         }
         function parseResponseFile(fileName) {
-          const text = tryReadFile(fileName, readFile2 || ((fileName2) => sys.readFile(fileName2)));
+          const text = tryReadFile(fileName, readFile3 || ((fileName2) => sys.readFile(fileName2)));
           if (!isString(text)) {
             errors.push(text);
             return;
@@ -85351,8 +85426,8 @@ ${lanes.join("\n")}
         unknownDidYouMeanDiagnostic: Diagnostics.Unknown_compiler_option_0_Did_you_mean_1,
         optionTypeMismatchDiagnostic: Diagnostics.Compiler_option_0_expects_an_argument
       };
-      function parseCommandLine(commandLine, readFile2) {
-        return parseCommandLineWorker(compilerOptionsDidYouMeanDiagnostics, commandLine, readFile2);
+      function parseCommandLine(commandLine, readFile3) {
+        return parseCommandLineWorker(compilerOptionsDidYouMeanDiagnostics, commandLine, readFile3);
       }
       function getOptionFromName(optionName, allowShort) {
         return getOptionDeclarationFromName(getOptionsNameMap, optionName, allowShort);
@@ -85434,8 +85509,8 @@ ${lanes.join("\n")}
           watchOptionsToExtend
         );
       }
-      function readConfigFile(fileName, readFile2) {
-        const textOrDiagnostic = tryReadFile(fileName, readFile2);
+      function readConfigFile(fileName, readFile3) {
+        const textOrDiagnostic = tryReadFile(fileName, readFile3);
         return isString(textOrDiagnostic) ? parseConfigFileTextToJson(fileName, textOrDiagnostic) : { config: {}, error: textOrDiagnostic };
       }
       function parseConfigFileTextToJson(fileName, jsonText) {
@@ -85450,14 +85525,14 @@ ${lanes.join("\n")}
           error: jsonSourceFile.parseDiagnostics.length ? jsonSourceFile.parseDiagnostics[0] : void 0
         };
       }
-      function readJsonConfigFile(fileName, readFile2) {
-        const textOrDiagnostic = tryReadFile(fileName, readFile2);
+      function readJsonConfigFile(fileName, readFile3) {
+        const textOrDiagnostic = tryReadFile(fileName, readFile3);
         return isString(textOrDiagnostic) ? parseJsonText(fileName, textOrDiagnostic) : { fileName, parseDiagnostics: [textOrDiagnostic] };
       }
-      function tryReadFile(fileName, readFile2) {
+      function tryReadFile(fileName, readFile3) {
         let text;
         try {
-          text = readFile2(fileName);
+          text = readFile3(fileName);
         } catch (e2) {
           return createCompilerDiagnostic(Diagnostics.Cannot_read_file_0_Colon_1, fileName, e2.message);
         }
@@ -169500,7 +169575,7 @@ ${lanes.join("\n")}
             return;
           }
           const buildInfo = host.getBuildInfo() || { version: version2 };
-          writeFile5(
+          writeFile6(
             host,
             emitterDiagnostics,
             buildInfoPath,
@@ -169712,7 +169787,7 @@ ${lanes.join("\n")}
             }
             if (sourceMapFilePath) {
               const sourceMap = sourceMapGenerator.toString();
-              writeFile5(
+              writeFile6(
                 host,
                 emitterDiagnostics,
                 sourceMapFilePath,
@@ -169727,7 +169802,7 @@ ${lanes.join("\n")}
           }
           const text = writer.getText();
           const data = { sourceMapUrlPos, diagnostics: transform22.diagnostics };
-          writeFile5(host, emitterDiagnostics, jsFilePath, text, !!compilerOptions.emitBOM, sourceFiles, data);
+          writeFile6(host, emitterDiagnostics, jsFilePath, text, !!compilerOptions.emitBOM, sourceFiles, data);
           writer.clear();
           return !data.skippedDtsWrite;
         }
@@ -175115,12 +175190,12 @@ ${lanes.join("\n")}
       function createCompilerHost(options, setParentNodes) {
         return createCompilerHostWorker(options, setParentNodes);
       }
-      function createGetSourceFile(readFile2, setParentNodes) {
+      function createGetSourceFile(readFile3, setParentNodes) {
         return (fileName, languageVersionOrOptions, onError) => {
           let text;
           try {
             mark("beforeIORead");
-            text = readFile2(fileName);
+            text = readFile3(fileName);
             mark("afterIORead");
             measure("I/O Read", "beforeIORead", "afterIORead");
           } catch (e2) {
@@ -176024,7 +176099,7 @@ ${lanes.join("\n")}
           getRedirectFromOutput,
           forEachResolvedProjectReference: forEachResolvedProjectReference2
         });
-        const readFile2 = host.readFile.bind(host);
+        const readFile3 = host.readFile.bind(host);
         (_e = tracing) == null ? void 0 : _e.push(tracing.Phase.Program, "shouldProgramCreateNewSourceFiles", { hasOldProgram: !!oldProgram });
         const shouldCreateNewSourceFile = shouldProgramCreateNewSourceFiles(oldProgram, options);
         (_f = tracing) == null ? void 0 : _f.pop();
@@ -176250,7 +176325,7 @@ ${lanes.join("\n")}
           shouldTransformImportCall,
           emitBuildInfo,
           fileExists,
-          readFile: readFile2,
+          readFile: readFile3,
           directoryExists,
           getSymlinkCache,
           realpath: (_o = host.realpath) == null ? void 0 : _o.bind(host),
@@ -237609,7 +237684,7 @@ ${options.prefix}` : "\n" : options.prefix
         walkUpParenthesizedTypesAndGetParentAndChild: () => walkUpParenthesizedTypesAndGetParentAndChild,
         whitespaceOrMapCommentRegExp: () => whitespaceOrMapCommentRegExp,
         writeCommentRange: () => writeCommentRange,
-        writeFile: () => writeFile5,
+        writeFile: () => writeFile6,
         writeFileEnsuringDirectories: () => writeFileEnsuringDirectories,
         zipWith: () => zipWith
       });
@@ -250734,7 +250809,7 @@ var require_esbuild_decorators = __commonJS({
     var typescript_1 = require_typescript();
     var util_1 = require("util");
     var strip_it_1 = require_strip_it();
-    var { readFile: readFile2 } = fs_1.promises;
+    var { readFile: readFile3 } = fs_1.promises;
     var theFinder = new RegExp(/((?<![(\s]\s*['"])@\w[.[\]\w\d]*\s*(?![;])[((?=\s)])/);
     var findDecorators = (fileContent) => theFinder.test((0, strip_it_1.strip)(fileContent));
     var esbuildDecorators2 = (options = {}) => ({
@@ -250758,7 +250833,7 @@ var require_esbuild_decorators = __commonJS({
           if (!forceTsc && (!parsedTsConfig || !parsedTsConfig.options || !parsedTsConfig.options.emitDecoratorMetadata)) {
             return;
           }
-          const ts = yield readFile2(args.path, "utf8").catch((err) => printDiagnostics({ file: args.path, err }));
+          const ts = yield readFile3(args.path, "utf8").catch((err) => printDiagnostics({ file: args.path, err }));
           const hasDecorator = findDecorators(ts);
           if (!ts || !hasDecorator) {
             return;
@@ -267389,8 +267464,8 @@ var require_graceful_fs = __commonJS({
       fs3.createReadStream = createReadStream3;
       fs3.createWriteStream = createWriteStream;
       var fs$readFile = fs3.readFile;
-      fs3.readFile = readFile2;
-      function readFile2(path2, options, cb) {
+      fs3.readFile = readFile3;
+      function readFile3(path2, options, cb) {
         if (typeof options === "function")
           cb = options, options = null;
         return go$readFile(path2, options, cb);
@@ -267407,8 +267482,8 @@ var require_graceful_fs = __commonJS({
         }
       }
       var fs$writeFile = fs3.writeFile;
-      fs3.writeFile = writeFile5;
-      function writeFile5(path2, data, options, cb) {
+      fs3.writeFile = writeFile6;
+      function writeFile6(path2, data, options, cb) {
         if (typeof options === "function")
           cb = options, options = null;
         return go$writeFile(path2, data, options, cb);
@@ -316863,17 +316938,704 @@ var init_delete2 = __esm({
   }
 });
 
-// src/commands/start/start.ts
+// src/commands/runner/config.ts
+var import_promises, DEFAULT_WS_URL, deriveSubscriptionsUrl, readLoginApiUrl, readSavedRunner, saveRunner, forgetRunner;
+var init_config = __esm({
+  "src/commands/runner/config.ts"() {
+    import_promises = require("fs/promises");
+    init_types();
+    DEFAULT_WS_URL = "wss://api.lambforge.com/subscriptions";
+    deriveSubscriptionsUrl = (apiUrl) => {
+      if (!apiUrl?.trim()) {
+        return DEFAULT_WS_URL;
+      }
+      const url2 = new URL(apiUrl.trim());
+      if (["localhost", "127.0.0.1"].includes(url2.hostname) && url2.port === "9004") {
+        return `ws://${url2.hostname}:9000/subscriptions`;
+      }
+      url2.protocol = url2.protocol === "http:" ? "ws:" : "wss:";
+      url2.pathname = "/subscriptions";
+      url2.search = "";
+      return url2.toString();
+    };
+    readLoginApiUrl = () => (0, import_promises.readFile)(urlDirectory, "utf-8").catch(() => "");
+    readSavedRunner = async () => {
+      try {
+        const saved = JSON.parse(await (0, import_promises.readFile)(runnerDirectory, "utf-8"));
+        return saved?.id && saved?.token ? saved : null;
+      } catch {
+        return null;
+      }
+    };
+    saveRunner = async (runner) => {
+      await (0, import_promises.mkdir)(mainDirectory, { recursive: true });
+      await (0, import_promises.writeFile)(runnerDirectory, JSON.stringify(runner, null, 2), "utf-8");
+      await (0, import_promises.chmod)(runnerDirectory, 384);
+    };
+    forgetRunner = () => (0, import_promises.rm)(runnerDirectory, { force: true });
+  }
+});
+
+// src/commands/runner/ollama.ts
+var ALLOWED_REQUESTS, isAllowedRequest, resolveOllamaUrl, OllamaModels;
+var init_ollama = __esm({
+  "src/commands/runner/ollama.ts"() {
+    ALLOWED_REQUESTS = [
+      { method: "POST", path: "/v1/chat/completions" }
+    ];
+    isAllowedRequest = (method, path2) => ALLOWED_REQUESTS.some(
+      (r2) => r2.method === method?.toUpperCase() && r2.path === path2
+    );
+    resolveOllamaUrl = (option) => {
+      const raw = option || process.env.OLLAMA_HOST || "http://127.0.0.1:11434";
+      const withScheme = /^https?:\/\//.test(raw) ? raw : `http://${raw}`;
+      const url2 = new URL(withScheme);
+      if (url2.hostname === "0.0.0.0") {
+        url2.hostname = "127.0.0.1";
+      }
+      return url2.origin;
+    };
+    OllamaModels = class {
+      constructor(baseUrl, fetchFn = fetch) {
+        this.baseUrl = baseUrl;
+        this.fetchFn = fetchFn;
+        this.showCache = /* @__PURE__ */ new Map();
+      }
+      async list() {
+        const res = await this.fetchFn(`${this.baseUrl}/api/tags`);
+        if (!res.ok) {
+          throw new Error(`Ollama /api/tags returned ${res.status}`);
+        }
+        const { models = [] } = await res.json();
+        const described = await Promise.all(
+          models.map((tag) => this.describe(tag))
+        );
+        return described.filter(
+          (m2) => !m2.capabilities.length || m2.capabilities.includes("completion")
+        );
+      }
+      async describe(tag) {
+        const show = await this.show(tag);
+        const contextLength = Object.entries(show?.model_info ?? {}).find(
+          ([key]) => key.endsWith(".context_length")
+        )?.[1];
+        return {
+          name: tag.name,
+          family: tag.details?.family,
+          parameterSize: tag.details?.parameter_size,
+          quantization: tag.details?.quantization_level,
+          capabilities: show?.capabilities ?? [],
+          contextLength: typeof contextLength === "number" ? contextLength : void 0
+        };
+      }
+      async show(tag) {
+        const key = tag.digest || tag.name;
+        if (this.showCache.has(key)) {
+          return this.showCache.get(key);
+        }
+        try {
+          const res = await this.fetchFn(`${this.baseUrl}/api/show`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ model: tag.name })
+          });
+          if (!res.ok) {
+            return void 0;
+          }
+          const show = await res.json();
+          this.showCache.set(key, show);
+          return show;
+        } catch {
+          return void 0;
+        }
+      }
+    };
+  }
+});
+
+// src/commands/runner/connection.ts
+var OPEN, SUBSCRIPTION_ID, MAX_CHUNK_CHARS, REQUESTS_SUBSCRIPTION, HEARTBEAT_MUTATION, RESPOND_MUTATION, RunnerAuthError, describeError, FrameSender, RunnerConnection;
+var init_connection = __esm({
+  "src/commands/runner/connection.ts"() {
+    init_ollama();
+    OPEN = 1;
+    SUBSCRIPTION_ID = "runner-requests";
+    MAX_CHUNK_CHARS = 32 * 1024;
+    REQUESTS_SUBSCRIPTION = `subscription {
+  subscribeToRunnerRequests { requestId type method path body }
+}`;
+    HEARTBEAT_MUTATION = `mutation runnerHeartbeat($models: [LocalRunnerModelInput], $runnerVersion: String) {
+  runnerHeartbeat(models: $models, runnerVersion: $runnerVersion) { id name }
+}`;
+    RESPOND_MUTATION = `mutation runnerRespond($frames: [RunnerResponseFrameInput!]!) {
+  runnerRespond(frames: $frames) { status }
+}`;
+    RunnerAuthError = class extends Error {
+    };
+    describeError = (e2) => e2 instanceof Error ? e2.message : String(e2);
+    FrameSender = class {
+      constructor(requestId, send, flushMs) {
+        this.requestId = requestId;
+        this.send = send;
+        this.flushMs = flushMs;
+        this.seq = 0;
+        this.queue = [];
+        this.sending = Promise.resolve();
+        this.lastPushAt = Date.now();
+      }
+      push(frame) {
+        this.lastPushAt = Date.now();
+        const last = this.queue[this.queue.length - 1];
+        if (frame.type === "chunk" && last?.type === "chunk" && last.data.length + frame.data.length <= MAX_CHUNK_CHARS) {
+          last.data += frame.data;
+        } else {
+          this.queue.push({ ...frame, requestId: this.requestId, seq: this.seq++ });
+        }
+        if (!this.timer) {
+          this.timer = setTimeout(() => void this.flush(), this.flushMs);
+        }
+      }
+      flush() {
+        clearTimeout(this.timer);
+        this.timer = void 0;
+        const frames = this.queue.splice(0);
+        if (frames.length) {
+          this.sending = this.sending.then(() => this.send(frames)).then(
+            () => void 0,
+            () => void 0
+          );
+        }
+        return this.sending;
+      }
+    };
+    RunnerConnection = class {
+      constructor(options) {
+        this.options = options;
+        this.stopped = false;
+        this.nextOperationId = 1;
+        this.operations = /* @__PURE__ */ new Map();
+        this.activeRequests = /* @__PURE__ */ new Map();
+        this.announcedModels = "";
+        this.fetchFn = options.fetchFn ?? fetch;
+        this.ollama = new OllamaModels(options.ollamaUrl, this.fetchFn);
+      }
+      /** Runs until `stop()`; rejects only when the token is refused. */
+      async run() {
+        let attempt = 0;
+        while (!this.stopped) {
+          const connected = await this.connectOnce();
+          if (this.fatal) {
+            throw this.fatal;
+          }
+          if (this.stopped) {
+            return;
+          }
+          attempt = connected ? 0 : attempt + 1;
+          const delay = Math.min(
+            this.options.maxReconnectDelayMs ?? 3e4,
+            1e3 * 2 ** attempt
+          );
+          this.options.logger.warn(
+            `Disconnected from Lambforge; reconnecting in ${Math.round(delay / 1e3)}s...`
+          );
+          await new Promise((r2) => setTimeout(r2, delay));
+        }
+      }
+      stop() {
+        this.stopped = true;
+        this.socket?.close(1e3, "runner stopped");
+      }
+      /** Resolves when the socket closes; `true` if it got as far as being acknowledged. */
+      connectOnce() {
+        return new Promise((resolve) => {
+          let acknowledged = false;
+          const createSocket = this.options.createSocket ?? ((url2, protocol) => {
+            if (typeof WebSocket === "undefined") {
+              throw new Error("gcli runner requires Node.js 22 or newer");
+            }
+            return new WebSocket(url2, protocol);
+          });
+          let socket;
+          try {
+            socket = createSocket(this.options.wsUrl, "graphql-ws");
+          } catch (e2) {
+            this.options.logger.error(describeError(e2));
+            resolve(false);
+            return;
+          }
+          this.socket = socket;
+          socket.onopen = () => this.send({
+            type: "connection_init",
+            payload: { runnerToken: this.options.token }
+          });
+          socket.onmessage = (event) => {
+            let message;
+            try {
+              message = JSON.parse(String(event.data));
+            } catch {
+              return;
+            }
+            if (message.type === "connection_ack") {
+              acknowledged = true;
+              void this.onConnected();
+            } else if (message.type === "connection_error") {
+              const reason = message.payload?.message || "connection refused";
+              this.fatal = new RunnerAuthError(
+                `Lambforge refused this runner (${reason}). The runner may have been deleted - re-register it with \`gcli runner:start --reset\`.`
+              );
+              socket.close();
+            } else if (message.id === SUBSCRIPTION_ID) {
+              if (message.type === "data") {
+                const request = message.payload?.data?.subscribeToRunnerRequests;
+                if (request) {
+                  void this.onRequest(request);
+                }
+              } else if (message.type === "error" || message.type === "complete") {
+                this.options.logger.error(
+                  `Request subscription ended: ${JSON.stringify(message.payload ?? {})}`
+                );
+                socket.close();
+              }
+            } else if (message.id && this.operations.has(message.id)) {
+              this.onOperationMessage(message.id, message.type, message.payload);
+            }
+          };
+          socket.onerror = () => void 0;
+          socket.onclose = () => {
+            this.onDisconnected();
+            resolve(acknowledged);
+          };
+        });
+      }
+      async onConnected() {
+        this.send({
+          id: SUBSCRIPTION_ID,
+          type: "start",
+          payload: { query: REQUESTS_SUBSCRIPTION }
+        });
+        const runner = await this.heartbeat(true).catch((e2) => {
+          this.options.logger.error(`Heartbeat failed: ${describeError(e2)}`);
+          return null;
+        });
+        if (runner) {
+          this.options.logger.log(
+            `Connected as "${runner.name}" (${runner.id}). Your local models are now available in the Lambforge chat.`
+          );
+        }
+        clearInterval(this.heartbeatTimer);
+        this.heartbeatTimer = setInterval(
+          () => void this.heartbeat(false).catch((e2) => {
+            this.options.logger.warn(`Heartbeat failed: ${describeError(e2)}`);
+            this.socket?.close();
+          }),
+          this.options.heartbeatMs ?? 3e4
+        );
+      }
+      onDisconnected() {
+        clearInterval(this.heartbeatTimer);
+        for (const [id, op] of this.operations) {
+          clearTimeout(op.timer);
+          op.reject(new Error("connection closed"));
+          this.operations.delete(id);
+        }
+        for (const controller of this.activeRequests.values()) {
+          controller.abort();
+        }
+        this.activeRequests.clear();
+      }
+      async heartbeat(announce) {
+        let models = [];
+        try {
+          models = await this.ollama.list();
+          if (this.ollamaReachable === false || announce) {
+            this.options.logger.info(
+              `Ollama at ${this.options.ollamaUrl}: ${models.length} model(s)`
+            );
+          }
+          this.ollamaReachable = true;
+        } catch (e2) {
+          if (this.ollamaReachable !== false) {
+            this.options.logger.warn(
+              `Cannot reach Ollama at ${this.options.ollamaUrl} (${describeError(e2)}). Is it running? Retrying...`
+            );
+          }
+          this.ollamaReachable = false;
+        }
+        const names = JSON.stringify(
+          models.map((m2) => m2.name)
+        );
+        if (!announce && names !== this.announcedModels && this.ollamaReachable) {
+          this.options.logger.info(
+            `Models: ${models.map((m2) => m2.name).join(", ") || "(none)"}`
+          );
+        }
+        this.announcedModels = names;
+        const data = await this.operation(HEARTBEAT_MUTATION, {
+          models,
+          runnerVersion: this.options.version
+        });
+        return data?.runnerHeartbeat;
+      }
+      async onRequest(request) {
+        if (request.type === "cancel") {
+          this.activeRequests.get(request.requestId)?.abort();
+          return;
+        }
+        const sender = new FrameSender(
+          request.requestId,
+          (frames) => this.operation(RESPOND_MUTATION, { frames }),
+          this.options.flushMs ?? 50
+        );
+        if (!isAllowedRequest(request.method, request.path)) {
+          sender.push({
+            type: "error",
+            error: `${request.method} ${request.path} is not allowed by this runner`
+          });
+          await sender.flush();
+          return;
+        }
+        const controller = new AbortController();
+        this.activeRequests.set(request.requestId, controller);
+        sender.push({ type: "ack" });
+        void sender.flush();
+        const pingMs = this.options.pingMs ?? 3e4;
+        const ping = setInterval(() => {
+          if (Date.now() - sender.lastPushAt >= pingMs) {
+            sender.push({ type: "ping" });
+            void sender.flush();
+          }
+        }, pingMs);
+        const started = Date.now();
+        const model = this.modelOf(request.body);
+        this.options.logger.info(`-> chat request (${model})`);
+        try {
+          const response = await this.fetchFn(
+            `${this.options.ollamaUrl}${request.path}`,
+            {
+              method: request.method,
+              headers: { "Content-Type": "application/json" },
+              body: request.body,
+              signal: controller.signal
+            }
+          );
+          sender.push({
+            type: "head",
+            status: response.status,
+            data: response.headers.get("content-type") ?? void 0
+          });
+          const reader = response.body?.getReader();
+          const decoder = new TextDecoder();
+          while (reader) {
+            const { done, value } = await reader.read();
+            if (done) {
+              break;
+            }
+            const text = decoder.decode(value, { stream: true });
+            if (text) {
+              sender.push({ type: "chunk", data: text });
+            }
+          }
+          const tail = decoder.decode();
+          if (tail) {
+            sender.push({ type: "chunk", data: tail });
+          }
+          sender.push({ type: "end" });
+          this.options.logger.info(
+            `<- ${response.status} (${model}) in ${((Date.now() - started) / 1e3).toFixed(1)}s`
+          );
+        } catch (e2) {
+          if (controller.signal.aborted) {
+            this.options.logger.info(`x  cancelled (${model})`);
+          } else {
+            const reason = describeError(e2);
+            this.options.logger.error(`x  ${reason}`);
+            sender.push({
+              type: "error",
+              error: /fetch failed|ECONNREFUSED/.test(reason) ? `Could not reach Ollama at ${this.options.ollamaUrl} on the runner machine - is it running?` : reason
+            });
+          }
+        } finally {
+          clearInterval(ping);
+          this.activeRequests.delete(request.requestId);
+          await sender.flush();
+        }
+      }
+      modelOf(body) {
+        try {
+          return JSON.parse(body ?? "{}").model ?? "unknown model";
+        } catch {
+          return "unknown model";
+        }
+      }
+      operation(query, variables) {
+        const id = String(this.nextOperationId++);
+        return new Promise((resolve, reject) => {
+          if (this.socket?.readyState !== OPEN) {
+            reject(new Error("not connected"));
+            return;
+          }
+          const timer2 = setTimeout(() => {
+            this.operations.delete(id);
+            reject(new Error("timed out waiting for Lambforge"));
+          }, this.options.operationTimeoutMs ?? 2e4);
+          this.operations.set(id, { resolve, reject, timer: timer2 });
+          this.send({ id, type: "start", payload: { query, variables } });
+        });
+      }
+      onOperationMessage(id, type, payload) {
+        const op = this.operations.get(id);
+        this.operations.delete(id);
+        clearTimeout(op.timer);
+        if (type === "data" && !payload?.errors?.length) {
+          op.resolve(payload?.data);
+        } else if (type === "complete") {
+          op.resolve(void 0);
+        } else {
+          op.reject(
+            new Error(
+              payload?.errors?.map((e2) => e2.message).join("; ") || payload?.message || "operation failed"
+            )
+          );
+        }
+      }
+      send(message) {
+        if (this.socket?.readyState === OPEN) {
+          this.socket.send(JSON.stringify(message));
+        }
+      }
+    };
+  }
+});
+
+// src/commands/runner/start.ts
 var start_exports2 = {};
 __export(start_exports2, {
+  RUNNER_VERSION: () => RUNNER_VERSION,
+  default: () => start_default
+});
+var import_os2, import_rxjs35, RUNNER_VERSION, resolveRunner, start_default;
+var init_start2 = __esm({
+  "src/commands/runner/start.ts"() {
+    import_os2 = require("os");
+    import_rxjs35 = __toESM(require_cjs());
+    init_gql_client();
+    init_log();
+    init_config();
+    init_connection();
+    init_ollama();
+    RUNNER_VERSION = "gcli-runner/1";
+    resolveRunner = async (cmd) => {
+      if (cmd.token) {
+        return { id: "(from --token)", name: cmd.name ?? "", token: cmd.token };
+      }
+      if (cmd.reset) {
+        await forgetRunner();
+      }
+      const saved = await readSavedRunner();
+      if (saved) {
+        return saved;
+      }
+      const name2 = cmd.name || (0, import_os2.hostname)();
+      Logger.info(`Registering this machine as local runner "${name2}"...`);
+      const { runner, token } = await (0, import_rxjs35.lastValueFrom)(
+        GraphqlClienAPI.createLocalRunner(name2)
+      ).catch((e2) => {
+        throw new Error(
+          `Could not register the runner (${e2?.message ?? e2}). Run \`gcli login\` first, or pass --token from Profile -> Local AI runners.`
+        );
+      });
+      const created = { id: runner.id, name: runner.name, token };
+      await saveRunner(created);
+      return created;
+    };
+    start_default = async (cmd) => {
+      const runner = await resolveRunner(cmd);
+      const ollamaUrl = resolveOllamaUrl(cmd.ollama);
+      const wsUrl = cmd.wsUrl || runner.wsUrl || deriveSubscriptionsUrl(await readLoginApiUrl());
+      Logger.log("-------------------");
+      Logger.log("[Lambforge local AI runner]");
+      Logger.info(`Lambforge: ${wsUrl}`);
+      Logger.info(`Ollama:    ${ollamaUrl}`);
+      Logger.info(
+        "Tip: agent mode sends large prompts (instructions + tool list). Give Ollama a big context window, e.g. start it with OLLAMA_CONTEXT_LENGTH=32768."
+      );
+      Logger.log("-------------------");
+      const connection = new RunnerConnection({
+        wsUrl,
+        token: runner.token,
+        ollamaUrl,
+        version: RUNNER_VERSION,
+        logger: Logger
+      });
+      const shutdown = () => {
+        Logger.info("Stopping runner...");
+        connection.stop();
+      };
+      process.once("SIGINT", shutdown);
+      process.once("SIGTERM", shutdown);
+      try {
+        await connection.run();
+      } catch (e2) {
+        if (e2 instanceof RunnerAuthError) {
+          Logger.error(e2.message);
+          process.exit(1);
+        }
+        throw e2;
+      }
+    };
+  }
+});
+
+// src/commands/runner/list.ts
+var list_exports6 = {};
+__export(list_exports6, {
+  default: () => list_default6
+});
+var import_rxjs36, import_operators34, list_default6;
+var init_list6 = __esm({
+  "src/commands/runner/list.ts"() {
+    import_rxjs36 = __toESM(require_cjs());
+    import_operators34 = __toESM(require_operators());
+    init_gql_client();
+    init_log();
+    list_default6 = () => (0, import_rxjs36.lastValueFrom)(
+      GraphqlClienAPI.listLocalRunners().pipe(
+        (0, import_operators34.tap)((runners) => {
+          Logger.log("-------------------");
+          Logger.log("[Action][listLocalRunners]");
+          if (!runners?.length) {
+            Logger.info(
+              "No local runners yet. Run `gcli runner:start` on the machine that runs Ollama."
+            );
+          } else {
+            Logger.table(
+              runners.map((r2) => ({
+                id: r2.id,
+                name: r2.name,
+                online: r2.online,
+                lastSeenAt: r2.lastSeenAt,
+                models: (r2.models ?? []).map((m2) => m2.name).join(", ")
+              }))
+            );
+          }
+          Logger.log("-------------------");
+        })
+      )
+    );
+  }
+});
+
+// src/commands/runner/models.ts
+var models_exports = {};
+__export(models_exports, {
+  default: () => models_default,
+  parseSelection: () => parseSelection
+});
+var import_rxjs37, isShown, parseSelection, models_default;
+var init_models = __esm({
+  "src/commands/runner/models.ts"() {
+    import_rxjs37 = __toESM(require_cjs());
+    init_gql_client();
+    init_log();
+    init_config();
+    isShown = (runner, name2) => !Array.isArray(runner.enabledModels) || runner.enabledModels.includes(name2);
+    parseSelection = (cmd) => {
+      if ([cmd.show !== void 0, !!cmd.all, !!cmd.none].filter(Boolean).length > 1) {
+        throw new Error("Use only one of --show, --all, --none.");
+      }
+      if (cmd.all) {
+        return { models: null };
+      }
+      if (cmd.none) {
+        return { models: [] };
+      }
+      if (cmd.show !== void 0) {
+        return {
+          models: cmd.show.split(",").map((m2) => m2.trim()).filter(Boolean)
+        };
+      }
+      return null;
+    };
+    models_default = async (cmd) => {
+      const selection = parseSelection(cmd);
+      const runnerId = cmd.id || (await readSavedRunner())?.id;
+      if (!runnerId) {
+        throw new Error("Specify the runner with --id (see `gcli runner:list`).");
+      }
+      let runner;
+      if (selection) {
+        runner = await (0, import_rxjs37.lastValueFrom)(
+          GraphqlClienAPI.setLocalRunnerModels(runnerId, selection.models)
+        );
+      } else {
+        const runners = await (0, import_rxjs37.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
+        runner = runners.find((r2) => r2.id === runnerId);
+      }
+      if (!runner) {
+        throw new Error(`Runner ${runnerId} not found.`);
+      }
+      const models = runner.models ?? [];
+      const unknown2 = (selection?.models ?? []).filter(
+        (m2) => !models.some((x2) => x2.name === m2)
+      );
+      if (unknown2.length) {
+        Logger.warn(
+          `Not reported by this runner (kept anyway, shown once Ollama has them): ${unknown2.join(", ")}`
+        );
+      }
+      Logger.log(
+        `[${runner.name}] shown in chat: ${models.filter((m2) => isShown(runner, m2.name)).length} of ${models.length}`
+      );
+      Logger.table(
+        models.map((m2) => ({
+          model: m2.name,
+          shown: isShown(runner, m2.name),
+          size: m2.parameterSize,
+          tools: m2.capabilities?.includes("tools")
+        }))
+      );
+    };
+  }
+});
+
+// src/commands/runner/delete.ts
+var delete_exports3 = {};
+__export(delete_exports3, {
+  default: () => delete_default3
+});
+var import_rxjs38, delete_default3;
+var init_delete3 = __esm({
+  "src/commands/runner/delete.ts"() {
+    import_rxjs38 = __toESM(require_cjs());
+    init_gql_client();
+    init_log();
+    init_config();
+    delete_default3 = async (cmd) => {
+      const saved = await readSavedRunner();
+      const runnerId = cmd.id || saved?.id;
+      if (!runnerId) {
+        throw new Error("Specify the runner with --id (see `gcli runner:list`).");
+      }
+      await (0, import_rxjs38.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
+      if (saved?.id === runnerId) {
+        await forgetRunner();
+      }
+      Logger.log(`Local runner ${runnerId} deleted; its token no longer works.`);
+    };
+  }
+});
+
+// src/commands/start/start.ts
+var start_exports3 = {};
+__export(start_exports3, {
   default: () => start
 });
 async function start(args) {
   Logger.log("---------------------------------");
-  return (0, import_rxjs35.lastValueFrom)(
+  return (0, import_rxjs39.lastValueFrom)(
     loadSpec().pipe(
-      (0, import_operators34.switchMap)(
-        (config2) => (0, import_rxjs35.of)({
+      (0, import_operators35.switchMap)(
+        (config2) => (0, import_rxjs39.of)({
           watcher: (0, import_node_fs2.watch)(process.cwd(), {
             recursive: true
           }),
@@ -316894,7 +317656,7 @@ async function start(args) {
           outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
           startCommand: "node"
         }).pipe(
-          (0, import_operators34.switchMap)(
+          (0, import_operators35.switchMap)(
             ({
               child,
               watcher,
@@ -316902,14 +317664,14 @@ async function start(args) {
               outfile,
               startCommand,
               ignorelist
-            }) => (0, import_rxjs35.from)(build_default(args)).pipe(
-              (0, import_operators34.tap)(() => {
+            }) => (0, import_rxjs39.from)(build_default(args)).pipe(
+              (0, import_operators35.tap)(() => {
                 Logger.warn(
                   `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
                 );
                 Logger.log("---------------------------------\n");
               }),
-              (0, import_operators34.tap)(() => {
+              (0, import_operators35.tap)(() => {
                 child = (0, import_node_child_process.spawn)(
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
@@ -316919,14 +317681,14 @@ async function start(args) {
                   }
                 );
               }),
-              (0, import_operators34.tap)(
-                () => (0, import_rxjs35.merge)(
-                  (0, import_rxjs35.fromEvent)(process, "SIGINT"),
-                  (0, import_rxjs35.fromEvent)(process, "SIGTERM"),
-                  (0, import_rxjs35.fromEvent)(process, "exit")
+              (0, import_operators35.tap)(
+                () => (0, import_rxjs39.merge)(
+                  (0, import_rxjs39.fromEvent)(process, "SIGINT"),
+                  (0, import_rxjs39.fromEvent)(process, "SIGTERM"),
+                  (0, import_rxjs39.fromEvent)(process, "exit")
                 ).pipe(
-                  (0, import_operators34.debounceTime)(100),
-                  (0, import_operators34.tap)(() => {
+                  (0, import_operators35.debounceTime)(100),
+                  (0, import_operators35.tap)(() => {
                     Logger.warn("\u26A0\uFE0F  Main process shutting down");
                     watcher.close();
                     child.kill("SIGTERM");
@@ -316934,13 +317696,13 @@ async function start(args) {
                   })
                 ).subscribe()
               ),
-              (0, import_operators34.switchMap)(
-                () => (0, import_rxjs35.fromEvent)(watcher, "change").pipe(
-                  (0, import_operators34.map)(([event, filename]) => ({
+              (0, import_operators35.switchMap)(
+                () => (0, import_rxjs39.fromEvent)(watcher, "change").pipe(
+                  (0, import_operators35.map)(([event, filename]) => ({
                     event,
                     filename
                   })),
-                  (0, import_operators34.filter)(({ filename }) => {
+                  (0, import_operators35.filter)(({ filename }) => {
                     if (!filename) {
                       return false;
                     }
@@ -316952,18 +317714,18 @@ async function start(args) {
                     const rootDir = filename.split(/[/\\]/)[0];
                     return whitelist.has(rootDir);
                   }),
-                  (0, import_operators34.debounceTime)(100)
+                  (0, import_operators35.debounceTime)(100)
                 )
               ),
-              (0, import_operators34.tap)((data) => {
+              (0, import_operators35.tap)((data) => {
                 Logger.log("\n---------------------------------");
                 Logger.log(
                   `\u27F3  Restarting due to change in: ${data.filename}`
                 );
                 child?.kill("SIGTERM");
               }),
-              (0, import_operators34.switchMap)(() => build_default(args)),
-              (0, import_operators34.tap)(() => {
+              (0, import_operators35.switchMap)(() => build_default(args)),
+              (0, import_operators35.tap)(() => {
                 Logger.warn(
                   `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
                 );
@@ -316984,13 +317746,13 @@ async function start(args) {
     )
   );
 }
-var import_node_child_process, import_node_fs2, import_rxjs35, import_operators34;
-var init_start2 = __esm({
+var import_node_child_process, import_node_fs2, import_rxjs39, import_operators35;
+var init_start3 = __esm({
   "src/commands/start/start.ts"() {
     import_node_child_process = require("node:child_process");
     import_node_fs2 = require("node:fs");
-    import_rxjs35 = __toESM(require_cjs());
-    import_operators34 = __toESM(require_operators());
+    import_rxjs39 = __toESM(require_cjs());
+    import_operators35 = __toESM(require_operators());
     init_log();
     init_build();
     init_load_spec();
@@ -317002,25 +317764,25 @@ var create_cron_exports = {};
 __export(create_cron_exports, {
   default: () => create_cron_default
 });
-var import_rxjs36, import_operators35, create_cron_default;
+var import_rxjs40, import_operators36, create_cron_default;
 var init_create_cron = __esm({
   "src/commands/triggers/cron/create-cron.ts"() {
-    import_rxjs36 = __toESM(require_cjs());
-    import_operators35 = __toESM(require_operators());
+    import_rxjs40 = __toESM(require_cjs());
+    import_operators36 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_cron_default = (cmd) => (0, import_rxjs36.lastValueFrom)(
+    create_cron_default = (cmd) => (0, import_rxjs40.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators35.switchMap)(
+        (0, import_operators36.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators35.switchMap)(
+            (0, import_operators36.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators35.map)((lambda) => ({
+                (0, import_operators36.map)((lambda) => ({
                   lambdaName: lambda.name,
                   lambdaId: lambda.id,
                   ...data?.triggers?.time ?? data
@@ -317029,12 +317791,12 @@ var init_create_cron = __esm({
             )
           )
         ),
-        (0, import_operators35.switchMap)(
+        (0, import_operators36.switchMap)(
           ({ lambdaId, cron, triggerName, lambdaName }) => GraphqlClienAPI.createTimeTrigger({ lambdaId, cron, triggerName }).pipe(
-            (0, import_operators35.map)((data) => ({ ...data, lambdaName }))
+            (0, import_operators36.map)((data) => ({ ...data, lambdaName }))
           )
         ),
-        (0, import_operators35.tap)((data) => {
+        (0, import_operators36.tap)((data) => {
           const columns = [
             "id",
             "lambdaName",
@@ -317057,25 +317819,25 @@ var delete_cron_exports = {};
 __export(delete_cron_exports, {
   default: () => delete_cron_default
 });
-var import_rxjs37, import_operators36, delete_cron_default;
+var import_rxjs41, import_operators37, delete_cron_default;
 var init_delete_cron = __esm({
   "src/commands/triggers/cron/delete-cron.ts"() {
-    import_rxjs37 = __toESM(require_cjs());
-    import_operators36 = __toESM(require_operators());
+    import_rxjs41 = __toESM(require_cjs());
+    import_operators37 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_cron_default = (cmd) => (0, import_rxjs37.lastValueFrom)(
+    delete_cron_default = (cmd) => (0, import_rxjs41.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators36.switchMap)(
+        (0, import_operators37.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators36.switchMap)(
+            (0, import_operators37.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators36.map)((lambda) => ({
+                (0, import_operators37.map)((lambda) => ({
                   lambdaName: lambda.name,
                   lambdaId: lambda.id
                 }))
@@ -317083,12 +317845,12 @@ var init_delete_cron = __esm({
             )
           )
         ),
-        (0, import_operators36.switchMap)(
+        (0, import_operators37.switchMap)(
           ({ lambdaId, lambdaName }) => GraphqlClienAPI.deleteLambdaTimeTrigger(lambdaId).pipe(
-            (0, import_operators36.map)((data) => ({ ...data, lambdaName }))
+            (0, import_operators37.map)((data) => ({ ...data, lambdaName }))
           )
         ),
-        (0, import_operators36.tap)((data) => {
+        (0, import_operators37.tap)((data) => {
           const columns = [
             "id",
             "lambdaName",
@@ -317110,29 +317872,29 @@ var list_crons_exports = {};
 __export(list_crons_exports, {
   default: () => list_crons_default
 });
-var import_rxjs38, import_operators37, list_crons_default;
+var import_rxjs42, import_operators38, list_crons_default;
 var init_list_crons = __esm({
   "src/commands/triggers/cron/list-crons.ts"() {
-    import_rxjs38 = __toESM(require_cjs());
-    import_operators37 = __toESM(require_operators());
+    import_rxjs42 = __toESM(require_cjs());
+    import_operators38 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_crons_default = (cmd) => (0, import_rxjs38.lastValueFrom)(
+    list_crons_default = (cmd) => (0, import_rxjs42.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators37.switchMap)(
-          (projectId) => (0, import_rxjs38.combineLatest)([
+        (0, import_operators38.switchMap)(
+          (projectId) => (0, import_rxjs42.combineLatest)([
             GraphqlClienAPI.listProjectTimeTriggers(projectId),
             GraphqlClienAPI.listLambdas(projectId)
           ])
         ),
-        (0, import_operators37.map)(
+        (0, import_operators38.map)(
           ([triggers, lambdas]) => triggers.map((v) => ({
             lambdaName: lambdas.find((l) => l.id === v.lambdaId)?.name,
             ...v
           }))
         ),
-        (0, import_operators37.tap)((data) => {
+        (0, import_operators38.tap)((data) => {
           const columns = [
             "id",
             "triggerName",
@@ -317447,6 +318209,37 @@ function registerRabbitMqCommands(program2) {
   program2.command("rabbitmq:delete").description("Delete a RabbitMQ broker").option("-p, --project <project>").option("--id <id>", "Broker id (see rabbitmq:list)").action(lazy(() => Promise.resolve().then(() => (init_delete2(), delete_exports2)).then((m2) => m2.default)));
 }
 
+// src/commands/runner/index.ts
+init_helpers();
+function registerRunnerCommands(program2) {
+  program2.command("runner:start").description(
+    "Connect this machine's Ollama to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, Ollama is never exposed)"
+  ).option(
+    "-n, --name <name>",
+    "Runner name shown in the chat model picker (default: hostname)"
+  ).option(
+    "-t, --token <token>",
+    "Runner token from Profile -> Local AI runners (instead of `gcli login`)"
+  ).option(
+    "--ollama <url>",
+    "Ollama URL (default: $OLLAMA_HOST or http://127.0.0.1:11434)"
+  ).option("--wsUrl <url>", "Lambforge subscriptions endpoint override").option("--reset", "Forget the saved runner and register a new one").action(lazy(() => Promise.resolve().then(() => (init_start2(), start_exports2)).then((m2) => m2.default)));
+  program2.command("runner:list").description("List your local AI runners and the models they serve").action(lazy(() => Promise.resolve().then(() => (init_list6(), list_exports6)).then((m2) => m2.default)));
+  program2.command("runner:models").description(
+    "Choose which of a runner's models appear in the chat model picker (no flags: list them)"
+  ).option(
+    "--id <id>",
+    "Runner id (default: the runner saved on this machine)"
+  ).option(
+    "--show <models>",
+    "Comma-separated models to show (hides the rest)"
+  ).option("--all", "Show every model again").option("--none", "Hide all models of this runner from the chat").action(lazy(() => Promise.resolve().then(() => (init_models(), models_exports)).then((m2) => m2.default)));
+  program2.command("runner:delete").description("Delete a local AI runner and revoke its token").option(
+    "--id <id>",
+    "Runner id (default: the runner saved on this machine)"
+  ).action(lazy(() => Promise.resolve().then(() => (init_delete3(), delete_exports3)).then((m2) => m2.default)));
+}
+
 // src/commands/start/index.ts
 init_helpers();
 function startCommands(program2) {
@@ -317456,7 +318249,7 @@ function startCommands(program2) {
   ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option(
     "-i, --ignore <ignore...>",
     "Ignore folders from triggering restarts"
-  ).option("-e, --external <external...>", "External libraries").action(lazy(() => Promise.resolve().then(() => (init_start2(), start_exports2)).then((m2) => m2.default)));
+  ).option("-e, --external <external...>", "External libraries").action(lazy(() => Promise.resolve().then(() => (init_start3(), start_exports3)).then((m2) => m2.default)));
 }
 
 // src/commands/triggers/cron/index.ts
@@ -317479,7 +318272,8 @@ var commands = [
   registerCronTriggerCommands,
   registerClusterCommands,
   registerRabbitMqCommands,
-  registerPluginCommands
+  registerPluginCommands,
+  registerRunnerCommands
 ];
 
 // src/main.ts

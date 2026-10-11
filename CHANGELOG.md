@@ -1,4 +1,4 @@
-## [1.8.237](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.237) (2026-08-29)
+## [1.8.238](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.238) (2026-10-11)
 
 
 ### Bug Fixes
@@ -136,6 +136,7 @@
 * **gcli:** npm ignore file added ([15530eb](https://github.com/Stradivario/gapi/commit/15530eb085653d26f53e01fd9d7902bdfd99b734))
 * **gcli:** readme.md added correct link [ci-skip] ([ff79521](https://github.com/Stradivario/gapi/commit/ff7952137b93a50e57ca51f15d3dbd71565c348d))
 * **gcli:** removed archiver as default export ([7ea3f62](https://github.com/Stradivario/gapi/commit/7ea3f6265dc58dc1f37d9177b1c8dd7ca2c91551))
+* **gcli:** runner commands bridge a local Ollama to the Lambforge chat ([b41c0b3](https://github.com/Stradivario/gapi/commit/b41c0b37ece02e18be87b632dc4b8e840d5eda28))
 * **gcli:** scaling options added to yml file ([3c01cdc](https://github.com/Stradivario/gapi/commit/3c01cdc7b3f7d0bce572b1a64af2b718075a93dc))
 * **gcli:** single executable ([8697dc6](https://github.com/Stradivario/gapi/commit/8697dc63dd03f9a4247238f21a3d77e604f0c360))
 * **gcli:** time triggers tools implemented ([8cbf633](https://github.com/Stradivario/gapi/commit/8cbf63325a15590c714e517a856fb9cca58b8767))
