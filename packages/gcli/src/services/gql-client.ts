@@ -20,6 +20,7 @@ import {
   readFileAsObservable,
   writeFileAsObservable,
 } from '~/commands/lambda/helpers/read-file';
+import { LocalRunner } from '~/commands/runner/types';
 import {
   generationTimeDirectory,
   keyDirectory,
@@ -32,6 +33,7 @@ import {
 import { ClusterFragment } from './types/cluster.fragment';
 import { EnvironmentFragment } from './types/environment.fragment';
 import { LambdaFragment } from './types/lambda.fragment';
+import { LocalRunnerFragment } from './types/local-runner.fragment';
 import {
   InstalledPluginFragment,
   PluginFragment,
@@ -517,6 +519,65 @@ export class GraphqlClienAPI {
       `,
       variables: { projectId, ...input },
     }).pipe(map((res) => res.provisionProjectCluster));
+  }
+
+  public static listLocalRunners() {
+    return this.query<{ listLocalRunners: LocalRunner[] }>({
+      query: gql`
+        query listLocalRunners {
+          listLocalRunners {
+            ${LocalRunnerFragment}
+          }
+        }
+      `,
+    }).pipe(map((res) => res.listLocalRunners));
+  }
+
+  public static createLocalRunner(name: string) {
+    return this.query<{
+      createLocalRunner: { runner: LocalRunner; token: string };
+    }>({
+      query: gql`
+        mutation createLocalRunner($name: String!) {
+          createLocalRunner(name: $name) {
+            token
+            runner {
+              ${LocalRunnerFragment}
+            }
+          }
+        }
+      `,
+      variables: { name },
+    }).pipe(map((res) => res.createLocalRunner));
+  }
+
+  public static setLocalRunnerModels(
+    runnerId: string,
+    models: string[] | null,
+  ) {
+    return this.query<{ setLocalRunnerModels: LocalRunner }>({
+      query: gql`
+        mutation setLocalRunnerModels($runnerId: String!, $models: [String!]) {
+          setLocalRunnerModels(runnerId: $runnerId, models: $models) {
+            ${LocalRunnerFragment}
+          }
+        }
+      `,
+      variables: { runnerId, models },
+    }).pipe(map((res) => res.setLocalRunnerModels));
+  }
+
+  public static deleteLocalRunner(runnerId: string) {
+    return this.query<{ deleteLocalRunner: { status: string } }>({
+      query: gql`
+        mutation deleteLocalRunner($runnerId: String!) {
+          deleteLocalRunner(runnerId: $runnerId) {
+            status
+          }
+        }
+      `,
+      variables: { runnerId },
+    }).pipe(map((res) => res.deleteLocalRunner));
   }
 
   public static projectClusters(projectId: string) {

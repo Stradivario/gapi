@@ -11,6 +11,7 @@ Whether you are deploying scalable serverless functions, managing cloud environm
 - [Managing Infrastructure](#managing-infrastructure)
 - [Serverless Functions (Lambdas)](#serverless-functions-lambdas)
 - [AI Integration (Model Context Protocol)](#ai-integration-model-context-protocol)
+- [Local AI Models (Ollama runner)](#local-ai-models-ollama-runner)
 - [Build System](#build-system)
 - [Command Reference](#command-reference)
 
@@ -713,6 +714,45 @@ To use this with Claude Desktop or other MCP-compatible tools, add the following
   }
 }
 ```
+
+## Local AI Models (Ollama runner)
+
+Use models running on your own machine in the Lambforge chat - including
+agent mode, spawned workers and MCP tools - exactly like the hosted models.
+`gcli runner:start` connects your local [Ollama](https://ollama.com) to
+Lambforge over an **outbound** WebSocket: it works behind NAT, nothing is
+port-forwarded, and Ollama is never exposed to the internet. The platform
+can only send chat completions to it (`POST /v1/chat/completions`).
+
+```bash
+# 1. Ollama with a model, and a context window big enough for agent mode
+ollama pull qwen3:32b
+OLLAMA_CONTEXT_LENGTH=32768 ollama serve
+
+# 2. Logged-in gcli registers this machine as a runner and connects
+gcli login
+gcli runner:start                      # --name my-gpu-box (default: hostname)
+```
+
+Your models now appear in the chat model picker with a **Local** badge
+(greyed out as **Offline** when the runner isn't running). The runner keeps
+running until Ctrl+C and reconnects on its own.
+
+| Command | Description |
+|---|---|
+| `gcli runner:start` | Connect this machine. First run registers a runner and saves it to `~/.graphql-server/runner.json`. Options: `--name`, `--token <runner token>` (headless machines without `gcli login` - create the token in Profile -> Local AI runners), `--ollama <url>` (default `$OLLAMA_HOST` or `http://127.0.0.1:11434`), `--wsUrl` (override the derived endpoint), `--reset` (forget the saved runner, register a new one) |
+| `gcli runner:list` | Your runners: online status, last seen, models |
+| `gcli runner:models` | List which models are shown in the chat; `--show a,b` shows only those, `--all` shows every model, `--none` hides them all; `--id` picks a runner (default: this machine's) |
+| `gcli runner:delete` | Delete a runner and revoke its token (`--id`, default: this machine's) |
+
+Notes:
+
+- Models are only offered if Ollama reports them as chat-capable; a model
+  without the `tools` capability is used without platform tools.
+- Local models don't count against your plan's AI token quota.
+- Requires Node.js >= 22.
+- Use Profile -> Local AI runners in the web app to see runners, choose
+  models with checkboxes, and create tokens.
 
 ## Build System & Local Development
 

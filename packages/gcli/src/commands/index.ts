@@ -7,6 +7,7 @@ import { registerPluginCommands } from './plugin';
 import { registerProjectCommands } from './project';
 import { registerMcpCommands } from './proxy';
 import { registerRabbitMqCommands } from './rabbitmq';
+import { registerRunnerCommands } from './runner';
 import { startCommands } from './start';
 import { registerCronTriggerCommands } from './triggers/cron';
 
@@ -22,4 +23,5 @@ export const commands = [
   registerClusterCommands,
   registerRabbitMqCommands,
   registerPluginCommands,
+  registerRunnerCommands,
 ];

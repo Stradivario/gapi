@@ -1,0 +1,48 @@
+name: Tests
+
+# Runs on every branch push except master (same as graphql-server's Tests and
+# graphql-server-lambdas' Specs), so a PR shows lint + test results before it
+# is merged. master itself is covered by the Publish workflow, which runs the
+# same lint/test steps before publishing.
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci-skip]')"
+    strategy:
+      matrix:
+        node-version: [24.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/yarn
+            node_modules
+            packages/*/node_modules
+          key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('yarn.lock', 'packages/*/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node${{ matrix.node-version }}-
+
+      # Same installer as the Publish and Release workflows (bolt workspaces).
+      - name: Install
+        run: npx @rxdi/bolt install
+
+      # Every workspace's `lint` / `test` script (npx bolt ws exec).
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Test
+        run: npm test --if-present

@@ -4,6 +4,12 @@ module.exports = {
   coverageReporters: ['lcov', 'html'],
   rootDir: './',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'node'],
+  // Mirrors tsconfig `paths`.
+  moduleNameMapper: {
+    '^~/(.*)$': '<rootDir>/src/$1',
+    '^@introspection/(.*)$': '<rootDir>/src/@introspection/$1',
+    '^@commands/(.*)$': '<rootDir>/src/commands/$1',
+  },
   globals: {
     __DEV__: true,
   },
