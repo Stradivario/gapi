@@ -15,3 +15,6 @@ export const generationTimeDirectory = [mainDirectory, 'generation-time'].join(
 );
 
 export const uploadUrlDirectory = [mainDirectory, 'upload-url'].join('/');
+
+// Local AI runner credentials (id, name, token) - see `gcli runner:start`.
+export const runnerDirectory = [mainDirectory, 'runner.json'].join('/');
