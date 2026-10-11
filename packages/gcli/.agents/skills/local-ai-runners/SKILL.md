@@ -23,6 +23,12 @@ security, symptom table): `graphql-server/docs/features/local-ai-runners.md`.
 - Socket close aborts every in-flight Ollama request; a refused token is
   fatal (`RunnerAuthError`), everything else reconnects with backoff.
 - Global `WebSocket` -> Node >= 22.
+- Daemon (`runner:daemon:*`, `daemon.ts`): systemd USER unit; never put the
+  token or other secrets in the unit (it's world-readable-ish config) - it
+  runs `runner:start`, which reads the 0600 `runner.json`. Keep exit code 78
+  for "token refused" in sync with `RestartPreventExitStatus`. Tests must
+  pass an explicit home dir to `SystemdUserService` (os.homedir() ignored a
+  changed HOME under jest and wrote into the real `~/.config` once).
 
 ## Run it against a dev stack
 

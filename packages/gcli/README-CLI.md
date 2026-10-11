@@ -1,68 +1,54 @@
 Usage: gcli [options] [command]
 
 Options:
-  -V, --version                 output the version number
-  -h, --help                    display help for command
+  -V, --version                                        output the version number
+  -h, --help                                           display help for command
 
 Commands:
-  login [options]               Login to graphql-server
-  lambda:list [options]         List of all lambdas for project
-  lambda:get [options]          Get lambda by id
+  login [options]                                      Login to graphql-server
+  lambda:list [options]                                List of all lambdas for project
+  lambda:get [options]                                 Get lambda by id
   lambda:create [options]
   lambda:update [options]
-  lambda:delete [options]       Get lambda by id
-  lambda:log [options]          Get lambda log
-  lambda:build:log [options]    Get build log
-  lambda:test [options]         Test lambda
+  lambda:delete [options]                              Get lambda by id
+  lambda:log [options]                                 Get lambda log
+  lambda:build:log [options]                           Get build log
+  lambda:test [options]                                Test lambda
   lambda:package [options]
-  project:list                  List of all projects
-  project:use <project>         Adds default project to be used all around the
-                                CLI
-  project:clear                 Clears default project to be used all around
-                                the CLI
-  build [options]               Build bundle using esbuild
-                                https://esbuild.github.io
-  environment:list [options]    List of all environments for project
-  environment:create [options]  Create environment for project
-  environment:update [options]  Update environment for project
-  environment:delete [options]  Delete environment for project
-  environment:get [options]     Get environment for project
-  mcp:start [options]           Start mcp proxy server
-  start [options]               Start bundle using esbuild
-                                https://esbuild.github.io
-  cron:create [options]         Create cron
-  cron:delete [options]         Delete cron
-  cron:list [options]           List of all cron jobs for project
-  cluster:create [options]      Provision a private Talos cluster for a project
-                                (runs in the background - takes several
-                                minutes; use --wait to block)
-  cluster:list [options]        List every private cluster this project has (it
-                                may have several - dev/stage/prod, ...)
-  cluster:teardown [options]    Tear down one of a project's clusters (runs in
-                                the background - use --wait to block)
-  cluster:kubeconfig [options]  Print (or save) a cluster's raw kubeconfig YAML
-                                - only available once it's 'ready'
-  rabbitmq:create [options]     Provision a RabbitMQ broker for a project (a
-                                project may have several)
-  rabbitmq:list [options]       List every RabbitMQ broker for a project
-  rabbitmq:delete [options]     Delete a RabbitMQ broker
-  plugin:list                   List every plugin available in the marketplace
-                                catalog
-  plugin:installed [options]    List plugins installed for a project (may
-                                include the same plugin on several clusters)
-  plugin:install [options]      Install a marketplace plugin for a project
-  plugin:uninstall [options]    Uninstall a plugin from a project (--cluster
-                                picks which installation, if it's on several)
-  runner:start [options]        Connect this machine's Ollama to the Lambforge
-                                chat as a local AI runner (outbound connection
-                                only - works behind NAT, Ollama is never
-                                exposed)
-  runner:list                   List your local AI runners and the models they
-                                serve
-  runner:models [options]       Choose which of a runner's models appear in the
-                                chat model picker (no flags: list them)
-  runner:delete [options]       Delete a local AI runner and revoke its token
-  help [command]                display help for command
+  project:list                                         List of all projects
+  project:use <project>                                Adds default project to be used all around the CLI
+  project:clear                                        Clears default project to be used all around the CLI
+  build [options]                                      Build bundle using esbuild https://esbuild.github.io 
+  environment:list [options]                           List of all environments for project
+  environment:create [options]                         Create environment for project
+  environment:update [options]                         Update environment for project
+  environment:delete [options]                         Delete environment for project
+  environment:get [options]                            Get environment for project
+  mcp:start [options]                                  Start mcp proxy server
+  start [options]                                      Start bundle using esbuild https://esbuild.github.io 
+  cron:create [options]                                Create cron
+  cron:delete [options]                                Delete cron
+  cron:list [options]                                  List of all cron jobs for project
+  cluster:create [options]                             Provision a private Talos cluster for a project (runs in the background - takes several minutes; use --wait to block)
+  cluster:list [options]                               List every private cluster this project has (it may have several - dev/stage/prod, ...)
+  cluster:teardown [options]                           Tear down one of a project's clusters (runs in the background - use --wait to block)
+  cluster:kubeconfig [options]                         Print (or save) a cluster's raw kubeconfig YAML - only available once it's 'ready'
+  rabbitmq:create [options]                            Provision a RabbitMQ broker for a project (a project may have several)
+  rabbitmq:list [options]                              List every RabbitMQ broker for a project
+  rabbitmq:delete [options]                            Delete a RabbitMQ broker
+  plugin:list                                          List every plugin available in the marketplace catalog
+  plugin:installed [options]                           List plugins installed for a project (may include the same plugin on several clusters)
+  plugin:install [options]                             Install a marketplace plugin for a project
+  plugin:uninstall [options]                           Uninstall a plugin from a project (--cluster picks which installation, if it's on several)
+  runner:start [options]                               Connect this machine's Ollama to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, Ollama is never exposed)
+  runner:daemon:install|runner:start:daemon [options]  Run the runner in the background as a systemd user service: starts with your session, restarts on failure (Linux)
+  runner:daemon:status [options]                       Show the runner service status (systemctl --user status)
+  runner:daemon:logs [options]                         Follow the runner service log (journalctl --user -f)
+  runner:daemon:uninstall [options]                    Stop and remove the runner service (the runner stays registered)
+  runner:list                                          List your local AI runners and the models they serve
+  runner:models [options]                              Choose which of a runner's models appear in the chat model picker (no flags: list them)
+  runner:delete [options]                              Delete a local AI runner and revoke its token
+  help [command]                                       display help for command
 [36m
 --- Subcommand: login ---[0m
 Usage: gcli login [options]
@@ -645,6 +631,50 @@ Options:
   --wsUrl <url>        Lambforge subscriptions endpoint override
   --reset              Forget the saved runner and register a new one
   -h, --help           display help for command
+[36m
+--- Subcommand: runner:daemon:install ---[0m
+Usage: gcli runner:daemon:install|runner:start:daemon [options]
+
+Run the runner in the background as a systemd user service: starts with your session, restarts on failure (Linux)
+
+Options:
+  -n, --name <name>    Runner name when registering (default: hostname)
+  -t, --token <token>  Runner token for a machine without `gcli login`
+  --ollama <url>       Ollama URL (default: $OLLAMA_HOST or
+                       http://127.0.0.1:11434)
+  --wsUrl <url>        Lambforge subscriptions endpoint override
+  --reset              Forget the saved runner and register a new one
+  --service <name>     systemd unit name (default: lambforge-runner)
+  --dry-run            Print the unit file instead of installing it
+  -h, --help           display help for command
+[36m
+--- Subcommand: runner:daemon:status ---[0m
+Usage: gcli runner:daemon:status [options]
+
+Show the runner service status (systemctl --user status)
+
+Options:
+  --service <name>  systemd unit name (default: lambforge-runner)
+  -h, --help        display help for command
+[36m
+--- Subcommand: runner:daemon:logs ---[0m
+Usage: gcli runner:daemon:logs [options]
+
+Follow the runner service log (journalctl --user -f)
+
+Options:
+  --service <name>  systemd unit name (default: lambforge-runner)
+  --lines <n>       Lines of history to show first (default 50)
+  -h, --help        display help for command
+[36m
+--- Subcommand: runner:daemon:uninstall ---[0m
+Usage: gcli runner:daemon:uninstall [options]
+
+Stop and remove the runner service (the runner stays registered)
+
+Options:
+  --service <name>  systemd unit name (default: lambforge-runner)
+  -h, --help        display help for command
 [36m
 --- Subcommand: runner:list ---[0m
 Usage: gcli runner:list [options]

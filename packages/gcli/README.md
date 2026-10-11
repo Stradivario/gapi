@@ -744,6 +744,26 @@ running until Ctrl+C and reconnects on its own.
 | `gcli runner:list` | Your runners: online status, last seen, models |
 | `gcli runner:models` | List which models are shown in the chat; `--show a,b` shows only those, `--all` shows every model, `--none` hides them all; `--id` picks a runner (default: this machine's) |
 | `gcli runner:delete` | Delete a runner and revoke its token (`--id`, default: this machine's) |
+| `gcli runner:start:daemon` / `runner:daemon:install` | Install + start the runner as a systemd user service (Linux); `runner:daemon:status`, `runner:daemon:logs`, `runner:daemon:uninstall` manage it |
+
+### Run it in the background (systemd, Linux)
+
+```bash
+npm i -g @gapi/gcli                 # a stable install - not the npx cache
+gcli login
+gcli runner:start:daemon            # = runner:daemon:install; same options as runner:start
+gcli runner:daemon:status
+gcli runner:daemon:logs             # follow the log (Ctrl+C to stop following)
+gcli runner:daemon:uninstall        # stop + remove the service (runner stays registered)
+```
+
+It installs a systemd **user** service (`~/.config/systemd/user/lambforge-runner.service`,
+no `sudo`) that starts with your session and restarts on failure. The runner
+token stays in `~/.graphql-server/runner.json`, never in the unit file; a
+revoked token stops the service instead of restart-looping. To keep it
+running after logout and start it at boot, enable lingering once:
+`sudo loginctl enable-linger $USER`. Preview the unit with `--dry-run`;
+`--service <name>` installs several runners side by side.
 
 Notes:
 

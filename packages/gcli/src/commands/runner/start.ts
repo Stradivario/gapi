@@ -12,6 +12,7 @@ import {
   saveRunner,
 } from './config';
 import { RunnerAuthError, RunnerConnection } from './connection';
+import { RUNNER_AUTH_EXIT_CODE } from './daemon';
 import { resolveOllamaUrl } from './ollama';
 import { SavedRunner } from './types';
 
@@ -23,7 +24,7 @@ export const RUNNER_VERSION = 'gcli-runner/1';
  *  2. the runner saved by a previous `runner:start` on this machine
  *  3. a new runner, registered with the account `gcli login` signed into
  */
-const resolveRunner = async (cmd: {
+export const resolveRunner = async (cmd: {
   token?: string;
   name?: string;
   reset?: boolean;
@@ -95,7 +96,9 @@ export default async (cmd: {
   } catch (e) {
     if (e instanceof RunnerAuthError) {
       Logger.error(e.message);
-      process.exit(1);
+      // Distinct code: the systemd unit (runner:daemon:install) must not
+      // restart-loop on a token that will never be accepted.
+      process.exit(RUNNER_AUTH_EXIT_CODE);
     }
     throw e;
   }

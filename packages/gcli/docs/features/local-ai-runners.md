@@ -13,6 +13,8 @@ what lives in gcli.
 | `gcli runner:list` | Your runners: online, last seen, models |
 | `gcli runner:models [--id] [--show a,b \| --all \| --none]` | Which models appear in the chat picker; no flag = list |
 | `gcli runner:delete [--id]` | Delete a runner and revoke its token (default: the saved one) |
+| `gcli runner:daemon:install` (alias `runner:start:daemon`) `[runner:start options] [--service] [--dry-run]` | Resolve/register the runner now (saves `runner.json`), then install + enable + restart a systemd USER unit running `runner:start --ollama <resolved>` (Linux) |
+| `gcli runner:daemon:status` / `:logs` / `:uninstall` | `systemctl --user status`, `journalctl --user -f`, disable --now + remove the unit |
 
 Endpoints: `--wsUrl` > `runner.json` > derived from the `gcli login` URL
 (`https://api.lambforge.com` -> `wss://api.lambforge.com/subscriptions`;
@@ -42,6 +44,15 @@ Ollama: `--ollama` > `$OLLAMA_HOST` (scheme optional, `0.0.0.0` -> `127.0.0.1`)
   The backend fits every request to it, because Ollama silently drops the
   oldest messages of a prompt that is too long (see the canonical doc,
   "Context window").
+- `daemon.ts` - `buildUnit` (pure; systemd quoting; `Restart=always`,
+  `RestartPreventExitStatus=78`), `resolveGcliCommand` (node + script, or
+  the SEA binary; warns for the npx cache), `SystemdUserService`
+  (`systemctl --user` via execFile, never a shell; home dir injectable so
+  tests can't touch the real `~/.config`). `daemon-commands.ts` - the
+  `runner:daemon:*` actions. Adapted from cli-builder's `SystemctlService`,
+  but a USER unit (no root) and no secrets in the unit. `runner:start` exits
+  78 (EX_CONFIG) when the token is refused, so systemd stops instead of
+  restart-looping.
 - `config.ts` (saved runner, URL derivation), `start.ts`, `list.ts`,
   `models.ts`, `delete.ts`, `index.ts` (command registration), `types.ts`.
 - `src/services/gql-client.ts` - `createLocalRunner`, `listLocalRunners`,
