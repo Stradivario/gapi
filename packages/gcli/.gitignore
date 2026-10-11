@@ -8,3 +8,6 @@ release
 !release/index.js
 !release/gcli-linux
 !release/esbuild.wasm
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+.claude/worktrees/
