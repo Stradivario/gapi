@@ -71,6 +71,13 @@ node release/index.js <command> --help
 npm run patch                    # release: build, version bump, publish
 ```
 
+CI (repo root `.github/workflows/`): **Tests** runs on every push to a
+non-master branch - `npx @rxdi/bolt install`, then `npm run lint` and
+`npm test` across all gapi workspaces (gcli included). **Publish** repeats
+lint/test on master before publishing; **Release GCLI Binary** builds the
+SEA binary on `v*` tags. Reproduce Tests locally from the repo root:
+`npm run lint && npm test`.
+
 ## Docs, skills and changelog - same change, every time
 
 This repo is documentation-driven. With every change:
