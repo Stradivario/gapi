@@ -9498,19 +9498,19 @@ var require_Observable = __commonJS({
     var config_1 = require_config();
     var isFunction_1 = require_isFunction();
     var errorContext_1 = require_errorContext();
-    var Observable4 = (function() {
-      function Observable5(subscribe) {
+    var Observable6 = (function() {
+      function Observable7(subscribe) {
         if (subscribe) {
           this._subscribe = subscribe;
         }
       }
-      Observable5.prototype.lift = function(operator) {
-        var observable = new Observable5();
+      Observable7.prototype.lift = function(operator) {
+        var observable = new Observable7();
         observable.source = this;
         observable.operator = operator;
         return observable;
       };
-      Observable5.prototype.subscribe = function(observerOrNext, error48, complete) {
+      Observable7.prototype.subscribe = function(observerOrNext, error48, complete) {
         var _this = this;
         var subscriber = isSubscriber(observerOrNext) ? observerOrNext : new Subscriber_1.SafeSubscriber(observerOrNext, error48, complete);
         errorContext_1.errorContext(function() {
@@ -9519,14 +9519,14 @@ var require_Observable = __commonJS({
         });
         return subscriber;
       };
-      Observable5.prototype._trySubscribe = function(sink) {
+      Observable7.prototype._trySubscribe = function(sink) {
         try {
           return this._subscribe(sink);
         } catch (err) {
           sink.error(err);
         }
       };
-      Observable5.prototype.forEach = function(next, promiseCtor) {
+      Observable7.prototype.forEach = function(next, promiseCtor) {
         var _this = this;
         promiseCtor = getPromiseCtor(promiseCtor);
         return new promiseCtor(function(resolve, reject) {
@@ -9545,21 +9545,21 @@ var require_Observable = __commonJS({
           _this.subscribe(subscriber);
         });
       };
-      Observable5.prototype._subscribe = function(subscriber) {
+      Observable7.prototype._subscribe = function(subscriber) {
         var _a2;
         return (_a2 = this.source) === null || _a2 === void 0 ? void 0 : _a2.subscribe(subscriber);
       };
-      Observable5.prototype[observable_1.observable] = function() {
+      Observable7.prototype[observable_1.observable] = function() {
         return this;
       };
-      Observable5.prototype.pipe = function() {
+      Observable7.prototype.pipe = function() {
         var operations = [];
         for (var _i = 0; _i < arguments.length; _i++) {
           operations[_i] = arguments[_i];
         }
         return pipe_1.pipeFromArray(operations)(this);
       };
-      Observable5.prototype.toPromise = function(promiseCtor) {
+      Observable7.prototype.toPromise = function(promiseCtor) {
         var _this = this;
         promiseCtor = getPromiseCtor(promiseCtor);
         return new promiseCtor(function(resolve, reject) {
@@ -9573,12 +9573,12 @@ var require_Observable = __commonJS({
           });
         });
       };
-      Observable5.create = function(subscribe) {
-        return new Observable5(subscribe);
+      Observable7.create = function(subscribe) {
+        return new Observable7(subscribe);
       };
-      return Observable5;
+      return Observable7;
     })();
-    exports2.Observable = Observable4;
+    exports2.Observable = Observable6;
     function getPromiseCtor(promiseCtor) {
       var _a2;
       return (_a2 = promiseCtor !== null && promiseCtor !== void 0 ? promiseCtor : config_1.config.Promise) !== null && _a2 !== void 0 ? _a2 : Promise;
@@ -12268,7 +12268,7 @@ var require_throwError = __commonJS({
     exports2.throwError = void 0;
     var Observable_1 = require_Observable();
     var isFunction_1 = require_isFunction();
-    function throwError10(errorOrErrorFactory, scheduler) {
+    function throwError11(errorOrErrorFactory, scheduler) {
       var errorFactory = isFunction_1.isFunction(errorOrErrorFactory) ? errorOrErrorFactory : function() {
         return errorOrErrorFactory;
       };
@@ -12279,7 +12279,7 @@ var require_throwError = __commonJS({
         return scheduler.schedule(init, 0, subscriber);
       } : init);
     }
-    exports2.throwError = throwError10;
+    exports2.throwError = throwError11;
   }
 });
 
@@ -12391,7 +12391,7 @@ var require_lastValueFrom = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.lastValueFrom = void 0;
     var EmptyError_1 = require_EmptyError();
-    function lastValueFrom38(source, config2) {
+    function lastValueFrom45(source, config2) {
       var hasConfig = typeof config2 === "object";
       return new Promise(function(resolve, reject) {
         var _hasValue = false;
@@ -12414,7 +12414,7 @@ var require_lastValueFrom = __commonJS({
         });
       });
     }
-    exports2.lastValueFrom = lastValueFrom38;
+    exports2.lastValueFrom = lastValueFrom45;
   }
 });
 
@@ -12591,7 +12591,7 @@ var require_map = __commonJS({
     exports2.map = void 0;
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function map24(project, thisArg) {
+    function map25(project, thisArg) {
       return lift_1.operate(function(source, subscriber) {
         var index = 0;
         source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, function(value) {
@@ -12599,7 +12599,7 @@ var require_map = __commonJS({
         }));
       });
     }
-    exports2.map = map24;
+    exports2.map = map25;
   }
 });
 
@@ -16648,7 +16648,7 @@ var require_switchMap = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function switchMap35(project, resultSelector) {
+    function switchMap36(project, resultSelector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSubscriber = null;
         var index = 0;
@@ -16672,7 +16672,7 @@ var require_switchMap = __commonJS({
         }));
       });
     }
-    exports2.switchMap = switchMap35;
+    exports2.switchMap = switchMap36;
   }
 });
 
@@ -19972,7 +19972,7 @@ var require_index_node_cjs = __commonJS({
       }
       return true;
     }
-    function map24(obj, fn, contextObj) {
+    function map25(obj, fn, contextObj) {
       var res = {};
       for (var key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -20462,7 +20462,7 @@ var require_index_node_cjs = __commonJS({
     exports2.isValidTimestamp = isValidTimestamp;
     exports2.issuedAtTime = issuedAtTime;
     exports2.jsonEval = jsonEval;
-    exports2.map = map24;
+    exports2.map = map25;
     exports2.querystring = querystring;
     exports2.querystringDecode = querystringDecode;
     exports2.safeGet = safeGet;
@@ -35484,16 +35484,16 @@ var require_encoder = __commonJS({
       }
       return bl(acc);
     }
-    function encodeMap(map24, options, encode3) {
-      const acc = [getHeader(map24.size, 128, 222)];
-      const keys = [...map24.keys()];
+    function encodeMap(map25, options, encode3) {
+      const acc = [getHeader(map25.size, 128, 222)];
+      const keys = [...map25.keys()];
       if (!options.preferMap) {
         if (keys.every((item) => typeof item === "string")) {
           console.warn("Map with string only keys will be deserialized as an object!");
         }
       }
       keys.forEach((key) => {
-        acc.push(encode3(key), encode3(map24.get(key)));
+        acc.push(encode3(key), encode3(map25.get(key)));
       });
       return bl(acc);
     }
@@ -36013,6 +36013,129 @@ var init_types = __esm({
   }
 });
 
+// src/commands/cluster/types.ts
+var ClusterChangeFragment, ClusterAutoscaleFragment, ClusterOverviewFragment, ClusterHealthFragment, ClusterScaleEventFragment;
+var init_types2 = __esm({
+  "src/commands/cluster/types.ts"() {
+    ClusterChangeFragment = `
+id
+projectId
+name
+status
+region
+serverType
+topology {
+  workers
+  singleNode
+  controlPlanes
+}
+withLoadBalancer
+loadBalancerIp
+error
+`;
+    ClusterAutoscaleFragment = `
+enabled
+minWorkers
+maxWorkers
+cpuScaleUpPercent
+memScaleUpPercent
+cpuScaleDownPercent
+memScaleDownPercent
+samplesToScale
+cooldownMinutes
+lastScaledAt
+lastEvaluatedAt
+lastDecision
+`;
+    ClusterOverviewFragment = `
+clusterId
+name
+status
+overall
+agentOnline
+agentLastSeenAt
+agentVersion
+health {
+  reportedAt
+  nodesTotal
+  nodesReady
+  nodesSchedulable
+  pods
+  pendingPods
+  cpuRequestsPercent
+  memRequestsPercent
+  cpuUsagePercent
+  memUsagePercent
+  fissionReady
+  prometheusReady
+  kubernetesVersion
+}
+autoscale {
+  enabled
+  minWorkers
+  maxWorkers
+  lastDecision
+  lastScaledAt
+}
+monthToDate {
+  period
+  nodeHours
+  loadBalancerHours
+  totalCostEur
+  totalCostUsd
+}
+estimatedMonthlyCostEur
+issues {
+  severity
+  code
+  message
+}
+`;
+    ClusterHealthFragment = `
+id
+clusterId
+createdAt
+agentVersion
+kubernetesVersion
+pods
+pendingPods
+fissionReady
+prometheusReady
+metricsAvailable
+cpuRequestsPercent
+memRequestsPercent
+cpuUsagePercent
+memUsagePercent
+nodes {
+  name
+  role
+  ready
+  instanceType
+  cpuRequests
+  cpuUsage
+  cpuAllocatable
+  memRequests
+  memUsage
+  memAllocatable
+  podCount
+  cordoned
+}
+`;
+    ClusterScaleEventFragment = `
+createdAt
+trigger
+direction
+fromWorkers
+toWorkers
+reason
+cpuRequestsPercent
+memRequestsPercent
+pendingPods
+error
+`;
+  }
+});
+
 // src/services/types/cluster.fragment.ts
 var ClusterFragment;
 var init_cluster_fragment = __esm({
@@ -36278,6 +36401,7 @@ var init_gql_client = __esm({
     import_operators = __toESM(require_operators());
     init_read_file();
     init_types();
+    init_types2();
     init_cluster_fragment();
     init_environment_fragment();
     init_lambda_fragment();
@@ -36660,6 +36784,8 @@ var init_gql_client = __esm({
           $location: String!
           $workers: Int
           $singleNode: Boolean
+          $withLoadBalancer: Boolean
+          $controlPlanes: Int
         ) {
           provisionProjectCluster(
             projectId: $projectId
@@ -36669,6 +36795,8 @@ var init_gql_client = __esm({
             location: $location
             workers: $workers
             singleNode: $singleNode
+            withLoadBalancer: $withLoadBalancer
+            controlPlanes: $controlPlanes
           ) {
             ${ClusterFragment}
           }
@@ -36763,6 +36891,157 @@ var init_gql_client = __esm({
       `,
           variables: { projectId, clusterId }
         }).pipe((0, import_operators.map)((res) => res.clusterKubeconfig));
+      }
+      // Cluster scaling, topology, load balancer and health (cluster-provisioner;
+      // the same operations as gql-fission core/services/cluster/*.graphql).
+      // Mutations start a background job: the returned status is e.g.
+      // "scaling"/"migrating" and settles to "ready" (or "error").
+      static clusterMutation(field, extraArgs, variables) {
+        const defs = Object.entries(extraArgs).map(([k, t2]) => `$${k}: ${t2}`).join(" ");
+        const args = Object.keys(extraArgs).map((k) => `${k}: $${k}`).join(" ");
+        return this.query({
+          query: gql`
+        mutation ${field}($projectId: String! $clusterId: String! ${defs}) {
+          ${field}(projectId: $projectId clusterId: $clusterId ${args}) {
+            ${ClusterChangeFragment}
+          }
+        }
+      `,
+          variables
+        }).pipe((0, import_operators.map)((res) => res[field]));
+      }
+      static scaleProjectCluster(projectId, clusterId, workers) {
+        return this.clusterMutation(
+          "scaleProjectCluster",
+          { workers: "Int!" },
+          { projectId, clusterId, workers }
+        );
+      }
+      static scaleControlPlanesProjectCluster(projectId, clusterId, controlPlanes) {
+        return this.clusterMutation(
+          "scaleControlPlanesProjectCluster",
+          { controlPlanes: "Int!" },
+          { projectId, clusterId, controlPlanes }
+        );
+      }
+      static migrateToMultiNodeProjectCluster(projectId, clusterId, workers) {
+        return this.clusterMutation(
+          "migrateToMultiNodeProjectCluster",
+          { workers: "Int!" },
+          { projectId, clusterId, workers }
+        );
+      }
+      static revertToSingleNodeProjectCluster(projectId, clusterId) {
+        return this.clusterMutation(
+          "revertToSingleNodeProjectCluster",
+          {},
+          { projectId, clusterId }
+        );
+      }
+      static setProjectClusterLoadBalancer(projectId, clusterId, enabled) {
+        return this.clusterMutation(
+          enabled ? "enableLoadBalancerProjectCluster" : "disableLoadBalancerProjectCluster",
+          {},
+          { projectId, clusterId }
+        );
+      }
+      static updateProjectClusterAutoscale(projectId, clusterId, input) {
+        return this.query({
+          query: gql`
+        mutation updateProjectClusterAutoscale(
+          $projectId: String!
+          $clusterId: String!
+          $input: ClusterAutoscaleInput!
+        ) {
+          updateProjectClusterAutoscale(
+            projectId: $projectId
+            clusterId: $clusterId
+            input: $input
+          ) {
+            id
+            name
+            status
+            topology {
+              workers
+              singleNode
+              controlPlanes
+            }
+            autoscale {
+              ${ClusterAutoscaleFragment}
+            }
+          }
+        }
+      `,
+          variables: { projectId, clusterId, input }
+        }).pipe((0, import_operators.map)((res) => res.updateProjectClusterAutoscale));
+      }
+      /** projectClusters with the fields cluster:apply compares. */
+      static projectClustersDetailed(projectId) {
+        return this.query({
+          query: gql`
+        query projectClustersDetailed($projectId: String!) {
+          projectClusters(projectId: $projectId) {
+            ${ClusterChangeFragment}
+            autoscale {
+              ${ClusterAutoscaleFragment}
+            }
+          }
+        }
+      `,
+          variables: { projectId }
+        }).pipe((0, import_operators.map)((res) => res.projectClusters ?? []));
+      }
+      static projectClustersOverview(projectId) {
+        return this.query({
+          query: gql`
+        query projectClustersOverview($projectId: String!) {
+          projectClustersOverview(projectId: $projectId) {
+            ${ClusterOverviewFragment}
+          }
+        }
+      `,
+          variables: { projectId }
+        }).pipe((0, import_operators.map)((res) => res.projectClustersOverview ?? []));
+      }
+      static clusterHealth(projectId, clusterId, limit = 1) {
+        return this.query({
+          query: gql`
+        query clusterHealth(
+          $projectId: String!
+          $clusterId: String!
+          $limit: Int
+        ) {
+          clusterHealth(
+            projectId: $projectId
+            clusterId: $clusterId
+            limit: $limit
+          ) {
+            ${ClusterHealthFragment}
+          }
+        }
+      `,
+          variables: { projectId, clusterId, limit }
+        }).pipe((0, import_operators.map)((res) => res.clusterHealth ?? []));
+      }
+      static clusterScaleEvents(projectId, clusterId, limit = 20) {
+        return this.query({
+          query: gql`
+        query clusterScaleEvents(
+          $projectId: String!
+          $clusterId: String!
+          $limit: Int
+        ) {
+          clusterScaleEvents(
+            projectId: $projectId
+            clusterId: $clusterId
+            limit: $limit
+          ) {
+            ${ClusterScaleEventFragment}
+          }
+        }
+      `,
+          variables: { projectId, clusterId, limit }
+        }).pipe((0, import_operators.map)((res) => res.clusterScaleEvents ?? []));
       }
       // --------------------------------------------------------------------
       // RabbitMQ brokers (graphql-server-lambdas) - a project may have
@@ -38424,22 +38703,22 @@ var require_source_map_generator = __commonJS({
       }, this);
     };
     SourceMapGenerator.prototype.toJSON = function SourceMapGenerator_toJSON() {
-      var map24 = {
+      var map25 = {
         version: this._version,
         sources: this._sources.toArray(),
         names: this._names.toArray(),
         mappings: this._serializeMappings()
       };
       if (this._file != null) {
-        map24.file = this._file;
+        map25.file = this._file;
       }
       if (this._sourceRoot != null) {
-        map24.sourceRoot = this._sourceRoot;
+        map25.sourceRoot = this._sourceRoot;
       }
       if (this._sourcesContents) {
-        map24.sourcesContent = this._generateSourcesContent(map24.sources, map24.sourceRoot);
+        map25.sourcesContent = this._generateSourcesContent(map25.sources, map25.sourceRoot);
       }
-      return map24;
+      return map25;
     };
     SourceMapGenerator.prototype.toString = function SourceMapGenerator_toString() {
       return JSON.stringify(this.toJSON());
@@ -39332,7 +39611,7 @@ var require_source_node = __commonJS({
         line: 1,
         column: 0
       };
-      var map24 = new SourceMapGenerator(aArgs);
+      var map25 = new SourceMapGenerator(aArgs);
       var sourceMappingActive = false;
       var lastOriginalSource = null;
       var lastOriginalLine = null;
@@ -39342,7 +39621,7 @@ var require_source_node = __commonJS({
         generated.code += chunk;
         if (original.source !== null && original.line !== null && original.column !== null) {
           if (lastOriginalSource !== original.source || lastOriginalLine !== original.line || lastOriginalColumn !== original.column || lastOriginalName !== original.name) {
-            map24.addMapping({
+            map25.addMapping({
               source: original.source,
               original: {
                 line: original.line,
@@ -39361,7 +39640,7 @@ var require_source_node = __commonJS({
           lastOriginalName = original.name;
           sourceMappingActive = true;
         } else if (sourceMappingActive) {
-          map24.addMapping({
+          map25.addMapping({
             generated: {
               line: generated.line,
               column: generated.column
@@ -39378,7 +39657,7 @@ var require_source_node = __commonJS({
               lastOriginalSource = null;
               sourceMappingActive = false;
             } else if (sourceMappingActive) {
-              map24.addMapping({
+              map25.addMapping({
                 source: original.source,
                 original: {
                   line: original.line,
@@ -39397,9 +39676,9 @@ var require_source_node = __commonJS({
         }
       });
       this.walkSourceContents(function(sourceFile, sourceContent) {
-        map24.setSourceContent(sourceFile, sourceContent);
+        map25.setSourceContent(sourceFile, sourceContent);
       });
-      return { code: generated.code, map: map24 };
+      return { code: generated.code, map: map25 };
     };
     exports2.SourceNode = SourceNode;
   }
@@ -41739,7 +42018,7 @@ var require_typescript = __commonJS({
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map24,
+        map: () => map25,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -42383,7 +42662,7 @@ var require_typescript = __commonJS({
       function clear(array2) {
         array2.length = 0;
       }
-      function map24(array2, f3) {
+      function map25(array2, f3) {
         let result;
         if (array2 !== void 0) {
           result = [];
@@ -42519,12 +42798,12 @@ var require_typescript = __commonJS({
           }
         }
       }
-      function getOrUpdate(map25, key, callback) {
-        if (map25.has(key)) {
-          return map25.get(key);
+      function getOrUpdate(map26, key, callback) {
+        if (map26.has(key)) {
+          return map26.get(key);
         }
         const value = callback();
-        map25.set(key, value);
+        map26.set(key, value);
         return value;
       }
       function tryAddToSet(set2, value) {
@@ -42570,12 +42849,12 @@ var require_typescript = __commonJS({
         }
         return result;
       }
-      function mapEntries(map25, f3) {
-        if (map25 === void 0) {
+      function mapEntries(map26, f3) {
+        if (map26 === void 0) {
           return void 0;
         }
         const result = /* @__PURE__ */ new Map();
-        map25.forEach((value, key) => {
+        map26.forEach((value, key) => {
           const [newKey, newValue] = f3(key, value);
           result.set(newKey, newValue);
         });
@@ -42924,16 +43203,16 @@ var require_typescript = __commonJS({
         return initial;
       }
       var hasOwnProperty = Object.prototype.hasOwnProperty;
-      function hasProperty(map25, key) {
-        return hasOwnProperty.call(map25, key);
+      function hasProperty(map26, key) {
+        return hasOwnProperty.call(map26, key);
       }
-      function getProperty(map25, key) {
-        return hasOwnProperty.call(map25, key) ? map25[key] : void 0;
+      function getProperty(map26, key) {
+        return hasOwnProperty.call(map26, key) ? map26[key] : void 0;
       }
-      function getOwnKeys(map25) {
+      function getOwnKeys(map26) {
         const keys = [];
-        for (const key in map25) {
-          if (hasOwnProperty.call(map25, key)) {
+        for (const key in map26) {
+          if (hasOwnProperty.call(map26, key)) {
             keys.push(key);
           }
         }
@@ -42965,10 +43244,10 @@ var require_typescript = __commonJS({
         }
         return result;
       }
-      function arrayFrom(iterator, map25) {
+      function arrayFrom(iterator, map26) {
         const result = [];
         for (const value of iterator) {
-          result.push(map25 ? map25(value) : value);
+          result.push(map26 ? map26(value) : value);
         }
         return result;
       }
@@ -43073,10 +43352,10 @@ var require_typescript = __commonJS({
         return fn == null ? void 0 : fn.bind(obj);
       }
       function createMultiMap() {
-        const map25 = /* @__PURE__ */ new Map();
-        map25.add = multiMapAdd;
-        map25.remove = multiMapRemove;
-        return map25;
+        const map26 = /* @__PURE__ */ new Map();
+        map26.add = multiMapAdd;
+        map26.remove = multiMapRemove;
+        return map26;
       }
       function multiMapAdd(key, value) {
         let values = this.get(key);
@@ -43292,13 +43571,13 @@ var require_typescript = __commonJS({
         };
       }
       function memoizeOne(callback) {
-        const map25 = /* @__PURE__ */ new Map();
+        const map26 = /* @__PURE__ */ new Map();
         return (arg) => {
           const key = `${typeof arg}:${arg}`;
-          let value = map25.get(key);
-          if (value === void 0 && !map25.has(key)) {
+          let value = map26.get(key);
+          if (value === void 0 && !map26.has(key)) {
             value = callback(arg);
-            map25.set(key, value);
+            map26.set(key, value);
           }
           return value;
         };
@@ -43912,7 +44191,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
         }
         Debug2.getFunctionName = getFunctionName;
         function formatSymbol(symbol2) {
-          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map24(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
+          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map25(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
         }
         Debug2.formatSymbol = formatSymbol;
         function formatEnum(value = 0, enumObject, isFlags) {
@@ -44338,7 +44617,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
               case 1:
                 return zipWith(
                   this.sources,
-                  this.targets || map24(this.sources, () => "any"),
+                  this.targets || map25(this.sources, () => "any"),
                   (s2, t2) => `${s2.__debugTypeToString()} -> ${typeof t2 === "string" ? t2 : t2.__debugTypeToString()}`
                 ).join(", ");
               case 2:
@@ -44973,10 +45252,10 @@ ${lanes.join("\n")}
         }
       }
       function formatDisjunction(alternatives) {
-        return map24(alternatives, formatAlternative).join(" || ") || "*";
+        return map25(alternatives, formatAlternative).join(" || ") || "*";
       }
       function formatAlternative(comparators) {
-        return map24(comparators, formatComparator).join(" ");
+        return map25(comparators, formatComparator).join(" ");
       }
       function formatComparator(comparator) {
         return `${comparator.operator}${comparator.operand}`;
@@ -51836,20 +52115,20 @@ ${lanes.join("\n")}
       var commentDirectiveRegExSingleLine = /^\/\/\/?\s*@(ts-expect-error|ts-ignore)/;
       var commentDirectiveRegExMultiLine = /^(?:\/|\*)*\s*@(ts-expect-error|ts-ignore)/;
       var jsDocSeeOrLink = /@(?:see|link)/i;
-      function lookupInUnicodeMap(code, map25) {
-        if (code < map25[0]) {
+      function lookupInUnicodeMap(code, map26) {
+        if (code < map26[0]) {
           return false;
         }
         let lo = 0;
-        let hi = map25.length;
+        let hi = map26.length;
         let mid;
         while (lo + 1 < hi) {
           mid = lo + (hi - lo) / 2;
           mid -= mid % 2;
-          if (map25[mid] <= code && code <= map25[mid + 1]) {
+          if (map26[mid] <= code && code <= map26[mid + 1]) {
             return true;
           }
-          if (code < map25[mid]) {
+          if (code < map26[mid]) {
             hi = mid;
           } else {
             lo = mid + 2;
@@ -56653,8 +56932,8 @@ ${lanes.join("\n")}
           node = node.parent;
         }
       }
-      function forEachEntry(map25, callback) {
-        const iterator = map25.entries();
+      function forEachEntry(map26, callback) {
+        const iterator = map26.entries();
         for (const [key, value] of iterator) {
           const result = callback(value, key);
           if (result) {
@@ -56663,8 +56942,8 @@ ${lanes.join("\n")}
         }
         return void 0;
       }
-      function forEachKey(map25, callback) {
-        const iterator = map25.keys();
+      function forEachKey(map26, callback) {
+        const iterator = map26.keys();
         for (const key of iterator) {
           const result = callback(key);
           if (result) {
@@ -61816,28 +62095,28 @@ ${lanes.join("\n")}
         }
         return true;
       }
-      function clearMap(map25, onDeleteValue) {
-        map25.forEach(onDeleteValue);
-        map25.clear();
+      function clearMap(map26, onDeleteValue) {
+        map26.forEach(onDeleteValue);
+        map26.clear();
       }
-      function mutateMapSkippingNewValues(map25, newMap, options) {
+      function mutateMapSkippingNewValues(map26, newMap, options) {
         const { onDeleteValue, onExistingValue } = options;
-        map25.forEach((existingValue, key) => {
+        map26.forEach((existingValue, key) => {
           var _a2;
           if (!(newMap == null ? void 0 : newMap.has(key))) {
-            map25.delete(key);
+            map26.delete(key);
             onDeleteValue(existingValue, key);
           } else if (onExistingValue) {
             onExistingValue(existingValue, (_a2 = newMap.get) == null ? void 0 : _a2.call(newMap, key), key);
           }
         });
       }
-      function mutateMap(map25, newMap, options) {
-        mutateMapSkippingNewValues(map25, newMap, options);
+      function mutateMap(map26, newMap, options) {
+        mutateMapSkippingNewValues(map26, newMap, options);
         const { createNewValue } = options;
         newMap == null ? void 0 : newMap.forEach((valueInNewMap, key) => {
-          if (!map25.has(key)) {
-            map25.set(key, createNewValue(key, valueInNewMap));
+          if (!map26.has(key)) {
+            map26.set(key, createNewValue(key, valueInNewMap));
           }
         });
       }
@@ -62903,7 +63182,7 @@ ${lanes.join("\n")}
         currentDirectory = normalizePath(currentDirectory);
         const absolutePath = combinePaths(currentDirectory, path2);
         return {
-          includeFilePatterns: map24(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
+          includeFilePatterns: map25(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
           includeFilePattern: getRegularExpressionForWildcard(includes, absolutePath, "files"),
           includeDirectoryPattern: getRegularExpressionForWildcard(includes, absolutePath, "directories"),
           excludePattern: getRegularExpressionForWildcard(excludes, absolutePath, "exclude"),
@@ -65413,7 +65692,7 @@ ${lanes.join("\n")}
           if (isObjectBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createObjectLiteralExpression(map24(node.elements, convertToObjectAssignmentElement)),
+                factory2.createObjectLiteralExpression(map25(node.elements, convertToObjectAssignmentElement)),
                 node
               ),
               node
@@ -65425,7 +65704,7 @@ ${lanes.join("\n")}
           if (isArrayBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createArrayLiteralExpression(map24(node.elements, convertToArrayAssignmentElement)),
+                factory2.createArrayLiteralExpression(map25(node.elements, convertToArrayAssignmentElement)),
                 node
               ),
               node
@@ -72786,12 +73065,12 @@ ${lanes.join("\n")}
         if (node.kind === 353) {
           Debug.fail("Should not need to re-set the children of a SyntaxList.");
         }
-        let map25 = sourceFileToNodeChildren.get(sourceFile);
-        if (map25 === void 0) {
-          map25 = /* @__PURE__ */ new WeakMap();
-          sourceFileToNodeChildren.set(sourceFile, map25);
+        let map26 = sourceFileToNodeChildren.get(sourceFile);
+        if (map26 === void 0) {
+          map26 = /* @__PURE__ */ new WeakMap();
+          sourceFileToNodeChildren.set(sourceFile, map26);
         }
-        map25.set(node, children);
+        map26.set(node, children);
         return children;
       }
       function unsetNodeChildren(node, origSourceFile) {
@@ -72802,10 +73081,10 @@ ${lanes.join("\n")}
         (_a2 = sourceFileToNodeChildren.get(origSourceFile)) == null ? void 0 : _a2.delete(node);
       }
       function transferSourceFileChildren(sourceFile, targetSourceFile) {
-        const map25 = sourceFileToNodeChildren.get(sourceFile);
-        if (map25 !== void 0) {
+        const map26 = sourceFileToNodeChildren.get(sourceFile);
+        if (map26 !== void 0) {
           sourceFileToNodeChildren.delete(sourceFile);
-          sourceFileToNodeChildren.set(targetSourceFile, map25);
+          sourceFileToNodeChildren.set(targetSourceFile, map26);
         }
       }
       function createEmptyExports(factory2) {
@@ -73247,7 +73526,7 @@ ${lanes.join("\n")}
               if (some(helperNames)) {
                 helperNames.sort(compareStringsCaseSensitive);
                 const namedBindings = nodeFactory.createNamedImports(
-                  map24(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
+                  map25(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
                     /*isTypeOnly*/
                     false,
                     /*propertyName*/
@@ -83450,7 +83729,7 @@ ${lanes.join("\n")}
               break;
             }
             case "amd-dependency": {
-              context.amdDependencies = map24(
+              context.amdDependencies = map25(
                 toArray(entryOrList),
                 (x2) => ({ name: x2.arguments.name, path: x2.arguments.path })
               );
@@ -85799,7 +86078,7 @@ ${lanes.join("\n")}
       function convertToTSConfig(configParseResult, configFileName, host) {
         var _a2, _b, _c;
         const getCanonicalFileName = createGetCanonicalFileName(host.useCaseSensitiveFileNames);
-        const files = map24(
+        const files = map25(
           filter3(
             configParseResult.fileNames,
             !((_b = (_a2 = configParseResult.options.configFile) == null ? void 0 : _a2.configFileSpecs) == null ? void 0 : _b.validatedIncludeSpecs) ? returnTrue : matchesSpecs(
@@ -85829,7 +86108,7 @@ ${lanes.join("\n")}
             version: void 0
           },
           watchOptions: watchOptionMap && optionMapToObject(watchOptionMap),
-          references: map24(configParseResult.projectReferences, (r2) => ({ ...r2, path: r2.originalPath ? r2.originalPath : "", originalPath: void 0 })),
+          references: map25(configParseResult.projectReferences, (r2) => ({ ...r2, path: r2.originalPath ? r2.originalPath : "", originalPath: void 0 })),
           files: length(files) ? files : void 0,
           ...((_c = configParseResult.options.configFile) == null ? void 0 : _c.configFileSpecs) ? {
             include: filterSameAsDefaultInclude(configParseResult.options.configFile.configFileSpecs.validatedIncludeSpecs),
@@ -86117,17 +86396,17 @@ ${lanes.join("\n")}
         function formatValueOrArray(settingName, value) {
           const option = optionDeclarations.filter((c) => c.name === settingName)[0];
           if (!option) Debug.fail(`No option named ${settingName}?`);
-          const map25 = option.type instanceof Map ? option.type : void 0;
+          const map26 = option.type instanceof Map ? option.type : void 0;
           if (isArray(value)) {
             const map32 = "element" in option && option.element.type instanceof Map ? option.element.type : void 0;
             return `[${value.map((v) => formatSingleValue(v, map32)).join(", ")}]`;
           } else {
-            return formatSingleValue(value, map25);
+            return formatSingleValue(value, map26);
           }
         }
-        function formatSingleValue(value, map25) {
-          if (map25) {
-            value = getNameOfCompilerOptionValue(value, map25) ?? Debug.fail(`No matching value of ${value}`);
+        function formatSingleValue(value, map26) {
+          if (map26) {
+            value = getNameOfCompilerOptionValue(value, map26) ?? Debug.fail(`No matching value of ${value}`);
           }
           return JSON.stringify(value);
         }
@@ -86518,7 +86797,7 @@ ${lanes.join("\n")}
             const setPropertyInResultIfNotUndefined = (propertyName) => {
               if (ownConfig.raw[propertyName]) return;
               if (extendsRaw[propertyName]) {
-                result[propertyName] = map24(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
+                result[propertyName] = map25(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
                   relativeDifference || (relativeDifference = convertToRelativePath(getDirectoryPath(extendedConfigPath), basePath, createGetCanonicalFileName(host.useCaseSensitiveFileNames))),
                   path2
                 ));
@@ -86827,7 +87106,7 @@ ${lanes.join("\n")}
         }
       }
       function convertJsonOptionOfListType(option, values, basePath, errors, propertyAssignment, valueExpression, sourceFile) {
-        return filter3(map24(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
+        return filter3(map25(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
       }
       var invalidTrailingRecursionPattern = /(?:^|\/)\*\*\/?$/;
       var wildcardDirectoryPattern = /^[^*?]*(?=\/[^/]*[*?])/;
@@ -86867,7 +87146,7 @@ ${lanes.join("\n")}
                   ".json"
                   /* Json */
                 ));
-                const includeFilePatterns = map24(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
+                const includeFilePatterns = map25(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
                 jsonOnlyIncludeRegexes = includeFilePatterns ? includeFilePatterns.map((pattern) => getRegexFromPattern(pattern, host.useCaseSensitiveFileNames)) : emptyArray;
               }
               const includeIndex = findIndex(jsonOnlyIncludeRegexes, (re) => re.test(file2));
@@ -94167,7 +94446,7 @@ ${lanes.join("\n")}
         }
         const normalizedSourcePaths = getPathsRelativeToRootDirs(sourceDirectory, rootDirs, getCanonicalFileName);
         const relativePaths = flatMap(normalizedSourcePaths, (sourcePath) => {
-          return map24(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
+          return map25(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
         });
         const shortest = min(relativePaths, compareNumberOfDirectorySeparators);
         if (!shortest) {
@@ -97212,7 +97491,7 @@ ${lanes.join("\n")}
               const exportedSymbol = exports22 ? find(symbolsToArray(exports22), (symbol2) => !!getSymbolIfSameReference(symbol2, localSymbol)) : void 0;
               const diagnostic = exportedSymbol ? error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_exported_as_2, moduleName, declarationName, symbolToString(exportedSymbol)) : error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_not_exported, moduleName, declarationName);
               if (localSymbol.declarations) {
-                addRelatedInfo(diagnostic, ...map24(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
+                addRelatedInfo(diagnostic, ...map25(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
               }
             }
           } else {
@@ -99993,7 +100272,7 @@ ${lanes.join("\n")}
               const types3 = type.types;
               const templateHead = factory.createTemplateHead(texts[0]);
               const templateSpans = factory.createNodeArray(
-                map24(types3, (t2, i2) => factory.createTemplateLiteralTypeSpan(
+                map25(types3, (t2, i2) => factory.createTemplateLiteralTypeSpan(
                   typeToTypeNodeHelper(t2, context),
                   (i2 < types3.length - 1 ? factory.createTemplateMiddle : factory.createTemplateTail)(texts[i2 + 1])
                 ))
@@ -100362,7 +100641,7 @@ ${lanes.join("\n")}
               }
               const abstractSignatures = filter3(resolved.constructSignatures, (signature) => !!(signature.flags & 4));
               if (some(abstractSignatures)) {
-                const types3 = map24(abstractSignatures, getOrCreateTypeFromSignature);
+                const types3 = map25(abstractSignatures, getOrCreateTypeFromSignature);
                 const typeElementCount = resolved.callSignatures.length + (resolved.constructSignatures.length - abstractSignatures.length) + resolved.indexInfos.length + // exclude `prototype` when writing a class expression as a type literal, as per
                 // the logic in `createTypeNodesFromResolvedType`.
                 (context.flags & 2048 ? countWhere(resolved.properties, (p) => !(p.flags & 4194304)) : length(resolved.properties));
@@ -100580,7 +100859,7 @@ ${lanes.join("\n")}
                   const newComponents = filter3(indexInfo.components, (e2) => {
                     return !hasLateBindableName(e2);
                   });
-                  return map24(newComponents, (e2) => {
+                  return map25(newComponents, (e2) => {
                     trackComputedName(e2.name.expression, context2.enclosingDeclaration, context2);
                     return setTextRange2(
                       context2,
@@ -101389,7 +101668,7 @@ ${lanes.join("\n")}
             const parameterDeclaration = getEffectiveParameterDeclaration(parameterSymbol);
             const parameterType = getTypeOfSymbol(parameterSymbol);
             const parameterTypeNode = serializeTypeForDeclaration(context, parameterDeclaration, parameterType, parameterSymbol);
-            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map24(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
+            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map25(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
             const isRest = parameterDeclaration && isRestParameter(parameterDeclaration) || getCheckFlags(parameterSymbol) & 32768;
             const dotDotDotToken = isRest ? factory.createToken(
               26
@@ -101587,7 +101866,7 @@ ${lanes.join("\n")}
             let typeParameterNodes;
             const targetSymbol = getTargetSymbol(symbol2);
             if (targetSymbol.flags & (32 | 64 | 524288)) {
-              typeParameterNodes = factory.createNodeArray(map24(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
+              typeParameterNodes = factory.createNodeArray(map25(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
             }
             return typeParameterNodes;
           }
@@ -101612,7 +101891,7 @@ ${lanes.join("\n")}
                 const params = getTypeParametersOfClassOrInterface(
                   parentSymbol.flags & 2097152 ? resolveAlias(parentSymbol) : parentSymbol
                 );
-                typeParameterNodes = mapToTypeNodes(map24(params, (t2) => getMappedType(t2, nextSymbol.links.mapper)), context);
+                typeParameterNodes = mapToTypeNodes(map25(params, (t2) => getMappedType(t2, nextSymbol.links.mapper)), context);
               } else {
                 typeParameterNodes = typeParametersToTypeParameterDeclarations(symbol2, context);
               }
@@ -102435,7 +102714,7 @@ ${lanes.join("\n")}
             }
             function getNamesOfDeclaration(statement) {
               if (isVariableStatement(statement)) {
-                return filter3(map24(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
+                return filter3(map25(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
               }
               return filter3([getNameOfDeclaration(statement)], isIdentifierAndNotUndefined);
             }
@@ -102461,7 +102740,7 @@ ${lanes.join("\n")}
                           void 0,
                           /*isTypeOnly*/
                           false,
-                          factory.createNamedExports(map24(flatMap(excessExports, (e2) => getNamesOfDeclaration(e2)), (id) => factory.createExportSpecifier(
+                          factory.createNamedExports(map25(flatMap(excessExports, (e2) => getNamesOfDeclaration(e2)), (id) => factory.createExportSpecifier(
                             /*isTypeOnly*/
                             false,
                             /*propertyName*/
@@ -102881,7 +103160,7 @@ ${lanes.join("\n")}
               var _a22;
               const aliasType = getDeclaredTypeOfTypeAlias(symbol2);
               const typeParams = getSymbolLinks(symbol2).typeParameters;
-              const typeParamDecls = map24(typeParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map25(typeParams, (p) => typeParameterToDeclaration(p, context));
               const jsdocAliasDecl = (_a22 = symbol2.declarations) == null ? void 0 : _a22.find(isJSDocTypeAlias);
               const commentText = getTextOfJSDocComment(jsdocAliasDecl ? jsdocAliasDecl.comment || jsdocAliasDecl.parent.comment : void 0);
               const restoreFlags = saveRestoreFlags(context);
@@ -102912,7 +103191,7 @@ ${lanes.join("\n")}
               context.approximateLength += 14 + internalSymbolName.length;
               const interfaceType = getDeclaredTypeOfClassOrInterface(symbol2);
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map24(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map25(localParams, (p) => typeParameterToDeclaration(p, context));
               const baseTypes = getBaseTypes(interfaceType);
               const baseType = length(baseTypes) ? getIntersectionType(baseTypes) : void 0;
               const members = serializePropertySymbolsForClassOrInterface(
@@ -103225,7 +103504,7 @@ ${lanes.join("\n")}
                 addingDeclare = oldAddingDeclare;
                 const declarations = results;
                 results = oldResults;
-                const defaultReplaced = map24(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
+                const defaultReplaced = map25(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
                   /*modifiers*/
                   void 0,
                   /*isTypeOnly*/
@@ -103244,7 +103523,7 @@ ${lanes.join("\n")}
                   d,
                   32
                   /* Export */
-                )) ? map24(defaultReplaced, removeExportModifier) : defaultReplaced;
+                )) ? map25(defaultReplaced, removeExportModifier) : defaultReplaced;
                 fakespace = factory.updateModuleDeclaration(
                   fakespace,
                   fakespace.modifiers,
@@ -103292,7 +103571,7 @@ ${lanes.join("\n")}
                 }
                 return cleanup(factory.createExpressionWithTypeArguments(
                   expr,
-                  map24(e2.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
+                  map25(e2.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
                 ));
                 function cleanup(result2) {
                   context.enclosingDeclaration = oldEnclosing;
@@ -103311,7 +103590,7 @@ ${lanes.join("\n")}
               const oldEnclosing = context.enclosingDeclaration;
               context.enclosingDeclaration = originalDecl || oldEnclosing;
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map24(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map25(localParams, (p) => typeParameterToDeclaration(p, context));
               forEach(localParams, (p) => context.approximateLength += symbolName(p.symbol).length);
               const classType = getTypeWithThisArgument(getDeclaredTypeOfClassOrInterface(symbol2));
               const baseTypes = getBaseTypes(classType);
@@ -103322,7 +103601,7 @@ ${lanes.join("\n")}
               const staticBaseType = isClass ? getBaseConstructorTypeOfClass(staticType) : anyType2;
               context.approximateLength += (length(baseTypes) ? 8 : 0) + (length(implementsExpressions) ? 11 : 0);
               const heritageClauses = [
-                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map24(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
+                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map25(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
                 ...!length(implementsExpressions) ? [] : [factory.createHeritageClause(119, implementsExpressions)]
               ];
               const symbolProps = getNonInheritedProperties(classType, baseTypes, getPropertiesOfType(classType));
@@ -104151,7 +104430,7 @@ ${lanes.join("\n")}
               let typeArgs;
               let reference;
               if (t2.target && isSymbolAccessibleByFlags(t2.target.symbol, enclosingDeclaration, flags)) {
-                typeArgs = map24(getTypeArguments(t2), (t22) => typeToTypeNodeHelper(t22, context));
+                typeArgs = map25(getTypeArguments(t2), (t22) => typeToTypeNodeHelper(t22, context));
                 reference = symbolToExpression(
                   t2.target.symbol,
                   context,
@@ -104615,7 +104894,7 @@ ${lanes.join("\n")}
         }
         function getTypeOfPrototypeProperty(prototype) {
           const classType = getDeclaredTypeOfSymbol(getParentOfSymbol(prototype));
-          return classType.typeParameters ? createTypeReference(classType, map24(classType.typeParameters, (_2) => anyType2)) : classType;
+          return classType.typeParameters ? createTypeReference(classType, map25(classType.typeParameters, (_2) => anyType2)) : classType;
         }
         function getTypeOfPropertyOfType(type, name2) {
           const prop = getPropertyOfType(type, name2);
@@ -104663,7 +104942,7 @@ ${lanes.join("\n")}
           if (source.flags & 1048576) {
             return mapType2(source, (t2) => getRestType(t2, properties, symbol2));
           }
-          let omitKeyType = getUnionType(map24(properties, getLiteralTypeFromPropertyName));
+          let omitKeyType = getUnionType(map25(properties, getLiteralTypeFromPropertyName));
           const spreadableProperties = [];
           const unspreadableToRestKeys = [];
           for (const prop of getPropertiesOfType(source)) {
@@ -105389,9 +105668,9 @@ ${lanes.join("\n")}
           if (elements.length === 0 || elements.length === 1 && restElement) {
             return languageVersion >= 2 ? createIterableType(anyType2) : anyArrayType;
           }
-          const elementTypes = map24(elements, (e2) => isOmittedExpression(e2) ? anyType2 : getTypeFromBindingElement(e2, includePatternInType, reportErrors2));
+          const elementTypes = map25(elements, (e2) => isOmittedExpression(e2) ? anyType2 : getTypeFromBindingElement(e2, includePatternInType, reportErrors2));
           const minLength = findLastIndex(elements, (e2) => !(e2 === restElement || isOmittedExpression(e2) || hasDefaultValue(e2)), elements.length - 1) + 1;
-          const elementFlags = map24(
+          const elementFlags = map25(
             elements,
             (e2, i2) => e2 === restElement ? 4 : i2 >= minLength ? 2 : 1
             /* Required */
@@ -106073,7 +106352,7 @@ ${lanes.join("\n")}
         }
         function getInstantiatedConstructorsForTypeArguments(type, typeArgumentNodes, location) {
           const signatures = getConstructorsForTypeArguments(type, typeArgumentNodes, location);
-          const typeArguments = map24(typeArgumentNodes, getTypeFromTypeNode);
+          const typeArguments = map25(typeArgumentNodes, getTypeFromTypeNode);
           return sameMap(signatures, (sig) => some(sig.typeParameters) ? getSignatureInstantiation(sig, typeArguments, isInJSFile(location)) : sig);
         }
         function getBaseConstructorTypeOfClass(type) {
@@ -106904,14 +107183,14 @@ ${lanes.join("\n")}
             if (isTupleType(restType)) {
               return [expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol)];
             } else if (!skipUnionExpanding && restType.flags & 1048576 && every(restType.types, isTupleType)) {
-              return map24(restType.types, (t2) => expandSignatureParametersWithTupleMembers(t2, restIndex, restSymbol));
+              return map25(restType.types, (t2) => expandSignatureParametersWithTupleMembers(t2, restIndex, restSymbol));
             }
           }
           return [sig.parameters];
           function expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol) {
             const elementTypes = getTypeArguments(restType);
             const associatedNames = getUniqAssociatedNamesFromTupleType(restType, restSymbol);
-            const restParams = map24(elementTypes, (t2, i2) => {
+            const restParams = map25(elementTypes, (t2, i2) => {
               const name2 = associatedNames && associatedNames[i2] ? associatedNames[i2] : getParameterNameAtPosition(sig, restIndex + i2, restType);
               const flags = restType.target.elementFlags[i2];
               const checkFlags = flags & 12 ? 32768 : flags & 2 ? 16384 : 0;
@@ -106922,7 +107201,7 @@ ${lanes.join("\n")}
             return concatenate(sig.parameters.slice(0, restIndex), restParams);
           }
           function getUniqAssociatedNamesFromTupleType(type, restSymbol) {
-            const names = map24(type.target.labeledElementDeclarations, (labeledElement, i2) => getTupleElementLabel(labeledElement, i2, type.target.elementFlags[i2], restSymbol));
+            const names = map25(type.target.labeledElementDeclarations, (labeledElement, i2) => getTupleElementLabel(labeledElement, i2, type.target.elementFlags[i2], restSymbol));
             if (names) {
               const duplicates = [];
               const uniqueNames = /* @__PURE__ */ new Set();
@@ -107093,7 +107372,7 @@ ${lanes.join("\n")}
               if (signatures !== masterList) {
                 const signature = signatures[0];
                 Debug.assert(!!signature, "getUnionSignatures bails early on empty signature lists and should not have empty lists on second pass");
-                results = !!signature.typeParameters && some(results, (s2) => !!s2.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s2.typeParameters)) ? void 0 : map24(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
+                results = !!signature.typeParameters && some(results, (s2) => !!s2.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s2.typeParameters)) ? void 0 : map25(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
                 if (!results) {
                   break;
                 }
@@ -107216,7 +107495,7 @@ ${lanes.join("\n")}
             for (const info of sourceInfos) {
               const indexType = info.keyType;
               if (every(types3, (t2) => !!getIndexInfoOfType(t2, indexType))) {
-                result.push(createIndexInfo(indexType, getUnionType(map24(types3, (t2) => getIndexTypeOfType(t2, indexType))), some(types3, (t2) => getIndexInfoOfType(t2, indexType).isReadonly)));
+                result.push(createIndexInfo(indexType, getUnionType(map25(types3, (t2) => getIndexTypeOfType(t2, indexType))), some(types3, (t2) => getIndexInfoOfType(t2, indexType).isReadonly)));
               }
             }
             return result;
@@ -107224,12 +107503,12 @@ ${lanes.join("\n")}
           return emptyArray;
         }
         function resolveUnionTypeMembers(type) {
-          const callSignatures = getUnionSignatures(map24(type.types, (t2) => t2 === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
+          const callSignatures = getUnionSignatures(map25(type.types, (t2) => t2 === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
             t2,
             0
             /* Call */
           )));
-          const constructSignatures = getUnionSignatures(map24(type.types, (t2) => getSignaturesOfType(
+          const constructSignatures = getUnionSignatures(map25(type.types, (t2) => getSignaturesOfType(
             t2,
             1
             /* Construct */
@@ -107246,7 +107525,7 @@ ${lanes.join("\n")}
             1
             /* Construct */
           ).length > 0);
-          const mixinFlags = map24(types3, isMixinConstructorType);
+          const mixinFlags = map25(types3, isMixinConstructorType);
           if (constructorTypeCount > 0 && constructorTypeCount === countWhere(mixinFlags, (b) => b)) {
             const firstMixinIndex = mixinFlags.indexOf(
               /*searchElement*/
@@ -107287,7 +107566,7 @@ ${lanes.join("\n")}
                 /* Construct */
               );
               if (signatures.length && mixinCount > 0) {
-                signatures = map24(signatures, (s2) => {
+                signatures = map25(signatures, (s2) => {
                   const clone22 = cloneSignature(s2);
                   clone22.resolvedReturnType = includeMixinType(getReturnTypeOfSignature(s2), types3, mixinFlags, i2);
                   return clone22;
@@ -108076,7 +108355,7 @@ ${lanes.join("\n")}
               return getBaseConstraint(getSubstitutionIntersection(t2));
             }
             if (isGenericTupleType(t2)) {
-              const newElements = map24(getElementTypes(t2), (v, i2) => {
+              const newElements = map25(getElementTypes(t2), (v, i2) => {
                 const constraint = v.flags & 262144 && t2.target.elementFlags[i2] & 8 && getBaseConstraint(v) || v;
                 return constraint !== v && everyType(constraint, (c) => isArrayOrTupleType(c) && !isGenericTupleType(c)) ? constraint : v;
               });
@@ -108512,7 +108791,7 @@ ${lanes.join("\n")}
               }
             }
           }
-          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map24(applicableInfos, (info) => info.type)), reduceLeft(
+          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map25(applicableInfos, (info) => info.type)), reduceLeft(
             applicableInfos,
             (isReadonly, info) => isReadonly && info.isReadonly,
             /*initial*/
@@ -108912,7 +109191,7 @@ ${lanes.join("\n")}
               return errorType;
             }
             let type = signature.target ? instantiateType(getReturnTypeOfSignature(signature.target), signature.mapper) : signature.compositeSignatures ? instantiateType(getUnionOrIntersectionType(
-              map24(signature.compositeSignatures, getReturnTypeOfSignature),
+              map25(signature.compositeSignatures, getReturnTypeOfSignature),
               signature.compositeKind,
               2
               /* Subtype */
@@ -109051,7 +109330,7 @@ ${lanes.join("\n")}
         function createCanonicalSignature(signature) {
           return getSignatureInstantiation(
             signature,
-            map24(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
+            map25(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
             isInJSFile(signature.declaration)
           );
         }
@@ -109062,8 +109341,8 @@ ${lanes.join("\n")}
               return signature.baseSignatureCache;
             }
             const typeEraser = createTypeEraser(typeParameters);
-            const baseConstraintMapper = createTypeMapper(typeParameters, map24(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
-            let baseConstraints = map24(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
+            const baseConstraintMapper = createTypeMapper(typeParameters, map25(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
+            let baseConstraints = map25(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
             for (let i2 = 0; i2 < typeParameters.length - 1; i2++) {
               baseConstraints = instantiateTypes(baseConstraints, baseConstraintMapper);
             }
@@ -109333,7 +109612,7 @@ ${lanes.join("\n")}
               return concatenate(type.target.outerTypeParameters, (_a2 = type.target.localTypeParameters) == null ? void 0 : _a2.map(() => errorType)) || emptyArray;
             }
             const node = type.node;
-            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type.target.outerTypeParameters, getEffectiveTypeArguments2(node, type.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map24(node.elements, getTypeFromTypeNode);
+            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type.target.outerTypeParameters, getEffectiveTypeArguments2(node, type.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map25(node.elements, getTypeFromTypeNode);
             if (popTypeResolution()) {
               type.resolvedTypeArguments ?? (type.resolvedTypeArguments = type.mapper ? instantiateTypes(typeArguments, type.mapper) : typeArguments);
             } else {
@@ -109739,7 +110018,7 @@ ${lanes.join("\n")}
           return links.resolvedType;
         }
         function typeArgumentsFromTypeReferenceNode(node) {
-          return map24(node.typeArguments, getTypeFromTypeNode);
+          return map25(node.typeArguments, getTypeFromTypeNode);
         }
         function getTypeFromTypeQueryNode(node) {
           const links = getNodeLinks(node);
@@ -110212,8 +110491,8 @@ ${lanes.join("\n")}
           if (elementType) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const elementFlags = map24(node.elements, getTupleElementFlags);
-          return getTupleTargetType(elementFlags, readonly2, map24(node.elements, memberIfLabeledElementDeclaration));
+          const elementFlags = map25(node.elements, getTupleElementFlags);
+          return getTupleTargetType(elementFlags, readonly2, map25(node.elements, memberIfLabeledElementDeclaration));
         }
         function memberIfLabeledElementDeclaration(member) {
           return isNamedTupleMember(member) || isParameter(member) ? member : void 0;
@@ -110286,7 +110565,7 @@ ${lanes.join("\n")}
                 void 0
               );
             } else {
-              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map24(node.elements, getTypeFromTypeNode);
+              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map25(node.elements, getTypeFromTypeNode);
               links.resolvedType = createNormalizedTypeReference(target, elementTypes);
             }
           }
@@ -110296,7 +110575,7 @@ ${lanes.join("\n")}
           return isTypeOperatorNode(node) && node.operator === 148;
         }
         function createTupleType(elementTypes, elementFlags, readonly2 = false, namedMemberDeclarations = []) {
-          const tupleTarget = getTupleTargetType(elementFlags || map24(
+          const tupleTarget = getTupleTargetType(elementFlags || map25(
             elementTypes,
             (_2) => 1
             /* Required */
@@ -110307,7 +110586,7 @@ ${lanes.join("\n")}
           if (elementFlags.length === 1 && elementFlags[0] & 4) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const key = map24(elementFlags, (f3) => f3 & 1 ? "#" : f3 & 2 ? "?" : f3 & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map24(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
+          const key = map25(elementFlags, (f3) => f3 & 1 ? "#" : f3 & 2 ? "?" : f3 & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map25(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
           let type = tupleTypes.get(key);
           if (!type) {
             tupleTypes.set(key, type = createTupleTargetType(elementFlags, readonly2, namedMemberDeclarations));
@@ -110382,7 +110661,7 @@ ${lanes.join("\n")}
           if (target.combinedFlags & 8) {
             const unionIndex = findIndex(elementTypes, (t2, i2) => !!(target.elementFlags[i2] & 8 && t2.flags & (131072 | 1048576)));
             if (unionIndex >= 0) {
-              return checkCrossProductUnion(map24(elementTypes, (t2, i2) => target.elementFlags[i2] & 8 ? t2 : unknownType2)) ? mapType2(elementTypes[unionIndex], (t2) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t2))) : errorType;
+              return checkCrossProductUnion(map25(elementTypes, (t2, i2) => target.elementFlags[i2] & 8 ? t2 : unknownType2)) ? mapType2(elementTypes[unionIndex], (t2) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t2))) : errorType;
             }
           }
           const expandedTypes = [];
@@ -110552,7 +110831,7 @@ ${lanes.join("\n")}
             const source = types3[i2];
             if (hasEmptyObject || source.flags & 469499904) {
               if (source.flags & 262144 && getBaseConstraintOrType(source).flags & 1048576) {
-                if (isTypeRelatedTo(source, getUnionType(map24(types3, (t2) => t2 === source ? neverType2 : t2)), strictSubtypeRelation)) {
+                if (isTypeRelatedTo(source, getUnionType(map25(types3, (t2) => t2 === source ? neverType2 : t2)), strictSubtypeRelation)) {
                   orderedRemoveItemAt(types3, i2);
                 }
                 continue;
@@ -110815,7 +111094,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            links.resolvedType = getUnionType(map24(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
+            links.resolvedType = getUnionType(map25(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
           }
           return links.resolvedType;
         }
@@ -111098,7 +111377,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            const types3 = map24(node.types, getTypeFromTypeNode);
+            const types3 = map25(node.types, getTypeFromTypeNode);
             const emptyIndex = types3.length === 2 ? types3.indexOf(emptyTypeLiteralType) : -1;
             const t2 = emptyIndex >= 0 ? types3[1 - emptyIndex] : unknownType2;
             const noSupertypeReduction = !!(t2.flags & (4 | 8 | 64) || t2.flags & 134217728 && isPatternLiteralType(t2));
@@ -111207,8 +111486,8 @@ ${lanes.join("\n")}
         }
         function getLiteralTypeFromProperties(type, include, includeOrigin) {
           const origin = includeOrigin && (getObjectFlags(type) & (3 | 4) || type.aliasSymbol) ? createOriginIndexType(type) : void 0;
-          const propertyTypes = map24(getPropertiesOfType(type), (prop) => getLiteralTypeFromProperty(prop, include));
-          const indexKeyTypes = map24(getIndexInfosOfType(type), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
+          const propertyTypes = map25(getPropertiesOfType(type), (prop) => getLiteralTypeFromProperty(prop, include));
+          const indexKeyTypes = map25(getIndexInfosOfType(type), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
           return getUnionType(
             concatenate(propertyTypes, indexKeyTypes),
             1,
@@ -111228,7 +111507,7 @@ ${lanes.join("\n")}
         }
         function getIndexType(type, indexFlags = 0) {
           type = getReducedType(type);
-          return isNoInferType(type) ? getNoInferType(getIndexType(type.baseType, indexFlags)) : shouldDeferIndexType(type, indexFlags) ? getIndexTypeForGenericType(type, indexFlags) : type.flags & 1048576 ? getIntersectionType(map24(type.types, (t2) => getIndexType(t2, indexFlags))) : type.flags & 2097152 ? getUnionType(map24(type.types, (t2) => getIndexType(t2, indexFlags))) : getObjectFlags(type) & 32 ? getIndexTypeForMappedType(type, indexFlags) : type === wildcardType ? wildcardType : type.flags & 2 ? neverType2 : type.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
+          return isNoInferType(type) ? getNoInferType(getIndexType(type.baseType, indexFlags)) : shouldDeferIndexType(type, indexFlags) ? getIndexTypeForGenericType(type, indexFlags) : type.flags & 1048576 ? getIntersectionType(map25(type.types, (t2) => getIndexType(t2, indexFlags))) : type.flags & 2097152 ? getUnionType(map25(type.types, (t2) => getIndexType(t2, indexFlags))) : getObjectFlags(type) & 32 ? getIndexTypeForMappedType(type, indexFlags) : type === wildcardType ? wildcardType : type.flags & 2 ? neverType2 : type.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
             type,
             (indexFlags & 2 ? 128 : 402653316) | (indexFlags & 1 ? 0 : 296 | 12288),
             indexFlags === 0
@@ -111266,8 +111545,8 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             links.resolvedType = getTemplateLiteralType(
-              [node.head.text, ...map24(node.templateSpans, (span) => span.literal.text)],
-              map24(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
+              [node.head.text, ...map25(node.templateSpans, (span) => span.literal.text)],
+              map25(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
             );
           }
           return links.resolvedType;
@@ -111298,7 +111577,7 @@ ${lanes.join("\n")}
               return newTypes[0];
             }
           }
-          const id = `${getTypeListId(newTypes)}|${map24(newTexts, (t2) => t2.length).join(",")}|${newTexts.join("")}`;
+          const id = `${getTypeListId(newTypes)}|${map25(newTexts, (t2) => t2.length).join(",")}|${newTexts.join("")}`;
           let type = templateLiteralTypes.get(id);
           if (!type) {
             templateLiteralTypes.set(id, type = createTemplateLiteralType(newTexts, newTypes));
@@ -111528,7 +111807,7 @@ ${lanes.join("\n")}
                   diagnostics.add(createDiagnosticForNode(accessExpression, Diagnostics.Property_0_does_not_exist_on_type_1, indexType.value, typeToString(objectType2)));
                   return undefinedType2;
                 } else if (indexType.flags & (8 | 4)) {
-                  const types3 = map24(objectType2.properties, (property) => {
+                  const types3 = map25(objectType2.properties, (property) => {
                     return getTypeOfSymbol(property);
                   });
                   return getUnionType(append(types3, undefinedType2));
@@ -111689,13 +111968,13 @@ ${lanes.join("\n")}
         }
         function distributeIndexOverObjectType(objectType2, indexType, writing) {
           if (objectType2.flags & 1048576 || objectType2.flags & 2097152 && !shouldDeferIndexType(objectType2)) {
-            const types3 = map24(objectType2.types, (t2) => getSimplifiedType(getIndexedAccessType(t2, indexType), writing));
+            const types3 = map25(objectType2.types, (t2) => getSimplifiedType(getIndexedAccessType(t2, indexType), writing));
             return objectType2.flags & 2097152 || writing ? getIntersectionType(types3) : getUnionType(types3);
           }
         }
         function distributeObjectOverIndexType(objectType2, indexType, writing) {
           if (indexType.flags & 1048576) {
-            const types3 = map24(indexType.types, (t2) => getSimplifiedType(getIndexedAccessType(objectType2, t2), writing));
+            const types3 = map25(indexType.types, (t2) => getSimplifiedType(getIndexedAccessType(objectType2, t2), writing));
             return writing ? getIntersectionType(types3) : getUnionType(types3);
           }
         }
@@ -111978,7 +112257,7 @@ ${lanes.join("\n")}
               const newRoot = newType.root;
               if (newRoot.outerTypeParameters) {
                 const typeParamMapper = combineTypeMappers(newType.mapper, newMapper);
-                const typeArguments = map24(newRoot.outerTypeParameters, (t2) => getMappedType(t2, typeParamMapper));
+                const typeArguments = map25(newRoot.outerTypeParameters, (t2) => getMappedType(t2, typeParamMapper));
                 const newRootMapper = createTypeMapper(newRoot.outerTypeParameters, typeArguments);
                 const newCheckType = newRoot.isDistributive ? getMappedType(newRoot.checkType, newRootMapper) : void 0;
                 if (!newCheckType || newCheckType === newRoot.checkType || !(newCheckType.flags & (1048576 | 131072))) {
@@ -112639,7 +112918,7 @@ ${lanes.join("\n")}
         }
         function createBackreferenceMapper(context, index) {
           const forwardInferences = context.inferences.slice(index);
-          return createTypeMapper(map24(forwardInferences, (i2) => i2.typeParameter), map24(forwardInferences, () => unknownType2));
+          return createTypeMapper(map25(forwardInferences, (i2) => i2.typeParameter), map25(forwardInferences, () => unknownType2));
         }
         function createOuterReturnMapper(context) {
           return context.outerReturnMapper ?? (context.outerReturnMapper = mergeTypeMappers(context.returnMapper, cloneInferenceContext(context).mapper));
@@ -112670,7 +112949,7 @@ ${lanes.join("\n")}
         function instantiateSignature(signature, mapper, eraseTypeParameters) {
           let freshTypeParameters;
           if (signature.typeParameters && !eraseTypeParameters) {
-            freshTypeParameters = map24(signature.typeParameters, cloneTypeParameter);
+            freshTypeParameters = map25(signature.typeParameters, cloneTypeParameter);
             mapper = combineTypeMappers(createTypeMapper(signature.typeParameters, freshTypeParameters), mapper);
             for (const tp of freshTypeParameters) {
               tp.mapper = mapper;
@@ -112742,7 +113021,7 @@ ${lanes.join("\n")}
           }
           if (typeParameters.length) {
             const combinedMapper = combineTypeMappers(type.mapper, mapper);
-            const typeArguments = map24(typeParameters, (t2) => getMappedType(t2, combinedMapper));
+            const typeArguments = map25(typeParameters, (t2) => getMappedType(t2, combinedMapper));
             const newAliasSymbol = aliasSymbol || type.aliasSymbol;
             const newAliasTypeArguments = aliasSymbol ? aliasTypeArguments : instantiateTypes(type.aliasTypeArguments, mapper);
             const id = getTypeListId(typeArguments) + getAliasId(newAliasSymbol, newAliasTypeArguments);
@@ -112854,7 +113133,7 @@ ${lanes.join("\n")}
                   return instantiateMappedTupleType(t2, type, typeVariable, mapper);
                 }
                 if (isArrayOrTupleOrIntersection(t2)) {
-                  return getIntersectionType(map24(t2.types, instantiateConstituent));
+                  return getIntersectionType(map25(t2.types, instantiateConstituent));
                 }
               }
               return instantiateAnonymousType(type, prependTypeMapping(typeVariable, t2, mapper));
@@ -112869,12 +113148,12 @@ ${lanes.join("\n")}
           const elementFlags = tupleType2.target.elementFlags;
           const fixedLength = tupleType2.target.fixedLength;
           const fixedMapper = fixedLength ? prependTypeMapping(typeVariable, tupleType2, mapper) : mapper;
-          const newElementTypes = map24(getElementTypes(tupleType2), (type, i2) => {
+          const newElementTypes = map25(getElementTypes(tupleType2), (type, i2) => {
             const flags = elementFlags[i2];
             return i2 < fixedLength ? instantiateMappedTypeTemplate(mappedType, getStringLiteralType("" + i2), !!(flags & 2), fixedMapper) : flags & 8 ? instantiateType(mappedType, prependTypeMapping(typeVariable, type, mapper)) : getElementTypeOfArrayType(instantiateType(mappedType, prependTypeMapping(typeVariable, createArrayType(type), mapper))) ?? unknownType2;
           });
           const modifiers = getMappedTypeModifiers(mappedType);
-          const newElementFlags = modifiers & 4 ? map24(elementFlags, (f3) => f3 & 1 ? 2 : f3) : modifiers & 8 ? map24(elementFlags, (f3) => f3 & 2 ? 1 : f3) : elementFlags;
+          const newElementFlags = modifiers & 4 ? map25(elementFlags, (f3) => f3 & 1 ? 2 : f3) : modifiers & 8 ? map25(elementFlags, (f3) => f3 & 2 ? 1 : f3) : elementFlags;
           const newReadonly = getModifiedReadonlyState(tupleType2.target.readonly, getMappedTypeModifiers(mappedType));
           return contains(newElementTypes, errorType) ? errorType : createTupleType(newElementTypes, newElementFlags, newReadonly, tupleType2.target.labeledElementDeclarations);
         }
@@ -112930,7 +113209,7 @@ ${lanes.join("\n")}
         function getConditionalTypeInstantiation(type, mapper, forConstraint, aliasSymbol, aliasTypeArguments) {
           const root = type.root;
           if (root.outerTypeParameters) {
-            const typeArguments = map24(root.outerTypeParameters, (t2) => getMappedType(t2, mapper));
+            const typeArguments = map25(root.outerTypeParameters, (t2) => getMappedType(t2, mapper));
             const id = (forConstraint ? "C" : "") + getTypeListId(typeArguments) + getAliasId(aliasSymbol, aliasTypeArguments);
             let result = root.instantiations.get(id);
             if (!result) {
@@ -113162,7 +113441,7 @@ ${lanes.join("\n")}
               return result;
             }
           } else if (type.flags & 2097152) {
-            return getIntersectionType(map24(type.types, getTypeWithoutSignatures));
+            return getIntersectionType(map25(type.types, getTypeWithoutSignatures));
           }
           return type;
         }
@@ -113318,7 +113597,7 @@ ${lanes.join("\n")}
           }
           const returnExpression = node.body;
           const sourceReturn = getReturnTypeOfSignature(sourceSig);
-          const targetReturn = getUnionType(map24(targetSignatures, getReturnTypeOfSignature));
+          const targetReturn = getUnionType(map25(targetSignatures, getReturnTypeOfSignature));
           if (!checkTypeRelatedTo(
             sourceReturn,
             targetReturn,
@@ -116157,9 +116436,9 @@ ${lanes.join("\n")}
               false
             )) {
               if (props.length > 5) {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map24(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map25(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
               } else {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map24(props, (p) => symbolToString(p)).join(", "));
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map25(props, (p) => symbolToString(p)).join(", "));
               }
               if (shouldSkipElaboration && errorInfo) {
                 overrideNextErrorInfo++;
@@ -117736,7 +118015,7 @@ ${lanes.join("\n")}
           return createInferenceContextWorker(typeParameters.map(createInferenceInfo), signature, flags, compareTypes || compareTypesAssignable);
         }
         function cloneInferenceContext(context, extraFlags = 0) {
-          return context && createInferenceContextWorker(map24(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
+          return context && createInferenceContextWorker(map25(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
         }
         function createInferenceContextWorker(inferences, signature, flags, compareTypes) {
           const context = {
@@ -117754,8 +118033,8 @@ ${lanes.join("\n")}
         }
         function makeFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map24(context.inferences, (i2) => i2.typeParameter),
-            map24(context.inferences, (inference, i2) => () => {
+            map25(context.inferences, (i2) => i2.typeParameter),
+            map25(context.inferences, (inference, i2) => () => {
               if (!inference.isFixed) {
                 inferFromIntraExpressionSites(context);
                 clearCachedInferences(context.inferences);
@@ -117767,8 +118046,8 @@ ${lanes.join("\n")}
         }
         function makeNonFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map24(context.inferences, (i2) => i2.typeParameter),
-            map24(context.inferences, (_2, i2) => () => {
+            map25(context.inferences, (i2) => i2.typeParameter),
+            map25(context.inferences, (_2, i2) => () => {
               return getInferredType(context, i2);
             })
           );
@@ -117828,7 +118107,7 @@ ${lanes.join("\n")}
         }
         function cloneInferredPartOfContext(context) {
           const inferences = filter3(context.inferences, hasInferenceCandidates);
-          return inferences.length ? createInferenceContextWorker(map24(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
+          return inferences.length ? createInferenceContextWorker(map25(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
         }
         function getMapperFromContext(context) {
           return context && context.mapper;
@@ -117916,7 +118195,7 @@ ${lanes.join("\n")}
             return createArrayType(elementType, isReadonlyArrayType(source));
           }
           if (isTupleType(source)) {
-            const elementTypes = map24(getElementTypes(source), (t2) => inferReverseMappedType(t2, target, constraint));
+            const elementTypes = map25(getElementTypes(source), (t2) => inferReverseMappedType(t2, target, constraint));
             if (!every(elementTypes, (t2) => !!t2)) {
               return void 0;
             }
@@ -118086,7 +118365,7 @@ ${lanes.join("\n")}
           return false;
         }
         function inferTypesFromTemplateLiteralType(source, target) {
-          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map24(source.types, (s2, i2) => {
+          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map25(source.types, (s2, i2) => {
             return isTypeAssignableTo(getBaseConstraintOrType(s2), getBaseConstraintOrType(target.types[i2])) ? s2 : getStringLikeTypeForType(s2);
           }) : inferFromLiteralPartsToTemplateLiteral(source.texts, source.types, target) : void 0;
         }
@@ -118550,8 +118829,8 @@ ${lanes.join("\n")}
               if (extendedConstraint && inferToMappedType(source, target, extendedConstraint)) {
                 return true;
               }
-              const propTypes = map24(getPropertiesOfType(source), getTypeOfSymbol);
-              const indexTypes = map24(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
+              const propTypes = map25(getPropertiesOfType(source), getTypeOfSymbol);
+              const indexTypes = map25(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
               inferFromTypes(getUnionType(concatenate(propTypes, indexTypes)), getTemplateTypeFromMappedType(target));
               return true;
             }
@@ -119150,7 +119429,7 @@ ${lanes.join("\n")}
           return result;
         }
         function mapTypesByKeyProperty(types3, name2) {
-          const map25 = /* @__PURE__ */ new Map();
+          const map26 = /* @__PURE__ */ new Map();
           let count = 0;
           for (const type of types3) {
             if (type.flags & (524288 | 2097152 | 58982400)) {
@@ -119162,11 +119441,11 @@ ${lanes.join("\n")}
                 let duplicate = false;
                 forEachType(discriminant, (t2) => {
                   const id = getTypeId(getRegularTypeOfLiteralType(t2));
-                  const existing = map25.get(id);
+                  const existing = map26.get(id);
                   if (!existing) {
-                    map25.set(id, type);
+                    map26.set(id, type);
                   } else if (existing !== unknownType2) {
-                    map25.set(id, unknownType2);
+                    map26.set(id, unknownType2);
                     duplicate = true;
                   }
                 });
@@ -119174,7 +119453,7 @@ ${lanes.join("\n")}
               }
             }
           }
-          return count >= 10 && count * 2 >= types3.length ? map25 : void 0;
+          return count >= 10 && count * 2 >= types3.length ? map26 : void 0;
         }
         function getKeyPropertyName(unionType2) {
           const types3 = unionType2.types;
@@ -119638,7 +119917,7 @@ ${lanes.join("\n")}
           ) : type;
         }
         function mapTypeWithAlias(type, mapper, aliasSymbol, aliasTypeArguments) {
-          return type.flags & 1048576 && aliasSymbol ? getUnionType(map24(type.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type, mapper);
+          return type.flags & 1048576 && aliasSymbol ? getUnionType(map25(type.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type, mapper);
         }
         function extractTypesOfKind(type, kind) {
           return filterType(type, (t2) => (t2.flags & kind) !== 0);
@@ -120406,7 +120685,7 @@ ${lanes.join("\n")}
           }
           function getUnionOrEvolvingArrayType(types3, subtypeReduction) {
             if (isEvolvingArrayTypeList(types3)) {
-              return getEvolvingArrayType(getUnionType(map24(types3, getElementTypeOfEvolvingArrayType)));
+              return getEvolvingArrayType(getUnionType(map25(types3, getElementTypeOfEvolvingArrayType)));
             }
             const result = recombineUnknownType(getUnionType(sameMap(types3, finalizeEvolvingArrayType), subtypeReduction));
             if (result !== declaredType && result.flags & declaredType.flags & 1048576 && arrayIsEqualTo(result.types, declaredType.types)) {
@@ -120500,7 +120779,7 @@ ${lanes.join("\n")}
           function narrowTypeBySwitchOnDiscriminantProperty(type, access, data) {
             if (data.clauseStart < data.clauseEnd && type.flags & 1048576 && getKeyPropertyName(type) === getAccessedPropertyName(access)) {
               const clauseTypes = getSwitchClauseTypes(data.switchStatement).slice(data.clauseStart, data.clauseEnd);
-              const candidate = getUnionType(map24(clauseTypes, (t2) => getConstituentTypeForKeyType(type, t2) || unknownType2));
+              const candidate = getUnionType(map25(clauseTypes, (t2) => getConstituentTypeForKeyType(type, t2) || unknownType2));
               if (candidate !== unknownType2) {
                 return candidate;
               }
@@ -120928,7 +121207,7 @@ ${lanes.join("\n")}
               return filterType(type, (t2) => getTypeFacts(t2, notEqualFacts) === notEqualFacts);
             }
             const clauseWitnesses = witnesses.slice(clauseStart, clauseEnd);
-            return getUnionType(map24(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type, text) : neverType2));
+            return getUnionType(map25(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type, text) : neverType2));
           }
           function narrowTypeBySwitchOnTrue(type, { switchStatement, clauseStart, clauseEnd }) {
             const defaultIndex = findIndex(
@@ -120963,7 +121242,7 @@ ${lanes.join("\n")}
               return type;
             }
             const clauses = switchStatement.caseBlock.clauses.slice(clauseStart, clauseEnd);
-            return getUnionType(map24(clauses, (clause) => clause.kind === 297 ? narrowType(
+            return getUnionType(map25(clauses, (clause) => clause.kind === 297 ? narrowType(
               type,
               clause.expression,
               /*assumeTrue*/
@@ -121055,7 +121334,7 @@ ${lanes.join("\n")}
               /* Construct */
             );
             if (constructSignatures.length) {
-              return getUnionType(map24(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
+              return getUnionType(map25(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
             }
             return emptyObjectType;
           }
@@ -123225,7 +123504,7 @@ ${lanes.join("\n")}
             getMatchingUnionConstituentForObjectLiteral(contextualType, node) ?? discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map24(
+                map25(
                   filter3(node.properties, (p) => {
                     if (!p.symbol) {
                       return false;
@@ -123240,7 +123519,7 @@ ${lanes.join("\n")}
                   }),
                   (prop) => [() => getContextFreeTypeOfExpression(prop.kind === 304 ? prop.initializer : prop.name), prop.symbol.escapedName]
                 ),
-                map24(
+                map25(
                   filter3(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     return !!(s2.flags & 16777216) && !!((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members) && !node.symbol.members.has(s2.escapedName) && isDiscriminantProperty(contextualType, s2.escapedName);
@@ -123262,11 +123541,11 @@ ${lanes.join("\n")}
             discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map24(
+                map25(
                   filter3(node.properties, (p) => !!p.symbol && p.kind === 292 && isDiscriminantProperty(contextualType, p.symbol.escapedName) && (!p.initializer || isPossiblyDiscriminantValue(p.initializer))),
                   (prop) => [!prop.initializer ? () => trueType : () => getContextFreeTypeOfExpression(prop.initializer), prop.symbol.escapedName]
                 ),
-                map24(
+                map25(
                   filter3(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     if (!(s2.flags & 16777216) || !((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members)) {
@@ -123325,13 +123604,13 @@ ${lanes.join("\n")}
           }
           if (type.flags & 1048576) {
             return getUnionType(
-              map24(type.types, (t2) => instantiateInstantiableTypes(t2, mapper)),
+              map25(type.types, (t2) => instantiateInstantiableTypes(t2, mapper)),
               0
               /* None */
             );
           }
           if (type.flags & 2097152) {
-            return getIntersectionType(map24(type.types, (t2) => instantiateInstantiableTypes(t2, mapper)));
+            return getIntersectionType(map25(type.types, (t2) => instantiateInstantiableTypes(t2, mapper)));
           }
           return type;
         }
@@ -124661,7 +124940,7 @@ ${lanes.join("\n")}
             );
           }
           if (signatures.length === 0 && apparentElemType.flags & 1048576) {
-            signatures = getUnionSignatures(map24(apparentElemType.types, (t2) => getUninstantiatedJsxSignaturesOfType(t2, caller)));
+            signatures = getUnionSignatures(map25(apparentElemType.types, (t2) => getUninstantiatedJsxSignaturesOfType(t2, caller)));
           }
           return signatures;
         }
@@ -126135,7 +126414,7 @@ ${lanes.join("\n")}
         function checkTypeArguments(signature, typeArgumentNodes, reportErrors2, headMessage) {
           const isJavascript = isInJSFile(signature.declaration);
           const typeParameters = signature.typeParameters;
-          const typeArgumentTypes = fillMissingTypeArguments(map24(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
+          const typeArgumentTypes = fillMissingTypeArguments(map25(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
           let mapper;
           for (let i2 = 0; i2 < typeArgumentNodes.length; i2++) {
             Debug.assert(typeParameters[i2] !== void 0, "Should not call checkTypeArguments with too many type arguments");
@@ -126816,7 +127095,7 @@ ${lanes.join("\n")}
                 const diags = max > 1 ? allDiagnostics[minIndex] : flatten(allDiagnostics);
                 Debug.assert(diags.length > 0, "No errors reported for 3 or fewer overload signatures");
                 let chain = chainDiagnosticMessages(
-                  map24(diags, createDiagnosticMessageChainFromDiagnostic),
+                  map25(diags, createDiagnosticMessageChainFromDiagnostic),
                   Diagnostics.No_overload_matches_this_call
                 );
                 if (headMessage) {
@@ -131384,7 +131663,7 @@ ${lanes.join("\n")}
                   if (returnSignature && !returnSignature.typeParameters && !every(context.inferences, hasInferenceCandidates)) {
                     const uniqueTypeParameters = getUniqueTypeParameters(context, signature.typeParameters);
                     const instantiatedSignature = getSignatureInstantiationWithoutFillingInTypeArguments(signature, uniqueTypeParameters);
-                    const inferences = map24(context.inferences, (info) => createInferenceInfo(info.typeParameter));
+                    const inferences = map25(context.inferences, (info) => createInferenceInfo(info.typeParameter));
                     applyToParameterTypes(instantiatedSignature, contextualSignature, (source, target) => {
                       inferTypes(
                         inferences,
@@ -132332,7 +132611,7 @@ ${lanes.join("\n")}
           return getEffectiveTypeArguments2(node, typeParameters)[index];
         }
         function getEffectiveTypeArguments2(node, typeParameters) {
-          return fillMissingTypeArguments(map24(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
+          return fillMissingTypeArguments(map25(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
         }
         function checkTypeArgumentConstraints(node, typeParameters) {
           let typeArguments;
@@ -132978,7 +133257,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const onfulfilledParameterType = getTypeWithFacts(
-            getUnionType(map24(candidates, getTypeOfFirstParameterOfSignature)),
+            getUnionType(map25(candidates, getTypeOfFirstParameterOfSignature)),
             2097152
             /* NEUndefinedOrNull */
           );
@@ -132997,7 +133276,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           return typeAsPromise.promisedTypeOfPromise = getUnionType(
-            map24(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
+            map25(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
             2
             /* Subtype */
           );
@@ -133763,13 +134042,13 @@ ${lanes.join("\n")}
         function isTypeParameterUnused(typeParameter) {
           return !(getMergedSymbol(typeParameter.symbol).isReferenced & 262144) && !isIdentifierThatStartsWithUnderscore(typeParameter.name);
         }
-        function addToGroup(map25, key, value, getKey) {
+        function addToGroup(map26, key, value, getKey) {
           const keyString = String(getKey(key));
-          const group2 = map25.get(keyString);
+          const group2 = map26.get(keyString);
           if (group2) {
             group2[1].push(value);
           } else {
-            map25.set(keyString, [key, [value]]);
+            map26.set(keyString, [key, [value]]);
           }
         }
         function tryGetRootParameterDeclaration(node) {
@@ -134996,7 +135275,7 @@ ${lanes.join("\n")}
             }
             return noCache ? noIterationTypes : setCachedIterationTypes(type, resolver.iterableCacheKey, noIterationTypes);
           }
-          const iteratorType = getIntersectionType(map24(validSignatures, getReturnTypeOfSignature));
+          const iteratorType = getIntersectionType(map25(validSignatures, getReturnTypeOfSignature));
           const iterationTypes = getIterationTypesOfIteratorWorker(iteratorType, resolver, errorNode, errorOutputContainer, noCache) ?? noIterationTypes;
           return noCache ? iterationTypes : setCachedIterationTypes(type, resolver.iterableCacheKey, iterationTypes);
         }
@@ -136215,7 +136494,7 @@ ${lanes.join("\n")}
                 error210(errorNode, Diagnostics.Non_abstract_class_0_does_not_implement_inherited_abstract_member_1_from_class_2, memberInfo.typeName, first2(memberInfo.missedProperties), memberInfo.baseTypeName);
               }
             } else if (length(memberInfo.missedProperties) > 5) {
-              const missedProperties = map24(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map25(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
               const remainingMissedProperties = length(memberInfo.missedProperties) - 4;
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1_and_2_more, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
@@ -136223,7 +136502,7 @@ ${lanes.join("\n")}
                 error210(errorNode, Diagnostics.Non_abstract_class_0_is_missing_implementations_for_the_following_members_of_1_Colon_2_and_3_more, memberInfo.typeName, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
               }
             } else {
-              const missedProperties = map24(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map25(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1, memberInfo.baseTypeName, missedProperties);
               } else {
@@ -138338,7 +138617,7 @@ ${lanes.join("\n")}
             } else if (symbol2) {
               const symbolLinks2 = getSymbolLinks(symbol2);
               const declarationList = mapDefined(infos, (i2) => i2.declaration);
-              const nodeListId = map24(declarationList, getNodeId).join(",");
+              const nodeListId = map25(declarationList, getNodeId).join(",");
               if (!symbolLinks2.filteredIndexSymbolCache) {
                 symbolLinks2.filteredIndexSymbolCache = /* @__PURE__ */ new Map();
               }
@@ -139594,7 +139873,7 @@ ${lanes.join("\n")}
                       const newComponents = filter3(info.components, (e2) => {
                         return !hasLateBindableName(e2);
                       });
-                      result.push(...map24(newComponents, (e2) => {
+                      result.push(...map25(newComponents, (e2) => {
                         trackComputedName(e2.name.expression);
                         const mods = infoList === staticInfos ? [factory.createModifier(
                           126
@@ -141557,7 +141836,7 @@ ${lanes.join("\n")}
             if (sourceProperties) {
               const sourcePropertiesFiltered = findDiscriminantProperties(sourceProperties, target);
               if (sourcePropertiesFiltered) {
-                const discriminated = discriminateTypeByDiscriminableItems(target, map24(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
+                const discriminated = discriminateTypeByDiscriminableItems(target, map25(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
                 if (discriminated !== target) {
                   return discriminated;
                 }
@@ -143593,13 +143872,13 @@ ${lanes.join("\n")}
           }
           exit();
         }
-        function appendSourceMap(generatedLine, generatedCharacter, map25, sourceMapPath, start2, end) {
+        function appendSourceMap(generatedLine, generatedCharacter, map26, sourceMapPath, start2, end) {
           Debug.assert(generatedLine >= pendingGeneratedLine, "generatedLine cannot backtrack");
           Debug.assert(generatedCharacter >= 0, "generatedCharacter cannot be negative");
           enter();
           const sourceIndexToNewSourceIndexMap = [];
           let nameIndexToNewNameIndexMap;
-          const mappingIterator = decodeMappings(map25.mappings);
+          const mappingIterator = decodeMappings(map26.mappings);
           for (const raw of mappingIterator) {
             if (end && (raw.generatedLine > end.line || raw.generatedLine === end.line && raw.generatedCharacter > end.character)) {
               break;
@@ -143614,21 +143893,21 @@ ${lanes.join("\n")}
             if (raw.sourceIndex !== void 0) {
               newSourceIndex = sourceIndexToNewSourceIndexMap[raw.sourceIndex];
               if (newSourceIndex === void 0) {
-                const rawPath = map25.sources[raw.sourceIndex];
-                const relativePath = map25.sourceRoot ? combinePaths(map25.sourceRoot, rawPath) : rawPath;
+                const rawPath = map26.sources[raw.sourceIndex];
+                const relativePath = map26.sourceRoot ? combinePaths(map26.sourceRoot, rawPath) : rawPath;
                 const combinedPath = combinePaths(getDirectoryPath(sourceMapPath), relativePath);
                 sourceIndexToNewSourceIndexMap[raw.sourceIndex] = newSourceIndex = addSource(combinedPath);
-                if (map25.sourcesContent && typeof map25.sourcesContent[raw.sourceIndex] === "string") {
-                  setSourceContent(newSourceIndex, map25.sourcesContent[raw.sourceIndex]);
+                if (map26.sourcesContent && typeof map26.sourcesContent[raw.sourceIndex] === "string") {
+                  setSourceContent(newSourceIndex, map26.sourcesContent[raw.sourceIndex]);
                 }
               }
               newSourceLine = raw.sourceLine;
               newSourceCharacter = raw.sourceCharacter;
-              if (map25.names && raw.nameIndex !== void 0) {
+              if (map26.names && raw.nameIndex !== void 0) {
                 if (!nameIndexToNewNameIndexMap) nameIndexToNewNameIndexMap = [];
                 newNameIndex = nameIndexToNewNameIndexMap[raw.nameIndex];
                 if (newNameIndex === void 0) {
-                  nameIndexToNewNameIndexMap[raw.nameIndex] = newNameIndex = addName(map25.names[raw.nameIndex]);
+                  nameIndexToNewNameIndexMap[raw.nameIndex] = newNameIndex = addName(map26.names[raw.nameIndex]);
                 }
               }
             }
@@ -143913,12 +144192,12 @@ ${lanes.join("\n")}
       function getGeneratedPositionOfMapping(value) {
         return value.generatedPosition;
       }
-      function createDocumentPositionMapper(host, map25, mapPath) {
+      function createDocumentPositionMapper(host, map26, mapPath) {
         const mapDirectory = getDirectoryPath(mapPath);
-        const sourceRoot = map25.sourceRoot ? getNormalizedAbsolutePath(map25.sourceRoot, mapDirectory) : mapDirectory;
-        const generatedAbsoluteFilePath = getNormalizedAbsolutePath(map25.file, mapDirectory);
+        const sourceRoot = map26.sourceRoot ? getNormalizedAbsolutePath(map26.sourceRoot, mapDirectory) : mapDirectory;
+        const generatedAbsoluteFilePath = getNormalizedAbsolutePath(map26.file, mapDirectory);
         const generatedFile = host.getSourceFileLike(generatedAbsoluteFilePath);
-        const sourceFileAbsolutePaths = map25.sources.map((source) => getNormalizedAbsolutePath(source, sourceRoot));
+        const sourceFileAbsolutePaths = map26.sources.map((source) => getNormalizedAbsolutePath(source, sourceRoot));
         const sourceToSourceIndexMap = new Map(sourceFileAbsolutePaths.map((source, i2) => [host.getCanonicalFileName(source), i2]));
         let decodedMappings;
         let generatedMappings;
@@ -143939,7 +144218,7 @@ ${lanes.join("\n")}
           let sourcePosition;
           if (isSourceMapping(mapping)) {
             const sourceFile = host.getSourceFileLike(sourceFileAbsolutePaths[mapping.sourceIndex]);
-            source = map25.sources[mapping.sourceIndex];
+            source = map26.sources[mapping.sourceIndex];
             sourcePosition = sourceFile !== void 0 ? getPositionOfLineAndCharacter(
               sourceFile,
               mapping.sourceLine,
@@ -143958,7 +144237,7 @@ ${lanes.join("\n")}
         }
         function getDecodedMappings() {
           if (decodedMappings === void 0) {
-            const decoder = decodeMappings(map25.mappings);
+            const decoder = decodeMappings(map26.mappings);
             const mappings = arrayFrom(decoder, processMapping);
             if (decoder.error !== void 0) {
               if (host.log) {
@@ -144045,7 +144324,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map24(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map25(node.sourceFiles, transformSourceFile));
         }
       }
       function getExportNeedsImportStarHelper(node) {
@@ -144251,12 +144530,12 @@ ${lanes.join("\n")}
         }
         return exportedNames;
       }
-      function multiMapSparseArrayAdd(map25, key, value) {
-        let values = map25[key];
+      function multiMapSparseArrayAdd(map26, key, value) {
+        let values = map26[key];
         if (values) {
           values.push(value);
         } else {
-          map25[key] = values = [value];
+          map26[key] = values = [value];
         }
         return values;
       }
@@ -144994,7 +145273,7 @@ ${lanes.join("\n")}
       }
       function makeArrayAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isArrayBindingOrAssignmentElement);
-        return factory2.createArrayLiteralExpression(map24(elements, factory2.converters.convertToArrayAssignmentElement));
+        return factory2.createArrayLiteralExpression(map25(elements, factory2.converters.convertToArrayAssignmentElement));
       }
       function makeObjectBindingPattern(factory2, elements) {
         Debug.assertEachNode(elements, isBindingElement);
@@ -145002,7 +145281,7 @@ ${lanes.join("\n")}
       }
       function makeObjectAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isObjectBindingOrAssignmentElement);
-        return factory2.createObjectLiteralExpression(map24(elements, factory2.converters.convertToObjectAssignmentElement));
+        return factory2.createObjectLiteralExpression(map25(elements, factory2.converters.convertToObjectAssignmentElement));
       }
       function makeBindingElement(factory2, name2) {
         return factory2.createBindingElement(
@@ -146448,7 +146727,7 @@ ${lanes.join("\n")}
             return setTextRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map24(variables, transformInitializedVariable)
+                  map25(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -146654,7 +146933,7 @@ ${lanes.join("\n")}
           currentNamespaceContainerName = localName;
           const statements = [];
           startLexicalEnvironment();
-          const members = map24(node.members, transformEnumMember);
+          const members = map25(node.members, transformEnumMember);
           insertStatementsAfterStandardPrologue(statements, endLexicalEnvironment());
           addRange(statements, members);
           currentNamespaceContainerName = savedCurrentNamespaceLocalName;
@@ -148565,7 +148844,7 @@ ${lanes.join("\n")}
             if (isDecoratedClassDeclaration) {
               Debug.assertIsDefined(pendingStatements, "Decorated classes transformed by TypeScript are expected to be within a variable declaration.");
               if (some(pendingExpressions)) {
-                addRange(pendingStatements, map24(pendingExpressions, factory2.createExpressionStatement));
+                addRange(pendingStatements, map25(pendingExpressions, factory2.createExpressionStatement));
               }
               if (some(staticPropertiesOrClassStaticBlocks)) {
                 addPropertyOrClassStaticBlockStatements(pendingStatements, staticPropertiesOrClassStaticBlocks, ((_b = node.emitNode) == null ? void 0 : _b.classThis) ?? factory2.getInternalName(node));
@@ -150354,13 +150633,13 @@ ${lanes.join("\n")}
           }
           const { false: decorators, true: metadata } = groupBy(allDecorators.decorators, isSyntheticMetadataDecorator);
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map24(decorators, transformDecorator));
+          addRange(decoratorExpressions, map25(decorators, transformDecorator));
           addRange(decoratorExpressions, flatMap(allDecorators.parameters, transformDecoratorsOfParameter));
-          addRange(decoratorExpressions, map24(metadata, transformDecorator));
+          addRange(decoratorExpressions, map25(metadata, transformDecorator));
           return decoratorExpressions;
         }
         function addClassElementDecorationStatements(statements, node, isStatic2) {
-          addRange(statements, map24(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
+          addRange(statements, map25(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
         }
         function isDecoratedClassElement(member, isStaticElement, parent2) {
           return nodeOrChildIsDecorated(
@@ -152265,7 +152544,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map24(allDecorators.decorators, transformDecorator));
+          addRange(decoratorExpressions, map25(allDecorators.decorators, transformDecorator));
           return decoratorExpressions;
         }
         function transformDecorator(decorator) {
@@ -152938,7 +153217,7 @@ ${lanes.join("\n")}
             }
             return void 0;
           }
-          return factory2.inlineExpressions(map24(variables, transformInitializedVariable));
+          return factory2.inlineExpressions(map25(variables, transformInitializedVariable));
         }
         function hoistVariableDeclarationList(node) {
           forEach(node.declarations, hoistVariable);
@@ -156354,7 +156633,7 @@ ${lanes.join("\n")}
           return target && target >= 5 ? factory2.createObjectLiteralExpression(transformJsxAttributesToProps(attrs, children)) : transformJsxAttributesToExpression(attrs, children);
         }
         function transformJsxAttributesToProps(attrs, children) {
-          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map24(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
+          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map25(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
           if (children) {
             props.push(children);
           }
@@ -159643,7 +159922,7 @@ ${lanes.join("\n")}
               /* NoHoisting */
             )
           );
-          const part = factory2.createVariableDeclarationList(map24(currentState.loopOutParameters, createOutVariable));
+          const part = factory2.createVariableDeclarationList(map25(currentState.loopOutParameters, createOutVariable));
           return { functionName, containsYield, functionDeclaration, part };
         }
         function createFunctionForBodyOfIterationStatement(node, currentState, outerState) {
@@ -159771,7 +160050,7 @@ ${lanes.join("\n")}
             loopFunctionExpressionName,
             /*typeArguments*/
             void 0,
-            map24(state.loopParameters, (p) => p.name)
+            map25(state.loopParameters, (p) => p.name)
           );
           const callResult = containsYield ? factory2.createYieldExpression(
             factory2.createToken(
@@ -160349,7 +160628,7 @@ ${lanes.join("\n")}
           return isSpreadElement(node) ? visitSpanOfSpreads : visitSpanOfNonSpreads;
         }
         function visitSpanOfSpreads(chunk) {
-          return map24(chunk, visitExpressionOfSpread);
+          return map25(chunk, visitExpressionOfSpread);
         }
         function visitExpressionOfSpread(node) {
           Debug.assertNode(node, isSpreadElement);
@@ -160921,7 +161200,7 @@ ${lanes.join("\n")}
             return setSourceMapRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map24(variables, transformInitializedVariable)
+                  map25(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -161479,7 +161758,7 @@ ${lanes.join("\n")}
             const variables = getInitializedVariables(initializer3);
             node = factory2.updateForStatement(
               node,
-              variables.length > 0 ? factory2.inlineExpressions(map24(variables, transformInitializedVariable)) : void 0,
+              variables.length > 0 ? factory2.inlineExpressions(map25(variables, transformInitializedVariable)) : void 0,
               visitNode(node.condition, visitor, isExpression),
               visitNode(node.incrementor, visitor, isExpression),
               visitIterationBody(node.statement, visitor, context)
@@ -164805,7 +165084,7 @@ ${lanes.join("\n")}
             moduleBodyBlock
           );
           const moduleName = tryGetModuleNameFromFile(factory2, node, host, compilerOptions);
-          const dependencies = factory2.createArrayLiteralExpression(map24(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
+          const dependencies = factory2.createArrayLiteralExpression(map25(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
           const updated = setEmitFlags(
             factory2.updateSourceFile(
               node,
@@ -166535,7 +166814,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map24(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map25(node.sourceFiles, transformSourceFile));
         }
       }
       function canProduceDiagnostics(node) {
@@ -167283,7 +167562,7 @@ ${lanes.join("\n")}
             rawLibReferenceDirectives = [];
             let hasNoDefaultLib = false;
             const bundle = factory2.createBundle(
-              map24(node.sourceFiles, (sourceFile) => {
+              map25(node.sourceFiles, (sourceFile) => {
                 if (sourceFile.isDeclarationFile) return void 0;
                 hasNoDefaultLib = hasNoDefaultLib || sourceFile.hasNoDefaultLib;
                 currentSourceFile = sourceFile;
@@ -167394,7 +167673,7 @@ ${lanes.join("\n")}
             getLibReferences()
           );
           function collectFileReferences(sourceFile) {
-            rawReferencedFiles = concatenate(rawReferencedFiles, map24(sourceFile.referencedFiles, (f3) => [sourceFile, f3]));
+            rawReferencedFiles = concatenate(rawReferencedFiles, map25(sourceFile.referencedFiles, (f3) => [sourceFile, f3]));
             rawTypeReferenceDirectives = concatenate(rawTypeReferenceDirectives, sourceFile.typeReferenceDirectives);
             rawLibReferenceDirectives = concatenate(rawLibReferenceDirectives, sourceFile.libReferenceDirectives);
           }
@@ -167608,7 +167887,7 @@ ${lanes.join("\n")}
           )) {
             return factory2.createNodeArray();
           }
-          const newParams = map24(params, (p) => ensureParameter(p, modifierMask));
+          const newParams = map25(params, (p) => ensureParameter(p, modifierMask));
           if (!newParams) {
             return factory2.createNodeArray();
           }
@@ -168360,7 +168639,7 @@ ${lanes.join("\n")}
                     void 0,
                     /*isTypeOnly*/
                     false,
-                    factory2.createNamedExports(map24(exportMappings, ([gen, exp]) => {
+                    factory2.createNamedExports(map25(exportMappings, ([gen, exp]) => {
                       return factory2.createExportSpecifier(
                         /*isTypeOnly*/
                         false,
@@ -168568,11 +168847,11 @@ ${lanes.join("\n")}
                   2
                   /* Const */
                 ));
-                const heritageClauses = factory2.createNodeArray(map24(input.heritageClauses, (clause) => {
+                const heritageClauses = factory2.createNodeArray(map25(input.heritageClauses, (clause) => {
                   if (clause.token === 96) {
                     const oldDiag2 = getSymbolAccessibilityDiagnostic;
                     getSymbolAccessibilityDiagnostic = createGetSymbolAccessibilityDiagnosticForNode(clause.types[0]);
-                    const newClause = factory2.updateHeritageClause(clause, map24(clause.types, (t2) => factory2.updateExpressionWithTypeArguments(t2, newId, visitNodes2(t2.typeArguments, visitDeclarationSubtree, isTypeNode))));
+                    const newClause = factory2.updateHeritageClause(clause, map25(clause.types, (t2) => factory2.updateExpressionWithTypeArguments(t2, newId, visitNodes2(t2.typeArguments, visitDeclarationSubtree, isTypeNode))));
                     getSymbolAccessibilityDiagnostic = oldDiag2;
                     return newClause;
                   }
@@ -168734,7 +169013,7 @@ ${lanes.join("\n")}
         }
         function transformHeritageClauses(nodes) {
           return factory2.createNodeArray(filter3(
-            map24(nodes, (clause) => factory2.updateHeritageClause(
+            map25(nodes, (clause) => factory2.updateHeritageClause(
               clause,
               visitNodes2(
                 factory2.createNodeArray(filter3(clause.types, (t2) => {
@@ -168856,7 +169135,7 @@ ${lanes.join("\n")}
         const moduleKind = getEmitModuleKind(compilerOptions);
         const useDefineForClassFields = getUseDefineForClassFields(compilerOptions);
         const transformers = [];
-        addRange(transformers, customTransformers && map24(customTransformers.before, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map25(customTransformers.before, wrapScriptTransformerFactory));
         transformers.push(transformTypeScript);
         if (compilerOptions.experimentalDecorators) {
           transformers.push(transformLegacyDecorators);
@@ -168894,13 +169173,13 @@ ${lanes.join("\n")}
           transformers.push(transformGenerators);
         }
         transformers.push(getModuleTransformer(moduleKind));
-        addRange(transformers, customTransformers && map24(customTransformers.after, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map25(customTransformers.after, wrapScriptTransformerFactory));
         return transformers;
       }
       function getDeclarationTransformers(customTransformers) {
         const transformers = [];
         transformers.push(transformDeclarations);
-        addRange(transformers, customTransformers && map24(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
+        addRange(transformers, customTransformers && map25(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
         return transformers;
       }
       function wrapCustomTransformer(transformer) {
@@ -174676,7 +174955,7 @@ ${lanes.join("\n")}
           var _a2;
           if (!host.realpath || ensureTrailingDirectorySeparator(toPath3(host.realpath(rootDir))) === rootDirPath) {
             const resultFromHost = {
-              files: map24(host.readDirectory(
+              files: map25(host.readDirectory(
                 rootDir,
                 /*extensions*/
                 void 0,
@@ -174775,7 +175054,7 @@ ${lanes.join("\n")}
           function getFileSystemEntriesFromHost(dir, path2) {
             if (rootSymLinkResult && path2 === rootDirPath) return rootSymLinkResult;
             const result = {
-              files: map24(host.readDirectory(
+              files: map25(host.readDirectory(
                 dir,
                 /*extensions*/
                 void 0,
@@ -175337,12 +175616,12 @@ ${lanes.join("\n")}
             const value = readFileCache.get(key);
             if (value !== void 0 && value !== data) {
               readFileCache.delete(key);
-              sourceFileCache.forEach((map25) => map25.delete(key));
+              sourceFileCache.forEach((map26) => map26.delete(key));
             } else if (getSourceFileWithCache) {
-              sourceFileCache.forEach((map25) => {
-                const sourceFile = map25.get(key);
+              sourceFileCache.forEach((map26) => {
+                const sourceFile = map26.get(key);
                 if (sourceFile && sourceFile.text !== data) {
-                  map25.delete(key);
+                  map26.delete(key);
                 }
               });
             }
@@ -179349,7 +179628,7 @@ ${lanes.join("\n")}
       ((BuilderState2) => {
         function createManyToManyPathMap() {
           function create2(forward, reverse, deleted) {
-            const map25 = {
+            const map26 = {
               getKeys: (v) => reverse.get(v),
               getValues: (k) => forward.get(k),
               keys: () => forward.keys(),
@@ -179378,10 +179657,10 @@ ${lanes.join("\n")}
                     addToMultimap(reverse, v, k);
                   }
                 });
-                return map25;
+                return map26;
               }
             };
-            return map25;
+            return map26;
           }
           return create2(
             /* @__PURE__ */ new Map(),
@@ -179391,19 +179670,19 @@ ${lanes.join("\n")}
           );
         }
         BuilderState2.createManyToManyPathMap = createManyToManyPathMap;
-        function addToMultimap(map25, k, v) {
-          let set2 = map25.get(k);
+        function addToMultimap(map26, k, v) {
+          let set2 = map26.get(k);
           if (!set2) {
             set2 = /* @__PURE__ */ new Set();
-            map25.set(k, set2);
+            map26.set(k, set2);
           }
           set2.add(v);
         }
-        function deleteFromMultimap(map25, k, v) {
-          const set2 = map25.get(k);
+        function deleteFromMultimap(map26, k, v) {
+          const set2 = map26.get(k);
           if (set2 == null ? void 0 : set2.delete(v)) {
             if (!set2.size) {
-              map25.delete(k);
+              map26.delete(k);
             }
             return true;
           }
@@ -179754,8 +180033,8 @@ ${lanes.join("\n")}
         if (diff & 48) result = result | emitKind & 48;
         return result;
       }
-      function hasSameKeys(map1, map25) {
-        return map1 === map25 || map1 !== void 0 && map25 !== void 0 && map1.size === map25.size && !forEachKey(map1, (key) => !map25.has(key));
+      function hasSameKeys(map1, map26) {
+        return map1 === map26 || map1 !== void 0 && map26 !== void 0 && map1.size === map26.size && !forEachKey(map1, (key) => !map26.has(key));
       }
       function createBuilderProgramState(newProgram, oldState) {
         var _a2, _b;
@@ -181089,7 +181368,7 @@ ${lanes.join("\n")}
         let filePathsSetList;
         const latestChangedDtsFile = buildInfo.latestChangedDtsFile ? toAbsolutePath(buildInfo.latestChangedDtsFile) : void 0;
         const fileInfos = /* @__PURE__ */ new Map();
-        const changedFilesSet = new Set(map24(buildInfo.changeFileSet, toFilePath));
+        const changedFilesSet = new Set(map25(buildInfo.changeFileSet, toFilePath));
         if (isIncrementalBundleEmitBuildInfo(buildInfo)) {
           buildInfo.fileInfos.forEach((fileInfo, index) => {
             const path2 = toFilePath(index + 1);
@@ -181182,10 +181461,10 @@ ${lanes.join("\n")}
           return filePathsSetList[fileIdsListId - 1];
         }
         function toManyToManyPathMap(referenceMap, options) {
-          const map25 = BuilderState.createReferencedMap(options);
-          if (!map25 || !referenceMap) return map25;
-          referenceMap.forEach(([fileId, fileIdListId]) => map25.set(toFilePath(fileId), toFilePathsSet(fileIdListId)));
-          return map25;
+          const map26 = BuilderState.createReferencedMap(options);
+          if (!map26 || !referenceMap) return map26;
+          referenceMap.forEach(([fileId, fileIdListId]) => map26.set(toFilePath(fileId), toFilePathsSet(fileIdListId)));
+          return map26;
         }
         function toPerFileSemanticDiagnostics(diagnostics) {
           const semanticDiagnostics = new Map(
@@ -187014,7 +187293,7 @@ ${lanes.join("\n")}
               return factory.createArrayTypeNode(visitNode(node.type, visitExistingNodeTreeSymbols, isTypeNode));
             }
             if (isJSDocTypeLiteral(node)) {
-              return factory.createTypeLiteralNode(map24(node.jsDocPropertyTags, (t2) => {
+              return factory.createTypeLiteralNode(map25(node.jsDocPropertyTags, (t2) => {
                 const name2 = visitNode(isIdentifier(t2.name) ? t2.name : t2.name.right, visitExistingNodeTreeSymbols, isIdentifier);
                 const overrideTypeNode = resolver.getJsDocPropertyOverride(context, node, t2);
                 return factory.createPropertySignature(
@@ -187080,7 +187359,7 @@ ${lanes.join("\n")}
               } else {
                 return factory.createFunctionTypeNode(
                   visitNodes2(node.typeParameters, visitExistingNodeTreeSymbols, isTypeParameterDeclaration),
-                  map24(node.parameters, (p, i2) => factory.createParameterDeclaration(
+                  map25(node.parameters, (p, i2) => factory.createParameterDeclaration(
                     /*modifiers*/
                     void 0,
                     getEffectiveDotDotDotForParameter(p),
@@ -191363,7 +191642,7 @@ ${lanes.join("\n")}
         return expression;
       }
       function mapOneOrMany(valueOrArray, f3, resultSelector = identity) {
-        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map24(valueOrArray, f3)) : f3(valueOrArray, 0) : void 0;
+        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map25(valueOrArray, f3)) : f3(valueOrArray, 0) : void 0;
       }
       function firstOrOnly(valueOrArray) {
         return isArray(valueOrArray) ? first2(valueOrArray) : valueOrArray;
@@ -193095,9 +193374,9 @@ ${lanes.join("\n")}
             sourceFilesSet
           );
           if (!referenceEntries) return void 0;
-          const map25 = arrayToMultiMap(referenceEntries.map(ts_FindAllReferences_exports.toHighlightSpan), (e2) => e2.fileName, (e2) => e2.span);
+          const map26 = arrayToMultiMap(referenceEntries.map(ts_FindAllReferences_exports.toHighlightSpan), (e2) => e2.fileName, (e2) => e2.span);
           const getCanonicalFileName = createGetCanonicalFileName(program2.useCaseSensitiveFileNames());
-          return arrayFrom(mapDefinedIterator(map25.entries(), ([fileName, highlightSpans]) => {
+          return arrayFrom(mapDefinedIterator(map26.entries(), ([fileName, highlightSpans]) => {
             if (!sourceFilesSet.has(fileName)) {
               if (!program2.redirectTargetsMap.has(toPath(fileName, program2.getCurrentDirectory(), getCanonicalFileName))) {
                 return void 0;
@@ -194760,12 +195039,12 @@ ${lanes.join("\n")}
         return void 0;
       }
       function convertDocumentToSourceMapper(host, contents, mapFileName) {
-        const map25 = tryParseRawSourceMap(contents);
-        if (!map25 || !map25.sources || !map25.file || !map25.mappings) {
+        const map26 = tryParseRawSourceMap(contents);
+        if (!map26 || !map26.sources || !map26.file || !map26.mappings) {
           return void 0;
         }
-        if (map25.sourcesContent && map25.sourcesContent.some(isString)) return void 0;
-        return createDocumentPositionMapper(host, map25, mapFileName);
+        if (map26.sourcesContent && map26.sourcesContent.some(isString)) return void 0;
+        return createDocumentPositionMapper(host, map26, mapFileName);
       }
       function createSourceFileLike(text, lineMap) {
         return {
@@ -195297,7 +195576,7 @@ interface Symbol {
         curCancellationToken = cancellationToken;
         curSourceFile = sourceFile;
         try {
-          return map24(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
+          return map25(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
         } finally {
           reset();
         }
@@ -195950,7 +196229,7 @@ interface Symbol {
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
           nameSpan: n.name && getNodeSpan(n.name),
-          childItems: map24(n.children, convertToTree)
+          childItems: map25(n.children, convertToTree)
         };
       }
       function convertToPrimaryNavBarMenuItem(n) {
@@ -195959,7 +196238,7 @@ interface Symbol {
           kind: getNodeKind(n.node),
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
-          childItems: map24(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
+          childItems: map25(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
           indent: n.indent,
           bolded: false,
           grayed: false
@@ -198187,12 +198466,12 @@ interface Symbol {
               "args",
               /*questionToken*/
               void 0,
-              factory.createUnionTypeNode(map24(signatureDeclarations, convertSignatureParametersToTuple))
+              factory.createUnionTypeNode(map25(signatureDeclarations, convertSignatureParametersToTuple))
             )
           ]);
         }
         function convertSignatureParametersToTuple(decl) {
-          const members = map24(decl.parameters, convertParameterToNamedTupleMember);
+          const members = map25(decl.parameters, convertParameterToNamedTupleMember);
           return setEmitFlags(
             factory.createTupleTypeNode(members),
             some(members, (m2) => !!length(getSyntheticLeadingComments(m2))) ? 0 : 1
@@ -198672,9 +198951,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function doChange5(sourceFile, program2, host, changes, functionDeclaration, groupedReferences) {
         const signature = groupedReferences.signature;
-        const newFunctionDeclarationParams = map24(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
+        const newFunctionDeclarationParams = map25(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
         if (signature) {
-          const newSignatureParams = map24(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
+          const newSignatureParams = map25(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
           replaceParameters(signature, newSignatureParams);
         }
         replaceParameters(functionDeclaration, newFunctionDeclarationParams);
@@ -198737,10 +199016,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         function groupReferences(referenceEntries) {
           const classReferences = { accessExpressions: [], typeUsages: [] };
           const groupedReferences2 = { functionCalls: [], declarations: [], classReferences, valid: true };
-          const functionSymbols = map24(functionNames, getSymbolTargetAtLocation);
-          const classSymbols = map24(classNames, getSymbolTargetAtLocation);
+          const functionSymbols = map25(functionNames, getSymbolTargetAtLocation);
+          const classSymbols = map25(classNames, getSymbolTargetAtLocation);
           const isConstructor = isConstructorDeclaration(functionDeclaration);
-          const contextualSymbols = map24(functionNames, (name2) => getSymbolForContextualType(name2, checker));
+          const contextualSymbols = map25(functionNames, (name2) => getSymbolForContextualType(name2, checker));
           for (const entry of referenceEntries) {
             if (entry.kind === ts_FindAllReferences_exports.EntryKind.Span) {
               groupedReferences2.valid = false;
@@ -199004,7 +199283,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const parameters = getRefactorableParameters(functionDeclaration.parameters);
         const hasRestParameter2 = isRestParameter(last(parameters));
         const nonRestArguments = hasRestParameter2 ? functionArguments.slice(0, parameters.length - 1) : functionArguments;
-        const properties = map24(nonRestArguments, (arg, i2) => {
+        const properties = map25(nonRestArguments, (arg, i2) => {
           const parameterName = getParameterName(parameters[i2]);
           const property = createPropertyOrShorthandAssignment(parameterName, arg);
           suppressLeadingAndTrailingTrivia(property.name);
@@ -199027,7 +199306,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function createNewParameters(functionDeclaration, program2, host) {
         const checker = program2.getTypeChecker();
         const refactorableParameters = getRefactorableParameters(functionDeclaration.parameters);
-        const bindingElements = map24(refactorableParameters, createBindingElementFromParameterDeclaration);
+        const bindingElements = map25(refactorableParameters, createBindingElementFromParameterDeclaration);
         const objectParameterName = factory.createObjectBindingPattern(bindingElements);
         const objectParameterType = createParameterTypeNode(refactorableParameters);
         let objectInitializer;
@@ -199082,7 +199361,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return element;
         }
         function createParameterTypeNode(parameters) {
-          const members = map24(parameters, createPropertySignatureFromParameterDeclaration);
+          const members = map25(parameters, createPropertySignatureFromParameterDeclaration);
           const typeNode = addEmitFlags(
             factory.createTypeLiteralNode(members),
             1
@@ -199357,7 +199636,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           i2 = newIndex - 1;
           const isLast = i2 === nodes.length - 1;
           if (isTemplateExpression(currentNode)) {
-            const spans = map24(currentNode.templateSpans, (span, index) => {
+            const spans = map25(currentNode.templateSpans, (span, index) => {
               copyExpressionComments(span);
               const isLastSpan = index === currentNode.templateSpans.length - 1;
               const text = span.literal.text + (isLastSpan ? subsequentText : "");
@@ -200984,8 +201263,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getPropertyAssignmentsForWritesAndVariableDeclarations(exposedVariableDeclarations, writes) {
-        const variableAssignments = map24(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
-        const writeAssignments = map24(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
+        const variableAssignments = map25(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
+        const writeAssignments = map25(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
         return variableAssignments === void 0 ? writeAssignments : writeAssignments === void 0 ? variableAssignments : variableAssignments.concat(writeAssignments);
       }
       function isReadonlyArray(v) {
@@ -202510,7 +202789,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function displayPartsToString(displayParts) {
         if (displayParts) {
-          return map24(displayParts, (displayPart2) => displayPart2.text).join("");
+          return map25(displayParts, (displayPart2) => displayPart2.text).join("");
         }
         return "";
       }
@@ -203873,7 +204152,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             const multiLineCommentStart = /(?:\/\*+\s*)/.source;
             const anyNumberOfSpacesAndAsterisksAtStartOfLine = /(?:^(?:\s|\*)*)/.source;
             const preamble = "(" + anyNumberOfSpacesAndAsterisksAtStartOfLine + "|" + singleLineCommentStart + "|" + multiLineCommentStart + ")";
-            const literals = "(?:" + map24(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
+            const literals = "(?:" + map25(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
             const endOfLineOrEndOfComment = /(?:$|\*\/)/.source;
             const messageRemainder = /(?:.*?)/.source;
             const messagePortion = "(" + literals + messageRemainder + ")";
@@ -204812,9 +205091,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         let declarations;
         if (symbol2 && symbol2.declarations) {
           const indices = indicesOf(symbol2.declarations);
-          const keys = map24(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
+          const keys = map25(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
           indices.sort((a, b) => compareStringsCaseSensitive(keys[a].file, keys[b].file) || keys[a].pos - keys[b].pos);
-          const sortedDeclarations = map24(indices, (i2) => symbol2.declarations[i2]);
+          const sortedDeclarations = map25(indices, (i2) => symbol2.declarations[i2]);
           let lastDecl;
           for (const decl of sortedDeclarations) {
             if (isValidCallHierarchyDeclaration(decl)) {
@@ -204950,7 +205229,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return { from: from11, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
-        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map24(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map25(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getIncomingCalls(program2, declaration, cancellationToken) {
         if (isSourceFile(declaration) || isModuleDeclaration(declaration) || isClassStaticBlockDeclaration(declaration)) {
@@ -205136,7 +205415,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return { to, fromSpans };
       }
       function convertCallSiteGroupToOutgoingCall(program2, entries) {
-        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map24(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map25(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getOutgoingCalls(program2, declaration) {
         if (declaration.flags & 33554432 || isMethodSignature(declaration)) {
@@ -205249,7 +205528,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getFixes(context) {
         const diagnostics = getDiagnostics(context);
         const registrations = errorCodeToFixes.get(String(context.errorCode));
-        return flatMap(registrations, (f3) => map24(f3.getCodeActions(context), removeFixIdIfFixAllUnavailable(f3, diagnostics)));
+        return flatMap(registrations, (f3) => map25(f3.getCodeActions(context), removeFixIdIfFixAllUnavailable(f3, diagnostics)));
       }
       function getAllFixes(context) {
         return fixIdToRegistration.get(cast(context.fixId, isString)).getAllCodeActions(context);
@@ -206085,7 +206364,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function transformJSDocTypeLiteral(node) {
-        const typeNode = factory.createTypeLiteralNode(map24(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
+        const typeNode = factory.createTypeLiteralNode(map25(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
           /*modifiers*/
           void 0,
           isIdentifier(tag.name) ? tag.name : tag.name.right,
@@ -207356,7 +207635,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function convertVariableStatement(sourceFile, statement, changes, checker, identifiers, target, quotePreference) {
         const { declarationList } = statement;
         let foundImport = false;
-        const converted = map24(declarationList.declarations, (decl) => {
+        const converted = map25(declarationList.declarations, (decl) => {
           const { name: name2, initializer: initializer3 } = decl;
           if (initializer3) {
             if (isExportsOrModuleExportsOrAlias(sourceFile, initializer3)) {
@@ -207677,9 +207956,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return name2;
       }
       function collectFreeIdentifiers(file2) {
-        const map25 = createMultiMap();
-        forEachFreeIdentifier(file2, (id) => map25.add(id.text, id));
-        return map25;
+        const map26 = createMultiMap();
+        forEachFreeIdentifier(file2, (id) => map26.add(id.text, id));
+        return map26;
       }
       function forEachFreeIdentifier(node, cb) {
         if (isIdentifier(node) && isFreeIdentifier(node)) cb(node);
@@ -210481,7 +210760,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         ));
       }
       function createExportSpecifiers(names, allowTypeModifier) {
-        return factory.createNodeArray(map24(names, (n) => factory.createExportSpecifier(
+        return factory.createNodeArray(map25(names, (n) => factory.createExportSpecifier(
           allowTypeModifier && n.isTypeOnly,
           /*propertyName*/
           void 0,
@@ -211367,7 +211646,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const checker = context.program.getTypeChecker();
         const jsxAttributesNode = info.parentDeclaration.attributes;
         const hasSpreadAttribute = some(jsxAttributesNode.properties, isJsxSpreadAttribute);
-        const attrs = map24(info.attributes, (attr) => {
+        const attrs = map25(info.attributes, (attr) => {
           const value = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(attr), info.parentDeclaration);
           const name2 = factory.createIdentifier(attr.name);
           const jsxAttribute = factory.createJsxAttribute(name2, factory.createJsxExpression(
@@ -211388,7 +211667,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const quotePreference = getQuotePreference(context.sourceFile, context.preferences);
         const target = getEmitScriptTarget(context.program.getCompilerOptions());
         const checker = context.program.getTypeChecker();
-        const props = map24(info.properties, (prop) => {
+        const props = map25(info.properties, (prop) => {
           const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), info.parentDeclaration);
           return factory.createPropertyAssignment(createPropertyNameFromSymbol(prop, target, quotePreference, checker), initializer3);
         });
@@ -211470,7 +211749,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return factory.createArrayLiteralExpression();
         }
         if (isObjectLiteralType(type)) {
-          const props = map24(checker.getPropertiesOfType(type), (prop) => {
+          const props = map25(checker.getPropertiesOfType(type), (prop) => {
             const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), enclosingDeclaration);
             return factory.createPropertyAssignment(prop.name, initializer3);
           });
@@ -211808,7 +212087,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function updateParameters(importAdder, scriptTarget, node, newParameters) {
-        const parameters = map24(node.parameters, (p) => factory.createParameterDeclaration(
+        const parameters = map25(node.parameters, (p) => factory.createParameterDeclaration(
           p.modifiers,
           p.dotDotDotToken,
           p.name,
@@ -212386,7 +212665,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           jsDocParameterTag.isNameFirst,
           jsDocParameterTag.comment
         );
-        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map24(tags, (t2) => t2 === jsDocParameterTag ? newJSDocParameterTag : t2)));
+        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map25(tags, (t2) => t2 === jsDocParameterTag ? newJSDocParameterTag : t2)));
         return createCodeFixActionWithoutFixAll(renameUnmatchedParameter, changes, [Diagnostics.Rename_param_tag_name_0_to_1, name2.getText(sourceFile), parameterName]);
       }
       function getInfo14(sourceFile, pos) {
@@ -212502,7 +212781,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               const elements = token.parent.elements;
               const diagnostic = [
                 elements.length > 1 ? Diagnostics.Remove_unused_declarations_for_Colon_0 : Diagnostics.Remove_unused_declaration_for_Colon_0,
-                map24(elements, (e2) => e2.getText(sourceFile)).join(", ")
+                map25(elements, (e2) => e2.getText(sourceFile)).join(", ")
               ];
               return [
                 createDeleteFix(ts_textChanges_exports.ChangeTracker.with(context, (t2) => deleteDestructuringElements(t2, sourceFile, token.parent)), diagnostic)
@@ -214463,7 +214742,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             ));
           }
         } else {
-          const paramTags = map24(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
+          const paramTags = map25(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
             /*tagName*/
             void 0,
             name2,
@@ -215597,8 +215876,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const isJs = isInJSFile(contextNode);
         const { typeArguments, arguments: args, parent: parent2 } = call;
         const contextualType = isJs ? void 0 : checker.getContextualType(call);
-        const names = map24(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
-        const instanceTypes = isJs ? [] : map24(args, (arg) => checker.getTypeAtLocation(arg));
+        const names = map25(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
+        const instanceTypes = isJs ? [] : map25(args, (arg) => checker.getTypeAtLocation(arg));
         const { argumentTypeNodes, argumentTypeParameters } = getArgumentTypesAndTypeParameters(
           checker,
           importAdder,
@@ -215906,7 +216185,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function getReturnTypeFromSignatures(signatures, checker, context, enclosingDeclaration) {
         if (length(signatures)) {
-          const type = checker.getUnionType(map24(signatures, checker.getReturnTypeOfSignature));
+          const type = checker.getUnionType(map25(signatures, checker.getReturnTypeOfSignature));
           return checker.typeToTypeNode(type, enclosingDeclaration, 1, 8, getNoopSymbolTrackerWithResolver(context));
         }
       }
@@ -217911,7 +218190,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           if (elements.length === 0) {
             return void 0;
           }
-          const newClauses = map24(elements, (element) => factory.createCaseClause(element, []));
+          const newClauses = map25(elements, (element) => factory.createCaseClause(element, []));
           const newLineChar = getNewLineOrDefaultFromHost(host, formatContext == null ? void 0 : formatContext.options);
           const printer = createSnippetPrinter({
             removeComments: true,
@@ -217921,7 +218200,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             newLine: getNewLineKind(newLineChar)
           });
           const printNode = formatContext ? (node) => printer.printAndFormatNode(4, node, sourceFile, formatContext) : (node) => printer.printNode(4, node, sourceFile);
-          const insertText = map24(newClauses, (clause, i2) => {
+          const insertText = map25(newClauses, (clause, i2) => {
             if (preferences.includeCompletionsWithSnippetText) {
               return `${printNode(clause)}$${i2 + 1}`;
             }
@@ -221353,17 +221632,17 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         ]: 2
       };
       function createNameAndKindSet() {
-        const map25 = /* @__PURE__ */ new Map();
+        const map26 = /* @__PURE__ */ new Map();
         function add(value) {
-          const existing = map25.get(value.name);
+          const existing = map26.get(value.name);
           if (!existing || kindPrecedence[existing.kind] < kindPrecedence[value.kind]) {
-            map25.set(value.name, value);
+            map26.set(value.name, value);
           }
         }
         return {
           add,
-          has: map25.has.bind(map25),
-          values: map25.values.bind(map25)
+          has: map26.has.bind(map26),
+          values: map26.values.bind(map26)
         };
       }
       function getStringLiteralCompletions(sourceFile, position, contextToken, options, host, program2, log, preferences, includeSymbol) {
@@ -222745,22 +223024,22 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return refs;
       }
       function getDirectImportsMap(sourceFiles, checker, cancellationToken) {
-        const map25 = /* @__PURE__ */ new Map();
+        const map26 = /* @__PURE__ */ new Map();
         for (const sourceFile of sourceFiles) {
           if (cancellationToken) cancellationToken.throwIfCancellationRequested();
           forEachImport(sourceFile, (importDecl, moduleSpecifier) => {
             const moduleSymbol = checker.getSymbolAtLocation(moduleSpecifier);
             if (moduleSymbol) {
               const id = getSymbolId(moduleSymbol).toString();
-              let imports = map25.get(id);
+              let imports = map26.get(id);
               if (!imports) {
-                map25.set(id, imports = []);
+                map26.set(id, imports = []);
               }
               imports.push(importDecl);
             }
           });
         }
-        return map25;
+        return map26;
       }
       function forEachPossibleImportOrExportStatement(sourceFileLike, action) {
         return forEach(sourceFileLike.kind === 308 ? sourceFileLike.statements : sourceFileLike.body.statements, (statement) => (
@@ -223148,7 +223427,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
         }
         const checker = program2.getTypeChecker();
-        return map24(referenceEntries, (entry) => toImplementationLocation(entry, checker));
+        return map25(referenceEntries, (entry) => toImplementationLocation(entry, checker));
       }
       function getImplementationReferenceEntries(program2, cancellationToken, sourceFiles, node, position) {
         if (node.kind === 308) {
@@ -223171,7 +223450,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function findReferenceOrRenameEntries(program2, cancellationToken, sourceFiles, node, position, options, convertEntry) {
-        return map24(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
+        return map25(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
       }
       function getReferenceEntriesForNode(position, node, program2, sourceFiles, cancellationToken, options = {}, sourceFilesSet = new Set(sourceFiles.map((f3) => f3.fileName))) {
         return flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options, sourceFilesSet));
@@ -225051,7 +225330,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           const staticBlocks = filter3(classDecl.members, isClassStaticBlockDeclaration);
           const containerName = symbol22 ? typeChecker.symbolToString(symbol22, classDecl) : "";
           const sourceFile2 = node.getSourceFile();
-          return map24(staticBlocks, (staticBlock) => {
+          return map25(staticBlocks, (staticBlock) => {
             let { pos } = moveRangePastModifiers(staticBlock);
             pos = skipTrivia(sourceFile2.text, pos);
             return createDefinitionInfoFromName(
@@ -225391,7 +225670,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         const withoutExpandos = filter3(filteredDeclarations, (d) => !isExpandoDeclaration(d));
         const results = some(withoutExpandos) ? withoutExpandos : filteredDeclarations;
-        return map24(results, (declaration) => createDefinitionInfo(
+        return map25(results, (declaration) => createDefinitionInfo(
           declaration,
           typeChecker,
           symbol2,
@@ -226618,7 +226897,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getJSDocTagNameCompletions() {
-        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map24(jsDocTagNames, (tagName) => {
+        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map25(jsDocTagNames, (tagName) => {
           return {
             name: tagName,
             kind: "keyword",
@@ -226629,7 +226908,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       var getJSDocTagNameCompletionDetails = getJSDocTagCompletionDetails;
       function getJSDocTagCompletions() {
-        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map24(jsDocTagNames, (tagName) => {
+        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map25(jsDocTagNames, (tagName) => {
           return {
             name: `@${tagName}`,
             kind: "keyword",
@@ -227461,7 +227740,7 @@ ${content}
         return isString(moduleSpecifierText) && some(sourceFile.moduleAugmentations, (moduleName) => isStringLiteral(moduleName) && moduleName.text === moduleSpecifierText);
       }
       function getNewImportSpecifiers(namedImports) {
-        return flatMap(namedImports, (namedImport) => map24(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
+        return flatMap(namedImports, (namedImport) => map25(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
           importSpecifier,
           importSpecifier.isTypeOnly,
           /*propertyName*/
@@ -228627,7 +228906,7 @@ ${content}
           /*meaning*/
           void 0
         ) : emptyArray;
-        const items = map24(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
+        const items = map25(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
         let selectedItemIndex = 0;
         let itemsSeen = 0;
         for (let i2 = 0; i2 < items.length; i2++) {
@@ -228687,7 +228966,7 @@ ${content}
       ), spacePart()];
       function getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, checker, enclosingDeclaration, sourceFile) {
         const infos = (isTypeParameterList ? itemInfoForTypeParameters : itemInfoForParameters)(candidateSignature, checker, enclosingDeclaration, sourceFile);
-        return map24(infos, ({ isVariadic, parameters, prefix, suffix }) => {
+        return map25(infos, ({ isVariadic, parameters, prefix, suffix }) => {
           const prefixDisplayParts = [...callTargetDisplayParts, ...prefix];
           const suffixDisplayParts = [...suffix, ...returnTypeToDisplayParts(candidateSignature, enclosingDeclaration, checker)];
           const documentation = candidateSignature.getDocumentationComment(checker);
@@ -228725,7 +229004,7 @@ ${content}
         const parameters = (typeParameters || emptyArray).map((t2) => createSignatureHelpParameterForTypeParameter(t2, checker, enclosingDeclaration, sourceFile, printer));
         const thisParameter = candidateSignature.thisParameter ? [checker.symbolToParameterDeclaration(candidateSignature.thisParameter, enclosingDeclaration, signatureHelpNodeBuilderFlags)] : [];
         return checker.getExpandedParameters(candidateSignature).map((paramList) => {
-          const params = factory.createNodeArray([...thisParameter, ...map24(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
+          const params = factory.createNodeArray([...thisParameter, ...map25(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
           const parameterParts = mapToDisplayParts((writer) => {
             printer.writeList(2576, params, sourceFile, writer);
           });
@@ -233629,9 +233908,9 @@ ${options.prefix}` : "\n" : options.prefix
         return mask2;
       }
       function createRulesMap(rules) {
-        const map25 = buildMap(rules);
+        const map26 = buildMap(rules);
         return (context) => {
-          const bucket = map25[getRuleBucketIndex(context.currentTokenSpan.kind, context.nextTokenSpan.kind)];
+          const bucket = map26[getRuleBucketIndex(context.currentTokenSpan.kind, context.nextTokenSpan.kind)];
           if (bucket) {
             const rules2 = [];
             let ruleActionMask = 0;
@@ -233649,22 +233928,22 @@ ${options.prefix}` : "\n" : options.prefix
         };
       }
       function buildMap(rules) {
-        const map25 = new Array(mapRowLength * mapRowLength);
-        const rulesBucketConstructionStateList = new Array(map25.length);
+        const map26 = new Array(mapRowLength * mapRowLength);
+        const rulesBucketConstructionStateList = new Array(map26.length);
         for (const rule2 of rules) {
           const specificRule = rule2.leftTokenRange.isSpecific && rule2.rightTokenRange.isSpecific;
           for (const left of rule2.leftTokenRange.tokens) {
             for (const right of rule2.rightTokenRange.tokens) {
               const index = getRuleBucketIndex(left, right);
-              let rulesBucket = map25[index];
+              let rulesBucket = map26[index];
               if (rulesBucket === void 0) {
-                rulesBucket = map25[index] = [];
+                rulesBucket = map26[index] = [];
               }
               addRule(rulesBucket, rule2.rule, specificRule, rulesBucketConstructionStateList, index);
             }
           }
         }
-        return map25;
+        return map26;
       }
       function getRuleBucketIndex(row, column) {
         Debug.assert(row <= 166 && column <= 166, "Must compute formatting context from tokens");
@@ -237242,7 +237521,7 @@ ${options.prefix}` : "\n" : options.prefix
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map24,
+        map: () => map25,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -238357,19 +238636,19 @@ ${options.prefix}` : "\n" : options.prefix
         return fileName;
       }
       function createNormalizedPathMap() {
-        const map25 = /* @__PURE__ */ new Map();
+        const map26 = /* @__PURE__ */ new Map();
         return {
           get(path2) {
-            return map25.get(path2);
+            return map26.get(path2);
           },
           set(path2, value) {
-            map25.set(path2, value);
+            map26.set(path2, value);
           },
           contains(path2) {
-            return map25.has(path2);
+            return map26.has(path2);
           },
           remove(path2) {
-            map25.delete(path2);
+            map26.delete(path2);
           }
         };
       }
@@ -239917,7 +240196,7 @@ ${options.prefix}` : "\n" : options.prefix
           if (!this.languageServiceEnabled) {
             return this.getRootScriptInfos();
           }
-          return map24(this.program.getSourceFiles(), (sourceFile) => {
+          return map25(this.program.getSourceFiles(), (sourceFile) => {
             const scriptInfo = this.projectService.getScriptInfoForPath(sourceFile.resolvedPath);
             Debug.assert(!!scriptInfo, "getScriptInfo", () => `scriptInfo for a file '${sourceFile.fileName}' Path: '${sourceFile.path}' / '${sourceFile.resolvedPath}' is missing.`);
             return scriptInfo;
@@ -241598,17 +241877,17 @@ ${options.prefix}` : "\n" : options.prefix
       var CloseFileWatcherEvent = "closeFileWatcher";
       var ensureProjectForOpenFileSchedule = "*ensureProjectForOpenFiles*";
       function prepareConvertersForEnumLikeCompilerOptions(commandLineOptions) {
-        const map25 = /* @__PURE__ */ new Map();
+        const map26 = /* @__PURE__ */ new Map();
         for (const option of commandLineOptions) {
           if (typeof option.type === "object") {
             const optionMap = option.type;
             optionMap.forEach((value) => {
               Debug.assert(typeof value === "number");
             });
-            map25.set(option.name, optionMap);
+            map26.set(option.name, optionMap);
           }
         }
-        return map25;
+        return map26;
       }
       var compilerOptionConverters = prepareConvertersForEnumLikeCompilerOptions(optionDeclarations);
       var watchOptionsConverters = prepareConvertersForEnumLikeCompilerOptions(optionsForWatch);
@@ -245408,7 +245687,7 @@ Dynamic files must always be opened with service's current directory or service 
         async enableRequestedPluginsWorker(pendingPlugins) {
           Debug.assert(this.currentPluginEnablementPromise === void 0);
           let sendProjectsUpdatedInBackgroundEvent = false;
-          await Promise.all(map24(pendingPlugins, async ([project, promises]) => {
+          await Promise.all(map25(pendingPlugins, async ([project, promises]) => {
             const results = await Promise.all(promises);
             if (project.isClosed() || isProjectDeferredClose(project)) {
               this.logger.info(`Cancelling plugin enabling for ${project.getProjectName()} as it is ${project.isClosed() ? "closed" : "deferred close"}`);
@@ -245744,7 +246023,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source: diag2.source,
-          relatedInformation: map24(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map25(diag2.relatedInformation, formatRelatedInformation)
         };
       }
       function formatRelatedInformation(info) {
@@ -245785,7 +246064,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source,
-          relatedInformation: map24(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map25(diag2.relatedInformation, formatRelatedInformation)
         };
         return includeFileName ? { ...common, fileName: diag2.file && diag2.file.fileName } : common;
       }
@@ -246298,7 +246577,7 @@ ${json2}${newLine}`;
               if (!result.some((p) => p.projectErrors && p.projectErrors.length !== 0)) {
                 return this.requiredResponse(result);
               }
-              const converted = map24(result, (p) => {
+              const converted = map25(result, (p) => {
                 if (!p.projectErrors || p.projectErrors.length === 0) {
                   return p;
                 }
@@ -247370,7 +247649,7 @@ ${json2}${newLine}`;
               this.event({
                 triggerFile: event.data.triggerFile,
                 configFile: event.data.configFileName,
-                diagnostics: map24(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
+                diagnostics: map25(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
                   diagnostic,
                   /*includeFileName*/
                   true
@@ -247711,7 +247990,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             concatenate(projectErrors, optionsErrors),
             (diagnostic) => !!diagnostic.file && diagnostic.file.fileName === configFile
           );
-          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map24(
+          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map25(
             diagnosticsForConfigFile,
             (diagnostic) => formatDiagnosticToProtocol(
               diagnostic,
@@ -247736,7 +248015,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             // TODO: GH#18217
             reportsUnnecessary: d.reportsUnnecessary,
             reportsDeprecated: d.reportsDeprecated,
-            relatedInformation: map24(d.relatedInformation, formatRelatedInformation)
+            relatedInformation: map25(d.relatedInformation, formatRelatedInformation)
           }));
         }
         getCompilerOptionsDiagnostics(args) {
@@ -247764,7 +248043,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
               endLocation: scriptInfo && scriptInfo.positionToLineOffset(d.start + d.length),
               reportsUnnecessary: d.reportsUnnecessary,
               reportsDeprecated: d.reportsDeprecated,
-              relatedInformation: map24(d.relatedInformation, formatRelatedInformation)
+              relatedInformation: map25(d.relatedInformation, formatRelatedInformation)
             })
           );
         }
@@ -248344,14 +248623,14 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           }
         }
         toSpanGroups(locations) {
-          const map25 = /* @__PURE__ */ new Map();
+          const map26 = /* @__PURE__ */ new Map();
           for (const { fileName, textSpan, contextSpan, originalContextSpan: _2, originalTextSpan: _3, originalFileName: _1, ...prefixSuffixText } of locations) {
-            let group2 = map25.get(fileName);
-            if (!group2) map25.set(fileName, group2 = { file: fileName, locs: [] });
+            let group2 = map26.get(fileName);
+            if (!group2) map26.set(fileName, group2 = { file: fileName, locs: [] });
             const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(fileName));
             group2.locs.push({ ...toProtocolTextSpanWithContext(textSpan, contextSpan, scriptInfo), ...prefixSuffixText });
           }
-          return arrayFrom(map25.values());
+          return arrayFrom(map26.values());
         }
         getReferences(args, simplifiedResult) {
           const file2 = toNormalizedPath(args.file);
@@ -248671,7 +248950,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             false
           ) })) : result.map((details) => ({
             ...details,
-            codeActions: map24(details.codeActions, (action) => this.mapCodeAction(action)),
+            codeActions: map25(details.codeActions, (action) => this.mapCodeAction(action)),
             documentation: this.mapDisplayParts(details.documentation, project),
             tags: this.mapJSDocTagInfo(details.tags, project, useDisplayParts)
           }));
@@ -248811,7 +249090,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           this.projectService.closeClientFile(file2);
         }
         mapLocationNavigationBarItems(items, scriptInfo) {
-          return map24(items, (item) => ({
+          return map25(items, (item) => ({
             text: item.text,
             kind: item.kind,
             kindModifiers: item.kindModifiers,
@@ -248832,7 +249111,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             kindModifiers: tree.kindModifiers,
             spans: tree.spans.map((span) => toProtocolTextSpan(span, scriptInfo)),
             nameSpan: tree.nameSpan && toProtocolTextSpan(tree.nameSpan, scriptInfo),
-            childItems: map24(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
+            childItems: map25(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
           };
         }
         getNavigationTree(args, simplifiedResult) {
@@ -249224,7 +249503,7 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
           const { locations } = args;
           const { file: file2, languageService } = this.getFileAndLanguageServiceForSyntacticOperation(args);
           const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(file2));
-          return map24(locations, (location) => {
+          return map25(locations, (location) => {
             const pos = this.getPosition(location, scriptInfo);
             const selectionRange = languageService.getSmartSelectionRange(file2, pos);
             return simplifiedResult ? this.mapSelectionRange(selectionRange, scriptInfo) : selectionRange;
@@ -252784,9 +253063,9 @@ var init_js_yaml = __esm({
       create: () => ({}),
       identify: isPlainObject,
       represent: (o) => {
-        const map24 = /* @__PURE__ */ new Map();
-        for (const key of Object.keys(o)) map24.set(key, o[key]);
-        return map24;
+        const map25 = /* @__PURE__ */ new Map();
+        for (const key of Object.keys(o)) map25.set(key, o[key]);
+        return map25;
       },
       addPair: (container, key, value) => {
         if (key !== null && typeof key === "object") return "object-based map does not support complex keys";
@@ -252811,9 +253090,9 @@ var init_js_yaml = __esm({
       create: () => /* @__PURE__ */ new Set(),
       identify: (data) => data instanceof Set,
       represent: (data) => {
-        const map24 = /* @__PURE__ */ new Map();
-        for (const key of data) map24.set(key, null);
-        return map24;
+        const map25 = /* @__PURE__ */ new Map();
+        for (const key of data) map25.set(key, null);
+        return map25;
       },
       addPair: (container, key, value) => {
         if (value !== null) return "cannot resolve a set item";
@@ -252926,19 +253205,19 @@ var init_js_yaml = __esm({
       identify: (data) => data instanceof Map || isPlainObject(data),
       represent: (data) => {
         if (data instanceof Map) return data;
-        const map24 = /* @__PURE__ */ new Map();
+        const map25 = /* @__PURE__ */ new Map();
         const obj = data;
-        for (const key of Object.keys(obj)) map24.set(key, obj[key]);
-        return map24;
+        for (const key of Object.keys(obj)) map25.set(key, obj[key]);
+        return map25;
       }
     });
     legacyMapTag = defineMappingTag("tag:yaml.org,2002:map", {
       create: () => ({}),
       identify: isPlainObject,
       represent: (o) => {
-        const map24 = /* @__PURE__ */ new Map();
-        for (const key of Object.keys(o)) map24.set(key, o[key]);
-        return map24;
+        const map25 = /* @__PURE__ */ new Map();
+        for (const key of Object.keys(o)) map25.set(key, o[key]);
+        return map25;
       },
       addPair: (container, key, value) => {
         const normalizedKey = normalizeKey(key);
@@ -253371,7 +253650,9 @@ var init_create = __esm({
               serverType: cmd.serverType || data.serverType,
               location: cmd.location || data.location,
               workers: cmd.workers ?? data.workers,
-              singleNode: cmd.singleNode ?? data.singleNode
+              singleNode: cmd.singleNode ?? data.singleNode,
+              withLoadBalancer: data.loadBalancer,
+              controlPlanes: data.controlPlanes
             }).pipe((0, import_operators7.map)((cluster) => ({ projectId, cluster })))
           ),
           (0, import_operators7.tap)(({ cluster }) => {
@@ -253406,23 +253687,394 @@ var init_create = __esm({
   }
 });
 
+// src/commands/cluster/helpers/cluster-change.ts
+var import_rxjs9, import_operators8, resolveClusterTarget, parseIntOption, describeChange, runClusterChange;
+var init_cluster_change = __esm({
+  "src/commands/cluster/helpers/cluster-change.ts"() {
+    import_rxjs9 = __toESM(require_cjs());
+    import_operators8 = __toESM(require_operators());
+    init_helpers();
+    init_log();
+    init_poll_until_ready();
+    resolveClusterTarget = async (cmd) => (0, import_rxjs9.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators8.switchMap)(
+          (projectId) => resolveClusterId(projectId, {
+            clusterId: cmd.cluster,
+            clusterName: cmd.clusterName
+          }).pipe(
+            (0, import_operators8.map)((clusterId) => {
+              if (!clusterId) {
+                throw new Error(
+                  "Pass --cluster <id> or --clusterName <name> (see gcli cluster:list)."
+                );
+              }
+              return { projectId, clusterId };
+            })
+          )
+        )
+      )
+    );
+    parseIntOption = (name2, value, min, max) => {
+      const n = Number(value);
+      if (value === void 0 || value === null || value === "") {
+        throw new Error(`--${name2} is required`);
+      }
+      if (!Number.isInteger(n) || n < min || n > max) {
+        throw new Error(`--${name2} must be an integer from ${min} to ${max}`);
+      }
+      return n;
+    };
+    describeChange = (cluster) => ({
+      id: cluster.id,
+      name: cluster.name,
+      status: cluster.status,
+      workers: cluster.topology?.workers,
+      singleNode: cluster.topology?.singleNode,
+      controlPlanes: cluster.topology?.controlPlanes,
+      loadBalancer: cluster.withLoadBalancer,
+      error: cluster.error ?? ""
+    });
+    runClusterChange = async (action, projectId, change$, wait) => {
+      const cluster = await (0, import_rxjs9.lastValueFrom)(change$);
+      Logger.log("-------------------");
+      Logger.log(`[Action][${action}]`);
+      Logger.table([describeChange(cluster)]);
+      Logger.log("-------------------");
+      if (!wait) {
+        if (cluster.status !== "ready") {
+          Logger.info(
+            "This runs in the background. Re-run with --wait to block until it settles, or check gcli cluster:status."
+          );
+        }
+        return cluster;
+      }
+      Logger.info(`Waiting for cluster ${cluster.id} to settle...`);
+      const final = await pollUntilReady(projectId, cluster.id);
+      Logger.log(`[Action][${action}] final status: ${final.status}`);
+      if (final.status === "error") {
+        throw new Error(
+          `Cluster ${cluster.id} ended in "error"${final.error ? `: ${final.error}` : ""}`
+        );
+      }
+      return final;
+    };
+  }
+});
+
+// src/commands/cluster/helpers/plan.ts
+var AUTOSCALE_BOUNDS, intIn, validateDesired, planClusterChanges;
+var init_plan = __esm({
+  "src/commands/cluster/helpers/plan.ts"() {
+    AUTOSCALE_BOUNDS = {
+      minWorkers: [1, 10],
+      maxWorkers: [1, 10],
+      cpuScaleUpPercent: [1, 100],
+      memScaleUpPercent: [1, 100],
+      cpuScaleDownPercent: [1, 100],
+      memScaleDownPercent: [1, 100],
+      samplesToScale: [1, 20],
+      cooldownMinutes: [1, 1440]
+    };
+    intIn = (v, min, max) => Number.isInteger(v) && v >= min && v <= max;
+    validateDesired = (d) => {
+      const errors = [];
+      if (!d?.name) errors.push("cluster.name is required");
+      if (d.workers !== void 0 && !intIn(d.workers, 1, 10)) {
+        errors.push("cluster.workers must be an integer from 1 to 10");
+      }
+      if (d.controlPlanes !== void 0 && ![1, 3, 5].includes(d.controlPlanes)) {
+        errors.push("cluster.controlPlanes must be 1, 3 or 5");
+      }
+      for (const [key, value] of Object.entries(d.autoscale ?? {})) {
+        if (key === "enabled") {
+          if (typeof value !== "boolean") {
+            errors.push("cluster.autoscale.enabled must be true or false");
+          }
+          continue;
+        }
+        const bounds = AUTOSCALE_BOUNDS[key];
+        if (!bounds) {
+          errors.push(`cluster.autoscale.${key} is not a known setting`);
+        } else if (!intIn(value, bounds[0], bounds[1])) {
+          errors.push(
+            `cluster.autoscale.${key} must be an integer from ${bounds[0]} to ${bounds[1]}`
+          );
+        }
+      }
+      const a = d.autoscale ?? {};
+      if (a.minWorkers !== void 0 && a.maxWorkers !== void 0 && a.maxWorkers < a.minWorkers) {
+        errors.push("cluster.autoscale.maxWorkers must be >= minWorkers");
+      }
+      if (d.singleNode && a.enabled) {
+        errors.push(
+          "cluster.autoscale.enabled needs a multi-node cluster (singleNode: false)"
+        );
+      }
+      return errors;
+    };
+    planClusterChanges = (current, desired) => {
+      const steps = [];
+      const notes = [];
+      const autoscaleOn = desired.autoscale?.enabled === true;
+      if (!current) {
+        steps.push({
+          kind: "create",
+          description: `create cluster "${desired.name}"${desired.singleNode ? " (single node)" : ` with ${desired.workers ?? desired.autoscale?.minWorkers ?? 1} worker(s)`}`
+        });
+        if (desired.autoscale && Object.keys(desired.autoscale).length) {
+          steps.push({
+            kind: "autoscale",
+            input: { ...desired.autoscale },
+            description: "set the autoscaling policy"
+          });
+        }
+        return { steps, notes };
+      }
+      const topo = current.topology ?? {};
+      const isSingle = !!topo.singleNode;
+      let willBeSingle = isSingle;
+      if (desired.singleNode === false && isSingle) {
+        const workers = desired.workers ?? desired.autoscale?.minWorkers ?? 1;
+        steps.push({
+          kind: "multi-node",
+          workers,
+          description: `convert to multi-node with ${workers} worker(s)`
+        });
+        willBeSingle = false;
+      } else if (desired.singleNode === true && !isSingle) {
+        steps.push({
+          kind: "single-node",
+          description: `convert to a single node (removes ${topo.workers ?? "the"} worker node(s))`,
+          destructive: true
+        });
+        willBeSingle = true;
+      }
+      const convertedToMulti = steps.some((s2) => s2.kind === "multi-node");
+      if (desired.workers !== void 0 && !willBeSingle && !convertedToMulti) {
+        if (autoscaleOn) {
+          notes.push(
+            "workers is ignored while autoscale.enabled is true - the autoscaler owns the worker count (set autoscale.minWorkers/maxWorkers instead)"
+          );
+        } else if (topo.workers !== desired.workers) {
+          steps.push({
+            kind: "scale",
+            workers: desired.workers,
+            description: `scale workers ${topo.workers ?? "?"} -> ${desired.workers}`
+          });
+        }
+      } else if (desired.workers !== void 0 && willBeSingle) {
+        notes.push("workers is ignored for a single-node cluster");
+      }
+      if (desired.controlPlanes !== void 0 && (topo.controlPlanes ?? 1) !== desired.controlPlanes) {
+        steps.push({
+          kind: "control-planes",
+          count: desired.controlPlanes,
+          description: `control planes ${topo.controlPlanes ?? 1} -> ${desired.controlPlanes}`
+        });
+      }
+      if (desired.loadBalancer !== void 0 && !!current.withLoadBalancer !== desired.loadBalancer) {
+        steps.push(
+          desired.loadBalancer ? {
+            kind: "load-balancer",
+            enabled: true,
+            description: "add the load balancer"
+          } : {
+            kind: "load-balancer",
+            enabled: false,
+            description: "remove the load balancer (its IP is released)",
+            destructive: true
+          }
+        );
+      }
+      if (desired.autoscale) {
+        const now = current.autoscale ?? {};
+        const changed = {};
+        for (const [key, value] of Object.entries(desired.autoscale)) {
+          if (now[key] !== value) {
+            changed[key] = value;
+          }
+        }
+        if (Object.keys(changed).length) {
+          steps.push({
+            kind: "autoscale",
+            input: changed,
+            description: `autoscale: ${Object.entries(changed).map(([k, v]) => `${k}=${v}`).join(", ")}`
+          });
+        }
+      }
+      return { steps, notes };
+    };
+  }
+});
+
+// src/commands/cluster/apply.ts
+var apply_exports = {};
+__export(apply_exports, {
+  default: () => apply_default
+});
+var import_rxjs10, readDesired, apply_default;
+var init_apply = __esm({
+  "src/commands/cluster/apply.ts"() {
+    import_rxjs10 = __toESM(require_cjs());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    init_load_spec();
+    init_cluster_change();
+    init_plan();
+    init_poll_until_ready();
+    readDesired = async (spec) => {
+      const data = await (0, import_rxjs10.lastValueFrom)(
+        loadSpec(
+          spec ?? "cluster.yaml"
+        )
+      );
+      const desired = data ? data.cluster ?? data : null;
+      if (!desired?.name) {
+        throw new Error(
+          "No cluster to apply: add a `cluster:` section with at least `name` to lambforge.yaml (or pass --spec cluster.yaml)"
+        );
+      }
+      return desired;
+    };
+    apply_default = async (cmd) => {
+      const desired = await readDesired(cmd.spec);
+      const errors = validateDesired(desired);
+      if (errors.length) {
+        throw new Error(`Invalid cluster spec:
+- ${errors.join("\n- ")}`);
+      }
+      const projectId = await (0, import_rxjs10.lastValueFrom)(parseProjectId(cmd.project));
+      const clusters = await (0, import_rxjs10.lastValueFrom)(
+        GraphqlClienAPI.projectClustersDetailed(projectId)
+      );
+      const current = clusters.find(
+        (c) => c.name === desired.name && c.status !== "deleted"
+      ) ?? null;
+      if (current && current.status !== "ready" && !cmd.dryRun) {
+        throw new Error(
+          `Cluster "${current.name}" is "${current.status}" - wait until it is ready (gcli cluster:status) and apply again`
+        );
+      }
+      const { steps, notes } = planClusterChanges(current, desired);
+      Logger.log("-------------------");
+      Logger.log(`[Action][clusterApply] ${desired.name}`);
+      notes.forEach((n) => Logger.warn(`note: ${n}`));
+      if (!steps.length) {
+        Logger.info("Nothing to change - the cluster already matches the spec.");
+        Logger.log("-------------------");
+        return { cluster: current, applied: [] };
+      }
+      Logger.table(
+        steps.map((s2, i2) => ({
+          step: i2 + 1,
+          change: s2.description,
+          needsYes: "destructive" in s2 && s2.destructive ? "yes" : ""
+        }))
+      );
+      Logger.log("-------------------");
+      if (cmd.dryRun) {
+        Logger.info("--dry-run: nothing was changed.");
+        return { cluster: current, applied: [] };
+      }
+      if (!current) {
+        const missing = ["imageId", "serverType", "location"].filter(
+          (k) => !desired[k]
+        );
+        if (missing.length) {
+          throw new Error(
+            `Cluster "${desired.name}" does not exist - creating it needs ${missing.map((k) => `cluster.${k}`).join(", ")} in the spec`
+          );
+        }
+      }
+      const applied = [];
+      let clusterId = current?.id;
+      for (const step of steps) {
+        if ("destructive" in step && step.destructive && !cmd.yes) {
+          Logger.warn(`skipped (re-run with --yes to apply): ${step.description}`);
+          continue;
+        }
+        Logger.info(`-> ${step.description}`);
+        if (step.kind === "create") {
+          const created = await (0, import_rxjs10.lastValueFrom)(
+            GraphqlClienAPI.provisionProjectCluster(projectId, {
+              name: desired.name,
+              imageId: desired.imageId,
+              serverType: desired.serverType,
+              location: desired.location,
+              workers: desired.singleNode ? void 0 : desired.workers ?? desired.autoscale?.minWorkers,
+              singleNode: desired.singleNode,
+              withLoadBalancer: desired.loadBalancer,
+              controlPlanes: desired.controlPlanes
+            })
+          );
+          clusterId = created.id;
+          Logger.info("Provisioning - this takes several minutes...");
+          const ready = await pollUntilReady(projectId, clusterId);
+          if (ready.status !== "ready") {
+            throw new Error(
+              `Cluster "${desired.name}" ended in "${ready.status}"${ready.error ? `: ${ready.error}` : ""}`
+            );
+          }
+        } else if (step.kind === "autoscale") {
+          await (0, import_rxjs10.lastValueFrom)(
+            GraphqlClienAPI.updateProjectClusterAutoscale(
+              projectId,
+              clusterId,
+              step.input
+            )
+          );
+        } else {
+          const change$ = step.kind === "multi-node" ? GraphqlClienAPI.migrateToMultiNodeProjectCluster(
+            projectId,
+            clusterId,
+            step.workers
+          ) : step.kind === "single-node" ? GraphqlClienAPI.revertToSingleNodeProjectCluster(
+            projectId,
+            clusterId
+          ) : step.kind === "scale" ? GraphqlClienAPI.scaleProjectCluster(
+            projectId,
+            clusterId,
+            step.workers
+          ) : step.kind === "control-planes" ? GraphqlClienAPI.scaleControlPlanesProjectCluster(
+            projectId,
+            clusterId,
+            step.count
+          ) : GraphqlClienAPI.setProjectClusterLoadBalancer(
+            projectId,
+            clusterId,
+            step.enabled
+          );
+          await runClusterChange(step.kind, projectId, change$, true);
+        }
+        applied.push(step);
+      }
+      Logger.info(
+        `Applied ${applied.length} of ${steps.length} change(s) to "${desired.name}".`
+      );
+      return { clusterId, applied };
+    };
+  }
+});
+
 // src/commands/cluster/list.ts
 var list_exports = {};
 __export(list_exports, {
   default: () => list_default
 });
-var import_rxjs9, import_operators8, list_default;
+var import_rxjs11, import_operators9, list_default;
 var init_list = __esm({
   "src/commands/cluster/list.ts"() {
-    import_rxjs9 = __toESM(require_cjs());
-    import_operators8 = __toESM(require_operators());
+    import_rxjs11 = __toESM(require_cjs());
+    import_operators9 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default = (cmd) => (0, import_rxjs9.lastValueFrom)(
+    list_default = (cmd) => (0, import_rxjs11.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators8.switchMap)((projectId) => GraphqlClienAPI.projectClusters(projectId)),
-        (0, import_operators8.tap)((clusters) => {
+        (0, import_operators9.switchMap)((projectId) => GraphqlClienAPI.projectClusters(projectId)),
+        (0, import_operators9.tap)((clusters) => {
           Logger.log("-------------------");
           Logger.log("[Action][projectClusters]");
           if (!clusters?.length) {
@@ -253451,24 +254103,24 @@ var teardown_exports = {};
 __export(teardown_exports, {
   default: () => teardown_default
 });
-var import_rxjs10, import_operators9, teardown_default;
+var import_rxjs12, import_operators10, teardown_default;
 var init_teardown = __esm({
   "src/commands/cluster/teardown.ts"() {
-    import_rxjs10 = __toESM(require_cjs());
-    import_operators9 = __toESM(require_operators());
+    import_rxjs12 = __toESM(require_cjs());
+    import_operators10 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_poll_until_ready();
     teardown_default = async (cmd) => {
-      const { projectId, cluster } = await (0, import_rxjs10.lastValueFrom)(
+      const { projectId, cluster } = await (0, import_rxjs12.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators9.switchMap)(
+          (0, import_operators10.switchMap)(
             (projectId2) => GraphqlClienAPI.teardownProjectCluster(projectId2, cmd.cluster).pipe(
-              (0, import_operators9.map)((cluster2) => ({ projectId: projectId2, cluster: cluster2 }))
+              (0, import_operators10.map)((cluster2) => ({ projectId: projectId2, cluster: cluster2 }))
             )
           ),
-          (0, import_operators9.tap)(({ cluster: cluster2 }) => {
+          (0, import_operators10.tap)(({ cluster: cluster2 }) => {
             Logger.log("-------------------");
             Logger.log("[Action][teardownProjectCluster]");
             Logger.table([cluster2]);
@@ -253499,27 +254151,439 @@ var kubeconfig_exports = {};
 __export(kubeconfig_exports, {
   default: () => kubeconfig_default
 });
-var import_rxjs11, import_operators10, kubeconfig_default;
+var import_rxjs13, import_operators11, kubeconfig_default;
 var init_kubeconfig = __esm({
   "src/commands/cluster/kubeconfig.ts"() {
-    import_rxjs11 = __toESM(require_cjs());
-    import_operators10 = __toESM(require_operators());
+    import_rxjs13 = __toESM(require_cjs());
+    import_operators11 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_read_file();
-    kubeconfig_default = (cmd) => (0, import_rxjs11.lastValueFrom)(
+    kubeconfig_default = (cmd) => (0, import_rxjs13.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators10.switchMap)(
+        (0, import_operators11.switchMap)(
           (projectId) => GraphqlClienAPI.clusterKubeconfig(projectId, cmd.cluster)
         ),
-        (0, import_operators10.switchMap)(
+        (0, import_operators11.switchMap)(
           (kubeconfig) => cmd.output ? writeFileAsObservable(cmd.output, kubeconfig).pipe(
-            (0, import_operators10.tap)(() => Logger.info(`Wrote kubeconfig to ${cmd.output}`))
-          ) : (0, import_rxjs11.of)(kubeconfig).pipe((0, import_operators10.tap)((value) => Logger.log(value)))
+            (0, import_operators11.tap)(() => Logger.info(`Wrote kubeconfig to ${cmd.output}`))
+          ) : (0, import_rxjs13.of)(kubeconfig).pipe((0, import_operators11.tap)((value) => Logger.log(value)))
         )
       )
     );
+  }
+});
+
+// src/commands/cluster/status.ts
+var status_exports = {};
+__export(status_exports, {
+  default: () => status_default,
+  overviewRow: () => overviewRow
+});
+var import_rxjs14, pct, overviewRow, status_default;
+var init_status = __esm({
+  "src/commands/cluster/status.ts"() {
+    import_rxjs14 = __toESM(require_cjs());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    pct = (v) => v == null ? "-" : `${Math.round(v)}%`;
+    overviewRow = (c) => ({
+      name: c.name,
+      id: c.clusterId,
+      status: c.status,
+      overall: c.overall,
+      agent: c.agentOnline ? "online" : "offline",
+      nodes: c.health ? `${c.health.nodesReady ?? 0}/${c.health.nodesTotal ?? 0} ready` : "-",
+      pods: c.health ? `${c.health.pods ?? 0} (${c.health.pendingPods ?? 0} pending)` : "-",
+      cpu: c.health ? `${pct(c.health.cpuUsagePercent)} used / ${pct(c.health.cpuRequestsPercent)} req` : "-",
+      mem: c.health ? `${pct(c.health.memUsagePercent)} used / ${pct(c.health.memRequestsPercent)} req` : "-",
+      autoscale: c.autoscale?.enabled ? `on ${c.autoscale.minWorkers}-${c.autoscale.maxWorkers}` : "off"
+    });
+    status_default = async (cmd) => {
+      const projectId = await (0, import_rxjs14.lastValueFrom)(parseProjectId(cmd.project));
+      const clusterId = await (0, import_rxjs14.lastValueFrom)(
+        resolveClusterId(projectId, {
+          clusterId: cmd.cluster,
+          clusterName: cmd.clusterName
+        })
+      );
+      const all = await (0, import_rxjs14.lastValueFrom)(
+        GraphqlClienAPI.projectClustersOverview(projectId)
+      );
+      const rows = clusterId ? all.filter((c) => c.clusterId === clusterId) : all;
+      Logger.log("-------------------");
+      Logger.log("[Action][projectClustersOverview]");
+      if (!rows.length) {
+        Logger.info(
+          clusterId ? `No cluster ${clusterId} in this project.` : "No private clusters for this project - it runs on the shared cluster. See cluster:create."
+        );
+      } else {
+        Logger.table(rows.map(overviewRow));
+        const issues = rows.flatMap(
+          (c) => (c.issues ?? []).map((i2) => ({
+            cluster: c.name,
+            severity: i2.severity,
+            code: i2.code,
+            message: i2.message
+          }))
+        );
+        if (issues.length) {
+          Logger.log("Issues:");
+          Logger.table(issues);
+        }
+      }
+      Logger.log("-------------------");
+      return rows;
+    };
+  }
+});
+
+// src/commands/cluster/health.ts
+var health_exports = {};
+__export(health_exports, {
+  default: () => health_default
+});
+var import_rxjs15, pct2, health_default;
+var init_health = __esm({
+  "src/commands/cluster/health.ts"() {
+    import_rxjs15 = __toESM(require_cjs());
+    init_gql_client();
+    init_log();
+    init_cluster_change();
+    pct2 = (v) => v == null ? "-" : `${Math.round(v)}%`;
+    health_default = async (cmd) => {
+      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      const [latest] = await (0, import_rxjs15.lastValueFrom)(
+        GraphqlClienAPI.clusterHealth(projectId, clusterId, 1)
+      );
+      Logger.log("-------------------");
+      Logger.log("[Action][clusterHealth]");
+      if (!latest) {
+        Logger.info(
+          'No health reports yet - the cluster agent has not reported (it installs with the cluster; check cluster:status for "agent").'
+        );
+      } else {
+        Logger.table([
+          {
+            reportedAt: latest.createdAt,
+            kubernetes: latest.kubernetesVersion,
+            agent: latest.agentVersion,
+            pods: latest.pods,
+            pendingPods: latest.pendingPods,
+            fission: latest.fissionReady ? "ready" : "not ready",
+            prometheus: latest.prometheusReady ? "ready" : "not ready",
+            cpu: `${pct2(latest.cpuUsagePercent)} used / ${pct2(latest.cpuRequestsPercent)} req`,
+            mem: `${pct2(latest.memUsagePercent)} used / ${pct2(latest.memRequestsPercent)} req`
+          }
+        ]);
+        if (latest.nodes?.length) {
+          Logger.table(
+            latest.nodes.map((n) => ({
+              node: n.name,
+              role: n.role,
+              ready: n.ready,
+              type: n.instanceType,
+              pods: n.podCount,
+              cordoned: n.cordoned ?? false
+            }))
+          );
+        }
+      }
+      Logger.log("-------------------");
+      return latest ?? null;
+    };
+  }
+});
+
+// src/commands/cluster/scale-events.ts
+var scale_events_exports = {};
+__export(scale_events_exports, {
+  default: () => scale_events_default
+});
+var import_rxjs16, scale_events_default;
+var init_scale_events = __esm({
+  "src/commands/cluster/scale-events.ts"() {
+    import_rxjs16 = __toESM(require_cjs());
+    init_gql_client();
+    init_log();
+    init_cluster_change();
+    scale_events_default = async (cmd) => {
+      const limit = cmd.limit === void 0 ? 20 : parseIntOption("limit", cmd.limit, 1, 200);
+      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      const events = await (0, import_rxjs16.lastValueFrom)(
+        GraphqlClienAPI.clusterScaleEvents(projectId, clusterId, limit)
+      );
+      Logger.log("-------------------");
+      Logger.log("[Action][clusterScaleEvents]");
+      if (!events.length) {
+        Logger.info("No scale events yet.");
+      } else {
+        Logger.table(
+          events.map((e2) => ({
+            at: e2.createdAt,
+            trigger: e2.trigger,
+            direction: e2.direction,
+            workers: `${e2.fromWorkers} -> ${e2.toWorkers}`,
+            reason: e2.reason ?? "",
+            error: e2.error ?? ""
+          }))
+        );
+      }
+      Logger.log("-------------------");
+      return events;
+    };
+  }
+});
+
+// src/commands/cluster/cost.ts
+var cost_exports = {};
+__export(cost_exports, {
+  default: () => cost_default
+});
+var import_rxjs17, money, cost_default;
+var init_cost = __esm({
+  "src/commands/cluster/cost.ts"() {
+    import_rxjs17 = __toESM(require_cjs());
+    init_helpers();
+    init_gql_client();
+    init_log();
+    money = (v, sign = "\u20AC") => v == null ? "-" : `${sign}${v.toFixed(2)}`;
+    cost_default = async (cmd) => {
+      const projectId = await (0, import_rxjs17.lastValueFrom)(parseProjectId(cmd.project));
+      const rows = await (0, import_rxjs17.lastValueFrom)(
+        GraphqlClienAPI.projectClustersOverview(projectId)
+      );
+      Logger.log("-------------------");
+      Logger.log("[Action][clusterCost]");
+      if (!rows.length) {
+        Logger.info("No private clusters for this project.");
+      } else {
+        Logger.table(
+          rows.map((c) => ({
+            name: c.name,
+            status: c.status,
+            period: c.monthToDate?.period ?? "-",
+            nodeHours: c.monthToDate?.nodeHours ?? 0,
+            loadBalancerHours: c.monthToDate?.loadBalancerHours ?? 0,
+            monthToDateEur: money(c.monthToDate?.totalCostEur),
+            monthToDateUsd: money(c.monthToDate?.totalCostUsd, "$"),
+            estimatedMonthEur: money(c.estimatedMonthlyCostEur)
+          }))
+        );
+      }
+      Logger.log("-------------------");
+      return rows;
+    };
+  }
+});
+
+// src/commands/cluster/scale.ts
+var scale_exports = {};
+__export(scale_exports, {
+  default: () => scale_default
+});
+var scale_default;
+var init_scale = __esm({
+  "src/commands/cluster/scale.ts"() {
+    init_gql_client();
+    init_cluster_change();
+    scale_default = async (cmd) => {
+      const workers = parseIntOption("workers", cmd.workers, 1, 10);
+      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      return runClusterChange(
+        "scaleProjectCluster",
+        projectId,
+        GraphqlClienAPI.scaleProjectCluster(projectId, clusterId, workers),
+        cmd.wait
+      );
+    };
+  }
+});
+
+// src/commands/cluster/scale-control-planes.ts
+var scale_control_planes_exports = {};
+__export(scale_control_planes_exports, {
+  default: () => scale_control_planes_default
+});
+var scale_control_planes_default;
+var init_scale_control_planes = __esm({
+  "src/commands/cluster/scale-control-planes.ts"() {
+    init_gql_client();
+    init_cluster_change();
+    scale_control_planes_default = async (cmd) => {
+      const count = Number(cmd.count);
+      if (![1, 3, 5].includes(count)) {
+        throw new Error(
+          "--count must be 1, 3 or 5 (an odd number keeps etcd quorum)"
+        );
+      }
+      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      return runClusterChange(
+        "scaleControlPlanesProjectCluster",
+        projectId,
+        GraphqlClienAPI.scaleControlPlanesProjectCluster(
+          projectId,
+          clusterId,
+          count
+        ),
+        cmd.wait
+      );
+    };
+  }
+});
+
+// src/commands/cluster/autoscale.ts
+var autoscale_exports = {};
+__export(autoscale_exports, {
+  default: () => autoscale_default,
+  toAutoscaleInput: () => toAutoscaleInput
+});
+var import_rxjs18, toAutoscaleInput, autoscale_default;
+var init_autoscale = __esm({
+  "src/commands/cluster/autoscale.ts"() {
+    import_rxjs18 = __toESM(require_cjs());
+    init_gql_client();
+    init_log();
+    init_cluster_change();
+    toAutoscaleInput = (cmd) => {
+      if (cmd.enable && cmd.disable) {
+        throw new Error("Pass --enable or --disable, not both");
+      }
+      const input = {};
+      if (cmd.enable) input.enabled = true;
+      if (cmd.disable) input.enabled = false;
+      const ints = [
+        ["min", "minWorkers", 1, 10],
+        ["max", "maxWorkers", 1, 10],
+        ["cpuUp", "cpuScaleUpPercent", 1, 100],
+        ["memUp", "memScaleUpPercent", 1, 100],
+        ["cpuDown", "cpuScaleDownPercent", 1, 100],
+        ["memDown", "memScaleDownPercent", 1, 100],
+        ["samples", "samplesToScale", 1, 20],
+        ["cooldown", "cooldownMinutes", 1, 1440]
+      ];
+      for (const [flag, field, min, max] of ints) {
+        if (cmd[flag] !== void 0) {
+          input[field] = parseIntOption(
+            String(flag),
+            cmd[flag],
+            min,
+            max
+          );
+        }
+      }
+      if (!Object.keys(input).length) {
+        throw new Error(
+          "Nothing to change: pass --enable/--disable and/or --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)"
+        );
+      }
+      return input;
+    };
+    autoscale_default = async (cmd) => {
+      const input = toAutoscaleInput(cmd);
+      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      const cluster = await (0, import_rxjs18.lastValueFrom)(
+        GraphqlClienAPI.updateProjectClusterAutoscale(projectId, clusterId, input)
+      );
+      const a = cluster.autoscale ?? {};
+      Logger.log("-------------------");
+      Logger.log("[Action][updateProjectClusterAutoscale]");
+      Logger.table([
+        {
+          cluster: cluster.name,
+          workers: cluster.topology?.workers,
+          enabled: a.enabled,
+          minWorkers: a.minWorkers,
+          maxWorkers: a.maxWorkers,
+          scaleUpAt: `cpu ${a.cpuScaleUpPercent}% / mem ${a.memScaleUpPercent}%`,
+          scaleDownAt: `cpu ${a.cpuScaleDownPercent}% / mem ${a.memScaleDownPercent}%`,
+          samples: a.samplesToScale,
+          cooldownMin: a.cooldownMinutes
+        }
+      ]);
+      Logger.log("-------------------");
+      return cluster;
+    };
+  }
+});
+
+// src/commands/cluster/multi-node.ts
+var multi_node_exports = {};
+__export(multi_node_exports, {
+  default: () => multi_node_default
+});
+var multi_node_default;
+var init_multi_node = __esm({
+  "src/commands/cluster/multi-node.ts"() {
+    init_gql_client();
+    init_cluster_change();
+    multi_node_default = async (cmd) => {
+      const workers = parseIntOption("workers", cmd.workers, 1, 10);
+      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      return runClusterChange(
+        "migrateToMultiNodeProjectCluster",
+        projectId,
+        GraphqlClienAPI.migrateToMultiNodeProjectCluster(
+          projectId,
+          clusterId,
+          workers
+        ),
+        cmd.wait
+      );
+    };
+  }
+});
+
+// src/commands/cluster/single-node.ts
+var single_node_exports = {};
+__export(single_node_exports, {
+  default: () => single_node_default
+});
+var single_node_default;
+var init_single_node = __esm({
+  "src/commands/cluster/single-node.ts"() {
+    init_gql_client();
+    init_cluster_change();
+    single_node_default = async (cmd) => {
+      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      return runClusterChange(
+        "revertToSingleNodeProjectCluster",
+        projectId,
+        GraphqlClienAPI.revertToSingleNodeProjectCluster(projectId, clusterId),
+        cmd.wait
+      );
+    };
+  }
+});
+
+// src/commands/cluster/load-balancer.ts
+var load_balancer_exports = {};
+__export(load_balancer_exports, {
+  default: () => load_balancer_default
+});
+var load_balancer_default;
+var init_load_balancer = __esm({
+  "src/commands/cluster/load-balancer.ts"() {
+    init_gql_client();
+    init_cluster_change();
+    load_balancer_default = async (cmd) => {
+      if (!!cmd.enable === !!cmd.disable) {
+        throw new Error("Pass exactly one of --enable or --disable");
+      }
+      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      return runClusterChange(
+        cmd.enable ? "enableLoadBalancerProjectCluster" : "disableLoadBalancerProjectCluster",
+        projectId,
+        GraphqlClienAPI.setProjectClusterLoadBalancer(
+          projectId,
+          clusterId,
+          !!cmd.enable
+        ),
+        cmd.wait
+      );
+    };
   }
 });
 
@@ -253528,18 +254592,18 @@ var list_environments_exports = {};
 __export(list_environments_exports, {
   default: () => list_environments_default
 });
-var import_rxjs12, import_operators11, list_environments_default;
+var import_rxjs19, import_operators12, list_environments_default;
 var init_list_environments = __esm({
   "src/commands/environment/list-environments.ts"() {
-    import_rxjs12 = __toESM(require_cjs());
-    import_operators11 = __toESM(require_operators());
+    import_rxjs19 = __toESM(require_cjs());
+    import_operators12 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_environments_default = (cmd) => (0, import_rxjs12.lastValueFrom)(
+    list_environments_default = (cmd) => (0, import_rxjs19.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators11.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
-        (0, import_operators11.tap)((data) => {
+        (0, import_operators12.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
+        (0, import_operators12.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -253569,33 +254633,33 @@ var create_environment_exports = {};
 __export(create_environment_exports, {
   default: () => create_environment_default
 });
-var import_rxjs13, import_operators12, create_environment_default;
+var import_rxjs20, import_operators13, create_environment_default;
 var init_create_environment = __esm({
   "src/commands/environment/create-environment.ts"() {
-    import_rxjs13 = __toESM(require_cjs());
-    import_operators12 = __toESM(require_operators());
+    import_rxjs20 = __toESM(require_cjs());
+    import_operators13 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     create_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs13.lastValueFrom)(
+      return (0, import_rxjs20.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators12.switchMap)(
+          (0, import_operators13.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-              (0, import_operators12.map)((data) => ({
+              (0, import_operators13.map)((data) => ({
                 projectId,
                 ...data?.environment ?? data
               }))
             )
           ),
-          (0, import_operators12.switchMap)(
+          (0, import_operators13.switchMap)(
             ({ projectId, clusterName: dataClusterName, ...data }) => resolveClusterId(projectId, {
               clusterId: cmdRest.clusterId || data.clusterId,
               clusterName: cmdClusterName || dataClusterName
             }).pipe(
-              (0, import_operators12.switchMap)(
+              (0, import_operators13.switchMap)(
                 (clusterId) => GraphqlClienAPI.createEnvironment(projectId, {
                   ...data,
                   ...cmdRest,
@@ -253604,7 +254668,7 @@ var init_create_environment = __esm({
               )
             )
           ),
-          (0, import_operators12.tap)((data) => {
+          (0, import_operators13.tap)((data) => {
             const columns = [
               "id",
               "name",
@@ -253635,34 +254699,34 @@ var update_environment_exports = {};
 __export(update_environment_exports, {
   default: () => update_environment_default
 });
-var import_rxjs14, import_operators13, update_environment_default;
+var import_rxjs21, import_operators14, update_environment_default;
 var init_update_environment = __esm({
   "src/commands/environment/update-environment.ts"() {
-    import_rxjs14 = __toESM(require_cjs());
-    import_operators13 = __toESM(require_operators());
+    import_rxjs21 = __toESM(require_cjs());
+    import_operators14 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     update_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs14.lastValueFrom)(
+      return (0, import_rxjs21.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators13.switchMap)(
+          (0, import_operators14.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-              (0, import_operators13.map)((data) => ({
+              (0, import_operators14.map)((data) => ({
                 projectId,
                 ...data?.environment ?? data
               }))
             )
           ),
-          (0, import_operators13.tap)(Logger.log),
-          (0, import_operators13.switchMap)(
+          (0, import_operators14.tap)(Logger.log),
+          (0, import_operators14.switchMap)(
             ({ projectId, clusterName: dataClusterName, ...data }) => resolveClusterId(projectId, {
               clusterId: cmdRest.clusterId || data.clusterId,
               clusterName: cmdClusterName || dataClusterName
             }).pipe(
-              (0, import_operators13.switchMap)(
+              (0, import_operators14.switchMap)(
                 (clusterId) => GraphqlClienAPI.updateEnvironment(projectId, {
                   ...data,
                   ...cmdRest,
@@ -253671,7 +254735,7 @@ var init_update_environment = __esm({
               )
             )
           ),
-          (0, import_operators13.tap)((data) => {
+          (0, import_operators14.tap)((data) => {
             const columns = [
               "id",
               "name",
@@ -253702,31 +254766,31 @@ var delete_environment_exports = {};
 __export(delete_environment_exports, {
   default: () => delete_environment_default
 });
-var import_rxjs15, import_operators14, delete_environment_default;
+var import_rxjs22, import_operators15, delete_environment_default;
 var init_delete_environment = __esm({
   "src/commands/environment/delete-environment.ts"() {
-    import_rxjs15 = __toESM(require_cjs());
-    import_operators14 = __toESM(require_operators());
+    import_rxjs22 = __toESM(require_cjs());
+    import_operators15 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_environment_default = (cmd) => (0, import_rxjs15.lastValueFrom)(
+    delete_environment_default = (cmd) => (0, import_rxjs22.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators14.switchMap)(
+        (0, import_operators15.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators14.map)((data) => ({
+            (0, import_operators15.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators14.switchMap)(
+        (0, import_operators15.switchMap)(
           ({ projectId, name: name2 }) => resolveClusterId(projectId, {
             clusterId: cmd.clusterId,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators14.switchMap)(
+            (0, import_operators15.switchMap)(
               (clusterId) => GraphqlClienAPI.deleteEnvironment(
                 name2,
                 projectId,
@@ -253736,7 +254800,7 @@ var init_delete_environment = __esm({
             )
           )
         ),
-        (0, import_operators14.tap)((data) => {
+        (0, import_operators15.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -253764,31 +254828,31 @@ var get_environment_exports = {};
 __export(get_environment_exports, {
   default: () => get_environment_default
 });
-var import_rxjs16, import_operators15, get_environment_default;
+var import_rxjs23, import_operators16, get_environment_default;
 var init_get_environment = __esm({
   "src/commands/environment/get-environment.ts"() {
-    import_rxjs16 = __toESM(require_cjs());
-    import_operators15 = __toESM(require_operators());
+    import_rxjs23 = __toESM(require_cjs());
+    import_operators16 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    get_environment_default = (cmd) => (0, import_rxjs16.lastValueFrom)(
+    get_environment_default = (cmd) => (0, import_rxjs23.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators15.switchMap)(
+        (0, import_operators16.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators15.map)((data) => ({
+            (0, import_operators16.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators15.switchMap)(
+        (0, import_operators16.switchMap)(
           ({ projectId, name: name2 }) => resolveClusterId(projectId, {
             clusterId: cmd.clusterId,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators15.switchMap)(
+            (0, import_operators16.switchMap)(
               (clusterId) => GraphqlClienAPI.getEnvironment(
                 cmd.name ?? name2,
                 projectId,
@@ -253797,7 +254861,7 @@ var init_get_environment = __esm({
             )
           )
         ),
-        (0, import_operators15.tap)((data) => {
+        (0, import_operators16.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -265469,10 +266533,10 @@ var require_async3 = __commonJS({
         return eachOfImplementation(coll, wrapAsync(iteratee), callback);
       }
       var eachOf$1 = awaitify(eachOf, 3);
-      function map24(coll, iteratee, callback) {
+      function map25(coll, iteratee, callback) {
         return _asyncMap(eachOf$1, coll, iteratee, callback);
       }
-      var map$1 = awaitify(map24, 3);
+      var map$1 = awaitify(map25, 3);
       var applyEach$1 = applyEach(map$1);
       function eachOfSeries(coll, iteratee, callback) {
         return eachOfLimit$2(coll, 1, iteratee, callback);
@@ -270282,8 +271346,8 @@ var require_lodash3 = __commonJS({
         return apply(func, this, otherArgs);
       };
     }
-    function getMapData(map24, key) {
-      var data = map24.__data__;
+    function getMapData(map25, key) {
+      var data = map25.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -270687,8 +271751,8 @@ var require_lodash4 = __commonJS({
     var createSet = !(Set2 && 1 / setToArray(new Set2([, -0]))[1] == INFINITY) ? noop3 : function(values) {
       return new Set2(values);
     };
-    function getMapData(map24, key) {
-      var data = map24.__data__;
+    function getMapData(map25, key) {
+      var data = map25.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -285031,45 +286095,45 @@ var package_exports = {};
 __export(package_exports, {
   default: () => package_default
 });
-var import_archiver, import_child_process, import_fs3, import_rxjs17, import_operators16, import_util3, ReadFile, package_default;
+var import_archiver, import_child_process, import_fs3, import_rxjs24, import_operators17, import_util3, ReadFile, package_default;
 var init_package = __esm({
   "src/commands/lambda/package.ts"() {
     import_archiver = __toESM(require_archiver());
     import_child_process = require("child_process");
     import_fs3 = require("fs");
-    import_rxjs17 = __toESM(require_cjs());
-    import_operators16 = __toESM(require_operators());
+    import_rxjs24 = __toESM(require_cjs());
+    import_operators17 = __toESM(require_operators());
     import_util3 = require("util");
     init_helpers2();
     init_load_spec();
     init_parse_ignore();
     init_read_file();
-    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators16.catchError)(() => (0, import_rxjs17.of)("")));
+    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators17.catchError)(() => (0, import_rxjs24.of)("")));
     package_default = (cmd) => {
-      return (0, import_rxjs17.lastValueFrom)(
+      return (0, import_rxjs24.lastValueFrom)(
         loadSpec(cmd.spec).pipe(
-          (0, import_operators16.map)((spec) => spec?.function ?? spec),
-          (0, import_operators16.switchMap)(async (data) => {
+          (0, import_operators17.map)((spec) => spec?.function ?? spec),
+          (0, import_operators17.switchMap)(async (data) => {
             const archive = (0, import_archiver.default)("zip", {
               zlib: { level: 9 }
               // Sets the compression level.
             });
             await (0, import_util3.promisify)(import_child_process.exec)(["chmod", "+x", data.script].join(" "));
-            const ignore = await (0, import_rxjs17.lastValueFrom)(
+            const ignore = await (0, import_rxjs24.lastValueFrom)(
               ReadFile(".gignore").pipe(
-                (0, import_operators16.map)((ignore2) => parseIgnoredFiles(ignore2))
+                (0, import_operators17.map)((ignore2) => parseIgnoredFiles(ignore2))
               )
             );
             archive.glob("**", {
               ignore: [".gcache/**", ...ignore]
             });
             archive.finalize();
-            return (0, import_rxjs17.lastValueFrom)(
-              (0, import_rxjs17.from)(streamToBufferPromise(archive)).pipe(
-                (0, import_operators16.switchMap)(
-                  (buffer) => (0, import_rxjs17.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
-                    (0, import_operators16.catchError)(() => (0, import_rxjs17.of)(true)),
-                    (0, import_operators16.switchMap)(
+            return (0, import_rxjs24.lastValueFrom)(
+              (0, import_rxjs24.from)(streamToBufferPromise(archive)).pipe(
+                (0, import_operators17.switchMap)(
+                  (buffer) => (0, import_rxjs24.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
+                    (0, import_operators17.catchError)(() => (0, import_rxjs24.of)(true)),
+                    (0, import_operators17.switchMap)(
                       () => (0, import_util3.promisify)(import_fs3.writeFile)(`.gcache/${data.name}.zip`, buffer)
                     )
                   )
@@ -285094,14 +286158,14 @@ function streamToBufferPromise(file2) {
     });
   });
 }
-var import_form_data, import_fs4, import_rxjs18, import_operators17, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
+var import_form_data, import_fs4, import_rxjs25, import_operators18, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
     import_fs4 = require("fs");
     init_src();
-    import_rxjs18 = __toESM(require_cjs());
-    import_operators17 = __toESM(require_operators());
+    import_rxjs25 = __toESM(require_cjs());
+    import_operators18 = __toESM(require_operators());
     import_stream_to_buffer = __toESM(require_stream_to_buffer());
     init_helpers();
     init_gql_client();
@@ -285109,14 +286173,14 @@ var init_helpers2 = __esm({
     init_package();
     init_load_spec();
     init_read_file();
-    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators17.catchError)(() => (0, import_rxjs18.of)("")));
-    createOrUpdateLambda = (cmd, type) => (0, import_rxjs18.lastValueFrom)(
+    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators18.catchError)(() => (0, import_rxjs25.of)("")));
+    createOrUpdateLambda = (cmd, type) => (0, import_rxjs25.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators17.switchMap)(
-          (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators17.map)(() => projectId))
+        (0, import_operators18.switchMap)(
+          (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators18.map)(() => projectId))
         ),
-        (0, import_operators17.switchMap)(async (projectId) => {
-          const spec = await (0, import_rxjs18.lastValueFrom)(loadSpec(cmd.spec));
+        (0, import_operators18.switchMap)(async (projectId) => {
+          const spec = await (0, import_rxjs25.lastValueFrom)(loadSpec(cmd.spec));
           return {
             projectId,
             ...spec?.function ?? spec
@@ -285124,16 +286188,16 @@ var init_helpers2 = __esm({
         }),
         /* Make zip archive */
         /* Get file id */
-        (0, import_operators17.switchMap)(async (data) => {
+        (0, import_operators18.switchMap)(async (data) => {
           if (!data.uploadAsZip) {
             return { ...data, customUploadFileId: "" };
           }
           await package_default(cmd);
           const body = new import_form_data.default();
           body.append("file[]", (0, import_fs4.createReadStream)(`.gcache/${data.name}.zip`));
-          const config2 = await (0, import_rxjs18.lastValueFrom)(GraphqlClienAPI.getConfig());
-          return (0, import_rxjs18.lastValueFrom)(
-            (0, import_rxjs18.from)(
+          const config2 = await (0, import_rxjs25.lastValueFrom)(GraphqlClienAPI.getConfig());
+          return (0, import_rxjs25.lastValueFrom)(
+            (0, import_rxjs25.from)(
               fetch2(config2.uploadUrl, {
                 method: "POST",
                 body,
@@ -285145,32 +286209,32 @@ var init_helpers2 = __esm({
                 }
               })
             ).pipe(
-              (0, import_operators17.switchMap)((res) => res.json()),
-              (0, import_operators17.map)((file2) => ({
+              (0, import_operators18.switchMap)((res) => res.json()),
+              (0, import_operators18.map)((file2) => ({
                 ...data,
                 customUploadFileId: file2.id
               }))
             )
           );
         }),
-        (0, import_operators17.switchMap)(async (payload) => {
-          const clusterId = await (0, import_rxjs18.lastValueFrom)(
+        (0, import_operators18.switchMap)(async (payload) => {
+          const clusterId = await (0, import_rxjs25.lastValueFrom)(
             resolveClusterId(payload.projectId, {
               clusterId: cmd.clusterId || payload.clusterId,
               clusterName: cmd.clusterName || payload.clusterName
             })
           );
-          return (0, import_rxjs18.lastValueFrom)(
+          return (0, import_rxjs25.lastValueFrom)(
             GraphqlClienAPI[type]({
-              code: cmd.code || await (0, import_rxjs18.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
+              code: cmd.code || await (0, import_rxjs25.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
               name: cmd.name || payload.name || "",
               projectId: payload.projectId,
               route: cmd.route || payload.route || "",
-              buildBashScript: cmd.buildBashScript || await (0, import_rxjs18.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
+              buildBashScript: cmd.buildBashScript || await (0, import_rxjs25.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
               configs: cmd.configs || payload.configs || [],
               env: cmd.env || payload.env || "nodejs",
               method: cmd.method || payload.method || ["GET"],
-              packageJson: cmd.packageJson || await (0, import_rxjs18.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
+              packageJson: cmd.packageJson || await (0, import_rxjs25.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
               envSecrets: cmd.envSecrets || payload.envSecrets || [],
@@ -285203,7 +286267,7 @@ var init_helpers2 = __esm({
             })
           );
         }),
-        (0, import_operators17.tap)((data) => {
+        (0, import_operators18.tap)((data) => {
           Logger.info(JSON.stringify(data, null, 2));
         })
       )
@@ -285223,27 +286287,27 @@ var list_exports2 = {};
 __export(list_exports2, {
   default: () => list_default2
 });
-var import_rxjs19, import_operators18, list_default2;
+var import_rxjs26, import_operators19, list_default2;
 var init_list2 = __esm({
   "src/commands/lambda/list.ts"() {
-    import_rxjs19 = __toESM(require_cjs());
-    import_operators18 = __toESM(require_operators());
+    import_rxjs26 = __toESM(require_cjs());
+    import_operators19 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default2 = (cmd) => (0, import_rxjs19.lastValueFrom)(
+    list_default2 = (cmd) => (0, import_rxjs26.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators18.switchMap)(
+        (0, import_operators19.switchMap)(
           (projectId) => resolveClusterId(projectId, {
             clusterId: cmd.clusterId,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators18.switchMap)(
+            (0, import_operators19.switchMap)(
               (clusterId) => GraphqlClienAPI.listLambdas(projectId, clusterId)
             )
           )
         ),
-        (0, import_operators18.tap)((data) => {
+        (0, import_operators19.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -285266,17 +286330,17 @@ var get_exports = {};
 __export(get_exports, {
   default: () => get_default
 });
-var import_rxjs20, import_operators19, get_default;
+var import_rxjs27, import_operators20, get_default;
 var init_get = __esm({
   "src/commands/lambda/get.ts"() {
-    import_rxjs20 = __toESM(require_cjs());
-    import_operators19 = __toESM(require_operators());
+    import_rxjs27 = __toESM(require_cjs());
+    import_operators20 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     get_default = async (cmd) => {
-      const table = (0, import_operators19.tap)((data) => {
+      const table = (0, import_operators20.tap)((data) => {
         const columns = [
           "name",
           "projectId",
@@ -285291,33 +286355,33 @@ var init_get = __esm({
         Logger.log("-------------------");
       });
       if (cmd.lambda) {
-        return (0, import_rxjs20.lastValueFrom)(
+        return (0, import_rxjs27.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators19.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
+            (0, import_operators20.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
             table
           )
         );
       }
-      const spec = await (0, import_rxjs20.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs27.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs20.lastValueFrom)(
+        return (0, import_rxjs27.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators19.catchError)((error48) => {
+            (0, import_operators20.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs20.throwError)(
+                return (0, import_rxjs27.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs20.throwError)(() => error48);
+              return (0, import_rxjs27.throwError)(() => error48);
             }),
-            (0, import_operators19.switchMap)(
+            (0, import_operators20.switchMap)(
               (projectId) => resolveClusterId(projectId, {
                 clusterId: cmd.clusterId,
                 clusterName: cmd.clusterName
               }).pipe(
-                (0, import_operators19.switchMap)(
+                (0, import_operators20.switchMap)(
                   (clusterId) => GraphqlClienAPI.getLambdaByName(
                     name2,
                     projectId,
@@ -285367,34 +286431,34 @@ var delete_exports = {};
 __export(delete_exports, {
   default: () => delete_default
 });
-var import_rxjs21, import_operators20, delete_default;
+var import_rxjs28, import_operators21, delete_default;
 var init_delete = __esm({
   "src/commands/lambda/delete.ts"() {
-    import_rxjs21 = __toESM(require_cjs());
-    import_operators20 = __toESM(require_operators());
+    import_rxjs28 = __toESM(require_cjs());
+    import_operators21 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     delete_default = async (cmd) => {
-      const spec = await (0, import_rxjs21.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs28.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       const env = cmd.env ?? spec.function?.env ?? spec.env;
       const clusterIdHint = cmd.clusterId ?? spec.function?.clusterId ?? spec.clusterId;
       const clusterNameHint = cmd.clusterName ?? spec.function?.clusterName ?? spec.clusterName;
-      return (0, import_rxjs21.lastValueFrom)(
+      return (0, import_rxjs28.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators20.switchMap)(
+          (0, import_operators21.switchMap)(
             (projectId) => resolveClusterId(projectId, {
               clusterId: clusterIdHint,
               clusterName: clusterNameHint
             }).pipe(
-              (0, import_operators20.switchMap)(
+              (0, import_operators21.switchMap)(
                 (clusterId) => GraphqlClienAPI.deleteLambda({ name: name2, projectId, env, clusterId })
               )
             )
           ),
-          (0, import_operators20.tap)((data) => {
+          (0, import_operators21.tap)((data) => {
             const columns = [
               "name",
               "projectId",
@@ -285417,45 +286481,45 @@ var logs_exports = {};
 __export(logs_exports, {
   default: () => logs_default
 });
-var import_rxjs22, import_operators21, logs_default;
+var import_rxjs29, import_operators22, logs_default;
 var init_logs = __esm({
   "src/commands/lambda/logs.ts"() {
-    import_rxjs22 = __toESM(require_cjs());
-    import_operators21 = __toESM(require_operators());
+    import_rxjs29 = __toESM(require_cjs());
+    import_operators22 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_default = async (cmd) => {
-      const result = (0, import_operators21.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators22.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs22.lastValueFrom)(
+        return (0, import_rxjs29.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators21.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
+            (0, import_operators22.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs22.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs29.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs22.lastValueFrom)(
+        return (0, import_rxjs29.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators21.catchError)((error48) => {
+            (0, import_operators22.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs22.throwError)(
+                return (0, import_rxjs29.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs22.throwError)(() => error48);
+              return (0, import_rxjs29.throwError)(() => error48);
             }),
-            (0, import_operators21.switchMap)(
+            (0, import_operators22.switchMap)(
               (projectId) => resolveClusterId(projectId, {
                 clusterId: cmd.clusterId,
                 clusterName: cmd.clusterName
               }).pipe(
-                (0, import_operators21.switchMap)(
+                (0, import_operators22.switchMap)(
                   (clusterId) => GraphqlClienAPI.getLambdaLogsByName(name2, projectId, clusterId)
                 )
               )
@@ -285474,45 +286538,45 @@ var logs_builder_exports = {};
 __export(logs_builder_exports, {
   default: () => logs_builder_default
 });
-var import_rxjs23, import_operators22, logs_builder_default;
+var import_rxjs30, import_operators23, logs_builder_default;
 var init_logs_builder = __esm({
   "src/commands/lambda/logs-builder.ts"() {
-    import_rxjs23 = __toESM(require_cjs());
-    import_operators22 = __toESM(require_operators());
+    import_rxjs30 = __toESM(require_cjs());
+    import_operators23 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_builder_default = async (cmd) => {
-      const result = (0, import_operators22.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators23.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs23.lastValueFrom)(
+        return (0, import_rxjs30.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators22.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
+            (0, import_operators23.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs23.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs30.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs23.lastValueFrom)(
+        return (0, import_rxjs30.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators22.catchError)((error48) => {
+            (0, import_operators23.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs23.throwError)(
+                return (0, import_rxjs30.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs23.throwError)(() => error48);
+              return (0, import_rxjs30.throwError)(() => error48);
             }),
-            (0, import_operators22.switchMap)(
+            (0, import_operators23.switchMap)(
               (projectId) => resolveClusterId(projectId, {
                 clusterId: cmd.clusterId,
                 clusterName: cmd.clusterName
               }).pipe(
-                (0, import_operators22.switchMap)(
+                (0, import_operators23.switchMap)(
                   (clusterId) => GraphqlClienAPI.getLambdaBuilderLogsByName(
                     name2,
                     projectId,
@@ -285535,39 +286599,39 @@ var test_exports = {};
 __export(test_exports, {
   default: () => test_default
 });
-var import_rxjs24, import_operators23, test_default;
+var import_rxjs31, import_operators24, test_default;
 var init_test = __esm({
   "src/commands/lambda/test.ts"() {
-    import_rxjs24 = __toESM(require_cjs());
-    import_operators23 = __toESM(require_operators());
+    import_rxjs31 = __toESM(require_cjs());
+    import_operators24 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     test_default = async (cmd) => {
-      const spec = await (0, import_rxjs24.lastValueFrom)(loadSpec(cmd.spec));
-      const processParameters = (lambda) => (0, import_rxjs24.of)(lambda).pipe(
-        (0, import_operators23.map)((lambda2) => ({
+      const spec = await (0, import_rxjs31.lastValueFrom)(loadSpec(cmd.spec));
+      const processParameters = (lambda) => (0, import_rxjs31.of)(lambda).pipe(
+        (0, import_operators24.map)((lambda2) => ({
           ...lambda2,
           url: cmd.pathParams ? cmd.pathParams.split(";").map((param) => param.split("=")).reduce(
             (prev, [key, value]) => prev.replace(key, value),
             lambda2.url
           ) : lambda2.url
         })),
-        (0, import_operators23.tap)(() => {
+        (0, import_operators24.tap)(() => {
           Logger.info(
             `About to hit URL: ${[lambda.url, cmd.queryParams].join("")}`
           );
         }),
-        (0, import_operators23.switchMap)(
-          (lambda2) => (0, import_rxjs24.from)(
+        (0, import_operators24.switchMap)(
+          (lambda2) => (0, import_rxjs31.from)(
             fetch([lambda2.url, cmd.queryParams].filter((i2) => !!i2).join(""), {
               method: cmd?.method ?? "GET",
               body: cmd.body
             })
-          ).pipe((0, import_operators23.switchMap)((res) => res.json()))
+          ).pipe((0, import_operators24.switchMap)((res) => res.json()))
         ),
-        (0, import_operators23.tap)((data) => {
+        (0, import_operators24.tap)((data) => {
           if (data.error) {
             Logger.error(data);
           } else {
@@ -285576,29 +286640,29 @@ var init_test = __esm({
         })
       );
       if (cmd.lambda) {
-        return (0, import_rxjs24.lastValueFrom)(
+        return (0, import_rxjs31.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators23.switchMap)(
+            (0, import_operators24.switchMap)(
               (id) => GraphqlClienAPI.getLambda(id, ["id", "url", "method", "params"])
             ),
-            (0, import_operators23.switchMap)(processParameters)
+            (0, import_operators24.switchMap)(processParameters)
           )
         );
       }
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs24.lastValueFrom)(
+        return (0, import_rxjs31.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators23.catchError)((error48) => {
+            (0, import_operators24.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs24.throwError)(
+                return (0, import_rxjs31.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs24.throwError)(() => error48);
+              return (0, import_rxjs31.throwError)(() => error48);
             }),
-            (0, import_operators23.switchMap)(
+            (0, import_operators24.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId, [
                 "id",
                 "url",
@@ -285606,7 +286670,7 @@ var init_test = __esm({
                 "params"
               ])
             ),
-            (0, import_operators23.switchMap)(processParameters)
+            (0, import_operators24.switchMap)(processParameters)
           )
         );
       }
@@ -285620,16 +286684,16 @@ var list_exports3 = {};
 __export(list_exports3, {
   default: () => list_default3
 });
-var import_rxjs25, import_operators24, list_default3;
+var import_rxjs32, import_operators25, list_default3;
 var init_list3 = __esm({
   "src/commands/plugin/list.ts"() {
-    import_rxjs25 = __toESM(require_cjs());
-    import_operators24 = __toESM(require_operators());
+    import_rxjs32 = __toESM(require_cjs());
+    import_operators25 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default3 = () => (0, import_rxjs25.lastValueFrom)(
+    list_default3 = () => (0, import_rxjs32.lastValueFrom)(
       GraphqlClienAPI.listAvailablePlugins().pipe(
-        (0, import_operators24.tap)((plugins) => {
+        (0, import_operators25.tap)((plugins) => {
           Logger.log("-------------------");
           Logger.log("[Action][listAvailablePlugins]");
           Logger.table(
@@ -285652,18 +286716,18 @@ var installed_exports = {};
 __export(installed_exports, {
   default: () => installed_default
 });
-var import_rxjs26, import_operators25, installed_default;
+var import_rxjs33, import_operators26, installed_default;
 var init_installed = __esm({
   "src/commands/plugin/installed.ts"() {
-    import_rxjs26 = __toESM(require_cjs());
-    import_operators25 = __toESM(require_operators());
+    import_rxjs33 = __toESM(require_cjs());
+    import_operators26 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    installed_default = (cmd) => (0, import_rxjs26.lastValueFrom)(
+    installed_default = (cmd) => (0, import_rxjs33.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators25.switchMap)((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
-        (0, import_operators25.tap)((installed) => {
+        (0, import_operators26.switchMap)((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
+        (0, import_operators26.tap)((installed) => {
           Logger.log("-------------------");
           Logger.log("[Action][listInstalledPlugins]");
           if (!installed?.length) {
@@ -285691,32 +286755,32 @@ var install_exports = {};
 __export(install_exports, {
   default: () => install_default
 });
-var import_rxjs27, import_operators26, install_default;
+var import_rxjs34, import_operators27, install_default;
 var init_install = __esm({
   "src/commands/plugin/install.ts"() {
-    import_rxjs27 = __toESM(require_cjs());
-    import_operators26 = __toESM(require_operators());
+    import_rxjs34 = __toESM(require_cjs());
+    import_operators27 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    install_default = (cmd) => (0, import_rxjs27.lastValueFrom)(
+    install_default = (cmd) => (0, import_rxjs34.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators26.switchMap)(
+        (0, import_operators27.switchMap)(
           (projectId) => loadSpec(
             cmd.spec ?? "plugin.yaml"
           ).pipe(
             // No spec file is required at all if --name/--cluster fully
             // cover it (unlike every other resource here, a plugin install
             // is often just "install this by name", no YAML needed).
-            (0, import_operators26.catchError)(() => (0, import_rxjs27.of)(void 0)),
-            (0, import_operators26.map)((data) => ({
+            (0, import_operators27.catchError)(() => (0, import_rxjs34.of)(void 0)),
+            (0, import_operators27.map)((data) => ({
               projectId,
               ...data ? data.plugin ?? data : {}
             }))
           )
         ),
-        (0, import_operators26.switchMap)(
+        (0, import_operators27.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.installPlugin(
             projectId,
             cmd.name || data.name,
@@ -285724,7 +286788,7 @@ var init_install = __esm({
             cmd.cluster || data.clusterId
           )
         ),
-        (0, import_operators26.tap)((installed) => {
+        (0, import_operators27.tap)((installed) => {
           Logger.log("-------------------");
           Logger.log("[Action][installPlugin]");
           Logger.table([installed]);
@@ -285740,20 +286804,20 @@ var uninstall_exports = {};
 __export(uninstall_exports, {
   default: () => uninstall_default
 });
-var import_rxjs28, import_operators27, uninstall_default;
+var import_rxjs35, import_operators28, uninstall_default;
 var init_uninstall = __esm({
   "src/commands/plugin/uninstall.ts"() {
-    import_rxjs28 = __toESM(require_cjs());
-    import_operators27 = __toESM(require_operators());
+    import_rxjs35 = __toESM(require_cjs());
+    import_operators28 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    uninstall_default = (cmd) => (0, import_rxjs28.lastValueFrom)(
+    uninstall_default = (cmd) => (0, import_rxjs35.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators27.switchMap)(
+        (0, import_operators28.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallPlugin(projectId, cmd.name, cmd.cluster)
         ),
-        (0, import_operators27.tap)((pluginName) => {
+        (0, import_operators28.tap)((pluginName) => {
           Logger.log("-------------------");
           Logger.log(`[Action][uninstallPlugin] removed ${pluginName}`);
           Logger.log("-------------------");
@@ -285768,16 +286832,16 @@ var list_exports4 = {};
 __export(list_exports4, {
   default: () => list_default4
 });
-var import_rxjs29, import_operators28, list_default4;
+var import_rxjs36, import_operators29, list_default4;
 var init_list4 = __esm({
   "src/commands/project/list.ts"() {
-    import_rxjs29 = __toESM(require_cjs());
-    import_operators28 = __toESM(require_operators());
+    import_rxjs36 = __toESM(require_cjs());
+    import_operators29 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default4 = async () => (0, import_rxjs29.lastValueFrom)(
+    list_default4 = async () => (0, import_rxjs36.lastValueFrom)(
       GraphqlClienAPI.listProjects().pipe(
-        (0, import_operators28.tap)((project) => {
+        (0, import_operators29.tap)((project) => {
           const columns = ["id", "name"];
           Logger.log("-------------------");
           Logger.log("[Action][listProjects]");
@@ -285794,24 +286858,24 @@ var use_exports = {};
 __export(use_exports, {
   default: () => use_default
 });
-var import_fs5, import_rxjs30, import_operators29, import_util4, use_default;
+var import_fs5, import_rxjs37, import_operators30, import_util4, use_default;
 var init_use = __esm({
   "src/commands/project/use.ts"() {
     import_fs5 = require("fs");
-    import_rxjs30 = __toESM(require_cjs());
-    import_operators29 = __toESM(require_operators());
+    import_rxjs37 = __toESM(require_cjs());
+    import_operators30 = __toESM(require_operators());
     import_util4 = require("util");
     init_helpers();
     init_gql_client();
     init_types();
     use_default = async (cmd) => {
-      return (0, import_rxjs30.lastValueFrom)(
+      return (0, import_rxjs37.lastValueFrom)(
         parseProjectId(cmd).pipe(
-          (0, import_operators29.switchMap)(
-            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators29.map)(() => projectId))
+          (0, import_operators30.switchMap)(
+            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators30.map)(() => projectId))
           ),
-          (0, import_operators29.switchMap)(
-            (projectId) => (0, import_rxjs30.from)(
+          (0, import_operators30.switchMap)(
+            (projectId) => (0, import_rxjs37.from)(
               (0, import_util4.promisify)(import_fs5.writeFile)(projectDirectory, projectId, {
                 encoding: "utf-8"
               })
@@ -286258,8 +287322,8 @@ var init_parseUtil = __esm({
       }
       let errorMessage = "";
       const maps = errorMaps.filter((m2) => !!m2).slice().reverse();
-      for (const map24 of maps) {
-        errorMessage = map24(fullIssue, { data, defaultError: errorMessage }).message;
+      for (const map25 of maps) {
+        errorMessage = map25(fullIssue, { data, defaultError: errorMessage }).message;
       }
       return {
         ...issueData,
@@ -286516,7 +287580,7 @@ function createZodEnum(values, params) {
   });
 }
 var ParseInputLazyPath, handleResult, ZodType, cuidRegex, cuid2Regex, ulidRegex, uuidRegex, nanoidRegex, jwtRegex, durationRegex, emailRegex, _emojiRegex, emojiRegex, ipv4Regex, ipv4CidrRegex, ipv6Regex, ipv6CidrRegex, base64Regex, base64urlRegex, dateRegexSource, dateRegex, ZodString, ZodNumber, ZodBigInt, ZodBoolean, ZodDate, ZodSymbol, ZodUndefined, ZodNull, ZodAny, ZodUnknown, ZodNever, ZodVoid, ZodArray, ZodObject, ZodUnion, getDiscriminator, ZodDiscriminatedUnion, ZodIntersection, ZodTuple, ZodRecord, ZodMap, ZodSet, ZodFunction, ZodLazy, ZodLiteral, ZodEnum, ZodNativeEnum, ZodPromise, ZodEffects, ZodOptional, ZodNullable, ZodDefault, ZodCatch, ZodNaN, ZodBranded, ZodPipeline, ZodReadonly, late, ZodFirstPartyTypeKind, stringType, numberType, nanType, bigIntType, booleanType, dateType, symbolType, undefinedType, nullType, anyType, unknownType, neverType, voidType, arrayType, objectType, strictObjectType, unionType, discriminatedUnionType, intersectionType, tupleType, recordType, mapType, setType, functionType, lazyType, literalType, enumType, nativeEnumType, promiseType, effectsType, optionalType, nullableType, preprocessType, pipelineType;
-var init_types2 = __esm({
+var init_types3 = __esm({
   "../../node_modules/zod/v3/types.js"() {
     init_ZodError();
     init_errors();
@@ -289768,7 +290832,7 @@ var init_external = __esm({
     init_parseUtil();
     init_typeAliases();
     init_util();
-    init_types2();
+    init_types3();
     init_ZodError();
   }
 });
@@ -292781,19 +293845,19 @@ var init_schemas = __esm({
       });
       const disc = cached(() => {
         const opts = def.options;
-        const map24 = /* @__PURE__ */ new Map();
+        const map25 = /* @__PURE__ */ new Map();
         for (const o of opts) {
           const values = o._zod.propValues?.[def.discriminator];
           if (!values || values.size === 0)
             throw new Error(`Invalid discriminated union option at index "${def.options.indexOf(o)}"`);
           for (const v of values) {
-            if (map24.has(v)) {
+            if (map25.has(v)) {
               throw new Error(`Duplicate discriminator value "${String(v)}"`);
             }
-            map24.set(v, o);
+            map25.set(v, o);
           }
         }
-        return map24;
+        return map25;
       });
       inst._zod.parse = (payload, ctx) => {
         const input = payload.value;
@@ -302276,7 +303340,7 @@ __export(schemas_exports3, {
   looseObject: () => looseObject,
   looseRecord: () => looseRecord,
   mac: () => mac2,
-  map: () => map17,
+  map: () => map18,
   meta: () => meta2,
   nan: () => nan,
   nanoid: () => nanoid2,
@@ -302572,7 +303636,7 @@ function looseRecord(keyType, valueType, params) {
     ...util_exports.normalizeParams(params)
   });
 }
-function map17(keyType, valueType, params) {
+function map18(keyType, valueType, params) {
   return new ZodMap2({
     type: "map",
     keyType,
@@ -303414,9 +304478,9 @@ var init_schemas3 = __esm({
 });
 
 // ../../node_modules/zod/v4/classic/compat.js
-function setErrorMap(map24) {
+function setErrorMap(map25) {
   config({
-    customError: map24
+    customError: map25
   });
 }
 function getErrorMap2() {
@@ -304116,7 +305180,7 @@ __export(external_exports3, {
   lt: () => _lt,
   lte: () => _lte,
   mac: () => mac2,
-  map: () => map17,
+  map: () => map18,
   maxLength: () => _maxLength,
   maxSize: () => _maxSize,
   meta: () => meta2,
@@ -304238,7 +305302,7 @@ var init_v4 = __esm({
 
 // ../../node_modules/@modelcontextprotocol/sdk/dist/esm/types.js
 var LATEST_PROTOCOL_VERSION, SUPPORTED_PROTOCOL_VERSIONS, RELATED_TASK_META_KEY, JSONRPC_VERSION, AssertObjectSchema, ProgressTokenSchema, CursorSchema, TaskCreationParamsSchema, TaskMetadataSchema, RelatedTaskMetadataSchema, RequestMetaSchema, BaseRequestParamsSchema, TaskAugmentedRequestParamsSchema, isTaskAugmentedRequestParams, RequestSchema, NotificationsParamsSchema, NotificationSchema, ResultSchema, RequestIdSchema, JSONRPCRequestSchema, isJSONRPCRequest, JSONRPCNotificationSchema, isJSONRPCNotification, JSONRPCResultResponseSchema, isJSONRPCResultResponse, ErrorCode, JSONRPCErrorResponseSchema, isJSONRPCErrorResponse, JSONRPCMessageSchema, JSONRPCResponseSchema, EmptyResultSchema, CancelledNotificationParamsSchema, CancelledNotificationSchema, IconSchema, IconsSchema, BaseMetadataSchema, ImplementationSchema, FormElicitationCapabilitySchema, ElicitationCapabilitySchema, ClientTasksCapabilitySchema, ServerTasksCapabilitySchema, ClientCapabilitiesSchema, InitializeRequestParamsSchema, InitializeRequestSchema, ServerCapabilitiesSchema, InitializeResultSchema, InitializedNotificationSchema, isInitializedNotification, PingRequestSchema, ProgressSchema, ProgressNotificationParamsSchema, ProgressNotificationSchema, PaginatedRequestParamsSchema, PaginatedRequestSchema, PaginatedResultSchema, TaskStatusSchema, TaskSchema, CreateTaskResultSchema, TaskStatusNotificationParamsSchema, TaskStatusNotificationSchema, GetTaskRequestSchema, GetTaskResultSchema, GetTaskPayloadRequestSchema, GetTaskPayloadResultSchema, ListTasksRequestSchema, ListTasksResultSchema, CancelTaskRequestSchema, CancelTaskResultSchema, ResourceContentsSchema, TextResourceContentsSchema, Base64Schema, BlobResourceContentsSchema, RoleSchema, AnnotationsSchema, ResourceSchema, ResourceTemplateSchema, ListResourcesRequestSchema, ListResourcesResultSchema, ListResourceTemplatesRequestSchema, ListResourceTemplatesResultSchema, ResourceRequestParamsSchema, ReadResourceRequestParamsSchema, ReadResourceRequestSchema, ReadResourceResultSchema, ResourceListChangedNotificationSchema, SubscribeRequestParamsSchema, SubscribeRequestSchema, UnsubscribeRequestParamsSchema, UnsubscribeRequestSchema, ResourceUpdatedNotificationParamsSchema, ResourceUpdatedNotificationSchema, PromptArgumentSchema, PromptSchema, ListPromptsRequestSchema, ListPromptsResultSchema, GetPromptRequestParamsSchema, GetPromptRequestSchema, TextContentSchema, ImageContentSchema, AudioContentSchema, ToolUseContentSchema, EmbeddedResourceSchema, ResourceLinkSchema, ContentBlockSchema, PromptMessageSchema, GetPromptResultSchema, PromptListChangedNotificationSchema, ToolAnnotationsSchema, ToolExecutionSchema, ToolSchema, ListToolsRequestSchema, ListToolsResultSchema, CallToolResultSchema, CompatibilityCallToolResultSchema, CallToolRequestParamsSchema, CallToolRequestSchema, ToolListChangedNotificationSchema, ListChangedOptionsBaseSchema, LoggingLevelSchema, SetLevelRequestParamsSchema, SetLevelRequestSchema, LoggingMessageNotificationParamsSchema, LoggingMessageNotificationSchema, ModelHintSchema, ModelPreferencesSchema, ToolChoiceSchema, ToolResultContentSchema, SamplingContentSchema, SamplingMessageContentBlockSchema, SamplingMessageSchema, CreateMessageRequestParamsSchema, CreateMessageRequestSchema, CreateMessageResultSchema, CreateMessageResultWithToolsSchema, BooleanSchemaSchema, StringSchemaSchema, NumberSchemaSchema, UntitledSingleSelectEnumSchemaSchema, TitledSingleSelectEnumSchemaSchema, LegacyTitledEnumSchemaSchema, SingleSelectEnumSchemaSchema, UntitledMultiSelectEnumSchemaSchema, TitledMultiSelectEnumSchemaSchema, MultiSelectEnumSchemaSchema, EnumSchemaSchema, PrimitiveSchemaDefinitionSchema, ElicitRequestFormParamsSchema, ElicitRequestURLParamsSchema, ElicitRequestParamsSchema, ElicitRequestSchema, ElicitationCompleteNotificationParamsSchema, ElicitationCompleteNotificationSchema, ElicitResultSchema, ResourceTemplateReferenceSchema, PromptReferenceSchema, CompleteRequestParamsSchema, CompleteRequestSchema, CompleteResultSchema, RootSchema, ListRootsRequestSchema, ListRootsResultSchema, RootsListChangedNotificationSchema, ClientRequestSchema, ClientNotificationSchema, ClientResultSchema, ServerRequestSchema, ServerNotificationSchema, ServerResultSchema, McpError, UrlElicitationRequiredError;
-var init_types3 = __esm({
+var init_types4 = __esm({
   "../../node_modules/@modelcontextprotocol/sdk/dist/esm/types.js"() {
     init_v4();
     LATEST_PROTOCOL_VERSION = "2025-11-25";
@@ -306160,7 +307224,7 @@ var DEFAULT_REQUEST_TIMEOUT_MSEC, Protocol;
 var init_protocol = __esm({
   "../../node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js"() {
     init_zod_compat();
-    init_types3();
+    init_types4();
     init_interfaces();
     init_zod_json_schema_compat();
     DEFAULT_REQUEST_TIMEOUT_MSEC = 6e4;
@@ -313939,7 +315003,7 @@ var init_ajv_provider = __esm({
 var ExperimentalClientTasks;
 var init_client = __esm({
   "../../node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/client.js"() {
-    init_types3();
+    init_types4();
     ExperimentalClientTasks = class {
       constructor(_client) {
         this._client = _client;
@@ -314180,7 +315244,7 @@ var Client;
 var init_client2 = __esm({
   "../../node_modules/@modelcontextprotocol/sdk/dist/esm/client/index.js"() {
     init_protocol();
-    init_types3();
+    init_types4();
     init_ajv_provider();
     init_zod_compat();
     init_client();
@@ -315506,7 +316570,7 @@ var UnauthorizedError, AUTHORIZATION_CODE_RESPONSE_TYPE, AUTHORIZATION_CODE_CHAL
 var init_auth2 = __esm({
   "../../node_modules/@modelcontextprotocol/sdk/dist/esm/client/auth.js"() {
     init_index_node();
-    init_types3();
+    init_types4();
     init_auth();
     init_auth();
     init_auth_utils();
@@ -315664,7 +316728,7 @@ var DEFAULT_STREAMABLE_HTTP_RECONNECTION_OPTIONS, StreamableHTTPError, Streamabl
 var init_streamableHttp = __esm({
   "../../node_modules/@modelcontextprotocol/sdk/dist/esm/client/streamableHttp.js"() {
     init_transport();
-    init_types3();
+    init_types4();
     init_auth2();
     init_stream();
     DEFAULT_STREAMABLE_HTTP_RECONNECTION_OPTIONS = {
@@ -316146,7 +317210,7 @@ var Server;
 var init_server2 = __esm({
   "../../node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js"() {
     init_protocol();
-    init_types3();
+    init_types4();
     init_ajv_provider();
     init_zod_compat();
     init_server();
@@ -316542,7 +317606,7 @@ function serializeMessage(message) {
 var ReadBuffer;
 var init_stdio = __esm({
   "../../node_modules/@modelcontextprotocol/sdk/dist/esm/shared/stdio.js"() {
-    init_types3();
+    init_types4();
     ReadBuffer = class {
       append(chunk) {
         this._buffer = this._buffer ? Buffer.concat([this._buffer, chunk]) : chunk;
@@ -316648,33 +317712,33 @@ __export(start_exports, {
   default: () => startProxy
 });
 async function startProxy(cmd) {
-  return (0, import_rxjs31.lastValueFrom)(
+  return (0, import_rxjs38.lastValueFrom)(
     GraphqlClienAPI.getConfig().pipe(
-      (0, import_operators30.take)(1),
-      (0, import_operators30.map)((config2) => ({
+      (0, import_operators31.take)(1),
+      (0, import_operators31.map)((config2) => ({
         ...config2,
         mcpUrl: new URL(
           cmd.url || [config2.url.replace(/\/graphql$/, ""), "/mcp"].join("") || "http://127.0.0.1:8000/mcp"
         )
       })),
-      (0, import_operators30.tap)((config2) => {
+      (0, import_operators31.tap)((config2) => {
         config2.mcpUrl.searchParams.set("transportType", "streamable-http");
         process.stderr.write(`Starting MCP proxy \u2192 ${config2.mcpUrl}
 `);
         process.stderr.write("Retrieving config for auth...\n");
       }),
-      (0, import_operators30.switchMap)(
-        (config2) => config2?.token ? (0, import_rxjs31.of)(config2) : (0, import_rxjs31.throwError)(
+      (0, import_operators31.switchMap)(
+        (config2) => config2?.token ? (0, import_rxjs38.of)(config2) : (0, import_rxjs38.throwError)(
           () => new Error("User is not authenticated (no token in config)")
         )
       ),
-      (0, import_operators30.tap)((config2) => {
+      (0, import_operators31.tap)((config2) => {
         process.stderr.write(
           `Config retrieved. Token start: ${config2.token.substring(0, 5)}
 `
         );
       }),
-      (0, import_operators30.map)((config2) => ({
+      (0, import_operators31.map)((config2) => ({
         ...config2,
         transport: new StreamableHTTPClientTransport(config2.mcpUrl, {
           requestInit: {
@@ -316682,34 +317746,34 @@ async function startProxy(cmd) {
               Authorization: config2.token
             }
           },
-          fetch: (input, init) => (0, import_rxjs31.lastValueFrom)(performFetch(input, init))
+          fetch: (input, init) => (0, import_rxjs38.lastValueFrom)(performFetch(input, init))
         }),
         client: new Client({
           name: "gapi-proxy-client",
           version: "1.0.0"
         })
       })),
-      (0, import_operators30.tap)(() => {
+      (0, import_operators31.tap)(() => {
         process.stderr.write("Connecting to upstream...\n");
       }),
-      (0, import_operators30.switchMap)(
-        (config2) => (0, import_rxjs31.from)(config2.client.connect(config2.transport)).pipe((0, import_operators30.map)(() => config2))
+      (0, import_operators31.switchMap)(
+        (config2) => (0, import_rxjs38.from)(config2.client.connect(config2.transport)).pipe((0, import_operators31.map)(() => config2))
       ),
-      (0, import_operators30.tap)(() => {
+      (0, import_operators31.tap)(() => {
         process.stderr.write("Connected to upstream MCP server\n");
       }),
       // Get capabilities AFTER connection is established
-      (0, import_operators30.map)((config2) => ({
+      (0, import_operators31.map)((config2) => ({
         ...config2,
         capabilities: config2.client.getServerCapabilities()
       })),
-      (0, import_operators30.tap)((config2) => {
+      (0, import_operators31.tap)((config2) => {
         process.stderr.write(
           `Upstream capabilities: ${JSON.stringify(config2.capabilities)}
 `
         );
       }),
-      (0, import_operators30.map)((config2) => {
+      (0, import_operators31.map)((config2) => {
         const server2 = new Server(
           {
             name: "gapi-proxy",
@@ -316719,67 +317783,67 @@ async function startProxy(cmd) {
             capabilities: config2.capabilities || {}
           }
         );
-        server2.fallbackRequestHandler = async (request) => (0, import_rxjs31.lastValueFrom)(
-          (0, import_rxjs31.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
-            (0, import_operators30.catchError)((e2) => {
+        server2.fallbackRequestHandler = async (request) => (0, import_rxjs38.lastValueFrom)(
+          (0, import_rxjs38.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
+            (0, import_operators31.catchError)((e2) => {
               process.stderr.write(`Upstream error: ${e2.message}
 `);
-              return (0, import_rxjs31.throwError)(() => e2);
+              return (0, import_rxjs38.throwError)(() => e2);
             })
           )
         );
         server2.fallbackNotificationHandler = async (notification) => {
-          await (0, import_rxjs31.lastValueFrom)(
-            (0, import_rxjs31.of)(notification).pipe(
-              (0, import_operators30.filter)((n) => n.method !== "notifications/initialized"),
-              (0, import_operators30.switchMap)(
-                (n) => (0, import_rxjs31.defer)(() => config2.client.notification(n)).pipe(
-                  (0, import_operators30.catchError)((e2) => {
+          await (0, import_rxjs38.lastValueFrom)(
+            (0, import_rxjs38.of)(notification).pipe(
+              (0, import_operators31.filter)((n) => n.method !== "notifications/initialized"),
+              (0, import_operators31.switchMap)(
+                (n) => (0, import_rxjs38.defer)(() => config2.client.notification(n)).pipe(
+                  (0, import_operators31.catchError)((e2) => {
                     process.stderr.write(`Notification error: ${e2}
 `);
-                    return import_rxjs31.EMPTY;
+                    return import_rxjs38.EMPTY;
                   })
                 )
               ),
-              (0, import_operators30.defaultIfEmpty)(null)
+              (0, import_operators31.defaultIfEmpty)(null)
             )
           );
         };
         return server2;
       }),
-      (0, import_operators30.switchMap)((server2) => (0, import_rxjs31.from)(server2.connect(new StdioServerTransport()))),
-      (0, import_operators30.tap)(() => {
+      (0, import_operators31.switchMap)((server2) => (0, import_rxjs38.from)(server2.connect(new StdioServerTransport()))),
+      (0, import_operators31.tap)(() => {
         process.stderr.write("MCP stdio server ready\n");
       }),
       // Keep the process running indefinitely to handle stdio communication
-      (0, import_operators30.switchMap)(() => new Promise(() => {
+      (0, import_operators31.switchMap)(() => new Promise(() => {
       }))
     )
   );
 }
-var import_rxjs31, import_operators30, import_stream2, performFetch;
+var import_rxjs38, import_operators31, import_stream2, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
     init_streamableHttp();
     init_server2();
     init_stdio2();
-    import_rxjs31 = __toESM(require_cjs());
-    import_operators30 = __toESM(require_operators());
+    import_rxjs38 = __toESM(require_cjs());
+    import_operators31 = __toESM(require_operators());
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
     performFetch = (input, init) => {
-      return (0, import_rxjs31.from)(fetch(input, init)).pipe(
-        (0, import_operators30.switchMap)((res) => {
+      return (0, import_rxjs38.from)(fetch(input, init)).pipe(
+        (0, import_operators31.switchMap)((res) => {
           if (res.status === 401 || res.status === 403) {
             process.stderr.write(
               `[DEBUG] Request failed with ${res.status}. Refreshing token...
 `
             );
             return GraphqlClienAPI.getConfig(true).pipe(
-              (0, import_operators30.take)(1),
-              (0, import_operators30.switchMap)((config2) => {
+              (0, import_operators31.take)(1),
+              (0, import_operators31.switchMap)((config2) => {
                 process.stderr.write(
                   "[DEBUG] Token refreshed. Retrying request...\n"
                 );
@@ -316792,9 +317856,9 @@ var init_start = __esm({
               })
             );
           }
-          return (0, import_rxjs31.of)(res);
+          return (0, import_rxjs38.of)(res);
         }),
-        (0, import_operators30.map)((res) => {
+        (0, import_operators31.map)((res) => {
           if (typeof res?.body?.pipeThrough !== "function") {
             try {
               const webStream = import_stream2.Readable.toWeb(res.body);
@@ -316808,10 +317872,10 @@ var init_start = __esm({
           }
           return res;
         }),
-        (0, import_operators30.catchError)((e2) => {
+        (0, import_operators31.catchError)((e2) => {
           process.stderr.write(`[ERROR] Fetch error: ${e2.message}
 `);
-          return (0, import_rxjs31.throwError)(() => e2);
+          return (0, import_rxjs38.throwError)(() => e2);
         })
       );
     };
@@ -316823,28 +317887,28 @@ var create_exports3 = {};
 __export(create_exports3, {
   default: () => create_default3
 });
-var import_rxjs32, import_operators31, create_default3;
+var import_rxjs39, import_operators32, create_default3;
 var init_create3 = __esm({
   "src/commands/rabbitmq/create.ts"() {
-    import_rxjs32 = __toESM(require_cjs());
-    import_operators31 = __toESM(require_operators());
+    import_rxjs39 = __toESM(require_cjs());
+    import_operators32 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_default3 = (cmd) => (0, import_rxjs32.lastValueFrom)(
+    create_default3 = (cmd) => (0, import_rxjs39.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators31.switchMap)(
+        (0, import_operators32.switchMap)(
           (projectId) => loadSpec(
             cmd.spec ?? "rabbitmq.yaml"
           ).pipe(
-            (0, import_operators31.map)((data) => ({
+            (0, import_operators32.map)((data) => ({
               projectId,
               ...data ? data.rabbitmq ?? data : {}
             }))
           )
         ),
-        (0, import_operators31.switchMap)(
+        (0, import_operators32.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.installRabbitMq(projectId, {
             name: cmd.name || data.name,
             description: cmd.description || data.description,
@@ -316855,7 +317919,7 @@ var init_create3 = __esm({
             clusterId: cmd.cluster || data.clusterId
           })
         ),
-        (0, import_operators31.tap)((broker) => {
+        (0, import_operators32.tap)((broker) => {
           Logger.log("-------------------");
           Logger.log("[Action][installRabbitMq]");
           Logger.table([broker]);
@@ -316871,20 +317935,20 @@ var list_exports5 = {};
 __export(list_exports5, {
   default: () => list_default5
 });
-var import_rxjs33, import_operators32, list_default5;
+var import_rxjs40, import_operators33, list_default5;
 var init_list5 = __esm({
   "src/commands/rabbitmq/list.ts"() {
-    import_rxjs33 = __toESM(require_cjs());
-    import_operators32 = __toESM(require_operators());
+    import_rxjs40 = __toESM(require_cjs());
+    import_operators33 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default5 = (cmd) => (0, import_rxjs33.lastValueFrom)(
+    list_default5 = (cmd) => (0, import_rxjs40.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators32.switchMap)(
+        (0, import_operators33.switchMap)(
           (projectId) => GraphqlClienAPI.listRabbitMqInstances(projectId)
         ),
-        (0, import_operators32.tap)((brokers) => {
+        (0, import_operators33.tap)((brokers) => {
           Logger.log("-------------------");
           Logger.log("[Action][listRabbitMqInstances]");
           if (!brokers?.length) {
@@ -316914,20 +317978,20 @@ var delete_exports2 = {};
 __export(delete_exports2, {
   default: () => delete_default2
 });
-var import_rxjs34, import_operators33, delete_default2;
+var import_rxjs41, import_operators34, delete_default2;
 var init_delete2 = __esm({
   "src/commands/rabbitmq/delete.ts"() {
-    import_rxjs34 = __toESM(require_cjs());
-    import_operators33 = __toESM(require_operators());
+    import_rxjs41 = __toESM(require_cjs());
+    import_operators34 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    delete_default2 = (cmd) => (0, import_rxjs34.lastValueFrom)(
+    delete_default2 = (cmd) => (0, import_rxjs41.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators33.switchMap)(
+        (0, import_operators34.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallRabbitMq(cmd.id, projectId)
         ),
-        (0, import_operators33.tap)((broker) => {
+        (0, import_operators34.tap)((broker) => {
           Logger.log("-------------------");
           Logger.log("[Action][uninstallRabbitMq]");
           Logger.table([broker]);
@@ -317567,11 +318631,11 @@ __export(start_exports2, {
   default: () => start_default,
   resolveRunner: () => resolveRunner
 });
-var import_os3, import_rxjs35, RUNNER_VERSION, resolveRunner, start_default;
+var import_os3, import_rxjs42, RUNNER_VERSION, resolveRunner, start_default;
 var init_start2 = __esm({
   "src/commands/runner/start.ts"() {
     import_os3 = require("os");
-    import_rxjs35 = __toESM(require_cjs());
+    import_rxjs42 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -317592,7 +318656,7 @@ var init_start2 = __esm({
       }
       const name2 = cmd.name || (0, import_os3.hostname)();
       Logger.info(`Registering this machine as local runner "${name2}"...`);
-      const { runner, token } = await (0, import_rxjs35.lastValueFrom)(
+      const { runner, token } = await (0, import_rxjs42.lastValueFrom)(
         GraphqlClienAPI.createLocalRunner(name2)
       ).catch((e2) => {
         throw new Error(
@@ -317739,16 +318803,16 @@ var list_exports6 = {};
 __export(list_exports6, {
   default: () => list_default6
 });
-var import_rxjs36, import_operators34, list_default6;
+var import_rxjs43, import_operators35, list_default6;
 var init_list6 = __esm({
   "src/commands/runner/list.ts"() {
-    import_rxjs36 = __toESM(require_cjs());
-    import_operators34 = __toESM(require_operators());
+    import_rxjs43 = __toESM(require_cjs());
+    import_operators35 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default6 = () => (0, import_rxjs36.lastValueFrom)(
+    list_default6 = () => (0, import_rxjs43.lastValueFrom)(
       GraphqlClienAPI.listLocalRunners().pipe(
-        (0, import_operators34.tap)((runners) => {
+        (0, import_operators35.tap)((runners) => {
           Logger.log("-------------------");
           Logger.log("[Action][listLocalRunners]");
           if (!runners?.length) {
@@ -317779,10 +318843,10 @@ __export(models_exports, {
   default: () => models_default,
   parseSelection: () => parseSelection
 });
-var import_rxjs37, isShown, parseSelection, models_default;
+var import_rxjs44, isShown, parseSelection, models_default;
 var init_models = __esm({
   "src/commands/runner/models.ts"() {
-    import_rxjs37 = __toESM(require_cjs());
+    import_rxjs44 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -317812,11 +318876,11 @@ var init_models = __esm({
       }
       let runner;
       if (selection) {
-        runner = await (0, import_rxjs37.lastValueFrom)(
+        runner = await (0, import_rxjs44.lastValueFrom)(
           GraphqlClienAPI.setLocalRunnerModels(runnerId, selection.models)
         );
       } else {
-        const runners = await (0, import_rxjs37.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
+        const runners = await (0, import_rxjs44.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
         runner = runners.find((r2) => r2.id === runnerId);
       }
       if (!runner) {
@@ -317851,10 +318915,10 @@ var delete_exports3 = {};
 __export(delete_exports3, {
   default: () => delete_default3
 });
-var import_rxjs38, delete_default3;
+var import_rxjs45, delete_default3;
 var init_delete3 = __esm({
   "src/commands/runner/delete.ts"() {
-    import_rxjs38 = __toESM(require_cjs());
+    import_rxjs45 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -317864,7 +318928,7 @@ var init_delete3 = __esm({
       if (!runnerId) {
         throw new Error("Specify the runner with --id (see `gcli runner:list`).");
       }
-      await (0, import_rxjs38.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
+      await (0, import_rxjs45.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
       if (saved?.id === runnerId) {
         await forgetRunner();
       }
@@ -317880,10 +318944,10 @@ __export(start_exports3, {
 });
 async function start(args) {
   Logger.log("---------------------------------");
-  return (0, import_rxjs39.lastValueFrom)(
+  return (0, import_rxjs46.lastValueFrom)(
     loadSpec().pipe(
-      (0, import_operators35.switchMap)(
-        (config2) => (0, import_rxjs39.of)({
+      (0, import_operators36.switchMap)(
+        (config2) => (0, import_rxjs46.of)({
           watcher: (0, import_node_fs2.watch)(process.cwd(), {
             recursive: true
           }),
@@ -317904,7 +318968,7 @@ async function start(args) {
           outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
           startCommand: "node"
         }).pipe(
-          (0, import_operators35.switchMap)(
+          (0, import_operators36.switchMap)(
             ({
               child,
               watcher,
@@ -317912,14 +318976,14 @@ async function start(args) {
               outfile,
               startCommand,
               ignorelist
-            }) => (0, import_rxjs39.from)(build_default(args)).pipe(
-              (0, import_operators35.tap)(() => {
+            }) => (0, import_rxjs46.from)(build_default(args)).pipe(
+              (0, import_operators36.tap)(() => {
                 Logger.warn(
                   `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
                 );
                 Logger.log("---------------------------------\n");
               }),
-              (0, import_operators35.tap)(() => {
+              (0, import_operators36.tap)(() => {
                 child = (0, import_node_child_process.spawn)(
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
@@ -317929,14 +318993,14 @@ async function start(args) {
                   }
                 );
               }),
-              (0, import_operators35.tap)(
-                () => (0, import_rxjs39.merge)(
-                  (0, import_rxjs39.fromEvent)(process, "SIGINT"),
-                  (0, import_rxjs39.fromEvent)(process, "SIGTERM"),
-                  (0, import_rxjs39.fromEvent)(process, "exit")
+              (0, import_operators36.tap)(
+                () => (0, import_rxjs46.merge)(
+                  (0, import_rxjs46.fromEvent)(process, "SIGINT"),
+                  (0, import_rxjs46.fromEvent)(process, "SIGTERM"),
+                  (0, import_rxjs46.fromEvent)(process, "exit")
                 ).pipe(
-                  (0, import_operators35.debounceTime)(100),
-                  (0, import_operators35.tap)(() => {
+                  (0, import_operators36.debounceTime)(100),
+                  (0, import_operators36.tap)(() => {
                     Logger.warn("\u26A0\uFE0F  Main process shutting down");
                     watcher.close();
                     child.kill("SIGTERM");
@@ -317944,13 +319008,13 @@ async function start(args) {
                   })
                 ).subscribe()
               ),
-              (0, import_operators35.switchMap)(
-                () => (0, import_rxjs39.fromEvent)(watcher, "change").pipe(
-                  (0, import_operators35.map)(([event, filename]) => ({
+              (0, import_operators36.switchMap)(
+                () => (0, import_rxjs46.fromEvent)(watcher, "change").pipe(
+                  (0, import_operators36.map)(([event, filename]) => ({
                     event,
                     filename
                   })),
-                  (0, import_operators35.filter)(({ filename }) => {
+                  (0, import_operators36.filter)(({ filename }) => {
                     if (!filename) {
                       return false;
                     }
@@ -317962,18 +319026,18 @@ async function start(args) {
                     const rootDir = filename.split(/[/\\]/)[0];
                     return whitelist.has(rootDir);
                   }),
-                  (0, import_operators35.debounceTime)(100)
+                  (0, import_operators36.debounceTime)(100)
                 )
               ),
-              (0, import_operators35.tap)((data) => {
+              (0, import_operators36.tap)((data) => {
                 Logger.log("\n---------------------------------");
                 Logger.log(
                   `\u27F3  Restarting due to change in: ${data.filename}`
                 );
                 child?.kill("SIGTERM");
               }),
-              (0, import_operators35.switchMap)(() => build_default(args)),
-              (0, import_operators35.tap)(() => {
+              (0, import_operators36.switchMap)(() => build_default(args)),
+              (0, import_operators36.tap)(() => {
                 Logger.warn(
                   `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
                 );
@@ -317994,13 +319058,13 @@ async function start(args) {
     )
   );
 }
-var import_node_child_process, import_node_fs2, import_rxjs39, import_operators35;
+var import_node_child_process, import_node_fs2, import_rxjs46, import_operators36;
 var init_start3 = __esm({
   "src/commands/start/start.ts"() {
     import_node_child_process = require("node:child_process");
     import_node_fs2 = require("node:fs");
-    import_rxjs39 = __toESM(require_cjs());
-    import_operators35 = __toESM(require_operators());
+    import_rxjs46 = __toESM(require_cjs());
+    import_operators36 = __toESM(require_operators());
     init_log();
     init_build();
     init_load_spec();
@@ -318012,39 +319076,49 @@ var create_cron_exports = {};
 __export(create_cron_exports, {
   default: () => create_cron_default
 });
-var import_rxjs40, import_operators36, create_cron_default;
+var import_rxjs47, import_operators37, create_cron_default;
 var init_create_cron = __esm({
   "src/commands/triggers/cron/create-cron.ts"() {
-    import_rxjs40 = __toESM(require_cjs());
-    import_operators36 = __toESM(require_operators());
+    import_rxjs47 = __toESM(require_cjs());
+    import_operators37 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_cron_default = (cmd) => (0, import_rxjs40.lastValueFrom)(
+    create_cron_default = (cmd) => (0, import_rxjs47.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators36.switchMap)(
+        (0, import_operators37.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators36.switchMap)(
+            (0, import_operators37.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators36.map)((lambda) => ({
-                  lambdaName: lambda.name,
-                  lambdaId: lambda.id,
-                  ...data?.triggers?.time ?? data
-                }))
+                (0, import_operators37.map)((lambda) => {
+                  const fromSpec = data?.triggers?.time ?? data;
+                  return {
+                    lambdaName: lambda.name,
+                    lambdaId: lambda.id,
+                    cron: cmd.cron ?? fromSpec?.cron,
+                    triggerName: cmd.triggerName ?? fromSpec?.triggerName
+                  };
+                })
               )
             )
           )
         ),
-        (0, import_operators36.switchMap)(
-          ({ lambdaId, cron, triggerName, lambdaName }) => GraphqlClienAPI.createTimeTrigger({ lambdaId, cron, triggerName }).pipe(
-            (0, import_operators36.map)((data) => ({ ...data, lambdaName }))
-          )
+        (0, import_operators37.switchMap)(
+          ({ lambdaId, cron, triggerName, lambdaName }) => !cron || !triggerName ? (0, import_rxjs47.throwError)(
+            () => new Error(
+              "cron:create needs --cron and --triggerName (or triggers.time.cron / triggerName in lambforge.yaml)"
+            )
+          ) : GraphqlClienAPI.createTimeTrigger({
+            lambdaId,
+            cron,
+            triggerName
+          }).pipe((0, import_operators37.map)((data) => ({ ...data, lambdaName })))
         ),
-        (0, import_operators36.tap)((data) => {
+        (0, import_operators37.tap)((data) => {
           const columns = [
             "id",
             "lambdaName",
@@ -318067,25 +319141,25 @@ var delete_cron_exports = {};
 __export(delete_cron_exports, {
   default: () => delete_cron_default
 });
-var import_rxjs41, import_operators37, delete_cron_default;
+var import_rxjs48, import_operators38, delete_cron_default;
 var init_delete_cron = __esm({
   "src/commands/triggers/cron/delete-cron.ts"() {
-    import_rxjs41 = __toESM(require_cjs());
-    import_operators37 = __toESM(require_operators());
+    import_rxjs48 = __toESM(require_cjs());
+    import_operators38 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_cron_default = (cmd) => (0, import_rxjs41.lastValueFrom)(
+    delete_cron_default = (cmd) => (0, import_rxjs48.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators37.switchMap)(
+        (0, import_operators38.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators37.switchMap)(
+            (0, import_operators38.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators37.map)((lambda) => ({
+                (0, import_operators38.map)((lambda) => ({
                   lambdaName: lambda.name,
                   lambdaId: lambda.id
                 }))
@@ -318093,12 +319167,12 @@ var init_delete_cron = __esm({
             )
           )
         ),
-        (0, import_operators37.switchMap)(
+        (0, import_operators38.switchMap)(
           ({ lambdaId, lambdaName }) => GraphqlClienAPI.deleteLambdaTimeTrigger(lambdaId).pipe(
-            (0, import_operators37.map)((data) => ({ ...data, lambdaName }))
+            (0, import_operators38.map)((data) => ({ ...data, lambdaName }))
           )
         ),
-        (0, import_operators37.tap)((data) => {
+        (0, import_operators38.tap)((data) => {
           const columns = [
             "id",
             "lambdaName",
@@ -318120,29 +319194,29 @@ var list_crons_exports = {};
 __export(list_crons_exports, {
   default: () => list_crons_default
 });
-var import_rxjs42, import_operators38, list_crons_default;
+var import_rxjs49, import_operators39, list_crons_default;
 var init_list_crons = __esm({
   "src/commands/triggers/cron/list-crons.ts"() {
-    import_rxjs42 = __toESM(require_cjs());
-    import_operators38 = __toESM(require_operators());
+    import_rxjs49 = __toESM(require_cjs());
+    import_operators39 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_crons_default = (cmd) => (0, import_rxjs42.lastValueFrom)(
+    list_crons_default = (cmd) => (0, import_rxjs49.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators38.switchMap)(
-          (projectId) => (0, import_rxjs42.combineLatest)([
+        (0, import_operators39.switchMap)(
+          (projectId) => (0, import_rxjs49.combineLatest)([
             GraphqlClienAPI.listProjectTimeTriggers(projectId),
             GraphqlClienAPI.listLambdas(projectId)
           ])
         ),
-        (0, import_operators38.map)(
+        (0, import_operators39.map)(
           ([triggers, lambdas]) => triggers.map((v) => ({
             lambdaName: lambdas.find((l) => l.id === v.lambdaId)?.name,
             ...v
           }))
         ),
-        (0, import_operators38.tap)((data) => {
+        (0, import_operators39.tap)((data) => {
           const columns = [
             "id",
             "triggerName",
@@ -318196,6 +319270,15 @@ function registerClusterCommands(program2) {
   program2.command("cluster:create").description(
     "Provision a private Talos cluster for a project (runs in the background - takes several minutes; use --wait to block)"
   ).option("-p, --project <project>").option("-spec, --spec <spec>").option("-n, --name <name>").option("--imageId <imageId>", "hcloud Talos snapshot id").option("--serverType <serverType>").option("-l, --location <location>").option("--workers <workers>", "Worker count (ignored when --singleNode)").option("--singleNode", "Control plane carries the workload too").option("--wait", "Block until the cluster is ready (or errors)").action(lazy(() => Promise.resolve().then(() => (init_create(), create_exports)).then((m2) => m2.default)));
+  program2.command("cluster:apply").description(
+    "Make a private cluster match the `cluster:` section of lambforge.yaml: creates it if missing, then applies topology, workers, control planes, load balancer and autoscaling"
+  ).option("-p, --project <project>").option(
+    "-spec, --spec <spec>",
+    "Spec file (default: lambforge.yaml / cluster.yaml)"
+  ).option("--dry-run", "Print the plan, change nothing").option(
+    "--yes",
+    "Also apply steps that remove capacity or the load balancer IP"
+  ).action(lazy(() => Promise.resolve().then(() => (init_apply(), apply_exports)).then((m2) => m2.default)));
   program2.command("cluster:list").description(
     "List every private cluster this project has (it may have several - dev/stage/prod, ...)"
   ).option("-p, --project <project>").action(lazy(() => Promise.resolve().then(() => (init_list(), list_exports)).then((m2) => m2.default)));
@@ -318205,6 +319288,56 @@ function registerClusterCommands(program2) {
   program2.command("cluster:kubeconfig").description(
     "Print (or save) a cluster's raw kubeconfig YAML - only available once it's 'ready'"
   ).option("-p, --project <project>").option("-c, --cluster <cluster>", "Cluster id (see cluster:list)").option("-o, --output <output>", "Write to this file instead of stdout").action(lazy(() => Promise.resolve().then(() => (init_kubeconfig(), kubeconfig_exports)).then((m2) => m2.default)));
+  const target = (cmd) => cmd.option("-p, --project <project>").option("-c, --cluster <cluster>", "Cluster id (see cluster:list)").option(
+    "--clusterName <clusterName>",
+    "Cluster name instead of --cluster"
+  );
+  target(
+    program2.command("cluster:status").description(
+      "Every cluster's status, agent, nodes, CPU/memory load, autoscaling and open issues (or one with --cluster)"
+    )
+  ).action(lazy(() => Promise.resolve().then(() => (init_status(), status_exports)).then((m2) => m2.default)));
+  target(
+    program2.command("cluster:health").description(
+      "The latest health report of a cluster's agent, with every node"
+    )
+  ).action(lazy(() => Promise.resolve().then(() => (init_health(), health_exports)).then((m2) => m2.default)));
+  target(
+    program2.command("cluster:scale-events").description("Manual and autoscaler scale history, newest first")
+  ).option("--limit <limit>", "How many events (default 20)").action(lazy(() => Promise.resolve().then(() => (init_scale_events(), scale_events_exports)).then((m2) => m2.default)));
+  program2.command("cluster:cost").description(
+    "Month-to-date cost and the monthly estimate of the project's private clusters"
+  ).option("-p, --project <project>").action(lazy(() => Promise.resolve().then(() => (init_cost(), cost_exports)).then((m2) => m2.default)));
+  target(
+    program2.command("cluster:scale").description(
+      "Set the number of worker nodes (1-10) of a multi-node cluster - billed per node-hour"
+    )
+  ).option("--workers <workers>", "Worker nodes, 1-10").option("--wait", "Block until the cluster settles").action(lazy(() => Promise.resolve().then(() => (init_scale(), scale_exports)).then((m2) => m2.default)));
+  target(
+    program2.command("cluster:scale:control-planes").description("Set the number of control-plane nodes (1, 3 or 5)")
+  ).option("--count <count>", "Control planes: 1, 3 or 5").option("--wait", "Block until the cluster settles").action(
+    lazy(() => Promise.resolve().then(() => (init_scale_control_planes(), scale_control_planes_exports)).then((m2) => m2.default))
+  );
+  target(
+    program2.command("cluster:autoscale").description(
+      "Change the worker autoscaling policy - only the flags you pass change"
+    )
+  ).option("--enable", "Turn autoscaling on (multi-node clusters only)").option("--disable", "Turn autoscaling off").option("--min <min>", "Minimum workers (1-10)").option("--max <max>", "Maximum workers (1-10)").option("--cpuUp <percent>", "Scale up at this CPU % (1-100)").option("--memUp <percent>", "Scale up at this memory % (1-100)").option("--cpuDown <percent>", "Scale down below this CPU % (1-100)").option("--memDown <percent>", "Scale down below this memory % (1-100)").option("--samples <n>", "Consecutive readings before acting (1-20)").option("--cooldown <minutes>", "Minutes between scale actions (1-1440)").action(lazy(() => Promise.resolve().then(() => (init_autoscale(), autoscale_exports)).then((m2) => m2.default)));
+  target(
+    program2.command("cluster:multi-node").description(
+      "Convert a single-node cluster to dedicated worker nodes (required for autoscaling)"
+    )
+  ).option("--workers <workers>", "Worker nodes, 1-10").option("--wait", "Block until the cluster settles").action(lazy(() => Promise.resolve().then(() => (init_multi_node(), multi_node_exports)).then((m2) => m2.default)));
+  target(
+    program2.command("cluster:single-node").description(
+      "Convert a multi-node cluster back to a single node (removes the worker nodes)"
+    )
+  ).option("--wait", "Block until the cluster settles").action(lazy(() => Promise.resolve().then(() => (init_single_node(), single_node_exports)).then((m2) => m2.default)));
+  target(
+    program2.command("cluster:load-balancer").description(
+      "Add or remove the cluster's load balancer (billed per hour while enabled)"
+    )
+  ).option("--enable", "Add the load balancer").option("--disable", "Remove the load balancer").option("--wait", "Block until the cluster settles").action(lazy(() => Promise.resolve().then(() => (init_load_balancer(), load_balancer_exports)).then((m2) => m2.default)));
 }
 
 // src/commands/environment/index.ts

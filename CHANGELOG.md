@@ -1,4 +1,4 @@
-## [1.8.240](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.240) (2026-10-11)
+## [1.8.241](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.241) (2026-10-19)
 
 
 ### Bug Fixes
@@ -107,6 +107,7 @@
 * **cli:** compressed documents exported in order to reduce bundle size using lzw codec and json-url library ([ad0b43a](https://github.com/Stradivario/gapi/commit/ad0b43a50948d107eee89fdb4bf67bd52464c94d))
 * **cluster:** add clusterId and clusterName support across commands and interfaces ([0171a47](https://github.com/Stradivario/gapi/commit/0171a472af838a56186030a5f5880e3301e0c80a))
 * **cluster:** add commands for provisioning, listing, and tearing down clusters ([c14723f](https://github.com/Stradivario/gapi/commit/c14723f18362a94347ddc2aff2121c4d495d03c4))
+* **cluster:** add scaling and status commands for clusters ([73da490](https://github.com/Stradivario/gapi/commit/73da4902dbf4acdf45839be4f635ccd215462ce7))
 * **context7:** added ownership for context7 readme [ci-skip] ([28ededf](https://github.com/Stradivario/gapi/commit/28ededff4a7618f977e1f31efa629d22cb7a41a0))
 * **dev:** added lambda logs commands ([905b9bf](https://github.com/Stradivario/gapi/commit/905b9bf68bf174e8cb11792e8bacb1eb4a5dc02c))
 * **dev:** decompress the result from logs ([f33a6ab](https://github.com/Stradivario/gapi/commit/f33a6ab615a448155c57fc7ec1022e8db83b97f7))
