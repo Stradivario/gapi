@@ -11,6 +11,7 @@ Whether you are deploying scalable serverless functions, managing cloud environm
 - [Managing Infrastructure](#managing-infrastructure)
 - [Serverless Functions (Lambdas)](#serverless-functions-lambdas)
 - [AI Integration (Model Context Protocol)](#ai-integration-model-context-protocol)
+  - [AI agent skill](#ai-agent-skill)
 - [Local AI Models (Ollama runner)](#local-ai-models-ollama-runner)
 - [Build System](#build-system)
 - [Command Reference](#command-reference)
@@ -24,7 +25,7 @@ You can install `gcli` using a pre-built binary or via NPM.
 For a standalone installation without Node.js dependencies:
 
 ```bash
-curl -L "https://github.com/Stradivario/gapi/releases/download/v1.8.198/gcli-linux" -o ~/.local/bin/gcli
+curl -L "https://github.com/Stradivario/gapi/releases/latest/download/gcli-linux" -o ~/.local/bin/gcli
 chmod +x ~/.local/bin/gcli
 ```
 
@@ -95,6 +96,10 @@ gcli environment:get --name 'staging'
 # (omit --clusterId to use the shared cluster - the default). Immutable
 # after creation.
 gcli environment:create --name 'staging' --clusterId '<clusterId>'
+
+# Resize it, or remove it
+gcli environment:update --name 'staging' --maxCpu 800 --maxMemory 1024
+gcli environment:delete --name 'staging'
 ```
 
 ### Private Clusters
@@ -119,16 +124,78 @@ gcli cluster:kubeconfig --cluster '<clusterId>' --output ./kubeconfig.yaml
 gcli cluster:teardown --cluster '<clusterId>' --wait
 ```
 
-`cluster.yaml`:
+Scale, reshape and watch a cluster (the same operations as the dashboard's
+cluster page). Changes run in the background; `--wait` blocks until the
+cluster is `ready` again. `--clusterName <name>` works instead of
+`--cluster <id>` everywhere.
+
+```bash
+# Health, load, autoscaling and open issues of every cluster (or one)
+gcli cluster:status [--cluster '<clusterId>']
+gcli cluster:health --cluster '<clusterId>'        # latest agent report, per node
+gcli cluster:scale-events --cluster '<clusterId>'  # manual + autoscaler history
+gcli cluster:cost                                  # month-to-date + monthly estimate
+
+# Worker nodes (1-10, billed per node-hour) and control planes (1, 3 or 5)
+gcli cluster:scale --cluster '<clusterId>' --workers 3 --wait
+gcli cluster:scale:control-planes --cluster '<clusterId>' --count 3 --wait
+
+# Topology: dedicated workers (needed for autoscaling) or back to one node
+gcli cluster:multi-node --cluster '<clusterId>' --workers 2 --wait
+gcli cluster:single-node --cluster '<clusterId>' --wait
+
+# Autoscaling - only the flags you pass change
+gcli cluster:autoscale --cluster '<clusterId>' --enable --min 2 --max 6
+gcli cluster:autoscale --cluster '<clusterId>' --cpuUp 75 --cpuDown 25 --cooldown 20
+gcli cluster:autoscale --cluster '<clusterId>' --disable
+
+# Load balancer (billed per hour while enabled)
+gcli cluster:load-balancer --cluster '<clusterId>' --enable --wait
+```
+
+#### Declarative clusters (`cluster:apply`)
+
+Write the cluster you want in the `cluster:` section of `lambforge.yaml`
+(or a standalone `cluster.yaml`) and let `cluster:apply` make it so: it
+creates the cluster when it doesn't exist, then applies topology, workers,
+control planes, the load balancer and autoscaling - one change at a time,
+waiting for the cluster to be ready between them. Keys you leave out are
+left as they are.
 
 ```yaml
-name: prod
-imageId: <hcloud-image-id>
-serverType: cpx22
-location: nbg1
-workers: 2
-singleNode: false
+cluster:
+  name: prod
+  # needed only to create it
+  imageId: <hcloud-image-id>
+  serverType: cpx22
+  location: nbg1
+  # desired state
+  singleNode: false        # true = one node runs everything (cheapest, dev/stage)
+  workers: 3               # 1-10; only the initial size while autoscale is enabled
+  controlPlanes: 1         # 1, 3 or 5
+  loadBalancer: true
+  autoscale:
+    enabled: true          # needs singleNode: false
+    minWorkers: 2
+    maxWorkers: 6
+    cpuScaleUpPercent: 70  # scale up above this (of allocatable)
+    memScaleUpPercent: 70
+    cpuScaleDownPercent: 30
+    memScaleDownPercent: 30
+    samplesToScale: 3      # consecutive readings before acting
+    cooldownMinutes: 15
 ```
+
+```bash
+gcli cluster:apply --dry-run     # print the plan, change nothing
+gcli cluster:apply               # apply it
+gcli cluster:apply --yes         # also steps that remove capacity or the LB IP
+gcli cluster:apply --spec cluster.yaml
+```
+
+Steps that remove capacity or release the load balancer's IP (going back to
+`singleNode: true`, `loadBalancer: false`) are skipped unless you pass
+`--yes`. Nodes and the load balancer are billed per started hour.
 
 ### RabbitMQ Brokers
 
@@ -285,15 +352,25 @@ options:
     external: []
 ```
 
-The same file can also carry `cluster:`, `rabbitmq:`, and `plugin:` sections, read by `cluster:create`, `rabbitmq:create`, and `plugin:install` respectively (each also accepts its own dedicated `--spec` file, e.g. `cluster.yaml`, if you'd rather keep them separate):
+The same file can also carry `cluster:`, `rabbitmq:`, `plugin:` and `triggers:` sections, read by `cluster:apply` / `cluster:create`, `rabbitmq:create`, `plugin:install` and `cron:create` respectively (each also accepts its own dedicated `--spec` file, e.g. `cluster.yaml`, if you'd rather keep them separate):
 
 ```yaml
-cluster:
+cluster:          # every key: see "Declarative clusters" above
   name: prod
   imageId: <hcloud-image-id>
   serverType: cpx22
   location: nbg1
   workers: 2
+  loadBalancer: false
+  autoscale:
+    enabled: true
+    minWorkers: 2
+    maxWorkers: 5
+
+triggers:
+  time:
+    triggerName: nightly
+    cron: '0 2 * * *'   # cron syntax or @every 5m / @daily
 
 rabbitmq:
   name: events-broker
@@ -361,7 +438,7 @@ gcli lambda:create --project <projectId> --spec ./lambforge.yaml
 `--mcp` and `--mcpGraph <name>` are also available as CLI flags; the array fields
 (`mcpOperations`, `mcpHeaders`, `mcpForwardHeaders`) are spec-only. A full annotated example lives in
 [`example/mcp/lambforge.yaml`](./example/mcp/lambforge.yaml). Client connects at
-`https://<host>/<projectId>/<route>/mcp`.
+`https://<host>/<projectId>/<route>` (with `route: mcp`: `https://<host>/<projectId>/mcp`).
 
 ### Conditional Configuration (Environment-Aware Specs)
 
@@ -638,9 +715,22 @@ gcli environment:update
 
 ### Function Lifecycle
 
+- **List**: `gcli lambda:list` (`--clusterName <name>` for one cluster's lambdas)
 - **Update**: `gcli lambda:update --name 'my-function' --file ./new-index.ts`
 - **Delete**: `gcli lambda:delete --name 'my-function'`
 - **Get Details**: `gcli lambda:get --name 'my-function'`
+
+### Schedules (cron)
+
+One time trigger per lambda. The platform calls the lambda's root with a
+GET and an `X-Fission-Timer-Name` header.
+
+```bash
+gcli cron:create --lambdaName 'my-function' --triggerName nightly --cron '0 2 * * *'
+gcli cron:create                 # reads triggers.time (and function.name) from lambforge.yaml
+gcli cron:list
+gcli cron:delete --lambdaName 'my-function'
+```
 
 ### Monitoring & Testing
 
@@ -714,6 +804,33 @@ To use this with Claude Desktop or other MCP-compatible tools, add the following
   }
 }
 ```
+
+### AI agent skill
+
+Give a coding agent (Claude Code and other agents that read skills) the
+whole platform. Paste this into the agent:
+
+```text
+Install the Lambforge skill from https://lambforge.com/skills/platform.md and follow its setup.
+```
+
+Or by hand for Claude Code:
+
+```bash
+mkdir -p ~/.claude/skills/lambforge && cd ~/.claude/skills/lambforge
+for f in $(curl -fsSL https://lambforge.com/skills/files.txt); do
+  curl -fsSLO "https://lambforge.com/skills/$f"
+done
+cp platform.md SKILL.md
+claude mcp add --scope user lambforge -- gcli mcp:start
+```
+
+`platform.md` covers setup (install gcli, the login command you run from
+Profile -> CLI - the agent never handles your token, `gcli mcp:start`) and
+the rules, and indexes topic files the agent reads on demand: gcli, MCP
+tools, deploy, REST code and testing, GraphQL and federation, websites,
+MCP servers, secrets, cron and queues, clusters and plugins, operations and
+costs, memory and plans. Source: gql-fission `src/skills/`.
 
 ## Local AI Models (Ollama runner)
 

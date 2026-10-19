@@ -30,6 +30,18 @@ import {
   urlDirectory,
 } from '~/types';
 
+import {
+  ClusterAutoscaleFragment,
+  ClusterAutoscalePolicy,
+  ClusterChange,
+  ClusterChangeFragment,
+  ClusterHealthFragment,
+  ClusterHealthSnapshot,
+  ClusterOverview,
+  ClusterOverviewFragment,
+  ClusterScaleEvent,
+  ClusterScaleEventFragment,
+} from '../commands/cluster/types';
 import { ClusterFragment } from './types/cluster.fragment';
 import { EnvironmentFragment } from './types/environment.fragment';
 import { LambdaFragment } from './types/lambda.fragment';
@@ -491,6 +503,8 @@ export class GraphqlClienAPI {
       location: string;
       workers?: number;
       singleNode?: boolean;
+      withLoadBalancer?: boolean;
+      controlPlanes?: number;
     },
   ) {
     return this.query<IMutation>({
@@ -503,6 +517,8 @@ export class GraphqlClienAPI {
           $location: String!
           $workers: Int
           $singleNode: Boolean
+          $withLoadBalancer: Boolean
+          $controlPlanes: Int
         ) {
           provisionProjectCluster(
             projectId: $projectId
@@ -512,6 +528,8 @@ export class GraphqlClienAPI {
             location: $location
             workers: $workers
             singleNode: $singleNode
+            withLoadBalancer: $withLoadBalancer
+            controlPlanes: $controlPlanes
           ) {
             ${ClusterFragment}
           }
@@ -618,6 +636,214 @@ export class GraphqlClienAPI {
       `,
       variables: { projectId, clusterId },
     }).pipe(map((res) => res.clusterKubeconfig));
+  }
+
+  // Cluster scaling, topology, load balancer and health (cluster-provisioner;
+  // the same operations as gql-fission core/services/cluster/*.graphql).
+  // Mutations start a background job: the returned status is e.g.
+  // "scaling"/"migrating" and settles to "ready" (or "error").
+
+  private static clusterMutation(
+    field: string,
+    extraArgs: Record<string, string>,
+    variables: Record<string, unknown>,
+  ) {
+    const defs = Object.entries(extraArgs)
+      .map(([k, t]) => `$${k}: ${t}`)
+      .join(' ');
+    const args = Object.keys(extraArgs)
+      .map((k) => `${k}: $${k}`)
+      .join(' ');
+    return this.query<Record<string, ClusterChange>>({
+      query: gql`
+        mutation ${field}($projectId: String! $clusterId: String! ${defs}) {
+          ${field}(projectId: $projectId clusterId: $clusterId ${args}) {
+            ${ClusterChangeFragment}
+          }
+        }
+      `,
+      variables,
+    }).pipe(map((res) => res[field]));
+  }
+
+  public static scaleProjectCluster(
+    projectId: string,
+    clusterId: string,
+    workers: number,
+  ) {
+    return this.clusterMutation(
+      'scaleProjectCluster',
+      { workers: 'Int!' },
+      { projectId, clusterId, workers },
+    );
+  }
+
+  public static scaleControlPlanesProjectCluster(
+    projectId: string,
+    clusterId: string,
+    controlPlanes: number,
+  ) {
+    return this.clusterMutation(
+      'scaleControlPlanesProjectCluster',
+      { controlPlanes: 'Int!' },
+      { projectId, clusterId, controlPlanes },
+    );
+  }
+
+  public static migrateToMultiNodeProjectCluster(
+    projectId: string,
+    clusterId: string,
+    workers: number,
+  ) {
+    return this.clusterMutation(
+      'migrateToMultiNodeProjectCluster',
+      { workers: 'Int!' },
+      { projectId, clusterId, workers },
+    );
+  }
+
+  public static revertToSingleNodeProjectCluster(
+    projectId: string,
+    clusterId: string,
+  ) {
+    return this.clusterMutation(
+      'revertToSingleNodeProjectCluster',
+      {},
+      { projectId, clusterId },
+    );
+  }
+
+  public static setProjectClusterLoadBalancer(
+    projectId: string,
+    clusterId: string,
+    enabled: boolean,
+  ) {
+    return this.clusterMutation(
+      enabled
+        ? 'enableLoadBalancerProjectCluster'
+        : 'disableLoadBalancerProjectCluster',
+      {},
+      { projectId, clusterId },
+    );
+  }
+
+  public static updateProjectClusterAutoscale(
+    projectId: string,
+    clusterId: string,
+    input: ClusterAutoscalePolicy,
+  ) {
+    return this.query<{
+      updateProjectClusterAutoscale: ClusterChange & {
+        autoscale: ClusterAutoscalePolicy;
+      };
+    }>({
+      query: gql`
+        mutation updateProjectClusterAutoscale(
+          $projectId: String!
+          $clusterId: String!
+          $input: ClusterAutoscaleInput!
+        ) {
+          updateProjectClusterAutoscale(
+            projectId: $projectId
+            clusterId: $clusterId
+            input: $input
+          ) {
+            id
+            name
+            status
+            topology {
+              workers
+              singleNode
+              controlPlanes
+            }
+            autoscale {
+              ${ClusterAutoscaleFragment}
+            }
+          }
+        }
+      `,
+      variables: { projectId, clusterId, input },
+    }).pipe(map((res) => res.updateProjectClusterAutoscale));
+  }
+
+  /** projectClusters with the fields cluster:apply compares. */
+  public static projectClustersDetailed(projectId: string) {
+    return this.query<{
+      projectClusters: (ClusterChange & {
+        autoscale: ClusterAutoscalePolicy;
+      })[];
+    }>({
+      query: gql`
+        query projectClustersDetailed($projectId: String!) {
+          projectClusters(projectId: $projectId) {
+            ${ClusterChangeFragment}
+            autoscale {
+              ${ClusterAutoscaleFragment}
+            }
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.projectClusters ?? []));
+  }
+
+  public static projectClustersOverview(projectId: string) {
+    return this.query<{ projectClustersOverview: ClusterOverview[] }>({
+      query: gql`
+        query projectClustersOverview($projectId: String!) {
+          projectClustersOverview(projectId: $projectId) {
+            ${ClusterOverviewFragment}
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.projectClustersOverview ?? []));
+  }
+
+  public static clusterHealth(projectId: string, clusterId: string, limit = 1) {
+    return this.query<{ clusterHealth: ClusterHealthSnapshot[] }>({
+      query: gql`
+        query clusterHealth(
+          $projectId: String!
+          $clusterId: String!
+          $limit: Int
+        ) {
+          clusterHealth(
+            projectId: $projectId
+            clusterId: $clusterId
+            limit: $limit
+          ) {
+            ${ClusterHealthFragment}
+          }
+        }
+      `,
+      variables: { projectId, clusterId, limit },
+    }).pipe(map((res) => res.clusterHealth ?? []));
+  }
+
+  public static clusterScaleEvents(
+    projectId: string,
+    clusterId: string,
+    limit = 20,
+  ) {
+    return this.query<{ clusterScaleEvents: ClusterScaleEvent[] }>({
+      query: gql`
+        query clusterScaleEvents(
+          $projectId: String!
+          $clusterId: String!
+          $limit: Int
+        ) {
+          clusterScaleEvents(
+            projectId: $projectId
+            clusterId: $clusterId
+            limit: $limit
+          ) {
+            ${ClusterScaleEventFragment}
+          }
+        }
+      `,
+      variables: { projectId, clusterId, limit },
+    }).pipe(map((res) => res.clusterScaleEvents ?? []));
   }
 
   // --------------------------------------------------------------------

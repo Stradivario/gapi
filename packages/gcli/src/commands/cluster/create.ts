@@ -6,16 +6,10 @@ import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
 import { loadSpec } from '../lambda/helpers/load-spec';
+import { ClusterDesired } from './helpers/plan';
 import { pollUntilReady } from './helpers/poll-until-ready';
 
-interface ClusterYamlSpec {
-  name: string;
-  imageId: string;
-  serverType: string;
-  location: string;
-  workers?: number;
-  singleNode?: boolean;
-}
+type ClusterYamlSpec = ClusterDesired;
 
 export default async (
   cmd: {
@@ -44,6 +38,8 @@ export default async (
           location: cmd.location || data.location,
           workers: cmd.workers ?? data.workers,
           singleNode: cmd.singleNode ?? data.singleNode,
+          withLoadBalancer: data.loadBalancer,
+          controlPlanes: data.controlPlanes,
         }).pipe(map((cluster) => ({ projectId, cluster }))),
       ),
       tap(({ cluster }) => {

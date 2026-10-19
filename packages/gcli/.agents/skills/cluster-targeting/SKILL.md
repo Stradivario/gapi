@@ -68,3 +68,26 @@ shared with or generated from gql-fission's copy.
 `jest.config.js` has no `moduleNameMapper` for the `~/` tsconfig path alias
 — new test files must use relative imports (e.g. `'../src/helpers'`), not
 `'~/helpers'`, or the test silently fails to resolve the module.
+
+## Managing a private cluster itself (scaling, topology, autoscale)
+
+The `cluster:*` commands that change or watch ONE cluster
+(`status`, `health`, `scale-events`, `cost`, `scale`,
+`scale:control-planes`, `multi-node`, `single-node`, `autoscale`,
+`load-balancer`) share `commands/cluster/helpers/cluster-change.ts`:
+`resolveClusterTarget` (`--cluster <id>` or `--clusterName <name>`,
+required), `parseIntOption`, and `runClusterChange` (mutate → print →
+`--wait` via `pollUntilReady`; ending in `error` exits non-zero). Their
+selections and types live in `commands/cluster/types.ts` (newer than the
+hand-kept `@introspection`).
+
+`cluster:apply` is the declarative path: the `cluster:` section of
+lambforge.yaml (`ClusterDesired` in `helpers/plan.ts`, also the type of
+`load-spec.ts`'s `cluster`). Keep `planClusterChanges` pure and ordered
+(create | topology → workers → control planes → load balancer →
+autoscale): each step is one background job and the cluster must be
+`ready` before the next. A new cluster setting = a key in `ClusterDesired`,
+a check in `validateDesired`, a step in the plan, a test in
+`test/cluster-apply.spec.ts`, and the README "Declarative clusters" block.
+The server merges partial autoscale input into the stored policy, so the
+plan sends only changed keys.

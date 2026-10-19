@@ -11,6 +11,7 @@ import {
 import { combineLatest, from, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
+import { ClusterDesired } from '../../cluster/helpers/plan';
 import { readFileAsObservable } from './read-file';
 import { loadYaml } from './yaml-schema';
 
@@ -59,15 +60,9 @@ interface BundlerOptions {
   };
 }
 
-/** Provisions a private Talos cluster - see `cluster:create`. */
-interface ClusterConfig {
-  name: string;
-  imageId: string;
-  serverType: string;
-  location: string;
-  workers?: number;
-  singleNode?: boolean;
-}
+/** A private Talos cluster: provisioned by `cluster:create`, reconciled to
+    this desired state by `cluster:apply` (ClusterDesired). */
+type ClusterConfig = ClusterDesired;
 
 /** Provisions a RabbitMQ broker - see `rabbitmq:create`. A project may have
     several; `clusterId` targets a private cluster, omitted = shared. */

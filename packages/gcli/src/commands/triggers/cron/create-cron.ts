@@ -1,5 +1,4 @@
-import { IFissionEnvironmentInputType } from '@introspection/index';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, throwError } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { parseProjectId } from '~/helpers';
@@ -9,13 +8,16 @@ import { Unboxed } from '~/types';
 
 import { loadSpec } from '../../lambda/helpers/load-spec';
 
-export default (
-  cmd: {
-    spec: string;
-    project: string;
-    lambdaName: string;
-  } & IFissionEnvironmentInputType,
-) =>
+/** gcli cron:create --lambdaName <n> --triggerName <t> --cron '<expr>'
+    Flags win; missing ones come from `triggers.time` of lambforge.yaml
+    (or cron.yaml / --spec). */
+export default (cmd: {
+  spec?: string;
+  project?: string;
+  lambdaName?: string;
+  triggerName?: string;
+  cron?: string;
+}) =>
   lastValueFrom(
     parseProjectId(cmd.project).pipe(
       switchMap((projectId) =>
@@ -25,20 +27,33 @@ export default (
               cmd?.lambdaName ?? data?.function?.name ?? data?.name,
               projectId,
             ).pipe(
-              map((lambda) => ({
-                lambdaName: lambda.name,
-                lambdaId: lambda.id,
-                ...(data?.triggers?.time ??
-                  (data as typeof data.triggers.time)),
-              })),
+              map((lambda) => {
+                const fromSpec =
+                  data?.triggers?.time ?? (data as typeof data.triggers.time);
+                return {
+                  lambdaName: lambda.name,
+                  lambdaId: lambda.id,
+                  cron: cmd.cron ?? fromSpec?.cron,
+                  triggerName: cmd.triggerName ?? fromSpec?.triggerName,
+                };
+              }),
             ),
           ),
         ),
       ),
       switchMap(({ lambdaId, cron, triggerName, lambdaName }) =>
-        GraphqlClienAPI.createTimeTrigger({ lambdaId, cron, triggerName }).pipe(
-          map((data) => ({ ...data, lambdaName })),
-        ),
+        !cron || !triggerName
+          ? throwError(
+              () =>
+                new Error(
+                  'cron:create needs --cron and --triggerName (or triggers.time.cron / triggerName in lambforge.yaml)',
+                ),
+            )
+          : GraphqlClienAPI.createTimeTrigger({
+              lambdaId,
+              cron,
+              triggerName,
+            }).pipe(map((data) => ({ ...data, lambdaName }))),
       ),
       tap((data) => {
         const columns: (keyof Unboxed<typeof data>)[] = [

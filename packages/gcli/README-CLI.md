@@ -30,9 +30,20 @@ Commands:
   cron:delete [options]                                Delete cron
   cron:list [options]                                  List of all cron jobs for project
   cluster:create [options]                             Provision a private Talos cluster for a project (runs in the background - takes several minutes; use --wait to block)
+  cluster:apply [options]                              Make a private cluster match the `cluster:` section of lambforge.yaml: creates it if missing, then applies topology, workers, control planes, load balancer and autoscaling
   cluster:list [options]                               List every private cluster this project has (it may have several - dev/stage/prod, ...)
   cluster:teardown [options]                           Tear down one of a project's clusters (runs in the background - use --wait to block)
   cluster:kubeconfig [options]                         Print (or save) a cluster's raw kubeconfig YAML - only available once it's 'ready'
+  cluster:status [options]                             Every cluster's status, agent, nodes, CPU/memory load, autoscaling and open issues (or one with --cluster)
+  cluster:health [options]                             The latest health report of a cluster's agent, with every node
+  cluster:scale-events [options]                       Manual and autoscaler scale history, newest first
+  cluster:cost [options]                               Month-to-date cost and the monthly estimate of the project's private clusters
+  cluster:scale [options]                              Set the number of worker nodes (1-10) of a multi-node cluster - billed per node-hour
+  cluster:scale:control-planes [options]               Set the number of control-plane nodes (1, 3 or 5)
+  cluster:autoscale [options]                          Change the worker autoscaling policy - only the flags you pass change
+  cluster:multi-node [options]                         Convert a single-node cluster to dedicated worker nodes (required for autoscaling)
+  cluster:single-node [options]                        Convert a multi-node cluster back to a single node (removes the worker nodes)
+  cluster:load-balancer [options]                      Add or remove the cluster's load balancer (billed per hour while enabled)
   rabbitmq:create [options]                            Provision a RabbitMQ broker for a project (a project may have several)
   rabbitmq:list [options]                              List every RabbitMQ broker for a project
   rabbitmq:delete [options]                            Delete a RabbitMQ broker
@@ -508,6 +519,19 @@ Options:
   --wait                     Block until the cluster is ready (or errors)
   -h, --help                 display help for command
 [36m
+--- Subcommand: cluster:apply ---[0m
+Usage: gcli cluster:apply [options]
+
+Make a private cluster match the `cluster:` section of lambforge.yaml: creates it if missing, then applies topology, workers, control planes, load balancer and autoscaling
+
+Options:
+  -p, --project <project>
+  -spec, --spec <spec>     Spec file (default: lambforge.yaml / cluster.yaml)
+  --dry-run                Print the plan, change nothing
+  --yes                    Also apply steps that remove capacity or the load
+                           balancer IP
+  -h, --help               display help for command
+[36m
 --- Subcommand: cluster:list ---[0m
 Usage: gcli cluster:list [options]
 
@@ -538,6 +562,135 @@ Options:
   -c, --cluster <cluster>  Cluster id (see cluster:list)
   -o, --output <output>    Write to this file instead of stdout
   -h, --help               display help for command
+[36m
+--- Subcommand: cluster:status ---[0m
+Usage: gcli cluster:status [options]
+
+Every cluster's status, agent, nodes, CPU/memory load, autoscaling and open issues (or one with --cluster)
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:health ---[0m
+Usage: gcli cluster:health [options]
+
+The latest health report of a cluster's agent, with every node
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:scale-events ---[0m
+Usage: gcli cluster:scale-events [options]
+
+Manual and autoscaler scale history, newest first
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  --limit <limit>              How many events (default 20)
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:cost ---[0m
+Usage: gcli cluster:cost [options]
+
+Month-to-date cost and the monthly estimate of the project's private clusters
+
+Options:
+  -p, --project <project>
+  -h, --help               display help for command
+[36m
+--- Subcommand: cluster:scale ---[0m
+Usage: gcli cluster:scale [options]
+
+Set the number of worker nodes (1-10) of a multi-node cluster - billed per node-hour
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  --workers <workers>          Worker nodes, 1-10
+  --wait                       Block until the cluster settles
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:scale:control-planes ---[0m
+Usage: gcli cluster:scale:control-planes [options]
+
+Set the number of control-plane nodes (1, 3 or 5)
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  --count <count>              Control planes: 1, 3 or 5
+  --wait                       Block until the cluster settles
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:autoscale ---[0m
+Usage: gcli cluster:autoscale [options]
+
+Change the worker autoscaling policy - only the flags you pass change
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  --enable                     Turn autoscaling on (multi-node clusters only)
+  --disable                    Turn autoscaling off
+  --min <min>                  Minimum workers (1-10)
+  --max <max>                  Maximum workers (1-10)
+  --cpuUp <percent>            Scale up at this CPU % (1-100)
+  --memUp <percent>            Scale up at this memory % (1-100)
+  --cpuDown <percent>          Scale down below this CPU % (1-100)
+  --memDown <percent>          Scale down below this memory % (1-100)
+  --samples <n>                Consecutive readings before acting (1-20)
+  --cooldown <minutes>         Minutes between scale actions (1-1440)
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:multi-node ---[0m
+Usage: gcli cluster:multi-node [options]
+
+Convert a single-node cluster to dedicated worker nodes (required for autoscaling)
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  --workers <workers>          Worker nodes, 1-10
+  --wait                       Block until the cluster settles
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:single-node ---[0m
+Usage: gcli cluster:single-node [options]
+
+Convert a multi-node cluster back to a single node (removes the worker nodes)
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  --wait                       Block until the cluster settles
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:load-balancer ---[0m
+Usage: gcli cluster:load-balancer [options]
+
+Add or remove the cluster's load balancer (billed per hour while enabled)
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  --enable                     Add the load balancer
+  --disable                    Remove the load balancer
+  --wait                       Block until the cluster settles
+  -h, --help                   display help for command
 [36m
 --- Subcommand: rabbitmq:create ---[0m
 Usage: gcli rabbitmq:create [options]
