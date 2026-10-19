@@ -71,6 +71,56 @@ export function gql(...args) {
   return result;
 }
 
+/** Message-queue trigger (not in the bundled introspection yet). */
+export interface MessageQueueTrigger {
+  id: string;
+  name: string;
+  lambdaName: string;
+  requestTopic: string;
+  responseTopic?: string | null;
+  errorTopic?: string | null;
+  rabbitMqId?: string | null;
+  clusterName?: string | null;
+  maxRetries?: number | null;
+  coolDownPeriod?: number | null;
+  pollingInterval?: number | null;
+  minReplicaCount?: number | null;
+  maxReplicaCount?: number | null;
+  threshold?: number | null;
+}
+
+export interface MessageQueueTriggerInput {
+  name: string;
+  lambdaName?: string;
+  requestTopic?: string;
+  responseTopic?: string;
+  errorTopic?: string;
+  rabbitMqId?: string;
+  maxRetries?: number;
+  coolDownPeriod?: number;
+  pollingInterval?: number;
+  minReplicaCount?: number;
+  maxReplicaCount?: number;
+  threshold?: number;
+}
+
+const MessageQueueTriggerFragment = `
+  id
+  name
+  lambdaName
+  requestTopic
+  responseTopic
+  errorTopic
+  rabbitMqId
+  clusterName
+  maxRetries
+  coolDownPeriod
+  pollingInterval
+  minReplicaCount
+  maxReplicaCount
+  threshold
+`;
+
 export class GraphqlClienAPI {
   public static query<T>({
     query,
@@ -486,6 +536,54 @@ export class GraphqlClienAPI {
         lambdaId,
       },
     }).pipe(map((res) => res.deleteLambdaTimeTrigger));
+  }
+
+  // --------------------------------------------------------------------
+  // Message-queue triggers (graphql-server-lambdas message-queue.controller)
+  // --------------------------------------------------------------------
+
+  public static listMessageQueueTriggers(projectId: string) {
+    return this.query<{ listMessageQueueTriggers: MessageQueueTrigger[] }>({
+      query: gql`
+        query listMessageQueueTriggers($projectId: String!) {
+          listMessageQueueTriggers(projectId: $projectId) {
+            ${MessageQueueTriggerFragment}
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.listMessageQueueTriggers));
+  }
+
+  public static saveMessageQueueTrigger(
+    mode: 'create' | 'update',
+    projectId: string,
+    payload: MessageQueueTriggerInput,
+  ) {
+    const field = `${mode}MessageQueueTrigger`;
+    return this.query<Record<string, MessageQueueTrigger>>({
+      query: gql`
+        mutation ${field}($projectId: String!, $payload: MessageQueueTriggerInput!) {
+          ${field}(projectId: $projectId, payload: $payload) {
+            ${MessageQueueTriggerFragment}
+          }
+        }
+      `,
+      variables: { projectId, payload },
+    }).pipe(map((res) => res[field]));
+  }
+
+  public static deleteMessageQueueTrigger(projectId: string, name: string) {
+    return this.query<{ deleteMessageQueueTrigger: MessageQueueTrigger }>({
+      query: gql`
+        mutation deleteMessageQueueTrigger($projectId: String!, $name: String!) {
+          deleteMessageQueueTrigger(projectId: $projectId, name: $name) {
+            ${MessageQueueTriggerFragment}
+          }
+        }
+      `,
+      variables: { projectId, name },
+    }).pipe(map((res) => res.deleteMessageQueueTrigger));
   }
 
   // --------------------------------------------------------------------

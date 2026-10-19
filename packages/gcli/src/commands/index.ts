@@ -10,6 +10,7 @@ import { registerRabbitMqCommands } from './rabbitmq';
 import { registerRunnerCommands } from './runner';
 import { startCommands } from './start';
 import { registerCronTriggerCommands } from './triggers/cron';
+import { registerMessageQueueTriggerCommands } from './triggers/message-queue';
 
 export const commands = [
   registerAuthCommands,
@@ -20,6 +21,7 @@ export const commands = [
   registerMcpCommands,
   startCommands,
   registerCronTriggerCommands,
+  registerMessageQueueTriggerCommands,
   registerClusterCommands,
   registerRabbitMqCommands,
   registerPluginCommands,

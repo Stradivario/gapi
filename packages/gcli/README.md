@@ -47,6 +47,20 @@ For automated pipelines (e.g., GitHub Actions), you can use `npx` with a long-li
   run: npx gcli login --ci --token ${{ secrets.GCLI_AUTH_TOKEN }}
 ```
 
+Create the token in the dashboard (Project → CI/CD) with only the permissions the pipeline needs. Every project command has a permission:
+
+| Permission | Commands |
+|---|---|
+| Lambdas: read / deploy / create / delete | `lambda:get/list/log/build:log/test`, `lambda:update`, `lambda:create`, `lambda:delete` |
+| Environments: read / write / delete | `environment:list/get`, `environment:create/update`, `environment:delete` |
+| Schedules: read / write | `cron:list`, `cron:create/delete` |
+| RabbitMQ: read / install / uninstall | `rabbitmq:list`, `rabbitmq:create`, `rabbitmq:delete` |
+| Queue triggers: read / manage | `mq-trigger:list`, `mq-trigger:create/update/delete` |
+| Plugins: read / install | `plugin:list/installed`, `plugin:install/uninstall` |
+| Clusters: read / scale / create / tear down / kubeconfig | `cluster:list/status/health/scale-events/cost`, `cluster:scale/autoscale/multi-node/single-node/load-balancer/apply`, `cluster:create/apply`, `cluster:teardown`, `cluster:kubeconfig` |
+
+A token can also be limited to some lambdas (lambda, schedule and queue-trigger commands). Typical tokens: *Deploy only* (`lambda:update`), or *DevOps (clusters)* for an infra repo that runs `gcli cluster:apply`. A command the token may not run fails with `ci-token-missing-scope: <operation> needs <permission>`. `runner:*` and `project:list` are personal and not available to CI tokens.
+
 ## Authentication
 
 Before interacting with the platform, you must authenticate. You can log in using an API key or a personal access token.
@@ -224,6 +238,21 @@ storage:
   enabled: true
   size: SMALL
 ```
+
+### Message-Queue Triggers
+
+A trigger runs a lambda for every message on a RabbitMQ queue (and can publish the response and failures to other queues).
+
+```bash
+gcli mq-trigger:create --name orders --lambda order-handler \
+  --request-topic orders --response-topic orders-done --error-topic orders-failed \
+  --broker '<brokerId>'            # see rabbitmq:list; needed when brokers share queue names
+gcli mq-trigger:update --name orders --max-replicas 5 --threshold 20   # only the flags you pass change
+gcli mq-trigger:list
+gcli mq-trigger:delete --name orders
+```
+
+Scaling flags: `--max-retries`, `--cool-down-period`, `--polling-interval`, `--min-replicas`, `--max-replicas`, `--threshold` (messages per replica).
 
 ### Marketplace Plugins
 

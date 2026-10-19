@@ -29,6 +29,10 @@ Commands:
   cron:create [options]                                Create cron
   cron:delete [options]                                Delete cron
   cron:list [options]                                  List of all cron jobs for project
+  mq-trigger:list [options]                            List the message-queue triggers of a project
+  mq-trigger:create [options]                          Run a lambda for every message on a RabbitMQ queue
+  mq-trigger:update [options]                          Change a message-queue trigger (same flags as create)
+  mq-trigger:delete [options]                          Delete a message-queue trigger
   cluster:create [options]                             Provision a private Talos cluster for a project (runs in the background - takes several minutes; use --wait to block)
   cluster:apply [options]                              Make a private cluster match the `cluster:` section of lambforge.yaml: creates it if missing, then applies topology, workers, control planes, load balancer and autoscaling
   cluster:list [options]                               List every private cluster this project has (it may have several - dev/stage/prod, ...)
@@ -500,6 +504,69 @@ List of all cron jobs for project
 
 Options:
   -p, --project <project>
+  -h, --help               display help for command
+[36m
+--- Subcommand: mq-trigger:list ---[0m
+Usage: gcli mq-trigger:list [options]
+
+List the message-queue triggers of a project
+
+Options:
+  -p, --project <project>
+  -h, --help               display help for command
+[36m
+--- Subcommand: mq-trigger:create ---[0m
+Usage: gcli mq-trigger:create [options]
+
+Run a lambda for every message on a RabbitMQ queue
+
+Options:
+  -p, --project <project>
+  -n, --name <name>             Trigger name
+  -l, --lambda <lambda>         Lambda the trigger runs per message
+  --request-topic <queue>       Queue the trigger consumes
+  --response-topic <queue>      Queue for the lambda response
+  --error-topic <queue>         Queue for failed messages
+  --broker <rabbitMqId>         RabbitMQ broker id (see rabbitmq:list) - needed
+                                when several brokers share queue names
+  --max-retries <n>
+  --cool-down-period <seconds>
+  --polling-interval <seconds>
+  --min-replicas <n>
+  --max-replicas <n>
+  --threshold <n>               Messages per replica before scaling out
+  -h, --help                    display help for command
+[36m
+--- Subcommand: mq-trigger:update ---[0m
+Usage: gcli mq-trigger:update [options]
+
+Change a message-queue trigger (same flags as create)
+
+Options:
+  -p, --project <project>
+  -n, --name <name>             Trigger name
+  -l, --lambda <lambda>         Lambda the trigger runs per message
+  --request-topic <queue>       Queue the trigger consumes
+  --response-topic <queue>      Queue for the lambda response
+  --error-topic <queue>         Queue for failed messages
+  --broker <rabbitMqId>         RabbitMQ broker id (see rabbitmq:list) - needed
+                                when several brokers share queue names
+  --max-retries <n>
+  --cool-down-period <seconds>
+  --polling-interval <seconds>
+  --min-replicas <n>
+  --max-replicas <n>
+  --threshold <n>               Messages per replica before scaling out
+  -h, --help                    display help for command
+[36m
+--- Subcommand: mq-trigger:delete ---[0m
+Usage: gcli mq-trigger:delete [options]
+
+Delete a message-queue trigger
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Trigger name
   -h, --help               display help for command
 [36m
 --- Subcommand: cluster:create ---[0m

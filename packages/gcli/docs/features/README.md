@@ -33,3 +33,4 @@ Outline (drop sections that don't apply):
 | `local-ai-runners` | [local-ai-runners.md](local-ai-runners.md) | `runner:*` commands; canonical doc in graphql-server |
 | `lambforge-agent-skill` | [lambforge-agent-skill.md](lambforge-agent-skill.md) | The agent skill that teaches gcli + `mcp:start`; canonical doc in gql-fission |
 | `dedicated-platform-cluster` | [dedicated-platform-cluster.md](dedicated-platform-cluster.md) | `cluster:status/health/scale/autoscale/...` commands; canonical doc in lambforge-agent |
+| `ci-token-scopes` | [ci-token-scopes.md](ci-token-scopes.md) | Which permission each command needs; `mq-trigger:*` commands; canonical doc in graphql-server |
