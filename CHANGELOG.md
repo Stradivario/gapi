@@ -1,4 +1,4 @@
-## [1.8.241](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.241) (2026-10-19)
+## [1.8.242](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.242) (2026-10-19)
 
 
 ### Bug Fixes
@@ -152,6 +152,7 @@
 * **lambda:** add cache option to CreateOrUpdateLambdaArguments and ConfigJSON ([8bed379](https://github.com/Stradivario/gapi/commit/8bed379e41dd95054a8d881003aea07354c2d293))
 * **lambda:** added functions to test lambda enviornment and to not initialize settings ([fa41948](https://github.com/Stradivario/gapi/commit/fa419484f6c4ed99e745e85b51e3029c8b8a5056))
 * **Lambda:** generation and deploy for lambda ([900e7dc](https://github.com/Stradivario/gapi/commit/900e7dcde5dc00af994adae9c8a5e808334b7bb9))
+* **mq-trigger:** add commands for managing message-queue triggers and update documentation ([3539d60](https://github.com/Stradivario/gapi/commit/3539d6068790de5e27654e566fc394a33e5e25ce))
 * **nats:** bumped version of rxdi due to nats changes ([5c05748](https://github.com/Stradivario/gapi/commit/5c057486eb6ba925f034136c59f194097107be3f))
 * **openai:** added more input parameters for the graphql endpoint ([9fdee60](https://github.com/Stradivario/gapi/commit/9fdee607ee26e2c9715768539c7079db6d206f43))
 * **openai:** added new version of openai and modified a little bit the code to fit new api ([44f606b](https://github.com/Stradivario/gapi/commit/44f606bf44b6e470066701242bad91bb36a8b739))
