@@ -1,4 +1,4 @@
-## [1.8.242](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.242) (2026-10-19)
+## [1.8.243](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.243) (2026-10-21)
 
 
 ### Bug Fixes
@@ -149,6 +149,7 @@
 * **graphql:** added option to disable query suggestion on client facing errors so attacker cannot guess what the next queries might be ([7eb4b0e](https://github.com/Stradivario/gapi/commit/7eb4b0ed89c61045ec0cf6cf51d76304288eaece))
 * **GraphqlCli:** init graphql-server cli ([9819b46](https://github.com/Stradivario/gapi/commit/9819b46458e6f732443b8d4ea8822cfa8f776a89))
 * **graphql:** dynamic schema merging ([c53591c](https://github.com/Stradivario/gapi/commit/c53591ce7d525c3d637bd62da200cb34ed742c90))
+* **lambda:** add bodyLimit option for lambda commands and update interfaces ([43e27b6](https://github.com/Stradivario/gapi/commit/43e27b665ab8edf76c8fc14c9ad64602908153ce))
 * **lambda:** add cache option to CreateOrUpdateLambdaArguments and ConfigJSON ([8bed379](https://github.com/Stradivario/gapi/commit/8bed379e41dd95054a8d881003aea07354c2d293))
 * **lambda:** added functions to test lambda enviornment and to not initialize settings ([fa41948](https://github.com/Stradivario/gapi/commit/fa419484f6c4ed99e745e85b51e3029c8b8a5056))
 * **Lambda:** generation and deploy for lambda ([900e7dc](https://github.com/Stradivario/gapi/commit/900e7dcde5dc00af994adae9c8a5e808334b7bb9))

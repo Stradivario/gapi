@@ -286294,6 +286294,9 @@ var init_helpers2 = __esm({
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
               envSecrets: cmd.envSecrets || payload.envSecrets || [],
+              /* Only sent when set, so gcli still works against an API
+                 without the field. */
+              ...cmd.bodyLimit ?? payload.bodyLimit ? { bodyLimit: String(cmd.bodyLimit ?? payload.bodyLimit) } : {},
               clusterId,
               network: cmd.network || payload.network || ["public", "private"],
               federation: cmd.federation ?? !!payload.federation,
@@ -319670,6 +319673,10 @@ function registerLambdaCommands(program2) {
     [
       "--envSecrets <envSecrets...>",
       "List of kubernetes secret names projected into process.env (graphql environment only)"
+    ],
+    [
+      "--bodyLimit <bodyLimit>",
+      "Largest request body the lambda accepts, e.g. 20mb (default 10mb, max 100mb)"
     ],
     [
       "--network <network>",

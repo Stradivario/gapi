@@ -1,6 +1,6 @@
 {
   "name": "@gapi/openai",
-  "version": "1.8.242",
+  "version": "1.8.243",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi.git"
