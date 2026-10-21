@@ -1492,6 +1492,7 @@ export
             
   */
     envSecrets?: Array<string> | null;
+    bodyLimit?: string | null;
     /**
     description?: 
       This is a name of the kubernetes secret can be used in the lambda code section as follows
@@ -3730,6 +3731,7 @@ The full @gapi/core code examples, the LambdaContext export interface, and the G
         
   */
     envSecrets?: Array<string> | null;
+    bodyLimit?: string | null;
     /**
     description: Can be one of the http methods GET,POST,UPDATE,DELETE,PUT defaults to GET if not defined
   */

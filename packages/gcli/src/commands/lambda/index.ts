@@ -72,6 +72,10 @@ export function registerLambdaCommands(program: Command) {
       'List of kubernetes secret names projected into process.env (graphql environment only)',
     ],
     [
+      '--bodyLimit <bodyLimit>',
+      'Largest request body the lambda accepts, e.g. 20mb (default 10mb, max 100mb)',
+    ],
+    [
       '--network <network>',
       'Can be private or public meaning exposed to the router or just for private available can be both also --network private --network public',
     ],

@@ -34,6 +34,8 @@ interface ConfigJSON {
   configs?: string[];
   secrets?: string[];
   envSecrets?: string[];
+  /* Largest request body the lambda accepts, e.g. "20mb" (runtime default 10mb) */
+  bodyLimit?: string | number;
   network?: string[];
   uploadAsZip?: string;
   federation?: boolean;

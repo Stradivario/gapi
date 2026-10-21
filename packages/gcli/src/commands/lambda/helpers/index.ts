@@ -34,6 +34,7 @@ export interface CreateOrUpdateLambdaArguments {
   configs: string[];
   secrets: string[];
   envSecrets: string[];
+  bodyLimit?: string;
   network: string[];
   env: string;
   /* Explicit disambiguation hint: which of the project's clusters `env`
@@ -163,6 +164,11 @@ export const createOrUpdateLambda = (
             params: cmd.params || payload.params || [],
             secrets: cmd.secrets || payload.secrets || [],
             envSecrets: cmd.envSecrets || payload.envSecrets || [],
+            /* Only sent when set, so gcli still works against an API
+               without the field. */
+            ...((cmd.bodyLimit ?? payload.bodyLimit)
+              ? { bodyLimit: String(cmd.bodyLimit ?? payload.bodyLimit) }
+              : {}),
             clusterId,
 
             network: cmd.network || payload.network || ['public', 'private'],
