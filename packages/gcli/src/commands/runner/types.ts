@@ -26,7 +26,9 @@ export interface LocalRunner {
 /** What the backend sends through `subscribeToRunnerRequests`. */
 export interface RunnerRequest {
   requestId: string;
-  type: 'request' | 'cancel';
+  // 'approval': a local workspace's command approval was answered in the
+  // web UI (requestId = approval id, body = { decision }).
+  type: 'request' | 'cancel' | 'approval';
   method?: string;
   path?: string;
   body?: string;

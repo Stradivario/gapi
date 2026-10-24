@@ -18,3 +18,7 @@ export const uploadUrlDirectory = [mainDirectory, 'upload-url'].join('/');
 
 // Local AI runner credentials (id, name, token) - see `gcli runner:start`.
 export const runnerDirectory = [mainDirectory, 'runner.json'].join('/');
+
+// Local workspaces registered on this machine, keyed by directory - see
+// `gcli workspace:start`.
+export const workspacesDirectory = [mainDirectory, 'workspaces.json'].join('/');

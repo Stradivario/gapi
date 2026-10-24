@@ -11,6 +11,7 @@ import { registerRunnerCommands } from './runner';
 import { startCommands } from './start';
 import { registerCronTriggerCommands } from './triggers/cron';
 import { registerMessageQueueTriggerCommands } from './triggers/message-queue';
+import { registerWorkspaceCommands } from './workspace';
 
 export const commands = [
   registerAuthCommands,
@@ -26,4 +27,5 @@ export const commands = [
   registerRabbitMqCommands,
   registerPluginCommands,
   registerRunnerCommands,
+  registerWorkspaceCommands,
 ];

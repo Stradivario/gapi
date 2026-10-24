@@ -21,6 +21,7 @@ import {
   writeFileAsObservable,
 } from '~/commands/lambda/helpers/read-file';
 import { LocalRunner } from '~/commands/runner/types';
+import { LocalWorkspace } from '~/commands/workspace/types';
 import {
   generationTimeDirectory,
   keyDirectory,
@@ -46,6 +47,7 @@ import { ClusterFragment } from './types/cluster.fragment';
 import { EnvironmentFragment } from './types/environment.fragment';
 import { LambdaFragment } from './types/lambda.fragment';
 import { LocalRunnerFragment } from './types/local-runner.fragment';
+import { LocalWorkspaceFragment } from './types/local-workspace.fragment';
 import {
   InstalledPluginFragment,
   PluginFragment,
@@ -694,6 +696,50 @@ export class GraphqlClienAPI {
       `,
       variables: { runnerId },
     }).pipe(map((res) => res.deleteLocalRunner));
+  }
+
+  public static listLocalWorkspaces(projectId?: string) {
+    return this.query<{ listLocalWorkspaces: LocalWorkspace[] }>({
+      query: gql`
+        query listLocalWorkspaces($projectId: String) {
+          listLocalWorkspaces(projectId: $projectId) {
+            ${LocalWorkspaceFragment}
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.listLocalWorkspaces));
+  }
+
+  public static createLocalWorkspace(projectId: string, name: string) {
+    return this.query<{
+      createLocalWorkspace: { workspace: LocalWorkspace; token: string };
+    }>({
+      query: gql`
+        mutation createLocalWorkspace($projectId: String!, $name: String!) {
+          createLocalWorkspace(projectId: $projectId, name: $name) {
+            token
+            workspace {
+              ${LocalWorkspaceFragment}
+            }
+          }
+        }
+      `,
+      variables: { projectId, name },
+    }).pipe(map((res) => res.createLocalWorkspace));
+  }
+
+  public static deleteLocalWorkspace(workspaceId: string) {
+    return this.query<{ deleteLocalWorkspace: { status: string } }>({
+      query: gql`
+        mutation deleteLocalWorkspace($workspaceId: String!) {
+          deleteLocalWorkspace(workspaceId: $workspaceId) {
+            status
+          }
+        }
+      `,
+      variables: { workspaceId },
+    }).pipe(map((res) => res.deleteLocalWorkspace));
   }
 
   public static projectClusters(projectId: string) {

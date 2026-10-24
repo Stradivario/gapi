@@ -34,7 +34,7 @@ fragment in every repo the change touches.
 |---|---|
 | `gcli-command` | Adding a command: registration, lazy actions, `GraphqlClienAPI`, tests, build/release, regenerating `README-CLI.md` |
 | `cluster-targeting` | Commands touching resources that can live on a private cluster (`--clusterId/--clusterName`) |
-| `local-ai-runners` | `runner:*` - the outbound WS client bridging a user's Ollama to the chat |
+| `local-ai-runners` | `runner:*` - the outbound WS client bridging a user's Ollama to the chat (its `TunnelConnection` base also serves `workspace:*`) |
 | `changelog` | Feature-keyed changelog fragments + feature docs |
 
 ## Documentation map
@@ -46,6 +46,7 @@ fragment in every repo the change touches.
 | Features (current state) | [`docs/features/README.md`](docs/features/README.md) |
 | Change history of a feature | `node scripts/changelog.mjs render --feature <slug>` |
 | Local AI runner (slice; canonical in graphql-server) | [`docs/features/local-ai-runners.md`](docs/features/local-ai-runners.md) |
+| Local workspaces - `workspace:*` (slice; canonical in graphql-server) | [`docs/features/local-workspaces.md`](docs/features/local-workspaces.md) |
 | Claude Code config in this package | [`.claude/README.md`](.claude/README.md) |
 
 ## Key patterns
@@ -102,4 +103,4 @@ to debug" live.
   gateway points every later command (and `runner:start`) at dev.
 - Jest needs the `moduleNameMapper` in `jest.config.js` for the `~/` alias -
   without it any spec importing command code fails to resolve.
-- `runner:start` needs Node >= 22 (global `WebSocket`).
+- `runner:start` and `workspace:start` need Node >= 22 (global `WebSocket`).

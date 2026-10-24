@@ -44,3 +44,12 @@ node release/index.js runner:models --show qwen3.8:27b   # keep the picker short
 Lambforge socket (acks, operation replies, pushes requests), `fakeOllama`
 plays Ollama (tags/show/streamed body, optional hold). Add a case there for
 any protocol change.
+
+## Shared with `workspace:*`
+
+The WebSocket client is `TunnelConnection` (`src/commands/runner/tunnel.ts`);
+`RunnerConnection` (Ollama) and `WorkspaceConnection` (local workspaces,
+`src/commands/workspace/`, feature `local-workspaces`) are its two
+subclasses. Protocol changes (frames, ack/ping, reconnect) go in the base
+class and must keep both test files green (`test/runner.spec.ts`,
+`test/workspace.spec.ts`).

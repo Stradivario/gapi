@@ -920,6 +920,56 @@ Notes:
 - Use Profile -> Local AI runners in the web app to see runners, choose
   models with checkboxes, and create tokens.
 
+## Local Workspaces (the chat works in your own project)
+
+`gcli workspace:start` connects the **current directory** to the Lambforge
+chat: the AI agents can read and edit its files, run commands (`npm install`,
+`npm test`, `git diff`, `tsc`) and keep dev servers running (`npm start`) -
+on your machine, in your real (git) project. Same **outbound** WebSocket as
+the Ollama runner: works behind NAT, opens no port. Web workspaces keep
+working as before; this is an additional, local kind.
+
+```bash
+gcli login
+gcli project:use <projectId>           # the workspace belongs to one project
+cd ~/code/my-app
+gcli workspace:start                   # --allow "npm test,npm run *" to skip approvals for those
+```
+
+Then, in a chat of that project (mode Auto): "run the tests in my local
+project and fix what fails", "start the dev server and check it boots". The
+agents only touch files under that directory.
+
+**Commands need your approval** - in this terminal (`[y]es / [a]lways for
+this session / [N]o`) or on the card in the chat; whichever you answer first
+wins. Read-only commands (`git status/diff/log/show`, `ls`, `pwd`, ...) and
+your `--allow` rules run unasked. Destructive ones (`git push`, `git reset
+--hard`, `git clean`, `git commit`, `rm -r`, `sudo`, `curl ... | sh`, ...)
+always ask. `--yolo` runs everything unasked - only for a sandbox or a repo
+you can reset. Nobody answers in 5 minutes = denied.
+
+| Command | Description |
+|---|---|
+| `gcli workspace:start` | Connect this directory. First run registers it (saved in `~/.graphql-server/workspaces.json`, per directory). Options: `--name`, `--project <id>` (default: `gcli project:use`), `--allow <list>` (comma-separated, `*` wildcard), `--no-default-allow`, `--yolo`, `--no-terminal-approval` (approve only in the chat), `--env A,B` (pass these variables to commands), `--inherit-env` (pass your whole environment), `--allow-secrets` (let the chat read `.env`/keys), `--token`, `--wsUrl`, `--reset` |
+| `gcli workspace:list` | Your local workspaces: online, project, directory, running processes (`--project`) |
+| `gcli workspace:delete` | Remove a workspace and revoke its token (`--id`, default: this directory's). Nothing on disk is deleted |
+
+What the chat can and can't do:
+
+- Files: only under the directory (symlinks resolved); `.git` is read-only;
+  `.env*`, private keys, `.npmrc`, ... are invisible unless `--allow-secrets`;
+  `node_modules` and `.gitignore`d files are not listed or searched.
+- Commands run as you, in a minimal environment (PATH, HOME, nvm/pnpm
+  dirs - none of your shell's tokens) unless `--env` / `--inherit-env`.
+- Background processes (`npm start`) live until the chat stops them or you
+  stop gcli - Ctrl+C stops every one of them.
+- Every operation is printed here (`->` read, `✎` write, `$` command,
+  `▶` process), so you can watch what the agent does.
+- Review with `git diff` and commit yourself - the agents are told not to
+  commit, push or reset.
+
+Requires Node.js >= 22.
+
 ## Build System & Local Development
 
 `gcli` includes a high-performance bundler powered by **esbuild**.

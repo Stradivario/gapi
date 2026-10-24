@@ -63,6 +63,9 @@ Commands:
   runner:list                                          List your local AI runners and the models they serve
   runner:models [options]                              Choose which of a runner's models appear in the chat model picker (no flags: list them)
   runner:delete [options]                              Delete a local AI runner and revoke its token
+  workspace:start [options]                            Connect the current directory to the Lambforge chat as a local workspace: the AI agents can read/edit its files and run commands here (outbound connection only - works behind NAT)
+  workspace:list [options]                             List your local workspaces (online status, directory, processes)
+  workspace:delete [options]                           Delete a local workspace and revoke its token (default: the one registered for this directory)
   help [command]                                       display help for command
 [36m
 --- Subcommand: login ---[0m
@@ -132,6 +135,7 @@ Options:
   --configs <configs...>                           List of kubernetes config names
   --secrets <secrets...>                           List of kubernetes secret names
   --envSecrets <envSecrets...>                     List of kubernetes secret names projected into process.env (graphql environment only)
+  --bodyLimit <bodyLimit>                          Largest request body the lambda accepts, e.g. 20mb (default 10mb, max 100mb)
   --network <network>                              Can be private or public meaning exposed to the router or just for private available can be both also --network private --network public
   --route <route>                                  Lambda route in which will be accessible
   --code <code>                                    URL or local path for single file source code
@@ -174,6 +178,7 @@ Options:
   --configs <configs...>                           List of kubernetes config names
   --secrets <secrets...>                           List of kubernetes secret names
   --envSecrets <envSecrets...>                     List of kubernetes secret names projected into process.env (graphql environment only)
+  --bodyLimit <bodyLimit>                          Largest request body the lambda accepts, e.g. 20mb (default 10mb, max 100mb)
   --network <network>                              Can be private or public meaning exposed to the router or just for private available can be both also --network private --network public
   --route <route>                                  Lambda route in which will be accessible
   --code <code>                                    URL or local path for single file source code
@@ -289,6 +294,7 @@ Options:
   --configs <configs...>                           List of kubernetes config names
   --secrets <secrets...>                           List of kubernetes secret names
   --envSecrets <envSecrets...>                     List of kubernetes secret names projected into process.env (graphql environment only)
+  --bodyLimit <bodyLimit>                          Largest request body the lambda accepts, e.g. 20mb (default 10mb, max 100mb)
   --network <network>                              Can be private or public meaning exposed to the router or just for private available can be both also --network private --network public
   --route <route>                                  Lambda route in which will be accessible
   --code <code>                                    URL or local path for single file source code
@@ -923,4 +929,53 @@ Delete a local AI runner and revoke its token
 
 Options:
   --id <id>   Runner id (default: the runner saved on this machine)
+  -h, --help  display help for command
+[36m
+--- Subcommand: workspace:start ---[0m
+Usage: gcli workspace:start [options]
+
+Connect the current directory to the Lambforge chat as a local workspace: the AI agents can read/edit its files and run commands here (outbound connection only - works behind NAT)
+
+Options:
+  -n, --name <name>          Workspace name shown in the chat (default:
+                             directory name)
+  -p, --project <projectId>  Project the workspace belongs to (default: `gcli
+                             project:use`)
+  -t, --token <token>        Workspace token (instead of registering with `gcli
+                             login`)
+  --allow <commands>         Comma-separated commands that run without
+                             approval; * matches anything (e.g. "npm test,npm
+                             run *")
+  --no-default-allow         Do not pre-allow read-only commands (git
+                             status/diff/log, ls, ...)
+  --yolo                     Run EVERY command without asking (only in a
+                             sandbox / a repo you can reset)
+  --no-terminal-approval     Approve commands only in the chat, never prompt in
+                             this terminal
+  --env <names>              Comma-separated environment variables to pass to
+                             commands (default: a minimal environment)
+  --inherit-env              Pass your whole shell environment to commands
+  --allow-secrets            Let the chat read/write .env files, keys and other
+                             secrets files
+  --wsUrl <url>              Lambforge subscriptions endpoint override
+  --reset                    Forget the workspace saved for this directory and
+                             register a new one
+  -h, --help                 display help for command
+[36m
+--- Subcommand: workspace:list ---[0m
+Usage: gcli workspace:list [options]
+
+List your local workspaces (online status, directory, processes)
+
+Options:
+  -p, --project <projectId>  Only this project
+  -h, --help                 display help for command
+[36m
+--- Subcommand: workspace:delete ---[0m
+Usage: gcli workspace:delete [options]
+
+Delete a local workspace and revoke its token (default: the one registered for this directory)
+
+Options:
+  --id <id>   Workspace id (see `gcli workspace:list`)
   -h, --help  display help for command
