@@ -1,4 +1,4 @@
-## [1.8.244](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.244) (2026-10-24)
+## [1.8.245](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.245) (2026-10-24)
 
 
 ### Bug Fixes
@@ -161,6 +161,7 @@
 * **openai:** created chat completion node ([e5f9635](https://github.com/Stradivario/gapi/commit/e5f96352b15617cd5faeb2f31e571ff3bde46806))
 * removed every occurency for graphiql and replacement with altair ([5db6974](https://github.com/Stradivario/gapi/commit/5db69741ab12e2263c1bd30692f3e89308214a93))
 * removed some more modules and altair ([e9fdcff](https://github.com/Stradivario/gapi/commit/e9fdcff0d920f0af3235feabe0375abf77c59dcc))
+* **runner:daemon:** add start, stop, and restart commands for managing the runner service ([87c2cfd](https://github.com/Stradivario/gapi/commit/87c2cfd7cbd504107a03dd722db3efbc0e69ba34))
 * **rxdi:** bumped many versions of rxdi infrastructure ([56cf598](https://github.com/Stradivario/gapi/commit/56cf5981ce2f5d14d514fdd88fafe753d802bc5d))
 * **rxdi:** bumped rxdi for new feature AMQPSusbscribe decorator for complex dead letter queue scenarios ([ef0b247](https://github.com/Stradivario/gapi/commit/ef0b247db094623d790e2f53ad5969ac6706ceeb))
 * **rxdi:** bumped rxdi versions due to recent ai changed with description field exposed to graphql query mutation and subscription better schema generation ([c6a4c35](https://github.com/Stradivario/gapi/commit/c6a4c35a007ba094c4bafc5c346ecc97a766181d))
