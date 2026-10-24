@@ -1,5 +1,5 @@
 import { execFile } from 'child_process';
-import { realpathSync } from 'fs';
+import { existsSync, realpathSync } from 'fs';
 import { mkdir, rm, writeFile } from 'fs/promises';
 import { homedir } from 'os';
 import { join } from 'path';
@@ -142,6 +142,40 @@ export class SystemdUserService {
     await rm(path, { force: true });
     await this.systemctl('daemon-reload');
     return path;
+  }
+
+  /** Whether `runner:daemon:install` wrote the unit. */
+  installed() {
+    return existsSync(unitPath(this.serviceName, this.home));
+  }
+
+  start() {
+    return this.systemctl('start', this.unit);
+  }
+
+  stop() {
+    return this.systemctl('stop', this.unit);
+  }
+
+  restart() {
+    return this.systemctl('restart', this.unit);
+  }
+
+  /**
+   * How the service is doing right after a start: `active`, or `failed`
+   * with the runner's exit status (78 = Lambforge refused the token). A
+   * refused runner exits within a second, so callers wait briefly first.
+   */
+  async outcome(): Promise<{ active: boolean; exitStatus?: number }> {
+    const { stdout } = await this.systemctl(
+      'show',
+      this.unit,
+      '--property=ActiveState',
+      '--property=ExecMainStatus',
+    ).catch((e) => ({ stdout: String(e?.stdout ?? '') }));
+    const active = /ActiveState=(active|activating|reloading)/.test(stdout);
+    const status = /ExecMainStatus=(\d+)/.exec(stdout)?.[1];
+    return { active, exitStatus: status ? Number(status) : undefined };
   }
 
   async status() {

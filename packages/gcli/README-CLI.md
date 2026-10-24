@@ -58,6 +58,9 @@ Commands:
   runner:start [options]                               Connect this machine's Ollama to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, Ollama is never exposed)
   runner:daemon:install|runner:start:daemon [options]  Run the runner in the background as a systemd user service: starts with your session, restarts on failure (Linux)
   runner:daemon:status [options]                       Show the runner service status (systemctl --user status)
+  runner:daemon:start [options]                        Start the installed runner service, and report whether it stays up
+  runner:daemon:stop [options]                         Stop the runner service (it stays installed and starts at your next login)
+  runner:daemon:restart [options]                      Restart the runner service (e.g. after `gcli login` to another server)
   runner:daemon:logs [options]                         Follow the runner service log (journalctl --user -f)
   runner:daemon:uninstall [options]                    Stop and remove the runner service (the runner stays registered)
   runner:list                                          List your local AI runners and the models they serve
@@ -878,6 +881,33 @@ Options:
 Usage: gcli runner:daemon:status [options]
 
 Show the runner service status (systemctl --user status)
+
+Options:
+  --service <name>  systemd unit name (default: lambforge-runner)
+  -h, --help        display help for command
+[36m
+--- Subcommand: runner:daemon:start ---[0m
+Usage: gcli runner:daemon:start [options]
+
+Start the installed runner service, and report whether it stays up
+
+Options:
+  --service <name>  systemd unit name (default: lambforge-runner)
+  -h, --help        display help for command
+[36m
+--- Subcommand: runner:daemon:stop ---[0m
+Usage: gcli runner:daemon:stop [options]
+
+Stop the runner service (it stays installed and starts at your next login)
+
+Options:
+  --service <name>  systemd unit name (default: lambforge-runner)
+  -h, --help        display help for command
+[36m
+--- Subcommand: runner:daemon:restart ---[0m
+Usage: gcli runner:daemon:restart [options]
+
+Restart the runner service (e.g. after `gcli login` to another server)
 
 Options:
   --service <name>  systemd unit name (default: lambforge-runner)

@@ -4056,13 +4056,13 @@ var require_ponyfill_es2018 = __commonJS({
         assertDictionary(original, context);
         const abort = original === null || original === void 0 ? void 0 : original.abort;
         const close = original === null || original === void 0 ? void 0 : original.close;
-        const start2 = original === null || original === void 0 ? void 0 : original.start;
+        const start3 = original === null || original === void 0 ? void 0 : original.start;
         const type = original === null || original === void 0 ? void 0 : original.type;
         const write = original === null || original === void 0 ? void 0 : original.write;
         return {
           abort: abort === void 0 ? void 0 : convertUnderlyingSinkAbortCallback(abort, original, `${context} has member 'abort' that`),
           close: close === void 0 ? void 0 : convertUnderlyingSinkCloseCallback(close, original, `${context} has member 'close' that`),
-          start: start2 === void 0 ? void 0 : convertUnderlyingSinkStartCallback(start2, original, `${context} has member 'start' that`),
+          start: start3 === void 0 ? void 0 : convertUnderlyingSinkStartCallback(start3, original, `${context} has member 'start' that`),
           write: write === void 0 ? void 0 : convertUnderlyingSinkWriteCallback(write, original, `${context} has member 'write' that`),
           type
         };
@@ -5853,13 +5853,13 @@ var require_ponyfill_es2018 = __commonJS({
         const autoAllocateChunkSize = original === null || original === void 0 ? void 0 : original.autoAllocateChunkSize;
         const cancel = original === null || original === void 0 ? void 0 : original.cancel;
         const pull = original === null || original === void 0 ? void 0 : original.pull;
-        const start2 = original === null || original === void 0 ? void 0 : original.start;
+        const start3 = original === null || original === void 0 ? void 0 : original.start;
         const type = original === null || original === void 0 ? void 0 : original.type;
         return {
           autoAllocateChunkSize: autoAllocateChunkSize === void 0 ? void 0 : convertUnsignedLongLongWithEnforceRange(autoAllocateChunkSize, `${context} has member 'autoAllocateChunkSize' that`),
           cancel: cancel === void 0 ? void 0 : convertUnderlyingSourceCancelCallback(cancel, original, `${context} has member 'cancel' that`),
           pull: pull === void 0 ? void 0 : convertUnderlyingSourcePullCallback(pull, original, `${context} has member 'pull' that`),
-          start: start2 === void 0 ? void 0 : convertUnderlyingSourceStartCallback(start2, original, `${context} has member 'start' that`),
+          start: start3 === void 0 ? void 0 : convertUnderlyingSourceStartCallback(start3, original, `${context} has member 'start' that`),
           type: type === void 0 ? void 0 : convertReadableStreamType(type, `${context} has member 'type' that`)
         };
       }
@@ -6286,14 +6286,14 @@ var require_ponyfill_es2018 = __commonJS({
         const cancel = original === null || original === void 0 ? void 0 : original.cancel;
         const flush = original === null || original === void 0 ? void 0 : original.flush;
         const readableType = original === null || original === void 0 ? void 0 : original.readableType;
-        const start2 = original === null || original === void 0 ? void 0 : original.start;
+        const start3 = original === null || original === void 0 ? void 0 : original.start;
         const transform2 = original === null || original === void 0 ? void 0 : original.transform;
         const writableType = original === null || original === void 0 ? void 0 : original.writableType;
         return {
           cancel: cancel === void 0 ? void 0 : convertTransformerCancelCallback(cancel, original, `${context} has member 'cancel' that`),
           flush: flush === void 0 ? void 0 : convertTransformerFlushCallback(flush, original, `${context} has member 'flush' that`),
           readableType,
-          start: start2 === void 0 ? void 0 : convertTransformerStartCallback(start2, original, `${context} has member 'start' that`),
+          start: start3 === void 0 ? void 0 : convertTransformerStartCallback(start3, original, `${context} has member 'start' that`),
           transform: transform2 === void 0 ? void 0 : convertTransformerTransformCallback(transform2, original, `${context} has member 'transform' that`),
           writableType
         };
@@ -6915,9 +6915,9 @@ var init_fetch_blob = __esm({
        * @param {number} [end]
        * @param {string} [type]
        */
-      slice(start2 = 0, end = this.size, type = "") {
+      slice(start3 = 0, end = this.size, type = "") {
         const { size } = this;
-        let relativeStart = start2 < 0 ? Math.max(size + start2, 0) : Math.min(start2, size);
+        let relativeStart = start3 < 0 ? Math.max(size + start3, 0) : Math.min(start3, size);
         let relativeEnd = end < 0 ? Math.max(size + end, 0) : Math.min(end, size);
         const span = Math.max(relativeEnd - relativeStart, 0);
         const parts = this.#parts;
@@ -7373,9 +7373,9 @@ var init_multipart_parser = __esm({
         const clear = (name2) => {
           delete this[name2 + "Mark"];
         };
-        const callback = (callbackSymbol, start2, end, ui8a) => {
-          if (start2 === void 0 || start2 !== end) {
-            this[callbackSymbol](ui8a && ui8a.subarray(start2, end));
+        const callback = (callbackSymbol, start3, end, ui8a) => {
+          if (start3 === void 0 || start3 !== end) {
+            this[callbackSymbol](ui8a && ui8a.subarray(start3, end));
           }
         };
         const dataCallback = (name2, clear2) => {
@@ -9922,7 +9922,7 @@ var require_animationFrames = __commonJS({
     function animationFramesFactory(timestampProvider) {
       return new Observable_1.Observable(function(subscriber) {
         var provider = timestampProvider || performanceTimestampProvider_1.performanceTimestampProvider;
-        var start2 = provider.now();
+        var start3 = provider.now();
         var id = 0;
         var run2 = function() {
           if (!subscriber.closed) {
@@ -9931,7 +9931,7 @@ var require_animationFrames = __commonJS({
               var now = provider.now();
               subscriber.next({
                 timestamp: timestampProvider ? now : timestamp,
-                elapsed: now - start2
+                elapsed: now - start3
               });
               run2();
             });
@@ -13722,17 +13722,17 @@ var require_range = __commonJS({
     exports2.range = void 0;
     var Observable_1 = require_Observable();
     var empty_1 = require_empty();
-    function range(start2, count, scheduler) {
+    function range(start3, count, scheduler) {
       if (count == null) {
-        count = start2;
-        start2 = 0;
+        count = start3;
+        start3 = 0;
       }
       if (count <= 0) {
         return empty_1.EMPTY;
       }
-      var end = count + start2;
+      var end = count + start3;
       return new Observable_1.Observable(scheduler ? function(subscriber) {
-        var n = start2;
+        var n = start3;
         return scheduler.schedule(function() {
           if (n < end) {
             subscriber.next(n++);
@@ -13742,7 +13742,7 @@ var require_range = __commonJS({
           }
         });
       } : function(subscriber) {
-        var n = start2;
+        var n = start3;
         while (n < end && !subscriber.closed) {
           subscriber.next(n++);
         }
@@ -30125,14 +30125,14 @@ var require_errors = __commonJS({
       }
       return str2.substring(this_len - search.length, this_len) === search;
     }
-    function includes(str2, search, start2) {
-      if (typeof start2 !== "number") {
-        start2 = 0;
+    function includes(str2, search, start3) {
+      if (typeof start3 !== "number") {
+        start3 = 0;
       }
-      if (start2 + search.length > str2.length) {
+      if (start3 + search.length > str2.length) {
         return false;
       } else {
-        return str2.indexOf(search, start2) !== -1;
+        return str2.indexOf(search, start3) !== -1;
       }
     }
     createErrorType("ERR_INVALID_OPT_VALUE", function(name2, value) {
@@ -32441,14 +32441,14 @@ var require_BufferList = __commonJS({
       const offset = this._offset(index);
       return this._bufs[offset[0]][offset[1]];
     };
-    BufferList.prototype.slice = function slice(start2, end) {
-      if (typeof start2 === "number" && start2 < 0) {
-        start2 += this.length;
+    BufferList.prototype.slice = function slice(start3, end) {
+      if (typeof start3 === "number" && start3 < 0) {
+        start3 += this.length;
       }
       if (typeof end === "number" && end < 0) {
         end += this.length;
       }
-      return this.copy(null, 0, start2, end);
+      return this.copy(null, 0, start3, end);
     };
     BufferList.prototype.copy = function copy(dst, dstStart, srcStart, srcEnd) {
       if (typeof srcStart !== "number" || srcStart < 0) {
@@ -32468,7 +32468,7 @@ var require_BufferList = __commonJS({
       const len = srcEnd - srcStart;
       let bytes = len;
       let bufoff = copy2 && dstStart || 0;
-      let start2 = off[1];
+      let start3 = off[1];
       if (srcStart === 0 && srcEnd === this.length) {
         if (!copy2) {
           return this._bufs.length === 1 ? this._bufs[0] : Buffer4.concat(this._bufs, this.length);
@@ -32479,43 +32479,43 @@ var require_BufferList = __commonJS({
         }
         return dst;
       }
-      if (bytes <= this._bufs[off[0]].length - start2) {
-        return copy2 ? this._bufs[off[0]].copy(dst, dstStart, start2, start2 + bytes) : this._bufs[off[0]].slice(start2, start2 + bytes);
+      if (bytes <= this._bufs[off[0]].length - start3) {
+        return copy2 ? this._bufs[off[0]].copy(dst, dstStart, start3, start3 + bytes) : this._bufs[off[0]].slice(start3, start3 + bytes);
       }
       if (!copy2) {
         dst = Buffer4.allocUnsafe(len);
       }
       for (let i2 = off[0]; i2 < this._bufs.length; i2++) {
-        const l = this._bufs[i2].length - start2;
+        const l = this._bufs[i2].length - start3;
         if (bytes > l) {
-          this._bufs[i2].copy(dst, bufoff, start2);
+          this._bufs[i2].copy(dst, bufoff, start3);
           bufoff += l;
         } else {
-          this._bufs[i2].copy(dst, bufoff, start2, start2 + bytes);
+          this._bufs[i2].copy(dst, bufoff, start3, start3 + bytes);
           bufoff += l;
           break;
         }
         bytes -= l;
-        if (start2) {
-          start2 = 0;
+        if (start3) {
+          start3 = 0;
         }
       }
       if (dst.length > bufoff) return dst.slice(0, bufoff);
       return dst;
     };
-    BufferList.prototype.shallowSlice = function shallowSlice(start2, end) {
-      start2 = start2 || 0;
+    BufferList.prototype.shallowSlice = function shallowSlice(start3, end) {
+      start3 = start3 || 0;
       end = typeof end !== "number" ? this.length : end;
-      if (start2 < 0) {
-        start2 += this.length;
+      if (start3 < 0) {
+        start3 += this.length;
       }
       if (end < 0) {
         end += this.length;
       }
-      if (start2 === end) {
+      if (start3 === end) {
         return this._new();
       }
-      const startOffset = this._offset(start2);
+      const startOffset = this._offset(start3);
       const endOffset = this._offset(end);
       const buffers = this._bufs.slice(startOffset[0], endOffset[0] + 1);
       if (endOffset[1] === 0) {
@@ -32528,8 +32528,8 @@ var require_BufferList = __commonJS({
       }
       return this._new(buffers);
     };
-    BufferList.prototype.toString = function toString(encoding, start2, end) {
-      return this.slice(start2, end).toString(encoding);
+    BufferList.prototype.toString = function toString(encoding, start3, end) {
+      return this.slice(start3, end).toString(encoding);
     };
     BufferList.prototype.consume = function consume(bytes) {
       bytes = Math.trunc(bytes);
@@ -33143,14 +33143,14 @@ var require_errors2 = __commonJS({
       }
       return str2.substring(this_len - search.length, this_len) === search;
     }
-    function includes(str2, search, start2) {
-      if (typeof start2 !== "number") {
-        start2 = 0;
+    function includes(str2, search, start3) {
+      if (typeof start3 !== "number") {
+        start3 = 0;
       }
-      if (start2 + search.length > str2.length) {
+      if (start3 + search.length > str2.length) {
         return false;
       } else {
-        return str2.indexOf(search, start2) !== -1;
+        return str2.indexOf(search, start3) !== -1;
       }
     }
     createErrorType("ERR_INVALID_OPT_VALUE", function(name2, value) {
@@ -35271,7 +35271,7 @@ var require_decoder = __commonJS({
         offset += 1;
         const size = SIZES[first2] || -1;
         if (bufLength < size) return null;
-        const inRange = (start2, end) => first2 >= start2 && first2 <= end;
+        const inRange = (start3, end) => first2 >= start3 && first2 <= end;
         if (first2 < 128) return [first2, 1];
         if ((first2 & 240) === 128) {
           const length = first2 & 15;
@@ -42735,8 +42735,8 @@ var require_typescript = __commonJS({
         }
         return false;
       }
-      function indexOfAnyCharCode(text, charCodes, start2) {
-        for (let i2 = start2 ?? 0; i2 < text.length; i2++) {
+      function indexOfAnyCharCode(text, charCodes, start3) {
+        for (let i2 = start3 ?? 0; i2 < text.length; i2++) {
           if (contains(charCodes, text.charCodeAt(i2))) {
             return i2;
           }
@@ -42949,9 +42949,9 @@ var require_typescript = __commonJS({
           const len = array2.length;
           let previousKey;
           let key;
-          let start2 = 0;
+          let start3 = 0;
           let pos = 0;
-          while (start2 < len) {
+          while (start3 < len) {
             while (pos < len) {
               const value = array2[pos];
               key = keyfn(value, pos);
@@ -42962,12 +42962,12 @@ var require_typescript = __commonJS({
               }
               pos++;
             }
-            if (start2 < pos) {
-              const v = mapfn(array2.slice(start2, pos), previousKey, start2, pos);
+            if (start3 < pos) {
+              const v = mapfn(array2.slice(start3, pos), previousKey, start3, pos);
               if (v) {
                 result.push(v);
               }
-              start2 = pos;
+              start3 = pos;
             }
             previousKey = key;
             pos++;
@@ -43001,18 +43001,18 @@ var require_typescript = __commonJS({
         return false;
       }
       function getRangesWhere(arr, pred, cb) {
-        let start2;
+        let start3;
         for (let i2 = 0; i2 < arr.length; i2++) {
           if (pred(arr[i2])) {
-            start2 = start2 === void 0 ? i2 : start2;
+            start3 = start3 === void 0 ? i2 : start3;
           } else {
-            if (start2 !== void 0) {
-              cb(start2, i2);
-              start2 = void 0;
+            if (start3 !== void 0) {
+              cb(start3, i2);
+              start3 = void 0;
             }
           }
         }
-        if (start2 !== void 0) cb(start2, arr.length);
+        if (start3 !== void 0) cb(start3, arr.length);
       }
       function concatenate(array1, array2) {
         if (array2 === void 0 || array2.length === 0) return array1;
@@ -43182,12 +43182,12 @@ var require_typescript = __commonJS({
       function toOffset(array2, offset) {
         return offset < 0 ? array2.length + offset : offset;
       }
-      function addRange(to, from11, start2, end) {
+      function addRange(to, from11, start3, end) {
         if (from11 === void 0 || from11.length === 0) return to;
-        if (to === void 0) return from11.slice(start2, end);
-        start2 = start2 === void 0 ? 0 : toOffset(from11, start2);
+        if (to === void 0) return from11.slice(start3, end);
+        start3 = start3 === void 0 ? 0 : toOffset(from11, start3);
         end = end === void 0 ? from11.length : toOffset(from11, end);
-        for (let i2 = start2; i2 < end && i2 < from11.length; i2++) {
+        for (let i2 = start3; i2 < end && i2 < from11.length; i2++) {
           if (from11[i2] !== void 0) {
             to.push(from11[i2]);
           }
@@ -43306,11 +43306,11 @@ var require_typescript = __commonJS({
         }
         return ~low;
       }
-      function reduceLeft(array2, f3, initial, start2, count) {
+      function reduceLeft(array2, f3, initial, start3, count) {
         if (array2 && array2.length > 0) {
           const size = array2.length;
           if (size > 0) {
-            let pos = start2 === void 0 || start2 < 0 ? 0 : start2;
+            let pos = start3 === void 0 || start3 < 0 ? 0 : start3;
             const end = count === void 0 || pos + count > size - 1 ? size - 1 : pos + count;
             let result;
             if (arguments.length <= 2) {
@@ -45492,9 +45492,9 @@ ${lanes.join("\n")}
       function measure(measureName, startMarkName, endMarkName) {
         if (enabled) {
           const end = (endMarkName !== void 0 ? marks.get(endMarkName) : void 0) ?? timestamp();
-          const start2 = (startMarkName !== void 0 ? marks.get(startMarkName) : void 0) ?? timeorigin;
+          const start3 = (startMarkName !== void 0 ? marks.get(startMarkName) : void 0) ?? timeorigin;
           const previousDuration = durations.get(measureName) || 0;
-          durations.set(measureName, previousDuration + (end - start2));
+          durations.set(measureName, previousDuration + (end - start3));
           performanceImpl == null ? void 0 : performanceImpl.measure(measureName, startMarkName, endMarkName);
         }
       }
@@ -48379,7 +48379,7 @@ ${lanes.join("\n")}
           var _a2;
           timerToUpdateChildWatches = void 0;
           sysLog(`sysLog:: onTimerToUpdateChildWatches:: ${cacheToUpdateChildWatches.size}`);
-          const start2 = timestamp();
+          const start3 = timestamp();
           const invokeMap = /* @__PURE__ */ new Map();
           while (!timerToUpdateChildWatches && cacheToUpdateChildWatches.size) {
             const result = cacheToUpdateChildWatches.entries().next();
@@ -48389,7 +48389,7 @@ ${lanes.join("\n")}
             const hasChanges = updateChildWatches(dirName, dirPath, options);
             if (!((_a2 = cache.get(dirPath)) == null ? void 0 : _a2.targetWatcher)) invokeCallbacks(dirName, dirPath, invokeMap, hasChanges ? void 0 : fileNames);
           }
-          sysLog(`sysLog:: invokingWatchers:: Elapsed:: ${timestamp() - start2}ms:: ${cacheToUpdateChildWatches.size}`);
+          sysLog(`sysLog:: invokingWatchers:: Elapsed:: ${timestamp() - start3}ms:: ${cacheToUpdateChildWatches.size}`);
           callbackCache.forEach((callbacks, rootDirName) => {
             const existing = invokeMap.get(rootDirName);
             if (existing) {
@@ -48402,7 +48402,7 @@ ${lanes.join("\n")}
               });
             }
           });
-          const elapsed = timestamp() - start2;
+          const elapsed = timestamp() - start3;
           sysLog(`sysLog:: Elapsed:: ${elapsed}ms:: onTimerToUpdateChildWatches:: ${cacheToUpdateChildWatches.size} ${timerToUpdateChildWatches}`);
         }
         function removeChildWatches(parentWatcher) {
@@ -49338,12 +49338,12 @@ ${lanes.join("\n")}
       function isVolumeCharacter(charCode) {
         return charCode >= 97 && charCode <= 122 || charCode >= 65 && charCode <= 90;
       }
-      function getFileUrlVolumeSeparatorEnd(url2, start2) {
-        const ch0 = url2.charCodeAt(start2);
-        if (ch0 === 58) return start2 + 1;
-        if (ch0 === 37 && url2.charCodeAt(start2 + 1) === 51) {
-          const ch2 = url2.charCodeAt(start2 + 2);
-          if (ch2 === 97 || ch2 === 65) return start2 + 3;
+      function getFileUrlVolumeSeparatorEnd(url2, start3) {
+        const ch0 = url2.charCodeAt(start3);
+        if (ch0 === 58) return start3 + 1;
+        if (ch0 === 37 && url2.charCodeAt(start3 + 1) === 51) {
+          const ch2 = url2.charCodeAt(start3 + 2);
+          if (ch2 === 97 || ch2 === 65) return start3 + 3;
         }
         return -1;
       }
@@ -49701,19 +49701,19 @@ ${lanes.join("\n")}
       function getPathComponentsRelativeTo(from11, to, stringEqualityComparer, getCanonicalFileName) {
         const fromComponents = reducePathComponents(getPathComponents(from11));
         const toComponents = reducePathComponents(getPathComponents(to));
-        let start2;
-        for (start2 = 0; start2 < fromComponents.length && start2 < toComponents.length; start2++) {
-          const fromComponent = getCanonicalFileName(fromComponents[start2]);
-          const toComponent = getCanonicalFileName(toComponents[start2]);
-          const comparer = start2 === 0 ? equateStringsCaseInsensitive : stringEqualityComparer;
+        let start3;
+        for (start3 = 0; start3 < fromComponents.length && start3 < toComponents.length; start3++) {
+          const fromComponent = getCanonicalFileName(fromComponents[start3]);
+          const toComponent = getCanonicalFileName(toComponents[start3]);
+          const comparer = start3 === 0 ? equateStringsCaseInsensitive : stringEqualityComparer;
           if (!comparer(fromComponent, toComponent)) break;
         }
-        if (start2 === 0) {
+        if (start3 === 0) {
           return toComponents;
         }
-        const components = toComponents.slice(start2);
+        const components = toComponents.slice(start3);
         const relative2 = [];
-        for (; start2 < fromComponents.length; start2++) {
+        for (; start3 < fromComponents.length; start3++) {
           relative2.push("..");
         }
         return ["", ...relative2, ...components];
@@ -52753,7 +52753,7 @@ ${lanes.join("\n")}
         }
         return true;
       }
-      function createScanner(languageVersion, skipTrivia2, languageVariant = 0, textInitial, onError, start2, length2) {
+      function createScanner(languageVersion, skipTrivia2, languageVariant = 0, textInitial, onError, start3, length2) {
         var text = textInitial;
         var pos;
         var end;
@@ -52766,7 +52766,7 @@ ${lanes.join("\n")}
         var skipJsDocLeadingAsterisks = 0;
         var scriptKind = 0;
         var jsDocParsingMode = 0;
-        setText(text, start2, length2);
+        setText(text, start3, length2);
         var scanner2 = {
           getTokenFullStart: () => fullStartPos,
           getStartPos: () => fullStartPos,
@@ -54156,7 +54156,7 @@ ${lanes.join("\n")}
                         }
                         break;
                       default:
-                        const start3 = pos;
+                        const start32 = pos;
                         const setFlags = scanPatternModifiers(
                           0
                           /* None */
@@ -54164,8 +54164,8 @@ ${lanes.join("\n")}
                         if (charCodeChecked(pos) === 45) {
                           pos++;
                           scanPatternModifiers(setFlags);
-                          if (pos === start3 + 1) {
-                            error210(Diagnostics.Subpattern_flags_must_be_present_when_there_is_a_minus_sign, start3, pos - start3);
+                          if (pos === start32 + 1) {
+                            error210(Diagnostics.Subpattern_flags_must_be_present_when_there_is_a_minus_sign, start32, pos - start32);
                           }
                         }
                         scanExpectedChar(
@@ -54736,7 +54736,7 @@ ${lanes.join("\n")}
                     mayContainStrings = true;
                   }
                   pos++;
-                  start2 = pos;
+                  start3 = pos;
                   characterCount = 0;
                   break;
                 default:
@@ -55442,13 +55442,13 @@ ${lanes.join("\n")}
       function textSpanIntersectsWithTextSpan(span, other) {
         return decodedTextSpanIntersectsWith(span.start, span.length, other.start, other.length);
       }
-      function textSpanIntersectsWith(span, start2, length2) {
-        return decodedTextSpanIntersectsWith(span.start, span.length, start2, length2);
+      function textSpanIntersectsWith(span, start3, length2) {
+        return decodedTextSpanIntersectsWith(span.start, span.length, start3, length2);
       }
-      function decodedTextSpanIntersectsWith(start1, length1, start2, length2) {
+      function decodedTextSpanIntersectsWith(start1, length1, start22, length2) {
         const end1 = start1 + length1;
-        const end2 = start2 + length2;
-        return start2 <= end1 && end2 >= start1;
+        const end2 = start22 + length2;
+        return start22 <= end1 && end2 >= start1;
       }
       function textSpanIntersectsWithPosition(span, position) {
         return position <= textSpanEnd(span) && position >= span.start;
@@ -55457,9 +55457,9 @@ ${lanes.join("\n")}
         return textSpanIntersectsWith(span, range.pos, range.end - range.pos);
       }
       function textSpanIntersection(span1, span2) {
-        const start2 = Math.max(span1.start, span2.start);
+        const start3 = Math.max(span1.start, span2.start);
         const end = Math.min(textSpanEnd(span1), textSpanEnd(span2));
-        return start2 <= end ? createTextSpanFromBounds(start2, end) : void 0;
+        return start3 <= end ? createTextSpanFromBounds(start3, end) : void 0;
       }
       function normalizeSpans(spans) {
         spans = spans.filter((span) => span.length > 0).sort((a, b) => {
@@ -55471,9 +55471,9 @@ ${lanes.join("\n")}
           let span = spans[i2];
           let j = i2 + 1;
           while (j < spans.length && textSpanIntersectsWithTextSpan(span, spans[j])) {
-            const start2 = Math.min(span.start, spans[j].start);
+            const start3 = Math.min(span.start, spans[j].start);
             const end = Math.max(textSpanEnd(span), textSpanEnd(spans[j]));
-            span = createTextSpanFromBounds(start2, end);
+            span = createTextSpanFromBounds(start3, end);
             j++;
           }
           i2 = j;
@@ -55481,17 +55481,17 @@ ${lanes.join("\n")}
         }
         return result;
       }
-      function createTextSpan(start2, length2) {
-        if (start2 < 0) {
+      function createTextSpan(start3, length2) {
+        if (start3 < 0) {
           throw new Error("start < 0");
         }
         if (length2 < 0) {
           throw new Error("length < 0");
         }
-        return { start: start2, length: length2 };
+        return { start: start3, length: length2 };
       }
-      function createTextSpanFromBounds(start2, end) {
-        return createTextSpan(start2, end - start2);
+      function createTextSpanFromBounds(start3, end) {
+        return createTextSpan(start3, end - start3);
       }
       function textChangeRangeNewSpan(range) {
         return createTextSpan(range.span.start, range.newLength);
@@ -57248,10 +57248,10 @@ ${lanes.join("\n")}
         if (lineIndex + 1 === lineStarts.length) {
           return sourceText.length - 1;
         } else {
-          const start2 = lineStarts[lineIndex];
+          const start3 = lineStarts[lineIndex];
           let pos = lineStarts[lineIndex + 1] - 1;
           Debug.assert(isLineBreak(sourceText.charCodeAt(pos)));
-          while (start2 <= pos && isLineBreak(sourceText.charCodeAt(pos))) {
+          while (start3 <= pos && isLineBreak(sourceText.charCodeAt(pos))) {
             pos--;
           }
           return pos;
@@ -57331,8 +57331,8 @@ ${lanes.join("\n")}
         }
         return false;
       }
-      function isPinnedComment(text, start2) {
-        return text.charCodeAt(start2 + 1) === 42 && text.charCodeAt(start2 + 2) === 33;
+      function isPinnedComment(text, start3) {
+        return text.charCodeAt(start3 + 1) === 42 && text.charCodeAt(start3 + 2) === 33;
       }
       function createCommentDirectivesMap(sourceFile, commentDirectives) {
         const directivesByLine = new Map(
@@ -58313,8 +58313,8 @@ ${lanes.join("\n")}
         return createDiagnosticForNodeInSourceFile(sourceFile, node, message, ...args);
       }
       function createDiagnosticForNodeArray(sourceFile, nodes, message, ...args) {
-        const start2 = skipTrivia(sourceFile.text, nodes.pos);
-        return createFileDiagnostic(sourceFile, start2, nodes.end - start2, message, ...args);
+        const start3 = skipTrivia(sourceFile.text, nodes.pos);
+        return createFileDiagnostic(sourceFile, start3, nodes.end - start3, message, ...args);
       }
       function createDiagnosticForNodeInSourceFile(sourceFile, node, message, ...args) {
         const span = getErrorSpanForNode(sourceFile, node);
@@ -58325,20 +58325,20 @@ ${lanes.join("\n")}
         return createFileDiagnosticFromMessageChain(sourceFile, span.start, span.length, messageChain, relatedInformation);
       }
       function createDiagnosticForNodeArrayFromMessageChain(sourceFile, nodes, messageChain, relatedInformation) {
-        const start2 = skipTrivia(sourceFile.text, nodes.pos);
-        return createFileDiagnosticFromMessageChain(sourceFile, start2, nodes.end - start2, messageChain, relatedInformation);
+        const start3 = skipTrivia(sourceFile.text, nodes.pos);
+        return createFileDiagnosticFromMessageChain(sourceFile, start3, nodes.end - start3, messageChain, relatedInformation);
       }
-      function assertDiagnosticLocation(sourceText, start2, length2) {
-        Debug.assertGreaterThanOrEqual(start2, 0);
+      function assertDiagnosticLocation(sourceText, start3, length2) {
+        Debug.assertGreaterThanOrEqual(start3, 0);
         Debug.assertGreaterThanOrEqual(length2, 0);
-        Debug.assertLessThanOrEqual(start2, sourceText.length);
-        Debug.assertLessThanOrEqual(start2 + length2, sourceText.length);
+        Debug.assertLessThanOrEqual(start3, sourceText.length);
+        Debug.assertLessThanOrEqual(start3 + length2, sourceText.length);
       }
-      function createFileDiagnosticFromMessageChain(file2, start2, length2, messageChain, relatedInformation) {
-        assertDiagnosticLocation(file2.text, start2, length2);
+      function createFileDiagnosticFromMessageChain(file2, start3, length2, messageChain, relatedInformation) {
+        assertDiagnosticLocation(file2.text, start3, length2);
         return {
           file: file2,
-          start: start2,
+          start: start3,
           length: length2,
           code: messageChain.code,
           category: messageChain.category,
@@ -58394,8 +58394,8 @@ ${lanes.join("\n")}
           pos
         );
         scanner2.scan();
-        const start2 = scanner2.getTokenStart();
-        return createTextSpanFromBounds(start2, scanner2.getTokenEnd());
+        const start3 = scanner2.getTokenStart();
+        return createTextSpanFromBounds(start3, scanner2.getTokenEnd());
       }
       function scanTokenAtPosition(sourceFile, pos) {
         const scanner2 = createScanner(
@@ -58462,9 +58462,9 @@ ${lanes.join("\n")}
             return getErrorSpanForArrowFunction(sourceFile, node);
           case 297:
           case 298: {
-            const start2 = skipTrivia(sourceFile.text, node.pos);
+            const start3 = skipTrivia(sourceFile.text, node.pos);
             const end = node.statements.length > 0 ? node.statements[0].pos : node.end;
-            return createTextSpanFromBounds(start2, end);
+            return createTextSpanFromBounds(start3, end);
           }
           case 254:
           case 230: {
@@ -58481,7 +58481,7 @@ ${lanes.join("\n")}
           }
           case 177: {
             const constructorDeclaration = node;
-            const start2 = skipTrivia(sourceFile.text, constructorDeclaration.pos);
+            const start3 = skipTrivia(sourceFile.text, constructorDeclaration.pos);
             const scanner2 = createScanner(
               sourceFile.languageVersion,
               /*skipTrivia*/
@@ -58490,14 +58490,14 @@ ${lanes.join("\n")}
               sourceFile.text,
               /*onError*/
               void 0,
-              start2
+              start3
             );
             let token = scanner2.scan();
             while (token !== 137 && token !== 1) {
               token = scanner2.scan();
             }
             const end = scanner2.getTokenEnd();
-            return createTextSpanFromBounds(start2, end);
+            return createTextSpanFromBounds(start3, end);
           }
         }
         if (errorNode === void 0) {
@@ -62098,8 +62098,8 @@ ${lanes.join("\n")}
       function rangeContainsRange(r1, r2) {
         return startEndContainsRange(r1.pos, r1.end, r2);
       }
-      function startEndContainsRange(start2, end, range) {
-        return start2 <= range.pos && end >= range.end;
+      function startEndContainsRange(start3, end, range) {
+        return start3 <= range.pos && end >= range.end;
       }
       function getPreviousNonWhitespacePosition(pos, stopPos = 0, sourceFile) {
         while (pos-- > stopPos) {
@@ -62481,18 +62481,18 @@ ${lanes.join("\n")}
       function getLocaleSpecificMessage(message) {
         return localizedDiagnosticMessages && localizedDiagnosticMessages[message.key] || message.message;
       }
-      function createDetachedDiagnostic(fileName, sourceText, start2, length2, message, ...args) {
-        if (start2 + length2 > sourceText.length) {
-          length2 = sourceText.length - start2;
+      function createDetachedDiagnostic(fileName, sourceText, start3, length2, message, ...args) {
+        if (start3 + length2 > sourceText.length) {
+          length2 = sourceText.length - start3;
         }
-        assertDiagnosticLocation(sourceText, start2, length2);
+        assertDiagnosticLocation(sourceText, start3, length2);
         let text = getLocaleSpecificMessage(message);
         if (some(args)) {
           text = formatStringFromArgs(text, args);
         }
         return {
           file: void 0,
-          start: start2,
+          start: start3,
           length: length2,
           messageText: text,
           category: message.category,
@@ -62540,15 +62540,15 @@ ${lanes.join("\n")}
         }
         return diagnosticsWithLocation;
       }
-      function createFileDiagnostic(file2, start2, length2, message, ...args) {
-        assertDiagnosticLocation(file2.text, start2, length2);
+      function createFileDiagnostic(file2, start3, length2, message, ...args) {
+        assertDiagnosticLocation(file2.text, start3, length2);
         let text = getLocaleSpecificMessage(message);
         if (some(args)) {
           text = formatStringFromArgs(text, args);
         }
         return {
           file: file2,
-          start: start2,
+          start: start3,
           length: length2,
           messageText: text,
           category: message.category,
@@ -70443,8 +70443,8 @@ ${lanes.join("\n")}
         function createGlobalMethodCall(globalObjectName, methodName, argumentsList) {
           return createMethodCall(createIdentifier(globalObjectName), methodName, argumentsList);
         }
-        function createArraySliceCall(array2, start2) {
-          return createMethodCall(array2, "slice", start2 === void 0 ? [] : [asExpression(start2)]);
+        function createArraySliceCall(array2, start3) {
+          return createMethodCall(array2, "slice", start3 === void 0 ? [] : [asExpression(start3)]);
         }
         function createArrayConcatCall(array2, argumentsList) {
           return createMethodCall(array2, "concat", argumentsList);
@@ -70756,8 +70756,8 @@ ${lanes.join("\n")}
           Debug.assert(every(nodes, isStatementOrBlock), "Cannot lift nodes to a Block.");
           return singleOrUndefined(nodes) || createBlock(nodes);
         }
-        function findSpanEnd(array2, test, start2) {
-          let i2 = start2;
+        function findSpanEnd(array2, test, start3) {
+          let i2 = start3;
           while (i2 < array2.length && test(array2[i2])) {
             i2++;
           }
@@ -74331,8 +74331,8 @@ ${lanes.join("\n")}
           }
         }
       }
-      function isJSDocLikeText(text, start2) {
-        return text.charCodeAt(start2 + 1) === 42 && text.charCodeAt(start2 + 2) === 42 && text.charCodeAt(start2 + 3) !== 47;
+      function isJSDocLikeText(text, start3) {
+        return text.charCodeAt(start3 + 1) === 42 && text.charCodeAt(start3 + 2) === 42 && text.charCodeAt(start3 + 3) !== 47;
       }
       function isFileProbablyExternalModule(sourceFile) {
         return forEach(sourceFile.statements, isAnExternalModuleIndicatorNode) || getImportMetaIfNecessary(sourceFile);
@@ -75480,15 +75480,15 @@ ${lanes.join("\n")}
         newSourceFile.flags |= sourceFile.flags & 12582912;
         return newSourceFile;
       }
-      function parseIsolatedJSDocComment(content, start2, length2) {
-        const result = Parser.JSDocParser.parseIsolatedJSDocComment(content, start2, length2);
+      function parseIsolatedJSDocComment(content, start3, length2) {
+        const result = Parser.JSDocParser.parseIsolatedJSDocComment(content, start3, length2);
         if (result && result.jsDoc) {
           Parser.fixupParentReferences(result.jsDoc);
         }
         return result;
       }
-      function parseJSDocTypeExpressionForTests(content, start2, length2) {
-        return Parser.JSDocParser.parseJSDocTypeExpressionForTests(content, start2, length2);
+      function parseJSDocTypeExpressionForTests(content, start3, length2) {
+        return Parser.JSDocParser.parseJSDocTypeExpressionForTests(content, start3, length2);
       }
       var Parser;
       ((Parser2) => {
@@ -75857,12 +75857,12 @@ ${lanes.join("\n")}
           const savedParseDiagnostics = parseDiagnostics;
           parseDiagnostics = [];
           let pos = 0;
-          let start2 = findNextStatementWithAwait(sourceFile.statements, 0);
-          while (start2 !== -1) {
+          let start3 = findNextStatementWithAwait(sourceFile.statements, 0);
+          while (start3 !== -1) {
             const prevStatement = sourceFile.statements[pos];
-            const nextStatement = sourceFile.statements[start2];
-            addRange(statements, sourceFile.statements, pos, start2);
-            pos = findNextStatementWithoutAwait(sourceFile.statements, start2);
+            const nextStatement = sourceFile.statements[start3];
+            addRange(statements, sourceFile.statements, pos, start3);
+            pos = findNextStatementWithoutAwait(sourceFile.statements, start3);
             const diagnosticStart = findIndex(savedParseDiagnostics, (diagnostic) => diagnostic.start >= prevStatement.pos);
             const diagnosticEnd = diagnosticStart >= 0 ? findIndex(savedParseDiagnostics, (diagnostic) => diagnostic.start >= nextStatement.pos, diagnosticStart) : -1;
             if (diagnosticStart >= 0) {
@@ -75896,7 +75896,7 @@ ${lanes.join("\n")}
               2
               /* Reparse */
             );
-            start2 = pos >= 0 ? findNextStatementWithAwait(sourceFile.statements, pos) : -1;
+            start3 = pos >= 0 ? findNextStatementWithAwait(sourceFile.statements, pos) : -1;
           }
           if (pos >= 0) {
             const prevStatement = sourceFile.statements[pos];
@@ -76103,18 +76103,18 @@ ${lanes.join("\n")}
         function parseErrorAtCurrentToken(message, ...args) {
           return parseErrorAt(scanner2.getTokenStart(), scanner2.getTokenEnd(), message, ...args);
         }
-        function parseErrorAtPosition(start2, length2, message, ...args) {
+        function parseErrorAtPosition(start3, length2, message, ...args) {
           const lastError = lastOrUndefined(parseDiagnostics);
           let result;
-          if (!lastError || start2 !== lastError.start) {
-            result = createDetachedDiagnostic(fileName, sourceText, start2, length2, message, ...args);
+          if (!lastError || start3 !== lastError.start) {
+            result = createDetachedDiagnostic(fileName, sourceText, start3, length2, message, ...args);
             parseDiagnostics.push(result);
           }
           parseErrorBeforeNextFinishedNode = true;
           return result;
         }
-        function parseErrorAt(start2, end, message, ...args) {
-          return parseErrorAtPosition(start2, end - start2, message, ...args);
+        function parseErrorAt(start3, end, message, ...args) {
+          return parseErrorAtPosition(start3, end - start3, message, ...args);
         }
         function parseErrorAtRange(range, message, ...args) {
           parseErrorAt(range.pos, range.end, message, ...args);
@@ -79396,8 +79396,8 @@ ${lanes.join("\n")}
                 parseErrorAtRange(openingTag, Diagnostics.JSX_fragment_has_no_corresponding_closing_tag);
               } else {
                 const tag = openingTag.tagName;
-                const start2 = Math.min(skipTrivia(sourceText, tag.pos), tag.end);
-                parseErrorAt(start2, tag.end, Diagnostics.JSX_element_0_has_no_corresponding_closing_tag, getTextOfNodeFromSourceText(sourceText, openingTag.tagName));
+                const start3 = Math.min(skipTrivia(sourceText, tag.pos), tag.end);
+                parseErrorAt(start3, tag.end, Diagnostics.JSX_element_0_has_no_corresponding_closing_tag, getTextOfNodeFromSourceText(sourceText, openingTag.tagName));
               }
               return void 0;
             case 31:
@@ -82234,7 +82234,7 @@ ${lanes.join("\n")}
         })(Tristate || (Tristate = {}));
         let JSDocParser;
         ((JSDocParser2) => {
-          function parseJSDocTypeExpressionForTests2(content, start2, length2) {
+          function parseJSDocTypeExpressionForTests2(content, start3, length2) {
             initializeState(
               "file.js",
               content,
@@ -82245,7 +82245,7 @@ ${lanes.join("\n")}
               0
               /* ParseAll */
             );
-            scanner2.setText(content, start2, length2);
+            scanner2.setText(content, start3, length2);
             currentToken = scanner2.scan();
             const jsDocTypeExpression = parseJSDocTypeExpression();
             const sourceFile = createSourceFile2(
@@ -82315,7 +82315,7 @@ ${lanes.join("\n")}
             return finishNode(result, pos);
           }
           JSDocParser2.parseJSDocNameReference = parseJSDocNameReference;
-          function parseIsolatedJSDocComment2(content, start2, length2) {
+          function parseIsolatedJSDocComment2(content, start3, length2) {
             initializeState(
               "",
               content,
@@ -82326,18 +82326,18 @@ ${lanes.join("\n")}
               0
               /* ParseAll */
             );
-            const jsDoc = doInsideOfContext(16777216, () => parseJSDocCommentWorker(start2, length2));
+            const jsDoc = doInsideOfContext(16777216, () => parseJSDocCommentWorker(start3, length2));
             const sourceFile = { languageVariant: 0, text: content };
             const diagnostics = attachFileToDiagnostics(parseDiagnostics, sourceFile);
             clearState();
             return jsDoc ? { jsDoc, diagnostics } : void 0;
           }
           JSDocParser2.parseIsolatedJSDocComment = parseIsolatedJSDocComment2;
-          function parseJSDocComment(parent2, start2, length2) {
+          function parseJSDocComment(parent2, start3, length2) {
             const saveToken = currentToken;
             const saveParseDiagnosticsLength = parseDiagnostics.length;
             const saveParseErrorBeforeNextFinishedNode = parseErrorBeforeNextFinishedNode;
-            const comment = doInsideOfContext(16777216, () => parseJSDocCommentWorker(start2, length2));
+            const comment = doInsideOfContext(16777216, () => parseJSDocCommentWorker(start3, length2));
             setParent(comment, parent2);
             if (contextFlags & 524288) {
               if (!jsDocDiagnostics) {
@@ -82364,14 +82364,14 @@ ${lanes.join("\n")}
             PropertyLikeParse2[PropertyLikeParse2["Parameter"] = 2] = "Parameter";
             PropertyLikeParse2[PropertyLikeParse2["CallbackParameter"] = 4] = "CallbackParameter";
           })(PropertyLikeParse || (PropertyLikeParse = {}));
-          function parseJSDocCommentWorker(start2 = 0, length2) {
+          function parseJSDocCommentWorker(start3 = 0, length2) {
             const content = sourceText;
-            const end = length2 === void 0 ? content.length : start2 + length2;
-            length2 = end - start2;
-            Debug.assert(start2 >= 0);
-            Debug.assert(start2 <= end);
+            const end = length2 === void 0 ? content.length : start3 + length2;
+            length2 = end - start3;
+            Debug.assert(start3 >= 0);
+            Debug.assert(start3 <= end);
             Debug.assert(end <= content.length);
-            if (!isJSDocLikeText(content, start2)) {
+            if (!isJSDocLikeText(content, start3)) {
               return void 0;
             }
             let tags;
@@ -82383,13 +82383,13 @@ ${lanes.join("\n")}
             const parts = [];
             const saveParsingContext = parsingContext;
             parsingContext |= 1 << 25;
-            const result = scanner2.scanRange(start2 + 3, length2 - 5, doJSDocScan);
+            const result = scanner2.scanRange(start3 + 3, length2 - 5, doJSDocScan);
             parsingContext = saveParsingContext;
             return result;
             function doJSDocScan() {
               let state = 1;
               let margin;
-              let indent3 = start2 - (content.lastIndexOf("\n", start2) + 1) + 4;
+              let indent3 = start3 - (content.lastIndexOf("\n", start3) + 1) + 4;
               function pushComment(text) {
                 if (!margin) {
                   margin = indent3;
@@ -82461,7 +82461,7 @@ ${lanes.join("\n")}
                         if (!linkEnd) {
                           removeLeadingNewlines(comments);
                         }
-                        parts.push(finishNode(factory2.createJSDocText(comments.join("")), linkEnd ?? start2, commentEnd));
+                        parts.push(finishNode(factory2.createJSDocText(comments.join("")), linkEnd ?? start3, commentEnd));
                         parts.push(link);
                         comments = [];
                         linkEnd = scanner2.getTokenEnd();
@@ -82484,11 +82484,11 @@ ${lanes.join("\n")}
                 }
               const trimmedComments = comments.join("").trimEnd();
               if (parts.length && trimmedComments.length) {
-                parts.push(finishNode(factory2.createJSDocText(trimmedComments), linkEnd ?? start2, commentsPos));
+                parts.push(finishNode(factory2.createJSDocText(trimmedComments), linkEnd ?? start3, commentsPos));
               }
               if (parts.length && tags) Debug.assertIsDefined(commentsPos, "having parsed tags implies that the end of the comment span should be set");
               const tagsArray = tags && createNodeArray(tags, tagsPos, tagsEnd);
-              return finishNode(factory2.createJSDocComment(parts.length ? createNodeArray(parts, start2, commentsPos) : trimmedComments.length ? trimmedComments : void 0, tagsArray), start2, end);
+              return finishNode(factory2.createJSDocComment(parts.length ? createNodeArray(parts, start3, commentsPos) : trimmedComments.length ? trimmedComments : void 0, tagsArray), start3, end);
             }
             function removeLeadingNewlines(comments2) {
               while (comments2.length && (comments2[0] === "\n" || comments2[0] === "\r")) {
@@ -83630,15 +83630,15 @@ ${lanes.join("\n")}
         }
         function extendToAffectedRange(sourceFile, changeRange) {
           const maxLookahead = 1;
-          let start2 = changeRange.span.start;
-          for (let i2 = 0; start2 > 0 && i2 <= maxLookahead; i2++) {
-            const nearestNode = findNearestNodeStartingBeforeOrAtPosition(sourceFile, start2);
-            Debug.assert(nearestNode.pos <= start2);
+          let start3 = changeRange.span.start;
+          for (let i2 = 0; start3 > 0 && i2 <= maxLookahead; i2++) {
+            const nearestNode = findNearestNodeStartingBeforeOrAtPosition(sourceFile, start3);
+            Debug.assert(nearestNode.pos <= start3);
             const position = nearestNode.pos;
-            start2 = Math.max(0, position - 1);
+            start3 = Math.max(0, position - 1);
           }
-          const finalSpan = createTextSpanFromBounds(start2, textSpanEnd(changeRange.span));
-          const finalLength = changeRange.newLength + (changeRange.span.start - start2);
+          const finalSpan = createTextSpanFromBounds(start3, textSpanEnd(changeRange.span));
+          const finalLength = changeRange.newLength + (changeRange.span.start - start3);
           return createTextChangeRange(finalSpan, finalLength);
         }
         function findNearestNodeStartingBeforeOrAtPosition(sourceFile, position) {
@@ -85738,19 +85738,19 @@ ${lanes.join("\n")}
           while (true) {
             while (pos < text.length && text.charCodeAt(pos) <= 32) pos++;
             if (pos >= text.length) break;
-            const start2 = pos;
-            if (text.charCodeAt(start2) === 34) {
+            const start3 = pos;
+            if (text.charCodeAt(start3) === 34) {
               pos++;
               while (pos < text.length && text.charCodeAt(pos) !== 34) pos++;
               if (pos < text.length) {
-                args.push(text.substring(start2 + 1, pos));
+                args.push(text.substring(start3 + 1, pos));
                 pos++;
               } else {
                 errors.push(createCompilerDiagnostic(Diagnostics.Unterminated_quoted_string_in_response_file_0, fileName));
               }
             } else {
               while (text.charCodeAt(pos) > 32) pos++;
-              args.push(text.substring(start2, pos));
+              args.push(text.substring(start3, pos));
             }
           }
           parseStrings(args);
@@ -93450,7 +93450,7 @@ ${lanes.join("\n")}
               currentFlow = reportedUnreachableFlow;
               if (!options.allowUnreachableCode) {
                 const isError = unreachableCodeIsError(options) && !(node.flags & 33554432) && (!isVariableStatement(node) || !!(getCombinedNodeFlags(node.declarationList) & 7) || node.declarationList.declarations.some((d) => !!d.initializer));
-                eachUnreachableRange(node, options, (start2, end) => errorOrSuggestionOnRange(isError, start2, end, Diagnostics.Unreachable_code_detected));
+                eachUnreachableRange(node, options, (start3, end) => errorOrSuggestionOnRange(isError, start3, end, Diagnostics.Unreachable_code_detected));
               }
             }
           }
@@ -93464,7 +93464,7 @@ ${lanes.join("\n")}
         if (isStatement(node) && isExecutableStatement(node) && isBlock(node.parent)) {
           const { statements } = node.parent;
           const slice = sliceAfter(statements, node);
-          getRangesWhere(slice, isExecutableStatement, (start2, afterEnd) => cb(slice[start2], slice[afterEnd - 1]));
+          getRangesWhere(slice, isExecutableStatement, (start3, afterEnd) => cb(slice[start3], slice[afterEnd - 1]));
         } else {
           cb(node, node);
         }
@@ -100726,7 +100726,7 @@ ${lanes.join("\n")}
                   deepCloneOrReuseNode
                 )), node);
               }
-              function deepCloneOrReuseNodes(nodes, visitor, test, start2, count) {
+              function deepCloneOrReuseNodes(nodes, visitor, test, start3, count) {
                 if (nodes && nodes.length === 0) {
                   return setTextRange(factory.createNodeArray(
                     /*elements*/
@@ -100734,7 +100734,7 @@ ${lanes.join("\n")}
                     nodes.hasTrailingComma
                   ), nodes);
                 }
-                return visitNodes2(nodes, visitor, test, start2, count);
+                return visitNodes2(nodes, visitor, test, start3, count);
               }
             }
             function createTypeNodeFromObjectType(type2) {
@@ -100853,13 +100853,13 @@ ${lanes.join("\n")}
                 if (outerTypeParameters) {
                   const length2 = outerTypeParameters.length;
                   while (i2 < length2) {
-                    const start2 = i2;
+                    const start3 = i2;
                     const parent2 = getParentSymbolOfTypeParameter(outerTypeParameters[i2]);
                     do {
                       i2++;
                     } while (i2 < length2 && getParentSymbolOfTypeParameter(outerTypeParameters[i2]) === parent2);
-                    if (!rangeEquals(outerTypeParameters, typeArguments, start2, i2)) {
-                      const typeArgumentSlice = mapToTypeNodes(typeArguments.slice(start2, i2), context);
+                    if (!rangeEquals(outerTypeParameters, typeArguments, start3, i2)) {
+                      const typeArgumentSlice = mapToTypeNodes(typeArguments.slice(start3, i2), context);
                       const restoreFlags2 = saveRestoreFlags(context);
                       context.flags |= 16;
                       const ref = symbolToTypeNode(parent2, context, 788968, typeArgumentSlice);
@@ -124189,12 +124189,12 @@ ${lanes.join("\n")}
             scanner2.setScriptTarget(sourceFile.languageVersion);
             scanner2.setLanguageVariant(sourceFile.languageVariant);
             scanner2.setOnError((message, length2, arg0) => {
-              const start2 = scanner2.getTokenEnd();
-              if (message.category === 3 && lastError && start2 === lastError.start && length2 === lastError.length) {
-                const error310 = createDetachedDiagnostic(sourceFile.fileName, sourceFile.text, start2, length2, message, arg0);
+              const start3 = scanner2.getTokenEnd();
+              if (message.category === 3 && lastError && start3 === lastError.start && length2 === lastError.length) {
+                const error310 = createDetachedDiagnostic(sourceFile.fileName, sourceFile.text, start3, length2, message, arg0);
                 addRelatedInfo(lastError, error310);
-              } else if (!lastError || start2 !== lastError.start) {
-                lastError = createFileDiagnostic(sourceFile, start2, length2, message, arg0);
+              } else if (!lastError || start3 !== lastError.start) {
+                lastError = createFileDiagnostic(sourceFile, start3, length2, message, arg0);
                 diagnostics.add(lastError);
               }
             });
@@ -126892,14 +126892,14 @@ ${lanes.join("\n")}
         }
         function getDiagnosticSpanForCallNode(node) {
           const sourceFile = getSourceFileOfNode(node);
-          const { start: start2, length: length2 } = getErrorSpanForNode(sourceFile, isPropertyAccessExpression(node.expression) ? node.expression.name : node.expression);
-          return { start: start2, length: length2, sourceFile };
+          const { start: start3, length: length2 } = getErrorSpanForNode(sourceFile, isPropertyAccessExpression(node.expression) ? node.expression.name : node.expression);
+          return { start: start3, length: length2, sourceFile };
         }
         function getDiagnosticForCallNode(node, message, ...args) {
           if (isCallExpression(node)) {
-            const { sourceFile, start: start2, length: length2 } = getDiagnosticSpanForCallNode(node);
+            const { sourceFile, start: start3, length: length2 } = getDiagnosticSpanForCallNode(node);
             if ("message" in message) {
-              return createFileDiagnostic(sourceFile, start2, length2, message, ...args);
+              return createFileDiagnostic(sourceFile, start3, length2, message, ...args);
             }
             return createDiagnosticForFileFromMessageChain(sourceFile, message);
           } else {
@@ -127230,8 +127230,8 @@ ${lanes.join("\n")}
                 const related = [...flatMap(diags, (d) => d.relatedInformation)];
                 let diag2;
                 if (every(diags, (d) => d.start === diags[0].start && d.length === diags[0].length && d.file === diags[0].file)) {
-                  const { file: file2, start: start2, length: length2 } = diags[0];
-                  diag2 = { file: file2, start: start2, length: length2, code: chain.code, category: chain.category, messageText: chain, relatedInformation: related };
+                  const { file: file2, start: start3, length: length2 } = diags[0];
+                  diag2 = { file: file2, start: start3, length: length2, code: chain.code, category: chain.category, messageText: chain, relatedInformation: related };
                 } else {
                   diag2 = createDiagnosticForNodeFromMessageChain(getSourceFileOfNode(node), getErrorNodeForCallNode(node), chain, related);
                 }
@@ -127815,8 +127815,8 @@ ${lanes.join("\n")}
             addRelatedInfo(diagnostic, createDiagnosticForNode(errorTarget, relatedInfo));
           }
           if (isCallExpression(errorTarget.parent)) {
-            const { start: start2, length: length2 } = getDiagnosticSpanForCallNode(errorTarget.parent);
-            diagnostic.start = start2;
+            const { start: start3, length: length2 } = getDiagnosticSpanForCallNode(errorTarget.parent);
+            diagnostic.start = start3;
             diagnostic.length = length2;
           }
           diagnostics.add(diagnostic);
@@ -128531,9 +128531,9 @@ ${lanes.join("\n")}
               grammarErrorOnNode(node, Diagnostics.This_syntax_is_reserved_in_files_with_the_mts_or_cts_extension_Use_an_as_expression_instead);
             }
             if (compilerOptions.erasableSyntaxOnly) {
-              const start2 = skipTrivia(file2.text, node.pos);
+              const start3 = skipTrivia(file2.text, node.pos);
               const end = node.expression.pos;
-              diagnostics.add(createFileDiagnostic(file2, start2, end - start2, Diagnostics.This_syntax_is_not_allowed_when_erasableSyntaxOnly_is_enabled));
+              diagnostics.add(createFileDiagnostic(file2, start3, end - start3, Diagnostics.This_syntax_is_not_allowed_when_erasableSyntaxOnly_is_enabled));
             }
           }
           return checkAssertionWorker(node, checkMode);
@@ -129624,10 +129624,10 @@ ${lanes.join("\n")}
             node.asteriskToken ? Diagnostics.Type_of_iterated_elements_of_a_yield_Asterisk_operand_must_either_be_a_valid_promise_or_must_not_contain_a_callable_then_member : Diagnostics.Type_of_yield_operand_in_an_async_generator_must_either_be_a_valid_promise_or_must_not_contain_a_callable_then_member
           );
         }
-        function getNotEqualFactsFromTypeofSwitch(start2, end, witnesses) {
+        function getNotEqualFactsFromTypeofSwitch(start3, end, witnesses) {
           let facts = 0;
           for (let i2 = 0; i2 < witnesses.length; i2++) {
-            const witness = i2 < start2 || i2 >= end ? witnesses[i2] : void 0;
+            const witness = i2 < start3 || i2 >= end ? witnesses[i2] : void 0;
             facts |= witness !== void 0 ? typeofNEFacts.get(witness) || 32768 : 0;
           }
           return facts;
@@ -131148,10 +131148,10 @@ ${lanes.join("\n")}
               if (!compilerOptions.allowUnreachableCode && isSideEffectFree(left) && !isIndirectCall(left.parent)) {
                 const sf = getSourceFileOfNode(left);
                 const sourceText = sf.text;
-                const start2 = skipTrivia(sourceText, left.pos);
+                const start3 = skipTrivia(sourceText, left.pos);
                 const isInDiag2657 = sf.parseDiagnostics.some((diag2) => {
                   if (diag2.code !== Diagnostics.JSX_expressions_must_have_one_parent_element.code) return false;
-                  return textSpanContainsPosition(diag2, start2);
+                  return textSpanContainsPosition(diag2, start3);
                 });
                 if (!isInDiag2657) error210(left, Diagnostics.Left_side_of_comma_operator_is_unused_and_has_no_side_effects);
               }
@@ -135766,9 +135766,9 @@ ${lanes.join("\n")}
           checkExpression(node.expression);
           const sourceFile = getSourceFileOfNode(node);
           if (!hasParseDiagnostics(sourceFile)) {
-            const start2 = getSpanOfTokenAtPosition(sourceFile, node.pos).start;
+            const start3 = getSpanOfTokenAtPosition(sourceFile, node.pos).start;
             const end = node.statement.pos;
-            grammarErrorAtPos(sourceFile, start2, end - start2, Diagnostics.The_with_statement_is_not_supported_All_symbols_in_a_with_block_will_have_type_any);
+            grammarErrorAtPos(sourceFile, start3, end - start3, Diagnostics.The_with_statement_is_not_supported_All_symbols_in_a_with_block_will_have_type_any);
           }
         }
         function checkSwitchStatement(node) {
@@ -140807,9 +140807,9 @@ ${lanes.join("\n")}
         }
         function checkGrammarTypeParameterList(typeParameters, file2) {
           if (typeParameters && typeParameters.length === 0) {
-            const start2 = typeParameters.pos - "<".length;
+            const start3 = typeParameters.pos - "<".length;
             const end = skipTrivia(file2.text, typeParameters.end) + ">".length;
-            return grammarErrorAtPos(file2, start2, end - start2, Diagnostics.Type_parameter_list_cannot_be_empty);
+            return grammarErrorAtPos(file2, start3, end - start3, Diagnostics.Type_parameter_list_cannot_be_empty);
           }
           return false;
         }
@@ -140933,9 +140933,9 @@ ${lanes.join("\n")}
         function checkGrammarForAtLeastOneTypeArgument(node, typeArguments) {
           if (typeArguments && typeArguments.length === 0) {
             const sourceFile = getSourceFileOfNode(node);
-            const start2 = typeArguments.pos - "<".length;
+            const start3 = typeArguments.pos - "<".length;
             const end = skipTrivia(sourceFile.text, typeArguments.end) + ">".length;
-            return grammarErrorAtPos(sourceFile, start2, end - start2, Diagnostics.Type_argument_list_cannot_be_empty);
+            return grammarErrorAtPos(sourceFile, start3, end - start3, Diagnostics.Type_argument_list_cannot_be_empty);
           }
           return false;
         }
@@ -141650,10 +141650,10 @@ ${lanes.join("\n")}
           }
           return false;
         }
-        function grammarErrorAtPos(nodeForSourceFile, start2, length2, message, ...args) {
+        function grammarErrorAtPos(nodeForSourceFile, start3, length2, message, ...args) {
           const sourceFile = getSourceFileOfNode(nodeForSourceFile);
           if (!hasParseDiagnostics(sourceFile)) {
-            diagnostics.add(createFileDiagnostic(sourceFile, start2, length2, message, ...args));
+            diagnostics.add(createFileDiagnostic(sourceFile, start3, length2, message, ...args));
             return true;
           }
           return false;
@@ -142195,28 +142195,28 @@ ${lanes.join("\n")}
         Debug.assertNode(visitedNode, test);
         return visitedNode;
       }
-      function visitNodes2(nodes, visitor, test, start2, count) {
+      function visitNodes2(nodes, visitor, test, start3, count) {
         if (nodes === void 0) {
           return nodes;
         }
         const length2 = nodes.length;
-        if (start2 === void 0 || start2 < 0) {
-          start2 = 0;
+        if (start3 === void 0 || start3 < 0) {
+          start3 = 0;
         }
-        if (count === void 0 || count > length2 - start2) {
-          count = length2 - start2;
+        if (count === void 0 || count > length2 - start3) {
+          count = length2 - start3;
         }
         let hasTrailingComma;
         let pos = -1;
         let end = -1;
-        if (start2 > 0 || count < length2) {
-          hasTrailingComma = nodes.hasTrailingComma && start2 + count === length2;
+        if (start3 > 0 || count < length2) {
+          hasTrailingComma = nodes.hasTrailingComma && start3 + count === length2;
         } else {
           pos = nodes.pos;
           end = nodes.end;
           hasTrailingComma = nodes.hasTrailingComma;
         }
-        const updated = visitArrayWorker(nodes, visitor, test, start2, count);
+        const updated = visitArrayWorker(nodes, visitor, test, start3, count);
         if (updated !== nodes) {
           const updatedArray = factory.createNodeArray(updated, hasTrailingComma);
           setTextRangePosEnd(updatedArray, pos, end);
@@ -142224,27 +142224,27 @@ ${lanes.join("\n")}
         }
         return nodes;
       }
-      function visitArray(nodes, visitor, test, start2, count) {
+      function visitArray(nodes, visitor, test, start3, count) {
         if (nodes === void 0) {
           return nodes;
         }
         const length2 = nodes.length;
-        if (start2 === void 0 || start2 < 0) {
-          start2 = 0;
+        if (start3 === void 0 || start3 < 0) {
+          start3 = 0;
         }
-        if (count === void 0 || count > length2 - start2) {
-          count = length2 - start2;
+        if (count === void 0 || count > length2 - start3) {
+          count = length2 - start3;
         }
-        return visitArrayWorker(nodes, visitor, test, start2, count);
+        return visitArrayWorker(nodes, visitor, test, start3, count);
       }
-      function visitArrayWorker(nodes, visitor, test, start2, count) {
+      function visitArrayWorker(nodes, visitor, test, start3, count) {
         let updated;
         const length2 = nodes.length;
-        if (start2 > 0 || count < length2) {
+        if (start3 > 0 || count < length2) {
           updated = [];
         }
         for (let i2 = 0; i2 < count; i2++) {
-          const node = nodes[i2 + start2];
+          const node = nodes[i2 + start3];
           const visited = node !== void 0 ? visitor ? visitor(node) : node : void 0;
           if (updated !== void 0 || visited === void 0 || visited !== node) {
             if (updated === void 0) {
@@ -142270,9 +142270,9 @@ ${lanes.join("\n")}
         Debug.assertEachNode(nodes, test);
         return nodes;
       }
-      function visitLexicalEnvironment(statements, visitor, context, start2, ensureUseStrict, nodesVisitor = visitNodes2) {
+      function visitLexicalEnvironment(statements, visitor, context, start3, ensureUseStrict, nodesVisitor = visitNodes2) {
         context.startLexicalEnvironment();
-        statements = nodesVisitor(statements, visitor, isStatement, start2);
+        statements = nodesVisitor(statements, visitor, isStatement, start3);
         if (ensureUseStrict) statements = context.factory.ensureUseStrict(statements);
         return factory.mergeLexicalEnvironment(statements, context.endLexicalEnvironment());
       }
@@ -143998,7 +143998,7 @@ ${lanes.join("\n")}
           }
           exit();
         }
-        function appendSourceMap(generatedLine, generatedCharacter, map27, sourceMapPath, start2, end) {
+        function appendSourceMap(generatedLine, generatedCharacter, map27, sourceMapPath, start3, end) {
           Debug.assert(generatedLine >= pendingGeneratedLine, "generatedLine cannot backtrack");
           Debug.assert(generatedCharacter >= 0, "generatedCharacter cannot be negative");
           enter();
@@ -144009,7 +144009,7 @@ ${lanes.join("\n")}
             if (end && (raw.generatedLine > end.line || raw.generatedLine === end.line && raw.generatedCharacter > end.character)) {
               break;
             }
-            if (start2 && (raw.generatedLine < start2.line || start2.line === raw.generatedLine && raw.generatedCharacter < start2.character)) {
+            if (start3 && (raw.generatedLine < start3.line || start3.line === raw.generatedLine && raw.generatedCharacter < start3.character)) {
               continue;
             }
             let newSourceIndex;
@@ -144037,9 +144037,9 @@ ${lanes.join("\n")}
                 }
               }
             }
-            const rawGeneratedLine = raw.generatedLine - (start2 ? start2.line : 0);
+            const rawGeneratedLine = raw.generatedLine - (start3 ? start3.line : 0);
             const newGeneratedLine = rawGeneratedLine + generatedLine;
-            const rawGeneratedCharacter = start2 && start2.line === raw.generatedLine ? raw.generatedCharacter - start2.character : raw.generatedCharacter;
+            const rawGeneratedCharacter = start3 && start3.line === raw.generatedLine ? raw.generatedCharacter - start3.character : raw.generatedCharacter;
             const newGeneratedCharacter = rawGeneratedLine === 0 ? rawGeneratedCharacter + generatedCharacter : rawGeneratedCharacter;
             addMapping(newGeneratedLine, newGeneratedCharacter, newSourceIndex, newSourceLine, newSourceCharacter, newNameIndex);
           }
@@ -144794,8 +144794,8 @@ ${lanes.join("\n")}
         const expression = skipParentheses(statement.expression);
         return isSuperCall(expression) ? expression : void 0;
       }
-      function findSuperStatementIndexPathWorker(statements, start2, indices) {
-        for (let i2 = start2; i2 < statements.length; i2 += 1) {
+      function findSuperStatementIndexPathWorker(statements, start3, indices) {
+        for (let i2 = start3; i2 < statements.length; i2 += 1) {
           const statement = statements[i2];
           if (getSuperCallFromStatement(statement)) {
             indices.unshift(i2);
@@ -144807,9 +144807,9 @@ ${lanes.join("\n")}
         }
         return false;
       }
-      function findSuperStatementIndexPath(statements, start2) {
+      function findSuperStatementIndexPath(statements, start3) {
         const indices = [];
-        findSuperStatementIndexPathWorker(statements, start2, indices);
+        findSuperStatementIndexPathWorker(statements, start3, indices);
         return indices;
       }
       function getProperties(node, requireInitializer, isStatic2) {
@@ -153622,9 +153622,9 @@ ${lanes.join("\n")}
           }
           return result;
         }
-        function transformAsyncFunctionBodyWorker(body, start2) {
+        function transformAsyncFunctionBodyWorker(body, start3) {
           if (isBlock(body)) {
-            return factory2.updateBlock(body, visitNodes2(body.statements, asyncBodyVisitor, isStatement, start2));
+            return factory2.updateBlock(body, visitNodes2(body.statements, asyncBodyVisitor, isStatement, start3));
           } else {
             return factory2.converters.convertToFunctionBlock(Debug.checkDefined(visitNode(body, asyncBodyVisitor, isConciseBody)));
           }
@@ -155945,9 +155945,9 @@ ${lanes.join("\n")}
           }
           return visitEachChild(node, visitor, context);
         }
-        function transformUsingDeclarations(statementsIn, start2, end, envBinding, topLevelStatements) {
+        function transformUsingDeclarations(statementsIn, start3, end, envBinding, topLevelStatements) {
           const statements = [];
-          for (let i2 = start2; i2 < end; i2++) {
+          for (let i2 = start3; i2 < end; i2++) {
             const statement = statementsIn[i2];
             const usingKind = getUsingKind(statement);
             if (usingKind) {
@@ -160332,10 +160332,10 @@ ${lanes.join("\n")}
             }
           }
         }
-        function addObjectLiteralMembers(expressions, node, receiver, start2) {
+        function addObjectLiteralMembers(expressions, node, receiver, start3) {
           const properties = node.properties;
           const numProperties = properties.length;
-          for (let i2 = start2; i2 < numProperties; i2++) {
+          for (let i2 = start3; i2 < numProperties; i2++) {
             const property = properties[i2];
             switch (property.kind) {
               case 178:
@@ -161653,9 +161653,9 @@ ${lanes.join("\n")}
           }
           return visitEachChild(node, visitor, context);
         }
-        function transformAndEmitStatements(statements2, start2 = 0) {
+        function transformAndEmitStatements(statements2, start3 = 0) {
           const numStatements = statements2.length;
-          for (let i2 = start2; i2 < numStatements; i2++) {
+          for (let i2 = start3; i2 < numStatements; i2++) {
             transformAndEmitStatement(statements2[i2]);
           }
         }
@@ -162466,8 +162466,8 @@ ${lanes.join("\n")}
         function supportsUnlabeledContinue(block) {
           return block.kind === 3;
         }
-        function hasImmediateContainingLabeledBlock(labelText, start2) {
-          for (let j = start2; j >= 0; j--) {
+        function hasImmediateContainingLabeledBlock(labelText, start3) {
+          for (let j = start3; j >= 0; j--) {
             const containingBlock = blockStack[j];
             if (supportsLabeledBreakOrContinue(containingBlock)) {
               if (containingBlock.labelText === labelText) {
@@ -173434,10 +173434,10 @@ ${lanes.join("\n")}
             onBeforeEmitNodeArray == null ? void 0 : onBeforeEmitNodeArray(modifiers);
             let lastMode;
             let mode;
-            let start2 = 0;
+            let start3 = 0;
             let pos = 0;
             let lastModifier;
-            while (start2 < modifiers.length) {
+            while (start3 < modifiers.length) {
               while (pos < modifiers.length) {
                 lastModifier = modifiers[pos];
                 mode = isDecorator(lastModifier) ? "decorators" : "modifiers";
@@ -173449,7 +173449,7 @@ ${lanes.join("\n")}
                 pos++;
               }
               const textRange = { pos: -1, end: -1 };
-              if (start2 === 0) textRange.pos = modifiers.pos;
+              if (start3 === 0) textRange.pos = modifiers.pos;
               if (pos === modifiers.length - 1) textRange.end = modifiers.end;
               if (lastMode === "modifiers" || allowDecorators) {
                 emitNodeListItems(
@@ -173459,14 +173459,14 @@ ${lanes.join("\n")}
                   lastMode === "modifiers" ? 2359808 : 2146305,
                   /*parenthesizerRule*/
                   void 0,
-                  start2,
-                  pos - start2,
+                  start3,
+                  pos - start3,
                   /*hasTrailingComma*/
                   false,
                   textRange
                 );
               }
-              start2 = pos;
+              start3 = pos;
               lastMode = mode;
               pos++;
             }
@@ -173619,26 +173619,26 @@ ${lanes.join("\n")}
               break;
           }
         }
-        function emitList(parentNode, children, format, parenthesizerRule, start2, count) {
+        function emitList(parentNode, children, format, parenthesizerRule, start3, count) {
           emitNodeList(
             emit,
             parentNode,
             children,
             format | (parentNode && getEmitFlags(parentNode) & 2 ? 65536 : 0),
             parenthesizerRule,
-            start2,
+            start3,
             count
           );
         }
-        function emitExpressionList(parentNode, children, format, parenthesizerRule, start2, count) {
-          emitNodeList(emitExpression, parentNode, children, format, parenthesizerRule, start2, count);
+        function emitExpressionList(parentNode, children, format, parenthesizerRule, start3, count) {
+          emitNodeList(emitExpression, parentNode, children, format, parenthesizerRule, start3, count);
         }
-        function emitNodeList(emit2, parentNode, children, format, parenthesizerRule, start2 = 0, count = children ? children.length - start2 : 0) {
+        function emitNodeList(emit2, parentNode, children, format, parenthesizerRule, start3 = 0, count = children ? children.length - start3 : 0) {
           const isUndefined = children === void 0;
           if (isUndefined && format & 16384) {
             return;
           }
-          const isEmpty = children === void 0 || start2 >= children.length || count === 0;
+          const isEmpty = children === void 0 || start3 >= children.length || count === 0;
           if (isEmpty && format & 32768) {
             onBeforeEmitNodeArray == null ? void 0 : onBeforeEmitNodeArray(children);
             onAfterEmitNodeArray == null ? void 0 : onAfterEmitNodeArray(children);
@@ -173662,7 +173662,7 @@ ${lanes.join("\n")}
               writeSpace();
             }
           } else {
-            emitNodeListItems(emit2, parentNode, children, format, parenthesizerRule, start2, count, children.hasTrailingComma, children);
+            emitNodeListItems(emit2, parentNode, children, format, parenthesizerRule, start3, count, children.hasTrailingComma, children);
           }
           onAfterEmitNodeArray == null ? void 0 : onAfterEmitNodeArray(children);
           if (format & 15360) {
@@ -173672,10 +173672,10 @@ ${lanes.join("\n")}
             writePunctuation(getClosingBracket(format));
           }
         }
-        function emitNodeListItems(emit2, parentNode, children, format, parenthesizerRule, start2, count, hasTrailingComma, childrenTextRange) {
+        function emitNodeListItems(emit2, parentNode, children, format, parenthesizerRule, start3, count, hasTrailingComma, childrenTextRange) {
           const mayEmitInterveningComments = (format & 262144) === 0;
           let shouldEmitInterveningComments = mayEmitInterveningComments;
-          const leadingLineTerminatorCount = getLeadingLineTerminatorCount(parentNode, children[start2], format);
+          const leadingLineTerminatorCount = getLeadingLineTerminatorCount(parentNode, children[start3], format);
           if (leadingLineTerminatorCount) {
             writeLine(leadingLineTerminatorCount);
             shouldEmitInterveningComments = false;
@@ -173689,7 +173689,7 @@ ${lanes.join("\n")}
           let previousSibling;
           let shouldDecreaseIndentAfterEmit = false;
           for (let i2 = 0; i2 < count; i2++) {
-            const child = children[start2 + i2];
+            const child = children[start3 + i2];
             if (format & 32) {
               writeLine();
               writeDelimiter(format);
@@ -173753,7 +173753,7 @@ ${lanes.join("\n")}
           if (format & 128) {
             decreaseIndent();
           }
-          const closingLineTerminatorCount = getClosingLineTerminatorCount(parentNode, children[start2 + count - 1], format, childrenTextRange);
+          const closingLineTerminatorCount = getClosingLineTerminatorCount(parentNode, children[start3 + count - 1], format, childrenTextRange);
           if (closingLineTerminatorCount) {
             writeLine(closingLineTerminatorCount);
           } else if (format & (2097152 | 256)) {
@@ -175498,9 +175498,9 @@ ${lanes.join("\n")}
         function createDirectoryWatcherWithLogging(file2, cb, flags, options, detailInfo1, detailInfo2) {
           const watchInfo = `DirectoryWatcher:: Added:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`;
           log(watchInfo);
-          const start2 = timestamp();
+          const start3 = timestamp();
           const watcher = triggerInvokingFactory.watchDirectory(file2, cb, flags, options, detailInfo1, detailInfo2);
-          const elapsed = timestamp() - start2;
+          const elapsed = timestamp() - start3;
           log(`Elapsed:: ${elapsed}ms ${watchInfo}`);
           return {
             close: () => {
@@ -175521,13 +175521,13 @@ ${lanes.join("\n")}
             (...args) => {
               const triggerredInfo = `${key === "watchFile" ? "FileWatcher" : "DirectoryWatcher"}:: Triggered with ${args[0]} ${args[1] !== void 0 ? args[1] : ""}:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`;
               log(triggerredInfo);
-              const start2 = timestamp();
+              const start3 = timestamp();
               cb.call(
                 /*thisArg*/
                 void 0,
                 ...args
               );
-              const elapsed = timestamp() - start2;
+              const elapsed = timestamp() - start3;
               log(`Elapsed:: ${elapsed}ms ${triggerredInfo}`);
             },
             flags,
@@ -175839,9 +175839,9 @@ ${lanes.join("\n")}
       function formatColorAndReset(text, formatStyle) {
         return formatStyle + text + resetEscapeSequence;
       }
-      function formatCodeSpan(file2, start2, length2, indent3, squiggleColor, host) {
-        const { line: firstLine, character: firstLineChar } = getLineAndCharacterOfPosition(file2, start2);
-        const { line: lastLine, character: lastLineChar } = getLineAndCharacterOfPosition(file2, start2 + length2);
+      function formatCodeSpan(file2, start3, length2, indent3, squiggleColor, host) {
+        const { line: firstLine, character: firstLineChar } = getLineAndCharacterOfPosition(file2, start3);
+        const { line: lastLine, character: lastLineChar } = getLineAndCharacterOfPosition(file2, start3 + length2);
         const lastLineInFile = getLineAndCharacterOfPosition(file2, file2.text.length).line;
         const hasMoreThanFiveLines = lastLine - firstLine >= 4;
         let gutterWidth = (lastLine + 1 + "").length;
@@ -175877,8 +175877,8 @@ ${lanes.join("\n")}
         }
         return context;
       }
-      function formatLocation(file2, start2, host, color = formatColorAndReset) {
-        const { line: firstLine, character: firstLineChar } = getLineAndCharacterOfPosition(file2, start2);
+      function formatLocation(file2, start3, host, color = formatColorAndReset) {
+        const { line: firstLine, character: firstLineChar } = getLineAndCharacterOfPosition(file2, start3);
         const relativeFileName = host ? convertToRelativePath(file2.fileName, host.getCurrentDirectory(), (fileName) => host.getCanonicalFileName(fileName)) : file2.fileName;
         let output = "";
         output += color(
@@ -175904,8 +175904,8 @@ ${lanes.join("\n")}
         let output = "";
         for (const diagnostic of diagnostics) {
           if (diagnostic.file) {
-            const { file: file2, start: start2 } = diagnostic;
-            output += formatLocation(file2, start2, host);
+            const { file: file2, start: start3 } = diagnostic;
+            output += formatLocation(file2, start3, host);
             output += " - ";
           }
           output += formatColorAndReset(diagnosticCategoryName(diagnostic), getCategoryFormat(diagnostic.category));
@@ -175921,11 +175921,11 @@ ${lanes.join("\n")}
           }
           if (diagnostic.relatedInformation) {
             output += host.getNewLine();
-            for (const { file: file2, start: start2, length: length2, messageText } of diagnostic.relatedInformation) {
+            for (const { file: file2, start: start3, length: length2, messageText } of diagnostic.relatedInformation) {
               if (file2) {
                 output += host.getNewLine();
-                output += halfIndent + formatLocation(file2, start2, host);
-                output += formatCodeSpan(file2, start2, length2, indent, "\x1B[96m", host);
+                output += halfIndent + formatLocation(file2, start3, host);
+                output += formatCodeSpan(file2, start3, length2, indent, "\x1B[96m", host);
               }
               output += host.getNewLine();
               output += indent + flattenDiagnosticMessageText(messageText, host.getNewLine());
@@ -177522,12 +177522,12 @@ ${lanes.join("\n")}
           });
         }
         function markPrecedingCommentDirectiveLine(diagnostic, directives) {
-          const { file: file2, start: start2 } = diagnostic;
+          const { file: file2, start: start3 } = diagnostic;
           if (!file2) {
             return -1;
           }
           const lineStarts = getLineStarts(file2);
-          let line = computeLineAndCharacterOfPosition(lineStarts, start2).line - 1;
+          let line = computeLineAndCharacterOfPosition(lineStarts, start3).line - 1;
           while (line >= 0) {
             if (directives.markUsed(line)) {
               return line;
@@ -177768,8 +177768,8 @@ ${lanes.join("\n")}
               }
             }
             function createDiagnosticForNodeArray2(nodes, message, ...args) {
-              const start2 = nodes.pos;
-              return createFileDiagnostic(sourceFile, start2, nodes.end - start2, message, ...args);
+              const start3 = nodes.pos;
+              return createFileDiagnostic(sourceFile, start3, nodes.end - start3, message, ...args);
             }
             function createDiagnosticForNode2(node, message, ...args) {
               return createDiagnosticForNodeInSourceFile(sourceFile, node, message, ...args);
@@ -187686,8 +187686,8 @@ ${lanes.join("\n")}
                 nonlocalNode ? visitNodesWithoutCopyingPositions : void 0
               );
             }
-            function visitNodesWithoutCopyingPositions(nodes, visitor, test, start2, count) {
-              let result = visitNodes2(nodes, visitor, test, start2, count);
+            function visitNodesWithoutCopyingPositions(nodes, visitor, test, start3, count) {
+              let result = visitNodes2(nodes, visitor, test, start3, count);
               if (result) {
                 if (result.pos !== -1 || result.end !== -1) {
                   if (result === nodes) {
@@ -188836,8 +188836,8 @@ ${lanes.join("\n")}
           constructor(text) {
             this.text = text;
           }
-          getText(start2, end) {
-            return start2 === 0 && end === this.text.length ? this.text : this.text.substring(start2, end);
+          getText(start3, end) {
+            return start3 === 0 && end === this.text.length ? this.text : this.text.substring(start3, end);
           }
           getLength() {
             return this.text.length;
@@ -189561,17 +189561,17 @@ ${lanes.join("\n")}
       function rangeContainsPositionExclusive(r2, pos) {
         return r2.pos < pos && pos < r2.end;
       }
-      function rangeContainsStartEnd(range, start2, end) {
-        return range.pos <= start2 && range.end >= end;
+      function rangeContainsStartEnd(range, start3, end) {
+        return range.pos <= start3 && range.end >= end;
       }
-      function rangeOverlapsWithStartEnd(r1, start2, end) {
-        return startEndOverlapsWithStartEnd(r1.pos, r1.end, start2, end);
+      function rangeOverlapsWithStartEnd(r1, start3, end) {
+        return startEndOverlapsWithStartEnd(r1.pos, r1.end, start3, end);
       }
-      function nodeOverlapsWithStartEnd(node, sourceFile, start2, end) {
-        return startEndOverlapsWithStartEnd(node.getStart(sourceFile), node.end, start2, end);
+      function nodeOverlapsWithStartEnd(node, sourceFile, start3, end) {
+        return startEndOverlapsWithStartEnd(node.getStart(sourceFile), node.end, start3, end);
       }
-      function startEndOverlapsWithStartEnd(start1, end1, start2, end2) {
-        const start3 = Math.max(start1, start2);
+      function startEndOverlapsWithStartEnd(start1, end1, start22, end2) {
+        const start3 = Math.max(start1, start22);
         const end = Math.min(end1, end2);
         return start3 < end;
       }
@@ -189989,15 +189989,15 @@ ${lanes.join("\n")}
               if (end < position) {
                 return -1;
               }
-              const start2 = allowPositionInLeadingTrivia ? children[middle].getFullStart() : children[middle].getStart(
+              const start3 = allowPositionInLeadingTrivia ? children[middle].getFullStart() : children[middle].getStart(
                 sourceFile,
                 /*includeJsDocComment*/
                 true
               );
-              if (start2 > position) {
+              if (start3 > position) {
                 return 1;
               }
-              if (nodeContainsPosition(children[middle], start2, end)) {
+              if (nodeContainsPosition(children[middle], start3, end)) {
                 if (children[middle - 1]) {
                   if (nodeContainsPosition(children[middle - 1])) {
                     return 1;
@@ -190005,7 +190005,7 @@ ${lanes.join("\n")}
                 }
                 return 0;
               }
-              if (includePrecedingTokenAtEndPosition && start2 === position && children[middle - 1] && children[middle - 1].getEnd() === position && nodeContainsPosition(children[middle - 1])) {
+              if (includePrecedingTokenAtEndPosition && start3 === position && children[middle - 1] && children[middle - 1].getEnd() === position && nodeContainsPosition(children[middle - 1])) {
                 return 1;
               }
               return -1;
@@ -190019,17 +190019,17 @@ ${lanes.join("\n")}
             }
             return current;
           }
-        function nodeContainsPosition(node, start2, end) {
+        function nodeContainsPosition(node, start3, end) {
           end ?? (end = node.getEnd());
           if (end < position) {
             return false;
           }
-          start2 ?? (start2 = allowPositionInLeadingTrivia ? node.getFullStart() : node.getStart(
+          start3 ?? (start3 = allowPositionInLeadingTrivia ? node.getFullStart() : node.getStart(
             sourceFile,
             /*includeJsDocComment*/
             true
           ));
-          if (start2 > position) {
+          if (start3 > position) {
             return false;
           }
           if (position < end || position === end && (node.kind === 1 || includeEndPosition)) {
@@ -190097,12 +190097,12 @@ ${lanes.join("\n")}
           if (i2 >= 0 && children[i2]) {
             const child = children[i2];
             if (position < child.end) {
-              const start2 = child.getStart(
+              const start3 = child.getStart(
                 sourceFile,
                 /*includeJsDoc*/
                 !excludeJsdoc
               );
-              const lookInPreviousChild = start2 >= position || // cursor in the leading trivia
+              const lookInPreviousChild = start3 >= position || // cursor in the leading trivia
               !nodeHasTokens(child, sourceFile) || isWhiteSpaceOnlyJsxText(child);
               if (lookInPreviousChild) {
                 const candidate2 = findRightmostChildNodeWithTokens(
@@ -190169,9 +190169,9 @@ ${lanes.join("\n")}
       }
       function isInString(sourceFile, position, previousToken = findPrecedingToken(position, sourceFile)) {
         if (previousToken && isStringTextContainingNode(previousToken)) {
-          const start2 = previousToken.getStart(sourceFile);
+          const start3 = previousToken.getStart(sourceFile);
           const end = previousToken.getEnd();
-          if (start2 < position && position < end) {
+          if (start3 < position && position < end) {
             return true;
           }
           if (position === end) {
@@ -190533,8 +190533,8 @@ ${lanes.join("\n")}
       function createTextRangeFromSpan(span) {
         return createRange(span.start, span.start + span.length);
       }
-      function createTextChangeFromStartLength(start2, length2, newText) {
-        return createTextChange(createTextSpan(start2, length2), newText);
+      function createTextChangeFromStartLength(start3, length2, newText) {
+        return createTextChange(createTextSpan(start3, length2), newText);
       }
       function createTextChange(span, newText) {
         return { span, newText };
@@ -191249,9 +191249,9 @@ ${lanes.join("\n")}
         copyTrailingComments(sourceNode, targetNode, sourceFile);
       }
       function hasLeadingLineBreak(node, text) {
-        const start2 = node.getFullStart();
+        const start3 = node.getFullStart();
         const end = node.getStart();
-        for (let i2 = start2; i2 < end; i2++) {
+        for (let i2 = start3; i2 < end; i2++) {
           if (text.charCodeAt(i2) === 10) return true;
         }
         return false;
@@ -192282,7 +192282,7 @@ ${lanes.join("\n")}
         ));
         const autoImportProvider = useAutoImportProvider && ((_a2 = host.getPackageJsonAutoImportProvider) == null ? void 0 : _a2.call(host));
         if (autoImportProvider) {
-          const start2 = timestamp();
+          const start3 = timestamp();
           const checker = program2.getTypeChecker();
           forEachExternalModule(autoImportProvider.getTypeChecker(), autoImportProvider.getSourceFiles(), excludePatterns, host, (module22, file2) => {
             if (file2 && !program2.getSourceFile(file2.fileName) || !file2 && !checker.resolveName(
@@ -192302,7 +192302,7 @@ ${lanes.join("\n")}
               );
             }
           });
-          (_b = host.log) == null ? void 0 : _b.call(host, `forEachExternalModuleToImportFrom autoImportProvider: ${timestamp() - start2}`);
+          (_b = host.log) == null ? void 0 : _b.call(host, `forEachExternalModuleToImportFrom autoImportProvider: ${timestamp() - start3}`);
         }
       }
       function getIsExcludedPatterns(preferences, useCaseSensitiveFileNames2) {
@@ -192357,7 +192357,7 @@ ${lanes.join("\n")}
       }
       function getExportInfoMap(importingFile, host, program2, preferences, cancellationToken) {
         var _a2, _b, _c, _d, _e;
-        const start2 = timestamp();
+        const start3 = timestamp();
         (_a2 = host.getPackageJsonAutoImportProvider) == null ? void 0 : _a2.call(host);
         const cache = ((_b = host.getCachedExportInfoMap) == null ? void 0 : _b.call(host)) || createCacheableExportInfoMap({
           getCurrentProgram: () => program2,
@@ -192420,7 +192420,7 @@ ${lanes.join("\n")}
           cache.clear();
           throw err;
         }
-        (_e = host.log) == null ? void 0 : _e.call(host, `getExportInfoMap: done in ${timestamp() - start2} ms`);
+        (_e = host.log) == null ? void 0 : _e.call(host, `getExportInfoMap: done in ${timestamp() - start3} ms`);
         return cache;
       }
       function getDefaultLikeExportInfo(moduleSymbol, checker) {
@@ -192656,16 +192656,16 @@ ${lanes.join("\n")}
             return lastOnTemplateStack === 16 ? 6 : void 0;
         }
       }
-      function pushEncodedClassification(start2, end, offset, classification, result) {
+      function pushEncodedClassification(start3, end, offset, classification, result) {
         if (classification === 8) {
           return;
         }
-        if (start2 === 0 && offset > 0) {
-          start2 += offset;
+        if (start3 === 0 && offset > 0) {
+          start3 += offset;
         }
-        const length2 = end - start2;
+        const length2 = end - start3;
         if (length2 > 0) {
-          result.push(start2 - offset, length2, classification);
+          result.push(start3 - offset, length2, classification);
         }
       }
       function convertClassificationsToResult(classifications, text) {
@@ -192673,11 +192673,11 @@ ${lanes.join("\n")}
         const dense = classifications.spans;
         let lastEnd = 0;
         for (let i2 = 0; i2 < dense.length; i2 += 3) {
-          const start2 = dense[i2];
+          const start3 = dense[i2];
           const length2 = dense[i2 + 1];
           const type = dense[i2 + 2];
           if (lastEnd >= 0) {
-            const whitespaceLength2 = start2 - lastEnd;
+            const whitespaceLength2 = start3 - lastEnd;
             if (whitespaceLength2 > 0) {
               entries.push({
                 length: whitespaceLength2,
@@ -192687,7 +192687,7 @@ ${lanes.join("\n")}
             }
           }
           entries.push({ length: length2, classification: convertClassification(type) });
-          lastEnd = start2 + length2;
+          lastEnd = start3 + length2;
         }
         const whitespaceLength = text.length - lastEnd;
         if (whitespaceLength > 0) {
@@ -192897,10 +192897,10 @@ ${lanes.join("\n")}
           endOfLineState: 0
           /* None */
         };
-        function pushClassification(start2, end, type) {
-          const length2 = end - start2;
+        function pushClassification(start3, end, type) {
+          const length2 = end - start3;
           Debug.assert(length2 > 0, `Classification had non-positive length of ${length2}`);
-          spans.push(start2);
+          spans.push(start3);
           spans.push(length2);
           spans.push(type);
         }
@@ -193025,23 +193025,23 @@ ${lanes.join("\n")}
           endOfLineState: 0
           /* None */
         };
-        function pushClassification(start2, length2, type) {
-          result.push(start2);
+        function pushClassification(start3, length2, type) {
+          result.push(start3);
           result.push(length2);
           result.push(type);
         }
         function classifyLeadingTriviaAndGetTokenStart(token) {
           triviaScanner.resetTokenState(token.pos);
           while (true) {
-            const start2 = triviaScanner.getTokenEnd();
-            if (!couldStartTrivia(sourceFile.text, start2)) {
-              return start2;
+            const start3 = triviaScanner.getTokenEnd();
+            if (!couldStartTrivia(sourceFile.text, start3)) {
+              return start3;
             }
             const kind = triviaScanner.scan();
             const end = triviaScanner.getTokenEnd();
-            const width = end - start2;
+            const width = end - start3;
             if (!isTrivia(kind)) {
-              return start2;
+              return start3;
             }
             switch (kind) {
               case 4:
@@ -193049,15 +193049,15 @@ ${lanes.join("\n")}
                 continue;
               case 2:
               case 3:
-                classifyComment(token, kind, start2, width);
+                classifyComment(token, kind, start3, width);
                 triviaScanner.resetTokenState(end);
                 continue;
               case 7:
                 const text = sourceFile.text;
-                const ch = text.charCodeAt(start2);
+                const ch = text.charCodeAt(start3);
                 if (ch === 60 || ch === 62) {
                   pushClassification(
-                    start2,
+                    start3,
                     width,
                     1
                     /* comment */
@@ -193068,7 +193068,7 @@ ${lanes.join("\n")}
                   ch === 124 || ch === 61
                   /* equals */
                 );
-                classifyDisabledMergeCode(text, start2, end);
+                classifyDisabledMergeCode(text, start3, end);
                 break;
               case 6:
                 break;
@@ -193077,24 +193077,24 @@ ${lanes.join("\n")}
             }
           }
         }
-        function classifyComment(token, kind, start2, width) {
+        function classifyComment(token, kind, start3, width) {
           if (kind === 3) {
-            const docCommentAndDiagnostics = parseIsolatedJSDocComment(sourceFile.text, start2, width);
+            const docCommentAndDiagnostics = parseIsolatedJSDocComment(sourceFile.text, start3, width);
             if (docCommentAndDiagnostics && docCommentAndDiagnostics.jsDoc) {
               setParent(docCommentAndDiagnostics.jsDoc, token);
               classifyJSDocComment(docCommentAndDiagnostics.jsDoc);
               return;
             }
           } else if (kind === 2) {
-            if (tryClassifyTripleSlashComment(start2, width)) {
+            if (tryClassifyTripleSlashComment(start3, width)) {
               return;
             }
           }
-          pushCommentRange(start2, width);
+          pushCommentRange(start3, width);
         }
-        function pushCommentRange(start2, width) {
+        function pushCommentRange(start3, width) {
           pushClassification(
-            start2,
+            start3,
             width,
             1
             /* comment */
@@ -193210,10 +193210,10 @@ ${lanes.join("\n")}
             }
           }
         }
-        function tryClassifyTripleSlashComment(start2, width) {
+        function tryClassifyTripleSlashComment(start3, width) {
           const tripleSlashXMLCommentRegEx = /^(\/\/\/\s*)(<)(?:(\S+)((?:[^/]|\/[^>])*)(\/>)?)?/m;
           const attributeRegex = /(\s)(\S+)(\s*)(=)(\s*)('[^']+'|"[^"]+")/g;
-          const text = sourceFile.text.substr(start2, width);
+          const text = sourceFile.text.substr(start3, width);
           const match = tripleSlashXMLCommentRegEx.exec(text);
           if (!match) {
             return false;
@@ -193221,7 +193221,7 @@ ${lanes.join("\n")}
           if (!match[3] || !(match[3] in commentPragmas)) {
             return false;
           }
-          let pos = start2;
+          let pos = start3;
           pushCommentRange(pos, match[1].length);
           pos += match[1].length;
           pushClassification(
@@ -193293,7 +193293,7 @@ ${lanes.join("\n")}
             );
             pos += match[5].length;
           }
-          const end = start2 + width;
+          const end = start3 + width;
           if (pos < end) {
             pushCommentRange(pos, end - pos);
           }
@@ -193304,16 +193304,16 @@ ${lanes.join("\n")}
             processElement(child);
           }
         }
-        function classifyDisabledMergeCode(text, start2, end) {
+        function classifyDisabledMergeCode(text, start3, end) {
           let i2;
-          for (i2 = start2; i2 < end; i2++) {
+          for (i2 = start3; i2 < end; i2++) {
             if (isLineBreak(text.charCodeAt(i2))) {
               break;
             }
           }
           pushClassification(
-            start2,
-            i2 - start2,
+            start3,
+            i2 - start3,
             1
             /* comment */
           );
@@ -193323,12 +193323,12 @@ ${lanes.join("\n")}
           }
         }
         function classifyDisabledCodeToken() {
-          const start2 = mergeConflictScanner.getTokenEnd();
+          const start3 = mergeConflictScanner.getTokenEnd();
           const tokenKind = mergeConflictScanner.scan();
           const end = mergeConflictScanner.getTokenEnd();
           const type = classifyTokenType(tokenKind);
           if (type) {
-            pushClassification(start2, end - start2, type);
+            pushClassification(start3, end - start3, type);
           }
         }
         function tryClassifyNode(node) {
@@ -194569,9 +194569,9 @@ ${lanes.join("\n")}
       }
       function indexOfIgnoringCase(str2, value) {
         const n = str2.length - value.length;
-        for (let start2 = 0; start2 <= n; start2++) {
-          if (every2(value, (valueChar, i2) => toLowerCase2(str2.charCodeAt(i2 + start2)) === valueChar)) {
-            return start2;
+        for (let start3 = 0; start3 <= n; start3++) {
+          if (every2(value, (valueChar, i2) => toLowerCase2(str2.charCodeAt(i2 + start3)) === valueChar)) {
+            return start3;
           }
         }
         return -1;
@@ -194686,8 +194686,8 @@ ${lanes.join("\n")}
         }
         return false;
       }
-      function isAllPunctuation(identifier, start2, end) {
-        return every2(identifier, (ch) => charIsPunctuation(ch) && ch !== 95, start2, end);
+      function isAllPunctuation(identifier, start3, end) {
+        return every2(identifier, (ch) => charIsPunctuation(ch) && ch !== 95, start3, end);
       }
       function transitionFromUpperToLower(identifier, index, wordStart) {
         return index !== wordStart && index + 1 < identifier.length && isUpperCaseLetter(identifier.charCodeAt(index)) && isLowerCaseLetter(identifier.charCodeAt(index + 1)) && every2(identifier, isUpperCaseLetter, wordStart, index);
@@ -194697,16 +194697,16 @@ ${lanes.join("\n")}
         const currentIsUpper = isUpperCaseLetter(identifier.charCodeAt(index));
         return currentIsUpper && (!word || !lastIsUpper);
       }
-      function everyInRange(start2, end, pred) {
-        for (let i2 = start2; i2 < end; i2++) {
+      function everyInRange(start3, end, pred) {
+        for (let i2 = start3; i2 < end; i2++) {
           if (!pred(i2)) {
             return false;
           }
         }
         return true;
       }
-      function every2(s2, pred, start2 = 0, end = s2.length) {
-        return everyInRange(start2, end, (i2) => pred(s2.charCodeAt(i2), i2));
+      function every2(s2, pred, start3 = 0, end = s2.length) {
+        return everyInRange(start3, end, (i2) => pred(s2.charCodeAt(i2), i2));
       }
       function preProcessFile(sourceText, readImportFiles = true, detectJavaScriptImports = false) {
         const pragmaContext = {
@@ -197930,9 +197930,9 @@ interface Symbol {
         const all = [];
         const ranges = [];
         const { toMove, afterLast } = rangeToMove;
-        getRangesWhere(toMove, isAllowedStatementToMove, (start2, afterEndIndex) => {
-          for (let i2 = start2; i2 < afterEndIndex; i2++) all.push(toMove[i2]);
-          ranges.push({ first: toMove[start2], afterLast });
+        getRangesWhere(toMove, isAllowedStatementToMove, (start3, afterEndIndex) => {
+          for (let i2 = start3; i2 < afterEndIndex; i2++) all.push(toMove[i2]);
+          ranges.push({ first: toMove[start3], afterLast });
         });
         return all.length === 0 ? void 0 : { all, ranges };
       }
@@ -198184,8 +198184,8 @@ interface Symbol {
           const lastDecl = declarations[length(declarations) - 1];
           const statementsToMove = mapDefined(declarations, (d) => getSourceFileOfNode(d) === sourceFile && isStatement(d) ? d : void 0);
           const end = findIndex(sourceFile.statements, (s2) => s2.end >= lastDecl.end);
-          const start2 = findIndex(sourceFile.statements, (s2) => s2.end >= firstDecl.end);
-          return { toMove: statementsToMove, start: start2, end };
+          const start3 = findIndex(sourceFile.statements, (s2) => s2.end >= firstDecl.end);
+          return { toMove: statementsToMove, start: start3, end };
         }
         return void 0;
       }
@@ -200230,26 +200230,26 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const startToken = findFirstNonJsxWhitespaceToken(sourceFile, span.start);
         const endToken = findTokenOnLeftOfPosition(sourceFile, textSpanEnd(span));
         const adjustedSpan = startToken && endToken && invoked ? getAdjustedSpanFromNodes(startToken, endToken, sourceFile) : span;
-        const start2 = cursorRequest ? getExtractableParent(startToken) : getParentNodeInSpan(startToken, sourceFile, adjustedSpan);
-        const end = cursorRequest ? start2 : getParentNodeInSpan(endToken, sourceFile, adjustedSpan);
+        const start3 = cursorRequest ? getExtractableParent(startToken) : getParentNodeInSpan(startToken, sourceFile, adjustedSpan);
+        const end = cursorRequest ? start3 : getParentNodeInSpan(endToken, sourceFile, adjustedSpan);
         let rangeFacts = 0;
         let thisNode;
-        if (!start2 || !end) {
+        if (!start3 || !end) {
           return { errors: [createFileDiagnostic(sourceFile, span.start, length2, Messages.cannotExtractRange)] };
         }
-        if (start2.flags & 16777216) {
+        if (start3.flags & 16777216) {
           return { errors: [createFileDiagnostic(sourceFile, span.start, length2, Messages.cannotExtractJSDoc)] };
         }
-        if (start2.parent !== end.parent) {
+        if (start3.parent !== end.parent) {
           return { errors: [createFileDiagnostic(sourceFile, span.start, length2, Messages.cannotExtractRange)] };
         }
-        if (start2 !== end) {
-          if (!isBlockLike(start2.parent)) {
+        if (start3 !== end) {
+          if (!isBlockLike(start3.parent)) {
             return { errors: [createFileDiagnostic(sourceFile, span.start, length2, Messages.cannotExtractRange)] };
           }
           const statements = [];
-          for (const statement of start2.parent.statements) {
-            if (statement === start2 || statements.length) {
+          for (const statement of start3.parent.statements) {
+            if (statement === start3 || statements.length) {
               const errors2 = checkNode(statement);
               if (errors2) {
                 return { errors: errors2 };
@@ -200265,10 +200265,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
           return { targetRange: { range: statements, facts: rangeFacts, thisNode } };
         }
-        if (isReturnStatement(start2) && !start2.expression) {
+        if (isReturnStatement(start3) && !start3.expression) {
           return { errors: [createFileDiagnostic(sourceFile, span.start, length2, Messages.cannotExtractRange)] };
         }
-        const node = refineNode(start2);
+        const node = refineNode(start3);
         const errors = checkRootNode(node) || checkNode(node);
         if (errors) {
           return { errors };
@@ -200500,12 +200500,12 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getAdjustedSpanFromNodes(startNode2, endNode2, sourceFile) {
-        const start2 = startNode2.getStart(sourceFile);
+        const start3 = startNode2.getStart(sourceFile);
         let end = endNode2.getEnd();
         if (sourceFile.text.charCodeAt(end) === 59) {
           end++;
         }
-        return { start: start2, length: end - start2 };
+        return { start: start3, length: end - start3 };
       }
       function getStatementOrExpressionRange(node) {
         if (isStatement(node)) {
@@ -201413,9 +201413,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         let expressionDiagnostic;
         if (expression === void 0) {
           const statements = targetRange.range;
-          const start2 = first2(statements).getStart();
+          const start3 = first2(statements).getStart();
           const end = last(statements).end;
-          expressionDiagnostic = createFileDiagnostic(sourceFile, start2, end - start2, Messages.expressionExpected);
+          expressionDiagnostic = createFileDiagnostic(sourceFile, start3, end - start3, Messages.expressionExpected);
         } else if (checker.getTypeAtLocation(expression).flags & (16384 | 131072)) {
           expressionDiagnostic = createDiagnosticForNode(expression, Messages.uselessConstantType);
         }
@@ -203877,18 +203877,18 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return match ? [createTextSpanFromNode(token, sourceFile), createTextSpanFromNode(match, sourceFile)].sort((a, b) => a.start - b.start) : emptyArray;
         }
         function getIndentationAtPosition(fileName, position, editorOptions) {
-          let start2 = timestamp();
+          let start3 = timestamp();
           const settings = toEditorSettings(editorOptions);
           const sourceFile = syntaxTreeCache.getCurrentSourceFile(fileName);
-          log("getIndentationAtPosition: getCurrentSourceFile: " + (timestamp() - start2));
-          start2 = timestamp();
+          log("getIndentationAtPosition: getCurrentSourceFile: " + (timestamp() - start3));
+          start3 = timestamp();
           const result = ts_formatting_exports.SmartIndenter.getIndentation(position, sourceFile, settings);
-          log("getIndentationAtPosition: computeIndentation  : " + (timestamp() - start2));
+          log("getIndentationAtPosition: computeIndentation  : " + (timestamp() - start3));
           return result;
         }
-        function getFormattingEditsForRange(fileName, start2, end, options) {
+        function getFormattingEditsForRange(fileName, start3, end, options) {
           const sourceFile = syntaxTreeCache.getCurrentSourceFile(fileName);
-          return ts_formatting_exports.formatSelection(start2, end, sourceFile, ts_formatting_exports.getFormatContext(toEditorSettings(options), host));
+          return ts_formatting_exports.formatSelection(start3, end, sourceFile, ts_formatting_exports.getFormatContext(toEditorSettings(options), host));
         }
         function getFormattingEditsForDocument(fileName, options) {
           return ts_formatting_exports.formatDocument(syntaxTreeCache.getCurrentSourceFile(fileName), ts_formatting_exports.getFormatContext(toEditorSettings(options), host));
@@ -203910,10 +203910,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
           return [];
         }
-        function getCodeFixesAtPosition(fileName, start2, end, errorCodes68, formatOptions, preferences = emptyOptions) {
+        function getCodeFixesAtPosition(fileName, start3, end, errorCodes68, formatOptions, preferences = emptyOptions) {
           synchronizeHostData();
           const sourceFile = getValidSourceFile(fileName);
-          const span = createTextSpanFromBounds(start2, end);
+          const span = createTextSpanFromBounds(start3, end);
           const formatContext = ts_formatting_exports.getFormatContext(formatOptions, host);
           return flatMap(deduplicate(errorCodes68, equateValues, compareValues), (errorCode) => {
             cancellationToken.throwIfCancellationRequested();
@@ -204617,8 +204617,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return spanInNode(tokenAtLocation);
         function textSpan(startNode2, endNode2) {
           const lastDecorator = canHaveDecorators(startNode2) ? findLast(startNode2.modifiers, isDecorator) : void 0;
-          const start2 = lastDecorator ? skipTrivia(sourceFile.text, lastDecorator.end) : startNode2.getStart(sourceFile);
-          return createTextSpanFromBounds(start2, (endNode2 || startNode2).getEnd());
+          const start3 = lastDecorator ? skipTrivia(sourceFile.text, lastDecorator.end) : startNode2.getStart(sourceFile);
+          return createTextSpanFromBounds(start3, (endNode2 || startNode2).getEnd());
         }
         function textSpanEndingAtNextToken(startNode2, previousTokenToFindNextEndToken) {
           return textSpan(startNode2, findNextToken(previousTokenToFindNextEndToken, previousTokenToFindNextEndToken.parent, sourceFile));
@@ -204633,11 +204633,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           if (nodeArray) {
             const index = nodeArray.indexOf(node);
             if (index >= 0) {
-              let start2 = index;
+              let start3 = index;
               let end = index + 1;
-              while (start2 > 0 && match(nodeArray[start2 - 1])) start2--;
+              while (start3 > 0 && match(nodeArray[start3 - 1])) start3--;
               while (end < nodeArray.length && match(nodeArray[end])) end++;
-              return createTextSpanFromBounds(skipTrivia(sourceFile.text, nodeArray[start2].pos), nodeArray[end - 1].end);
+              return createTextSpanFromBounds(skipTrivia(sourceFile.text, nodeArray[start3].pos), nodeArray[end - 1].end);
             }
           }
           return textSpan(node);
@@ -205819,7 +205819,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return decl;
       }
       function getIsMatchingAsyncError(span, errorCode) {
-        return ({ start: start2, length: length2, relatedInformation, code }) => isNumber(start2) && isNumber(length2) && textSpansEqual({ start: start2, length: length2 }, span) && code === errorCode && !!relatedInformation && some(relatedInformation, (related) => related.code === Diagnostics.Did_you_mean_to_mark_this_function_as_async.code);
+        return ({ start: start3, length: length2, relatedInformation, code }) => isNumber(start3) && isNumber(length2) && textSpansEqual({ start: start3, length: length2 }, span) && code === errorCode && !!relatedInformation && some(relatedInformation, (related) => related.code === Diagnostics.Did_you_mean_to_mark_this_function_as_async.code);
       }
       var fixId3 = "addMissingAwait";
       var propertyAccessCode = Diagnostics.Property_0_does_not_exist_on_type_1.code;
@@ -205904,7 +205904,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function isMissingAwaitError(sourceFile, errorCode, span, cancellationToken, program2) {
         const checker = program2.getTypeChecker();
         const diagnostics = checker.getDiagnostics(sourceFile, cancellationToken);
-        return some(diagnostics, ({ start: start2, length: length2, relatedInformation, code }) => isNumber(start2) && isNumber(length2) && textSpansEqual({ start: start2, length: length2 }, span) && code === errorCode && !!relatedInformation && some(relatedInformation, (related) => related.code === Diagnostics.Did_you_forget_to_use_await.code));
+        return some(diagnostics, ({ start: start3, length: length2, relatedInformation, code }) => isNumber(start3) && isNumber(length2) && textSpansEqual({ start: start3, length: length2 }, span) && code === errorCode && !!relatedInformation && some(relatedInformation, (related) => related.code === Diagnostics.Did_you_forget_to_use_await.code));
       }
       function findAwaitableInitializers(expression, sourceFile, cancellationToken, program2, checker) {
         const identifiers = getIdentifiersFromErrorSpanExpression(expression, checker);
@@ -206281,8 +206281,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         fixIds: [fixId8],
         getAllCodeActions: (context) => codeFixAll(context, errorCodes8, (changes, diag2) => makeChange8(changes, diag2.file, diag2.start))
       });
-      function makeChange8(changeTracker, sourceFile, start2) {
-        const token = getTokenAtPosition(sourceFile, start2);
+      function makeChange8(changeTracker, sourceFile, start3) {
+        const token = getTokenAtPosition(sourceFile, start3);
         const param = token.parent;
         if (!isParameter(param)) {
           return Debug.fail("Tried to add a parameter name to a non-parameter: " + Debug.formatSyntaxKind(token.kind));
@@ -210582,12 +210582,12 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         },
         fixIds: [fixName, fixAddOverrideId, fixRemoveOverrideId],
         getAllCodeActions: (context) => codeFixAll(context, errorCodes21, (changes, diag2) => {
-          const { code, start: start2 } = diag2;
+          const { code, start: start3 } = diag2;
           const info = errorCodeFixIdMap[code];
           if (!info || info.fixId !== context.fixId) {
             return;
           }
-          dispatchChanges(changes, context, code, start2);
+          dispatchChanges(changes, context, code, start3);
         })
       });
       function dispatchChanges(changeTracker, context, errorCode, pos) {
@@ -211086,8 +211086,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         errorCodes: errorCodes27,
         fixIds: [fixIdAddReturnStatement, fixRemoveBracesFromArrowFunctionBody, fixIdWrapTheBlockWithParen],
         getCodeActions: function getCodeActionsToCorrectReturnValue(context) {
-          const { program: program2, sourceFile, span: { start: start2 }, errorCode } = context;
-          const info = getInfo9(program2.getTypeChecker(), sourceFile, start2, errorCode);
+          const { program: program2, sourceFile, span: { start: start3 }, errorCode } = context;
+          const info = getInfo9(program2.getTypeChecker(), sourceFile, start3, errorCode);
           if (!info) return void 0;
           if (info.kind === 0) {
             return append(
@@ -212296,8 +212296,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       registerCodeFix({
         errorCodes: errorCodes31,
         getCodeActions: function getCodeActionsToFixNotFoundModule(context) {
-          const { host, sourceFile, span: { start: start2 }, errorCode } = context;
-          const packageName = errorCode === errorCannotFindImplicitJsxImport ? getJSXImplicitImportBase(context.program.getCompilerOptions(), sourceFile) : tryGetImportedPackageName(sourceFile, start2);
+          const { host, sourceFile, span: { start: start3 }, errorCode } = context;
+          const packageName = errorCode === errorCannotFindImplicitJsxImport ? getJSXImplicitImportBase(context.program.getCompilerOptions(), sourceFile) : tryGetImportedPackageName(sourceFile, start3);
           if (packageName === void 0) return void 0;
           const typesPackageName = getTypesPackageNameToInstall(packageName, host, errorCode);
           return typesPackageName === void 0 ? [] : [createCodeFixAction(
@@ -212715,13 +212715,13 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function isValidCharacter(character) {
         return hasProperty(htmlEntity, character);
       }
-      function doChange26(changes, preferences, sourceFile, start2, useHtmlEntity) {
-        const character = sourceFile.getText()[start2];
+      function doChange26(changes, preferences, sourceFile, start3, useHtmlEntity) {
+        const character = sourceFile.getText()[start3];
         if (!isValidCharacter(character)) {
           return;
         }
         const replacement = useHtmlEntity ? htmlEntity[character] : `{${quote(sourceFile, preferences, character)}}`;
-        changes.replaceRangeWithText(sourceFile, { pos: start2, end: start2 + 1 }, replacement);
+        changes.replaceRangeWithText(sourceFile, { pos: start3, end: start3 + 1 }, replacement);
       }
       var deleteUnmatchedParameter = "deleteUnmatchedParameter";
       var renameUnmatchedParameter = "renameUnmatchedParameter";
@@ -212745,8 +212745,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         getAllCodeActions: function getAllCodeActionsToFixUnmatchedParameter(context) {
           const tagsToSignature = /* @__PURE__ */ new Map();
           return createCombinedCodeActions(ts_textChanges_exports.ChangeTracker.with(context, (changes) => {
-            eachDiagnostic(context, errorCodes41, ({ file: file2, start: start2 }) => {
-              const info = getInfo14(file2, start2);
+            eachDiagnostic(context, errorCodes41, ({ file: file2, start: start3 }) => {
+              const info = getInfo14(file2, start3);
               if (info) {
                 tagsToSignature.set(info.signature, append(tagsToSignature.get(info.signature), info.jsDocParameterTag));
               }
@@ -212826,8 +212826,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         },
         fixIds: [fixId33]
       });
-      function getImportDeclaration(sourceFile, program2, start2) {
-        const identifier = tryCast(getTokenAtPosition(sourceFile, start2), isIdentifier);
+      function getImportDeclaration(sourceFile, program2, start3) {
+        const identifier = tryCast(getTokenAtPosition(sourceFile, start3), isIdentifier);
         if (!identifier || identifier.parent.kind !== 184) return;
         const checker = program2.getTypeChecker();
         const symbol2 = checker.getSymbolAtLocation(identifier);
@@ -213214,15 +213214,15 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         fixIds: [fixId34],
         getAllCodeActions: (context) => codeFixAll(context, errorCodes44, (changes, diag2) => doChange27(changes, diag2.file, diag2.start, diag2.length, diag2.code))
       });
-      function doChange27(changes, sourceFile, start2, length2, errorCode) {
-        const token = getTokenAtPosition(sourceFile, start2);
+      function doChange27(changes, sourceFile, start3, length2, errorCode) {
+        const token = getTokenAtPosition(sourceFile, start3);
         const statement = findAncestor(token, isStatement);
         if (statement.getStart(sourceFile) !== token.getStart(sourceFile)) {
           const logData = JSON.stringify({
             statementKind: Debug.formatSyntaxKind(statement.kind),
             tokenKind: Debug.formatSyntaxKind(token.kind),
             errorCode,
-            start: start2,
+            start: start3,
             length: length2
           });
           Debug.fail("Token and statement should start at the same point. " + logData);
@@ -213247,7 +213247,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
         }
         if (isBlock(statement.parent)) {
-          const end = start2 + length2;
+          const end = start3 + length2;
           const lastStatement = Debug.checkDefined(lastWhere(sliceAfter(statement.parent.statements, statement), (s2) => s2.pos < end), "Some statement should be last");
           changes.deleteNodeRange(sourceFile, statement, lastStatement);
         } else {
@@ -213273,8 +213273,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         fixIds: [fixId35],
         getAllCodeActions: (context) => codeFixAll(context, errorCodes45, (changes, diag2) => doChange28(changes, diag2.file, diag2.start))
       });
-      function doChange28(changes, sourceFile, start2) {
-        const token = getTokenAtPosition(sourceFile, start2);
+      function doChange28(changes, sourceFile, start3) {
+        const token = getTokenAtPosition(sourceFile, start3);
         const labeledStatement = cast(token.parent, isLabeledStatement);
         const pos = token.getStart(sourceFile);
         const statementPos = labeledStatement.statement.getStart(sourceFile);
@@ -213400,8 +213400,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function doChange30(changes, sourceFile, name2) {
         changes.replaceNodeWithText(sourceFile, name2, `${name2.text}()`);
       }
-      function getCallName(sourceFile, start2) {
-        const token = getTokenAtPosition(sourceFile, start2);
+      function getCallName(sourceFile, start3) {
+        const token = getTokenAtPosition(sourceFile, start3);
         if (isPropertyAccessExpression(token.parent)) {
           let current = token.parent;
           while (isPropertyAccessExpression(current.parent)) {
@@ -214423,8 +214423,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return expr.parent.type.type;
         }
       }
-      function getNodes3(sourceFile, start2) {
-        const token = getTokenAtPosition(sourceFile, start2);
+      function getNodes3(sourceFile, start3) {
+        const token = getTokenAtPosition(sourceFile, start3);
         const containingFunction = getContainingFunction(token);
         if (!containingFunction) {
           return;
@@ -214482,15 +214482,15 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
         })
       });
-      function doChange32(file2, start2, length2, code, context) {
+      function doChange32(file2, start3, length2, code, context) {
         let startPosition;
         let endPosition;
         if (code === Diagnostics._0_is_defined_as_an_accessor_in_class_1_but_is_overridden_here_in_2_as_an_instance_property.code) {
-          startPosition = start2;
-          endPosition = start2 + length2;
+          startPosition = start3;
+          endPosition = start3 + length2;
         } else if (code === Diagnostics._0_is_defined_as_a_property_in_class_1_but_is_overridden_here_in_2_as_an_accessor.code) {
           const checker = context.program.getTypeChecker();
-          const node = getTokenAtPosition(file2, start2).parent;
+          const node = getTokenAtPosition(file2, start3).parent;
           if (isComputedPropertyName(node)) {
             return;
           }
@@ -214550,8 +214550,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       registerCodeFix({
         errorCodes: errorCodes51,
         getCodeActions(context) {
-          const { sourceFile, program: program2, span: { start: start2 }, errorCode, cancellationToken, host, preferences } = context;
-          const token = getTokenAtPosition(sourceFile, start2);
+          const { sourceFile, program: program2, span: { start: start3 }, errorCode, cancellationToken, host, preferences } = context;
+          const token = getTokenAtPosition(sourceFile, start3);
           let declaration;
           const changes = ts_textChanges_exports.ChangeTracker.with(context, (changes2) => {
             declaration = doChange33(
@@ -216447,8 +216447,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         return token;
       }
-      function generateAccessorFromProperty(file2, program2, start2, end, context, _actionName) {
-        const fieldInfo = getAccessorConvertiblePropertyAtPosition(file2, program2, start2, end);
+      function generateAccessorFromProperty(file2, program2, start3, end, context, _actionName) {
+        const fieldInfo = getAccessorConvertiblePropertyAtPosition(file2, program2, start3, end);
         if (!fieldInfo || ts_refactor_exports.isRefactorErrorInfo(fieldInfo)) return void 0;
         const changeTracker = ts_textChanges_exports.ChangeTracker.fromContext(context);
         const { isStatic: isStatic2, isReadonly, fieldName, accessorName, originalName, type, container, declaration } = fieldInfo;
@@ -216515,12 +216515,12 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         modifierFlags |= 2;
         return modifierFlags;
       }
-      function getAccessorConvertiblePropertyAtPosition(file2, program2, start2, end, considerEmptySpans = true) {
-        const node = getTokenAtPosition(file2, start2);
-        const cursorRequest = start2 === end && considerEmptySpans;
+      function getAccessorConvertiblePropertyAtPosition(file2, program2, start3, end, considerEmptySpans = true) {
+        const node = getTokenAtPosition(file2, start3);
+        const cursorRequest = start3 === end && considerEmptySpans;
         const declaration = findAncestor(node.parent, isAcceptedDeclaration);
         const meaning = 7 | 256 | 8;
-        if (!declaration || !(nodeOverlapsWithStartEnd(declaration.name, file2, start2, end) || cursorRequest)) {
+        if (!declaration || !(nodeOverlapsWithStartEnd(declaration.name, file2, start3, end) || cursorRequest)) {
           return {
             error: getLocaleSpecificMessage(Diagnostics.Could_not_find_property_for_which_to_generate_accessor)
           };
@@ -216997,8 +216997,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       registerCodeFix({
         errorCodes: errorCodes56,
         getCodeActions(context) {
-          const { sourceFile, span: { start: start2 } } = context;
-          const info = getInfo19(sourceFile, start2);
+          const { sourceFile, span: { start: start3 } } = context;
+          const info = getInfo19(sourceFile, start3);
           if (!info) return void 0;
           const changes = ts_textChanges_exports.ChangeTracker.with(context, (t2) => doChange36(t2, sourceFile, info, context.preferences));
           return [createCodeFixAction(fixId44, changes, Diagnostics.Convert_to_default_import, fixId44, Diagnostics.Convert_all_to_default_imports)];
@@ -217591,7 +217591,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function resolvingModuleSpecifiers(logPrefix, host, resolver, program2, position, preferences, isForImportStatementCompletion, isValidTypeOnlyUseSite, cb) {
         var _a2, _b, _c, _d;
-        const start2 = timestamp();
+        const start3 = timestamp();
         const needsFullResolution = isForImportStatementCompletion || getResolvePackageJsonExports(program2.getCompilerOptions()) || ((_a2 = preferences.autoImportSpecifierExcludeRegexes) == null ? void 0 : _a2.length);
         let skippedAny = false;
         let ambientCount = 0;
@@ -217607,7 +217607,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const hitRateMessage = cacheAttemptCount ? ` (${(resolvedFromCacheCount / cacheAttemptCount * 100).toFixed(1)}% hit rate)` : "";
         (_b = host.log) == null ? void 0 : _b.call(host, `${logPrefix}: resolved ${resolvedCount} module specifiers, plus ${ambientCount} ambient and ${resolvedFromCacheCount} from cache${hitRateMessage}`);
         (_c = host.log) == null ? void 0 : _c.call(host, `${logPrefix}: response is ${skippedAny ? "incomplete" : "complete"}`);
-        (_d = host.log) == null ? void 0 : _d.call(host, `${logPrefix}: ${timestamp() - start2}`);
+        (_d = host.log) == null ? void 0 : _d.call(host, `${logPrefix}: ${timestamp() - start3}`);
         return result;
         function tryResolve(exportInfo, isFromAmbientModule) {
           if (isFromAmbientModule) {
@@ -219002,10 +219002,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         function escapingWrite(s2, write) {
           const escaped = escapeSnippetText(s2);
           if (escaped !== s2) {
-            const start2 = baseWriter.getTextPos();
+            const start3 = baseWriter.getTextPos();
             write();
             const end = baseWriter.getTextPos();
-            escapes = append(escapes || (escapes = []), { newText: escaped, span: { start: start2, length: end - start2 } });
+            escapes = append(escapes || (escapes = []), { newText: escaped, span: { start: start3, length: end - start3 } });
           } else {
             write();
           }
@@ -219194,7 +219194,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getCompletionEntriesFromSymbols(symbols, entries, replacementToken, contextToken, location, position, sourceFile, host, program2, target, log, kind, preferences, compilerOptions, formatContext, isTypeOnlyLocation, propertyAccessToConvert, jsxIdentifierExpected, isJsxInitializer, importStatementCompletion, recommendedCompletion, symbolToOriginInfoMap, symbolToSortTextMap, isJsxIdentifierExpected, isRightOfOpenTag, includeSymbol = false) {
-        const start2 = timestamp();
+        const start3 = timestamp();
         const closestSymbolDeclaration = getClosestSymbolDeclaration(contextToken, location);
         const useSemicolons = probablyUsesSemicolons(sourceFile);
         const typeChecker = program2.getTypeChecker();
@@ -219253,7 +219253,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             true
           );
         }
-        log("getCompletionsAtPosition: getCompletionEntriesFromSymbols: " + (timestamp() - start2));
+        log("getCompletionsAtPosition: getCompletionEntriesFromSymbols: " + (timestamp() - start3));
         return {
           has: (name2) => uniques.has(name2),
           add: (name2) => uniques.set(name2, true)
@@ -219676,12 +219676,12 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getCompletionData(program2, log, sourceFile, compilerOptions, position, preferences, detailsEntryId, host, formatContext, cancellationToken) {
         const typeChecker = program2.getTypeChecker();
         const inCheckedFile = isCheckedFile(sourceFile, compilerOptions);
-        let start2 = timestamp();
+        let start3 = timestamp();
         let currentToken = getTokenAtPosition(sourceFile, position);
-        log("getCompletionData: Get current token: " + (timestamp() - start2));
-        start2 = timestamp();
+        log("getCompletionData: Get current token: " + (timestamp() - start3));
+        start3 = timestamp();
         const insideComment = isInComment(sourceFile, position, currentToken);
-        log("getCompletionData: Is inside comment: " + (timestamp() - start2));
+        log("getCompletionData: Is inside comment: " + (timestamp() - start3));
         let insideJsDocTagTypeExpression = false;
         let insideJsDocImportTag = false;
         let isInSnippetScope = false;
@@ -219730,12 +219730,12 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             return void 0;
           }
         }
-        start2 = timestamp();
+        start3 = timestamp();
         const isJsOnlyLocation = !insideJsDocTagTypeExpression && !insideJsDocImportTag && isSourceFileJS(sourceFile);
         const tokens = getRelevantTokens(position, sourceFile);
         const previousToken = tokens.previousToken;
         let contextToken = tokens.contextToken;
-        log("getCompletionData: Get previous token: " + (timestamp() - start2));
+        log("getCompletionData: Get previous token: " + (timestamp() - start3));
         let node = currentToken;
         let propertyAccessToConvert;
         let isRightOfDot = false;
@@ -222671,8 +222671,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           });
         }
       }
-      function withoutStartAndEnd(s2, start2, end) {
-        return startsWith(s2, start2) && endsWith(s2, end) ? s2.slice(start2.length, s2.length - end.length) : void 0;
+      function withoutStartAndEnd(s2, start3, end) {
+        return startsWith(s2, start3) && endsWith(s2, end) ? s2.slice(start3.length, s2.length - end.length) : void 0;
       }
       function removeLeadingDirectorySeparator(path2) {
         return path2[0] === directorySeparator ? path2.slice(1) : path2;
@@ -223822,17 +223822,17 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return { fileName: documentSpan.fileName, span };
       }
       function getTextSpan(node, sourceFile, endNode2) {
-        let start2 = node.getStart(sourceFile);
+        let start3 = node.getStart(sourceFile);
         let end = (endNode2 || node).getEnd();
-        if (isStringLiteralLike(node) && end - start2 > 2) {
+        if (isStringLiteralLike(node) && end - start3 > 2) {
           Debug.assert(endNode2 === void 0);
-          start2 += 1;
+          start3 += 1;
           end -= 1;
         }
         if ((endNode2 == null ? void 0 : endNode2.kind) === 270) {
           end = endNode2.getFullStart();
         }
-        return createTextSpanFromBounds(start2, end);
+        return createTextSpanFromBounds(start3, end);
       }
       function getTextSpanOfEntry(entry) {
         return entry.kind === 0 ? entry.textSpan : getTextSpan(entry.node, entry.node.getSourceFile());
@@ -227332,13 +227332,13 @@ ${content}
             (block) => or(isBlock, isSourceFile)(block) && some(block.statements, (origStmt) => changes.some((newStmt) => matchNode(newStmt, origStmt)))
           );
           if (scope) {
-            const start2 = scope.statements.find((stmt) => changes.some((node) => matchNode(node, stmt)));
-            if (start2) {
+            const start3 = scope.statements.find((stmt) => changes.some((node) => matchNode(node, stmt)));
+            if (start3) {
               const end = findLast(scope.statements, (stmt) => changes.some((node) => matchNode(node, stmt)));
               forEach(changes, wipeNode);
               changeTracker.replaceNodeRangeWithNodes(
                 originalFile,
-                start2,
+                start3,
                 end,
                 changes
               );
@@ -228617,13 +228617,13 @@ ${content}
         return { canRename: false, localizedErrorMessage: getLocaleSpecificMessage(diagnostic) };
       }
       function createTriggerSpanForNode(node, sourceFile) {
-        let start2 = node.getStart(sourceFile);
+        let start3 = node.getStart(sourceFile);
         let width = node.getWidth(sourceFile);
         if (isStringLiteralLike(node)) {
-          start2 += 1;
+          start3 += 1;
           width -= 2;
         }
-        return createTextSpan(start2, width);
+        return createTextSpan(start3, width);
       }
       function nodeIsEligibleForRename(node) {
         switch (node.kind) {
@@ -229229,7 +229229,7 @@ ${content}
                   pushSelectionRange(start22, end2);
                 }
                 const isBetweenMultiLineBookends = isSyntaxList(node) && isListOpener(prevNode) && isListCloser(nextNode) && !positionsAreOnSameLine(prevNode.getStart(), nextNode.getStart(), sourceFile);
-                let start2 = isBetweenMultiLineBookends ? prevNode.getEnd() : node.getStart();
+                let start3 = isBetweenMultiLineBookends ? prevNode.getEnd() : node.getStart();
                 const end = isBetweenMultiLineBookends ? nextNode.getStart() : getEndPos(sourceFile, node);
                 if (hasJSDocNodes(node) && ((_a2 = node.jsDoc) == null ? void 0 : _a2.length)) {
                   pushSelectionRange(first2(node.jsDoc).getStart(), end);
@@ -229237,12 +229237,12 @@ ${content}
                 if (isSyntaxList(node)) {
                   const firstChild = node.getChildren()[0];
                   if (firstChild && hasJSDocNodes(firstChild) && ((_b = firstChild.jsDoc) == null ? void 0 : _b.length) && firstChild.getStart() !== node.pos) {
-                    start2 = Math.min(start2, first2(firstChild.jsDoc).getStart());
+                    start3 = Math.min(start3, first2(firstChild.jsDoc).getStart());
                   }
                 }
-                pushSelectionRange(start2, end);
+                pushSelectionRange(start3, end);
                 if (isStringLiteral(node) || isTemplateLiteral(node)) {
-                  pushSelectionRange(start2 + 1, end - 1);
+                  pushSelectionRange(start3 + 1, end - 1);
                 }
                 parentNode = node;
                 break;
@@ -229253,9 +229253,9 @@ ${content}
             }
           }
         return selectionRange;
-        function pushSelectionRange(start2, end) {
-          if (start2 !== end) {
-            const textSpan = createTextSpanFromBounds(start2, end);
+        function pushSelectionRange(start3, end) {
+          if (start3 !== end) {
+            const textSpan = createTextSpanFromBounds(start3, end);
             if (!selectionRange || // Skip ranges that are identical to the parent
             !textSpansEqual(textSpan, selectionRange.textSpan) && // Skip ranges that don't contain the original position
             textSpanIntersectsWithPosition(textSpan, pos)) {
@@ -229263,9 +229263,9 @@ ${content}
             }
           }
         }
-        function pushSelectionCommentRange(start2, end) {
-          pushSelectionRange(start2, end);
-          let pos2 = start2;
+        function pushSelectionCommentRange(start3, end) {
+          pushSelectionRange(start3, end);
+          let pos2 = start3;
           while (sourceFile.text.charCodeAt(pos2) === 47) {
             pos2++;
           }
@@ -230428,18 +230428,18 @@ ${content}
         TrailingTriviaOption2[TrailingTriviaOption2["Include"] = 2] = "Include";
         return TrailingTriviaOption2;
       })(TrailingTriviaOption || {});
-      function skipWhitespacesAndLineBreaks(text, start2) {
+      function skipWhitespacesAndLineBreaks(text, start3) {
         return skipTrivia(
           text,
-          start2,
+          start3,
           /*stopAfterLineBreak*/
           false,
           /*stopAtComments*/
           true
         );
       }
-      function hasCommentsBeforeLineBreak(text, start2) {
-        let i2 = start2;
+      function hasCommentsBeforeLineBreak(text, start3) {
+        let i2 = start3;
         while (i2 < text.length) {
           const ch = text.charCodeAt(i2);
           if (isWhiteSpaceSingleLine(ch)) {
@@ -230476,14 +230476,14 @@ ${content}
           }
         }
         const fullStart = node.getFullStart();
-        const start2 = node.getStart(sourceFile);
-        if (fullStart === start2) {
-          return start2;
+        const start3 = node.getStart(sourceFile);
+        if (fullStart === start3) {
+          return start3;
         }
         const fullStartLine = getLineStartPositionForPosition(fullStart, sourceFile);
-        const startLine = getLineStartPositionForPosition(start2, sourceFile);
+        const startLine = getLineStartPositionForPosition(start3, sourceFile);
         if (startLine === fullStartLine) {
-          return leadingTriviaOption === 1 ? fullStart : start2;
+          return leadingTriviaOption === 1 ? fullStart : start3;
         }
         if (hasTrailingComment) {
           const comment = ((_a2 = getLeadingCommentRanges(sourceFile.text, fullStart)) == null ? void 0 : _a2[0]) || ((_b = getTrailingCommentRanges(sourceFile.text, fullStart)) == null ? void 0 : _b[0]);
@@ -230804,13 +230804,13 @@ ${content}
           return true;
         }
         tryInsertThisTypeAnnotation(sourceFile, node, type) {
-          const start2 = findChildOfKind(node, 21, sourceFile).getStart(sourceFile) + 1;
+          const start3 = findChildOfKind(node, 21, sourceFile).getStart(sourceFile) + 1;
           const suffix = node.parameters.length ? ", " : "";
-          this.insertNodeAt(sourceFile, start2, type, { prefix: "this: ", suffix });
+          this.insertNodeAt(sourceFile, start3, type, { prefix: "this: ", suffix });
         }
         insertTypeParameters(sourceFile, node, typeParameters) {
-          const start2 = (findChildOfKind(node, 21, sourceFile) || first2(node.parameters)).getStart(sourceFile);
-          this.insertNodesAt(sourceFile, start2, typeParameters, { prefix: "<", suffix: ">", joiner: ", " });
+          const start3 = (findChildOfKind(node, 21, sourceFile) || first2(node.parameters)).getStart(sourceFile);
+          this.insertNodesAt(sourceFile, start3, typeParameters, { prefix: "<", suffix: ">", joiner: ", " });
         }
         getOptionsForInsertNodeBefore(before, inserted, blankLineBetween) {
           if (isStatement(before) || isClassElement(before)) {
@@ -231347,8 +231347,8 @@ ${options.prefix}` : "\n" : options.prefix
         setTextRangePosEnd(newNode, getPos2(node), getEnd(node));
         return newNode;
       }
-      function assignPositionsToNodeArray(nodes, visitor, test, start2, count) {
-        const visited = visitNodes2(nodes, visitor, test, start2, count);
+      function assignPositionsToNodeArray(nodes, visitor, test, start3, count) {
+        const visited = visitNodes2(nodes, visitor, test, start3, count);
         if (!visited) {
           return visited;
         }
@@ -231718,7 +231718,7 @@ ${options.prefix}` : "\n" : options.prefix
           if (!importClause.namedBindings) {
             deleteNode(changes, sourceFile, importClause.parent);
           } else {
-            const start2 = importClause.name.getStart(sourceFile);
+            const start3 = importClause.name.getStart(sourceFile);
             const nextToken = getTokenAtPosition(sourceFile, importClause.name.end);
             if (nextToken && nextToken.kind === 28) {
               const end = skipTrivia(
@@ -231729,7 +231729,7 @@ ${options.prefix}` : "\n" : options.prefix
                 /*stopAtComments*/
                 true
               );
-              changes.deleteRange(sourceFile, { pos: start2, end });
+              changes.deleteRange(sourceFile, { pos: start3, end });
             } else {
               deleteNode(changes, sourceFile, importClause.name);
             }
@@ -234194,9 +234194,9 @@ ${options.prefix}` : "\n" : options.prefix
           /* FormatDocument */
         );
       }
-      function formatSelection(start2, end, sourceFile, formatContext) {
+      function formatSelection(start3, end, sourceFile, formatContext) {
         const span = {
-          pos: getLineStartPositionForPosition(start2, sourceFile),
+          pos: getLineStartPositionForPosition(start3, sourceFile),
           end
         };
         return formatSpan(
@@ -234277,9 +234277,9 @@ ${options.prefix}` : "\n" : options.prefix
         }
       }
       function getScanStartPosition(enclosingNode, originalRange, sourceFile) {
-        const start2 = enclosingNode.getStart(sourceFile);
-        if (start2 === originalRange.pos && enclosingNode.end === originalRange.end) {
-          return start2;
+        const start3 = enclosingNode.getStart(sourceFile);
+        if (start3 === originalRange.pos && enclosingNode.end === originalRange.end) {
+          return start3;
         }
         const precedingToken = findPrecedingToken(originalRange.pos, sourceFile);
         if (!precedingToken) {
@@ -234963,9 +234963,9 @@ ${options.prefix}` : "\n" : options.prefix
             }
           }
         }
-        function getTrailingWhitespaceStartPosition(start2, end) {
+        function getTrailingWhitespaceStartPosition(start3, end) {
           let pos = end;
-          while (pos >= start2 && isWhiteSpaceSingleLine(sourceFile.text.charCodeAt(pos))) {
+          while (pos >= start3 && isWhiteSpaceSingleLine(sourceFile.text.charCodeAt(pos))) {
             pos--;
           }
           if (pos !== end) {
@@ -234992,19 +234992,19 @@ ${options.prefix}` : "\n" : options.prefix
           const endLine = sourceFile.getLineAndCharacterOfPosition(endPos).line;
           trimTrailingWhitespacesForLines(startLine, endLine + 1, previousRange2);
         }
-        function recordDelete(start2, len) {
+        function recordDelete(start3, len) {
           if (len) {
-            edits.push(createTextChangeFromStartLength(start2, len, ""));
+            edits.push(createTextChangeFromStartLength(start3, len, ""));
           }
         }
-        function recordReplace(start2, len, newText) {
+        function recordReplace(start3, len, newText) {
           if (len || newText) {
-            edits.push(createTextChangeFromStartLength(start2, len, newText));
+            edits.push(createTextChangeFromStartLength(start3, len, newText));
           }
         }
-        function recordInsert(start2, text) {
+        function recordInsert(start3, text) {
           if (text) {
-            edits.push(createTextChangeFromStartLength(start2, 0, text));
+            edits.push(createTextChangeFromStartLength(start3, 0, text));
           }
         }
         function applyRuleEdits(rule2, previousRange2, previousStartLine, currentRange, currentStartLine) {
@@ -235299,10 +235299,10 @@ ${options.prefix}` : "\n" : options.prefix
           return getBaseIndentation(options);
         }
         function getIndentationForNode(n, ignoreActualIndentationRange, sourceFile, options) {
-          const start2 = sourceFile.getLineAndCharacterOfPosition(n.getStart(sourceFile));
+          const start3 = sourceFile.getLineAndCharacterOfPosition(n.getStart(sourceFile));
           return getIndentationForNodeWorker(
             n,
-            start2,
+            start3,
             ignoreActualIndentationRange,
             /*indentationDelta*/
             0,
@@ -235323,8 +235323,8 @@ ${options.prefix}` : "\n" : options.prefix
           while (parent2) {
             let useActualIndentation = true;
             if (ignoreActualIndentationRange) {
-              const start2 = current.getStart(sourceFile);
-              useActualIndentation = start2 < ignoreActualIndentationRange.pos || start2 > ignoreActualIndentationRange.end;
+              const start3 = current.getStart(sourceFile);
+              useActualIndentation = start3 < ignoreActualIndentationRange.pos || start3 > ignoreActualIndentationRange.end;
             }
             const containingListOrParentStart = getContainingListOrParentStart(parent2, current, sourceFile);
             const parentAndChildShareLine = containingListOrParentStart.line === currentStart.line || childStartsOnTheSameLineWithElseInIfStatement(parent2, current, currentStart.line, sourceFile);
@@ -235448,7 +235448,7 @@ ${options.prefix}` : "\n" : options.prefix
         function getListByPosition(pos, node, sourceFile) {
           return node && getListByRange(pos, pos, node, sourceFile);
         }
-        function getListByRange(start2, end, node, sourceFile) {
+        function getListByRange(start3, end, node, sourceFile) {
           switch (node.kind) {
             case 184:
               return getList(node.typeArguments);
@@ -235489,7 +235489,7 @@ ${options.prefix}` : "\n" : options.prefix
               return getList(node.elements);
           }
           function getList(list) {
-            return list && rangeContainsStartEnd(getVisualListRange(node, list, sourceFile), start2, end) ? list : void 0;
+            return list && rangeContainsStartEnd(getVisualListRange(node, list, sourceFile), start3, end) ? list : void 0;
           }
         }
         function getVisualListRange(node, list, sourceFile) {
@@ -239121,8 +239121,8 @@ ${options.prefix}` : "\n" : options.prefix
           this.resetSourceMapInfo();
           this.version++;
         }
-        edit(start2, end, newText) {
-          this.switchToScriptVersionCache().edit(start2, end - start2, newText);
+        edit(start3, end, newText) {
+          this.switchToScriptVersionCache().edit(start3, end - start3, newText);
           this.ownFileText = false;
           this.text = void 0;
           this.textSnapshot = void 0;
@@ -239204,9 +239204,9 @@ ${options.prefix}` : "\n" : options.prefix
           const svc = this.tryUseScriptVersionCache();
           if (svc) return svc.lineToTextSpan(line);
           const lineMap = this.getLineMap();
-          const start2 = lineMap[line];
+          const start3 = lineMap[line];
           const end = line + 1 < lineMap.length ? lineMap[line + 1] : this.text.length;
-          return createTextSpanFromBounds(start2, end);
+          return createTextSpanFromBounds(start3, end);
         }
         /**
          * @param line 1 based index
@@ -239504,8 +239504,8 @@ ${options.prefix}` : "\n" : options.prefix
           }
           return false;
         }
-        editContent(start2, end, newText) {
-          this.textStorage.edit(start2, end, newText);
+        editContent(start3, end, newText) {
+          this.textStorage.edit(start3, end, newText);
           this.markContainingProjectsAsDirty();
         }
         markContainingProjectsAsDirty() {
@@ -240678,7 +240678,7 @@ ${options.prefix}` : "\n" : options.prefix
           Debug.assert(oldProgram === this.program);
           Debug.assert(!this.isClosed(), "Called update graph worker of closed project");
           this.writeLog(`Starting updateGraphWorker: Project: ${this.getProjectName()}`);
-          const start2 = timestamp();
+          const start3 = timestamp();
           const { hasInvalidatedResolutions, hasInvalidatedLibResolutions } = this.resolutionCache.createHasInvalidatedResolutions(returnFalse, returnFalse);
           this.hasInvalidatedResolutions = hasInvalidatedResolutions;
           this.hasInvalidatedLibResolutions = hasInvalidatedLibResolutions;
@@ -240784,7 +240784,7 @@ ${options.prefix}` : "\n" : options.prefix
             },
             (removed) => this.detachScriptInfoFromProject(removed)
           );
-          const elapsed = timestamp() - start2;
+          const elapsed = timestamp() - start3;
           this.sendPerformanceEvent("UpdateGraph", elapsed);
           this.writeLog(`Finishing updateGraphWorker: Project: ${this.getProjectName()} projectStateVersion: ${this.projectStateVersion} projectProgramVersion: ${this.projectProgramVersion} structureChanged: ${hasNewProgram}${this.program ? ` structureIsReused:: ${StructureIsReused[this.program.structureIsReused]}` : ""} Elapsed: ${elapsed}ms`);
           if (this.projectService.logger.isTestLogger) {
@@ -241254,7 +241254,7 @@ ${options.prefix}` : "\n" : options.prefix
           const dependencySelection = this.includePackageJsonAutoImports();
           if (dependencySelection) {
             (_a2 = tracing) == null ? void 0 : _a2.push(tracing.Phase.Session, "getPackageJsonAutoImportProvider");
-            const start2 = timestamp();
+            const start3 = timestamp();
             this.autoImportProviderHost = AutoImportProviderProject.create(
               dependencySelection,
               this,
@@ -241262,7 +241262,7 @@ ${options.prefix}` : "\n" : options.prefix
             ) ?? false;
             if (this.autoImportProviderHost) {
               updateProjectIfDirty(this.autoImportProviderHost);
-              this.sendPerformanceEvent("CreatePackageJsonAutoImportProvider", timestamp() - start2);
+              this.sendPerformanceEvent("CreatePackageJsonAutoImportProvider", timestamp() - start3);
               (_b = tracing) == null ? void 0 : _b.pop();
               return this.autoImportProviderHost.getCurrentProgram();
             }
@@ -241505,7 +241505,7 @@ ${options.prefix}` : "\n" : options.prefix
           if (!program2) {
             return emptyArray;
           }
-          const start2 = timestamp();
+          const start3 = timestamp();
           let dependencyNames;
           let rootNames;
           const rootFileName = combinePaths(hostProject.currentDirectory, inferredTypesContainingFile);
@@ -241597,7 +241597,7 @@ ${options.prefix}` : "\n" : options.prefix
             });
           }
           if (rootNames == null ? void 0 : rootNames.size) {
-            hostProject.log(`AutoImportProviderProject: found ${rootNames.size} root files in ${dependenciesAdded} dependencies ${referencesAddded} referenced projects in ${timestamp() - start2} ms`);
+            hostProject.log(`AutoImportProviderProject: found ${rootNames.size} root files in ${dependenciesAdded} dependencies ${referencesAddded} referenced projects in ${timestamp() - start3} ms`);
           }
           return rootNames ? arrayFrom(rootNames.values()) : emptyArray;
           function addRootNames(entrypoints) {
@@ -246176,13 +246176,13 @@ Dynamic files must always be opened with service's current directory or service 
         return { line: lineAndCharacter.line + 1, offset: lineAndCharacter.character + 1 };
       }
       function formatDiagnosticToProtocol(diag2, includeFileName) {
-        const start2 = diag2.file && convertToLocation(getLineAndCharacterOfPosition(diag2.file, diag2.start));
+        const start3 = diag2.file && convertToLocation(getLineAndCharacterOfPosition(diag2.file, diag2.start));
         const end = diag2.file && convertToLocation(getLineAndCharacterOfPosition(diag2.file, diag2.start + diag2.length));
         const text = flattenDiagnosticMessageText(diag2.messageText, "\n");
         const { code, source } = diag2;
         const category = diagnosticCategoryName(diag2);
         const common = {
-          start: start2,
+          start: start3,
           end,
           text,
           code,
@@ -246256,10 +246256,10 @@ ${json2}${newLine}`;
         }
         executeAction(action) {
           var _a2, _b, _c, _d, _e, _f;
-          let stop = false;
+          let stop2 = false;
           try {
             if (this.operationHost.isCancellationRequested()) {
-              stop = true;
+              stop2 = true;
               (_a2 = tracing) == null ? void 0 : _a2.instant(tracing.Phase.Session, "stepCanceled", { seq: this.requestId, early: true });
             } else {
               (_b = tracing) == null ? void 0 : _b.push(tracing.Phase.Session, "stepAction", { seq: this.requestId });
@@ -246268,7 +246268,7 @@ ${json2}${newLine}`;
             }
           } catch (e2) {
             (_d = tracing) == null ? void 0 : _d.popAll();
-            stop = true;
+            stop2 = true;
             if (e2 instanceof OperationCanceledException) {
               (_e = tracing) == null ? void 0 : _e.instant(tracing.Phase.Session, "stepCanceled", { seq: this.requestId });
             } else {
@@ -246277,7 +246277,7 @@ ${json2}${newLine}`;
             }
           }
           this.performanceData = this.operationHost.getPerformanceData();
-          if (stop || !this.hasPendingWork()) {
+          if (stop2 || !this.hasPendingWork()) {
             this.complete();
           }
         }
@@ -246736,9 +246736,9 @@ ${json2}${newLine}`;
                   fileName: file2.fileName,
                   changes: mapDefinedIterator(arrayReverseIterator(file2.textChanges), (change) => {
                     const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(file2.fileName));
-                    const start2 = scriptInfo.lineOffsetToPosition(change.start.line, change.start.offset);
+                    const start3 = scriptInfo.lineOffsetToPosition(change.start.line, change.start.offset);
                     const end = scriptInfo.lineOffsetToPosition(change.end.line, change.end.offset);
-                    return start2 >= 0 ? { span: { start: start2, length: end - start2 }, newText: change.newText } : void 0;
+                    return start3 >= 0 ? { span: { start: start3, length: end - start3 }, newText: change.newText } : void 0;
                   })
                 })),
                 request.arguments.closedFiles
@@ -248456,11 +248456,11 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
         }
         toFileSpan(fileName, textSpan, project) {
           const ls = project.getLanguageService();
-          const start2 = ls.toLineColumnOffset(fileName, textSpan.start);
+          const start3 = ls.toLineColumnOffset(fileName, textSpan.start);
           const end = ls.toLineColumnOffset(fileName, textSpanEnd(textSpan));
           return {
             file: fileName,
-            start: { line: start2.line + 1, offset: start2.character + 1 },
+            start: { line: start3.line + 1, offset: start3.character + 1 },
             end: { line: end.line + 1, offset: end.character + 1 }
           };
         }
@@ -248597,11 +248597,11 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           const scriptInfo = this.projectService.getScriptInfoForNormalizedPath(file2);
           const focusLocations = (_a2 = args.mapping.focusLocations) == null ? void 0 : _a2.map((spans) => {
             return spans.map((loc) => {
-              const start2 = scriptInfo.lineOffsetToPosition(loc.start.line, loc.start.offset);
+              const start3 = scriptInfo.lineOffsetToPosition(loc.start.line, loc.start.offset);
               const end = scriptInfo.lineOffsetToPosition(loc.end.line, loc.end.offset);
               return {
-                start: start2,
-                length: end - start2
+                start: start3,
+                length: end - start3
               };
             });
           });
@@ -249179,14 +249179,14 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           const scriptInfo = this.projectService.getScriptInfo(args.file);
           Debug.assert(!!scriptInfo);
           scriptInfo.textStorage.switchToScriptVersionCache();
-          const start2 = scriptInfo.lineOffsetToPosition(args.line, args.offset);
+          const start3 = scriptInfo.lineOffsetToPosition(args.line, args.offset);
           const end = scriptInfo.lineOffsetToPosition(args.endLine, args.endOffset);
-          if (start2 >= 0) {
+          if (start3 >= 0) {
             this.changeSeq++;
             this.projectService.applyChangesToFile(
               scriptInfo,
               singleIterator({
-                span: { start: start2, length: end - start2 },
+                span: { start: start3, length: end - start3 },
                 newText: args.insertString
                 // TODO: GH#18217
               })
@@ -249827,13 +249827,13 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
         onMessage(message) {
           var _a2, _b, _c, _d, _e, _f, _g;
           this.gcTimer.scheduleCollect();
-          let start2;
+          let start3;
           const currentPerformanceData = this.performanceData;
           if (this.logger.hasLevel(
             2
             /* requestTime */
           )) {
-            start2 = this.hrtime();
+            start3 = this.hrtime();
             if (this.logger.hasLevel(
               3
               /* verbose */
@@ -249860,7 +249860,7 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
               2
               /* requestTime */
             )) {
-              const elapsedTime = hrTimeToMilliseconds(this.hrtime(start2)).toFixed(4);
+              const elapsedTime = hrTimeToMilliseconds(this.hrtime(start3)).toFixed(4);
               if (responseRequired) {
                 this.logger.perftrc(`${request.seq}::${request.command}: elapsed time (in milliseconds) ${elapsedTime}`);
               } else {
@@ -249991,8 +249991,8 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
             continue;
           }
           for (let i2 = textChanges2.length - 1; i2 >= 0; i2--) {
-            const { newText, span: { start: start2, length: length2 } } = textChanges2[i2];
-            text = text.slice(0, start2) + newText + text.slice(start2 + length2);
+            const { newText, span: { start: start3, length: length2 } } = textChanges2[i2];
+            text = text.slice(0, start3) + newText + text.slice(start3 + length2);
           }
         }
         return text;
@@ -251730,11 +251730,11 @@ function foldedBreaks(count) {
   if (count === 1) return " ";
   return "\n".repeat(count - 1);
 }
-function getPlainValue(input, start2, end) {
+function getPlainValue(input, start3, end) {
   let result = "";
-  let position = start2;
-  let captureStart = start2;
-  let captureEnd = start2;
+  let position = start3;
+  let captureStart = start3;
+  let captureEnd = start3;
   while (position < end) {
     const ch = input.charCodeAt(position);
     if (ch === 10 || ch === 13) {
@@ -251749,11 +251749,11 @@ function getPlainValue(input, start2, end) {
   }
   return result + input.slice(captureStart, captureEnd);
 }
-function getSingleQuotedValue(input, start2, end) {
+function getSingleQuotedValue(input, start3, end) {
   let result = "";
-  let position = start2;
-  let captureStart = start2;
-  let captureEnd = start2;
+  let position = start3;
+  let captureStart = start3;
+  let captureEnd = start3;
   while (position < end) {
     const ch = input.charCodeAt(position);
     if (ch === 39) {
@@ -251772,11 +251772,11 @@ function getSingleQuotedValue(input, start2, end) {
   }
   return result + input.slice(captureStart, end);
 }
-function getDoubleQuotedValue(input, start2, end) {
+function getDoubleQuotedValue(input, start3, end) {
   let result = "";
-  let position = start2;
-  let captureStart = start2;
-  let captureEnd = start2;
+  let position = start3;
+  let captureStart = start3;
+  let captureEnd = start3;
   while (position < end) {
     const ch = input.charCodeAt(position);
     if (ch === 92) {
@@ -251811,9 +251811,9 @@ function getDoubleQuotedValue(input, start2, end) {
   }
   return result + input.slice(captureStart, end);
 }
-function getBlockValue(input, start2, end, indent, chomping, folded) {
+function getBlockValue(input, start3, end, indent, chomping, folded) {
   const textIndent = indent < 0 ? 0 : indent;
-  const region = input.slice(start2, end).replace(/\r\n?/g, "\n");
+  const region = input.slice(start3, end).replace(/\r\n?/g, "\n");
   const lines = region === "" ? [] : (region.endsWith("\n") ? region.slice(0, -1) : region).split("\n");
   let result = "";
   let didReadContent = false;
@@ -252097,10 +252097,10 @@ function addDocumentEvent(state, explicitStart, explicitEnd) {
     directives: state.directives
   });
 }
-function addSequenceEvent(state, start2, anchorStart, anchorEnd, tagStart, tagEnd, style) {
+function addSequenceEvent(state, start3, anchorStart, anchorEnd, tagStart, tagEnd, style) {
   state.events.push({
     type: 2,
-    start: start2,
+    start: start3,
     anchorStart,
     anchorEnd,
     tagStart,
@@ -252108,10 +252108,10 @@ function addSequenceEvent(state, start2, anchorStart, anchorEnd, tagStart, tagEn
     style
   });
 }
-function addMappingEvent(state, start2, anchorStart, anchorEnd, tagStart, tagEnd, style) {
+function addMappingEvent(state, start3, anchorStart, anchorEnd, tagStart, tagEnd, style) {
   state.events.push({
     type: 3,
-    start: start2,
+    start: start3,
     anchorStart,
     anchorEnd,
     tagStart,
@@ -252257,13 +252257,13 @@ function skipUntilLineEnd(state) {
   let ch = state.input.charCodeAt(state.position);
   while (ch !== 0 && !isEol(ch)) ch = state.input.charCodeAt(++state.position);
 }
-function checkPrintable(state, start2, end) {
-  if (PATTERN_NON_PRINTABLE.test(state.input.slice(start2, end))) throwError3(state, "the stream contains non-printable characters");
+function checkPrintable(state, start3, end) {
+  if (PATTERN_NON_PRINTABLE.test(state.input.slice(start3, end))) throwError3(state, "the stream contains non-printable characters");
 }
 function readTagProperty(state, props, inFlow) {
   if (state.input.charCodeAt(state.position) !== 33) return false;
   if (props.tagStart !== NO_RANGE$1) throwError3(state, "duplication of a tag property");
-  const start2 = state.position;
+  const start3 = state.position;
   let isVerbatim = false;
   let isNamed = false;
   let tagHandle = "!";
@@ -252298,7 +252298,7 @@ function readTagProperty(state, props, inFlow) {
   }
   if (tagName && !(isVerbatim ? PATTERN_TAG_URI.test(tagName) : PATTERN_TAG_SUFFIX.test(tagName))) throwError3(state, `tag name cannot contain such characters: ${tagName}`);
   if (!isVerbatim && tagHandle !== "!" && tagHandle !== "!!" && !HAS_OWN.call(state.tagHandlers, tagHandle)) throwError3(state, `undeclared tag handle "${tagHandle}"`);
-  props.tagStart = start2;
+  props.tagStart = start3;
   props.tagEnd = state.position;
   return true;
 }
@@ -252306,10 +252306,10 @@ function readAnchorProperty(state, props) {
   if (state.input.charCodeAt(state.position) !== 38) return false;
   if (props.anchorStart !== NO_RANGE$1) throwError3(state, "duplication of an anchor property");
   state.position++;
-  const start2 = state.position;
+  const start3 = state.position;
   while (state.input.charCodeAt(state.position) !== 0 && !isWsOrEol(state.input.charCodeAt(state.position)) && !isFlowIndicator(state.input.charCodeAt(state.position))) state.position++;
-  if (state.position === start2) throwError3(state, "name of an anchor node must contain at least one character");
-  props.anchorStart = start2;
+  if (state.position === start3) throwError3(state, "name of an anchor node must contain at least one character");
+  props.anchorStart = start3;
   props.anchorEnd = state.position;
   return true;
 }
@@ -252317,10 +252317,10 @@ function readAlias(state, props) {
   if (state.input.charCodeAt(state.position) !== 42) return false;
   if (props.anchorStart !== NO_RANGE$1 || props.tagStart !== NO_RANGE$1) throwError3(state, "alias node should not have any properties");
   state.position++;
-  const start2 = state.position;
+  const start3 = state.position;
   while (state.input.charCodeAt(state.position) !== 0 && !isWsOrEol(state.input.charCodeAt(state.position)) && !isFlowIndicator(state.input.charCodeAt(state.position))) state.position++;
-  if (state.position === start2) throwError3(state, "name of an alias node must contain at least one character");
-  addAliasEvent(state, start2, state.position);
+  if (state.position === start3) throwError3(state, "name of an alias node must contain at least one character");
+  addAliasEvent(state, start3, state.position);
   return true;
 }
 function readFlowScalarBreak(state, nodeIndent) {
@@ -252330,7 +252330,7 @@ function readFlowScalarBreak(state, nodeIndent) {
 function readSingleQuotedScalar(state, nodeIndent, props) {
   if (state.input.charCodeAt(state.position) !== 39) return false;
   state.position++;
-  const start2 = state.position;
+  const start3 = state.position;
   let simple = true;
   while (state.input.charCodeAt(state.position) !== 0) {
     const ch = state.input.charCodeAt(state.position);
@@ -252342,7 +252342,7 @@ function readSingleQuotedScalar(state, nodeIndent, props) {
       }
       const end = state.position;
       state.position++;
-      addScalarEvent(state, start2, end, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 2, 1, -1, simple);
+      addScalarEvent(state, start3, end, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 2, 1, -1, simple);
       return true;
     }
     if (isEol(ch)) {
@@ -252357,14 +252357,14 @@ function readSingleQuotedScalar(state, nodeIndent, props) {
 function readDoubleQuotedScalar(state, nodeIndent, props) {
   if (state.input.charCodeAt(state.position) !== 34) return false;
   state.position++;
-  const start2 = state.position;
+  const start3 = state.position;
   let simple = true;
   while (state.input.charCodeAt(state.position) !== 0) {
     const ch = state.input.charCodeAt(state.position);
     if (ch === 34) {
       const end = state.position;
       state.position++;
-      addScalarEvent(state, start2, end, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 3, 1, -1, simple);
+      addScalarEvent(state, start3, end, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 3, 1, -1, simple);
       return true;
     }
     if (ch === 92) {
@@ -252483,7 +252483,7 @@ function canStartPlainScalar(state, nodeContext) {
 }
 function readPlainScalar(state, nodeIndent, nodeContext, props) {
   if (!canStartPlainScalar(state, nodeContext)) return false;
-  const start2 = state.position;
+  const start3 = state.position;
   let end = state.position;
   let ch = state.input.charCodeAt(state.position);
   const inFlow = nodeContext === CONTEXT_FLOW_IN;
@@ -252516,9 +252516,9 @@ function readPlainScalar(state, nodeIndent, nodeContext, props) {
     if (!isWhiteSpace(ch)) end = state.position + 1;
     ch = state.input.charCodeAt(++state.position);
   }
-  if (end === start2) return false;
-  checkPrintable(state, start2, end);
-  addScalarEvent(state, start2, end, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 1, 1, -1, !multiline);
+  if (end === start3) return false;
+  checkPrintable(state, start3, end);
+  addScalarEvent(state, start3, end, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 1, 1, -1, !multiline);
   return true;
 }
 function skipFlowSeparationSpace(state, nodeIndent) {
@@ -252529,12 +252529,12 @@ function skipFlowSeparationSpace(state, nodeIndent) {
 function readFlowCollection(state, nodeIndent, props) {
   const ch = state.input.charCodeAt(state.position);
   const isMapping = ch === 123;
-  const start2 = state.position;
+  const start3 = state.position;
   let readNext = true;
   if (ch !== 91 && ch !== 123) return false;
   const terminator = isMapping ? 125 : 93;
-  if (isMapping) addMappingEvent(state, start2, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 2);
-  else addSequenceEvent(state, start2, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 2);
+  if (isMapping) addMappingEvent(state, start3, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 2);
+  else addSequenceEvent(state, start3, props.anchorStart, props.anchorEnd, props.tagStart, props.tagEnd, 2);
   state.position++;
   while (state.input.charCodeAt(state.position) !== 0) {
     skipFlowSeparationSpace(state, nodeIndent);
@@ -252785,9 +252785,9 @@ function readDirective(state) {
   while (state.input.charCodeAt(state.position) !== 0 && !isEol(state.input.charCodeAt(state.position))) {
     while (isWhiteSpace(state.input.charCodeAt(state.position))) state.position++;
     if (state.input.charCodeAt(state.position) === 35 || isEol(state.input.charCodeAt(state.position)) || state.input.charCodeAt(state.position) === 0) break;
-    const start2 = state.position;
+    const start3 = state.position;
     while (state.input.charCodeAt(state.position) !== 0 && !isWsOrEol(state.input.charCodeAt(state.position))) state.position++;
-    args.push(state.input.slice(start2, state.position));
+    args.push(state.input.slice(start3, state.position));
   }
   if (isEol(state.input.charCodeAt(state.position))) consumeLineBreak(state);
   if (name2 === "YAML") {
@@ -268234,10 +268234,10 @@ var require_polyfills = __commonJS({
       if (platform === "win32") {
         fs3.rename = /* @__PURE__ */ (function(fs$rename) {
           return function(from11, to, cb) {
-            var start2 = Date.now();
+            var start3 = Date.now();
             var backoff = 0;
             fs$rename(from11, to, function CB(er) {
-              if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start2 < 6e4) {
+              if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start3 < 6e4) {
                 setTimeout(function() {
                   fs3.stat(to, function(stater, st) {
                     if (stater && stater.code === "ENOENT")
@@ -270950,19 +270950,19 @@ var require_lodash = __commonJS({
       }
       return result;
     }
-    function baseRest(func, start2) {
-      start2 = nativeMax(start2 === void 0 ? func.length - 1 : start2, 0);
+    function baseRest(func, start3) {
+      start3 = nativeMax(start3 === void 0 ? func.length - 1 : start3, 0);
       return function() {
-        var args = arguments, index = -1, length = nativeMax(args.length - start2, 0), array2 = Array(length);
+        var args = arguments, index = -1, length = nativeMax(args.length - start3, 0), array2 = Array(length);
         while (++index < length) {
-          array2[index] = args[start2 + index];
+          array2[index] = args[start3 + index];
         }
         index = -1;
-        var otherArgs = Array(start2 + 1);
-        while (++index < start2) {
+        var otherArgs = Array(start3 + 1);
+        while (++index < start3) {
           otherArgs[index] = args[index];
         }
-        otherArgs[start2] = array2;
+        otherArgs[start3] = array2;
         return apply(func, this, otherArgs);
       };
     }
@@ -271456,19 +271456,19 @@ var require_lodash3 = __commonJS({
       var pattern = isFunction(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
       return pattern.test(toSource(value));
     }
-    function baseRest(func, start2) {
-      start2 = nativeMax(start2 === void 0 ? func.length - 1 : start2, 0);
+    function baseRest(func, start3) {
+      start3 = nativeMax(start3 === void 0 ? func.length - 1 : start3, 0);
       return function() {
-        var args = arguments, index = -1, length = nativeMax(args.length - start2, 0), array2 = Array(length);
+        var args = arguments, index = -1, length = nativeMax(args.length - start3, 0), array2 = Array(length);
         while (++index < length) {
-          array2[index] = args[start2 + index];
+          array2[index] = args[start3 + index];
         }
         index = -1;
-        var otherArgs = Array(start2 + 1);
-        while (++index < start2) {
+        var otherArgs = Array(start3 + 1);
+        while (++index < start3) {
           otherArgs[index] = args[index];
         }
-        otherArgs[start2] = array2;
+        otherArgs[start3] = array2;
         return apply(func, this, otherArgs);
       };
     }
@@ -271818,19 +271818,19 @@ var require_lodash4 = __commonJS({
       var pattern = isFunction(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
       return pattern.test(toSource(value));
     }
-    function baseRest(func, start2) {
-      start2 = nativeMax(start2 === void 0 ? func.length - 1 : start2, 0);
+    function baseRest(func, start3) {
+      start3 = nativeMax(start3 === void 0 ? func.length - 1 : start3, 0);
       return function() {
-        var args = arguments, index = -1, length = nativeMax(args.length - start2, 0), array2 = Array(length);
+        var args = arguments, index = -1, length = nativeMax(args.length - start3, 0), array2 = Array(length);
         while (++index < length) {
-          array2[index] = args[start2 + index];
+          array2[index] = args[start3 + index];
         }
         index = -1;
-        var otherArgs = Array(start2 + 1);
-        while (++index < start2) {
+        var otherArgs = Array(start3 + 1);
+        while (++index < start3) {
           otherArgs[index] = args[index];
         }
-        otherArgs[start2] = array2;
+        otherArgs[start3] = array2;
         return apply(func, this, otherArgs);
       };
     }
@@ -272050,8 +272050,8 @@ var require_old = __commonJS({
       var current;
       var base;
       var previous;
-      start2();
-      function start2() {
+      start3();
+      function start3() {
         var m2 = splitRootRe.exec(p);
         pos = m2[0].length;
         current = m2[0];
@@ -272098,7 +272098,7 @@ var require_old = __commonJS({
           if (!isWindows) seenLinks[id] = linkTarget;
         }
         p = pathModule.resolve(resolvedLink, p.slice(pos));
-        start2();
+        start3();
       }
       if (cache) cache[original] = p;
       return p;
@@ -272117,8 +272117,8 @@ var require_old = __commonJS({
       var current;
       var base;
       var previous;
-      start2();
-      function start2() {
+      start3();
+      function start3() {
         var m2 = splitRootRe.exec(p);
         pos = m2[0].length;
         current = m2[0];
@@ -272182,7 +272182,7 @@ var require_old = __commonJS({
       }
       function gotResolvedLink(resolvedLink) {
         p = pathModule.resolve(resolvedLink, p.slice(pos));
-        start2();
+        start3();
       }
     };
   }
@@ -274180,14 +274180,14 @@ var require_errors3 = __commonJS({
       }
       return str2.substring(this_len - search.length, this_len) === search;
     }
-    function includes(str2, search, start2) {
-      if (typeof start2 !== "number") {
-        start2 = 0;
+    function includes(str2, search, start3) {
+      if (typeof start3 !== "number") {
+        start3 = 0;
       }
-      if (start2 + search.length > str2.length) {
+      if (start3 + search.length > str2.length) {
         return false;
       } else {
-        return str2.indexOf(search, start2) !== -1;
+        return str2.indexOf(search, start3) !== -1;
       }
     }
     createErrorType("ERR_INVALID_OPT_VALUE", function(name2, value) {
@@ -277522,14 +277522,14 @@ var require_errors4 = __commonJS({
       }
       return str2.substring(this_len - search.length, this_len) === search;
     }
-    function includes(str2, search, start2) {
-      if (typeof start2 !== "number") {
-        start2 = 0;
+    function includes(str2, search, start3) {
+      if (typeof start3 !== "number") {
+        start3 = 0;
       }
-      if (start2 + search.length > str2.length) {
+      if (start3 + search.length > str2.length) {
         return false;
       } else {
-        return str2.indexOf(search, start2) !== -1;
+        return str2.indexOf(search, start3) !== -1;
       }
     }
     createErrorType("ERR_INVALID_OPT_VALUE", function(name2, value) {
@@ -280294,14 +280294,14 @@ var require_errors5 = __commonJS({
       }
       return str2.substring(this_len - search.length, this_len) === search;
     }
-    function includes(str2, search, start2) {
-      if (typeof start2 !== "number") {
-        start2 = 0;
+    function includes(str2, search, start3) {
+      if (typeof start3 !== "number") {
+        start3 = 0;
       }
-      if (start2 + search.length > str2.length) {
+      if (start3 + search.length > str2.length) {
         return false;
       } else {
-        return str2.indexOf(search, start2) !== -1;
+        return str2.indexOf(search, start3) !== -1;
       }
     }
     createErrorType("ERR_INVALID_OPT_VALUE", function(name2, value) {
@@ -283531,14 +283531,14 @@ var require_errors6 = __commonJS({
       }
       return str2.substring(this_len - search.length, this_len) === search;
     }
-    function includes(str2, search, start2) {
-      if (typeof start2 !== "number") {
-        start2 = 0;
+    function includes(str2, search, start3) {
+      if (typeof start3 !== "number") {
+        start3 = 0;
       }
-      if (start2 + search.length > str2.length) {
+      if (start3 + search.length > str2.length) {
         return false;
       } else {
-        return str2.indexOf(search, start2) !== -1;
+        return str2.indexOf(search, start3) !== -1;
       }
     }
     createErrorType("ERR_INVALID_OPT_VALUE", function(name2, value) {
@@ -291163,9 +291163,9 @@ function nullish(input) {
   return input === null || input === void 0;
 }
 function cleanRegex(source) {
-  const start2 = source.startsWith("^") ? 1 : 0;
+  const start3 = source.startsWith("^") ? 1 : 0;
   const end = source.endsWith("$") ? source.length - 1 : source.length;
-  return source.slice(start2, end);
+  return source.slice(start3, end);
 }
 function floatSafeRemainder2(val, step) {
   const valDecCount = (val.toString().split(".")[1] || "").length;
@@ -294585,9 +294585,9 @@ var init_schemas = __esm({
           const source = part._zod.pattern instanceof RegExp ? part._zod.pattern.source : part._zod.pattern;
           if (!source)
             throw new Error(`Invalid template literal part: ${part._zod.traits}`);
-          const start2 = source.startsWith("^") ? 1 : 0;
+          const start3 = source.startsWith("^") ? 1 : 0;
           const end = source.endsWith("$") ? source.length - 1 : source.length;
-          regexParts.push(source.slice(start2, end));
+          regexParts.push(source.slice(start3, end));
         } else if (part === null || primitiveTypes.has(typeof part)) {
           regexParts.push(escapeRegex(`${part}`));
         } else {
@@ -318774,6 +318774,35 @@ var init_daemon = __esm({
         await this.systemctl("daemon-reload");
         return path2;
       }
+      /** Whether `runner:daemon:install` wrote the unit. */
+      installed() {
+        return (0, import_fs7.existsSync)(unitPath(this.serviceName, this.home));
+      }
+      start() {
+        return this.systemctl("start", this.unit);
+      }
+      stop() {
+        return this.systemctl("stop", this.unit);
+      }
+      restart() {
+        return this.systemctl("restart", this.unit);
+      }
+      /**
+       * How the service is doing right after a start: `active`, or `failed`
+       * with the runner's exit status (78 = Lambforge refused the token). A
+       * refused runner exits within a second, so callers wait briefly first.
+       */
+      async outcome() {
+        const { stdout } = await this.systemctl(
+          "show",
+          this.unit,
+          "--property=ActiveState",
+          "--property=ExecMainStatus"
+        ).catch((e2) => ({ stdout: String(e2?.stdout ?? "") }));
+        const active = /ActiveState=(active|activating|reloading)/.test(stdout);
+        const status2 = /ExecMainStatus=(\d+)/.exec(stdout)?.[1];
+        return { active, exitStatus: status2 ? Number(status2) : void 0 };
+      }
       async status() {
         return this.systemctl("status", "--no-pager", "--lines=15", this.unit).then((r2) => r2.stdout).catch((e2) => e2.stdout || e2.message);
       }
@@ -318890,10 +318919,14 @@ var daemon_commands_exports = {};
 __export(daemon_commands_exports, {
   install: () => install,
   logs: () => logs,
+  reportStarted: () => reportStarted,
+  restart: () => restart,
+  start: () => start,
   status: () => status,
+  stop: () => stop,
   uninstall: () => uninstall
 });
-var import_child_process3, install, uninstall, status, logs;
+var import_child_process3, install, uninstall, installedService, reportStarted, start, restart, stop, status, logs;
 var init_daemon_commands = __esm({
   "src/commands/runner/daemon-commands.ts"() {
     import_child_process3 = require("child_process");
@@ -318957,6 +318990,50 @@ var init_daemon_commands = __esm({
       const path2 = await new SystemdUserService(serviceName).uninstall();
       Logger.log(
         `Stopped and removed ${serviceName} (${path2}). The runner itself is still registered - \`gcli runner:delete\` revokes it.`
+      );
+    };
+    installedService = (cmd) => {
+      assertSystemdAvailable();
+      const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
+      const systemd = new SystemdUserService(serviceName);
+      if (!systemd.installed()) {
+        throw new Error(
+          `The ${serviceName} service is not installed - run \`gcli runner:daemon:install\` first.`
+        );
+      }
+      return { serviceName, systemd };
+    };
+    reportStarted = async (serviceName, systemd, settleMs = 2e3) => {
+      await new Promise((resolve2) => setTimeout(resolve2, settleMs));
+      const { active, exitStatus } = await systemd.outcome();
+      if (active) {
+        Logger.log(`${serviceName} is running. Logs: gcli runner:daemon:logs`);
+        return;
+      }
+      if (exitStatus === RUNNER_AUTH_EXIT_CODE) {
+        throw new Error(
+          `${serviceName} stopped: Lambforge refused this runner's token (deleted, or registered on another server - check ~/.graphql-server/url). Re-register it with \`gcli runner:daemon:install --reset\`.`
+        );
+      }
+      throw new Error(
+        `${serviceName} did not stay up (exit status ${exitStatus ?? "unknown"}). See \`gcli runner:daemon:logs\`.`
+      );
+    };
+    start = async (cmd) => {
+      const { serviceName, systemd } = installedService(cmd);
+      await systemd.start();
+      await reportStarted(serviceName, systemd);
+    };
+    restart = async (cmd) => {
+      const { serviceName, systemd } = installedService(cmd);
+      await systemd.restart();
+      await reportStarted(serviceName, systemd);
+    };
+    stop = async (cmd) => {
+      const { serviceName, systemd } = installedService(cmd);
+      await systemd.stop();
+      Logger.log(
+        `${serviceName} stopped. It starts again with your next login (it stays enabled); \`gcli runner:daemon:uninstall\` removes it.`
       );
     };
     status = async (cmd) => {
@@ -319120,9 +319197,9 @@ var init_delete3 = __esm({
 // src/commands/start/start.ts
 var start_exports3 = {};
 __export(start_exports3, {
-  default: () => start
+  default: () => start2
 });
-async function start(args) {
+async function start2(args) {
   Logger.log("---------------------------------");
   return (0, import_rxjs46.lastValueFrom)(
     loadSpec().pipe(
@@ -321475,6 +321552,15 @@ function registerRunnerCommands(program2) {
     "Ollama URL (default: $OLLAMA_HOST or http://127.0.0.1:11434)"
   ).option("--wsUrl <url>", "Lambforge subscriptions endpoint override").option("--reset", "Forget the saved runner and register a new one").option("--service <name>", "systemd unit name (default: lambforge-runner)").option("--dry-run", "Print the unit file instead of installing it").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.install)));
   program2.command("runner:daemon:status").description("Show the runner service status (systemctl --user status)").option("--service <name>", "systemd unit name (default: lambforge-runner)").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.status)));
+  program2.command("runner:daemon:start").description(
+    "Start the installed runner service, and report whether it stays up"
+  ).option("--service <name>", "systemd unit name (default: lambforge-runner)").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.start)));
+  program2.command("runner:daemon:stop").description(
+    "Stop the runner service (it stays installed and starts at your next login)"
+  ).option("--service <name>", "systemd unit name (default: lambforge-runner)").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.stop)));
+  program2.command("runner:daemon:restart").description(
+    "Restart the runner service (e.g. after `gcli login` to another server)"
+  ).option("--service <name>", "systemd unit name (default: lambforge-runner)").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.restart)));
   program2.command("runner:daemon:logs").description("Follow the runner service log (journalctl --user -f)").option("--service <name>", "systemd unit name (default: lambforge-runner)").option("--lines <n>", "Lines of history to show first (default 50)").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.logs)));
   program2.command("runner:daemon:uninstall").description(
     "Stop and remove the runner service (the runner stays registered)"

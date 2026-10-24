@@ -29,6 +29,11 @@ security, symptom table): `graphql-server/docs/features/local-ai-runners.md`.
   for "token refused" in sync with `RestartPreventExitStatus`. Tests must
   pass an explicit home dir to `SystemdUserService` (os.homedir() ignored a
   changed HOME under jest and wrote into the real `~/.config` once).
+  `runner:daemon:start`/`:restart` check the outcome after ~2 s
+  (`reportStarted`, exit 78 -> the `--reset` hint) - a refused runner exits
+  within a second, so "started" alone would be a lie. Your local `gcli` and
+  the installed unit may both run this repo's `release/index.js` (npm link),
+  so a build changes what the service runs on its next restart.
 
 ## Run it against a dev stack
 

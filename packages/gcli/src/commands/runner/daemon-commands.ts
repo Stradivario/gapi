@@ -8,6 +8,7 @@ import {
   buildUnit,
   DEFAULT_SERVICE_NAME,
   resolveGcliCommand,
+  RUNNER_AUTH_EXIT_CODE,
   SystemdUserService,
   unitPath,
 } from './daemon';
@@ -94,6 +95,65 @@ export const uninstall = async (cmd: { service?: string }) => {
   Logger.log(
     `Stopped and removed ${serviceName} (${path}). The runner itself is still registered - ` +
       '`gcli runner:delete` revokes it.',
+  );
+};
+
+const installedService = (cmd: { service?: string }) => {
+  assertSystemdAvailable();
+  const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
+  const systemd = new SystemdUserService(serviceName);
+  if (!systemd.installed()) {
+    throw new Error(
+      `The ${serviceName} service is not installed - run \`gcli runner:daemon:install\` first.`,
+    );
+  }
+  return { serviceName, systemd };
+};
+
+/**
+ * After start/restart: a runner Lambforge refuses exits within a second
+ * (status 78), so wait briefly and report that instead of "started".
+ */
+export const reportStarted = async (
+  serviceName: string,
+  systemd: SystemdUserService,
+  settleMs = 2000,
+) => {
+  await new Promise((resolve) => setTimeout(resolve, settleMs));
+  const { active, exitStatus } = await systemd.outcome();
+  if (active) {
+    Logger.log(`${serviceName} is running. Logs: gcli runner:daemon:logs`);
+    return;
+  }
+  if (exitStatus === RUNNER_AUTH_EXIT_CODE) {
+    throw new Error(
+      `${serviceName} stopped: Lambforge refused this runner's token (deleted, or registered on another server - check ~/.graphql-server/url). ` +
+        'Re-register it with `gcli runner:daemon:install --reset`.',
+    );
+  }
+  throw new Error(
+    `${serviceName} did not stay up (exit status ${exitStatus ?? 'unknown'}). See \`gcli runner:daemon:logs\`.`,
+  );
+};
+
+export const start = async (cmd: { service?: string }) => {
+  const { serviceName, systemd } = installedService(cmd);
+  await systemd.start();
+  await reportStarted(serviceName, systemd);
+};
+
+export const restart = async (cmd: { service?: string }) => {
+  const { serviceName, systemd } = installedService(cmd);
+  await systemd.restart();
+  await reportStarted(serviceName, systemd);
+};
+
+export const stop = async (cmd: { service?: string }) => {
+  const { serviceName, systemd } = installedService(cmd);
+  await systemd.stop();
+  Logger.log(
+    `${serviceName} stopped. It starts again with your next login (it stays enabled); ` +
+      '`gcli runner:daemon:uninstall` removes it.',
   );
 };
 

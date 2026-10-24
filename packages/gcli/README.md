@@ -890,7 +890,7 @@ running until Ctrl+C and reconnects on its own.
 | `gcli runner:list` | Your runners: online status, last seen, models |
 | `gcli runner:models` | List which models are shown in the chat; `--show a,b` shows only those, `--all` shows every model, `--none` hides them all; `--id` picks a runner (default: this machine's) |
 | `gcli runner:delete` | Delete a runner and revoke its token (`--id`, default: this machine's) |
-| `gcli runner:start:daemon` / `runner:daemon:install` | Install + start the runner as a systemd user service (Linux); `runner:daemon:status`, `runner:daemon:logs`, `runner:daemon:uninstall` manage it |
+| `gcli runner:start:daemon` / `runner:daemon:install` | Install + start the runner as a systemd user service (Linux); `runner:daemon:start`, `:stop`, `:restart`, `:status`, `:logs`, `:uninstall` manage it |
 
 ### Run it in the background (systemd, Linux)
 
@@ -899,6 +899,9 @@ npm i -g @gapi/gcli                 # a stable install - not the npx cache
 gcli login
 gcli runner:start:daemon            # = runner:daemon:install; same options as runner:start
 gcli runner:daemon:status
+gcli runner:daemon:stop             # stop it (stays installed, starts at next login)
+gcli runner:daemon:start            # start it again; tells you if it does not stay up
+gcli runner:daemon:restart          # e.g. after `gcli login` to another server
 gcli runner:daemon:logs             # follow the log (Ctrl+C to stop following)
 gcli runner:daemon:uninstall        # stop + remove the service (runner stays registered)
 ```

@@ -55,6 +55,30 @@ export function registerRunnerCommands(program: Command) {
     .action(lazy(() => import('./daemon-commands').then((m) => m.status)));
 
   program
+    .command('runner:daemon:start')
+    .description(
+      'Start the installed runner service, and report whether it stays up',
+    )
+    .option('--service <name>', 'systemd unit name (default: lambforge-runner)')
+    .action(lazy(() => import('./daemon-commands').then((m) => m.start)));
+
+  program
+    .command('runner:daemon:stop')
+    .description(
+      'Stop the runner service (it stays installed and starts at your next login)',
+    )
+    .option('--service <name>', 'systemd unit name (default: lambforge-runner)')
+    .action(lazy(() => import('./daemon-commands').then((m) => m.stop)));
+
+  program
+    .command('runner:daemon:restart')
+    .description(
+      'Restart the runner service (e.g. after `gcli login` to another server)',
+    )
+    .option('--service <name>', 'systemd unit name (default: lambforge-runner)')
+    .action(lazy(() => import('./daemon-commands').then((m) => m.restart)));
+
+  program
     .command('runner:daemon:logs')
     .description('Follow the runner service log (journalctl --user -f)')
     .option('--service <name>', 'systemd unit name (default: lambforge-runner)')

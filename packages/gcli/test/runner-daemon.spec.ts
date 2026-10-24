@@ -12,6 +12,7 @@ import {
   SystemdUserService,
   unitPath,
 } from '../src/commands/runner/daemon';
+import { reportStarted } from '../src/commands/runner/daemon-commands';
 
 describe('[runner:daemon] unit file', () => {
   const unit = buildUnit({
@@ -140,5 +141,64 @@ describe('[runner:daemon] systemctl --user', () => {
     expect(
       await new SystemdUserService('x', exec, home).lingerEnabled('me'),
     ).toBe(true);
+  });
+
+  it('start / stop / restart drive the unit', async () => {
+    const calls: string[] = [];
+    const exec = async (file: string, args: string[]) => {
+      calls.push([file, ...args].join(' '));
+      return { stdout: '' };
+    };
+    const service = new SystemdUserService('test-runner', exec, home);
+    expect(service.installed()).toBe(false);
+    await service.install('[Unit]\n');
+    expect(service.installed()).toBe(true);
+    calls.length = 0;
+
+    await service.start();
+    await service.stop();
+    await service.restart();
+
+    expect(calls).toEqual([
+      'systemctl --user start test-runner.service',
+      'systemctl --user stop test-runner.service',
+      'systemctl --user restart test-runner.service',
+    ]);
+  });
+});
+
+describe('[runner:daemon] start reports whether the runner stays up', () => {
+  const serviceWith = (stdout: string) =>
+    new SystemdUserService(
+      'test-runner',
+      async () => ({ stdout }),
+      '/nonexistent',
+    );
+
+  it('running', async () => {
+    const service = serviceWith('ActiveState=active\nExecMainStatus=0\n');
+    await expect(service.outcome()).resolves.toEqual({
+      active: true,
+      exitStatus: 0,
+    });
+    await expect(
+      reportStarted('test-runner', service, 0),
+    ).resolves.toBeUndefined();
+  });
+
+  it('a refused token (exit 78) says how to re-register', async () => {
+    const service = serviceWith(
+      `ActiveState=failed\nExecMainStatus=${RUNNER_AUTH_EXIT_CODE}\n`,
+    );
+    await expect(reportStarted('test-runner', service, 0)).rejects.toThrow(
+      /refused this runner's token.*runner:daemon:install --reset/,
+    );
+  });
+
+  it('any other exit points to the logs', async () => {
+    const service = serviceWith('ActiveState=failed\nExecMainStatus=1\n');
+    await expect(reportStarted('test-runner', service, 0)).rejects.toThrow(
+      /exit status 1.*runner:daemon:logs/,
+    );
   });
 });

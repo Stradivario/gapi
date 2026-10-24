@@ -14,6 +14,8 @@ what lives in gcli.
 | `gcli runner:models [--id] [--show a,b \| --all \| --none]` | Which models appear in the chat picker; no flag = list |
 | `gcli runner:delete [--id]` | Delete a runner and revoke its token (default: the saved one) |
 | `gcli runner:daemon:install` (alias `runner:start:daemon`) `[runner:start options] [--service] [--dry-run]` | Resolve/register the runner now (saves `runner.json`), then install + enable + restart a systemd USER unit running `runner:start --ollama <resolved>` (Linux) |
+| `gcli runner:daemon:start` / `:restart` `[--service]` | `systemctl --user start/restart`, then after ~2 s reads `ActiveState`/`ExecMainStatus` (`SystemdUserService.outcome`): running, or an error - exit 78 = token refused (deleted, or registered on another server than `~/.graphql-server/url`) with the `runner:daemon:install --reset` hint. Refuses when the unit is not installed |
+| `gcli runner:daemon:stop` `[--service]` | `systemctl --user stop` (stays enabled: starts again at the next login) |
 | `gcli runner:daemon:status` / `:logs` / `:uninstall` | `systemctl --user status`, `journalctl --user -f`, disable --now + remove the unit |
 
 Endpoints: `--wsUrl` > `runner.json` > derived from the `gcli login` URL
