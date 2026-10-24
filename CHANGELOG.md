@@ -1,4 +1,4 @@
-## [1.8.243](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.243) (2026-10-21)
+## [1.8.244](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.244) (2026-10-24)
 
 
 ### Bug Fixes
@@ -177,6 +177,7 @@
 * **Sendgrid:** added default email from injection ([59b8abf](https://github.com/Stradivario/gapi/commit/59b8abf0345629aff618b103151401c30d31c605))
 * **Sendgrid:** added sendgrid module to stack ([98f7d0a](https://github.com/Stradivario/gapi/commit/98f7d0a7ccd162d51078ab3aeb6c2e34d8378ada))
 * **withFilter:** added re exported withFilter since it was with messed typings not reflecting the actual framework ([83e1c45](https://github.com/Stradivario/gapi/commit/83e1c4526b1f6304225a48cd0ce575fd0f71bc68))
+* **workspace:** implement workspace start command and related types ([b872564](https://github.com/Stradivario/gapi/commit/b87256410d79f40601403687c14c9faeb90bdfd8))
 * **zip:** added zip upload ([1c240c0](https://github.com/Stradivario/gapi/commit/1c240c0f9e8df9612f88b8eb2b618d2d5904f21a))
 
 
