@@ -11,6 +11,7 @@ import { registerRunnerCommands } from './runner';
 import { startCommands } from './start';
 import { registerCronTriggerCommands } from './triggers/cron';
 import { registerMessageQueueTriggerCommands } from './triggers/message-queue';
+import { registerWorkflowCommands } from './workflow';
 import { registerWorkspaceCommands } from './workspace';
 
 export const commands = [
@@ -28,4 +29,5 @@ export const commands = [
   registerPluginCommands,
   registerRunnerCommands,
   registerWorkspaceCommands,
+  registerWorkflowCommands,
 ];

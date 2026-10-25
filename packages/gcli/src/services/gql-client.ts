@@ -21,6 +21,13 @@ import {
   writeFileAsObservable,
 } from '~/commands/lambda/helpers/read-file';
 import { LocalRunner } from '~/commands/runner/types';
+import {
+  Workflow,
+  WorkflowDefinition,
+  WorkflowDraft,
+  WorkflowRun,
+  WorkflowValidation,
+} from '~/commands/workflow/types';
 import { LocalWorkspace } from '~/commands/workspace/types';
 import {
   generationTimeDirectory,
@@ -55,6 +62,11 @@ import {
 import { ProjectFragment } from './types/project.fragment';
 import { RabbitMqFragment } from './types/rabbitmq.fragment';
 import { TimeTriggerFragment } from './types/time-trigger.fragment';
+import {
+  WorkflowFragment,
+  WorkflowRunDetailsFragment,
+  WorkflowRunFragment,
+} from './types/workflow.fragment';
 
 export function gql(...args) {
   const literals = args[0];
@@ -1181,6 +1193,254 @@ export class GraphqlClienAPI {
         ]).pipe(map(() => cfg)),
       ),
     );
+  }
+
+  // --------------------------------------------------------------------
+  // Workflows (feature workflows): graphql-server-lambdas, plus the AI
+  // draft from graphql-server. Ids are workflow ids; commands resolve names.
+  // --------------------------------------------------------------------
+
+  public static listWorkflows(projectId: string) {
+    return this.query<{ listWorkflows: Workflow[] }>({
+      query: gql`
+        query listWorkflows($projectId: String!) {
+          listWorkflows(projectId: $projectId) {
+            ${WorkflowFragment}
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.listWorkflows ?? []));
+  }
+
+  public static validateWorkflow(
+    projectId: string,
+    definition: WorkflowDefinition,
+    clusterId?: string,
+  ) {
+    return this.query<{ validateWorkflow: WorkflowValidation }>({
+      query: gql`
+        query validateWorkflow(
+          $projectId: String!
+          $definition: JSON!
+          $clusterId: String
+        ) {
+          validateWorkflow(
+            projectId: $projectId
+            definition: $definition
+            clusterId: $clusterId
+          ) {
+            valid
+            clusterId
+            functions
+          }
+        }
+      `,
+      variables: { projectId, definition, clusterId },
+    }).pipe(map((res) => res.validateWorkflow));
+  }
+
+  public static createWorkflow(
+    projectId: string,
+    input: {
+      name: string;
+      description?: string;
+      definition: WorkflowDefinition;
+      clusterId?: string;
+    },
+  ) {
+    return this.query<{ createWorkflow: Workflow }>({
+      query: gql`
+        mutation createWorkflow(
+          $projectId: String!
+          $name: String!
+          $description: String
+          $definition: JSON!
+          $clusterId: String
+        ) {
+          createWorkflow(
+            projectId: $projectId
+            name: $name
+            description: $description
+            definition: $definition
+            clusterId: $clusterId
+          ) {
+            ${WorkflowFragment}
+          }
+        }
+      `,
+      variables: { projectId, ...input },
+    }).pipe(map((res) => res.createWorkflow));
+  }
+
+  public static updateWorkflow(
+    projectId: string,
+    workflowId: string,
+    input: { description?: string; definition: WorkflowDefinition },
+  ) {
+    return this.query<{ updateWorkflow: Workflow }>({
+      query: gql`
+        mutation updateWorkflow(
+          $projectId: String!
+          $workflowId: String!
+          $description: String
+          $definition: JSON!
+        ) {
+          updateWorkflow(
+            projectId: $projectId
+            workflowId: $workflowId
+            description: $description
+            definition: $definition
+          ) {
+            ${WorkflowFragment}
+          }
+        }
+      `,
+      variables: { projectId, workflowId, ...input },
+    }).pipe(map((res) => res.updateWorkflow));
+  }
+
+  public static deleteWorkflow(projectId: string, workflowId: string) {
+    return this.query<{ deleteWorkflow: Workflow }>({
+      query: gql`
+        mutation deleteWorkflow($projectId: String!, $workflowId: String!) {
+          deleteWorkflow(projectId: $projectId, workflowId: $workflowId) {
+            id
+            name
+          }
+        }
+      `,
+      variables: { projectId, workflowId },
+    }).pipe(map((res) => res.deleteWorkflow));
+  }
+
+  public static startWorkflowRun(
+    projectId: string,
+    workflowId: string,
+    input?: unknown,
+  ) {
+    return this.query<{ startWorkflowRun: WorkflowRun }>({
+      query: gql`
+        mutation startWorkflowRun(
+          $projectId: String!
+          $workflowId: String!
+          $input: JSON
+        ) {
+          startWorkflowRun(
+            projectId: $projectId
+            workflowId: $workflowId
+            input: $input
+          ) {
+            ${WorkflowRunFragment}
+          }
+        }
+      `,
+      variables: { projectId, workflowId, input },
+    }).pipe(map((res) => res.startWorkflowRun));
+  }
+
+  public static listWorkflowRuns(
+    projectId: string,
+    workflowId: string,
+    limit?: number,
+  ) {
+    return this.query<{ listWorkflowRuns: WorkflowRun[] }>({
+      query: gql`
+        query listWorkflowRuns(
+          $projectId: String!
+          $workflowId: String!
+          $limit: Int
+        ) {
+          listWorkflowRuns(
+            projectId: $projectId
+            workflowId: $workflowId
+            limit: $limit
+          ) {
+            ${WorkflowRunFragment}
+          }
+        }
+      `,
+      variables: { projectId, workflowId, limit },
+    }).pipe(map((res) => res.listWorkflowRuns ?? []));
+  }
+
+  public static getWorkflowRun(
+    projectId: string,
+    workflowId: string,
+    runName: string,
+  ) {
+    return this.query<{ getWorkflowRun: WorkflowRun }>({
+      query: gql`
+        query getWorkflowRun(
+          $projectId: String!
+          $workflowId: String!
+          $runName: String!
+        ) {
+          getWorkflowRun(
+            projectId: $projectId
+            workflowId: $workflowId
+            runName: $runName
+          ) {
+            ${WorkflowRunDetailsFragment}
+          }
+        }
+      `,
+      variables: { projectId, workflowId, runName },
+    }).pipe(map((res) => res.getWorkflowRun));
+  }
+
+  public static cancelWorkflowRun(
+    projectId: string,
+    workflowId: string,
+    runName: string,
+  ) {
+    return this.query<{ cancelWorkflowRun: WorkflowRun }>({
+      query: gql`
+        mutation cancelWorkflowRun(
+          $projectId: String!
+          $workflowId: String!
+          $runName: String!
+        ) {
+          cancelWorkflowRun(
+            projectId: $projectId
+            workflowId: $workflowId
+            runName: $runName
+          ) {
+            ${WorkflowRunFragment}
+          }
+        }
+      `,
+      variables: { projectId, workflowId, runName },
+    }).pipe(map((res) => res.cancelWorkflowRun));
+  }
+
+  /** AI draft (graphql-server, MiniMax): from plain language, or a change
+      to `current`. Nothing is saved. */
+  public static generateWorkflowDraft(
+    projectId: string,
+    description: string,
+    current?: WorkflowDefinition,
+  ) {
+    return this.query<{ generateWorkflowDraft: WorkflowDraft }>({
+      query: gql`
+        mutation generateWorkflowDraft(
+          $projectId: String!
+          $description: String!
+          $current: JSON
+        ) {
+          generateWorkflowDraft(
+            projectId: $projectId
+            description: $description
+            current: $current
+          ) {
+            definition
+            explanation
+            warnings
+          }
+        }
+      `,
+      variables: { projectId, description, current },
+    }).pipe(map((res) => res.generateWorkflowDraft));
   }
 
   public static signIn(customToken: string) {

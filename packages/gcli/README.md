@@ -761,6 +761,61 @@ gcli cron:list
 gcli cron:delete --lambdaName 'my-function'
 ```
 
+### Workflows
+
+A workflow runs several lambdas as one process: each step gets the previous
+step's response, steps can retry, branch (Choice), fan out (Parallel / Map)
+or wait, and every run is recorded step by step. Workflows must be included
+in the project's plan (`allowWorkflows`).
+
+```bash
+# Draft one with AI from plain language (MiniMax), review the YAML, save it
+gcli workflow:generate -d "charge the card with retries; if it fails wait 1h and email the customer; otherwise send the receipt" -o order-flow.yaml
+gcli workflow:apply -f order-flow.yaml --name order-flow     # create or update by name
+
+# Or change an existing one in place
+gcli workflow:generate --name order-flow -d "add a 5 minute wait before the email" --apply
+
+# Run it and watch each step
+gcli workflow:run --name order-flow --input '{"orderId": 42}' --wait
+gcli workflow:runs --name order-flow
+gcli workflow:status --name order-flow --run order-flow-abc12 --follow
+gcli workflow:cancel --name order-flow --run order-flow-abc12
+
+gcli workflow:list
+gcli workflow:get --name order-flow -o order-flow.yaml        # edit, then workflow:apply
+gcli workflow:validate -f order-flow.yaml
+gcli workflow:delete --name order-flow                        # also deletes its runs
+```
+
+The file `workflow:get` / `workflow:generate` write (and `workflow:apply`
+reads) - a Fission `kind: Workflow` manifest or a bare `startAt` + `states`
+works too:
+
+```yaml
+workflow:
+  name: order-flow
+  description: Charge, then mail the receipt
+  definition:
+    startAt: charge
+    states:
+      charge:
+        type: Task
+        function: { type: name, name: charge }
+        retry: { maxAttempts: 3, backoffBase: 2s, backoffCap: 30s }
+        next: mail
+      mail:
+        type: Task
+        function: { type: name, name: mailer }
+        end: true
+```
+
+Step types: Task (call a lambda), Choice (branch on a value), Parallel,
+Map (once per list item), Wait (durable pause), Succeed, Fail. A step gets
+one attempt unless it has `retry`. Runs can only be started by
+`workflow:run` (or the UI / API) - HTTP and cron triggers cannot start a
+workflow yet.
+
 ### Monitoring & Testing
 
 Debug your functions directly from the terminal.

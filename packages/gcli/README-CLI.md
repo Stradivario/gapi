@@ -69,6 +69,16 @@ Commands:
   workspace:start [options]                            Connect the current directory to the Lambforge chat as a local workspace: the AI agents can read/edit its files and run commands here (outbound connection only - works behind NAT)
   workspace:list [options]                             List your local workspaces (online status, directory, processes)
   workspace:delete [options]                           Delete a local workspace and revoke its token (default: the one registered for this directory)
+  workflow:list [options]                              List the project workflows
+  workflow:get [options]                               Print a workflow as YAML (the format workflow:apply reads), or write it with -o
+  workflow:generate [options]                          Draft a workflow with AI from plain language (or change one with --name / --from). Prints or writes YAML; saves only with --apply
+  workflow:apply [options]                             Create or update a workflow from a YAML/JSON file (workflow: {name, description, definition})
+  workflow:validate [options]                          Check a workflow file against the cluster (lambdas exist, graph is valid)
+  workflow:delete [options]                            Delete a workflow and all of its runs
+  workflow:run [options]                               Start a run; the JSON input is the first step request body. --wait follows it to the end
+  workflow:runs [options]                              List a workflow runs, newest first
+  workflow:status [options]                            Show a run: its step events, error and output (--follow until it ends)
+  workflow:cancel [options]                            Cancel a running run
   help [command]                                       display help for command
 [36m
 --- Subcommand: login ---[0m
@@ -1009,3 +1019,118 @@ Delete a local workspace and revoke its token (default: the one registered for t
 Options:
   --id <id>   Workspace id (see `gcli workspace:list`)
   -h, --help  display help for command
+[36m
+--- Subcommand: workflow:list ---[0m
+Usage: gcli workflow:list [options]
+
+List the project workflows
+
+Options:
+  -p, --project <project>
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:get ---[0m
+Usage: gcli workflow:get [options]
+
+Print a workflow as YAML (the format workflow:apply reads), or write it with -o
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Workflow name
+  -o, --out <file>         Write the YAML to this file
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:generate ---[0m
+Usage: gcli workflow:generate [options]
+
+Draft a workflow with AI from plain language (or change one with --name / --from). Prints or writes YAML; saves only with --apply
+
+Options:
+  -p, --project <project>
+  -d, --description <text>  What the workflow should do, e.g. "charge the card
+                            with retries, then email the receipt"
+  -n, --name <name>         Workflow name: an existing one is changed, a new
+                            one is named so
+  --from <file>             Change this workflow file instead
+  -o, --out <file>          Write the draft YAML to this file
+  --apply                   Save the draft as the workflow (needs a name)
+  -h, --help                display help for command
+[36m
+--- Subcommand: workflow:apply ---[0m
+Usage: gcli workflow:apply [options]
+
+Create or update a workflow from a YAML/JSON file (workflow: {name, description, definition})
+
+Options:
+  -p, --project <project>
+  -f, --file <file>         Workflow file
+  -n, --name <name>         Overrides workflow.name from the file
+  -d, --description <text>  Overrides workflow.description
+  -h, --help                display help for command
+[36m
+--- Subcommand: workflow:validate ---[0m
+Usage: gcli workflow:validate [options]
+
+Check a workflow file against the cluster (lambdas exist, graph is valid)
+
+Options:
+  -p, --project <project>
+  -f, --file <file>        Workflow file
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:delete ---[0m
+Usage: gcli workflow:delete [options]
+
+Delete a workflow and all of its runs
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Workflow name
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:run ---[0m
+Usage: gcli workflow:run [options]
+
+Start a run; the JSON input is the first step request body. --wait follows it to the end
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Workflow name
+  -i, --input <json>       Run input as JSON (default {})
+  --input-file <file>      Read the run input from a JSON file
+  -w, --wait               Print each step as it happens until the run ends
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:runs ---[0m
+Usage: gcli workflow:runs [options]
+
+List a workflow runs, newest first
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Workflow name
+  -l, --limit <limit>      How many (default 50)
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:status ---[0m
+Usage: gcli workflow:status [options]
+
+Show a run: its step events, error and output (--follow until it ends)
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Workflow name
+  -r, --run <run>          Run name (see workflow:runs)
+  -f, --follow             Keep printing events until the run ends
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:cancel ---[0m
+Usage: gcli workflow:cancel [options]
+
+Cancel a running run
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Workflow name
+  -r, --run <run>          Run name (see workflow:runs)
+  -h, --help               display help for command
