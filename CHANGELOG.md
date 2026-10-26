@@ -1,4 +1,4 @@
-## [1.8.245](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.245) (2026-10-24)
+## [1.8.246](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.246) (2026-10-26)
 
 
 ### Bug Fixes
@@ -144,6 +144,7 @@
 * **gcli:** single executable ([8697dc6](https://github.com/Stradivario/gapi/commit/8697dc63dd03f9a4247238f21a3d77e604f0c360))
 * **gcli:** time triggers tools implemented ([8cbf633](https://github.com/Stradivario/gapi/commit/8cbf63325a15590c714e517a856fb9cca58b8767))
 * **gcli:** updated mcp server to be with rxjs instead of imperative code ([4337cad](https://github.com/Stradivario/gapi/commit/4337cad4a5091700b1f31ab1e01028ee96b6a096))
+* **gcli:** workflow commands with AI drafts ([4019d58](https://github.com/Stradivario/gapi/commit/4019d586ce392b75da4cd44e704cc12da30e7e3a))
 * **geojson:** removed package geojson and instead re-exported from the library itself one less library for @gapi/core ([5d76d0f](https://github.com/Stradivario/gapi/commit/5d76d0f98ef70317bf82245512be9d0db8113d5b))
 * **graphql-pubsub:** added compatibility between graphql v15 and graphql v16 we want to use v16 but subscriptions are not stable enough ([b94d7a7](https://github.com/Stradivario/gapi/commit/b94d7a748856d64a952ac4f837db1d5d1b0437a2))
 * **graphql:** added option to disable query suggestion on client facing errors so attacker cannot guess what the next queries might be ([7eb4b0e](https://github.com/Stradivario/gapi/commit/7eb4b0ed89c61045ec0cf6cf51d76304288eaece))
