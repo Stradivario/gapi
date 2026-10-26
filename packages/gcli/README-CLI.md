@@ -79,6 +79,9 @@ Commands:
   workflow:runs [options]                              List a workflow runs, newest first
   workflow:status [options]                            Show a run: its step events, error and output (--follow until it ends)
   workflow:cancel [options]                            Cancel a running run
+  workflow:trigger:add [options]                       Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs Fission 1.26+ on the cluster
+  workflow:trigger:list [options]                      List a workflow HTTP and schedule triggers
+  workflow:trigger:remove [options]                    Remove a workflow trigger
   help [command]                                       display help for command
 [36m
 --- Subcommand: login ---[0m
@@ -1133,4 +1136,44 @@ Options:
   -p, --project <project>
   -n, --name <name>        Workflow name
   -r, --run <run>          Run name (see workflow:runs)
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:trigger:add ---[0m
+Usage: gcli workflow:trigger:add [options]
+
+Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs Fission 1.26+ on the cluster
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Workflow name
+  --http                   An HTTP trigger: <router>/<project>/workflows/<path>
+  --path <path>            HTTP path under /workflows/ (default: the workflow
+                           name)
+  --method <methods>       HTTP methods, comma separated (default POST)
+  --cron <schedule>        A schedule: "@every 1h", "0 9 * * 1-5", "@daily"
+                           (UTC)
+  -i, --input <json>       Schedule: the input of every run (default {})
+  --input-file <file>      Schedule: read the run input from a JSON file
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:trigger:list ---[0m
+Usage: gcli workflow:trigger:list [options]
+
+List a workflow HTTP and schedule triggers
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Workflow name
+  -h, --help               display help for command
+[36m
+--- Subcommand: workflow:trigger:remove ---[0m
+Usage: gcli workflow:trigger:remove [options]
+
+Remove a workflow trigger
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Workflow name
+  -t, --trigger <trigger>  Trigger id, path or schedule (see
+                           workflow:trigger:list)
   -h, --help               display help for command

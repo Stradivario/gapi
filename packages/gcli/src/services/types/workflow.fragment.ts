@@ -5,6 +5,17 @@ clusterId
 name
 description
 definition
+triggers {
+  id
+  kind
+  resourceName
+  path
+  methods
+  cron
+  input
+  url
+  createdAt
+}
 createdAt
 updatedAt
 `;
@@ -20,6 +31,8 @@ finishedAt
 activeStates
 errorType
 cause
+triggerKind
+triggerName
 `;
 
 export const WorkflowRunDetailsFragment = `

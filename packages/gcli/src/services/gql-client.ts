@@ -26,6 +26,7 @@ import {
   WorkflowDefinition,
   WorkflowDraft,
   WorkflowRun,
+  WorkflowTriggerInput,
   WorkflowValidation,
 } from '~/commands/workflow/types';
 import { LocalWorkspace } from '~/commands/workspace/types';
@@ -1412,6 +1413,58 @@ export class GraphqlClienAPI {
       `,
       variables: { projectId, workflowId, runName },
     }).pipe(map((res) => res.cancelWorkflowRun));
+  }
+
+  /** Add an HTTP or cron trigger that starts runs (Fission 1.26+ on the
+      workflow's cluster). Returns the workflow with its triggers. */
+  public static addWorkflowTrigger(
+    projectId: string,
+    workflowId: string,
+    trigger: WorkflowTriggerInput,
+  ) {
+    return this.query<{ addWorkflowTrigger: Workflow }>({
+      query: gql`
+        mutation addWorkflowTrigger(
+          $projectId: String!
+          $workflowId: String!
+          $trigger: WorkflowTriggerInput!
+        ) {
+          addWorkflowTrigger(
+            projectId: $projectId
+            workflowId: $workflowId
+            trigger: $trigger
+          ) {
+            ${WorkflowFragment}
+          }
+        }
+      `,
+      variables: { projectId, workflowId, trigger },
+    }).pipe(map((res) => res.addWorkflowTrigger));
+  }
+
+  public static removeWorkflowTrigger(
+    projectId: string,
+    workflowId: string,
+    triggerId: string,
+  ) {
+    return this.query<{ removeWorkflowTrigger: Workflow }>({
+      query: gql`
+        mutation removeWorkflowTrigger(
+          $projectId: String!
+          $workflowId: String!
+          $triggerId: String!
+        ) {
+          removeWorkflowTrigger(
+            projectId: $projectId
+            workflowId: $workflowId
+            triggerId: $triggerId
+          ) {
+            ${WorkflowFragment}
+          }
+        }
+      `,
+      variables: { projectId, workflowId, triggerId },
+    }).pipe(map((res) => res.removeWorkflowTrigger));
   }
 
   /** AI draft (graphql-server, MiniMax): from plain language, or a change

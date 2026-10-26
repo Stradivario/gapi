@@ -788,6 +788,24 @@ gcli workflow:validate -f order-flow.yaml
 gcli workflow:delete --name order-flow                        # also deletes its runs
 ```
 
+**Triggers** start runs without anyone calling `workflow:run` (Fission 1.26+
+on the workflow's cluster creates the run itself):
+
+```bash
+# An HTTP URL: every request starts a run, the JSON body is the run input,
+# the answer is 202 {"run": "..."}; default path = the workflow name, POST
+gcli workflow:trigger:add --name order-flow --http --path orders --method POST
+curl -X POST 'https://functions.lambforge.com/<projectId>/workflows/orders' -d '{"orderId": 42}'
+
+# A schedule (UTC) with a fixed run input
+gcli workflow:trigger:add --name nightly-report --cron "0 6 * * *" --input '{"scope": "all"}'
+
+gcli workflow:trigger:list --name order-flow
+gcli workflow:trigger:remove --name order-flow --trigger orders   # id, path or schedule
+```
+
+`workflow:runs` shows how each run started (`manual`, `http`, `schedule`).
+
 The file `workflow:get` / `workflow:generate` write (and `workflow:apply`
 reads) - a Fission `kind: Workflow` manifest or a bare `startAt` + `states`
 works too:

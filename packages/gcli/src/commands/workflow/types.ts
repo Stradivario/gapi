@@ -17,6 +17,29 @@ export interface WorkflowState {
   [key: string]: unknown;
 }
 
+/** An HTTP or cron trigger that starts runs (Fission creates the run). */
+export interface WorkflowTrigger {
+  id: string;
+  kind: 'http' | 'cron' | string;
+  /** The Fission HTTPTrigger / TimeTrigger name. */
+  resourceName?: string | null;
+  path?: string | null;
+  methods?: (string | null)[] | null;
+  cron?: string | null;
+  input?: unknown;
+  /** http: the public URL (a request starts a run, answers 202 {run}). */
+  url?: string | null;
+  createdAt?: string | null;
+}
+
+export interface WorkflowTriggerInput {
+  kind: 'http' | 'cron';
+  path?: string;
+  methods?: string[];
+  cron?: string;
+  input?: unknown;
+}
+
 export interface Workflow {
   id: string;
   projectId: string;
@@ -24,6 +47,7 @@ export interface Workflow {
   name: string;
   description?: string | null;
   definition: WorkflowDefinition;
+  triggers?: WorkflowTrigger[] | null;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -47,6 +71,9 @@ export interface WorkflowRun {
   activeStates?: string[] | null;
   errorType?: string | null;
   cause?: string | null;
+  /** httptrigger / timetrigger when a workflow trigger started the run. */
+  triggerKind?: string | null;
+  triggerName?: string | null;
   events?: WorkflowRunEvent[] | null;
 }
 

@@ -25,6 +25,12 @@ import {
 } from '../src/commands/workflow/definition';
 import generate from '../src/commands/workflow/generate';
 import run from '../src/commands/workflow/run';
+import {
+  buildTriggerInput,
+  findTrigger,
+  runSource,
+  triggerRow,
+} from '../src/commands/workflow/triggers';
 import { parseProjectId } from '../src/helpers';
 import { GraphqlClienAPI } from '../src/services/gql-client';
 
@@ -154,5 +160,80 @@ describe('[workflow] commands', () => {
       id: 1,
     });
     expect(result).toMatchObject({ phase: 'Succeeded' });
+  });
+});
+
+describe('workflow triggers', () => {
+  it('builds an HTTP trigger: path cleaned, methods upper-cased', () => {
+    expect(buildTriggerInput({ http: true })).toEqual({ kind: 'http' });
+    expect(
+      buildTriggerInput({ http: true, path: '/orders', method: 'post, put' }),
+    ).toEqual({ kind: 'http', path: 'orders', methods: ['POST', 'PUT'] });
+  });
+
+  it('builds a cron trigger with its input', () => {
+    expect(buildTriggerInput({ cron: ' @daily ' })).toEqual({
+      kind: 'cron',
+      cron: '@daily',
+      input: {},
+    });
+    expect(
+      buildTriggerInput({ cron: '@hourly', input: '{"scope":"all"}' }).input,
+    ).toEqual({ scope: 'all' });
+    expect(
+      buildTriggerInput({ cron: '@hourly', inputText: '[1]', input: '{}' })
+        .input,
+    ).toEqual([1]);
+  });
+
+  it('refuses ambiguous or misplaced options', () => {
+    expect(() => buildTriggerInput({})).toThrow(/either --http or --cron/);
+    expect(() => buildTriggerInput({ http: true, cron: '@daily' })).toThrow(
+      /either --http or --cron/,
+    );
+    expect(() => buildTriggerInput({ http: true, input: '{}' })).toThrow(
+      /request body/,
+    );
+    expect(() => buildTriggerInput({ cron: '@daily', input: '{' })).toThrow(
+      /not valid JSON/,
+    );
+  });
+
+  it('finds a trigger by id, Fission name, path or schedule', () => {
+    const triggers = [
+      { id: 't1', kind: 'http', resourceName: 'wf-a-http-1', path: 'orders' },
+      { id: 't2', kind: 'cron', resourceName: 'wf-a-cron-2', cron: '@daily' },
+    ];
+    expect(findTrigger(triggers, 't2').id).toBe('t2');
+    expect(findTrigger(triggers, 'wf-a-http-1').id).toBe('t1');
+    expect(findTrigger(triggers, '/orders').id).toBe('t1');
+    expect(findTrigger(triggers, '@daily').id).toBe('t2');
+    expect(() => findTrigger(triggers, 'nope')).toThrow(/No trigger "nope"/);
+    expect(() => findTrigger(triggers)).toThrow(/--trigger is required/);
+  });
+
+  it('describes triggers and where a run came from', () => {
+    expect(
+      triggerRow({
+        id: 't1',
+        kind: 'http',
+        methods: ['POST'],
+        url: 'https://x/p/workflows/orders',
+      }),
+    ).toEqual({
+      id: 't1',
+      kind: 'http',
+      when: 'POST https://x/p/workflows/orders',
+      input: 'request body',
+    });
+    expect(
+      triggerRow({ id: 't2', kind: 'cron', cron: '@daily', input: { a: 1 } })
+        .when,
+    ).toBe('@daily');
+    expect(runSource({ name: 'r', triggerKind: 'httptrigger' })).toBe('http');
+    expect(runSource({ name: 'r', triggerKind: 'timetrigger' })).toBe(
+      'schedule',
+    );
+    expect(runSource({ name: 'r' })).toBe('manual');
   });
 });

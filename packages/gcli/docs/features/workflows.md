@@ -17,9 +17,19 @@ the id with `listWorkflows`):
 | `workflow:validate -f file` | `validateWorkflow` (graph + lambdas on the cluster) |
 | `workflow:delete -n` | `deleteWorkflow` (runs too) |
 | `workflow:run -n [-i json \| --input-file] [--wait]` | `startWorkflowRun`; `--wait` polls `getWorkflowRun` every 2 s and prints each new event until the run is terminal |
-| `workflow:runs -n [-l]` | `listWorkflowRuns` |
+| `workflow:runs -n [-l]` | `listWorkflowRuns` (column `by`: manual / http / schedule, from `triggerKind`) |
 | `workflow:status -n -r run [--follow]` | `getWorkflowRun` (events, error, output) |
 | `workflow:cancel -n -r run` | `cancelWorkflowRun` |
+| `workflow:trigger:add -n (--http [--path] [--method a,b] \| --cron "<schedule>" [-i json \| --input-file])` | `addWorkflowTrigger`; prints the trigger and, for HTTP, a `curl` line |
+| `workflow:trigger:list -n` | the workflow's `triggers` (id, kind, URL or schedule, input) |
+| `workflow:trigger:remove -n -t <id \| path \| schedule \| Fission name>` | `removeWorkflowTrigger` |
+
+Triggers (2026-10-26) are HTTP URLs (`<router>/<projectId>/workflows/<path>`,
+the JSON body is the run input, 202 `{run}`) and schedules (cron, UTC, with a
+fixed input) that start runs. Fission 1.26+ (fork `workflow-triggers`) on the
+workflow's cluster creates the run. The option handling is pure and tested:
+`src/commands/workflow/triggers.ts` (`buildTriggerInput`, `findTrigger`,
+`triggerRow`, `runSource`).
 
 The workflow file (`definition.ts` `parseWorkflowFile`) accepts
 `workflow: {name, description, clusterId, definition}`, the same without the
@@ -37,7 +47,9 @@ USER-only in graphql-server-lambdas, so these commands need `gcli login`.
 `npx jest --coverage=false test/workflow.spec.ts`. Real: log in to a
 gateway whose project has `allowWorkflows`, then
 `gcli workflow:generate -d "..." -n demo --apply` and
-`gcli workflow:run -n demo --wait`.
+`gcli workflow:run -n demo --wait`; triggers:
+`gcli workflow:trigger:add -n demo --http`, then `curl -X POST <url> -d '{}'`
+and `gcli workflow:runs -n demo` shows the run `by` http.
 
 ## How to debug
 
@@ -47,3 +59,6 @@ gateway whose project has `allowWorkflows`, then
   `allowWorkflows`.
 - `Workflows are not enabled on this cluster`: the cluster runs Fission
   without `workflows.enabled` (canonical doc, Requires).
+- `Workflow triggers need Fission 1.26 or newer on this cluster`: the
+  cluster's Fission CRDs predate workflow triggers.
+- `Pass either --http or --cron`: exactly one of them.

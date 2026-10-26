@@ -105,4 +105,52 @@ export function registerWorkflowCommands(program: Command) {
     .option('-n, --name <name>', 'Workflow name')
     .option('-r, --run <run>', 'Run name (see workflow:runs)')
     .action(lazy(() => import('./cancel').then((m) => m.default)));
+
+  program
+    .command('workflow:trigger:add')
+    .description(
+      'Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs Fission 1.26+ on the cluster',
+    )
+    .option('-p, --project <project>')
+    .option('-n, --name <name>', 'Workflow name')
+    .option('--http', 'An HTTP trigger: <router>/<project>/workflows/<path>')
+    .option(
+      '--path <path>',
+      'HTTP path under /workflows/ (default: the workflow name)',
+    )
+    .option(
+      '--method <methods>',
+      'HTTP methods, comma separated (default POST)',
+    )
+    .option(
+      '--cron <schedule>',
+      'A schedule: "@every 1h", "0 9 * * 1-5", "@daily" (UTC)',
+    )
+    .option(
+      '-i, --input <json>',
+      'Schedule: the input of every run (default {})',
+    )
+    .option(
+      '--input-file <file>',
+      'Schedule: read the run input from a JSON file',
+    )
+    .action(lazy(() => import('./trigger-add').then((m) => m.default)));
+
+  program
+    .command('workflow:trigger:list')
+    .description('List a workflow HTTP and schedule triggers')
+    .option('-p, --project <project>')
+    .option('-n, --name <name>', 'Workflow name')
+    .action(lazy(() => import('./trigger-list').then((m) => m.default)));
+
+  program
+    .command('workflow:trigger:remove')
+    .description('Remove a workflow trigger')
+    .option('-p, --project <project>')
+    .option('-n, --name <name>', 'Workflow name')
+    .option(
+      '-t, --trigger <trigger>',
+      'Trigger id, path or schedule (see workflow:trigger:list)',
+    )
+    .action(lazy(() => import('./trigger-remove').then((m) => m.default)));
 }

@@ -4,6 +4,7 @@ import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
 import { resolveWorkflow, withProject } from './helpers';
+import { runSource } from './triggers';
 
 export default (cmd: { project?: string; name?: string; limit?: string }) =>
   withProject(cmd.project, (projectId) =>
@@ -24,6 +25,7 @@ export default (cmd: { project?: string; name?: string; limit?: string }) =>
                 started: r.startedAt ?? '',
                 finished: r.finishedAt ?? '',
                 error: r.errorType ?? '',
+                by: runSource(r),
               })),
             )
           : Logger.info('No runs yet. Start one with workflow:run.'),
