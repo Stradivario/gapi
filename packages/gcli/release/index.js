@@ -15,11 +15,11 @@ var __export = (target, all) => {
   for (var name2 in all)
     __defProp(target, name2, { get: all[name2], enumerable: true });
 };
-var __copyProps = (to, from15, except, desc) => {
-  if (from15 && typeof from15 === "object" || typeof from15 === "function") {
-    for (let key of __getOwnPropNames(from15))
+var __copyProps = (to, from16, except, desc) => {
+  if (from16 && typeof from16 === "object" || typeof from16 === "function") {
+    for (let key of __getOwnPropNames(from16))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from15[key], enumerable: !(desc = __getOwnPropDesc(from15, key)) || desc.enumerable });
+        __defProp(to, key, { get: () => from16[key], enumerable: !(desc = __getOwnPropDesc(from16, key)) || desc.enumerable });
   }
   return to;
 };
@@ -8917,9 +8917,9 @@ var require_Subscription = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9100,9 +9100,9 @@ var require_timeoutProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9860,9 +9860,9 @@ var require_animationFrameProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10460,9 +10460,9 @@ var require_intervalProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10669,9 +10669,9 @@ var require_immediateProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12233,10 +12233,10 @@ var require_from = __commonJS({
     exports2.from = void 0;
     var scheduled_1 = require_scheduled();
     var innerFrom_1 = require_innerFrom();
-    function from15(input, scheduler) {
+    function from16(input, scheduler) {
       return scheduler ? scheduled_1.scheduled(input, scheduler) : innerFrom_1.innerFrom(input);
     }
-    exports2.from = from15;
+    exports2.from = from16;
   }
 });
 
@@ -12391,7 +12391,7 @@ var require_lastValueFrom = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.lastValueFrom = void 0;
     var EmptyError_1 = require_EmptyError();
-    function lastValueFrom52(source, config2) {
+    function lastValueFrom53(source, config2) {
       var hasConfig = typeof config2 === "object";
       return new Promise(function(resolve2, reject) {
         var _hasValue = false;
@@ -12414,7 +12414,7 @@ var require_lastValueFrom = __commonJS({
         });
       });
     }
-    exports2.lastValueFrom = lastValueFrom52;
+    exports2.lastValueFrom = lastValueFrom53;
   }
 });
 
@@ -12624,9 +12624,9 @@ var require_mapOneOrManyArgs = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12666,9 +12666,9 @@ var require_bindCallbackInternals = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -13800,9 +13800,9 @@ var require_zip = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14430,9 +14430,9 @@ var require_combineLatest2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14478,9 +14478,9 @@ var require_combineLatestWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14552,9 +14552,9 @@ var require_concat2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14598,9 +14598,9 @@ var require_concatWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15091,9 +15091,9 @@ var require_endWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15638,9 +15638,9 @@ var require_merge2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15685,9 +15685,9 @@ var require_mergeWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15770,9 +15770,9 @@ var require_onErrorResumeNextWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15954,9 +15954,9 @@ var require_raceWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16352,9 +16352,9 @@ var require_share = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17354,9 +17354,9 @@ var require_withLatestFrom = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17440,9 +17440,9 @@ var require_zip2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17483,9 +17483,9 @@ var require_zipWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -18251,9 +18251,9 @@ var require_race2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from15) {
-      for (var i2 = 0, il = from15.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from15[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
+      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from16[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -31385,7 +31385,7 @@ var require_from2 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors().codes.ERR_INVALID_ARG_TYPE;
-    function from15(Readable2, iterable, opts) {
+    function from16(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -31424,7 +31424,7 @@ var require_from2 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from15;
+    module2.exports = from16;
   }
 });
 
@@ -31468,7 +31468,7 @@ var require_stream_readable = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from15;
+    var from16;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -32150,10 +32150,10 @@ var require_stream_readable = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from15 === void 0) {
-          from15 = require_from2();
+        if (from16 === void 0) {
+          from16 = require_from2();
         }
-        return from15(Readable2, iterable, opts);
+        return from16(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -32333,8 +32333,8 @@ var require_pipeline = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from15, to) {
-      return from15.pipe(to);
+    function pipe2(from16, to) {
+      return from16.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -34112,7 +34112,7 @@ var require_from3 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors2().codes.ERR_INVALID_ARG_TYPE;
-    function from15(Readable2, iterable, opts) {
+    function from16(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -34151,7 +34151,7 @@ var require_from3 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from15;
+    module2.exports = from16;
   }
 });
 
@@ -34195,7 +34195,7 @@ var require_stream_readable2 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from15;
+    var from16;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -34877,10 +34877,10 @@ var require_stream_readable2 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from15 === void 0) {
-          from15 = require_from3();
+        if (from16 === void 0) {
+          from16 = require_from3();
         }
-        return from15(Readable2, iterable, opts);
+        return from16(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -35060,8 +35060,8 @@ var require_pipeline2 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from15, to) {
-      return from15.pipe(to);
+    function pipe2(from16, to) {
+      return from16.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -36945,6 +36945,31 @@ var init_gql_client = __esm({
           variables: { projectId, ...input }
         }).pipe((0, import_operators.map)((res) => res.provisionProjectCluster));
       }
+      /** A virtual cluster (vCluster) on the shared cluster or on one of the
+          project's private clusters. routerUrl/hostNamespace are selected here
+          only, not in ClusterFragment, so older servers keep working. */
+      static provisionProjectVirtualCluster(projectId, input) {
+        return this.query({
+          query: gql`
+        mutation provisionProjectVirtualCluster(
+          $projectId: String!
+          $name: String!
+          $hostClusterId: String
+        ) {
+          provisionProjectVirtualCluster(
+            projectId: $projectId
+            name: $name
+            hostClusterId: $hostClusterId
+          ) {
+            ${ClusterFragment}
+            routerUrl
+            hostNamespace
+          }
+        }
+      `,
+          variables: { projectId, ...input }
+        }).pipe((0, import_operators.map)((res) => res.provisionProjectVirtualCluster));
+      }
       static listLocalRunners() {
         return this.query({
           query: gql`
@@ -38099,14 +38124,14 @@ function __spreadArrays() {
       r2[k] = a[j];
   return r2;
 }
-function __spreadArray(to, from15, pack) {
-  if (pack || arguments.length === 2) for (var i2 = 0, l = from15.length, ar; i2 < l; i2++) {
-    if (ar || !(i2 in from15)) {
-      if (!ar) ar = Array.prototype.slice.call(from15, 0, i2);
-      ar[i2] = from15[i2];
+function __spreadArray(to, from16, pack) {
+  if (pack || arguments.length === 2) for (var i2 = 0, l = from16.length, ar; i2 < l; i2++) {
+    if (ar || !(i2 in from16)) {
+      if (!ar) ar = Array.prototype.slice.call(from16, 0, i2);
+      ar[i2] = from16[i2];
     }
   }
-  return to.concat(ar || Array.prototype.slice.call(from15));
+  return to.concat(ar || Array.prototype.slice.call(from16));
 }
 function __await(v) {
   return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -40630,11 +40655,11 @@ var require_typescript = __commonJS({
         for (var name2 in all)
           __defProp2(target, name2, { get: all[name2], enumerable: true });
       };
-      var __copyProps2 = (to, from15, except, desc) => {
-        if (from15 && typeof from15 === "object" || typeof from15 === "function") {
-          for (let key of __getOwnPropNames2(from15))
+      var __copyProps2 = (to, from16, except, desc) => {
+        if (from16 && typeof from16 === "object" || typeof from16 === "function") {
+          for (let key of __getOwnPropNames2(from16))
             if (!__hasOwnProp2.call(to, key) && key !== except)
-              __defProp2(to, key, { get: () => from15[key], enumerable: !(desc = __getOwnPropDesc2(from15, key)) || desc.enumerable });
+              __defProp2(to, key, { get: () => from16[key], enumerable: !(desc = __getOwnPropDesc2(from16, key)) || desc.enumerable });
         }
         return to;
       };
@@ -43478,14 +43503,14 @@ var require_typescript = __commonJS({
       function toOffset(array2, offset) {
         return offset < 0 ? array2.length + offset : offset;
       }
-      function addRange(to, from15, start3, end) {
-        if (from15 === void 0 || from15.length === 0) return to;
-        if (to === void 0) return from15.slice(start3, end);
-        start3 = start3 === void 0 ? 0 : toOffset(from15, start3);
-        end = end === void 0 ? from15.length : toOffset(from15, end);
-        for (let i2 = start3; i2 < end && i2 < from15.length; i2++) {
-          if (from15[i2] !== void 0) {
-            to.push(from15[i2]);
+      function addRange(to, from16, start3, end) {
+        if (from16 === void 0 || from16.length === 0) return to;
+        if (to === void 0) return from16.slice(start3, end);
+        start3 = start3 === void 0 ? 0 : toOffset(from16, start3);
+        end = end === void 0 ? from16.length : toOffset(from16, end);
+        for (let i2 = start3; i2 < end && i2 < from16.length; i2++) {
+          if (from16[i2] !== void 0) {
+            to.push(from16[i2]);
           }
         }
         return to;
@@ -49994,8 +50019,8 @@ ${lanes.join("\n")}
         const canonicalDirectoryName = getCanonicalFileName(directoryName);
         return startsWith(canonicalFileName, canonicalDirectoryName + "/") || startsWith(canonicalFileName, canonicalDirectoryName + "\\");
       }
-      function getPathComponentsRelativeTo(from15, to, stringEqualityComparer, getCanonicalFileName) {
-        const fromComponents = reducePathComponents(getPathComponents(from15));
+      function getPathComponentsRelativeTo(from16, to, stringEqualityComparer, getCanonicalFileName) {
+        const fromComponents = reducePathComponents(getPathComponents(from16));
         const toComponents = reducePathComponents(getPathComponents(to));
         let start3;
         for (start3 = 0; start3 < fromComponents.length && start3 < toComponents.length; start3++) {
@@ -50031,8 +50056,8 @@ ${lanes.join("\n")}
           false
         );
       }
-      function getRelativePathFromFile(from15, to, getCanonicalFileName) {
-        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from15), to, getCanonicalFileName));
+      function getRelativePathFromFile(from16, to, getCanonicalFileName) {
+        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from16), to, getCanonicalFileName));
       }
       function getRelativePathToDirectoryOrUrl(directoryPathOrUrl, relativeOrAbsolutePath, currentDirectory, getCanonicalFileName, isAbsolutePathAnUrl) {
         const pathComponents2 = getPathComponentsRelativeTo(
@@ -57583,15 +57608,15 @@ ${lanes.join("\n")}
         if (!nodeArray || isArray(child) || !isElement(child)) return false;
         return contains(nodeArray, child);
       }
-      function insertStatementsAfterPrologue(to, from15, isPrologueDirective2) {
-        if (from15 === void 0 || from15.length === 0) return to;
+      function insertStatementsAfterPrologue(to, from16, isPrologueDirective2) {
+        if (from16 === void 0 || from16.length === 0) return to;
         let statementIndex = 0;
         for (; statementIndex < to.length; ++statementIndex) {
           if (!isPrologueDirective2(to[statementIndex])) {
             break;
           }
         }
-        to.splice(statementIndex, 0, ...from15);
+        to.splice(statementIndex, 0, ...from16);
         return to;
       }
       function insertStatementAfterPrologue(to, statement, isPrologueDirective2) {
@@ -57608,11 +57633,11 @@ ${lanes.join("\n")}
       function isAnyPrologueDirective(node) {
         return isPrologueDirective(node) || !!(getEmitFlags(node) & 2097152);
       }
-      function insertStatementsAfterStandardPrologue(to, from15) {
-        return insertStatementsAfterPrologue(to, from15, isPrologueDirective);
+      function insertStatementsAfterStandardPrologue(to, from16) {
+        return insertStatementsAfterPrologue(to, from16, isPrologueDirective);
       }
-      function insertStatementsAfterCustomPrologue(to, from15) {
-        return insertStatementsAfterPrologue(to, from15, isAnyPrologueDirective);
+      function insertStatementsAfterCustomPrologue(to, from16) {
+        return insertStatementsAfterPrologue(to, from16, isAnyPrologueDirective);
       }
       function insertStatementAfterStandardPrologue(to, statement) {
         return insertStatementAfterPrologue(to, statement, isPrologueDirective);
@@ -72091,13 +72116,13 @@ ${lanes.join("\n")}
             [cooked, raw]
           );
         }
-        function createSpreadArrayHelper(to, from15, packFrom) {
+        function createSpreadArrayHelper(to, from16, packFrom) {
           context.requestEmitHelper(spreadArrayHelper);
           return factory2.createCallExpression(
             getUnscopedHelperName("__spreadArray"),
             /*typeArguments*/
             void 0,
-            [to, from15, packFrom ? immutableTrue() : immutableFalse()]
+            [to, from16, packFrom ? immutableTrue() : immutableFalse()]
           );
         }
         function createPropKeyHelper(expr) {
@@ -204461,8 +204486,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           } else {
             for (const pos2 of positions) {
-              const from15 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
-              const offset = text.substr(from15, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
+              const from16 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
+              const offset = text.substr(from16, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
               textChanges2.push({
                 newText: "",
                 span: {
@@ -205647,8 +205672,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getCallSiteGroupKey(entry) {
         return getNodeId(entry.declaration);
       }
-      function createCallHierarchyIncomingCall(from15, fromSpans) {
-        return { from: from15, fromSpans };
+      function createCallHierarchyIncomingCall(from16, fromSpans) {
+        return { from: from16, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
         return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map30(entries, (entry) => createTextSpanFromRange(entry.range)));
@@ -208822,11 +208847,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const rightSibling = currentNodeIndex < maxChildIndex ? commentNode.getChildAt(currentNodeIndex + 1) : void 0;
         return { leftSibling, rightSibling };
       }
-      function findEndOfTextBetween(jsDocComment, from15, to) {
-        const comment = jsDocComment.getText().substring(from15 - jsDocComment.getStart(), to - jsDocComment.getStart());
+      function findEndOfTextBetween(jsDocComment, from16, to) {
+        const comment = jsDocComment.getText().substring(from16 - jsDocComment.getStart(), to - jsDocComment.getStart());
         for (let i2 = comment.length; i2 > 0; i2--) {
           if (!/[*/\s]/.test(comment.substring(i2 - 1, i2))) {
-            return from15 + i2;
+            return from16 + i2;
           }
         }
         return to;
@@ -233902,9 +233927,9 @@ ${options.prefix}` : "\n" : options.prefix
       function toTokenRange(arg) {
         return typeof arg === "number" ? tokenRangeFrom([arg]) : isArray(arg) ? tokenRangeFrom(arg) : arg;
       }
-      function tokenRangeFromRange(from15, to, except = []) {
+      function tokenRangeFromRange(from16, to, except = []) {
         const tokens = [];
-        for (let token = from15; token <= to; token++) {
+        for (let token = from16; token <= to; token++) {
           if (!contains(except, token)) {
             tokens.push(token);
           }
@@ -254728,23 +254753,56 @@ var init_poll_until_ready = __esm({
   }
 });
 
+// src/commands/cluster/helpers/virtual-cluster.ts
+var import_rxjs8, provisionVirtualCluster;
+var init_virtual_cluster = __esm({
+  "src/commands/cluster/helpers/virtual-cluster.ts"() {
+    import_rxjs8 = __toESM(require_cjs());
+    init_gql_client();
+    provisionVirtualCluster = async (projectId, name2, host) => {
+      let hostClusterId;
+      if (host) {
+        const clusters = await (0, import_rxjs8.lastValueFrom)(
+          GraphqlClienAPI.projectClustersDetailed(projectId)
+        );
+        hostClusterId = clusters.find(
+          (c) => c.name === host && c.status !== "deleted"
+        )?.id;
+        if (!hostClusterId) {
+          throw new Error(
+            `No cluster named "${host}" in this project to host the virtual cluster`
+          );
+        }
+      }
+      return (0, import_rxjs8.lastValueFrom)(
+        GraphqlClienAPI.provisionProjectVirtualCluster(projectId, {
+          name: name2,
+          hostClusterId
+        })
+      );
+    };
+  }
+});
+
 // src/commands/cluster/create.ts
 var create_exports = {};
 __export(create_exports, {
   default: () => create_default
 });
-var import_rxjs8, import_operators7, create_default;
+var import_rxjs9, import_rxjs10, import_operators7, create_default;
 var init_create = __esm({
   "src/commands/cluster/create.ts"() {
-    import_rxjs8 = __toESM(require_cjs());
+    import_rxjs9 = __toESM(require_cjs());
+    import_rxjs10 = __toESM(require_cjs());
     import_operators7 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     init_poll_until_ready();
+    init_virtual_cluster();
     create_default = async (cmd) => {
-      const result = await (0, import_rxjs8.lastValueFrom)(
+      const result = await (0, import_rxjs9.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators7.switchMap)(
             (projectId) => loadSpec(
@@ -254757,7 +254815,13 @@ var init_create = __esm({
             )
           ),
           (0, import_operators7.switchMap)(
-            ({ projectId, ...data }) => GraphqlClienAPI.provisionProjectCluster(projectId, {
+            ({ projectId, ...data }) => (cmd.virtual || data.provider === "vcluster" ? (0, import_rxjs10.from)(
+              provisionVirtualCluster(
+                projectId,
+                cmd.name || data.name,
+                cmd.host ?? data.host
+              )
+            ) : GraphqlClienAPI.provisionProjectCluster(projectId, {
               name: cmd.name || data.name,
               imageId: cmd.imageId || data.imageId,
               serverType: cmd.serverType || data.serverType,
@@ -254766,7 +254830,7 @@ var init_create = __esm({
               singleNode: cmd.singleNode ?? data.singleNode,
               withLoadBalancer: data.loadBalancer,
               controlPlanes: data.controlPlanes
-            }).pipe((0, import_operators7.map)((cluster) => ({ projectId, cluster })))
+            })).pipe((0, import_operators7.map)((cluster) => ({ projectId, cluster })))
           ),
           (0, import_operators7.tap)(({ cluster }) => {
             Logger.log("-------------------");
@@ -254801,15 +254865,15 @@ var init_create = __esm({
 });
 
 // src/commands/cluster/helpers/cluster-change.ts
-var import_rxjs9, import_operators8, resolveClusterTarget, parseIntOption, describeChange, runClusterChange;
+var import_rxjs11, import_operators8, resolveClusterTarget, parseIntOption, describeChange, runClusterChange;
 var init_cluster_change = __esm({
   "src/commands/cluster/helpers/cluster-change.ts"() {
-    import_rxjs9 = __toESM(require_cjs());
+    import_rxjs11 = __toESM(require_cjs());
     import_operators8 = __toESM(require_operators());
     init_helpers();
     init_log();
     init_poll_until_ready();
-    resolveClusterTarget = async (cmd) => (0, import_rxjs9.lastValueFrom)(
+    resolveClusterTarget = async (cmd) => (0, import_rxjs11.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators8.switchMap)(
           (projectId) => resolveClusterId(projectId, {
@@ -254849,7 +254913,7 @@ var init_cluster_change = __esm({
       error: cluster.error ?? ""
     });
     runClusterChange = async (action, projectId, change$, wait) => {
-      const cluster = await (0, import_rxjs9.lastValueFrom)(change$);
+      const cluster = await (0, import_rxjs11.lastValueFrom)(change$);
       Logger.log("-------------------");
       Logger.log(`[Action][${action}]`);
       Logger.table([describeChange(cluster)]);
@@ -254876,7 +254940,7 @@ var init_cluster_change = __esm({
 });
 
 // src/commands/cluster/helpers/plan.ts
-var AUTOSCALE_BOUNDS, intIn, validateDesired, planClusterChanges;
+var AUTOSCALE_BOUNDS, VIRTUAL_UNSUPPORTED, intIn, validateDesired, planClusterChanges;
 var init_plan = __esm({
   "src/commands/cluster/helpers/plan.ts"() {
     AUTOSCALE_BOUNDS = {
@@ -254889,10 +254953,34 @@ var init_plan = __esm({
       samplesToScale: [1, 20],
       cooldownMinutes: [1, 1440]
     };
+    VIRTUAL_UNSUPPORTED = [
+      "imageId",
+      "serverType",
+      "location",
+      "singleNode",
+      "workers",
+      "controlPlanes",
+      "loadBalancer",
+      "autoscale"
+    ];
     intIn = (v, min, max) => Number.isInteger(v) && v >= min && v <= max;
     validateDesired = (d) => {
       const errors = [];
       if (!d?.name) errors.push("cluster.name is required");
+      if (d.provider !== void 0 && d.provider !== "vcluster") {
+        errors.push("cluster.provider must be 'vcluster' (or omitted)");
+      }
+      if (d.provider === "vcluster") {
+        for (const key of VIRTUAL_UNSUPPORTED) {
+          if (d[key] !== void 0) {
+            errors.push(`cluster.${key} does not apply to a virtual cluster`);
+          }
+        }
+        return errors;
+      }
+      if (d.host !== void 0) {
+        errors.push("cluster.host needs provider: 'vcluster'");
+      }
       if (d.workers !== void 0 && !intIn(d.workers, 1, 10)) {
         errors.push("cluster.workers must be an integer from 1 to 10");
       }
@@ -254930,6 +255018,15 @@ var init_plan = __esm({
       const steps = [];
       const notes = [];
       const autoscaleOn = desired.autoscale?.enabled === true;
+      if (desired.provider === "vcluster") {
+        if (!current) {
+          steps.push({
+            kind: "create",
+            description: `create virtual cluster "${desired.name}" on ${desired.host ? `"${desired.host}"` : "the shared cluster"}`
+          });
+        }
+        return { steps, notes };
+      }
       if (!current) {
         steps.push({
           kind: "create",
@@ -255026,10 +255123,10 @@ var apply_exports = {};
 __export(apply_exports, {
   default: () => apply_default
 });
-var import_rxjs10, readDesired, apply_default;
+var import_rxjs12, readDesired, apply_default;
 var init_apply = __esm({
   "src/commands/cluster/apply.ts"() {
-    import_rxjs10 = __toESM(require_cjs());
+    import_rxjs12 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
@@ -255037,8 +255134,9 @@ var init_apply = __esm({
     init_cluster_change();
     init_plan();
     init_poll_until_ready();
+    init_virtual_cluster();
     readDesired = async (spec) => {
-      const data = await (0, import_rxjs10.lastValueFrom)(
+      const data = await (0, import_rxjs12.lastValueFrom)(
         loadSpec(
           spec ?? "cluster.yaml"
         )
@@ -255058,8 +255156,8 @@ var init_apply = __esm({
         throw new Error(`Invalid cluster spec:
 - ${errors.join("\n- ")}`);
       }
-      const projectId = await (0, import_rxjs10.lastValueFrom)(parseProjectId(cmd.project));
-      const clusters = await (0, import_rxjs10.lastValueFrom)(
+      const projectId = await (0, import_rxjs12.lastValueFrom)(parseProjectId(cmd.project));
+      const clusters = await (0, import_rxjs12.lastValueFrom)(
         GraphqlClienAPI.projectClustersDetailed(projectId)
       );
       const current = clusters.find(
@@ -255091,7 +255189,7 @@ var init_apply = __esm({
         Logger.info("--dry-run: nothing was changed.");
         return { cluster: current, applied: [] };
       }
-      if (!current) {
+      if (!current && desired.provider !== "vcluster") {
         const missing = ["imageId", "serverType", "location"].filter(
           (k) => !desired[k]
         );
@@ -255110,7 +255208,7 @@ var init_apply = __esm({
         }
         Logger.info(`-> ${step.description}`);
         if (step.kind === "create") {
-          const created = await (0, import_rxjs10.lastValueFrom)(
+          const created = desired.provider === "vcluster" ? await provisionVirtualCluster(projectId, desired.name, desired.host) : await (0, import_rxjs12.lastValueFrom)(
             GraphqlClienAPI.provisionProjectCluster(projectId, {
               name: desired.name,
               imageId: desired.imageId,
@@ -255131,7 +255229,7 @@ var init_apply = __esm({
             );
           }
         } else if (step.kind === "autoscale") {
-          await (0, import_rxjs10.lastValueFrom)(
+          await (0, import_rxjs12.lastValueFrom)(
             GraphqlClienAPI.updateProjectClusterAutoscale(
               projectId,
               clusterId,
@@ -255176,15 +255274,15 @@ var list_exports = {};
 __export(list_exports, {
   default: () => list_default
 });
-var import_rxjs11, import_operators9, list_default;
+var import_rxjs13, import_operators9, list_default;
 var init_list = __esm({
   "src/commands/cluster/list.ts"() {
-    import_rxjs11 = __toESM(require_cjs());
+    import_rxjs13 = __toESM(require_cjs());
     import_operators9 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default = (cmd) => (0, import_rxjs11.lastValueFrom)(
+    list_default = (cmd) => (0, import_rxjs13.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators9.switchMap)((projectId) => GraphqlClienAPI.projectClusters(projectId)),
         (0, import_operators9.tap)((clusters) => {
@@ -255216,17 +255314,17 @@ var teardown_exports = {};
 __export(teardown_exports, {
   default: () => teardown_default
 });
-var import_rxjs12, import_operators10, teardown_default;
+var import_rxjs14, import_operators10, teardown_default;
 var init_teardown = __esm({
   "src/commands/cluster/teardown.ts"() {
-    import_rxjs12 = __toESM(require_cjs());
+    import_rxjs14 = __toESM(require_cjs());
     import_operators10 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_poll_until_ready();
     teardown_default = async (cmd) => {
-      const { projectId, cluster } = await (0, import_rxjs12.lastValueFrom)(
+      const { projectId, cluster } = await (0, import_rxjs14.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators10.switchMap)(
             (projectId2) => GraphqlClienAPI.teardownProjectCluster(projectId2, cmd.cluster).pipe(
@@ -255264,16 +255362,16 @@ var kubeconfig_exports = {};
 __export(kubeconfig_exports, {
   default: () => kubeconfig_default
 });
-var import_rxjs13, import_operators11, kubeconfig_default;
+var import_rxjs15, import_operators11, kubeconfig_default;
 var init_kubeconfig = __esm({
   "src/commands/cluster/kubeconfig.ts"() {
-    import_rxjs13 = __toESM(require_cjs());
+    import_rxjs15 = __toESM(require_cjs());
     import_operators11 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_read_file();
-    kubeconfig_default = (cmd) => (0, import_rxjs13.lastValueFrom)(
+    kubeconfig_default = (cmd) => (0, import_rxjs15.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators11.switchMap)(
           (projectId) => GraphqlClienAPI.clusterKubeconfig(projectId, cmd.cluster)
@@ -255281,7 +255379,7 @@ var init_kubeconfig = __esm({
         (0, import_operators11.switchMap)(
           (kubeconfig) => cmd.output ? writeFileAsObservable(cmd.output, kubeconfig).pipe(
             (0, import_operators11.tap)(() => Logger.info(`Wrote kubeconfig to ${cmd.output}`))
-          ) : (0, import_rxjs13.of)(kubeconfig).pipe((0, import_operators11.tap)((value) => Logger.log(value)))
+          ) : (0, import_rxjs15.of)(kubeconfig).pipe((0, import_operators11.tap)((value) => Logger.log(value)))
         )
       )
     );
@@ -255294,10 +255392,10 @@ __export(status_exports, {
   default: () => status_default,
   overviewRow: () => overviewRow
 });
-var import_rxjs14, pct, overviewRow, status_default;
+var import_rxjs16, pct, overviewRow, status_default;
 var init_status = __esm({
   "src/commands/cluster/status.ts"() {
-    import_rxjs14 = __toESM(require_cjs());
+    import_rxjs16 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
@@ -255315,14 +255413,14 @@ var init_status = __esm({
       autoscale: c.autoscale?.enabled ? `on ${c.autoscale.minWorkers}-${c.autoscale.maxWorkers}` : "off"
     });
     status_default = async (cmd) => {
-      const projectId = await (0, import_rxjs14.lastValueFrom)(parseProjectId(cmd.project));
-      const clusterId = await (0, import_rxjs14.lastValueFrom)(
+      const projectId = await (0, import_rxjs16.lastValueFrom)(parseProjectId(cmd.project));
+      const clusterId = await (0, import_rxjs16.lastValueFrom)(
         resolveClusterId(projectId, {
           clusterId: cmd.cluster,
           clusterName: cmd.clusterName
         })
       );
-      const all = await (0, import_rxjs14.lastValueFrom)(
+      const all = await (0, import_rxjs16.lastValueFrom)(
         GraphqlClienAPI.projectClustersOverview(projectId)
       );
       const rows = clusterId ? all.filter((c) => c.clusterId === clusterId) : all;
@@ -255358,17 +255456,17 @@ var health_exports = {};
 __export(health_exports, {
   default: () => health_default
 });
-var import_rxjs15, pct2, health_default;
+var import_rxjs17, pct2, health_default;
 var init_health = __esm({
   "src/commands/cluster/health.ts"() {
-    import_rxjs15 = __toESM(require_cjs());
+    import_rxjs17 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_cluster_change();
     pct2 = (v) => v == null ? "-" : `${Math.round(v)}%`;
     health_default = async (cmd) => {
       const { projectId, clusterId } = await resolveClusterTarget(cmd);
-      const [latest] = await (0, import_rxjs15.lastValueFrom)(
+      const [latest] = await (0, import_rxjs17.lastValueFrom)(
         GraphqlClienAPI.clusterHealth(projectId, clusterId, 1)
       );
       Logger.log("-------------------");
@@ -255415,17 +255513,17 @@ var scale_events_exports = {};
 __export(scale_events_exports, {
   default: () => scale_events_default
 });
-var import_rxjs16, scale_events_default;
+var import_rxjs18, scale_events_default;
 var init_scale_events = __esm({
   "src/commands/cluster/scale-events.ts"() {
-    import_rxjs16 = __toESM(require_cjs());
+    import_rxjs18 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_cluster_change();
     scale_events_default = async (cmd) => {
       const limit = cmd.limit === void 0 ? 20 : parseIntOption("limit", cmd.limit, 1, 200);
       const { projectId, clusterId } = await resolveClusterTarget(cmd);
-      const events = await (0, import_rxjs16.lastValueFrom)(
+      const events = await (0, import_rxjs18.lastValueFrom)(
         GraphqlClienAPI.clusterScaleEvents(projectId, clusterId, limit)
       );
       Logger.log("-------------------");
@@ -255455,17 +255553,17 @@ var cost_exports = {};
 __export(cost_exports, {
   default: () => cost_default
 });
-var import_rxjs17, money, cost_default;
+var import_rxjs19, money, cost_default;
 var init_cost = __esm({
   "src/commands/cluster/cost.ts"() {
-    import_rxjs17 = __toESM(require_cjs());
+    import_rxjs19 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
     money = (v, sign = "\u20AC") => v == null ? "-" : `${sign}${v.toFixed(2)}`;
     cost_default = async (cmd) => {
-      const projectId = await (0, import_rxjs17.lastValueFrom)(parseProjectId(cmd.project));
-      const rows = await (0, import_rxjs17.lastValueFrom)(
+      const projectId = await (0, import_rxjs19.lastValueFrom)(parseProjectId(cmd.project));
+      const rows = await (0, import_rxjs19.lastValueFrom)(
         GraphqlClienAPI.projectClustersOverview(projectId)
       );
       Logger.log("-------------------");
@@ -255553,10 +255651,10 @@ __export(autoscale_exports, {
   default: () => autoscale_default,
   toAutoscaleInput: () => toAutoscaleInput
 });
-var import_rxjs18, toAutoscaleInput, autoscale_default;
+var import_rxjs20, toAutoscaleInput, autoscale_default;
 var init_autoscale = __esm({
   "src/commands/cluster/autoscale.ts"() {
-    import_rxjs18 = __toESM(require_cjs());
+    import_rxjs20 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_cluster_change();
@@ -255597,7 +255695,7 @@ var init_autoscale = __esm({
     autoscale_default = async (cmd) => {
       const input = toAutoscaleInput(cmd);
       const { projectId, clusterId } = await resolveClusterTarget(cmd);
-      const cluster = await (0, import_rxjs18.lastValueFrom)(
+      const cluster = await (0, import_rxjs20.lastValueFrom)(
         GraphqlClienAPI.updateProjectClusterAutoscale(projectId, clusterId, input)
       );
       const a = cluster.autoscale ?? {};
@@ -255705,15 +255803,15 @@ var list_environments_exports = {};
 __export(list_environments_exports, {
   default: () => list_environments_default
 });
-var import_rxjs19, import_operators12, list_environments_default;
+var import_rxjs21, import_operators12, list_environments_default;
 var init_list_environments = __esm({
   "src/commands/environment/list-environments.ts"() {
-    import_rxjs19 = __toESM(require_cjs());
+    import_rxjs21 = __toESM(require_cjs());
     import_operators12 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_environments_default = (cmd) => (0, import_rxjs19.lastValueFrom)(
+    list_environments_default = (cmd) => (0, import_rxjs21.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators12.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
         (0, import_operators12.tap)((data) => {
@@ -255746,10 +255844,10 @@ var create_environment_exports = {};
 __export(create_environment_exports, {
   default: () => create_environment_default
 });
-var import_rxjs20, import_operators13, create_environment_default;
+var import_rxjs22, import_operators13, create_environment_default;
 var init_create_environment = __esm({
   "src/commands/environment/create-environment.ts"() {
-    import_rxjs20 = __toESM(require_cjs());
+    import_rxjs22 = __toESM(require_cjs());
     import_operators13 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -255757,7 +255855,7 @@ var init_create_environment = __esm({
     init_load_spec();
     create_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs20.lastValueFrom)(
+      return (0, import_rxjs22.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators13.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
@@ -255812,10 +255910,10 @@ var update_environment_exports = {};
 __export(update_environment_exports, {
   default: () => update_environment_default
 });
-var import_rxjs21, import_operators14, update_environment_default;
+var import_rxjs23, import_operators14, update_environment_default;
 var init_update_environment = __esm({
   "src/commands/environment/update-environment.ts"() {
-    import_rxjs21 = __toESM(require_cjs());
+    import_rxjs23 = __toESM(require_cjs());
     import_operators14 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -255823,7 +255921,7 @@ var init_update_environment = __esm({
     init_load_spec();
     update_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs21.lastValueFrom)(
+      return (0, import_rxjs23.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators14.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
@@ -255879,16 +255977,16 @@ var delete_environment_exports = {};
 __export(delete_environment_exports, {
   default: () => delete_environment_default
 });
-var import_rxjs22, import_operators15, delete_environment_default;
+var import_rxjs24, import_operators15, delete_environment_default;
 var init_delete_environment = __esm({
   "src/commands/environment/delete-environment.ts"() {
-    import_rxjs22 = __toESM(require_cjs());
+    import_rxjs24 = __toESM(require_cjs());
     import_operators15 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_environment_default = (cmd) => (0, import_rxjs22.lastValueFrom)(
+    delete_environment_default = (cmd) => (0, import_rxjs24.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators15.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
@@ -255941,16 +256039,16 @@ var get_environment_exports = {};
 __export(get_environment_exports, {
   default: () => get_environment_default
 });
-var import_rxjs23, import_operators16, get_environment_default;
+var import_rxjs25, import_operators16, get_environment_default;
 var init_get_environment = __esm({
   "src/commands/environment/get-environment.ts"() {
-    import_rxjs23 = __toESM(require_cjs());
+    import_rxjs25 = __toESM(require_cjs());
     import_operators16 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    get_environment_default = (cmd) => (0, import_rxjs23.lastValueFrom)(
+    get_environment_default = (cmd) => (0, import_rxjs25.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators16.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
@@ -264662,9 +264760,9 @@ var require_mime_types = __commonJS({
         for (var i2 = 0; i2 < exts.length; i2++) {
           var extension2 = exts[i2];
           if (types3[extension2]) {
-            var from15 = preference.indexOf(db[types3[extension2]].source);
+            var from16 = preference.indexOf(db[types3[extension2]].source);
             var to = preference.indexOf(mime.source);
-            if (types3[extension2] !== "application/octet-stream" && (from15 > to || from15 === to && types3[extension2].substr(0, 12) === "application/")) {
+            if (types3[extension2] !== "application/octet-stream" && (from16 > to || from16 === to && types3[extension2].substr(0, 12) === "application/")) {
               continue;
             }
           }
@@ -269220,15 +269318,15 @@ var require_polyfills = __commonJS({
       }
       if (platform === "win32") {
         fs3.rename = /* @__PURE__ */ (function(fs$rename) {
-          return function(from15, to, cb) {
+          return function(from16, to, cb) {
             var start3 = Date.now();
             var backoff = 0;
-            fs$rename(from15, to, function CB(er) {
+            fs$rename(from16, to, function CB(er) {
               if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start3 < 6e4) {
                 setTimeout(function() {
                   fs3.stat(to, function(stater, st) {
                     if (stater && stater.code === "ENOENT")
-                      fs$rename(from15, to, CB);
+                      fs$rename(from16, to, CB);
                     else
                       cb(er);
                   });
@@ -276136,7 +276234,7 @@ var require_from4 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors3().codes.ERR_INVALID_ARG_TYPE;
-    function from15(Readable2, iterable, opts) {
+    function from16(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -276175,7 +276273,7 @@ var require_from4 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from15;
+    module2.exports = from16;
   }
 });
 
@@ -276219,7 +276317,7 @@ var require_stream_readable4 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from15;
+    var from16;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -276901,10 +276999,10 @@ var require_stream_readable4 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from15 === void 0) {
-          from15 = require_from4();
+        if (from16 === void 0) {
+          from16 = require_from4();
         }
-        return from15(Readable2, iterable, opts);
+        return from16(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -277084,8 +277182,8 @@ var require_pipeline3 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from15, to) {
-      return from15.pipe(to);
+    function pipe2(from16, to) {
+      return from16.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -279478,7 +279576,7 @@ var require_from5 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors4().codes.ERR_INVALID_ARG_TYPE;
-    function from15(Readable2, iterable, opts) {
+    function from16(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -279517,7 +279615,7 @@ var require_from5 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from15;
+    module2.exports = from16;
   }
 });
 
@@ -279561,7 +279659,7 @@ var require_stream_readable5 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from15;
+    var from16;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -280243,10 +280341,10 @@ var require_stream_readable5 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from15 === void 0) {
-          from15 = require_from5();
+        if (from16 === void 0) {
+          from16 = require_from5();
         }
-        return from15(Readable2, iterable, opts);
+        return from16(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -280426,8 +280524,8 @@ var require_pipeline4 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from15, to) {
-      return from15.pipe(to);
+    function pipe2(from16, to) {
+      return from16.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -282250,7 +282348,7 @@ var require_from6 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors5().codes.ERR_INVALID_ARG_TYPE;
-    function from15(Readable2, iterable, opts) {
+    function from16(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -282289,7 +282387,7 @@ var require_from6 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from15;
+    module2.exports = from16;
   }
 });
 
@@ -282333,7 +282431,7 @@ var require_stream_readable6 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from15;
+    var from16;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -283015,10 +283113,10 @@ var require_stream_readable6 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from15 === void 0) {
-          from15 = require_from6();
+        if (from16 === void 0) {
+          from16 = require_from6();
         }
-        return from15(Readable2, iterable, opts);
+        return from16(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -283198,8 +283296,8 @@ var require_pipeline5 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from15, to) {
-      return from15.pipe(to);
+    function pipe2(from16, to) {
+      return from16.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -285487,7 +285585,7 @@ var require_from7 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors6().codes.ERR_INVALID_ARG_TYPE;
-    function from15(Readable2, iterable, opts) {
+    function from16(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -285526,7 +285624,7 @@ var require_from7 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from15;
+    module2.exports = from16;
   }
 });
 
@@ -285570,7 +285668,7 @@ var require_stream_readable7 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from15;
+    var from16;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -286252,10 +286350,10 @@ var require_stream_readable7 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from15 === void 0) {
-          from15 = require_from7();
+        if (from16 === void 0) {
+          from16 = require_from7();
         }
-        return from15(Readable2, iterable, opts);
+        return from16(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -286435,8 +286533,8 @@ var require_pipeline6 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from15, to) {
-      return from15.pipe(to);
+    function pipe2(from16, to) {
+      return from16.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -287208,22 +287306,22 @@ var package_exports = {};
 __export(package_exports, {
   default: () => package_default
 });
-var import_archiver, import_child_process, import_fs3, import_rxjs24, import_operators17, import_util3, ReadFile, package_default;
+var import_archiver, import_child_process, import_fs3, import_rxjs26, import_operators17, import_util3, ReadFile, package_default;
 var init_package = __esm({
   "src/commands/lambda/package.ts"() {
     import_archiver = __toESM(require_archiver());
     import_child_process = require("child_process");
     import_fs3 = require("fs");
-    import_rxjs24 = __toESM(require_cjs());
+    import_rxjs26 = __toESM(require_cjs());
     import_operators17 = __toESM(require_operators());
     import_util3 = require("util");
     init_helpers2();
     init_load_spec();
     init_parse_ignore();
     init_read_file();
-    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators17.catchError)(() => (0, import_rxjs24.of)("")));
+    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators17.catchError)(() => (0, import_rxjs26.of)("")));
     package_default = (cmd) => {
-      return (0, import_rxjs24.lastValueFrom)(
+      return (0, import_rxjs26.lastValueFrom)(
         loadSpec(cmd.spec).pipe(
           (0, import_operators17.map)((spec) => spec?.function ?? spec),
           (0, import_operators17.switchMap)(async (data) => {
@@ -287232,7 +287330,7 @@ var init_package = __esm({
               // Sets the compression level.
             });
             await (0, import_util3.promisify)(import_child_process.exec)(["chmod", "+x", data.script].join(" "));
-            const ignore = await (0, import_rxjs24.lastValueFrom)(
+            const ignore = await (0, import_rxjs26.lastValueFrom)(
               ReadFile(".gignore").pipe(
                 (0, import_operators17.map)((ignore2) => parseIgnoredFiles(ignore2))
               )
@@ -287241,11 +287339,11 @@ var init_package = __esm({
               ignore: [".gcache/**", ...ignore]
             });
             archive.finalize();
-            return (0, import_rxjs24.lastValueFrom)(
-              (0, import_rxjs24.from)(streamToBufferPromise(archive)).pipe(
+            return (0, import_rxjs26.lastValueFrom)(
+              (0, import_rxjs26.from)(streamToBufferPromise(archive)).pipe(
                 (0, import_operators17.switchMap)(
-                  (buffer) => (0, import_rxjs24.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
-                    (0, import_operators17.catchError)(() => (0, import_rxjs24.of)(true)),
+                  (buffer) => (0, import_rxjs26.from)((0, import_util3.promisify)(import_fs3.mkdir)(".gcache")).pipe(
+                    (0, import_operators17.catchError)(() => (0, import_rxjs26.of)(true)),
                     (0, import_operators17.switchMap)(
                       () => (0, import_util3.promisify)(import_fs3.writeFile)(`.gcache/${data.name}.zip`, buffer)
                     )
@@ -287271,13 +287369,13 @@ function streamToBufferPromise(file2) {
     });
   });
 }
-var import_form_data, import_fs4, import_rxjs25, import_operators18, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
+var import_form_data, import_fs4, import_rxjs27, import_operators18, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
     import_fs4 = require("fs");
     init_src();
-    import_rxjs25 = __toESM(require_cjs());
+    import_rxjs27 = __toESM(require_cjs());
     import_operators18 = __toESM(require_operators());
     import_stream_to_buffer = __toESM(require_stream_to_buffer());
     init_helpers();
@@ -287286,14 +287384,14 @@ var init_helpers2 = __esm({
     init_package();
     init_load_spec();
     init_read_file();
-    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators18.catchError)(() => (0, import_rxjs25.of)("")));
-    createOrUpdateLambda = (cmd, type) => (0, import_rxjs25.lastValueFrom)(
+    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators18.catchError)(() => (0, import_rxjs27.of)("")));
+    createOrUpdateLambda = (cmd, type) => (0, import_rxjs27.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators18.switchMap)(
           (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators18.map)(() => projectId))
         ),
         (0, import_operators18.switchMap)(async (projectId) => {
-          const spec = await (0, import_rxjs25.lastValueFrom)(loadSpec(cmd.spec));
+          const spec = await (0, import_rxjs27.lastValueFrom)(loadSpec(cmd.spec));
           return {
             projectId,
             ...spec?.function ?? spec
@@ -287308,9 +287406,9 @@ var init_helpers2 = __esm({
           await package_default(cmd);
           const body = new import_form_data.default();
           body.append("file[]", (0, import_fs4.createReadStream)(`.gcache/${data.name}.zip`));
-          const config2 = await (0, import_rxjs25.lastValueFrom)(GraphqlClienAPI.getConfig());
-          return (0, import_rxjs25.lastValueFrom)(
-            (0, import_rxjs25.from)(
+          const config2 = await (0, import_rxjs27.lastValueFrom)(GraphqlClienAPI.getConfig());
+          return (0, import_rxjs27.lastValueFrom)(
+            (0, import_rxjs27.from)(
               fetch2(config2.uploadUrl, {
                 method: "POST",
                 body,
@@ -287331,23 +287429,23 @@ var init_helpers2 = __esm({
           );
         }),
         (0, import_operators18.switchMap)(async (payload) => {
-          const clusterId = await (0, import_rxjs25.lastValueFrom)(
+          const clusterId = await (0, import_rxjs27.lastValueFrom)(
             resolveClusterId(payload.projectId, {
               clusterId: cmd.clusterId || payload.clusterId,
               clusterName: cmd.clusterName || payload.clusterName
             })
           );
-          return (0, import_rxjs25.lastValueFrom)(
+          return (0, import_rxjs27.lastValueFrom)(
             GraphqlClienAPI[type]({
-              code: cmd.code || await (0, import_rxjs25.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
+              code: cmd.code || await (0, import_rxjs27.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
               name: cmd.name || payload.name || "",
               projectId: payload.projectId,
               route: cmd.route || payload.route || "",
-              buildBashScript: cmd.buildBashScript || await (0, import_rxjs25.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
+              buildBashScript: cmd.buildBashScript || await (0, import_rxjs27.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
               configs: cmd.configs || payload.configs || [],
               env: cmd.env || payload.env || "nodejs",
               method: cmd.method || payload.method || ["GET"],
-              packageJson: cmd.packageJson || await (0, import_rxjs25.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
+              packageJson: cmd.packageJson || await (0, import_rxjs27.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
               envSecrets: cmd.envSecrets || payload.envSecrets || [],
@@ -287403,15 +287501,15 @@ var list_exports2 = {};
 __export(list_exports2, {
   default: () => list_default2
 });
-var import_rxjs26, import_operators19, list_default2;
+var import_rxjs28, import_operators19, list_default2;
 var init_list2 = __esm({
   "src/commands/lambda/list.ts"() {
-    import_rxjs26 = __toESM(require_cjs());
+    import_rxjs28 = __toESM(require_cjs());
     import_operators19 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default2 = (cmd) => (0, import_rxjs26.lastValueFrom)(
+    list_default2 = (cmd) => (0, import_rxjs28.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators19.switchMap)(
           (projectId) => resolveClusterId(projectId, {
@@ -287446,10 +287544,10 @@ var get_exports = {};
 __export(get_exports, {
   default: () => get_default
 });
-var import_rxjs27, import_operators20, get_default;
+var import_rxjs29, import_operators20, get_default;
 var init_get = __esm({
   "src/commands/lambda/get.ts"() {
-    import_rxjs27 = __toESM(require_cjs());
+    import_rxjs29 = __toESM(require_cjs());
     import_operators20 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -287471,26 +287569,26 @@ var init_get = __esm({
         Logger.log("-------------------");
       });
       if (cmd.lambda) {
-        return (0, import_rxjs27.lastValueFrom)(
+        return (0, import_rxjs29.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
             (0, import_operators20.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
             table
           )
         );
       }
-      const spec = await (0, import_rxjs27.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs29.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs27.lastValueFrom)(
+        return (0, import_rxjs29.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
             (0, import_operators20.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs27.throwError)(
+                return (0, import_rxjs29.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs27.throwError)(() => error48);
+              return (0, import_rxjs29.throwError)(() => error48);
             }),
             (0, import_operators20.switchMap)(
               (projectId) => resolveClusterId(projectId, {
@@ -287547,22 +287645,22 @@ var delete_exports = {};
 __export(delete_exports, {
   default: () => delete_default
 });
-var import_rxjs28, import_operators21, delete_default;
+var import_rxjs30, import_operators21, delete_default;
 var init_delete = __esm({
   "src/commands/lambda/delete.ts"() {
-    import_rxjs28 = __toESM(require_cjs());
+    import_rxjs30 = __toESM(require_cjs());
     import_operators21 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     delete_default = async (cmd) => {
-      const spec = await (0, import_rxjs28.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs30.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       const env = cmd.env ?? spec.function?.env ?? spec.env;
       const clusterIdHint = cmd.clusterId ?? spec.function?.clusterId ?? spec.clusterId;
       const clusterNameHint = cmd.clusterName ?? spec.function?.clusterName ?? spec.clusterName;
-      return (0, import_rxjs28.lastValueFrom)(
+      return (0, import_rxjs30.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators21.switchMap)(
             (projectId) => resolveClusterId(projectId, {
@@ -287597,10 +287695,10 @@ var logs_exports = {};
 __export(logs_exports, {
   default: () => logs_default
 });
-var import_rxjs29, import_operators22, logs_default;
+var import_rxjs31, import_operators22, logs_default;
 var init_logs = __esm({
   "src/commands/lambda/logs.ts"() {
-    import_rxjs29 = __toESM(require_cjs());
+    import_rxjs31 = __toESM(require_cjs());
     import_operators22 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -287609,26 +287707,26 @@ var init_logs = __esm({
     logs_default = async (cmd) => {
       const result = (0, import_operators22.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs29.lastValueFrom)(
+        return (0, import_rxjs31.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
             (0, import_operators22.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs29.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs31.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs29.lastValueFrom)(
+        return (0, import_rxjs31.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
             (0, import_operators22.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs29.throwError)(
+                return (0, import_rxjs31.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs29.throwError)(() => error48);
+              return (0, import_rxjs31.throwError)(() => error48);
             }),
             (0, import_operators22.switchMap)(
               (projectId) => resolveClusterId(projectId, {
@@ -287654,10 +287752,10 @@ var logs_builder_exports = {};
 __export(logs_builder_exports, {
   default: () => logs_builder_default
 });
-var import_rxjs30, import_operators23, logs_builder_default;
+var import_rxjs32, import_operators23, logs_builder_default;
 var init_logs_builder = __esm({
   "src/commands/lambda/logs-builder.ts"() {
-    import_rxjs30 = __toESM(require_cjs());
+    import_rxjs32 = __toESM(require_cjs());
     import_operators23 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -287666,26 +287764,26 @@ var init_logs_builder = __esm({
     logs_builder_default = async (cmd) => {
       const result = (0, import_operators23.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs30.lastValueFrom)(
+        return (0, import_rxjs32.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
             (0, import_operators23.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs30.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs32.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs30.lastValueFrom)(
+        return (0, import_rxjs32.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
             (0, import_operators23.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs30.throwError)(
+                return (0, import_rxjs32.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs30.throwError)(() => error48);
+              return (0, import_rxjs32.throwError)(() => error48);
             }),
             (0, import_operators23.switchMap)(
               (projectId) => resolveClusterId(projectId, {
@@ -287715,18 +287813,18 @@ var test_exports = {};
 __export(test_exports, {
   default: () => test_default
 });
-var import_rxjs31, import_operators24, test_default;
+var import_rxjs33, import_operators24, test_default;
 var init_test = __esm({
   "src/commands/lambda/test.ts"() {
-    import_rxjs31 = __toESM(require_cjs());
+    import_rxjs33 = __toESM(require_cjs());
     import_operators24 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     test_default = async (cmd) => {
-      const spec = await (0, import_rxjs31.lastValueFrom)(loadSpec(cmd.spec));
-      const processParameters = (lambda) => (0, import_rxjs31.of)(lambda).pipe(
+      const spec = await (0, import_rxjs33.lastValueFrom)(loadSpec(cmd.spec));
+      const processParameters = (lambda) => (0, import_rxjs33.of)(lambda).pipe(
         (0, import_operators24.map)((lambda2) => ({
           ...lambda2,
           url: cmd.pathParams ? cmd.pathParams.split(";").map((param) => param.split("=")).reduce(
@@ -287740,7 +287838,7 @@ var init_test = __esm({
           );
         }),
         (0, import_operators24.switchMap)(
-          (lambda2) => (0, import_rxjs31.from)(
+          (lambda2) => (0, import_rxjs33.from)(
             fetch([lambda2.url, cmd.queryParams].filter((i2) => !!i2).join(""), {
               method: cmd?.method ?? "GET",
               body: cmd.body
@@ -287756,7 +287854,7 @@ var init_test = __esm({
         })
       );
       if (cmd.lambda) {
-        return (0, import_rxjs31.lastValueFrom)(
+        return (0, import_rxjs33.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
             (0, import_operators24.switchMap)(
               (id) => GraphqlClienAPI.getLambda(id, ["id", "url", "method", "params"])
@@ -287767,16 +287865,16 @@ var init_test = __esm({
       }
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs31.lastValueFrom)(
+        return (0, import_rxjs33.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
             (0, import_operators24.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs31.throwError)(
+                return (0, import_rxjs33.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs31.throwError)(() => error48);
+              return (0, import_rxjs33.throwError)(() => error48);
             }),
             (0, import_operators24.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId, [
@@ -287800,14 +287898,14 @@ var list_exports3 = {};
 __export(list_exports3, {
   default: () => list_default3
 });
-var import_rxjs32, import_operators25, list_default3;
+var import_rxjs34, import_operators25, list_default3;
 var init_list3 = __esm({
   "src/commands/plugin/list.ts"() {
-    import_rxjs32 = __toESM(require_cjs());
+    import_rxjs34 = __toESM(require_cjs());
     import_operators25 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default3 = () => (0, import_rxjs32.lastValueFrom)(
+    list_default3 = () => (0, import_rxjs34.lastValueFrom)(
       GraphqlClienAPI.listAvailablePlugins().pipe(
         (0, import_operators25.tap)((plugins) => {
           Logger.log("-------------------");
@@ -287832,15 +287930,15 @@ var installed_exports = {};
 __export(installed_exports, {
   default: () => installed_default
 });
-var import_rxjs33, import_operators26, installed_default;
+var import_rxjs35, import_operators26, installed_default;
 var init_installed = __esm({
   "src/commands/plugin/installed.ts"() {
-    import_rxjs33 = __toESM(require_cjs());
+    import_rxjs35 = __toESM(require_cjs());
     import_operators26 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    installed_default = (cmd) => (0, import_rxjs33.lastValueFrom)(
+    installed_default = (cmd) => (0, import_rxjs35.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators26.switchMap)((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
         (0, import_operators26.tap)((installed) => {
@@ -287871,16 +287969,16 @@ var install_exports = {};
 __export(install_exports, {
   default: () => install_default
 });
-var import_rxjs34, import_operators27, install_default;
+var import_rxjs36, import_operators27, install_default;
 var init_install = __esm({
   "src/commands/plugin/install.ts"() {
-    import_rxjs34 = __toESM(require_cjs());
+    import_rxjs36 = __toESM(require_cjs());
     import_operators27 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    install_default = (cmd) => (0, import_rxjs34.lastValueFrom)(
+    install_default = (cmd) => (0, import_rxjs36.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators27.switchMap)(
           (projectId) => loadSpec(
@@ -287889,7 +287987,7 @@ var init_install = __esm({
             // No spec file is required at all if --name/--cluster fully
             // cover it (unlike every other resource here, a plugin install
             // is often just "install this by name", no YAML needed).
-            (0, import_operators27.catchError)(() => (0, import_rxjs34.of)(void 0)),
+            (0, import_operators27.catchError)(() => (0, import_rxjs36.of)(void 0)),
             (0, import_operators27.map)((data) => ({
               projectId,
               ...data ? data.plugin ?? data : {}
@@ -287920,15 +288018,15 @@ var uninstall_exports = {};
 __export(uninstall_exports, {
   default: () => uninstall_default
 });
-var import_rxjs35, import_operators28, uninstall_default;
+var import_rxjs37, import_operators28, uninstall_default;
 var init_uninstall = __esm({
   "src/commands/plugin/uninstall.ts"() {
-    import_rxjs35 = __toESM(require_cjs());
+    import_rxjs37 = __toESM(require_cjs());
     import_operators28 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    uninstall_default = (cmd) => (0, import_rxjs35.lastValueFrom)(
+    uninstall_default = (cmd) => (0, import_rxjs37.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators28.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallPlugin(projectId, cmd.name, cmd.cluster)
@@ -287948,14 +288046,14 @@ var list_exports4 = {};
 __export(list_exports4, {
   default: () => list_default4
 });
-var import_rxjs36, import_operators29, list_default4;
+var import_rxjs38, import_operators29, list_default4;
 var init_list4 = __esm({
   "src/commands/project/list.ts"() {
-    import_rxjs36 = __toESM(require_cjs());
+    import_rxjs38 = __toESM(require_cjs());
     import_operators29 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default4 = async () => (0, import_rxjs36.lastValueFrom)(
+    list_default4 = async () => (0, import_rxjs38.lastValueFrom)(
       GraphqlClienAPI.listProjects().pipe(
         (0, import_operators29.tap)((project) => {
           const columns = ["id", "name"];
@@ -287974,24 +288072,24 @@ var use_exports = {};
 __export(use_exports, {
   default: () => use_default
 });
-var import_fs5, import_rxjs37, import_operators30, import_util4, use_default;
+var import_fs5, import_rxjs39, import_operators30, import_util4, use_default;
 var init_use = __esm({
   "src/commands/project/use.ts"() {
     import_fs5 = require("fs");
-    import_rxjs37 = __toESM(require_cjs());
+    import_rxjs39 = __toESM(require_cjs());
     import_operators30 = __toESM(require_operators());
     import_util4 = require("util");
     init_helpers();
     init_gql_client();
     init_types();
     use_default = async (cmd) => {
-      return (0, import_rxjs37.lastValueFrom)(
+      return (0, import_rxjs39.lastValueFrom)(
         parseProjectId(cmd).pipe(
           (0, import_operators30.switchMap)(
             (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators30.map)(() => projectId))
           ),
           (0, import_operators30.switchMap)(
-            (projectId) => (0, import_rxjs37.from)(
+            (projectId) => (0, import_rxjs39.from)(
               (0, import_util4.promisify)(import_fs5.writeFile)(projectDirectory, projectId, {
                 encoding: "utf-8"
               })
@@ -309862,17 +309960,17 @@ var require_codegen = __commonJS({
       }
     };
     var ForRange = class extends For {
-      constructor(varKind, name2, from15, to) {
+      constructor(varKind, name2, from16, to) {
         super();
         this.varKind = varKind;
         this.name = name2;
-        this.from = from15;
+        this.from = from16;
         this.to = to;
       }
       render(opts) {
         const varKind = opts.es5 ? scope_1.varKinds.var : this.varKind;
-        const { name: name2, from: from15, to } = this;
-        return `for(${varKind} ${name2}=${from15}; ${name2}<${to}; ${name2}++)` + super.render(opts);
+        const { name: name2, from: from16, to } = this;
+        return `for(${varKind} ${name2}=${from16}; ${name2}<${to}; ${name2}++)` + super.render(opts);
       }
       get names() {
         const names = addExprNames(super.names, this.from);
@@ -310091,9 +310189,9 @@ var require_codegen = __commonJS({
         return this._for(new ForLoop(iteration), forBody);
       }
       // `for` statement for a range of values
-      forRange(nameOrPrefix, from15, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
+      forRange(nameOrPrefix, from16, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
         const name2 = this._scope.toName(nameOrPrefix);
-        return this._for(new ForRange(varKind, name2, from15, to), () => forBody(name2));
+        return this._for(new ForRange(varKind, name2, from16, to), () => forBody(name2));
       }
       // `for-of` statement (in es5 mode replace with a normal for loop)
       forOf(nameOrPrefix, iterable, forBody, varKind = scope_1.varKinds.const) {
@@ -310232,13 +310330,13 @@ var require_codegen = __commonJS({
       }
     };
     exports2.CodeGen = CodeGen;
-    function addNames(names, from15) {
-      for (const n in from15)
-        names[n] = (names[n] || 0) + (from15[n] || 0);
+    function addNames(names, from16) {
+      for (const n in from16)
+        names[n] = (names[n] || 0) + (from16[n] || 0);
       return names;
     }
-    function addExprNames(names, from15) {
-      return from15 instanceof code_1._CodeOrName ? addNames(names, from15.names) : names;
+    function addExprNames(names, from16) {
+      return from16 instanceof code_1._CodeOrName ? addNames(names, from16.names) : names;
     }
     function optimizeExpr(expr, names, constants) {
       if (expr instanceof code_1.Name)
@@ -310265,9 +310363,9 @@ var require_codegen = __commonJS({
         return e2 instanceof code_1._Code && e2._items.some((c) => c instanceof code_1.Name && names[c.str] === 1 && constants[c.str] !== void 0);
       }
     }
-    function subtractNames(names, from15) {
-      for (const n in from15)
-        names[n] = (names[n] || 0) - (from15[n] || 0);
+    function subtractNames(names, from16) {
+      for (const n in from16)
+        names[n] = (names[n] || 0) - (from16[n] || 0);
     }
     function not(x2) {
       return typeof x2 == "boolean" || typeof x2 == "number" || x2 === null ? !x2 : (0, code_1._)`!${par(x2)}`;
@@ -310385,31 +310483,31 @@ var require_util5 = __commonJS({
     }
     exports2.eachItem = eachItem;
     function makeMergeEvaluated({ mergeNames, mergeToName, mergeValues: mergeValues3, resultToName }) {
-      return (gen, from15, to, toName) => {
-        const res = to === void 0 ? from15 : to instanceof codegen_1.Name ? (from15 instanceof codegen_1.Name ? mergeNames(gen, from15, to) : mergeToName(gen, from15, to), to) : from15 instanceof codegen_1.Name ? (mergeToName(gen, to, from15), from15) : mergeValues3(from15, to);
+      return (gen, from16, to, toName) => {
+        const res = to === void 0 ? from16 : to instanceof codegen_1.Name ? (from16 instanceof codegen_1.Name ? mergeNames(gen, from16, to) : mergeToName(gen, from16, to), to) : from16 instanceof codegen_1.Name ? (mergeToName(gen, to, from16), from16) : mergeValues3(from16, to);
         return toName === codegen_1.Name && !(res instanceof codegen_1.Name) ? resultToName(gen, res) : res;
       };
     }
     exports2.mergeEvaluated = {
       props: makeMergeEvaluated({
-        mergeNames: (gen, from15, to) => gen.if((0, codegen_1._)`${to} !== true && ${from15} !== undefined`, () => {
-          gen.if((0, codegen_1._)`${from15} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from15})`));
+        mergeNames: (gen, from16, to) => gen.if((0, codegen_1._)`${to} !== true && ${from16} !== undefined`, () => {
+          gen.if((0, codegen_1._)`${from16} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from16})`));
         }),
-        mergeToName: (gen, from15, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
-          if (from15 === true) {
+        mergeToName: (gen, from16, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
+          if (from16 === true) {
             gen.assign(to, true);
           } else {
             gen.assign(to, (0, codegen_1._)`${to} || {}`);
-            setEvaluated(gen, to, from15);
+            setEvaluated(gen, to, from16);
           }
         }),
-        mergeValues: (from15, to) => from15 === true ? true : { ...from15, ...to },
+        mergeValues: (from16, to) => from16 === true ? true : { ...from16, ...to },
         resultToName: evaluatedPropsToName
       }),
       items: makeMergeEvaluated({
-        mergeNames: (gen, from15, to) => gen.if((0, codegen_1._)`${to} !== true && ${from15} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from15} === true ? true : ${to} > ${from15} ? ${to} : ${from15}`)),
-        mergeToName: (gen, from15, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from15 === true ? true : (0, codegen_1._)`${to} > ${from15} ? ${to} : ${from15}`)),
-        mergeValues: (from15, to) => from15 === true ? true : Math.max(from15, to),
+        mergeNames: (gen, from16, to) => gen.if((0, codegen_1._)`${to} !== true && ${from16} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from16} === true ? true : ${to} > ${from16} ? ${to} : ${from16}`)),
+        mergeToName: (gen, from16, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from16 === true ? true : (0, codegen_1._)`${to} > ${from16} ? ${to} : ${from16}`)),
+        mergeValues: (from16, to) => from16 === true ? true : Math.max(from16, to),
         resultToName: (gen, items) => gen.var("items", items)
       })
     };
@@ -318828,7 +318926,7 @@ __export(start_exports, {
   default: () => startProxy
 });
 async function startProxy(cmd) {
-  return (0, import_rxjs38.lastValueFrom)(
+  return (0, import_rxjs40.lastValueFrom)(
     GraphqlClienAPI.getConfig().pipe(
       (0, import_operators31.take)(1),
       (0, import_operators31.map)((config2) => ({
@@ -318844,7 +318942,7 @@ async function startProxy(cmd) {
         process.stderr.write("Retrieving config for auth...\n");
       }),
       (0, import_operators31.switchMap)(
-        (config2) => config2?.token ? (0, import_rxjs38.of)(config2) : (0, import_rxjs38.throwError)(
+        (config2) => config2?.token ? (0, import_rxjs40.of)(config2) : (0, import_rxjs40.throwError)(
           () => new Error("User is not authenticated (no token in config)")
         )
       ),
@@ -318862,7 +318960,7 @@ async function startProxy(cmd) {
               Authorization: config2.token
             }
           },
-          fetch: (input, init) => (0, import_rxjs38.lastValueFrom)(performFetch(input, init))
+          fetch: (input, init) => (0, import_rxjs40.lastValueFrom)(performFetch(input, init))
         }),
         client: new Client({
           name: "gapi-proxy-client",
@@ -318873,7 +318971,7 @@ async function startProxy(cmd) {
         process.stderr.write("Connecting to upstream...\n");
       }),
       (0, import_operators31.switchMap)(
-        (config2) => (0, import_rxjs38.from)(config2.client.connect(config2.transport)).pipe((0, import_operators31.map)(() => config2))
+        (config2) => (0, import_rxjs40.from)(config2.client.connect(config2.transport)).pipe((0, import_operators31.map)(() => config2))
       ),
       (0, import_operators31.tap)(() => {
         process.stderr.write("Connected to upstream MCP server\n");
@@ -318899,25 +318997,25 @@ async function startProxy(cmd) {
             capabilities: config2.capabilities || {}
           }
         );
-        server2.fallbackRequestHandler = async (request) => (0, import_rxjs38.lastValueFrom)(
-          (0, import_rxjs38.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
+        server2.fallbackRequestHandler = async (request) => (0, import_rxjs40.lastValueFrom)(
+          (0, import_rxjs40.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
             (0, import_operators31.catchError)((e2) => {
               process.stderr.write(`Upstream error: ${e2.message}
 `);
-              return (0, import_rxjs38.throwError)(() => e2);
+              return (0, import_rxjs40.throwError)(() => e2);
             })
           )
         );
         server2.fallbackNotificationHandler = async (notification) => {
-          await (0, import_rxjs38.lastValueFrom)(
-            (0, import_rxjs38.of)(notification).pipe(
+          await (0, import_rxjs40.lastValueFrom)(
+            (0, import_rxjs40.of)(notification).pipe(
               (0, import_operators31.filter)((n) => n.method !== "notifications/initialized"),
               (0, import_operators31.switchMap)(
-                (n) => (0, import_rxjs38.defer)(() => config2.client.notification(n)).pipe(
+                (n) => (0, import_rxjs40.defer)(() => config2.client.notification(n)).pipe(
                   (0, import_operators31.catchError)((e2) => {
                     process.stderr.write(`Notification error: ${e2}
 `);
-                    return import_rxjs38.EMPTY;
+                    return import_rxjs40.EMPTY;
                   })
                 )
               ),
@@ -318927,7 +319025,7 @@ async function startProxy(cmd) {
         };
         return server2;
       }),
-      (0, import_operators31.switchMap)((server2) => (0, import_rxjs38.from)(server2.connect(new StdioServerTransport()))),
+      (0, import_operators31.switchMap)((server2) => (0, import_rxjs40.from)(server2.connect(new StdioServerTransport()))),
       (0, import_operators31.tap)(() => {
         process.stderr.write("MCP stdio server ready\n");
       }),
@@ -318937,20 +319035,20 @@ async function startProxy(cmd) {
     )
   );
 }
-var import_rxjs38, import_operators31, import_stream2, performFetch;
+var import_rxjs40, import_operators31, import_stream2, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
     init_streamableHttp();
     init_server2();
     init_stdio2();
-    import_rxjs38 = __toESM(require_cjs());
+    import_rxjs40 = __toESM(require_cjs());
     import_operators31 = __toESM(require_operators());
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
     performFetch = (input, init) => {
-      return (0, import_rxjs38.from)(fetch(input, init)).pipe(
+      return (0, import_rxjs40.from)(fetch(input, init)).pipe(
         (0, import_operators31.switchMap)((res) => {
           if (res.status === 401 || res.status === 403) {
             process.stderr.write(
@@ -318972,7 +319070,7 @@ var init_start = __esm({
               })
             );
           }
-          return (0, import_rxjs38.of)(res);
+          return (0, import_rxjs40.of)(res);
         }),
         (0, import_operators31.map)((res) => {
           if (typeof res?.body?.pipeThrough !== "function") {
@@ -318991,7 +319089,7 @@ var init_start = __esm({
         (0, import_operators31.catchError)((e2) => {
           process.stderr.write(`[ERROR] Fetch error: ${e2.message}
 `);
-          return (0, import_rxjs38.throwError)(() => e2);
+          return (0, import_rxjs40.throwError)(() => e2);
         })
       );
     };
@@ -319003,16 +319101,16 @@ var create_exports3 = {};
 __export(create_exports3, {
   default: () => create_default3
 });
-var import_rxjs39, import_operators32, create_default3;
+var import_rxjs41, import_operators32, create_default3;
 var init_create3 = __esm({
   "src/commands/rabbitmq/create.ts"() {
-    import_rxjs39 = __toESM(require_cjs());
+    import_rxjs41 = __toESM(require_cjs());
     import_operators32 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_default3 = (cmd) => (0, import_rxjs39.lastValueFrom)(
+    create_default3 = (cmd) => (0, import_rxjs41.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators32.switchMap)(
           (projectId) => loadSpec(
@@ -319051,15 +319149,15 @@ var list_exports5 = {};
 __export(list_exports5, {
   default: () => list_default5
 });
-var import_rxjs40, import_operators33, list_default5;
+var import_rxjs42, import_operators33, list_default5;
 var init_list5 = __esm({
   "src/commands/rabbitmq/list.ts"() {
-    import_rxjs40 = __toESM(require_cjs());
+    import_rxjs42 = __toESM(require_cjs());
     import_operators33 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default5 = (cmd) => (0, import_rxjs40.lastValueFrom)(
+    list_default5 = (cmd) => (0, import_rxjs42.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators33.switchMap)(
           (projectId) => GraphqlClienAPI.listRabbitMqInstances(projectId)
@@ -319094,15 +319192,15 @@ var delete_exports2 = {};
 __export(delete_exports2, {
   default: () => delete_default2
 });
-var import_rxjs41, import_operators34, delete_default2;
+var import_rxjs43, import_operators34, delete_default2;
 var init_delete2 = __esm({
   "src/commands/rabbitmq/delete.ts"() {
-    import_rxjs41 = __toESM(require_cjs());
+    import_rxjs43 = __toESM(require_cjs());
     import_operators34 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    delete_default2 = (cmd) => (0, import_rxjs41.lastValueFrom)(
+    delete_default2 = (cmd) => (0, import_rxjs43.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators34.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallRabbitMq(cmd.id, projectId)
@@ -319827,11 +319925,11 @@ __export(start_exports2, {
   default: () => start_default,
   resolveRunner: () => resolveRunner
 });
-var import_os3, import_rxjs42, RUNNER_VERSION, resolveRunner, start_default;
+var import_os3, import_rxjs44, RUNNER_VERSION, resolveRunner, start_default;
 var init_start2 = __esm({
   "src/commands/runner/start.ts"() {
     import_os3 = require("os");
-    import_rxjs42 = __toESM(require_cjs());
+    import_rxjs44 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -319852,7 +319950,7 @@ var init_start2 = __esm({
       }
       const name2 = cmd.name || (0, import_os3.hostname)();
       Logger.info(`Registering this machine as local runner "${name2}"...`);
-      const { runner, token } = await (0, import_rxjs42.lastValueFrom)(
+      const { runner, token } = await (0, import_rxjs44.lastValueFrom)(
         GraphqlClienAPI.createLocalRunner(name2)
       ).catch((e2) => {
         throw new Error(
@@ -320047,14 +320145,14 @@ var list_exports6 = {};
 __export(list_exports6, {
   default: () => list_default6
 });
-var import_rxjs43, import_operators35, list_default6;
+var import_rxjs45, import_operators35, list_default6;
 var init_list6 = __esm({
   "src/commands/runner/list.ts"() {
-    import_rxjs43 = __toESM(require_cjs());
+    import_rxjs45 = __toESM(require_cjs());
     import_operators35 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default6 = () => (0, import_rxjs43.lastValueFrom)(
+    list_default6 = () => (0, import_rxjs45.lastValueFrom)(
       GraphqlClienAPI.listLocalRunners().pipe(
         (0, import_operators35.tap)((runners) => {
           Logger.log("-------------------");
@@ -320087,10 +320185,10 @@ __export(models_exports, {
   default: () => models_default,
   parseSelection: () => parseSelection
 });
-var import_rxjs44, isShown, parseSelection, models_default;
+var import_rxjs46, isShown, parseSelection, models_default;
 var init_models = __esm({
   "src/commands/runner/models.ts"() {
-    import_rxjs44 = __toESM(require_cjs());
+    import_rxjs46 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -320120,11 +320218,11 @@ var init_models = __esm({
       }
       let runner;
       if (selection) {
-        runner = await (0, import_rxjs44.lastValueFrom)(
+        runner = await (0, import_rxjs46.lastValueFrom)(
           GraphqlClienAPI.setLocalRunnerModels(runnerId, selection.models)
         );
       } else {
-        const runners = await (0, import_rxjs44.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
+        const runners = await (0, import_rxjs46.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
         runner = runners.find((r2) => r2.id === runnerId);
       }
       if (!runner) {
@@ -320159,10 +320257,10 @@ var delete_exports3 = {};
 __export(delete_exports3, {
   default: () => delete_default3
 });
-var import_rxjs45, delete_default3;
+var import_rxjs47, delete_default3;
 var init_delete3 = __esm({
   "src/commands/runner/delete.ts"() {
-    import_rxjs45 = __toESM(require_cjs());
+    import_rxjs47 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -320172,7 +320270,7 @@ var init_delete3 = __esm({
       if (!runnerId) {
         throw new Error("Specify the runner with --id (see `gcli runner:list`).");
       }
-      await (0, import_rxjs45.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
+      await (0, import_rxjs47.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
       if (saved?.id === runnerId) {
         await forgetRunner();
       }
@@ -320188,10 +320286,10 @@ __export(start_exports3, {
 });
 async function start2(args) {
   Logger.log("---------------------------------");
-  return (0, import_rxjs46.lastValueFrom)(
+  return (0, import_rxjs48.lastValueFrom)(
     loadSpec().pipe(
       (0, import_operators36.switchMap)(
-        (config2) => (0, import_rxjs46.of)({
+        (config2) => (0, import_rxjs48.of)({
           watcher: (0, import_node_fs2.watch)(process.cwd(), {
             recursive: true
           }),
@@ -320220,7 +320318,7 @@ async function start2(args) {
               outfile,
               startCommand,
               ignorelist
-            }) => (0, import_rxjs46.from)(build_default(args)).pipe(
+            }) => (0, import_rxjs48.from)(build_default(args)).pipe(
               (0, import_operators36.tap)(() => {
                 Logger.warn(
                   `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
@@ -320238,10 +320336,10 @@ async function start2(args) {
                 );
               }),
               (0, import_operators36.tap)(
-                () => (0, import_rxjs46.merge)(
-                  (0, import_rxjs46.fromEvent)(process, "SIGINT"),
-                  (0, import_rxjs46.fromEvent)(process, "SIGTERM"),
-                  (0, import_rxjs46.fromEvent)(process, "exit")
+                () => (0, import_rxjs48.merge)(
+                  (0, import_rxjs48.fromEvent)(process, "SIGINT"),
+                  (0, import_rxjs48.fromEvent)(process, "SIGTERM"),
+                  (0, import_rxjs48.fromEvent)(process, "exit")
                 ).pipe(
                   (0, import_operators36.debounceTime)(100),
                   (0, import_operators36.tap)(() => {
@@ -320253,7 +320351,7 @@ async function start2(args) {
                 ).subscribe()
               ),
               (0, import_operators36.switchMap)(
-                () => (0, import_rxjs46.fromEvent)(watcher, "change").pipe(
+                () => (0, import_rxjs48.fromEvent)(watcher, "change").pipe(
                   (0, import_operators36.map)(([event, filename]) => ({
                     event,
                     filename
@@ -320302,12 +320400,12 @@ async function start2(args) {
     )
   );
 }
-var import_node_child_process, import_node_fs2, import_rxjs46, import_operators36;
+var import_node_child_process, import_node_fs2, import_rxjs48, import_operators36;
 var init_start3 = __esm({
   "src/commands/start/start.ts"() {
     import_node_child_process = require("node:child_process");
     import_node_fs2 = require("node:fs");
-    import_rxjs46 = __toESM(require_cjs());
+    import_rxjs48 = __toESM(require_cjs());
     import_operators36 = __toESM(require_operators());
     init_log();
     init_build();
@@ -320320,16 +320418,16 @@ var create_cron_exports = {};
 __export(create_cron_exports, {
   default: () => create_cron_default
 });
-var import_rxjs47, import_operators37, create_cron_default;
+var import_rxjs49, import_operators37, create_cron_default;
 var init_create_cron = __esm({
   "src/commands/triggers/cron/create-cron.ts"() {
-    import_rxjs47 = __toESM(require_cjs());
+    import_rxjs49 = __toESM(require_cjs());
     import_operators37 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_cron_default = (cmd) => (0, import_rxjs47.lastValueFrom)(
+    create_cron_default = (cmd) => (0, import_rxjs49.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators37.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
@@ -320352,7 +320450,7 @@ var init_create_cron = __esm({
           )
         ),
         (0, import_operators37.switchMap)(
-          ({ lambdaId, cron, triggerName, lambdaName }) => !cron || !triggerName ? (0, import_rxjs47.throwError)(
+          ({ lambdaId, cron, triggerName, lambdaName }) => !cron || !triggerName ? (0, import_rxjs49.throwError)(
             () => new Error(
               "cron:create needs --cron and --triggerName (or triggers.time.cron / triggerName in lambforge.yaml)"
             )
@@ -320385,16 +320483,16 @@ var delete_cron_exports = {};
 __export(delete_cron_exports, {
   default: () => delete_cron_default
 });
-var import_rxjs48, import_operators38, delete_cron_default;
+var import_rxjs50, import_operators38, delete_cron_default;
 var init_delete_cron = __esm({
   "src/commands/triggers/cron/delete-cron.ts"() {
-    import_rxjs48 = __toESM(require_cjs());
+    import_rxjs50 = __toESM(require_cjs());
     import_operators38 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_cron_default = (cmd) => (0, import_rxjs48.lastValueFrom)(
+    delete_cron_default = (cmd) => (0, import_rxjs50.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators38.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
@@ -320438,18 +320536,18 @@ var list_crons_exports = {};
 __export(list_crons_exports, {
   default: () => list_crons_default
 });
-var import_rxjs49, import_operators39, list_crons_default;
+var import_rxjs51, import_operators39, list_crons_default;
 var init_list_crons = __esm({
   "src/commands/triggers/cron/list-crons.ts"() {
-    import_rxjs49 = __toESM(require_cjs());
+    import_rxjs51 = __toESM(require_cjs());
     import_operators39 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_crons_default = (cmd) => (0, import_rxjs49.lastValueFrom)(
+    list_crons_default = (cmd) => (0, import_rxjs51.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators39.switchMap)(
-          (projectId) => (0, import_rxjs49.combineLatest)([
+          (projectId) => (0, import_rxjs51.combineLatest)([
             GraphqlClienAPI.listProjectTimeTriggers(projectId),
             GraphqlClienAPI.listLambdas(projectId)
           ])
@@ -320482,15 +320580,15 @@ var list_exports7 = {};
 __export(list_exports7, {
   default: () => list_default7
 });
-var import_rxjs50, import_operators40, list_default7;
+var import_rxjs52, import_operators40, list_default7;
 var init_list7 = __esm({
   "src/commands/triggers/message-queue/list.ts"() {
-    import_rxjs50 = __toESM(require_cjs());
+    import_rxjs52 = __toESM(require_cjs());
     import_operators40 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default7 = (cmd) => (0, import_rxjs50.lastValueFrom)(
+    list_default7 = (cmd) => (0, import_rxjs52.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators40.switchMap)(
           (projectId) => GraphqlClienAPI.listMessageQueueTriggers(projectId)
@@ -320526,10 +320624,10 @@ __export(save_exports, {
   mergeOverExisting: () => mergeOverExisting,
   toTriggerInput: () => toTriggerInput
 });
-var import_rxjs51, import_operators41, int2, toTriggerInput, mergeOverExisting, save_default;
+var import_rxjs53, import_operators41, int2, toTriggerInput, mergeOverExisting, save_default;
 var init_save = __esm({
   "src/commands/triggers/message-queue/save.ts"() {
-    import_rxjs51 = __toESM(require_cjs());
+    import_rxjs53 = __toESM(require_cjs());
     import_operators41 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -320592,11 +320690,11 @@ var init_save = __esm({
         )
       );
     };
-    save_default = (mode, cmd) => (0, import_rxjs51.lastValueFrom)(
+    save_default = (mode, cmd) => (0, import_rxjs53.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators41.switchMap)((projectId) => {
           const changes = toTriggerInput(mode, cmd);
-          const payload$ = mode === "create" ? (0, import_rxjs51.of)(changes) : GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
+          const payload$ = mode === "create" ? (0, import_rxjs53.of)(changes) : GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
             (0, import_operators41.map)(
               (triggers) => mergeOverExisting(
                 triggers.find((t2) => t2.name === cmd.name),
@@ -320634,15 +320732,15 @@ var delete_exports4 = {};
 __export(delete_exports4, {
   default: () => delete_default4
 });
-var import_rxjs52, import_operators42, delete_default4;
+var import_rxjs54, import_operators42, delete_default4;
 var init_delete4 = __esm({
   "src/commands/triggers/message-queue/delete.ts"() {
-    import_rxjs52 = __toESM(require_cjs());
+    import_rxjs54 = __toESM(require_cjs());
     import_operators42 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    delete_default4 = (cmd) => (0, import_rxjs52.lastValueFrom)(
+    delete_default4 = (cmd) => (0, import_rxjs54.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators42.switchMap)(
           (projectId) => GraphqlClienAPI.deleteMessageQueueTrigger(projectId, cmd.name)
@@ -320752,11 +320850,11 @@ var init_definition = __esm({
 });
 
 // src/commands/workflow/helpers.ts
-var import_promises3, import_rxjs53, import_operators43, resolveWorkflow, withProject, readWorkflowFile, writeTextFile, POLL_MS, followRun, printRunResult;
+var import_promises3, import_rxjs55, import_operators43, resolveWorkflow, withProject, readWorkflowFile, writeTextFile, POLL_MS, followRun, printRunResult;
 var init_helpers4 = __esm({
   "src/commands/workflow/helpers.ts"() {
     import_promises3 = require("fs/promises");
-    import_rxjs53 = __toESM(require_cjs());
+    import_rxjs55 = __toESM(require_cjs());
     import_operators43 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -320778,18 +320876,18 @@ var init_helpers4 = __esm({
         })
       );
     };
-    withProject = (project, fn) => (0, import_rxjs53.lastValueFrom)(parseProjectId(project).pipe((0, import_operators43.switchMap)(fn)));
+    withProject = (project, fn) => (0, import_rxjs55.lastValueFrom)(parseProjectId(project).pipe((0, import_operators43.switchMap)(fn)));
     readWorkflowFile = (path2) => {
       if (!path2) {
         throw new Error("--file is required (a workflow YAML or JSON file)");
       }
-      return (0, import_rxjs53.from)((0, import_promises3.readFile)(path2, "utf8")).pipe((0, import_operators43.map)(parseWorkflowFile));
+      return (0, import_rxjs55.from)((0, import_promises3.readFile)(path2, "utf8")).pipe((0, import_operators43.map)(parseWorkflowFile));
     };
-    writeTextFile = (path2, text) => (0, import_rxjs53.from)((0, import_promises3.writeFile)(path2, text, "utf8"));
+    writeTextFile = (path2, text) => (0, import_rxjs55.from)((0, import_promises3.writeFile)(path2, text, "utf8"));
     POLL_MS = 2e3;
     followRun = (projectId, workflowId, runName) => {
       let printed = 0;
-      return (0, import_rxjs53.timer)(0, POLL_MS).pipe(
+      return (0, import_rxjs55.timer)(0, POLL_MS).pipe(
         (0, import_operators43.switchMap)(
           () => GraphqlClienAPI.getWorkflowRun(projectId, workflowId, runName)
         ),
@@ -320862,10 +320960,10 @@ var get_exports2 = {};
 __export(get_exports2, {
   default: () => get_default2
 });
-var import_rxjs54, import_operators45, get_default2;
+var import_rxjs56, import_operators45, get_default2;
 var init_get2 = __esm({
   "src/commands/workflow/get.ts"() {
-    import_rxjs54 = __toESM(require_cjs());
+    import_rxjs56 = __toESM(require_cjs());
     import_operators45 = __toESM(require_operators());
     init_log();
     init_definition();
@@ -320881,7 +320979,7 @@ var init_get2 = __esm({
           });
           if (!cmd.out) {
             Logger.log(text);
-            return (0, import_rxjs54.of)(null);
+            return (0, import_rxjs56.of)(null);
           }
           return writeTextFile(cmd.out, text).pipe(
             (0, import_operators45.tap)(() => Logger.info(`Wrote ${cmd.out}`))
@@ -320951,11 +321049,11 @@ var generate_exports = {};
 __export(generate_exports, {
   default: () => generate_default
 });
-var import_promises4, import_rxjs55, import_operators47, generate_default;
+var import_promises4, import_rxjs57, import_operators47, generate_default;
 var init_generate = __esm({
   "src/commands/workflow/generate.ts"() {
     import_promises4 = require("fs/promises");
-    import_rxjs55 = __toESM(require_cjs());
+    import_rxjs57 = __toESM(require_cjs());
     import_operators47 = __toESM(require_operators());
     init_gql_client();
     init_log();
@@ -320968,7 +321066,7 @@ var init_generate = __esm({
           'Describe the workflow: --description "charge the card with retries, then email the receipt"'
         );
       }
-      const base$ = cmd.from ? (0, import_rxjs55.from)((0, import_promises4.readFile)(cmd.from, "utf8")).pipe((0, import_operators47.map)(parseWorkflowFile)) : cmd.name ? GraphqlClienAPI.listWorkflows(projectId).pipe(
+      const base$ = cmd.from ? (0, import_rxjs57.from)((0, import_promises4.readFile)(cmd.from, "utf8")).pipe((0, import_operators47.map)(parseWorkflowFile)) : cmd.name ? GraphqlClienAPI.listWorkflows(projectId).pipe(
         (0, import_operators47.switchMap)(
           (workflows) => workflows.some((w) => w.name === cmd.name) ? resolveWorkflow(projectId, cmd.name).pipe(
             (0, import_operators47.map)((w) => ({
@@ -320976,9 +321074,9 @@ var init_generate = __esm({
               description: w.description ?? void 0,
               definition: w.definition
             }))
-          ) : (0, import_rxjs55.of)(null)
+          ) : (0, import_rxjs57.of)(null)
         )
-      ) : (0, import_rxjs55.of)(null);
+      ) : (0, import_rxjs57.of)(null);
       return base$.pipe(
         (0, import_operators47.tap)(() => Logger.info("Asking the AI for a draft...")),
         (0, import_operators47.switchMap)(
@@ -321005,10 +321103,10 @@ var init_generate = __esm({
           const text = toWorkflowYaml(file2);
           const written$ = cmd.out ? writeTextFile(cmd.out, text).pipe(
             (0, import_operators47.tap)(() => Logger.info(`Wrote ${cmd.out}`))
-          ) : (0, import_rxjs55.of)(null).pipe((0, import_operators47.tap)(() => !cmd.apply && Logger.log(text)));
+          ) : (0, import_rxjs57.of)(null).pipe((0, import_operators47.tap)(() => !cmd.apply && Logger.log(text)));
           return written$.pipe(
             (0, import_operators47.switchMap)(
-              () => cmd.apply ? applyWorkflow(projectId, file2) : (0, import_rxjs55.of)(null).pipe(
+              () => cmd.apply ? applyWorkflow(projectId, file2) : (0, import_rxjs57.of)(null).pipe(
                 (0, import_operators47.tap)(
                   () => Logger.info(
                     cmd.out ? `Review it, then: gcli workflow:apply --file ${cmd.out}${file2.name ? "" : " --name <name>"}` : "Save it with -o <file>, or re-run with --apply --name <name>"
@@ -321082,11 +321180,11 @@ var run_exports = {};
 __export(run_exports, {
   default: () => run_default
 });
-var import_promises5, import_rxjs56, import_operators50, run_default;
+var import_promises5, import_rxjs58, import_operators50, run_default;
 var init_run = __esm({
   "src/commands/workflow/run.ts"() {
     import_promises5 = require("fs/promises");
-    import_rxjs56 = __toESM(require_cjs());
+    import_rxjs58 = __toESM(require_cjs());
     import_operators50 = __toESM(require_operators());
     init_gql_client();
     init_log();
@@ -321094,7 +321192,7 @@ var init_run = __esm({
     init_helpers4();
     run_default = (cmd) => withProject(
       cmd.project,
-      (projectId) => (cmd.inputFile ? (0, import_rxjs56.from)((0, import_promises5.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs56.of)(cmd.input)).pipe(
+      (projectId) => (cmd.inputFile ? (0, import_rxjs58.from)((0, import_promises5.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs58.of)(cmd.input)).pipe(
         (0, import_operators50.map)(parseRunInput),
         (0, import_operators50.switchMap)(
           (input) => resolveWorkflow(projectId, cmd.name).pipe(
@@ -321102,7 +321200,7 @@ var init_run = __esm({
               (w) => GraphqlClienAPI.startWorkflowRun(projectId, w.id, input).pipe(
                 (0, import_operators50.tap)((run2) => Logger.info(`Started run ${run2.name}`)),
                 (0, import_operators50.switchMap)(
-                  (run2) => cmd.wait ? followRun(projectId, w.id, run2.name) : (0, import_rxjs56.of)(run2).pipe(
+                  (run2) => cmd.wait ? followRun(projectId, w.id, run2.name) : (0, import_rxjs58.of)(run2).pipe(
                     (0, import_operators50.tap)(
                       () => Logger.info(
                         `Follow it: gcli workflow:status --name ${w.name} --run ${run2.name} --follow`
@@ -321276,11 +321374,11 @@ var trigger_add_exports = {};
 __export(trigger_add_exports, {
   default: () => trigger_add_default
 });
-var import_promises6, import_rxjs57, import_operators54, trigger_add_default;
+var import_promises6, import_rxjs59, import_operators54, trigger_add_default;
 var init_trigger_add = __esm({
   "src/commands/workflow/trigger-add.ts"() {
     import_promises6 = require("fs/promises");
-    import_rxjs57 = __toESM(require_cjs());
+    import_rxjs59 = __toESM(require_cjs());
     import_operators54 = __toESM(require_operators());
     init_gql_client();
     init_log();
@@ -321288,7 +321386,7 @@ var init_trigger_add = __esm({
     init_triggers();
     trigger_add_default = (cmd) => withProject(
       cmd.project,
-      (projectId) => (cmd.inputFile ? (0, import_rxjs57.from)((0, import_promises6.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs57.of)(void 0)).pipe(
+      (projectId) => (cmd.inputFile ? (0, import_rxjs59.from)((0, import_promises6.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs59.of)(void 0)).pipe(
         (0, import_operators54.map)((inputText) => buildTriggerInput({ ...cmd, inputText })),
         (0, import_operators54.switchMap)(
           (trigger) => resolveWorkflow(projectId, cmd.name).pipe(
@@ -322663,12 +322761,12 @@ __export(start_exports4, {
   WORKSPACE_VERSION: () => WORKSPACE_VERSION,
   default: () => start_default2
 });
-var import_promises8, import_path3, import_rxjs58, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
+var import_promises8, import_path3, import_rxjs60, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
 var init_start4 = __esm({
   "src/commands/workspace/start.ts"() {
     import_promises8 = require("fs/promises");
     import_path3 = require("path");
-    import_rxjs58 = __toESM(require_cjs());
+    import_rxjs60 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
@@ -322698,7 +322796,7 @@ var init_start4 = __esm({
       if (saved && (!cmd.project || cmd.project === saved.projectId)) {
         return saved;
       }
-      const projectId = await (0, import_rxjs58.lastValueFrom)(parseProjectId(cmd.project)).catch(
+      const projectId = await (0, import_rxjs60.lastValueFrom)(parseProjectId(cmd.project)).catch(
         () => {
           throw new Error(
             "No project selected. Pass --project <projectId> or run `gcli project:use <projectId>` first."
@@ -322707,7 +322805,7 @@ var init_start4 = __esm({
       );
       const name2 = cmd.name || (0, import_path3.basename)(root);
       Logger.info(`Registering ${root} as local workspace "${name2}"...`);
-      const { workspace, token } = await (0, import_rxjs58.lastValueFrom)(
+      const { workspace, token } = await (0, import_rxjs60.lastValueFrom)(
         GraphqlClienAPI.createLocalWorkspace(projectId, name2)
       ).catch((e2) => {
         throw new Error(
@@ -322798,16 +322896,16 @@ var list_exports9 = {};
 __export(list_exports9, {
   default: () => list_default9
 });
-var import_rxjs59, list_default9;
+var import_rxjs61, list_default9;
 var init_list9 = __esm({
   "src/commands/workspace/list.ts"() {
-    import_rxjs59 = __toESM(require_cjs());
+    import_rxjs61 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
     list_default9 = async (cmd) => {
       const [workspaces, saved] = await Promise.all([
-        (0, import_rxjs59.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
+        (0, import_rxjs61.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
         readSavedWorkspaces()
       ]);
       const onThisMachine = new Set(Object.values(saved).map((w) => w.id));
@@ -322841,11 +322939,11 @@ var delete_exports6 = {};
 __export(delete_exports6, {
   default: () => delete_default6
 });
-var import_promises9, import_rxjs60, delete_default6;
+var import_promises9, import_rxjs62, delete_default6;
 var init_delete6 = __esm({
   "src/commands/workspace/delete.ts"() {
     import_promises9 = require("fs/promises");
-    import_rxjs60 = __toESM(require_cjs());
+    import_rxjs62 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
@@ -322857,7 +322955,7 @@ var init_delete6 = __esm({
           "No workspace registered for this directory - pass --id (see `gcli workspace:list`)."
         );
       }
-      await (0, import_rxjs60.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
+      await (0, import_rxjs62.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
       await forgetWorkspace({ id: workspaceId });
       Logger.log(
         `Local workspace ${workspaceId} deleted; its token no longer works.`
@@ -322901,8 +322999,14 @@ function buildCommands(program2) {
 init_helpers();
 function registerClusterCommands(program2) {
   program2.command("cluster:create").description(
-    "Provision a private Talos cluster for a project (runs in the background - takes several minutes; use --wait to block)"
-  ).option("-p, --project <project>").option("-spec, --spec <spec>").option("-n, --name <name>").option("--imageId <imageId>", "hcloud Talos snapshot id").option("--serverType <serverType>").option("-l, --location <location>").option("--workers <workers>", "Worker count (ignored when --singleNode)").option("--singleNode", "Control plane carries the workload too").option("--wait", "Block until the cluster is ready (or errors)").action(lazy(() => Promise.resolve().then(() => (init_create(), create_exports)).then((m2) => m2.default)));
+    "Provision a private Talos cluster, or with --virtual a virtual cluster, for a project (runs in the background; use --wait to block)"
+  ).option("-p, --project <project>").option("-spec, --spec <spec>").option("-n, --name <name>").option("--imageId <imageId>", "hcloud Talos snapshot id").option("--serverType <serverType>").option("-l, --location <location>").option("--workers <workers>", "Worker count (ignored when --singleNode)").option("--singleNode", "Control plane carries the workload too").option(
+    "--virtual",
+    "A virtual cluster (own Kubernetes API + Fission, no servers, ~2 minutes) instead of a private Talos cluster"
+  ).option(
+    "--host <host>",
+    "With --virtual: name of a private cluster of this project to run on (default: the shared cluster)"
+  ).option("--wait", "Block until the cluster is ready (or errors)").action(lazy(() => Promise.resolve().then(() => (init_create(), create_exports)).then((m2) => m2.default)));
   program2.command("cluster:apply").description(
     "Make a private cluster match the `cluster:` section of lambforge.yaml: creates it if missing, then applies topology, workers, control planes, load balancer and autoscaling"
   ).option("-p, --project <project>").option(
