@@ -6,7 +6,7 @@ export function registerClusterCommands(program: Command) {
   program
     .command('cluster:create')
     .description(
-      'Provision a private Talos cluster for a project (runs in the background - takes several minutes; use --wait to block)',
+      'Provision a private Talos cluster, or with --virtual a virtual cluster, for a project (runs in the background; use --wait to block)',
     )
     .option('-p, --project <project>')
     .option('-spec, --spec <spec>')
@@ -16,6 +16,14 @@ export function registerClusterCommands(program: Command) {
     .option('-l, --location <location>')
     .option('--workers <workers>', 'Worker count (ignored when --singleNode)')
     .option('--singleNode', 'Control plane carries the workload too')
+    .option(
+      '--virtual',
+      'A virtual cluster (own Kubernetes API + Fission, no servers, ~2 minutes) instead of a private Talos cluster',
+    )
+    .option(
+      '--host <host>',
+      'With --virtual: name of a private cluster of this project to run on (default: the shared cluster)',
+    )
     .option('--wait', 'Block until the cluster is ready (or errors)')
     .action(lazy(() => import('./create').then((m) => m.default)));
 

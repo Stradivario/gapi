@@ -14,6 +14,7 @@ import {
   validateDesired,
 } from './helpers/plan';
 import { pollUntilReady } from './helpers/poll-until-ready';
+import { provisionVirtualCluster } from './helpers/virtual-cluster';
 import { ClusterChange } from './types';
 
 const readDesired = async (spec?: string): Promise<ClusterDesired> => {
@@ -88,7 +89,7 @@ export default async (cmd: {
     return { cluster: current, applied: [] as ClusterStep[] };
   }
 
-  if (!current) {
+  if (!current && desired.provider !== 'vcluster') {
     const missing = (['imageId', 'serverType', 'location'] as const).filter(
       (k) => !desired[k],
     );
@@ -110,20 +111,23 @@ export default async (cmd: {
     }
     Logger.info(`-> ${step.description}`);
     if (step.kind === 'create') {
-      const created = await lastValueFrom(
-        GraphqlClienAPI.provisionProjectCluster(projectId, {
-          name: desired.name,
-          imageId: desired.imageId,
-          serverType: desired.serverType,
-          location: desired.location,
-          workers: desired.singleNode
-            ? undefined
-            : (desired.workers ?? desired.autoscale?.minWorkers),
-          singleNode: desired.singleNode,
-          withLoadBalancer: desired.loadBalancer,
-          controlPlanes: desired.controlPlanes,
-        }),
-      );
+      const created =
+        desired.provider === 'vcluster'
+          ? await provisionVirtualCluster(projectId, desired.name, desired.host)
+          : await lastValueFrom(
+              GraphqlClienAPI.provisionProjectCluster(projectId, {
+                name: desired.name,
+                imageId: desired.imageId,
+                serverType: desired.serverType,
+                location: desired.location,
+                workers: desired.singleNode
+                  ? undefined
+                  : (desired.workers ?? desired.autoscale?.minWorkers),
+                singleNode: desired.singleNode,
+                withLoadBalancer: desired.loadBalancer,
+                controlPlanes: desired.controlPlanes,
+              }),
+            );
       clusterId = created.id;
       Logger.info('Provisioning - this takes several minutes...');
       const ready = await pollUntilReady(projectId, clusterId);

@@ -1,4 +1,5 @@
 import { lastValueFrom } from 'rxjs';
+import { from } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { parseProjectId } from '~/helpers';
@@ -8,6 +9,7 @@ import { Logger } from '~/services/log';
 import { loadSpec } from '../lambda/helpers/load-spec';
 import { ClusterDesired } from './helpers/plan';
 import { pollUntilReady } from './helpers/poll-until-ready';
+import { provisionVirtualCluster } from './helpers/virtual-cluster';
 
 type ClusterYamlSpec = ClusterDesired;
 
@@ -16,6 +18,7 @@ export default async (
     spec?: string;
     project?: string;
     wait?: boolean;
+    virtual?: boolean;
   } & Partial<ClusterYamlSpec>,
 ) => {
   const result = await lastValueFrom(
@@ -31,16 +34,25 @@ export default async (
         ),
       ),
       switchMap(({ projectId, ...data }) =>
-        GraphqlClienAPI.provisionProjectCluster(projectId, {
-          name: cmd.name || data.name,
-          imageId: cmd.imageId || data.imageId,
-          serverType: cmd.serverType || data.serverType,
-          location: cmd.location || data.location,
-          workers: cmd.workers ?? data.workers,
-          singleNode: cmd.singleNode ?? data.singleNode,
-          withLoadBalancer: data.loadBalancer,
-          controlPlanes: data.controlPlanes,
-        }).pipe(map((cluster) => ({ projectId, cluster }))),
+        (cmd.virtual || data.provider === 'vcluster'
+          ? from(
+              provisionVirtualCluster(
+                projectId,
+                cmd.name || data.name,
+                cmd.host ?? data.host,
+              ),
+            )
+          : GraphqlClienAPI.provisionProjectCluster(projectId, {
+              name: cmd.name || data.name,
+              imageId: cmd.imageId || data.imageId,
+              serverType: cmd.serverType || data.serverType,
+              location: cmd.location || data.location,
+              workers: cmd.workers ?? data.workers,
+              singleNode: cmd.singleNode ?? data.singleNode,
+              withLoadBalancer: data.loadBalancer,
+              controlPlanes: data.controlPlanes,
+            })
+        ).pipe(map((cluster) => ({ projectId, cluster }))),
       ),
       tap(({ cluster }) => {
         Logger.log('-------------------');

@@ -92,6 +92,10 @@ This repo is documentation-driven. With every change:
 3. **Skills / AGENTS.md** - learned something non-obvious, or a workflow
    bit you? Update the owning skill (`.agents/skills/<name>/SKILL.md`) or
    this file in the same change.
+4. **User docs + What's new** - a change users can see or do also updates
+   gql-fission's public docs page (`gql-fission/src/docs/<slug>.md`) and adds a
+   line to `gql-fission/src/app/changelog/releases.ts`. Skill:
+   `user-docs-and-changelog` in gql-fission.
 
 Before working on an existing feature: `node scripts/changelog.mjs render
 --feature <slug>` + its feature doc. That is where "how to test" and "how

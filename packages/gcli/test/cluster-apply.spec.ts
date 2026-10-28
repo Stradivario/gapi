@@ -20,6 +20,23 @@ const kinds = (plan: { steps: { kind: string }[] }) =>
   plan.steps.map((s) => s.kind);
 
 describe('[cluster:apply plan]', () => {
+  it('only ever creates a virtual cluster - nothing else to reconcile', () => {
+    const desired = { name: 'dev', provider: 'vcluster' as const };
+    expect(kinds(planClusterChanges(null, desired))).toEqual(['create']);
+    expect(
+      kinds(planClusterChanges(cluster({ name: 'dev' }), desired)),
+    ).toEqual([]);
+  });
+
+  it('rejects node settings on a virtual cluster, and host without it', () => {
+    expect(
+      validateDesired({ name: 'dev', provider: 'vcluster', workers: 2 }),
+    ).toEqual(['cluster.workers does not apply to a virtual cluster']);
+    expect(validateDesired({ name: 'dev', host: 'prod' })).toEqual([
+      "cluster.host needs provider: 'vcluster'",
+    ]);
+  });
+
   it('creates a missing cluster in its desired shape, then sets autoscaling', () => {
     const plan = planClusterChanges(null, {
       name: 'prod',

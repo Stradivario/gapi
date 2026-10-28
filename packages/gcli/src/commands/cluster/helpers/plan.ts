@@ -7,6 +7,12 @@ import { ClusterAutoscalePolicy, ClusterChange } from '../types';
  */
 export interface ClusterDesired {
   name: string;
+  /* 'vcluster' = a virtual cluster (own Kubernetes API + Fission, no
+     servers) on `host`. Omitted = a private Talos cluster. */
+  provider?: 'vcluster';
+  /* Virtual clusters only: name of one of the project's private clusters
+     to run on. Omitted = the shared Lambforge cluster. */
+  host?: string;
   /* Needed only when the cluster does not exist yet. */
   imageId?: string;
   serverType?: string;
@@ -62,6 +68,17 @@ const AUTOSCALE_BOUNDS: Record<string, [number, number]> = {
   cooldownMinutes: [1, 1440],
 };
 
+const VIRTUAL_UNSUPPORTED = [
+  'imageId',
+  'serverType',
+  'location',
+  'singleNode',
+  'workers',
+  'controlPlanes',
+  'loadBalancer',
+  'autoscale',
+] as const;
+
 const intIn = (v: unknown, min: number, max: number) =>
   Number.isInteger(v) && (v as number) >= min && (v as number) <= max;
 
@@ -69,6 +86,21 @@ const intIn = (v: unknown, min: number, max: number) =>
 export const validateDesired = (d: ClusterDesired): string[] => {
   const errors: string[] = [];
   if (!d?.name) errors.push('cluster.name is required');
+  if (d.provider !== undefined && d.provider !== 'vcluster') {
+    errors.push("cluster.provider must be 'vcluster' (or omitted)");
+  }
+  if (d.provider === 'vcluster') {
+    // A virtual cluster has no servers: none of the node settings apply.
+    for (const key of VIRTUAL_UNSUPPORTED) {
+      if (d[key] !== undefined) {
+        errors.push(`cluster.${key} does not apply to a virtual cluster`);
+      }
+    }
+    return errors;
+  }
+  if (d.host !== undefined) {
+    errors.push("cluster.host needs provider: 'vcluster'");
+  }
   if (d.workers !== undefined && !intIn(d.workers, 1, 10)) {
     errors.push('cluster.workers must be an integer from 1 to 10');
   }
@@ -121,6 +153,19 @@ export const planClusterChanges = (
   const steps: ClusterStep[] = [];
   const notes: string[] = [];
   const autoscaleOn = desired.autoscale?.enabled === true;
+
+  if (desired.provider === 'vcluster') {
+    // Nothing to reconcile on a virtual cluster beyond its existence.
+    if (!current) {
+      steps.push({
+        kind: 'create',
+        description: `create virtual cluster "${desired.name}" on ${
+          desired.host ? `"${desired.host}"` : 'the shared cluster'
+        }`,
+      });
+    }
+    return { steps, notes };
+  }
 
   if (!current) {
     steps.push({

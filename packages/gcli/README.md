@@ -211,6 +211,27 @@ Steps that remove capacity or release the load balancer's IP (going back to
 `singleNode: true`, `loadBalancer: false`) are skipped unless you pass
 `--yes`. Nodes and the load balancer are billed per started hour.
 
+#### Virtual clusters
+
+A virtual cluster has its own Kubernetes API and Fission but no servers: it
+runs in one namespace of the shared Lambforge cluster, or of one of your
+private clusters, and is ready in about two minutes. Everything else
+(environments, lambdas, `--clusterName`, `cluster:kubeconfig`,
+`cluster:teardown`) works the same as for a private cluster; scaling and
+load balancer commands don't apply.
+
+```bash
+gcli cluster:create --virtual --name dev                  # on the shared cluster
+gcli cluster:create --virtual --name stage --host prod    # on your private cluster "prod"
+```
+
+```yaml
+cluster:
+  name: dev
+  provider: vcluster
+  host: prod          # optional - omitted = the shared cluster
+```
+
 ### RabbitMQ Brokers
 
 A project may have several RabbitMQ brokers, each optionally scoped to one of its private clusters.

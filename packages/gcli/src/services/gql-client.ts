@@ -1,6 +1,7 @@
 import 'firebase/auth';
 
 import {
+  ICluster,
   ICreateOrUpdateLambdaInput,
   ICreateTimeTriggerInput,
   IDeleteLambdaInput,
@@ -650,6 +651,40 @@ export class GraphqlClienAPI {
       `,
       variables: { projectId, ...input },
     }).pipe(map((res) => res.provisionProjectCluster));
+  }
+
+  /** A virtual cluster (vCluster) on the shared cluster or on one of the
+      project's private clusters. routerUrl/hostNamespace are selected here
+      only, not in ClusterFragment, so older servers keep working. */
+  public static provisionProjectVirtualCluster(
+    projectId: string,
+    input: { name: string; hostClusterId?: string },
+  ) {
+    return this.query<{
+      provisionProjectVirtualCluster: ICluster & {
+        routerUrl?: string | null;
+        hostNamespace?: string | null;
+      };
+    }>({
+      query: gql`
+        mutation provisionProjectVirtualCluster(
+          $projectId: String!
+          $name: String!
+          $hostClusterId: String
+        ) {
+          provisionProjectVirtualCluster(
+            projectId: $projectId
+            name: $name
+            hostClusterId: $hostClusterId
+          ) {
+            ${ClusterFragment}
+            routerUrl
+            hostNamespace
+          }
+        }
+      `,
+      variables: { projectId, ...input },
+    }).pipe(map((res) => res.provisionProjectVirtualCluster));
   }
 
   public static listLocalRunners() {

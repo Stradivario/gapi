@@ -5,6 +5,7 @@ jest.mock('../src/services/gql-client', () => ({
     projectClustersDetailed: jest.fn(),
     projectClusters: jest.fn(),
     provisionProjectCluster: jest.fn(),
+    provisionProjectVirtualCluster: jest.fn(),
     scaleProjectCluster: jest.fn(),
     revertToSingleNodeProjectCluster: jest.fn(),
     setProjectClusterLoadBalancer: jest.fn(),
@@ -124,6 +125,29 @@ describe('[cluster:apply command]', () => {
       withLoadBalancer: true,
       controlPlanes: 3,
     });
+  });
+
+  it('creates a virtual cluster on a private host given by name', async () => {
+    api.projectClustersDetailed.mockReturnValue(of([existing]));
+    api.provisionProjectVirtualCluster.mockReturnValue(
+      of({ id: 'vc', name: 'dev', status: 'pending' }),
+    );
+    api.projectClusters.mockReturnValue(
+      of([{ id: 'vc', name: 'dev', status: 'ready' }]),
+    );
+    spec({ name: 'dev', provider: 'vcluster', host: 'prod' });
+    await apply({});
+    expect(api.provisionProjectVirtualCluster).toHaveBeenCalledWith('proj-1', {
+      name: 'dev',
+      hostClusterId: 'c1',
+    });
+    expect(api.provisionProjectCluster).not.toHaveBeenCalled();
+  });
+
+  it('refuses a virtual cluster whose host does not exist', async () => {
+    api.projectClustersDetailed.mockReturnValue(of([existing]));
+    spec({ name: 'dev', provider: 'vcluster', host: 'nope' });
+    await expect(apply({})).rejects.toThrow('No cluster named "nope"');
   });
 
   it('refuses to create without imageId/serverType/location', async () => {
