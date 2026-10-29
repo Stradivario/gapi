@@ -36155,6 +36155,9 @@ topology {
   singleNode
 }
 endpoint
+routerUrl
+withLoadBalancer
+loadBalancerIp
 error
 `;
   }
@@ -36946,8 +36949,8 @@ var init_gql_client = __esm({
         }).pipe((0, import_operators.map)((res) => res.provisionProjectCluster));
       }
       /** A virtual cluster (vCluster) on the shared cluster or on one of the
-          project's private clusters. routerUrl/hostNamespace are selected here
-          only, not in ClusterFragment, so older servers keep working. */
+          project's private clusters. `dedicatedLoadBalancer` gives its router
+          its own IP (billed); the platform subdomain works either way. */
       static provisionProjectVirtualCluster(projectId, input) {
         return this.query({
           query: gql`
@@ -36955,14 +36958,15 @@ var init_gql_client = __esm({
           $projectId: String!
           $name: String!
           $hostClusterId: String
+          $dedicatedLoadBalancer: Boolean
         ) {
           provisionProjectVirtualCluster(
             projectId: $projectId
             name: $name
             hostClusterId: $hostClusterId
+            dedicatedLoadBalancer: $dedicatedLoadBalancer
           ) {
             ${ClusterFragment}
-            routerUrl
             hostNamespace
           }
         }
@@ -254759,7 +254763,7 @@ var init_virtual_cluster = __esm({
   "src/commands/cluster/helpers/virtual-cluster.ts"() {
     import_rxjs8 = __toESM(require_cjs());
     init_gql_client();
-    provisionVirtualCluster = async (projectId, name2, host) => {
+    provisionVirtualCluster = async (projectId, name2, host, dedicatedLoadBalancer) => {
       let hostClusterId;
       if (host) {
         const clusters = await (0, import_rxjs8.lastValueFrom)(
@@ -254777,7 +254781,8 @@ var init_virtual_cluster = __esm({
       return (0, import_rxjs8.lastValueFrom)(
         GraphqlClienAPI.provisionProjectVirtualCluster(projectId, {
           name: name2,
-          hostClusterId
+          hostClusterId,
+          ...dedicatedLoadBalancer === void 0 ? {} : { dedicatedLoadBalancer }
         })
       );
     };
@@ -254819,7 +254824,8 @@ var init_create = __esm({
               provisionVirtualCluster(
                 projectId,
                 cmd.name || data.name,
-                cmd.host ?? data.host
+                cmd.host ?? data.host,
+                cmd.dedicatedLb ?? data.loadBalancer
               )
             ) : GraphqlClienAPI.provisionProjectCluster(projectId, {
               name: cmd.name || data.name,
@@ -254960,7 +254966,6 @@ var init_plan = __esm({
       "singleNode",
       "workers",
       "controlPlanes",
-      "loadBalancer",
       "autoscale"
     ];
     intIn = (v, min, max) => Number.isInteger(v) && v >= min && v <= max;
@@ -255022,8 +255027,21 @@ var init_plan = __esm({
         if (!current) {
           steps.push({
             kind: "create",
-            description: `create virtual cluster "${desired.name}" on ${desired.host ? `"${desired.host}"` : "the shared cluster"}`
+            description: `create virtual cluster "${desired.name}" on ${desired.host ? `"${desired.host}"` : "the shared cluster"}${desired.loadBalancer ? " with a dedicated load balancer" : ""}`
           });
+        } else if (desired.loadBalancer !== void 0 && !!current.withLoadBalancer !== desired.loadBalancer) {
+          steps.push(
+            desired.loadBalancer ? {
+              kind: "load-balancer",
+              enabled: true,
+              description: "add a dedicated load balancer (its own IP, billed; the subdomain stays)"
+            } : {
+              kind: "load-balancer",
+              enabled: false,
+              description: "remove the dedicated load balancer (its IP is released; the subdomain stays)",
+              destructive: true
+            }
+          );
         }
         return { steps, notes };
       }
@@ -255208,7 +255226,12 @@ var init_apply = __esm({
         }
         Logger.info(`-> ${step.description}`);
         if (step.kind === "create") {
-          const created = desired.provider === "vcluster" ? await provisionVirtualCluster(projectId, desired.name, desired.host) : await (0, import_rxjs12.lastValueFrom)(
+          const created = desired.provider === "vcluster" ? await provisionVirtualCluster(
+            projectId,
+            desired.name,
+            desired.host,
+            desired.loadBalancer
+          ) : await (0, import_rxjs12.lastValueFrom)(
             GraphqlClienAPI.provisionProjectCluster(projectId, {
               name: desired.name,
               imageId: desired.imageId,
@@ -255293,14 +255316,20 @@ var init_list = __esm({
               "No private clusters for this project yet - this project runs on the shared cluster. See cluster:create."
             );
           } else {
-            Logger.table(clusters, [
-              "id",
-              "name",
-              "status",
-              "region",
-              "serverType",
-              "endpoint"
-            ]);
+            Logger.table(
+              clusters.map((c) => {
+                const x2 = c;
+                return {
+                  id: x2.id,
+                  name: x2.name,
+                  type: x2.provider === "vcluster" ? "virtual" : x2.provider,
+                  status: x2.status,
+                  router: x2.routerUrl ?? "-",
+                  api: x2.endpoint ?? "-",
+                  loadBalancer: x2.withLoadBalancer ? x2.loadBalancerIp ?? "pending" : "off"
+                };
+              })
+            );
           }
           Logger.log("-------------------");
         })
@@ -323006,6 +323035,9 @@ function registerClusterCommands(program2) {
   ).option(
     "--host <host>",
     "With --virtual: name of a private cluster of this project to run on (default: the shared cluster)"
+  ).option(
+    "--dedicated-lb",
+    "With --virtual: give its router its own load balancer IP (billed per hour); without it lambdas are served on the platform subdomain"
   ).option("--wait", "Block until the cluster is ready (or errors)").action(lazy(() => Promise.resolve().then(() => (init_create(), create_exports)).then((m2) => m2.default)));
   program2.command("cluster:apply").description(
     "Make a private cluster match the `cluster:` section of lambforge.yaml: creates it if missing, then applies topology, workers, control planes, load balancer and autoscaling"
@@ -323072,7 +323104,7 @@ function registerClusterCommands(program2) {
   ).option("--wait", "Block until the cluster settles").action(lazy(() => Promise.resolve().then(() => (init_single_node(), single_node_exports)).then((m2) => m2.default)));
   target(
     program2.command("cluster:load-balancer").description(
-      "Add or remove the cluster's load balancer (billed per hour while enabled)"
+      "Add or remove the cluster's load balancer (billed per hour while enabled). On a virtual cluster this is its dedicated LB - its own IP; the platform subdomain keeps working either way"
     )
   ).option("--enable", "Add the load balancer").option("--disable", "Remove the load balancer").option("--wait", "Block until the cluster settles").action(lazy(() => Promise.resolve().then(() => (init_load_balancer(), load_balancer_exports)).then((m2) => m2.default)));
 }
