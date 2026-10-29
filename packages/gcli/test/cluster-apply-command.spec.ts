@@ -144,6 +144,23 @@ describe('[cluster:apply command]', () => {
     expect(api.provisionProjectCluster).not.toHaveBeenCalled();
   });
 
+  it('creates a virtual cluster with its dedicated load balancer from the spec', async () => {
+    api.projectClustersDetailed.mockReturnValue(of([existing]));
+    api.provisionProjectVirtualCluster.mockReturnValue(
+      of({ id: 'vc', name: 'dev', status: 'pending' }),
+    );
+    api.projectClusters.mockReturnValue(
+      of([{ id: 'vc', name: 'dev', status: 'ready' }]),
+    );
+    spec({ name: 'dev', provider: 'vcluster', loadBalancer: true });
+    await apply({});
+    expect(api.provisionProjectVirtualCluster).toHaveBeenCalledWith('proj-1', {
+      name: 'dev',
+      hostClusterId: undefined,
+      dedicatedLoadBalancer: true,
+    });
+  });
+
   it('refuses a virtual cluster whose host does not exist', async () => {
     api.projectClustersDetailed.mockReturnValue(of([existing]));
     spec({ name: 'dev', provider: 'vcluster', host: 'nope' });

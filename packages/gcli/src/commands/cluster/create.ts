@@ -19,6 +19,7 @@ export default async (
     project?: string;
     wait?: boolean;
     virtual?: boolean;
+    dedicatedLb?: boolean;
   } & Partial<ClusterYamlSpec>,
 ) => {
   const result = await lastValueFrom(
@@ -40,6 +41,7 @@ export default async (
                 projectId,
                 cmd.name || data.name,
                 cmd.host ?? data.host,
+                cmd.dedicatedLb ?? data.loadBalancer,
               ),
             )
           : GraphqlClienAPI.provisionProjectCluster(projectId, {

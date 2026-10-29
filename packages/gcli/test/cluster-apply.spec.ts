@@ -20,18 +20,51 @@ const kinds = (plan: { steps: { kind: string }[] }) =>
   plan.steps.map((s) => s.kind);
 
 describe('[cluster:apply plan]', () => {
-  it('only ever creates a virtual cluster - nothing else to reconcile', () => {
+  it('only creates a virtual cluster or toggles its dedicated load balancer', () => {
     const desired = { name: 'dev', provider: 'vcluster' as const };
     expect(kinds(planClusterChanges(null, desired))).toEqual(['create']);
+    const existingVc = cluster({ name: 'dev', withLoadBalancer: false });
+    expect(kinds(planClusterChanges(existingVc, desired))).toEqual([]);
+    const add = planClusterChanges(existingVc, {
+      ...desired,
+      loadBalancer: true,
+    });
+    expect(add.steps).toEqual([
+      expect.objectContaining({ kind: 'load-balancer', enabled: true }),
+    ]);
+    const remove = planClusterChanges(
+      cluster({ name: 'dev', withLoadBalancer: true }),
+      { ...desired, loadBalancer: false },
+    );
+    expect(remove.steps).toEqual([
+      expect.objectContaining({
+        kind: 'load-balancer',
+        enabled: false,
+        destructive: true,
+      }),
+    ]);
+    // created WITH the LB in one step - no follow-up toggle
     expect(
-      kinds(planClusterChanges(cluster({ name: 'dev' }), desired)),
-    ).toEqual([]);
+      planClusterChanges(null, { ...desired, loadBalancer: true }).steps,
+    ).toEqual([
+      expect.objectContaining({
+        kind: 'create',
+        description: expect.stringContaining('dedicated load balancer'),
+      }),
+    ]);
   });
 
   it('rejects node settings on a virtual cluster, and host without it', () => {
     expect(
       validateDesired({ name: 'dev', provider: 'vcluster', workers: 2 }),
     ).toEqual(['cluster.workers does not apply to a virtual cluster']);
+    expect(
+      validateDesired({
+        name: 'dev',
+        provider: 'vcluster',
+        loadBalancer: true,
+      }),
+    ).toEqual([]);
     expect(validateDesired({ name: 'dev', host: 'prod' })).toEqual([
       "cluster.host needs provider: 'vcluster'",
     ]);

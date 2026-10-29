@@ -12,5 +12,8 @@ topology {
   singleNode
 }
 endpoint
+routerUrl
+withLoadBalancer
+loadBalancerIp
 error
 `;

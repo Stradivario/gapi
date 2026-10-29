@@ -654,11 +654,15 @@ export class GraphqlClienAPI {
   }
 
   /** A virtual cluster (vCluster) on the shared cluster or on one of the
-      project's private clusters. routerUrl/hostNamespace are selected here
-      only, not in ClusterFragment, so older servers keep working. */
+      project's private clusters. `dedicatedLoadBalancer` gives its router
+      its own IP (billed); the platform subdomain works either way. */
   public static provisionProjectVirtualCluster(
     projectId: string,
-    input: { name: string; hostClusterId?: string },
+    input: {
+      name: string;
+      hostClusterId?: string;
+      dedicatedLoadBalancer?: boolean;
+    },
   ) {
     return this.query<{
       provisionProjectVirtualCluster: ICluster & {
@@ -671,14 +675,15 @@ export class GraphqlClienAPI {
           $projectId: String!
           $name: String!
           $hostClusterId: String
+          $dedicatedLoadBalancer: Boolean
         ) {
           provisionProjectVirtualCluster(
             projectId: $projectId
             name: $name
             hostClusterId: $hostClusterId
+            dedicatedLoadBalancer: $dedicatedLoadBalancer
           ) {
             ${ClusterFragment}
-            routerUrl
             hostNamespace
           }
         }

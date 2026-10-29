@@ -4,11 +4,13 @@ import { GraphqlClienAPI } from '~/services/gql-client';
 
 /** provisionProjectVirtualCluster with the host given by NAME, as in the
     `cluster:` section (`host: prod`) or `cluster:create --host prod`.
-    No host = the shared Lambforge cluster. */
+    No host = the shared Lambforge cluster. `dedicatedLoadBalancer` =
+    `loadBalancer: true` / `--dedicated-lb`. */
 export const provisionVirtualCluster = async (
   projectId: string,
   name: string,
   host?: string,
+  dedicatedLoadBalancer?: boolean,
 ) => {
   let hostClusterId: string | undefined;
   if (host) {
@@ -28,6 +30,7 @@ export const provisionVirtualCluster = async (
     GraphqlClienAPI.provisionProjectVirtualCluster(projectId, {
       name,
       hostClusterId,
+      ...(dedicatedLoadBalancer === undefined ? {} : { dedicatedLoadBalancer }),
     }),
   );
 };

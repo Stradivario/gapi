@@ -113,7 +113,12 @@ export default async (cmd: {
     if (step.kind === 'create') {
       const created =
         desired.provider === 'vcluster'
-          ? await provisionVirtualCluster(projectId, desired.name, desired.host)
+          ? await provisionVirtualCluster(
+              projectId,
+              desired.name,
+              desired.host,
+              desired.loadBalancer,
+            )
           : await lastValueFrom(
               GraphqlClienAPI.provisionProjectCluster(projectId, {
                 name: desired.name,

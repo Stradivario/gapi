@@ -22,6 +22,8 @@ export interface ClusterDesired {
   workers?: number;
   /* 1, 3 or 5. */
   controlPlanes?: number;
+  /* Talos: the cluster's LB. Virtual cluster: its DEDICATED LB (own IP,
+     billed) - the platform subdomain works either way. */
   loadBalancer?: boolean;
   autoscale?: Omit<
     ClusterAutoscalePolicy,
@@ -75,7 +77,6 @@ const VIRTUAL_UNSUPPORTED = [
   'singleNode',
   'workers',
   'controlPlanes',
-  'loadBalancer',
   'autoscale',
 ] as const;
 
@@ -155,14 +156,35 @@ export const planClusterChanges = (
   const autoscaleOn = desired.autoscale?.enabled === true;
 
   if (desired.provider === 'vcluster') {
-    // Nothing to reconcile on a virtual cluster beyond its existence.
+    // A virtual cluster has no nodes: only its existence and its dedicated
+    // load balancer can be reconciled (it is created with the LB already).
     if (!current) {
       steps.push({
         kind: 'create',
         description: `create virtual cluster "${desired.name}" on ${
           desired.host ? `"${desired.host}"` : 'the shared cluster'
-        }`,
+        }${desired.loadBalancer ? ' with a dedicated load balancer' : ''}`,
       });
+    } else if (
+      desired.loadBalancer !== undefined &&
+      !!current.withLoadBalancer !== desired.loadBalancer
+    ) {
+      steps.push(
+        desired.loadBalancer
+          ? {
+              kind: 'load-balancer',
+              enabled: true,
+              description:
+                'add a dedicated load balancer (its own IP, billed; the subdomain stays)',
+            }
+          : {
+              kind: 'load-balancer',
+              enabled: false,
+              description:
+                'remove the dedicated load balancer (its IP is released; the subdomain stays)',
+              destructive: true,
+            },
+      );
     }
     return { steps, notes };
   }

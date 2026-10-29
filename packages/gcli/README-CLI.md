@@ -33,7 +33,7 @@ Commands:
   mq-trigger:create [options]                          Run a lambda for every message on a RabbitMQ queue
   mq-trigger:update [options]                          Change a message-queue trigger (same flags as create)
   mq-trigger:delete [options]                          Delete a message-queue trigger
-  cluster:create [options]                             Provision a private Talos cluster for a project (runs in the background - takes several minutes; use --wait to block)
+  cluster:create [options]                             Provision a private Talos cluster, or with --virtual a virtual cluster, for a project (runs in the background; use --wait to block)
   cluster:apply [options]                              Make a private cluster match the `cluster:` section of lambforge.yaml: creates it if missing, then applies topology, workers, control planes, load balancer and autoscaling
   cluster:list [options]                               List every private cluster this project has (it may have several - dev/stage/prod, ...)
   cluster:teardown [options]                           Tear down one of a project's clusters (runs in the background - use --wait to block)
@@ -47,7 +47,7 @@ Commands:
   cluster:autoscale [options]                          Change the worker autoscaling policy - only the flags you pass change
   cluster:multi-node [options]                         Convert a single-node cluster to dedicated worker nodes (required for autoscaling)
   cluster:single-node [options]                        Convert a multi-node cluster back to a single node (removes the worker nodes)
-  cluster:load-balancer [options]                      Add or remove the cluster's load balancer (billed per hour while enabled)
+  cluster:load-balancer [options]                      Add or remove the cluster's load balancer (billed per hour while enabled). On a virtual cluster this is its dedicated LB - its own IP; the platform subdomain keeps working either way
   rabbitmq:create [options]                            Provision a RabbitMQ broker for a project (a project may have several)
   rabbitmq:list [options]                              List every RabbitMQ broker for a project
   rabbitmq:delete [options]                            Delete a RabbitMQ broker
@@ -594,7 +594,7 @@ Options:
 --- Subcommand: cluster:create ---[0m
 Usage: gcli cluster:create [options]
 
-Provision a private Talos cluster for a project (runs in the background - takes several minutes; use --wait to block)
+Provision a private Talos cluster, or with --virtual a virtual cluster, for a project (runs in the background; use --wait to block)
 
 Options:
   -p, --project <project>
@@ -605,6 +605,14 @@ Options:
   -l, --location <location>
   --workers <workers>        Worker count (ignored when --singleNode)
   --singleNode               Control plane carries the workload too
+  --virtual                  A virtual cluster (own Kubernetes API + Fission,
+                             no servers, ~2 minutes) instead of a private Talos
+                             cluster
+  --host <host>              With --virtual: name of a private cluster of this
+                             project to run on (default: the shared cluster)
+  --dedicated-lb             With --virtual: give its router its own load
+                             balancer IP (billed per hour); without it lambdas
+                             are served on the platform subdomain
   --wait                     Block until the cluster is ready (or errors)
   -h, --help                 display help for command
 [36m
@@ -770,7 +778,7 @@ Options:
 --- Subcommand: cluster:load-balancer ---[0m
 Usage: gcli cluster:load-balancer [options]
 
-Add or remove the cluster's load balancer (billed per hour while enabled)
+Add or remove the cluster's load balancer (billed per hour while enabled). On a virtual cluster this is its dedicated LB - its own IP; the platform subdomain keeps working either way
 
 Options:
   -p, --project <project>

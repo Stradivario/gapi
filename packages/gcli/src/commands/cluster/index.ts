@@ -24,6 +24,10 @@ export function registerClusterCommands(program: Command) {
       '--host <host>',
       'With --virtual: name of a private cluster of this project to run on (default: the shared cluster)',
     )
+    .option(
+      '--dedicated-lb',
+      'With --virtual: give its router its own load balancer IP (billed per hour); without it lambdas are served on the platform subdomain',
+    )
     .option('--wait', 'Block until the cluster is ready (or errors)')
     .action(lazy(() => import('./create').then((m) => m.default)));
 
@@ -182,7 +186,7 @@ export function registerClusterCommands(program: Command) {
     program
       .command('cluster:load-balancer')
       .description(
-        "Add or remove the cluster's load balancer (billed per hour while enabled)",
+        "Add or remove the cluster's load balancer (billed per hour while enabled). On a virtual cluster this is its dedicated LB - its own IP; the platform subdomain keeps working either way",
       ),
   )
     .option('--enable', 'Add the load balancer')

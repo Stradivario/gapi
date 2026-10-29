@@ -217,12 +217,22 @@ A virtual cluster has its own Kubernetes API and Fission but no servers: it
 runs in one namespace of the shared Lambforge cluster, or of one of your
 private clusters, and is ready in about two minutes. Everything else
 (environments, lambdas, `--clusterName`, `cluster:kubeconfig`,
-`cluster:teardown`) works the same as for a private cluster; scaling and
-load balancer commands don't apply.
+`cluster:teardown`) works the same as for a private cluster; scaling
+commands don't apply.
+
+Its lambdas are served on a platform subdomain (`https://vc-<id>.lambforge.com`,
+shown in the `router` column of `cluster:list`) at no extra cost. A
+**dedicated load balancer** gives its router an IP of its own, billed per
+started hour like any load balancer; the subdomain keeps working.
+`cluster:kubeconfig` gives you admin access through
+`https://k-<id>.lambforge.com` (the `api` column).
 
 ```bash
 gcli cluster:create --virtual --name dev                  # on the shared cluster
 gcli cluster:create --virtual --name stage --host prod    # on your private cluster "prod"
+gcli cluster:create --virtual --name demo --dedicated-lb  # with its own IP
+gcli cluster:load-balancer --cluster <id> --enable        # add the dedicated LB later
+gcli cluster:load-balancer --cluster <id> --disable       # release it (subdomain stays)
 ```
 
 ```yaml
@@ -230,7 +240,12 @@ cluster:
   name: dev
   provider: vcluster
   host: prod          # optional - omitted = the shared cluster
+  loadBalancer: true  # optional - dedicated LB; cluster:apply adds/removes it
 ```
+
+`cluster:apply` creates the virtual cluster (with the load balancer if set)
+and later adds or removes the dedicated load balancer when `loadBalancer`
+changes; removing it is skipped unless you pass `--yes`.
 
 ### RabbitMQ Brokers
 

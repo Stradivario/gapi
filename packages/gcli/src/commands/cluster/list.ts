@@ -17,14 +17,26 @@ export default (cmd: { project?: string }) =>
             'No private clusters for this project yet - this project runs on the shared cluster. See cluster:create.',
           );
         } else {
-          Logger.table(clusters, [
-            'id',
-            'name',
-            'status',
-            'region',
-            'serverType',
-            'endpoint',
-          ] as never);
+          Logger.table(
+            clusters.map((c) => {
+              const x = c as typeof c & {
+                routerUrl?: string | null;
+                withLoadBalancer?: boolean | null;
+                loadBalancerIp?: string | null;
+              };
+              return {
+                id: x.id,
+                name: x.name,
+                type: x.provider === 'vcluster' ? 'virtual' : x.provider,
+                status: x.status,
+                router: x.routerUrl ?? '-',
+                api: x.endpoint ?? '-',
+                loadBalancer: x.withLoadBalancer
+                  ? (x.loadBalancerIp ?? 'pending')
+                  : 'off',
+              };
+            }),
+          );
         }
         Logger.log('-------------------');
       }),
