@@ -1,4 +1,4 @@
-## [1.8.250](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.250) (2026-10-30)
+## [1.8.251](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.251) (2026-10-30)
 
 
 ### Bug Fixes
@@ -97,6 +97,7 @@
 ### Features
 
 * **ac:** validator is now a separated entity type so it can be referenced from outside of the library scope ([b9ccb94](https://github.com/Stradivario/gapi/commit/b9ccb944224efd0020ca4046127e22729aecd404))
+* add cluster management commands for self-managed nodes ([01b3c12](https://github.com/Stradivario/gapi/commit/01b3c12224fc75f636d570f9fb6d3eaf3cd35972))
 * **altair:** added new module replacing graphiql called altair ([27c1632](https://github.com/Stradivario/gapi/commit/27c16322e9883d5d6d0b4621303127b3858add6f))
 * **AsyncTemplate:** added async template with parameters ([cec4799](https://github.com/Stradivario/gapi/commit/cec4799973ba30c8955c9167f780ed2ea320056c))
 * **bump:** graphql and other version bumps removed microservices since it is replaced by federation ([d567b82](https://github.com/Stradivario/gapi/commit/d567b8258c6dd974e272c1d26597df38b9d1c8aa))
