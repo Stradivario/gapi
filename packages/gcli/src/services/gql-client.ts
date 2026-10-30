@@ -47,6 +47,9 @@ import {
   ClusterChangeFragment,
   ClusterHealthFragment,
   ClusterHealthSnapshot,
+  ClusterNode,
+  ClusterNodeFragment,
+  ClusterNodeJoinConfig,
   ClusterOverview,
   ClusterOverviewFragment,
   ClusterScaleEvent,
@@ -995,6 +998,129 @@ export class GraphqlClienAPI {
       `,
       variables: { projectId },
     }).pipe(map((res) => res.projectClustersOverview ?? []));
+  }
+
+  // Self-managed machines attached to a Talos cluster (cluster-provisioner,
+  // feature self-managed-nodes; ADMIN in phase 1).
+  public static clusterNodeJoinConfig(input: {
+    clusterId: string;
+    name: string;
+    pool?: string;
+    reserved?: boolean;
+    installDisk?: string;
+  }) {
+    return this.query<{ clusterNodeJoinConfig: ClusterNodeJoinConfig }>({
+      query: gql`
+        mutation clusterNodeJoinConfig(
+          $clusterId: String!
+          $name: String!
+          $pool: String
+          $reserved: Boolean
+          $installDisk: String
+        ) {
+          clusterNodeJoinConfig(
+            clusterId: $clusterId
+            name: $name
+            pool: $pool
+            reserved: $reserved
+            installDisk: $installDisk
+          ) {
+            clusterName
+            nodeName
+            pool
+            reserved
+            config
+            talosVersion
+            isoUrl
+            isoUrlArm64
+            endpoint
+          }
+        }
+      `,
+      variables: input,
+    }).pipe(map((res) => res.clusterNodeJoinConfig));
+  }
+
+  public static clusterAttachInfo(clusterId: string) {
+    return this.query<{
+      clusterAttachInfo: {
+        clusterName: string;
+        attachable: boolean;
+        reason?: string | null;
+        kubespanEnabled: boolean;
+        talosVersion?: string | null;
+        isoUrl?: string | null;
+        isoUrlArm64?: string | null;
+      };
+    }>({
+      query: gql`
+        query clusterAttachInfo($clusterId: String!) {
+          clusterAttachInfo(clusterId: $clusterId) {
+            clusterName
+            attachable
+            reason
+            kubespanEnabled
+            talosVersion
+            isoUrl
+            isoUrlArm64
+          }
+        }
+      `,
+      variables: { clusterId },
+    }).pipe(map((res) => res.clusterAttachInfo));
+  }
+
+  /** includeCloud: also the cluster's Hetzner nodes (default: attached
+      machines only, which is what cluster:attach waits on). */
+  public static clusterNodes(clusterId: string, includeCloud = false) {
+    return this.query<{ clusterNodes: ClusterNode[] }>({
+      query: gql`
+        query clusterNodes($clusterId: String!, $includeCloud: Boolean) {
+          clusterNodes(clusterId: $clusterId, includeCloud: $includeCloud) {
+            ${ClusterNodeFragment}
+          }
+        }
+      `,
+      variables: { clusterId, includeCloud },
+    }).pipe(map((res) => res.clusterNodes ?? []));
+  }
+
+  public static setClusterNodePaused(
+    clusterId: string,
+    name: string,
+    paused: boolean,
+  ) {
+    return this.query<{ setClusterNodePaused: ClusterNode }>({
+      query: gql`
+        mutation setClusterNodePaused(
+          $clusterId: String!
+          $name: String!
+          $paused: Boolean!
+        ) {
+          setClusterNodePaused(
+            clusterId: $clusterId
+            name: $name
+            paused: $paused
+          ) {
+            ${ClusterNodeFragment}
+          }
+        }
+      `,
+      variables: { clusterId, name, paused },
+    }).pipe(map((res) => res.setClusterNodePaused));
+  }
+
+  public static detachClusterNode(clusterId: string, name: string) {
+    return this.query<{ detachClusterNode: ClusterNode }>({
+      query: gql`
+        mutation detachClusterNode($clusterId: String!, $name: String!) {
+          detachClusterNode(clusterId: $clusterId, name: $name) {
+            ${ClusterNodeFragment}
+          }
+        }
+      `,
+      variables: { clusterId, name },
+    }).pipe(map((res) => res.detachClusterNode));
   }
 
   public static clusterHealth(projectId: string, clusterId: string, limit = 1) {

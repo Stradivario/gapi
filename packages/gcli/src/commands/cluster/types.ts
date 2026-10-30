@@ -245,3 +245,56 @@ export interface ClusterScaleEvent {
   pendingPods?: number;
   error?: string | null;
 }
+
+/* self-managed-nodes: machines attached to a Talos cluster (cluster-provisioner) */
+export const ClusterNodeFragment = `
+name
+pool
+reserved
+status
+cordoned
+internalIp
+cpuCores
+memoryGb
+osImage
+kubeletVersion
+joinedAt
+addedAt
+recorded
+source
+role
+`;
+
+export interface ClusterNode {
+  name: string;
+  pool?: string | null;
+  reserved: boolean;
+  /** 'joining' | 'ready' | 'not-ready' | 'detached' */
+  status: string;
+  cordoned: boolean;
+  internalIp?: string | null;
+  cpuCores?: number | null;
+  memoryGb?: number | null;
+  osImage?: string | null;
+  kubeletVersion?: string | null;
+  joinedAt?: string | null;
+  addedAt?: string | null;
+  recorded: boolean;
+  /** 'own' (an attached machine) | 'hetzner' (a server the platform provisioned) */
+  source?: string;
+  /** 'control-plane' | 'worker' */
+  role?: string;
+}
+
+export interface ClusterNodeJoinConfig {
+  clusterName: string;
+  nodeName: string;
+  pool: string;
+  reserved: boolean;
+  /** Talos machine config with the cluster join token - apply, never keep. */
+  config: string;
+  talosVersion?: string | null;
+  isoUrl?: string | null;
+  isoUrlArm64?: string | null;
+  endpoint?: string | null;
+}

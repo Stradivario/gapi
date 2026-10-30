@@ -37,3 +37,4 @@ Outline (drop sections that don't apply):
 | `ci-token-scopes` | [ci-token-scopes.md](ci-token-scopes.md) | Which permission each command needs; `mq-trigger:*` commands; canonical doc in graphql-server |
 | `workflows` | [workflows.md](workflows.md) | `workflow:*` commands incl. AI drafts (`workflow:generate`); canonical doc in graphql-server-lambdas |
 | `virtual-clusters` | [virtual-clusters.md](virtual-clusters.md) | cluster:create --virtual, provider: vcluster (slice; canonical in graphql-server-functions) |
+| `self-managed-nodes` | [self-managed-nodes.md](self-managed-nodes.md) | `cluster:attach/nodes/detach` - your own machine as a Talos worker (slice; canonical in graphql-server-functions) |

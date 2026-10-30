@@ -96,6 +96,65 @@ export function registerClusterCommands(program: Command) {
       ),
   ).action(lazy(() => import('./status').then((m) => m.default)));
 
+  /* Self-managed machines (feature self-managed-nodes): your own computer
+     joins a Lambforge Talos cluster as an extra worker over KubeSpan. */
+  target(
+    program
+      .command('cluster:attach')
+      .description(
+        'Attach a machine you own (booted from the Talos ISO, on this network) to a Talos cluster as an extra worker - its install disk is WIPED',
+      ),
+  )
+    .option('--node-ip <nodeIp>', "The machine's address on your network")
+    .option('-n, --name <name>', 'Machine name = hostname, e.g. home-1')
+    .option('--pool <pool>', 'Pool label lambforge.io/pool (default "default")')
+    .option(
+      '--reserved',
+      'Only workloads that tolerate the pool run there (default: plain extra capacity)',
+    )
+    .option('--disk <disk>', 'Install disk, e.g. /dev/nvme0n1 (WIPED)')
+    .option('--yes', 'Do not ask before wiping the disk')
+    .option('--no-wait', 'Do not wait for the machine to join')
+    .option('--timeout <minutes>', 'How long to wait for the join (default 10)')
+    .action(lazy(() => import('./attach').then((m) => m.default)));
+
+  target(
+    program
+      .command('cluster:nodes')
+      .description(
+        'Every node of a cluster: its Hetzner control planes and workers and the machines attached to it',
+      ),
+  ).action(lazy(() => import('./nodes').then((m) => m.default)));
+
+  target(
+    program
+      .command('cluster:pause')
+      .description(
+        'Pause an attached machine (cordon): nothing new runs there, running work stays',
+      ),
+  )
+    .option('-n, --name <name>', 'Machine name (see cluster:nodes)')
+    .action(lazy(() => import('./pause').then((m) => m.pause)));
+
+  target(
+    program
+      .command('cluster:resume')
+      .description('Let new work run on a paused machine again (uncordon)'),
+  )
+    .option('-n, --name <name>', 'Machine name (see cluster:nodes)')
+    .action(lazy(() => import('./pause').then((m) => m.resume)));
+
+  target(
+    program
+      .command('cluster:detach')
+      .description(
+        'Drain and remove an attached machine from a cluster (reset the machine afterwards)',
+      ),
+  )
+    .option('-n, --name <name>', 'Machine name (see cluster:nodes)')
+    .option('--yes', 'Do not ask for confirmation')
+    .action(lazy(() => import('./detach').then((m) => m.default)));
+
   target(
     program
       .command('cluster:health')
