@@ -19,10 +19,10 @@ export interface AttachOptions {
   timeout?: string;
 }
 
-const NAME_RE = /^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$/;
+export const NAME_RE = /^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$/;
 const POOL_RE = /^[a-z0-9]([a-z0-9-]{0,30}[a-z0-9])?$/;
 const DISK_RE = /^\/dev\/[A-Za-z0-9/_-]+$/;
-const HOST_RE = /^[A-Za-z0-9.:-]+$/;
+export const HOST_RE = /^[A-Za-z0-9.:-]+$/;
 
 /** The validated inputs of cluster:attach, or a readable error. */
 export function parseAttachOptions(cmd: AttachOptions) {
@@ -94,8 +94,11 @@ export const nodeRow = (n: ClusterNode) => {
   };
 };
 
-/** Wipes only the machine's config and data, so it boots into maintenance
-    mode again (a plain reset also wipes the boot loader). A machine that
-    joined answers only with the cluster's talosconfig, not --insecure. */
-export const resetHint = (ip = '<machine-ip>') =>
-  `talosctl --talosconfig <cluster talosconfig> -n ${ip} -e ${ip} reset --graceful=false --reboot --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL`;
+/** How to bring a machine back to maintenance mode (to attach it again):
+    gcli wipes only its config and data and keeps the boot loader. */
+export const resetHint = (
+  clusterId = '<cluster-id>',
+  name = '<machine-name>',
+  ip = '<machine-ip>',
+) =>
+  `gcli cluster:reset-machine --cluster ${clusterId} --name ${name} --node-ip ${ip}`;

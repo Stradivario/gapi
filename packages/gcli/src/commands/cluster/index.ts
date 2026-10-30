@@ -146,6 +146,35 @@ export function registerClusterCommands(program: Command) {
 
   target(
     program
+      .command('cluster:reset-machine')
+      .description(
+        'Bring a detached machine back to maintenance mode to attach it again (wipes its config and data, keeps the boot loader)',
+      ),
+  )
+    .option('-n, --name <name>', 'Machine name')
+    .option('--node-ip <nodeIp>', "The machine's address on your network")
+    .option('--yes', 'Do not ask for confirmation')
+    .action(lazy(() => import('./reset-machine').then((m) => m.default)));
+
+  target(
+    program
+      .command('cluster:talosconfig')
+      .description(
+        'A short-lived talosconfig for one of your Talos clusters (admin of its machines with talosctl) - printed, or saved with -o',
+      ),
+  )
+    .option(
+      '-o, --output <output>',
+      'Write to this file (mode 600) instead of stdout',
+    )
+    .option(
+      '--ttl <minutes>',
+      'How long it works, 5 to 1440 minutes (default 60)',
+    )
+    .action(lazy(() => import('./talosconfig').then((m) => m.default)));
+
+  target(
+    program
       .command('cluster:detach')
       .description(
         'Drain and remove an attached machine from a cluster (reset the machine afterwards)',

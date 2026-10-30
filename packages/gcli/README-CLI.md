@@ -39,6 +39,13 @@ Commands:
   cluster:teardown [options]                           Tear down one of a project's clusters (runs in the background - use --wait to block)
   cluster:kubeconfig [options]                         Print (or save) a cluster's raw kubeconfig YAML - only available once it's 'ready'
   cluster:status [options]                             Every cluster's status, agent, nodes, CPU/memory load, autoscaling and open issues (or one with --cluster)
+  cluster:attach [options]                             Attach a machine you own (booted from the Talos ISO, on this network) to a Talos cluster as an extra worker - its install disk is WIPED
+  cluster:nodes [options]                              Every node of a cluster: its Hetzner control planes and workers and the machines attached to it
+  cluster:pause [options]                              Pause an attached machine (cordon): nothing new runs there, running work stays
+  cluster:resume [options]                             Let new work run on a paused machine again (uncordon)
+  cluster:reset-machine [options]                      Bring a detached machine back to maintenance mode to attach it again (wipes its config and data, keeps the boot loader)
+  cluster:talosconfig [options]                        A short-lived talosconfig for one of your Talos clusters (admin of its machines with talosctl) - printed, or saved with -o
+  cluster:detach [options]                             Drain and remove an attached machine from a cluster (reset the machine afterwards)
   cluster:health [options]                             The latest health report of a cluster's agent, with every node
   cluster:scale-events [options]                       Manual and autoscaler scale history, newest first
   cluster:cost [options]                               Month-to-date cost and the monthly estimate of the project's private clusters
@@ -669,6 +676,102 @@ Options:
   -p, --project <project>
   -c, --cluster <cluster>      Cluster id (see cluster:list)
   --clusterName <clusterName>  Cluster name instead of --cluster
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:attach ---[0m
+Usage: gcli cluster:attach [options]
+
+Attach a machine you own (booted from the Talos ISO, on this network) to a Talos cluster as an extra worker - its install disk is WIPED
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  --node-ip <nodeIp>           The machine's address on your network
+  -n, --name <name>            Machine name = hostname, e.g. home-1
+  --pool <pool>                Pool label lambforge.io/pool (default "default")
+  --reserved                   Only workloads that tolerate the pool run there
+                               (default: plain extra capacity)
+  --disk <disk>                Install disk, e.g. /dev/nvme0n1 (WIPED)
+  --yes                        Do not ask before wiping the disk
+  --no-wait                    Do not wait for the machine to join
+  --timeout <minutes>          How long to wait for the join (default 10)
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:nodes ---[0m
+Usage: gcli cluster:nodes [options]
+
+Every node of a cluster: its Hetzner control planes and workers and the machines attached to it
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:pause ---[0m
+Usage: gcli cluster:pause [options]
+
+Pause an attached machine (cordon): nothing new runs there, running work stays
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  -n, --name <name>            Machine name (see cluster:nodes)
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:resume ---[0m
+Usage: gcli cluster:resume [options]
+
+Let new work run on a paused machine again (uncordon)
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  -n, --name <name>            Machine name (see cluster:nodes)
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:reset-machine ---[0m
+Usage: gcli cluster:reset-machine [options]
+
+Bring a detached machine back to maintenance mode to attach it again (wipes its config and data, keeps the boot loader)
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  -n, --name <name>            Machine name
+  --node-ip <nodeIp>           The machine's address on your network
+  --yes                        Do not ask for confirmation
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:talosconfig ---[0m
+Usage: gcli cluster:talosconfig [options]
+
+A short-lived talosconfig for one of your Talos clusters (admin of its machines with talosctl) - printed, or saved with -o
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  -o, --output <output>        Write to this file (mode 600) instead of stdout
+  --ttl <minutes>              How long it works, 5 to 1440 minutes (default
+                               60)
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:detach ---[0m
+Usage: gcli cluster:detach [options]
+
+Drain and remove an attached machine from a cluster (reset the machine afterwards)
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  -n, --name <name>            Machine name (see cluster:nodes)
+  --yes                        Do not ask for confirmation
   -h, --help                   display help for command
 [36m
 --- Subcommand: cluster:health ---[0m

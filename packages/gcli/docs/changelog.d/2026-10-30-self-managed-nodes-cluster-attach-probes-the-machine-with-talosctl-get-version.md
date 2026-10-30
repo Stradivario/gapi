@@ -22,9 +22,17 @@
   machine refuses, and a plain reset wipes the boot loader too (it left the
   first real machine unbootable). It now wipes only STATE + EPHEMERAL with the
   cluster's talosconfig.
+- **talosctl is downloaded when needed** (`helpers/talosctl.ts`): the
+  cluster's version, sha256-checked, cached in `~/.graphql-server/bin`;
+  `cluster:attach` no longer asks you to install it.
+- **New `cluster:reset-machine`** (safe reset back to maintenance mode,
+  hostname check, refusals) and **`cluster:talosconfig`** (short-lived,
+  freshly signed). The detach / failed-join hint now prints
+  `gcli cluster:reset-machine ...`.
 - **Test:** `npx jest test/cluster-attach --coverage=false`.
 - **Debug:** run the probe by hand against the machine's LAN IP; see
   `docs/features/self-managed-nodes.md`.
+- **Verification (talosctl / reset-machine / talosconfig):** local stack + real cluster, with a separate gcli home on the local admin test identity: `cluster:talosconfig --ttl 5` wrote a 0600 file whose certificate (O=os:admin) expired 5 minutes after issue; it answered from the control plane and from home-1. `reset-machine` refused home-1 (still in the cluster), the control plane (Hetzner) and `--name home-2` at home-1's IP (hostname check) - nothing was wiped; that last run had no talosctl on PATH and downloaded v1.12.7 (checksum verified). A real reset was not run. Suite 126/126.
 - **Verification:** live on cluster 6ae44580678d8012d02aee58: `cluster:nodes` listed the control plane (94.130.96.226) and home-1; pause showed `ready, paused`, resume cleared it; pausing the control plane was refused. Full gcli suite 123/123. Earlier: 4/4 specs pass, tsc + eslint clean, build ok. The new
   probe was run against a real machine in maintenance mode (Talos v1.12.7)
   and its output parses to `v1.12.7`; `get disks --insecure` also answers.

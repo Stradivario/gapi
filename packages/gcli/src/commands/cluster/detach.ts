@@ -44,6 +44,6 @@ export default async (
   );
   Logger.log(`${node.name} is detached.`);
   Logger.info(
-    `The machine still runs Talos. To reuse it, reset it from its network: ${resetHint()}`,
+    `The machine still runs Talos. To attach it again (or anywhere else), reset it from its network: ${resetHint(clusterId, node.name)}`,
   );
 };

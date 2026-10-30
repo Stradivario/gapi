@@ -286,6 +286,14 @@ export interface ClusterNode {
   role?: string;
 }
 
+export interface ClusterTalosconfig {
+  /** a credential (OS-level admin of the cluster's machines) - private file only */
+  talosconfig: string;
+  expiresAt: string;
+  endpoint: string;
+  talosVersion?: string | null;
+}
+
 export interface ClusterNodeJoinConfig {
   clusterName: string;
   nodeName: string;

@@ -57,7 +57,7 @@ Create the token in the dashboard (Project → CI/CD) with only the permissions 
 | RabbitMQ: read / install / uninstall | `rabbitmq:list`, `rabbitmq:create`, `rabbitmq:delete` |
 | Queue triggers: read / manage | `mq-trigger:list`, `mq-trigger:create/update/delete` |
 | Plugins: read / install | `plugin:list/installed`, `plugin:install/uninstall` |
-| Clusters: read / scale / create / tear down / kubeconfig | `cluster:list/status/health/scale-events/cost`, `cluster:scale/autoscale/multi-node/single-node/load-balancer/apply`, `cluster:create/apply`, `cluster:teardown`, `cluster:kubeconfig`, `cluster:attach/nodes/pause/resume/detach` (your own machines, admin) |
+| Clusters: read / scale / create / tear down / kubeconfig | `cluster:list/status/health/scale-events/cost`, `cluster:scale/autoscale/multi-node/single-node/load-balancer/apply`, `cluster:create/apply`, `cluster:teardown`, `cluster:kubeconfig`, `cluster:attach/nodes/pause/resume/detach` (your own machines, admin), `cluster:reset-machine`, `cluster:talosconfig` |
 
 A token can also be limited to some lambdas (lambda, schedule and queue-trigger commands). Typical tokens: *Deploy only* (`lambda:update`), or *DevOps (clusters)* for an infra repo that runs `gcli cluster:apply`. A command the token may not run fails with `ci-token-missing-scope: <operation> needs <permission>`. `runner:*` and `project:list` are personal and not available to CI tokens.
 
@@ -153,6 +153,8 @@ gcli cluster:cost                                  # month-to-date + monthly est
 # Attach a machine you own (booted from the Talos ISO, on this network) as an
 # extra worker - its install disk is WIPED (feature self-managed-nodes, admin)
 gcli cluster:attach --cluster '<clusterId>' --node-ip 192.168.1.50 --name home-1 --disk /dev/nvme0n1 [--pool home] [--reserved]
+gcli cluster:reset-machine --cluster '<clusterId>' --name home-1 --node-ip 192.168.1.50   # back to maintenance mode (after detach)
+gcli cluster:talosconfig --cluster '<clusterId>' -o talosconfig --ttl 60                    # short-lived talosconfig (mode 600)
 gcli cluster:nodes --cluster '<clusterId>'
 gcli cluster:detach --cluster '<clusterId>' --name home-1
 

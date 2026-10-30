@@ -54,6 +54,7 @@ import {
   ClusterOverviewFragment,
   ClusterScaleEvent,
   ClusterScaleEventFragment,
+  ClusterTalosconfig,
 } from '../commands/cluster/types';
 import { ClusterFragment } from './types/cluster.fragment';
 import { EnvironmentFragment } from './types/environment.fragment';
@@ -1083,6 +1084,34 @@ export class GraphqlClienAPI {
       `,
       variables: { clusterId, includeCloud },
     }).pipe(map((res) => res.clusterNodes ?? []));
+  }
+
+  public static clusterTalosconfig(
+    projectId: string,
+    clusterId: string,
+    ttlMinutes?: number,
+  ) {
+    return this.query<{ clusterTalosconfig: ClusterTalosconfig }>({
+      query: gql`
+        query clusterTalosconfig(
+          $projectId: String!
+          $clusterId: String!
+          $ttlMinutes: Int
+        ) {
+          clusterTalosconfig(
+            projectId: $projectId
+            clusterId: $clusterId
+            ttlMinutes: $ttlMinutes
+          ) {
+            talosconfig
+            expiresAt
+            endpoint
+            talosVersion
+          }
+        }
+      `,
+      variables: { projectId, clusterId, ttlMinutes },
+    }).pipe(map((res) => res.clusterTalosconfig));
   }
 
   public static setClusterNodePaused(

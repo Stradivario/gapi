@@ -122,8 +122,8 @@ describe('[cluster:attach helpers] (self-managed-nodes)', () => {
       use: '-',
     });
     expect(cloud).not.toHaveProperty('note');
-    expect(resetHint('192.168.1.50')).toBe(
-      'talosctl --talosconfig <cluster talosconfig> -n 192.168.1.50 -e 192.168.1.50 reset --graceful=false --reboot --system-labels-to-wipe STATE --system-labels-to-wipe EPHEMERAL',
+    expect(resetHint('c1', 'home-1', '192.168.1.50')).toBe(
+      'gcli cluster:reset-machine --cluster c1 --name home-1 --node-ip 192.168.1.50',
     );
   });
 });

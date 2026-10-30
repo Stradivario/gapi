@@ -1,4 +1,3 @@
-import { execFile } from 'child_process';
 import { mkdtemp, rm, writeFile } from 'fs/promises';
 import { tmpdir } from 'os';
 import { join } from 'path';
@@ -16,21 +15,7 @@ import {
   serverTalosVersion,
 } from './helpers/attach';
 import { resolveClusterTarget } from './helpers/cluster-change';
-
-const talosctl = (args: string[], timeoutMs = 20_000) =>
-  new Promise<{ code: number; stdout: string; stderr: string }>((resolve) =>
-    execFile(
-      'talosctl',
-      args,
-      { timeout: timeoutMs, maxBuffer: 10 * 1024 * 1024 },
-      (error, stdout, stderr) =>
-        resolve({
-          code: error ? ((error as { code?: number }).code ?? 1) : 0,
-          stdout: String(stdout),
-          stderr: String(stderr),
-        }),
-    ),
-  );
+import { ensureTalosctl, runBinary } from './helpers/talosctl';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -66,9 +51,15 @@ export default async (cmd: AttachOptions) => {
     );
   }
 
+  // the cluster's own talosctl version - downloaded once when missing
+  const binary = info.talosVersion
+    ? await ensureTalosctl(info.talosVersion)
+    : 'talosctl';
+  const talosctl = (args: string[], timeoutMs = 20_000) =>
+    runBinary(binary, args, timeoutMs);
   if ((await talosctl(['version', '--client'])).code !== 0) {
     throw new Error(
-      'talosctl is not installed. Install it (https://www.talos.dev/latest/talos-guides/install/talosctl/) - e.g. curl -sL https://talos.dev/install | sh',
+      'talosctl is not available. Install it: https://www.talos.dev/latest/talos-guides/install/talosctl/',
     );
   }
 
@@ -176,6 +167,6 @@ export default async (cmd: AttachOptions) => {
     }
   }
   Logger.warn(
-    `${opts.name} has not joined yet. Check gcli cluster:nodes later; if it never joins, reset it (${resetHint(opts.nodeIp)}) and attach again.`,
+    `${opts.name} has not joined yet. Check gcli cluster:nodes later; if it never joins, reset it (${resetHint(clusterId, opts.name, opts.nodeIp)}) and attach again.`,
   );
 };
