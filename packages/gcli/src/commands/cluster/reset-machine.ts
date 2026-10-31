@@ -45,7 +45,7 @@ export default async (cmd: ResetOptions) => {
       "--node-ip is required: the machine's address on your network",
     );
   }
-  const { projectId, clusterId } = await resolveClusterTarget(cmd);
+  const { clusterId } = await resolveClusterTarget(cmd);
 
   const node = (
     await lastValueFrom(GraphqlClienAPI.clusterNodes(clusterId, true))
@@ -62,7 +62,7 @@ export default async (cmd: ResetOptions) => {
   }
 
   const access = await lastValueFrom(
-    GraphqlClienAPI.clusterTalosconfig(projectId, clusterId, 15),
+    GraphqlClienAPI.clusterTalosconfig(clusterId, 15),
   );
   const binary = access.talosVersion
     ? await ensureTalosctl(access.talosVersion)

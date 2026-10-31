@@ -15,7 +15,7 @@ export default async (cmd: {
   const { projectId, cluster } = await lastValueFrom(
     parseProjectId(cmd.project).pipe(
       switchMap((projectId) =>
-        GraphqlClienAPI.teardownProjectCluster(projectId, cmd.cluster).pipe(
+        GraphqlClienAPI.teardownProjectCluster(cmd.cluster).pipe(
           map((cluster) => ({ projectId, cluster })),
         ),
       ),
@@ -38,7 +38,9 @@ export default async (cmd: {
   }
 
   Logger.info(`Waiting for cluster ${cluster.id} to finish tearing down...`);
-  const finalCluster = await pollUntilReady(projectId, cluster.id);
+  const finalCluster = await pollUntilReady(projectId, cluster.id, {
+    goneMeansDeleted: true,
+  });
   Logger.log(
     `[Action][teardownProjectCluster] final status: ${finalCluster.status}`,
   );

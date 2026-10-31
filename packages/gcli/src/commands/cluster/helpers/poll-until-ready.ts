@@ -17,13 +17,22 @@ const TERMINAL_STATUSES = ['ready', 'error', 'deleted'];
 export function pollUntilReady(
   projectId: string,
   clusterId: string,
-  { intervalMs = 5000, timeoutMs = 20 * 60 * 1000 } = {},
+  {
+    intervalMs = 5000,
+    timeoutMs = 20 * 60 * 1000,
+    /** watching a teardown: a cluster no longer listed is deleted (the
+        project's list leaves deleted clusters out) */
+    goneMeansDeleted = false,
+  } = {},
 ): Promise<ICluster> {
   return firstValueFrom(
     timer(0, intervalMs).pipe(
       switchMap(() => GraphqlClienAPI.projectClusters(projectId)),
       switchMap((clusters) => {
         const cluster = (clusters || []).find((c) => c.id === clusterId);
+        if (!cluster && goneMeansDeleted) {
+          return [{ id: clusterId, status: 'deleted' } as ICluster];
+        }
         if (!cluster) {
           throw new Error(`cluster ${clusterId} not found`);
         }

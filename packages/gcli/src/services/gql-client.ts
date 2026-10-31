@@ -812,30 +812,30 @@ export class GraphqlClienAPI {
     }).pipe(map((res) => res.projectClusters));
   }
 
-  public static teardownProjectCluster(projectId: string, clusterId: string) {
+  // Cluster operations are keyed by the cluster alone: the server checks the
+  // cluster's own project (one API for users and admins - a platform cluster
+  // has no project).
+  public static teardownProjectCluster(clusterId: string) {
     return this.query<IMutation>({
       query: gql`
-        mutation teardownProjectCluster(
-          $projectId: String!
-          $clusterId: String!
-        ) {
-          teardownProjectCluster(projectId: $projectId, clusterId: $clusterId) {
+        mutation teardownProjectCluster($clusterId: String!) {
+          teardownProjectCluster(clusterId: $clusterId) {
             ${ClusterFragment}
           }
         }
       `,
-      variables: { projectId, clusterId },
+      variables: { clusterId },
     }).pipe(map((res) => res.teardownProjectCluster));
   }
 
-  public static clusterKubeconfig(projectId: string, clusterId: string) {
+  public static clusterKubeconfig(clusterId: string) {
     return this.query<IQuery>({
       query: gql`
-        query clusterKubeconfig($projectId: String!, $clusterId: String!) {
-          clusterKubeconfig(projectId: $projectId, clusterId: $clusterId)
+        query clusterKubeconfig($clusterId: String!) {
+          clusterKubeconfig(clusterId: $clusterId)
         }
       `,
-      variables: { projectId, clusterId },
+      variables: { clusterId },
     }).pipe(map((res) => res.clusterKubeconfig));
   }
 
@@ -1086,23 +1086,11 @@ export class GraphqlClienAPI {
     }).pipe(map((res) => res.clusterNodes ?? []));
   }
 
-  public static clusterTalosconfig(
-    projectId: string,
-    clusterId: string,
-    ttlMinutes?: number,
-  ) {
+  public static clusterTalosconfig(clusterId: string, ttlMinutes?: number) {
     return this.query<{ clusterTalosconfig: ClusterTalosconfig }>({
       query: gql`
-        query clusterTalosconfig(
-          $projectId: String!
-          $clusterId: String!
-          $ttlMinutes: Int
-        ) {
-          clusterTalosconfig(
-            projectId: $projectId
-            clusterId: $clusterId
-            ttlMinutes: $ttlMinutes
-          ) {
+        query clusterTalosconfig($clusterId: String!, $ttlMinutes: Int) {
+          clusterTalosconfig(clusterId: $clusterId, ttlMinutes: $ttlMinutes) {
             talosconfig
             expiresAt
             endpoint
@@ -1110,7 +1098,7 @@ export class GraphqlClienAPI {
           }
         }
       `,
-      variables: { projectId, clusterId, ttlMinutes },
+      variables: { clusterId, ttlMinutes },
     }).pipe(map((res) => res.clusterTalosconfig));
   }
 

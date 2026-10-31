@@ -22,9 +22,9 @@ export default async (
   if (ttl !== undefined && (!Number.isInteger(ttl) || ttl < 5 || ttl > 1440)) {
     throw new Error('--ttl is in minutes, 5 to 1440');
   }
-  const { projectId, clusterId } = await resolveClusterTarget(cmd);
+  const { clusterId } = await resolveClusterTarget(cmd);
   const res = await lastValueFrom(
-    GraphqlClienAPI.clusterTalosconfig(projectId, clusterId, ttl),
+    GraphqlClienAPI.clusterTalosconfig(clusterId, ttl),
   );
   if (!cmd.output) {
     process.stdout.write(res.talosconfig);
