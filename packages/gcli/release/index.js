@@ -37092,29 +37092,29 @@ var init_gql_client = __esm({
           variables: { projectId }
         }).pipe((0, import_operators.map)((res) => res.projectClusters));
       }
-      static teardownProjectCluster(projectId, clusterId) {
+      // Cluster operations are keyed by the cluster alone: the server checks the
+      // cluster's own project (one API for users and admins - a platform cluster
+      // has no project).
+      static teardownProjectCluster(clusterId) {
         return this.query({
           query: gql`
-        mutation teardownProjectCluster(
-          $projectId: String!
-          $clusterId: String!
-        ) {
-          teardownProjectCluster(projectId: $projectId, clusterId: $clusterId) {
+        mutation teardownProjectCluster($clusterId: String!) {
+          teardownProjectCluster(clusterId: $clusterId) {
             ${ClusterFragment}
           }
         }
       `,
-          variables: { projectId, clusterId }
+          variables: { clusterId }
         }).pipe((0, import_operators.map)((res) => res.teardownProjectCluster));
       }
-      static clusterKubeconfig(projectId, clusterId) {
+      static clusterKubeconfig(clusterId) {
         return this.query({
           query: gql`
-        query clusterKubeconfig($projectId: String!, $clusterId: String!) {
-          clusterKubeconfig(projectId: $projectId, clusterId: $clusterId)
+        query clusterKubeconfig($clusterId: String!) {
+          clusterKubeconfig(clusterId: $clusterId)
         }
       `,
-          variables: { projectId, clusterId }
+          variables: { clusterId }
         }).pipe((0, import_operators.map)((res) => res.clusterKubeconfig));
       }
       // Cluster scaling, topology, load balancer and health (cluster-provisioner;
@@ -37294,19 +37294,11 @@ var init_gql_client = __esm({
           variables: { clusterId, includeCloud }
         }).pipe((0, import_operators.map)((res) => res.clusterNodes ?? []));
       }
-      static clusterTalosconfig(projectId, clusterId, ttlMinutes) {
+      static clusterTalosconfig(clusterId, ttlMinutes) {
         return this.query({
           query: gql`
-        query clusterTalosconfig(
-          $projectId: String!
-          $clusterId: String!
-          $ttlMinutes: Int
-        ) {
-          clusterTalosconfig(
-            projectId: $projectId
-            clusterId: $clusterId
-            ttlMinutes: $ttlMinutes
-          ) {
+        query clusterTalosconfig($clusterId: String!, $ttlMinutes: Int) {
+          clusterTalosconfig(clusterId: $clusterId, ttlMinutes: $ttlMinutes) {
             talosconfig
             expiresAt
             endpoint
@@ -37314,7 +37306,7 @@ var init_gql_client = __esm({
           }
         }
       `,
-          variables: { projectId, clusterId, ttlMinutes }
+          variables: { clusterId, ttlMinutes }
         }).pipe((0, import_operators.map)((res) => res.clusterTalosconfig));
       }
       static setClusterNodePaused(clusterId, name2, paused) {
@@ -254858,12 +254850,21 @@ var init_build = __esm({
 });
 
 // src/commands/cluster/helpers/poll-until-ready.ts
-function pollUntilReady(projectId, clusterId, { intervalMs = 5e3, timeoutMs = 20 * 60 * 1e3 } = {}) {
+function pollUntilReady(projectId, clusterId, {
+  intervalMs = 5e3,
+  timeoutMs = 20 * 60 * 1e3,
+  /** watching a teardown: a cluster no longer listed is deleted (the
+      project's list leaves deleted clusters out) */
+  goneMeansDeleted = false
+} = {}) {
   return (0, import_rxjs7.firstValueFrom)(
     (0, import_rxjs7.timer)(0, intervalMs).pipe(
       (0, import_operators6.switchMap)(() => GraphqlClienAPI.projectClusters(projectId)),
       (0, import_operators6.switchMap)((clusters) => {
         const cluster = (clusters || []).find((c) => c.id === clusterId);
+        if (!cluster && goneMeansDeleted) {
+          return [{ id: clusterId, status: "deleted" }];
+        }
         if (!cluster) {
           throw new Error(`cluster ${clusterId} not found`);
         }
@@ -255494,7 +255495,7 @@ var init_teardown = __esm({
       const { projectId, cluster } = await (0, import_rxjs14.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators10.switchMap)(
-            (projectId2) => GraphqlClienAPI.teardownProjectCluster(projectId2, cmd.cluster).pipe(
+            (projectId2) => GraphqlClienAPI.teardownProjectCluster(cmd.cluster).pipe(
               (0, import_operators10.map)((cluster2) => ({ projectId: projectId2, cluster: cluster2 }))
             )
           ),
@@ -255515,7 +255516,9 @@ var init_teardown = __esm({
         return cluster;
       }
       Logger.info(`Waiting for cluster ${cluster.id} to finish tearing down...`);
-      const finalCluster = await pollUntilReady(projectId, cluster.id);
+      const finalCluster = await pollUntilReady(projectId, cluster.id, {
+        goneMeansDeleted: true
+      });
       Logger.log(
         `[Action][teardownProjectCluster] final status: ${finalCluster.status}`
       );
@@ -255534,15 +255537,11 @@ var init_kubeconfig = __esm({
   "src/commands/cluster/kubeconfig.ts"() {
     import_rxjs15 = __toESM(require_cjs());
     import_operators11 = __toESM(require_operators());
-    init_helpers();
     init_gql_client();
     init_log();
     init_read_file();
     kubeconfig_default = (cmd) => (0, import_rxjs15.lastValueFrom)(
-      parseProjectId(cmd.project).pipe(
-        (0, import_operators11.switchMap)(
-          (projectId) => GraphqlClienAPI.clusterKubeconfig(projectId, cmd.cluster)
-        ),
+      GraphqlClienAPI.clusterKubeconfig(cmd.cluster).pipe(
         (0, import_operators11.switchMap)(
           (kubeconfig) => cmd.output ? writeFileAsObservable(cmd.output, kubeconfig).pipe(
             (0, import_operators11.tap)(() => Logger.info(`Wrote kubeconfig to ${cmd.output}`))
@@ -256030,7 +256029,7 @@ var init_reset_machine = __esm({
           "--node-ip is required: the machine's address on your network"
         );
       }
-      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      const { clusterId } = await resolveClusterTarget(cmd);
       const node = (await (0, import_rxjs20.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId, true))).find((n) => n.name === name2);
       if (node?.source === "hetzner") {
         throw new Error(
@@ -256043,7 +256042,7 @@ var init_reset_machine = __esm({
         );
       }
       const access = await (0, import_rxjs20.lastValueFrom)(
-        GraphqlClienAPI.clusterTalosconfig(projectId, clusterId, 15)
+        GraphqlClienAPI.clusterTalosconfig(clusterId, 15)
       );
       const binary = access.talosVersion ? await ensureTalosctl(access.talosVersion) : "talosctl";
       const dir = await (0, import_promises3.mkdtemp)((0, import_path3.join)((0, import_os3.tmpdir)(), "gcli-reset-"));
@@ -256132,9 +256131,9 @@ var init_talosconfig = __esm({
       if (ttl !== void 0 && (!Number.isInteger(ttl) || ttl < 5 || ttl > 1440)) {
         throw new Error("--ttl is in minutes, 5 to 1440");
       }
-      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      const { clusterId } = await resolveClusterTarget(cmd);
       const res = await (0, import_rxjs21.lastValueFrom)(
-        GraphqlClienAPI.clusterTalosconfig(projectId, clusterId, ttl)
+        GraphqlClienAPI.clusterTalosconfig(clusterId, ttl)
       );
       if (!cmd.output) {
         process.stdout.write(res.talosconfig);

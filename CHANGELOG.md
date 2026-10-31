@@ -1,4 +1,4 @@
-## [1.8.251](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.251) (2026-10-30)
+## [1.8.252](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.252) (2026-10-31)
 
 
 ### Bug Fixes
@@ -112,6 +112,7 @@
 * **cluster:** add support for dedicated load balancer in virtual clusters ([438ea8e](https://github.com/Stradivario/gapi/commit/438ea8e084fcda7e2b03f90d16344ecdd1a47cdd))
 * **cluster:** add support for self-managed nodes attachment and detachment ([3c3ec13](https://github.com/Stradivario/gapi/commit/3c3ec13a75d1e7ef9889d3ab3e7f05b8de7537a7))
 * **cluster:** add support for virtual clusters with provisioning and validation ([0e5cf9c](https://github.com/Stradivario/gapi/commit/0e5cf9c239fbaac820f5459b7234f15464802b6f))
+* **cluster:** refactor cluster commands to use clusterId directly and improve teardown handling ([f9ccb4c](https://github.com/Stradivario/gapi/commit/f9ccb4c52737e1f25d7dcbd9188cc97088f5fd5b))
 * **context7:** added ownership for context7 readme [ci-skip] ([28ededf](https://github.com/Stradivario/gapi/commit/28ededff4a7618f977e1f31efa629d22cb7a41a0))
 * **dev:** added lambda logs commands ([905b9bf](https://github.com/Stradivario/gapi/commit/905b9bf68bf174e8cb11792e8bacb1eb4a5dc02c))
 * **dev:** decompress the result from logs ([f33a6ab](https://github.com/Stradivario/gapi/commit/f33a6ab615a448155c57fc7ec1022e8db83b97f7))
