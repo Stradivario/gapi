@@ -17,27 +17,48 @@ import { z } from 'zod';
 
 import { GraphqlClienAPI } from '~/services/gql-client';
 
-const performFetch = (input: RequestInfo | URL, init?: RequestInit) => {
-  // process.stderr.write(`[DEBUG] performFetch called for ${input}\n`);
-  return from(fetch(input, init)).pipe(
+/**
+ * The login token (Firebase ID token) lives 1 h. The proxy runs for days, so
+ * every forwarded request reads it through getConfig(), which refreshes it
+ * after 30 min - a token fixed at startup made every call 401 after an hour
+ * (the upstream answers 200 with the 401 inside the tool result, so the
+ * status check below never saw it). Concurrent requests share one refresh.
+ */
+let pendingToken: Promise<string> | null = null;
+export const currentToken = (force = false): Promise<string> => {
+  if (!pendingToken || force) {
+    pendingToken = lastValueFrom(
+      GraphqlClienAPI.getConfig(force).pipe(
+        take(1),
+        map((config) => config.token),
+      ),
+    ).finally(() => {
+      pendingToken = null;
+    });
+  }
+  return pendingToken;
+};
+
+const withToken = (init: RequestInit | undefined, token: string) => {
+  const headers = new Headers(init?.headers);
+  headers.set('Authorization', token);
+  return { ...init, headers };
+};
+
+export const performFetch = (input: RequestInfo | URL, init?: RequestInit) => {
+  return from(currentToken()).pipe(
+    switchMap((token) => fetch(input, withToken(init, token))),
     switchMap((res) => {
-      // process.stderr.write(`[DEBUG] Fetch status: ${res.status} for ${input}\n`);
       if (res.status === 401 || res.status === 403) {
         process.stderr.write(
           `[DEBUG] Request failed with ${res.status}. Refreshing token...\n`,
         );
-        return GraphqlClienAPI.getConfig(true).pipe(
-          take(1),
-          switchMap((config) => {
+        return from(currentToken(true)).pipe(
+          switchMap((token) => {
             process.stderr.write(
               '[DEBUG] Token refreshed. Retrying request...\n',
             );
-            const headers = new Headers(init?.headers);
-            headers.set('Authorization', config.token);
-            return fetch(input, {
-              ...init,
-              headers,
-            });
+            return fetch(input, withToken(init, token));
           }),
         );
       }
