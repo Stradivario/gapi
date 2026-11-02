@@ -197,16 +197,19 @@ export const createOrUpdateLambda = (
               targetCpu: cmd.targetCpu || payload.scaleOptions?.targetCpu || 0,
               idleTimeout:
                 cmd.idleTimeout || payload.scaleOptions?.idleTimeout || 120,
+              // 0 = not set: the server fills these in within the project's
+              // plan (concurrency <= 3, timeouts 60/120 s capped). A fixed
+              // 500 / 60 / 120 here was refused on plans with lower maxima.
               concurrency:
-                cmd.concurrency || payload.scaleOptions?.concurrency || 500,
+                cmd.concurrency || payload.scaleOptions?.concurrency || 0,
               functionTimeout:
                 cmd.functionTimeout ||
                 payload.scaleOptions?.functionTimeout ||
-                60,
+                0,
               specializationTimeout:
                 cmd.specializationTimeout ||
                 payload.scaleOptions?.specializationTimeout ||
-                120,
+                0,
             },
           }),
         );

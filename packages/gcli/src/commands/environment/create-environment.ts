@@ -8,6 +8,7 @@ import { Logger } from '~/services/log';
 import { Unboxed } from '~/types';
 
 import { loadSpec } from '../lambda/helpers/load-spec';
+import { environmentPayload } from './environment-payload';
 
 export default (
   cmd: {
@@ -36,8 +37,7 @@ export default (
         }).pipe(
           switchMap((clusterId) =>
             GraphqlClienAPI.createEnvironment(projectId, {
-              ...data,
-              ...cmdRest,
+              ...environmentPayload(data, cmdRest),
               clusterId,
             }),
           ),

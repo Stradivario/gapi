@@ -1,6 +1,8 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
 import { BuildOptions, Platform } from 'esbuild';
 import esbuild from 'esbuild';
+import { existsSync } from 'fs';
+import { join } from 'path';
 import { lastValueFrom, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
@@ -50,12 +52,17 @@ export default async (args: BuildArguments) => {
           switchMap(({ esbuild, options }) =>
             esbuild.build({
               ...options,
-              plugins: [
-                esbuildDecorators({
-                  tsconfig: './tsconfig.json',
-                  cwd: process.cwd(),
-                }),
-              ],
+              // Decorator metadata needs the project's tsconfig; without one
+              // the plugin failed with "[plugin: tsc] failed to open
+              // 'undefined'" - plain esbuild handles a project without it.
+              plugins: existsSync(join(process.cwd(), 'tsconfig.json'))
+                ? [
+                    esbuildDecorators({
+                      tsconfig: './tsconfig.json',
+                      cwd: process.cwd(),
+                    }),
+                  ]
+                : [],
             }),
           ),
           tap((data) => {
