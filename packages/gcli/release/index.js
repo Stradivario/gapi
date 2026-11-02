@@ -76037,7 +76037,7 @@ ${lanes.join("\n")}
         var parseDiagnostics;
         var jsDocDiagnostics;
         var syntaxCursor;
-        var currentToken;
+        var currentToken2;
         var nodeCount;
         var identifiers;
         var identifierCount;
@@ -76584,60 +76584,60 @@ ${lanes.join("\n")}
           return scanner2.hasPrecedingJSDocComment();
         }
         function token() {
-          return currentToken;
+          return currentToken2;
         }
         function nextTokenWithoutCheck() {
-          return currentToken = scanner2.scan();
+          return currentToken2 = scanner2.scan();
         }
         function nextTokenAnd(func) {
           nextToken();
           return func();
         }
         function nextToken() {
-          if (isKeyword(currentToken) && (scanner2.hasUnicodeEscape() || scanner2.hasExtendedUnicodeEscape())) {
+          if (isKeyword(currentToken2) && (scanner2.hasUnicodeEscape() || scanner2.hasExtendedUnicodeEscape())) {
             parseErrorAt(scanner2.getTokenStart(), scanner2.getTokenEnd(), Diagnostics.Keywords_cannot_contain_escape_characters);
           }
           return nextTokenWithoutCheck();
         }
         function nextTokenJSDoc() {
-          return currentToken = scanner2.scanJsDocToken();
+          return currentToken2 = scanner2.scanJsDocToken();
         }
         function nextJSDocCommentTextToken(inBackticks) {
-          return currentToken = scanner2.scanJSDocCommentTextToken(inBackticks);
+          return currentToken2 = scanner2.scanJSDocCommentTextToken(inBackticks);
         }
         function reScanGreaterToken() {
-          return currentToken = scanner2.reScanGreaterToken();
+          return currentToken2 = scanner2.reScanGreaterToken();
         }
         function reScanSlashToken() {
-          return currentToken = scanner2.reScanSlashToken();
+          return currentToken2 = scanner2.reScanSlashToken();
         }
         function reScanTemplateToken(isTaggedTemplate) {
-          return currentToken = scanner2.reScanTemplateToken(isTaggedTemplate);
+          return currentToken2 = scanner2.reScanTemplateToken(isTaggedTemplate);
         }
         function reScanLessThanToken() {
-          return currentToken = scanner2.reScanLessThanToken();
+          return currentToken2 = scanner2.reScanLessThanToken();
         }
         function reScanHashToken() {
-          return currentToken = scanner2.reScanHashToken();
+          return currentToken2 = scanner2.reScanHashToken();
         }
         function scanJsxIdentifier() {
-          return currentToken = scanner2.scanJsxIdentifier();
+          return currentToken2 = scanner2.scanJsxIdentifier();
         }
         function scanJsxText() {
-          return currentToken = scanner2.scanJsxToken();
+          return currentToken2 = scanner2.scanJsxToken();
         }
         function scanJsxAttributeValue() {
-          return currentToken = scanner2.scanJsxAttributeValue();
+          return currentToken2 = scanner2.scanJsxAttributeValue();
         }
         function speculationHelper(callback, speculationKind) {
-          const saveToken = currentToken;
+          const saveToken = currentToken2;
           const saveParseDiagnosticsLength = parseDiagnostics.length;
           const saveParseErrorBeforeNextFinishedNode = parseErrorBeforeNextFinishedNode;
           const saveContextFlags = contextFlags;
           const result = speculationKind !== 0 ? scanner2.lookAhead(callback) : scanner2.tryScan(callback);
           Debug.assert(saveContextFlags === contextFlags);
           if (!result || speculationKind !== 0) {
-            currentToken = saveToken;
+            currentToken2 = saveToken;
             if (speculationKind !== 2) {
               parseDiagnostics.length = saveParseDiagnosticsLength;
             }
@@ -78634,8 +78634,8 @@ ${lanes.join("\n")}
               19
               /* OpenBraceToken */
             );
-            const currentToken2 = token();
-            if (currentToken2 === 118 || currentToken2 === 132) {
+            const currentToken22 = token();
+            if (currentToken22 === 118 || currentToken22 === 132) {
               nextToken();
             } else {
               parseErrorAtCurrentToken(Diagnostics._0_expected, tokenToString(
@@ -78648,7 +78648,7 @@ ${lanes.join("\n")}
               /* ColonToken */
             );
             attributes = parseImportAttributes(
-              currentToken2,
+              currentToken22,
               /*skipKeyword*/
               true
             );
@@ -79838,10 +79838,10 @@ ${lanes.join("\n")}
           const pos = getNodePos();
           const node = factory2.createJsxText(
             scanner2.getTokenValue(),
-            currentToken === 13
+            currentToken2 === 13
             /* JsxTextAllWhiteSpaces */
           );
-          currentToken = scanner2.scanJsxToken();
+          currentToken2 = scanner2.scanJsxToken();
           return finishNode(node, pos);
         }
         function parseJsxChild(openingTag, token2) {
@@ -79884,7 +79884,7 @@ ${lanes.join("\n")}
           const saveParsingContext = parsingContext;
           parsingContext |= 1 << 14;
           while (true) {
-            const child = parseJsxChild(openingTag, currentToken = scanner2.reScanJsxToken());
+            const child = parseJsxChild(openingTag, currentToken2 = scanner2.reScanJsxToken());
             if (!child) break;
             list.push(child);
             if (isJsxOpeningElement(openingTag) && (child == null ? void 0 : child.kind) === 285 && !tagNamesAreEquivalent(child.openingElement.tagName, child.closingElement.tagName) && tagNamesAreEquivalent(openingTag.tagName, child.closingElement.tagName)) {
@@ -81114,11 +81114,11 @@ ${lanes.join("\n")}
                 nextToken();
                 return token() === 166 || token() === 11 || token() === 42 || token() === 19 || tokenIsIdentifierOrKeyword(token());
               case 95:
-                let currentToken2 = nextToken();
-                if (currentToken2 === 156) {
-                  currentToken2 = lookAhead(nextToken);
+                let currentToken22 = nextToken();
+                if (currentToken22 === 156) {
+                  currentToken22 = lookAhead(nextToken);
                 }
-                if (currentToken2 === 64 || currentToken2 === 42 || currentToken2 === 19 || currentToken2 === 90 || currentToken2 === 130 || currentToken2 === 60) {
+                if (currentToken22 === 64 || currentToken22 === 42 || currentToken22 === 19 || currentToken22 === 90 || currentToken22 === 130 || currentToken22 === 60) {
                   return true;
                 }
                 continue;
@@ -82319,9 +82319,9 @@ ${lanes.join("\n")}
           return importClause;
         }
         function tryParseImportAttributes() {
-          const currentToken2 = token();
-          if ((currentToken2 === 118 || currentToken2 === 132) && !scanner2.hasPrecedingLineBreak()) {
-            return parseImportAttributes(currentToken2);
+          const currentToken22 = token();
+          if ((currentToken22 === 118 || currentToken22 === 132) && !scanner2.hasPrecedingLineBreak()) {
+            return parseImportAttributes(currentToken22);
           }
         }
         function parseImportAttribute() {
@@ -82615,9 +82615,9 @@ ${lanes.join("\n")}
               moduleSpecifier = parseModuleSpecifier();
             }
           }
-          const currentToken2 = token();
-          if (moduleSpecifier && (currentToken2 === 118 || currentToken2 === 132) && !scanner2.hasPrecedingLineBreak()) {
-            attributes = parseImportAttributes(currentToken2);
+          const currentToken22 = token();
+          if (moduleSpecifier && (currentToken22 === 118 || currentToken22 === 132) && !scanner2.hasPrecedingLineBreak()) {
+            attributes = parseImportAttributes(currentToken22);
           }
           parseSemicolon();
           setAwaitContext(savedAwaitContext);
@@ -82701,7 +82701,7 @@ ${lanes.join("\n")}
               /* ParseAll */
             );
             scanner2.setText(content, start3, length2);
-            currentToken = scanner2.scan();
+            currentToken2 = scanner2.scan();
             const jsDocTypeExpression = parseJSDocTypeExpression();
             const sourceFile = createSourceFile2(
               "file.js",
@@ -82789,7 +82789,7 @@ ${lanes.join("\n")}
           }
           JSDocParser2.parseIsolatedJSDocComment = parseIsolatedJSDocComment2;
           function parseJSDocComment(parent2, start3, length2) {
-            const saveToken = currentToken;
+            const saveToken = currentToken2;
             const saveParseDiagnosticsLength = parseDiagnostics.length;
             const saveParseErrorBeforeNextFinishedNode = parseErrorBeforeNextFinishedNode;
             const comment = doInsideOfContext(16777216, () => parseJSDocCommentWorker(start3, length2));
@@ -82800,7 +82800,7 @@ ${lanes.join("\n")}
               }
               addRange(jsDocDiagnostics, parseDiagnostics, saveParseDiagnosticsLength);
             }
-            currentToken = saveToken;
+            currentToken2 = saveToken;
             parseDiagnostics.length = saveParseDiagnosticsLength;
             parseErrorBeforeNextFinishedNode = saveParseErrorBeforeNextFinishedNode;
             return comment;
@@ -195179,18 +195179,18 @@ ${lanes.join("\n")}
         const importedFiles = [];
         let ambientExternalModules;
         let lastToken;
-        let currentToken;
+        let currentToken2;
         let braceNesting = 0;
         let externalModule = false;
         function nextToken() {
-          lastToken = currentToken;
-          currentToken = scanner.scan();
-          if (currentToken === 19) {
+          lastToken = currentToken2;
+          currentToken2 = scanner.scan();
+          if (currentToken2 === 19) {
             braceNesting++;
-          } else if (currentToken === 20) {
+          } else if (currentToken2 === 20) {
             braceNesting--;
           }
-          return currentToken;
+          return currentToken2;
         }
         function getFileReference() {
           const fileName = scanner.getTokenValue();
@@ -218276,11 +218276,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         };
       }
       function getJSDocParameterCompletions(sourceFile, position, checker, options, preferences, tagNameOnly) {
-        const currentToken = getTokenAtPosition(sourceFile, position);
-        if (!isJSDocTag(currentToken) && !isJSDoc(currentToken)) {
+        const currentToken2 = getTokenAtPosition(sourceFile, position);
+        if (!isJSDocTag(currentToken2) && !isJSDoc(currentToken2)) {
           return [];
         }
-        const jsDoc = isJSDoc(currentToken) ? currentToken : currentToken.parent;
+        const jsDoc = isJSDoc(currentToken2) ? currentToken2 : currentToken2.parent;
         if (!isJSDoc(jsDoc)) {
           return [];
         }
@@ -220132,10 +220132,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const typeChecker = program2.getTypeChecker();
         const inCheckedFile = isCheckedFile(sourceFile, compilerOptions);
         let start3 = timestamp();
-        let currentToken = getTokenAtPosition(sourceFile, position);
+        let currentToken2 = getTokenAtPosition(sourceFile, position);
         log("getCompletionData: Get current token: " + (timestamp() - start3));
         start3 = timestamp();
-        const insideComment = isInComment(sourceFile, position, currentToken);
+        const insideComment = isInComment(sourceFile, position, currentToken2);
         log("getCompletionData: Is inside comment: " + (timestamp() - start3));
         let insideJsDocTagTypeExpression = false;
         let insideJsDocImportTag = false;
@@ -220157,7 +220157,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               }
             }
           }
-          const tag = getJsDocTagAtPosition(currentToken, position);
+          const tag = getJsDocTagAtPosition(currentToken2, position);
           if (tag) {
             if (tag.tagName.pos <= position && position <= tag.tagName.end) {
               return {
@@ -220170,8 +220170,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             } else {
               const typeExpression = tryGetTypeExpressionFromTag(tag);
               if (typeExpression) {
-                currentToken = getTokenAtPosition(sourceFile, position);
-                if (!currentToken || !isDeclarationName(currentToken) && (currentToken.parent.kind !== 349 || currentToken.parent.name !== currentToken)) {
+                currentToken2 = getTokenAtPosition(sourceFile, position);
+                if (!currentToken2 || !isDeclarationName(currentToken2) && (currentToken2.parent.kind !== 349 || currentToken2.parent.name !== currentToken2)) {
                   insideJsDocTagTypeExpression = isCurrentlyEditingNode(typeExpression);
                 }
               }
@@ -220191,7 +220191,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const previousToken = tokens.previousToken;
         let contextToken = tokens.contextToken;
         log("getCompletionData: Get previous token: " + (timestamp() - start3));
-        let node = currentToken;
+        let node = currentToken2;
         let propertyAccessToConvert;
         let isRightOfDot = false;
         let isRightOfQuestionDot = false;
@@ -220263,16 +220263,16 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               contextToken = parent2;
               parent2 = parent2.parent;
             }
-            if (currentToken.parent === location) {
-              switch (currentToken.kind) {
+            if (currentToken2.parent === location) {
+              switch (currentToken2.kind) {
                 case 32:
-                  if (currentToken.parent.kind === 285 || currentToken.parent.kind === 287) {
-                    location = currentToken;
+                  if (currentToken2.parent.kind === 285 || currentToken2.parent.kind === 287) {
+                    location = currentToken2;
                   }
                   break;
                 case 44:
-                  if (currentToken.parent.kind === 286) {
-                    location = currentToken;
+                  if (currentToken2.parent.kind === 286) {
+                    location = currentToken2;
                   }
                   break;
               }
@@ -232469,30 +232469,30 @@ ${options.prefix}` : "\n" : options.prefix
             scanner2.resetTokenState(savedPos);
             scanner2.scan();
           }
-          let currentToken = getNextToken(n, expectedScanAction);
+          let currentToken2 = getNextToken(n, expectedScanAction);
           const token = createTextRangeWithKind(
             scanner2.getTokenFullStart(),
             scanner2.getTokenEnd(),
-            currentToken
+            currentToken2
           );
           if (trailingTrivia) {
             trailingTrivia = void 0;
           }
           while (scanner2.getTokenFullStart() < endPos) {
-            currentToken = scanner2.scan();
-            if (!isTrivia(currentToken)) {
+            currentToken2 = scanner2.scan();
+            if (!isTrivia(currentToken2)) {
               break;
             }
             const trivia = createTextRangeWithKind(
               scanner2.getTokenFullStart(),
               scanner2.getTokenEnd(),
-              currentToken
+              currentToken2
             );
             if (!trailingTrivia) {
               trailingTrivia = [];
             }
             trailingTrivia.push(trivia);
-            if (currentToken === 4) {
+            if (currentToken2 === 4) {
               scanner2.scan();
               break;
             }
@@ -235660,8 +235660,8 @@ ${options.prefix}` : "\n" : options.prefix
             return 0;
           }
           const lineAtPosition = sourceFile.getLineAndCharacterOfPosition(position).line;
-          const currentToken = getTokenAtPosition(sourceFile, position);
-          const isObjectLiteral = currentToken.kind === 19 && currentToken.parent.kind === 211;
+          const currentToken2 = getTokenAtPosition(sourceFile, position);
+          const isObjectLiteral = currentToken2.kind === 19 && currentToken2.parent.kind === 211;
           if (options.indentStyle === 1 || isObjectLiteral) {
             return getBlockIndent(sourceFile, position, options);
           }
@@ -235677,7 +235677,7 @@ ${options.prefix}` : "\n" : options.prefix
               219,
               220
               /* ArrowFunction */
-            ].includes(currentToken.parent.kind);
+            ].includes(currentToken2.parent.kind);
             const indentSize = useTheSameBaseIndentation ? 0 : options.indentSize;
             return getActualIndentationForListStartLine(containerList, sourceFile, options) + indentSize;
           }
@@ -319672,7 +319672,9 @@ var init_zod = __esm({
 // src/commands/proxy/start.ts
 var start_exports = {};
 __export(start_exports, {
-  default: () => startProxy
+  currentToken: () => currentToken,
+  default: () => startProxy,
+  performFetch: () => performFetch
 });
 async function startProxy(cmd) {
   return (0, import_rxjs46.lastValueFrom)(
@@ -319784,7 +319786,7 @@ async function startProxy(cmd) {
     )
   );
 }
-var import_rxjs46, import_operators31, import_stream2, performFetch;
+var import_rxjs46, import_operators31, import_stream2, pendingToken, currentToken, withToken, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
@@ -319796,26 +319798,40 @@ var init_start = __esm({
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
+    pendingToken = null;
+    currentToken = (force = false) => {
+      if (!pendingToken || force) {
+        pendingToken = (0, import_rxjs46.lastValueFrom)(
+          GraphqlClienAPI.getConfig(force).pipe(
+            (0, import_operators31.take)(1),
+            (0, import_operators31.map)((config2) => config2.token)
+          )
+        ).finally(() => {
+          pendingToken = null;
+        });
+      }
+      return pendingToken;
+    };
+    withToken = (init, token) => {
+      const headers = new Headers(init?.headers);
+      headers.set("Authorization", token);
+      return { ...init, headers };
+    };
     performFetch = (input, init) => {
-      return (0, import_rxjs46.from)(fetch(input, init)).pipe(
+      return (0, import_rxjs46.from)(currentToken()).pipe(
+        (0, import_operators31.switchMap)((token) => fetch(input, withToken(init, token))),
         (0, import_operators31.switchMap)((res) => {
           if (res.status === 401 || res.status === 403) {
             process.stderr.write(
               `[DEBUG] Request failed with ${res.status}. Refreshing token...
 `
             );
-            return GraphqlClienAPI.getConfig(true).pipe(
-              (0, import_operators31.take)(1),
-              (0, import_operators31.switchMap)((config2) => {
+            return (0, import_rxjs46.from)(currentToken(true)).pipe(
+              (0, import_operators31.switchMap)((token) => {
                 process.stderr.write(
                   "[DEBUG] Token refreshed. Retrying request...\n"
                 );
-                const headers = new Headers(init?.headers);
-                headers.set("Authorization", config2.token);
-                return fetch(input, {
-                  ...init,
-                  headers
-                });
+                return fetch(input, withToken(init, token));
               })
             );
           }
