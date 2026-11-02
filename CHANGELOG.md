@@ -1,4 +1,4 @@
-## [1.8.253](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.253) (2026-11-02)
+## [1.8.254](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.254) (2026-11-02)
 
 
 ### Bug Fixes
@@ -46,6 +46,7 @@
 * **gcli:** added secrets instead of secret due to api change in lamb forge ([9b4b2fe](https://github.com/Stradivario/gapi/commit/9b4b2fe0d1180b946897581bcf2355d84a0fecc5))
 * **gcli:** async code refactored to rxjs [ci-skip] ([42cf603](https://github.com/Stradivario/gapi/commit/42cf6039547de01381c20db48bda760f3906987f))
 * **gcli:** authorization token passed also to upload lambda logic ([26e5126](https://github.com/Stradivario/gapi/commit/26e512698fd471fb73ecf302e857631609eecc8e))
+* **gcli:** build reads lambforge.yaml, environment flags as numbers, plan-safe scale defaults ([1fd8120](https://github.com/Stradivario/gapi/commit/1fd8120678a9ce13b4539d62d488529aac69dc24))
 * **gcli:** builded again the package with namespace import from all ([f655951](https://github.com/Stradivario/gapi/commit/f6559518341065cef27d9404d8941480ff704ee0))
 * **gcli:** decompress logs ([705241b](https://github.com/Stradivario/gapi/commit/705241b05fcba9d8375c4cf8a73710f1989323e3))
 * **gcli:** default export of form data and stream to buffer ([94800cb](https://github.com/Stradivario/gapi/commit/94800cb9fa946b6843dd9a7517c987007b254821))

@@ -29867,7 +29867,7 @@ var require_buffer_list = __commonJS({
         }
       }, {
         key: "join",
-        value: function join6(s2) {
+        value: function join7(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -32885,7 +32885,7 @@ var require_buffer_list2 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join6(s2) {
+        value: function join7(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -38710,7 +38710,7 @@ var require_util = __commonJS({
       return path2;
     }
     exports2.normalize = normalize2;
-    function join6(aRoot, aPath) {
+    function join7(aRoot, aPath) {
       if (aRoot === "") {
         aRoot = ".";
       }
@@ -38742,7 +38742,7 @@ var require_util = __commonJS({
       }
       return joined;
     }
-    exports2.join = join6;
+    exports2.join = join7;
     exports2.isAbsolute = function(aPath) {
       return aPath.charAt(0) === "/" || urlRegexp.test(aPath);
     };
@@ -38915,7 +38915,7 @@ var require_util = __commonJS({
             parsed.path = parsed.path.substring(0, index + 1);
           }
         }
-        sourceURL = join6(urlGenerate(parsed), sourceURL);
+        sourceURL = join7(urlGenerate(parsed), sourceURL);
       }
       return normalize2(sourceURL);
     }
@@ -254783,11 +254783,13 @@ var build_exports = {};
 __export(build_exports, {
   default: () => build_default
 });
-var import_esbuild_decorators, import_esbuild, import_rxjs6, import_operators5, build_default;
+var import_esbuild_decorators, import_esbuild, import_fs3, import_path, import_rxjs6, import_operators5, build_default;
 var init_build = __esm({
   "src/commands/build/build.ts"() {
     import_esbuild_decorators = __toESM(require_src());
     import_esbuild = __toESM(require("esbuild"));
+    import_fs3 = require("fs");
+    import_path = require("path");
     import_rxjs6 = __toESM(require_cjs());
     import_operators5 = __toESM(require_operators());
     init_log();
@@ -254818,12 +254820,15 @@ var init_build = __esm({
               (0, import_operators5.switchMap)(
                 ({ esbuild: esbuild2, options }) => esbuild2.build({
                   ...options,
-                  plugins: [
+                  // Decorator metadata needs the project's tsconfig; without one
+                  // the plugin failed with "[plugin: tsc] failed to open
+                  // 'undefined'" - plain esbuild handles a project without it.
+                  plugins: (0, import_fs3.existsSync)((0, import_path.join)(process.cwd(), "tsconfig.json")) ? [
                     (0, import_esbuild_decorators.esbuildDecorators)({
                       tsconfig: "./tsconfig.json",
                       cwd: process.cwd()
                     })
-                  ]
+                  ] : []
                 })
               ),
               (0, import_operators5.tap)((data) => {
@@ -255726,12 +255731,12 @@ async function ensureTalosctl(version2) {
     return "talosctl";
   }
   const asset = talosctlAssetName();
-  const dir = (0, import_path.join)(mainDirectory, "bin");
-  const binary = (0, import_path.join)(
+  const dir = (0, import_path2.join)(mainDirectory, "bin");
+  const binary = (0, import_path2.join)(
     dir,
     `talosctl-${version2}${asset.endsWith(".exe") ? ".exe" : ""}`
   );
-  if ((0, import_fs3.existsSync)(binary)) {
+  if ((0, import_fs4.existsSync)(binary)) {
     return binary;
   }
   Logger.info(
@@ -255757,14 +255762,14 @@ async function ensureTalosctl(version2) {
   Logger.info(`talosctl ${version2} saved to ${binary}`);
   return binary;
 }
-var import_child_process, import_crypto, import_fs3, import_promises, import_path, RELEASES, VERSION_RE, clientVersionOf, runBinary;
+var import_child_process, import_crypto, import_fs4, import_promises, import_path2, RELEASES, VERSION_RE, clientVersionOf, runBinary;
 var init_talosctl = __esm({
   "src/commands/cluster/helpers/talosctl.ts"() {
     import_child_process = require("child_process");
     import_crypto = require("crypto");
-    import_fs3 = require("fs");
+    import_fs4 = require("fs");
     import_promises = require("fs/promises");
-    import_path = require("path");
+    import_path2 = require("path");
     init_log();
     init_types();
     RELEASES = "https://github.com/siderolabs/talos/releases/download";
@@ -255790,12 +255795,12 @@ var attach_exports = {};
 __export(attach_exports, {
   default: () => attach_default
 });
-var import_promises2, import_os2, import_path2, import_readline, import_rxjs17, sleep, ask, attach_default;
+var import_promises2, import_os2, import_path3, import_readline, import_rxjs17, sleep, ask, attach_default;
 var init_attach2 = __esm({
   "src/commands/cluster/attach.ts"() {
     import_promises2 = require("fs/promises");
     import_os2 = require("os");
-    import_path2 = require("path");
+    import_path3 = require("path");
     import_readline = require("readline");
     import_rxjs17 = __toESM(require_cjs());
     init_gql_client();
@@ -255889,8 +255894,8 @@ var init_attach2 = __esm({
           `The cluster runs Talos ${join_.talosVersion}, the machine booted ${version2}. It installs ${join_.talosVersion} anyway; if the join fails, boot ${join_.isoUrl}.`
         );
       }
-      const dir = await (0, import_promises2.mkdtemp)((0, import_path2.join)((0, import_os2.tmpdir)(), "gcli-attach-"));
-      const file2 = (0, import_path2.join)(dir, "machine.yaml");
+      const dir = await (0, import_promises2.mkdtemp)((0, import_path3.join)((0, import_os2.tmpdir)(), "gcli-attach-"));
+      const file2 = (0, import_path3.join)(dir, "machine.yaml");
       try {
         await (0, import_promises2.writeFile)(file2, join_.config, { mode: 384 });
         const applied = await talosctl(
@@ -256002,12 +256007,12 @@ __export(reset_machine_exports, {
   default: () => reset_machine_default,
   hostnameOf: () => hostnameOf
 });
-var import_promises3, import_os3, import_path3, import_readline2, import_rxjs20, hostnameOf, reset_machine_default;
+var import_promises3, import_os3, import_path4, import_readline2, import_rxjs20, hostnameOf, reset_machine_default;
 var init_reset_machine = __esm({
   "src/commands/cluster/reset-machine.ts"() {
     import_promises3 = require("fs/promises");
     import_os3 = require("os");
-    import_path3 = require("path");
+    import_path4 = require("path");
     import_readline2 = require("readline");
     import_rxjs20 = __toESM(require_cjs());
     init_gql_client();
@@ -256045,8 +256050,8 @@ var init_reset_machine = __esm({
         GraphqlClienAPI.clusterTalosconfig(clusterId, 15)
       );
       const binary = access.talosVersion ? await ensureTalosctl(access.talosVersion) : "talosctl";
-      const dir = await (0, import_promises3.mkdtemp)((0, import_path3.join)((0, import_os3.tmpdir)(), "gcli-reset-"));
-      const config2 = (0, import_path3.join)(dir, "talosconfig");
+      const dir = await (0, import_promises3.mkdtemp)((0, import_path4.join)((0, import_os3.tmpdir)(), "gcli-reset-"));
+      const config2 = (0, import_path4.join)(dir, "talosconfig");
       try {
         await (0, import_promises3.writeFile)(config2, access.talosconfig, { mode: 384 });
         const talos = (args, timeoutMs = 3e4) => runBinary(
@@ -256588,6 +256593,45 @@ var init_list_environments = __esm({
   }
 });
 
+// src/commands/environment/environment-payload.ts
+var NUMERIC_FIELDS, CLI_ONLY, environmentPayload;
+var init_environment_payload = __esm({
+  "src/commands/environment/environment-payload.ts"() {
+    NUMERIC_FIELDS = [
+      "minCpu",
+      "maxCpu",
+      "minMemory",
+      "maxMemory",
+      "poolSize",
+      "maxPods",
+      "builderPoolSize",
+      "builderMaxParallelBuilds",
+      "builderIdleTimeout",
+      "terminationGracePeriod"
+    ];
+    CLI_ONLY = ["spec", "project", "clusterName"];
+    environmentPayload = (spec, flags) => {
+      const merged = { ...spec };
+      for (const [key, value] of Object.entries(flags)) {
+        if (value !== void 0) merged[key] = value;
+      }
+      for (const key of CLI_ONLY) delete merged[key];
+      for (const key of NUMERIC_FIELDS) {
+        const value = merged[key];
+        if (value === void 0 || value === null || typeof value === "number") {
+          continue;
+        }
+        const n = Number(value);
+        if (!Number.isInteger(n)) {
+          throw new Error(`--${key} must be a whole number, got "${value}"`);
+        }
+        merged[key] = n;
+      }
+      return merged;
+    };
+  }
+});
+
 // src/commands/environment/create-environment.ts
 var create_environment_exports = {};
 __export(create_environment_exports, {
@@ -256602,6 +256646,7 @@ var init_create_environment = __esm({
     init_gql_client();
     init_log();
     init_load_spec();
+    init_environment_payload();
     create_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
       return (0, import_rxjs28.lastValueFrom)(
@@ -256621,8 +256666,7 @@ var init_create_environment = __esm({
             }).pipe(
               (0, import_operators13.switchMap)(
                 (clusterId) => GraphqlClienAPI.createEnvironment(projectId, {
-                  ...data,
-                  ...cmdRest,
+                  ...environmentPayload(data, cmdRest),
                   clusterId
                 })
               )
@@ -256668,6 +256712,7 @@ var init_update_environment = __esm({
     init_gql_client();
     init_log();
     init_load_spec();
+    init_environment_payload();
     update_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
       return (0, import_rxjs29.lastValueFrom)(
@@ -256688,8 +256733,7 @@ var init_update_environment = __esm({
             }).pipe(
               (0, import_operators14.switchMap)(
                 (clusterId) => GraphqlClienAPI.updateEnvironment(projectId, {
-                  ...data,
-                  ...cmdRest,
+                  ...environmentPayload(data, cmdRest),
                   clusterId
                 })
               )
@@ -270956,7 +271000,7 @@ var require_BufferList2 = __commonJS({
         this.head = this.tail = null;
         this.length = 0;
       };
-      BufferList.prototype.join = function join6(s2) {
+      BufferList.prototype.join = function join7(s2) {
         if (this.length === 0) return "";
         var p = this.head;
         var ret = "" + p.data;
@@ -275756,7 +275800,7 @@ var require_buffer_list3 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join6(s2) {
+        value: function join7(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -279098,7 +279142,7 @@ var require_buffer_list4 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join6(s2) {
+        value: function join7(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -281870,7 +281914,7 @@ var require_buffer_list5 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join6(s2) {
+        value: function join7(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -285107,7 +285151,7 @@ var require_buffer_list6 = __commonJS({
         }
       }, {
         key: "join",
-        value: function join6(s2) {
+        value: function join7(s2) {
           if (this.length === 0) return "";
           var p = this.head;
           var ret = "" + p.data;
@@ -288055,12 +288099,12 @@ var package_exports = {};
 __export(package_exports, {
   default: () => package_default
 });
-var import_archiver, import_child_process2, import_fs4, import_rxjs32, import_operators17, import_util3, ReadFile, package_default;
+var import_archiver, import_child_process2, import_fs5, import_rxjs32, import_operators17, import_util3, ReadFile, package_default;
 var init_package = __esm({
   "src/commands/lambda/package.ts"() {
     import_archiver = __toESM(require_archiver());
     import_child_process2 = require("child_process");
-    import_fs4 = require("fs");
+    import_fs5 = require("fs");
     import_rxjs32 = __toESM(require_cjs());
     import_operators17 = __toESM(require_operators());
     import_util3 = require("util");
@@ -288091,10 +288135,10 @@ var init_package = __esm({
             return (0, import_rxjs32.lastValueFrom)(
               (0, import_rxjs32.from)(streamToBufferPromise(archive)).pipe(
                 (0, import_operators17.switchMap)(
-                  (buffer) => (0, import_rxjs32.from)((0, import_util3.promisify)(import_fs4.mkdir)(".gcache")).pipe(
+                  (buffer) => (0, import_rxjs32.from)((0, import_util3.promisify)(import_fs5.mkdir)(".gcache")).pipe(
                     (0, import_operators17.catchError)(() => (0, import_rxjs32.of)(true)),
                     (0, import_operators17.switchMap)(
-                      () => (0, import_util3.promisify)(import_fs4.writeFile)(`.gcache/${data.name}.zip`, buffer)
+                      () => (0, import_util3.promisify)(import_fs5.writeFile)(`.gcache/${data.name}.zip`, buffer)
                     )
                   )
                 )
@@ -288118,11 +288162,11 @@ function streamToBufferPromise(file2) {
     });
   });
 }
-var import_form_data, import_fs5, import_rxjs33, import_operators18, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
+var import_form_data, import_fs6, import_rxjs33, import_operators18, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
-    import_fs5 = require("fs");
+    import_fs6 = require("fs");
     init_src();
     import_rxjs33 = __toESM(require_cjs());
     import_operators18 = __toESM(require_operators());
@@ -288154,7 +288198,7 @@ var init_helpers2 = __esm({
           }
           await package_default(cmd);
           const body = new import_form_data.default();
-          body.append("file[]", (0, import_fs5.createReadStream)(`.gcache/${data.name}.zip`));
+          body.append("file[]", (0, import_fs6.createReadStream)(`.gcache/${data.name}.zip`));
           const config2 = await (0, import_rxjs33.lastValueFrom)(GraphqlClienAPI.getConfig());
           return (0, import_rxjs33.lastValueFrom)(
             (0, import_rxjs33.from)(
@@ -288223,9 +288267,12 @@ var init_helpers2 = __esm({
                 minScale: cmd.minScale || payload.scaleOptions?.minScale || 0,
                 targetCpu: cmd.targetCpu || payload.scaleOptions?.targetCpu || 0,
                 idleTimeout: cmd.idleTimeout || payload.scaleOptions?.idleTimeout || 120,
-                concurrency: cmd.concurrency || payload.scaleOptions?.concurrency || 500,
-                functionTimeout: cmd.functionTimeout || payload.scaleOptions?.functionTimeout || 60,
-                specializationTimeout: cmd.specializationTimeout || payload.scaleOptions?.specializationTimeout || 120
+                // 0 = not set: the server fills these in within the project's
+                // plan (concurrency <= 3, timeouts 60/120 s capped). A fixed
+                // 500 / 60 / 120 here was refused on plans with lower maxima.
+                concurrency: cmd.concurrency || payload.scaleOptions?.concurrency || 0,
+                functionTimeout: cmd.functionTimeout || payload.scaleOptions?.functionTimeout || 0,
+                specializationTimeout: cmd.specializationTimeout || payload.scaleOptions?.specializationTimeout || 0
               }
             })
           );
@@ -288821,10 +288868,10 @@ var use_exports = {};
 __export(use_exports, {
   default: () => use_default
 });
-var import_fs6, import_rxjs45, import_operators30, import_util4, use_default;
+var import_fs7, import_rxjs45, import_operators30, import_util4, use_default;
 var init_use = __esm({
   "src/commands/project/use.ts"() {
-    import_fs6 = require("fs");
+    import_fs7 = require("fs");
     import_rxjs45 = __toESM(require_cjs());
     import_operators30 = __toESM(require_operators());
     import_util4 = require("util");
@@ -288839,7 +288886,7 @@ var init_use = __esm({
           ),
           (0, import_operators30.switchMap)(
             (projectId) => (0, import_rxjs45.from)(
-              (0, import_util4.promisify)(import_fs6.writeFile)(projectDirectory, projectId, {
+              (0, import_util4.promisify)(import_fs7.writeFile)(projectDirectory, projectId, {
                 encoding: "utf-8"
               })
             )
@@ -288855,13 +288902,13 @@ var clear_exports = {};
 __export(clear_exports, {
   default: () => clear_default
 });
-var import_fs7, import_util5, clear_default;
+var import_fs8, import_util5, clear_default;
 var init_clear = __esm({
   "src/commands/project/clear.ts"() {
-    import_fs7 = require("fs");
+    import_fs8 = require("fs");
     import_util5 = require("util");
     init_types();
-    clear_default = async () => (0, import_util5.promisify)(import_fs7.unlink)(projectDirectory);
+    clear_default = async () => (0, import_util5.promisify)(import_fs8.unlink)(projectDirectory);
   }
 });
 
@@ -320537,19 +320584,19 @@ var init_connection = __esm({
 });
 
 // src/commands/runner/daemon.ts
-var import_child_process3, import_fs8, import_promises6, import_os4, import_path4, import_util11, DEFAULT_SERVICE_NAME, RUNNER_AUTH_EXIT_CODE, systemdQuote, unitPath, buildUnit, resolveGcliCommand, defaultExec, SystemdUserService, assertSystemdAvailable;
+var import_child_process3, import_fs9, import_promises6, import_os4, import_path5, import_util11, DEFAULT_SERVICE_NAME, RUNNER_AUTH_EXIT_CODE, systemdQuote, unitPath, buildUnit, resolveGcliCommand, defaultExec, SystemdUserService, assertSystemdAvailable;
 var init_daemon = __esm({
   "src/commands/runner/daemon.ts"() {
     import_child_process3 = require("child_process");
-    import_fs8 = require("fs");
+    import_fs9 = require("fs");
     import_promises6 = require("fs/promises");
     import_os4 = require("os");
-    import_path4 = require("path");
+    import_path5 = require("path");
     import_util11 = require("util");
     DEFAULT_SERVICE_NAME = "lambforge-runner";
     RUNNER_AUTH_EXIT_CODE = 78;
     systemdQuote = (word) => /^[A-Za-z0-9_@%+=:,./-]+$/.test(word) ? word : `"${word.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
-    unitPath = (serviceName, home = (0, import_os4.homedir)()) => (0, import_path4.join)(home, ".config", "systemd", "user", `${serviceName}.service`);
+    unitPath = (serviceName, home = (0, import_os4.homedir)()) => (0, import_path5.join)(home, ".config", "systemd", "user", `${serviceName}.service`);
     buildUnit = ({
       serviceName,
       execStart,
@@ -320588,7 +320635,7 @@ var init_daemon = __esm({
       }
       let script = argv[1];
       try {
-        script = (0, import_fs8.realpathSync)(script);
+        script = (0, import_fs9.realpathSync)(script);
       } catch {
       }
       const ephemeral = /[/\\]_npx[/\\]|[/\\]\.npm[/\\]_cacache/.test(script);
@@ -320610,7 +320657,7 @@ var init_daemon = __esm({
       /** install -> daemon-reload -> enable -> restart (picks up a changed unit). */
       async install(unitContent) {
         const path2 = unitPath(this.serviceName, this.home);
-        await (0, import_promises6.mkdir)((0, import_path4.join)(path2, ".."), { recursive: true });
+        await (0, import_promises6.mkdir)((0, import_path5.join)(path2, ".."), { recursive: true });
         await (0, import_promises6.writeFile)(path2, unitContent, "utf-8");
         await this.systemctl("daemon-reload");
         await this.systemctl("enable", this.unit);
@@ -320626,7 +320673,7 @@ var init_daemon = __esm({
       }
       /** Whether `runner:daemon:install` wrote the unit. */
       installed() {
-        return (0, import_fs8.existsSync)(unitPath(this.serviceName, this.home));
+        return (0, import_fs9.existsSync)(unitPath(this.serviceName, this.home));
       }
       start() {
         return this.systemctl("start", this.unit);
@@ -322412,13 +322459,13 @@ var init_config2 = __esm({
 });
 
 // src/commands/workspace/files.ts
-var import_child_process5, import_crypto2, import_fs9, import_path5, import_util12, run, WorkspaceError, MAX_READ_BYTES, MAX_WRITE_BYTES, DEFAULT_LIST_LIMIT, MAX_LIST_LIMIT, DEFAULT_SEARCH_RESULTS, MAX_SEARCH_RESULTS, MAX_MATCH_TEXT, SKIP_DIRS, SECRET_FILE, SECRET_TEMPLATE, isSecretFile, contentHash, toPosix, WorkspaceFiles;
+var import_child_process5, import_crypto2, import_fs10, import_path6, import_util12, run, WorkspaceError, MAX_READ_BYTES, MAX_WRITE_BYTES, DEFAULT_LIST_LIMIT, MAX_LIST_LIMIT, DEFAULT_SEARCH_RESULTS, MAX_SEARCH_RESULTS, MAX_MATCH_TEXT, SKIP_DIRS, SECRET_FILE, SECRET_TEMPLATE, isSecretFile, contentHash, toPosix, WorkspaceFiles;
 var init_files = __esm({
   "src/commands/workspace/files.ts"() {
     import_child_process5 = require("child_process");
     import_crypto2 = require("crypto");
-    import_fs9 = require("fs");
-    import_path5 = require("path");
+    import_fs10 = require("fs");
+    import_path6 = require("path");
     import_util12 = require("util");
     run = (0, import_util12.promisify)(import_child_process5.execFile);
     WorkspaceError = class extends Error {
@@ -322438,11 +322485,11 @@ var init_files = __esm({
     SECRET_FILE = /^(\.env(\..+)?|.*\.(pem|key|p12|pfx|keystore|jks)|id_(rsa|dsa|ecdsa|ed25519)(\.pub)?|\.npmrc|\.pypirc|\.netrc|credentials(\.json)?)$/i;
     SECRET_TEMPLATE = /\.(example|sample|template|dist|defaults)$/i;
     isSecretFile = (path2) => {
-      const name2 = (0, import_path5.basename)(path2);
+      const name2 = (0, import_path6.basename)(path2);
       return SECRET_FILE.test(name2) && !SECRET_TEMPLATE.test(name2);
     };
     contentHash = (content) => (0, import_crypto2.createHash)("sha256").update(content).digest("hex").slice(0, 16);
-    toPosix = (p) => p.split(import_path5.sep).join("/");
+    toPosix = (p) => p.split(import_path6.sep).join("/");
     WorkspaceFiles = class {
       constructor(root, options = {}) {
         this.root = root;
@@ -322451,9 +322498,9 @@ var init_files = __esm({
       /** Absolute path for a workspace-relative one, or a WorkspaceError. */
       async resolvePath(input, { forWrite = false } = {}) {
         const rel = (input ?? ".").trim() || ".";
-        const abs = (0, import_path5.resolve)(this.root, rel);
-        const fromRoot = (0, import_path5.relative)(this.root, abs);
-        if (fromRoot.startsWith("..") || (0, import_path5.isAbsolute)(fromRoot)) {
+        const abs = (0, import_path6.resolve)(this.root, rel);
+        const fromRoot = (0, import_path6.relative)(this.root, abs);
+        if (fromRoot.startsWith("..") || (0, import_path6.isAbsolute)(fromRoot)) {
           throw new WorkspaceError(
             `${input} is outside the workspace root - paths are relative to ${this.root}`,
             403
@@ -322462,9 +322509,9 @@ var init_files = __esm({
         let existing = abs;
         for (; ; ) {
           try {
-            const real = await import_fs9.promises.realpath(existing);
-            const realFromRoot = (0, import_path5.relative)(this.root, real);
-            if (realFromRoot.startsWith("..") || (0, import_path5.isAbsolute)(realFromRoot)) {
+            const real = await import_fs10.promises.realpath(existing);
+            const realFromRoot = (0, import_path6.relative)(this.root, real);
+            if (realFromRoot.startsWith("..") || (0, import_path6.isAbsolute)(realFromRoot)) {
               throw new WorkspaceError(
                 `${input} resolves outside the workspace root (symlink)`,
                 403
@@ -322473,7 +322520,7 @@ var init_files = __esm({
             break;
           } catch (e2) {
             if (e2 instanceof WorkspaceError) throw e2;
-            const parent = (0, import_path5.dirname)(existing);
+            const parent = (0, import_path6.dirname)(existing);
             if (parent === existing) break;
             existing = parent;
           }
@@ -322521,7 +322568,7 @@ var init_files = __esm({
         const out = [];
         const walk = async (relDir) => {
           if (out.length > limit) return;
-          const entries = await import_fs9.promises.readdir((0, import_path5.join)(this.root, relDir), { withFileTypes: true }).catch(() => []);
+          const entries = await import_fs10.promises.readdir((0, import_path6.join)(this.root, relDir), { withFileTypes: true }).catch(() => []);
           for (const entry of entries) {
             if (SKIP_DIRS.has(entry.name)) continue;
             const rel = relDir === "." ? entry.name : `${relDir}/${entry.name}`;
@@ -322564,7 +322611,7 @@ var init_files = __esm({
         entries = entries.slice(0, limit);
         await Promise.all(
           entries.filter((e2) => e2.type === "file").map(async (e2) => {
-            e2.size = await import_fs9.promises.stat((0, import_path5.join)(this.root, e2.path)).then((s2) => s2.size).catch(() => void 0);
+            e2.size = await import_fs10.promises.stat((0, import_path6.join)(this.root, e2.path)).then((s2) => s2.size).catch(() => void 0);
           })
         );
         return {
@@ -322575,12 +322622,12 @@ var init_files = __esm({
       async read(args) {
         if (!args.path) throw new WorkspaceError("path is required");
         const { abs, rel } = await this.resolvePath(args.path);
-        const stat2 = await import_fs9.promises.stat(abs).catch(() => null);
+        const stat2 = await import_fs10.promises.stat(abs).catch(() => null);
         if (!stat2) throw new WorkspaceError(`${rel} does not exist`, 404);
         if (stat2.isDirectory()) {
           throw new WorkspaceError(`${rel} is a directory - use LocalListFiles`);
         }
-        const buffer = await import_fs9.promises.readFile(abs);
+        const buffer = await import_fs10.promises.readFile(abs);
         if (buffer.subarray(0, 8e3).includes(0)) {
           return { path: rel, size: stat2.size, binary: true, content: "" };
         }
@@ -322609,7 +322656,7 @@ var init_files = __esm({
         };
       }
       async currentText(abs) {
-        return import_fs9.promises.readFile(abs, "utf-8").catch((e2) => {
+        return import_fs10.promises.readFile(abs, "utf-8").catch((e2) => {
           if (e2?.code === "ENOENT") return null;
           throw e2;
         });
@@ -322630,8 +322677,8 @@ var init_files = __esm({
             );
           }
         }
-        await import_fs9.promises.mkdir((0, import_path5.dirname)(abs), { recursive: true });
-        await import_fs9.promises.writeFile(abs, content, "utf-8");
+        await import_fs10.promises.mkdir((0, import_path6.dirname)(abs), { recursive: true });
+        await import_fs10.promises.writeFile(abs, content, "utf-8");
         return {
           path: rel,
           size: Buffer.byteLength(content),
@@ -322663,7 +322710,7 @@ var init_files = __esm({
           );
         }
         const after = args.replaceAll ? before.split(args.oldText).join(args.newText ?? "") : before.replace(args.oldText, () => args.newText ?? "");
-        await import_fs9.promises.writeFile(abs, after, "utf-8");
+        await import_fs10.promises.writeFile(abs, after, "utf-8");
         return {
           path: rel,
           replacements: args.replaceAll ? count : 1,
@@ -322674,14 +322721,14 @@ var init_files = __esm({
       async delete(args) {
         if (!args.path) throw new WorkspaceError("path is required");
         const { abs, rel } = await this.resolvePath(args.path, { forWrite: true });
-        const stat2 = await import_fs9.promises.lstat(abs).catch(() => null);
+        const stat2 = await import_fs10.promises.lstat(abs).catch(() => null);
         if (!stat2) return { path: rel, deleted: false };
         if (stat2.isDirectory()) {
           throw new WorkspaceError(
             `${rel} is a directory - only files can be deleted (use RunCommand for more)`
           );
         }
-        await import_fs9.promises.unlink(abs);
+        await import_fs10.promises.unlink(abs);
         return { path: rel, deleted: true };
       }
       async search(args) {
@@ -322733,7 +322780,7 @@ var init_files = __esm({
           raw = [];
           for (const file2 of await this.allFiles(rel, 2e4)) {
             if (globRe && !globRe.test(file2)) continue;
-            const text = await import_fs9.promises.readFile((0, import_path5.join)(this.root, file2)).catch(() => null);
+            const text = await import_fs10.promises.readFile((0, import_path6.join)(this.root, file2)).catch(() => null);
             if (!text || text.subarray(0, 8e3).includes(0)) continue;
             text.toString("utf-8").split("\n").forEach((line, i2) => {
               if (raw.length <= max && re.test(line)) {
@@ -323526,11 +323573,11 @@ __export(start_exports4, {
   WORKSPACE_VERSION: () => WORKSPACE_VERSION,
   default: () => start_default2
 });
-var import_promises12, import_path6, import_rxjs66, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
+var import_promises12, import_path7, import_rxjs66, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
 var init_start4 = __esm({
   "src/commands/workspace/start.ts"() {
     import_promises12 = require("fs/promises");
-    import_path6 = require("path");
+    import_path7 = require("path");
     import_rxjs66 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
@@ -323548,7 +323595,7 @@ var init_start4 = __esm({
       if (cmd.token) {
         return {
           id: "(from --token)",
-          name: cmd.name ?? (0, import_path6.basename)(root),
+          name: cmd.name ?? (0, import_path7.basename)(root),
           token: cmd.token,
           projectId: cmd.project ?? "",
           root
@@ -323568,7 +323615,7 @@ var init_start4 = __esm({
           );
         }
       );
-      const name2 = cmd.name || (0, import_path6.basename)(root);
+      const name2 = cmd.name || (0, import_path7.basename)(root);
       Logger.info(`Registering ${root} as local workspace "${name2}"...`);
       const { workspace, token } = await (0, import_rxjs66.lastValueFrom)(
         GraphqlClienAPI.createLocalWorkspace(projectId, name2)
@@ -323756,8 +323803,20 @@ init_helpers();
 function buildCommands(program2) {
   program2.command("build").description("Build bundle using esbuild https://esbuild.github.io ").option(
     "-f, --files <files...>",
-    "File or files to bundle defaults to index.ts"
-  ).option("-b, --bundle", "Bundle code", true).option("-m, --minify", "Minify code", false).option("-p, --platform <char>", "Platform ", "node").option("-t, --target <char>", "Target ", "node14.4").option("-o, --outfile <char>", "Outfile name").option("-e, --external <external...>", "External libraries").action(lazy(() => Promise.resolve().then(() => (init_build(), build_exports)).then((m2) => m2.default)));
+    "File or files to bundle (default: function.file from lambforge.yaml, else index.ts)"
+  ).option(
+    "-b, --bundle",
+    "Bundle code (default: options.bundler.bundle, else true)"
+  ).option(
+    "-m, --minify",
+    "Minify code (default: options.bundler.minify, else false)"
+  ).option("-p, --platform <char>", "Platform ", "node").option(
+    "-t, --target <char>",
+    "Target (default: options.bundler.target, else node24)"
+  ).option(
+    "-o, --outfile <char>",
+    "Outfile name (default: options.bundler.outfile, else index.js)"
+  ).option("-e, --external <external...>", "External libraries").action(lazy(() => Promise.resolve().then(() => (init_build(), build_exports)).then((m2) => m2.default)));
 }
 
 // src/commands/cluster/index.ts
