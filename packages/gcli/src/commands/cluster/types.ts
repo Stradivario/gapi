@@ -93,10 +93,9 @@ monthToDate {
   period
   nodeHours
   loadBalancerHours
-  totalCostEur
-  totalCostUsd
+  totalCost
 }
-estimatedMonthlyCostEur
+estimatedMonthlyCost
 issues {
   severity
   code
@@ -249,10 +248,9 @@ export interface ClusterOverview {
     period?: string;
     nodeHours?: number;
     loadBalancerHours?: number;
-    totalCostEur?: number;
-    totalCostUsd?: number;
+    totalCost?: number;
   } | null;
-  estimatedMonthlyCostEur?: number | null;
+  estimatedMonthlyCost?: number | null;
   issues?: { severity: string; code: string; message: string }[];
 }
 

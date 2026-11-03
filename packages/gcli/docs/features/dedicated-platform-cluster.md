@@ -14,7 +14,7 @@ commands (cluster-provisioner operations, the same ones gql-fission's
 | `cluster:health --cluster` | `clusterHealth(limit: 1)` - latest agent report + nodes |
 | `cluster:scale-events --cluster [--limit]` | `clusterScaleEvents` |
 | `cluster:plan --cluster` | `clusterProvisioningPlan` - why pods are pending (verdict per pod), the nodes pods mode would create, consolidation (plan 17) |
-| `cluster:cost` | `projectClustersOverview` (`monthToDate`, `estimatedMonthlyCostEur`) |
+| `cluster:cost` | `projectClustersOverview` (`monthToDate`, `estimatedMonthlyCost`) |
 | `cluster:scale --workers 1-10 [--wait]` | `scaleProjectCluster` |
 | `cluster:scale:control-planes --count 1/3/5 [--wait]` | `scaleControlPlanesProjectCluster` |
 | `cluster:multi-node --workers [--wait]` / `cluster:single-node [--wait]` | `migrateToMultiNodeProjectCluster` / `revertToSingleNodeProjectCluster` |
