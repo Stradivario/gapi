@@ -256,7 +256,28 @@ export function registerClusterCommands(program: Command) {
       'Comma-separated worker server types in order of preference, e.g. cx33,cpx22 (the next is used when one is out of stock); "" = the cluster\'s own type',
     )
     .option('--step <n>', 'Workers added per scale-up (1-3, custom profile)')
+    .option(
+      '--mode <mode>',
+      'thresholds (CPU/memory %) | pods (create the cheapest nodes that fit unschedulable pods)',
+    )
+    .option(
+      '--consolidation',
+      'pods mode: remove the newest worker when its pods fit elsewhere',
+    )
+    .option('--no-consolidation', 'pods mode: never remove workers by itself')
+    .option(
+      '--minNodeAge <minutes>',
+      'pods mode: never remove a worker younger than this (5-1440)',
+    )
     .action(lazy(() => import('./autoscale').then((m) => m.default)));
+
+  target(
+    program
+      .command('cluster:plan')
+      .description(
+        'Why pods are pending and what the pods-mode autoscaler would do: a verdict per pod, the nodes it would create, consolidation',
+      ),
+  ).action(lazy(() => import('./plan').then((m) => m.default)));
 
   target(
     program

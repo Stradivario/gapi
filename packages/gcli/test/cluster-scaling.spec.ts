@@ -105,6 +105,18 @@ describe('[cluster scaling commands]', () => {
         '--profile must be one of',
       );
     });
+    it('maps --mode, --no-consolidation and --minNodeAge (pods mode)', () => {
+      expect(
+        toAutoscaleInput({
+          mode: 'pods',
+          consolidation: false,
+          minNodeAge: '45',
+        }),
+      ).toEqual({ mode: 'pods', consolidation: false, minNodeAgeMinutes: 45 });
+      expect(() => toAutoscaleInput({ mode: 'karpenter' })).toThrow(
+        '--mode must be thresholds or pods',
+      );
+    });
     it('refuses nothing-to-change and conflicting flags', () => {
       expect(() => toAutoscaleInput({})).toThrow('Nothing to change');
       expect(() => toAutoscaleInput({ enable: true, disable: true })).toThrow(

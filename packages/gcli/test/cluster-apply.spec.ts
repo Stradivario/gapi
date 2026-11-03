@@ -189,6 +189,38 @@ describe('[cluster:apply plan]', () => {
     ]);
   });
 
+  it('validates pods mode and pools', () => {
+    expect(
+      validateDesired({
+        name: 'prod',
+        autoscale: {
+          mode: 'pods',
+          consolidation: true,
+          minNodeAgeMinutes: 30,
+          pools: [
+            {
+              name: 'big',
+              serverTypes: ['cx53'],
+              taints: [{ key: 'big', effect: 'NoSchedule' }],
+            },
+          ],
+        },
+      }),
+    ).toEqual([]);
+    expect(
+      validateDesired({
+        name: 'prod',
+        autoscale: {
+          mode: 'magic' as never,
+          pools: [{ name: 'x', serverTypes: [] }],
+        },
+      }),
+    ).toEqual([
+      expect.stringContaining("mode must be 'thresholds' or 'pods'"),
+      expect.stringContaining('pools must be up to 5 pools'),
+    ]);
+  });
+
   it('marks capacity- or IP-removing steps destructive', () => {
     const plan = planClusterChanges(cluster({ withLoadBalancer: true }), {
       name: 'prod',

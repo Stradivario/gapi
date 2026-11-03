@@ -73,6 +73,7 @@ const AUTOSCALE_BOUNDS: Record<string, [number, number]> = {
   samplesToScale: [1, 20],
   cooldownMinutes: [1, 1440],
   scaleUpStep: [1, 3],
+  minNodeAgeMinutes: [5, 1440],
 };
 
 const SERVER_TYPE_NAME = /^[a-z]+[0-9]+[a-z]*$/;
@@ -126,6 +127,37 @@ export const validateDesired = (d: ClusterDesired): string[] => {
       if (!SCALING_PROFILES.includes(value as never)) {
         errors.push(
           `cluster.autoscale.scalingProfile must be one of ${SCALING_PROFILES.join(', ')}`,
+        );
+      }
+      continue;
+    }
+    if (key === 'mode') {
+      if (!['thresholds', 'pods'].includes(String(value))) {
+        errors.push("cluster.autoscale.mode must be 'thresholds' or 'pods'");
+      }
+      continue;
+    }
+    if (key === 'consolidation') {
+      if (typeof value !== 'boolean') {
+        errors.push('cluster.autoscale.consolidation must be true or false');
+      }
+      continue;
+    }
+    if (key === 'pools') {
+      const pools = value as unknown as Array<Record<string, unknown>>;
+      if (
+        !Array.isArray(pools) ||
+        pools.length > 5 ||
+        pools.some(
+          (p) =>
+            !p ||
+            typeof p.name !== 'string' ||
+            !Array.isArray(p.serverTypes) ||
+            !(p.serverTypes as unknown[]).length,
+        )
+      ) {
+        errors.push(
+          'cluster.autoscale.pools must be up to 5 pools, each { name, serverTypes: [...], labels?, taints?, maxWorkers?, weight? }',
         );
       }
       continue;
@@ -322,7 +354,16 @@ export const planClusterChanges = (
         kind: 'autoscale',
         input: changed,
         description: `autoscale: ${Object.entries(changed)
-          .map(([k, v]) => `${k}=${Array.isArray(v) ? v.join(',') : v}`)
+          .map(
+            ([k, v]) =>
+              `${k}=${
+                k === 'pools'
+                  ? `${(v as unknown[]).length} pool(s)`
+                  : Array.isArray(v)
+                    ? v.join(',')
+                    : v
+              }`,
+          )
           .join(', ')}`,
       });
     }
