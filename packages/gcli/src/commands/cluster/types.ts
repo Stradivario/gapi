@@ -28,6 +28,24 @@ enabled
 scalingProfile
 serverTypes
 scaleUpStep
+mode
+consolidation
+minNodeAgeMinutes
+pools {
+  name
+  serverTypes
+  labels {
+    key
+    value
+  }
+  taints {
+    key
+    value
+    effect
+  }
+  maxWorkers
+  weight
+}
 minWorkers
 maxWorkers
 cpuScaleUpPercent
@@ -75,10 +93,9 @@ monthToDate {
   period
   nodeHours
   loadBalancerHours
-  totalCostEur
-  totalCostUsd
+  totalCost
 }
-estimatedMonthlyCostEur
+estimatedMonthlyCost
 issues {
   severity
   code
@@ -160,6 +177,15 @@ export const SCALING_PROFILES: ScalingProfile[] = [
   'custom',
 ];
 
+export interface ClusterNodePool {
+  name: string;
+  serverTypes: string[];
+  labels?: Array<{ key: string; value: string }>;
+  taints?: Array<{ key: string; value?: string; effect: string }>;
+  maxWorkers?: number;
+  weight?: number;
+}
+
 export interface ClusterAutoscalePolicy {
   enabled?: boolean;
   /** Presets thresholds/heartbeats/cooldown/step; 'custom' = as typed. */
@@ -168,6 +194,13 @@ export interface ClusterAutoscalePolicy {
   serverTypes?: string[];
   /** Workers added per scale-up (1-3). */
   scaleUpStep?: number;
+  /** 'thresholds' | 'pods' (plan 17: nodes for unschedulable pods). */
+  mode?: 'thresholds' | 'pods';
+  /** pods mode: remove the newest worker when its pods fit elsewhere. */
+  consolidation?: boolean;
+  minNodeAgeMinutes?: number;
+  /** pods mode: extra node pools (replaces the list). */
+  pools?: ClusterNodePool[];
   minWorkers?: number;
   maxWorkers?: number;
   cpuScaleUpPercent?: number;
@@ -215,10 +248,9 @@ export interface ClusterOverview {
     period?: string;
     nodeHours?: number;
     loadBalancerHours?: number;
-    totalCostEur?: number;
-    totalCostUsd?: number;
+    totalCost?: number;
   } | null;
-  estimatedMonthlyCostEur?: number | null;
+  estimatedMonthlyCost?: number | null;
   issues?: { severity: string; code: string; message: string }[];
 }
 

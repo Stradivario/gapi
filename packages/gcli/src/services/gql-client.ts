@@ -967,6 +967,65 @@ export class GraphqlClienAPI {
     }).pipe(map((res) => res.updateProjectClusterAutoscale));
   }
 
+  /** Plan 17: why pods are pending and what pods mode would do. */
+  public static clusterProvisioningPlan(projectId: string, clusterId: string) {
+    return this.query<{
+      clusterProvisioningPlan: {
+        mode: string;
+        enabled: boolean;
+        agentReportsPods: boolean;
+        sampleAt: string | null;
+        note: string | null;
+        addedMonthly: number;
+        verdicts: { pod: string; status: string; reason: string | null }[];
+        claims: { pool: string; type: string; price: number; pods: string[] }[];
+        consolidation: {
+          action: string;
+          node: string;
+          reason: string;
+          savingMonthly: number | null;
+        } | null;
+      };
+    }>({
+      query: gql`
+        query clusterProvisioningPlan(
+          $projectId: String!
+          $clusterId: String!
+        ) {
+          clusterProvisioningPlan(
+            projectId: $projectId
+            clusterId: $clusterId
+          ) {
+            mode
+            enabled
+            agentReportsPods
+            sampleAt
+            note
+            addedMonthly
+            verdicts {
+              pod
+              status
+              reason
+            }
+            claims {
+              pool
+              type
+              price
+              pods
+            }
+            consolidation {
+              action
+              node
+              reason
+              savingMonthly
+            }
+          }
+        }
+      `,
+      variables: { projectId, clusterId },
+    }).pipe(map((res) => res.clusterProvisioningPlan));
+  }
+
   /** projectClusters with the fields cluster:apply compares. */
   public static projectClustersDetailed(projectId: string) {
     return this.query<{

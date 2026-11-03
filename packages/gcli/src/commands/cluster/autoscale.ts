@@ -24,6 +24,10 @@ export interface AutoscaleOptions extends ClusterTargetOptions {
   profile?: string;
   serverTypes?: string;
   step?: string;
+  mode?: string;
+  /** commander: --consolidation / --no-consolidation */
+  consolidation?: boolean;
+  minNodeAge?: string;
 }
 
 /** Only the flags given - the server merges them into the stored policy
@@ -52,6 +56,7 @@ export const toAutoscaleInput = (
     ['samples', 'samplesToScale', 1, 20],
     ['cooldown', 'cooldownMinutes', 1, 1440],
     ['step', 'scaleUpStep', 1, 3],
+    ['minNodeAge', 'minNodeAgeMinutes', 5, 1440],
   ];
   for (const [flag, field, min, max] of ints) {
     if (cmd[flag] !== undefined) {
@@ -72,6 +77,15 @@ export const toAutoscaleInput = (
     input.scalingProfile =
       cmd.profile as ClusterAutoscalePolicy['scalingProfile'];
   }
+  if (cmd.mode !== undefined) {
+    if (!['thresholds', 'pods'].includes(cmd.mode)) {
+      throw new Error(`--mode must be thresholds or pods, got "${cmd.mode}"`);
+    }
+    input.mode = cmd.mode as ClusterAutoscalePolicy['mode'];
+  }
+  if (cmd.consolidation !== undefined) {
+    input.consolidation = cmd.consolidation;
+  }
   if (cmd.serverTypes !== undefined) {
     // "" (or "none") clears the list: workers use the cluster's own type
     input.serverTypes = ['', 'none'].includes(cmd.serverTypes.trim())
@@ -83,7 +97,7 @@ export const toAutoscaleInput = (
   }
   if (!Object.keys(input).length) {
     throw new Error(
-      'Nothing to change: pass --enable/--disable and/or --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)',
+      'Nothing to change: pass --enable/--disable and/or --mode, --consolidation/--no-consolidation, --minNodeAge, --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)',
     );
   }
   return input;
@@ -104,6 +118,7 @@ export default async (cmd: AutoscaleOptions) => {
       cluster: cluster.name,
       workers: cluster.topology?.workers,
       enabled: a.enabled,
+      mode: a.mode,
       profile: a.scalingProfile,
       workerTypes: a.serverTypes?.length
         ? a.serverTypes.join(',')
