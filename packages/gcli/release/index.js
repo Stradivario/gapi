@@ -21369,7 +21369,7 @@ var require_lib = __commonJS({
 var require_XMLHttpRequest = __commonJS({
   "../../node_modules/xmlhttprequest/lib/XMLHttpRequest.js"(exports2) {
     var Url = require("url");
-    var spawn4 = require("child_process").spawn;
+    var spawn5 = require("child_process").spawn;
     var fs3 = require("fs");
     exports2.XMLHttpRequest = function() {
       "use strict";
@@ -21639,7 +21639,7 @@ var require_XMLHttpRequest = __commonJS({
           var syncFile = ".node-xmlhttprequest-sync-" + process.pid;
           fs3.writeFileSync(syncFile, "", "utf8");
           var execString = "var http = require('http'), https = require('https'), fs = require('fs');var doRequest = http" + (ssl ? "s" : "") + ".request;var options = " + JSON.stringify(options) + ";var responseText = '';var req = doRequest(options, function(response) {response.setEncoding('utf8');response.on('data', function(chunk) {  responseText += chunk;});response.on('end', function() {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: null, data: {statusCode: response.statusCode, headers: response.headers, text: responseText}}), 'utf8');fs.unlinkSync('" + syncFile + "');});response.on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});}).on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});" + (data ? "req.write('" + JSON.stringify(data).slice(1, -1).replace(/'/g, "\\'") + "');" : "") + "req.end();";
-          var syncProc = spawn4(process.argv[0], ["-e", execString]);
+          var syncProc = spawn5(process.argv[0], ["-e", execString]);
           while (fs3.existsSync(syncFile)) {
           }
           var resp = JSON.parse(fs3.readFileSync(contentFile, "utf8"));
@@ -36015,7 +36015,7 @@ var init_types = __esm({
 });
 
 // src/commands/cluster/types.ts
-var ClusterChangeFragment, ClusterAutoscaleFragment, ClusterOverviewFragment, ClusterHealthFragment, ClusterScaleEventFragment, ClusterNodeFragment;
+var ClusterChangeFragment, ClusterAutoscaleFragment, ClusterOverviewFragment, ClusterHealthFragment, ClusterScaleEventFragment, SCALING_PROFILES, ClusterNodeFragment;
 var init_types2 = __esm({
   "src/commands/cluster/types.ts"() {
     ClusterChangeFragment = `
@@ -36036,6 +36036,9 @@ error
 `;
     ClusterAutoscaleFragment = `
 enabled
+scalingProfile
+serverTypes
+scaleUpStep
 minWorkers
 maxWorkers
 cpuScaleUpPercent
@@ -36134,6 +36137,12 @@ memRequestsPercent
 pendingPods
 error
 `;
+    SCALING_PROFILES = [
+      "conservative",
+      "balanced",
+      "aggressive",
+      "custom"
+    ];
     ClusterNodeFragment = `
 name
 pool
@@ -37917,12 +37926,101 @@ var init_helpers = __esm({
   }
 });
 
+// src/commands/auth/browser-login.ts
+var import_child_process, import_os2, anonymous, startBrowserLogin, pollBrowserLogin, openInBrowser, sleep, waitForApproval, browserLogin;
+var init_browser_login = __esm({
+  "src/commands/auth/browser-login.ts"() {
+    import_child_process = require("child_process");
+    import_os2 = require("os");
+    init_log();
+    anonymous = async (url2, query, variables) => {
+      const res = await fetch(url2, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ query, variables })
+      });
+      const body = await res.json().catch(() => ({}));
+      if (body.errors?.length) {
+        throw new Error(body.errors.map((e2) => e2.message).join("; "));
+      }
+      if (!body.data) {
+        throw new Error(`${url2} answered ${res.status} without data`);
+      }
+      return body.data;
+    };
+    startBrowserLogin = (url2) => anonymous(
+      url2,
+      `mutation startCliLogin($hostname: String, $platform: String, $apiUrl: String) {
+      startCliLogin(hostname: $hostname, platform: $platform, apiUrl: $apiUrl) {
+        sessionId userCode verificationUrl expiresAt pollIntervalSeconds
+      }
+    }`,
+      { hostname: (0, import_os2.hostname)(), platform: (0, import_os2.platform)(), apiUrl: url2 }
+    ).then((d) => d.startCliLogin);
+    pollBrowserLogin = (url2, sessionId) => anonymous(
+      url2,
+      `mutation pollCliLogin($sessionId: String!) {
+      pollCliLogin(sessionId: $sessionId) { status token key }
+    }`,
+      { sessionId }
+    ).then((d) => d.pollCliLogin);
+    openInBrowser = (link) => {
+      const [cmd, args] = process.platform === "darwin" ? ["open", [link]] : process.platform === "win32" ? ["cmd", ["/c", "start", '""', link]] : ["xdg-open", [link]];
+      try {
+        const child = (0, import_child_process.spawn)(cmd, args, { stdio: "ignore", detached: true });
+        child.on("error", () => void 0);
+        child.unref();
+      } catch {
+      }
+    };
+    sleep = (ms) => new Promise((r2) => setTimeout(r2, ms));
+    waitForApproval = async (url2, start3, pollMs) => {
+      const every = pollMs ?? Math.max(1, start3.pollIntervalSeconds ?? 2) * 1e3;
+      const deadline = start3.expiresAt ? new Date(start3.expiresAt).getTime() : Date.now() + 10 * 6e4;
+      while (Date.now() < deadline + every) {
+        await sleep(every);
+        let poll;
+        try {
+          poll = await pollBrowserLogin(url2, start3.sessionId);
+        } catch {
+          continue;
+        }
+        if (poll.status === "approved" && poll.token && poll.key) {
+          return { token: poll.token, key: poll.key };
+        }
+        if (poll.status === "denied") {
+          throw new Error("The login was denied in the browser.");
+        }
+        if (poll.status === "expired") {
+          break;
+        }
+      }
+      throw new Error("The login link expired. Run `gcli login` again.");
+    };
+    browserLogin = async (url2, options = {}) => {
+      const print = options.print ?? ((line) => Logger.log(line));
+      const start3 = await startBrowserLogin(url2);
+      print("");
+      print("Log in to Lambforge from your browser:");
+      print(`  ${start3.verificationUrl}`);
+      print(`  Code: ${start3.userCode}  (check it matches the page)`);
+      print("");
+      if (options.openBrowser !== false) {
+        openInBrowser(start3.verificationUrl);
+      }
+      print("Waiting for approval... (Ctrl+C to cancel)");
+      return waitForApproval(url2, start3, options.pollMs);
+    };
+  }
+});
+
 // src/commands/auth/login.ts
 var login_exports = {};
 __export(login_exports, {
-  default: () => login_default
+  default: () => login_default,
+  loginWithToken: () => loginWithToken
 });
-var import_fs2, import_rxjs4, import_operators3, import_util2, MainLambforgeAPI, login_default;
+var import_fs2, import_rxjs4, import_operators3, import_util2, MainLambforgeAPI, login_default, loginWithToken;
 var init_login = __esm({
   "src/commands/auth/login.ts"() {
     import_fs2 = require("fs");
@@ -37932,8 +38030,23 @@ var init_login = __esm({
     init_log();
     init_types();
     init_gql_client();
+    init_browser_login();
     MainLambforgeAPI = "https://api.lambforge.com";
-    login_default = (cmd) => (0, import_rxjs4.lastValueFrom)(
+    login_default = async (cmd) => {
+      if (!cmd.token && !cmd.ci) {
+        const { token, key } = await browserLogin(cmd.url || MainLambforgeAPI, {
+          openBrowser: cmd.browser !== false
+        });
+        return loginWithToken({ ...cmd, token, key: cmd.key || key });
+      }
+      if (!cmd.key && !cmd.ci) {
+        throw new Error(
+          "--key is required with --token (or run `gcli login` alone to log in through the browser)"
+        );
+      }
+      return loginWithToken(cmd);
+    };
+    loginWithToken = (cmd) => (0, import_rxjs4.lastValueFrom)(
       (0, import_rxjs4.of)(GraphqlClienAPI.init(cmd.key)).pipe(
         (0, import_operators3.switchMap)(
           () => (0, import_rxjs4.from)((0, import_util2.promisify)(import_fs2.mkdir)(mainDirectory)).pipe(
@@ -37988,7 +38101,7 @@ var init_login = __esm({
               ]).pipe((0, import_operators3.map)(() => user))
             ),
             (0, import_operators3.tap)(
-              (user) => Logger.log(
+              (user) => cmd.silent || Logger.log(
                 "Logged in as",
                 `"${user?.displayName}"`,
                 "with email",
@@ -44558,10 +44671,10 @@ var require_typescript = __commonJS({
             Debug2.loggingHost.log(level, s2);
           }
         }
-        function log(s2) {
+        function log2(s2) {
           logMessage(3, s2);
         }
-        Debug2.log = log;
+        Debug2.log = log2;
         ((_log) => {
           function error210(s2) {
             logMessage(1, s2);
@@ -44571,15 +44684,15 @@ var require_typescript = __commonJS({
             logMessage(2, s2);
           }
           _log.warn = warn;
-          function log2(s2) {
+          function log22(s2) {
             logMessage(3, s2);
           }
-          _log.log = log2;
+          _log.log = log22;
           function trace2(s2) {
             logMessage(4, s2);
           }
           _log.trace = trace2;
-        })(log = Debug2.log || (Debug2.log = {}));
+        })(log2 = Debug2.log || (Debug2.log = {}));
         const assertionCache = {};
         function getAssertionLevel() {
           return currentAssertionLevel;
@@ -49333,7 +49446,7 @@ ${lanes.join("\n")}
           const isMacOs = process.platform === "darwin";
           const isLinuxOrMacOs = process.platform === "linux" || isMacOs;
           const statSyncOptions = { throwIfNoEntry: false };
-          const platform = _os.platform();
+          const platform2 = _os.platform();
           const useCaseSensitiveFileNames2 = isFileSystemCaseSensitive();
           const fsRealpath = !!_fs.realpathSync.native ? process.platform === "win32" ? fsRealPathHandlingLongPath : _fs.realpathSync.native : _fs.realpathSync;
           const executingFilePath = __filename.endsWith("sys.js") ? _path.join(_path.dirname(__dirname), "__fake__.js") : __filename;
@@ -49538,7 +49651,7 @@ ${lanes.join("\n")}
             }
           }
           function isFileSystemCaseSensitive() {
-            if (platform === "win32" || platform === "win64") {
+            if (platform2 === "win32" || platform2 === "win64") {
               return false;
             }
             return !fileExists(swapCase(__filename));
@@ -175897,8 +176010,8 @@ ${lanes.join("\n")}
         WatchLogLevel2[WatchLogLevel2["Verbose"] = 2] = "Verbose";
         return WatchLogLevel2;
       })(WatchLogLevel || {});
-      function getWatchFactory(host, watchLogLevel, log, getDetailWatchInfo2) {
-        setSysLog(watchLogLevel === 2 ? log : noop3);
+      function getWatchFactory(host, watchLogLevel, log2, getDetailWatchInfo2) {
+        setSysLog(watchLogLevel === 2 ? log2 : noop3);
         const plainInvokeFactory = {
           watchFile: (file2, callback, pollingInterval, options) => host.watchFile(file2, callback, pollingInterval, options),
           watchDirectory: (directory, callback, flags, options) => host.watchDirectory(directory, callback, (flags & 1) !== 0, options)
@@ -175935,36 +176048,36 @@ ${lanes.join("\n")}
           return typeof host.useCaseSensitiveFileNames === "boolean" ? host.useCaseSensitiveFileNames : host.useCaseSensitiveFileNames();
         }
         function createExcludeWatcherWithLogging(file2, flags, options, detailInfo1, detailInfo2) {
-          log(`ExcludeWatcher:: Added:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`);
+          log2(`ExcludeWatcher:: Added:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`);
           return {
-            close: () => log(`ExcludeWatcher:: Close:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`)
+            close: () => log2(`ExcludeWatcher:: Close:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`)
           };
         }
         function createFileWatcherWithLogging(file2, cb, flags, options, detailInfo1, detailInfo2) {
-          log(`FileWatcher:: Added:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`);
+          log2(`FileWatcher:: Added:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`);
           const watcher = triggerInvokingFactory.watchFile(file2, cb, flags, options, detailInfo1, detailInfo2);
           return {
             close: () => {
-              log(`FileWatcher:: Close:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`);
+              log2(`FileWatcher:: Close:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`);
               watcher.close();
             }
           };
         }
         function createDirectoryWatcherWithLogging(file2, cb, flags, options, detailInfo1, detailInfo2) {
           const watchInfo = `DirectoryWatcher:: Added:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`;
-          log(watchInfo);
+          log2(watchInfo);
           const start3 = timestamp();
           const watcher = triggerInvokingFactory.watchDirectory(file2, cb, flags, options, detailInfo1, detailInfo2);
           const elapsed = timestamp() - start3;
-          log(`Elapsed:: ${elapsed}ms ${watchInfo}`);
+          log2(`Elapsed:: ${elapsed}ms ${watchInfo}`);
           return {
             close: () => {
               const watchInfo2 = `DirectoryWatcher:: Close:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`;
-              log(watchInfo2);
+              log2(watchInfo2);
               const start22 = timestamp();
               watcher.close();
               const elapsed2 = timestamp() - start22;
-              log(`Elapsed:: ${elapsed2}ms ${watchInfo2}`);
+              log2(`Elapsed:: ${elapsed2}ms ${watchInfo2}`);
             }
           };
         }
@@ -175975,7 +176088,7 @@ ${lanes.join("\n")}
             file2,
             (...args) => {
               const triggerredInfo = `${key === "watchFile" ? "FileWatcher" : "DirectoryWatcher"}:: Triggered with ${args[0]} ${args[1] !== void 0 ? args[1] : ""}:: ${getWatchInfo(file2, flags, options, detailInfo1, detailInfo2, getDetailWatchInfo2)}`;
-              log(triggerredInfo);
+              log2(triggerredInfo);
               const start3 = timestamp();
               cb.call(
                 /*thisArg*/
@@ -175983,7 +176096,7 @@ ${lanes.join("\n")}
                 ...args
               );
               const elapsed = timestamp() - start3;
-              log(`Elapsed:: ${elapsed}ms ${triggerredInfo}`);
+              log2(`Elapsed:: ${elapsed}ms ${triggerredInfo}`);
             },
             flags,
             options,
@@ -189054,7 +189167,7 @@ ${lanes.join("\n")}
         }
         return void 0;
       }
-      function discoverTypings(host, log, fileNames, projectRootPath, safeList, packageNameToTypingLocation, typeAcquisition, unresolvedImports, typesRegistry, compilerOptions) {
+      function discoverTypings(host, log2, fileNames, projectRootPath, safeList, packageNameToTypingLocation, typeAcquisition, unresolvedImports, typesRegistry, compilerOptions) {
         if (!typeAcquisition || !typeAcquisition.enable) {
           return { cachedTypingPaths: [], newTypingNames: [], filesToWatch: [] };
         }
@@ -189089,7 +189202,7 @@ ${lanes.join("\n")}
         }
         for (const excludeTypingName of exclude) {
           const didDelete = inferredTypings.delete(excludeTypingName);
-          if (didDelete && log) log(`Typing for ${excludeTypingName} is in exclude list, will be ignored.`);
+          if (didDelete && log2) log2(`Typing for ${excludeTypingName} is in exclude list, will be ignored.`);
         }
         packageNameToTypingLocation.forEach((typing, name2) => {
           const registryEntry = typesRegistry.get(name2);
@@ -189107,7 +189220,7 @@ ${lanes.join("\n")}
           }
         });
         const result = { cachedTypingPaths, newTypingNames, filesToWatch };
-        if (log) log(`Finished typings discovery:${stringifyIndented(result)}`);
+        if (log2) log2(`Finished typings discovery:${stringifyIndented(result)}`);
         return result;
         function addInferredTyping(typingName) {
           if (!inferredTypings.has(typingName)) {
@@ -189115,7 +189228,7 @@ ${lanes.join("\n")}
           }
         }
         function addInferredTypings(typingNames, message) {
-          if (log) log(`${message}: ${JSON.stringify(typingNames)}`);
+          if (log2) log2(`${message}: ${JSON.stringify(typingNames)}`);
           forEach(typingNames, addInferredTyping);
         }
         function getTypingNames(projectRootPath2, manifestName, modulesDirName, filesToWatch2) {
@@ -189155,7 +189268,7 @@ ${lanes.join("\n")}
             return isScoped && toFileNameLowerCase(pathComponents2[pathComponents2.length - 4]) === modulesDirName || // `node_modules/@foo/bar`
             !isScoped && toFileNameLowerCase(pathComponents2[pathComponents2.length - 3]) === modulesDirName;
           });
-          if (log) log(`Searching for typing names in ${packagesFolderPath}; all files: ${JSON.stringify(dependencyManifestNames)}`);
+          if (log2) log2(`Searching for typing names in ${packagesFolderPath}; all files: ${JSON.stringify(dependencyManifestNames)}`);
           for (const manifestPath2 of dependencyManifestNames) {
             const normalizedFileName = normalizePath(manifestPath2);
             const result2 = readConfigFile(normalizedFileName, (path2) => host.readFile(path2));
@@ -189167,10 +189280,10 @@ ${lanes.join("\n")}
             if (ownTypes) {
               const absolutePath = getNormalizedAbsolutePath(ownTypes, getDirectoryPath(normalizedFileName));
               if (host.fileExists(absolutePath)) {
-                if (log) log(`    Package '${manifest2.name}' provides its own types.`);
+                if (log2) log2(`    Package '${manifest2.name}' provides its own types.`);
                 inferredTypings.set(manifest2.name, absolutePath);
               } else {
-                if (log) log(`    Package '${manifest2.name}' provides its own types but they are missing.`);
+                if (log2) log2(`    Package '${manifest2.name}' provides its own types but they are missing.`);
               }
             } else {
               packageNames.push(manifest2.name);
@@ -189194,7 +189307,7 @@ ${lanes.join("\n")}
             /* Jsx */
           ));
           if (hasJsxFile) {
-            if (log) log(`Inferred 'react' typings due to presence of '.jsx' extension`);
+            if (log2) log2(`Inferred 'react' typings due to presence of '.jsx' extension`);
             addInferredTyping("react");
           }
         }
@@ -203582,7 +203695,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const cancellationToken = host.getCancellationToken ? new CancellationTokenObject(host.getCancellationToken()) : NoopCancellationToken;
         const currentDirectory = host.getCurrentDirectory();
         maybeSetLocalizedDiagnosticMessages((_a2 = host.getLocalizedDiagnosticMessages) == null ? void 0 : _a2.bind(host));
-        function log(message) {
+        function log2(message) {
           if (host.log) {
             host.log(message);
           }
@@ -203597,7 +203710,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           readFile: maybeBind(host, host.readFile),
           getDocumentPositionMapper: maybeBind(host, host.getDocumentPositionMapper),
           getSourceFileLike: maybeBind(host, host.getSourceFileLike),
-          log
+          log: log2
         });
         function getValidSourceFile(fileName) {
           const sourceFile = program2.getSourceFile(fileName);
@@ -203632,7 +203745,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
           const typeRootsVersion = host.getTypeRootsVersion ? host.getTypeRootsVersion() : 0;
           if (lastTypesRootVersion !== typeRootsVersion) {
-            log("TypeRoots version has changed; provide new program");
+            log2("TypeRoots version has changed; provide new program");
             program2 = void 0;
             lastTypesRootVersion = typeRootsVersion;
           }
@@ -204002,7 +204115,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return ts_Completions_exports.getCompletionsAtPosition(
             host,
             program2,
-            log,
+            log2,
             getValidSourceFile(fileName),
             position,
             fullPreferences,
@@ -204017,7 +204130,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           synchronizeHostData();
           return ts_Completions_exports.getCompletionEntryDetails(
             program2,
-            log,
+            log2,
             getValidSourceFile(fileName),
             position,
             { name: name2, source, data },
@@ -204030,7 +204143,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         function getCompletionEntrySymbol2(fileName, position, name2, source, preferences = emptyOptions) {
           synchronizeHostData();
-          return ts_Completions_exports.getCompletionEntrySymbol(program2, log, getValidSourceFile(fileName), position, { name: name2, source }, host, preferences);
+          return ts_Completions_exports.getCompletionEntrySymbol(program2, log2, getValidSourceFile(fileName), position, { name: name2, source }, host, preferences);
         }
         function getQuickInfoAtPosition(fileName, position, maximumLength, verbosityLevel) {
           synchronizeHostData();
@@ -204335,10 +204448,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           let start3 = timestamp();
           const settings = toEditorSettings(editorOptions);
           const sourceFile = syntaxTreeCache.getCurrentSourceFile(fileName);
-          log("getIndentationAtPosition: getCurrentSourceFile: " + (timestamp() - start3));
+          log2("getIndentationAtPosition: getCurrentSourceFile: " + (timestamp() - start3));
           start3 = timestamp();
           const result = ts_formatting_exports.SmartIndenter.getIndentation(position, sourceFile, settings);
-          log("getIndentationAtPosition: computeIndentation  : " + (timestamp() - start3));
+          log2("getIndentationAtPosition: computeIndentation  : " + (timestamp() - start3));
           return result;
         }
         function getFormattingEditsForRange(fileName, start3, end, options) {
@@ -218092,7 +218205,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         return allCommitCharacters;
       }
-      function getCompletionsAtPosition(host, program2, log, sourceFile, position, preferences, triggerCharacter, completionKind, cancellationToken, formatContext, includeSymbol = false) {
+      function getCompletionsAtPosition(host, program2, log2, sourceFile, position, preferences, triggerCharacter, completionKind, cancellationToken, formatContext, includeSymbol = false) {
         var _a2;
         const { previousToken } = getRelevantTokens(position, sourceFile);
         if (triggerCharacter && !isInString(sourceFile, position, previousToken) && !isValidTrigger(sourceFile, triggerCharacter, previousToken, position)) {
@@ -218125,7 +218238,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         } else {
           incompleteCompletionsCache == null ? void 0 : incompleteCompletionsCache.clear();
         }
-        const stringCompletions = ts_Completions_StringCompletions_exports.getStringLiteralCompletions(sourceFile, position, previousToken, compilerOptions, host, program2, log, preferences, includeSymbol);
+        const stringCompletions = ts_Completions_StringCompletions_exports.getStringLiteralCompletions(sourceFile, position, previousToken, compilerOptions, host, program2, log2, preferences, includeSymbol);
         if (stringCompletions) {
           return stringCompletions;
         }
@@ -218134,7 +218247,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         const completionData = getCompletionData(
           program2,
-          log,
+          log2,
           sourceFile,
           compilerOptions,
           position,
@@ -218150,7 +218263,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         switch (completionData.kind) {
           case 0:
-            const response = completionInfoFromData(sourceFile, host, program2, compilerOptions, log, completionData, preferences, formatContext, position, includeSymbol);
+            const response = completionInfoFromData(sourceFile, host, program2, compilerOptions, log2, completionData, preferences, formatContext, position, includeSymbol);
             if (response == null ? void 0 : response.isIncomplete) {
               incompleteCompletionsCache == null ? void 0 : incompleteCompletionsCache.set(response);
             }
@@ -218572,7 +218685,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getOptionalReplacementSpan(location) {
         return (location == null ? void 0 : location.kind) === 80 ? createTextSpanFromNode(location) : void 0;
       }
-      function completionInfoFromData(sourceFile, host, program2, compilerOptions, log, completionData, preferences, formatContext, position, includeSymbol) {
+      function completionInfoFromData(sourceFile, host, program2, compilerOptions, log2, completionData, preferences, formatContext, position, includeSymbol) {
         const {
           symbols,
           contextToken,
@@ -218636,7 +218749,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           host,
           program2,
           getEmitScriptTarget(compilerOptions),
-          log,
+          log2,
           completionKind,
           preferences,
           compilerOptions,
@@ -219648,7 +219761,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return "TypeOnlyAlias/";
         }
       }
-      function getCompletionEntriesFromSymbols(symbols, entries, replacementToken, contextToken, location, position, sourceFile, host, program2, target, log, kind, preferences, compilerOptions, formatContext, isTypeOnlyLocation, propertyAccessToConvert, jsxIdentifierExpected, isJsxInitializer, importStatementCompletion, recommendedCompletion, symbolToOriginInfoMap, symbolToSortTextMap, isJsxIdentifierExpected, isRightOfOpenTag, includeSymbol = false) {
+      function getCompletionEntriesFromSymbols(symbols, entries, replacementToken, contextToken, location, position, sourceFile, host, program2, target, log2, kind, preferences, compilerOptions, formatContext, isTypeOnlyLocation, propertyAccessToConvert, jsxIdentifierExpected, isJsxInitializer, importStatementCompletion, recommendedCompletion, symbolToOriginInfoMap, symbolToSortTextMap, isJsxIdentifierExpected, isRightOfOpenTag, includeSymbol = false) {
         const start3 = timestamp();
         const closestSymbolDeclaration = getClosestSymbolDeclaration(contextToken, location);
         const useSemicolons = probablyUsesSemicolons(sourceFile);
@@ -219708,7 +219821,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             true
           );
         }
-        log("getCompletionsAtPosition: getCompletionEntriesFromSymbols: " + (timestamp() - start3));
+        log2("getCompletionsAtPosition: getCompletionEntriesFromSymbols: " + (timestamp() - start3));
         return {
           has: (name2) => uniques.has(name2),
           add: (name2) => uniques.set(name2, true)
@@ -219804,7 +219917,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         return entries;
       }
-      function getSymbolCompletionFromEntryId(program2, log, sourceFile, position, entryId, host, preferences) {
+      function getSymbolCompletionFromEntryId(program2, log2, sourceFile, position, entryId, host, preferences) {
         if (entryId.source === "SwitchCases/") {
           return { type: "cases" };
         }
@@ -219827,7 +219940,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const compilerOptions = program2.getCompilerOptions();
         const completionData = getCompletionData(
           program2,
-          log,
+          log2,
           sourceFile,
           compilerOptions,
           position,
@@ -219852,7 +219965,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return info && info.name === entryId.name && (entryId.source === "ClassMemberSnippet/" && symbol2.flags & 106500 || entryId.source === "ObjectLiteralMethodSnippet/" && symbol2.flags & (4 | 8192) || getSourceFromOrigin(origin) === entryId.source || entryId.source === "ObjectLiteralMemberWithComma/") ? { type: "symbol", symbol: symbol2, location, origin, contextToken, previousToken, isJsxInitializer, isTypeOnlyLocation } : void 0;
         }) || { type: "none" };
       }
-      function getCompletionEntryDetails(program2, log, sourceFile, position, entryId, host, formatContext, preferences, cancellationToken) {
+      function getCompletionEntryDetails(program2, log2, sourceFile, position, entryId, host, formatContext, preferences, cancellationToken) {
         const typeChecker = program2.getTypeChecker();
         const compilerOptions = program2.getCompilerOptions();
         const { name: name2, source, data } = entryId;
@@ -219860,7 +219973,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         if (isInString(sourceFile, position, previousToken)) {
           return ts_Completions_StringCompletions_exports.getStringLiteralCompletionDetails(name2, sourceFile, position, previousToken, program2, host, cancellationToken, preferences);
         }
-        const symbolCompletion = getSymbolCompletionFromEntryId(program2, log, sourceFile, position, entryId, host, preferences);
+        const symbolCompletion = getSymbolCompletionFromEntryId(program2, log2, sourceFile, position, entryId, host, preferences);
         switch (symbolCompletion.type) {
           case "request": {
             const { request } = symbolCompletion;
@@ -220054,8 +220167,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         Debug.assert(!(data == null ? void 0 : data.moduleSpecifier) || moduleSpecifier === data.moduleSpecifier);
         return { sourceDisplay: [textPart(moduleSpecifier)], codeActions: [codeAction] };
       }
-      function getCompletionEntrySymbol(program2, log, sourceFile, position, entryId, host, preferences) {
-        const completion = getSymbolCompletionFromEntryId(program2, log, sourceFile, position, entryId, host, preferences);
+      function getCompletionEntrySymbol(program2, log2, sourceFile, position, entryId, host, preferences) {
+        const completion = getSymbolCompletionFromEntryId(program2, log2, sourceFile, position, entryId, host, preferences);
         return completion.type === "symbol" ? completion.symbol : void 0;
       }
       var CompletionKind = /* @__PURE__ */ ((CompletionKind2) => {
@@ -220128,15 +220241,15 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           /* SourceFile */
         ));
       }
-      function getCompletionData(program2, log, sourceFile, compilerOptions, position, preferences, detailsEntryId, host, formatContext, cancellationToken) {
+      function getCompletionData(program2, log2, sourceFile, compilerOptions, position, preferences, detailsEntryId, host, formatContext, cancellationToken) {
         const typeChecker = program2.getTypeChecker();
         const inCheckedFile = isCheckedFile(sourceFile, compilerOptions);
         let start3 = timestamp();
         let currentToken2 = getTokenAtPosition(sourceFile, position);
-        log("getCompletionData: Get current token: " + (timestamp() - start3));
+        log2("getCompletionData: Get current token: " + (timestamp() - start3));
         start3 = timestamp();
         const insideComment = isInComment(sourceFile, position, currentToken2);
-        log("getCompletionData: Is inside comment: " + (timestamp() - start3));
+        log2("getCompletionData: Is inside comment: " + (timestamp() - start3));
         let insideJsDocTagTypeExpression = false;
         let insideJsDocImportTag = false;
         let isInSnippetScope = false;
@@ -220181,7 +220294,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           }
           if (!insideJsDocTagTypeExpression && !insideJsDocImportTag) {
-            log("Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.");
+            log2("Returning an empty list because completion was inside a regular comment or plain text part of a JsDoc comment.");
             return void 0;
           }
         }
@@ -220190,7 +220303,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const tokens = getRelevantTokens(position, sourceFile);
         const previousToken = tokens.previousToken;
         let contextToken = tokens.contextToken;
-        log("getCompletionData: Get previous token: " + (timestamp() - start3));
+        log2("getCompletionData: Get previous token: " + (timestamp() - start3));
         let node = currentToken2;
         let propertyAccessToConvert;
         let isRightOfDot = false;
@@ -220223,7 +220336,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             isNewIdentifierLocation = importStatementCompletionInfo.isNewIdentifierLocation;
           }
           if (!importStatementCompletionInfo.replacementSpan && isCompletionListBlocker(contextToken)) {
-            log("Returning an empty list because completion was requested in an invalid position.");
+            log2("Returning an empty list because completion was requested in an invalid position.");
             return keywordFilters ? keywordCompletionData(keywordFilters, isJsOnlyLocation, computeCommitCharactersAndIsNewIdentifier().isNewIdentifierLocation) : void 0;
           }
           let parent2 = contextToken.parent;
@@ -220356,7 +220469,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             return keywordFilters ? keywordCompletionData(keywordFilters, isJsOnlyLocation, isNewIdentifierLocation) : void 0;
           }
         }
-        log("getCompletionData: Semantic work: " + (timestamp() - semanticStart));
+        log2("getCompletionData: Semantic work: " + (timestamp() - semanticStart));
         const contextualType = previousToken && getContextualType(previousToken, position, sourceFile, typeChecker);
         const isLiteralExpected = !tryCast(previousToken, isStringLiteralLike) && !isJsxIdentifierExpected;
         const literals = !isLiteralExpected ? [] : mapDefined(
@@ -220903,7 +221016,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         function isCompletionListBlocker(contextToken2) {
           const start22 = timestamp();
           const result = isInStringOrRegularExpressionOrTemplateLiteral(contextToken2) || isSolelyIdentifierDefinitionLocation(contextToken2) || isDotOfNumericLiteral(contextToken2) || isInJsxText(contextToken2) || isBigIntLiteral(contextToken2);
-          log("getCompletionsAtPosition: isCompletionListBlocker: " + (timestamp() - start22));
+          log2("getCompletionsAtPosition: isCompletionListBlocker: " + (timestamp() - start22));
           return result;
         }
         function isInJsxText(contextToken2) {
@@ -222226,7 +222339,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           values: map210.values.bind(map210)
         };
       }
-      function getStringLiteralCompletions(sourceFile, position, contextToken, options, host, program2, log, preferences, includeSymbol) {
+      function getStringLiteralCompletions(sourceFile, position, contextToken, options, host, program2, log2, preferences, includeSymbol) {
         if (isInReferenceComment(sourceFile, position)) {
           const entries = getTripleSlashReferenceCompletion(sourceFile, position, program2, host, createModuleSpecifierResolutionHost(program2, host));
           return entries && convertPathCompletions(entries);
@@ -222234,10 +222347,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         if (isInString(sourceFile, position, contextToken)) {
           if (!contextToken || !isStringLiteralLike(contextToken)) return void 0;
           const entries = getStringLiteralCompletionEntries(sourceFile, contextToken, position, program2, host, preferences);
-          return convertStringLiteralCompletions(entries, contextToken, sourceFile, host, program2, log, options, preferences, position, includeSymbol);
+          return convertStringLiteralCompletions(entries, contextToken, sourceFile, host, program2, log2, options, preferences, position, includeSymbol);
         }
       }
-      function convertStringLiteralCompletions(completion, contextToken, sourceFile, host, program2, log, options, preferences, position, includeSymbol) {
+      function convertStringLiteralCompletions(completion, contextToken, sourceFile, host, program2, log2, options, preferences, position, includeSymbol) {
         if (completion === void 0) {
           return void 0;
         }
@@ -222258,7 +222371,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               host,
               program2,
               99,
-              log,
+              log2,
               4,
               preferences,
               options,
@@ -238761,7 +238874,7 @@ ${options.prefix}` : "\n" : options.prefix
         isEnabled: () => false,
         writeLine: noop3
       };
-      function typingToFileName(cachePath, packageName, installTypingHost, log) {
+      function typingToFileName(cachePath, packageName, installTypingHost, log2) {
         try {
           const result = resolveModuleName(packageName, combinePaths(cachePath, "index.d.ts"), {
             moduleResolution: 2
@@ -238769,8 +238882,8 @@ ${options.prefix}` : "\n" : options.prefix
           }, installTypingHost);
           return result.resolvedModule && result.resolvedModule.resolvedFileName;
         } catch (e2) {
-          if (log.isEnabled()) {
-            log.writeLine(`Failed to resolve ${packageName} in folder '${cachePath}': ${e2.message}`);
+          if (log2.isEnabled()) {
+            log2.writeLine(`Failed to resolve ${packageName} in folder '${cachePath}': ${e2.message}`);
           }
           return void 0;
         }
@@ -238797,13 +238910,13 @@ ${options.prefix}` : "\n" : options.prefix
         return { command, remaining: remaining - toSlice };
       }
       var TypingsInstaller = class {
-        constructor(installTypingHost, globalCachePath, safeListPath, typesMapLocation, throttleLimit, log = nullLog) {
+        constructor(installTypingHost, globalCachePath, safeListPath, typesMapLocation, throttleLimit, log2 = nullLog) {
           this.installTypingHost = installTypingHost;
           this.globalCachePath = globalCachePath;
           this.safeListPath = safeListPath;
           this.typesMapLocation = typesMapLocation;
           this.throttleLimit = throttleLimit;
-          this.log = log;
+          this.log = log2;
           this.packageNameToTypingLocation = /* @__PURE__ */ new Map();
           this.missingTypingsSet = /* @__PURE__ */ new Set();
           this.knownCachesSet = /* @__PURE__ */ new Set();
@@ -239301,13 +239414,13 @@ ${options.prefix}` : "\n" : options.prefix
         }
         static run(self2) {
           self2.timerId = void 0;
-          const log = self2.logger.hasLevel(
+          const log2 = self2.logger.hasLevel(
             2
             /* requestTime */
           );
-          const before = log && self2.host.getMemoryUsage();
+          const before = log2 && self2.host.getMemoryUsage();
           self2.host.gc();
-          if (log) {
+          if (log2) {
             const after = self2.host.getMemoryUsage();
             self2.logger.perftrc(`GC::before ${before}, after ${after}`);
           }
@@ -240235,17 +240348,17 @@ ${options.prefix}` : "\n" : options.prefix
           updateProjectIfDirty(this);
           return hasOneOrMoreJsAndNoTsFiles(this);
         }
-        static resolveModule(moduleName, initialDir, host, log) {
-          return _Project.importServicePluginSync({ name: moduleName }, [initialDir], host, log).resolvedModule;
+        static resolveModule(moduleName, initialDir, host, log2) {
+          return _Project.importServicePluginSync({ name: moduleName }, [initialDir], host, log2).resolvedModule;
         }
         /** @internal */
-        static importServicePluginSync(pluginConfigEntry, searchPaths, host, log) {
+        static importServicePluginSync(pluginConfigEntry, searchPaths, host, log2) {
           Debug.assertIsDefined(host.require);
           let errorLogs;
           let resolvedModule;
           for (const initialDir of searchPaths) {
             const resolvedPath = normalizeSlashes(host.resolvePath(combinePaths(initialDir, "node_modules")));
-            log(`Loading ${pluginConfigEntry.name} from ${initialDir} (resolved to ${resolvedPath})`);
+            log2(`Loading ${pluginConfigEntry.name} from ${initialDir} (resolved to ${resolvedPath})`);
             const result = host.require(resolvedPath, pluginConfigEntry.name);
             if (!result.error) {
               resolvedModule = result.module;
@@ -240257,13 +240370,13 @@ ${options.prefix}` : "\n" : options.prefix
           return { pluginConfigEntry, resolvedModule, errorLogs };
         }
         /** @internal */
-        static async importServicePluginAsync(pluginConfigEntry, searchPaths, host, log) {
+        static async importServicePluginAsync(pluginConfigEntry, searchPaths, host, log2) {
           Debug.assertIsDefined(host.importPlugin);
           let errorLogs;
           let resolvedModule;
           for (const initialDir of searchPaths) {
             const resolvedPath = combinePaths(initialDir, "node_modules");
-            log(`Dynamically importing ${pluginConfigEntry.name} from ${initialDir} (resolved to ${resolvedPath})`);
+            log2(`Dynamically importing ${pluginConfigEntry.name} from ${initialDir} (resolved to ${resolvedPath})`);
             let result;
             try {
               result = await host.importPlugin(resolvedPath, pluginConfigEntry.name);
@@ -243070,7 +243183,7 @@ ${options.prefix}` : "\n" : options.prefix
             3
             /* verbose */
           ) ? 2 : this.logger.loggingEnabled() ? 1 : 0;
-          const log = watchLogLevel !== 0 ? (s2) => this.logger.info(s2) : noop3;
+          const log2 = watchLogLevel !== 0 ? (s2) => this.logger.info(s2) : noop3;
           this.packageJsonCache = createPackageJsonCache(this);
           this.watchFactory = this.serverMode !== 0 ? {
             watchFile: returnNoopFileWatcher,
@@ -243078,7 +243191,7 @@ ${options.prefix}` : "\n" : options.prefix
           } : getWatchFactory(
             createWatchFactoryHostUsingWatchEvents(this, opts.canUseWatchEvents) || this.host,
             watchLogLevel,
-            log,
+            log2,
             getDetailWatchInfo
           );
           this.canUseWatchEvents = getCanUseWatchEvents(this, opts.canUseWatchEvents);
@@ -255090,9 +255203,10 @@ var init_cluster_change = __esm({
 });
 
 // src/commands/cluster/helpers/plan.ts
-var AUTOSCALE_BOUNDS, VIRTUAL_UNSUPPORTED, intIn, validateDesired, planClusterChanges;
+var AUTOSCALE_BOUNDS, SERVER_TYPE_NAME, VIRTUAL_UNSUPPORTED, intIn, validateDesired, planClusterChanges;
 var init_plan = __esm({
   "src/commands/cluster/helpers/plan.ts"() {
+    init_types2();
     AUTOSCALE_BOUNDS = {
       minWorkers: [1, 10],
       maxWorkers: [1, 10],
@@ -255101,8 +255215,10 @@ var init_plan = __esm({
       cpuScaleDownPercent: [1, 100],
       memScaleDownPercent: [1, 100],
       samplesToScale: [1, 20],
-      cooldownMinutes: [1, 1440]
+      cooldownMinutes: [1, 1440],
+      scaleUpStep: [1, 3]
     };
+    SERVER_TYPE_NAME = /^[a-z]+[0-9]+[a-z]*$/;
     VIRTUAL_UNSUPPORTED = [
       "imageId",
       "serverType",
@@ -255140,6 +255256,22 @@ var init_plan = __esm({
         if (key === "enabled") {
           if (typeof value !== "boolean") {
             errors.push("cluster.autoscale.enabled must be true or false");
+          }
+          continue;
+        }
+        if (key === "scalingProfile") {
+          if (!SCALING_PROFILES.includes(value)) {
+            errors.push(
+              `cluster.autoscale.scalingProfile must be one of ${SCALING_PROFILES.join(", ")}`
+            );
+          }
+          continue;
+        }
+        if (key === "serverTypes") {
+          if (!Array.isArray(value) || value.length > 10 || value.some((t2) => !SERVER_TYPE_NAME.test(String(t2)))) {
+            errors.push(
+              "cluster.autoscale.serverTypes must be a list of up to 10 Hetzner server types, e.g. [cx33, cpx22]"
+            );
           }
           continue;
         }
@@ -255262,8 +255394,9 @@ var init_plan = __esm({
       if (desired.autoscale) {
         const now = current.autoscale ?? {};
         const changed = {};
+        const same = (a, b) => Array.isArray(a) || Array.isArray(b) ? JSON.stringify(a ?? []) === JSON.stringify(b ?? []) : a === b;
         for (const [key, value] of Object.entries(desired.autoscale)) {
-          if (now[key] !== value) {
+          if (!same(now[key], value)) {
             changed[key] = value;
           }
         }
@@ -255271,7 +255404,7 @@ var init_plan = __esm({
           steps.push({
             kind: "autoscale",
             input: changed,
-            description: `autoscale: ${Object.entries(changed).map(([k, v]) => `${k}=${v}`).join(", ")}`
+            description: `autoscale: ${Object.entries(changed).map(([k, v]) => `${k}=${Array.isArray(v) ? v.join(",") : v}`).join(", ")}`
           });
         }
       }
@@ -255692,12 +255825,12 @@ var init_attach = __esm({
 });
 
 // src/commands/cluster/helpers/talosctl.ts
-function talosctlAssetName(platform = process.platform, arch = process.arch) {
-  const os2 = platform === "win32" ? "windows" : platform === "darwin" ? "darwin" : platform === "linux" ? "linux" : null;
+function talosctlAssetName(platform2 = process.platform, arch = process.arch) {
+  const os2 = platform2 === "win32" ? "windows" : platform2 === "darwin" ? "darwin" : platform2 === "linux" ? "linux" : null;
   const cpu = arch === "x64" ? "amd64" : arch === "arm64" ? "arm64" : null;
   if (!os2 || !cpu) {
     throw new Error(
-      `No talosctl release for ${platform}/${arch}. Install talosctl yourself: https://www.talos.dev/latest/talos-guides/install/talosctl/`
+      `No talosctl release for ${platform2}/${arch}. Install talosctl yourself: https://www.talos.dev/latest/talos-guides/install/talosctl/`
     );
   }
   return `talosctl-${os2}-${cpu}${os2 === "windows" ? ".exe" : ""}`;
@@ -255762,10 +255895,10 @@ async function ensureTalosctl(version2) {
   Logger.info(`talosctl ${version2} saved to ${binary}`);
   return binary;
 }
-var import_child_process, import_crypto, import_fs4, import_promises, import_path2, RELEASES, VERSION_RE, clientVersionOf, runBinary;
+var import_child_process2, import_crypto, import_fs4, import_promises, import_path2, RELEASES, VERSION_RE, clientVersionOf, runBinary;
 var init_talosctl = __esm({
   "src/commands/cluster/helpers/talosctl.ts"() {
-    import_child_process = require("child_process");
+    import_child_process2 = require("child_process");
     import_crypto = require("crypto");
     import_fs4 = require("fs");
     import_promises = require("fs/promises");
@@ -255776,7 +255909,7 @@ var init_talosctl = __esm({
     VERSION_RE = /^v\d+\.\d+\.\d+$/;
     clientVersionOf = (output) => output.match(/Talos (v\d+\.\d+\.\d+\S*)/)?.[1] ?? null;
     runBinary = (binary, args, timeoutMs = 2e4) => new Promise(
-      (resolve2) => (0, import_child_process.execFile)(
+      (resolve2) => (0, import_child_process2.execFile)(
         binary,
         args,
         { timeout: timeoutMs, maxBuffer: 10 * 1024 * 1024 },
@@ -255795,11 +255928,11 @@ var attach_exports = {};
 __export(attach_exports, {
   default: () => attach_default
 });
-var import_promises2, import_os2, import_path3, import_readline, import_rxjs17, sleep, ask, attach_default;
+var import_promises2, import_os3, import_path3, import_readline, import_rxjs17, sleep2, ask, attach_default;
 var init_attach2 = __esm({
   "src/commands/cluster/attach.ts"() {
     import_promises2 = require("fs/promises");
-    import_os2 = require("os");
+    import_os3 = require("os");
     import_path3 = require("path");
     import_readline = require("readline");
     import_rxjs17 = __toESM(require_cjs());
@@ -255808,7 +255941,7 @@ var init_attach2 = __esm({
     init_attach();
     init_cluster_change();
     init_talosctl();
-    sleep = (ms) => new Promise((r2) => setTimeout(r2, ms));
+    sleep2 = (ms) => new Promise((r2) => setTimeout(r2, ms));
     ask = (question) => new Promise((resolve2) => {
       const rl = (0, import_readline.createInterface)({
         input: process.stdin,
@@ -255850,7 +255983,7 @@ var init_attach2 = __esm({
           "yaml"
         ]);
         version2 = probe.code === 0 ? serverTalosVersion(probe.stdout) : void 0;
-        if (!version2) await sleep(5e3);
+        if (!version2) await sleep2(5e3);
       }
       if (!version2) {
         throw new Error(
@@ -255894,7 +256027,7 @@ var init_attach2 = __esm({
           `The cluster runs Talos ${join_.talosVersion}, the machine booted ${version2}. It installs ${join_.talosVersion} anyway; if the join fails, boot ${join_.isoUrl}.`
         );
       }
-      const dir = await (0, import_promises2.mkdtemp)((0, import_path3.join)((0, import_os2.tmpdir)(), "gcli-attach-"));
+      const dir = await (0, import_promises2.mkdtemp)((0, import_path3.join)((0, import_os3.tmpdir)(), "gcli-attach-"));
       const file2 = (0, import_path3.join)(dir, "machine.yaml");
       try {
         await (0, import_promises2.writeFile)(file2, join_.config, { mode: 384 });
@@ -255922,7 +256055,7 @@ var init_attach2 = __esm({
       );
       const deadline = Date.now() + opts.timeoutMs;
       while (Date.now() < deadline) {
-        await sleep(15e3);
+        await sleep2(15e3);
         const nodes = await (0, import_rxjs17.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId));
         const node = nodes.find((n) => n.name === opts.name);
         if (node?.status === "ready") {
@@ -256007,11 +256140,11 @@ __export(reset_machine_exports, {
   default: () => reset_machine_default,
   hostnameOf: () => hostnameOf
 });
-var import_promises3, import_os3, import_path4, import_readline2, import_rxjs20, hostnameOf, reset_machine_default;
+var import_promises3, import_os4, import_path4, import_readline2, import_rxjs20, hostnameOf, reset_machine_default;
 var init_reset_machine = __esm({
   "src/commands/cluster/reset-machine.ts"() {
     import_promises3 = require("fs/promises");
-    import_os3 = require("os");
+    import_os4 = require("os");
     import_path4 = require("path");
     import_readline2 = require("readline");
     import_rxjs20 = __toESM(require_cjs());
@@ -256050,7 +256183,7 @@ var init_reset_machine = __esm({
         GraphqlClienAPI.clusterTalosconfig(clusterId, 15)
       );
       const binary = access.talosVersion ? await ensureTalosctl(access.talosVersion) : "talosctl";
-      const dir = await (0, import_promises3.mkdtemp)((0, import_path4.join)((0, import_os3.tmpdir)(), "gcli-reset-"));
+      const dir = await (0, import_promises3.mkdtemp)((0, import_path4.join)((0, import_os4.tmpdir)(), "gcli-reset-"));
       const config2 = (0, import_path4.join)(dir, "talosconfig");
       try {
         await (0, import_promises3.writeFile)(config2, access.talosconfig, { mode: 384 });
@@ -256412,6 +256545,7 @@ var init_autoscale = __esm({
     init_gql_client();
     init_log();
     init_cluster_change();
+    init_types2();
     toAutoscaleInput = (cmd) => {
       if (cmd.enable && cmd.disable) {
         throw new Error("Pass --enable or --disable, not both");
@@ -256427,7 +256561,8 @@ var init_autoscale = __esm({
         ["cpuDown", "cpuScaleDownPercent", 1, 100],
         ["memDown", "memScaleDownPercent", 1, 100],
         ["samples", "samplesToScale", 1, 20],
-        ["cooldown", "cooldownMinutes", 1, 1440]
+        ["cooldown", "cooldownMinutes", 1, 1440],
+        ["step", "scaleUpStep", 1, 3]
       ];
       for (const [flag, field, min, max] of ints) {
         if (cmd[flag] !== void 0) {
@@ -256439,9 +256574,20 @@ var init_autoscale = __esm({
           );
         }
       }
+      if (cmd.profile !== void 0) {
+        if (!SCALING_PROFILES.includes(cmd.profile)) {
+          throw new Error(
+            `--profile must be one of ${SCALING_PROFILES.join(", ")}, got "${cmd.profile}"`
+          );
+        }
+        input.scalingProfile = cmd.profile;
+      }
+      if (cmd.serverTypes !== void 0) {
+        input.serverTypes = ["", "none"].includes(cmd.serverTypes.trim()) ? [] : cmd.serverTypes.split(",").map((t2) => t2.trim().toLowerCase()).filter(Boolean);
+      }
       if (!Object.keys(input).length) {
         throw new Error(
-          "Nothing to change: pass --enable/--disable and/or --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)"
+          "Nothing to change: pass --enable/--disable and/or --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)"
         );
       }
       return input;
@@ -256460,6 +256606,9 @@ var init_autoscale = __esm({
           cluster: cluster.name,
           workers: cluster.topology?.workers,
           enabled: a.enabled,
+          profile: a.scalingProfile,
+          workerTypes: a.serverTypes?.length ? a.serverTypes.join(",") : "(cluster type)",
+          step: a.scaleUpStep,
           minWorkers: a.minWorkers,
           maxWorkers: a.maxWorkers,
           scaleUpAt: `cpu ${a.cpuScaleUpPercent}% / mem ${a.memScaleUpPercent}%`,
@@ -269338,7 +269487,7 @@ var require_async3 = __commonJS({
       function groupBySeries(coll, iteratee, callback) {
         return groupByLimit$1(coll, 1, iteratee, callback);
       }
-      var log = consoleFunc("log");
+      var log2 = consoleFunc("log");
       function mapValuesLimit(obj, limit, iteratee, callback) {
         callback = once(callback);
         var newObj = {};
@@ -269866,7 +270015,7 @@ var require_async3 = __commonJS({
         groupBy,
         groupByLimit: groupByLimit$1,
         groupBySeries,
-        log,
+        log: log2,
         map: map$1,
         mapLimit: mapLimit$1,
         mapSeries: mapSeries$1,
@@ -269972,7 +270121,7 @@ var require_async3 = __commonJS({
       exports3.groupBy = groupBy;
       exports3.groupByLimit = groupByLimit$1;
       exports3.groupBySeries = groupBySeries;
-      exports3.log = log;
+      exports3.log = log2;
       exports3.map = map$1;
       exports3.mapLimit = mapLimit$1;
       exports3.mapSeries = mapSeries$1;
@@ -270050,7 +270199,7 @@ var require_polyfills = __commonJS({
     var constants = require("constants");
     var origCwd = process.cwd;
     var cwd = null;
-    var platform = process.env.GRACEFUL_FS_PLATFORM || process.platform;
+    var platform2 = process.env.GRACEFUL_FS_PLATFORM || process.platform;
     process.cwd = function() {
       if (!cwd)
         cwd = origCwd.call(process);
@@ -270109,7 +270258,7 @@ var require_polyfills = __commonJS({
         fs3.lchownSync = function() {
         };
       }
-      if (platform === "win32") {
+      if (platform2 === "win32") {
         fs3.rename = /* @__PURE__ */ (function(fs$rename) {
           return function(from16, to, cb) {
             var start3 = Date.now();
@@ -278982,8 +279131,8 @@ var require_zip_archive_entry = __commonJS({
       }
       this.name = name2;
     };
-    ZipArchiveEntry.prototype.setPlatform = function(platform) {
-      this.platform = platform;
+    ZipArchiveEntry.prototype.setPlatform = function(platform2) {
+      this.platform = platform2;
     };
     ZipArchiveEntry.prototype.setSize = function(size) {
       if (size < 0) {
@@ -288099,11 +288248,11 @@ var package_exports = {};
 __export(package_exports, {
   default: () => package_default
 });
-var import_archiver, import_child_process2, import_fs5, import_rxjs32, import_operators17, import_util3, ReadFile, package_default;
+var import_archiver, import_child_process3, import_fs5, import_rxjs32, import_operators17, import_util3, ReadFile, package_default;
 var init_package = __esm({
   "src/commands/lambda/package.ts"() {
     import_archiver = __toESM(require_archiver());
-    import_child_process2 = require("child_process");
+    import_child_process3 = require("child_process");
     import_fs5 = require("fs");
     import_rxjs32 = __toESM(require_cjs());
     import_operators17 = __toESM(require_operators());
@@ -288122,7 +288271,7 @@ var init_package = __esm({
               zlib: { level: 9 }
               // Sets the compression level.
             });
-            await (0, import_util3.promisify)(import_child_process2.exec)(["chmod", "+x", data.script].join(" "));
+            await (0, import_util3.promisify)(import_child_process3.exec)(["chmod", "+x", data.script].join(" "));
             const ignore = await (0, import_rxjs32.lastValueFrom)(
               ReadFile(".gignore").pipe(
                 (0, import_operators17.map)((ignore2) => parseIgnoredFiles(ignore2))
@@ -288162,7 +288311,7 @@ function streamToBufferPromise(file2) {
     });
   });
 }
-var import_form_data, import_fs6, import_rxjs33, import_operators18, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, createCommand;
+var import_form_data, import_fs6, import_rxjs33, import_operators18, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, printAddresses, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
@@ -288279,8 +288428,19 @@ var init_helpers2 = __esm({
         }),
         (0, import_operators18.tap)((data) => {
           Logger.info(JSON.stringify(data, null, 2));
-        })
+        }),
+        (0, import_operators18.switchMap)((data) => printAddresses(data))
       )
+    );
+    printAddresses = (data) => (data?.id ? GraphqlClienAPI.getLambda(data.id, ["siteUrl"]).pipe(
+      (0, import_operators18.map)((l) => l.siteUrl ?? null),
+      (0, import_operators18.catchError)(() => (0, import_rxjs33.of)(null))
+    ) : (0, import_rxjs33.of)(null)).pipe(
+      (0, import_operators18.tap)((siteUrl) => {
+        if (data?.url) Logger.info(`URL:  ${data.url}`);
+        if (siteUrl) Logger.info(`Site: ${siteUrl}`);
+      }),
+      (0, import_operators18.map)(() => data)
     );
     createCommand = (command) => (options) => (program2) => {
       const cmd = program2.command(command);
@@ -293880,7 +294040,7 @@ __export(regexes_exports, {
   extendedDuration: () => extendedDuration,
   guid: () => guid,
   hex: () => hex,
-  hostname: () => hostname,
+  hostname: () => hostname2,
   html5Email: () => html5Email,
   idnEmail: () => idnEmail,
   integer: () => integer,
@@ -293947,7 +294107,7 @@ function fixedBase64(bodyLength, padding) {
 function fixedBase64url(length) {
   return new RegExp(`^[A-Za-z0-9_-]{${length}}$`);
 }
-var cuid, cuid2, ulid, xid, ksuid, nanoid, duration, extendedDuration, guid, uuid, uuid4, uuid6, uuid7, email, html5Email, rfc5322Email, unicodeEmail, idnEmail, browserEmail, _emoji, ipv4, ipv6, mac, cidrv4, cidrv6, base64, base64url, hostname, domain, e164, dateSource, date, string, bigint, integer, number, boolean, _null, _undefined, lowercase, uppercase, hex, md5_hex, md5_base64, md5_base64url, sha1_hex, sha1_base64, sha1_base64url, sha256_hex, sha256_base64, sha256_base64url, sha384_hex, sha384_base64, sha384_base64url, sha512_hex, sha512_base64, sha512_base64url;
+var cuid, cuid2, ulid, xid, ksuid, nanoid, duration, extendedDuration, guid, uuid, uuid4, uuid6, uuid7, email, html5Email, rfc5322Email, unicodeEmail, idnEmail, browserEmail, _emoji, ipv4, ipv6, mac, cidrv4, cidrv6, base64, base64url, hostname2, domain, e164, dateSource, date, string, bigint, integer, number, boolean, _null, _undefined, lowercase, uppercase, hex, md5_hex, md5_base64, md5_base64url, sha1_hex, sha1_base64, sha1_base64url, sha256_hex, sha256_base64, sha256_base64url, sha384_hex, sha384_base64, sha384_base64url, sha512_hex, sha512_base64, sha512_base64url;
 var init_regexes = __esm({
   "../../node_modules/zod/v4/core/regexes.js"() {
     init_util2();
@@ -293985,7 +294145,7 @@ var init_regexes = __esm({
     cidrv6 = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::|([0-9a-fA-F]{1,4})?::([0-9a-fA-F]{1,4}:?){0,6})\/(12[0-8]|1[01][0-9]|[1-9]?[0-9])$/;
     base64 = /^$|^(?:[0-9a-zA-Z+/]{4})*(?:(?:[0-9a-zA-Z+/]{2}==)|(?:[0-9a-zA-Z+/]{3}=))?$/;
     base64url = /^[A-Za-z0-9_-]*$/;
-    hostname = /^(?=.{1,253}\.?$)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[-0-9a-zA-Z]{0,61}[0-9a-zA-Z])?)*\.?$/;
+    hostname2 = /^(?=.{1,253}\.?$)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[-0-9a-zA-Z]{0,61}[0-9a-zA-Z])?)*\.?$/;
     domain = /^([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
     e164 = /^\+[1-9]\d{6,14}$/;
     dateSource = `(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))`;
@@ -305332,7 +305492,7 @@ __export(schemas_exports3, {
   guid: () => guid2,
   hash: () => hash,
   hex: () => hex2,
-  hostname: () => hostname2,
+  hostname: () => hostname3,
   httpUrl: () => httpUrl,
   instanceof: () => _instanceof,
   int: () => int,
@@ -305479,7 +305639,7 @@ function jwt(params) {
 function stringFormat(format, fnOrRegex, _params = {}) {
   return _stringFormat(ZodCustomStringFormat, format, fnOrRegex, _params);
 }
-function hostname2(_params) {
+function hostname3(_params) {
   return _stringFormat(ZodCustomStringFormat, "hostname", regexes_exports.hostname, _params);
 }
 function hex2(_params) {
@@ -307165,7 +307325,7 @@ __export(external_exports3, {
   guid: () => guid2,
   hash: () => hash,
   hex: () => hex2,
-  hostname: () => hostname2,
+  hostname: () => hostname3,
   httpUrl: () => httpUrl,
   includes: () => _includes,
   instanceof: () => _instanceof,
@@ -314451,11 +314611,11 @@ var require_core2 = __commonJS({
     Ajv2.ValidationError = validation_error_1.default;
     Ajv2.MissingRefError = ref_error_1.default;
     exports2.default = Ajv2;
-    function checkOptions(checkOpts, options, msg, log = "error") {
+    function checkOptions(checkOpts, options, msg, log2 = "error") {
       for (const key in checkOpts) {
         const opt = key;
         if (opt in options)
-          this.logger[log](`${msg}: option ${key}. ${checkOpts[opt]}`);
+          this.logger[log2](`${msg}: option ${key}. ${checkOpts[opt]}`);
       }
     }
     function getSchEnv(keyRef) {
@@ -319716,6 +319876,105 @@ var init_zod = __esm({
   }
 });
 
+// src/commands/proxy/login-gate.ts
+var LOGIN_TOOL, log, startLoginGate;
+var init_login_gate = __esm({
+  "src/commands/proxy/login-gate.ts"() {
+    init_server2();
+    init_stdio2();
+    init_types4();
+    init_browser_login();
+    init_login();
+    LOGIN_TOOL = "LambforgeLogin";
+    log = (line) => process.stderr.write(`${line}
+`);
+    startLoginGate = async (apiUrl) => {
+      let state = { kind: "idle" };
+      const begin = async () => {
+        const start3 = await startBrowserLogin(apiUrl);
+        state = { kind: "waiting", start: start3 };
+        log(
+          `Lambforge login: open ${start3.verificationUrl} (code ${start3.userCode})`
+        );
+        waitForApproval(apiUrl, start3).then(async ({ token, key }) => {
+          await loginWithToken({
+            token,
+            key,
+            url: apiUrl,
+            uploadUrl: "",
+            ci: false,
+            silent: true
+          });
+          state = { kind: "done" };
+          log("Lambforge login saved - reconnect this MCP server.");
+        }).catch((e2) => {
+          state = { kind: "failed", error: e2.message };
+          log(`Lambforge login failed: ${e2.message}`);
+        });
+        return start3;
+      };
+      const answer = async () => {
+        if (state.kind === "done") {
+          return 'Logged in. Ask the user to reconnect the "lambforge" MCP server (in Claude Code: /mcp -> lambforge -> Reconnect); after that every Lambforge tool is available.';
+        }
+        if (state.kind === "waiting") {
+          const { start: start4 } = state;
+          return `Still waiting. Ask the user to open ${start4.verificationUrl} and approve code ${start4.userCode}, then call ${LOGIN_TOOL} again.`;
+        }
+        const start3 = await begin();
+        return [
+          "Not logged in to Lambforge yet. Show the user this link and code:",
+          "",
+          `  ${start3.verificationUrl}`,
+          `  Code: ${start3.userCode}`,
+          "",
+          "They open it (signed in to lambforge.com), check the code matches and press Approve.",
+          `Then call ${LOGIN_TOOL} again; it reports when the login is saved.`,
+          "You cannot approve it yourself."
+        ].join("\n");
+      };
+      const server2 = new Server(
+        { name: "gapi-proxy", version: "1.0.0" },
+        { capabilities: { tools: {} } }
+      );
+      server2.setRequestHandler(ListToolsRequestSchema, async () => ({
+        tools: [
+          {
+            name: LOGIN_TOOL,
+            description: "gcli is not logged in to Lambforge, so no other Lambforge tool is available yet. Call this to get a login link and code for the user; call again to check whether they approved it.",
+            inputSchema: { type: "object", properties: {} }
+          }
+        ]
+      }));
+      server2.setRequestHandler(CallToolRequestSchema, async (request) => {
+        if (request.params.name !== LOGIN_TOOL) {
+          return {
+            isError: true,
+            content: [
+              {
+                type: "text",
+                text: `Not logged in to Lambforge - call ${LOGIN_TOOL} first.`
+              }
+            ]
+          };
+        }
+        try {
+          return { content: [{ type: "text", text: await answer() }] };
+        } catch (e2) {
+          if (state.kind === "failed") state = { kind: "idle" };
+          return {
+            isError: true,
+            content: [{ type: "text", text: e2.message }]
+          };
+        }
+      });
+      await server2.connect(new StdioServerTransport());
+      log(`Not logged in - serving only ${LOGIN_TOOL}.`);
+      await new Promise(() => void 0);
+    };
+  }
+});
+
 // src/commands/proxy/start.ts
 var start_exports = {};
 __export(start_exports, {
@@ -319724,6 +319983,11 @@ __export(start_exports, {
   performFetch: () => performFetch
 });
 async function startProxy(cmd) {
+  if (!(0, import_fs9.existsSync)(tokenDirectory)) {
+    return startLoginGate(
+      cmd.url ? cmd.url.replace(/\/mcp\/?$/, "") : "https://api.lambforge.com"
+    );
+  }
   return (0, import_rxjs46.lastValueFrom)(
     GraphqlClienAPI.getConfig().pipe(
       (0, import_operators31.take)(1),
@@ -319833,18 +320097,21 @@ async function startProxy(cmd) {
     )
   );
 }
-var import_rxjs46, import_operators31, import_stream2, pendingToken, currentToken, withToken, performFetch;
+var import_fs9, import_rxjs46, import_operators31, import_stream2, pendingToken, currentToken, withToken, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
     init_streamableHttp();
     init_server2();
     init_stdio2();
+    import_fs9 = require("fs");
     import_rxjs46 = __toESM(require_cjs());
     import_operators31 = __toESM(require_operators());
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
+    init_types();
+    init_login_gate();
     pendingToken = null;
     currentToken = (force = false) => {
       if (!pendingToken || force) {
@@ -320584,19 +320851,19 @@ var init_connection = __esm({
 });
 
 // src/commands/runner/daemon.ts
-var import_child_process3, import_fs9, import_promises6, import_os4, import_path5, import_util11, DEFAULT_SERVICE_NAME, RUNNER_AUTH_EXIT_CODE, systemdQuote, unitPath, buildUnit, resolveGcliCommand, defaultExec, SystemdUserService, assertSystemdAvailable;
+var import_child_process4, import_fs10, import_promises6, import_os5, import_path5, import_util11, DEFAULT_SERVICE_NAME, RUNNER_AUTH_EXIT_CODE, systemdQuote, unitPath, buildUnit, resolveGcliCommand, defaultExec, SystemdUserService, assertSystemdAvailable;
 var init_daemon = __esm({
   "src/commands/runner/daemon.ts"() {
-    import_child_process3 = require("child_process");
-    import_fs9 = require("fs");
+    import_child_process4 = require("child_process");
+    import_fs10 = require("fs");
     import_promises6 = require("fs/promises");
-    import_os4 = require("os");
+    import_os5 = require("os");
     import_path5 = require("path");
     import_util11 = require("util");
     DEFAULT_SERVICE_NAME = "lambforge-runner";
     RUNNER_AUTH_EXIT_CODE = 78;
     systemdQuote = (word) => /^[A-Za-z0-9_@%+=:,./-]+$/.test(word) ? word : `"${word.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
-    unitPath = (serviceName, home = (0, import_os4.homedir)()) => (0, import_path5.join)(home, ".config", "systemd", "user", `${serviceName}.service`);
+    unitPath = (serviceName, home = (0, import_os5.homedir)()) => (0, import_path5.join)(home, ".config", "systemd", "user", `${serviceName}.service`);
     buildUnit = ({
       serviceName,
       execStart,
@@ -320635,7 +320902,7 @@ var init_daemon = __esm({
       }
       let script = argv[1];
       try {
-        script = (0, import_fs9.realpathSync)(script);
+        script = (0, import_fs10.realpathSync)(script);
       } catch {
       }
       const ephemeral = /[/\\]_npx[/\\]|[/\\]\.npm[/\\]_cacache/.test(script);
@@ -320644,9 +320911,9 @@ var init_daemon = __esm({
         warning: ephemeral ? `gcli is running from the npx cache (${script}), which npm may clean up and break the service. Install it globally first: npm i -g @gapi/gcli, then re-run this command with \`gcli\`.` : void 0
       };
     };
-    defaultExec = (file2, args) => (0, import_util11.promisify)(import_child_process3.execFile)(file2, args, { encoding: "utf8" });
+    defaultExec = (file2, args) => (0, import_util11.promisify)(import_child_process4.execFile)(file2, args, { encoding: "utf8" });
     SystemdUserService = class {
-      constructor(serviceName = DEFAULT_SERVICE_NAME, exec2 = defaultExec, home = (0, import_os4.homedir)()) {
+      constructor(serviceName = DEFAULT_SERVICE_NAME, exec2 = defaultExec, home = (0, import_os5.homedir)()) {
         this.serviceName = serviceName;
         this.exec = exec2;
         this.home = home;
@@ -320673,7 +320940,7 @@ var init_daemon = __esm({
       }
       /** Whether `runner:daemon:install` wrote the unit. */
       installed() {
-        return (0, import_fs9.existsSync)(unitPath(this.serviceName, this.home));
+        return (0, import_fs10.existsSync)(unitPath(this.serviceName, this.home));
       }
       start() {
         return this.systemctl("start", this.unit);
@@ -320737,10 +321004,10 @@ __export(start_exports2, {
   default: () => start_default,
   resolveRunner: () => resolveRunner
 });
-var import_os5, import_rxjs50, RUNNER_VERSION, resolveRunner, start_default;
+var import_os6, import_rxjs50, RUNNER_VERSION, resolveRunner, start_default;
 var init_start2 = __esm({
   "src/commands/runner/start.ts"() {
-    import_os5 = require("os");
+    import_os6 = require("os");
     import_rxjs50 = __toESM(require_cjs());
     init_gql_client();
     init_log();
@@ -320760,7 +321027,7 @@ var init_start2 = __esm({
       if (saved) {
         return saved;
       }
-      const name2 = cmd.name || (0, import_os5.hostname)();
+      const name2 = cmd.name || (0, import_os6.hostname)();
       Logger.info(`Registering this machine as local runner "${name2}"...`);
       const { runner, token } = await (0, import_rxjs50.lastValueFrom)(
         GraphqlClienAPI.createLocalRunner(name2)
@@ -320823,10 +321090,10 @@ __export(daemon_commands_exports, {
   stop: () => stop,
   uninstall: () => uninstall
 });
-var import_child_process4, install, uninstall, installedService, reportStarted, start, restart, stop, status, logs;
+var import_child_process5, install, uninstall, installedService, reportStarted, start, restart, stop, status, logs;
 var init_daemon_commands = __esm({
   "src/commands/runner/daemon-commands.ts"() {
-    import_child_process4 = require("child_process");
+    import_child_process5 = require("child_process");
     init_log();
     init_config();
     init_daemon();
@@ -320942,7 +321209,7 @@ var init_daemon_commands = __esm({
       assertSystemdAvailable();
       const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
       return new Promise((resolve2) => {
-        (0, import_child_process4.spawn)(
+        (0, import_child_process5.spawn)(
           "journalctl",
           ["--user", "-u", `${serviceName}.service`, "-f", "-n", cmd.lines || "50"],
           { stdio: "inherit" }
@@ -322328,11 +322595,11 @@ var init_approvals = __esm({
       }
     };
     ApprovalGate = class {
-      constructor(policy, backend, prompt, log, timeoutMs = APPROVAL_TIMEOUT_MS) {
+      constructor(policy, backend, prompt, log2, timeoutMs = APPROVAL_TIMEOUT_MS) {
         this.policy = policy;
         this.backend = backend;
         this.prompt = prompt;
-        this.log = log;
+        this.log = log2;
         this.timeoutMs = timeoutMs;
         this.waiting = /* @__PURE__ */ new Map();
         // A web answer that arrived before the card's id was back here.
@@ -322459,15 +322726,15 @@ var init_config2 = __esm({
 });
 
 // src/commands/workspace/files.ts
-var import_child_process5, import_crypto2, import_fs10, import_path6, import_util12, run, WorkspaceError, MAX_READ_BYTES, MAX_WRITE_BYTES, DEFAULT_LIST_LIMIT, MAX_LIST_LIMIT, DEFAULT_SEARCH_RESULTS, MAX_SEARCH_RESULTS, MAX_MATCH_TEXT, SKIP_DIRS, SECRET_FILE, SECRET_TEMPLATE, isSecretFile, contentHash, toPosix, WorkspaceFiles;
+var import_child_process6, import_crypto2, import_fs11, import_path6, import_util12, run, WorkspaceError, MAX_READ_BYTES, MAX_WRITE_BYTES, DEFAULT_LIST_LIMIT, MAX_LIST_LIMIT, DEFAULT_SEARCH_RESULTS, MAX_SEARCH_RESULTS, MAX_MATCH_TEXT, SKIP_DIRS, SECRET_FILE, SECRET_TEMPLATE, isSecretFile, contentHash, toPosix, WorkspaceFiles;
 var init_files = __esm({
   "src/commands/workspace/files.ts"() {
-    import_child_process5 = require("child_process");
+    import_child_process6 = require("child_process");
     import_crypto2 = require("crypto");
-    import_fs10 = require("fs");
+    import_fs11 = require("fs");
     import_path6 = require("path");
     import_util12 = require("util");
-    run = (0, import_util12.promisify)(import_child_process5.execFile);
+    run = (0, import_util12.promisify)(import_child_process6.execFile);
     WorkspaceError = class extends Error {
       constructor(message, status2 = 400) {
         super(message);
@@ -322509,7 +322776,7 @@ var init_files = __esm({
         let existing = abs;
         for (; ; ) {
           try {
-            const real = await import_fs10.promises.realpath(existing);
+            const real = await import_fs11.promises.realpath(existing);
             const realFromRoot = (0, import_path6.relative)(this.root, real);
             if (realFromRoot.startsWith("..") || (0, import_path6.isAbsolute)(realFromRoot)) {
               throw new WorkspaceError(
@@ -322568,7 +322835,7 @@ var init_files = __esm({
         const out = [];
         const walk = async (relDir) => {
           if (out.length > limit) return;
-          const entries = await import_fs10.promises.readdir((0, import_path6.join)(this.root, relDir), { withFileTypes: true }).catch(() => []);
+          const entries = await import_fs11.promises.readdir((0, import_path6.join)(this.root, relDir), { withFileTypes: true }).catch(() => []);
           for (const entry of entries) {
             if (SKIP_DIRS.has(entry.name)) continue;
             const rel = relDir === "." ? entry.name : `${relDir}/${entry.name}`;
@@ -322611,7 +322878,7 @@ var init_files = __esm({
         entries = entries.slice(0, limit);
         await Promise.all(
           entries.filter((e2) => e2.type === "file").map(async (e2) => {
-            e2.size = await import_fs10.promises.stat((0, import_path6.join)(this.root, e2.path)).then((s2) => s2.size).catch(() => void 0);
+            e2.size = await import_fs11.promises.stat((0, import_path6.join)(this.root, e2.path)).then((s2) => s2.size).catch(() => void 0);
           })
         );
         return {
@@ -322622,12 +322889,12 @@ var init_files = __esm({
       async read(args) {
         if (!args.path) throw new WorkspaceError("path is required");
         const { abs, rel } = await this.resolvePath(args.path);
-        const stat2 = await import_fs10.promises.stat(abs).catch(() => null);
+        const stat2 = await import_fs11.promises.stat(abs).catch(() => null);
         if (!stat2) throw new WorkspaceError(`${rel} does not exist`, 404);
         if (stat2.isDirectory()) {
           throw new WorkspaceError(`${rel} is a directory - use LocalListFiles`);
         }
-        const buffer = await import_fs10.promises.readFile(abs);
+        const buffer = await import_fs11.promises.readFile(abs);
         if (buffer.subarray(0, 8e3).includes(0)) {
           return { path: rel, size: stat2.size, binary: true, content: "" };
         }
@@ -322656,7 +322923,7 @@ var init_files = __esm({
         };
       }
       async currentText(abs) {
-        return import_fs10.promises.readFile(abs, "utf-8").catch((e2) => {
+        return import_fs11.promises.readFile(abs, "utf-8").catch((e2) => {
           if (e2?.code === "ENOENT") return null;
           throw e2;
         });
@@ -322677,8 +322944,8 @@ var init_files = __esm({
             );
           }
         }
-        await import_fs10.promises.mkdir((0, import_path6.dirname)(abs), { recursive: true });
-        await import_fs10.promises.writeFile(abs, content, "utf-8");
+        await import_fs11.promises.mkdir((0, import_path6.dirname)(abs), { recursive: true });
+        await import_fs11.promises.writeFile(abs, content, "utf-8");
         return {
           path: rel,
           size: Buffer.byteLength(content),
@@ -322710,7 +322977,7 @@ var init_files = __esm({
           );
         }
         const after = args.replaceAll ? before.split(args.oldText).join(args.newText ?? "") : before.replace(args.oldText, () => args.newText ?? "");
-        await import_fs10.promises.writeFile(abs, after, "utf-8");
+        await import_fs11.promises.writeFile(abs, after, "utf-8");
         return {
           path: rel,
           replacements: args.replaceAll ? count : 1,
@@ -322721,14 +322988,14 @@ var init_files = __esm({
       async delete(args) {
         if (!args.path) throw new WorkspaceError("path is required");
         const { abs, rel } = await this.resolvePath(args.path, { forWrite: true });
-        const stat2 = await import_fs10.promises.lstat(abs).catch(() => null);
+        const stat2 = await import_fs11.promises.lstat(abs).catch(() => null);
         if (!stat2) return { path: rel, deleted: false };
         if (stat2.isDirectory()) {
           throw new WorkspaceError(
             `${rel} is a directory - only files can be deleted (use RunCommand for more)`
           );
         }
-        await import_fs10.promises.unlink(abs);
+        await import_fs11.promises.unlink(abs);
         return { path: rel, deleted: true };
       }
       async search(args) {
@@ -322780,7 +323047,7 @@ var init_files = __esm({
           raw = [];
           for (const file2 of await this.allFiles(rel, 2e4)) {
             if (globRe && !globRe.test(file2)) continue;
-            const text = await import_fs10.promises.readFile((0, import_path6.join)(this.root, file2)).catch(() => null);
+            const text = await import_fs11.promises.readFile((0, import_path6.join)(this.root, file2)).catch(() => null);
             if (!text || text.subarray(0, 8e3).includes(0)) continue;
             text.toString("utf-8").split("\n").forEach((line, i2) => {
               if (raw.length <= max && re.test(line)) {
@@ -322801,10 +323068,10 @@ var init_files = __esm({
 });
 
 // src/commands/workspace/processes.ts
-var import_child_process6, DEFAULT_TIMEOUT_S, MAX_TIMEOUT_S, MAX_STREAM_CHARS, MAX_PROCESS_LINES, MAX_PROCESSES, DEFAULT_WAIT_S, MAX_WAIT_S, KILL_GRACE_MS, ANSI, stripAnsi, BASE_ENV, buildEnv, shellOf, killTree, terminate, TailBuffer, runCommand, ProcessManager;
+var import_child_process7, DEFAULT_TIMEOUT_S, MAX_TIMEOUT_S, MAX_STREAM_CHARS, MAX_PROCESS_LINES, MAX_PROCESSES, DEFAULT_WAIT_S, MAX_WAIT_S, KILL_GRACE_MS, ANSI, stripAnsi, BASE_ENV, buildEnv, shellOf, killTree, terminate, TailBuffer, runCommand, ProcessManager;
 var init_processes = __esm({
   "src/commands/workspace/processes.ts"() {
-    import_child_process6 = require("child_process");
+    import_child_process7 = require("child_process");
     init_files();
     DEFAULT_TIMEOUT_S = 300;
     MAX_TIMEOUT_S = 1800;
@@ -322887,7 +323154,7 @@ var init_processes = __esm({
       if (!child.pid || child.exitCode !== null) return;
       try {
         if (process.platform === "win32") {
-          (0, import_child_process6.spawn)("taskkill", ["/pid", String(child.pid), "/T", "/F"]);
+          (0, import_child_process7.spawn)("taskkill", ["/pid", String(child.pid), "/T", "/F"]);
         } else {
           process.kill(-child.pid, signal);
         }
@@ -322929,7 +323196,7 @@ ${this.text}` : this.text;
       );
       const started = Date.now();
       const [shell, shellArgs] = shellOf(args.command);
-      const child = (0, import_child_process6.spawn)(shell, shellArgs, {
+      const child = (0, import_child_process7.spawn)(shell, shellArgs, {
         cwd: args.cwd,
         env: args.env,
         stdio: ["ignore", "pipe", "pipe"],
@@ -323019,7 +323286,7 @@ ${this.text}` : this.text;
           }
         }
         const [shell, shellArgs] = shellOf(args.command);
-        const child = (0, import_child_process6.spawn)(shell, shellArgs, {
+        const child = (0, import_child_process7.spawn)(shell, shellArgs, {
           cwd: args.cwd,
           env: args.env,
           stdio: ["ignore", "pipe", "pipe"],
@@ -323175,10 +323442,10 @@ ${this.text}` : this.text;
 });
 
 // src/commands/workspace/connection.ts
-var import_os6, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num, short, WorkspaceConnection;
+var import_os7, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num, short, WorkspaceConnection;
 var init_connection2 = __esm({
   "src/commands/workspace/connection.ts"() {
-    import_os6 = require("os");
+    import_os7 = require("os");
     init_tunnel();
     init_approvals();
     init_files();
@@ -323261,7 +323528,7 @@ var init_connection2 = __esm({
         const data = await this.operation(HEARTBEAT_MUTATION2, {
           info: {
             root: this.options.root,
-            hostname: (0, import_os6.hostname)(),
+            hostname: (0, import_os7.hostname)(),
             platform: process.platform,
             gitBranch: await this.files.gitBranch(),
             clientVersion: this.options.version,
@@ -323325,7 +323592,7 @@ var init_connection2 = __esm({
       }
       /** One operation (exposed for tests). */
       async dispatch(op, args, signal) {
-        const log = (line) => this.options.logger.info(line);
+        const log2 = (line) => this.options.logger.info(line);
         switch (op) {
           case "info":
             return {
@@ -323338,21 +323605,21 @@ var init_connection2 = __esm({
               processes: this.processes.list()
             };
           case "list":
-            log(`-> list ${str(args.path) ?? "."}`);
+            log2(`-> list ${str(args.path) ?? "."}`);
             return this.files.list({
               path: str(args.path),
               recursive: args.recursive !== false,
               limit: num(args.limit)
             });
           case "read":
-            log(`-> read ${str(args.path)}`);
+            log2(`-> read ${str(args.path)}`);
             return this.files.read({
               path: str(args.path),
               startLine: num(args.startLine),
               endLine: num(args.endLine)
             });
           case "search":
-            log(`-> search /${str(args.pattern)}/ in ${str(args.path) ?? "."}`);
+            log2(`-> search /${str(args.pattern)}/ in ${str(args.path) ?? "."}`);
             return this.files.search({
               pattern: str(args.pattern),
               path: str(args.path),
@@ -323367,7 +323634,7 @@ var init_connection2 = __esm({
               content: str(args.content) ?? "",
               expectedHash: str(args.expectedHash)
             });
-            log(`\u270E  ${result.created ? "created" : "wrote"} ${result.path}`);
+            log2(`\u270E  ${result.created ? "created" : "wrote"} ${result.path}`);
             return result;
           }
           case "edit": {
@@ -323378,12 +323645,12 @@ var init_connection2 = __esm({
               replaceAll: args.replaceAll === true,
               expectedHash: str(args.expectedHash)
             });
-            log(`\u270E  edited ${result.path} (${result.replacements}x)`);
+            log2(`\u270E  edited ${result.path} (${result.replacements}x)`);
             return result;
           }
           case "delete": {
             const result = await this.files.delete({ path: str(args.path) });
-            if (result.deleted) log(`\u270E  deleted ${result.path}`);
+            if (result.deleted) log2(`\u270E  deleted ${result.path}`);
             return result;
           }
           case "exec":
@@ -323402,7 +323669,7 @@ var init_connection2 = __esm({
             const result = await this.processes.stop({
               processId: str(args.processId)
             });
-            log(`\u25A0  stopped ${result.processId}`);
+            log2(`\u25A0  stopped ${result.processId}`);
             return result;
           }
           default:
@@ -323792,7 +324059,9 @@ init_src();
 // src/commands/auth/index.ts
 init_helpers();
 function registerAuthCommands(program2) {
-  program2.command("login").description("Login to graphql-server").option("-k, --key <key>", "Specify api key").option("-uu, --uploadUrl <key>", "Specify upload server").option("-ci, --ci", "Initialize directories for CI/CD purposes").option(
+  program2.command("login").description(
+    "Log in. Without --token: prints a link, opens your browser and waits for you to approve it on lambforge.com"
+  ).option("--no-browser", "Only print the login link, do not open a browser").option("-k, --key <key>", "Specify api key").option("-uu, --uploadUrl <key>", "Specify upload server").option("-ci, --ci", "Initialize directories for CI/CD purposes").option(
     "-t, --token <token>",
     "Specify custom token generated from the website"
   ).option("-u, --url <url>", "Specify api url").action(lazy(() => Promise.resolve().then(() => (init_login(), login_exports)).then((m2) => m2.default)));
@@ -323928,7 +324197,13 @@ function registerClusterCommands(program2) {
     program2.command("cluster:autoscale").description(
       "Change the worker autoscaling policy - only the flags you pass change"
     )
-  ).option("--enable", "Turn autoscaling on (multi-node clusters only)").option("--disable", "Turn autoscaling off").option("--min <min>", "Minimum workers (1-10)").option("--max <max>", "Maximum workers (1-10)").option("--cpuUp <percent>", "Scale up at this CPU % (1-100)").option("--memUp <percent>", "Scale up at this memory % (1-100)").option("--cpuDown <percent>", "Scale down below this CPU % (1-100)").option("--memDown <percent>", "Scale down below this memory % (1-100)").option("--samples <n>", "Consecutive readings before acting (1-20)").option("--cooldown <minutes>", "Minutes between scale actions (1-1440)").action(lazy(() => Promise.resolve().then(() => (init_autoscale(), autoscale_exports)).then((m2) => m2.default)));
+  ).option("--enable", "Turn autoscaling on (multi-node clusters only)").option("--disable", "Turn autoscaling off").option("--min <min>", "Minimum workers (1-10)").option("--max <max>", "Maximum workers (1-10)").option("--cpuUp <percent>", "Scale up at this CPU % (1-100)").option("--memUp <percent>", "Scale up at this memory % (1-100)").option("--cpuDown <percent>", "Scale down below this CPU % (1-100)").option("--memDown <percent>", "Scale down below this memory % (1-100)").option("--samples <n>", "Consecutive readings before acting (1-20)").option("--cooldown <minutes>", "Minutes between scale actions (1-1440)").option(
+    "--profile <profile>",
+    "conservative | balanced | aggressive presets the thresholds above; custom uses them as given"
+  ).option(
+    "--serverTypes <types>",
+    `Comma-separated worker server types in order of preference, e.g. cx33,cpx22 (the next is used when one is out of stock); "" = the cluster's own type`
+  ).option("--step <n>", "Workers added per scale-up (1-3, custom profile)").action(lazy(() => Promise.resolve().then(() => (init_autoscale(), autoscale_exports)).then((m2) => m2.default)));
   target(
     program2.command("cluster:multi-node").description(
       "Convert a single-node cluster to dedicated worker nodes (required for autoscaling)"
