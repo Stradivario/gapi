@@ -1,4 +1,8 @@
-import { ClusterAutoscalePolicy, ClusterChange } from '../types';
+import {
+  ClusterAutoscalePolicy,
+  ClusterChange,
+  SCALING_PROFILES,
+} from '../types';
 
 /**
  * The desired state of a private cluster - the `cluster:` section of
@@ -68,7 +72,10 @@ const AUTOSCALE_BOUNDS: Record<string, [number, number]> = {
   memScaleDownPercent: [1, 100],
   samplesToScale: [1, 20],
   cooldownMinutes: [1, 1440],
+  scaleUpStep: [1, 3],
 };
+
+const SERVER_TYPE_NAME = /^[a-z]+[0-9]+[a-z]*$/;
 
 const VIRTUAL_UNSUPPORTED = [
   'imageId',
@@ -112,6 +119,26 @@ export const validateDesired = (d: ClusterDesired): string[] => {
     if (key === 'enabled') {
       if (typeof value !== 'boolean') {
         errors.push('cluster.autoscale.enabled must be true or false');
+      }
+      continue;
+    }
+    if (key === 'scalingProfile') {
+      if (!SCALING_PROFILES.includes(value as never)) {
+        errors.push(
+          `cluster.autoscale.scalingProfile must be one of ${SCALING_PROFILES.join(', ')}`,
+        );
+      }
+      continue;
+    }
+    if (key === 'serverTypes') {
+      if (
+        !Array.isArray(value) ||
+        value.length > 10 ||
+        value.some((t) => !SERVER_TYPE_NAME.test(String(t)))
+      ) {
+        errors.push(
+          'cluster.autoscale.serverTypes must be a list of up to 10 Hetzner server types, e.g. [cx33, cpx22]',
+        );
       }
       continue;
     }
@@ -281,8 +308,12 @@ export const planClusterChanges = (
   if (desired.autoscale) {
     const now = current.autoscale ?? {};
     const changed: ClusterAutoscalePolicy = {};
+    const same = (a: unknown, b: unknown) =>
+      Array.isArray(a) || Array.isArray(b)
+        ? JSON.stringify(a ?? []) === JSON.stringify(b ?? [])
+        : a === b;
     for (const [key, value] of Object.entries(desired.autoscale)) {
-      if ((now as Record<string, unknown>)[key] !== value) {
+      if (!same((now as Record<string, unknown>)[key], value)) {
         (changed as Record<string, unknown>)[key] = value;
       }
     }
@@ -291,7 +322,7 @@ export const planClusterChanges = (
         kind: 'autoscale',
         input: changed,
         description: `autoscale: ${Object.entries(changed)
-          .map(([k, v]) => `${k}=${v}`)
+          .map(([k, v]) => `${k}=${Array.isArray(v) ? v.join(',') : v}`)
           .join(', ')}`,
       });
     }

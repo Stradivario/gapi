@@ -146,6 +146,49 @@ describe('[cluster:apply plan]', () => {
     ]);
   });
 
+  it('diffs the profile and the server type list by value', () => {
+    const same = planClusterChanges(
+      cluster({
+        autoscale: {
+          enabled: true,
+          minWorkers: 1,
+          maxWorkers: 5,
+          scalingProfile: 'balanced',
+          serverTypes: ['cx33', 'cpx22'],
+        },
+      }),
+      {
+        name: 'prod',
+        autoscale: {
+          scalingProfile: 'balanced',
+          serverTypes: ['cx33', 'cpx22'],
+        },
+      },
+    );
+    expect(same.steps).toEqual([]);
+    const changed = planClusterChanges(cluster(), {
+      name: 'prod',
+      autoscale: { scalingProfile: 'aggressive', serverTypes: ['cx33'] },
+    });
+    expect(changed.steps[0]).toMatchObject({
+      kind: 'autoscale',
+      input: { scalingProfile: 'aggressive', serverTypes: ['cx33'] },
+      description: expect.stringContaining('serverTypes=cx33'),
+    });
+  });
+
+  it('rejects an unknown profile and malformed server types', () => {
+    expect(
+      validateDesired({
+        name: 'prod',
+        autoscale: { scalingProfile: 'turbo' as never, serverTypes: ['cx 33'] },
+      }),
+    ).toEqual([
+      expect.stringContaining('scalingProfile must be one of'),
+      expect.stringContaining('serverTypes must be a list'),
+    ]);
+  });
+
   it('marks capacity- or IP-removing steps destructive', () => {
     const plan = planClusterChanges(cluster({ withLoadBalancer: true }), {
       name: 'prod',

@@ -39,3 +39,5 @@ Outline (drop sections that don't apply):
 | `virtual-clusters` | [virtual-clusters.md](virtual-clusters.md) | cluster:create --virtual, provider: vcluster (slice; canonical in graphql-server-functions) |
 | `self-managed-nodes` | [self-managed-nodes.md](self-managed-nodes.md) | `cluster:attach/nodes/detach` - your own machine as a Talos worker (slice; canonical in graphql-server-functions) |
 | `mcp-proxy` | [mcp-proxy.md](mcp-proxy.md) | `gcli mcp:start` - local stdio MCP server forwarding to the platform MCP endpoint; token refreshed per request |
+| `cli-browser-login` | [cli-browser-login.md](cli-browser-login.md) | Slice (canonical: graphql-server): `gcli login` with no token through the browser; `mcp:start` LambforgeLogin |
+| `lambda-site-url` | [lambda-site-url.md](lambda-site-url.md) | Slice (canonical: graphql-server-lambdas): `Site:` line after create/update |

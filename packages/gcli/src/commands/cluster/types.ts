@@ -25,6 +25,9 @@ error
 
 export const ClusterAutoscaleFragment = `
 enabled
+scalingProfile
+serverTypes
+scaleUpStep
 minWorkers
 maxWorkers
 cpuScaleUpPercent
@@ -144,8 +147,27 @@ export interface ClusterChange {
   error?: string | null;
 }
 
+export type ScalingProfile =
+  | 'conservative'
+  | 'balanced'
+  | 'aggressive'
+  | 'custom';
+
+export const SCALING_PROFILES: ScalingProfile[] = [
+  'conservative',
+  'balanced',
+  'aggressive',
+  'custom',
+];
+
 export interface ClusterAutoscalePolicy {
   enabled?: boolean;
+  /** Presets thresholds/heartbeats/cooldown/step; 'custom' = as typed. */
+  scalingProfile?: ScalingProfile;
+  /** Worker server types in order of preference (next one on no stock). */
+  serverTypes?: string[];
+  /** Workers added per scale-up (1-3). */
+  scaleUpStep?: number;
   minWorkers?: number;
   maxWorkers?: number;
   cpuScaleUpPercent?: number;

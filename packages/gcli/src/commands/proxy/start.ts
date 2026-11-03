@@ -2,6 +2,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { existsSync } from 'fs';
 import { defer, EMPTY, from, lastValueFrom, of, throwError } from 'rxjs';
 import {
   catchError,
@@ -16,6 +17,9 @@ import { Readable } from 'stream';
 import { z } from 'zod';
 
 import { GraphqlClienAPI } from '~/services/gql-client';
+import { tokenDirectory } from '~/types';
+
+import { startLoginGate } from './login-gate';
 
 /**
  * The login token (Firebase ID token) lives 1 h. The proxy runs for days, so
@@ -90,6 +94,12 @@ export const performFetch = (input: RequestInfo | URL, init?: RequestInit) => {
  * gcli mcp:start --url http://localhost:8000/mcp
  */
 export default async function startProxy(cmd: { url: string }) {
+  if (!existsSync(tokenDirectory)) {
+    // Not logged in: offer the browser login as the only tool.
+    return startLoginGate(
+      cmd.url ? cmd.url.replace(/\/mcp\/?$/, '') : 'https://api.lambforge.com',
+    );
+  }
   return lastValueFrom(
     GraphqlClienAPI.getConfig().pipe(
       take(1),

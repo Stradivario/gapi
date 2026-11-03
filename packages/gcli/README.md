@@ -66,12 +66,19 @@ A token can also be limited to some lambdas (lambda, schedule and queue-trigger 
 Before interacting with the platform, you must authenticate. You can log in using an API key or a personal access token.
 
 ```bash
-# Interactive Login
+# Through the browser: prints a link + code, opens the browser and waits
 gcli login
+gcli login --no-browser        # headless: only print the link, open it on any device
 
-# Login with specific credentials
+# Login with specific credentials (the command from Profile -> CLI Settings)
 gcli login --token 'YOUR_GRAPHQL_TOKEN' --key 'YOUR_API_KEY' --url 'API_URL'
 ```
+
+The browser login is approved on lambforge.com: when you are not signed in,
+the sign-in dialog opens and the terminal continues as soon as you are. The
+token is created on the server and handed to this terminal once.
+`gcli mcp:start` without a login serves a single `LambforgeLogin` tool that
+gives your AI agent the link to show you.
 
 ## Managing Infrastructure
 

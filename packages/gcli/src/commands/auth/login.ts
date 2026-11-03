@@ -15,16 +15,40 @@ import {
 } from '~/types';
 
 import { GraphqlClienAPI } from '../../services/gql-client';
+import { browserLogin } from './browser-login';
 
 const MainLambforgeAPI = 'https://api.lambforge.com';
 
-export default (cmd: {
+interface LoginOptions {
   key: string;
   url: string;
   uploadUrl: string;
   ci: boolean;
   token: string;
-}) =>
+  /** commander's --no-browser */
+  browser?: boolean;
+  /** No stdout output (mcp:start: stdout is the MCP channel). */
+  silent?: boolean;
+}
+
+/** No --token: log in through the browser (the server issues the token
+    and the web API key), then continue exactly like a pasted command. */
+export default async (cmd: LoginOptions) => {
+  if (!cmd.token && !cmd.ci) {
+    const { token, key } = await browserLogin(cmd.url || MainLambforgeAPI, {
+      openBrowser: cmd.browser !== false,
+    });
+    return loginWithToken({ ...cmd, token, key: cmd.key || key });
+  }
+  if (!cmd.key && !cmd.ci) {
+    throw new Error(
+      '--key is required with --token (or run `gcli login` alone to log in through the browser)',
+    );
+  }
+  return loginWithToken(cmd);
+};
+
+export const loginWithToken = (cmd: LoginOptions) =>
   lastValueFrom(
     of(GraphqlClienAPI.init(cmd.key)).pipe(
       switchMap(() =>
@@ -87,13 +111,15 @@ export default (cmd: {
                 }),
               ]).pipe(map(() => user)),
             ),
-            tap((user) =>
-              Logger.log(
-                'Logged in as',
-                `"${user?.displayName}"`,
-                'with email',
-                `"${user?.email}"`,
-              ),
+            tap(
+              (user) =>
+                cmd.silent ||
+                Logger.log(
+                  'Logged in as',
+                  `"${user?.displayName}"`,
+                  'with email',
+                  `"${user?.email}"`,
+                ),
             ),
           ),
       ),

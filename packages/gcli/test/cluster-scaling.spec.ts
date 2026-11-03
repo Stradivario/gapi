@@ -86,6 +86,25 @@ describe('[cluster scaling commands]', () => {
       });
       expect(toAutoscaleInput({ disable: true })).toEqual({ enabled: false });
     });
+    it('maps --profile, --serverTypes and --step', () => {
+      expect(
+        toAutoscaleInput({
+          profile: 'aggressive',
+          serverTypes: 'CX33, cpx22',
+          step: '2',
+        }),
+      ).toEqual({
+        scalingProfile: 'aggressive',
+        serverTypes: ['cx33', 'cpx22'],
+        scaleUpStep: 2,
+      });
+      expect(toAutoscaleInput({ serverTypes: '' })).toEqual({
+        serverTypes: [],
+      });
+      expect(() => toAutoscaleInput({ profile: 'turbo' })).toThrow(
+        '--profile must be one of',
+      );
+    });
     it('refuses nothing-to-change and conflicting flags', () => {
       expect(() => toAutoscaleInput({})).toThrow('Nothing to change');
       expect(() => toAutoscaleInput({ enable: true, disable: true })).toThrow(

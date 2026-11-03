@@ -17,7 +17,7 @@ commands (cluster-provisioner operations, the same ones gql-fission's
 | `cluster:scale --workers 1-10 [--wait]` | `scaleProjectCluster` |
 | `cluster:scale:control-planes --count 1/3/5 [--wait]` | `scaleControlPlanesProjectCluster` |
 | `cluster:multi-node --workers [--wait]` / `cluster:single-node [--wait]` | `migrateToMultiNodeProjectCluster` / `revertToSingleNodeProjectCluster` |
-| `cluster:autoscale [--enable/--disable] [--min --max --cpuUp --memUp --cpuDown --memDown --samples --cooldown]` | `updateProjectClusterAutoscale` - partial: the server merges it into the stored policy and validates (min <= max, scale-down below scale-up, single-node cannot autoscale) |
+| `cluster:autoscale [--enable/--disable] [--profile] [--serverTypes a,b] [--step] [--min --max --cpuUp --memUp --cpuDown --memDown --samples --cooldown]` | `updateProjectClusterAutoscale` - partial: the server merges it into the stored policy and validates (min <= max, scale-down below scale-up, single-node cannot autoscale, server types allowed by the plan and of the cluster's CPU architecture). A preset profile overrides the thresholds |
 | `cluster:load-balancer --enable/--disable [--wait]` | `enable/disableLoadBalancerProjectCluster` |
 | `cluster:apply [--spec] [--dry-run] [--yes]` | reconciles the `cluster:` section of lambforge.yaml: `projectClusters` (current) → plan → provision / topology / scale / control planes / load balancer / autoscale, one job at a time, waiting for `ready` between them |
 

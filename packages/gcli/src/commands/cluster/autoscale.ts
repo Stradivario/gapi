@@ -8,7 +8,7 @@ import {
   parseIntOption,
   resolveClusterTarget,
 } from './helpers/cluster-change';
-import { ClusterAutoscalePolicy } from './types';
+import { ClusterAutoscalePolicy, SCALING_PROFILES } from './types';
 
 export interface AutoscaleOptions extends ClusterTargetOptions {
   enable?: boolean;
@@ -21,6 +21,9 @@ export interface AutoscaleOptions extends ClusterTargetOptions {
   memDown?: string;
   samples?: string;
   cooldown?: string;
+  profile?: string;
+  serverTypes?: string;
+  step?: string;
 }
 
 /** Only the flags given - the server merges them into the stored policy
@@ -48,6 +51,7 @@ export const toAutoscaleInput = (
     ['memDown', 'memScaleDownPercent', 1, 100],
     ['samples', 'samplesToScale', 1, 20],
     ['cooldown', 'cooldownMinutes', 1, 1440],
+    ['step', 'scaleUpStep', 1, 3],
   ];
   for (const [flag, field, min, max] of ints) {
     if (cmd[flag] !== undefined) {
@@ -59,9 +63,27 @@ export const toAutoscaleInput = (
       );
     }
   }
+  if (cmd.profile !== undefined) {
+    if (!SCALING_PROFILES.includes(cmd.profile as never)) {
+      throw new Error(
+        `--profile must be one of ${SCALING_PROFILES.join(', ')}, got "${cmd.profile}"`,
+      );
+    }
+    input.scalingProfile =
+      cmd.profile as ClusterAutoscalePolicy['scalingProfile'];
+  }
+  if (cmd.serverTypes !== undefined) {
+    // "" (or "none") clears the list: workers use the cluster's own type
+    input.serverTypes = ['', 'none'].includes(cmd.serverTypes.trim())
+      ? []
+      : cmd.serverTypes
+          .split(',')
+          .map((t) => t.trim().toLowerCase())
+          .filter(Boolean);
+  }
   if (!Object.keys(input).length) {
     throw new Error(
-      'Nothing to change: pass --enable/--disable and/or --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)',
+      'Nothing to change: pass --enable/--disable and/or --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)',
     );
   }
   return input;
@@ -82,6 +104,11 @@ export default async (cmd: AutoscaleOptions) => {
       cluster: cluster.name,
       workers: cluster.topology?.workers,
       enabled: a.enabled,
+      profile: a.scalingProfile,
+      workerTypes: a.serverTypes?.length
+        ? a.serverTypes.join(',')
+        : '(cluster type)',
+      step: a.scaleUpStep,
       minWorkers: a.minWorkers,
       maxWorkers: a.maxWorkers,
       scaleUpAt: `cpu ${a.cpuScaleUpPercent}% / mem ${a.memScaleUpPercent}%`,

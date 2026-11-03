@@ -247,6 +247,15 @@ export function registerClusterCommands(program: Command) {
     .option('--memDown <percent>', 'Scale down below this memory % (1-100)')
     .option('--samples <n>', 'Consecutive readings before acting (1-20)')
     .option('--cooldown <minutes>', 'Minutes between scale actions (1-1440)')
+    .option(
+      '--profile <profile>',
+      'conservative | balanced | aggressive presets the thresholds above; custom uses them as given',
+    )
+    .option(
+      '--serverTypes <types>',
+      'Comma-separated worker server types in order of preference, e.g. cx33,cpx22 (the next is used when one is out of stock); "" = the cluster\'s own type',
+    )
+    .option('--step <n>', 'Workers added per scale-up (1-3, custom profile)')
     .action(lazy(() => import('./autoscale').then((m) => m.default)));
 
   target(

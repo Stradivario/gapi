@@ -217,7 +217,29 @@ export const createOrUpdateLambda = (
       tap((data) => {
         Logger.info(JSON.stringify(data, null, 2));
       }),
+      switchMap((data) => printAddresses(data)),
     ),
+  );
+
+/** The two addresses to hand the user: the router url and, for a public
+    lambda on the shared cluster, the host-root site url
+    (https://<projectId>-<route>.lambforge.com - what an SPA needs). Asked
+    separately and best-effort, so an API without `siteUrl` still works. */
+const printAddresses = <T extends { id?: string | null; url?: string | null }>(
+  data: T,
+): Observable<T> =>
+  (data?.id
+    ? GraphqlClienAPI.getLambda(data.id, ['siteUrl' as never]).pipe(
+        map((l) => (l as { siteUrl?: string | null }).siteUrl ?? null),
+        catchError(() => of(null)),
+      )
+    : of(null)
+  ).pipe(
+    tap((siteUrl) => {
+      if (data?.url) Logger.info(`URL:  ${data.url}`);
+      if (siteUrl) Logger.info(`Site: ${siteUrl}`);
+    }),
+    map(() => data),
   );
 
 export const createCommand =
