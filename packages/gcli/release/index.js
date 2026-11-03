@@ -12391,7 +12391,7 @@ var require_lastValueFrom = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.lastValueFrom = void 0;
     var EmptyError_1 = require_EmptyError();
-    function lastValueFrom59(source, config2) {
+    function lastValueFrom60(source, config2) {
       var hasConfig = typeof config2 === "object";
       return new Promise(function(resolve2, reject) {
         var _hasValue = false;
@@ -12414,7 +12414,7 @@ var require_lastValueFrom = __commonJS({
         });
       });
     }
-    exports2.lastValueFrom = lastValueFrom59;
+    exports2.lastValueFrom = lastValueFrom60;
   }
 });
 
@@ -36039,6 +36039,24 @@ enabled
 scalingProfile
 serverTypes
 scaleUpStep
+mode
+consolidation
+minNodeAgeMinutes
+pools {
+  name
+  serverTypes
+  labels {
+    key
+    value
+  }
+  taints {
+    key
+    value
+    effect
+  }
+  maxWorkers
+  weight
+}
 minWorkers
 maxWorkers
 cpuScaleUpPercent
@@ -36085,10 +36103,9 @@ monthToDate {
   period
   nodeHours
   loadBalancerHours
-  totalCostEur
-  totalCostUsd
+  totalCost
 }
-estimatedMonthlyCostEur
+estimatedMonthlyCost
 issues {
   severity
   code
@@ -37208,6 +37225,47 @@ var init_gql_client = __esm({
       `,
           variables: { projectId, clusterId, input }
         }).pipe((0, import_operators.map)((res) => res.updateProjectClusterAutoscale));
+      }
+      /** Plan 17: why pods are pending and what pods mode would do. */
+      static clusterProvisioningPlan(projectId, clusterId) {
+        return this.query({
+          query: gql`
+        query clusterProvisioningPlan(
+          $projectId: String!
+          $clusterId: String!
+        ) {
+          clusterProvisioningPlan(
+            projectId: $projectId
+            clusterId: $clusterId
+          ) {
+            mode
+            enabled
+            agentReportsPods
+            sampleAt
+            note
+            addedMonthly
+            verdicts {
+              pod
+              status
+              reason
+            }
+            claims {
+              pool
+              type
+              price
+              pods
+            }
+            consolidation {
+              action
+              node
+              reason
+              savingMonthly
+            }
+          }
+        }
+      `,
+          variables: { projectId, clusterId }
+        }).pipe((0, import_operators.map)((res) => res.clusterProvisioningPlan));
       }
       /** projectClusters with the fields cluster:apply compares. */
       static projectClustersDetailed(projectId) {
@@ -255216,7 +255274,8 @@ var init_plan = __esm({
       memScaleDownPercent: [1, 100],
       samplesToScale: [1, 20],
       cooldownMinutes: [1, 1440],
-      scaleUpStep: [1, 3]
+      scaleUpStep: [1, 3],
+      minNodeAgeMinutes: [5, 1440]
     };
     SERVER_TYPE_NAME = /^[a-z]+[0-9]+[a-z]*$/;
     VIRTUAL_UNSUPPORTED = [
@@ -255263,6 +255322,29 @@ var init_plan = __esm({
           if (!SCALING_PROFILES.includes(value)) {
             errors.push(
               `cluster.autoscale.scalingProfile must be one of ${SCALING_PROFILES.join(", ")}`
+            );
+          }
+          continue;
+        }
+        if (key === "mode") {
+          if (!["thresholds", "pods"].includes(String(value))) {
+            errors.push("cluster.autoscale.mode must be 'thresholds' or 'pods'");
+          }
+          continue;
+        }
+        if (key === "consolidation") {
+          if (typeof value !== "boolean") {
+            errors.push("cluster.autoscale.consolidation must be true or false");
+          }
+          continue;
+        }
+        if (key === "pools") {
+          const pools = value;
+          if (!Array.isArray(pools) || pools.length > 5 || pools.some(
+            (p) => !p || typeof p.name !== "string" || !Array.isArray(p.serverTypes) || !p.serverTypes.length
+          )) {
+            errors.push(
+              "cluster.autoscale.pools must be up to 5 pools, each { name, serverTypes: [...], labels?, taints?, maxWorkers?, weight? }"
             );
           }
           continue;
@@ -255404,7 +255486,9 @@ var init_plan = __esm({
           steps.push({
             kind: "autoscale",
             input: changed,
-            description: `autoscale: ${Object.entries(changed).map(([k, v]) => `${k}=${Array.isArray(v) ? v.join(",") : v}`).join(", ")}`
+            description: `autoscale: ${Object.entries(changed).map(
+              ([k, v]) => `${k}=${k === "pools" ? `${v.length} pool(s)` : Array.isArray(v) ? v.join(",") : v}`
+            ).join(", ")}`
           });
         }
       }
@@ -256447,7 +256531,7 @@ var init_cost = __esm({
     init_helpers();
     init_gql_client();
     init_log();
-    money = (v, sign = "\u20AC") => v == null ? "-" : `${sign}${v.toFixed(2)}`;
+    money = (v) => v == null ? "-" : v.toFixed(2);
     cost_default = async (cmd) => {
       const projectId = await (0, import_rxjs25.lastValueFrom)(parseProjectId(cmd.project));
       const rows = await (0, import_rxjs25.lastValueFrom)(
@@ -256458,6 +256542,7 @@ var init_cost = __esm({
       if (!rows.length) {
         Logger.info("No private clusters for this project.");
       } else {
+        Logger.info("Amounts in the platform currency (EUR unless changed).");
         Logger.table(
           rows.map((c) => ({
             name: c.name,
@@ -256465,9 +256550,8 @@ var init_cost = __esm({
             period: c.monthToDate?.period ?? "-",
             nodeHours: c.monthToDate?.nodeHours ?? 0,
             loadBalancerHours: c.monthToDate?.loadBalancerHours ?? 0,
-            monthToDateEur: money(c.monthToDate?.totalCostEur),
-            monthToDateUsd: money(c.monthToDate?.totalCostUsd, "$"),
-            estimatedMonthEur: money(c.estimatedMonthlyCostEur)
+            monthToDate: money(c.monthToDate?.totalCost),
+            estimatedMonth: money(c.estimatedMonthlyCost)
           }))
         );
       }
@@ -256562,7 +256646,8 @@ var init_autoscale = __esm({
         ["memDown", "memScaleDownPercent", 1, 100],
         ["samples", "samplesToScale", 1, 20],
         ["cooldown", "cooldownMinutes", 1, 1440],
-        ["step", "scaleUpStep", 1, 3]
+        ["step", "scaleUpStep", 1, 3],
+        ["minNodeAge", "minNodeAgeMinutes", 5, 1440]
       ];
       for (const [flag, field, min, max] of ints) {
         if (cmd[flag] !== void 0) {
@@ -256582,12 +256667,21 @@ var init_autoscale = __esm({
         }
         input.scalingProfile = cmd.profile;
       }
+      if (cmd.mode !== void 0) {
+        if (!["thresholds", "pods"].includes(cmd.mode)) {
+          throw new Error(`--mode must be thresholds or pods, got "${cmd.mode}"`);
+        }
+        input.mode = cmd.mode;
+      }
+      if (cmd.consolidation !== void 0) {
+        input.consolidation = cmd.consolidation;
+      }
       if (cmd.serverTypes !== void 0) {
         input.serverTypes = ["", "none"].includes(cmd.serverTypes.trim()) ? [] : cmd.serverTypes.split(",").map((t2) => t2.trim().toLowerCase()).filter(Boolean);
       }
       if (!Object.keys(input).length) {
         throw new Error(
-          "Nothing to change: pass --enable/--disable and/or --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)"
+          "Nothing to change: pass --enable/--disable and/or --mode, --consolidation/--no-consolidation, --minNodeAge, --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)"
         );
       }
       return input;
@@ -256606,6 +256700,7 @@ var init_autoscale = __esm({
           cluster: cluster.name,
           workers: cluster.topology?.workers,
           enabled: a.enabled,
+          mode: a.mode,
           profile: a.scalingProfile,
           workerTypes: a.serverTypes?.length ? a.serverTypes.join(",") : "(cluster type)",
           step: a.scaleUpStep,
@@ -256619,6 +256714,61 @@ var init_autoscale = __esm({
       ]);
       Logger.log("-------------------");
       return cluster;
+    };
+  }
+});
+
+// src/commands/cluster/plan.ts
+var plan_exports = {};
+__export(plan_exports, {
+  default: () => plan_default
+});
+var import_rxjs27, plan_default;
+var init_plan2 = __esm({
+  "src/commands/cluster/plan.ts"() {
+    import_rxjs27 = __toESM(require_cjs());
+    init_gql_client();
+    init_log();
+    init_cluster_change();
+    plan_default = async (cmd) => {
+      const { projectId, clusterId } = await resolveClusterTarget(cmd);
+      const plan = await (0, import_rxjs27.lastValueFrom)(
+        GraphqlClienAPI.clusterProvisioningPlan(projectId, clusterId)
+      );
+      Logger.log("-------------------");
+      Logger.log("[Action][clusterProvisioningPlan]");
+      Logger.info(
+        `mode ${plan.mode}${plan.enabled ? "" : " (autoscaling off)"}, heartbeat ${plan.sampleAt ?? "none"}`
+      );
+      if (plan.agentReportsPods === false) {
+        Logger.warn(
+          "The cluster agent is too old to report pending pods - reinstall it from the Agent card on the dashboard (Install agent) or with the MCP tool InstallClusterAgent."
+        );
+      }
+      if (plan.note) Logger.info(plan.note);
+      if (plan.verdicts?.length) {
+        Logger.table(
+          plan.verdicts.map((v) => ({
+            pod: v.pod,
+            status: v.status,
+            reason: v.reason ?? ""
+          }))
+        );
+      } else if (!plan.note) {
+        Logger.info("Every pod is scheduled.");
+      }
+      if (plan.claims?.length) {
+        Logger.info(
+          `${plan.mode === "pods" && plan.enabled ? "Creating" : "Pods mode would create"}: ${plan.claims.map((c) => `${c.type} (${c.pool}) for ${c.pods?.length ?? 0} pod(s)`).join(", ")} - +${plan.addedMonthly}/month`
+        );
+      }
+      if (plan.consolidation && plan.consolidation.action !== "keep") {
+        Logger.info(
+          `Consolidation: ${plan.consolidation.action} ${plan.consolidation.node} - ${plan.consolidation.reason}`
+        );
+      }
+      Logger.log("-------------------");
+      return plan;
     };
   }
 });
@@ -256706,15 +256856,15 @@ var list_environments_exports = {};
 __export(list_environments_exports, {
   default: () => list_environments_default
 });
-var import_rxjs27, import_operators12, list_environments_default;
+var import_rxjs28, import_operators12, list_environments_default;
 var init_list_environments = __esm({
   "src/commands/environment/list-environments.ts"() {
-    import_rxjs27 = __toESM(require_cjs());
+    import_rxjs28 = __toESM(require_cjs());
     import_operators12 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_environments_default = (cmd) => (0, import_rxjs27.lastValueFrom)(
+    list_environments_default = (cmd) => (0, import_rxjs28.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators12.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
         (0, import_operators12.tap)((data) => {
@@ -256786,10 +256936,10 @@ var create_environment_exports = {};
 __export(create_environment_exports, {
   default: () => create_environment_default
 });
-var import_rxjs28, import_operators13, create_environment_default;
+var import_rxjs29, import_operators13, create_environment_default;
 var init_create_environment = __esm({
   "src/commands/environment/create-environment.ts"() {
-    import_rxjs28 = __toESM(require_cjs());
+    import_rxjs29 = __toESM(require_cjs());
     import_operators13 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -256798,7 +256948,7 @@ var init_create_environment = __esm({
     init_environment_payload();
     create_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs28.lastValueFrom)(
+      return (0, import_rxjs29.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators13.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
@@ -256852,10 +257002,10 @@ var update_environment_exports = {};
 __export(update_environment_exports, {
   default: () => update_environment_default
 });
-var import_rxjs29, import_operators14, update_environment_default;
+var import_rxjs30, import_operators14, update_environment_default;
 var init_update_environment = __esm({
   "src/commands/environment/update-environment.ts"() {
-    import_rxjs29 = __toESM(require_cjs());
+    import_rxjs30 = __toESM(require_cjs());
     import_operators14 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -256864,7 +257014,7 @@ var init_update_environment = __esm({
     init_environment_payload();
     update_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs29.lastValueFrom)(
+      return (0, import_rxjs30.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators14.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
@@ -256919,16 +257069,16 @@ var delete_environment_exports = {};
 __export(delete_environment_exports, {
   default: () => delete_environment_default
 });
-var import_rxjs30, import_operators15, delete_environment_default;
+var import_rxjs31, import_operators15, delete_environment_default;
 var init_delete_environment = __esm({
   "src/commands/environment/delete-environment.ts"() {
-    import_rxjs30 = __toESM(require_cjs());
+    import_rxjs31 = __toESM(require_cjs());
     import_operators15 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_environment_default = (cmd) => (0, import_rxjs30.lastValueFrom)(
+    delete_environment_default = (cmd) => (0, import_rxjs31.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators15.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
@@ -256981,16 +257131,16 @@ var get_environment_exports = {};
 __export(get_environment_exports, {
   default: () => get_environment_default
 });
-var import_rxjs31, import_operators16, get_environment_default;
+var import_rxjs32, import_operators16, get_environment_default;
 var init_get_environment = __esm({
   "src/commands/environment/get-environment.ts"() {
-    import_rxjs31 = __toESM(require_cjs());
+    import_rxjs32 = __toESM(require_cjs());
     import_operators16 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    get_environment_default = (cmd) => (0, import_rxjs31.lastValueFrom)(
+    get_environment_default = (cmd) => (0, import_rxjs32.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators16.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
@@ -288248,22 +288398,22 @@ var package_exports = {};
 __export(package_exports, {
   default: () => package_default
 });
-var import_archiver, import_child_process3, import_fs5, import_rxjs32, import_operators17, import_util3, ReadFile, package_default;
+var import_archiver, import_child_process3, import_fs5, import_rxjs33, import_operators17, import_util3, ReadFile, package_default;
 var init_package = __esm({
   "src/commands/lambda/package.ts"() {
     import_archiver = __toESM(require_archiver());
     import_child_process3 = require("child_process");
     import_fs5 = require("fs");
-    import_rxjs32 = __toESM(require_cjs());
+    import_rxjs33 = __toESM(require_cjs());
     import_operators17 = __toESM(require_operators());
     import_util3 = require("util");
     init_helpers2();
     init_load_spec();
     init_parse_ignore();
     init_read_file();
-    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators17.catchError)(() => (0, import_rxjs32.of)("")));
+    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators17.catchError)(() => (0, import_rxjs33.of)("")));
     package_default = (cmd) => {
-      return (0, import_rxjs32.lastValueFrom)(
+      return (0, import_rxjs33.lastValueFrom)(
         loadSpec(cmd.spec).pipe(
           (0, import_operators17.map)((spec) => spec?.function ?? spec),
           (0, import_operators17.switchMap)(async (data) => {
@@ -288272,7 +288422,7 @@ var init_package = __esm({
               // Sets the compression level.
             });
             await (0, import_util3.promisify)(import_child_process3.exec)(["chmod", "+x", data.script].join(" "));
-            const ignore = await (0, import_rxjs32.lastValueFrom)(
+            const ignore = await (0, import_rxjs33.lastValueFrom)(
               ReadFile(".gignore").pipe(
                 (0, import_operators17.map)((ignore2) => parseIgnoredFiles(ignore2))
               )
@@ -288281,11 +288431,11 @@ var init_package = __esm({
               ignore: [".gcache/**", ...ignore]
             });
             archive.finalize();
-            return (0, import_rxjs32.lastValueFrom)(
-              (0, import_rxjs32.from)(streamToBufferPromise(archive)).pipe(
+            return (0, import_rxjs33.lastValueFrom)(
+              (0, import_rxjs33.from)(streamToBufferPromise(archive)).pipe(
                 (0, import_operators17.switchMap)(
-                  (buffer) => (0, import_rxjs32.from)((0, import_util3.promisify)(import_fs5.mkdir)(".gcache")).pipe(
-                    (0, import_operators17.catchError)(() => (0, import_rxjs32.of)(true)),
+                  (buffer) => (0, import_rxjs33.from)((0, import_util3.promisify)(import_fs5.mkdir)(".gcache")).pipe(
+                    (0, import_operators17.catchError)(() => (0, import_rxjs33.of)(true)),
                     (0, import_operators17.switchMap)(
                       () => (0, import_util3.promisify)(import_fs5.writeFile)(`.gcache/${data.name}.zip`, buffer)
                     )
@@ -288311,13 +288461,13 @@ function streamToBufferPromise(file2) {
     });
   });
 }
-var import_form_data, import_fs6, import_rxjs33, import_operators18, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, printAddresses, createCommand;
+var import_form_data, import_fs6, import_rxjs34, import_operators18, import_stream_to_buffer, ReadFile2, createOrUpdateLambda, printAddresses, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
     import_fs6 = require("fs");
     init_src();
-    import_rxjs33 = __toESM(require_cjs());
+    import_rxjs34 = __toESM(require_cjs());
     import_operators18 = __toESM(require_operators());
     import_stream_to_buffer = __toESM(require_stream_to_buffer());
     init_helpers();
@@ -288326,14 +288476,14 @@ var init_helpers2 = __esm({
     init_package();
     init_load_spec();
     init_read_file();
-    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators18.catchError)(() => (0, import_rxjs33.of)("")));
-    createOrUpdateLambda = (cmd, type) => (0, import_rxjs33.lastValueFrom)(
+    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators18.catchError)(() => (0, import_rxjs34.of)("")));
+    createOrUpdateLambda = (cmd, type) => (0, import_rxjs34.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators18.switchMap)(
           (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators18.map)(() => projectId))
         ),
         (0, import_operators18.switchMap)(async (projectId) => {
-          const spec = await (0, import_rxjs33.lastValueFrom)(loadSpec(cmd.spec));
+          const spec = await (0, import_rxjs34.lastValueFrom)(loadSpec(cmd.spec));
           return {
             projectId,
             ...spec?.function ?? spec
@@ -288348,9 +288498,9 @@ var init_helpers2 = __esm({
           await package_default(cmd);
           const body = new import_form_data.default();
           body.append("file[]", (0, import_fs6.createReadStream)(`.gcache/${data.name}.zip`));
-          const config2 = await (0, import_rxjs33.lastValueFrom)(GraphqlClienAPI.getConfig());
-          return (0, import_rxjs33.lastValueFrom)(
-            (0, import_rxjs33.from)(
+          const config2 = await (0, import_rxjs34.lastValueFrom)(GraphqlClienAPI.getConfig());
+          return (0, import_rxjs34.lastValueFrom)(
+            (0, import_rxjs34.from)(
               fetch2(config2.uploadUrl, {
                 method: "POST",
                 body,
@@ -288371,23 +288521,23 @@ var init_helpers2 = __esm({
           );
         }),
         (0, import_operators18.switchMap)(async (payload) => {
-          const clusterId = await (0, import_rxjs33.lastValueFrom)(
+          const clusterId = await (0, import_rxjs34.lastValueFrom)(
             resolveClusterId(payload.projectId, {
               clusterId: cmd.clusterId || payload.clusterId,
               clusterName: cmd.clusterName || payload.clusterName
             })
           );
-          return (0, import_rxjs33.lastValueFrom)(
+          return (0, import_rxjs34.lastValueFrom)(
             GraphqlClienAPI[type]({
-              code: cmd.code || await (0, import_rxjs33.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
+              code: cmd.code || await (0, import_rxjs34.lastValueFrom)(ReadFile2(cmd.file || payload.file)) || "",
               name: cmd.name || payload.name || "",
               projectId: payload.projectId,
               route: cmd.route || payload.route || "",
-              buildBashScript: cmd.buildBashScript || await (0, import_rxjs33.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
+              buildBashScript: cmd.buildBashScript || await (0, import_rxjs34.lastValueFrom)(ReadFile2(cmd.script || payload.script)) || "",
               configs: cmd.configs || payload.configs || [],
               env: cmd.env || payload.env || "nodejs",
               method: cmd.method || payload.method || ["GET"],
-              packageJson: cmd.packageJson || await (0, import_rxjs33.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
+              packageJson: cmd.packageJson || await (0, import_rxjs34.lastValueFrom)(ReadFile2(cmd.package || payload.package)) || "{}",
               params: cmd.params || payload.params || [],
               secrets: cmd.secrets || payload.secrets || [],
               envSecrets: cmd.envSecrets || payload.envSecrets || [],
@@ -288434,8 +288584,8 @@ var init_helpers2 = __esm({
     );
     printAddresses = (data) => (data?.id ? GraphqlClienAPI.getLambda(data.id, ["siteUrl"]).pipe(
       (0, import_operators18.map)((l) => l.siteUrl ?? null),
-      (0, import_operators18.catchError)(() => (0, import_rxjs33.of)(null))
-    ) : (0, import_rxjs33.of)(null)).pipe(
+      (0, import_operators18.catchError)(() => (0, import_rxjs34.of)(null))
+    ) : (0, import_rxjs34.of)(null)).pipe(
       (0, import_operators18.tap)((siteUrl) => {
         if (data?.url) Logger.info(`URL:  ${data.url}`);
         if (siteUrl) Logger.info(`Site: ${siteUrl}`);
@@ -288457,15 +288607,15 @@ var list_exports2 = {};
 __export(list_exports2, {
   default: () => list_default2
 });
-var import_rxjs34, import_operators19, list_default2;
+var import_rxjs35, import_operators19, list_default2;
 var init_list2 = __esm({
   "src/commands/lambda/list.ts"() {
-    import_rxjs34 = __toESM(require_cjs());
+    import_rxjs35 = __toESM(require_cjs());
     import_operators19 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default2 = (cmd) => (0, import_rxjs34.lastValueFrom)(
+    list_default2 = (cmd) => (0, import_rxjs35.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators19.switchMap)(
           (projectId) => resolveClusterId(projectId, {
@@ -288500,10 +288650,10 @@ var get_exports = {};
 __export(get_exports, {
   default: () => get_default
 });
-var import_rxjs35, import_operators20, get_default;
+var import_rxjs36, import_operators20, get_default;
 var init_get = __esm({
   "src/commands/lambda/get.ts"() {
-    import_rxjs35 = __toESM(require_cjs());
+    import_rxjs36 = __toESM(require_cjs());
     import_operators20 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -288525,26 +288675,26 @@ var init_get = __esm({
         Logger.log("-------------------");
       });
       if (cmd.lambda) {
-        return (0, import_rxjs35.lastValueFrom)(
+        return (0, import_rxjs36.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
             (0, import_operators20.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
             table
           )
         );
       }
-      const spec = await (0, import_rxjs35.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs36.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs35.lastValueFrom)(
+        return (0, import_rxjs36.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
             (0, import_operators20.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs35.throwError)(
+                return (0, import_rxjs36.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs35.throwError)(() => error48);
+              return (0, import_rxjs36.throwError)(() => error48);
             }),
             (0, import_operators20.switchMap)(
               (projectId) => resolveClusterId(projectId, {
@@ -288601,22 +288751,22 @@ var delete_exports = {};
 __export(delete_exports, {
   default: () => delete_default
 });
-var import_rxjs36, import_operators21, delete_default;
+var import_rxjs37, import_operators21, delete_default;
 var init_delete = __esm({
   "src/commands/lambda/delete.ts"() {
-    import_rxjs36 = __toESM(require_cjs());
+    import_rxjs37 = __toESM(require_cjs());
     import_operators21 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     delete_default = async (cmd) => {
-      const spec = await (0, import_rxjs36.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs37.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       const env = cmd.env ?? spec.function?.env ?? spec.env;
       const clusterIdHint = cmd.clusterId ?? spec.function?.clusterId ?? spec.clusterId;
       const clusterNameHint = cmd.clusterName ?? spec.function?.clusterName ?? spec.clusterName;
-      return (0, import_rxjs36.lastValueFrom)(
+      return (0, import_rxjs37.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
           (0, import_operators21.switchMap)(
             (projectId) => resolveClusterId(projectId, {
@@ -288651,10 +288801,10 @@ var logs_exports = {};
 __export(logs_exports, {
   default: () => logs_default
 });
-var import_rxjs37, import_operators22, logs_default;
+var import_rxjs38, import_operators22, logs_default;
 var init_logs = __esm({
   "src/commands/lambda/logs.ts"() {
-    import_rxjs37 = __toESM(require_cjs());
+    import_rxjs38 = __toESM(require_cjs());
     import_operators22 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -288663,26 +288813,26 @@ var init_logs = __esm({
     logs_default = async (cmd) => {
       const result = (0, import_operators22.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs37.lastValueFrom)(
+        return (0, import_rxjs38.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
             (0, import_operators22.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs37.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs38.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs37.lastValueFrom)(
+        return (0, import_rxjs38.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
             (0, import_operators22.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs37.throwError)(
+                return (0, import_rxjs38.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs37.throwError)(() => error48);
+              return (0, import_rxjs38.throwError)(() => error48);
             }),
             (0, import_operators22.switchMap)(
               (projectId) => resolveClusterId(projectId, {
@@ -288708,10 +288858,10 @@ var logs_builder_exports = {};
 __export(logs_builder_exports, {
   default: () => logs_builder_default
 });
-var import_rxjs38, import_operators23, logs_builder_default;
+var import_rxjs39, import_operators23, logs_builder_default;
 var init_logs_builder = __esm({
   "src/commands/lambda/logs-builder.ts"() {
-    import_rxjs38 = __toESM(require_cjs());
+    import_rxjs39 = __toESM(require_cjs());
     import_operators23 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -288720,26 +288870,26 @@ var init_logs_builder = __esm({
     logs_builder_default = async (cmd) => {
       const result = (0, import_operators23.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs38.lastValueFrom)(
+        return (0, import_rxjs39.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
             (0, import_operators23.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs38.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs39.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs38.lastValueFrom)(
+        return (0, import_rxjs39.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
             (0, import_operators23.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs38.throwError)(
+                return (0, import_rxjs39.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs38.throwError)(() => error48);
+              return (0, import_rxjs39.throwError)(() => error48);
             }),
             (0, import_operators23.switchMap)(
               (projectId) => resolveClusterId(projectId, {
@@ -288769,18 +288919,18 @@ var test_exports = {};
 __export(test_exports, {
   default: () => test_default
 });
-var import_rxjs39, import_operators24, test_default;
+var import_rxjs40, import_operators24, test_default;
 var init_test = __esm({
   "src/commands/lambda/test.ts"() {
-    import_rxjs39 = __toESM(require_cjs());
+    import_rxjs40 = __toESM(require_cjs());
     import_operators24 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     test_default = async (cmd) => {
-      const spec = await (0, import_rxjs39.lastValueFrom)(loadSpec(cmd.spec));
-      const processParameters = (lambda) => (0, import_rxjs39.of)(lambda).pipe(
+      const spec = await (0, import_rxjs40.lastValueFrom)(loadSpec(cmd.spec));
+      const processParameters = (lambda) => (0, import_rxjs40.of)(lambda).pipe(
         (0, import_operators24.map)((lambda2) => ({
           ...lambda2,
           url: cmd.pathParams ? cmd.pathParams.split(";").map((param) => param.split("=")).reduce(
@@ -288794,7 +288944,7 @@ var init_test = __esm({
           );
         }),
         (0, import_operators24.switchMap)(
-          (lambda2) => (0, import_rxjs39.from)(
+          (lambda2) => (0, import_rxjs40.from)(
             fetch([lambda2.url, cmd.queryParams].filter((i2) => !!i2).join(""), {
               method: cmd?.method ?? "GET",
               body: cmd.body
@@ -288810,7 +288960,7 @@ var init_test = __esm({
         })
       );
       if (cmd.lambda) {
-        return (0, import_rxjs39.lastValueFrom)(
+        return (0, import_rxjs40.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
             (0, import_operators24.switchMap)(
               (id) => GraphqlClienAPI.getLambda(id, ["id", "url", "method", "params"])
@@ -288821,16 +288971,16 @@ var init_test = __esm({
       }
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs39.lastValueFrom)(
+        return (0, import_rxjs40.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
             (0, import_operators24.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs39.throwError)(
+                return (0, import_rxjs40.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs39.throwError)(() => error48);
+              return (0, import_rxjs40.throwError)(() => error48);
             }),
             (0, import_operators24.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId, [
@@ -288854,14 +289004,14 @@ var list_exports3 = {};
 __export(list_exports3, {
   default: () => list_default3
 });
-var import_rxjs40, import_operators25, list_default3;
+var import_rxjs41, import_operators25, list_default3;
 var init_list3 = __esm({
   "src/commands/plugin/list.ts"() {
-    import_rxjs40 = __toESM(require_cjs());
+    import_rxjs41 = __toESM(require_cjs());
     import_operators25 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default3 = () => (0, import_rxjs40.lastValueFrom)(
+    list_default3 = () => (0, import_rxjs41.lastValueFrom)(
       GraphqlClienAPI.listAvailablePlugins().pipe(
         (0, import_operators25.tap)((plugins) => {
           Logger.log("-------------------");
@@ -288886,15 +289036,15 @@ var installed_exports = {};
 __export(installed_exports, {
   default: () => installed_default
 });
-var import_rxjs41, import_operators26, installed_default;
+var import_rxjs42, import_operators26, installed_default;
 var init_installed = __esm({
   "src/commands/plugin/installed.ts"() {
-    import_rxjs41 = __toESM(require_cjs());
+    import_rxjs42 = __toESM(require_cjs());
     import_operators26 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    installed_default = (cmd) => (0, import_rxjs41.lastValueFrom)(
+    installed_default = (cmd) => (0, import_rxjs42.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators26.switchMap)((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
         (0, import_operators26.tap)((installed) => {
@@ -288925,16 +289075,16 @@ var install_exports = {};
 __export(install_exports, {
   default: () => install_default
 });
-var import_rxjs42, import_operators27, install_default;
+var import_rxjs43, import_operators27, install_default;
 var init_install = __esm({
   "src/commands/plugin/install.ts"() {
-    import_rxjs42 = __toESM(require_cjs());
+    import_rxjs43 = __toESM(require_cjs());
     import_operators27 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    install_default = (cmd) => (0, import_rxjs42.lastValueFrom)(
+    install_default = (cmd) => (0, import_rxjs43.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators27.switchMap)(
           (projectId) => loadSpec(
@@ -288943,7 +289093,7 @@ var init_install = __esm({
             // No spec file is required at all if --name/--cluster fully
             // cover it (unlike every other resource here, a plugin install
             // is often just "install this by name", no YAML needed).
-            (0, import_operators27.catchError)(() => (0, import_rxjs42.of)(void 0)),
+            (0, import_operators27.catchError)(() => (0, import_rxjs43.of)(void 0)),
             (0, import_operators27.map)((data) => ({
               projectId,
               ...data ? data.plugin ?? data : {}
@@ -288974,15 +289124,15 @@ var uninstall_exports = {};
 __export(uninstall_exports, {
   default: () => uninstall_default
 });
-var import_rxjs43, import_operators28, uninstall_default;
+var import_rxjs44, import_operators28, uninstall_default;
 var init_uninstall = __esm({
   "src/commands/plugin/uninstall.ts"() {
-    import_rxjs43 = __toESM(require_cjs());
+    import_rxjs44 = __toESM(require_cjs());
     import_operators28 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    uninstall_default = (cmd) => (0, import_rxjs43.lastValueFrom)(
+    uninstall_default = (cmd) => (0, import_rxjs44.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators28.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallPlugin(projectId, cmd.name, cmd.cluster)
@@ -289002,14 +289152,14 @@ var list_exports4 = {};
 __export(list_exports4, {
   default: () => list_default4
 });
-var import_rxjs44, import_operators29, list_default4;
+var import_rxjs45, import_operators29, list_default4;
 var init_list4 = __esm({
   "src/commands/project/list.ts"() {
-    import_rxjs44 = __toESM(require_cjs());
+    import_rxjs45 = __toESM(require_cjs());
     import_operators29 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default4 = async () => (0, import_rxjs44.lastValueFrom)(
+    list_default4 = async () => (0, import_rxjs45.lastValueFrom)(
       GraphqlClienAPI.listProjects().pipe(
         (0, import_operators29.tap)((project) => {
           const columns = ["id", "name"];
@@ -289028,24 +289178,24 @@ var use_exports = {};
 __export(use_exports, {
   default: () => use_default
 });
-var import_fs7, import_rxjs45, import_operators30, import_util4, use_default;
+var import_fs7, import_rxjs46, import_operators30, import_util4, use_default;
 var init_use = __esm({
   "src/commands/project/use.ts"() {
     import_fs7 = require("fs");
-    import_rxjs45 = __toESM(require_cjs());
+    import_rxjs46 = __toESM(require_cjs());
     import_operators30 = __toESM(require_operators());
     import_util4 = require("util");
     init_helpers();
     init_gql_client();
     init_types();
     use_default = async (cmd) => {
-      return (0, import_rxjs45.lastValueFrom)(
+      return (0, import_rxjs46.lastValueFrom)(
         parseProjectId(cmd).pipe(
           (0, import_operators30.switchMap)(
             (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators30.map)(() => projectId))
           ),
           (0, import_operators30.switchMap)(
-            (projectId) => (0, import_rxjs45.from)(
+            (projectId) => (0, import_rxjs46.from)(
               (0, import_util4.promisify)(import_fs7.writeFile)(projectDirectory, projectId, {
                 encoding: "utf-8"
               })
@@ -319988,7 +320138,7 @@ async function startProxy(cmd) {
       cmd.url ? cmd.url.replace(/\/mcp\/?$/, "") : "https://api.lambforge.com"
     );
   }
-  return (0, import_rxjs46.lastValueFrom)(
+  return (0, import_rxjs47.lastValueFrom)(
     GraphqlClienAPI.getConfig().pipe(
       (0, import_operators31.take)(1),
       (0, import_operators31.map)((config2) => ({
@@ -320004,7 +320154,7 @@ async function startProxy(cmd) {
         process.stderr.write("Retrieving config for auth...\n");
       }),
       (0, import_operators31.switchMap)(
-        (config2) => config2?.token ? (0, import_rxjs46.of)(config2) : (0, import_rxjs46.throwError)(
+        (config2) => config2?.token ? (0, import_rxjs47.of)(config2) : (0, import_rxjs47.throwError)(
           () => new Error("User is not authenticated (no token in config)")
         )
       ),
@@ -320022,7 +320172,7 @@ async function startProxy(cmd) {
               Authorization: config2.token
             }
           },
-          fetch: (input, init) => (0, import_rxjs46.lastValueFrom)(performFetch(input, init))
+          fetch: (input, init) => (0, import_rxjs47.lastValueFrom)(performFetch(input, init))
         }),
         client: new Client({
           name: "gapi-proxy-client",
@@ -320033,7 +320183,7 @@ async function startProxy(cmd) {
         process.stderr.write("Connecting to upstream...\n");
       }),
       (0, import_operators31.switchMap)(
-        (config2) => (0, import_rxjs46.from)(config2.client.connect(config2.transport)).pipe((0, import_operators31.map)(() => config2))
+        (config2) => (0, import_rxjs47.from)(config2.client.connect(config2.transport)).pipe((0, import_operators31.map)(() => config2))
       ),
       (0, import_operators31.tap)(() => {
         process.stderr.write("Connected to upstream MCP server\n");
@@ -320059,25 +320209,25 @@ async function startProxy(cmd) {
             capabilities: config2.capabilities || {}
           }
         );
-        server2.fallbackRequestHandler = async (request) => (0, import_rxjs46.lastValueFrom)(
-          (0, import_rxjs46.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
+        server2.fallbackRequestHandler = async (request) => (0, import_rxjs47.lastValueFrom)(
+          (0, import_rxjs47.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
             (0, import_operators31.catchError)((e2) => {
               process.stderr.write(`Upstream error: ${e2.message}
 `);
-              return (0, import_rxjs46.throwError)(() => e2);
+              return (0, import_rxjs47.throwError)(() => e2);
             })
           )
         );
         server2.fallbackNotificationHandler = async (notification) => {
-          await (0, import_rxjs46.lastValueFrom)(
-            (0, import_rxjs46.of)(notification).pipe(
+          await (0, import_rxjs47.lastValueFrom)(
+            (0, import_rxjs47.of)(notification).pipe(
               (0, import_operators31.filter)((n) => n.method !== "notifications/initialized"),
               (0, import_operators31.switchMap)(
-                (n) => (0, import_rxjs46.defer)(() => config2.client.notification(n)).pipe(
+                (n) => (0, import_rxjs47.defer)(() => config2.client.notification(n)).pipe(
                   (0, import_operators31.catchError)((e2) => {
                     process.stderr.write(`Notification error: ${e2}
 `);
-                    return import_rxjs46.EMPTY;
+                    return import_rxjs47.EMPTY;
                   })
                 )
               ),
@@ -320087,7 +320237,7 @@ async function startProxy(cmd) {
         };
         return server2;
       }),
-      (0, import_operators31.switchMap)((server2) => (0, import_rxjs46.from)(server2.connect(new StdioServerTransport()))),
+      (0, import_operators31.switchMap)((server2) => (0, import_rxjs47.from)(server2.connect(new StdioServerTransport()))),
       (0, import_operators31.tap)(() => {
         process.stderr.write("MCP stdio server ready\n");
       }),
@@ -320097,7 +320247,7 @@ async function startProxy(cmd) {
     )
   );
 }
-var import_fs9, import_rxjs46, import_operators31, import_stream2, pendingToken, currentToken, withToken, performFetch;
+var import_fs9, import_rxjs47, import_operators31, import_stream2, pendingToken, currentToken, withToken, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
@@ -320105,7 +320255,7 @@ var init_start = __esm({
     init_server2();
     init_stdio2();
     import_fs9 = require("fs");
-    import_rxjs46 = __toESM(require_cjs());
+    import_rxjs47 = __toESM(require_cjs());
     import_operators31 = __toESM(require_operators());
     import_stream2 = require("stream");
     init_zod();
@@ -320115,7 +320265,7 @@ var init_start = __esm({
     pendingToken = null;
     currentToken = (force = false) => {
       if (!pendingToken || force) {
-        pendingToken = (0, import_rxjs46.lastValueFrom)(
+        pendingToken = (0, import_rxjs47.lastValueFrom)(
           GraphqlClienAPI.getConfig(force).pipe(
             (0, import_operators31.take)(1),
             (0, import_operators31.map)((config2) => config2.token)
@@ -320132,7 +320282,7 @@ var init_start = __esm({
       return { ...init, headers };
     };
     performFetch = (input, init) => {
-      return (0, import_rxjs46.from)(currentToken()).pipe(
+      return (0, import_rxjs47.from)(currentToken()).pipe(
         (0, import_operators31.switchMap)((token) => fetch(input, withToken(init, token))),
         (0, import_operators31.switchMap)((res) => {
           if (res.status === 401 || res.status === 403) {
@@ -320140,7 +320290,7 @@ var init_start = __esm({
               `[DEBUG] Request failed with ${res.status}. Refreshing token...
 `
             );
-            return (0, import_rxjs46.from)(currentToken(true)).pipe(
+            return (0, import_rxjs47.from)(currentToken(true)).pipe(
               (0, import_operators31.switchMap)((token) => {
                 process.stderr.write(
                   "[DEBUG] Token refreshed. Retrying request...\n"
@@ -320149,7 +320299,7 @@ var init_start = __esm({
               })
             );
           }
-          return (0, import_rxjs46.of)(res);
+          return (0, import_rxjs47.of)(res);
         }),
         (0, import_operators31.map)((res) => {
           if (typeof res?.body?.pipeThrough !== "function") {
@@ -320168,7 +320318,7 @@ var init_start = __esm({
         (0, import_operators31.catchError)((e2) => {
           process.stderr.write(`[ERROR] Fetch error: ${e2.message}
 `);
-          return (0, import_rxjs46.throwError)(() => e2);
+          return (0, import_rxjs47.throwError)(() => e2);
         })
       );
     };
@@ -320180,16 +320330,16 @@ var create_exports3 = {};
 __export(create_exports3, {
   default: () => create_default3
 });
-var import_rxjs47, import_operators32, create_default3;
+var import_rxjs48, import_operators32, create_default3;
 var init_create3 = __esm({
   "src/commands/rabbitmq/create.ts"() {
-    import_rxjs47 = __toESM(require_cjs());
+    import_rxjs48 = __toESM(require_cjs());
     import_operators32 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_default3 = (cmd) => (0, import_rxjs47.lastValueFrom)(
+    create_default3 = (cmd) => (0, import_rxjs48.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators32.switchMap)(
           (projectId) => loadSpec(
@@ -320228,15 +320378,15 @@ var list_exports5 = {};
 __export(list_exports5, {
   default: () => list_default5
 });
-var import_rxjs48, import_operators33, list_default5;
+var import_rxjs49, import_operators33, list_default5;
 var init_list5 = __esm({
   "src/commands/rabbitmq/list.ts"() {
-    import_rxjs48 = __toESM(require_cjs());
+    import_rxjs49 = __toESM(require_cjs());
     import_operators33 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default5 = (cmd) => (0, import_rxjs48.lastValueFrom)(
+    list_default5 = (cmd) => (0, import_rxjs49.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators33.switchMap)(
           (projectId) => GraphqlClienAPI.listRabbitMqInstances(projectId)
@@ -320271,15 +320421,15 @@ var delete_exports2 = {};
 __export(delete_exports2, {
   default: () => delete_default2
 });
-var import_rxjs49, import_operators34, delete_default2;
+var import_rxjs50, import_operators34, delete_default2;
 var init_delete2 = __esm({
   "src/commands/rabbitmq/delete.ts"() {
-    import_rxjs49 = __toESM(require_cjs());
+    import_rxjs50 = __toESM(require_cjs());
     import_operators34 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    delete_default2 = (cmd) => (0, import_rxjs49.lastValueFrom)(
+    delete_default2 = (cmd) => (0, import_rxjs50.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators34.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallRabbitMq(cmd.id, projectId)
@@ -321004,11 +321154,11 @@ __export(start_exports2, {
   default: () => start_default,
   resolveRunner: () => resolveRunner
 });
-var import_os6, import_rxjs50, RUNNER_VERSION, resolveRunner, start_default;
+var import_os6, import_rxjs51, RUNNER_VERSION, resolveRunner, start_default;
 var init_start2 = __esm({
   "src/commands/runner/start.ts"() {
     import_os6 = require("os");
-    import_rxjs50 = __toESM(require_cjs());
+    import_rxjs51 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -321029,7 +321179,7 @@ var init_start2 = __esm({
       }
       const name2 = cmd.name || (0, import_os6.hostname)();
       Logger.info(`Registering this machine as local runner "${name2}"...`);
-      const { runner, token } = await (0, import_rxjs50.lastValueFrom)(
+      const { runner, token } = await (0, import_rxjs51.lastValueFrom)(
         GraphqlClienAPI.createLocalRunner(name2)
       ).catch((e2) => {
         throw new Error(
@@ -321224,14 +321374,14 @@ var list_exports6 = {};
 __export(list_exports6, {
   default: () => list_default6
 });
-var import_rxjs51, import_operators35, list_default6;
+var import_rxjs52, import_operators35, list_default6;
 var init_list6 = __esm({
   "src/commands/runner/list.ts"() {
-    import_rxjs51 = __toESM(require_cjs());
+    import_rxjs52 = __toESM(require_cjs());
     import_operators35 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default6 = () => (0, import_rxjs51.lastValueFrom)(
+    list_default6 = () => (0, import_rxjs52.lastValueFrom)(
       GraphqlClienAPI.listLocalRunners().pipe(
         (0, import_operators35.tap)((runners) => {
           Logger.log("-------------------");
@@ -321264,10 +321414,10 @@ __export(models_exports, {
   default: () => models_default,
   parseSelection: () => parseSelection
 });
-var import_rxjs52, isShown, parseSelection, models_default;
+var import_rxjs53, isShown, parseSelection, models_default;
 var init_models = __esm({
   "src/commands/runner/models.ts"() {
-    import_rxjs52 = __toESM(require_cjs());
+    import_rxjs53 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -321297,11 +321447,11 @@ var init_models = __esm({
       }
       let runner;
       if (selection) {
-        runner = await (0, import_rxjs52.lastValueFrom)(
+        runner = await (0, import_rxjs53.lastValueFrom)(
           GraphqlClienAPI.setLocalRunnerModels(runnerId, selection.models)
         );
       } else {
-        const runners = await (0, import_rxjs52.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
+        const runners = await (0, import_rxjs53.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
         runner = runners.find((r2) => r2.id === runnerId);
       }
       if (!runner) {
@@ -321336,10 +321486,10 @@ var delete_exports3 = {};
 __export(delete_exports3, {
   default: () => delete_default3
 });
-var import_rxjs53, delete_default3;
+var import_rxjs54, delete_default3;
 var init_delete3 = __esm({
   "src/commands/runner/delete.ts"() {
-    import_rxjs53 = __toESM(require_cjs());
+    import_rxjs54 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -321349,7 +321499,7 @@ var init_delete3 = __esm({
       if (!runnerId) {
         throw new Error("Specify the runner with --id (see `gcli runner:list`).");
       }
-      await (0, import_rxjs53.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
+      await (0, import_rxjs54.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
       if (saved?.id === runnerId) {
         await forgetRunner();
       }
@@ -321365,10 +321515,10 @@ __export(start_exports3, {
 });
 async function start2(args) {
   Logger.log("---------------------------------");
-  return (0, import_rxjs54.lastValueFrom)(
+  return (0, import_rxjs55.lastValueFrom)(
     loadSpec().pipe(
       (0, import_operators36.switchMap)(
-        (config2) => (0, import_rxjs54.of)({
+        (config2) => (0, import_rxjs55.of)({
           watcher: (0, import_node_fs2.watch)(process.cwd(), {
             recursive: true
           }),
@@ -321397,7 +321547,7 @@ async function start2(args) {
               outfile,
               startCommand,
               ignorelist
-            }) => (0, import_rxjs54.from)(build_default(args)).pipe(
+            }) => (0, import_rxjs55.from)(build_default(args)).pipe(
               (0, import_operators36.tap)(() => {
                 Logger.warn(
                   `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
@@ -321415,10 +321565,10 @@ async function start2(args) {
                 );
               }),
               (0, import_operators36.tap)(
-                () => (0, import_rxjs54.merge)(
-                  (0, import_rxjs54.fromEvent)(process, "SIGINT"),
-                  (0, import_rxjs54.fromEvent)(process, "SIGTERM"),
-                  (0, import_rxjs54.fromEvent)(process, "exit")
+                () => (0, import_rxjs55.merge)(
+                  (0, import_rxjs55.fromEvent)(process, "SIGINT"),
+                  (0, import_rxjs55.fromEvent)(process, "SIGTERM"),
+                  (0, import_rxjs55.fromEvent)(process, "exit")
                 ).pipe(
                   (0, import_operators36.debounceTime)(100),
                   (0, import_operators36.tap)(() => {
@@ -321430,7 +321580,7 @@ async function start2(args) {
                 ).subscribe()
               ),
               (0, import_operators36.switchMap)(
-                () => (0, import_rxjs54.fromEvent)(watcher, "change").pipe(
+                () => (0, import_rxjs55.fromEvent)(watcher, "change").pipe(
                   (0, import_operators36.map)(([event, filename]) => ({
                     event,
                     filename
@@ -321479,12 +321629,12 @@ async function start2(args) {
     )
   );
 }
-var import_node_child_process, import_node_fs2, import_rxjs54, import_operators36;
+var import_node_child_process, import_node_fs2, import_rxjs55, import_operators36;
 var init_start3 = __esm({
   "src/commands/start/start.ts"() {
     import_node_child_process = require("node:child_process");
     import_node_fs2 = require("node:fs");
-    import_rxjs54 = __toESM(require_cjs());
+    import_rxjs55 = __toESM(require_cjs());
     import_operators36 = __toESM(require_operators());
     init_log();
     init_build();
@@ -321497,16 +321647,16 @@ var create_cron_exports = {};
 __export(create_cron_exports, {
   default: () => create_cron_default
 });
-var import_rxjs55, import_operators37, create_cron_default;
+var import_rxjs56, import_operators37, create_cron_default;
 var init_create_cron = __esm({
   "src/commands/triggers/cron/create-cron.ts"() {
-    import_rxjs55 = __toESM(require_cjs());
+    import_rxjs56 = __toESM(require_cjs());
     import_operators37 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_cron_default = (cmd) => (0, import_rxjs55.lastValueFrom)(
+    create_cron_default = (cmd) => (0, import_rxjs56.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators37.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
@@ -321529,7 +321679,7 @@ var init_create_cron = __esm({
           )
         ),
         (0, import_operators37.switchMap)(
-          ({ lambdaId, cron, triggerName, lambdaName }) => !cron || !triggerName ? (0, import_rxjs55.throwError)(
+          ({ lambdaId, cron, triggerName, lambdaName }) => !cron || !triggerName ? (0, import_rxjs56.throwError)(
             () => new Error(
               "cron:create needs --cron and --triggerName (or triggers.time.cron / triggerName in lambforge.yaml)"
             )
@@ -321562,16 +321712,16 @@ var delete_cron_exports = {};
 __export(delete_cron_exports, {
   default: () => delete_cron_default
 });
-var import_rxjs56, import_operators38, delete_cron_default;
+var import_rxjs57, import_operators38, delete_cron_default;
 var init_delete_cron = __esm({
   "src/commands/triggers/cron/delete-cron.ts"() {
-    import_rxjs56 = __toESM(require_cjs());
+    import_rxjs57 = __toESM(require_cjs());
     import_operators38 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_cron_default = (cmd) => (0, import_rxjs56.lastValueFrom)(
+    delete_cron_default = (cmd) => (0, import_rxjs57.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators38.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
@@ -321615,18 +321765,18 @@ var list_crons_exports = {};
 __export(list_crons_exports, {
   default: () => list_crons_default
 });
-var import_rxjs57, import_operators39, list_crons_default;
+var import_rxjs58, import_operators39, list_crons_default;
 var init_list_crons = __esm({
   "src/commands/triggers/cron/list-crons.ts"() {
-    import_rxjs57 = __toESM(require_cjs());
+    import_rxjs58 = __toESM(require_cjs());
     import_operators39 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_crons_default = (cmd) => (0, import_rxjs57.lastValueFrom)(
+    list_crons_default = (cmd) => (0, import_rxjs58.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators39.switchMap)(
-          (projectId) => (0, import_rxjs57.combineLatest)([
+          (projectId) => (0, import_rxjs58.combineLatest)([
             GraphqlClienAPI.listProjectTimeTriggers(projectId),
             GraphqlClienAPI.listLambdas(projectId)
           ])
@@ -321659,15 +321809,15 @@ var list_exports7 = {};
 __export(list_exports7, {
   default: () => list_default7
 });
-var import_rxjs58, import_operators40, list_default7;
+var import_rxjs59, import_operators40, list_default7;
 var init_list7 = __esm({
   "src/commands/triggers/message-queue/list.ts"() {
-    import_rxjs58 = __toESM(require_cjs());
+    import_rxjs59 = __toESM(require_cjs());
     import_operators40 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default7 = (cmd) => (0, import_rxjs58.lastValueFrom)(
+    list_default7 = (cmd) => (0, import_rxjs59.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators40.switchMap)(
           (projectId) => GraphqlClienAPI.listMessageQueueTriggers(projectId)
@@ -321703,10 +321853,10 @@ __export(save_exports, {
   mergeOverExisting: () => mergeOverExisting,
   toTriggerInput: () => toTriggerInput
 });
-var import_rxjs59, import_operators41, int2, toTriggerInput, mergeOverExisting, save_default;
+var import_rxjs60, import_operators41, int2, toTriggerInput, mergeOverExisting, save_default;
 var init_save = __esm({
   "src/commands/triggers/message-queue/save.ts"() {
-    import_rxjs59 = __toESM(require_cjs());
+    import_rxjs60 = __toESM(require_cjs());
     import_operators41 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -321769,11 +321919,11 @@ var init_save = __esm({
         )
       );
     };
-    save_default = (mode, cmd) => (0, import_rxjs59.lastValueFrom)(
+    save_default = (mode, cmd) => (0, import_rxjs60.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators41.switchMap)((projectId) => {
           const changes = toTriggerInput(mode, cmd);
-          const payload$ = mode === "create" ? (0, import_rxjs59.of)(changes) : GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
+          const payload$ = mode === "create" ? (0, import_rxjs60.of)(changes) : GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
             (0, import_operators41.map)(
               (triggers) => mergeOverExisting(
                 triggers.find((t2) => t2.name === cmd.name),
@@ -321811,15 +321961,15 @@ var delete_exports4 = {};
 __export(delete_exports4, {
   default: () => delete_default4
 });
-var import_rxjs60, import_operators42, delete_default4;
+var import_rxjs61, import_operators42, delete_default4;
 var init_delete4 = __esm({
   "src/commands/triggers/message-queue/delete.ts"() {
-    import_rxjs60 = __toESM(require_cjs());
+    import_rxjs61 = __toESM(require_cjs());
     import_operators42 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    delete_default4 = (cmd) => (0, import_rxjs60.lastValueFrom)(
+    delete_default4 = (cmd) => (0, import_rxjs61.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
         (0, import_operators42.switchMap)(
           (projectId) => GraphqlClienAPI.deleteMessageQueueTrigger(projectId, cmd.name)
@@ -321929,11 +322079,11 @@ var init_definition = __esm({
 });
 
 // src/commands/workflow/helpers.ts
-var import_promises7, import_rxjs61, import_operators43, resolveWorkflow, withProject, readWorkflowFile, writeTextFile, POLL_MS, followRun, printRunResult;
+var import_promises7, import_rxjs62, import_operators43, resolveWorkflow, withProject, readWorkflowFile, writeTextFile, POLL_MS, followRun, printRunResult;
 var init_helpers4 = __esm({
   "src/commands/workflow/helpers.ts"() {
     import_promises7 = require("fs/promises");
-    import_rxjs61 = __toESM(require_cjs());
+    import_rxjs62 = __toESM(require_cjs());
     import_operators43 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
@@ -321955,18 +322105,18 @@ var init_helpers4 = __esm({
         })
       );
     };
-    withProject = (project, fn) => (0, import_rxjs61.lastValueFrom)(parseProjectId(project).pipe((0, import_operators43.switchMap)(fn)));
+    withProject = (project, fn) => (0, import_rxjs62.lastValueFrom)(parseProjectId(project).pipe((0, import_operators43.switchMap)(fn)));
     readWorkflowFile = (path2) => {
       if (!path2) {
         throw new Error("--file is required (a workflow YAML or JSON file)");
       }
-      return (0, import_rxjs61.from)((0, import_promises7.readFile)(path2, "utf8")).pipe((0, import_operators43.map)(parseWorkflowFile));
+      return (0, import_rxjs62.from)((0, import_promises7.readFile)(path2, "utf8")).pipe((0, import_operators43.map)(parseWorkflowFile));
     };
-    writeTextFile = (path2, text) => (0, import_rxjs61.from)((0, import_promises7.writeFile)(path2, text, "utf8"));
+    writeTextFile = (path2, text) => (0, import_rxjs62.from)((0, import_promises7.writeFile)(path2, text, "utf8"));
     POLL_MS = 2e3;
     followRun = (projectId, workflowId, runName) => {
       let printed = 0;
-      return (0, import_rxjs61.timer)(0, POLL_MS).pipe(
+      return (0, import_rxjs62.timer)(0, POLL_MS).pipe(
         (0, import_operators43.switchMap)(
           () => GraphqlClienAPI.getWorkflowRun(projectId, workflowId, runName)
         ),
@@ -322039,10 +322189,10 @@ var get_exports2 = {};
 __export(get_exports2, {
   default: () => get_default2
 });
-var import_rxjs62, import_operators45, get_default2;
+var import_rxjs63, import_operators45, get_default2;
 var init_get2 = __esm({
   "src/commands/workflow/get.ts"() {
-    import_rxjs62 = __toESM(require_cjs());
+    import_rxjs63 = __toESM(require_cjs());
     import_operators45 = __toESM(require_operators());
     init_log();
     init_definition();
@@ -322058,7 +322208,7 @@ var init_get2 = __esm({
           });
           if (!cmd.out) {
             Logger.log(text);
-            return (0, import_rxjs62.of)(null);
+            return (0, import_rxjs63.of)(null);
           }
           return writeTextFile(cmd.out, text).pipe(
             (0, import_operators45.tap)(() => Logger.info(`Wrote ${cmd.out}`))
@@ -322128,11 +322278,11 @@ var generate_exports = {};
 __export(generate_exports, {
   default: () => generate_default
 });
-var import_promises8, import_rxjs63, import_operators47, generate_default;
+var import_promises8, import_rxjs64, import_operators47, generate_default;
 var init_generate = __esm({
   "src/commands/workflow/generate.ts"() {
     import_promises8 = require("fs/promises");
-    import_rxjs63 = __toESM(require_cjs());
+    import_rxjs64 = __toESM(require_cjs());
     import_operators47 = __toESM(require_operators());
     init_gql_client();
     init_log();
@@ -322145,7 +322295,7 @@ var init_generate = __esm({
           'Describe the workflow: --description "charge the card with retries, then email the receipt"'
         );
       }
-      const base$ = cmd.from ? (0, import_rxjs63.from)((0, import_promises8.readFile)(cmd.from, "utf8")).pipe((0, import_operators47.map)(parseWorkflowFile)) : cmd.name ? GraphqlClienAPI.listWorkflows(projectId).pipe(
+      const base$ = cmd.from ? (0, import_rxjs64.from)((0, import_promises8.readFile)(cmd.from, "utf8")).pipe((0, import_operators47.map)(parseWorkflowFile)) : cmd.name ? GraphqlClienAPI.listWorkflows(projectId).pipe(
         (0, import_operators47.switchMap)(
           (workflows) => workflows.some((w) => w.name === cmd.name) ? resolveWorkflow(projectId, cmd.name).pipe(
             (0, import_operators47.map)((w) => ({
@@ -322153,9 +322303,9 @@ var init_generate = __esm({
               description: w.description ?? void 0,
               definition: w.definition
             }))
-          ) : (0, import_rxjs63.of)(null)
+          ) : (0, import_rxjs64.of)(null)
         )
-      ) : (0, import_rxjs63.of)(null);
+      ) : (0, import_rxjs64.of)(null);
       return base$.pipe(
         (0, import_operators47.tap)(() => Logger.info("Asking the AI for a draft...")),
         (0, import_operators47.switchMap)(
@@ -322182,10 +322332,10 @@ var init_generate = __esm({
           const text = toWorkflowYaml(file2);
           const written$ = cmd.out ? writeTextFile(cmd.out, text).pipe(
             (0, import_operators47.tap)(() => Logger.info(`Wrote ${cmd.out}`))
-          ) : (0, import_rxjs63.of)(null).pipe((0, import_operators47.tap)(() => !cmd.apply && Logger.log(text)));
+          ) : (0, import_rxjs64.of)(null).pipe((0, import_operators47.tap)(() => !cmd.apply && Logger.log(text)));
           return written$.pipe(
             (0, import_operators47.switchMap)(
-              () => cmd.apply ? applyWorkflow(projectId, file2) : (0, import_rxjs63.of)(null).pipe(
+              () => cmd.apply ? applyWorkflow(projectId, file2) : (0, import_rxjs64.of)(null).pipe(
                 (0, import_operators47.tap)(
                   () => Logger.info(
                     cmd.out ? `Review it, then: gcli workflow:apply --file ${cmd.out}${file2.name ? "" : " --name <name>"}` : "Save it with -o <file>, or re-run with --apply --name <name>"
@@ -322259,11 +322409,11 @@ var run_exports = {};
 __export(run_exports, {
   default: () => run_default
 });
-var import_promises9, import_rxjs64, import_operators50, run_default;
+var import_promises9, import_rxjs65, import_operators50, run_default;
 var init_run = __esm({
   "src/commands/workflow/run.ts"() {
     import_promises9 = require("fs/promises");
-    import_rxjs64 = __toESM(require_cjs());
+    import_rxjs65 = __toESM(require_cjs());
     import_operators50 = __toESM(require_operators());
     init_gql_client();
     init_log();
@@ -322271,7 +322421,7 @@ var init_run = __esm({
     init_helpers4();
     run_default = (cmd) => withProject(
       cmd.project,
-      (projectId) => (cmd.inputFile ? (0, import_rxjs64.from)((0, import_promises9.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs64.of)(cmd.input)).pipe(
+      (projectId) => (cmd.inputFile ? (0, import_rxjs65.from)((0, import_promises9.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs65.of)(cmd.input)).pipe(
         (0, import_operators50.map)(parseRunInput),
         (0, import_operators50.switchMap)(
           (input) => resolveWorkflow(projectId, cmd.name).pipe(
@@ -322279,7 +322429,7 @@ var init_run = __esm({
               (w) => GraphqlClienAPI.startWorkflowRun(projectId, w.id, input).pipe(
                 (0, import_operators50.tap)((run2) => Logger.info(`Started run ${run2.name}`)),
                 (0, import_operators50.switchMap)(
-                  (run2) => cmd.wait ? followRun(projectId, w.id, run2.name) : (0, import_rxjs64.of)(run2).pipe(
+                  (run2) => cmd.wait ? followRun(projectId, w.id, run2.name) : (0, import_rxjs65.of)(run2).pipe(
                     (0, import_operators50.tap)(
                       () => Logger.info(
                         `Follow it: gcli workflow:status --name ${w.name} --run ${run2.name} --follow`
@@ -322453,11 +322603,11 @@ var trigger_add_exports = {};
 __export(trigger_add_exports, {
   default: () => trigger_add_default
 });
-var import_promises10, import_rxjs65, import_operators54, trigger_add_default;
+var import_promises10, import_rxjs66, import_operators54, trigger_add_default;
 var init_trigger_add = __esm({
   "src/commands/workflow/trigger-add.ts"() {
     import_promises10 = require("fs/promises");
-    import_rxjs65 = __toESM(require_cjs());
+    import_rxjs66 = __toESM(require_cjs());
     import_operators54 = __toESM(require_operators());
     init_gql_client();
     init_log();
@@ -322465,7 +322615,7 @@ var init_trigger_add = __esm({
     init_triggers();
     trigger_add_default = (cmd) => withProject(
       cmd.project,
-      (projectId) => (cmd.inputFile ? (0, import_rxjs65.from)((0, import_promises10.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs65.of)(void 0)).pipe(
+      (projectId) => (cmd.inputFile ? (0, import_rxjs66.from)((0, import_promises10.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs66.of)(void 0)).pipe(
         (0, import_operators54.map)((inputText) => buildTriggerInput({ ...cmd, inputText })),
         (0, import_operators54.switchMap)(
           (trigger) => resolveWorkflow(projectId, cmd.name).pipe(
@@ -323840,12 +323990,12 @@ __export(start_exports4, {
   WORKSPACE_VERSION: () => WORKSPACE_VERSION,
   default: () => start_default2
 });
-var import_promises12, import_path7, import_rxjs66, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
+var import_promises12, import_path7, import_rxjs67, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
 var init_start4 = __esm({
   "src/commands/workspace/start.ts"() {
     import_promises12 = require("fs/promises");
     import_path7 = require("path");
-    import_rxjs66 = __toESM(require_cjs());
+    import_rxjs67 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
@@ -323875,7 +324025,7 @@ var init_start4 = __esm({
       if (saved && (!cmd.project || cmd.project === saved.projectId)) {
         return saved;
       }
-      const projectId = await (0, import_rxjs66.lastValueFrom)(parseProjectId(cmd.project)).catch(
+      const projectId = await (0, import_rxjs67.lastValueFrom)(parseProjectId(cmd.project)).catch(
         () => {
           throw new Error(
             "No project selected. Pass --project <projectId> or run `gcli project:use <projectId>` first."
@@ -323884,7 +324034,7 @@ var init_start4 = __esm({
       );
       const name2 = cmd.name || (0, import_path7.basename)(root);
       Logger.info(`Registering ${root} as local workspace "${name2}"...`);
-      const { workspace, token } = await (0, import_rxjs66.lastValueFrom)(
+      const { workspace, token } = await (0, import_rxjs67.lastValueFrom)(
         GraphqlClienAPI.createLocalWorkspace(projectId, name2)
       ).catch((e2) => {
         throw new Error(
@@ -323975,16 +324125,16 @@ var list_exports9 = {};
 __export(list_exports9, {
   default: () => list_default9
 });
-var import_rxjs67, list_default9;
+var import_rxjs68, list_default9;
 var init_list9 = __esm({
   "src/commands/workspace/list.ts"() {
-    import_rxjs67 = __toESM(require_cjs());
+    import_rxjs68 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
     list_default9 = async (cmd) => {
       const [workspaces, saved] = await Promise.all([
-        (0, import_rxjs67.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
+        (0, import_rxjs68.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
         readSavedWorkspaces()
       ]);
       const onThisMachine = new Set(Object.values(saved).map((w) => w.id));
@@ -324018,11 +324168,11 @@ var delete_exports6 = {};
 __export(delete_exports6, {
   default: () => delete_default6
 });
-var import_promises13, import_rxjs68, delete_default6;
+var import_promises13, import_rxjs69, delete_default6;
 var init_delete6 = __esm({
   "src/commands/workspace/delete.ts"() {
     import_promises13 = require("fs/promises");
-    import_rxjs68 = __toESM(require_cjs());
+    import_rxjs69 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
@@ -324034,7 +324184,7 @@ var init_delete6 = __esm({
           "No workspace registered for this directory - pass --id (see `gcli workspace:list`)."
         );
       }
-      await (0, import_rxjs68.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
+      await (0, import_rxjs69.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
       await forgetWorkspace({ id: workspaceId });
       Logger.log(
         `Local workspace ${workspaceId} deleted; its token no longer works.`
@@ -324203,7 +324353,21 @@ function registerClusterCommands(program2) {
   ).option(
     "--serverTypes <types>",
     `Comma-separated worker server types in order of preference, e.g. cx33,cpx22 (the next is used when one is out of stock); "" = the cluster's own type`
-  ).option("--step <n>", "Workers added per scale-up (1-3, custom profile)").action(lazy(() => Promise.resolve().then(() => (init_autoscale(), autoscale_exports)).then((m2) => m2.default)));
+  ).option("--step <n>", "Workers added per scale-up (1-3, custom profile)").option(
+    "--mode <mode>",
+    "thresholds (CPU/memory %) | pods (create the cheapest nodes that fit unschedulable pods)"
+  ).option(
+    "--consolidation",
+    "pods mode: remove the newest worker when its pods fit elsewhere"
+  ).option("--no-consolidation", "pods mode: never remove workers by itself").option(
+    "--minNodeAge <minutes>",
+    "pods mode: never remove a worker younger than this (5-1440)"
+  ).action(lazy(() => Promise.resolve().then(() => (init_autoscale(), autoscale_exports)).then((m2) => m2.default)));
+  target(
+    program2.command("cluster:plan").description(
+      "Why pods are pending and what the pods-mode autoscaler would do: a verdict per pod, the nodes it would create, consolidation"
+    )
+  ).action(lazy(() => Promise.resolve().then(() => (init_plan2(), plan_exports)).then((m2) => m2.default)));
   target(
     program2.command("cluster:multi-node").description(
       "Convert a single-node cluster to dedicated worker nodes (required for autoscaling)"

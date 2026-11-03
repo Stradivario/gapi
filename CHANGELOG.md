@@ -1,4 +1,4 @@
-## [1.8.255](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.255) (2026-11-03)
+## [1.8.256](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.256) (2026-11-03)
 
 
 ### Bug Fixes
@@ -141,6 +141,7 @@
 * **gcli:** browser login (gcli login without --token, mcp:start LambforgeLogin), cluster:autoscale --profile/--serverTypes/--step, lambda Site address ([acd1970](https://github.com/Stradivario/gapi/commit/acd1970c87cf8583f3bcd1900bc491c1332de2a1))
 * **gcli:** build script added outfile ([1bea705](https://github.com/Stradivario/gapi/commit/1bea7057543c37999ec2bd23983bc8a0401361f0))
 * **gcli:** bundle binary ([e4ad1a0](https://github.com/Stradivario/gapi/commit/e4ad1a075bb468f014d5cc01cda31227775fe04a))
+* **gcli:** cluster:plan; cluster:autoscale --mode/--consolidation/--minNodeAge; pools in cluster YAML (plan 17) ([9b1dfc7](https://github.com/Stradivario/gapi/commit/9b1dfc743652279fb88b9c1eedef27745f6e02fe))
 * **gcli:** environment crud operations added ([5c4bde8](https://github.com/Stradivario/gapi/commit/5c4bde864e328e97c21f616af5911e3ce0208edf))
 * **gcli:** federation and envSecret are adopted to the cli ([244b451](https://github.com/Stradivario/gapi/commit/244b4515ae93fddbc9aace6cef917181982f9f06))
 * **gcli:** logging is now on a single place introduced new configuration lambforge.yaml and start bundling capabilities using esbuild really amazing commitgit add .! ([064cd2a](https://github.com/Stradivario/gapi/commit/064cd2a7bb1b33951869961624df81f3b4c097ad))
@@ -152,6 +153,7 @@
 * **gcli:** scaling options added to yml file ([3c01cdc](https://github.com/Stradivario/gapi/commit/3c01cdc7b3f7d0bce572b1a64af2b718075a93dc))
 * **gcli:** single executable ([8697dc6](https://github.com/Stradivario/gapi/commit/8697dc63dd03f9a4247238f21a3d77e604f0c360))
 * **gcli:** time triggers tools implemented ([8cbf633](https://github.com/Stradivario/gapi/commit/8cbf63325a15590c714e517a856fb9cca58b8767))
+* **gcli:** update cluster cost command to print amounts in platform currency, removing USD column ([1b63100](https://github.com/Stradivario/gapi/commit/1b6310083c40402e6afc8cf8a0097cebb8dbcb04))
 * **gcli:** updated mcp server to be with rxjs instead of imperative code ([4337cad](https://github.com/Stradivario/gapi/commit/4337cad4a5091700b1f31ab1e01028ee96b6a096))
 * **gcli:** workflow commands with AI drafts ([4019d58](https://github.com/Stradivario/gapi/commit/4019d586ce392b75da4cd44e704cc12da30e7e3a))
 * **gcli:** workflow:trigger commands for HTTP and schedule triggers ([6efafc3](https://github.com/Stradivario/gapi/commit/6efafc3bb6cab07847fcc56b74ea56a0bc5859b8))
