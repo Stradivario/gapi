@@ -1,5 +1,4 @@
 import { spawn } from 'child_process';
-import fetch from 'node-fetch';
 import { hostname, platform } from 'os';
 
 import { Logger } from '~/services/log';
@@ -9,7 +8,8 @@ import { Logger } from '~/services/log';
  * one-time login, print the link + code, open the browser, and wait until
  * the user approves it on lambforge.com. The server mints and encrypts the
  * token; this side only holds a random session id and receives the token
- * once. No new dependencies: node-fetch (already used) and child_process.
+ * once. No dependencies: Node's built-in fetch (Node >= 22) and
+ * child_process.
  */
 
 export interface BrowserLoginResult {

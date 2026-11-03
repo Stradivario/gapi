@@ -1,5 +1,5 @@
 const fetchMock = jest.fn();
-jest.mock('node-fetch', () => ({ __esModule: true, default: fetchMock }));
+global.fetch = fetchMock as never;
 jest.mock('child_process', () => ({
   spawn: jest.fn(() => ({ on: jest.fn(), unref: jest.fn() })),
 }));
