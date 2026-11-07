@@ -18,7 +18,6 @@ import { combineLatest, from, of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { resolveUploadUrl } from '~/commands/auth/login-urls';
-
 import {
   readFileAsObservable,
   writeFileAsObservable,
