@@ -15,7 +15,9 @@ import {
 import { LZWService } from '@rxdi/compressor';
 import * as firebase from 'firebase/app';
 import { combineLatest, from, of, throwError } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
+
+import { resolveUploadUrl } from '~/commands/auth/login-urls';
 
 import {
   readFileAsObservable,
@@ -1327,7 +1329,9 @@ export class GraphqlClienAPI {
       readFileAsObservable(generationTimeDirectory).pipe(
         map((date) => Number(date)),
       ),
-      readFileAsObservable(uploadUrlDirectory),
+      // Older logins have no upload-url file; the proxy's login-gate
+      // writes an empty one - both fall back to <API origin>/upload-lambda.
+      readFileAsObservable(uploadUrlDirectory).pipe(catchError(() => of(''))),
     ]).pipe(
       map(([token, url, refresh, key, timeGenerated, uploadUrl]) => ({
         token,
@@ -1336,7 +1340,7 @@ export class GraphqlClienAPI {
         key,
         timeGenerated,
         expired: force || (Date.now() - timeGenerated) / 1000 > 1800,
-        uploadUrl,
+        uploadUrl: resolveUploadUrl(uploadUrl, url),
       })),
       switchMap((config) =>
         config.expired
