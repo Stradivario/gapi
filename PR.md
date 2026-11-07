@@ -1,81 +1,89 @@
-# gcli: local AI runner commands (+ AI-ready package setup)
+# gcli: login defaults - upload URL from the API origin, `--ci` without `--key`
 
 ## Summary
 
-New `gcli runner:*` commands connect a user's local Ollama to the
-Lambforge chat, so their own models can be used like hosted ones -
-including agent mode and MCP tools. The connection is **outbound only** (a
-WebSocket to `/subscriptions`): it works behind NAT and Ollama is never
-exposed. Only chat completions (`POST /v1/chat/completions`) are ever
-proxied.
+Two `gcli login` fixes found while wiring a CI deploy (legends,
+`.github/workflows/lambforge-deploy.yml`):
 
-Also adds the AI-ready setup for the gcli package (`AGENTS.md`, skills,
-feature-keyed changelog).
+1. **Upload URL default.** Without `--uploadUrl`, gcli now uses the API
+   URL's **origin** + `/upload-lambda`. It used to append to the whole
+   `--url`, which breaks for any API URL with a path or a trailing slash.
+2. **`--ci` without `--key` crashed.** The documented CI recipe
+   (`gcli login --ci --token <t>`) failed with
+   `TypeError [ERR_INVALID_ARG_TYPE]: The "data" argument must be of type
+   string ... Received undefined`, because the key file was written with
+   `undefined`. CI pipelines had to pass `--key ''` as a workaround.
 
 ## Changes
 
-### Commands (`packages/gcli/src/commands/runner/`)
+### Upload URL (`src/commands/auth/login-urls.ts`, new)
 
-| Command | What it does |
-|---|---|
-| `gcli runner:start` | Registers the machine with the `gcli login` session (or `--token` for headless machines), saves `~/.graphql-server/runner.json` (0600), connects and serves requests until Ctrl+C. Options: `--name`, `--token`, `--ollama`, `--wsUrl`, `--reset` |
-| `gcli runner:list` | Runners: online, last seen, models |
-| `gcli runner:models` | Which models appear in the chat picker: `--show a,b`, `--all`, `--none`; no flag = list |
-| `gcli runner:delete` | Delete a runner and revoke its token |
+| `--url` | before | after |
+|---|---|---|
+| *(none)* | `https://api.lambforge.com/upload-lambda` | same |
+| `https://api.lambforge.com` | `https://api.lambforge.com/upload-lambda` | same |
+| `https://api.lambforge.com/` | `https://api.lambforge.com//upload-lambda` | `https://api.lambforge.com/upload-lambda` |
+| `https://pubsub.graphql-server.com/graphql` | `https://pubsub.graphql-server.com/graphql/upload-lambda` | `https://pubsub.graphql-server.com/upload-lambda` |
+| any, with `--uploadUrl X` | `X` | `X` (unchanged: explicit wins) |
 
-- `RunnerConnection`: subscriptions-transport-ws client - heartbeat every
-  30s with the Ollama models (`/api/tags` + `/api/show`; non-chat models
-  dropped), requests proxied to Ollama and streamed back in ordered,
-  batched frames (50ms, chunks merged up to 32KB), `ping` while Ollama
-  queues a request, cancel on Stop, reconnect with backoff (1s -> 30s), a
-  refused token exits with a `--reset` hint.
-- Endpoint derived from the `gcli login` URL (production
-  `wss://api.lambforge.com/subscriptions`; dev :9004 -> ws :9000).
-  `OLLAMA_HOST` supported. Requires Node >= 22.
-- `README.md`: new "Local AI Models (Ollama runner)" section.
-  `README-CLI.md` regenerated from `--all-help` - it was also missing the
-  cron, cluster, rabbitmq, plugin and `lambda:package` commands.
+- `defaultUploadUrl(apiUrl)` / `resolveUploadUrl(uploadUrl, apiUrl)`;
+  `MAIN_LAMBFORGE_API` moved here (login.ts keeps its alias).
+- `src/commands/auth/login.ts`: `loginWithToken` writes
+  `resolveUploadUrl(cmd.uploadUrl, cmd.url)`.
+- `src/services/gql-client.ts` `getConfig()`: a missing `upload-url` file
+  (logins from before it existed) or an empty one (the `mcp:start`
+  login-gate writes `''`) resolves from the stored `url` too, so
+  `lambda:create` / `lambda:update` always have an upload server.
 
-### CI: PR test run (repo root)
-- New `.github/workflows/tests.yml` (**Tests**): on every push to a
-  non-master branch - `npx @rxdi/bolt install`, `npm run lint`, `npm test`
-  across all workspaces, like graphql-server's Tests and
-  graphql-server-lambdas' Specs. Until now lint/test ran only in Publish,
-  i.e. after the merge to master.
+### `--ci` without `--key` (`src/commands/auth/login.ts`)
 
-### Package setup
-- `AGENTS.md` + `CLAUDE.md` loader; skills in `packages/gcli/.agents/skills`
-  (`cluster-targeting` moved there, new `gcli-command`,
-  `local-ai-runners`, `changelog`).
-- Changelog fragments in `docs/changelog.d/`, `npm run changelog -- ...`.
-- `jest.config.js` maps the tsconfig path aliases (`~/`, `@introspection/`,
-  `@commands/`) - specs importing command code could not resolve before.
+- The key file gets `cmd.key ?? ''`. The key is only used to refresh a
+  Firebase token older than 30 minutes; a CI token is never refreshed, so
+  an empty key is correct.
 
-## How to test
+### Docs
+
+- `packages/gcli/docs/features/cli-browser-login.md` (gcli slice): the URL
+  helpers, the `--ci` rule, the new test.
+- Changelog fragment `packages/gcli/docs/changelog.d/2026-11-07-cli-browser-login-login-upload-url-defaults-to-api-origin-upload-lambda-ci-nee.md`.
+
+## Before / after for CI
 
 ```bash
-cd packages/gcli
-npx jest --coverage=false          # 27/27 (test/runner.spec.ts: fake server socket + fake streaming Ollama)
-npx tsc --noEmit -p .
-npm run build && node release/index.js runner:start --help
+# before (workaround)
+npx @gapi/gcli login --ci --token "$TOKEN" --key '' \
+  --url https://api.lambforge.com --uploadUrl https://api.lambforge.com/upload-lambda
+
+# after
+npx @gapi/gcli login --ci --token "$TOKEN" --url https://api.lambforge.com
 ```
 
-End to end against a backend with graphql-server `feat/local-ai-runners`:
-`gcli login`, `ollama serve`, `node release/index.js runner:start` ->
-`Connected as "<name>"`; pick the model in the chat; `runner:models --show
-<model>`; Ctrl+C -> runner shows offline within ~90s.
+Existing pipelines keep working: `--key ''` and an explicit `--uploadUrl`
+are still accepted.
 
-## Release notes
+## Testing
 
-- `release/index.js` is not rebuilt in this branch - `npm run patch`
-  builds and publishes it.
-- Release after graphql-server `feat/local-ai-runners` is deployed (the
-  commands call the new resolvers).
+- New `test/login-urls.spec.ts` (3 tests): origin derivation incl. trailing
+  slash, a `/graphql` path and localhost; no URL -> Lambforge API; explicit
+  `--uploadUrl` wins, empty falls back.
+- Full suite: `npx jest` -> **142/142** (18 suites). `tsc --noEmit` clean,
+  eslint clean on the changed files.
+- Built CLI (`npm run build`, then `node release/index.js`), each run in a
+  throwaway `HOME` with a dummy token and **no `--key`**:
 
-## Related PRs
+  | args | exit | `upload-url` |
+  |---|---|---|
+  | *(none)* | 0 | `https://api.lambforge.com/upload-lambda` |
+  | `--url https://api.lambforge.com` | 0 | `https://api.lambforge.com/upload-lambda` |
+  | `--url https://pubsub.graphql-server.com/graphql` | 0 | `https://pubsub.graphql-server.com/upload-lambda` |
+  | `--url https://api.lambforge.com --uploadUrl https://up.example.com/x` | 0 | `https://up.example.com/x` |
 
-- graphql-server `feat/local-ai-runners` - backend (required first)
-- gql-fission `feat/local-ai-runners` - profile page and picker
+  `key` was written empty in every run.
 
-Docs: `packages/gcli/docs/features/local-ai-runners.md` ->
-`graphql-server/docs/features/local-ai-runners.md` (canonical).
+`release/index.js` is not part of this PR (it is rebuilt at the version
+bump, like the other fix commits).
+
+## Follow-up after release
+
+- legends `.github/workflows/lambforge-deploy.yml`: drop `--key ''` and
+  `--uploadUrl`, bump `@gapi/gcli` in `apps/*/package.json`.
