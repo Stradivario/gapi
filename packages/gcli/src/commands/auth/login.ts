@@ -16,8 +16,9 @@ import {
 
 import { GraphqlClienAPI } from '../../services/gql-client';
 import { browserLogin } from './browser-login';
+import { MAIN_LAMBFORGE_API, resolveUploadUrl } from './login-urls';
 
-const MainLambforgeAPI = 'https://api.lambforge.com';
+const MainLambforgeAPI = MAIN_LAMBFORGE_API;
 
 interface LoginOptions {
   key: string;
@@ -71,16 +72,15 @@ export const loginWithToken = (cmd: LoginOptions) =>
                     encoding: 'utf-8',
                   },
                 ),
-                promisify(writeFile)(keyDirectory, cmd.key, {
+                // `--ci` does not need a key (a CI token is never refreshed
+                // through Firebase); writing `undefined` used to crash
+                // ("The data argument must be of type string").
+                promisify(writeFile)(keyDirectory, cmd.key ?? '', {
                   encoding: 'utf-8',
                 }),
                 promisify(writeFile)(
                   uploadUrlDirectory,
-                  cmd.uploadUrl
-                    ? cmd.uploadUrl
-                    : cmd.url
-                      ? `${cmd.url}/upload-lambda`
-                      : `${MainLambforgeAPI}/upload-lambda`,
+                  resolveUploadUrl(cmd.uploadUrl, cmd.url),
                   {
                     encoding: 'utf-8',
                   },
