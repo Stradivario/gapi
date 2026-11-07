@@ -1,4 +1,4 @@
-## [1.8.256](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.256) (2026-11-03)
+## [1.8.257](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.257) (2026-11-07)
 
 
 ### Bug Fixes
@@ -56,6 +56,7 @@
 * **gcli:** esbuild marked as external but installable inside dependencies ([e8d6b72](https://github.com/Stradivario/gapi/commit/e8d6b72f217123da5e2445fe8987cbeda4fd371c))
 * **gcli:** esbuild was not included into the npm package ([3e30711](https://github.com/Stradivario/gapi/commit/3e30711da0a38856ea82bf0cf60f6d2612a3c5de))
 * **gcli:** load spec file default export fix ([1d1c71f](https://github.com/Stradivario/gapi/commit/1d1c71f96813aa59f883bced7e44f655849cb980))
+* **gcli:** login - upload URL defaults to <API origin>/upload-lambda; --ci needs no --key ([0a6fce2](https://github.com/Stradivario/gapi/commit/0a6fce2b0221acde37564b6b797636bc8f00e6f7))
 * **gcli:** login to gcli using integration ci/cd pipeline ([56c2bdd](https://github.com/Stradivario/gapi/commit/56c2bddd73368cc20f21c2f7b819b79ea900b30b))
 * **gcli:** mcp start function changes [ci-skip] ([46c615a](https://github.com/Stradivario/gapi/commit/46c615afc41681896c51cbc42665f1ff1669a3ed))
 * **gcli:** mcp:start refreshes the login token per request ([deff051](https://github.com/Stradivario/gapi/commit/deff05176131a6356ca980e010267104138fa987))

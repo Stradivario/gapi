@@ -14276,13 +14276,13 @@ var require_catchError = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var lift_1 = require_lift();
-    function catchError12(selector) {
+    function catchError13(selector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSub = null;
         var syncUnsub = false;
         var handledResult;
         innerSub = source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, void 0, void 0, function(err) {
-          handledResult = innerFrom_1.innerFrom(selector(err, catchError12(selector)(source)));
+          handledResult = innerFrom_1.innerFrom(selector(err, catchError13(selector)(source)));
           if (innerSub) {
             innerSub.unsubscribe();
             innerSub = null;
@@ -14298,7 +14298,7 @@ var require_catchError = __commonJS({
         }
       });
     }
-    exports2.catchError = catchError12;
+    exports2.catchError = catchError13;
   }
 });
 
@@ -35994,6 +35994,23 @@ var require_index_cjs3 = __commonJS({
   }
 });
 
+// src/commands/auth/login-urls.ts
+var MAIN_LAMBFORGE_API, defaultUploadUrl, resolveUploadUrl;
+var init_login_urls = __esm({
+  "src/commands/auth/login-urls.ts"() {
+    MAIN_LAMBFORGE_API = "https://api.lambforge.com";
+    defaultUploadUrl = (apiUrl) => {
+      const base = apiUrl?.trim() || MAIN_LAMBFORGE_API;
+      try {
+        return `${new URL(base).origin}/upload-lambda`;
+      } catch {
+        return `${base.replace(/\/+$/, "")}/upload-lambda`;
+      }
+    };
+    resolveUploadUrl = (uploadUrl, apiUrl) => uploadUrl?.trim() || defaultUploadUrl(apiUrl);
+  }
+});
+
 // src/types.ts
 var import_os, mainDirectory, tokenDirectory, refreshTokenDirectory, urlDirectory, keyDirectory, projectDirectory, generationTimeDirectory, uploadUrlDirectory, runnerDirectory, workspacesDirectory;
 var init_types = __esm({
@@ -36527,6 +36544,7 @@ var init_gql_client = __esm({
     firebase = __toESM(require_index_cjs3());
     import_rxjs2 = __toESM(require_cjs());
     import_operators = __toESM(require_operators());
+    init_login_urls();
     init_read_file();
     init_types();
     init_types2();
@@ -37568,7 +37586,9 @@ var init_gql_client = __esm({
           readFileAsObservable(generationTimeDirectory).pipe(
             (0, import_operators.map)((date5) => Number(date5))
           ),
-          readFileAsObservable(uploadUrlDirectory)
+          // Older logins have no upload-url file; the proxy's login-gate
+          // writes an empty one - both fall back to <API origin>/upload-lambda.
+          readFileAsObservable(uploadUrlDirectory).pipe((0, import_operators.catchError)(() => (0, import_rxjs2.of)("")))
         ]).pipe(
           (0, import_operators.map)(([token, url2, refresh, key, timeGenerated, uploadUrl]) => ({
             token,
@@ -37577,7 +37597,7 @@ var init_gql_client = __esm({
             key,
             timeGenerated,
             expired: force || (Date.now() - timeGenerated) / 1e3 > 1800,
-            uploadUrl
+            uploadUrl: resolveUploadUrl(uploadUrl, url2)
           })),
           (0, import_operators.switchMap)(
             (config2) => config2.expired ? this.refreshToken(config2.key, config2.refresh).pipe(
@@ -38089,7 +38109,8 @@ var init_login = __esm({
     init_types();
     init_gql_client();
     init_browser_login();
-    MainLambforgeAPI = "https://api.lambforge.com";
+    init_login_urls();
+    MainLambforgeAPI = MAIN_LAMBFORGE_API;
     login_default = async (cmd) => {
       if (!cmd.token && !cmd.ci) {
         const { token, key } = await browserLogin(cmd.url || MainLambforgeAPI, {
@@ -38125,12 +38146,15 @@ var init_login = __esm({
                     encoding: "utf-8"
                   }
                 ),
-                (0, import_util2.promisify)(import_fs2.writeFile)(keyDirectory, cmd.key, {
+                // `--ci` does not need a key (a CI token is never refreshed
+                // through Firebase); writing `undefined` used to crash
+                // ("The data argument must be of type string").
+                (0, import_util2.promisify)(import_fs2.writeFile)(keyDirectory, cmd.key ?? "", {
                   encoding: "utf-8"
                 }),
                 (0, import_util2.promisify)(import_fs2.writeFile)(
                   uploadUrlDirectory,
-                  cmd.uploadUrl ? cmd.uploadUrl : cmd.url ? `${cmd.url}/upload-lambda` : `${MainLambforgeAPI}/upload-lambda`,
+                  resolveUploadUrl(cmd.uploadUrl, cmd.url),
                   {
                     encoding: "utf-8"
                   }
