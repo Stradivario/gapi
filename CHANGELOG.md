@@ -1,4 +1,4 @@
-## [1.8.258](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.258) (2026-11-07)
+## [1.8.259](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.259) (2026-11-08)
 
 
 ### Bug Fixes
@@ -110,6 +110,7 @@
 * **cli-builder:** notifiy result based on label in order to track machine with label ([5796b6e](https://github.com/Stradivario/gapi/commit/5796b6e6443dcc4e5f4878dcb6146d818c893ebf))
 * **cli:** added more options for parcel in order to customize behaviour ([52d0a4d](https://github.com/Stradivario/gapi/commit/52d0a4d18c1c0634f79953d659f735fad39181d7))
 * **cli:** compressed documents exported in order to reduce bundle size using lzw codec and json-url library ([ad0b43a](https://github.com/Stradivario/gapi/commit/ad0b43a50948d107eee89fdb4bf67bd52464c94d))
+* **cli:** strictNullability option for schema introspect ([61032e7](https://github.com/Stradivario/gapi/commit/61032e7c78d793886d048ec146d835b9493f820b))
 * **cluster:** add clusterId and clusterName support across commands and interfaces ([0171a47](https://github.com/Stradivario/gapi/commit/0171a472af838a56186030a5f5880e3301e0c80a))
 * **cluster:** add commands for provisioning, listing, and tearing down clusters ([c14723f](https://github.com/Stradivario/gapi/commit/c14723f18362a94347ddc2aff2121c4d495d03c4))
 * **cluster:** add scaling and status commands for clusters ([73da490](https://github.com/Stradivario/gapi/commit/73da4902dbf4acdf45839be4f635ccd215462ce7))
