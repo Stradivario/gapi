@@ -70,7 +70,14 @@ const run = (schemaInput, optionsInput) => {
       addSemicolon(typeBuilder(name, possibleTypes)) + '\n\n',
       description
     );
-  const typeNameDeclaration = (name) => addSemicolon(`__typename: "${name}"`);
+  // Optional either way: the default post-processing made it `?:`; strict
+  // mode skips that, and objects built by hand have no __typename.
+  const typeNameDeclaration = (name) =>
+    addSemicolon(
+      optionsInput.strictNullability
+        ? `__typename?: "${name}"`
+        : `__typename: "${name}"`
+    );
   const generateInterfaceDeclaration = (
     { name, description },
     declaration,
@@ -132,9 +139,14 @@ const run = (schemaInput, optionsInput) => {
        */
       interfaceName = interfaceName.replace(/\!/g, '');
     }
+    // strictNullability: a NonNull OUTPUT field stays required too (by
+    // default every output field is optional - see the post-processing below).
+    const strict = !!optionsInput.strictNullability;
     return formatInput(
       field.name,
-      isInput && (showNullabiltyAttribute || !isNotNull),
+      isInput || strict
+        ? showNullabiltyAttribute || !isNotNull
+        : false,
       printType(interfaceName, !showNullabiltyAttribute)
     );
   };
@@ -253,7 +265,7 @@ const run = (schemaInput, optionsInput) => {
     typeInterfaces.forEach((type) => {
       const typeInterface = type.replace(/interface/g, 'export interface');
       typesWithExport.push(
-        typeInterface.includes('?:')
+        optionsInput.strictNullability || typeInterface.includes('?:')
           ? typeInterface
           : typeInterface.replace(/:/g, '?:')
       );

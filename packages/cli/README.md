@@ -168,6 +168,22 @@ config:
 gapi schema introspect
 ```
 
+###### strictNullability - keep NonNull output fields required
+
+By default every field of a generated OUTPUT interface is optional (`field?: T`).
+With `strictNullability: true` (or `--strict-nullability`) a `NonNull` output
+field stays required (`field: T`) and only nullable fields are optional
+(`field?: T | null`), so the generated types match the schema exactly.
+`__typename` stays optional.
+
+```yml
+config:
+  schema:
+    introspectionEndpoint: http://localhost:9000/graphql
+    introspectionOutputFolder: ./src/app/core/api-introspection
+    strictNullability: true
+```
+
 ##### Available shared commands are:
 
 ###### --verbose - Show better logging

@@ -18,6 +18,8 @@ export class SchemaTask {
   private folder: string;
   private endpoint: string;
   private headers: string;
+  /** NonNull output fields stay required in the generated interfaces. */
+  private strictNullability = false;
   private node_modules: string;
   private bashFolder: string;
   private pattern: string;
@@ -50,6 +52,9 @@ export class SchemaTask {
     this.node_modules = __dirname.replace('dist/tasks', 'node_modules');
     this.bashFolder = __dirname.replace('dist/tasks', 'bash');
     this.headers = this.configService.config.config.schema.headers;
+    this.strictNullability =
+      !!this.configService.config.config.schema.strictNullability ||
+      this.argsService.args.includes('--strict-nullability');
 
     if (process.argv[3] === 'introspect') {
       await this.createDir();
@@ -203,7 +208,9 @@ export const introspectionQueryResultData = ${JSON.stringify(
         isWindows() ? 'set' : 'export'
       } NODE_TLS_REJECT_UNAUTHORIZED=0 && node  ${
         this.bashFolder
-      }/gql2ts/index.js ${this.folder}/schema.json -o ${this.folder}/index.ts`,
+      }/gql2ts/index.js ${this.folder}/schema.json -o ${this.folder}/index.ts${
+        this.strictNullability ? ' --strict-nullability' : ''
+      }`,
     );
     console.log(
       `[GenerateSchema]: Typescript interfaces generated inside folder: ${this.folder}/index.d.ts`,

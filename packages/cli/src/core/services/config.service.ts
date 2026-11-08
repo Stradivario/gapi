@@ -41,6 +41,11 @@ export interface GapiMainConfig {
     introspectionOutputFolder: string;
     headers: string;
     pattern: string;
+    /**
+     * Generated interfaces keep NonNull output fields required (by default
+     * every output field is optional). Also `--strict-nullability`.
+     */
+    strictNullability?: boolean;
   };
   remote: {
     link: string;

@@ -41,6 +41,11 @@ program
     'Whether to exclude deprecated fields',
     false
   )
+  .option(
+    '--strict-nullability',
+    'NonNull output fields stay required (default: every output field is optional)',
+    false
+  )
   .parse(process.argv);
 const run = (schema, options) => {
   let defaultOverrides = {};
