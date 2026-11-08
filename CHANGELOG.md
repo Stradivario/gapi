@@ -1,4 +1,4 @@
-## [1.8.259](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.259) (2026-11-08)
+## [1.8.260](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.260) (2026-11-08)
 
 
 ### Bug Fixes
@@ -30,6 +30,7 @@
 * **cli:** if not defined headers property it throws error and intrupting previews flow without headers ([178d5a6](https://github.com/Stradivario/gapi/commit/178d5a6d69ddae7ec00770a4767865ffafa36090))
 * **cli:** lint removed from generated files ([8a75cf4](https://github.com/Stradivario/gapi/commit/8a75cf4b6e6132f1c4cbad9256eb7a981e9ec757))
 * **cli:** removed daemon service from @gapi/cli and @gapi/core as a dependency ([3b7c655](https://github.com/Stradivario/gapi/commit/3b7c65563a0e03c6c5c7dcb53295de3ba843d236))
+* **cli:** schema introspect works from a local (hoisted) install ([2865cc2](https://github.com/Stradivario/gapi/commit/2865cc260d34f4f99543a995b30d0900bfff1a01))
 * **cli:** yaml parsing is broken in the new version 20.19 of nodejs ([5e82d52](https://github.com/Stradivario/gapi/commit/5e82d525e9ed8daa1ccc3b752a47510d6353638f))
 * **commander:** bumped to latest version ([0b03e40](https://github.com/Stradivario/gapi/commit/0b03e401e0bdc54d039a23840b66f38b5761a47b))
 * **core:** added export for graphql-subscriptions ([7c6e42f](https://github.com/Stradivario/gapi/commit/7c6e42f15de5c4d841d009cc9a57e6531e4fa63b))
