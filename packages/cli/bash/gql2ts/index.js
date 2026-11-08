@@ -66,18 +66,22 @@ const run = (schema, options) => {
     }
     return;
   }
-  const namespace = from_schema_1.generateNamespace(
-    options.namespace,
-    schema,
-    options,
-    defaultOverrides
-  );
-
-  if (options.outputFile) {
-    util_1.writeToFile(options.outputFile, namespace);
-  } else {
-    console.log(namespace);
-  }
+  // prettier >= 3 formats asynchronously (a hoisted project prettier in a
+  // local install): wait for the text either way.
+  Promise.resolve(
+    from_schema_1.generateNamespace(
+      options.namespace,
+      schema,
+      options,
+      defaultOverrides
+    )
+  ).then((namespace) => {
+    if (options.outputFile) {
+      util_1.writeToFile(options.outputFile, namespace);
+    } else {
+      console.log(namespace);
+    }
+  });
 };
 const fileName = program.args[0];
 

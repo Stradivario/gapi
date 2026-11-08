@@ -151,9 +151,9 @@ export const introspectionQueryResultData = ${JSON.stringify(
       `[CollectQueries]: generating temporary documents file ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`,
     );
     await this.execService.call(
-      `node ${
-        this.node_modules
-      }/graphql-document-collector/bin/graphql-document-collector '${
+      `node ${this.modulePath(
+        'graphql-document-collector/bin/graphql-document-collector',
+      )} '${
         this.pattern ? this.pattern : '**/*.{graphql,gql}'
       }' > ${GAPI_DAEMON_CACHE_FOLDER}/${randomString}.json`,
     );
@@ -191,14 +191,27 @@ export const introspectionQueryResultData = ${JSON.stringify(
     console.log('[CollectQueries]: queries collection finished');
   }
 
+  /**
+   * A dependency's file wherever npm put it: nested under the CLI (global
+   * install) or hoisted into the project's node_modules (local install -
+   * the nested path used to fail with "Cannot find module").
+   */
+  private modulePath(file: string): string {
+    try {
+      return require.resolve(file);
+    } catch {
+      return `${this.node_modules}/${file}`;
+    }
+  }
+
   public async generateSchema() {
     console.log(`[GenerateSchema]: Trying to hit ${this.endpoint} ...`);
     await this.execService.call(
       `${
         isWindows() ? 'set' : 'export'
-      } NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${
-        this.node_modules
-      }/apollo-codegen/lib/cli.js introspect-schema ${this.endpoint} ${
+      } NODE_TLS_REJECT_UNAUTHORIZED=0 && node ${this.modulePath(
+        'apollo-codegen/lib/cli.js',
+      )} introspect-schema ${this.endpoint} ${
         this.headers ? `--header "${this.headers}"` : ''
       } --output ${this.folder}/schema.json`,
     );
