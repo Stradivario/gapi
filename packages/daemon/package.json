@@ -56,8 +56,8 @@
   "devDependencies": {
     "@types/hapi": "^18.0.2",
     "typescript": "^5.9.3",
-    "@rxdi/core": "^0.7.255",
-    "@rxdi/graphql": "^0.7.255",
-    "@rxdi/hapi": "^0.7.255"
+    "@rxdi/core": "^0.7.256",
+    "@rxdi/graphql": "^0.7.256",
+    "@rxdi/hapi": "^0.7.256"
   }
 }
