@@ -1,4 +1,4 @@
-## [1.8.261](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.261) (2026-11-09)
+## [1.8.262](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.262) (2026-11-13)
 
 
 ### Bug Fixes
@@ -171,6 +171,7 @@
 * **Lambda:** generation and deploy for lambda ([900e7dc](https://github.com/Stradivario/gapi/commit/900e7dcde5dc00af994adae9c8a5e808334b7bb9))
 * **mq-trigger:** add commands for managing message-queue triggers and update documentation ([3539d60](https://github.com/Stradivario/gapi/commit/3539d6068790de5e27654e566fc394a33e5e25ce))
 * **nats:** bumped version of rxdi due to nats changes ([5c05748](https://github.com/Stradivario/gapi/commit/5c057486eb6ba925f034136c59f194097107be3f))
+* **node-storage:** enable attached machines to carry volumes on their own disk ([e2e1115](https://github.com/Stradivario/gapi/commit/e2e11157e1ff258151a9e8aa255f39fbae35499e))
 * **openai:** added more input parameters for the graphql endpoint ([9fdee60](https://github.com/Stradivario/gapi/commit/9fdee607ee26e2c9715768539c7079db6d206f43))
 * **openai:** added new version of openai and modified a little bit the code to fit new api ([44f606b](https://github.com/Stradivario/gapi/commit/44f606bf44b6e470066701242bad91bb36a8b739))
 * **openai:** added open ai module with simple graphql mutation ([ec660f9](https://github.com/Stradivario/gapi/commit/ec660f9542909f16b5b8bda19ae39dee00c48352))
