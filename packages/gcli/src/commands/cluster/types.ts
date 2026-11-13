@@ -317,6 +317,8 @@ addedAt
 recorded
 source
 role
+storage
+storageMessage
 `;
 
 export interface ClusterNode {
@@ -338,6 +340,9 @@ export interface ClusterNode {
   source?: string;
   /** 'control-plane' | 'worker' */
   role?: string;
+  /** node-storage: 'off' | 'preparing' | 'ready' | 'failed' */
+  storage?: string;
+  storageMessage?: string | null;
 }
 
 export interface ClusterTalosconfig {
@@ -353,6 +358,7 @@ export interface ClusterNodeJoinConfig {
   nodeName: string;
   pool: string;
   reserved: boolean;
+  storage?: boolean;
   /** Talos machine config with the cluster join token - apply, never keep. */
   config: string;
   talosVersion?: string | null;

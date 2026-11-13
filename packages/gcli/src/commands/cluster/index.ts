@@ -113,6 +113,10 @@ export function registerClusterCommands(program: Command) {
       'Only workloads that tolerate the pool run there (default: plain extra capacity)',
     )
     .option('--disk <disk>', 'Install disk, e.g. /dev/nvme0n1 (WIPED)')
+    .option(
+      '--storage',
+      'The machine also carries volumes on its own disk (default: lambdas only)',
+    )
     .option('--yes', 'Do not ask before wiping the disk')
     .option('--no-wait', 'Do not wait for the machine to join')
     .option('--timeout <minutes>', 'How long to wait for the join (default 10)')
@@ -143,6 +147,19 @@ export function registerClusterCommands(program: Command) {
   )
     .option('-n, --name <name>', 'Machine name (see cluster:nodes)')
     .action(lazy(() => import('./pause').then((m) => m.resume)));
+
+  target(
+    program
+      .command('cluster:node-storage')
+      .description(
+        'Let an attached machine carry volumes on its own disk (it restarts once), or stop with --off',
+      ),
+  )
+    .option('-n, --name <name>', 'Machine name (see cluster:nodes)')
+    .option('--off', 'Stop carrying volumes (refused while it holds one)')
+    .option('--no-wait', 'Do not wait until the machine is ready')
+    .option('--timeout <minutes>', 'How long to wait (default 40)')
+    .action(lazy(() => import('./node-storage').then((m) => m.default)));
 
   target(
     program

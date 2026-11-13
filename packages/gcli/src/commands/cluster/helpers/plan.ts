@@ -3,6 +3,7 @@ import {
   ClusterChange,
   SCALING_PROFILES,
 } from '../types';
+import { MachineDesired, validateMachines } from './machines';
 
 /**
  * The desired state of a private cluster - the `cluster:` section of
@@ -33,6 +34,10 @@ export interface ClusterDesired {
     ClusterAutoscalePolicy,
     'lastScaledAt' | 'lastEvaluatedAt' | 'lastDecision'
   >;
+  /* Machines of your own attached to the cluster (cluster:attach). apply
+     only changes what is listed for an attached machine - today `storage`;
+     it never attaches or detaches one. */
+  machines?: MachineDesired[];
 }
 
 /** The current state `cluster:apply` reads (projectClusters). */
@@ -86,6 +91,7 @@ const VIRTUAL_UNSUPPORTED = [
   'workers',
   'controlPlanes',
   'autoscale',
+  'machines',
 ] as const;
 
 const intIn = (v: unknown, min: number, max: number) =>
@@ -110,6 +116,7 @@ export const validateDesired = (d: ClusterDesired): string[] => {
   if (d.host !== undefined) {
     errors.push("cluster.host needs provider: 'vcluster'");
   }
+  errors.push(...validateMachines(d.machines));
   if (d.workers !== undefined && !intIn(d.workers, 1, 10)) {
     errors.push('cluster.workers must be an integer from 1 to 10');
   }

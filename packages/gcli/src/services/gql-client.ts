@@ -1069,6 +1069,7 @@ export class GraphqlClienAPI {
     pool?: string;
     reserved?: boolean;
     installDisk?: string;
+    storage?: boolean;
   }) {
     return this.query<{ clusterNodeJoinConfig: ClusterNodeJoinConfig }>({
       query: gql`
@@ -1078,6 +1079,7 @@ export class GraphqlClienAPI {
           $pool: String
           $reserved: Boolean
           $installDisk: String
+          $storage: Boolean
         ) {
           clusterNodeJoinConfig(
             clusterId: $clusterId
@@ -1085,11 +1087,13 @@ export class GraphqlClienAPI {
             pool: $pool
             reserved: $reserved
             installDisk: $installDisk
+            storage: $storage
           ) {
             clusterName
             nodeName
             pool
             reserved
+            storage
             config
             talosVersion
             isoUrl
@@ -1185,6 +1189,31 @@ export class GraphqlClienAPI {
       `,
       variables: { clusterId, name, paused },
     }).pipe(map((res) => res.setClusterNodePaused));
+  }
+
+  public static setClusterNodeStorage(
+    clusterId: string,
+    name: string,
+    enabled: boolean,
+  ) {
+    return this.query<{ setClusterNodeStorage: ClusterNode }>({
+      query: gql`
+        mutation setClusterNodeStorage(
+          $clusterId: String!
+          $name: String!
+          $enabled: Boolean!
+        ) {
+          setClusterNodeStorage(
+            clusterId: $clusterId
+            name: $name
+            enabled: $enabled
+          ) {
+            ${ClusterNodeFragment}
+          }
+        }
+      `,
+      variables: { clusterId, name, enabled },
+    }).pipe(map((res) => res.setClusterNodeStorage));
   }
 
   public static detachClusterNode(clusterId: string, name: string) {

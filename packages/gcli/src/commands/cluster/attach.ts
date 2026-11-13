@@ -118,6 +118,7 @@ export default async (cmd: AttachOptions) => {
       pool: opts.pool,
       reserved: opts.reserved,
       installDisk: opts.disk,
+      storage: opts.storage,
     }),
   );
   if (join_.talosVersion && join_.talosVersion !== version) {
@@ -145,7 +146,7 @@ export default async (cmd: AttachOptions) => {
     await rm(dir, { recursive: true, force: true });
   }
   Logger.info(
-    `Config applied - ${opts.name} installs Talos and reboots, then joins "${join_.clusterName}" (pool ${join_.pool}, ${join_.reserved ? 'reserved' : 'extra capacity'}).`,
+    `Config applied - ${opts.name} installs Talos and reboots, then joins "${join_.clusterName}" (pool ${join_.pool}, ${join_.reserved ? 'reserved' : 'extra capacity'}${opts.storage ? ', carries volumes' : ''}).`,
   );
 
   if (!opts.wait) {
@@ -163,6 +164,11 @@ export default async (cmd: AttachOptions) => {
     if (node?.status === 'ready') {
       Logger.log(`${opts.name} joined and is ready.`);
       Logger.table([nodeRow(node)]);
+      if (opts.storage) {
+        Logger.info(
+          'The cluster installs its storage add-on now (a few minutes) - volumes can be made once gcli cluster:nodes shows storage "yes" and the add-on is up.',
+        );
+      }
       return;
     }
   }

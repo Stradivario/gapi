@@ -6,6 +6,7 @@ import { Logger } from '~/services/log';
 
 import { loadSpec } from '../lambda/helpers/load-spec';
 import { runClusterChange } from './helpers/cluster-change';
+import { MachineDesired, planMachines } from './helpers/machines';
 import {
   ClusterCurrent,
   ClusterDesired,
@@ -15,6 +16,7 @@ import {
 } from './helpers/plan';
 import { pollUntilReady } from './helpers/poll-until-ready';
 import { provisionVirtualCluster } from './helpers/virtual-cluster';
+import { waitForStorage } from './node-storage';
 import { ClusterChange } from './types';
 
 const readDesired = async (spec?: string): Promise<ClusterDesired> => {
@@ -41,13 +43,78 @@ const readDesired = async (spec?: string): Promise<ClusterDesired> => {
  * cluster to be ready between them. Steps that remove capacity or release
  * the load balancer IP need --yes.
  */
-export default async (cmd: {
+export default async (cmd: ApplyOptions) => {
+  const desired = await readDesired(cmd.spec);
+  const result = await applyCluster(desired, cmd);
+  const clusterId = result.clusterId ?? result.cluster?.id;
+  if (desired.machines?.length && clusterId) {
+    await applyMachines(clusterId, desired.machines, cmd);
+  }
+  return result;
+};
+
+interface ApplyOptions {
   project?: string;
   spec?: string;
   dryRun?: boolean;
   yes?: boolean;
-}) => {
-  const desired = await readDesired(cmd.spec);
+}
+
+/**
+ * The `machines:` list of the spec: storage on / off for machines that are
+ * attached, one at a time (each may restart), waiting for each. A machine
+ * that is not attached is only reported - attaching needs its network.
+ */
+const applyMachines = async (
+  clusterId: string,
+  machines: MachineDesired[],
+  cmd: ApplyOptions,
+) => {
+  const nodes = await lastValueFrom(GraphqlClienAPI.clusterNodes(clusterId));
+  const { steps, notes } = planMachines(machines, nodes, clusterId);
+  notes.forEach((n) => Logger.warn(`note: ${n}`));
+  if (!steps.length) {
+    Logger.info('Machines: nothing to change.');
+    return;
+  }
+  Logger.table(
+    steps.map((s, i) => ({
+      step: i + 1,
+      change: s.description,
+      needsYes: s.destructive ? 'yes' : '',
+    })),
+  );
+  if (cmd.dryRun) {
+    return;
+  }
+  for (const step of steps) {
+    if (step.destructive && !cmd.yes) {
+      Logger.warn(`skipped (re-run with --yes to apply): ${step.description}`);
+      continue;
+    }
+    Logger.info(`-> ${step.description}`);
+    await lastValueFrom(
+      GraphqlClienAPI.setClusterNodeStorage(clusterId, step.name, step.enabled),
+    );
+    if (
+      step.enabled &&
+      !(await waitForStorage(clusterId, step.name, 40 * 60_000))
+    ) {
+      // the next machine must not restart while this one is still busy
+      Logger.warn('Stopped here - apply again once it is ready.');
+      return;
+    }
+  }
+};
+
+const applyCluster = async (
+  desired: ClusterDesired,
+  cmd: ApplyOptions,
+): Promise<{
+  cluster?: ClusterCurrent | null;
+  clusterId?: string;
+  applied: ClusterStep[];
+}> => {
   const errors = validateDesired(desired);
   if (errors.length) {
     throw new Error(`Invalid cluster spec:\n- ${errors.join('\n- ')}`);

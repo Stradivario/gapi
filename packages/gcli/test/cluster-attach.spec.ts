@@ -17,6 +17,7 @@ describe('[cluster:attach helpers] (self-managed-nodes)', () => {
       pool: undefined,
       disk: undefined,
       reserved: false,
+      storage: false,
       yes: false,
       wait: true,
       timeoutMs: 600_000,

@@ -4,6 +4,7 @@
  * test/cluster-attach.spec.ts.
  */
 import { ClusterNode } from '../types';
+import { storageCell } from './machines';
 
 export interface AttachOptions {
   project?: string;
@@ -13,6 +14,7 @@ export interface AttachOptions {
   name?: string;
   pool?: string;
   reserved?: boolean;
+  storage?: boolean;
   disk?: string;
   yes?: boolean;
   wait?: boolean;
@@ -60,6 +62,7 @@ export function parseAttachOptions(cmd: AttachOptions) {
     pool,
     disk,
     reserved: !!cmd.reserved,
+    storage: !!cmd.storage,
     yes: !!cmd.yes,
     wait: cmd.wait !== false,
     timeoutMs: timeoutMinutes * 60_000,
@@ -85,6 +88,7 @@ export const nodeRow = (n: ClusterNode) => {
     status: n.cordoned ? `${n.status}, paused` : n.status,
     pool: own ? (n.pool ?? '-') : '-',
     use: own ? (n.reserved ? 'reserved' : 'capacity') : '-',
+    storage: storageCell(n),
     ip: n.internalIp ?? '-',
     cpu: n.cpuCores ?? '-',
     memoryGb: n.memoryGb ?? '-',
