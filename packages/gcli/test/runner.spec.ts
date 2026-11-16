@@ -380,6 +380,143 @@ describe('[runner] connection', () => {
   });
 });
 
+describe('[runner] several backends (Ollama + an OpenAI-compatible server)', () => {
+  /** Ollama on :11434 (fakeOllama) + a Strata-like llama.cpp server on :8080. */
+  const twoBackends = (strataUp = true) => {
+    const ollama = fakeOllama();
+    const strataCalls: { url: string; init?: RequestInit }[] = [];
+    const fetchFn = (async (url: string, init?: RequestInit) => {
+      if (!url.startsWith('http://127.0.0.1:8080')) {
+        return ollama.fetchFn(url, init);
+      }
+      strataCalls.push({ url, init });
+      if (!strataUp) {
+        throw new TypeError('fetch failed');
+      }
+      if (url.endsWith('/v1/models')) {
+        return json({ data: [{ id: 'Qwen3.8-Flash-Next' }] });
+      }
+      if (url.endsWith('/props')) {
+        return json({ default_generation_settings: { n_ctx: 131072 } });
+      }
+      return new Response('data: {"from":"strata"}\n\ndata: [DONE]\n\n', {
+        headers: { 'content-type': 'text/event-stream' },
+      });
+    }) as typeof fetch;
+    return { ollama, strataCalls, fetchFn };
+  };
+  const backends = [
+    { name: 'ollama', kind: 'ollama', url: 'http://127.0.0.1:11434' },
+    {
+      name: 'strata',
+      kind: 'openai',
+      url: 'http://127.0.0.1:8080',
+      apiKey: 'sk-strata',
+    },
+  ];
+
+  it('reports the models of both in one heartbeat, the secondary ones prefixed', async () => {
+    const server = new FakeServer();
+    const fakes = twoBackends();
+    const { connection, running } = connect(server, fakes.ollama, {
+      fetchFn: fakes.fetchFn,
+      backends,
+    });
+    await waitFor(() => server.heartbeats.length === 1);
+
+    expect(server.heartbeats[0].models.map((m: any) => m.name)).toEqual([
+      'qwen3:32b',
+      'gemma3:1b',
+      'strata/Qwen3.8-Flash-Next',
+    ]);
+    expect(server.heartbeats[0].models[2]).toEqual({
+      name: 'strata/Qwen3.8-Flash-Next',
+      parameterSize: undefined,
+      capabilities: ['completion'],
+      contextLength: undefined,
+      runtimeContextLength: 131072,
+    });
+
+    connection.stop();
+    await running;
+  });
+
+  it('sends a strata/ model to Strata under its own name, with the key', async () => {
+    const server = new FakeServer();
+    const fakes = twoBackends();
+    const { connection, running } = connect(server, fakes.ollama, {
+      fetchFn: fakes.fetchFn,
+      backends,
+    });
+    await waitFor(() => server.heartbeats.length === 1);
+
+    server.request({
+      requestId: 's1',
+      type: 'request',
+      method: 'POST',
+      path: '/v1/chat/completions',
+      body: '{"model":"strata/Qwen3.8-Flash-Next","stream":true}',
+    });
+    await waitFor(() =>
+      server.frames.some((f) => f.requestId === 's1' && f.type === 'end'),
+    );
+
+    const chat = fakes.strataCalls.find((c) =>
+      c.url.endsWith('/v1/chat/completions'),
+    );
+    expect(chat.url).toBe('http://127.0.0.1:8080/v1/chat/completions');
+    expect(JSON.parse(chat.init.body as string)).toEqual({
+      model: 'Qwen3.8-Flash-Next',
+      stream: true,
+    });
+    expect((chat.init.headers as any).Authorization).toBe('Bearer sk-strata');
+    expect(
+      byRequest(server.frames, 's1')
+        .filter((f) => f.type === 'chunk')
+        .map((f) => f.data)
+        .join(''),
+    ).toContain('"from":"strata"');
+    // Ollama's models still go to Ollama, untouched
+    expect(
+      fakes.ollama.calls.some((c) => c.url.endsWith('/v1/chat/completions')),
+    ).toBe(false);
+
+    connection.stop();
+    await running;
+  });
+
+  it('keeps serving Ollama while Strata is down', async () => {
+    const server = new FakeServer();
+    const fakes = twoBackends(false);
+    const { connection, running } = connect(server, fakes.ollama, {
+      fetchFn: fakes.fetchFn,
+      backends,
+    });
+    await waitFor(() => server.heartbeats.length === 1);
+    expect(server.heartbeats[0].models.map((m: any) => m.name)).toEqual([
+      'qwen3:32b',
+      'gemma3:1b',
+    ]);
+
+    server.request({
+      requestId: 's2',
+      type: 'request',
+      method: 'POST',
+      path: '/v1/chat/completions',
+      body: '{"model":"strata/Qwen3.8-Flash-Next"}',
+    });
+    await waitFor(() =>
+      server.frames.some((f) => f.requestId === 's2' && f.type === 'error'),
+    );
+    expect(
+      byRequest(server.frames, 's2').find((f) => f.type === 'error').error,
+    ).toMatch(/Could not reach strata \(openai\) at http:\/\/127.0.0.1:8080/);
+
+    connection.stop();
+    await running;
+  });
+});
+
 describe('[runner] FrameSender', () => {
   it('numbers frames and merges consecutive chunks into one batch', async () => {
     const batches: RunnerResponseFrame[][] = [];

@@ -5,6 +5,11 @@ import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
 import {
+  BackendOptions,
+  describeBackends,
+  resolveBackends,
+} from './adapters/spec';
+import {
   deriveSubscriptionsUrl,
   forgetRunner,
   readLoginApiUrl,
@@ -13,7 +18,6 @@ import {
 } from './config';
 import { RunnerAuthError, RunnerConnection } from './connection';
 import { RUNNER_AUTH_EXIT_CODE } from './daemon';
-import { resolveOllamaUrl } from './ollama';
 import { SavedRunner } from './types';
 
 export const RUNNER_VERSION = 'gcli-runner/1';
@@ -53,15 +57,16 @@ export const resolveRunner = async (cmd: {
   return created;
 };
 
-export default async (cmd: {
-  token?: string;
-  name?: string;
-  reset?: boolean;
-  ollama?: string;
-  wsUrl?: string;
-}) => {
+export default async (
+  cmd: {
+    token?: string;
+    name?: string;
+    reset?: boolean;
+    wsUrl?: string;
+  } & BackendOptions,
+) => {
   const runner = await resolveRunner(cmd);
-  const ollamaUrl = resolveOllamaUrl(cmd.ollama);
+  const backends = resolveBackends(cmd, runner.backends);
   const wsUrl =
     cmd.wsUrl ||
     runner.wsUrl ||
@@ -70,16 +75,16 @@ export default async (cmd: {
   Logger.log('-------------------');
   Logger.log('[Lambforge local AI runner]');
   Logger.info(`Lambforge: ${wsUrl}`);
-  Logger.info(`Ollama:    ${ollamaUrl}`);
+  Logger.info(`Backends:  ${describeBackends(backends)}`);
   Logger.info(
-    'Tip: agent mode sends large prompts (instructions + tool list). Give Ollama a big context window, e.g. start it with OLLAMA_CONTEXT_LENGTH=32768.',
+    'Tip: agent mode sends large prompts (instructions + tool list). Give your model server a big context window, e.g. start Ollama with OLLAMA_CONTEXT_LENGTH=32768.',
   );
   Logger.log('-------------------');
 
   const connection = new RunnerConnection({
     wsUrl,
     token: runner.token,
-    ollamaUrl,
+    backends,
     version: RUNNER_VERSION,
     logger: Logger,
   });

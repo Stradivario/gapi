@@ -5,7 +5,7 @@ Options:
   -h, --help                                           display help for command
 
 Commands:
-  login [options]                                      Login to graphql-server
+  login [options]                                      Log in. Without --token: prints a link, opens your browser and waits for you to approve it on lambforge.com
   lambda:list [options]                                List of all lambdas for project
   lambda:get [options]                                 Get lambda by id
   lambda:create [options]
@@ -43,6 +43,7 @@ Commands:
   cluster:nodes [options]                              Every node of a cluster: its Hetzner control planes and workers and the machines attached to it
   cluster:pause [options]                              Pause an attached machine (cordon): nothing new runs there, running work stays
   cluster:resume [options]                             Let new work run on a paused machine again (uncordon)
+  cluster:node-storage [options]                       Let an attached machine carry volumes on its own disk (it restarts once), or stop with --off
   cluster:reset-machine [options]                      Bring a detached machine back to maintenance mode to attach it again (wipes its config and data, keeps the boot loader)
   cluster:talosconfig [options]                        A short-lived talosconfig for one of your Talos clusters (admin of its machines with talosctl) - printed, or saved with -o
   cluster:detach [options]                             Drain and remove an attached machine from a cluster (reset the machine afterwards)
@@ -52,6 +53,7 @@ Commands:
   cluster:scale [options]                              Set the number of worker nodes (1-10) of a multi-node cluster - billed per node-hour
   cluster:scale:control-planes [options]               Set the number of control-plane nodes (1, 3 or 5)
   cluster:autoscale [options]                          Change the worker autoscaling policy - only the flags you pass change
+  cluster:plan [options]                               Why pods are pending and what the pods-mode autoscaler would do: a verdict per pod, the nodes it would create, consolidation
   cluster:multi-node [options]                         Convert a single-node cluster to dedicated worker nodes (required for autoscaling)
   cluster:single-node [options]                        Convert a multi-node cluster back to a single node (removes the worker nodes)
   cluster:load-balancer [options]                      Add or remove the cluster's load balancer (billed per hour while enabled). On a virtual cluster this is its dedicated LB - its own IP; the platform subdomain keeps working either way
@@ -62,7 +64,7 @@ Commands:
   plugin:installed [options]                           List plugins installed for a project (may include the same plugin on several clusters)
   plugin:install [options]                             Install a marketplace plugin for a project
   plugin:uninstall [options]                           Uninstall a plugin from a project (--cluster picks which installation, if it's on several)
-  runner:start [options]                               Connect this machine's Ollama to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, Ollama is never exposed)
+  runner:start [options]                               Connect this machine's model servers (Ollama, Strata or any OpenAI-compatible server) to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, nothing is exposed)
   runner:daemon:install|runner:start:daemon [options]  Run the runner in the background as a systemd user service: starts with your session, restarts on failure (Linux)
   runner:daemon:status [options]                       Show the runner service status (systemctl --user status)
   runner:daemon:start [options]                        Start the installed runner service, and report whether it stays up
@@ -94,9 +96,10 @@ Commands:
 --- Subcommand: login ---[0m
 Usage: gcli login [options]
 
-Login to graphql-server
+Log in. Without --token: prints a link, opens your browser and waits for you to approve it on lambforge.com
 
 Options:
+  --no-browser            Only print the login link, do not open a browser
   -k, --key <key>         Specify api key
   -uu, --uploadUrl <key>  Specify upload server
   -ci, --ci               Initialize directories for CI/CD purposes
@@ -371,12 +374,17 @@ Usage: gcli build [options]
 Build bundle using esbuild https://esbuild.github.io 
 
 Options:
-  -f, --files <files...>        File or files to bundle defaults to index.ts
-  -b, --bundle                  Bundle code (default: true)
-  -m, --minify                  Minify code (default: false)
+  -f, --files <files...>        File or files to bundle (default: function.file
+                                from lambforge.yaml, else index.ts)
+  -b, --bundle                  Bundle code (default: options.bundler.bundle,
+                                else true)
+  -m, --minify                  Minify code (default: options.bundler.minify,
+                                else false)
   -p, --platform <char>         Platform  (default: "node")
-  -t, --target <char>           Target  (default: "node14.4")
-  -o, --outfile <char>          Outfile name
+  -t, --target <char>           Target (default: options.bundler.target, else
+                                node24)
+  -o, --outfile <char>          Outfile name (default: options.bundler.outfile,
+                                else index.js)
   -e, --external <external...>  External libraries
   -h, --help                    display help for command
 [36m
@@ -693,6 +701,8 @@ Options:
   --reserved                   Only workloads that tolerate the pool run there
                                (default: plain extra capacity)
   --disk <disk>                Install disk, e.g. /dev/nvme0n1 (WIPED)
+  --storage                    The machine also carries volumes on its own disk
+                               (default: lambdas only)
   --yes                        Do not ask before wiping the disk
   --no-wait                    Do not wait for the machine to join
   --timeout <minutes>          How long to wait for the join (default 10)
@@ -731,6 +741,22 @@ Options:
   -c, --cluster <cluster>      Cluster id (see cluster:list)
   --clusterName <clusterName>  Cluster name instead of --cluster
   -n, --name <name>            Machine name (see cluster:nodes)
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:node-storage ---[0m
+Usage: gcli cluster:node-storage [options]
+
+Let an attached machine carry volumes on its own disk (it restarts once), or stop with --off
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  -n, --name <name>            Machine name (see cluster:nodes)
+  --off                        Stop carrying volumes (refused while it holds
+                               one)
+  --no-wait                    Do not wait until the machine is ready
+  --timeout <minutes>          How long to wait (default 40)
   -h, --help                   display help for command
 [36m
 --- Subcommand: cluster:reset-machine ---[0m
@@ -851,6 +877,31 @@ Options:
   --memDown <percent>          Scale down below this memory % (1-100)
   --samples <n>                Consecutive readings before acting (1-20)
   --cooldown <minutes>         Minutes between scale actions (1-1440)
+  --profile <profile>          conservative | balanced | aggressive presets the
+                               thresholds above; custom uses them as given
+  --serverTypes <types>        Comma-separated worker server types in order of
+                               preference, e.g. cx33,cpx22 (the next is used
+                               when one is out of stock); "" = the cluster's
+                               own type
+  --step <n>                   Workers added per scale-up (1-3, custom profile)
+  --mode <mode>                thresholds (CPU/memory %) | pods (create the
+                               cheapest nodes that fit unschedulable pods)
+  --consolidation              pods mode: remove the newest worker when its
+                               pods fit elsewhere
+  --no-consolidation           pods mode: never remove workers by itself
+  --minNodeAge <minutes>       pods mode: never remove a worker younger than
+                               this (5-1440)
+  -h, --help                   display help for command
+[36m
+--- Subcommand: cluster:plan ---[0m
+Usage: gcli cluster:plan [options]
+
+Why pods are pending and what the pods-mode autoscaler would do: a verdict per pod, the nodes it would create, consolidation
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
   -h, --help                   display help for command
 [36m
 --- Subcommand: cluster:multi-node ---[0m
@@ -972,18 +1023,25 @@ Options:
 --- Subcommand: runner:start ---[0m
 Usage: gcli runner:start [options]
 
-Connect this machine's Ollama to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, Ollama is never exposed)
+Connect this machine's model servers (Ollama, Strata or any OpenAI-compatible server) to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, nothing is exposed)
 
 Options:
-  -n, --name <name>    Runner name shown in the chat model picker (default:
-                       hostname)
-  -t, --token <token>  Runner token from Profile -> Local AI runners (instead
-                       of `gcli login`)
-  --ollama <url>       Ollama URL (default: $OLLAMA_HOST or
-                       http://127.0.0.1:11434)
-  --wsUrl <url>        Lambforge subscriptions endpoint override
-  --reset              Forget the saved runner and register a new one
-  -h, --help           display help for command
+  -n, --name <name>          Runner name shown in the chat model picker
+                             (default: hostname)
+  -t, --token <token>        Runner token from Profile -> Local AI runners
+                             (instead of `gcli login`)
+  --ollama <url>             Ollama URL (default: $OLLAMA_HOST or
+                             http://127.0.0.1:11434)
+  --backend <name=kind:url>  Model server to serve from, repeatable; kinds:
+                             ollama, openai (Strata, llama-server, LM Studio,
+                             vLLM). E.g. --backend
+                             strata=openai:http://127.0.0.1:8080. With
+                             --ollama, Ollama comes first
+  --backend-key <name=key>   API key for a backend, repeatable (default:
+                             $<NAME>_API_KEY, e.g. $STRATA_API_KEY)
+  --wsUrl <url>              Lambforge subscriptions endpoint override
+  --reset                    Forget the saved runner and register a new one
+  -h, --help                 display help for command
 [36m
 --- Subcommand: runner:daemon:install ---[0m
 Usage: gcli runner:daemon:install|runner:start:daemon [options]
@@ -991,15 +1049,22 @@ Usage: gcli runner:daemon:install|runner:start:daemon [options]
 Run the runner in the background as a systemd user service: starts with your session, restarts on failure (Linux)
 
 Options:
-  -n, --name <name>    Runner name when registering (default: hostname)
-  -t, --token <token>  Runner token for a machine without `gcli login`
-  --ollama <url>       Ollama URL (default: $OLLAMA_HOST or
-                       http://127.0.0.1:11434)
-  --wsUrl <url>        Lambforge subscriptions endpoint override
-  --reset              Forget the saved runner and register a new one
-  --service <name>     systemd unit name (default: lambforge-runner)
-  --dry-run            Print the unit file instead of installing it
-  -h, --help           display help for command
+  -n, --name <name>          Runner name when registering (default: hostname)
+  -t, --token <token>        Runner token for a machine without `gcli login`
+  --ollama <url>             Ollama URL (default: $OLLAMA_HOST or
+                             http://127.0.0.1:11434)
+  --backend <name=kind:url>  Model server to serve from, repeatable; kinds:
+                             ollama, openai (Strata, llama-server, LM Studio,
+                             vLLM). E.g. --backend
+                             strata=openai:http://127.0.0.1:8080. With
+                             --ollama, Ollama comes first
+  --backend-key <name=key>   API key for a backend, repeatable (default:
+                             $<NAME>_API_KEY, e.g. $STRATA_API_KEY)
+  --wsUrl <url>              Lambforge subscriptions endpoint override
+  --reset                    Forget the saved runner and register a new one
+  --service <name>           systemd unit name (default: lambforge-runner)
+  --dry-run                  Print the unit file instead of installing it
+  -h, --help                 display help for command
 [36m
 --- Subcommand: runner:daemon:status ---[0m
 Usage: gcli runner:daemon:status [options]

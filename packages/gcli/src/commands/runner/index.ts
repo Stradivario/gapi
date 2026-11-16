@@ -2,11 +2,16 @@ import { Command } from 'commander';
 
 import { lazy } from '~/helpers';
 
+const collect = (value: string, previous: string[] = []) => [
+  ...previous,
+  value,
+];
+
 export function registerRunnerCommands(program: Command) {
   program
     .command('runner:start')
     .description(
-      "Connect this machine's Ollama to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, Ollama is never exposed)",
+      "Connect this machine's model servers (Ollama, Strata or any OpenAI-compatible server) to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, nothing is exposed)",
     )
     .option(
       '-n, --name <name>',
@@ -19,6 +24,16 @@ export function registerRunnerCommands(program: Command) {
     .option(
       '--ollama <url>',
       'Ollama URL (default: $OLLAMA_HOST or http://127.0.0.1:11434)',
+    )
+    .option(
+      '--backend <name=kind:url>',
+      'Model server to serve from, repeatable; kinds: ollama, openai (Strata, llama-server, LM Studio, vLLM). E.g. --backend strata=openai:http://127.0.0.1:8080. With --ollama, Ollama comes first',
+      collect,
+    )
+    .option(
+      '--backend-key <name=key>',
+      'API key for a backend, repeatable (default: $<NAME>_API_KEY, e.g. $STRATA_API_KEY)',
+      collect,
     )
     .option('--wsUrl <url>', 'Lambforge subscriptions endpoint override')
     .option('--reset', 'Forget the saved runner and register a new one')
@@ -41,6 +56,16 @@ export function registerRunnerCommands(program: Command) {
     .option(
       '--ollama <url>',
       'Ollama URL (default: $OLLAMA_HOST or http://127.0.0.1:11434)',
+    )
+    .option(
+      '--backend <name=kind:url>',
+      'Model server to serve from, repeatable; kinds: ollama, openai (Strata, llama-server, LM Studio, vLLM). E.g. --backend strata=openai:http://127.0.0.1:8080. With --ollama, Ollama comes first',
+      collect,
+    )
+    .option(
+      '--backend-key <name=key>',
+      'API key for a backend, repeatable (default: $<NAME>_API_KEY, e.g. $STRATA_API_KEY)',
+      collect,
     )
     .option('--wsUrl <url>', 'Lambforge subscriptions endpoint override')
     .option('--reset', 'Forget the saved runner and register a new one')

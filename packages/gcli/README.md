@@ -1038,9 +1038,39 @@ running after logout and start it at boot, enable lingering once:
 `sudo loginctl enable-linger $USER`. Preview the unit with `--dry-run`;
 `--service <name>` installs several runners side by side.
 
+### Several model servers in one runner (Ollama + Strata, LM Studio, ...)
+
+One runner can serve models from several local servers at once. Each one is a
+`--backend <name>=<kind>:<url>` (repeatable). Built-in kinds:
+
+| Kind | Servers | Models from |
+|---|---|---|
+| `ollama` | Ollama | `/api/tags` + `/api/show` + `/api/ps` |
+| `openai` | any OpenAI-compatible server: Strata, llama.cpp `llama-server`, LM Studio, vLLM | `/v1/models` (+ `/props` for the running context window, when the server has it) |
+
+```bash
+# Ollama + Strata in one runner
+gcli runner:start --ollama http://127.0.0.1:11434 \
+                  --backend strata=openai:http://127.0.0.1:8080
+# API key: --backend-key strata=<key>, or $STRATA_API_KEY ($<NAME>_API_KEY)
+
+# the same as a service: backends + keys are saved in ~/.graphql-server/runner.json (0600)
+gcli runner:daemon:install --ollama http://127.0.0.1:11434 \
+                           --backend strata=openai:http://127.0.0.1:8080
+```
+
+The first backend is the primary: its models keep their names. The others
+appear as `<name>/<model>` (e.g. `strata/Qwen3.8-Flash-Next`) in the chat
+picker and in `runner:models --show`. A backend that is down only removes its
+own models; the rest keep working. Without `--backend` the runner serves one
+Ollama, exactly as before. Re-running `runner:daemon:install` without
+`--backend` goes back to Ollama only.
+
 Notes:
 
-- Models are only offered if Ollama reports them as chat-capable; a model
+- Ollama models are only offered if Ollama reports them as chat-capable;
+  OpenAI-compatible servers don't report capabilities, so their models are
+  offered with tools; a model
   without the `tools` capability is used without platform tools.
 - Local models don't count against your plan's AI token quota.
 - Requires Node.js >= 22.

@@ -1,3 +1,5 @@
+import { AdapterSpec } from './adapters/types';
+
 export interface LocalRunnerModel {
   name: string;
   parameterSize?: string;
@@ -49,4 +51,9 @@ export interface SavedRunner {
   name: string;
   token: string;
   wsUrl?: string;
+  /**
+   * Model servers saved by `runner:daemon:install --backend ...` (keys
+   * included - runner.json is 0600). Absent = one Ollama, as before.
+   */
+  backends?: AdapterSpec[];
 }

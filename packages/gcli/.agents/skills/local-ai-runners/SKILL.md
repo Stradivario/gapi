@@ -1,6 +1,6 @@
 ---
 name: local-ai-runners
-description: Work on the gcli local AI runner (runner:start/list/models/delete) - the subscriptions-transport-ws client that bridges a user's Ollama to the Lambforge chat. USE when the runner won't connect, drops requests, or before changing src/commands/runner/**.
+description: Work on the gcli local AI runner (runner:start/list/models/delete) - the subscriptions-transport-ws client that bridges a user's local model servers (Ollama, Strata / OpenAI-compatible, via adapters) to the Lambforge chat. USE when the runner won't connect, drops requests, or before changing src/commands/runner/**.
 ---
 
 # gcli local AI runner
@@ -22,6 +22,16 @@ security, symptom table): `graphql-server/docs/features/local-ai-runners.md`.
   idle timeout kills it (spawned agent workers queue on one GPU).
 - Socket close aborts every in-flight Ollama request; a refused token is
   fatal (`RunnerAuthError`), everything else reconnects with backoff.
+- Model servers are adapters (`src/commands/runner/adapters/`): the chat
+  format stays OpenAI `/v1/chat/completions`; adapters only discover models
+  and forward. The heartbeat's model objects must keep the
+  `LocalRunnerModelInput` shape (name, parameterSize, quantization, family,
+  capabilities, contextLength, runtimeContextLength) - adding a field there
+  breaks the GraphQL input unless graphql-server adds it too. The primary
+  (first) backend's model names must stay unprefixed: saved `runner:models`
+  selections depend on them.
+- API keys of backends live only in the 0600 `runner.json` or env
+  (`$<NAME>_API_KEY`), never in the systemd unit or logs.
 - Global `WebSocket` -> Node >= 22.
 - Daemon (`runner:daemon:*`, `daemon.ts`): systemd USER unit; never put the
   token or other secrets in the unit (it's world-readable-ish config) - it
