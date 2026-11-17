@@ -1,4 +1,4 @@
-## [1.8.263](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.263) (2026-11-15)
+## [1.8.265](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.265) (2026-11-17)
 
 
 ### Bug Fixes
@@ -130,6 +130,7 @@
 * **federation:** added missing apollo server configs ([cc6edfe](https://github.com/Stradivario/gapi/commit/cc6edfecb02315ed11e156cf63616a983a5b82a7))
 * **federation:** added willSendRequest and context lambdas in order to manage authentication outside the scope of the library ([5f597ab](https://github.com/Stradivario/gapi/commit/5f597ab2504b127ed9838ef84e2ea678927c6b32))
 * **Federation:** removed _service and status from schema sdl when processing _service graph, removed ethereum, ipfs related modules with packages ([cd4d74d](https://github.com/Stradivario/gapi/commit/cd4d74d1296ac5a38416f9ced93ea2caf00f1be7))
+* **gcli:** --spread and --spreadStrict for lambdas (spread replicas across machines) ([0d0840d](https://github.com/Stradivario/gapi/commit/0d0840dd1775f3030263dc7d53fb81b885ac87c4))
 * **gcli:** added additional neat features to yaml parser so we can have conditionals and assignments and things like that ([406bc19](https://github.com/Stradivario/gapi/commit/406bc199c5c7f279b0d34bc339ff57c097061dba))
 * **gcli:** added esbuild as a script with decorators ([35148c7](https://github.com/Stradivario/gapi/commit/35148c72809a5aaef07947ad49cdb78b0b97e4c2))
 * **gcli:** added esbuild as dependency since we want to automatically use the binary for the available architecture for SEA bundle we use the actual binary ([eacc12a](https://github.com/Stradivario/gapi/commit/eacc12a2d26d1b47358882cc9a6ce79ffde9e964))
@@ -166,6 +167,7 @@
 * **graphql:** added option to disable query suggestion on client facing errors so attacker cannot guess what the next queries might be ([7eb4b0e](https://github.com/Stradivario/gapi/commit/7eb4b0ed89c61045ec0cf6cf51d76304288eaece))
 * **GraphqlCli:** init graphql-server cli ([9819b46](https://github.com/Stradivario/gapi/commit/9819b46458e6f732443b8d4ea8822cfa8f776a89))
 * **graphql:** dynamic schema merging ([c53591c](https://github.com/Stradivario/gapi/commit/c53591ce7d525c3d637bd62da200cb34ed742c90))
+* implement multi-backend support for model servers ([8268d86](https://github.com/Stradivario/gapi/commit/8268d8645c5f27d6e222f63703db01c0d2538fe1))
 * **lambda:** add bodyLimit option for lambda commands and update interfaces ([43e27b6](https://github.com/Stradivario/gapi/commit/43e27b665ab8edf76c8fc14c9ad64602908153ce))
 * **lambda:** add cache option to CreateOrUpdateLambdaArguments and ConfigJSON ([8bed379](https://github.com/Stradivario/gapi/commit/8bed379e41dd95054a8d881003aea07354c2d293))
 * **lambda:** added functions to test lambda enviornment and to not initialize settings ([fa41948](https://github.com/Stradivario/gapi/commit/fa419484f6c4ed99e745e85b51e3029c8b8a5056))

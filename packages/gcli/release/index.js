@@ -288702,6 +288702,23 @@ var init_package = __esm({
   }
 });
 
+// src/commands/lambda/helpers/spread.ts
+function spreadScaleOptions(cmd, spec) {
+  const spread = cmd.spread ?? spec?.spread;
+  const strict = cmd.spreadStrict ?? spec?.spreadStrict;
+  if (spread != null && !["none", "machines"].includes(String(spread))) {
+    throw new Error(`--spread must be 'machines' or 'none' (got '${spread}')`);
+  }
+  return {
+    ...spread != null ? { spread: String(spread) } : {},
+    ...strict != null ? { spreadStrict: String(strict) === "true" } : {}
+  };
+}
+var init_spread = __esm({
+  "src/commands/lambda/helpers/spread.ts"() {
+  }
+});
+
 // src/commands/lambda/helpers/index.ts
 function streamToBufferPromise(file2) {
   return new Promise((resolve2, reject) => {
@@ -288728,6 +288745,7 @@ var init_helpers2 = __esm({
     init_package();
     init_load_spec();
     init_read_file();
+    init_spread();
     ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators18.catchError)(() => (0, import_rxjs35.of)("")));
     createOrUpdateLambda = (cmd, type) => (0, import_rxjs35.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
@@ -288823,7 +288841,8 @@ var init_helpers2 = __esm({
                 // 500 / 60 / 120 here was refused on plans with lower maxima.
                 concurrency: cmd.concurrency || payload.scaleOptions?.concurrency || 0,
                 functionTimeout: cmd.functionTimeout || payload.scaleOptions?.functionTimeout || 0,
-                specializationTimeout: cmd.specializationTimeout || payload.scaleOptions?.specializationTimeout || 0
+                specializationTimeout: cmd.specializationTimeout || payload.scaleOptions?.specializationTimeout || 0,
+                ...spreadScaleOptions(cmd, payload.scaleOptions)
               }
             })
           );
@@ -325164,6 +325183,14 @@ function registerLambdaCommands(program2) {
     [
       "--specializationTimeout <specializationTimeout>",
       "Timeout for executor to wait for function pod creation"
+    ],
+    [
+      "--spread <spread>",
+      "Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides"
+    ],
+    [
+      "--spreadStrict <spreadStrict>",
+      "With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up"
     ]
   ];
   createCommand("lambda:create")(createOrUpdateOptions)(program2).action(
