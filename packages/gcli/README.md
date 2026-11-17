@@ -409,6 +409,8 @@ function:
     concurrency: 1
     functionTimeout: 60
     specializationTimeout: 120
+    spread: machines            # replicas on different machines ('none' = the scheduler decides)
+    spreadStrict: false         # true = a replica waits rather than share a machine
 
 environment:
   name: nodejs
@@ -431,6 +433,14 @@ options:
     target: node24
     external: []
 ```
+
+**Spread across machines** (newdeploy, plan 33): `spread: machines` puts the
+replicas on different machines of the cluster, as evenly as possible, so a
+machine going down takes one replica, not several (use it with
+`minScale >= 2`). Soft by default: it never blocks a scale-up.
+`spreadStrict: true` keeps a replica waiting rather than sharing a machine.
+Flags: `--spread machines|none`, `--spreadStrict true|false`. Left out = the
+lambda keeps what it has. Changing it restarts the replicas once.
 
 The same file can also carry `cluster:`, `rabbitmq:`, `plugin:` and `triggers:` sections, read by `cluster:apply` / `cluster:create`, `rabbitmq:create`, `plugin:install` and `cron:create` respectively (each also accepts its own dedicated `--spec` file, e.g. `cluster.yaml`, if you'd rather keep them separate):
 

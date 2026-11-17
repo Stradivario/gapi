@@ -150,6 +150,14 @@ export function registerLambdaCommands(program: Command) {
       '--specializationTimeout <specializationTimeout>',
       'Timeout for executor to wait for function pod creation',
     ],
+    [
+      '--spread <spread>',
+      "Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides",
+    ],
+    [
+      '--spreadStrict <spreadStrict>',
+      "With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up",
+    ],
   ];
 
   createCommand('lambda:create')(createOrUpdateOptions)(program).action(

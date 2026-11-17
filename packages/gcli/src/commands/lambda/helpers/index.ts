@@ -18,6 +18,9 @@ import { Logger } from '~/services/log';
 import packageZip from '../package';
 import { loadSpec } from './load-spec';
 import { readFileAsObservable } from './read-file';
+import { spreadScaleOptions } from './spread';
+
+export { spreadScaleOptions };
 
 const ReadFile = (file: string): Observable<string> =>
   readFileAsObservable(file).pipe(catchError(() => of('')));
@@ -71,6 +74,10 @@ export interface CreateOrUpdateLambdaArguments {
   concurrency: number;
   functionTimeout: number;
   specializationTimeout: number;
+  /* Replicas across machines (plan 33): 'machines' | 'none' */
+  spread?: string;
+  /* 'true' / 'false' from the flag, boolean from the spec */
+  spreadStrict?: string | boolean;
 }
 
 export function streamToBufferPromise(file: File | ReadStream | WriteStream) {
@@ -210,6 +217,7 @@ export const createOrUpdateLambda = (
                 cmd.specializationTimeout ||
                 payload.scaleOptions?.specializationTimeout ||
                 0,
+              ...spreadScaleOptions(cmd, payload.scaleOptions),
             },
           }),
         );
