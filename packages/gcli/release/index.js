@@ -35511,16 +35511,16 @@ var require_encoder = __commonJS({
       });
       return bl(acc);
     }
-    function write64BitUint(buf, offset, num2) {
-      const lo = num2 % 4294967296;
-      const hi = Math.floor(num2 / 4294967296);
+    function write64BitUint(buf, offset, num3) {
+      const lo = num3 % 4294967296;
+      const hi = Math.floor(num3 / 4294967296);
       buf.writeUInt32BE(hi, offset + 0);
       buf.writeUInt32BE(lo, offset + 4);
     }
-    function write64BitInt(buf, offset, num2) {
-      const negate = num2 < 0;
-      num2 = Math.abs(num2);
-      write64BitUint(buf, offset, num2);
+    function write64BitInt(buf, offset, num3) {
+      const negate = num3 < 0;
+      num3 = Math.abs(num3);
+      write64BitUint(buf, offset, num3);
       if (negate) negate64BitInt(buf, offset);
     }
     function negate64BitInt(buf, offset) {
@@ -183652,7 +183652,7 @@ ${lanes.join("\n")}
       function createTabularErrorsDisplay(filesInError, host) {
         const distinctFiles = filesInError.filter((value, index, self2) => index === self2.findIndex((file2) => (file2 == null ? void 0 : file2.fileName) === (value == null ? void 0 : value.fileName)));
         if (distinctFiles.length === 0) return "";
-        const numberLength = (num2) => Math.log(num2) * Math.LOG10E + 1;
+        const numberLength = (num3) => Math.log(num3) * Math.LOG10E + 1;
         const fileToErrorCount = distinctFiles.map((file2) => [file2, countWhere(filesInError, (fileInError) => fileInError.fileName === file2.fileName)]);
         const maxErrors = maxBy(fileToErrorCount, 0, (value) => value[1]);
         const headerRow = Diagnostics.Errors_Files.message;
@@ -192781,7 +192781,7 @@ ${lanes.join("\n")}
           search: (importingFile, preferCapitalized, matches, action) => {
             if (importingFile !== usableByFileName) return;
             return forEachEntry(exportInfo, (info, key2) => {
-              const { symbolName: symbolName2, ambientModuleName } = parseKey(key2);
+              const { symbolName: symbolName2, ambientModuleName } = parseKey2(key2);
               const name2 = preferCapitalized && info[0].capitalizedSymbolName || symbolName2;
               if (matches(name2, info[0].targetFlags)) {
                 const rehydrated = info.map(rehydrateCachedInfo);
@@ -192853,7 +192853,7 @@ ${lanes.join("\n")}
           const moduleKey = ambientModuleName || "";
           return `${importedName.length} ${getSymbolId(skipAlias(symbol2, checker))} ${importedName} ${moduleKey}`;
         }
-        function parseKey(key2) {
+        function parseKey2(key2) {
           const firstSpace = key2.indexOf(" ");
           const secondSpace = key2.indexOf(" ", firstSpace + 1);
           const symbolNameLength = parseInt(key2.substring(0, firstSpace), 10);
@@ -206064,7 +206064,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           }
         }
-        function collect(node) {
+        function collect2(node) {
           if (!node) return;
           if (node.flags & 33554432) {
             return;
@@ -206073,7 +206073,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             if (isClassLike(node)) {
               for (const member of node.members) {
                 if (member.name && isComputedPropertyName(member.name)) {
-                  collect(member.name.expression);
+                  collect2(member.name.expression);
                 }
               }
             }
@@ -206092,105 +206092,105 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               return;
             case 217:
             case 235:
-              collect(node.expression);
+              collect2(node.expression);
               return;
             case 261:
             case 170:
-              collect(node.name);
-              collect(node.initializer);
+              collect2(node.name);
+              collect2(node.initializer);
               return;
             case 214:
               recordCallSite(node);
-              collect(node.expression);
-              forEach(node.arguments, collect);
+              collect2(node.expression);
+              forEach(node.arguments, collect2);
               return;
             case 215:
               recordCallSite(node);
-              collect(node.expression);
-              forEach(node.arguments, collect);
+              collect2(node.expression);
+              forEach(node.arguments, collect2);
               return;
             case 216:
               recordCallSite(node);
-              collect(node.tag);
-              collect(node.template);
+              collect2(node.tag);
+              collect2(node.template);
               return;
             case 287:
             case 286:
               recordCallSite(node);
-              collect(node.tagName);
-              collect(node.attributes);
+              collect2(node.tagName);
+              collect2(node.attributes);
               return;
             case 171:
               recordCallSite(node);
-              collect(node.expression);
+              collect2(node.expression);
               return;
             case 212:
             case 213:
               recordCallSite(node);
-              forEachChild(node, collect);
+              forEachChild(node, collect2);
               break;
             case 239:
-              collect(node.expression);
+              collect2(node.expression);
               return;
           }
           if (isPartOfTypeNode(node)) {
             return;
           }
-          forEachChild(node, collect);
+          forEachChild(node, collect2);
         }
-        return collect;
+        return collect2;
       }
-      function collectCallSitesOfSourceFile(node, collect) {
-        forEach(node.statements, collect);
+      function collectCallSitesOfSourceFile(node, collect2) {
+        forEach(node.statements, collect2);
       }
-      function collectCallSitesOfModuleDeclaration(node, collect) {
+      function collectCallSitesOfModuleDeclaration(node, collect2) {
         if (!hasSyntacticModifier(
           node,
           128
           /* Ambient */
         ) && node.body && isModuleBlock(node.body)) {
-          forEach(node.body.statements, collect);
+          forEach(node.body.statements, collect2);
         }
       }
-      function collectCallSitesOfFunctionLikeDeclaration(typeChecker, node, collect) {
+      function collectCallSitesOfFunctionLikeDeclaration(typeChecker, node, collect2) {
         const implementation = findImplementation(typeChecker, node);
         if (implementation) {
-          forEach(implementation.parameters, collect);
-          collect(implementation.body);
+          forEach(implementation.parameters, collect2);
+          collect2(implementation.body);
         }
       }
-      function collectCallSitesOfClassStaticBlockDeclaration(node, collect) {
-        collect(node.body);
+      function collectCallSitesOfClassStaticBlockDeclaration(node, collect2) {
+        collect2(node.body);
       }
-      function collectCallSitesOfClassLikeDeclaration(node, collect) {
-        forEach(node.modifiers, collect);
+      function collectCallSitesOfClassLikeDeclaration(node, collect2) {
+        forEach(node.modifiers, collect2);
         const heritage = getClassExtendsHeritageElement(node);
         if (heritage) {
-          collect(heritage.expression);
+          collect2(heritage.expression);
         }
         for (const member of node.members) {
           if (canHaveModifiers(member)) {
-            forEach(member.modifiers, collect);
+            forEach(member.modifiers, collect2);
           }
           if (isPropertyDeclaration(member)) {
-            collect(member.initializer);
+            collect2(member.initializer);
           } else if (isConstructorDeclaration(member) && member.body) {
-            forEach(member.parameters, collect);
-            collect(member.body);
+            forEach(member.parameters, collect2);
+            collect2(member.body);
           } else if (isClassStaticBlockDeclaration(member)) {
-            collect(member);
+            collect2(member);
           }
         }
       }
       function collectCallSites(program2, node) {
         const callSites = [];
-        const collect = createCallSiteCollector(program2, callSites);
+        const collect2 = createCallSiteCollector(program2, callSites);
         switch (node.kind) {
           case 308:
-            collectCallSitesOfSourceFile(node, collect);
+            collectCallSitesOfSourceFile(node, collect2);
             break;
           case 268:
-            collectCallSitesOfModuleDeclaration(node, collect);
+            collectCallSitesOfModuleDeclaration(node, collect2);
             break;
           case 263:
           case 219:
@@ -206198,14 +206198,14 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           case 175:
           case 178:
           case 179:
-            collectCallSitesOfFunctionLikeDeclaration(program2.getTypeChecker(), node, collect);
+            collectCallSitesOfFunctionLikeDeclaration(program2.getTypeChecker(), node, collect2);
             break;
           case 264:
           case 232:
-            collectCallSitesOfClassLikeDeclaration(node, collect);
+            collectCallSitesOfClassLikeDeclaration(node, collect2);
             break;
           case 176:
-            collectCallSitesOfClassStaticBlockDeclaration(node, collect);
+            collectCallSitesOfClassStaticBlockDeclaration(node, collect2);
             break;
           default:
             Debug.assertNever(node);
@@ -282314,9 +282314,9 @@ var require_buffer_crc32 = __commonJS({
         throw new Error("input must be buffer, number, or string, received " + typeof input);
       }
     }
-    function bufferizeInt(num2) {
+    function bufferizeInt(num3) {
       var tmp = ensureBuffer(4);
-      tmp.writeInt32BE(num2, 0);
+      tmp.writeInt32BE(num3, 0);
       return tmp;
     }
     function _crc32(buf, previous) {
@@ -285417,9 +285417,9 @@ var require_headers = __commonJS({
       }
       return 0;
     };
-    var indexOf = function(block, num2, offset, end) {
+    var indexOf = function(block, num3, offset, end) {
       for (; offset < end; offset++) {
-        if (block[offset] === num2) return offset;
+        if (block[offset] === num3) return offset;
       }
       return end;
     };
@@ -320697,44 +320697,6 @@ var init_delete2 = __esm({
   }
 });
 
-// src/commands/runner/config.ts
-var import_promises5, DEFAULT_WS_URL, deriveSubscriptionsUrl, readLoginApiUrl, readSavedRunner, saveRunner, forgetRunner;
-var init_config = __esm({
-  "src/commands/runner/config.ts"() {
-    import_promises5 = require("fs/promises");
-    init_types();
-    DEFAULT_WS_URL = "wss://api.lambforge.com/subscriptions";
-    deriveSubscriptionsUrl = (apiUrl) => {
-      if (!apiUrl?.trim()) {
-        return DEFAULT_WS_URL;
-      }
-      const url2 = new URL(apiUrl.trim());
-      if (["localhost", "127.0.0.1"].includes(url2.hostname) && url2.port === "9004") {
-        return `ws://${url2.hostname}:9000/subscriptions`;
-      }
-      url2.protocol = url2.protocol === "http:" ? "ws:" : "wss:";
-      url2.pathname = "/subscriptions";
-      url2.search = "";
-      return url2.toString();
-    };
-    readLoginApiUrl = () => (0, import_promises5.readFile)(urlDirectory, "utf-8").catch(() => "");
-    readSavedRunner = async () => {
-      try {
-        const saved = JSON.parse(await (0, import_promises5.readFile)(runnerDirectory, "utf-8"));
-        return saved?.id && saved?.token ? saved : null;
-      } catch {
-        return null;
-      }
-    };
-    saveRunner = async (runner) => {
-      await (0, import_promises5.mkdir)(mainDirectory, { recursive: true });
-      await (0, import_promises5.writeFile)(runnerDirectory, JSON.stringify(runner, null, 2), "utf-8");
-      await (0, import_promises5.chmod)(runnerDirectory, 384);
-    };
-    forgetRunner = () => (0, import_promises5.rm)(runnerDirectory, { force: true });
-  }
-});
-
 // src/commands/runner/ollama.ts
 var ALLOWED_REQUESTS, isAllowedRequest, resolveOllamaUrl, OllamaModels;
 var init_ollama = __esm({
@@ -320844,6 +320806,273 @@ var init_ollama = __esm({
         }
       }
     };
+  }
+});
+
+// src/commands/runner/adapters/base.ts
+var HttpModelAdapter;
+var init_base2 = __esm({
+  "src/commands/runner/adapters/base.ts"() {
+    HttpModelAdapter = class {
+      constructor(spec, deps = {}) {
+        this.name = spec.name;
+        this.kind = spec.kind;
+        this.url = spec.url.replace(/\/+$/, "");
+        this.apiKey = spec.apiKey;
+        this.fetchFn = deps.fetchFn ?? fetch;
+      }
+      forward(method, path2, body, signal) {
+        return this.fetchFn(`${this.url}${path2}`, {
+          method,
+          headers: this.headers({ "Content-Type": "application/json" }),
+          body,
+          signal
+        });
+      }
+      headers(extra = {}) {
+        return this.apiKey ? { ...extra, Authorization: `Bearer ${this.apiKey}` } : extra;
+      }
+    };
+  }
+});
+
+// src/commands/runner/adapters/ollama.ts
+var OllamaAdapter;
+var init_ollama2 = __esm({
+  "src/commands/runner/adapters/ollama.ts"() {
+    init_ollama();
+    init_base2();
+    OllamaAdapter = class extends HttpModelAdapter {
+      constructor(spec, deps = {}) {
+        super(spec, deps);
+        this.models = new OllamaModels(this.url, this.fetchFn);
+      }
+      listModels() {
+        return this.models.list();
+      }
+    };
+  }
+});
+
+// src/commands/runner/adapters/openai.ts
+var formatParams, num, OpenAIAdapter;
+var init_openai = __esm({
+  "src/commands/runner/adapters/openai.ts"() {
+    init_base2();
+    formatParams = (n) => typeof n === "number" && n > 0 ? `${(n / 1e9).toFixed(n >= 1e10 ? 0 : 1)}B` : void 0;
+    num = (v) => typeof v === "number" && v > 0 ? v : void 0;
+    OpenAIAdapter = class extends HttpModelAdapter {
+      async listModels() {
+        const res = await this.fetchFn(`${this.url}/v1/models`, {
+          headers: this.headers()
+        });
+        if (!res.ok) {
+          throw new Error(`/v1/models returned ${res.status}`);
+        }
+        const { data = [] } = await res.json();
+        const props = await this.props();
+        const models = data.filter((m2) => typeof m2.id === "string" && m2.id);
+        const kept = [];
+        const claimed = /* @__PURE__ */ new Set();
+        for (const m2 of models) {
+          const names = [m2.id, ...m2.aliases ?? []];
+          if (names.some((n) => claimed.has(n))) {
+            continue;
+          }
+          kept.push(m2);
+          names.forEach((n) => claimed.add(n));
+        }
+        return kept.map((m2) => {
+          const runtime = num(m2.max_model_len) ?? num(m2.meta?.n_ctx) ?? this.runningContext(props);
+          return {
+            name: m2.id,
+            parameterSize: formatParams(m2.meta?.n_params),
+            capabilities: this.capabilities(m2, props),
+            contextLength: num(m2.meta?.n_ctx_train) ?? num(m2.context_length) ?? num(m2.max_model_len),
+            // A llama.cpp server serves exactly one model, so /props applies to it.
+            ...runtime ? { runtimeContextLength: runtime } : {}
+          };
+        });
+      }
+      capabilities(model, props) {
+        if (!props) {
+          return [];
+        }
+        const caps = ["completion"];
+        const tpl = props.chat_template_caps;
+        if (tpl?.supports_tools || tpl?.supports_tool_calls) {
+          caps.push("tools");
+        }
+        if (props.modalities?.vision || model.architecture?.input_modalities?.includes("image")) {
+          caps.push("vision");
+        }
+        return caps;
+      }
+      runningContext(props) {
+        return num(props?.default_generation_settings?.n_ctx) ?? num(props?.n_ctx);
+      }
+      async props() {
+        try {
+          const res = await this.fetchFn(`${this.url}/props`, {
+            headers: this.headers()
+          });
+          return res.ok ? await res.json() : void 0;
+        } catch {
+          return void 0;
+        }
+      }
+    };
+  }
+});
+
+// src/commands/runner/adapters/registry.ts
+var factories, registerAdapter, adapterKinds, hasAdapterKind, createAdapter;
+var init_registry = __esm({
+  "src/commands/runner/adapters/registry.ts"() {
+    init_ollama2();
+    init_openai();
+    factories = /* @__PURE__ */ new Map();
+    registerAdapter = (kind, factory) => {
+      factories.set(kind.toLowerCase(), factory);
+    };
+    adapterKinds = () => [...factories.keys()];
+    hasAdapterKind = (kind) => factories.has(kind?.toLowerCase());
+    createAdapter = (spec, deps = {}) => {
+      const factory = factories.get(spec.kind?.toLowerCase());
+      if (!factory) {
+        throw new Error(
+          `Unknown backend kind "${spec.kind}" for "${spec.name}" (known: ${adapterKinds().join(", ")})`
+        );
+      }
+      return factory(spec, deps);
+    };
+    registerAdapter("ollama", (spec, deps) => new OllamaAdapter(spec, deps));
+    registerAdapter("openai", (spec, deps) => new OpenAIAdapter(spec, deps));
+  }
+});
+
+// src/commands/runner/adapters/spec.ts
+var NAME2, normaliseUrl, parseBackendSpec, parseKey, apiKeyEnvVar, resolveBackends, describeBackends;
+var init_spec = __esm({
+  "src/commands/runner/adapters/spec.ts"() {
+    init_ollama();
+    init_registry();
+    NAME2 = /^[a-z0-9][a-z0-9_-]*$/i;
+    normaliseUrl = (raw) => {
+      const withScheme = /^https?:\/\//.test(raw) ? raw : `http://${raw}`;
+      const url2 = new URL(withScheme);
+      if (url2.hostname === "0.0.0.0") {
+        url2.hostname = "127.0.0.1";
+      }
+      return `${url2.origin}${url2.pathname.replace(/\/+$/, "")}`;
+    };
+    parseBackendSpec = (value) => {
+      const eq = value.indexOf("=");
+      if (eq < 1) {
+        throw new Error(
+          `--backend "${value}": expected <name>=<kind>:<url>, e.g. strata=openai:http://127.0.0.1:8080`
+        );
+      }
+      const name2 = value.slice(0, eq).trim();
+      let rest = value.slice(eq + 1).trim();
+      if (!NAME2.test(name2)) {
+        throw new Error(
+          `--backend "${value}": the name may only use letters, digits, - and _`
+        );
+      }
+      const kindMatch = /^([a-z][a-z0-9_-]*):(?!\/\/)/i.exec(rest);
+      let kind = name2;
+      if (kindMatch && hasAdapterKind(kindMatch[1])) {
+        kind = kindMatch[1];
+        rest = rest.slice(kindMatch[0].length);
+      }
+      if (!hasAdapterKind(kind)) {
+        throw new Error(
+          `--backend "${value}": unknown kind "${kind}" (known: ${adapterKinds().join(", ")})`
+        );
+      }
+      if (!rest) {
+        throw new Error(`--backend "${value}": missing URL`);
+      }
+      return { name: name2, kind: kind.toLowerCase(), url: normaliseUrl(rest) };
+    };
+    parseKey = (value) => {
+      const eq = value.indexOf("=");
+      if (eq < 1 || eq === value.length - 1) {
+        throw new Error("--backend-key: expected <name>=<key>");
+      }
+      return [value.slice(0, eq).trim(), value.slice(eq + 1)];
+    };
+    apiKeyEnvVar = (name2) => `${name2.toUpperCase().replace(/-/g, "_")}_API_KEY`;
+    resolveBackends = (cmd, saved, env = process.env) => {
+      const ollamaUrl = () => resolveOllamaUrl(cmd.ollama || env.OLLAMA_HOST || "http://127.0.0.1:11434");
+      let specs;
+      if (cmd.backend?.length) {
+        specs = cmd.backend.map(parseBackendSpec);
+        if (cmd.ollama && !specs.some((s2) => s2.name === "ollama")) {
+          specs.unshift({
+            name: "ollama",
+            kind: "ollama",
+            url: ollamaUrl()
+          });
+        }
+      } else if (saved?.length && !cmd.ollama) {
+        specs = saved.map((s2) => ({ ...s2 }));
+      } else {
+        specs = [{ name: "ollama", kind: "ollama", url: ollamaUrl() }];
+      }
+      const keys = new Map((cmd.backendKey ?? []).map(parseKey));
+      for (const name2 of keys.keys()) {
+        if (!specs.some((s2) => s2.name === name2)) {
+          throw new Error(`--backend-key ${name2}=...: no backend named "${name2}"`);
+        }
+      }
+      return specs.map((spec) => {
+        const apiKey = keys.get(spec.name) ?? env[apiKeyEnvVar(spec.name)] ?? spec.apiKey;
+        return apiKey ? { ...spec, apiKey } : spec;
+      });
+    };
+    describeBackends = (specs) => specs.map(
+      (s2) => `${s2.name}${s2.kind === s2.name ? "" : ` (${s2.kind})`} ${s2.url}${s2.apiKey ? " [key]" : ""}`
+    ).join(", ");
+  }
+});
+
+// src/commands/runner/config.ts
+var import_promises5, DEFAULT_WS_URL, deriveSubscriptionsUrl, readLoginApiUrl, readSavedRunner, saveRunner, forgetRunner;
+var init_config = __esm({
+  "src/commands/runner/config.ts"() {
+    import_promises5 = require("fs/promises");
+    init_types();
+    DEFAULT_WS_URL = "wss://api.lambforge.com/subscriptions";
+    deriveSubscriptionsUrl = (apiUrl) => {
+      if (!apiUrl?.trim()) {
+        return DEFAULT_WS_URL;
+      }
+      const url2 = new URL(apiUrl.trim());
+      if (["localhost", "127.0.0.1"].includes(url2.hostname) && url2.port === "9004") {
+        return `ws://${url2.hostname}:9000/subscriptions`;
+      }
+      url2.protocol = url2.protocol === "http:" ? "ws:" : "wss:";
+      url2.pathname = "/subscriptions";
+      url2.search = "";
+      return url2.toString();
+    };
+    readLoginApiUrl = () => (0, import_promises5.readFile)(urlDirectory, "utf-8").catch(() => "");
+    readSavedRunner = async () => {
+      try {
+        const saved = JSON.parse(await (0, import_promises5.readFile)(runnerDirectory, "utf-8"));
+        return saved?.id && saved?.token ? saved : null;
+      } catch {
+        return null;
+      }
+    };
+    saveRunner = async (runner) => {
+      await (0, import_promises5.mkdir)(mainDirectory, { recursive: true });
+      await (0, import_promises5.writeFile)(runnerDirectory, JSON.stringify(runner, null, 2), "utf-8");
+      await (0, import_promises5.chmod)(runnerDirectory, 384);
+    };
+    forgetRunner = () => (0, import_promises5.rm)(runnerDirectory, { force: true });
   }
 });
 
@@ -321123,10 +321352,138 @@ var init_tunnel = __esm({
   }
 });
 
+// src/commands/runner/adapters/router.ts
+var ModelRouter;
+var init_router = __esm({
+  "src/commands/runner/adapters/router.ts"() {
+    init_tunnel();
+    ModelRouter = class {
+      constructor(adapters, logger) {
+        this.adapters = adapters;
+        this.logger = logger;
+        this.routes = /* @__PURE__ */ new Map();
+        this.reachable = /* @__PURE__ */ new Map();
+        if (!adapters.length) {
+          throw new Error("A runner needs at least one backend");
+        }
+        const names = adapters.map((a) => a.name);
+        const dup = names.find((n, i2) => names.indexOf(n) !== i2);
+        if (dup) {
+          throw new Error(`Backend name "${dup}" is used twice`);
+        }
+      }
+      get primary() {
+        return this.adapters[0];
+      }
+      /** `strata/Qwen3` for a secondary adapter, the plain name for the primary. */
+      exposedName(adapter, model) {
+        return adapter === this.primary ? model : `${adapter.name}/${model}`;
+      }
+      /**
+       * Every backend's models under their exposed names. A backend that can't be
+       * reached contributes nothing this round (its models drop out of the
+       * picker) without affecting the others; reachability changes are logged once.
+       */
+      async listModels(announce = false) {
+        const perAdapter = await Promise.all(
+          this.adapters.map(async (adapter) => {
+            try {
+              const models = await adapter.listModels();
+              if (this.reachable.get(adapter.name) === false || announce) {
+                this.logger.info(
+                  `${this.label(adapter)}: ${models.length} model(s)`
+                );
+              }
+              this.reachable.set(adapter.name, true);
+              const routes = /* @__PURE__ */ new Map();
+              for (const model of models) {
+                routes.set(this.exposedName(adapter, model.name), {
+                  adapter,
+                  upstream: model.name
+                });
+              }
+              this.routes.set(adapter.name, routes);
+              return models.map((m2) => ({
+                ...m2,
+                name: this.exposedName(adapter, m2.name)
+              }));
+            } catch (e2) {
+              if (this.reachable.get(adapter.name) !== false) {
+                this.logger.warn(
+                  `Cannot reach ${this.label(adapter)} (${describeError(e2)}). Is it running? Retrying...`
+                );
+              }
+              this.reachable.set(adapter.name, false);
+              return [];
+            }
+          })
+        );
+        const seen = /* @__PURE__ */ new Set();
+        return perAdapter.flat().filter((m2) => {
+          if (seen.has(m2.name)) {
+            return false;
+          }
+          seen.add(m2.name);
+          return true;
+        });
+      }
+      /** True when at least one backend answered the last `listModels`. */
+      get anyReachable() {
+        return [...this.reachable.values()].some(Boolean);
+      }
+      /**
+       * Which backend serves `model`, and the request body with the model renamed
+       * to the backend's own name. Unknown models (e.g. a request racing the first
+       * heartbeat) go to the backend named by the prefix, else to the primary,
+       * unchanged.
+       */
+      route(body) {
+        let parsed;
+        try {
+          parsed = JSON.parse(body ?? "");
+        } catch {
+          parsed = void 0;
+        }
+        const model = typeof parsed?.model === "string" ? parsed.model : void 0;
+        if (!model) {
+          return { adapter: this.primary, body, model: "unknown model" };
+        }
+        const route = this.find(model);
+        if (!route || route.upstream === model) {
+          return { adapter: route?.adapter ?? this.primary, body, model };
+        }
+        return {
+          adapter: route.adapter,
+          body: JSON.stringify({ ...parsed, model: route.upstream }),
+          model
+        };
+      }
+      label(adapter) {
+        const kind = adapter.kind === adapter.name ? "" : ` (${adapter.kind})`;
+        return `${adapter.name}${kind} at ${adapter.url}`;
+      }
+      find(model) {
+        for (const routes of this.routes.values()) {
+          const route = routes.get(model);
+          if (route) {
+            return route;
+          }
+        }
+        const adapter = this.adapters.find(
+          (a) => a !== this.primary && model.startsWith(`${a.name}/`)
+        );
+        return adapter ? { adapter, upstream: model.slice(adapter.name.length + 1) } : void 0;
+      }
+    };
+  }
+});
+
 // src/commands/runner/connection.ts
 var HEARTBEAT_MUTATION, RunnerConnection;
 var init_connection = __esm({
   "src/commands/runner/connection.ts"() {
+    init_registry();
+    init_router();
     init_ollama();
     init_tunnel();
     HEARTBEAT_MUTATION = `mutation runnerHeartbeat($models: [LocalRunnerModelInput], $runnerVersion: String) {
@@ -321137,8 +321494,18 @@ var init_connection = __esm({
         super(options);
         this.options = options;
         this.announcedModels = "";
-        this.fetchFn = options.fetchFn ?? fetch;
-        this.ollama = new OllamaModels(options.ollamaUrl, this.fetchFn);
+        const fetchFn = options.fetchFn ?? fetch;
+        const specs = options.backends?.length ? options.backends : [
+          {
+            name: "ollama",
+            kind: "ollama",
+            url: options.ollamaUrl ?? "http://127.0.0.1:11434"
+          }
+        ];
+        this.router = new ModelRouter(
+          options.adapters?.length ? options.adapters : specs.map((spec) => createAdapter(spec, { fetchFn })),
+          options.logger
+        );
       }
       connectionParams() {
         return { runnerToken: this.options.token };
@@ -321154,27 +321521,9 @@ var init_connection = __esm({
         );
       }
       async heartbeat(announce) {
-        let models = [];
-        try {
-          models = await this.ollama.list();
-          if (this.ollamaReachable === false || announce) {
-            this.options.logger.info(
-              `Ollama at ${this.options.ollamaUrl}: ${models.length} model(s)`
-            );
-          }
-          this.ollamaReachable = true;
-        } catch (e2) {
-          if (this.ollamaReachable !== false) {
-            this.options.logger.warn(
-              `Cannot reach Ollama at ${this.options.ollamaUrl} (${describeError(e2)}). Is it running? Retrying...`
-            );
-          }
-          this.ollamaReachable = false;
-        }
-        const names = JSON.stringify(
-          models.map((m2) => m2.name)
-        );
-        if (!announce && names !== this.announcedModels && this.ollamaReachable) {
+        const models = await this.router.listModels(announce);
+        const names = JSON.stringify(models.map((m2) => m2.name));
+        if (!announce && names !== this.announcedModels && this.router.anyReachable) {
           this.options.logger.info(
             `Models: ${models.map((m2) => m2.name).join(", ") || "(none)"}`
           );
@@ -321191,17 +321540,15 @@ var init_connection = __esm({
       }
       async serve(request, sender, signal) {
         const started = Date.now();
-        const model = this.modelOf(request.body);
-        this.options.logger.info(`-> chat request (${model})`);
+        const { adapter, body, model } = this.router.route(request.body);
+        const via = this.router.adapters.length > 1 ? ` via ${adapter.name}` : "";
+        this.options.logger.info(`-> chat request (${model})${via}`);
         try {
-          const response = await this.fetchFn(
-            `${this.options.ollamaUrl}${request.path}`,
-            {
-              method: request.method,
-              headers: { "Content-Type": "application/json" },
-              body: request.body,
-              signal
-            }
+          const response = await adapter.forward(
+            request.method,
+            request.path,
+            body,
+            signal
           );
           sender.push({
             type: "head",
@@ -321236,16 +321583,9 @@ var init_connection = __esm({
             this.options.logger.error(`x  ${reason}`);
             sender.push({
               type: "error",
-              error: /fetch failed|ECONNREFUSED/.test(reason) ? `Could not reach Ollama at ${this.options.ollamaUrl} on the runner machine - is it running?` : reason
+              error: /fetch failed|ECONNREFUSED/.test(reason) ? `Could not reach ${this.router.label(adapter)} on the runner machine - is it running?` : reason
             });
           }
-        }
-      }
-      modelOf(body) {
-        try {
-          return JSON.parse(body ?? "{}").model ?? "unknown model";
-        } catch {
-          return "unknown model";
         }
       }
     };
@@ -321413,10 +321753,10 @@ var init_start2 = __esm({
     import_rxjs52 = __toESM(require_cjs());
     init_gql_client();
     init_log();
+    init_spec();
     init_config();
     init_connection();
     init_daemon();
-    init_ollama();
     RUNNER_VERSION = "gcli-runner/1";
     resolveRunner = async (cmd) => {
       if (cmd.token) {
@@ -321444,20 +321784,20 @@ var init_start2 = __esm({
     };
     start_default = async (cmd) => {
       const runner = await resolveRunner(cmd);
-      const ollamaUrl = resolveOllamaUrl(cmd.ollama);
+      const backends = resolveBackends(cmd, runner.backends);
       const wsUrl = cmd.wsUrl || runner.wsUrl || deriveSubscriptionsUrl(await readLoginApiUrl());
       Logger.log("-------------------");
       Logger.log("[Lambforge local AI runner]");
       Logger.info(`Lambforge: ${wsUrl}`);
-      Logger.info(`Ollama:    ${ollamaUrl}`);
+      Logger.info(`Backends:  ${describeBackends(backends)}`);
       Logger.info(
-        "Tip: agent mode sends large prompts (instructions + tool list). Give Ollama a big context window, e.g. start it with OLLAMA_CONTEXT_LENGTH=32768."
+        "Tip: agent mode sends large prompts (instructions + tool list). Give your model server a big context window, e.g. start Ollama with OLLAMA_CONTEXT_LENGTH=32768."
       );
       Logger.log("-------------------");
       const connection = new RunnerConnection({
         wsUrl,
         token: runner.token,
-        ollamaUrl,
+        backends,
         version: RUNNER_VERSION,
         logger: Logger
       });
@@ -321497,6 +321837,7 @@ var init_daemon_commands = __esm({
   "src/commands/runner/daemon-commands.ts"() {
     import_child_process5 = require("child_process");
     init_log();
+    init_spec();
     init_config();
     init_daemon();
     init_ollama();
@@ -321508,12 +321849,11 @@ var init_daemon_commands = __esm({
       if (warning) {
         Logger.warn(warning);
       }
-      const ollamaUrl = resolveOllamaUrl(cmd.ollama);
+      const backends = cmd.backend?.length ? resolveBackends(cmd) : void 0;
       const execStart = [
         ...command,
         "runner:start",
-        "--ollama",
-        ollamaUrl,
+        ...backends ? [] : ["--ollama", resolveOllamaUrl(cmd.ollama)],
         ...cmd.wsUrl ? ["--wsUrl", cmd.wsUrl] : []
       ];
       const unit = buildUnit({ serviceName, execStart });
@@ -321536,6 +321876,15 @@ var init_daemon_commands = __esm({
         await resolveRunner({ name: cmd.name, reset: cmd.reset });
       }
       const runner = await readSavedRunner();
+      if (runner) {
+        delete runner.backends;
+        await saveRunner(backends ? { ...runner, backends } : runner);
+      }
+      if (backends) {
+        Logger.info(
+          `Backends saved to the runner config: ${describeBackends(backends)}`
+        );
+      }
       const systemd = new SystemdUserService(serviceName);
       const path2 = await systemd.install(unit);
       Logger.log(
@@ -323844,7 +324193,7 @@ ${this.text}` : this.text;
 });
 
 // src/commands/workspace/connection.ts
-var import_os7, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num, short, WorkspaceConnection;
+var import_os7, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num2, short, WorkspaceConnection;
 var init_connection2 = __esm({
   "src/commands/workspace/connection.ts"() {
     import_os7 = require("os");
@@ -323877,7 +324226,7 @@ var init_connection2 = __esm({
   settleLocalWorkspaceApproval(approvalId: $approvalId, decision: $decision) { status }
 }`;
     str = (v) => typeof v === "string" ? v : void 0;
-    num = (v) => typeof v === "number" && Number.isFinite(v) ? v : void 0;
+    num2 = (v) => typeof v === "number" && Number.isFinite(v) ? v : void 0;
     short = (text, max = 100) => text.length > max ? `${text.slice(0, max - 1)}\u2026` : text;
     WorkspaceConnection = class extends TunnelConnection {
       constructor(options) {
@@ -324011,14 +324360,14 @@ var init_connection2 = __esm({
             return this.files.list({
               path: str(args.path),
               recursive: args.recursive !== false,
-              limit: num(args.limit)
+              limit: num2(args.limit)
             });
           case "read":
             log2(`-> read ${str(args.path)}`);
             return this.files.read({
               path: str(args.path),
-              startLine: num(args.startLine),
-              endLine: num(args.endLine)
+              startLine: num2(args.startLine),
+              endLine: num2(args.endLine)
             });
           case "search":
             log2(`-> search /${str(args.pattern)}/ in ${str(args.path) ?? "."}`);
@@ -324028,7 +324377,7 @@ var init_connection2 = __esm({
               glob: str(args.glob),
               regex: args.regex !== false,
               caseSensitive: args.caseSensitive === true,
-              maxResults: num(args.maxResults)
+              maxResults: num2(args.maxResults)
             });
           case "write": {
             const result = await this.files.write({
@@ -324064,8 +324413,8 @@ var init_connection2 = __esm({
           case "process/logs":
             return this.processes.logs({
               processId: str(args.processId),
-              tail: num(args.tail),
-              sinceLine: num(args.sinceLine)
+              tail: num2(args.tail),
+              sinceLine: num2(args.sinceLine)
             });
           case "process/stop": {
             const result = await this.processes.stop({
@@ -324106,7 +324455,7 @@ var init_connection2 = __esm({
           command,
           cwd,
           displayCwd,
-          timeoutSeconds: num(args.timeoutSeconds),
+          timeoutSeconds: num2(args.timeoutSeconds),
           env: buildEnv(this.options, { CI: "1" }),
           signal
         });
@@ -324125,7 +324474,7 @@ var init_connection2 = __esm({
           displayCwd,
           name: str(args.name),
           waitFor: str(args.waitFor),
-          waitSeconds: num(args.waitSeconds),
+          waitSeconds: num2(args.waitSeconds),
           env: buildEnv(this.options),
           signal
         });
@@ -324901,9 +325250,13 @@ function registerRabbitMqCommands(program2) {
 
 // src/commands/runner/index.ts
 init_helpers();
+var collect = (value, previous = []) => [
+  ...previous,
+  value
+];
 function registerRunnerCommands(program2) {
   program2.command("runner:start").description(
-    "Connect this machine's Ollama to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, Ollama is never exposed)"
+    "Connect this machine's model servers (Ollama, Strata or any OpenAI-compatible server) to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, nothing is exposed)"
   ).option(
     "-n, --name <name>",
     "Runner name shown in the chat model picker (default: hostname)"
@@ -324913,6 +325266,14 @@ function registerRunnerCommands(program2) {
   ).option(
     "--ollama <url>",
     "Ollama URL (default: $OLLAMA_HOST or http://127.0.0.1:11434)"
+  ).option(
+    "--backend <name=kind:url>",
+    "Model server to serve from, repeatable; kinds: ollama, openai (Strata, llama-server, LM Studio, vLLM). E.g. --backend strata=openai:http://127.0.0.1:8080. With --ollama, Ollama comes first",
+    collect
+  ).option(
+    "--backend-key <name=key>",
+    "API key for a backend, repeatable (default: $<NAME>_API_KEY, e.g. $STRATA_API_KEY)",
+    collect
   ).option("--wsUrl <url>", "Lambforge subscriptions endpoint override").option("--reset", "Forget the saved runner and register a new one").action(lazy(() => Promise.resolve().then(() => (init_start2(), start_exports2)).then((m2) => m2.default)));
   program2.command("runner:daemon:install").alias("runner:start:daemon").description(
     "Run the runner in the background as a systemd user service: starts with your session, restarts on failure (Linux)"
@@ -324925,6 +325286,14 @@ function registerRunnerCommands(program2) {
   ).option(
     "--ollama <url>",
     "Ollama URL (default: $OLLAMA_HOST or http://127.0.0.1:11434)"
+  ).option(
+    "--backend <name=kind:url>",
+    "Model server to serve from, repeatable; kinds: ollama, openai (Strata, llama-server, LM Studio, vLLM). E.g. --backend strata=openai:http://127.0.0.1:8080. With --ollama, Ollama comes first",
+    collect
+  ).option(
+    "--backend-key <name=key>",
+    "API key for a backend, repeatable (default: $<NAME>_API_KEY, e.g. $STRATA_API_KEY)",
+    collect
   ).option("--wsUrl <url>", "Lambforge subscriptions endpoint override").option("--reset", "Forget the saved runner and register a new one").option("--service <name>", "systemd unit name (default: lambforge-runner)").option("--dry-run", "Print the unit file instead of installing it").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.install)));
   program2.command("runner:daemon:status").description("Show the runner service status (systemctl --user status)").option("--service <name>", "systemd unit name (default: lambforge-runner)").action(lazy(() => Promise.resolve().then(() => (init_daemon_commands(), daemon_commands_exports)).then((m2) => m2.status)));
   program2.command("runner:daemon:start").description(

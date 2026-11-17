@@ -1,4 +1,7 @@
-import { isAllowedRequest, OllamaModels } from './ollama';
+import { createAdapter } from './adapters/registry';
+import { ModelRouter } from './adapters/router';
+import { AdapterSpec, ModelAdapter } from './adapters/types';
+import { isAllowedRequest } from './ollama';
 import {
   describeError,
   FrameSender,
@@ -14,7 +17,12 @@ export { FrameSender, RunnerAuthError, RunnerLogger, SocketLike };
 export interface RunnerConnectionOptions {
   wsUrl: string;
   token: string;
-  ollamaUrl: string;
+  /** Model servers to serve from; the first is the primary (see ModelRouter). */
+  backends?: AdapterSpec[];
+  /** Ready-made adapters (tests, embedding); wins over `backends`. */
+  adapters?: ModelAdapter[];
+  /** Shorthand for a single Ollama backend (the pre-adapter option). */
+  ollamaUrl?: string;
   version: string;
   logger: RunnerLogger;
   createSocket?: (url: string, protocol: string) => SocketLike;
@@ -32,19 +40,32 @@ const HEARTBEAT_MUTATION = `mutation runnerHeartbeat($models: [LocalRunnerModelI
 
 /**
  * Keeps this machine connected to Lambforge as a local runner and serves the
- * chat's model requests from the local Ollama. The connection is outbound
- * only, so it works from behind NAT without exposing Ollama.
+ * chat's model requests from the local model servers (Ollama, Strata or any
+ * other registered adapter - see `adapters/`). The connection is outbound
+ * only, so it works from behind NAT without exposing any of them.
  */
 export class RunnerConnection extends TunnelConnection<LocalRunner> {
-  private ollamaReachable?: boolean;
   private announcedModels = '';
-  private readonly ollama: OllamaModels;
-  private readonly fetchFn: typeof fetch;
+  readonly router: ModelRouter;
 
   constructor(private options: RunnerConnectionOptions) {
     super(options);
-    this.fetchFn = options.fetchFn ?? fetch;
-    this.ollama = new OllamaModels(options.ollamaUrl, this.fetchFn);
+    const fetchFn = options.fetchFn ?? fetch;
+    const specs: AdapterSpec[] = options.backends?.length
+      ? options.backends
+      : [
+          {
+            name: 'ollama',
+            kind: 'ollama',
+            url: options.ollamaUrl ?? 'http://127.0.0.1:11434',
+          },
+        ];
+    this.router = new ModelRouter(
+      options.adapters?.length
+        ? options.adapters
+        : specs.map((spec) => createAdapter(spec, { fetchFn })),
+      options.logger,
+    );
   }
 
   protected connectionParams() {
@@ -64,29 +85,15 @@ export class RunnerConnection extends TunnelConnection<LocalRunner> {
   }
 
   protected async heartbeat(announce: boolean) {
-    let models: unknown[] = [];
-    try {
-      models = await this.ollama.list();
-      if (this.ollamaReachable === false || announce) {
-        this.options.logger.info(
-          `Ollama at ${this.options.ollamaUrl}: ${models.length} model(s)`,
-        );
-      }
-      this.ollamaReachable = true;
-    } catch (e) {
-      if (this.ollamaReachable !== false) {
-        this.options.logger.warn(
-          `Cannot reach Ollama at ${this.options.ollamaUrl} (${describeError(e)}). Is it running? Retrying...`,
-        );
-      }
-      this.ollamaReachable = false;
-    }
-    const names = JSON.stringify(
-      models.map((m) => (m as { name: string }).name),
-    );
-    if (!announce && names !== this.announcedModels && this.ollamaReachable) {
+    const models = await this.router.listModels(announce);
+    const names = JSON.stringify(models.map((m) => m.name));
+    if (
+      !announce &&
+      names !== this.announcedModels &&
+      this.router.anyReachable
+    ) {
       this.options.logger.info(
-        `Models: ${models.map((m) => (m as { name: string }).name).join(', ') || '(none)'}`,
+        `Models: ${models.map((m) => m.name).join(', ') || '(none)'}`,
       );
     }
     this.announcedModels = names;
@@ -109,18 +116,16 @@ export class RunnerConnection extends TunnelConnection<LocalRunner> {
     signal: AbortSignal,
   ) {
     const started = Date.now();
-    const model = this.modelOf(request.body);
-    this.options.logger.info(`-> chat request (${model})`);
+    const { adapter, body, model } = this.router.route(request.body);
+    const via = this.router.adapters.length > 1 ? ` via ${adapter.name}` : '';
+    this.options.logger.info(`-> chat request (${model})${via}`);
 
     try {
-      const response = await this.fetchFn(
-        `${this.options.ollamaUrl}${request.path}`,
-        {
-          method: request.method,
-          headers: { 'Content-Type': 'application/json' },
-          body: request.body,
-          signal,
-        },
+      const response = await adapter.forward(
+        request.method,
+        request.path,
+        body,
+        signal,
       );
       sender.push({
         type: 'head',
@@ -156,18 +161,10 @@ export class RunnerConnection extends TunnelConnection<LocalRunner> {
         sender.push({
           type: 'error',
           error: /fetch failed|ECONNREFUSED/.test(reason)
-            ? `Could not reach Ollama at ${this.options.ollamaUrl} on the runner machine - is it running?`
+            ? `Could not reach ${this.router.label(adapter)} on the runner machine - is it running?`
             : reason,
         });
       }
-    }
-  }
-
-  private modelOf(body?: string) {
-    try {
-      return JSON.parse(body ?? '{}').model ?? 'unknown model';
-    } catch {
-      return 'unknown model';
     }
   }
 }

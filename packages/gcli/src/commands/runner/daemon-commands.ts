@@ -2,6 +2,11 @@ import { spawn } from 'child_process';
 
 import { Logger } from '~/services/log';
 
+import {
+  BackendOptions,
+  describeBackends,
+  resolveBackends,
+} from './adapters/spec';
 import { forgetRunner, readSavedRunner, saveRunner } from './config';
 import {
   assertSystemdAvailable,
@@ -15,10 +20,9 @@ import {
 import { resolveOllamaUrl } from './ollama';
 import { resolveRunner } from './start';
 
-interface InstallOptions {
+interface InstallOptions extends BackendOptions {
   name?: string;
   token?: string;
-  ollama?: string;
   wsUrl?: string;
   reset?: boolean;
   service?: string;
@@ -39,13 +43,14 @@ export const install = async (cmd: InstallOptions) => {
   if (warning) {
     Logger.warn(warning);
   }
-  // Resolved here: the service won't see this shell's OLLAMA_HOST.
-  const ollamaUrl = resolveOllamaUrl(cmd.ollama);
+  // Several backends: saved (with their keys) in the 0600 runner.json, which
+  // `runner:start` reads - never in the unit. One Ollama: --ollama as before,
+  // resolved here because the service won't see this shell's OLLAMA_HOST.
+  const backends = cmd.backend?.length ? resolveBackends(cmd) : undefined;
   const execStart = [
     ...command,
     'runner:start',
-    '--ollama',
-    ollamaUrl,
+    ...(backends ? [] : ['--ollama', resolveOllamaUrl(cmd.ollama)]),
     ...(cmd.wsUrl ? ['--wsUrl', cmd.wsUrl] : []),
   ];
   const unit = buildUnit({ serviceName, execStart });
@@ -71,6 +76,16 @@ export const install = async (cmd: InstallOptions) => {
     await resolveRunner({ name: cmd.name, reset: cmd.reset });
   }
   const runner = await readSavedRunner();
+  if (runner) {
+    // Re-installing without --backend goes back to one Ollama: drop stale ones.
+    delete runner.backends;
+    await saveRunner(backends ? { ...runner, backends } : runner);
+  }
+  if (backends) {
+    Logger.info(
+      `Backends saved to the runner config: ${describeBackends(backends)}`,
+    );
+  }
 
   const systemd = new SystemdUserService(serviceName);
   const path = await systemd.install(unit);
