@@ -1312,6 +1312,30 @@ export class GraphqlClienAPI {
     }).pipe(map((res) => res.listRabbitMqInstances));
   }
 
+  public static declareQueue(
+    id: string,
+    projectId: string,
+    payload: { name: string; durable?: boolean; auto_delete?: boolean },
+  ) {
+    return this.query<IMutation>({
+      query: gql`
+        mutation declareQueue(
+          $id: String!
+          $projectId: String!
+          $payload: RabbitMqInputQueue!
+        ) {
+          declareQueue(id: $id, projectId: $projectId, payload: $payload) {
+            id
+            name
+            durable
+            auto_delete
+          }
+        }
+      `,
+      variables: { id, projectId, payload },
+    }).pipe(map((res) => res.declareQueue));
+  }
+
   public static uninstallRabbitMq(id: string, projectId: string) {
     return this.query<IMutation>({
       query: gql`

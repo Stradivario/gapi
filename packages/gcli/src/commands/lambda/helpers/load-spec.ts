@@ -87,6 +87,34 @@ interface PluginConfig {
   config?: Record<string, unknown>;
 }
 
+/** Queues declared on one of the project's RabbitMQ brokers - see
+    `queue:declare`. `broker` is the broker's name or id; it may be left out
+    when the project has exactly one broker. */
+export interface QueuesConfig {
+  broker?: string;
+  declare: string[];
+}
+
+/** One message-queue trigger - see `mq-trigger:apply`. Runs `lambda`
+    (default: this file's `function.name`) for every message on
+    `requestTopic`; the lambda's response goes to `responseTopic`, a call
+    that keeps failing to `errorTopic`. */
+export interface MqTriggerConfig {
+  name: string;
+  lambda?: string;
+  requestTopic: string;
+  responseTopic?: string;
+  errorTopic?: string;
+  /** broker name or id; optional with one broker */
+  broker?: string;
+  maxRetries?: number;
+  coolDownPeriod?: number;
+  pollingInterval?: number;
+  minReplicas?: number;
+  maxReplicas?: number;
+  threshold?: number;
+}
+
 interface LambForgeConfig extends ConfigJSON {
   function: ConfigJSON;
   /* clusterName is gcli-only convenience (resolved to the real clusterId
@@ -95,7 +123,9 @@ interface LambForgeConfig extends ConfigJSON {
   environment: IFissionEnvironmentInputType & { clusterName?: string };
   triggers: {
     time: ICreateTimeTriggerInput;
+    mq?: MqTriggerConfig[];
   };
+  queues: QueuesConfig;
   options: BundlerOptions;
   cluster: ClusterConfig;
   rabbitmq: RabbitMqConfig;
