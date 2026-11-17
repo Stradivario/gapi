@@ -3928,6 +3928,14 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
     
   */
     requestsPerPod?: number | null;
+    /**
+    description: "machines" = replicas on different machines (plan 33); "none" (default)
+  */
+    spread?: 'none' | 'machines' | null;
+    /**
+    description: With spread "machines": true = a replica waits rather than share a machine
+  */
+    spreadStrict?: boolean | null;
 }
 
   
