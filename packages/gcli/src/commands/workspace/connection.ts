@@ -1,4 +1,6 @@
 import { hostname } from 'os';
+import { EMPTY, from } from 'rxjs';
+import { bufferTime, catchError, concatMap, filter } from 'rxjs/operators';
 
 import {
   describeError,
@@ -18,6 +20,7 @@ import {
 import { WorkspaceError, WorkspaceFiles } from './files';
 import { CommandPolicy } from './policy';
 import { buildEnv, EnvOptions, ProcessManager, runCommand } from './processes';
+import { TerminalEvent, TerminalManager } from './terminals';
 
 export const WORKSPACE_PATH_PREFIX = '/workspace/';
 
@@ -36,6 +39,10 @@ export const WORKSPACE_OPS = [
   'process/list',
   'process/logs',
   'process/stop',
+  // browser terminals (--allow-terminal, plan 36)
+  'terminal/open',
+  'terminal/input',
+  'terminal/close',
 ];
 
 export interface LocalWorkspaceIdentity {
@@ -51,6 +58,8 @@ export interface WorkspaceConnectionOptions extends EnvOptions {
   logger: RunnerLogger;
   policy: CommandPolicy;
   allowSecrets?: boolean;
+  /** `--allow-terminal`: the owner may open a shell here from the browser. */
+  allowTerminal?: boolean;
   /** null = no terminal (approvals only on the web card). */
   prompt: ApprovalPrompt | null;
   createSocket?: (url: string, protocol: string) => SocketLike;
@@ -67,6 +76,9 @@ const HEARTBEAT_MUTATION = `mutation localWorkspaceHeartbeat($info: LocalWorkspa
 }`;
 const REQUEST_APPROVAL_MUTATION = `mutation requestLocalWorkspaceApproval($command: String!, $cwd: String, $chatId: String) {
   requestLocalWorkspaceApproval(command: $command, cwd: $cwd, chatId: $chatId) { id }
+}`;
+const PUSH_TERMINAL_MUTATION = `mutation pushLocalWorkspaceTerminalEvents($events: [LocalWorkspaceTerminalEventInput]!) {
+  pushLocalWorkspaceTerminalEvents(events: $events) { status }
 }`;
 const SETTLE_APPROVAL_MUTATION = `mutation settleLocalWorkspaceApproval($approvalId: String!, $decision: String!) {
   settleLocalWorkspaceApproval(approvalId: $approvalId, decision: $decision) { status }
@@ -89,9 +101,23 @@ export class WorkspaceConnection extends TunnelConnection<LocalWorkspaceIdentity
   readonly files: WorkspaceFiles;
   readonly processes: ProcessManager;
   readonly approvals: ApprovalGate;
+  readonly terminals: TerminalManager;
 
   constructor(private options: WorkspaceConnectionOptions) {
     super(options);
+    this.terminals = new TerminalManager(options.root, () => buildEnv(options));
+    // terminal output / exits / changed files -> the browser, batched
+    this.terminals.events$
+      .pipe(
+        bufferTime(40),
+        filter((events) => events.length > 0),
+        concatMap((events: TerminalEvent[]) =>
+          from(this.operation(PUSH_TERMINAL_MUTATION, { events })).pipe(
+            catchError(() => EMPTY),
+          ),
+        ),
+      )
+      .subscribe();
     this.files = new WorkspaceFiles(options.root, {
       allowSecrets: options.allowSecrets,
     });
@@ -302,6 +328,22 @@ export class WorkspaceConnection extends TunnelConnection<LocalWorkspaceIdentity
           tail: num(args.tail),
           sinceLine: num(args.sinceLine),
         });
+      case 'terminal/open':
+        this.requireTerminal();
+        log('▣  terminal opened from the browser');
+        return this.terminals.open({
+          cols: num(args.cols),
+          rows: num(args.rows),
+        });
+      case 'terminal/input':
+        this.requireTerminal();
+        return this.terminals.input(
+          str(args.sessionId) ?? '',
+          str(args.data) ?? '',
+        );
+      case 'terminal/close':
+        log('▣  terminal closed');
+        return this.terminals.close(str(args.sessionId) ?? '');
       case 'process/stop': {
         const result = await this.processes.stop({
           processId: str(args.processId),
@@ -311,6 +353,15 @@ export class WorkspaceConnection extends TunnelConnection<LocalWorkspaceIdentity
       }
       default:
         throw new WorkspaceError(`unknown operation ${op}`, 404);
+    }
+  }
+
+  private requireTerminal() {
+    if (!this.options.allowTerminal) {
+      throw new WorkspaceError(
+        'Browser terminals are off for this workspace - restart it with `gcli workspace:start --allow-terminal`.',
+        403,
+      );
     }
   }
 
@@ -385,6 +436,7 @@ export class WorkspaceConnection extends TunnelConnection<LocalWorkspaceIdentity
 
   stop() {
     this.processes.stopAll();
+    this.terminals.closeAll();
     super.stop();
   }
 }

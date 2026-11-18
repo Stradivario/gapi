@@ -42,6 +42,10 @@ export function registerWorkspaceCommands(program: Command) {
     )
     .option('--inherit-env', 'Pass your whole shell environment to commands')
     .option(
+      '--allow-terminal',
+      'Let you open a terminal on this machine from the Lambforge editor',
+    )
+    .option(
       '--allow-secrets',
       'Let the chat read/write .env files, keys and other secrets files',
     )

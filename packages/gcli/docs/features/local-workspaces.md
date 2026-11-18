@@ -19,6 +19,18 @@ the outbound WebSocket tunnel local AI runners use.
 | `src/commands/workspace/processes.ts` | `runCommand` (timeout, process-group kill, output tails), `ProcessManager` (background processes, ring buffer, waitFor), `buildEnv` |
 | `src/commands/workspace/{start,list,delete,config,index}.ts` | the commands; `~/.graphql-server/workspaces.json` (0600, keyed by directory) |
 
+## Browser terminal (`--allow-terminal`, plan 36)
+
+`src/commands/workspace/terminals.ts` (`TerminalManager`): `terminal/open`
+spawns `$SHELL -i` in the root - in a PTY through `script` (Linux
+`script -qfec`, macOS `script -q /dev/null`), plain pipes without it - plus
+a recursive `fs.watch`. Output, exits and changed paths go out on
+`events$`; `WorkspaceConnection` batches them (40 ms) into
+`pushLocalWorkspaceTerminalEvents`. `terminal/input` writes stdin,
+`terminal/close` kills the process group. Without `--allow-terminal` every
+`terminal/*` op answers 403. Canonical: graphql-server
+`docs/features/local-workspaces.md` "Browser terminal".
+
 ## Protocol (what the backend sends)
 
 `POST /workspace/<op>` with a JSON body, answered `head(status) + chunks + end`

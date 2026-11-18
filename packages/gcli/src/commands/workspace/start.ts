@@ -32,6 +32,7 @@ export interface WorkspaceStartOptions {
   yolo?: boolean;
   defaultAllow?: boolean;
   allowSecrets?: boolean;
+  allowTerminal?: boolean;
   env?: string;
   inheritEnv?: boolean;
   terminalApproval?: boolean;
@@ -131,6 +132,11 @@ export default async (cmd: WorkspaceStartOptions) => {
       '--allow-secrets: .env files and keys are readable by the chat.',
     );
   }
+  if (cmd.allowTerminal) {
+    Logger.warn(
+      '--allow-terminal: you can open a shell in this directory from the Lambforge editor.',
+    );
+  }
   Logger.info(
     'Press Ctrl+C to disconnect (stops every process the chat started).',
   );
@@ -144,6 +150,7 @@ export default async (cmd: WorkspaceStartOptions) => {
     logger: Logger,
     policy,
     allowSecrets: cmd.allowSecrets,
+    allowTerminal: cmd.allowTerminal,
     inheritEnv: cmd.inheritEnv,
     passEnv: csv(cmd.env),
     prompt: terminal,
@@ -156,7 +163,10 @@ export default async (cmd: WorkspaceStartOptions) => {
   process.once('SIGINT', shutdown);
   process.once('SIGTERM', shutdown);
   // Last resort: never leave a dev server the chat started running.
-  process.once('exit', () => connection.processes.stopAll());
+  process.once('exit', () => {
+    connection.processes.stopAll();
+    connection.terminals.closeAll();
+  });
 
   try {
     await connection.run();
