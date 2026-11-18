@@ -30,7 +30,10 @@ export interface RunnerRequest {
   requestId: string;
   // 'approval': a local workspace's command approval was answered in the
   // web UI (requestId = approval id, body = { decision }).
-  type: 'request' | 'cancel' | 'approval';
+  // 'input' / 'resize': a browser terminal's keystrokes / new size, one-way
+  // (body = { sessionId, data } / { sessionId, cols, rows }) - no reply, so
+  // typing never waits for a round trip to this machine (plan 36).
+  type: 'request' | 'cancel' | 'approval' | 'input' | 'resize';
   method?: string;
   path?: string;
   body?: string;

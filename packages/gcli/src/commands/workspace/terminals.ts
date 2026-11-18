@@ -1,6 +1,6 @@
 import { ChildProcess, spawn, spawnSync } from 'child_process';
 import { randomUUID } from 'crypto';
-import { FSWatcher, watch } from 'fs';
+import { FSWatcher, readdirSync, readFileSync, readlinkSync, watch } from 'fs';
 import { sep } from 'path';
 import { from, Subject, Subscription } from 'rxjs';
 import { bufferTime, concatMap, filter, mergeMap } from 'rxjs/operators';
@@ -101,6 +101,35 @@ export class TerminalManager {
     return { written: data.length };
   }
 
+  /**
+   * The browser terminal changed size: the shell's PTY gets it (`stty -F
+   * <pts>`), and the kernel sends its process group SIGWINCH - programs
+   * redraw. Only with a PTY (`script`); on plain pipes there is nothing to
+   * resize. Never throws: a resize is cosmetic.
+   */
+  resize(sessionId: string, size: { cols?: number; rows?: number }) {
+    const child = this.sessions.get(sessionId);
+    if (!child?.pid) {
+      return { resized: false };
+    }
+    const tty = shellTty(child.pid);
+    if (!tty) {
+      return { resized: false };
+    }
+    const cols = dimension(size.cols, 0);
+    const rows = dimension(size.rows, 0);
+    if (!cols || !rows) {
+      return { resized: false };
+    }
+    const flag = process.platform === 'darwin' ? '-f' : '-F';
+    const result = spawnSync(
+      'stty',
+      [flag, tty, 'cols', String(cols), 'rows', String(rows)],
+      { stdio: 'ignore' },
+    );
+    return { resized: result.status === 0 };
+  }
+
   close(sessionId: string) {
     const child = this.sessions.get(sessionId);
     if (child) {
@@ -172,6 +201,49 @@ export class TerminalManager {
       return null; // no watching: the terminal still works
     }
   }
+}
+
+/**
+ * The PTY of the shell `script` started for a session (its child process):
+ * linux reads /proc (busybox has no `ps -o tty`), macOS asks `ps`. null =
+ * no PTY found (pipes, or not supported here).
+ */
+export function shellTty(scriptPid: number): string | null {
+  try {
+    if (process.platform === 'linux') {
+      const child = readdirSync('/proc')
+        .filter((name) => /^\d+$/.test(name))
+        .find((pid) => {
+          try {
+            // stat: "pid (comm) state ppid ..." - comm may hold spaces
+            const stat = readFileSync(`/proc/${pid}/stat`, 'utf8');
+            return (
+              Number(stat.slice(stat.lastIndexOf(')') + 2).split(' ')[1]) ===
+              scriptPid
+            );
+          } catch {
+            return false;
+          }
+        });
+      if (!child) return null;
+      const tty = readlinkSync(`/proc/${child}/fd/0`);
+      return tty.startsWith('/dev/pts/') ? tty : null;
+    }
+    if (process.platform === 'darwin') {
+      const children = spawnSync('pgrep', ['-P', String(scriptPid)], {
+        encoding: 'utf8',
+      }).stdout.trim();
+      const pid = children.split('\n')[0];
+      if (!pid) return null;
+      const tty = spawnSync('ps', ['-o', 'tty=', '-p', pid], {
+        encoding: 'utf8',
+      }).stdout.trim();
+      return tty && tty !== '??' ? `/dev/${tty}` : null;
+    }
+  } catch {
+    // not found / not permitted
+  }
+  return null;
 }
 
 /** A terminal dimension from the browser as a safe integer (it goes into

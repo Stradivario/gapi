@@ -212,6 +212,10 @@ export class WorkspaceConnection extends TunnelConnection<LocalWorkspaceIdentity
   }
 
   protected onNotice(request: RunnerRequest) {
+    if (request.type === 'input' || request.type === 'resize') {
+      this.onTerminalNotice(request);
+      return;
+    }
     if (request.type !== 'approval') return;
     try {
       const { decision } = JSON.parse(request.body ?? '{}') as {
@@ -226,6 +230,28 @@ export class WorkspaceConnection extends TunnelConnection<LocalWorkspaceIdentity
       }
     } catch {
       // malformed notice: ignore
+    }
+  }
+
+  /** One-way terminal frames: keystrokes and size. Only for a session the
+      browser opened (which needs --allow-terminal); anything else is
+      ignored - there is no one to answer. */
+  private onTerminalNotice(request: RunnerRequest) {
+    try {
+      const body = JSON.parse(request.body ?? '{}') as {
+        sessionId?: string;
+        data?: string;
+        cols?: number;
+        rows?: number;
+      };
+      if (!body.sessionId) return;
+      if (request.type === 'input' && typeof body.data === 'string') {
+        this.terminals.input(body.sessionId, body.data);
+      } else if (request.type === 'resize') {
+        this.terminals.resize(body.sessionId, body);
+      }
+    } catch {
+      // closed session or malformed frame: nothing to do
     }
   }
 

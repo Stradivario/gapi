@@ -74,6 +74,26 @@ describe('[workspace] terminals', () => {
     expect(() => terminals.input(sessionId, 'ls\n')).toThrow(/closed/);
   });
 
+  it('opens at the browser size and follows a resize (PTY via script)', async () => {
+    const { sessionId, pty } = terminals.open({ cols: 100, rows: 30 });
+    if (!pty) return; // no `script` on this machine: nothing to resize
+    const first = outputOf(sessionId, '30 100');
+    terminals.input(sessionId, 'stty size\n');
+    await expect(first).resolves.toContain('30 100');
+    expect(terminals.resize(sessionId, { cols: 150, rows: 40 })).toEqual({
+      resized: true,
+    });
+    const after = outputOf(sessionId, '40 150');
+    terminals.input(sessionId, 'stty size\n');
+    await expect(after).resolves.toContain('40 150');
+  });
+
+  it('a resize of a closed or unknown session is a no-op', () => {
+    expect(terminals.resize('nope', { cols: 100, rows: 30 })).toEqual({
+      resized: false,
+    });
+  });
+
   it('caps the open sessions', () => {
     for (let i = 0; i < 4; i++) terminals.open({});
     expect(() => terminals.open({})).toThrow(/At most 4/);
