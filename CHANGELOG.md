@@ -1,4 +1,4 @@
-## [1.8.274](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.274) (2026-11-18)
+## [1.8.275](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.275) (2026-11-18)
 
 
 ### Bug Fixes
@@ -42,6 +42,7 @@
 * **federation:** readme ([da4d035](https://github.com/Stradivario/gapi/commit/da4d0356720829e40ccd4061ae4fe587061e7203))
 * **federation:** rebuilded module and re-deployed ([e4fe17e](https://github.com/Stradivario/gapi/commit/e4fe17ec857dd3fd876a51cf4fdc0751dd090670))
 * **gcli:** --version prints the package version (was 0.0.1) ([1335a1d](https://github.com/Stradivario/gapi/commit/1335a1d4e80e4a78920b07ed3e757140ed9dbbd5))
+* **gcli:** a new editor watch at the cap drops the oldest (stale watches of reloaded tabs blocked live changes) ([f2ebcf6](https://github.com/Stradivario/gapi/commit/f2ebcf631dd4a44f2e675aca3b27286a6fe61a24))
 * **gcli:** added additional options ([dd4958a](https://github.com/Stradivario/gapi/commit/dd4958aa12305ea9cf7c35a43863eacc705c0b5e))
 * **gcli:** added config extraction from the current api url ([1afdf6f](https://github.com/Stradivario/gapi/commit/1afdf6fc5cfadecab5fcc19a417d3939cb60c9dd))
 * **gcli:** added missing envSecrets in lambda fragment ([c14b9e5](https://github.com/Stradivario/gapi/commit/c14b9e5aaaca1c09e85e1acd228ede8d79b66646))

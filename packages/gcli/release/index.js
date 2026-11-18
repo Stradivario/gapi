@@ -324774,10 +324774,8 @@ ${e2.message}\r
        */
       watch() {
         if (this.watches.size >= MAX_SESSIONS) {
-          throw new WorkspaceError(
-            `At most ${MAX_SESSIONS} editors watching at a time.`,
-            429
-          );
+          const oldest = this.watches.keys().next().value;
+          this.unwatch(oldest);
         }
         const sessionId = (0, import_crypto3.randomUUID)();
         const changed$ = new import_rxjs70.Subject();
@@ -326256,7 +326254,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.273" : "development";
+var version2 = true ? "1.8.274" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
