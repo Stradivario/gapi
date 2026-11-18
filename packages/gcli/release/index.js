@@ -15,11 +15,11 @@ var __export = (target, all) => {
   for (var name2 in all)
     __defProp(target, name2, { get: all[name2], enumerable: true });
 };
-var __copyProps = (to, from16, except, desc) => {
-  if (from16 && typeof from16 === "object" || typeof from16 === "function") {
-    for (let key of __getOwnPropNames(from16))
+var __copyProps = (to, from17, except, desc) => {
+  if (from17 && typeof from17 === "object" || typeof from17 === "function") {
+    for (let key of __getOwnPropNames(from17))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from16[key], enumerable: !(desc = __getOwnPropDesc(from16, key)) || desc.enumerable });
+        __defProp(to, key, { get: () => from17[key], enumerable: !(desc = __getOwnPropDesc(from17, key)) || desc.enumerable });
   }
   return to;
 };
@@ -8917,9 +8917,9 @@ var require_Subscription = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9100,9 +9100,9 @@ var require_timeoutProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9860,9 +9860,9 @@ var require_animationFrameProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10007,9 +10007,9 @@ var require_Subject = __commonJS({
     var ObjectUnsubscribedError_1 = require_ObjectUnsubscribedError();
     var arrRemove_1 = require_arrRemove();
     var errorContext_1 = require_errorContext();
-    var Subject = (function(_super) {
-      __extends2(Subject2, _super);
-      function Subject2() {
+    var Subject2 = (function(_super) {
+      __extends2(Subject3, _super);
+      function Subject3() {
         var _this = _super.call(this) || this;
         _this.closed = false;
         _this.currentObservers = null;
@@ -10019,17 +10019,17 @@ var require_Subject = __commonJS({
         _this.thrownError = null;
         return _this;
       }
-      Subject2.prototype.lift = function(operator) {
+      Subject3.prototype.lift = function(operator) {
         var subject = new AnonymousSubject(this, this);
         subject.operator = operator;
         return subject;
       };
-      Subject2.prototype._throwIfClosed = function() {
+      Subject3.prototype._throwIfClosed = function() {
         if (this.closed) {
           throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
         }
       };
-      Subject2.prototype.next = function(value) {
+      Subject3.prototype.next = function(value) {
         var _this = this;
         errorContext_1.errorContext(function() {
           var e_1, _a2;
@@ -10055,7 +10055,7 @@ var require_Subject = __commonJS({
           }
         });
       };
-      Subject2.prototype.error = function(err) {
+      Subject3.prototype.error = function(err) {
         var _this = this;
         errorContext_1.errorContext(function() {
           _this._throwIfClosed();
@@ -10069,7 +10069,7 @@ var require_Subject = __commonJS({
           }
         });
       };
-      Subject2.prototype.complete = function() {
+      Subject3.prototype.complete = function() {
         var _this = this;
         errorContext_1.errorContext(function() {
           _this._throwIfClosed();
@@ -10082,11 +10082,11 @@ var require_Subject = __commonJS({
           }
         });
       };
-      Subject2.prototype.unsubscribe = function() {
+      Subject3.prototype.unsubscribe = function() {
         this.isStopped = this.closed = true;
         this.observers = this.currentObservers = null;
       };
-      Object.defineProperty(Subject2.prototype, "observed", {
+      Object.defineProperty(Subject3.prototype, "observed", {
         get: function() {
           var _a2;
           return ((_a2 = this.observers) === null || _a2 === void 0 ? void 0 : _a2.length) > 0;
@@ -10094,16 +10094,16 @@ var require_Subject = __commonJS({
         enumerable: false,
         configurable: true
       });
-      Subject2.prototype._trySubscribe = function(subscriber) {
+      Subject3.prototype._trySubscribe = function(subscriber) {
         this._throwIfClosed();
         return _super.prototype._trySubscribe.call(this, subscriber);
       };
-      Subject2.prototype._subscribe = function(subscriber) {
+      Subject3.prototype._subscribe = function(subscriber) {
         this._throwIfClosed();
         this._checkFinalizedStatuses(subscriber);
         return this._innerSubscribe(subscriber);
       };
-      Subject2.prototype._innerSubscribe = function(subscriber) {
+      Subject3.prototype._innerSubscribe = function(subscriber) {
         var _this = this;
         var _a2 = this, hasError = _a2.hasError, isStopped = _a2.isStopped, observers = _a2.observers;
         if (hasError || isStopped) {
@@ -10116,7 +10116,7 @@ var require_Subject = __commonJS({
           arrRemove_1.arrRemove(observers, subscriber);
         });
       };
-      Subject2.prototype._checkFinalizedStatuses = function(subscriber) {
+      Subject3.prototype._checkFinalizedStatuses = function(subscriber) {
         var _a2 = this, hasError = _a2.hasError, thrownError = _a2.thrownError, isStopped = _a2.isStopped;
         if (hasError) {
           subscriber.error(thrownError);
@@ -10124,17 +10124,17 @@ var require_Subject = __commonJS({
           subscriber.complete();
         }
       };
-      Subject2.prototype.asObservable = function() {
+      Subject3.prototype.asObservable = function() {
         var observable = new Observable_1.Observable();
         observable.source = this;
         return observable;
       };
-      Subject2.create = function(destination, source) {
+      Subject3.create = function(destination, source) {
         return new AnonymousSubject(destination, source);
       };
-      return Subject2;
+      return Subject3;
     })(Observable_1.Observable);
-    exports2.Subject = Subject;
+    exports2.Subject = Subject2;
     var AnonymousSubject = (function(_super) {
       __extends2(AnonymousSubject2, _super);
       function AnonymousSubject2(destination, source) {
@@ -10160,7 +10160,7 @@ var require_Subject = __commonJS({
         return (_b = (_a2 = this.source) === null || _a2 === void 0 ? void 0 : _a2.subscribe(subscriber)) !== null && _b !== void 0 ? _b : Subscription_1.EMPTY_SUBSCRIPTION;
       };
       return AnonymousSubject2;
-    })(Subject);
+    })(Subject2);
     exports2.AnonymousSubject = AnonymousSubject;
   }
 });
@@ -10460,9 +10460,9 @@ var require_intervalProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10669,9 +10669,9 @@ var require_immediateProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12233,10 +12233,10 @@ var require_from = __commonJS({
     exports2.from = void 0;
     var scheduled_1 = require_scheduled();
     var innerFrom_1 = require_innerFrom();
-    function from16(input, scheduler) {
+    function from17(input, scheduler) {
       return scheduler ? scheduled_1.scheduled(input, scheduler) : innerFrom_1.innerFrom(input);
     }
-    exports2.from = from16;
+    exports2.from = from17;
   }
 });
 
@@ -12624,9 +12624,9 @@ var require_mapOneOrManyArgs = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12666,9 +12666,9 @@ var require_bindCallbackInternals = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -13644,7 +13644,7 @@ var require_filter = __commonJS({
     exports2.filter = void 0;
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function filter4(predicate, thisArg) {
+    function filter5(predicate, thisArg) {
       return lift_1.operate(function(source, subscriber) {
         var index = 0;
         source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, function(value) {
@@ -13652,7 +13652,7 @@ var require_filter = __commonJS({
         }));
       });
     }
-    exports2.filter = filter4;
+    exports2.filter = filter5;
   }
 });
 
@@ -13800,9 +13800,9 @@ var require_zip = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14090,7 +14090,7 @@ var require_bufferTime = __commonJS({
     var async_1 = require_async();
     var args_1 = require_args();
     var executeSchedule_1 = require_executeSchedule();
-    function bufferTime(bufferTimeSpan) {
+    function bufferTime2(bufferTimeSpan) {
       var _a2, _b;
       var otherArgs = [];
       for (var _i = 1; _i < arguments.length; _i++) {
@@ -14162,7 +14162,7 @@ var require_bufferTime = __commonJS({
         source.subscribe(bufferTimeSubscriber);
       });
     }
-    exports2.bufferTime = bufferTime;
+    exports2.bufferTime = bufferTime2;
   }
 });
 
@@ -14276,13 +14276,13 @@ var require_catchError = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var lift_1 = require_lift();
-    function catchError14(selector) {
+    function catchError15(selector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSub = null;
         var syncUnsub = false;
         var handledResult;
         innerSub = source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, void 0, void 0, function(err) {
-          handledResult = innerFrom_1.innerFrom(selector(err, catchError14(selector)(source)));
+          handledResult = innerFrom_1.innerFrom(selector(err, catchError15(selector)(source)));
           if (innerSub) {
             innerSub.unsubscribe();
             innerSub = null;
@@ -14298,7 +14298,7 @@ var require_catchError = __commonJS({
         }
       });
     }
-    exports2.catchError = catchError14;
+    exports2.catchError = catchError15;
   }
 });
 
@@ -14430,9 +14430,9 @@ var require_combineLatest2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14478,9 +14478,9 @@ var require_combineLatestWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14505,10 +14505,10 @@ var require_concatMap = __commonJS({
     exports2.concatMap = void 0;
     var mergeMap_1 = require_mergeMap();
     var isFunction_1 = require_isFunction();
-    function concatMap(project, resultSelector) {
+    function concatMap2(project, resultSelector) {
       return isFunction_1.isFunction(resultSelector) ? mergeMap_1.mergeMap(project, resultSelector, 1) : mergeMap_1.mergeMap(project, 1);
     }
-    exports2.concatMap = concatMap;
+    exports2.concatMap = concatMap2;
   }
 });
 
@@ -14552,9 +14552,9 @@ var require_concat2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14598,9 +14598,9 @@ var require_concatWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15091,9 +15091,9 @@ var require_endWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15638,9 +15638,9 @@ var require_merge2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15685,9 +15685,9 @@ var require_mergeWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15770,9 +15770,9 @@ var require_onErrorResumeNextWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15954,9 +15954,9 @@ var require_raceWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16352,9 +16352,9 @@ var require_share = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17354,9 +17354,9 @@ var require_withLatestFrom = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17440,9 +17440,9 @@ var require_zip2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17483,9 +17483,9 @@ var require_zipWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -18251,9 +18251,9 @@ var require_race2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from16) {
-      for (var i2 = 0, il = from16.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from16[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
+      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from17[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -21369,7 +21369,7 @@ var require_lib = __commonJS({
 var require_XMLHttpRequest = __commonJS({
   "../../node_modules/xmlhttprequest/lib/XMLHttpRequest.js"(exports2) {
     var Url = require("url");
-    var spawn5 = require("child_process").spawn;
+    var spawn6 = require("child_process").spawn;
     var fs3 = require("fs");
     exports2.XMLHttpRequest = function() {
       "use strict";
@@ -21639,7 +21639,7 @@ var require_XMLHttpRequest = __commonJS({
           var syncFile = ".node-xmlhttprequest-sync-" + process.pid;
           fs3.writeFileSync(syncFile, "", "utf8");
           var execString = "var http = require('http'), https = require('https'), fs = require('fs');var doRequest = http" + (ssl ? "s" : "") + ".request;var options = " + JSON.stringify(options) + ";var responseText = '';var req = doRequest(options, function(response) {response.setEncoding('utf8');response.on('data', function(chunk) {  responseText += chunk;});response.on('end', function() {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: null, data: {statusCode: response.statusCode, headers: response.headers, text: responseText}}), 'utf8');fs.unlinkSync('" + syncFile + "');});response.on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});}).on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});" + (data ? "req.write('" + JSON.stringify(data).slice(1, -1).replace(/'/g, "\\'") + "');" : "") + "req.end();";
-          var syncProc = spawn5(process.argv[0], ["-e", execString]);
+          var syncProc = spawn6(process.argv[0], ["-e", execString]);
           while (fs3.existsSync(syncFile)) {
           }
           var resp = JSON.parse(fs3.readFileSync(contentFile, "utf8"));
@@ -31385,7 +31385,7 @@ var require_from2 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors().codes.ERR_INVALID_ARG_TYPE;
-    function from16(Readable2, iterable, opts) {
+    function from17(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -31424,7 +31424,7 @@ var require_from2 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from16;
+    module2.exports = from17;
   }
 });
 
@@ -31468,7 +31468,7 @@ var require_stream_readable = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from16;
+    var from17;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -32150,10 +32150,10 @@ var require_stream_readable = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from16 === void 0) {
-          from16 = require_from2();
+        if (from17 === void 0) {
+          from17 = require_from2();
         }
-        return from16(Readable2, iterable, opts);
+        return from17(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -32333,8 +32333,8 @@ var require_pipeline = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from16, to) {
-      return from16.pipe(to);
+    function pipe2(from17, to) {
+      return from17.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -34112,7 +34112,7 @@ var require_from3 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors2().codes.ERR_INVALID_ARG_TYPE;
-    function from16(Readable2, iterable, opts) {
+    function from17(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -34151,7 +34151,7 @@ var require_from3 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from16;
+    module2.exports = from17;
   }
 });
 
@@ -34195,7 +34195,7 @@ var require_stream_readable2 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from16;
+    var from17;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -34877,10 +34877,10 @@ var require_stream_readable2 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from16 === void 0) {
-          from16 = require_from3();
+        if (from17 === void 0) {
+          from17 = require_from3();
         }
-        return from16(Readable2, iterable, opts);
+        return from17(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -35060,8 +35060,8 @@ var require_pipeline2 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from16, to) {
-      return from16.pipe(to);
+    function pipe2(from17, to) {
+      return from17.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -38497,14 +38497,14 @@ function __spreadArrays() {
       r2[k] = a[j];
   return r2;
 }
-function __spreadArray(to, from16, pack) {
-  if (pack || arguments.length === 2) for (var i2 = 0, l = from16.length, ar; i2 < l; i2++) {
-    if (ar || !(i2 in from16)) {
-      if (!ar) ar = Array.prototype.slice.call(from16, 0, i2);
-      ar[i2] = from16[i2];
+function __spreadArray(to, from17, pack) {
+  if (pack || arguments.length === 2) for (var i2 = 0, l = from17.length, ar; i2 < l; i2++) {
+    if (ar || !(i2 in from17)) {
+      if (!ar) ar = Array.prototype.slice.call(from17, 0, i2);
+      ar[i2] = from17[i2];
     }
   }
-  return to.concat(ar || Array.prototype.slice.call(from16));
+  return to.concat(ar || Array.prototype.slice.call(from17));
 }
 function __await(v) {
   return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -41028,11 +41028,11 @@ var require_typescript = __commonJS({
         for (var name2 in all)
           __defProp2(target, name2, { get: all[name2], enumerable: true });
       };
-      var __copyProps2 = (to, from16, except, desc) => {
-        if (from16 && typeof from16 === "object" || typeof from16 === "function") {
-          for (let key of __getOwnPropNames2(from16))
+      var __copyProps2 = (to, from17, except, desc) => {
+        if (from17 && typeof from17 === "object" || typeof from17 === "function") {
+          for (let key of __getOwnPropNames2(from17))
             if (!__hasOwnProp2.call(to, key) && key !== except)
-              __defProp2(to, key, { get: () => from16[key], enumerable: !(desc = __getOwnPropDesc2(from16, key)) || desc.enumerable });
+              __defProp2(to, key, { get: () => from17[key], enumerable: !(desc = __getOwnPropDesc2(from17, key)) || desc.enumerable });
         }
         return to;
       };
@@ -41552,7 +41552,7 @@ var require_typescript = __commonJS({
         fileExtensionIsOneOf: () => fileExtensionIsOneOf,
         fileIncludeReasonToDiagnostics: () => fileIncludeReasonToDiagnostics,
         fileShouldUseJavaScriptRequire: () => fileShouldUseJavaScriptRequire,
-        filter: () => filter4,
+        filter: () => filter5,
         filterMutate: () => filterMutate,
         filterSemanticDiagnostics: () => filterSemanticDiagnostics,
         find: () => find,
@@ -43449,7 +43449,7 @@ var require_typescript = __commonJS({
         }
         return count;
       }
-      function filter4(array2, f3) {
+      function filter5(array2, f3) {
         if (array2 !== void 0) {
           const len = array2.length;
           let i2 = 0;
@@ -43876,14 +43876,14 @@ var require_typescript = __commonJS({
       function toOffset(array2, offset) {
         return offset < 0 ? array2.length + offset : offset;
       }
-      function addRange(to, from16, start3, end) {
-        if (from16 === void 0 || from16.length === 0) return to;
-        if (to === void 0) return from16.slice(start3, end);
-        start3 = start3 === void 0 ? 0 : toOffset(from16, start3);
-        end = end === void 0 ? from16.length : toOffset(from16, end);
-        for (let i2 = start3; i2 < end && i2 < from16.length; i2++) {
-          if (from16[i2] !== void 0) {
-            to.push(from16[i2]);
+      function addRange(to, from17, start3, end) {
+        if (from17 === void 0 || from17.length === 0) return to;
+        if (to === void 0) return from17.slice(start3, end);
+        start3 = start3 === void 0 ? 0 : toOffset(from17, start3);
+        end = end === void 0 ? from17.length : toOffset(from17, end);
+        for (let i2 = start3; i2 < end && i2 < from17.length; i2++) {
+          if (from17[i2] !== void 0) {
+            to.push(from17[i2]);
           }
         }
         return to;
@@ -50392,8 +50392,8 @@ ${lanes.join("\n")}
         const canonicalDirectoryName = getCanonicalFileName(directoryName);
         return startsWith(canonicalFileName, canonicalDirectoryName + "/") || startsWith(canonicalFileName, canonicalDirectoryName + "\\");
       }
-      function getPathComponentsRelativeTo(from16, to, stringEqualityComparer, getCanonicalFileName) {
-        const fromComponents = reducePathComponents(getPathComponents(from16));
+      function getPathComponentsRelativeTo(from17, to, stringEqualityComparer, getCanonicalFileName) {
+        const fromComponents = reducePathComponents(getPathComponents(from17));
         const toComponents = reducePathComponents(getPathComponents(to));
         let start3;
         for (start3 = 0; start3 < fromComponents.length && start3 < toComponents.length; start3++) {
@@ -50429,8 +50429,8 @@ ${lanes.join("\n")}
           false
         );
       }
-      function getRelativePathFromFile(from16, to, getCanonicalFileName) {
-        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from16), to, getCanonicalFileName));
+      function getRelativePathFromFile(from17, to, getCanonicalFileName) {
+        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from17), to, getCanonicalFileName));
       }
       function getRelativePathToDirectoryOrUrl(directoryPathOrUrl, relativeOrAbsolutePath, currentDirectory, getCanonicalFileName, isAbsolutePathAnUrl) {
         const pathComponents2 = getPathComponentsRelativeTo(
@@ -56528,7 +56528,7 @@ ${lanes.join("\n")}
       }
       function getDecorators(node) {
         if (hasDecorators(node)) {
-          return filter4(node.modifiers, isDecorator);
+          return filter5(node.modifiers, isDecorator);
         }
       }
       function getModifiers(node) {
@@ -56537,7 +56537,7 @@ ${lanes.join("\n")}
           98303
           /* Modifier */
         )) {
-          return filter4(node.modifiers, isModifier);
+          return filter5(node.modifiers, isModifier);
         }
       }
       function getJSDocParameterTagsWorker(param, noCache) {
@@ -57680,7 +57680,7 @@ ${lanes.join("\n")}
         return void 0;
       }
       function getDeclarationsOfKind(symbol2, kind) {
-        return filter4(symbol2.declarations || emptyArray, (d) => d.kind === kind);
+        return filter5(symbol2.declarations || emptyArray, (d) => d.kind === kind);
       }
       function createSymbolTable(symbols) {
         const result = /* @__PURE__ */ new Map();
@@ -57981,15 +57981,15 @@ ${lanes.join("\n")}
         if (!nodeArray || isArray(child) || !isElement(child)) return false;
         return contains(nodeArray, child);
       }
-      function insertStatementsAfterPrologue(to, from16, isPrologueDirective2) {
-        if (from16 === void 0 || from16.length === 0) return to;
+      function insertStatementsAfterPrologue(to, from17, isPrologueDirective2) {
+        if (from17 === void 0 || from17.length === 0) return to;
         let statementIndex = 0;
         for (; statementIndex < to.length; ++statementIndex) {
           if (!isPrologueDirective2(to[statementIndex])) {
             break;
           }
         }
-        to.splice(statementIndex, 0, ...from16);
+        to.splice(statementIndex, 0, ...from17);
         return to;
       }
       function insertStatementAfterPrologue(to, statement, isPrologueDirective2) {
@@ -58006,11 +58006,11 @@ ${lanes.join("\n")}
       function isAnyPrologueDirective(node) {
         return isPrologueDirective(node) || !!(getEmitFlags(node) & 2097152);
       }
-      function insertStatementsAfterStandardPrologue(to, from16) {
-        return insertStatementsAfterPrologue(to, from16, isPrologueDirective);
+      function insertStatementsAfterStandardPrologue(to, from17) {
+        return insertStatementsAfterPrologue(to, from17, isPrologueDirective);
       }
-      function insertStatementsAfterCustomPrologue(to, from16) {
-        return insertStatementsAfterPrologue(to, from16, isAnyPrologueDirective);
+      function insertStatementsAfterCustomPrologue(to, from17) {
+        return insertStatementsAfterPrologue(to, from17, isAnyPrologueDirective);
       }
       function insertStatementAfterStandardPrologue(to, statement) {
         return insertStatementAfterPrologue(to, statement, isPrologueDirective);
@@ -59274,7 +59274,7 @@ ${lanes.join("\n")}
       }
       function getJSDocCommentRanges(node, text) {
         const commentRanges = node.kind === 170 || node.kind === 169 || node.kind === 219 || node.kind === 220 || node.kind === 218 || node.kind === 261 || node.kind === 282 ? concatenate(getTrailingCommentRanges(text, node.pos), getLeadingCommentRanges(text, node.pos)) : getLeadingCommentRanges(text, node.pos);
-        return filter4(
+        return filter5(
           commentRanges,
           (comment) => comment.end <= node.end && // Due to parse errors sometime empty parameter may get comments assigned to it that end up not in parameter range
           text.charCodeAt(comment.pos + 1) === 42 && text.charCodeAt(comment.pos + 2) === 42 && text.charCodeAt(comment.pos + 3) !== 47
@@ -60576,10 +60576,10 @@ ${lanes.join("\n")}
         const lastJsDoc = last(comments);
         return flatMap(comments, (jsDoc) => {
           if (jsDoc === lastJsDoc) {
-            const ownedTags = filter4(jsDoc.tags, (tag) => ownsJSDocTag(hostNode, tag));
+            const ownedTags = filter5(jsDoc.tags, (tag) => ownsJSDocTag(hostNode, tag));
             return jsDoc.tags === ownedTags ? [jsDoc] : ownedTags;
           } else {
-            return filter4(jsDoc.tags, isJSDocOverloadTag);
+            return filter5(jsDoc.tags, isJSDocOverloadTag);
           }
         });
       }
@@ -61423,7 +61423,7 @@ ${lanes.join("\n")}
         return -1;
       }
       function getSemanticJsxChildren(children) {
-        return filter4(children, (i2) => {
+        return filter5(children, (i2) => {
           switch (i2.kind) {
             case 295:
               return !!i2.expression;
@@ -61884,13 +61884,13 @@ ${lanes.join("\n")}
         if (options.outFile) {
           const moduleKind = getEmitModuleKind(options);
           const moduleEmitEnabled = options.emitDeclarationOnly || moduleKind === 2 || moduleKind === 4;
-          return filter4(
+          return filter5(
             host.getSourceFiles(),
             (sourceFile) => (moduleEmitEnabled || !isExternalModule(sourceFile)) && sourceFileMayBeEmitted(sourceFile, host, forceDtsEmit)
           );
         } else {
           const sourceFiles = targetSourceFile === void 0 ? host.getSourceFiles() : [targetSourceFile];
-          return filter4(
+          return filter5(
             sourceFiles,
             (sourceFile) => sourceFileMayBeEmitted(sourceFile, host, forceDtsEmit)
           );
@@ -62108,7 +62108,7 @@ ${lanes.join("\n")}
         let currentDetachedCommentInfo;
         if (removeComments) {
           if (node.pos === 0) {
-            leadingComments = filter4(getLeadingCommentRanges(text, node.pos), isPinnedCommentLocal);
+            leadingComments = filter5(getLeadingCommentRanges(text, node.pos), isPinnedCommentLocal);
           }
         } else {
           leadingComments = getLeadingCommentRanges(text, node.pos);
@@ -62814,7 +62814,7 @@ ${lanes.join("\n")}
         return false;
       }
       function getInitializedVariables(node) {
-        return filter4(node.declarations, isInitializedVariable);
+        return filter5(node.declarations, isInitializedVariable);
       }
       function isInitializedVariable(node) {
         return isVariableDeclaration(node) && node.initializer !== void 0;
@@ -72489,13 +72489,13 @@ ${lanes.join("\n")}
             [cooked, raw]
           );
         }
-        function createSpreadArrayHelper(to, from16, packFrom) {
+        function createSpreadArrayHelper(to, from17, packFrom) {
           context.requestEmitHelper(spreadArrayHelper);
           return factory2.createCallExpression(
             getUnscopedHelperName("__spreadArray"),
             /*typeArguments*/
             void 0,
-            [to, from16, packFrom ? immutableTrue() : immutableFalse()]
+            [to, from17, packFrom ? immutableTrue() : immutableFalse()]
           );
         }
         function createPropKeyHelper(expr) {
@@ -74406,7 +74406,7 @@ ${lanes.join("\n")}
         }
       }
       function getImportedHelpers(sourceFile) {
-        return filter4(getEmitHelpers(sourceFile), (helper) => !helper.scoped);
+        return filter5(getEmitHelpers(sourceFile), (helper) => !helper.scoped);
       }
       function getOrCreateExternalHelpersModuleNameIfNeeded(factory2, node, compilerOptions, helpers, hasExportStarsToExportValues, hasImportStarOrImportDefault) {
         const externalHelpersModuleName = getExternalHelpersModuleName(node);
@@ -86835,7 +86835,7 @@ ${lanes.join("\n")}
             elements.forEach((element) => convertPropertyValueToJson(element, elementOption));
             return void 0;
           }
-          return filter4(elements.map((element) => convertPropertyValueToJson(element, elementOption)), (v) => v !== void 0);
+          return filter5(elements.map((element) => convertPropertyValueToJson(element, elementOption)), (v) => v !== void 0);
         }
         function convertPropertyValueToJson(valueExpression, option) {
           switch (valueExpression.kind) {
@@ -86899,7 +86899,7 @@ ${lanes.join("\n")}
         var _a2, _b, _c;
         const getCanonicalFileName = createGetCanonicalFileName(host.useCaseSensitiveFileNames);
         const files = map32(
-          filter4(
+          filter5(
             configParseResult.fileNames,
             !((_b = (_a2 = configParseResult.options.configFile) == null ? void 0 : _a2.configFileSpecs) == null ? void 0 : _b.validatedIncludeSpecs) ? returnTrue : matchesSpecs(
               configFileName,
@@ -87372,7 +87372,7 @@ ${lanes.join("\n")}
             const outDir = options.outDir;
             const declarationDir = options.declarationDir;
             if (outDir || declarationDir) {
-              excludeSpecs = filter4([outDir, declarationDir], (d) => !!d);
+              excludeSpecs = filter5([outDir, declarationDir], (d) => !!d);
             }
           }
           if (filesSpecs === void 0 && includeSpecs === void 0) {
@@ -87409,7 +87409,7 @@ ${lanes.join("\n")}
               basePathForFileNames
             ) || validatedExcludeSpecsBeforeSubstitution;
           }
-          const validatedFilesSpecBeforeSubstitution = filter4(filesSpecs, isString);
+          const validatedFilesSpecBeforeSubstitution = filter5(filesSpecs, isString);
           const validatedFilesSpec = getSubstitutedStringArrayWithConfigDirTemplate(
             validatedFilesSpecBeforeSubstitution,
             basePathForFileNames
@@ -87926,7 +87926,7 @@ ${lanes.join("\n")}
         }
       }
       function convertJsonOptionOfListType(option, values, basePath, errors, propertyAssignment, valueExpression, sourceFile) {
-        return filter4(map32(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
+        return filter5(map32(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
       }
       var invalidTrailingRecursionPattern = /(?:^|\/)\*\*\/?$/;
       var wildcardDirectoryPattern = /^[^*?]*(?=\/[^/]*[*?])/;
@@ -88015,7 +88015,7 @@ ${lanes.join("\n")}
       function matchesExclude(pathToCheck, excludeSpecs, useCaseSensitiveFileNames2, currentDirectory) {
         return matchesExcludeWorker(
           pathToCheck,
-          filter4(excludeSpecs, (spec) => !invalidDotDotAfterRecursiveWildcard(spec)),
+          filter5(excludeSpecs, (spec) => !invalidDotDotAfterRecursiveWildcard(spec)),
           useCaseSensitiveFileNames2,
           currentDirectory
         );
@@ -88979,11 +88979,11 @@ ${lanes.join("\n")}
             if (i2 < rootLength) {
               return void 0;
             }
-            const sep2 = directory.lastIndexOf(directorySeparator, i2 - 1);
-            if (sep2 === -1) {
+            const sep3 = directory.lastIndexOf(directorySeparator, i2 - 1);
+            if (sep3 === -1) {
               return void 0;
             }
-            return directory.substr(0, Math.max(sep2, rootLength));
+            return directory.substr(0, Math.max(sep3, rootLength));
           }
         }
       }
@@ -90242,7 +90242,7 @@ ${lanes.join("\n")}
             moduleName
           );
         }
-        const expandingKeys = toSorted(filter4(getOwnKeys(lookupTable), (k) => hasOneAsterisk(k) || endsWith(k, "/")), comparePatternKeys);
+        const expandingKeys = toSorted(filter5(getOwnKeys(lookupTable), (k) => hasOneAsterisk(k) || endsWith(k, "/")), comparePatternKeys);
         for (const potentialTarget of expandingKeys) {
           if (state.features & 16 && matchesPatternWithTrailer(potentialTarget, moduleName)) {
             const target = lookupTable[potentialTarget];
@@ -97379,7 +97379,7 @@ ${lanes.join("\n")}
                       const propName = declaration2.name;
                       if (isIdentifier(propName) || isPrivateIdentifier(propName)) {
                         const type = getTypeOfSymbol(getSymbolOfDeclaration(declaration2));
-                        const staticBlocks = filter4(declaration2.parent.members, isClassStaticBlockDeclaration);
+                        const staticBlocks = filter5(declaration2.parent.members, isClassStaticBlockDeclaration);
                         if (isPropertyInitializedInStaticBlocks(propName, type, staticBlocks, declaration2.parent.pos, current.pos)) {
                           return true;
                         }
@@ -99602,7 +99602,7 @@ ${lanes.join("\n")}
         function getResolvedTypeWithoutAbstractConstructSignatures(type) {
           if (type.constructSignatures.length === 0) return type;
           if (type.objectTypeWithoutAbstractConstructSignatures) return type.objectTypeWithoutAbstractConstructSignatures;
-          const constructSignatures = filter4(type.constructSignatures, (signature) => !(signature.flags & 4));
+          const constructSignatures = filter5(type.constructSignatures, (signature) => !(signature.flags & 4));
           if (type.constructSignatures === constructSignatures) return type;
           const typeCopy = createAnonymousType(
             type.symbol,
@@ -99952,7 +99952,7 @@ ${lanes.join("\n")}
         }
         function hasVisibleDeclarations(symbol2, shouldComputeAliasToMakeVisible) {
           let aliasesToMakeVisible;
-          if (!every(filter4(
+          if (!every(filter5(
             symbol2.declarations,
             (d) => d.kind !== 80
             /* Identifier */
@@ -100608,7 +100608,7 @@ ${lanes.join("\n")}
             });
           }
           function simplifyClassDeclaration(classDecl, symbol2) {
-            const classDeclarations = filter4(symbol2.declarations, isClassLike);
+            const classDeclarations = filter5(symbol2.declarations, isClassLike);
             const originalClassDecl = classDeclarations && classDeclarations.length > 0 ? classDeclarations[0] : classDecl;
             const modifiers = getEffectiveModifierFlags(originalClassDecl) & ~(32 | 128);
             const isAnonymous = isClassExpression(originalClassDecl);
@@ -100626,7 +100626,7 @@ ${lanes.join("\n")}
             return factory.replaceModifiers(classDecl, modifiers);
           }
           function simplifyModifiers(newDecl, isDeclKind, symbol2) {
-            const decls = filter4(symbol2.declarations, isDeclKind);
+            const decls = filter5(symbol2.declarations, isDeclKind);
             const declWithModifiers = decls && decls.length > 0 ? decls[0] : newDecl;
             const modifiers = getEffectiveModifierFlags(declWithModifiers) & ~(32 | 128);
             return factory.replaceModifiers(newDecl, modifiers);
@@ -101459,7 +101459,7 @@ ${lanes.join("\n")}
                   return signatureNode;
                 }
               }
-              const abstractSignatures = filter4(resolved.constructSignatures, (signature) => !!(signature.flags & 4));
+              const abstractSignatures = filter5(resolved.constructSignatures, (signature) => !!(signature.flags & 4));
               if (some(abstractSignatures)) {
                 const types3 = map32(abstractSignatures, getOrCreateTypeFromSignature);
                 const typeElementCount = resolved.callSignatures.length + (resolved.constructSignatures.length - abstractSignatures.length) + resolved.indexInfos.length + // exclude `prototype` when writing a class expression as a type literal, as per
@@ -101676,7 +101676,7 @@ ${lanes.join("\n")}
                   )) == null ? void 0 : _a22.accessibility) === 0);
                 });
                 if (allComponentComputedNamesSerializable) {
-                  const newComponents = filter4(indexInfo.components, (e2) => {
+                  const newComponents = filter5(indexInfo.components, (e2) => {
                     return !hasLateBindableName(e2);
                   });
                   return map32(newComponents, (e2) => {
@@ -103534,16 +103534,16 @@ ${lanes.join("\n")}
             }
             function getNamesOfDeclaration(statement) {
               if (isVariableStatement(statement)) {
-                return filter4(map32(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
+                return filter5(map32(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
               }
-              return filter4([getNameOfDeclaration(statement)], isIdentifierAndNotUndefined);
+              return filter5([getNameOfDeclaration(statement)], isIdentifierAndNotUndefined);
             }
             function flattenExportAssignedNamespace(statements) {
               const exportAssignment = find(statements, isExportAssignment);
               const nsIndex = findIndex(statements, isModuleDeclaration);
               let ns = nsIndex !== -1 ? statements[nsIndex] : void 0;
               if (ns && exportAssignment && exportAssignment.isExportEquals && isIdentifier(exportAssignment.expression) && isIdentifier(ns.name) && idText(ns.name) === idText(exportAssignment.expression) && ns.body && isModuleBlock(ns.body)) {
-                const excessExports = filter4(statements, (s2) => !!(getEffectiveModifierFlags(s2) & 32));
+                const excessExports = filter5(statements, (s2) => !!(getEffectiveModifierFlags(s2) & 32));
                 const name2 = ns.name;
                 let body = ns.body;
                 if (length(excessExports)) {
@@ -103589,15 +103589,15 @@ ${lanes.join("\n")}
                       /* None */
                     );
                   });
-                  statements = [...filter4(statements, (s2) => s2 !== ns && s2 !== exportAssignment), ...results];
+                  statements = [...filter5(statements, (s2) => s2 !== ns && s2 !== exportAssignment), ...results];
                 }
               }
               return statements;
             }
             function mergeExportDeclarations(statements) {
-              const exports22 = filter4(statements, (d) => isExportDeclaration(d) && !d.moduleSpecifier && !!d.exportClause && isNamedExports(d.exportClause));
+              const exports22 = filter5(statements, (d) => isExportDeclaration(d) && !d.moduleSpecifier && !!d.exportClause && isNamedExports(d.exportClause));
               if (length(exports22) > 1) {
-                const nonExports = filter4(statements, (d) => !isExportDeclaration(d) || !!d.moduleSpecifier || !d.exportClause);
+                const nonExports = filter5(statements, (d) => !isExportDeclaration(d) || !!d.moduleSpecifier || !d.exportClause);
                 statements = [
                   ...nonExports,
                   factory.createExportDeclaration(
@@ -103611,14 +103611,14 @@ ${lanes.join("\n")}
                   )
                 ];
               }
-              const reexports = filter4(statements, (d) => isExportDeclaration(d) && !!d.moduleSpecifier && !!d.exportClause && isNamedExports(d.exportClause));
+              const reexports = filter5(statements, (d) => isExportDeclaration(d) && !!d.moduleSpecifier && !!d.exportClause && isNamedExports(d.exportClause));
               if (length(reexports) > 1) {
                 const groups = group(reexports, (decl) => isStringLiteral(decl.moduleSpecifier) ? ">" + decl.moduleSpecifier.text : ">");
                 if (groups.length !== reexports.length) {
                   for (const group2 of groups) {
                     if (group2.length > 1) {
                       statements = [
-                        ...filter4(statements, (s2) => !group2.includes(s2)),
+                        ...filter5(statements, (s2) => !group2.includes(s2)),
                         factory.createExportDeclaration(
                           /*modifiers*/
                           void 0,
@@ -103642,7 +103642,7 @@ ${lanes.join("\n")}
                   if (!e2.propertyName && e2.name.kind !== 11) {
                     const name2 = e2.name;
                     const indices = indicesOf(statements);
-                    const associatedIndices = filter4(indices, (i2) => nodeHasName(statements[i2], name2));
+                    const associatedIndices = filter5(indices, (i2) => nodeHasName(statements[i2], name2));
                     if (length(associatedIndices) && every(associatedIndices, (i2) => canHaveExportModifier(statements[i2]))) {
                       for (const index2 of associatedIndices) {
                         statements[index2] = addExportModifier(statements[index2]);
@@ -104115,7 +104115,7 @@ ${lanes.join("\n")}
                 }
                 exports22 = arrayFrom(membersSet);
               }
-              return filter4(exports22, (m2) => isNamespaceMember(m2) && isIdentifierText(
+              return filter5(exports22, (m2) => isNamespaceMember(m2) && isIdentifierText(
                 m2.escapedName,
                 99
                 /* ESNext */
@@ -104158,7 +104158,7 @@ ${lanes.join("\n")}
                   void 0,
                   /*isTypeOnly*/
                   false,
-                  factory.createNamedExports(mapDefined(filter4(
+                  factory.createNamedExports(mapDefined(filter5(
                     mergedMembers,
                     (n) => n.escapedName !== "export="
                     /* ExportEquals */
@@ -104204,7 +104204,7 @@ ${lanes.join("\n")}
               const internalSymbolName = getInternalSymbolName(symbol2, symbolName2);
               context.approximateLength += 9 + internalSymbolName.length;
               const members = [];
-              const memberProps = filter4(getPropertiesOfType(getTypeOfSymbol(symbol2)), (p) => !!(p.flags & 8));
+              const memberProps = filter5(getPropertiesOfType(getTypeOfSymbol(symbol2)), (p) => !!(p.flags & 8));
               let i2 = 0;
               for (const p of memberProps) {
                 i2++;
@@ -104262,7 +104262,7 @@ ${lanes.join("\n")}
                 addResult(setTextRange2(context, decl, getSignatureTextRangeLocation(sig)), modifierFlags);
               }
               if (!(symbol2.flags & (512 | 1024) && !!symbol2.exports && !!symbol2.exports.size)) {
-                const props = filter4(getPropertiesOfType(type), isNamespaceMember);
+                const props = filter5(getPropertiesOfType(type), isNamespaceMember);
                 context.approximateLength += localName.length;
                 serializeAsNamespaceDeclaration(
                   props,
@@ -104425,10 +104425,10 @@ ${lanes.join("\n")}
                 ...!length(implementsExpressions) ? [] : [factory.createHeritageClause(119, implementsExpressions)]
               ];
               const symbolProps = getNonInheritedProperties(classType, baseTypes, getPropertiesOfType(classType));
-              const publicSymbolProps = filter4(symbolProps, (s2) => !isHashPrivate(s2));
+              const publicSymbolProps = filter5(symbolProps, (s2) => !isHashPrivate(s2));
               const hasPrivateIdentifier = some(symbolProps, isHashPrivate);
               const privateProperties = hasPrivateIdentifier ? isExpanding(context) ? serializePropertySymbolsForClassOrInterface(
-                filter4(symbolProps, isHashPrivate),
+                filter5(symbolProps, isHashPrivate),
                 /*isClass*/
                 true,
                 baseTypes[0],
@@ -104457,7 +104457,7 @@ ${lanes.join("\n")}
                 false
               );
               const staticMembers = serializePropertySymbolsForClassOrInterface(
-                filter4(getPropertiesOfType(staticType), (p) => !(p.flags & 4194304) && p.escapedName !== "prototype" && !isNamespaceMember(p)),
+                filter5(getPropertiesOfType(staticType), (p) => !(p.flags & 4194304) && p.escapedName !== "prototype" && !isNamespaceMember(p)),
                 /*isClass*/
                 true,
                 staticBaseType,
@@ -104498,7 +104498,7 @@ ${lanes.join("\n")}
                     heritageClauses,
                     [...indexSignatures, ...staticMembers, ...constructors, ...publicProperties, ...privateProperties]
                   ),
-                  symbol2.declarations && filter4(symbol2.declarations, (d) => isClassDeclaration(d) || isClassExpression(d))[0]
+                  symbol2.declarations && filter5(symbol2.declarations, (d) => isClassDeclaration(d) || isClassExpression(d))[0]
                 ),
                 modifierFlags
               );
@@ -104929,7 +104929,7 @@ ${lanes.join("\n")}
               const ctxSrc = getSourceFileOfNode(context.enclosingDeclaration);
               return getObjectFlags(typeToSerialize) & (16 | 32) && !some((_a22 = typeToSerialize.symbol) == null ? void 0 : _a22.declarations, isTypeNode) && // If the type comes straight from a type node, we shouldn't try to break it up
               !length(getIndexInfosOfType(typeToSerialize)) && !isClassInstanceSide(typeToSerialize) && // While a class instance is potentially representable as a NS, prefer printing a reference to the instance type and serializing the class
-              !!(length(filter4(getPropertiesOfType(typeToSerialize), isNamespaceMember)) || length(getSignaturesOfType(
+              !!(length(filter5(getPropertiesOfType(typeToSerialize), isNamespaceMember)) || length(getSignaturesOfType(
                 typeToSerialize,
                 0
                 /* Call */
@@ -106071,7 +106071,7 @@ ${lanes.join("\n")}
                 isOptional
               );
             } else {
-              const staticBlocks = filter4(declaration.parent.members, isClassStaticBlockDeclaration);
+              const staticBlocks = filter5(declaration.parent.members, isClassStaticBlockDeclaration);
               const type = staticBlocks.length ? getFlowTypeInStaticBlocks(declaration.symbol, staticBlocks) : getEffectiveModifierFlags(declaration) & 128 ? getTypeOfPropertyInBaseClass(declaration.symbol) : void 0;
               return type && addOptionality(
                 type,
@@ -107164,7 +107164,7 @@ ${lanes.join("\n")}
         function getConstructorsForTypeArguments(type, typeArgumentNodes, location) {
           const typeArgCount = length(typeArgumentNodes);
           const isJavascript = isInJSFile(location);
-          return filter4(getSignaturesOfType(
+          return filter5(getSignaturesOfType(
             type,
             1
             /* Construct */
@@ -107920,7 +107920,7 @@ ${lanes.join("\n")}
                 /* Construct */
               ));
               const inheritedIndexInfos = instantiatedBaseType !== anyType2 ? getIndexInfosOfType(instantiatedBaseType) : [anyBaseTypeIndexInfo];
-              indexInfos = concatenate(indexInfos, filter4(inheritedIndexInfos, (info) => !findIndexInfo(indexInfos, info.keyType)));
+              indexInfos = concatenate(indexInfos, filter5(inheritedIndexInfos, (info) => !findIndexInfo(indexInfos, info.keyType)));
             }
           }
           setStructuredTypeMembers(type, members, callSignatures, constructSignatures, indexInfos);
@@ -110260,7 +110260,7 @@ ${lanes.join("\n")}
                 }
               }
             }
-            const allPropertySymbols = concatenate(computedPropertySymbols, filter4(siblingSymbols, (s2) => s2 !== indexSymbol));
+            const allPropertySymbols = concatenate(computedPropertySymbols, filter5(siblingSymbols, (s2) => s2 !== indexSymbol));
             if (hasComputedStringProperty && !findIndexInfo(indexInfos, stringType2)) indexInfos.push(getObjectLiteralIndexInfo(readonlyComputedStringProperty, 0, allPropertySymbols, stringType2));
             if (hasComputedNumberProperty && !findIndexInfo(indexInfos, numberType2)) indexInfos.push(getObjectLiteralIndexInfo(readonlyComputedNumberProperty, 0, allPropertySymbols, numberType2));
             if (hasComputedSymbolProperty && !findIndexInfo(indexInfos, esSymbolType)) indexInfos.push(getObjectLiteralIndexInfo(readonlyComputedSymbolProperty, 0, allPropertySymbols, esSymbolType));
@@ -110272,7 +110272,7 @@ ${lanes.join("\n")}
           return !!(type.flags & (4 | 8 | 4096)) || isPatternLiteralType(type) || !!(type.flags & 2097152) && !isGenericType(type) && some(type.types, isValidIndexKeyType);
         }
         function getConstraintDeclaration(type) {
-          return mapDefined(filter4(type.symbol && type.symbol.declarations, isTypeParameterDeclaration), getEffectiveConstraintOfTypeParameter)[0];
+          return mapDefined(filter5(type.symbol && type.symbol.declarations, isTypeParameterDeclaration), getEffectiveConstraintOfTypeParameter)[0];
         }
         function getInferredTypeParameterConstraint(typeParameter, omitTypeReferences) {
           var _a2;
@@ -111699,7 +111699,7 @@ ${lanes.join("\n")}
           }
         }
         function removeStringLiteralsMatchedByTemplateLiterals(types3) {
-          const templates = filter4(types3, isPatternLiteralType);
+          const templates = filter5(types3, isPatternLiteralType);
           if (templates.length) {
             let i2 = types3.length;
             while (i2 > 0) {
@@ -111984,7 +111984,7 @@ ${lanes.join("\n")}
         }
         function extractRedundantTemplateLiterals(types3) {
           let i2 = types3.length;
-          const literals = filter4(types3, (t2) => !!(t2.flags & 128));
+          const literals = filter5(types3, (t2) => !!(t2.flags & 128));
           while (i2 > 0) {
             i2--;
             const t2 = types3[i2];
@@ -113129,7 +113129,7 @@ ${lanes.join("\n")}
               /*includeThisTypes*/
               true
             );
-            const outerTypeParameters = aliasTypeArguments ? allOuterTypeParameters : filter4(allOuterTypeParameters, (tp) => isTypeParameterPossiblyReferenced(tp, node));
+            const outerTypeParameters = aliasTypeArguments ? allOuterTypeParameters : filter5(allOuterTypeParameters, (tp) => isTypeParameterPossiblyReferenced(tp, node));
             const root = {
               node,
               checkType,
@@ -113836,7 +113836,7 @@ ${lanes.join("\n")}
             }
             typeParameters = outerTypeParameters || emptyArray;
             const allDeclarations = type.objectFlags & (4 | 8388608) ? [declaration] : type.symbol.declarations;
-            typeParameters = (target.objectFlags & (4 | 8388608) || target.symbol.flags & 8192 || target.symbol.flags & 2048) && !target.aliasTypeArguments ? filter4(typeParameters, (tp) => some(allDeclarations, (d) => isTypeParameterPossiblyReferenced(tp, d))) : typeParameters;
+            typeParameters = (target.objectFlags & (4 | 8388608) || target.symbol.flags & 8192 || target.symbol.flags & 2048) && !target.aliasTypeArguments ? filter5(typeParameters, (tp) => some(allDeclarations, (d) => isTypeParameterPossiblyReferenced(tp, d))) : typeParameters;
             links.outerTypeParameters = typeParameters;
           }
           if (typeParameters.length) {
@@ -118926,7 +118926,7 @@ ${lanes.join("\n")}
           };
         }
         function cloneInferredPartOfContext(context) {
-          const inferences = filter4(context.inferences, hasInferenceCandidates);
+          const inferences = filter5(context.inferences, hasInferenceCandidates);
           return inferences.length ? createInferenceContextWorker(map32(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
         }
         function getMapperFromContext(context) {
@@ -119500,8 +119500,8 @@ ${lanes.join("\n")}
               }
             }
             return [
-              matchedSources ? filter4(sources, (t2) => !contains(matchedSources, t2)) : sources,
-              matchedTargets ? filter4(targets, (t2) => !contains(matchedTargets, t2)) : targets
+              matchedSources ? filter5(sources, (t2) => !contains(matchedSources, t2)) : sources,
+              matchedTargets ? filter5(targets, (t2) => !contains(matchedTargets, t2)) : targets
             ];
           }
           function inferFromTypeArguments(sourceTypes, targetTypes, variances) {
@@ -119927,14 +119927,14 @@ ${lanes.join("\n")}
         }
         function unionObjectAndArrayLiteralCandidates(candidates) {
           if (candidates.length > 1) {
-            const objectLiterals = filter4(candidates, isObjectOrArrayLiteralType);
+            const objectLiterals = filter5(candidates, isObjectOrArrayLiteralType);
             if (objectLiterals.length) {
               const literalsType = getUnionType(
                 objectLiterals,
                 2
                 /* Subtype */
               );
-              return concatenate(filter4(candidates, (t2) => !isObjectOrArrayLiteralType(t2)), [literalsType]);
+              return concatenate(filter5(candidates, (t2) => !isObjectOrArrayLiteralType(t2)), [literalsType]);
             }
           }
           return candidates;
@@ -120674,7 +120674,7 @@ ${lanes.join("\n")}
         function filterType(type, f3) {
           if (type.flags & 1048576) {
             const types3 = type.types;
-            const filtered = filter4(types3, f3);
+            const filtered = filter5(types3, f3);
             if (filtered === types3) {
               return type;
             }
@@ -120682,7 +120682,7 @@ ${lanes.join("\n")}
             let newOrigin;
             if (origin && origin.flags & 1048576) {
               const originTypes = origin.types;
-              const originFiltered = filter4(originTypes, (t2) => !!(t2.flags & 1048576) || f3(t2));
+              const originFiltered = filter5(originTypes, (t2) => !!(t2.flags & 1048576) || f3(t2));
               if (originTypes.length - originFiltered.length === types3.length - filtered.length) {
                 if (originFiltered.length === 1) {
                   return originFiltered[0];
@@ -124325,7 +124325,7 @@ ${lanes.join("\n")}
               contextualType,
               concatenate(
                 map32(
-                  filter4(node.properties, (p) => {
+                  filter5(node.properties, (p) => {
                     if (!p.symbol) {
                       return false;
                     }
@@ -124340,7 +124340,7 @@ ${lanes.join("\n")}
                   (prop) => [() => getContextFreeTypeOfExpression(prop.kind === 304 ? prop.initializer : prop.name), prop.symbol.escapedName]
                 ),
                 map32(
-                  filter4(getPropertiesOfType(contextualType), (s2) => {
+                  filter5(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     return !!(s2.flags & 16777216) && !!((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members) && !node.symbol.members.has(s2.escapedName) && isDiscriminantProperty(contextualType, s2.escapedName);
                   }),
@@ -124362,11 +124362,11 @@ ${lanes.join("\n")}
               contextualType,
               concatenate(
                 map32(
-                  filter4(node.properties, (p) => !!p.symbol && p.kind === 292 && isDiscriminantProperty(contextualType, p.symbol.escapedName) && (!p.initializer || isPossiblyDiscriminantValue(p.initializer))),
+                  filter5(node.properties, (p) => !!p.symbol && p.kind === 292 && isDiscriminantProperty(contextualType, p.symbol.escapedName) && (!p.initializer || isPossiblyDiscriminantValue(p.initializer))),
                   (prop) => [!prop.initializer ? () => trueType : () => getContextFreeTypeOfExpression(prop.initializer), prop.symbol.escapedName]
                 ),
                 map32(
-                  filter4(getPropertiesOfType(contextualType), (s2) => {
+                  filter5(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     if (!(s2.flags & 16777216) || !((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members)) {
                       return false;
@@ -124807,7 +124807,7 @@ ${lanes.join("\n")}
             0
             /* Call */
           );
-          const applicableByArity = filter4(signatures, (s2) => !isAritySmaller(s2, node));
+          const applicableByArity = filter5(signatures, (s2) => !isAritySmaller(s2, node));
           return applicableByArity.length === 1 ? applicableByArity[0] : getIntersectedSignatures(applicableByArity);
         }
         function isAritySmaller(signature, target) {
@@ -126623,7 +126623,7 @@ ${lanes.join("\n")}
           if (typeof name2 !== "string") {
             const parent2 = name2.parent;
             if (isPropertyAccessExpression(parent2)) {
-              props = filter4(props, (prop) => isValidPropertyAccessForCompletions(parent2, containingType, prop));
+              props = filter5(props, (prop) => isValidPropertyAccessForCompletions(parent2, containingType, prop));
             }
             name2 = idText(name2);
           }
@@ -127943,7 +127943,7 @@ ${lanes.join("\n")}
                 headMessage
               );
             } else if (!isJsxOpenFragment) {
-              const signaturesWithCorrectTypeArgumentArity = filter4(signatures, (s2) => hasCorrectTypeArgumentArity(s2, typeArguments));
+              const signaturesWithCorrectTypeArgumentArity = filter5(signatures, (s2) => hasCorrectTypeArgumentArity(s2, typeArguments));
               if (signaturesWithCorrectTypeArgumentArity.length === 0) {
                 diagnostics.add(getTypeArgumentArityError(node, signatures, typeArguments, headMessage));
               } else {
@@ -129394,7 +129394,7 @@ ${lanes.join("\n")}
             }
           }
           function getInstantiatedSignatures(signatures) {
-            const applicableSignatures = filter4(signatures, (sig) => !!sig.typeParameters && hasCorrectTypeArgumentArity(sig, typeArguments));
+            const applicableSignatures = filter5(signatures, (sig) => !!sig.typeParameters && hasCorrectTypeArgumentArity(sig, typeArguments));
             return sameMap(applicableSignatures, (sig) => {
               const typeArgumentTypes = checkTypeArguments(
                 sig,
@@ -133872,7 +133872,7 @@ ${lanes.join("\n")}
             });
           }
           if (hasNonAmbientClass && !isConstructor && symbol2.flags & 16 && declarations) {
-            const relatedDiagnostics = filter4(
+            const relatedDiagnostics = filter5(
               declarations,
               (d) => d.kind === 264
               /* ClassDeclaration */
@@ -135765,7 +135765,7 @@ ${lanes.join("\n")}
           if (use & 4) {
             if (arrayType2.flags & 1048576) {
               const arrayTypes = inputType.types;
-              const filteredTypes = filter4(arrayTypes, (t2) => !(t2.flags & 402653316));
+              const filteredTypes = filter5(arrayTypes, (t2) => !(t2.flags & 402653316));
               if (filteredTypes !== arrayTypes) {
                 arrayType2 = getUnionType(
                   filteredTypes,
@@ -136076,7 +136076,7 @@ ${lanes.join("\n")}
             0
             /* Call */
           ) : void 0;
-          const validSignatures = filter4(allSignatures, (sig) => getMinArgumentCount(sig) === 0);
+          const validSignatures = filter5(allSignatures, (sig) => getMinArgumentCount(sig) === 0);
           if (!some(validSignatures)) {
             if (errorNode && some(allSignatures)) {
               checkTypeAssignableTo(
@@ -136660,7 +136660,7 @@ ${lanes.join("\n")}
           }
         }
         function checkUnmatchedJSDocParameters(node) {
-          const jsdocParameters = filter4(getJSDocTags(node), isJSDocParameterTag);
+          const jsdocParameters = filter5(getJSDocTags(node), isJSDocParameterTag);
           if (!length(jsdocParameters)) return;
           const isJs = isInJSFile(node);
           const parameters = /* @__PURE__ */ new Set();
@@ -137219,7 +137219,7 @@ ${lanes.join("\n")}
           return getCheckFlags(s2) & 1 ? s2.links.target : s2;
         }
         function getClassOrInterfaceDeclarationsOfSymbol(symbol2) {
-          return filter4(
+          return filter5(
             symbol2.declarations,
             (d) => d.kind === 264 || d.kind === 265
             /* InterfaceDeclaration */
@@ -139610,7 +139610,7 @@ ${lanes.join("\n")}
             const keyType = getLiteralTypeFromPropertyName(node);
             const objectType2 = getTypeOfExpression(node.parent.expression);
             const objectTypes = objectType2.flags & 1048576 ? objectType2.types : [objectType2];
-            return flatMap(objectTypes, (t2) => filter4(getIndexInfosOfType(t2), (info) => isApplicableIndexType(keyType, info.keyType)));
+            return flatMap(objectTypes, (t2) => filter5(getIndexInfosOfType(t2), (info) => isApplicableIndexType(keyType, info.keyType)));
           }
           return void 0;
         }
@@ -140495,7 +140495,7 @@ ${lanes.join("\n")}
             if (reference) {
               const symbol2 = getReferencedValueSymbol(reference);
               if (symbol2) {
-                return filter4(getExportSymbolOfValueSymbolIfExported(symbol2).declarations, (declaration) => {
+                return filter5(getExportSymbolOfValueSymbolIfExported(symbol2).declarations, (declaration) => {
                   switch (declaration.kind) {
                     case 261:
                     case 170:
@@ -140690,7 +140690,7 @@ ${lanes.join("\n")}
                       )) == null ? void 0 : _a2.accessibility) === 0);
                     });
                     if (allComponentComputedNamesSerializable) {
-                      const newComponents = filter4(info.components, (e2) => {
+                      const newComponents = filter5(info.components, (e2) => {
                         return !hasLateBindableName(e2);
                       });
                       result.push(...map32(newComponents, (e2) => {
@@ -141536,7 +141536,7 @@ ${lanes.join("\n")}
           }
         }
         function getNonSimpleParameters(parameters) {
-          return filter4(parameters, (parameter) => !!parameter.initializer || isBindingPattern(parameter.name) || isRestParameter(parameter));
+          return filter5(parameters, (parameter) => !!parameter.initializer || isBindingPattern(parameter.name) || isRestParameter(parameter));
         }
         function checkGrammarForUseStrictSimpleParameterList(node) {
           if (languageVersion >= 3) {
@@ -145507,13 +145507,13 @@ ${lanes.join("\n")}
         return indices;
       }
       function getProperties(node, requireInitializer, isStatic2) {
-        return filter4(node.members, (m2) => isInitializedOrStaticProperty(m2, requireInitializer, isStatic2));
+        return filter5(node.members, (m2) => isInitializedOrStaticProperty(m2, requireInitializer, isStatic2));
       }
       function isStaticPropertyDeclarationOrClassStaticBlockDeclaration(element) {
         return isStaticPropertyDeclaration(element) || isClassStaticBlockDeclaration(element);
       }
       function getStaticPropertiesAndClassStaticBlock(node) {
-        return filter4(node.members, isStaticPropertyDeclarationOrClassStaticBlockDeclaration);
+        return filter5(node.members, isStaticPropertyDeclarationOrClassStaticBlockDeclaration);
       }
       function isInitializedOrStaticProperty(member, requireInitializer, isStatic2) {
         return isPropertyDeclaration(member) && (!!member.initializer || !requireInitializer) && hasStaticModifier(member) === isStatic2;
@@ -147025,7 +147025,7 @@ ${lanes.join("\n")}
           const members = visitNodes2(node.members, getClassElementVisitor(node), isClassElement);
           let newMembers;
           const constructor = getFirstConstructorWithBody(node);
-          const parametersWithPropertyAssignments = constructor && filter4(constructor.parameters, (p) => isParameterPropertyDeclaration(p, constructor));
+          const parametersWithPropertyAssignments = constructor && filter5(constructor.parameters, (p) => isParameterPropertyDeclaration(p, constructor));
           if (parametersWithPropertyAssignments) {
             for (const parameter of parametersWithPropertyAssignments) {
               const parameterProperty = factory2.createPropertyDeclaration(
@@ -147058,9 +147058,9 @@ ${lanes.join("\n")}
           if (some(metadata)) {
             const modifiersArray = [];
             addRange(modifiersArray, takeWhile(modifiers, isExportOrDefaultModifier));
-            addRange(modifiersArray, filter4(modifiers, isDecorator));
+            addRange(modifiersArray, filter5(modifiers, isDecorator));
             addRange(modifiersArray, metadata);
-            addRange(modifiersArray, filter4(skipWhile(modifiers, isExportOrDefaultModifier), isModifier));
+            addRange(modifiersArray, filter5(skipWhile(modifiers, isExportOrDefaultModifier), isModifier));
             modifiers = setTextRange(factory2.createNodeArray(modifiersArray), modifiers);
           }
           return modifiers;
@@ -147070,9 +147070,9 @@ ${lanes.join("\n")}
             const metadata = getTypeMetadata(node, container);
             if (some(metadata)) {
               const modifiersArray = [];
-              addRange(modifiersArray, filter4(modifiers, isDecorator));
+              addRange(modifiersArray, filter5(modifiers, isDecorator));
               addRange(modifiersArray, metadata);
-              addRange(modifiersArray, filter4(modifiers, isModifier));
+              addRange(modifiersArray, filter5(modifiers, isModifier));
               modifiers = setTextRange(factory2.createNodeArray(modifiersArray), modifiers);
             }
           }
@@ -147306,7 +147306,7 @@ ${lanes.join("\n")}
           addRange(statementsOut, visitNodes2(statementsIn, visitor, isStatement, superStatementIndex + 1));
         }
         function transformConstructorBody(body, constructor) {
-          const parametersWithPropertyAssignments = constructor && filter4(constructor.parameters, (p) => isParameterPropertyDeclaration(p, constructor));
+          const parametersWithPropertyAssignments = constructor && filter5(constructor.parameters, (p) => isParameterPropertyDeclaration(p, constructor));
           if (!some(parametersWithPropertyAssignments)) {
             return visitFunctionBody(body, visitor, context);
           }
@@ -148738,7 +148738,7 @@ ${lanes.join("\n")}
               factory2.createAssignment(
                 functionName,
                 factory2.createFunctionExpression(
-                  filter4(node.modifiers, (m2) => isModifier(m2) && !isStaticModifier(m2) && !isAccessorModifier(m2)),
+                  filter5(node.modifiers, (m2) => isModifier(m2) && !isStaticModifier(m2) && !isAccessorModifier(m2)),
                   node.asteriskToken,
                   functionName,
                   /*typeParameters*/
@@ -149386,7 +149386,7 @@ ${lanes.join("\n")}
           }
         }
         function getPrivateInstanceMethodsAndAccessors(node) {
-          return filter4(node.members, isNonStaticMethodOrAccessorWithPrivateName);
+          return filter5(node.members, isNonStaticMethodOrAccessorWithPrivateName);
         }
         function getClassFacts(node) {
           var _a2;
@@ -149800,7 +149800,7 @@ ${lanes.join("\n")}
             membersArray = append(membersArray, classNamedEvaluationHelperBlock);
             membersArray = append(membersArray, syntheticConstructor);
             membersArray = append(membersArray, syntheticStaticBlock);
-            const remainingMembers = classThisAssignmentBlock || classNamedEvaluationHelperBlock ? filter4(members, (member) => member !== classThisAssignmentBlock && member !== classNamedEvaluationHelperBlock) : members;
+            const remainingMembers = classThisAssignmentBlock || classNamedEvaluationHelperBlock ? filter5(members, (member) => member !== classThisAssignmentBlock && member !== classNamedEvaluationHelperBlock) : members;
             membersArray = addRange(membersArray, remainingMembers);
             members = setTextRange(
               factory2.createNodeArray(membersArray),
@@ -149912,7 +149912,7 @@ ${lanes.join("\n")}
           );
           let properties = instanceProperties;
           if (!useDefineForClassFields) {
-            properties = filter4(properties, (property) => !!property.initializer || isPrivateIdentifier(property.name) || hasAccessorModifier(property));
+            properties = filter5(properties, (property) => !!property.initializer || isPrivateIdentifier(property.name) || hasAccessorModifier(property));
           }
           const privateMethodsAndAccessors = getPrivateInstanceMethodsAndAccessors(node);
           const needsConstructorBody = some(properties) || some(privateMethodsAndAccessors);
@@ -149932,8 +149932,8 @@ ${lanes.join("\n")}
           const receiver = factory2.createThis();
           addInstanceMethodStatements(initializerStatements, privateMethodsAndAccessors, receiver);
           if (constructor) {
-            const parameterProperties = filter4(instanceProperties, (prop) => isParameterPropertyDeclaration(getOriginalNode(prop), constructor));
-            const nonParameterProperties = filter4(properties, (prop) => !isParameterPropertyDeclaration(getOriginalNode(prop), constructor));
+            const parameterProperties = filter5(instanceProperties, (prop) => isParameterPropertyDeclaration(getOriginalNode(prop), constructor));
+            const nonParameterProperties = filter5(properties, (prop) => !isParameterPropertyDeclaration(getOriginalNode(prop), constructor));
             addPropertyOrClassStaticBlockStatements(initializerStatements, parameterProperties, receiver);
             addPropertyOrClassStaticBlockStatements(initializerStatements, nonParameterProperties, receiver);
           } else {
@@ -151470,7 +151470,7 @@ ${lanes.join("\n")}
           ) && isStaticElement === isStatic(member);
         }
         function getDecoratedClassElements(node, isStatic2) {
-          return filter4(node.members, (m2) => isDecoratedClassElement(m2, isStatic2, node));
+          return filter5(node.members, (m2) => isDecoratedClassElement(m2, isStatic2, node));
         }
         function generateClassElementDecorationExpressions(node, isStatic2) {
           const members = getDecoratedClassElements(node, isStatic2);
@@ -157335,7 +157335,7 @@ ${lanes.join("\n")}
           const tagName = getTagName(node);
           const childrenProp = children && children.length ? convertJsxChildrenToChildrenPropAssignment(children) : void 0;
           const keyAttr = find(node.attributes.properties, (p) => !!p.name && isIdentifier(p.name) && p.name.escapedText === "key");
-          const attrs = keyAttr ? filter4(node.attributes.properties, (p) => p !== keyAttr) : node.attributes.properties;
+          const attrs = keyAttr ? filter5(node.attributes.properties, (p) => p !== keyAttr) : node.attributes.properties;
           const objectProperties = length(attrs) ? transformJsxAttributesToObjectProps(attrs, childrenProp) : factory2.createObjectLiteralExpression(childrenProp ? [childrenProp] : emptyArray);
           return visitJsxOpeningLikeElementOrFragmentJSX(
             tagName,
@@ -161254,8 +161254,8 @@ ${lanes.join("\n")}
           convertedLoopState = void 0;
           const bodyStatements = visitNodes2(body.statements, classWrapperStatementVisitor, isStatement);
           convertedLoopState = savedConvertedLoopState;
-          const classStatements = filter4(bodyStatements, isVariableStatementWithInitializer);
-          const remainingStatements = filter4(bodyStatements, (stmt) => !isVariableStatementWithInitializer(stmt));
+          const classStatements = filter5(bodyStatements, isVariableStatementWithInitializer);
+          const remainingStatements = filter5(bodyStatements, (stmt) => !isVariableStatementWithInitializer(stmt));
           const varStatement = cast(first2(classStatements), isVariableStatement);
           const variable = varStatement.declarationList.declarations[0];
           const initializer3 = skipOuterExpressions(variable.initializer);
@@ -168185,7 +168185,7 @@ ${lanes.join("\n")}
       }
       function getDeclarationDiagnostics(host, resolver, file2) {
         const compilerOptions = host.getCompilerOptions();
-        const files = filter4(getSourceFilesToEmit(host, file2), isSourceFileNotJson);
+        const files = filter5(getSourceFilesToEmit(host, file2), isSourceFileNotJson);
         return contains(files, file2) ? transformNodes(
           resolver,
           host,
@@ -168346,7 +168346,7 @@ ${lanes.join("\n")}
         function reportNonlocalAugmentation(containingFile, parentSymbol, symbol2) {
           var _a2;
           const primaryDeclaration = (_a2 = parentSymbol.declarations) == null ? void 0 : _a2.find((d) => getSourceFileOfNode(d) === containingFile);
-          const augmentingDeclarations = filter4(symbol2.declarations, (d) => getSourceFileOfNode(d) !== containingFile);
+          const augmentingDeclarations = filter5(symbol2.declarations, (d) => getSourceFileOfNode(d) !== containingFile);
           if (primaryDeclaration && augmentingDeclarations) {
             for (const augmentations of augmentingDeclarations) {
               context.addDiagnostic(addRelatedInfo(
@@ -169675,7 +169675,7 @@ ${lanes.join("\n")}
                     getSymbolAccessibilityDiagnostic = oldDiag2;
                     return newClause;
                   }
-                  return factory2.updateHeritageClause(clause, visitNodes2(factory2.createNodeArray(filter4(
+                  return factory2.updateHeritageClause(clause, visitNodes2(factory2.createNodeArray(filter5(
                     clause.types,
                     (t2) => isEntityNameExpression(t2.expression) || t2.expression.kind === 106
                     /* NullKeyword */
@@ -169832,11 +169832,11 @@ ${lanes.join("\n")}
           return maskModifierFlags(node, mask2, additions);
         }
         function transformHeritageClauses(nodes) {
-          return factory2.createNodeArray(filter4(
+          return factory2.createNodeArray(filter5(
             map32(nodes, (clause) => factory2.updateHeritageClause(
               clause,
               visitNodes2(
-                factory2.createNodeArray(filter4(clause.types, (t2) => {
+                factory2.createNodeArray(filter5(clause.types, (t2) => {
                   return isEntityNameExpression(t2.expression) || clause.token === 96 && t2.expression.kind === 106;
                 })),
                 visitDeclarationSubtree,
@@ -170571,7 +170571,7 @@ ${lanes.join("\n")}
       function getCommonSourceDirectoryOfConfig({ options, fileNames }, ignoreCase) {
         return getCommonSourceDirectory(
           options,
-          () => filter4(fileNames, (file2) => !(options.noEmitForJsFiles && fileExtensionIsOneOf(file2, supportedJSExtensionsFlat)) && !isDeclarationFileName(file2)),
+          () => filter5(fileNames, (file2) => !(options.noEmitForJsFiles && fileExtensionIsOneOf(file2, supportedJSExtensionsFlat)) && !isDeclarationFileName(file2)),
           getDirectoryPath(normalizeSlashes(Debug.checkDefined(options.configFilePath))),
           createGetCanonicalFileName(!ignoreCase)
         );
@@ -170695,7 +170695,7 @@ ${lanes.join("\n")}
             emitSkipped = true;
             return;
           }
-          (isSourceFile(sourceFileOrBundle) ? [sourceFileOrBundle] : filter4(sourceFileOrBundle.sourceFiles, isSourceFileNotJson)).forEach(
+          (isSourceFile(sourceFileOrBundle) ? [sourceFileOrBundle] : filter5(sourceFileOrBundle.sourceFiles, isSourceFileNotJson)).forEach(
             (sourceFile) => {
               if (compilerOptions.noCheck || !canIncludeBindAndCheckDiagnostics(sourceFile, compilerOptions)) markLinkedReferences(sourceFile);
             }
@@ -170747,7 +170747,7 @@ ${lanes.join("\n")}
             return;
           }
           const sourceFiles = isSourceFile(sourceFileOrBundle) ? [sourceFileOrBundle] : sourceFileOrBundle.sourceFiles;
-          const filesForEmit = forceDtsEmit ? sourceFiles : filter4(sourceFiles, isSourceFileNotJson);
+          const filesForEmit = forceDtsEmit ? sourceFiles : filter5(sourceFiles, isSourceFileNotJson);
           const inputListOrBundle = compilerOptions.outFile ? [factory.createBundle(filesForEmit)] : filesForEmit;
           filesForEmit.forEach((sourceFile) => {
             if (emitOnly && !getEmitDeclarations(compilerOptions) || compilerOptions.noCheck || emitResolverSkipsTypeChecking(emitOnly, forceDtsEmit) || !canIncludeBindAndCheckDiagnostics(sourceFile, compilerOptions)) {
@@ -177580,7 +177580,7 @@ ${lanes.join("\n")}
           if (commonSourceDirectory !== void 0) {
             return commonSourceDirectory;
           }
-          const emittedFiles = filter4(files, (file2) => sourceFileMayBeEmitted(file2, program2));
+          const emittedFiles = filter5(files, (file2) => sourceFileMayBeEmitted(file2, program2));
           commonSourceDirectory = getCommonSourceDirectory(
             options,
             () => mapDefined(emittedFiles, (file2) => file2.isDeclarationFile ? void 0 : file2.fileName),
@@ -178177,8 +178177,8 @@ ${lanes.join("\n")}
             let bindDiagnostics = sourceFile.bindDiagnostics;
             let checkDiagnostics = typeChecker2.getDiagnostics(sourceFile, cancellationToken, nodesToCheck);
             if (isPlainJs) {
-              bindDiagnostics = filter4(bindDiagnostics, (d) => plainJSErrors.has(d.code));
-              checkDiagnostics = filter4(checkDiagnostics, (d) => plainJSErrors.has(d.code));
+              bindDiagnostics = filter5(bindDiagnostics, (d) => plainJSErrors.has(d.code));
+              checkDiagnostics = filter5(checkDiagnostics, (d) => plainJSErrors.has(d.code));
             }
             return getMergedBindAndCheckDiagnostics(
               sourceFile,
@@ -180068,7 +180068,7 @@ ${lanes.join("\n")}
         return { diagnostics, sourceMaps: void 0, emittedFiles, emitSkipped: true };
       }
       function filterSemanticDiagnostics(diagnostic, option) {
-        return filter4(diagnostic, (d) => !d.skippedOn || !option[d.skippedOn]);
+        return filter5(diagnostic, (d) => !d.skippedOn || !option[d.skippedOn]);
       }
       function parseConfigHostFromCompilerHostLike(host, directoryStructureHost = host) {
         return {
@@ -183610,7 +183610,7 @@ ${lanes.join("\n")}
         );
       }
       function getFilesInErrorForSummary(diagnostics) {
-        const filesInError = filter4(
+        const filesInError = filter5(
           diagnostics,
           (diagnostic) => diagnostic.category === 1
           /* Error */
@@ -185045,7 +185045,7 @@ ${lanes.join("\n")}
           baseWatchOptions
         );
       }
-      function createSolutionBuilderState(watch2, hostOrHostWithWatch, rootNames, options, baseWatchOptions) {
+      function createSolutionBuilderState(watch3, hostOrHostWithWatch, rootNames, options, baseWatchOptions) {
         const host = hostOrHostWithWatch;
         const hostWithWatch = hostOrHostWithWatch;
         const baseCompilerOptions = getCompilerOptionsOfBuildOptions(options);
@@ -185149,9 +185149,9 @@ ${lanes.join("\n")}
           cache: void 0,
           allProjectBuildPending: true,
           needsSummary: true,
-          watchAllProjectsPending: watch2,
+          watchAllProjectsPending: watch3,
           // Watch state
-          watch: watch2,
+          watch: watch3,
           allWatchedWildcardDirectories: /* @__PURE__ */ new Map(),
           allWatchedInputFiles: /* @__PURE__ */ new Map(),
           allWatchedConfigFiles: /* @__PURE__ */ new Map(),
@@ -186524,8 +186524,8 @@ ${lanes.join("\n")}
         clearMap(state.allWatchedInputFiles, (watchedWildcardDirectories) => clearMap(watchedWildcardDirectories, closeFileWatcher));
         clearMap(state.allWatchedPackageJsonFiles, (watchedPacageJsonFiles) => clearMap(watchedPacageJsonFiles, closeFileWatcher));
       }
-      function createSolutionBuilderWorker(watch2, hostOrHostWithWatch, rootNames, options, baseWatchOptions) {
-        const state = createSolutionBuilderState(watch2, hostOrHostWithWatch, rootNames, options, baseWatchOptions);
+      function createSolutionBuilderWorker(watch3, hostOrHostWithWatch, rootNames, options, baseWatchOptions) {
+        const state = createSolutionBuilderState(watch3, hostOrHostWithWatch, rootNames, options, baseWatchOptions);
         return {
           build: (project, cancellationToken, writeFile22, getCustomTransformers) => build2(state, project, cancellationToken, writeFile22, getCustomTransformers),
           clean: (project) => clean(state, project),
@@ -186820,7 +186820,7 @@ ${lanes.join("\n")}
         return options.pretty;
       }
       function getOptionsForHelp(commandLine) {
-        return !!commandLine.options.all ? toSorted(optionDeclarations.concat(tscBuildOption), (a, b) => compareStringsCaseInsensitive(a.name, b.name)) : filter4(optionDeclarations.concat(tscBuildOption), (v) => !!v.showInSimplifiedHelpView);
+        return !!commandLine.options.all ? toSorted(optionDeclarations.concat(tscBuildOption), (a, b) => compareStringsCaseInsensitive(a.name, b.name)) : filter5(optionDeclarations.concat(tscBuildOption), (v) => !!v.showInSimplifiedHelpView);
       }
       function printVersion(sys2) {
         sys2.write(getDiagnosticText(Diagnostics.Version_0, version3) + sys2.newLine);
@@ -187144,7 +187144,7 @@ ${lanes.join("\n")}
         output = [...output, ...generateSectionOptionsOutput(
           sys2,
           getDiagnosticText(Diagnostics.BUILD_OPTIONS),
-          filter4(buildOptions, (option) => option !== tscBuildOption),
+          filter5(buildOptions, (option) => option !== tscBuildOption),
           /*subCategory*/
           false,
           formatMessage(Diagnostics.Using_build_b_will_make_tsc_behave_more_like_a_build_orchestrator_than_a_compiler_This_is_used_to_trigger_building_composite_projects_which_you_can_learn_more_about_at_0, "https://aka.ms/tsc-composite-builds")
@@ -187158,7 +187158,7 @@ ${lanes.join("\n")}
         output = [...output, ...generateSectionOptionsOutput(
           sys2,
           getDiagnosticText(Diagnostics.BUILD_OPTIONS),
-          filter4(buildOptions, (option) => option !== tscBuildOption),
+          filter5(buildOptions, (option) => option !== tscBuildOption),
           /*subCategory*/
           false,
           formatMessage(Diagnostics.Using_build_b_will_make_tsc_behave_more_like_a_build_orchestrator_than_a_compiler_This_is_used_to_trigger_building_composite_projects_which_you_can_learn_more_about_at_0, "https://aka.ms/tsc-composite-builds")
@@ -191418,7 +191418,7 @@ ${lanes.join("\n")}
         var _a2;
         const decl = isArray(imports) ? imports[0] : imports;
         const importKindPredicate = decl.kind === 244 ? isRequireVariableStatement : isAnyImportSyntax;
-        const existingImportStatements = filter4(sourceFile.statements, importKindPredicate);
+        const existingImportStatements = filter5(sourceFile.statements, importKindPredicate);
         const { comparer, isSorted } = ts_OrganizeImports_exports.getOrganizeImportsStringComparerWithDetection(existingImportStatements, preferences);
         const sortedNewImports = isArray(imports) ? toSorted(imports, (a, b) => ts_OrganizeImports_exports.compareImportsOrRequireStatements(a, b, comparer)) : [imports];
         if (!(existingImportStatements == null ? void 0 : existingImportStatements.length)) {
@@ -196256,7 +196256,7 @@ interface Symbol {
       }
       var commandLineOptionsStringToEnum;
       function fixupCompilerOptions(options, diagnostics) {
-        commandLineOptionsStringToEnum = commandLineOptionsStringToEnum || filter4(optionDeclarations, (o) => typeof o.type === "object" && !forEachEntry(o.type, (v) => typeof v !== "number"));
+        commandLineOptionsStringToEnum = commandLineOptionsStringToEnum || filter5(optionDeclarations, (o) => typeof o.type === "object" && !forEachEntry(o.type, (v) => typeof v !== "number"));
         options = cloneCompilerOptions(options);
         for (const opt of commandLineOptionsStringToEnum) {
           if (!hasProperty(options, opt.name)) {
@@ -198843,7 +198843,7 @@ interface Symbol {
           for (const [exportDeclaration, topLevelDeclarations] of arrayFrom(targetToSourceExports)) {
             if (exportDeclaration.exportClause && isNamedExports(exportDeclaration.exportClause) && length(exportDeclaration.exportClause.elements)) {
               const elements = exportDeclaration.exportClause.elements;
-              const updatedElements = filter4(elements, (elem) => find(skipAlias(elem.symbol, checker).declarations, (d) => isTopLevelDeclaration(d) && topLevelDeclarations.has(d)) === void 0);
+              const updatedElements = filter5(elements, (elem) => find(skipAlias(elem.symbol, checker).declarations, (d) => isTopLevelDeclaration(d) && topLevelDeclarations.has(d)) === void 0);
               if (length(updatedElements) === 0) {
                 changes.deleteNode(targetFile, exportDeclaration);
                 removedExports.add(exportDeclaration);
@@ -203136,7 +203136,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             if (isGetAccessor(context)) {
               if (!this.contextualGetAccessorDocumentationComment) {
                 this.contextualGetAccessorDocumentationComment = emptyArray;
-                this.contextualGetAccessorDocumentationComment = getDocumentationComment(filter4(this.declarations, isGetAccessor), checker);
+                this.contextualGetAccessorDocumentationComment = getDocumentationComment(filter5(this.declarations, isGetAccessor), checker);
               }
               if (length(this.contextualGetAccessorDocumentationComment)) {
                 return this.contextualGetAccessorDocumentationComment;
@@ -203145,7 +203145,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             if (isSetAccessor(context)) {
               if (!this.contextualSetAccessorDocumentationComment) {
                 this.contextualSetAccessorDocumentationComment = emptyArray;
-                this.contextualSetAccessorDocumentationComment = getDocumentationComment(filter4(this.declarations, isSetAccessor), checker);
+                this.contextualSetAccessorDocumentationComment = getDocumentationComment(filter5(this.declarations, isSetAccessor), checker);
               }
               if (length(this.contextualSetAccessorDocumentationComment)) {
                 return this.contextualSetAccessorDocumentationComment;
@@ -203166,7 +203166,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             if (isGetAccessor(context)) {
               if (!this.contextualGetAccessorTags) {
                 this.contextualGetAccessorTags = emptyArray;
-                this.contextualGetAccessorTags = getJsDocTagsOfDeclarations(filter4(this.declarations, isGetAccessor), checker);
+                this.contextualGetAccessorTags = getJsDocTagsOfDeclarations(filter5(this.declarations, isGetAccessor), checker);
               }
               if (length(this.contextualGetAccessorTags)) {
                 return this.contextualGetAccessorTags;
@@ -203175,7 +203175,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             if (isSetAccessor(context)) {
               if (!this.contextualSetAccessorTags) {
                 this.contextualSetAccessorTags = emptyArray;
-                this.contextualSetAccessorTags = getJsDocTagsOfDeclarations(filter4(this.declarations, isSetAccessor), checker);
+                this.contextualSetAccessorTags = getJsDocTagsOfDeclarations(filter5(this.declarations, isSetAccessor), checker);
               }
               if (length(this.contextualSetAccessorTags)) {
                 return this.contextualSetAccessorTags;
@@ -204859,8 +204859,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           } else {
             for (const pos2 of positions) {
-              const from16 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
-              const offset = text.substr(from16, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
+              const from17 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
+              const offset = text.substr(from17, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
               textChanges2.push({
                 newText: "",
                 span: {
@@ -205248,7 +205248,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           const symbol2 = contextualType.getProperty(name2);
           return symbol2 ? [symbol2] : emptyArray;
         }
-        const filteredTypes = isObjectLiteralExpression(node.parent) || isJsxAttributes(node.parent) ? filter4(contextualType.types, (t2) => !checker.isTypeInvalidDueToUnionDiscriminant(t2, node.parent)) : contextualType.types;
+        const filteredTypes = isObjectLiteralExpression(node.parent) || isJsxAttributes(node.parent) ? filter5(contextualType.types, (t2) => !checker.isTypeInvalidDueToUnionDiscriminant(t2, node.parent)) : contextualType.types;
         const discriminatedPropertySymbols = mapDefined(filteredTypes, (t2) => t2.getProperty(name2));
         if (unionSymbolOk && (discriminatedPropertySymbols.length === 0 || discriminatedPropertySymbols.length === contextualType.types.length)) {
           const symbol2 = contextualType.getProperty(name2);
@@ -206045,8 +206045,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getCallSiteGroupKey(entry) {
         return getNodeId(entry.declaration);
       }
-      function createCallHierarchyIncomingCall(from16, fromSpans) {
-        return { from: from16, fromSpans };
+      function createCallHierarchyIncomingCall(from17, fromSpans) {
+        return { from: from17, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
         return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map32(entries, (entry) => createTextSpanFromRange(entry.range)));
@@ -206056,7 +206056,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return [];
         }
         const location = getCallHierarchyDeclarationReferenceNode(declaration);
-        const calls = filter4(ts_FindAllReferences_exports.findReferenceOrRenameEntries(
+        const calls = filter5(ts_FindAllReferences_exports.findReferenceOrRenameEntries(
           program2,
           cancellationToken,
           program2.getSourceFiles(),
@@ -207563,7 +207563,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getModifierKindFromSource(source, kind) {
-        return canHaveModifiers(source) ? filter4(source.modifiers, (modifier) => modifier.kind === kind) : void 0;
+        return canHaveModifiers(source) ? filter5(source.modifiers, (modifier) => modifier.kind === kind) : void 0;
       }
       function isConstructorAssignment(x2) {
         if (!x2.name) return false;
@@ -208363,13 +208363,13 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         convertExportsAccesses(sourceFile, exports22, changes);
         let moduleExportsChangedToDefault = false;
         let useSitesToUnqualify;
-        for (const statement of filter4(sourceFile.statements, isVariableStatement)) {
+        for (const statement of filter5(sourceFile.statements, isVariableStatement)) {
           const newUseSites = convertVariableStatement(sourceFile, statement, changes, checker, identifiers, target, quotePreference);
           if (newUseSites) {
             copyEntries(newUseSites, useSitesToUnqualify ?? (useSitesToUnqualify = /* @__PURE__ */ new Map()));
           }
         }
-        for (const statement of filter4(sourceFile.statements, (s2) => !isVariableStatement(s2))) {
+        for (const statement of filter5(sourceFile.statements, (s2) => !isVariableStatement(s2))) {
           const moduleExportsChanged = convertStatement(sourceFile, statement, checker, changes, identifiers, target, exports22, useSitesToUnqualify, quotePreference);
           moduleExportsChangedToDefault = moduleExportsChangedToDefault || moduleExportsChanged;
         }
@@ -208948,7 +208948,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             exportDeclaration.modifiers,
             /*isTypeOnly*/
             false,
-            factory.updateNamedExports(exportClause, filter4(exportClause.elements, (e2) => !contains(typeExportSpecifiers, e2))),
+            factory.updateNamedExports(exportClause, filter5(exportClause.elements, (e2) => !contains(typeExportSpecifiers, e2))),
             exportDeclaration.moduleSpecifier,
             /*attributes*/
             void 0
@@ -208979,7 +208979,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           createTextSpanFromNode(exportClause),
           context.program.getSemanticDiagnostics(context.sourceFile, context.cancellationToken)
         );
-        return filter4(exportClause.elements, (element) => {
+        return filter5(exportClause.elements, (element) => {
           var _a2;
           return element === originExportSpecifier || ((_a2 = findDiagnosticForNode(element, diagnostics)) == null ? void 0 : _a2.code) === errorCodes14[0];
         });
@@ -209220,11 +209220,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const rightSibling = currentNodeIndex < maxChildIndex ? commentNode.getChildAt(currentNodeIndex + 1) : void 0;
         return { leftSibling, rightSibling };
       }
-      function findEndOfTextBetween(jsDocComment, from16, to) {
-        const comment = jsDocComment.getText().substring(from16 - jsDocComment.getStart(), to - jsDocComment.getStart());
+      function findEndOfTextBetween(jsDocComment, from17, to) {
+        const comment = jsDocComment.getText().substring(from17 - jsDocComment.getStart(), to - jsDocComment.getStart());
         for (let i2 = comment.length; i2 > 0; i2--) {
           if (!/[*/\s]/.test(comment.substring(i2 - 1, i2))) {
-            return from16 + i2;
+            return from17 + i2;
           }
         }
         return to;
@@ -212644,7 +212644,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           }
         }
-        return filter4(targetProps, (targetProp) => isIdentifierText(
+        return filter5(targetProps, (targetProp) => isIdentifierText(
           targetProp.name,
           target,
           1
@@ -212786,7 +212786,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         const checker = program2.getTypeChecker();
         const type = checker.getTypeAtLocation(callExpression.expression);
-        const convertibleSignatureDeclarations = filter4(type.symbol.declarations, isConvertibleSignatureDeclaration);
+        const convertibleSignatureDeclarations = filter5(type.symbol.declarations, isConvertibleSignatureDeclaration);
         if (convertibleSignatureDeclarations === void 0) {
           return void 0;
         }
@@ -219593,7 +219593,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               /* Subtype */
             ) : type;
             if (effectiveType.flags & 1048576) {
-              const functionTypes = filter4(effectiveType.types, (type2) => checker.getSignaturesOfType(
+              const functionTypes = filter5(effectiveType.types, (type2) => checker.getSignaturesOfType(
                 type2,
                 0
                 /* Call */
@@ -220759,7 +220759,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               }
             }
           } else {
-            symbols.push(...filter4(getPropertiesForCompletion(type, typeChecker), (s2) => typeChecker.isValidPropertyAccessForCompletions(propertyAccess, type, s2)));
+            symbols.push(...filter5(getPropertiesForCompletion(type, typeChecker), (s2) => typeChecker.isValidPropertyAccessForCompletions(propertyAccess, type, s2)));
           }
           if (insertAwait && preferences.includeCompletionsWithInsertText) {
             const promiseType2 = typeChecker.getPromisedTypeOfPromise(type);
@@ -221034,7 +221034,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
                   if (detailsEntryId && !some(info, (i2) => detailsEntryId.source === stripQuotes(i2.moduleSymbol.name))) {
                     return;
                   }
-                  info = filter4(info, isImportableExportInfo);
+                  info = filter5(info, isImportableExportInfo);
                   if (!info.length) {
                     return;
                   }
@@ -221295,7 +221295,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           const existingMembers = getPropertiesForCompletion(containerActualType, typeChecker);
           const existingMemberEscapedNames = /* @__PURE__ */ new Set();
           existingMembers.forEach((s2) => existingMemberEscapedNames.add(s2.escapedName));
-          symbols = concatenate(symbols, filter4(members, (s2) => !existingMemberEscapedNames.has(s2.escapedName)));
+          symbols = concatenate(symbols, filter5(members, (s2) => !existingMemberEscapedNames.has(s2.escapedName)));
           completionKind = 0;
           isNewIdentifierLocation = true;
           return 1;
@@ -221408,7 +221408,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           const importAttributes = contextToken.kind === 19 || contextToken.kind === 28 ? tryCast(contextToken.parent, isImportAttributes) : contextToken.kind === 59 ? tryCast(contextToken.parent.parent, isImportAttributes) : void 0;
           if (importAttributes === void 0) return 0;
           const existing = new Set(importAttributes.elements.map(getNameFromImportAttribute));
-          symbols = filter4(typeChecker.getTypeAtLocation(importAttributes).getApparentProperties(), (attr) => !existing.has(attr.escapedName));
+          symbols = filter5(typeChecker.getTypeAtLocation(importAttributes).getApparentProperties(), (attr) => !existing.has(attr.escapedName));
           return 1;
         }
         function tryGetLocalNamedExportCompletionSymbols() {
@@ -222057,14 +222057,14 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getPropertiesForObjectExpression(contextualType, completionsType, obj, checker) {
         const hasCompletionsType = completionsType && completionsType !== contextualType;
         const promiseFilteredContextualType = checker.getUnionType(
-          filter4(
+          filter5(
             contextualType.flags & 1048576 ? contextualType.types : [contextualType],
             (t2) => !checker.getPromisedTypeOfPromise(t2)
           )
         );
         const type = hasCompletionsType && !(completionsType.flags & 3) ? checker.getUnionType([promiseFilteredContextualType, completionsType]) : promiseFilteredContextualType;
         const properties = getApparentProperties(type, obj, checker);
-        return type.isClass() && containsNonPublicProperties(properties) ? [] : hasCompletionsType ? filter4(properties, hasDeclarationOtherThanSelf) : properties;
+        return type.isClass() && containsNonPublicProperties(properties) ? [] : hasCompletionsType ? filter5(properties, hasDeclarationOtherThanSelf) : properties;
         function hasDeclarationOtherThanSelf(member) {
           if (!length(member.declarations)) return true;
           return some(member.declarations, (decl) => decl.parent !== obj);
@@ -222072,7 +222072,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function getApparentProperties(type, node, checker) {
         if (!type.isUnion()) return type.getApparentProperties();
-        return checker.getAllPossiblePropertiesOfTypes(filter4(type.types, (memberType) => !(memberType.flags & 402784252 || checker.isArrayLikeType(memberType) || checker.isTypeInvalidDueToUnionDiscriminant(memberType, node) || checker.typeHasCallOrConstructSignatures(memberType) || memberType.isClass() && containsNonPublicProperties(memberType.getApparentProperties()))));
+        return checker.getAllPossiblePropertiesOfTypes(filter5(type.types, (memberType) => !(memberType.flags & 402784252 || checker.isArrayLikeType(memberType) || checker.isTypeInvalidDueToUnionDiscriminant(memberType, node) || checker.typeHasCallOrConstructSignatures(memberType) || memberType.isClass() && containsNonPublicProperties(memberType.getApparentProperties()))));
       }
       function containsNonPublicProperties(props) {
         return some(props, (p) => !!(getDeclarationModifierFlagsFromSymbol(p) & 6));
@@ -222783,7 +222783,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function stringLiteralCompletionsFromProperties(type) {
         return type && {
           kind: 1,
-          symbols: filter4(type.getApparentProperties(), (prop) => !(prop.valueDeclaration && isPrivateIdentifierClassElementDeclaration(prop.valueDeclaration))),
+          symbols: filter5(type.getApparentProperties(), (prop) => !(prop.valueDeclaration && isPrivateIdentifierClassElementDeclaration(prop.valueDeclaration))),
           hasIndexSignature: hasIndexSignature(type)
         };
       }
@@ -225210,7 +225210,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         Core2.eachSymbolReferenceInFile = eachSymbolReferenceInFile;
         function getTopMostDeclarationNamesInFile(declarationName, sourceFile) {
-          const candidates = filter4(getPossibleSymbolReferenceNodes(sourceFile, declarationName), (name2) => !!getDeclarationFromName(name2));
+          const candidates = filter5(getPossibleSymbolReferenceNodes(sourceFile, declarationName), (name2) => !!getDeclarationFromName(name2));
           return candidates.reduce((topMost, decl) => {
             const depth = getDepth(decl);
             if (!some(topMost.declarationNames) || depth === topMost.depth) {
@@ -226147,7 +226147,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         if (isStaticModifier(node) && isClassStaticBlockDeclaration(node.parent)) {
           const classDecl = node.parent.parent;
           const { symbol: symbol22, failedAliasResolution: failedAliasResolution2 } = getSymbol(classDecl, typeChecker, stopAtAlias);
-          const staticBlocks = filter4(classDecl.members, isClassStaticBlockDeclaration);
+          const staticBlocks = filter5(classDecl.members, isClassStaticBlockDeclaration);
           const containerName = symbol22 ? typeChecker.symbolToString(symbol22, classDecl) : "";
           const sourceFile2 = node.getSourceFile();
           return map32(staticBlocks, (staticBlock) => {
@@ -226483,12 +226483,12 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return !!containingAssignment && getAssignmentDeclarationKind(containingAssignment) === 5;
       }
       function getDefinitionFromSymbol(typeChecker, symbol2, node, failedAliasResolution, declarationFilter) {
-        const filteredDeclarations = declarationFilter !== void 0 ? filter4(symbol2.declarations, declarationFilter) : symbol2.declarations;
+        const filteredDeclarations = declarationFilter !== void 0 ? filter5(symbol2.declarations, declarationFilter) : symbol2.declarations;
         const signatureDefinition = !declarationFilter && (getConstructSignatureDefinition() || getCallSignatureDefinition());
         if (signatureDefinition) {
           return signatureDefinition;
         }
-        const withoutExpandos = filter4(filteredDeclarations, (d) => !isExpandoDeclaration(d));
+        const withoutExpandos = filter5(filteredDeclarations, (d) => !isExpandoDeclaration(d));
         const results = some(withoutExpandos) ? withoutExpandos : filteredDeclarations;
         return map32(results, (declaration) => createDefinitionInfo(
           declaration,
@@ -231474,7 +231474,7 @@ ${content}
           this.replaceJSDocComment(sourceFile, parent2, [...oldTags, ...unmergedNewTags]);
         }
         filterJSDocTags(sourceFile, parent2, predicate) {
-          this.replaceJSDocComment(sourceFile, parent2, filter4(flatMapToMutable(parent2.jsDoc, (j) => j.tags), predicate));
+          this.replaceJSDocComment(sourceFile, parent2, filter5(flatMapToMutable(parent2.jsDoc, (j) => j.tags), predicate));
         }
         replaceRangeWithText(sourceFile, range, text) {
           this.changes.push({ kind: 3, sourceFile, range, text });
@@ -234300,9 +234300,9 @@ ${options.prefix}` : "\n" : options.prefix
       function toTokenRange(arg) {
         return typeof arg === "number" ? tokenRangeFrom([arg]) : isArray(arg) ? tokenRangeFrom(arg) : arg;
       }
-      function tokenRangeFromRange(from16, to, except = []) {
+      function tokenRangeFromRange(from17, to, except = []) {
         const tokens = [];
-        for (let token = from16; token <= to; token++) {
+        for (let token = from17; token <= to; token++) {
           if (!contains(except, token)) {
             tokens.push(token);
           }
@@ -237055,7 +237055,7 @@ ${options.prefix}` : "\n" : options.prefix
         fileExtensionIsOneOf: () => fileExtensionIsOneOf,
         fileIncludeReasonToDiagnostics: () => fileIncludeReasonToDiagnostics,
         fileShouldUseJavaScriptRequire: () => fileShouldUseJavaScriptRequire,
-        filter: () => filter4,
+        filter: () => filter5,
         filterMutate: () => filterMutate,
         filterSemanticDiagnostics: () => filterSemanticDiagnostics,
         find: () => find,
@@ -240337,8 +240337,8 @@ ${options.prefix}` : "\n" : options.prefix
           /* Tsx */
         ));
       }
-      function isGeneratedFileWatcher(watch2) {
-        return watch2.generatedFilePath !== void 0;
+      function isGeneratedFileWatcher(watch3) {
+        return watch3.generatedFilePath !== void 0;
       }
       function setIsEqualTo(arr1, arr2) {
         if (arr1 === arr2) {
@@ -240767,7 +240767,7 @@ ${options.prefix}` : "\n" : options.prefix
          * Get the errors that dont have any file name associated
          */
         getGlobalProjectErrors() {
-          return filter4(this.projectErrors, (diagnostic) => !diagnostic.file) || emptyArray2;
+          return filter5(this.projectErrors, (diagnostic) => !diagnostic.file) || emptyArray2;
         }
         /**
          * Get all the project errors
@@ -241352,8 +241352,8 @@ ${options.prefix}` : "\n" : options.prefix
               /* DirectoryWatcher */
             );
           }
-          toRemove.forEach((watch2, path2) => {
-            watch2.close();
+          toRemove.forEach((watch3, path2) => {
+            watch3.close();
             this.typingWatchers.delete(path2);
           });
         }
@@ -241364,7 +241364,7 @@ ${options.prefix}` : "\n" : options.prefix
         removeExistingTypings(include) {
           if (!include.length) return include;
           const existing = getAutomaticTypeDirectiveNames(this.getCompilerOptions(), this);
-          return filter4(include, (i2) => !existing.includes(i2));
+          return filter5(include, (i2) => !existing.includes(i2));
         }
         updateGraphWorker() {
           var _a2, _b;
@@ -242595,7 +242595,7 @@ ${options.prefix}` : "\n" : options.prefix
          * Get the errors that dont have any file name associated
          */
         getGlobalProjectErrors() {
-          return filter4(this.projectErrors, (diagnostic) => !diagnostic.file) || emptyArray2;
+          return filter5(this.projectErrors, (diagnostic) => !diagnostic.file) || emptyArray2;
         }
         /**
          * Get all the project errors
@@ -248806,7 +248806,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
         getConfigFileDiagnostics(configFile, project, includeLinePosition) {
           const projectErrors = project.getAllProjectErrors();
           const optionsErrors = project.getLanguageService().getCompilerOptionsDiagnostics();
-          const diagnosticsForConfigFile = filter4(
+          const diagnosticsForConfigFile = filter5(
             concatenate(projectErrors, optionsErrors),
             (diagnostic) => !!diagnostic.file && diagnostic.file.fileName === configFile
           );
@@ -248841,7 +248841,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
         getCompilerOptionsDiagnostics(args) {
           const project = this.getProject(args.projectFileName);
           return this.convertToDiagnosticsWithLinePosition(
-            filter4(
+            filter5(
               project.getLanguageService().getCompilerOptionsDiagnostics(),
               (diagnostic) => !diagnostic.file
             ),
@@ -249389,7 +249389,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             projects = scriptInfo.containingProjects;
             symLinkedProjects = this.projectService.getSymlinkedProjects(scriptInfo);
           }
-          projects = filter4(projects, (p) => p.languageServiceEnabled && !p.isOrphan());
+          projects = filter5(projects, (p) => p.languageServiceEnabled && !p.isOrphan());
           if (!ignoreNoProjectError && (!projects || !projects.length) && !symLinkedProjects) {
             this.projectService.logErrorForScriptInfoNotFound(args.file ?? args.projectFileName);
             return Errors.ThrowNoProject();
@@ -250002,7 +250002,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
               /*excludeLibFiles*/
               preferences.excludeLibrarySymbolsInNavTo
             );
-            const unseenItems = filter4(projectItems, (item) => tryAddSeenItem(item) && !getMappedLocationForProject(documentSpanLocation(item), project));
+            const unseenItems = filter5(projectItems, (item) => tryAddSeenItem(item) && !getMappedLocationForProject(documentSpanLocation(item), project));
             if (unseenItems.length) {
               outputs.push({ project, navigateToItems: unseenItems });
             }
@@ -254074,8 +254074,8 @@ function writeFlowMapping(state, level, node) {
     if (explicitPair) pairBuffer += "? ";
     else if (state.quoteFlowKeys) pairBuffer += '"';
     const valueText = writeNode(state, level, value, {});
-    const sep2 = state.flowSkipColonSpace || valueText === "" ? "" : " ";
-    pairBuffer += `${keyText}${state.quoteFlowKeys && !explicitPair ? '"' : ""}:${sep2}${valueText}`;
+    const sep3 = state.flowSkipColonSpace || valueText === "" ? "" : " ";
+    pairBuffer += `${keyText}${state.quoteFlowKeys && !explicitPair ? '"' : ""}:${sep3}${valueText}`;
     result += pairBuffer;
   }
   const pad = state.flowBracketPadding && result !== "" ? " " : "";
@@ -254172,8 +254172,8 @@ function writeNode(state, level, node, ctx) {
       if (anchor !== null) props.push(anchor);
       if (tag !== null) props.push(tag);
     }
-    const sep2 = body === "" || body.charCodeAt(0) === CHAR_LINE_FEED ? "" : " ";
-    body = `${props.join(" ")}${sep2}${body}`;
+    const sep3 = body === "" || body.charCodeAt(0) === CHAR_LINE_FEED ? "" : " ";
+    body = `${props.join(" ")}${sep3}${body}`;
   }
   return body;
 }
@@ -254218,8 +254218,8 @@ function present(documents, options) {
         block: true,
         compact: true
       });
-      const sep2 = body === "" ? "" : hasDirectives || rootStartsOwnLine(doc.contents) ? "\n" : " ";
-      result += `---${sep2}${body}
+      const sep3 = body === "" ? "" : hasDirectives || rootStartsOwnLine(doc.contents) ? "\n" : " ";
+      result += `---${sep3}${body}
 `;
     } else result += writeNode(state, 0, doc.contents, {
       block: true,
@@ -266123,9 +266123,9 @@ var require_mime_types = __commonJS({
         for (var i2 = 0; i2 < exts.length; i2++) {
           var extension2 = exts[i2];
           if (types3[extension2]) {
-            var from16 = preference.indexOf(db[types3[extension2]].source);
+            var from17 = preference.indexOf(db[types3[extension2]].source);
             var to = preference.indexOf(mime.source);
-            if (types3[extension2] !== "application/octet-stream" && (from16 > to || from16 === to && types3[extension2].substr(0, 12) === "application/")) {
+            if (types3[extension2] !== "application/octet-stream" && (from17 > to || from17 === to && types3[extension2].substr(0, 12) === "application/")) {
               continue;
             }
           }
@@ -267872,7 +267872,7 @@ var require_balanced_match = __commonJS({
 // ../../node_modules/brace-expansion/index.js
 var require_brace_expansion = __commonJS({
   "../../node_modules/brace-expansion/index.js"(exports2, module2) {
-    var concatMap = require_concat_map();
+    var concatMap2 = require_concat_map();
     var balanced = require_balanced_match();
     module2.exports = expandTop;
     var escSlash = "\0SLASH" + Math.random() + "\0";
@@ -267997,7 +267997,7 @@ var require_brace_expansion = __commonJS({
           N.push(c);
         }
       } else {
-        N = concatMap(n, function(el) {
+        N = concatMap2(n, function(el) {
           return expand(el, false);
         });
       }
@@ -268044,8 +268044,8 @@ var require_minimatch = __commonJS({
       }, {});
     }
     var slashSplit = /\/+/;
-    minimatch.filter = filter4;
-    function filter4(pattern, options) {
+    minimatch.filter = filter5;
+    function filter5(pattern, options) {
       options = options || {};
       return function(p, i2, list) {
         return minimatch(p, pattern, options);
@@ -269851,13 +269851,13 @@ var require_async3 = __commonJS({
         });
       }
       function _filter(eachfn, coll, iteratee, callback) {
-        var filter5 = isArrayLike(coll) ? filterArray : filterGeneric;
-        return filter5(eachfn, coll, wrapAsync(iteratee), callback);
+        var filter6 = isArrayLike(coll) ? filterArray : filterGeneric;
+        return filter6(eachfn, coll, wrapAsync(iteratee), callback);
       }
-      function filter4(coll, iteratee, callback) {
+      function filter5(coll, iteratee, callback) {
         return _filter(eachOf$1, coll, iteratee, callback);
       }
-      var filter$1 = awaitify(filter4, 3);
+      var filter$1 = awaitify(filter5, 3);
       function filterLimit(coll, limit, iteratee, callback) {
         return _filter(eachOfLimit(limit), coll, iteratee, callback);
       }
@@ -270681,15 +270681,15 @@ var require_polyfills = __commonJS({
       }
       if (platform2 === "win32") {
         fs3.rename = /* @__PURE__ */ (function(fs$rename) {
-          return function(from16, to, cb) {
+          return function(from17, to, cb) {
             var start3 = Date.now();
             var backoff = 0;
-            fs$rename(from16, to, function CB(er) {
+            fs$rename(from17, to, function CB(er) {
               if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start3 < 6e4) {
                 setTimeout(function() {
                   fs3.stat(to, function(stater, st) {
                     if (stater && stater.code === "ENOENT")
-                      fs$rename(from16, to, CB);
+                      fs$rename(from17, to, CB);
                     else
                       cb(er);
                   });
@@ -277597,7 +277597,7 @@ var require_from4 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors3().codes.ERR_INVALID_ARG_TYPE;
-    function from16(Readable2, iterable, opts) {
+    function from17(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -277636,7 +277636,7 @@ var require_from4 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from16;
+    module2.exports = from17;
   }
 });
 
@@ -277680,7 +277680,7 @@ var require_stream_readable4 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from16;
+    var from17;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -278362,10 +278362,10 @@ var require_stream_readable4 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from16 === void 0) {
-          from16 = require_from4();
+        if (from17 === void 0) {
+          from17 = require_from4();
         }
-        return from16(Readable2, iterable, opts);
+        return from17(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -278545,8 +278545,8 @@ var require_pipeline3 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from16, to) {
-      return from16.pipe(to);
+    function pipe2(from17, to) {
+      return from17.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -280939,7 +280939,7 @@ var require_from5 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors4().codes.ERR_INVALID_ARG_TYPE;
-    function from16(Readable2, iterable, opts) {
+    function from17(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -280978,7 +280978,7 @@ var require_from5 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from16;
+    module2.exports = from17;
   }
 });
 
@@ -281022,7 +281022,7 @@ var require_stream_readable5 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from16;
+    var from17;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -281704,10 +281704,10 @@ var require_stream_readable5 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from16 === void 0) {
-          from16 = require_from5();
+        if (from17 === void 0) {
+          from17 = require_from5();
         }
-        return from16(Readable2, iterable, opts);
+        return from17(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -281887,8 +281887,8 @@ var require_pipeline4 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from16, to) {
-      return from16.pipe(to);
+    function pipe2(from17, to) {
+      return from17.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -283711,7 +283711,7 @@ var require_from6 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors5().codes.ERR_INVALID_ARG_TYPE;
-    function from16(Readable2, iterable, opts) {
+    function from17(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -283750,7 +283750,7 @@ var require_from6 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from16;
+    module2.exports = from17;
   }
 });
 
@@ -283794,7 +283794,7 @@ var require_stream_readable6 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from16;
+    var from17;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -284476,10 +284476,10 @@ var require_stream_readable6 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from16 === void 0) {
-          from16 = require_from6();
+        if (from17 === void 0) {
+          from17 = require_from6();
         }
-        return from16(Readable2, iterable, opts);
+        return from17(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -284659,8 +284659,8 @@ var require_pipeline5 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from16, to) {
-      return from16.pipe(to);
+    function pipe2(from17, to) {
+      return from17.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -286948,7 +286948,7 @@ var require_from7 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors6().codes.ERR_INVALID_ARG_TYPE;
-    function from16(Readable2, iterable, opts) {
+    function from17(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -286987,7 +286987,7 @@ var require_from7 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from16;
+    module2.exports = from17;
   }
 });
 
@@ -287031,7 +287031,7 @@ var require_stream_readable7 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from16;
+    var from17;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -287713,10 +287713,10 @@ var require_stream_readable7 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from16 === void 0) {
-          from16 = require_from7();
+        if (from17 === void 0) {
+          from17 = require_from7();
         }
-        return from16(Readable2, iterable, opts);
+        return from17(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -287896,8 +287896,8 @@ var require_pipeline6 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from16, to) {
-      return from16.pipe(to);
+    function pipe2(from17, to) {
+      return from17.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -311356,17 +311356,17 @@ var require_codegen = __commonJS({
       }
     };
     var ForRange = class extends For {
-      constructor(varKind, name2, from16, to) {
+      constructor(varKind, name2, from17, to) {
         super();
         this.varKind = varKind;
         this.name = name2;
-        this.from = from16;
+        this.from = from17;
         this.to = to;
       }
       render(opts) {
         const varKind = opts.es5 ? scope_1.varKinds.var : this.varKind;
-        const { name: name2, from: from16, to } = this;
-        return `for(${varKind} ${name2}=${from16}; ${name2}<${to}; ${name2}++)` + super.render(opts);
+        const { name: name2, from: from17, to } = this;
+        return `for(${varKind} ${name2}=${from17}; ${name2}<${to}; ${name2}++)` + super.render(opts);
       }
       get names() {
         const names = addExprNames(super.names, this.from);
@@ -311585,9 +311585,9 @@ var require_codegen = __commonJS({
         return this._for(new ForLoop(iteration), forBody);
       }
       // `for` statement for a range of values
-      forRange(nameOrPrefix, from16, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
+      forRange(nameOrPrefix, from17, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
         const name2 = this._scope.toName(nameOrPrefix);
-        return this._for(new ForRange(varKind, name2, from16, to), () => forBody(name2));
+        return this._for(new ForRange(varKind, name2, from17, to), () => forBody(name2));
       }
       // `for-of` statement (in es5 mode replace with a normal for loop)
       forOf(nameOrPrefix, iterable, forBody, varKind = scope_1.varKinds.const) {
@@ -311726,13 +311726,13 @@ var require_codegen = __commonJS({
       }
     };
     exports2.CodeGen = CodeGen;
-    function addNames(names, from16) {
-      for (const n in from16)
-        names[n] = (names[n] || 0) + (from16[n] || 0);
+    function addNames(names, from17) {
+      for (const n in from17)
+        names[n] = (names[n] || 0) + (from17[n] || 0);
       return names;
     }
-    function addExprNames(names, from16) {
-      return from16 instanceof code_1._CodeOrName ? addNames(names, from16.names) : names;
+    function addExprNames(names, from17) {
+      return from17 instanceof code_1._CodeOrName ? addNames(names, from17.names) : names;
     }
     function optimizeExpr(expr, names, constants) {
       if (expr instanceof code_1.Name)
@@ -311759,9 +311759,9 @@ var require_codegen = __commonJS({
         return e2 instanceof code_1._Code && e2._items.some((c) => c instanceof code_1.Name && names[c.str] === 1 && constants[c.str] !== void 0);
       }
     }
-    function subtractNames(names, from16) {
-      for (const n in from16)
-        names[n] = (names[n] || 0) - (from16[n] || 0);
+    function subtractNames(names, from17) {
+      for (const n in from17)
+        names[n] = (names[n] || 0) - (from17[n] || 0);
     }
     function not(x2) {
       return typeof x2 == "boolean" || typeof x2 == "number" || x2 === null ? !x2 : (0, code_1._)`!${par(x2)}`;
@@ -311879,31 +311879,31 @@ var require_util5 = __commonJS({
     }
     exports2.eachItem = eachItem;
     function makeMergeEvaluated({ mergeNames, mergeToName, mergeValues: mergeValues3, resultToName }) {
-      return (gen, from16, to, toName) => {
-        const res = to === void 0 ? from16 : to instanceof codegen_1.Name ? (from16 instanceof codegen_1.Name ? mergeNames(gen, from16, to) : mergeToName(gen, from16, to), to) : from16 instanceof codegen_1.Name ? (mergeToName(gen, to, from16), from16) : mergeValues3(from16, to);
+      return (gen, from17, to, toName) => {
+        const res = to === void 0 ? from17 : to instanceof codegen_1.Name ? (from17 instanceof codegen_1.Name ? mergeNames(gen, from17, to) : mergeToName(gen, from17, to), to) : from17 instanceof codegen_1.Name ? (mergeToName(gen, to, from17), from17) : mergeValues3(from17, to);
         return toName === codegen_1.Name && !(res instanceof codegen_1.Name) ? resultToName(gen, res) : res;
       };
     }
     exports2.mergeEvaluated = {
       props: makeMergeEvaluated({
-        mergeNames: (gen, from16, to) => gen.if((0, codegen_1._)`${to} !== true && ${from16} !== undefined`, () => {
-          gen.if((0, codegen_1._)`${from16} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from16})`));
+        mergeNames: (gen, from17, to) => gen.if((0, codegen_1._)`${to} !== true && ${from17} !== undefined`, () => {
+          gen.if((0, codegen_1._)`${from17} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from17})`));
         }),
-        mergeToName: (gen, from16, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
-          if (from16 === true) {
+        mergeToName: (gen, from17, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
+          if (from17 === true) {
             gen.assign(to, true);
           } else {
             gen.assign(to, (0, codegen_1._)`${to} || {}`);
-            setEvaluated(gen, to, from16);
+            setEvaluated(gen, to, from17);
           }
         }),
-        mergeValues: (from16, to) => from16 === true ? true : { ...from16, ...to },
+        mergeValues: (from17, to) => from17 === true ? true : { ...from17, ...to },
         resultToName: evaluatedPropsToName
       }),
       items: makeMergeEvaluated({
-        mergeNames: (gen, from16, to) => gen.if((0, codegen_1._)`${to} !== true && ${from16} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from16} === true ? true : ${to} > ${from16} ? ${to} : ${from16}`)),
-        mergeToName: (gen, from16, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from16 === true ? true : (0, codegen_1._)`${to} > ${from16} ? ${to} : ${from16}`)),
-        mergeValues: (from16, to) => from16 === true ? true : Math.max(from16, to),
+        mergeNames: (gen, from17, to) => gen.if((0, codegen_1._)`${to} !== true && ${from17} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from17} === true ? true : ${to} > ${from17} ? ${to} : ${from17}`)),
+        mergeToName: (gen, from17, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from17 === true ? true : (0, codegen_1._)`${to} > ${from17} ? ${to} : ${from17}`)),
+        mergeValues: (from17, to) => from17 === true ? true : Math.max(from17, to),
         resultToName: (gen, items) => gen.var("items", items)
       })
     };
@@ -324457,15 +324457,141 @@ ${this.text}` : this.text;
   }
 });
 
+// src/commands/workspace/terminals.ts
+function shellCommand() {
+  if (process.platform === "win32") {
+    return [process.env.ComSpec || "cmd.exe", []];
+  }
+  const shell = process.env.SHELL || "/bin/sh";
+  if ((0, import_child_process8.spawnSync)("script", ["--version"]).error) {
+    return [shell, ["-i"]];
+  }
+  return process.platform === "darwin" ? ["script", ["-q", "/dev/null", shell, "-i"]] : ["script", ["-qfec", `${shell} -i`, "/dev/null"]];
+}
+function kill(child) {
+  try {
+    if (child.pid && process.platform !== "win32") {
+      process.kill(-child.pid, "SIGTERM");
+    } else {
+      child.kill("SIGTERM");
+    }
+  } catch {
+  }
+}
+var import_child_process8, import_crypto3, import_fs12, import_path7, import_rxjs70, IGNORED, MAX_SESSIONS, TerminalManager;
+var init_terminals = __esm({
+  "src/commands/workspace/terminals.ts"() {
+    import_child_process8 = require("child_process");
+    import_crypto3 = require("crypto");
+    import_fs12 = require("fs");
+    import_path7 = require("path");
+    import_rxjs70 = __toESM(require_cjs());
+    init_files();
+    IGNORED = /* @__PURE__ */ new Set(["node_modules", ".git"]);
+    MAX_SESSIONS = 4;
+    TerminalManager = class {
+      constructor(root, env) {
+        this.root = root;
+        this.env = env;
+        this.events$ = new import_rxjs70.Subject();
+        this.sessions = /* @__PURE__ */ new Map();
+      }
+      open(size) {
+        if (this.sessions.size >= MAX_SESSIONS) {
+          throw new WorkspaceError(
+            `At most ${MAX_SESSIONS} browser terminals at a time - close one first.`,
+            429
+          );
+        }
+        const sessionId = (0, import_crypto3.randomUUID)();
+        const [command, args] = shellCommand();
+        const child = (0, import_child_process8.spawn)(command, args, {
+          cwd: this.root,
+          env: {
+            ...this.env(),
+            TERM: "xterm-256color",
+            COLUMNS: String(size.cols ?? 80),
+            LINES: String(size.rows ?? 24)
+          },
+          stdio: "pipe",
+          // its own process group: closing kills everything started in it
+          detached: process.platform !== "win32"
+        });
+        const emit = (event) => this.events$.next({ sessionId, ...event });
+        const print = (chunk) => emit({ kind: "output", data: chunk.toString("utf8") });
+        child.stdout?.on("data", print);
+        child.stderr?.on("data", print);
+        child.on("exit", (code) => {
+          emit({ kind: "exit", exitCode: code });
+          this.forget(sessionId);
+        });
+        child.on(
+          "error",
+          (e2) => emit({ kind: "output", data: `\r
+${e2.message}\r
+` })
+        );
+        this.sessions.set(sessionId, {
+          child,
+          watcher: this.watchRoot((path2) => emit({ kind: "changed", data: path2 }))
+        });
+        return { sessionId, pty: command === "script" };
+      }
+      input(sessionId, data) {
+        this.session(sessionId).child.stdin?.write(data);
+        return { written: data.length };
+      }
+      close(sessionId) {
+        const session = this.sessions.get(sessionId);
+        if (session) {
+          kill(session.child);
+          this.forget(sessionId);
+        }
+        return { closed: !!session };
+      }
+      closeAll() {
+        [...this.sessions.keys()].forEach((id) => this.close(id));
+      }
+      session(sessionId) {
+        const session = this.sessions.get(sessionId);
+        if (!session) {
+          throw new WorkspaceError("This terminal is closed.", 404);
+        }
+        return session;
+      }
+      forget(sessionId) {
+        this.sessions.get(sessionId)?.watcher?.close();
+        this.sessions.delete(sessionId);
+      }
+      /** Recursive watch of the root (Node >= 20 on Linux, macOS, Windows). */
+      watchRoot(onChange) {
+        try {
+          return (0, import_fs12.watch)(this.root, { recursive: true }, (_event, filename) => {
+            const path2 = filename?.toString().split(import_path7.sep).join("/");
+            if (path2 && !path2.split("/").some((part) => IGNORED.has(part))) {
+              onChange(path2);
+            }
+          });
+        } catch {
+          return null;
+        }
+      }
+    };
+  }
+});
+
 // src/commands/workspace/connection.ts
-var import_os7, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num2, short, WorkspaceConnection;
+var import_os7, import_rxjs71, import_operators59, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, PUSH_TERMINAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num2, short, WorkspaceConnection;
 var init_connection2 = __esm({
   "src/commands/workspace/connection.ts"() {
     import_os7 = require("os");
+    import_rxjs71 = __toESM(require_cjs());
+    import_operators59 = __toESM(require_operators());
     init_tunnel();
     init_approvals();
     init_files();
     init_processes();
+    init_terminals();
     WORKSPACE_PATH_PREFIX = "/workspace/";
     WORKSPACE_OPS = [
       "info",
@@ -324479,13 +324605,20 @@ var init_connection2 = __esm({
       "process/start",
       "process/list",
       "process/logs",
-      "process/stop"
+      "process/stop",
+      // browser terminals (--allow-terminal, plan 36)
+      "terminal/open",
+      "terminal/input",
+      "terminal/close"
     ];
     HEARTBEAT_MUTATION2 = `mutation localWorkspaceHeartbeat($info: LocalWorkspaceHeartbeatInput) {
   localWorkspaceHeartbeat(info: $info) { id name }
 }`;
     REQUEST_APPROVAL_MUTATION = `mutation requestLocalWorkspaceApproval($command: String!, $cwd: String, $chatId: String) {
   requestLocalWorkspaceApproval(command: $command, cwd: $cwd, chatId: $chatId) { id }
+}`;
+    PUSH_TERMINAL_MUTATION = `mutation pushLocalWorkspaceTerminalEvents($events: [LocalWorkspaceTerminalEventInput]!) {
+  pushLocalWorkspaceTerminalEvents(events: $events) { status }
 }`;
     SETTLE_APPROVAL_MUTATION = `mutation settleLocalWorkspaceApproval($approvalId: String!, $decision: String!) {
   settleLocalWorkspaceApproval(approvalId: $approvalId, decision: $decision) { status }
@@ -324497,6 +324630,16 @@ var init_connection2 = __esm({
       constructor(options) {
         super(options);
         this.options = options;
+        this.terminals = new TerminalManager(options.root, () => buildEnv(options));
+        this.terminals.events$.pipe(
+          (0, import_operators59.bufferTime)(40),
+          (0, import_operators59.filter)((events) => events.length > 0),
+          (0, import_operators59.concatMap)(
+            (events) => (0, import_rxjs71.from)(this.operation(PUSH_TERMINAL_MUTATION, { events })).pipe(
+              (0, import_operators59.catchError)(() => import_rxjs71.EMPTY)
+            )
+          )
+        ).subscribe();
         this.files = new WorkspaceFiles(options.root, {
           allowSecrets: options.allowSecrets
         });
@@ -324681,6 +324824,22 @@ var init_connection2 = __esm({
               tail: num2(args.tail),
               sinceLine: num2(args.sinceLine)
             });
+          case "terminal/open":
+            this.requireTerminal();
+            log2("\u25A3  terminal opened from the browser");
+            return this.terminals.open({
+              cols: num2(args.cols),
+              rows: num2(args.rows)
+            });
+          case "terminal/input":
+            this.requireTerminal();
+            return this.terminals.input(
+              str(args.sessionId) ?? "",
+              str(args.data) ?? ""
+            );
+          case "terminal/close":
+            log2("\u25A3  terminal closed");
+            return this.terminals.close(str(args.sessionId) ?? "");
           case "process/stop": {
             const result = await this.processes.stop({
               processId: str(args.processId)
@@ -324690,6 +324849,14 @@ var init_connection2 = __esm({
           }
           default:
             throw new WorkspaceError(`unknown operation ${op}`, 404);
+        }
+      }
+      requireTerminal() {
+        if (!this.options.allowTerminal) {
+          throw new WorkspaceError(
+            "Browser terminals are off for this workspace - restart it with `gcli workspace:start --allow-terminal`.",
+            403
+          );
         }
       }
       async commandTarget(args) {
@@ -324750,6 +324917,7 @@ var init_connection2 = __esm({
       }
       stop() {
         this.processes.stopAll();
+        this.terminals.closeAll();
         super.stop();
       }
     };
@@ -324856,12 +325024,12 @@ __export(start_exports4, {
   WORKSPACE_VERSION: () => WORKSPACE_VERSION,
   default: () => start_default2
 });
-var import_promises12, import_path7, import_rxjs70, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
+var import_promises12, import_path8, import_rxjs72, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
 var init_start4 = __esm({
   "src/commands/workspace/start.ts"() {
     import_promises12 = require("fs/promises");
-    import_path7 = require("path");
-    import_rxjs70 = __toESM(require_cjs());
+    import_path8 = require("path");
+    import_rxjs72 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
@@ -324878,7 +325046,7 @@ var init_start4 = __esm({
       if (cmd.token) {
         return {
           id: "(from --token)",
-          name: cmd.name ?? (0, import_path7.basename)(root),
+          name: cmd.name ?? (0, import_path8.basename)(root),
           token: cmd.token,
           projectId: cmd.project ?? "",
           root
@@ -324891,16 +325059,16 @@ var init_start4 = __esm({
       if (saved && (!cmd.project || cmd.project === saved.projectId)) {
         return saved;
       }
-      const projectId = await (0, import_rxjs70.lastValueFrom)(parseProjectId(cmd.project)).catch(
+      const projectId = await (0, import_rxjs72.lastValueFrom)(parseProjectId(cmd.project)).catch(
         () => {
           throw new Error(
             "No project selected. Pass --project <projectId> or run `gcli project:use <projectId>` first."
           );
         }
       );
-      const name2 = cmd.name || (0, import_path7.basename)(root);
+      const name2 = cmd.name || (0, import_path8.basename)(root);
       Logger.info(`Registering ${root} as local workspace "${name2}"...`);
-      const { workspace, token } = await (0, import_rxjs70.lastValueFrom)(
+      const { workspace, token } = await (0, import_rxjs72.lastValueFrom)(
         GraphqlClienAPI.createLocalWorkspace(projectId, name2)
       ).catch((e2) => {
         throw new Error(
@@ -324949,6 +325117,11 @@ var init_start4 = __esm({
           "--allow-secrets: .env files and keys are readable by the chat."
         );
       }
+      if (cmd.allowTerminal) {
+        Logger.warn(
+          "--allow-terminal: you can open a shell in this directory from the Lambforge editor."
+        );
+      }
       Logger.info(
         "Press Ctrl+C to disconnect (stops every process the chat started)."
       );
@@ -324961,6 +325134,7 @@ var init_start4 = __esm({
         logger: Logger,
         policy,
         allowSecrets: cmd.allowSecrets,
+        allowTerminal: cmd.allowTerminal,
         inheritEnv: cmd.inheritEnv,
         passEnv: csv(cmd.env),
         prompt: terminal
@@ -324971,7 +325145,10 @@ var init_start4 = __esm({
       };
       process.once("SIGINT", shutdown);
       process.once("SIGTERM", shutdown);
-      process.once("exit", () => connection.processes.stopAll());
+      process.once("exit", () => {
+        connection.processes.stopAll();
+        connection.terminals.closeAll();
+      });
       try {
         await connection.run();
       } catch (e2) {
@@ -324991,16 +325168,16 @@ var list_exports9 = {};
 __export(list_exports9, {
   default: () => list_default9
 });
-var import_rxjs71, list_default9;
+var import_rxjs73, list_default9;
 var init_list9 = __esm({
   "src/commands/workspace/list.ts"() {
-    import_rxjs71 = __toESM(require_cjs());
+    import_rxjs73 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
     list_default9 = async (cmd) => {
       const [workspaces, saved] = await Promise.all([
-        (0, import_rxjs71.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
+        (0, import_rxjs73.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
         readSavedWorkspaces()
       ]);
       const onThisMachine = new Set(Object.values(saved).map((w) => w.id));
@@ -325034,11 +325211,11 @@ var delete_exports6 = {};
 __export(delete_exports6, {
   default: () => delete_default6
 });
-var import_promises13, import_rxjs72, delete_default6;
+var import_promises13, import_rxjs74, delete_default6;
 var init_delete6 = __esm({
   "src/commands/workspace/delete.ts"() {
     import_promises13 = require("fs/promises");
-    import_rxjs72 = __toESM(require_cjs());
+    import_rxjs74 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
@@ -325050,7 +325227,7 @@ var init_delete6 = __esm({
           "No workspace registered for this directory - pass --id (see `gcli workspace:list`)."
         );
       }
-      await (0, import_rxjs72.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
+      await (0, import_rxjs74.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
       await forgetWorkspace({ id: workspaceId });
       Logger.log(
         `Local workspace ${workspaceId} deleted; its token no longer works.`
@@ -325738,6 +325915,9 @@ function registerWorkspaceCommands(program2) {
     "--env <names>",
     "Comma-separated environment variables to pass to commands (default: a minimal environment)"
   ).option("--inherit-env", "Pass your whole shell environment to commands").option(
+    "--allow-terminal",
+    "Let you open a terminal on this machine from the Lambforge editor"
+  ).option(
     "--allow-secrets",
     "Let the chat read/write .env files, keys and other secrets files"
   ).option("--wsUrl <url>", "Lambforge subscriptions endpoint override").option(
@@ -325798,7 +325978,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.266" : "development";
+var version2 = true ? "1.8.267" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
