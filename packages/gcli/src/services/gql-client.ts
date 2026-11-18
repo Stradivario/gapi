@@ -1453,8 +1453,7 @@ export class GraphqlClienAPI {
         // A `--ci` login has no API key: its token is long-lived and is
         // never refreshed (refreshing it broke every command 30 minutes
         // after the login - a cloud workspace stays signed in for weeks).
-        expired:
-          !!key && (force || (Date.now() - timeGenerated) / 1000 > 1800),
+        expired: !!key && (force || (Date.now() - timeGenerated) / 1000 > 1800),
         uploadUrl: resolveUploadUrl(uploadUrl, url),
       })),
       switchMap((config) =>
