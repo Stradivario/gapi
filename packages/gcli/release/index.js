@@ -325318,7 +325318,7 @@ var init_start4 = __esm({
     init_config2();
     init_connection2();
     init_policy();
-    WORKSPACE_VERSION = "gcli-workspace/1";
+    WORKSPACE_VERSION = "gcli-workspace/2";
     csv = (value) => (value ?? "").split(",").map((v) => v.trim()).filter(Boolean);
     resolveWorkspace = async (root, cmd) => {
       if (cmd.token) {
@@ -326256,7 +326256,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.272" : "development";
+var version2 = true ? "1.8.273" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
