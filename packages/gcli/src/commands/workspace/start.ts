@@ -15,7 +15,12 @@ import { WorkspaceConnection } from './connection';
 import { CommandPolicy } from './policy';
 import { SavedWorkspace } from './types';
 
-export const WORKSPACE_VERSION = 'gcli-workspace/1';
+/**
+ * The workspace protocol this gcli speaks (reported as `clientVersion`):
+ * 2 = takes one-way terminal `input` / `resize` frames (plan 36) - the
+ * backend sends keystrokes to /1 as request/response instead.
+ */
+export const WORKSPACE_VERSION = 'gcli-workspace/2';
 
 const csv = (value?: string) =>
   (value ?? '')
