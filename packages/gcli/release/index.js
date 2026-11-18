@@ -324642,7 +324642,10 @@ var init_terminals = __esm({
         this.env = env;
         this.notIgnored = notIgnored;
         this.events$ = new import_rxjs70.Subject();
+        /** shells (`terminal/*`) */
         this.sessions = /* @__PURE__ */ new Map();
+        /** file watches (`watch/*`) - the open editor, terminal or not */
+        this.watches = /* @__PURE__ */ new Map();
       }
       open(size) {
         if (this.sessions.size >= MAX_SESSIONS) {
@@ -324679,46 +324682,66 @@ var init_terminals = __esm({
 ${e2.message}\r
 ` })
         );
+        this.sessions.set(sessionId, child);
+        return { sessionId, pty: command === "script" };
+      }
+      input(sessionId, data) {
+        const child = this.sessions.get(sessionId);
+        if (!child) {
+          throw new WorkspaceError("This terminal is closed.", 404);
+        }
+        child.stdin?.write(data);
+        return { written: data.length };
+      }
+      close(sessionId) {
+        const child = this.sessions.get(sessionId);
+        if (child) {
+          kill(child);
+          this.forget(sessionId);
+        }
+        return { closed: !!child };
+      }
+      /**
+       * Watch the root for the browser editor (no shell, no --allow-terminal:
+       * only the names of changed files, which `list` shows anyway). Changes
+       * are batched, de-duplicated and `.gitignore`d ones dropped, then sent as
+       * `changed` events of this watch.
+       */
+      watch() {
+        if (this.watches.size >= MAX_SESSIONS) {
+          throw new WorkspaceError(
+            `At most ${MAX_SESSIONS} editors watching at a time.`,
+            429
+          );
+        }
+        const sessionId = (0, import_crypto3.randomUUID)();
         const changed$ = new import_rxjs70.Subject();
         const changes = changed$.pipe(
           (0, import_operators59.bufferTime)(WATCH_BATCH_MS),
           (0, import_operators59.filter)((paths) => paths.length > 0),
           (0, import_operators59.concatMap)((paths) => (0, import_rxjs70.from)(this.notIgnored([...new Set(paths)]))),
           (0, import_operators59.mergeMap)((paths) => (0, import_rxjs70.from)(paths))
-        ).subscribe((path2) => emit({ kind: "changed", data: path2 }));
-        this.sessions.set(sessionId, {
-          child,
+        ).subscribe(
+          (path2) => this.events$.next({ sessionId, kind: "changed", data: path2 })
+        );
+        this.watches.set(sessionId, {
           watcher: this.watchRoot((path2) => changed$.next(path2)),
           changes
         });
-        return { sessionId, pty: command === "script" };
+        return { sessionId };
       }
-      input(sessionId, data) {
-        this.session(sessionId).child.stdin?.write(data);
-        return { written: data.length };
-      }
-      close(sessionId) {
-        const session = this.sessions.get(sessionId);
-        if (session) {
-          kill(session.child);
-          this.forget(sessionId);
-        }
-        return { closed: !!session };
+      unwatch(sessionId) {
+        const watch3 = this.watches.get(sessionId);
+        watch3?.watcher?.close();
+        watch3?.changes.unsubscribe();
+        this.watches.delete(sessionId);
+        return { closed: !!watch3 };
       }
       closeAll() {
         [...this.sessions.keys()].forEach((id) => this.close(id));
-      }
-      session(sessionId) {
-        const session = this.sessions.get(sessionId);
-        if (!session) {
-          throw new WorkspaceError("This terminal is closed.", 404);
-        }
-        return session;
+        [...this.watches.keys()].forEach((id) => this.unwatch(id));
       }
       forget(sessionId) {
-        const session = this.sessions.get(sessionId);
-        session?.watcher?.close();
-        session?.changes.unsubscribe();
         this.sessions.delete(sessionId);
       }
       /** Recursive watch of the root (Node >= 20 on Linux, macOS, Windows). */
@@ -324767,7 +324790,10 @@ var init_connection2 = __esm({
       // browser terminals (--allow-terminal, plan 36)
       "terminal/open",
       "terminal/input",
-      "terminal/close"
+      "terminal/close",
+      // the browser editor's file watch (no --allow-terminal needed)
+      "watch/open",
+      "watch/close"
     ];
     HEARTBEAT_MUTATION2 = `mutation localWorkspaceHeartbeat($info: LocalWorkspaceHeartbeatInput) {
   localWorkspaceHeartbeat(info: $info) { id name }
@@ -325000,6 +325026,11 @@ var init_connection2 = __esm({
               str(args.sessionId) ?? "",
               str(args.data) ?? ""
             );
+          case "watch/open":
+            log2("\u25C9  the browser editor watches the files");
+            return this.terminals.watch();
+          case "watch/close":
+            return this.terminals.unwatch(str(args.sessionId) ?? "");
           case "terminal/close":
             log2("\u25A3  terminal closed");
             return this.terminals.close(str(args.sessionId) ?? "");
@@ -326141,7 +326172,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.269" : "development";
+var version2 = true ? "1.8.270" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));

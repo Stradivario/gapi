@@ -1,4 +1,4 @@
-## [1.8.270](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.270) (2026-11-18)
+## [1.8.271](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.271) (2026-11-18)
 
 
 ### Bug Fixes
@@ -160,6 +160,7 @@
 * **gcli:** runner commands bridge a local Ollama to the Lambforge chat ([b41c0b3](https://github.com/Stradivario/gapi/commit/b41c0b37ece02e18be87b632dc4b8e840d5eda28))
 * **gcli:** scaling options added to yml file ([3c01cdc](https://github.com/Stradivario/gapi/commit/3c01cdc7b3f7d0bce572b1a64af2b718075a93dc))
 * **gcli:** single executable ([8697dc6](https://github.com/Stradivario/gapi/commit/8697dc63dd03f9a4247238f21a3d77e604f0c360))
+* **gcli:** the browser editor watches a workspace's files without a terminal (watch/open, watch/close) ([e2b89e1](https://github.com/Stradivario/gapi/commit/e2b89e139f2dacd7d25ac389a8c4fe253a52ebe9))
 * **gcli:** time triggers tools implemented ([8cbf633](https://github.com/Stradivario/gapi/commit/8cbf63325a15590c714e517a856fb9cca58b8767))
 * **gcli:** update cluster cost command to print amounts in platform currency, removing USD column ([1b63100](https://github.com/Stradivario/gapi/commit/1b6310083c40402e6afc8cf8a0097cebb8dbcb04))
 * **gcli:** updated mcp server to be with rxjs instead of imperative code ([4337cad](https://github.com/Stradivario/gapi/commit/4337cad4a5091700b1f31ab1e01028ee96b6a096))
