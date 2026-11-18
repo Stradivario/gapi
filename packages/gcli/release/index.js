@@ -324033,7 +324033,9 @@ var init_files = __esm({
         entries = entries.slice(0, limit);
         await Promise.all(
           entries.filter((e2) => e2.type === "file").map(async (e2) => {
-            e2.size = await import_fs12.promises.stat((0, import_path7.join)(this.root, e2.path)).then((s2) => s2.size).catch(() => void 0);
+            const stat2 = await import_fs12.promises.stat((0, import_path7.join)(this.root, e2.path)).catch(() => void 0);
+            e2.size = stat2?.size;
+            e2.mtimeMs = stat2 ? Math.floor(stat2.mtimeMs) : void 0;
           })
         );
         return {
@@ -326139,7 +326141,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.268" : "development";
+var version2 = true ? "1.8.269" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
