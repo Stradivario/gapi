@@ -94,6 +94,12 @@ describe('[workspace] a folder without git honours .gitignore', () => {
     };
     const paths = (listed.files ?? listed.entries ?? []).map((e) => e.path);
     expect(paths).toContain('src/main.ts');
+    // size + modification time: the browser's file cache compares them
+    const main = (listed.files ?? listed.entries ?? []).find(
+      (e) => e.path === 'src/main.ts',
+    ) as { size?: number; mtimeMs?: number };
+    expect(main.size).toBe(1);
+    expect(main.mtimeMs).toEqual(expect.any(Number));
     expect(paths.some((p) => /^(dist|\.parcel-cache)\//.test(p))).toBe(false);
   });
 

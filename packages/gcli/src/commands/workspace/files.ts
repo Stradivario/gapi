@@ -55,6 +55,8 @@ const toPosix = (p: string) => p.split(sep).join('/');
 export interface FileEntry {
   path: string;
   size?: number;
+  /** last modification (ms) - the browser's file cache checks it */
+  mtimeMs?: number;
   type: 'file' | 'dir';
 }
 
@@ -254,10 +256,11 @@ export class WorkspaceFiles {
       entries
         .filter((e) => e.type === 'file')
         .map(async (e) => {
-          e.size = await fs
+          const stat = await fs
             .stat(join(this.root, e.path))
-            .then((s) => s.size)
             .catch(() => undefined);
+          e.size = stat?.size;
+          e.mtimeMs = stat ? Math.floor(stat.mtimeMs) : undefined;
         }),
     );
     // git lists deleted-but-tracked files too
