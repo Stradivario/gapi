@@ -1,4 +1,4 @@
-## [1.8.271](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.271) (2026-11-18)
+## [1.8.272](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.272) (2026-11-18)
 
 
 ### Bug Fixes
@@ -49,6 +49,7 @@
 * **gcli:** async code refactored to rxjs [ci-skip] ([42cf603](https://github.com/Stradivario/gapi/commit/42cf6039547de01381c20db48bda760f3906987f))
 * **gcli:** authorization token passed also to upload lambda logic ([26e5126](https://github.com/Stradivario/gapi/commit/26e512698fd471fb73ecf302e857631609eecc8e))
 * **gcli:** browser login uses Node's built-in fetch - node-fetch v3 is ESM-only and broke the jest run in CI ([17049f0](https://github.com/Stradivario/gapi/commit/17049f0eb3340abd59a52642b21c9108853b56dc))
+* **gcli:** browser terminal PTY starts at the browser's size (stty) - no 80-column wrap ([2c95540](https://github.com/Stradivario/gapi/commit/2c9554091e48782e1fab0a6863a159057cad479d))
 * **gcli:** build reads lambforge.yaml, environment flags as numbers, plan-safe scale defaults ([1fd8120](https://github.com/Stradivario/gapi/commit/1fd8120678a9ce13b4539d62d488529aac69dc24))
 * **gcli:** builded again the package with namespace import from all ([f655951](https://github.com/Stradivario/gapi/commit/f6559518341065cef27d9404d8941480ff704ee0))
 * **gcli:** decompress logs ([705241b](https://github.com/Stradivario/gapi/commit/705241b05fcba9d8375c4cf8a73710f1989323e3))

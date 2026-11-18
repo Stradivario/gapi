@@ -324599,15 +324599,22 @@ ${this.text}` : this.text;
 });
 
 // src/commands/workspace/terminals.ts
-function shellCommand() {
-  if (process.platform === "win32") {
+function dimension(value, fallback) {
+  const n = Math.trunc(Number(value));
+  return Number.isFinite(n) && n >= 10 && n <= 1e3 ? n : fallback;
+}
+function shellCommand(size = {}, platform2 = process.platform, hasScript = () => !(0, import_child_process8.spawnSync)("script", ["--version"]).error) {
+  if (platform2 === "win32") {
     return [process.env.ComSpec || "cmd.exe", []];
   }
   const shell = process.env.SHELL || "/bin/sh";
-  if ((0, import_child_process8.spawnSync)("script", ["--version"]).error) {
+  if (!hasScript()) {
     return [shell, ["-i"]];
   }
-  return process.platform === "darwin" ? ["script", ["-q", "/dev/null", shell, "-i"]] : ["script", ["-qfec", `${shell} -i`, "/dev/null"]];
+  const cols = dimension(size.cols, 80);
+  const rows = dimension(size.rows, 24);
+  const start3 = `stty cols ${cols} rows ${rows} 2>/dev/null; exec ${shell} -i`;
+  return platform2 === "darwin" ? ["script", ["-q", "/dev/null", "/bin/sh", "-c", start3]] : ["script", ["-qfec", start3, "/dev/null"]];
 }
 function kill(child) {
   try {
@@ -324655,7 +324662,7 @@ var init_terminals = __esm({
           );
         }
         const sessionId = (0, import_crypto3.randomUUID)();
-        const [command, args] = shellCommand();
+        const [command, args] = shellCommand(size);
         const child = (0, import_child_process8.spawn)(command, args, {
           cwd: this.root,
           env: {
@@ -326172,7 +326179,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.270" : "development";
+var version2 = true ? "1.8.271" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
