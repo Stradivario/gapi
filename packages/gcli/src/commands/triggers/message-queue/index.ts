@@ -46,6 +46,15 @@ export function registerMessageQueueTriggerCommands(program: Command) {
   );
 
   program
+    .command('mq-trigger:apply')
+    .description(
+      'Create or update the message-queue triggers listed under triggers.mq in lambforge.yaml',
+    )
+    .option('-p, --project <project>')
+    .option('-spec, --spec <spec>')
+    .action(lazy(() => import('./apply').then((m) => m.default)));
+
+  program
     .command('mq-trigger:delete')
     .description('Delete a message-queue trigger')
     .option('-p, --project <project>')

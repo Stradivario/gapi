@@ -28,6 +28,24 @@ export function registerRabbitMqCommands(program: Command) {
     .action(lazy(() => import('./list').then((m) => m.default)));
 
   program
+    .command('queue:declare')
+    .description(
+      'Declare queues on a RabbitMQ broker of the project (skips the ones it has)',
+    )
+    .option('-p, --project <project>')
+    .option(
+      '-n, --name <name>',
+      'Queue name; repeat for several. Without it: queues.declare in lambforge.yaml',
+      (value: string, all: string[] = []) => [...all, value],
+    )
+    .option(
+      '--broker <broker>',
+      'Broker name or id (see rabbitmq:list); optional when the project has one',
+    )
+    .option('-spec, --spec <spec>')
+    .action(lazy(() => import('./declare-queue').then((m) => m.default)));
+
+  program
     .command('rabbitmq:delete')
     .description('Delete a RabbitMQ broker')
     .option('-p, --project <project>')

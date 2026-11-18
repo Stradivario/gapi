@@ -43,3 +43,4 @@ Outline (drop sections that don't apply):
 | `cli-browser-login` | [cli-browser-login.md](cli-browser-login.md) | Slice (canonical: graphql-server): `gcli login` with no token through the browser; `mcp:start` LambforgeLogin |
 | `lambda-site-url` | [lambda-site-url.md](lambda-site-url.md) | Slice (canonical: graphql-server-lambdas): `Site:` line after create/update |
 | `lambda-spread` | [lambda-spread.md](lambda-spread.md) | Slice (canonical: graphql-server-lambdas): replicas across machines (plan 33): `--spread` / `--spreadStrict`, yaml keys |
+| `mq-triggers-yaml` | [mq-triggers-yaml.md](mq-triggers-yaml.md) | `queue:declare`, `mq-trigger:apply`, `queues:` / `triggers.mq` in `lambforge.yaml` (plan 34) |

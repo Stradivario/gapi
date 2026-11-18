@@ -32,6 +32,7 @@ Commands:
   mq-trigger:list [options]                            List the message-queue triggers of a project
   mq-trigger:create [options]                          Run a lambda for every message on a RabbitMQ queue
   mq-trigger:update [options]                          Change a message-queue trigger (same flags as create)
+  mq-trigger:apply [options]                           Create or update the message-queue triggers listed under triggers.mq in lambforge.yaml
   mq-trigger:delete [options]                          Delete a message-queue trigger
   cluster:create [options]                             Provision a private Talos cluster, or with --virtual a virtual cluster, for a project (runs in the background; use --wait to block)
   cluster:apply [options]                              Make a private cluster match the `cluster:` section of lambforge.yaml: creates it if missing, then applies topology, workers, control planes, load balancer and autoscaling
@@ -59,6 +60,7 @@ Commands:
   cluster:load-balancer [options]                      Add or remove the cluster's load balancer (billed per hour while enabled). On a virtual cluster this is its dedicated LB - its own IP; the platform subdomain keeps working either way
   rabbitmq:create [options]                            Provision a RabbitMQ broker for a project (a project may have several)
   rabbitmq:list [options]                              List every RabbitMQ broker for a project
+  queue:declare [options]                              Declare queues on a RabbitMQ broker of the project (skips the ones it has)
   rabbitmq:delete [options]                            Delete a RabbitMQ broker
   plugin:list                                          List every plugin available in the marketplace catalog
   plugin:installed [options]                           List plugins installed for a project (may include the same plugin on several clusters)
@@ -183,6 +185,8 @@ Options:
   --concurrency <concurrency>                      Maximum number of pods specialized concurrently to serve requests
   --functionTimeout <functionTimeout>              Maximum time for a request to wait for the response from the function
   --specializationTimeout <specializationTimeout>  Timeout for executor to wait for function pod creation
+  --spread <spread>                                Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides
+  --spreadStrict <spreadStrict>                    With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up
   -h, --help                                       display help for command
 [36m
 --- Subcommand: lambda:update ---[0m
@@ -226,6 +230,8 @@ Options:
   --concurrency <concurrency>                      Maximum number of pods specialized concurrently to serve requests
   --functionTimeout <functionTimeout>              Maximum time for a request to wait for the response from the function
   --specializationTimeout <specializationTimeout>  Timeout for executor to wait for function pod creation
+  --spread <spread>                                Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides
+  --spreadStrict <spreadStrict>                    With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up
   -h, --help                                       display help for command
 [36m
 --- Subcommand: lambda:delete ---[0m
@@ -342,6 +348,8 @@ Options:
   --concurrency <concurrency>                      Maximum number of pods specialized concurrently to serve requests
   --functionTimeout <functionTimeout>              Maximum time for a request to wait for the response from the function
   --specializationTimeout <specializationTimeout>  Timeout for executor to wait for function pod creation
+  --spread <spread>                                Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides
+  --spreadStrict <spreadStrict>                    With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up
   -h, --help                                       display help for command
 [36m
 --- Subcommand: project:list ---[0m
@@ -595,6 +603,16 @@ Options:
   --max-replicas <n>
   --threshold <n>               Messages per replica before scaling out
   -h, --help                    display help for command
+[36m
+--- Subcommand: mq-trigger:apply ---[0m
+Usage: gcli mq-trigger:apply [options]
+
+Create or update the message-queue triggers listed under triggers.mq in lambforge.yaml
+
+Options:
+  -p, --project <project>
+  -spec, --spec <spec>
+  -h, --help               display help for command
 [36m
 --- Subcommand: mq-trigger:delete ---[0m
 Usage: gcli mq-trigger:delete [options]
@@ -967,6 +985,20 @@ List every RabbitMQ broker for a project
 
 Options:
   -p, --project <project>
+  -h, --help               display help for command
+[36m
+--- Subcommand: queue:declare ---[0m
+Usage: gcli queue:declare [options]
+
+Declare queues on a RabbitMQ broker of the project (skips the ones it has)
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        Queue name; repeat for several. Without it:
+                           queues.declare in lambforge.yaml
+  --broker <broker>        Broker name or id (see rabbitmq:list); optional when
+                           the project has one
+  -spec, --spec <spec>
   -h, --help               display help for command
 [36m
 --- Subcommand: rabbitmq:delete ---[0m

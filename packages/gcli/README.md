@@ -55,7 +55,8 @@ Create the token in the dashboard (Project → CI/CD) with only the permissions 
 | Environments: read / write / delete | `environment:list/get`, `environment:create/update`, `environment:delete` |
 | Schedules: read / write | `cron:list`, `cron:create/delete` |
 | RabbitMQ: read / install / uninstall | `rabbitmq:list`, `rabbitmq:create`, `rabbitmq:delete` |
-| Queue triggers: read / manage | `mq-trigger:list`, `mq-trigger:create/update/delete` |
+| Queues: declare | `queue:declare` |
+| Queue triggers: read / manage | `mq-trigger:list`, `mq-trigger:create/update/delete`, `mq-trigger:apply` (from `lambforge.yaml`) |
 | Plugins: read / install | `plugin:list/installed`, `plugin:install/uninstall` |
 | Clusters: read / scale / create / tear down / kubeconfig | `cluster:list/status/health/scale-events/cost`, `cluster:scale/autoscale/multi-node/single-node/load-balancer/apply`, `cluster:create/apply`, `cluster:teardown`, `cluster:kubeconfig`, `cluster:attach/nodes/pause/resume/detach` (your own machines, admin), `cluster:reset-machine`, `cluster:talosconfig` |
 
@@ -305,6 +306,34 @@ gcli mq-trigger:delete --name orders
 
 Scaling flags: `--max-retries`, `--cool-down-period`, `--polling-interval`, `--min-replicas`, `--max-replicas`, `--threshold` (messages per replica).
 
+Queues and triggers can also live in `lambforge.yaml`, next to the lambda they belong to, and be applied on every deploy (both commands are safe to run again):
+
+```yaml
+queues:
+  broker: events-broker        # broker name or id; leave out when the project has one broker
+  declare: [orders, orders-done, orders-failed]
+
+triggers:
+  mq:
+    - name: orders
+      # lambda: order-handler  # default: this file's function.name
+      requestTopic: orders
+      responseTopic: orders-done
+      errorTopic: orders-failed
+      maxRetries: 2
+      minReplicas: 0
+      maxReplicas: 3
+      threshold: 20
+```
+
+```bash
+gcli queue:declare                       # declares queues.declare; skips the ones the broker has
+gcli queue:declare -n orders -n orders-done --broker events-broker   # or by flag
+gcli mq-trigger:apply                    # creates the missing triggers, updates the others; never deletes
+```
+
+How a message is handled: the trigger calls the lambda over HTTP with the message as the request body. A 2xx answer publishes the lambda's response to `responseTopic` and removes the message. Anything else is retried `maxRetries` times right away, then the error goes to `errorTopic` and the message stays unacknowledged (it comes back when the trigger's pod restarts). A lambda that must not be re-run forever answers 200 and reports the failure in its response.
+
 ### Marketplace Plugins
 
 Plugins (Redis, MongoDB, NATS, FalkorDB, ...) can be installed on the shared cluster or on any private cluster - the same plugin can be installed on several clusters at once.
@@ -442,7 +471,7 @@ machine going down takes one replica, not several (use it with
 Flags: `--spread machines|none`, `--spreadStrict true|false`. Left out = the
 lambda keeps what it has. Changing it restarts the replicas once.
 
-The same file can also carry `cluster:`, `rabbitmq:`, `plugin:` and `triggers:` sections, read by `cluster:apply` / `cluster:create`, `rabbitmq:create`, `plugin:install` and `cron:create` respectively (each also accepts its own dedicated `--spec` file, e.g. `cluster.yaml`, if you'd rather keep them separate):
+The same file can also carry `cluster:`, `rabbitmq:`, `plugin:`, `queues:` and `triggers:` sections, read by `cluster:apply` / `cluster:create`, `rabbitmq:create`, `plugin:install`, `queue:declare` and `cron:create` (`triggers.time`) / `mq-trigger:apply` (`triggers.mq`) respectively (each also accepts its own dedicated `--spec` file, e.g. `cluster.yaml`, if you'd rather keep them separate):
 
 ```yaml
 cluster:          # every key: see "Declarative clusters" above
