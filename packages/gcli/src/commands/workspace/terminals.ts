@@ -29,15 +29,17 @@ const MAX_SESSIONS = 4;
 /** Changed paths are collected this long, then filtered in one go. */
 const WATCH_BATCH_MS = 150;
 
-interface Session {
-  child: ChildProcess;
+interface Watch {
   watcher: FSWatcher | null;
   changes: Subscription;
 }
 
 export class TerminalManager {
   readonly events$ = new Subject<TerminalEvent>();
-  private readonly sessions = new Map<string, Session>();
+  /** shells (`terminal/*`) */
+  private readonly sessions = new Map<string, ChildProcess>();
+  /** file watches (`watch/*`) - the open editor, terminal or not */
+  private readonly watches = new Map<string, Watch>();
 
   /**
    * @param notIgnored keeps the paths `.gitignore` does not ignore
@@ -86,7 +88,42 @@ export class TerminalManager {
     child.on('error', (e) =>
       emit({ kind: 'output', data: `\r\n${e.message}\r\n` }),
     );
-    // changed files: batched, de-duplicated, .gitignore'd ones dropped
+    this.sessions.set(sessionId, child);
+    return { sessionId, pty: command === 'script' };
+  }
+
+  input(sessionId: string, data: string) {
+    const child = this.sessions.get(sessionId);
+    if (!child) {
+      throw new WorkspaceError('This terminal is closed.', 404);
+    }
+    child.stdin?.write(data);
+    return { written: data.length };
+  }
+
+  close(sessionId: string) {
+    const child = this.sessions.get(sessionId);
+    if (child) {
+      kill(child);
+      this.forget(sessionId);
+    }
+    return { closed: !!child };
+  }
+
+  /**
+   * Watch the root for the browser editor (no shell, no --allow-terminal:
+   * only the names of changed files, which `list` shows anyway). Changes
+   * are batched, de-duplicated and `.gitignore`d ones dropped, then sent as
+   * `changed` events of this watch.
+   */
+  watch() {
+    if (this.watches.size >= MAX_SESSIONS) {
+      throw new WorkspaceError(
+        `At most ${MAX_SESSIONS} editors watching at a time.`,
+        429,
+      );
+    }
+    const sessionId = randomUUID();
     const changed$ = new Subject<string>();
     const changes = changed$
       .pipe(
@@ -95,45 +132,30 @@ export class TerminalManager {
         concatMap((paths) => from(this.notIgnored([...new Set(paths)]))),
         mergeMap((paths) => from(paths)),
       )
-      .subscribe((path) => emit({ kind: 'changed', data: path }));
-    this.sessions.set(sessionId, {
-      child,
+      .subscribe((path) =>
+        this.events$.next({ sessionId, kind: 'changed', data: path }),
+      );
+    this.watches.set(sessionId, {
       watcher: this.watchRoot((path) => changed$.next(path)),
       changes,
     });
-    return { sessionId, pty: command === 'script' };
+    return { sessionId };
   }
 
-  input(sessionId: string, data: string) {
-    this.session(sessionId).child.stdin?.write(data);
-    return { written: data.length };
-  }
-
-  close(sessionId: string) {
-    const session = this.sessions.get(sessionId);
-    if (session) {
-      kill(session.child);
-      this.forget(sessionId);
-    }
-    return { closed: !!session };
+  unwatch(sessionId: string) {
+    const watch = this.watches.get(sessionId);
+    watch?.watcher?.close();
+    watch?.changes.unsubscribe();
+    this.watches.delete(sessionId);
+    return { closed: !!watch };
   }
 
   closeAll() {
     [...this.sessions.keys()].forEach((id) => this.close(id));
-  }
-
-  private session(sessionId: string): Session {
-    const session = this.sessions.get(sessionId);
-    if (!session) {
-      throw new WorkspaceError('This terminal is closed.', 404);
-    }
-    return session;
+    [...this.watches.keys()].forEach((id) => this.unwatch(id));
   }
 
   private forget(sessionId: string) {
-    const session = this.sessions.get(sessionId);
-    session?.watcher?.close();
-    session?.changes.unsubscribe();
     this.sessions.delete(sessionId);
   }
 

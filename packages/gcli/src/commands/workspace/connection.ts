@@ -43,6 +43,9 @@ export const WORKSPACE_OPS = [
   'terminal/open',
   'terminal/input',
   'terminal/close',
+  // the browser editor's file watch (no --allow-terminal needed)
+  'watch/open',
+  'watch/close',
 ];
 
 export interface LocalWorkspaceIdentity {
@@ -346,6 +349,11 @@ export class WorkspaceConnection extends TunnelConnection<LocalWorkspaceIdentity
           str(args.sessionId) ?? '',
           str(args.data) ?? '',
         );
+      case 'watch/open':
+        log('◉  the browser editor watches the files');
+        return this.terminals.watch();
+      case 'watch/close':
+        return this.terminals.unwatch(str(args.sessionId) ?? '');
       case 'terminal/close':
         log('▣  terminal closed');
         return this.terminals.close(str(args.sessionId) ?? '');

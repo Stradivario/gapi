@@ -50,8 +50,8 @@ describe('[workspace] terminals', () => {
     await expect(printed).resolves.toContain('hello-from-the-shell');
   });
 
-  it('reports files changed in the root', async () => {
-    const { sessionId } = terminals.open({});
+  it('a watch reports files changed in the root', async () => {
+    const { sessionId } = terminals.watch();
     const changed = firstValueFrom(
       terminals.events$.pipe(
         filter((e) => e.sessionId === sessionId && e.kind === 'changed'),
@@ -88,7 +88,7 @@ describe('[workspace] terminal watch skips .gitignore', () => {
       () => ({ ...process.env }),
       (paths) => files.notIgnored(paths),
     );
-    const { sessionId } = terminals.open({});
+    const { sessionId } = terminals.watch();
     const reported: string[] = [];
     const sub = terminals.events$
       .pipe(filter((e) => e.sessionId === sessionId && e.kind === 'changed'))
@@ -129,6 +129,18 @@ describe('[workspace] terminals need --allow-terminal', () => {
     await expect(
       connection.dispatch('terminal/open', { cols: 80, rows: 24 }),
     ).rejects.toThrow(/--allow-terminal/);
+    connection.stop();
+  });
+
+  it('watches the files without the flag (names only, no shell)', async () => {
+    const connection = connect(false);
+    const watch = (await connection.dispatch('watch/open', {})) as {
+      sessionId: string;
+    };
+    expect(watch.sessionId).toEqual(expect.any(String));
+    await expect(
+      connection.dispatch('watch/close', { sessionId: watch.sessionId }),
+    ).resolves.toEqual({ closed: true });
     connection.stop();
   });
 
