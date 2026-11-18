@@ -55,11 +55,16 @@ import { commands } from './commands';
 import { outputAllHelp } from './helpers';
 import { Logger } from './services/log';
 
+/** Set by the bundle (build.js `define`): the package.json version. */
+declare const __GCLI_VERSION__: string;
+const version =
+  typeof __GCLI_VERSION__ === 'string' ? __GCLI_VERSION__ : 'development';
+
 /**
  * 3. CORE LOGIC
  */
 export const main = (argv: string[]) => {
-  program.name('gcli').version('0.0.1');
+  program.name('gcli').version(version);
 
   // Registering CLI commands
   commands.map((command) => command(program));
