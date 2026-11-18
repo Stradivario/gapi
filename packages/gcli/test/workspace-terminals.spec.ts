@@ -94,6 +94,25 @@ describe('[workspace] terminals', () => {
     });
   });
 
+  it('a new watch at the cap drops the oldest instead of being refused', async () => {
+    const ids = [0, 1, 2, 3].map(() => terminals.watch().sessionId);
+    const { sessionId } = terminals.watch();
+    expect(ids).not.toContain(sessionId);
+    // the newest reports changes
+    const changed = firstValueFrom(
+      terminals.events$.pipe(
+        filter((e) => e.sessionId === sessionId && e.kind === 'changed'),
+        map((e) => e.data),
+        timeout(10000),
+      ),
+    );
+    writeFileSync(join(root, 'after-the-cap.txt'), 'x');
+    await expect(changed).resolves.toBe('after-the-cap.txt');
+    // the oldest is gone, the others are still there
+    expect(terminals.unwatch(ids[0])).toEqual({ closed: false });
+    expect(terminals.unwatch(ids[1])).toEqual({ closed: true });
+  });
+
   it('caps the open sessions', () => {
     for (let i = 0; i < 4; i++) terminals.open({});
     expect(() => terminals.open({})).toThrow(/At most 4/);

@@ -146,11 +146,12 @@ export class TerminalManager {
    * `changed` events of this watch.
    */
   watch() {
+    // A reloaded or closed browser tab never closes its watch, so stale
+    // ones are normal: at the cap the OLDEST makes room (it was refused
+    // before - after four reloads the editor silently got no changes).
     if (this.watches.size >= MAX_SESSIONS) {
-      throw new WorkspaceError(
-        `At most ${MAX_SESSIONS} editors watching at a time.`,
-        429,
-      );
+      const oldest = this.watches.keys().next().value as string;
+      this.unwatch(oldest);
     }
     const sessionId = randomUUID();
     const changed$ = new Subject<string>();
