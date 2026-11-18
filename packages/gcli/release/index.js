@@ -21755,7 +21755,7 @@ var require_index_node_cjs2 = __commonJS({
     ] = "First argument to `onLog` must be null or a function.", _a2);
     var ERROR_FACTORY = new util2.ErrorFactory("app", "Firebase", ERRORS);
     var name$1 = "@firebase/app";
-    var version2 = "0.6.4";
+    var version3 = "0.6.4";
     var name$2 = "@firebase/analytics";
     var name$3 = "@firebase/auth";
     var name$4 = "@firebase/database";
@@ -22010,17 +22010,17 @@ var require_index_node_cjs2 = __commonJS({
           namespace[componentName]
         ) : null;
       }
-      function registerVersion(libraryKeyOrName, version3, variant) {
+      function registerVersion(libraryKeyOrName, version4, variant) {
         var _a3;
         var library = (_a3 = PLATFORM_LOG_STRING[libraryKeyOrName]) !== null && _a3 !== void 0 ? _a3 : libraryKeyOrName;
         if (variant) {
           library += "-" + variant;
         }
         var libraryMismatch = library.match(/\s|\//);
-        var versionMismatch = version3.match(/\s|\//);
+        var versionMismatch = version4.match(/\s|\//);
         if (libraryMismatch || versionMismatch) {
           var warning = [
-            'Unable to register library "' + library + '" with version "' + version3 + '":'
+            'Unable to register library "' + library + '" with version "' + version4 + '":'
           ];
           if (libraryMismatch) {
             warning.push('library name "' + library + '" contains illegal characters (whitespace or "/")');
@@ -22029,7 +22029,7 @@ var require_index_node_cjs2 = __commonJS({
             warning.push("and");
           }
           if (versionMismatch) {
-            warning.push('version name "' + version3 + '" contains illegal characters (whitespace or "/")');
+            warning.push('version name "' + version4 + '" contains illegal characters (whitespace or "/")');
           }
           logger.warn(warning.join(" "));
           return;
@@ -22037,7 +22037,7 @@ var require_index_node_cjs2 = __commonJS({
         registerComponent(new component.Component(
           library + "-version",
           function() {
-            return { library, version: version3 };
+            return { library, version: version4 };
           },
           "VERSION"
           /* VERSION */
@@ -22110,7 +22110,7 @@ var require_index_node_cjs2 = __commonJS({
         "PRIVATE"
         /* PRIVATE */
       ));
-      firebase3.registerVersion(name$1, version2, variant);
+      firebase3.registerVersion(name$1, version3, variant);
       firebase3.registerVersion("fire-js", "");
     }
     firebase2.INTERNAL.extendNamespace({
@@ -35988,8 +35988,8 @@ var require_index_cjs3 = __commonJS({
     }
     var firebase2 = _interopDefault(require_index_node_cjs2());
     var name2 = "firebase";
-    var version2 = "7.14.6";
-    firebase2.registerVersion(name2, version2, "app");
+    var version3 = "7.14.6";
+    firebase2.registerVersion(name2, version3, "app");
     module2.exports = firebase2;
   }
 });
@@ -39770,15 +39770,15 @@ var require_source_map_consumer = __commonJS({
       if (typeof aSourceMap === "string") {
         sourceMap = util2.parseSourceMapInput(aSourceMap);
       }
-      var version2 = util2.getArg(sourceMap, "version");
+      var version3 = util2.getArg(sourceMap, "version");
       var sources = util2.getArg(sourceMap, "sources");
       var names = util2.getArg(sourceMap, "names", []);
       var sourceRoot = util2.getArg(sourceMap, "sourceRoot", null);
       var sourcesContent = util2.getArg(sourceMap, "sourcesContent", null);
       var mappings = util2.getArg(sourceMap, "mappings");
       var file2 = util2.getArg(sourceMap, "file", null);
-      if (version2 != this._version) {
-        throw new Error("Unsupported version: " + version2);
+      if (version3 != this._version) {
+        throw new Error("Unsupported version: " + version3);
       }
       if (sourceRoot) {
         sourceRoot = util2.normalize(sourceRoot);
@@ -40083,10 +40083,10 @@ var require_source_map_consumer = __commonJS({
       if (typeof aSourceMap === "string") {
         sourceMap = util2.parseSourceMapInput(aSourceMap);
       }
-      var version2 = util2.getArg(sourceMap, "version");
+      var version3 = util2.getArg(sourceMap, "version");
       var sections = util2.getArg(sourceMap, "sections");
-      if (version2 != this._version) {
-        throw new Error("Unsupported version: " + version2);
+      if (version3 != this._version) {
+        throw new Error("Unsupported version: " + version3);
       }
       this._sources = new ArraySet();
       this._names = new ArraySet();
@@ -43262,7 +43262,7 @@ var require_typescript = __commonJS({
         usingSingleLineStringWriter: () => usingSingleLineStringWriter,
         utf16EncodeAsString: () => utf16EncodeAsString,
         validateLocaleAndSetLanguage: () => validateLocaleAndSetLanguage,
-        version: () => version2,
+        version: () => version3,
         versionMajorMinor: () => versionMajorMinor,
         visitArray: () => visitArray,
         visitCommaListElements: () => visitCommaListElements,
@@ -43286,7 +43286,7 @@ var require_typescript = __commonJS({
       });
       module3.exports = __toCommonJS2(typescript_exports);
       var versionMajorMinor = "5.9";
-      var version2 = "5.9.3";
+      var version3 = "5.9.3";
       var Comparison = /* @__PURE__ */ ((Comparison3) => {
         Comparison3[Comparison3["LessThan"] = -1] = "LessThan";
         Comparison3[Comparison3["EqualTo"] = 0] = "EqualTo";
@@ -88398,7 +88398,7 @@ ${lanes.join("\n")}
       }
       var typeScriptVersion;
       function getPackageJsonTypesVersionsPaths(typesVersions) {
-        if (!typeScriptVersion) typeScriptVersion = new Version(version2);
+        if (!typeScriptVersion) typeScriptVersion = new Version(version3);
         for (const key in typesVersions) {
           if (!hasProperty(typesVersions, key)) continue;
           const keyRange = VersionRange.tryParse(key);
@@ -90046,7 +90046,7 @@ ${lanes.join("\n")}
             false
           );
           if (state.traceEnabled) {
-            trace(state.host, Diagnostics.package_json_has_a_typesVersions_entry_0_that_matches_compiler_version_1_looking_for_a_pattern_to_match_module_name_2, versionPaths.version, version2, moduleName);
+            trace(state.host, Diagnostics.package_json_has_a_typesVersions_entry_0_that_matches_compiler_version_1_looking_for_a_pattern_to_match_module_name_2, versionPaths.version, version3, moduleName);
           }
           const pathPatterns = tryParsePatterns(versionPaths.paths);
           const result = tryLoadModuleUsingPaths(extensions, moduleName, candidate, versionPaths.paths, pathPatterns, loader, onlyRecordFailuresForPackageFile || onlyRecordFailuresForIndex, state);
@@ -90528,7 +90528,7 @@ ${lanes.join("\n")}
         if (!startsWith(key, "types@")) return false;
         const range = VersionRange.tryParse(key.substring("types@".length));
         if (!range) return false;
-        return range.test(version2);
+        return range.test(version3);
       }
       function loadModuleFromNearestNodeModulesDirectory(extensions, moduleName, directory, state, cache, redirectedReference) {
         return loadModuleFromNearestNodeModulesDirectoryWorker(
@@ -90664,7 +90664,7 @@ ${lanes.join("\n")}
         const versionPaths = rest !== "" && packageInfo ? getVersionPathsOfPackageJsonInfo(packageInfo, state) : void 0;
         if (versionPaths) {
           if (state.traceEnabled) {
-            trace(state.host, Diagnostics.package_json_has_a_typesVersions_entry_0_that_matches_compiler_version_1_looking_for_a_pattern_to_match_module_name_2, versionPaths.version, version2, rest);
+            trace(state.host, Diagnostics.package_json_has_a_typesVersions_entry_0_that_matches_compiler_version_1_looking_for_a_pattern_to_match_module_name_2, versionPaths.version, version3, rest);
           }
           const packageDirectoryExists = nodeModulesDirectoryExists && directoryProbablyExists(packageDirectory, state.host);
           const pathPatterns = tryParsePatterns(versionPaths.paths);
@@ -170673,7 +170673,7 @@ ${lanes.join("\n")}
             emitSkipped = true;
             return;
           }
-          const buildInfo = host.getBuildInfo() || { version: version2 };
+          const buildInfo = host.getBuildInfo() || { version: version3 };
           writeFile13(
             host,
             emitterDiagnostics,
@@ -181406,7 +181406,7 @@ ${lanes.join("\n")}
             root: arrayFrom(rootFileNames, (r2) => relativeToBuildInfo(r2)),
             errors: state.hasErrors ? true : void 0,
             checkPending: state.checkPending,
-            version: version2
+            version: version3
           };
           return buildInfo2;
         }
@@ -181438,7 +181438,7 @@ ${lanes.join("\n")}
             // Actual value
             errors: state.hasErrors ? true : void 0,
             checkPending: state.checkPending,
-            version: version2
+            version: version3
           };
           return buildInfo2;
         }
@@ -181535,7 +181535,7 @@ ${lanes.join("\n")}
           latestChangedDtsFile,
           errors: state.hasErrors ? true : void 0,
           checkPending: state.checkPending,
-          version: version2
+          version: version3
         };
         return buildInfo;
         function relativeToBuildInfoEnsuringAbsolutePath(path2) {
@@ -184213,7 +184213,7 @@ ${lanes.join("\n")}
           if (!content) return void 0;
           buildInfo = getBuildInfo(buildInfoPath, content);
         }
-        if (!buildInfo || buildInfo.version !== version2 || !isIncrementalBuildInfo(buildInfo)) return void 0;
+        if (!buildInfo || buildInfo.version !== version3 || !isIncrementalBuildInfo(buildInfo)) return void 0;
         return createBuilderProgramUsingIncrementalBuildInfo(buildInfo, buildInfoPath, host);
       }
       function createIncrementalCompilerHost(options, system = sys) {
@@ -185916,7 +185916,7 @@ ${lanes.join("\n")}
           };
         }
         const incrementalBuildInfo = isIncremental && isIncrementalBuildInfo(buildInfo) ? buildInfo : void 0;
-        if ((incrementalBuildInfo || !isIncremental) && buildInfo.version !== version2) {
+        if ((incrementalBuildInfo || !isIncremental) && buildInfo.version !== version3) {
           return {
             type: 14,
             version: buildInfo.version
@@ -186735,7 +186735,7 @@ ${lanes.join("\n")}
               Diagnostics.Project_0_is_out_of_date_because_output_for_it_was_generated_with_version_1_that_differs_with_current_version_2,
               relName(state, configFileName),
               status2.version,
-              version2
+              version3
             );
           case 17:
             return reportStatus(
@@ -186823,7 +186823,7 @@ ${lanes.join("\n")}
         return !!commandLine.options.all ? toSorted(optionDeclarations.concat(tscBuildOption), (a, b) => compareStringsCaseInsensitive(a.name, b.name)) : filter4(optionDeclarations.concat(tscBuildOption), (v) => !!v.showInSimplifiedHelpView);
       }
       function printVersion(sys2) {
-        sys2.write(getDiagnosticText(Diagnostics.Version_0, version2) + sys2.newLine);
+        sys2.write(getDiagnosticText(Diagnostics.Version_0, version3) + sys2.newLine);
       }
       function createColors(sys2) {
         const showColors = defaultIsPretty(sys2);
@@ -187075,7 +187075,7 @@ ${lanes.join("\n")}
       }
       function printEasyHelp(sys2, simpleOptions) {
         const colors = createColors(sys2);
-        let output = [...getHeader(sys2, `${getDiagnosticText(Diagnostics.tsc_Colon_The_TypeScript_Compiler)} - ${getDiagnosticText(Diagnostics.Version_0, version2)}`)];
+        let output = [...getHeader(sys2, `${getDiagnosticText(Diagnostics.tsc_Colon_The_TypeScript_Compiler)} - ${getDiagnosticText(Diagnostics.Version_0, version3)}`)];
         output.push(colors.bold(getDiagnosticText(Diagnostics.COMMON_COMMANDS)) + sys2.newLine + sys2.newLine);
         example("tsc", Diagnostics.Compiles_the_current_project_tsconfig_json_in_the_working_directory);
         example("tsc app.ts util.ts", Diagnostics.Ignoring_tsconfig_json_compiles_the_specified_files_with_default_compiler_options);
@@ -187122,7 +187122,7 @@ ${lanes.join("\n")}
         }
       }
       function printAllHelp(sys2, compilerOptions, buildOptions, watchOptions) {
-        let output = [...getHeader(sys2, `${getDiagnosticText(Diagnostics.tsc_Colon_The_TypeScript_Compiler)} - ${getDiagnosticText(Diagnostics.Version_0, version2)}`)];
+        let output = [...getHeader(sys2, `${getDiagnosticText(Diagnostics.tsc_Colon_The_TypeScript_Compiler)} - ${getDiagnosticText(Diagnostics.Version_0, version3)}`)];
         output = [...output, ...generateSectionOptionsOutput(
           sys2,
           getDiagnosticText(Diagnostics.ALL_COMPILER_OPTIONS),
@@ -187154,7 +187154,7 @@ ${lanes.join("\n")}
         }
       }
       function printBuildHelp(sys2, buildOptions) {
-        let output = [...getHeader(sys2, `${getDiagnosticText(Diagnostics.tsc_Colon_The_TypeScript_Compiler)} - ${getDiagnosticText(Diagnostics.Version_0, version2)}`)];
+        let output = [...getHeader(sys2, `${getDiagnosticText(Diagnostics.tsc_Colon_The_TypeScript_Compiler)} - ${getDiagnosticText(Diagnostics.Version_0, version3)}`)];
         output = [...output, ...generateSectionOptionsOutput(
           sys2,
           getDiagnosticText(Diagnostics.BUILD_OPTIONS),
@@ -238765,7 +238765,7 @@ ${options.prefix}` : "\n" : options.prefix
         usingSingleLineStringWriter: () => usingSingleLineStringWriter,
         utf16EncodeAsString: () => utf16EncodeAsString,
         validateLocaleAndSetLanguage: () => validateLocaleAndSetLanguage,
-        version: () => version2,
+        version: () => version3,
         versionMajorMinor: () => versionMajorMinor,
         visitArray: () => visitArray,
         visitCommaListElements: () => visitCommaListElements,
@@ -238790,7 +238790,7 @@ ${options.prefix}` : "\n" : options.prefix
       var enableDeprecationWarnings = true;
       var typeScriptVersion2;
       function getTypeScriptVersion() {
-        return typeScriptVersion2 ?? (typeScriptVersion2 = new Version(version2));
+        return typeScriptVersion2 ?? (typeScriptVersion2 = new Version(version3));
       }
       function formatDeprecationMessage(name2, error210, errorAfter, since, message) {
         let deprecationMessage = error210 ? "DeprecationError: " : "DeprecationWarning: ";
@@ -239299,7 +239299,7 @@ ${options.prefix}` : "\n" : options.prefix
           this.sendResponse({
             kind: EventBeginInstallTypes,
             eventId: requestId,
-            typingsInstallerVersion: version2,
+            typingsInstallerVersion: version3,
             projectName: req.projectName
           });
           const scopedTypings = filteredTypings.map(typingsName);
@@ -239341,7 +239341,7 @@ ${options.prefix}` : "\n" : options.prefix
                 projectName: req.projectName,
                 packagesToInstall: scopedTypings,
                 installSuccess: ok,
-                typingsInstallerVersion: version2
+                typingsInstallerVersion: version3
               };
               this.sendResponse(response);
             }
@@ -244380,7 +244380,7 @@ ${options.prefix}` : "\n" : options.prefix
             configFileName: configFileName(),
             projectType: project instanceof ExternalProject ? "external" : "configured",
             languageServiceEnabled: project.languageServiceEnabled,
-            version: version2
+            version: version3
           };
           this.eventHandler({ eventName: ProjectInfoTelemetryEvent, data });
           function configFileName() {
@@ -247348,7 +247348,7 @@ ${json2}${newLine}`;
               "status"
               /* Status */
             ]: () => {
-              const response = { version: version2 };
+              const response = { version: version3 };
               return this.requiredResponse(response);
             },
             [
@@ -256200,40 +256200,40 @@ async function download(url2) {
   }
   return Buffer.from(await res.arrayBuffer());
 }
-async function ensureTalosctl(version2) {
-  if (!VERSION_RE.test(version2)) {
-    throw new Error(`Unknown Talos version "${version2}"`);
+async function ensureTalosctl(version3) {
+  if (!VERSION_RE.test(version3)) {
+    throw new Error(`Unknown Talos version "${version3}"`);
   }
   const onPath = await runBinary("talosctl", [
     "version",
     "--client",
     "--short"
   ]);
-  if (onPath.code === 0 && clientVersionOf(onPath.stdout) === version2) {
+  if (onPath.code === 0 && clientVersionOf(onPath.stdout) === version3) {
     return "talosctl";
   }
   const asset = talosctlAssetName();
   const dir = (0, import_path2.join)(mainDirectory, "bin");
   const binary = (0, import_path2.join)(
     dir,
-    `talosctl-${version2}${asset.endsWith(".exe") ? ".exe" : ""}`
+    `talosctl-${version3}${asset.endsWith(".exe") ? ".exe" : ""}`
   );
   if ((0, import_fs4.existsSync)(binary)) {
     return binary;
   }
   Logger.info(
-    `Downloading talosctl ${version2} (${asset}, about 90 MB, once) from the Talos releases ...`
+    `Downloading talosctl ${version3} (${asset}, about 90 MB, once) from the Talos releases ...`
   );
-  const sums = (await download(`${RELEASES}/${version2}/sha256sum.txt`)).toString("utf8");
+  const sums = (await download(`${RELEASES}/${version3}/sha256sum.txt`)).toString("utf8");
   const expected = checksumFor(sums, asset);
   if (!expected) {
-    throw new Error(`The ${version2} release lists no checksum for ${asset}.`);
+    throw new Error(`The ${version3} release lists no checksum for ${asset}.`);
   }
-  const body = await download(`${RELEASES}/${version2}/${asset}`);
+  const body = await download(`${RELEASES}/${version3}/${asset}`);
   const actual = (0, import_crypto.createHash)("sha256").update(body).digest("hex");
   if (actual !== expected) {
     throw new Error(
-      `Checksum mismatch for ${asset} ${version2} - the download was not used.`
+      `Checksum mismatch for ${asset} ${version3} - the download was not used.`
     );
   }
   await (0, import_promises.mkdir)(dir, { recursive: true });
@@ -256241,7 +256241,7 @@ async function ensureTalosctl(version2) {
   await (0, import_promises.writeFile)(partial2, body, { mode: 493 });
   await (0, import_promises.chmod)(partial2, 493);
   await (0, import_promises.rename)(partial2, binary);
-  Logger.info(`talosctl ${version2} saved to ${binary}`);
+  Logger.info(`talosctl ${version3} saved to ${binary}`);
   return binary;
 }
 var import_child_process2, import_crypto, import_fs4, import_promises, import_path2, RELEASES, VERSION_RE, clientVersionOf, runBinary;
@@ -256320,8 +256320,8 @@ var init_attach2 = __esm({
         );
       }
       Logger.info(`Looking for the Talos installer at ${opts.nodeIp}:50000 ...`);
-      let version2;
-      for (let i2 = 0; i2 < 12 && !version2; i2++) {
+      let version3;
+      for (let i2 = 0; i2 < 12 && !version3; i2++) {
         const probe = await talosctl([
           "-n",
           opts.nodeIp,
@@ -256331,15 +256331,15 @@ var init_attach2 = __esm({
           "-o",
           "yaml"
         ]);
-        version2 = probe.code === 0 ? serverTalosVersion(probe.stdout) : void 0;
-        if (!version2) await sleep3(5e3);
+        version3 = probe.code === 0 ? serverTalosVersion(probe.stdout) : void 0;
+        if (!version3) await sleep3(5e3);
       }
-      if (!version2) {
+      if (!version3) {
         throw new Error(
           `No Talos installer answers at ${opts.nodeIp}:50000. Boot the machine from the Talos ${info.talosVersion ?? ""} ISO (${info.isoUrl ?? "https://github.com/siderolabs/talos/releases"}; ARM: ${info.isoUrlArm64 ?? "-"}) and run this from the same network.`
         );
       }
-      Logger.info(`Machine runs the Talos ${version2} installer. Its disks:`);
+      Logger.info(`Machine runs the Talos ${version3} installer. Its disks:`);
       const disks = await talosctl([
         "-n",
         opts.nodeIp,
@@ -256372,9 +256372,9 @@ var init_attach2 = __esm({
           storage: opts.storage
         })
       );
-      if (join_.talosVersion && join_.talosVersion !== version2) {
+      if (join_.talosVersion && join_.talosVersion !== version3) {
         Logger.warn(
-          `The cluster runs Talos ${join_.talosVersion}, the machine booted ${version2}. It installs ${join_.talosVersion} anyway; if the join fails, boot ${join_.isoUrl}.`
+          `The cluster runs Talos ${join_.talosVersion}, the machine booted ${version3}. It installs ${join_.talosVersion} anyway; if the join fails, boot ${join_.isoUrl}.`
         );
       }
       const dir = await (0, import_promises2.mkdtemp)((0, import_path3.join)((0, import_os3.tmpdir)(), "gcli-attach-"));
@@ -274648,8 +274648,8 @@ var require_fs = __commonJS({
     var fs3 = require("fs");
     var origRealpath = fs3.realpath;
     var origRealpathSync = fs3.realpathSync;
-    var version2 = process.version;
-    var ok = /^v[0-5]\./.test(version2);
+    var version3 = process.version;
+    var ok = /^v[0-5]\./.test(version3);
     var old = require_old();
     function newError(er) {
       return er && er.syscall === "realpath" && (er.code === "ELOOP" || er.code === "ENOMEM" || er.code === "ENAMETOOLONG");
@@ -290070,11 +290070,11 @@ function datetimeRegex(args) {
   regex = `${regex}(${opts.join("|")})`;
   return new RegExp(`^${regex}$`);
 }
-function isValidIP(ip, version2) {
-  if ((version2 === "v4" || !version2) && ipv4Regex.test(ip)) {
+function isValidIP(ip, version3) {
+  if ((version3 === "v4" || !version3) && ipv4Regex.test(ip)) {
     return true;
   }
-  if ((version2 === "v6" || !version2) && ipv6Regex.test(ip)) {
+  if ((version3 === "v6" || !version3) && ipv6Regex.test(ip)) {
     return true;
   }
   return false;
@@ -290101,11 +290101,11 @@ function isValidJWT(jwt2, alg) {
     return false;
   }
 }
-function isValidCidr(ip, version2) {
-  if ((version2 === "v4" || !version2) && ipv4CidrRegex.test(ip)) {
+function isValidCidr(ip, version3) {
+  if ((version3 === "v4" || !version3) && ipv4CidrRegex.test(ip)) {
     return true;
   }
-  if ((version2 === "v6" || !version2) && ipv6CidrRegex.test(ip)) {
+  if ((version3 === "v6" || !version3) && ipv6CidrRegex.test(ip)) {
     return true;
   }
   return false;
@@ -294560,10 +294560,10 @@ var init_regexes = __esm({
     duration = /^P(?:(\d+W)|(?!.*W)(?=\d|T\d)(\d+Y)?(\d+M)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+([.,]\d+)?S)?)?)$/;
     extendedDuration = /^[-+]?P(?!$)(?:(?:[-+]?\d+Y)|(?:[-+]?\d+[.,]\d+Y$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:(?:[-+]?\d+W)|(?:[-+]?\d+[.,]\d+W$))?(?:(?:[-+]?\d+D)|(?:[-+]?\d+[.,]\d+D$))?(?:T(?=[\d+-])(?:(?:[-+]?\d+H)|(?:[-+]?\d+[.,]\d+H$))?(?:(?:[-+]?\d+M)|(?:[-+]?\d+[.,]\d+M$))?(?:[-+]?\d+(?:[.,]\d+)?S)?)??$/;
     guid = /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$/;
-    uuid = (version2) => {
-      if (!version2)
+    uuid = (version3) => {
+      if (!version3)
         return /^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/;
-      return new RegExp(`^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-${version2}[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$`);
+      return new RegExp(`^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-${version3}[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12})$`);
     };
     uuid4 = /* @__PURE__ */ uuid(4);
     uuid6 = /* @__PURE__ */ uuid(6);
@@ -307504,10 +307504,10 @@ function fromJSONSchema(schema, params) {
   if (typeof schema === "boolean") {
     return schema ? z.any() : z.never();
   }
-  const version2 = detectVersion(schema, params?.defaultTarget);
+  const version3 = detectVersion(schema, params?.defaultTarget);
   const defs = schema.$defs || schema.definitions || {};
   const ctx = {
-    version: version2,
+    version: version3,
     defs,
     refs: /* @__PURE__ */ new Map(),
     processing: /* @__PURE__ */ new Set(),
@@ -319715,8 +319715,8 @@ var init_streamableHttp = __esm({
           throw error48;
         }
       }
-      setProtocolVersion(version2) {
-        this._protocolVersion = version2;
+      setProtocolVersion(version3) {
+        this._protocolVersion = version3;
       }
       get protocolVersion() {
         return this._protocolVersion;
@@ -325798,8 +325798,9 @@ if (!isWebContainer) {
   } else {
   }
 }
+var version2 = true ? "1.8.266" : "development";
 var main = (argv) => {
-  import_commander.program.name("gcli").version("0.0.1");
+  import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
   import_commander.program.on("command:*", () => {
     console.log();
