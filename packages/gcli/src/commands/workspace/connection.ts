@@ -105,7 +105,12 @@ export class WorkspaceConnection extends TunnelConnection<LocalWorkspaceIdentity
 
   constructor(private options: WorkspaceConnectionOptions) {
     super(options);
-    this.terminals = new TerminalManager(options.root, () => buildEnv(options));
+    this.terminals = new TerminalManager(
+      options.root,
+      () => buildEnv(options),
+      // read when a change comes in - this.files exists by then
+      (paths) => this.files.notIgnored(paths),
+    );
     // terminal output / exits / changed files -> the browser, batched
     this.terminals.events$
       .pipe(

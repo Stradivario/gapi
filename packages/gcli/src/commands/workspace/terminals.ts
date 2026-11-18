@@ -2,7 +2,8 @@ import { ChildProcess, spawn, spawnSync } from 'child_process';
 import { randomUUID } from 'crypto';
 import { FSWatcher, watch } from 'fs';
 import { sep } from 'path';
-import { Subject } from 'rxjs';
+import { from, Subject, Subscription } from 'rxjs';
+import { bufferTime, concatMap, filter, mergeMap } from 'rxjs/operators';
 
 import { WorkspaceError } from './files';
 
@@ -24,22 +25,31 @@ export interface TerminalEvent {
   exitCode?: number | null;
 }
 
-/** Folders whose churn the editor never shows (installs, VCS). */
-const IGNORED = new Set(['node_modules', '.git']);
 const MAX_SESSIONS = 4;
+/** Changed paths are collected this long, then filtered in one go. */
+const WATCH_BATCH_MS = 150;
 
 interface Session {
   child: ChildProcess;
   watcher: FSWatcher | null;
+  changes: Subscription;
 }
 
 export class TerminalManager {
   readonly events$ = new Subject<TerminalEvent>();
   private readonly sessions = new Map<string, Session>();
 
+  /**
+   * @param notIgnored keeps the paths `.gitignore` does not ignore
+   *   (WorkspaceFiles.notIgnored) - a build's output never reaches the
+   *   browser.
+   */
   constructor(
     private readonly root: string,
     private readonly env: () => NodeJS.ProcessEnv,
+    private readonly notIgnored: (paths: string[]) => Promise<string[]> = (
+      paths,
+    ) => Promise.resolve(paths),
   ) {}
 
   open(size: { cols?: number; rows?: number }) {
@@ -76,9 +86,20 @@ export class TerminalManager {
     child.on('error', (e) =>
       emit({ kind: 'output', data: `\r\n${e.message}\r\n` }),
     );
+    // changed files: batched, de-duplicated, .gitignore'd ones dropped
+    const changed$ = new Subject<string>();
+    const changes = changed$
+      .pipe(
+        bufferTime(WATCH_BATCH_MS),
+        filter((paths) => paths.length > 0),
+        concatMap((paths) => from(this.notIgnored([...new Set(paths)]))),
+        mergeMap((paths) => from(paths)),
+      )
+      .subscribe((path) => emit({ kind: 'changed', data: path }));
     this.sessions.set(sessionId, {
       child,
-      watcher: this.watchRoot((path) => emit({ kind: 'changed', data: path })),
+      watcher: this.watchRoot((path) => changed$.next(path)),
+      changes,
     });
     return { sessionId, pty: command === 'script' };
   }
@@ -110,7 +131,9 @@ export class TerminalManager {
   }
 
   private forget(sessionId: string) {
-    this.sessions.get(sessionId)?.watcher?.close();
+    const session = this.sessions.get(sessionId);
+    session?.watcher?.close();
+    session?.changes.unsubscribe();
     this.sessions.delete(sessionId);
   }
 
@@ -119,7 +142,7 @@ export class TerminalManager {
     try {
       return watch(this.root, { recursive: true }, (_event, filename) => {
         const path = filename?.toString().split(sep).join('/');
-        if (path && !path.split('/').some((part) => IGNORED.has(part))) {
+        if (path) {
           onChange(path);
         }
       });

@@ -27,7 +27,13 @@ spawns `$SHELL -i` in the root - in a PTY through `script` (Linux
 a recursive `fs.watch`. Output, exits and changed paths go out on
 `events$`; `WorkspaceConnection` batches them (40 ms) into
 `pushLocalWorkspaceTerminalEvents`. `terminal/input` writes stdin,
-`terminal/close` kills the process group. Without `--allow-terminal` every
+`terminal/close` kills the process group. Changed paths are batched
+(150 ms) and `.gitignore`d ones dropped before they reach the browser
+(`WorkspaceFiles.notIgnored`): git's `check-ignore` inside a repo with git
+installed, otherwise our own matcher (`gitignore.ts`: nested files,
+negation, `dir/`, anchors, `*`/`**`/`?`/`[...]`) - which also filters the
+listing of a folder without git. No package for it (gcli's only dependency
+is esbuild). Without `--allow-terminal` every
 `terminal/*` op answers 403. Canonical: graphql-server
 `docs/features/local-workspaces.md` "Browser terminal".
 

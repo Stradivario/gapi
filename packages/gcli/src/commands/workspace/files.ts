@@ -1,4 +1,4 @@
-import { execFile } from 'child_process';
+import { execFile, spawn } from 'child_process';
 import { createHash } from 'crypto';
 import { promises as fs } from 'fs';
 import {
@@ -11,6 +11,8 @@ import {
   sep,
 } from 'path';
 import { promisify } from 'util';
+
+import { GitignoreMatcher } from './gitignore';
 
 const run = promisify(execFile);
 
@@ -67,11 +69,15 @@ export interface WorkspaceFilesOptions {
  */
 export class WorkspaceFiles {
   private gitRepo?: Promise<boolean>;
+  /** .gitignore when git cannot answer (no repo / no git installed). */
+  readonly gitignore: GitignoreMatcher;
 
   constructor(
     readonly root: string,
     private options: WorkspaceFilesOptions = {},
-  ) {}
+  ) {
+    this.gitignore = new GitignoreMatcher(root);
+  }
 
   /** Absolute path for a workspace-relative one, or a WorkspaceError. */
   async resolvePath(input: string | undefined, { forWrite = false } = {}) {
@@ -138,6 +144,49 @@ export class WorkspaceFiles {
     );
   }
 
+  /**
+   * The paths `.gitignore` does not ignore (relative to the root), in one
+   * `git check-ignore` - what the browser terminal's watcher reports, so a
+   * build writing dist/ or a cache does not flood the editor. Outside a git
+   * repo only node_modules / .git are dropped.
+   */
+  async notIgnored(paths: string[]): Promise<string[]> {
+    if (paths.some((p) => p.split('/').pop() === '.gitignore')) {
+      this.gitignore.clear(); // the rules themselves changed
+    }
+    const kept = paths.filter(
+      (p) => !p.split('/').some((part) => SKIP_DIRS.has(part)),
+    );
+    if (!kept.length) return kept;
+    const ignoredByGit = (await this.isGitRepo())
+      ? await this.gitCheckIgnore(kept)
+      : null;
+    return ignoredByGit
+      ? kept.filter((p) => !ignoredByGit.has(p))
+      : kept.filter((p) => !this.gitignore.ignored(p));
+  }
+
+  /** The ignored ones of `paths` by git itself; null when git cannot run. */
+  private gitCheckIgnore(paths: string[]): Promise<Set<string> | null> {
+    return new Promise((done) => {
+      const git = spawn('git', ['check-ignore', '--stdin', '-z'], {
+        cwd: this.root,
+      });
+      let out = '';
+      git.stdout.on('data', (chunk) => (out += chunk));
+      // exit 0 = some ignored, 1 = none ignored, anything else = no answer
+      git.on('close', (code) =>
+        done(
+          code === 0 || code === 1
+            ? new Set(out.split('\0').filter(Boolean))
+            : null,
+        ),
+      );
+      git.on('error', () => done(null));
+      git.stdin.end(paths.join('\0'));
+    });
+  }
+
   /** Every file under `dir` (git-aware), relative to the root. */
   private async allFiles(dir: string, limit: number): Promise<string[]> {
     if (await this.isGitRepo()) {
@@ -160,6 +209,7 @@ export class WorkspaceFiles {
       for (const entry of entries) {
         if (SKIP_DIRS.has(entry.name)) continue;
         const rel = relDir === '.' ? entry.name : `${relDir}/${entry.name}`;
+        if (this.gitignore.ignored(rel, entry.isDirectory())) continue;
         if (entry.isDirectory()) await walk(rel);
         else if (entry.isFile()) out.push(rel);
         if (out.length > limit) return;

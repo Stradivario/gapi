@@ -1,12 +1,14 @@
 import 'jest';
 
-import { mkdtempSync, realpathSync, rmSync, writeFileSync } from 'fs';
+import { execFileSync } from 'child_process';
+import { mkdirSync, mkdtempSync, realpathSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { firstValueFrom } from 'rxjs';
 import { filter, map, scan, timeout } from 'rxjs/operators';
 
 import { WorkspaceConnection } from '../src/commands/workspace/connection';
+import { WorkspaceFiles } from '../src/commands/workspace/files';
 import { CommandPolicy } from '../src/commands/workspace/policy';
 import { TerminalManager } from '../src/commands/workspace/terminals';
 
@@ -65,6 +67,41 @@ describe('[workspace] terminals', () => {
   it('caps the open sessions', () => {
     for (let i = 0; i < 4; i++) terminals.open({});
     expect(() => terminals.open({})).toThrow(/At most 4/);
+  });
+});
+
+describe('[workspace] terminal watch skips .gitignore', () => {
+  it('reports src changes, never ignored build output', async () => {
+    const root = realpathSync(mkdtempSync(join(tmpdir(), 'gcli-ign-')));
+    execFileSync('git', ['init', '-q'], { cwd: root });
+    writeFileSync(join(root, '.gitignore'), 'dist/\n');
+    mkdirSync(join(root, 'dist'));
+    const files = new WorkspaceFiles(root);
+    const terminals = new TerminalManager(
+      root,
+      () => ({ ...process.env }),
+      (paths) => files.notIgnored(paths),
+    );
+    const { sessionId } = terminals.open({});
+    const reported: string[] = [];
+    const sub = terminals.events$
+      .pipe(filter((e) => e.sessionId === sessionId && e.kind === 'changed'))
+      .subscribe((e) => reported.push(e.data ?? ''));
+    await new Promise((r) => setTimeout(r, 100));
+    writeFileSync(join(root, 'dist', 'bundle.js'), 'x');
+    writeFileSync(join(root, 'src.ts'), 'y');
+    await firstValueFrom(
+      terminals.events$.pipe(
+        filter((e) => e.kind === 'changed' && e.data === 'src.ts'),
+        timeout(10000),
+      ),
+    );
+    await new Promise((r) => setTimeout(r, 400));
+    expect(reported).toContain('src.ts');
+    expect(reported.filter((p) => p.startsWith('dist'))).toEqual([]);
+    sub.unsubscribe();
+    terminals.closeAll();
+    rmSync(root, { recursive: true, force: true });
   });
 });
 
