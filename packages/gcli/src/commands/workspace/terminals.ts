@@ -62,7 +62,7 @@ export class TerminalManager {
       );
     }
     const sessionId = randomUUID();
-    const [command, args] = shellCommand();
+    const [command, args] = shellCommand(size);
     const child = spawn(command, args, {
       cwd: this.root,
       env: {
@@ -174,18 +174,36 @@ export class TerminalManager {
   }
 }
 
-/** The shell, in a PTY through `script` where the system has it. */
-function shellCommand(): [string, string[]] {
-  if (process.platform === 'win32') {
+/** A terminal dimension from the browser as a safe integer (it goes into
+    a shell command line). */
+export function dimension(value: unknown, fallback: number) {
+  const n = Math.trunc(Number(value));
+  return Number.isFinite(n) && n >= 10 && n <= 1000 ? n : fallback;
+}
+
+/**
+ * The shell, in a PTY through `script` where the system has it. The PTY
+ * gets the browser terminal's size first (`stty`): readline asks the PTY,
+ * not COLUMNS, so without it lines wrapped at 80 columns in a wide editor.
+ */
+export function shellCommand(
+  size: { cols?: number; rows?: number } = {},
+  platform: string = process.platform,
+  hasScript = () => !spawnSync('script', ['--version']).error,
+): [string, string[]] {
+  if (platform === 'win32') {
     return [process.env.ComSpec || 'cmd.exe', []];
   }
   const shell = process.env.SHELL || '/bin/sh';
-  if (spawnSync('script', ['--version']).error) {
+  if (!hasScript()) {
     return [shell, ['-i']];
   }
-  return process.platform === 'darwin'
-    ? ['script', ['-q', '/dev/null', shell, '-i']]
-    : ['script', ['-qfec', `${shell} -i`, '/dev/null']];
+  const cols = dimension(size.cols, 80);
+  const rows = dimension(size.rows, 24);
+  const start = `stty cols ${cols} rows ${rows} 2>/dev/null; exec ${shell} -i`;
+  return platform === 'darwin'
+    ? ['script', ['-q', '/dev/null', '/bin/sh', '-c', start]]
+    : ['script', ['-qfec', start, '/dev/null']];
 }
 
 function kill(child: ChildProcess) {

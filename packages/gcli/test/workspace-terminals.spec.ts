@@ -16,7 +16,11 @@ import { filter, map, scan, timeout } from 'rxjs/operators';
 import { WorkspaceConnection } from '../src/commands/workspace/connection';
 import { WorkspaceFiles } from '../src/commands/workspace/files';
 import { CommandPolicy } from '../src/commands/workspace/policy';
-import { TerminalManager } from '../src/commands/workspace/terminals';
+import {
+  dimension,
+  shellCommand,
+  TerminalManager,
+} from '../src/commands/workspace/terminals';
 
 /* Browser terminals (plan 36): a real shell in the workspace root, its
    output and the files it changes pushed as events. */
@@ -151,5 +155,42 @@ describe('[workspace] terminals need --allow-terminal', () => {
     };
     expect(opened.sessionId).toEqual(expect.any(String));
     connection.stop();
+  });
+});
+
+describe('terminal size in the PTY (plan 36)', () => {
+  it('linux: script runs stty with the browser size, then the shell', () => {
+    const [command, args] = shellCommand(
+      { cols: 180, rows: 40 },
+      'linux',
+      () => true,
+    );
+    expect(command).toBe('script');
+    expect(args[0]).toBe('-qfec');
+    expect(args[1]).toMatch(
+      /^stty cols 180 rows 40 2>\/dev\/null; exec .+ -i$/,
+    );
+  });
+
+  it('darwin: the same through sh -c', () => {
+    const [, args] = shellCommand(
+      { cols: 100, rows: 30 },
+      'darwin',
+      () => true,
+    );
+    expect(args.slice(0, 4)).toEqual(['-q', '/dev/null', '/bin/sh', '-c']);
+    expect(args[4]).toContain('stty cols 100 rows 30');
+  });
+
+  it('no script: the plain shell (pipes)', () => {
+    const [, args] = shellCommand({ cols: 100 }, 'linux', () => false);
+    expect(args).toEqual(['-i']);
+  });
+
+  it('only sane integers reach the command line', () => {
+    expect(dimension('120; rm -rf /', 80)).toBe(80);
+    expect(dimension(99.7, 80)).toBe(99);
+    expect(dimension(5, 80)).toBe(80);
+    expect(dimension(undefined, 24)).toBe(24);
   });
 });
