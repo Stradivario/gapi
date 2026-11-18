@@ -37640,7 +37640,10 @@ var init_gql_client = __esm({
             refresh,
             key,
             timeGenerated,
-            expired: force || (Date.now() - timeGenerated) / 1e3 > 1800,
+            // A `--ci` login has no API key: its token is long-lived and is
+            // never refreshed (refreshing it broke every command 30 minutes
+            // after the login - a cloud workspace stays signed in for weeks).
+            expired: !!key && (force || (Date.now() - timeGenerated) / 1e3 > 1800),
             uploadUrl: resolveUploadUrl(uploadUrl, url2)
           })),
           (0, import_operators.switchMap)(
@@ -326254,7 +326257,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.274" : "development";
+var version2 = true ? "1.8.275" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
