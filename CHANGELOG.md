@@ -1,4 +1,4 @@
-## [1.8.268](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.268) (2026-11-18)
+## [1.8.269](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.269) (2026-11-18)
 
 
 ### Bug Fixes
@@ -72,6 +72,7 @@
 * **gcli:** reverted logic without options request ([f37f092](https://github.com/Stradivario/gapi/commit/f37f0922eaec5c060b80064a508ab12c3da3d48f))
 * **gcli:** runner reports each model's loaded context window ([7176790](https://github.com/Stradivario/gapi/commit/7176790c900f94768eb2d65e395bcf3fd83456b0))
 * **gcli:** spread operator was breaking plugin initialization ([f2e6745](https://github.com/Stradivario/gapi/commit/f2e674513a29b9c13fdfe79fe8aba2b6e07e53a1))
+* **gcli:** the browser terminal's watch and listings honour .gitignore, with or without git ([86936dc](https://github.com/Stradivario/gapi/commit/86936dc0685454972b24982aaa5bee44c034d14c))
 * **gcli:** token authentication after expire fixed ([fc099eb](https://github.com/Stradivario/gapi/commit/fc099ebd5af0b5094e5b1919f875e9dbdfd035e3))
 * **gcli:** upload lambda was not working due to attempt to use native node fetch but it does not handle very well multipart form data... ([9652c3b](https://github.com/Stradivario/gapi/commit/9652c3b7c5ac18b9242a3e18d250d54687eafbcb))
 * **gcli:** wasm was not loaded correctly so we need to remove url since we are running in webcontainer ([6585092](https://github.com/Stradivario/gapi/commit/658509281b29e897b178c5f860dc0f06c8b01915))
