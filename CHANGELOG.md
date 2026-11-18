@@ -1,4 +1,4 @@
-## [1.8.272](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.272) (2026-11-18)
+## [1.8.273](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.273) (2026-11-18)
 
 
 ### Bug Fixes
@@ -154,6 +154,7 @@
 * **gcli:** federation and envSecret are adopted to the cli ([244b451](https://github.com/Stradivario/gapi/commit/244b4515ae93fddbc9aace6cef917181982f9f06))
 * **gcli:** logging is now on a single place introduced new configuration lambforge.yaml and start bundling capabilities using esbuild really amazing commitgit add .! ([064cd2a](https://github.com/Stradivario/gapi/commit/064cd2a7bb1b33951869961624df81f3b4c097ad))
 * **gcli:** npm ignore file added ([15530eb](https://github.com/Stradivario/gapi/commit/15530eb085653d26f53e01fd9d7902bdfd99b734))
+* **gcli:** one-way terminal input + resize frames (no round trip per keystroke), PTY resize via stty -F ([34f054d](https://github.com/Stradivario/gapi/commit/34f054dbbef33261ffe9f4ac022441f5e755de81))
 * **gcli:** queue:declare, mq-trigger:apply and queues / triggers.mq in lambforge.yaml ([cf567e0](https://github.com/Stradivario/gapi/commit/cf567e021b296dc60d7c6e31967a98c9dd0a10d5))
 * **gcli:** readme.md added correct link [ci-skip] ([ff79521](https://github.com/Stradivario/gapi/commit/ff7952137b93a50e57ca51f15d3dbd71565c348d))
 * **gcli:** removed archiver as default export ([7ea3f62](https://github.com/Stradivario/gapi/commit/7ea3f6265dc58dc1f37d9177b1c8dd7ca2c91551))

@@ -324599,6 +324599,36 @@ ${this.text}` : this.text;
 });
 
 // src/commands/workspace/terminals.ts
+function shellTty(scriptPid) {
+  try {
+    if (process.platform === "linux") {
+      const child = (0, import_fs13.readdirSync)("/proc").filter((name2) => /^\d+$/.test(name2)).find((pid) => {
+        try {
+          const stat2 = (0, import_fs13.readFileSync)(`/proc/${pid}/stat`, "utf8");
+          return Number(stat2.slice(stat2.lastIndexOf(")") + 2).split(" ")[1]) === scriptPid;
+        } catch {
+          return false;
+        }
+      });
+      if (!child) return null;
+      const tty = (0, import_fs13.readlinkSync)(`/proc/${child}/fd/0`);
+      return tty.startsWith("/dev/pts/") ? tty : null;
+    }
+    if (process.platform === "darwin") {
+      const children = (0, import_child_process8.spawnSync)("pgrep", ["-P", String(scriptPid)], {
+        encoding: "utf8"
+      }).stdout.trim();
+      const pid = children.split("\n")[0];
+      if (!pid) return null;
+      const tty = (0, import_child_process8.spawnSync)("ps", ["-o", "tty=", "-p", pid], {
+        encoding: "utf8"
+      }).stdout.trim();
+      return tty && tty !== "??" ? `/dev/${tty}` : null;
+    }
+  } catch {
+  }
+  return null;
+}
 function dimension(value, fallback) {
   const n = Math.trunc(Number(value));
   return Number.isFinite(n) && n >= 10 && n <= 1e3 ? n : fallback;
@@ -324699,6 +324729,34 @@ ${e2.message}\r
         }
         child.stdin?.write(data);
         return { written: data.length };
+      }
+      /**
+       * The browser terminal changed size: the shell's PTY gets it (`stty -F
+       * <pts>`), and the kernel sends its process group SIGWINCH - programs
+       * redraw. Only with a PTY (`script`); on plain pipes there is nothing to
+       * resize. Never throws: a resize is cosmetic.
+       */
+      resize(sessionId, size) {
+        const child = this.sessions.get(sessionId);
+        if (!child?.pid) {
+          return { resized: false };
+        }
+        const tty = shellTty(child.pid);
+        if (!tty) {
+          return { resized: false };
+        }
+        const cols = dimension(size.cols, 0);
+        const rows = dimension(size.rows, 0);
+        if (!cols || !rows) {
+          return { resized: false };
+        }
+        const flag = process.platform === "darwin" ? "-f" : "-F";
+        const result = (0, import_child_process8.spawnSync)(
+          "stty",
+          [flag, tty, "cols", String(cols), "rows", String(rows)],
+          { stdio: "ignore" }
+        );
+        return { resized: result.status === 0 };
       }
       close(sessionId) {
         const child = this.sessions.get(sessionId);
@@ -324909,11 +324967,30 @@ var init_connection2 = __esm({
         return request.method === "POST" && WORKSPACE_OPS.includes(op) ? null : `${request.method} ${request.path} is not allowed by this workspace`;
       }
       onNotice(request) {
+        if (request.type === "input" || request.type === "resize") {
+          this.onTerminalNotice(request);
+          return;
+        }
         if (request.type !== "approval") return;
         try {
           const { decision } = JSON.parse(request.body ?? "{}");
           if (decision === "allow" || decision === "always" || decision === "deny") {
             this.approvals.onWebDecision(request.requestId, decision);
+          }
+        } catch {
+        }
+      }
+      /** One-way terminal frames: keystrokes and size. Only for a session the
+          browser opened (which needs --allow-terminal); anything else is
+          ignored - there is no one to answer. */
+      onTerminalNotice(request) {
+        try {
+          const body = JSON.parse(request.body ?? "{}");
+          if (!body.sessionId) return;
+          if (request.type === "input" && typeof body.data === "string") {
+            this.terminals.input(body.sessionId, body.data);
+          } else if (request.type === "resize") {
+            this.terminals.resize(body.sessionId, body);
           }
         } catch {
         }
@@ -326179,7 +326256,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.271" : "development";
+var version2 = true ? "1.8.272" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
