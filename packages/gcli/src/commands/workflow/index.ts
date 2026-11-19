@@ -109,7 +109,7 @@ export function registerWorkflowCommands(program: Command) {
   program
     .command('workflow:trigger:add')
     .description(
-      'Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs Fission 1.26+ on the cluster',
+      'Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs runtime 1.26+ on the cluster',
     )
     .option('-p, --project <project>')
     .option('-n, --name <name>', 'Workflow name')

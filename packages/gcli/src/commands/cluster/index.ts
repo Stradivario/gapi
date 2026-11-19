@@ -18,7 +18,7 @@ export function registerClusterCommands(program: Command) {
     .option('--singleNode', 'Control plane carries the workload too')
     .option(
       '--virtual',
-      'A virtual cluster (own Kubernetes API + Fission, no servers, ~2 minutes) instead of a private Talos cluster',
+      'A virtual cluster (own Kubernetes API + the Lambforge runtime, no servers, ~2 minutes) instead of a private Talos cluster',
     )
     .option(
       '--host <host>',
