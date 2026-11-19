@@ -1,4 +1,4 @@
-## [1.8.276](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.276) (2026-11-18)
+## [1.8.277](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.277) (2026-11-19)
 
 
 ### Bug Fixes
@@ -103,6 +103,7 @@
 * **SystemdDaemon:** removed export from helpers ([bf53d92](https://github.com/Stradivario/gapi/commit/bf53d92664c8576d3fa8f1108fca998b8ef77966))
 * **tests:** missing tests script ([b9f5cf5](https://github.com/Stradivario/gapi/commit/b9f5cf5ed2c28550b048045b6744f18025082433))
 * **versions:** mismatched versions 140 instead ot 142 ([14e4d90](https://github.com/Stradivario/gapi/commit/14e4d9017f9b54fe4ab50e0e46668f2b3bc70c69))
+* **workflows:** help texts say runtime, not Fission ([0119a2d](https://github.com/Stradivario/gapi/commit/0119a2d7268a9ebdf7c50a9b9e155d7f777af568))
 
 
 ### Features

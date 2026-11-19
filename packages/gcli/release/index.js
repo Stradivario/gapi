@@ -325567,7 +325567,7 @@ function registerClusterCommands(program2) {
     "Provision a private Talos cluster, or with --virtual a virtual cluster, for a project (runs in the background; use --wait to block)"
   ).option("-p, --project <project>").option("-spec, --spec <spec>").option("-n, --name <name>").option("--imageId <imageId>", "hcloud Talos snapshot id").option("--serverType <serverType>").option("-l, --location <location>").option("--workers <workers>", "Worker count (ignored when --singleNode)").option("--singleNode", "Control plane carries the workload too").option(
     "--virtual",
-    "A virtual cluster (own Kubernetes API + Fission, no servers, ~2 minutes) instead of a private Talos cluster"
+    "A virtual cluster (own Kubernetes API + the Lambforge runtime, no servers, ~2 minutes) instead of a private Talos cluster"
   ).option(
     "--host <host>",
     "With --virtual: name of a private cluster of this project to run on (default: the shared cluster)"
@@ -326140,7 +326140,7 @@ function registerWorkflowCommands(program2) {
   ).option("-p, --project <project>").option("-n, --name <name>", "Workflow name").option("-r, --run <run>", "Run name (see workflow:runs)").option("-f, --follow", "Keep printing events until the run ends").action(lazy(() => Promise.resolve().then(() => (init_status2(), status_exports2)).then((m2) => m2.default)));
   program2.command("workflow:cancel").description("Cancel a running run").option("-p, --project <project>").option("-n, --name <name>", "Workflow name").option("-r, --run <run>", "Run name (see workflow:runs)").action(lazy(() => Promise.resolve().then(() => (init_cancel(), cancel_exports)).then((m2) => m2.default)));
   program2.command("workflow:trigger:add").description(
-    "Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs Fission 1.26+ on the cluster"
+    "Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs runtime 1.26+ on the cluster"
   ).option("-p, --project <project>").option("-n, --name <name>", "Workflow name").option("--http", "An HTTP trigger: <router>/<project>/workflows/<path>").option(
     "--path <path>",
     "HTTP path under /workflows/ (default: the workflow name)"
@@ -326257,7 +326257,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.275" : "development";
+var version2 = true ? "1.8.276" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
