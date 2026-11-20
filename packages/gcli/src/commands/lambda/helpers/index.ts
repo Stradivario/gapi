@@ -19,6 +19,7 @@ import packageZip from '../package';
 import { loadSpec } from './load-spec';
 import { readFileAsObservable } from './read-file';
 import { spreadScaleOptions } from './spread';
+import { DesiredTimeTrigger, syncTimeTrigger } from './time-trigger-sync';
 
 export { spreadScaleOptions };
 
@@ -94,14 +95,21 @@ export function streamToBufferPromise(file: File | ReadStream | WriteStream) {
 export const createOrUpdateLambda = (
   cmd: CreateOrUpdateLambdaArguments,
   type: 'createLambda' | 'updateLambda',
-) =>
-  lastValueFrom(
+) => {
+  // read from the spec in the first step, applied after the lambda is saved
+  let timeTrigger: DesiredTimeTrigger | undefined;
+  let projectIdUsed = '';
+  return lastValueFrom(
     parseProjectId(cmd.project).pipe(
       switchMap((projectId) =>
-        GraphqlClienAPI.getProject(projectId).pipe(map(() => projectId)),
+        GraphqlClienAPI.getProject(projectId).pipe(
+          map(() => (projectIdUsed = projectId)),
+        ),
       ),
       switchMap(async (projectId) => {
         const spec = await lastValueFrom(loadSpec(cmd.spec));
+        // `triggers.time` lives beside `function`; kept for the sync below
+        timeTrigger = spec?.triggers?.time;
         return {
           projectId,
           ...(spec?.function ?? spec),
@@ -226,8 +234,17 @@ export const createOrUpdateLambda = (
         Logger.info(JSON.stringify(data, null, 2));
       }),
       switchMap((data) => printAddresses(data)),
+      // apply `triggers.time` of lambforge.yaml (it used to be ignored)
+      switchMap((data) =>
+        syncTimeTrigger(
+          projectIdUsed,
+          data as { id?: string; name?: string },
+          timeTrigger,
+        ).pipe(map(() => data)),
+      ),
     ),
   );
+};
 
 /** The two addresses to hand the user: the router url and, for a public
     lambda on the shared cluster, the host-root site url

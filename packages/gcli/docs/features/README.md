@@ -44,3 +44,4 @@ Outline (drop sections that don't apply):
 | `lambda-site-url` | [lambda-site-url.md](lambda-site-url.md) | Slice (canonical: graphql-server-lambdas): `Site:` line after create/update |
 | `lambda-spread` | [lambda-spread.md](lambda-spread.md) | Slice (canonical: graphql-server-lambdas): replicas across machines (plan 33): `--spread` / `--spreadStrict`, yaml keys |
 | `mq-triggers-yaml` | [mq-triggers-yaml.md](mq-triggers-yaml.md) | `queue:declare`, `mq-trigger:apply`, `queues:` / `triggers.mq` in `lambforge.yaml` (plan 34) |
+| [time-triggers-yaml](time-triggers-yaml.md) | lambda:create / lambda:update apply `triggers.time` (create / keep / replace the one time trigger) |
