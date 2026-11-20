@@ -79,6 +79,27 @@ lint/test on master before publishing; **Release GCLI Binary** builds the
 SEA binary on `v*` tags. Reproduce Tests locally from the repo root:
 `npm run lint && npm test`.
 
+## RxJS first (strict - owner, 2026-11-20)
+
+Every async flow is RxJS, in every Lambforge repository: write it as an
+observable and convert to a Promise only at the very end, where an API
+demands one.
+
+- Compose with `pipe`: `defer` / `from` around promise APIs (Mongo, S3,
+  HTTP), `switchMap` / `mergeMap` / `concatMap` to chain, `forkJoin` /
+  `combineLatest` for parallel work, `map` to shape, `catchError` for the
+  failure branch, `of(...)` / `EMPTY` for early exits, `finalize` for
+  cleanup, `timer` / `interval` / `repeat({ delay })` for polling and
+  schedules, `mergeMap(fn, N)` for bounded concurrency.
+- A Promise only at a boundary that requires it - a lambda's default export,
+  a framework hook typed to return a Promise, an existing async caller -
+  via `lastValueFrom` / `firstValueFrom` at the end. `@gapi` resolvers
+  (`@Query` / `@Mutation`) and the services behind them return the
+  Observable directly.
+- Not in new or touched code: `await` sequences, try/catch as control flow,
+  `.then` chains, `Promise.resolve`, `setTimeout` / `setInterval` loops.
+  Code you touch that is still async/await is converted in the same change.
+
 ## Docs, skills and changelog - same change, every time
 
 This repo is documentation-driven. With every change:
