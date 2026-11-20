@@ -1,4 +1,4 @@
-## [1.8.277](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.277) (2026-11-19)
+## [1.8.278](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.278) (2026-11-20)
 
 
 ### Bug Fixes
@@ -156,6 +156,7 @@
 * **gcli:** cluster:plan; cluster:autoscale --mode/--consolidation/--minNodeAge; pools in cluster YAML (plan 17) ([9b1dfc7](https://github.com/Stradivario/gapi/commit/9b1dfc743652279fb88b9c1eedef27745f6e02fe))
 * **gcli:** environment crud operations added ([5c4bde8](https://github.com/Stradivario/gapi/commit/5c4bde864e328e97c21f616af5911e3ce0208edf))
 * **gcli:** federation and envSecret are adopted to the cli ([244b451](https://github.com/Stradivario/gapi/commit/244b4515ae93fddbc9aace6cef917181982f9f06))
+* **gcli:** lambda:create / lambda:update apply triggers.time from lambforge.yaml ([e74b79f](https://github.com/Stradivario/gapi/commit/e74b79fa19b6adc42c98f1fa30aa97e037aeac50))
 * **gcli:** logging is now on a single place introduced new configuration lambforge.yaml and start bundling capabilities using esbuild really amazing commitgit add .! ([064cd2a](https://github.com/Stradivario/gapi/commit/064cd2a7bb1b33951869961624df81f3b4c097ad))
 * **gcli:** npm ignore file added ([15530eb](https://github.com/Stradivario/gapi/commit/15530eb085653d26f53e01fd9d7902bdfd99b734))
 * **gcli:** one-way terminal input + resize frames (no round trip per keystroke), PTY resize via stty -F ([34f054d](https://github.com/Stradivario/gapi/commit/34f054dbbef33261ffe9f4ac022441f5e755de81))
