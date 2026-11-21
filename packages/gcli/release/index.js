@@ -322181,8 +322181,9 @@ var init_plan4 = __esm({
             (s2) => s2.state === "changes" || s2.state === "missing"
           ).length;
           if (cmd.json) {
-            Logger.log(
-              JSON.stringify({ plans, unmanaged: rest, errors, drift }, null, 2)
+            process.stdout.write(
+              `${JSON.stringify({ plans, unmanaged: rest, errors, drift }, null, 2)}
+`
             );
           } else {
             for (const p of plans) {
@@ -327689,7 +327690,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.281" : "development";
+var version2 = true ? "1.8.282" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));

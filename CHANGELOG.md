@@ -1,4 +1,4 @@
-## [1.8.282](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.282) (2026-11-21)
+## [1.8.283](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.283) (2026-11-21)
 
 
 ### Bug Fixes
@@ -67,6 +67,7 @@
 * **gcli:** mcp start function changes [ci-skip] ([46c615a](https://github.com/Stradivario/gapi/commit/46c615afc41681896c51cbc42665f1ff1669a3ed))
 * **gcli:** mcp:start refreshes the login token per request ([deff051](https://github.com/Stradivario/gapi/commit/deff05176131a6356ca980e010267104138fa987))
 * **gcli:** passed environment variables to the child process ([d0ec671](https://github.com/Stradivario/gapi/commit/d0ec6718c467658a8b5b46ed408f1ca866ef5fff))
+* **gcli:** plan --json prints plain JSON ([4b01879](https://github.com/Stradivario/gapi/commit/4b01879ade62bea00054d81c7396e1d221bdf08c))
 * **gcli:** re-build ([fc68cee](https://github.com/Stradivario/gapi/commit/fc68cee7c7d6f81aef54010899903ba8d4e685c1))
 * **gcli:** removed console.log ([2889fb3](https://github.com/Stradivario/gapi/commit/2889fb30019c9a2b23360387fe0d5c8ff9e2f4a8))
 * **gcli:** removed packages from dependencies since we don't want them when installing ([3efb328](https://github.com/Stradivario/gapi/commit/3efb328cd7734d14381d4c3248a28e325ee2fff4))
