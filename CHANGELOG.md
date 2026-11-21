@@ -1,4 +1,4 @@
-## [1.8.279](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.279) (2026-11-20)
+## [1.8.280](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.280) (2026-11-21)
 
 
 ### Bug Fixes
@@ -154,6 +154,7 @@
 * **gcli:** build script added outfile ([1bea705](https://github.com/Stradivario/gapi/commit/1bea7057543c37999ec2bd23983bc8a0401361f0))
 * **gcli:** bundle binary ([e4ad1a0](https://github.com/Stradivario/gapi/commit/e4ad1a075bb468f014d5cc01cda31227775fe04a))
 * **gcli:** cluster:plan; cluster:autoscale --mode/--consolidation/--minNodeAge; pools in cluster YAML (plan 17) ([9b1dfc7](https://github.com/Stradivario/gapi/commit/9b1dfc743652279fb88b9c1eedef27745f6e02fe))
+* **gcli:** domains: in lambforge.yaml - domain:apply, domain:list, applied on every deploy ([3a1173e](https://github.com/Stradivario/gapi/commit/3a1173e41b02c6a9d9108ac79c26e9b8ab3be82e))
 * **gcli:** environment crud operations added ([5c4bde8](https://github.com/Stradivario/gapi/commit/5c4bde864e328e97c21f616af5911e3ce0208edf))
 * **gcli:** federation and envSecret are adopted to the cli ([244b451](https://github.com/Stradivario/gapi/commit/244b4515ae93fddbc9aace6cef917181982f9f06))
 * **gcli:** lambda:create / lambda:update apply triggers.time from lambforge.yaml ([e74b79f](https://github.com/Stradivario/gapi/commit/e74b79fa19b6adc42c98f1fa30aa97e037aeac50))
