@@ -474,17 +474,17 @@ lambda keeps what it has. Changing it restarts the replicas once.
 
 ### Domains in lambforge.yaml
 
-`domains:` lists the project's platform names (`https://pesho.lambforge.app`, live at once) and custom domains, with their routing. Every `lambda:create` / `lambda:update` applies it after the deploy (a problem is reported, the deploy still succeeds); `domain:apply` applies it on its own, `domain:list` shows the result.
+`domains:` lists the project's platform names (`https://acme.lambforge.app`, live at once) and custom domains, with their routing. Every `lambda:create` / `lambda:update` applies it after the deploy (a problem is reported, the deploy still succeeds); `domain:apply` applies it on its own, `domain:list` shows the result.
 
 ```yaml
 domains:
-  - name: pesho                 # https://pesho.lambforge.app
+  - name: acme                 # https://acme.lambforge.app
     serves: all                 # every lambda at /<route>
     paths:
       /api: my-api              # path rules: prefix -> lambda, the longest wins
   - host: api.example.com       # your own domain: set the CNAME gcli prints
     serves: my-api              # one lambda at the root
-  - name: pesho-staging         # serves left out = this file's own lambda
+  - name: acme-staging         # serves left out = this file's own lambda
 ```
 
 `serves`: a lambda name, `all` or `full-path` (`/<projectId>/<route>`). A new custom domain prints the DNS records to set; its routing is applied on the next run, once it is verified. Domains the file does not mention are never removed. CI/CD tokens need the `domain:read` + `domain:write` permissions.

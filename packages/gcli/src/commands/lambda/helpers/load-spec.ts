@@ -116,7 +116,7 @@ export interface MqTriggerConfig {
 }
 
 /** One entry of `domains:` - see `domain:apply`. Either a platform name
-    (`name: pesho` -> https://pesho.lambforge.app, live at once) or a custom
+    (`name: acme` -> https://acme.lambforge.app, live at once) or a custom
     domain (`host: api.example.com` - point its CNAME at the target gcli
     prints). `serves`: a lambda name (that lambda at the root, the default:
     this file's `function.name`), `all` (every lambda at /<route>) or

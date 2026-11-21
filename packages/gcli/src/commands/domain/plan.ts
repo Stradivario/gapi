@@ -5,7 +5,7 @@ import { DomainRouting, ProjectDomain } from '~/services/gql-client';
     customer-domains): claim a platform name / add a custom domain when the
     project has none, then routing - or nothing when it already matches. */
 export interface DomainStep {
-  /** platform name (`pesho`) or hostname (`api.example.com`) */
+  /** platform name (`acme`) or hostname (`api.example.com`) */
   label: string;
   existing?: ProjectDomain;
   create?: 'claim' | 'add';
