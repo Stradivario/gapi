@@ -1,4 +1,4 @@
-## [1.8.281](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.281) (2026-11-21)
+## [1.8.282](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.282) (2026-11-21)
 
 
 ### Bug Fixes
@@ -60,6 +60,7 @@
 * **gcli:** environment update ([b1815c5](https://github.com/Stradivario/gapi/commit/b1815c599163dc8aeade8409f2941a3a3c4191db))
 * **gcli:** esbuild marked as external but installable inside dependencies ([e8d6b72](https://github.com/Stradivario/gapi/commit/e8d6b72f217123da5e2445fe8987cbeda4fd371c))
 * **gcli:** esbuild was not included into the npm package ([3e30711](https://github.com/Stradivario/gapi/commit/3e30711da0a38856ea82bf0cf60f6d2612a3c5de))
+* **gcli:** lint for the repo commands (no any, import order) ([f43f3d1](https://github.com/Stradivario/gapi/commit/f43f3d1436a411d2c7cda310ced427532fcf8888))
 * **gcli:** load spec file default export fix ([1d1c71f](https://github.com/Stradivario/gapi/commit/1d1c71f96813aa59f883bced7e44f655849cb980))
 * **gcli:** login - upload URL defaults to <API origin>/upload-lambda; --ci needs no --key ([0a6fce2](https://github.com/Stradivario/gapi/commit/0a6fce2b0221acde37564b6b797636bc8f00e6f7))
 * **gcli:** login to gcli using integration ci/cd pipeline ([56c2bdd](https://github.com/Stradivario/gapi/commit/56c2bddd73368cc20f21c2f7b819b79ea900b30b))
@@ -172,6 +173,7 @@
 * **gcli:** time triggers tools implemented ([8cbf633](https://github.com/Stradivario/gapi/commit/8cbf63325a15590c714e517a856fb9cca58b8767))
 * **gcli:** update cluster cost command to print amounts in platform currency, removing USD column ([1b63100](https://github.com/Stradivario/gapi/commit/1b6310083c40402e6afc8cf8a0097cebb8dbcb04))
 * **gcli:** updated mcp server to be with rxjs instead of imperative code ([4337cad](https://github.com/Stradivario/gapi/commit/4337cad4a5091700b1f31ab1e01028ee96b6a096))
+* **gcli:** validate, plan and export over every lambforge.yaml of a repository ([365ac25](https://github.com/Stradivario/gapi/commit/365ac25abf31e6ae356dd995372bc619a98562b2))
 * **gcli:** workflow commands with AI drafts ([4019d58](https://github.com/Stradivario/gapi/commit/4019d586ce392b75da4cd44e704cc12da30e7e3a))
 * **gcli:** workflow:trigger commands for HTTP and schedule triggers ([6efafc3](https://github.com/Stradivario/gapi/commit/6efafc3bb6cab07847fcc56b74ea56a0bc5859b8))
 * **gcli:** workspace list returns mtimeMs (the editor's browser cache key) ([250db93](https://github.com/Stradivario/gapi/commit/250db939352905c4d86b77d8f04f15db1a562f3c))
