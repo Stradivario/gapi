@@ -227,8 +227,10 @@ export default (
           (s) => s.state === 'changes' || s.state === 'missing',
         ).length;
         if (cmd.json) {
-          Logger.log(
-            JSON.stringify({ plans, unmanaged: rest, errors, drift }, null, 2),
+          // plain stdout - the Logger colours its output
+          process.stdout.write(
+            `${JSON.stringify({ plans, unmanaged: rest, errors, drift }, null, 2)}
+`,
           );
         } else {
           for (const p of plans) {

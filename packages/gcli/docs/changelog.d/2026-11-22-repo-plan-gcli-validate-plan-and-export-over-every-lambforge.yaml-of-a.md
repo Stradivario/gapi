@@ -12,6 +12,8 @@
   missing per unit and section (function, environment, triggers.time,
   triggers.mq, domains) and the project's unmanaged lambdas. Read-only.
 - `gcli export <lambda> [-o]`: lambforge.yaml from a running lambda.
+- `plan --json` writes plain JSON to stdout (the Logger colours its
+  output - fixed after 1.8.282).
 - A unit without `environment:` inherits the nearest parent's.
 - tsconfig: `resolveJsonModule`.
 - **Test:** `npx jest test/repo-plan`.
