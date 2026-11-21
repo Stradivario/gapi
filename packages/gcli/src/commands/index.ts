@@ -6,6 +6,7 @@ import { registerEnvironmentCommands } from './environment';
 import { registerLambdaCommands } from './lambda';
 import { registerPluginCommands } from './plugin';
 import { registerProjectCommands } from './project';
+import { registerRepoCommands } from './repo';
 import { registerMcpCommands } from './proxy';
 import { registerRabbitMqCommands } from './rabbitmq';
 import { registerRunnerCommands } from './runner';
@@ -32,4 +33,5 @@ export const commands = [
   registerWorkspaceCommands,
   registerWorkflowCommands,
   registerDomainCommands,
+  registerRepoCommands,
 ];

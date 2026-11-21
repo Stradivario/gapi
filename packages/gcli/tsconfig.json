@@ -10,6 +10,7 @@
     "outDir": "dist",
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "strictNullChecks": false,

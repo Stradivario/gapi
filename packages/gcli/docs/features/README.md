@@ -45,3 +45,5 @@ Outline (drop sections that don't apply):
 | `lambda-spread` | [lambda-spread.md](lambda-spread.md) | Slice (canonical: graphql-server-lambdas): replicas across machines (plan 33): `--spread` / `--spreadStrict`, yaml keys |
 | `mq-triggers-yaml` | [mq-triggers-yaml.md](mq-triggers-yaml.md) | `queue:declare`, `mq-trigger:apply`, `queues:` / `triggers.mq` in `lambforge.yaml` (plan 34) |
 | [time-triggers-yaml](time-triggers-yaml.md) | lambda:create / lambda:update apply `triggers.time` (create / keep / replace the one time trigger) |
+| [domains-yaml](domains-yaml.md) | `domains:` in lambforge.yaml, `domain:apply` / `domain:list`, applied after every lambda deploy |
+| [repo-plan](repo-plan.md) | `gcli validate` / `plan` / `export` over every lambforge.yaml of a repository; JSON Schema |

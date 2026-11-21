@@ -529,6 +529,23 @@ plugin:
   clusterId: ''
 ```
 
+### Validate, plan and export (monorepos)
+
+gcli finds every `lambforge.yaml` of a repository (skipping `node_modules`,
+build output, `.gcache` and `.gitignore` matches). A folder without its own
+`environment:` uses the nearest parent file's.
+
+```bash
+gcli validate                 # schema + cross-file checks (unknown key = warning, wrong type = error)
+gcli validate --online        # + keys the live API does not take
+gcli plan                     # v in sync, ~ will change (field: now -> wanted), + missing, unmanaged lambdas
+gcli plan --exit-code --json  # CI: 0 in sync, 2 drift, 1 error
+gcli export my-api -o lambforge.yaml   # from a running lambda (secret names only)
+```
+
+Editor completion: start the file with
+`# yaml-language-server: $schema=https://lambforge.com/schemas/lambforge.json`.
+
 ### MCP Server Functions
 
 A function can be provisioned as an **MCP Server** in front of a **federation graph** by setting `mcp: true`. The MCP lambda has **no source code** — it is fully described by config: the selected `mcpGraph` (a federation lambda in the same project) is resolved to its internal router URL and **introspected** (single source of truth, no schema file), and the curated `mcpOperations` become MCP tools. Use the MCP runtime image and `newdeploy` + `minScale: 1` (MCP holds long-lived streamable-HTTP sessions).

@@ -1,0 +1,204 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://lambforge.com/schemas/lambforge.json",
+  "title": "lambforge.yaml",
+  "description": "Lambforge project / lambda descriptor - read by gcli (lambda:create / update, environment:*, cluster:apply, domain:apply, ...). Values may use the !env / !switch / !if tags.",
+  "type": "object",
+  "patternProperties": { "^\\.": {} },
+  "additionalProperties": false,
+  "properties": {
+    "function": { "$ref": "#/definitions/function" },
+    "environment": { "$ref": "#/definitions/environment" },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "bundler": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "bundle": { "type": "boolean" },
+            "minify": { "type": "boolean" },
+            "target": { "type": ["string", "boolean"] },
+            "outfile": { "type": "string" },
+            "external": { "type": "array", "items": { "type": "string" } },
+            "watch": { "type": "array", "items": { "type": "string" } },
+            "ignore": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "triggers": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "time": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["triggerName", "cron"],
+          "properties": {
+            "triggerName": { "type": "string" },
+            "cron": { "type": "string" }
+          }
+        },
+        "mq": { "type": "array", "items": { "$ref": "#/definitions/mqTrigger" } }
+      }
+    },
+    "queues": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["declare"],
+      "properties": {
+        "broker": { "type": "string" },
+        "declare": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "domains": { "type": "array", "items": { "$ref": "#/definitions/domain" } },
+    "cluster": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "provider": { "enum": ["vcluster"] },
+        "host": { "type": "string" },
+        "imageId": { "type": ["string", "number"] },
+        "serverType": { "type": "string" },
+        "location": { "type": "string" },
+        "singleNode": { "type": "boolean" },
+        "workers": { "type": "integer" },
+        "controlPlanes": { "type": "integer" },
+        "loadBalancer": { "type": "boolean" },
+        "autoscale": { "type": ["object", "null"] },
+        "machines": { "type": "array" }
+      }
+    },
+    "rabbitmq": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "user": { "type": "string" },
+        "password": { "type": "string" },
+        "region": { "type": "string" },
+        "storage": { "type": "object" },
+        "clusterId": { "type": "string" }
+      }
+    },
+    "plugin": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "clusterId": { "type": "string" },
+        "config": { "type": "object" }
+      }
+    }
+  },
+  "definitions": {
+    "stringList": { "type": "array", "items": { "type": "string" } },
+    "function": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "description": "Function name, unique in the project (per cluster)" },
+        "route": { "type": "string", "description": "HTTP route: https://functions.lambforge.com/<projectId>/<route>" },
+        "file": { "type": "string", "description": "Entry point bundled by gcli" },
+        "script": { "type": "string", "description": "Build script (build.sh)" },
+        "package": { "type": "string", "description": "package.json with your extra dependencies" },
+        "env": { "type": "string", "description": "Environment (runtime) the lambda runs on" },
+        "clusterId": { "type": "string" },
+        "clusterName": { "type": "string" },
+        "method": { "$ref": "#/definitions/stringList" },
+        "params": { "$ref": "#/definitions/stringList" },
+        "secrets": { "$ref": "#/definitions/stringList" },
+        "envSecrets": { "$ref": "#/definitions/stringList" },
+        "configs": { "$ref": "#/definitions/stringList" },
+        "network": { "type": "array", "items": { "enum": ["public", "private"] } },
+        "bodyLimit": { "type": ["string", "number"] },
+        "uploadAsZip": { "type": ["boolean", "string"] },
+        "streamMultipart": { "type": "boolean" },
+        "cache": { "type": ["boolean", "object"] },
+        "federation": { "type": "boolean" },
+        "subgraphs": { "$ref": "#/definitions/stringList" },
+        "mcp": { "type": "boolean" },
+        "mcpGraph": { "type": "string" },
+        "mcpOperations": { "type": "array" },
+        "mcpHeaders": { "type": "array" },
+        "mcpForwardHeaders": { "type": "array" },
+        "static": { "type": "object", "description": "Static site settings (root, spa, headers, mimeTypes, caching, precompress...)" },
+        "scaleOptions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "executorType": { "enum": ["poolmgr", "newdeploy", "container"] },
+            "minScale": { "type": "integer" },
+            "maxScale": { "type": "integer" },
+            "targetCpu": { "type": "number" },
+            "minCpu": { "type": "number" },
+            "maxCpu": { "type": "number" },
+            "minMemory": { "type": "number" },
+            "maxMemory": { "type": "number" },
+            "concurrency": { "type": "integer" },
+            "functionTimeout": { "type": "integer" },
+            "specializationTimeout": { "type": "integer" },
+            "idleTimeout": { "type": "integer" },
+            "spread": { "enum": ["machines", "none"] },
+            "spreadStrict": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "image": { "type": "string" },
+        "builder": { "type": "string" },
+        "poolSize": { "type": "integer" },
+        "maxPods": { "type": "integer" },
+        "builderPoolSize": { "type": "integer" },
+        "builderMaxParallelBuilds": { "type": "integer" },
+        "builderIdleTimeout": { "type": "integer" },
+        "minCpu": { "type": "number" },
+        "maxCpu": { "type": "number" },
+        "minMemory": { "type": "number" },
+        "maxMemory": { "type": "number" },
+        "region": { "type": "string" },
+        "terminationGracePeriod": { "type": "integer" },
+        "clusterId": { "type": "string" },
+        "clusterName": { "type": "string" }
+      }
+    },
+    "mqTrigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "requestTopic"],
+      "properties": {
+        "name": { "type": "string" },
+        "lambda": { "type": "string" },
+        "requestTopic": { "type": "string" },
+        "responseTopic": { "type": "string" },
+        "errorTopic": { "type": "string" },
+        "broker": { "type": "string" },
+        "maxRetries": { "type": "integer" },
+        "coolDownPeriod": { "type": "integer" },
+        "pollingInterval": { "type": "integer" },
+        "minReplicas": { "type": "integer" },
+        "maxReplicas": { "type": "integer" },
+        "threshold": { "type": "integer" }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "description": "Platform name: <name>.lambforge.app" },
+        "host": { "type": "string", "description": "Your own domain, e.g. api.example.com" },
+        "serves": { "type": "string", "description": "A lambda name, all or full-path" },
+        "paths": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    }
+  }
+}

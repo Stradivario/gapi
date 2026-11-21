@@ -604,6 +604,69 @@ export class GraphqlClienAPI {
   // Message-queue triggers (graphql-server-lambdas message-queue.controller)
   // --------------------------------------------------------------------
 
+  /** The project's lambdas with the settings `gcli plan` compares - names of
+      secrets / configs only, never their contents. */
+  public static listLambdasForPlan(projectId: string) {
+    return this.query<{ listProjectLambdas: Record<string, any>[] }>({
+      query: gql`
+        query listLambdasForPlan($projectId: String!) {
+          listProjectLambdas(projectId: $projectId) {
+            id
+            name
+            route
+            env
+            params
+            network
+            method
+            clusterId
+            federation
+            subgraphs
+            mcp
+            secrets {
+              name
+            }
+            configs {
+              name
+            }
+            envSecrets
+            scaleOptions {
+              executorType
+              minScale
+              maxScale
+              targetCpu
+              minCpu
+              maxCpu
+              minMemory
+              maxMemory
+              concurrency
+              functionTimeout
+              specializationTimeout
+              idleTimeout
+            }
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.listProjectLambdas ?? []));
+  }
+
+  /** Field names of input types on the LIVE API (gcli validate --online). */
+  public static inputFieldNames(typeNames: string[]) {
+    return this.query<Record<string, { inputFields: { name: string }[] }>>({
+      query: gql`
+        query inputFieldNames {
+          ${typeNames.map((t, i) => `t${i}: __type(name: "${t}") { inputFields { name } }`).join('\n')}
+        }
+      `,
+    }).pipe(
+      map((res) =>
+        typeNames.map((_, i) =>
+          (res[`t${i}`]?.inputFields ?? []).map((f) => f.name),
+        ),
+      ),
+    );
+  }
+
   /* Domains (feature customer-domains, plans 43-44) START */
   public static listProjectDomains(projectId: string) {
     return this.query<{ listProjectDomains: ProjectDomain[] }>({

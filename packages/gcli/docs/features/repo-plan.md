@@ -1,0 +1,58 @@
+# repo-plan - gcli validate / plan / export (monorepo aware)
+
+Plan: graphql-server `docs/plans/46-gcli-monorepo-plan-and-validate.md`.
+Code: `src/commands/repo/`. Schema: `src/schema/lambforge.schema.json`
+(published copy: gql-fission `src/schemas/lambforge.json` ->
+`https://lambforge.com/schemas/lambforge.json` - **update both together**).
+
+## Commands
+
+| Command | Does | Network |
+|---|---|---|
+| `gcli validate [path] [--online]` | every `lambforge.yaml` against the schema + cross-file checks; exit 1 on errors | `--online`: introspects the live input types |
+| `gcli plan [path] [-p] [--exit-code] [--json]` | per unit and section: `v` in sync, `~` change (field: now -> wanted), `+` missing, `x` error; then unmanaged lambdas | read-only queries |
+| `gcli export <lambda> [-p] [-o file]` | a `lambforge.yaml` from a running lambda (function, environment, time trigger, domains) | read-only |
+
+## How it works
+
+- **Discovery** (`discover.ts`): from the git root above `path`; skips
+  `node_modules`, `.git`, `.gcache`, `dist`, `release` and `.gitignore`
+  matches (the workspace `GitignoreMatcher`), depth 8. A unit = a folder
+  with a `lambforge.yaml`. Without its own `environment:` a unit inherits
+  the nearest parent's (owner decision: own wins). `own` = the file,
+  `spec` = with inheritance.
+- **Schema check** (`schema-check.ts`): a small JSON-Schema subset (type,
+  enum, required, properties, additionalProperties, patternProperties,
+  items, $ref) - no ajv. Unknown keys are WARNINGS, wrong types / missing
+  required keys ERRORS. Top-level keys starting with `.` (YAML anchors) are
+  allowed. Cross checks (`validate.ts`): the same `function.name` / route
+  on the same cluster twice = error; a `domains:` lambda no unit declares =
+  warning.
+- **Drift** (`drift.ts`, pure): only keys the file sets; lists as sets;
+  `"20"` == `20`; a scaleOptions size/time of `0` = server default, not
+  drift; environment fields the server did not return are skipped.
+- **Plan** (`plan.ts`): the project is read ONCE (lambdas with
+  `listLambdasForPlan` - secret NAMES only, environments, time / mq
+  triggers, domains), then `planUnit` per unit reuses `timeTriggerPlan` and
+  `domainStep`. An inherited environment is planned only in the unit that
+  owns it.
+- **Export** (`export.ts`): `toYaml` is pure; an exported file validates
+  clean and plans in sync (round-trip spec).
+
+## Test
+
+`npx jest test/repo-plan` (discovery + inheritance + skips, schema,
+cross checks, drift, plan, export round trip).
+
+## Debug
+
+- A key flagged unknown that gcli does read: add it to the schema (both
+  copies). `--online` names keys the live API lacks; gcli-only keys are in
+  `GCLI_ONLY` (validate.ts).
+- A false `~`: check how the live field reads in `FUNCTION_FIELDS`
+  (drift.ts) - e.g. secrets are objects, envSecrets strings.
+
+## Not built yet
+
+`gcli apply --all` (order: environments, lambdas, triggers + domains;
+never deletes), `cluster:` / `queues:` in plan, code drift (archive hash).
