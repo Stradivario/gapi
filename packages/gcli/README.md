@@ -57,6 +57,7 @@ Create the token in the dashboard (Project → CI/CD) with only the permissions 
 | RabbitMQ: read / install / uninstall | `rabbitmq:list`, `rabbitmq:create`, `rabbitmq:delete` |
 | Queues: declare | `queue:declare` |
 | Queue triggers: read / manage | `mq-trigger:list`, `mq-trigger:create/update/delete`, `mq-trigger:apply` (from `lambforge.yaml`) |
+| Domains: read / manage | `domain:list`, `domain:apply` (and the `domains:` section every deploy applies) |
 | Plugins: read / install | `plugin:list/installed`, `plugin:install/uninstall` |
 | Clusters: read / scale / create / tear down / kubeconfig | `cluster:list/status/health/scale-events/cost`, `cluster:scale/autoscale/multi-node/single-node/load-balancer/apply`, `cluster:create/apply`, `cluster:teardown`, `cluster:kubeconfig`, `cluster:attach/nodes/pause/resume/detach` (your own machines, admin), `cluster:reset-machine`, `cluster:talosconfig` |
 
@@ -471,7 +472,29 @@ machine going down takes one replica, not several (use it with
 Flags: `--spread machines|none`, `--spreadStrict true|false`. Left out = the
 lambda keeps what it has. Changing it restarts the replicas once.
 
-The same file can also carry `cluster:`, `rabbitmq:`, `plugin:`, `queues:` and `triggers:` sections, read by `cluster:apply` / `cluster:create`, `rabbitmq:create`, `plugin:install`, `queue:declare` and `cron:create` (`triggers.time`) / `mq-trigger:apply` (`triggers.mq`) respectively (each also accepts its own dedicated `--spec` file, e.g. `cluster.yaml`, if you'd rather keep them separate):
+### Domains in lambforge.yaml
+
+`domains:` lists the project's platform names (`https://pesho.lambforge.app`, live at once) and custom domains, with their routing. Every `lambda:create` / `lambda:update` applies it after the deploy (a problem is reported, the deploy still succeeds); `domain:apply` applies it on its own, `domain:list` shows the result.
+
+```yaml
+domains:
+  - name: pesho                 # https://pesho.lambforge.app
+    serves: all                 # every lambda at /<route>
+    paths:
+      /api: my-api              # path rules: prefix -> lambda, the longest wins
+  - host: api.example.com       # your own domain: set the CNAME gcli prints
+    serves: my-api              # one lambda at the root
+  - name: pesho-staging         # serves left out = this file's own lambda
+```
+
+`serves`: a lambda name, `all` or `full-path` (`/<projectId>/<route>`). A new custom domain prints the DNS records to set; its routing is applied on the next run, once it is verified. Domains the file does not mention are never removed. CI/CD tokens need the `domain:read` + `domain:write` permissions.
+
+```bash
+gcli domain:list
+gcli domain:apply                        # claims / adds what is missing, routes the rest; never removes
+```
+
+The same file can also carry `cluster:`, `rabbitmq:`, `plugin:`, `queues:`, `triggers:` and `domains:` sections, read by `cluster:apply` / `cluster:create`, `rabbitmq:create`, `plugin:install`, `queue:declare` and `cron:create` (`triggers.time`) / `mq-trigger:apply` (`triggers.mq`) respectively (each also accepts its own dedicated `--spec` file, e.g. `cluster.yaml`, if you'd rather keep them separate):
 
 ```yaml
 cluster:          # every key: see "Declarative clusters" above

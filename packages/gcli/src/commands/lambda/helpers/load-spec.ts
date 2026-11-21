@@ -115,6 +115,20 @@ export interface MqTriggerConfig {
   threshold?: number;
 }
 
+/** One entry of `domains:` - see `domain:apply`. Either a platform name
+    (`name: pesho` -> https://pesho.lambforge.app, live at once) or a custom
+    domain (`host: api.example.com` - point its CNAME at the target gcli
+    prints). `serves`: a lambda name (that lambda at the root, the default:
+    this file's `function.name`), `all` (every lambda at /<route>) or
+    `full-path` (/<projectId>/<route>, like functions.lambforge.com).
+    `paths`: prefix -> lambda name, the longest prefix wins. */
+export interface DomainConfig {
+  name?: string;
+  host?: string;
+  serves?: string;
+  paths?: Record<string, string>;
+}
+
 interface LambForgeConfig extends ConfigJSON {
   function: ConfigJSON;
   /* clusterName is gcli-only convenience (resolved to the real clusterId
@@ -130,6 +144,7 @@ interface LambForgeConfig extends ConfigJSON {
   cluster: ClusterConfig;
   rabbitmq: RabbitMqConfig;
   plugin: PluginConfig;
+  domains?: DomainConfig[];
 }
 
 export const loadSpec = <T = LambForgeConfig>(spec?: string) =>

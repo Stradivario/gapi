@@ -11,12 +11,13 @@ import { from, lastValueFrom, Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import streamToBuffer from 'stream-to-buffer';
 
+import { applyDomains } from '~/commands/domain/apply';
 import { parseProjectId, resolveClusterId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
 import packageZip from '../package';
-import { loadSpec } from './load-spec';
+import { DomainConfig, loadSpec } from './load-spec';
 import { readFileAsObservable } from './read-file';
 import { spreadScaleOptions } from './spread';
 import { DesiredTimeTrigger, syncTimeTrigger } from './time-trigger-sync';
@@ -98,6 +99,7 @@ export const createOrUpdateLambda = (
 ) => {
   // read from the spec in the first step, applied after the lambda is saved
   let timeTrigger: DesiredTimeTrigger | undefined;
+  let domains: DomainConfig[] = [];
   let projectIdUsed = '';
   return lastValueFrom(
     parseProjectId(cmd.project).pipe(
@@ -110,6 +112,8 @@ export const createOrUpdateLambda = (
         const spec = await lastValueFrom(loadSpec(cmd.spec));
         // `triggers.time` lives beside `function`; kept for the sync below
         timeTrigger = spec?.triggers?.time;
+        // `domains:` too (feature customer-domains), applied after the save
+        domains = spec?.domains ?? [];
         return {
           projectId,
           ...(spec?.function ?? spec),
@@ -241,6 +245,22 @@ export const createOrUpdateLambda = (
           data as { id?: string; name?: string },
           timeTrigger,
         ).pipe(map(() => data)),
+      ),
+      // apply `domains:` - reported, never fails the deploy itself
+      switchMap((data) =>
+        applyDomains(
+          projectIdUsed,
+          domains,
+          (data as { name?: string })?.name,
+        ).pipe(
+          catchError((e) => {
+            Logger.error(
+              `domains: was not applied: ${(e as Error)?.message ?? e} - run gcli domain:apply`,
+            );
+            return of([]);
+          }),
+          map(() => data),
+        ),
       ),
     ),
   );

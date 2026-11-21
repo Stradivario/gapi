@@ -1,6 +1,7 @@
 import { registerAuthCommands } from './auth';
 import { buildCommands } from './build';
 import { registerClusterCommands } from './cluster';
+import { registerDomainCommands } from './domain';
 import { registerEnvironmentCommands } from './environment';
 import { registerLambdaCommands } from './lambda';
 import { registerPluginCommands } from './plugin';
@@ -30,4 +31,5 @@ export const commands = [
   registerRunnerCommands,
   registerWorkspaceCommands,
   registerWorkflowCommands,
+  registerDomainCommands,
 ];

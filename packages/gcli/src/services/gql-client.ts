@@ -125,6 +125,47 @@ export interface MessageQueueTriggerInput {
   threshold?: number;
 }
 
+/** A project domain (feature customer-domains). */
+export interface ProjectDomain {
+  id: string;
+  hostname: string;
+  status: string;
+  routeMode: 'prefix' | 'all' | 'passthrough';
+  lambdaId?: string | null;
+  lambdaName?: string | null;
+  platform?: boolean | null;
+  ownZone?: boolean | null;
+  managedOutside?: boolean | null;
+  cnameTarget?: string | null;
+  error?: string | null;
+  verification?: { type: string; name: string; value: string }[] | null;
+  paths?:
+    | { prefix: string; lambdaId: string; lambdaName?: string | null }[]
+    | null;
+}
+
+export interface DomainRouting {
+  routeMode: 'prefix' | 'all' | 'passthrough';
+  lambdaId?: string | null;
+  paths: { prefix: string; lambdaId: string }[];
+}
+
+const ProjectDomainFragment = `
+  id
+  hostname
+  status
+  routeMode
+  lambdaId
+  lambdaName
+  platform
+  ownZone
+  managedOutside
+  cnameTarget
+  error
+  verification { type name value }
+  paths { prefix lambdaId lambdaName }
+`;
+
 const MessageQueueTriggerFragment = `
   id
   name
@@ -562,6 +603,87 @@ export class GraphqlClienAPI {
   // --------------------------------------------------------------------
   // Message-queue triggers (graphql-server-lambdas message-queue.controller)
   // --------------------------------------------------------------------
+
+  /* Domains (feature customer-domains, plans 43-44) START */
+  public static listProjectDomains(projectId: string) {
+    return this.query<{ listProjectDomains: ProjectDomain[] }>({
+      query: gql`
+        query listProjectDomains($projectId: String!) {
+          listProjectDomains(projectId: $projectId) {
+            ${ProjectDomainFragment}
+          }
+        }
+      `,
+      variables: { projectId },
+    }).pipe(map((res) => res.listProjectDomains ?? []));
+  }
+
+  public static claimPlatformName(
+    projectId: string,
+    name: string,
+    routeMode: 'prefix' | 'all',
+    lambdaId?: string,
+  ) {
+    return this.query<{ claimPlatformName: ProjectDomain }>({
+      query: gql`
+        mutation claimPlatformName($projectId: String!, $name: String!, $routeMode: String!, $lambdaId: String) {
+          claimPlatformName(projectId: $projectId, name: $name, routeMode: $routeMode, lambdaId: $lambdaId) {
+            ${ProjectDomainFragment}
+          }
+        }
+      `,
+      variables: { projectId, name, routeMode, lambdaId: lambdaId ?? null },
+    }).pipe(map((res) => res.claimPlatformName));
+  }
+
+  public static addProjectDomain(
+    projectId: string,
+    hostname: string,
+    lambdaId: string,
+  ) {
+    return this.query<{ addProjectDomain: ProjectDomain }>({
+      query: gql`
+        mutation addProjectDomain($projectId: String!, $hostname: String!, $lambdaId: String!) {
+          addProjectDomain(projectId: $projectId, hostname: $hostname, lambdaId: $lambdaId) {
+            ${ProjectDomainFragment}
+          }
+        }
+      `,
+      variables: { projectId, hostname, lambdaId },
+    }).pipe(map((res) => res.addProjectDomain));
+  }
+
+  public static setDomainRouting(domainId: string, routing: DomainRouting) {
+    return this.query<{ setDomainRouting: ProjectDomain }>({
+      query: gql`
+        mutation setDomainRouting($domainId: String!, $routeMode: String!, $lambdaId: String, $paths: [ProjectDomainPathRuleInput!]) {
+          setDomainRouting(domainId: $domainId, routeMode: $routeMode, lambdaId: $lambdaId, paths: $paths) {
+            ${ProjectDomainFragment}
+          }
+        }
+      `,
+      variables: {
+        domainId,
+        routeMode: routing.routeMode,
+        lambdaId: routing.lambdaId ?? null,
+        paths: routing.paths,
+      },
+    }).pipe(map((res) => res.setDomainRouting));
+  }
+
+  public static removeProjectDomain(domainId: string) {
+    return this.query<{ removeProjectDomain: { id: string } }>({
+      query: gql`
+        mutation removeProjectDomain($domainId: String!) {
+          removeProjectDomain(domainId: $domainId) {
+            id
+          }
+        }
+      `,
+      variables: { domainId },
+    }).pipe(map((res) => res.removeProjectDomain));
+  }
+  /* Domains END */
 
   public static listMessageQueueTriggers(projectId: string) {
     return this.query<{ listMessageQueueTriggers: MessageQueueTrigger[] }>({
