@@ -162,7 +162,7 @@ export default (name: string, cmd: { project?: string; output?: string }) =>
             lambda,
             env,
             trigger,
-            domainsOf(lambda.id, lambda.name, domains),
+            domainsOf(String(lambda.id), String(lambda.name), domains),
           ),
         );
       }),

@@ -607,7 +607,7 @@ export class GraphqlClienAPI {
   /** The project's lambdas with the settings `gcli plan` compares - names of
       secrets / configs only, never their contents. */
   public static listLambdasForPlan(projectId: string) {
-    return this.query<{ listProjectLambdas: Record<string, any>[] }>({
+    return this.query<{ listProjectLambdas: Record<string, unknown>[] }>({
       query: gql`
         query listLambdasForPlan($projectId: String!) {
           listProjectLambdas(projectId: $projectId) {
