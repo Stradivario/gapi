@@ -326655,7 +326655,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.279" : "development";
+var version2 = true ? "1.8.280" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));

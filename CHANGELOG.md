@@ -1,4 +1,4 @@
-## [1.8.280](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.280) (2026-11-21)
+## [1.8.281](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.281) (2026-11-21)
 
 
 ### Bug Fixes
