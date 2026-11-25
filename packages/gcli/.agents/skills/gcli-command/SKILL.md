@@ -1,6 +1,6 @@
 ---
 name: gcli-command
-description: Add or change a gcli command (commander registration, lazy action modules, GraphqlClienAPI calls through the gateway, Logger output, tests, build/release, regenerating README-CLI.md). USE BEFORE adding a `gcli <area>:<verb>` command or a new API call in src/services/gql-client.ts.
+description: Add or change a gcli command (commander registration, lazy action modules, GraphqlClienAPI calls through the gateway, ui output, tests, build/release, regenerating README-CLI.md). USE BEFORE adding a `gcli <area>:<verb>` command or a new API call in src/services/gql-client.ts.
 ---
 
 # Adding a gcli command
@@ -18,7 +18,13 @@ src/commands/index.ts            add registerXCommands to `commands`
 - Actions are lazy-imported - keep heavy imports inside the action module.
 - Return a promise (`lastValueFrom(observable)` for rxjs flows); throw an
   `Error` with an actionable message (`Run gcli login first`, `--id ...`).
-- Output via `Logger` (`src/services/log.ts`: log/info/warn/error/table).
+- Output via `ui` (`src/services/ui.ts`, feature cli-output): `ui.header`
+  for a flow, `step(label, { scope, done })` around each slow part,
+  `ui.success` / `ui.warn` / `ui.error` with a scope, `ui.done` +
+  `ui.summary` at the end, `ui.table` for lists, `ui.print` for data. No
+  banners, no raw escape codes; data a script reads gets `--json`.
+  `Logger` (`src/services/log.ts`) is the old wrapper over `ui` for existing
+  calls. Full vocabulary: `docs/features/cli-output.md`.
 
 ## API calls
 
