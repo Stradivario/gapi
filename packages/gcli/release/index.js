@@ -13069,12 +13069,12 @@ var require_defer = __commonJS({
     exports2.defer = void 0;
     var Observable_1 = require_Observable();
     var innerFrom_1 = require_innerFrom();
-    function defer6(observableFactory) {
+    function defer7(observableFactory) {
       return new Observable_1.Observable(function(subscriber) {
         innerFrom_1.innerFrom(observableFactory()).subscribe(subscriber);
       });
     }
-    exports2.defer = defer6;
+    exports2.defer = defer7;
   }
 });
 
@@ -50078,7 +50078,7 @@ ${lanes.join("\n")}
               return process.memoryUsage().heapUsed;
             },
             getFileSize(path2) {
-              const stat2 = statSync2(path2);
+              const stat2 = statSync3(path2);
               if (stat2 == null ? void 0 : stat2.isFile()) {
                 return stat2.size;
               }
@@ -50122,7 +50122,7 @@ ${lanes.join("\n")}
             }
           };
           return nodeSystem;
-          function statSync2(path2) {
+          function statSync3(path2) {
             try {
               return _fs.statSync(path2, statSyncOptions);
             } catch {
@@ -50181,7 +50181,7 @@ ${lanes.join("\n")}
               activeSession.post("Profiler.stop", (err, { profile }) => {
                 var _a2;
                 if (!err) {
-                  if ((_a2 = statSync2(profilePath)) == null ? void 0 : _a2.isDirectory()) {
+                  if ((_a2 = statSync3(profilePath)) == null ? void 0 : _a2.isDirectory()) {
                     profilePath = _path.join(profilePath, `${(/* @__PURE__ */ new Date()).toISOString().replace(/:/g, "-")}+P${process.pid}.cpuprofile`);
                   }
                   try {
@@ -50301,7 +50301,7 @@ ${lanes.join("\n")}
                 let stat2;
                 if (typeof dirent === "string" || dirent.isSymbolicLink()) {
                   const name2 = combinePaths(path2, entry);
-                  stat2 = statSync2(name2);
+                  stat2 = statSync3(name2);
                   if (!stat2) {
                     continue;
                   }
@@ -50325,7 +50325,7 @@ ${lanes.join("\n")}
             return matchFiles(path2, extensions, excludes, includes, useCaseSensitiveFileNames2, process.cwd(), depth, getAccessibleFileSystemEntries, realpath3);
           }
           function fileSystemEntryExists(path2, entryKind) {
-            const stat2 = statSync2(path2);
+            const stat2 = statSync3(path2);
             if (!stat2) {
               return false;
             }
@@ -50367,7 +50367,7 @@ ${lanes.join("\n")}
           }
           function getModifiedTime3(path2) {
             var _a2;
-            return (_a2 = statSync2(path2)) == null ? void 0 : _a2.mtime;
+            return (_a2 = statSync3(path2)) == null ? void 0 : _a2.mtime;
           }
           function setModifiedTime(path2, time3) {
             try {
@@ -255447,7 +255447,7 @@ var build_exports = {};
 __export(build_exports, {
   default: () => build_default
 });
-var import_esbuild_decorators, import_esbuild, import_fs3, import_path, import_rxjs7, import_operators6, build_default;
+var import_esbuild_decorators, import_esbuild, import_fs3, import_path, import_rxjs7, import_operators6, esbuildMessage, sizeOf, build_default;
 var init_build = __esm({
   "src/commands/build/build.ts"() {
     import_esbuild_decorators = __toESM(require_src());
@@ -255456,17 +255456,13 @@ var init_build = __esm({
     import_path = require("path");
     import_rxjs7 = __toESM(require_cjs());
     import_operators6 = __toESM(require_operators());
-    init_log();
+    init_ui();
     init_load_spec();
+    esbuildMessage = (m2) => `${m2.location ? `${m2.location.file}:${m2.location.line} ` : ""}${m2.text}`;
+    sizeOf = (file2) => file2 && (0, import_fs3.existsSync)(file2) ? ` (${bytes((0, import_fs3.statSync)(file2).size)})` : "";
     build_default = async (args) => {
-      const time3 = Date.now();
       return (0, import_rxjs7.lastValueFrom)(
         loadSpec().pipe(
-          (0, import_operators6.tap)((config2) => {
-            Logger.info(
-              `\u{1F528} Bundling ${args.files?.length ? args.files.join("") : config2?.function?.file ?? config2?.file ?? "index.ts"}`
-            );
-          }),
           (0, import_operators6.switchMap)(
             (config2) => (0, import_rxjs7.of)(config2).pipe(
               (0, import_operators6.map)((config3) => ({
@@ -255481,37 +255477,41 @@ var init_build = __esm({
                   external: args.external ?? config3?.options?.bundler?.external ?? []
                 }
               })),
-              (0, import_operators6.switchMap)(
-                ({ esbuild: esbuild2, options }) => esbuild2.build({
-                  ...options,
-                  // Decorator metadata needs the project's tsconfig; without one
-                  // the plugin failed with "[plugin: tsc] failed to open
-                  // 'undefined'" - plain esbuild handles a project without it.
-                  plugins: (0, import_fs3.existsSync)((0, import_path.join)(process.cwd(), "tsconfig.json")) ? [
-                    (0, import_esbuild_decorators.esbuildDecorators)({
-                      tsconfig: "./tsconfig.json",
-                      cwd: process.cwd()
-                    })
-                  ] : []
-                })
-              ),
-              (0, import_operators6.tap)((data) => {
-                if (data.warnings.length) {
-                  Logger.warn(data.warnings);
-                }
-                if (data.errors.length) {
-                  Logger.error(data.errors);
-                }
-                Logger.warn(`\u{1F3D7}\uFE0F  Bundling finish in ${Date.now() - time3}ms`);
-                Logger.info(
-                  `\u2705 Finished bundling output file ${args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js"}`
+              (0, import_operators6.switchMap)(({ esbuild: esbuild2, options }) => {
+                const entry = options.entryPoints.join(", ");
+                return (0, import_rxjs7.defer)(
+                  () => esbuild2.build({
+                    ...options,
+                    // Decorator metadata needs the project's tsconfig; without one
+                    // the plugin failed with "[plugin: tsc] failed to open
+                    // 'undefined'" - plain esbuild handles a project without it.
+                    plugins: (0, import_fs3.existsSync)((0, import_path.join)(process.cwd(), "tsconfig.json")) ? [
+                      (0, import_esbuild_decorators.esbuildDecorators)({
+                        tsconfig: "./tsconfig.json",
+                        cwd: process.cwd()
+                      })
+                    ] : []
+                  })
+                ).pipe(
+                  (0, import_operators6.tap)((data) => {
+                    data.warnings.forEach(
+                      (w) => ui.warn(esbuildMessage(w), "build")
+                    );
+                    data.errors.forEach(
+                      (e2) => ui.error(esbuildMessage(e2), "build")
+                    );
+                  }),
+                  step(`bundling ${entry}`, {
+                    scope: "build",
+                    done: () => `bundled ${entry} -> ${options.outfile}${sizeOf(options.outfile)}`
+                  })
                 );
               })
             )
           )
         )
       ).catch((e2) => {
-        console.error(e2);
+        ui.error(errorText(e2), "build");
         process.exit(1);
       });
     };
@@ -256070,7 +256070,7 @@ async function waitForStorage(clusterId, name2, timeoutMs) {
     const nodes = await (0, import_rxjs13.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId));
     const node = nodes.find((n) => n.name === name2);
     if (node?.storage === "ready") {
-      Logger.log(`${name2} carries volumes now.`);
+      Logger.success(`${name2} carries volumes now.`);
       return true;
     }
     if (node?.storage === "failed") {
@@ -256112,11 +256112,11 @@ var init_node_storage = __esm({
         GraphqlClienAPI.setClusterNodeStorage(clusterId, name2, !cmd.off)
       );
       if (cmd.off) {
-        Logger.log(`${node.name} no longer carries volumes.`);
+        Logger.success(`${node.name} no longer carries volumes.`);
         return;
       }
       if (node.storage === "ready") {
-        Logger.log(`${node.name} already carries volumes.`);
+        Logger.success(`${node.name} already carries volumes.`);
         return;
       }
       Logger.info(
@@ -256320,7 +256320,7 @@ var init_apply = __esm({
         }
         applied.push(step2);
       }
-      Logger.info(
+      Logger.success(
         `Applied ${applied.length} of ${steps.length} change(s) to "${desired.name}".`
       );
       return { clusterId, applied };
@@ -256795,7 +256795,7 @@ var init_attach2 = __esm({
       } finally {
         await (0, import_promises2.rm)(dir, { recursive: true, force: true });
       }
-      Logger.info(
+      Logger.success(
         `Config applied - ${opts.name} installs Talos and reboots, then joins "${join_.clusterName}" (pool ${join_.pool}, ${join_.reserved ? "reserved" : "extra capacity"}${opts.storage ? ", carries volumes" : ""}).`
       );
       if (!opts.wait) {
@@ -256811,7 +256811,7 @@ var init_attach2 = __esm({
         const nodes = await (0, import_rxjs19.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId));
         const node = nodes.find((n) => n.name === opts.name);
         if (node?.status === "ready") {
-          Logger.log(`${opts.name} joined and is ready.`);
+          Logger.success(`${opts.name} joined and is ready`);
           Logger.table([nodeRow(node)]);
           if (opts.storage) {
             Logger.info(
@@ -257087,7 +257087,7 @@ var init_detach = __esm({
       const node = await (0, import_rxjs24.lastValueFrom)(
         GraphqlClienAPI.detachClusterNode(clusterId, name2)
       );
-      Logger.log(`${node.name} is detached.`);
+      Logger.success(`${node.name} is detached`);
       Logger.info(
         `The machine still runs Talos. To attach it again (or anywhere else), reset it from its network: ${resetHint(clusterId, node.name)}`
       );
@@ -257835,6 +257835,7 @@ var init_create_environment = __esm({
             )
           ),
           (0, import_operators16.tap)((data) => {
+            Logger.success(`Environment ${data?.name ?? ""} created`);
             const columns = [
               "id",
               "name",
@@ -257884,7 +257885,6 @@ var init_update_environment = __esm({
               }))
             )
           ),
-          (0, import_operators17.tap)(Logger.log),
           (0, import_operators17.switchMap)(
             ({ projectId, clusterName: dataClusterName, ...data }) => resolveClusterId(projectId, {
               clusterId: cmdRest.clusterId || data.clusterId,
@@ -257899,6 +257899,7 @@ var init_update_environment = __esm({
             )
           ),
           (0, import_operators17.tap)((data) => {
+            Logger.success(`Environment ${data?.name ?? ""} updated`);
             const columns = [
               "id",
               "name",
@@ -257961,6 +257962,7 @@ var init_delete_environment = __esm({
           )
         ),
         (0, import_operators18.tap)((data) => {
+          Logger.success(`Environment ${data?.name ?? ""} deleted`);
           const columns = [
             "id",
             "name",
@@ -266719,8 +266721,8 @@ var require_mime_types = __commonJS({
 // ../../node_modules/asynckit/lib/defer.js
 var require_defer2 = __commonJS({
   "../../node_modules/asynckit/lib/defer.js"(exports2, module2) {
-    module2.exports = defer6;
-    function defer6(fn) {
+    module2.exports = defer7;
+    function defer7(fn) {
       var nextTick = typeof setImmediate == "function" ? setImmediate : typeof process == "object" && typeof process.nextTick == "function" ? process.nextTick : null;
       if (nextTick) {
         nextTick(fn);
@@ -266734,18 +266736,18 @@ var require_defer2 = __commonJS({
 // ../../node_modules/asynckit/lib/async.js
 var require_async2 = __commonJS({
   "../../node_modules/asynckit/lib/async.js"(exports2, module2) {
-    var defer6 = require_defer2();
+    var defer7 = require_defer2();
     module2.exports = async;
     function async(callback) {
       var isAsync2 = false;
-      defer6(function() {
+      defer7(function() {
         isAsync2 = true;
       });
       return function async_callback(err, result) {
         if (isAsync2) {
           callback(err, result);
         } else {
-          defer6(function nextTick_callback() {
+          defer7(function nextTick_callback() {
             callback(err, result);
           });
         }
@@ -269386,8 +269388,8 @@ var require_async3 = __commonJS({
       function fallback(fn) {
         setTimeout(fn, 0);
       }
-      function wrap(defer6) {
-        return (fn, ...args) => defer6(() => fn(...args));
+      function wrap(defer7) {
+        return (fn, ...args) => defer7(() => fn(...args));
       }
       var _defer;
       if (hasQueueMicrotask) {
@@ -289324,6 +289326,25 @@ var init_package = __esm({
   }
 });
 
+// src/commands/lambda/helpers/deploy-state.ts
+var deployStateOf;
+var init_deploy_state = __esm({
+  "src/commands/lambda/helpers/deploy-state.ts"() {
+    deployStateOf = (build2, deployStatus) => {
+      if (build2?.failed || deployStatus === "FAILED") {
+        return { state: "FAILED", status: build2?.status };
+      }
+      if (build2?.ready && (!deployStatus || deployStatus === "LIVE")) {
+        return { state: "LIVE", status: build2.status };
+      }
+      return {
+        state: "DEPLOYING",
+        status: build2?.ready ? "rolling out" : build2?.status
+      };
+    };
+  }
+});
+
 // src/commands/lambda/helpers/spread.ts
 function spreadScaleOptions(cmd, spec) {
   const spread = cmd.spread ?? spec?.spread;
@@ -289429,6 +289450,7 @@ var init_helpers2 = __esm({
     init_gql_client();
     init_ui();
     init_package();
+    init_deploy_state();
     init_load_spec();
     init_read_file();
     init_spread();
@@ -289545,16 +289567,16 @@ var init_helpers2 = __esm({
     );
     DEPLOY_POLL_MS = 3e3;
     DEPLOY_TIMEOUT_MS = 15 * 6e4;
-    deployState = (lambda, type2) => type2 === "updateLambda" ? GraphqlClienAPI.getLambda(lambda.id, ["deployStatus"]).pipe(
-      (0, import_operators22.map)((l) => ({
-        state: l.deployStatus ?? "LIVE",
-        status: "rolling out"
-      }))
-    ) : GraphqlClienAPI.getLambdaBuildStatus(lambda.id).pipe(
-      (0, import_operators22.map)((b) => ({
-        state: b?.failed ? "FAILED" : b?.ready ? "LIVE" : "DEPLOYING",
-        status: b?.status
-      }))
+    deployState = (lambda) => (0, import_rxjs39.forkJoin)({
+      build: GraphqlClienAPI.getLambdaBuildStatus(lambda.id),
+      // not on every API yet: an error = not known
+      lambda: GraphqlClienAPI.getLambda(lambda.id, [
+        "deployStatus"
+      ]).pipe((0, import_operators22.catchError)(() => (0, import_rxjs39.of)(null)))
+    }).pipe(
+      (0, import_operators22.map)(
+        ({ build: build2, lambda: l }) => deployStateOf(build2, l?.deployStatus)
+      )
     );
     reportBuildProblems = (lambdaId, scope) => GraphqlClienAPI.getLambdaBuildStatus(lambdaId).pipe(
       (0, import_operators22.tap)((b) => {
@@ -289571,13 +289593,12 @@ ${ui.dim(b.runtimeErrors)}`,
       (0, import_operators22.catchError)(() => (0, import_rxjs39.of)(null))
     );
     followDeploy = (lambda, type2, scope, wait) => {
-      const needsWait = type2 === "createLambda" || lambda?.deployStatus === "DEPLOYING";
-      if (!wait || !lambda?.id || !needsWait) return (0, import_rxjs39.of)(lambda);
+      if (!wait || !lambda?.id) return (0, import_rxjs39.of)(lambda);
       const started = Date.now();
       const spinner = ui.spin("building and rolling out", scope);
       const logsHint = `gcli lambda:logs-builder --name ${lambda.name}`;
       return (0, import_rxjs39.timer)(DEPLOY_POLL_MS, DEPLOY_POLL_MS).pipe(
-        (0, import_operators22.switchMap)(() => deployState(lambda, type2)),
+        (0, import_operators22.switchMap)(() => deployState(lambda)),
         (0, import_operators22.tap)(
           ({ status: status2 }) => spinner.update(
             `building and rolling out${status2 ? ` (${status2})` : ""} ${ui.dim(elapsed(Date.now() - started))}`
@@ -289875,6 +289896,7 @@ var init_delete = __esm({
             )
           ),
           (0, import_operators25.tap)((data) => {
+            Logger.success(`Lambda ${data?.name ?? ""} deleted`);
             const columns = [
               "name",
               "projectId",
@@ -290196,6 +290218,7 @@ var init_install = __esm({
           )
         ),
         (0, import_operators31.tap)((installed) => {
+          Logger.success("Plugin installed");
           Logger.table([installed]);
         })
       )
@@ -321442,6 +321465,7 @@ var init_create3 = __esm({
           })
         ),
         (0, import_operators36.tap)((broker) => {
+          Logger.success(`RabbitMQ broker ${broker?.name ?? ""} installed`);
           Logger.table([broker]);
         })
       )
@@ -321623,6 +321647,7 @@ var init_delete2 = __esm({
           (projectId) => GraphqlClienAPI.uninstallRabbitMq(cmd.id, projectId)
         ),
         (0, import_operators39.tap)((broker) => {
+          Logger.success(`RabbitMQ broker ${broker?.name ?? ""} removed`);
           Logger.table([broker]);
         })
       )
@@ -322679,6 +322704,7 @@ var init_save = __esm({
           );
         }),
         (0, import_operators42.tap)((trigger) => {
+          Logger.success(`Queue trigger ${trigger?.name ?? ""} saved`);
           Logger.table([
             {
               name: trigger.name,
@@ -324349,7 +324375,7 @@ var init_daemon_commands = __esm({
       }
       const systemd = new SystemdUserService(serviceName);
       const path2 = await systemd.install(unit);
-      Logger.log(
+      Logger.success(
         `Runner "${runner?.name || runner?.id}" installed as systemd user service ${serviceName} (${path2}) and started.`
       );
       Logger.info(
@@ -324365,7 +324391,7 @@ var init_daemon_commands = __esm({
       assertSystemdAvailable();
       const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
       const path2 = await new SystemdUserService(serviceName).uninstall();
-      Logger.log(
+      Logger.success(
         `Stopped and removed ${serviceName} (${path2}). The runner itself is still registered - \`gcli runner:delete\` revokes it.`
       );
     };
@@ -324384,7 +324410,7 @@ var init_daemon_commands = __esm({
       await new Promise((resolve4) => setTimeout(resolve4, settleMs));
       const { active, exitStatus } = await systemd.outcome();
       if (active) {
-        Logger.log(`${serviceName} is running. Logs: gcli runner:daemon:logs`);
+        Logger.success(`${serviceName} is running. Logs: gcli runner:daemon:logs`);
         return;
       }
       if (exitStatus === RUNNER_AUTH_EXIT_CODE) {
@@ -324409,7 +324435,7 @@ var init_daemon_commands = __esm({
     stop = async (cmd) => {
       const { serviceName, systemd } = installedService(cmd);
       await systemd.stop();
-      Logger.log(
+      Logger.success(
         `${serviceName} stopped. It starts again with your next login (it stays enabled); \`gcli runner:daemon:uninstall\` removes it.`
       );
     };
@@ -324563,7 +324589,7 @@ var init_delete3 = __esm({
       if (saved?.id === runnerId) {
         await forgetRunner();
       }
-      Logger.log(`Local runner ${runnerId} deleted; its token no longer works.`);
+      Logger.success(`Local runner ${runnerId} deleted; its token no longer works`);
     };
   }
 });
@@ -324608,10 +324634,8 @@ async function start2(args) {
               ignorelist
             }) => (0, import_rxjs67.from)(build_default(args)).pipe(
               (0, import_operators47.tap)(() => {
-                Logger.warn(
-                  `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
-                );
-                Logger.log("---------------------------------\n");
+                ui.info(`running ${startCommand} ${outfile}
+`, "start");
               }),
               (0, import_operators47.tap)(() => {
                 child = (0, import_node_child_process.spawn)(
@@ -324660,18 +324684,14 @@ async function start2(args) {
                 )
               ),
               (0, import_operators47.tap)((data) => {
-                Logger.log("\n---------------------------------");
-                Logger.log(
-                  `\u27F3  Restarting due to change in: ${data.filename}`
-                );
+                ui.print("");
+                ui.info(`${data.filename} changed - restarting`, "start");
                 child?.kill("SIGTERM");
               }),
               (0, import_operators47.switchMap)(() => build_default(args)),
               (0, import_operators47.tap)(() => {
-                Logger.warn(
-                  `\u{1F4E2} Starting script "${startCommand} ${outfile}"`
-                );
-                Logger.log("---------------------------------\n");
+                ui.info(`running ${startCommand} ${outfile}
+`, "start");
                 child = (0, import_node_child_process.spawn)(
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
@@ -324696,6 +324716,7 @@ var init_start3 = __esm({
     import_rxjs67 = __toESM(require_cjs());
     import_operators47 = __toESM(require_operators());
     init_log();
+    init_ui();
     init_build();
     init_load_spec();
   }
@@ -324749,6 +324770,7 @@ var init_create_cron = __esm({
           }).pipe((0, import_operators48.map)((data) => ({ ...data, lambdaName })))
         ),
         (0, import_operators48.tap)((data) => {
+          Logger.success(`Time trigger ${data?.triggerName ?? ""} created`);
           const columns = [
             "id",
             "lambdaName",
@@ -324800,6 +324822,7 @@ var init_delete_cron = __esm({
           )
         ),
         (0, import_operators49.tap)((data) => {
+          Logger.success(`Time trigger ${data?.triggerName ?? ""} deleted`);
           const columns = [
             "id",
             "lambdaName",
@@ -324912,6 +324935,7 @@ var init_delete4 = __esm({
           (projectId) => GraphqlClienAPI.deleteMessageQueueTrigger(projectId, cmd.name)
         ),
         (0, import_operators52.tap)((trigger) => {
+          Logger.success(`Queue trigger ${trigger?.name ?? ""} deleted`);
           Logger.info(
             `Deleted trigger ${trigger?.name ?? cmd.name}${trigger?.lambdaName ? ` (lambda ${trigger.lambdaName})` : ""}`
           );
@@ -325184,7 +325208,7 @@ var init_apply5 = __esm({
           });
         }),
         (0, import_operators56.tap)(
-          (w) => Logger.info(
+          (w) => Logger.success(
             `Workflow ${w.name} saved (${Object.keys(w.definition?.states ?? {}).length} steps). Run it: gcli workflow:run --name ${w.name} --wait`
           )
         )
@@ -325562,7 +325586,7 @@ var init_trigger_add = __esm({
           const added = (updated.triggers ?? []).find(
             (t2) => !before.some((b) => b.id === t2.id)
           );
-          Logger.info(`Trigger added to ${updated.name}`);
+          Logger.success(`Trigger added to ${updated.name}`);
           if (added) {
             Logger.table([triggerRow(added)]);
             if (added.kind === "http" && added.url) {
@@ -325626,7 +325650,7 @@ var init_trigger_remove = __esm({
           )
         ),
         (0, import_operators66.tap)(
-          (w) => Logger.info(
+          (w) => Logger.success(
             `Trigger removed from ${w.name} (${w.triggers?.length ?? 0} left)`
           )
         )
@@ -327343,7 +327367,7 @@ var init_start4 = __esm({
       Logger.info(`Lambforge: ${wsUrl}`);
       if (policy.mode === "yolo") {
         Logger.warn(
-          "\x1B[31m--yolo: the chat agents can run ANY command on this machine without asking.\x1B[0m"
+          "--yolo: the chat agents can run ANY command on this machine without asking."
         );
       } else {
         Logger.info(
@@ -327466,7 +327490,7 @@ var init_delete6 = __esm({
       }
       await (0, import_rxjs82.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
       await forgetWorkspace({ id: workspaceId });
-      Logger.log(
+      Logger.success(
         `Local workspace ${workspaceId} deleted; its token no longer works.`
       );
     };
@@ -328260,7 +328284,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.285" : "development";
+var version2 = true ? "1.8.286" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));

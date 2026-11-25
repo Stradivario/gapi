@@ -1,4 +1,4 @@
-## [1.8.286](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.286) (2026-11-25)
+## [1.8.287](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.287) (2026-11-25)
 
 
 ### Bug Fixes
@@ -57,6 +57,7 @@
 * **gcli:** builded again the package with namespace import from all ([f655951](https://github.com/Stradivario/gapi/commit/f6559518341065cef27d9404d8941480ff704ee0))
 * **gcli:** decompress logs ([705241b](https://github.com/Stradivario/gapi/commit/705241b05fcba9d8375c4cf8a73710f1989323e3))
 * **gcli:** default export of form data and stream to buffer ([94800cb](https://github.com/Stradivario/gapi/commit/94800cb9fa946b6843dd9a7517c987007b254821))
+* **gcli:** deploys follow the build status and deployStatus ([d8a8e73](https://github.com/Stradivario/gapi/commit/d8a8e735a9b52e74000628a118abf6dd482c0318))
 * **gcli:** documentation fix [ci-skip] ([8fd6a46](https://github.com/Stradivario/gapi/commit/8fd6a46c8cc2b417d8edc1121ef4178b7e7e7e29))
 * **gcli:** environment update ([b1815c5](https://github.com/Stradivario/gapi/commit/b1815c599163dc8aeade8409f2941a3a3c4191db))
 * **gcli:** esbuild marked as external but installable inside dependencies ([e8d6b72](https://github.com/Stradivario/gapi/commit/e8d6b72f217123da5e2445fe8987cbeda4fd371c))
@@ -166,6 +167,7 @@
 * **gcli:** gcli apply - plan, confirm, then apply every lambforge.yaml ([f53fea5](https://github.com/Stradivario/gapi/commit/f53fea53fbd98972558fdd2e8abbf5feac841f1a))
 * **gcli:** lambda:create / lambda:update apply triggers.time from lambforge.yaml ([e74b79f](https://github.com/Stradivario/gapi/commit/e74b79fa19b6adc42c98f1fa30aa97e037aeac50))
 * **gcli:** logging is now on a single place introduced new configuration lambforge.yaml and start bundling capabilities using esbuild really amazing commitgit add .! ([064cd2a](https://github.com/Stradivario/gapi/commit/064cd2a7bb1b33951869961624df81f3b4c097ad))
+* **gcli:** new output in every command, build as one step ([a10109c](https://github.com/Stradivario/gapi/commit/a10109ca448dadeb7942900ddfee742cc90523d1))
 * **gcli:** npm ignore file added ([15530eb](https://github.com/Stradivario/gapi/commit/15530eb085653d26f53e01fd9d7902bdfd99b734))
 * **gcli:** one-way terminal input + resize frames (no round trip per keystroke), PTY resize via stty -F ([34f054d](https://github.com/Stradivario/gapi/commit/34f054dbbef33261ffe9f4ac022441f5e755de81))
 * **gcli:** queue:declare, mq-trigger:apply and queues / triggers.mq in lambforge.yaml ([cf567e0](https://github.com/Stradivario/gapi/commit/cf567e021b296dc60d7c6e31967a98c9dd0a10d5))
