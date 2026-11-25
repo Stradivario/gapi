@@ -1,4 +1,4 @@
-## [1.8.284](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.284) (2026-11-25)
+## [1.8.286](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.286) (2026-11-25)
 
 
 ### Bug Fixes
@@ -48,6 +48,7 @@
 * **gcli:** added config extraction from the current api url ([1afdf6f](https://github.com/Stradivario/gapi/commit/1afdf6fc5cfadecab5fcc19a417d3939cb60c9dd))
 * **gcli:** added missing envSecrets in lambda fragment ([c14b9e5](https://github.com/Stradivario/gapi/commit/c14b9e5aaaca1c09e85e1acd228ede8d79b66646))
 * **gcli:** added secrets instead of secret due to api change in lamb forge ([9b4b2fe](https://github.com/Stradivario/gapi/commit/9b4b2fe0d1180b946897581bcf2355d84a0fecc5))
+* **gcli:** apply deploys from the unit folder (absolute path joined twice) ([7c3c0ad](https://github.com/Stradivario/gapi/commit/7c3c0ad0f49399dadbde7ff62d6b016a56470a2b))
 * **gcli:** async code refactored to rxjs [ci-skip] ([42cf603](https://github.com/Stradivario/gapi/commit/42cf6039547de01381c20db48bda760f3906987f))
 * **gcli:** authorization token passed also to upload lambda logic ([26e5126](https://github.com/Stradivario/gapi/commit/26e512698fd471fb73ecf302e857631609eecc8e))
 * **gcli:** browser login uses Node's built-in fetch - node-fetch v3 is ESM-only and broke the jest run in CI ([17049f0](https://github.com/Stradivario/gapi/commit/17049f0eb3340abd59a52642b21c9108853b56dc))
@@ -136,6 +137,7 @@
 * **dev:** loaded spec on single place and used all over the functions ([ab73876](https://github.com/Stradivario/gapi/commit/ab7387672b61f8ee1dc884e6424d1ebfb4e36d5a))
 * **dev:** refresh token authentication added ([0262bc1](https://github.com/Stradivario/gapi/commit/0262bc18aeba5e9efae3b6913bc4926dfc5d338d))
 * **dev:** test command introduced with few parameters ([f08078e](https://github.com/Stradivario/gapi/commit/f08078e2e088f5fa8b5799ce7a561cebd9f72d2b))
+* **docs:** update README with setup instructions for Strata and Inkling 2 Mini as runner backends ([28ef619](https://github.com/Stradivario/gapi/commit/28ef619a1a96ae01e59665bf239d6c2b0355ca3e))
 * **falkordb:** added new module to import falkordb client into the gapi system ([e82a4cc](https://github.com/Stradivario/gapi/commit/e82a4cc9d679db81e69c5f393bab0b57f0a9af2a))
 * **federation:** added missing apollo server configs ([cc6edfe](https://github.com/Stradivario/gapi/commit/cc6edfecb02315ed11e156cf63616a983a5b82a7))
 * **federation:** added willSendRequest and context lambdas in order to manage authentication outside the scope of the library ([5f597ab](https://github.com/Stradivario/gapi/commit/5f597ab2504b127ed9838ef84e2ea678927c6b32))
@@ -160,6 +162,8 @@
 * **gcli:** domains: in lambforge.yaml - domain:apply, domain:list, applied on every deploy ([3a1173e](https://github.com/Stradivario/gapi/commit/3a1173e41b02c6a9d9108ac79c26e9b8ab3be82e))
 * **gcli:** environment crud operations added ([5c4bde8](https://github.com/Stradivario/gapi/commit/5c4bde864e328e97c21f616af5911e3ce0208edf))
 * **gcli:** federation and envSecret are adopted to the cli ([244b451](https://github.com/Stradivario/gapi/commit/244b4515ae93fddbc9aace6cef917181982f9f06))
+* **gcli:** firebase-style output, deploys wait for the build ([1d689c5](https://github.com/Stradivario/gapi/commit/1d689c5e00bc29836f8db6f4b1a6b2d0f11674c6))
+* **gcli:** gcli apply - plan, confirm, then apply every lambforge.yaml ([f53fea5](https://github.com/Stradivario/gapi/commit/f53fea53fbd98972558fdd2e8abbf5feac841f1a))
 * **gcli:** lambda:create / lambda:update apply triggers.time from lambforge.yaml ([e74b79f](https://github.com/Stradivario/gapi/commit/e74b79fa19b6adc42c98f1fa30aa97e037aeac50))
 * **gcli:** logging is now on a single place introduced new configuration lambforge.yaml and start bundling capabilities using esbuild really amazing commitgit add .! ([064cd2a](https://github.com/Stradivario/gapi/commit/064cd2a7bb1b33951869961624df81f3b4c097ad))
 * **gcli:** npm ignore file added ([15530eb](https://github.com/Stradivario/gapi/commit/15530eb085653d26f53e01fd9d7902bdfd99b734))
