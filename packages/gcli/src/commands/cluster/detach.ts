@@ -42,7 +42,7 @@ export default async (
   const node = await lastValueFrom(
     GraphqlClienAPI.detachClusterNode(clusterId, name),
   );
-  Logger.log(`${node.name} is detached.`);
+  Logger.success(`${node.name} is detached`);
   Logger.info(
     `The machine still runs Talos. To attach it again (or anywhere else), reset it from its network: ${resetHint(clusterId, node.name)}`,
   );

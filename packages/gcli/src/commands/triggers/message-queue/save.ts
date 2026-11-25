@@ -121,6 +121,7 @@ export default (mode: 'create' | 'update', cmd: MqTriggerFlags) =>
         );
       }),
       tap((trigger) => {
+        Logger.success(`Queue trigger ${trigger?.name ?? ''} saved`);
         Logger.table([
           {
             name: trigger.name,

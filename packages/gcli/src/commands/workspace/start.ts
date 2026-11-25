@@ -122,7 +122,7 @@ export default async (cmd: WorkspaceStartOptions) => {
   Logger.info(`Lambforge: ${wsUrl}`);
   if (policy.mode === 'yolo') {
     Logger.warn(
-      '\x1b[31m--yolo: the chat agents can run ANY command on this machine without asking.\x1b[0m',
+      '--yolo: the chat agents can run ANY command on this machine without asking.',
     );
   } else {
     Logger.info(

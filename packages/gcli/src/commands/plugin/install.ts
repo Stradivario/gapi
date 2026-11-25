@@ -44,6 +44,7 @@ export default (cmd: {
         ),
       ),
       tap((installed) => {
+        Logger.success('Plugin installed');
         Logger.table([installed]);
       }),
     ),

@@ -89,7 +89,7 @@ export const install = async (cmd: InstallOptions) => {
 
   const systemd = new SystemdUserService(serviceName);
   const path = await systemd.install(unit);
-  Logger.log(
+  Logger.success(
     `Runner "${runner?.name || runner?.id}" installed as systemd user service ${serviceName} (${path}) and started.`,
   );
   Logger.info(
@@ -107,7 +107,7 @@ export const uninstall = async (cmd: { service?: string }) => {
   assertSystemdAvailable();
   const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
   const path = await new SystemdUserService(serviceName).uninstall();
-  Logger.log(
+  Logger.success(
     `Stopped and removed ${serviceName} (${path}). The runner itself is still registered - ` +
       '`gcli runner:delete` revokes it.',
   );
@@ -137,7 +137,7 @@ export const reportStarted = async (
   await new Promise((resolve) => setTimeout(resolve, settleMs));
   const { active, exitStatus } = await systemd.outcome();
   if (active) {
-    Logger.log(`${serviceName} is running. Logs: gcli runner:daemon:logs`);
+    Logger.success(`${serviceName} is running. Logs: gcli runner:daemon:logs`);
     return;
   }
   if (exitStatus === RUNNER_AUTH_EXIT_CODE) {
@@ -166,7 +166,7 @@ export const restart = async (cmd: { service?: string }) => {
 export const stop = async (cmd: { service?: string }) => {
   const { serviceName, systemd } = installedService(cmd);
   await systemd.stop();
-  Logger.log(
+  Logger.success(
     `${serviceName} stopped. It starts again with your next login (it stays enabled); ` +
       '`gcli runner:daemon:uninstall` removes it.',
   );

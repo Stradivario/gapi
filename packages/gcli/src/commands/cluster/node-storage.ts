@@ -25,7 +25,7 @@ export async function waitForStorage(
     const nodes = await lastValueFrom(GraphqlClienAPI.clusterNodes(clusterId));
     const node = nodes.find((n) => n.name === name);
     if (node?.storage === 'ready') {
-      Logger.log(`${name} carries volumes now.`);
+      Logger.success(`${name} carries volumes now.`);
       return true;
     }
     if (node?.storage === 'failed') {
@@ -75,11 +75,11 @@ export default async (
     GraphqlClienAPI.setClusterNodeStorage(clusterId, name, !cmd.off),
   );
   if (cmd.off) {
-    Logger.log(`${node.name} no longer carries volumes.`);
+    Logger.success(`${node.name} no longer carries volumes.`);
     return;
   }
   if (node.storage === 'ready') {
-    Logger.log(`${node.name} already carries volumes.`);
+    Logger.success(`${node.name} already carries volumes.`);
     return;
   }
   Logger.info(

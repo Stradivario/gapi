@@ -16,7 +16,7 @@ export default async (cmd: { id?: string }) => {
   }
   await lastValueFrom(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
   await forgetWorkspace({ id: workspaceId });
-  Logger.log(
+  Logger.success(
     `Local workspace ${workspaceId} deleted; its token no longer works.`,
   );
 };

@@ -34,7 +34,7 @@ export default (
         const added = (updated.triggers ?? []).find(
           (t) => !before.some((b) => b.id === t.id),
         );
-        Logger.info(`Trigger added to ${updated.name}`);
+        Logger.success(`Trigger added to ${updated.name}`);
         if (added) {
           Logger.table([triggerRow(added)]);
           if (added.kind === 'http' && added.url) {

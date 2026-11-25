@@ -40,6 +40,7 @@ export default async (cmd: {
         ),
       ),
       tap((data) => {
+        Logger.success(`Lambda ${data?.name ?? ''} deleted`);
         const columns: (keyof typeof data)[] = [
           'name',
           'projectId',

@@ -15,5 +15,5 @@ export default async (cmd: { id?: string }) => {
   if (saved?.id === runnerId) {
     await forgetRunner();
   }
-  Logger.log(`Local runner ${runnerId} deleted; its token no longer works.`);
+  Logger.success(`Local runner ${runnerId} deleted; its token no longer works`);
 };

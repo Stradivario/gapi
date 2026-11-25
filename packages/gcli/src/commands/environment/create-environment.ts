@@ -44,6 +44,7 @@ export default (
         ),
       ),
       tap((data) => {
+        Logger.success(`Environment ${data?.name ?? ''} created`);
         const columns: (keyof Unboxed<typeof data>)[] = [
           'id',
           'name',

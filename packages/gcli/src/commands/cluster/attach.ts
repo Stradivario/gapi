@@ -145,7 +145,7 @@ export default async (cmd: AttachOptions) => {
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
-  Logger.info(
+  Logger.success(
     `Config applied - ${opts.name} installs Talos and reboots, then joins "${join_.clusterName}" (pool ${join_.pool}, ${join_.reserved ? 'reserved' : 'extra capacity'}${opts.storage ? ', carries volumes' : ''}).`,
   );
 
@@ -162,7 +162,7 @@ export default async (cmd: AttachOptions) => {
     const nodes = await lastValueFrom(GraphqlClienAPI.clusterNodes(clusterId));
     const node = nodes.find((n) => n.name === opts.name);
     if (node?.status === 'ready') {
-      Logger.log(`${opts.name} joined and is ready.`);
+      Logger.success(`${opts.name} joined and is ready`);
       Logger.table([nodeRow(node)]);
       if (opts.storage) {
         Logger.info(

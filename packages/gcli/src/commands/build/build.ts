@@ -1,12 +1,12 @@
 import { esbuildDecorators } from '@anatine/esbuild-decorators';
-import { BuildOptions, Platform } from 'esbuild';
+import { BuildOptions, Message, Platform } from 'esbuild';
 import esbuild from 'esbuild';
-import { existsSync } from 'fs';
+import { existsSync, statSync } from 'fs';
 import { join } from 'path';
-import { lastValueFrom, of } from 'rxjs';
+import { defer, lastValueFrom, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { Logger } from '~/services/log';
+import { bytes, errorText, step, ui } from '~/services/ui';
 
 import { loadSpec } from '../lambda/helpers/load-spec';
 
@@ -21,15 +21,16 @@ export interface BuildArguments {
   ignore?: string[];
 }
 
+/** `src/main.ts:12 Could not resolve "x"` */
+const esbuildMessage = (m: Message) =>
+  `${m.location ? `${m.location.file}:${m.location.line} ` : ''}${m.text}`;
+
+const sizeOf = (file?: string) =>
+  file && existsSync(file) ? ` (${bytes(statSync(file).size)})` : '';
+
 export default async (args: BuildArguments) => {
-  const time = Date.now();
   return lastValueFrom(
     loadSpec().pipe(
-      tap((config) => {
-        Logger.info(
-          `🔨 Bundling ${args.files?.length ? args.files.join('') : (config?.function?.file ?? config?.file ?? 'index.ts')}`,
-        );
-      }),
       switchMap((config) =>
         of(config).pipe(
           map((config) => ({
@@ -49,39 +50,45 @@ export default async (args: BuildArguments) => {
                 args.external ?? config?.options?.bundler?.external ?? [],
             } as BuildOptions,
           })),
-          switchMap(({ esbuild, options }) =>
-            esbuild.build({
-              ...options,
-              // Decorator metadata needs the project's tsconfig; without one
-              // the plugin failed with "[plugin: tsc] failed to open
-              // 'undefined'" - plain esbuild handles a project without it.
-              plugins: existsSync(join(process.cwd(), 'tsconfig.json'))
-                ? [
-                    esbuildDecorators({
-                      tsconfig: './tsconfig.json',
-                      cwd: process.cwd(),
-                    }),
-                  ]
-                : [],
-            }),
-          ),
-          tap((data) => {
-            if (data.warnings.length) {
-              Logger.warn(data.warnings);
-            }
-            if (data.errors.length) {
-              Logger.error(data.errors);
-            }
-            Logger.warn(`🏗️  Bundling finish in ${Date.now() - time}ms`);
-            Logger.info(
-              `✅ Finished bundling output file ${args.outfile ?? config?.options?.bundler?.outfile ?? 'index.js'}`,
+          switchMap(({ esbuild, options }) => {
+            const entry = (options.entryPoints as string[]).join(', ');
+            return defer(() =>
+              esbuild.build({
+                ...options,
+                // Decorator metadata needs the project's tsconfig; without one
+                // the plugin failed with "[plugin: tsc] failed to open
+                // 'undefined'" - plain esbuild handles a project without it.
+                plugins: existsSync(join(process.cwd(), 'tsconfig.json'))
+                  ? [
+                      esbuildDecorators({
+                        tsconfig: './tsconfig.json',
+                        cwd: process.cwd(),
+                      }),
+                    ]
+                  : [],
+              }),
+            ).pipe(
+              tap((data) => {
+                data.warnings.forEach((w) =>
+                  ui.warn(esbuildMessage(w), 'build'),
+                );
+                data.errors.forEach((e) =>
+                  ui.error(esbuildMessage(e), 'build'),
+                );
+              }),
+              step(`bundling ${entry}`, {
+                scope: 'build',
+                done: () =>
+                  `bundled ${entry} -> ${options.outfile}${sizeOf(options.outfile)}`,
+              }),
             );
           }),
         ),
       ),
     ),
   ).catch((e) => {
-    console.error(e);
+    // esbuild has printed the details already
+    ui.error(errorText(e), 'build');
     process.exit(1);
   });
 };

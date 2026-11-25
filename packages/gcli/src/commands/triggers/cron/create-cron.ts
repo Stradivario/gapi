@@ -56,6 +56,7 @@ export default (cmd: {
             }).pipe(map((data) => ({ ...data, lambdaName }))),
       ),
       tap((data) => {
+        Logger.success(`Time trigger ${data?.triggerName ?? ''} created`);
         const columns: (keyof Unboxed<typeof data>)[] = [
           'id',
           'lambdaName',

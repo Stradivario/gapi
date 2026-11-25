@@ -39,6 +39,7 @@ export default (
         ),
       ),
       tap((data) => {
+        Logger.success(`Time trigger ${data?.triggerName ?? ''} deleted`);
         const columns: (keyof Unboxed<typeof data>)[] = [
           'id',
           'lambdaName',

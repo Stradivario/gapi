@@ -49,6 +49,7 @@ export default (
         }),
       ),
       tap((broker) => {
+        Logger.success(`RabbitMQ broker ${broker?.name ?? ''} installed`);
         Logger.table([broker]);
       }),
     ),

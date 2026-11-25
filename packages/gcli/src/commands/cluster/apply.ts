@@ -248,7 +248,7 @@ const applyCluster = async (
     }
     applied.push(step);
   }
-  Logger.info(
+  Logger.success(
     `Applied ${applied.length} of ${steps.length} change(s) to "${desired.name}".`,
   );
   return { clusterId, applied };

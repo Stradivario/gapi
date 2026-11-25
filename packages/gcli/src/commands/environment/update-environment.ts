@@ -31,7 +31,6 @@ export default (
           })),
         ),
       ),
-      tap(Logger.log),
       switchMap(({ projectId, clusterName: dataClusterName, ...data }) =>
         resolveClusterId(projectId, {
           clusterId: cmdRest.clusterId || data.clusterId,
@@ -46,6 +45,7 @@ export default (
         ),
       ),
       tap((data) => {
+        Logger.success(`Environment ${data?.name ?? ''} updated`);
         const columns: (keyof Unboxed<typeof data>)[] = [
           'id',
           'name',

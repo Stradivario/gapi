@@ -17,7 +17,7 @@ export default (cmd: { project?: string; name?: string; trigger?: string }) =>
         ),
       ),
       tap((w) =>
-        Logger.info(
+        Logger.success(
           `Trigger removed from ${w.name} (${w.triggers?.length ?? 0} left)`,
         ),
       ),

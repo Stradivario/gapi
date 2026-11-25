@@ -5,6 +5,7 @@ import { from, fromEvent, lastValueFrom, merge, of } from 'rxjs';
 import { debounceTime, filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { Logger } from '~/services/log';
+import { ui } from '~/services/ui';
 
 import build, { BuildArguments } from '../build/build';
 import { loadSpec } from '../lambda/helpers/load-spec';
@@ -46,10 +47,7 @@ export default async function start(args: BuildArguments) {
             }) =>
               from(build(args)).pipe(
                 tap(() => {
-                  Logger.warn(
-                    `📢 Starting script "${startCommand} ${outfile}"`,
-                  );
-                  Logger.log('---------------------------------\n');
+                  ui.info(`running ${startCommand} ${outfile}\n`, 'start');
                 }),
                 tap(() => {
                   child = spawn(
@@ -103,18 +101,13 @@ export default async function start(args: BuildArguments) {
                   ),
                 ),
                 tap((data) => {
-                  Logger.log('\n---------------------------------');
-                  Logger.log(
-                    `⟳  Restarting due to change in: ${data.filename}`,
-                  );
+                  ui.print('');
+                  ui.info(`${data.filename} changed - restarting`, 'start');
                   child?.kill('SIGTERM');
                 }),
                 switchMap(() => build(args)),
                 tap(() => {
-                  Logger.warn(
-                    `📢 Starting script "${startCommand} ${outfile}"`,
-                  );
-                  Logger.log('---------------------------------\n');
+                  ui.info(`running ${startCommand} ${outfile}\n`, 'start');
                   child = spawn(
                     startCommand,
                     ['--disable-warning=DEP0040', outfile],

@@ -42,6 +42,7 @@ export default (cmd: {
         ),
       ),
       tap((data) => {
+        Logger.success(`Environment ${data?.name ?? ''} deleted`);
         const columns: (keyof Unboxed<typeof data>)[] = [
           'id',
           'name',

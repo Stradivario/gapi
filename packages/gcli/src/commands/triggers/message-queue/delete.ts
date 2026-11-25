@@ -12,6 +12,7 @@ export default (cmd: { project?: string; name: string }) =>
         GraphqlClienAPI.deleteMessageQueueTrigger(projectId, cmd.name),
       ),
       tap((trigger) => {
+        Logger.success(`Queue trigger ${trigger?.name ?? ''} deleted`);
         Logger.info(
           `Deleted trigger ${trigger?.name ?? cmd.name}${trigger?.lambdaName ? ` (lambda ${trigger.lambdaName})` : ''}`,
         );

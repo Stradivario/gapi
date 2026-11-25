@@ -12,6 +12,7 @@ export default (cmd: { project?: string; id: string }) =>
         GraphqlClienAPI.uninstallRabbitMq(cmd.id, projectId),
       ),
       tap((broker) => {
+        Logger.success(`RabbitMQ broker ${broker?.name ?? ''} removed`);
         Logger.table([broker]);
       }),
     ),

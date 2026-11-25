@@ -29,7 +29,7 @@ export const applyWorkflow = (projectId: string, file: WorkflowFile) => {
           });
     }),
     tap((w) =>
-      Logger.info(
+      Logger.success(
         `Workflow ${w.name} saved (${Object.keys(w.definition?.states ?? {}).length} steps). Run it: gcli workflow:run --name ${w.name} --wait`,
       ),
     ),
