@@ -121,6 +121,21 @@ describe('drift', () => {
     ]);
   });
 
+  it('a secret the live lambda lists twice is still the same set', () => {
+    expect(
+      functionChanges(
+        { secrets: ['environment', 'firebase'] },
+        {
+          secrets: [
+            { name: 'environment' },
+            { name: 'firebase' },
+            { name: 'environment' },
+          ],
+        },
+      ),
+    ).toEqual([]);
+  });
+
   it('ignores environment fields the server did not return', () => {
     expect(
       environmentChanges({ image: 'b', maxPods: 0 }, { image: 'a' }),

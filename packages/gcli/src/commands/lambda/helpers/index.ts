@@ -104,6 +104,8 @@ export interface CreateOrUpdateLambdaArguments {
   wait?: boolean;
   /* `--json`: the saved lambda as JSON on stdout, progress on stderr */
   json?: boolean;
+  /* inside a bigger flow (gcli apply): no header, no closing summary */
+  embedded?: boolean;
   /* Replicas across machines (plan 33): 'machines' | 'none' */
   spread?: string;
   /* 'true' / 'false' from the flag, boolean from the spec */
@@ -396,9 +398,11 @@ export const createOrUpdateLambda = (
         const timeTrigger: DesiredTimeTrigger | undefined =
           spec?.triggers?.time;
         const domains: DomainConfig[] = spec?.domains ?? [];
-        ui.header(
-          `${type === 'createLambda' ? 'Creating' : 'Deploying'} ${name} to project ${project?.name || projectId}`,
-        );
+        if (!cmd.embedded) {
+          ui.header(
+            `${type === 'createLambda' ? 'Creating' : 'Deploying'} ${name} to project ${project?.name || projectId}`,
+          );
+        }
         const prepared$: Observable<LambdaSpec> = data.uploadAsZip
           ? uploadArchive(cmd, data, scope)
           : of({ ...data, customUploadFileId: '' });
@@ -441,6 +445,13 @@ const finish = (
 ) =>
   siteUrlOf(lambda).pipe(
     tap((siteUrl) => {
+      if (cmd.embedded) {
+        ui.success(
+          `live at ${siteUrl || lambda?.url || '-'}`,
+          `lambda[${lambda?.name}]`,
+        );
+        return;
+      }
       ui.done(type === 'createLambda' ? 'Lambda created!' : 'Deploy complete!');
       ui.print('');
       ui.summary([

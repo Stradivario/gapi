@@ -1,8 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { createInterface } from 'node:readline';
 import { format, styleText } from 'node:util';
 
-import { defer, interval, MonoTypeOperatorFunction, Subscription } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import {
+  defer,
+  from,
+  interval,
+  MonoTypeOperatorFunction,
+  Observable,
+  Subscription,
+  throwError,
+} from 'rxjs';
+import { finalize, switchMap, tap, toArray } from 'rxjs/operators';
 
 /**
  * Feature cli-output: how gcli talks to people. One vocabulary for every
@@ -279,6 +288,32 @@ export const ui = {
   },
 
   spin,
+
+  /** `?  question [y/N]` - yes only on y / yes. Not on a terminal: an error
+      that names the flag to pass instead (CI must never wait for input). */
+  confirm: (question: string, flag = '--yes'): Observable<boolean> =>
+    !process.stdin.isTTY
+      ? throwError(
+          () =>
+            new Error(
+              `${question} - no terminal to ask on; pass ${flag} to go ahead`,
+            ),
+        )
+      : new Observable<boolean>((subscriber) => {
+          const rl = createInterface({
+            input: process.stdin,
+            output: state.out,
+          });
+          rl.question(
+            `${paint('?', ['cyan', 'bold'])}  ${question} ${dim('[y/N]')} `,
+            (answer) => {
+              rl.close();
+              subscriber.next(/^y(es)?$/i.test(answer.trim()));
+              subscriber.complete();
+            },
+          );
+          return () => rl.close();
+        }),
 };
 
 /**
@@ -294,12 +329,14 @@ export function step<T>(
     defer(() => {
       const started = Date.now();
       const spinner = spin(label, opts.scope);
-      let value: T;
+      // the done line comes when the step COMPLETES, before anything
+      // downstream sees its value - so it is printed before the next step
       return source.pipe(
+        toArray(),
         tap({
-          next: (v) => (value = v),
-          complete: () => {
+          next: (values) => {
             spinner.stop();
+            const value = values[values.length - 1];
             const text = opts.done ? opts.done(value) : label;
             ui.success(
               `${text} ${dim(elapsed(Date.now() - started))}`,
@@ -311,6 +348,7 @@ export function step<T>(
             ui.error(`${label} failed`, opts.scope);
           },
         }),
+        switchMap((values) => from(values)),
         finalize(() => spinner.stop()),
       );
     });

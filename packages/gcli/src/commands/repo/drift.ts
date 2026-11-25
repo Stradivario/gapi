@@ -21,8 +21,9 @@ export type UnitState = 'in-sync' | 'changes' | 'missing';
     (`"20"` and `20` are the same in YAML). */
 const same = (a: unknown, b: unknown): boolean => {
   if (Array.isArray(a) || Array.isArray(b)) {
-    const x = [...((a as unknown[]) ?? [])].map(String).sort();
-    const y = [...((b as unknown[]) ?? [])].map(String).sort();
+    // true sets: a name listed twice on the live lambda is still one
+    const x = [...new Set(((a as unknown[]) ?? []).map(String))].sort();
+    const y = [...new Set(((b as unknown[]) ?? []).map(String))].sort();
     return x.length === y.length && x.every((v, i) => v === y[i]);
   }
   if (a === undefined || a === null || a === '')

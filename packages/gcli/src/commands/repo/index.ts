@@ -27,6 +27,23 @@ export function registerRepoCommands(program: Command) {
     .action(lazy(() => import('./plan').then((m) => m.default)));
 
   program
+    .command('apply [path]')
+    .description(
+      'Make every lambforge.yaml of the repository true: shows the plan, asks, then creates / updates environments, lambdas (waiting for each build), time + queue triggers and domains. Never deletes.',
+    )
+    .option('-p, --project <project>')
+    .option('-y, --yes', 'Apply without asking (CI)')
+    .option(
+      '--code',
+      'Also redeploy lambdas whose settings are in sync (code changes are not detected yet)',
+    )
+    .option(
+      '--only <lambda>',
+      'Only the lambforge.yaml of this lambda (or folder)',
+    )
+    .action(lazy(() => import('./apply').then((m) => m.default)));
+
+  program
     .command('export <lambda>')
     .description(
       'Generate a lambforge.yaml from a running lambda (function, environment, time trigger, domains) - secret and config names only',

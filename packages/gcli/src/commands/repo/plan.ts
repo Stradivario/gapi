@@ -5,7 +5,7 @@ import { domainStep } from '~/commands/domain/plan';
 import { timeTriggerPlan } from '~/commands/lambda/helpers/time-trigger-sync';
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI, ProjectDomain } from '~/services/gql-client';
-import { Logger } from '~/services/log';
+import { ui } from '~/services/ui';
 
 import { discover, repoRoot, Unit } from './discover';
 import {
@@ -13,10 +13,10 @@ import {
   environmentChanges,
   functionChanges,
   Loose,
-  show,
   stateOf,
   UnitState,
 } from './drift';
+import { renderPlan, unitNames } from './plan-view';
 
 /** What runs in the project - read once for the whole repository. */
 interface Live {
@@ -169,14 +169,7 @@ export const unmanaged = (units: Unit[], live: Live) => {
     .map((l) => l.name as string);
 };
 
-const MARK: Record<string, string> = {
-  'in-sync': 'v',
-  changes: '~',
-  missing: '+',
-  error: 'x',
-};
-
-const loadLive = (projectId: string) =>
+export const loadLive = (projectId: string) =>
   forkJoin({
     lambdas: GraphqlClienAPI.listLambdasForPlan(projectId),
     environments: GraphqlClienAPI.listEnvironments(projectId).pipe(
@@ -227,33 +220,14 @@ export default (
           (s) => s.state === 'changes' || s.state === 'missing',
         ).length;
         if (cmd.json) {
-          // plain stdout - the Logger colours its output
           process.stdout.write(
             `${JSON.stringify({ plans, unmanaged: rest, errors, drift }, null, 2)}
 `,
           );
         } else {
-          for (const p of plans) {
-            if (!p.sections.length) continue;
-            Logger.info(p.unit);
-            for (const s of p.sections) {
-              Logger.info(
-                `  ${MARK[s.state]} ${s.section}${s.state === 'missing' ? ' (will be created)' : ''}`,
-              );
-              for (const c of s.changes)
-                Logger.info(
-                  `      ${c.field}: ${show(c.now)} -> ${show(c.wanted)}`,
-                );
-              if (s.note) Logger.error(`      ${s.note}`);
-            }
-          }
-          if (rest.length) {
-            Logger.info(
-              `unmanaged (in the project, in no file here - another repository may deploy them): ${rest.join(', ')}`,
-            );
-          }
-          Logger.info(
-            `${all.length - drift - errors} in sync, ${drift} to change, ${errors} error(s)`,
+          renderPlan(plans, rest, unitNames(units));
+          ui.print(
+            `\n${all.length - drift - errors} in sync, ${drift} to change, ${errors} error(s)${drift ? ui.dim(' - gcli apply makes the changes') : ''}`,
           );
         }
         if (cmd.exitCode) process.exitCode = errors ? 1 : drift ? 2 : 0;

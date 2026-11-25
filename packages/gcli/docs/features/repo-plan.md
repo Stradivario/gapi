@@ -11,6 +11,7 @@ Code: `src/commands/repo/`. Schema: `src/schema/lambforge.schema.json`
 |---|---|---|
 | `gcli validate [path] [--online]` | every `lambforge.yaml` against the schema + cross-file checks; exit 1 on errors | `--online`: introspects the live input types |
 | `gcli plan [path] [-p] [--exit-code] [--json]` | per unit and section: `v` in sync, `~` change (field: now -> wanted), `+` missing, `x` error; then unmanaged lambdas | read-only queries |
+| `gcli apply [path] [-p] [--yes] [--code] [--only <lambda>]` | the plan, a confirmation, then makes it true (see below); never deletes | writes |
 | `gcli export <lambda> [-p] [-o file]` | a `lambforge.yaml` from a running lambda (function, environment, time trigger, domains) | read-only |
 
 ## How it works
@@ -41,7 +42,7 @@ Code: `src/commands/repo/`. Schema: `src/schema/lambforge.schema.json`
 
 ## Test
 
-`npx jest test/repo-plan` (discovery + inheritance + skips, schema,
+`npx jest test/repo-plan test/repo-apply` (discovery + inheritance + skips, schema,
 cross checks, drift, plan, export round trip).
 
 ## Debug
@@ -50,9 +51,33 @@ cross checks, drift, plan, export round trip).
   copies). `--online` names keys the live API lacks; gcli-only keys are in
   `GCLI_ONLY` (validate.ts).
 - A false `~`: check how the live field reads in `FUNCTION_FIELDS`
-  (drift.ts) - e.g. secrets are objects, envSecrets strings.
+  (drift.ts) - e.g. secrets are objects, envSecrets strings. Lists are
+  true sets: production lambdas list some secret names 2-3 times
+  (found 2026-11-25), which is not drift.
+
+## gcli apply (`apply.ts`, decisions in `apply-work.ts`)
+
+1. Plan as `gcli plan` (shared view `plan-view.ts`: units with work get
+   their sections and `field: now -> wanted`; units in sync are one line;
+   unmanaged lambdas one line). A plan with errors applies nothing.
+2. Asks `Apply changes to N lambforge.yaml (M deploys)? [y/N]` on a
+   terminal (`ui.confirm`); without one it stops and names `--yes`.
+3. Order: environments (only in the unit that owns one), then per unit,
+   in its own folder (`process.chdir` - a deploy reads build.sh, .gignore
+   and the files next to its lambforge.yaml): the lambda deploy (the
+   lambda:update flow in `embedded` mode, waiting for the build; it brings
+   `triggers.time` and `domains:` along), else just the time trigger /
+   domains that drifted; then `triggers.mq` (`applyMqTriggers`, shared with
+   mq-trigger:apply).
+4. `workFor` (pure): function missing = create, changes = update, in sync =
+   nothing unless `--code`. A new lambda also gets its queue triggers.
+5. Stops at the first failure (what ran stays applied), exit 1.
+
+Code changes are not in the plan yet (no archive fingerprint on the
+server), so `apply` redeploys code only with `--code` or when settings
+changed.
 
 ## Not built yet
 
-`gcli apply --all` (order: environments, lambdas, triggers + domains;
-never deletes), `cluster:` / `queues:` in plan, code drift (archive hash).
+Code drift (an archive hash stored on the lambda), `cluster:` / `queues:`
+in plan, `--prune` (would delete unmanaged lambdas - a separate decision).

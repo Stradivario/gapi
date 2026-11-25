@@ -54,6 +54,50 @@ export const applyMode = (
 ): 'create' | 'update' =>
   existing.some((t) => t.name === name) ? 'update' : 'create';
 
+/** Creates the missing `triggers.mq` of a spec, updates the others (never
+    deletes). Shared by mq-trigger:apply and gcli apply. */
+export const applyMqTriggers = (
+  projectId: string,
+  data: {
+    function?: { name?: string };
+    name?: string;
+    triggers?: { mq?: MqTriggerConfig[] };
+    queues?: { broker?: string };
+  },
+) => {
+  const triggers = data?.triggers?.mq ?? [];
+  return GraphqlClienAPI.listRabbitMqInstances(projectId).pipe(
+    switchMap((brokers) =>
+      GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
+        switchMap((existing) =>
+          concat(
+            ...triggers.map((trigger) => {
+              const input = yamlTriggerInput(trigger, {
+                lambda: data?.function?.name ?? data?.name,
+                brokerId: resolveBroker(
+                  brokers,
+                  trigger.broker ?? data?.queues?.broker,
+                ).id,
+              });
+              const mode = applyMode(existing ?? [], input.name);
+              return GraphqlClienAPI.saveMessageQueueTrigger(
+                mode,
+                projectId,
+                mode === 'create'
+                  ? input
+                  : mergeOverExisting(
+                      existing.find((t) => t.name === input.name),
+                      input,
+                    ),
+              ).pipe(map((saved) => ({ mode, saved })));
+            }),
+          ).pipe(toArray()),
+        ),
+      ),
+    ),
+  );
+};
+
 /**
  * Brings the project's message-queue triggers to what `triggers.mq` in
  * lambforge.yaml says: creates the missing ones, updates the others. Safe to
@@ -65,42 +109,12 @@ export default (cmd: { project?: string; spec?: string }) =>
       switchMap((projectId) =>
         loadSpec(cmd.spec).pipe(
           switchMap((data) => {
-            const triggers = data?.triggers?.mq ?? [];
-            if (!triggers.length) {
+            if (!data?.triggers?.mq?.length) {
               throw new Error(
                 'mq-trigger:apply needs triggers.mq in lambforge.yaml',
               );
             }
-            return GraphqlClienAPI.listRabbitMqInstances(projectId).pipe(
-              switchMap((brokers) =>
-                GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
-                  switchMap((existing) =>
-                    concat(
-                      ...triggers.map((trigger) => {
-                        const input = yamlTriggerInput(trigger, {
-                          lambda: data?.function?.name ?? data?.name,
-                          brokerId: resolveBroker(
-                            brokers,
-                            trigger.broker ?? data?.queues?.broker,
-                          ).id,
-                        });
-                        const mode = applyMode(existing ?? [], input.name);
-                        return GraphqlClienAPI.saveMessageQueueTrigger(
-                          mode,
-                          projectId,
-                          mode === 'create'
-                            ? input
-                            : mergeOverExisting(
-                                existing.find((t) => t.name === input.name),
-                                input,
-                              ),
-                        ).pipe(map((saved) => ({ mode, saved })));
-                      }),
-                    ).pipe(toArray()),
-                  ),
-                ),
-              ),
-            );
+            return applyMqTriggers(projectId, data as never);
           }),
         ),
       ),
