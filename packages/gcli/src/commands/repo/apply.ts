@@ -1,5 +1,3 @@
-import { dirname, join } from 'node:path';
-
 import {
   concat,
   defer,
@@ -30,7 +28,7 @@ import { parseProjectId, ReportedError, resolveClusterId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { elapsed, errorText, step, ui } from '~/services/ui';
 
-import { hasWork, UnitWork, workFor } from './apply-work';
+import { hasWork, unitFolder, UnitWork, workFor } from './apply-work';
 import { discover, repoRoot, Unit } from './discover';
 import { Loose } from './drift';
 import { loadLive, planUnit, unmanaged } from './plan';
@@ -41,7 +39,9 @@ import { countPlan, renderPlan, unitNames } from './plan-view';
 const inFolder = <T>(unit: Unit, root: string, work$: () => Observable<T>) =>
   defer(() => {
     const back = process.cwd();
-    process.chdir(dirname(join(root, unit.file)));
+    // discover() gives an absolute file; resolve() keeps it, and still
+    // places a relative one under the root
+    process.chdir(unitFolder(root, unit));
     return work$().pipe(finalize(() => process.chdir(back)));
   });
 

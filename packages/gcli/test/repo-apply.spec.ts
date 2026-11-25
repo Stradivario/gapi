@@ -1,4 +1,9 @@
-import { hasWork, workFor } from '~/commands/repo/apply-work';
+import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
+import { hasWork, unitFolder, workFor } from '~/commands/repo/apply-work';
+import { discover } from '~/commands/repo/discover';
 import type { UnitPlan } from '~/commands/repo/plan';
 
 /** Feature repo-plan: what `gcli apply` does for one lambforge.yaml,
@@ -86,5 +91,18 @@ describe('gcli apply - work per lambforge.yaml', () => {
     expect(
       workFor(unit(env), plan([['environment', 'changes']])).environment,
     ).toBe('update');
+  });
+
+  it('deploys from the folder of the discovered lambforge.yaml', () => {
+    const root = mkdtempSync(join(tmpdir(), 'gcli-apply-'));
+    mkdirSync(join(root, 'packages', 'api'), { recursive: true });
+    writeFileSync(
+      join(root, 'packages', 'api', 'lambforge.yaml'),
+      'function:\n  name: api\n',
+    );
+    const [found] = discover(root);
+    // 2026-11-25: the absolute file was joined onto the root a second time
+    expect(unitFolder(root, found)).toBe(join(root, 'packages', 'api'));
+    expect(unitFolder(root, unit(spec))).toBe(join(root, 'packages', 'api'));
   });
 });

@@ -1,3 +1,5 @@
+import { dirname, resolve } from 'node:path';
+
 import type { Unit } from './discover';
 import type { UnitPlan } from './plan';
 
@@ -60,3 +62,8 @@ export function workFor(
 
 export const hasWork = (w: UnitWork) =>
   !!(w.environment || w.lambda || w.time || w.domains || w.mq);
+
+/** The folder a unit deploys from. discover() gives an absolute file;
+    resolve() keeps it (and still places a relative one under the root). */
+export const unitFolder = (root: string, unit: Unit) =>
+  dirname(resolve(root, unit.file));
