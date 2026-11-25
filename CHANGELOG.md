@@ -1,4 +1,4 @@
-## [1.8.283](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.283) (2026-11-21)
+## [1.8.284](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.284) (2026-11-25)
 
 
 ### Bug Fixes
@@ -80,6 +80,7 @@
 * **gcli:** the browser terminal's watch and listings honour .gitignore, with or without git ([86936dc](https://github.com/Stradivario/gapi/commit/86936dc0685454972b24982aaa5bee44c034d14c))
 * **gcli:** token authentication after expire fixed ([fc099eb](https://github.com/Stradivario/gapi/commit/fc099ebd5af0b5094e5b1919f875e9dbdfd035e3))
 * **gcli:** upload lambda was not working due to attempt to use native node fetch but it does not handle very well multipart form data... ([9652c3b](https://github.com/Stradivario/gapi/commit/9652c3b7c5ac18b9242a3e18d250d54687eafbcb))
+* **gcli:** uploadAsZip ships .well-known/ folders ([af5678b](https://github.com/Stradivario/gapi/commit/af5678b7b29b620110ec2c47ee3ea0d49454b9d1))
 * **gcli:** wasm was not loaded correctly so we need to remove url since we are running in webcontainer ([6585092](https://github.com/Stradivario/gapi/commit/658509281b29e897b178c5f860dc0f06c8b01915))
 * **gcli:** workspace protocol 2 announces one-way terminal frames ([da05b64](https://github.com/Stradivario/gapi/commit/da05b64ae78c9bf4165818b1af3a5bd150ed94c5))
 * **gcli:** wrong graphql type ([30f1af2](https://github.com/Stradivario/gapi/commit/30f1af28a022bbeaff0da1da80da7e7c91b0e7b7))

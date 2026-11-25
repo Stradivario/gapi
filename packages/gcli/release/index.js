@@ -289010,6 +289010,28 @@ var require_archiver = __commonJS({
   }
 });
 
+// src/commands/lambda/helpers/archive-globs.ts
+var archiveGlobs;
+var init_archive_globs = __esm({
+  "src/commands/lambda/helpers/archive-globs.ts"() {
+    archiveGlobs = (ignore, cwd) => {
+      const skip = [".gcache/**", ...ignore];
+      const at = cwd ? { cwd } : {};
+      return [
+        { pattern: "**", options: { ignore: skip, ...at } },
+        {
+          pattern: "**/.well-known/**",
+          options: {
+            dot: true,
+            ignore: ["**/node_modules/**", "**/.git/**", ...skip],
+            ...at
+          }
+        }
+      ];
+    };
+  }
+});
+
 // src/commands/lambda/helpers/parse-ignore.ts
 var parseIgnoredFiles;
 var init_parse_ignore = __esm({
@@ -289033,6 +289055,7 @@ var init_package = __esm({
     import_operators19 = __toESM(require_operators());
     import_util3 = require("util");
     init_helpers2();
+    init_archive_globs();
     init_load_spec();
     init_parse_ignore();
     init_read_file();
@@ -289052,9 +289075,9 @@ var init_package = __esm({
                 (0, import_operators19.map)((ignore2) => parseIgnoredFiles(ignore2))
               )
             );
-            archive.glob("**", {
-              ignore: [".gcache/**", ...ignore]
-            });
+            archiveGlobs(ignore).forEach(
+              ({ pattern, options }) => archive.glob(pattern, options)
+            );
             archive.finalize();
             return (0, import_rxjs36.lastValueFrom)(
               (0, import_rxjs36.from)(streamToBufferPromise(archive)).pipe(
@@ -327690,7 +327713,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.282" : "development";
+var version2 = true ? "1.8.283" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
