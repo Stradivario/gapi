@@ -47,3 +47,4 @@ Outline (drop sections that don't apply):
 | [time-triggers-yaml](time-triggers-yaml.md) | lambda:create / lambda:update apply `triggers.time` (create / keep / replace the one time trigger) |
 | [domains-yaml](domains-yaml.md) | `domains:` in lambforge.yaml, `domain:apply` / `domain:list`, applied after every lambda deploy |
 | [repo-plan](repo-plan.md) | `gcli validate` / `plan` / `export` over every lambforge.yaml of a repository; JSON Schema |
+| [lambda-upload-zip](lambda-upload-zip.md) | What `uploadAsZip` zips: no dotfiles except `.well-known/` (1.8.284) |

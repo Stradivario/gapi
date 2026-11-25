@@ -9,6 +9,7 @@ import {
   CreateOrUpdateLambdaArguments,
   streamToBufferPromise,
 } from './helpers';
+import { archiveGlobs } from './helpers/archive-globs';
 import { loadSpec } from './helpers/load-spec';
 import { parseIgnoredFiles } from './helpers/parse-ignore';
 import { readFileAsObservable } from './helpers/read-file';
@@ -31,9 +32,9 @@ export default (cmd: CreateOrUpdateLambdaArguments) => {
           ),
         );
 
-        archive.glob('**', {
-          ignore: ['.gcache/**', ...ignore],
-        });
+        archiveGlobs(ignore).forEach(({ pattern, options }) =>
+          archive.glob(pattern, options),
+        );
 
         archive.finalize();
 
