@@ -14840,12 +14840,12 @@ var require_ignoreElements = __commonJS({
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var noop_1 = require_noop();
-    function ignoreElements() {
+    function ignoreElements2() {
       return lift_1.operate(function(source, subscriber) {
         source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, noop_1.noop));
       });
     }
-    exports2.ignoreElements = ignoreElements;
+    exports2.ignoreElements = ignoreElements2;
   }
 });
 
@@ -21369,7 +21369,7 @@ var require_lib = __commonJS({
 var require_XMLHttpRequest = __commonJS({
   "../../node_modules/xmlhttprequest/lib/XMLHttpRequest.js"(exports2) {
     var Url = require("url");
-    var spawn7 = require("child_process").spawn;
+    var spawn8 = require("child_process").spawn;
     var fs3 = require("fs");
     exports2.XMLHttpRequest = function() {
       "use strict";
@@ -21639,7 +21639,7 @@ var require_XMLHttpRequest = __commonJS({
           var syncFile = ".node-xmlhttprequest-sync-" + process.pid;
           fs3.writeFileSync(syncFile, "", "utf8");
           var execString = "var http = require('http'), https = require('https'), fs = require('fs');var doRequest = http" + (ssl ? "s" : "") + ".request;var options = " + JSON.stringify(options) + ";var responseText = '';var req = doRequest(options, function(response) {response.setEncoding('utf8');response.on('data', function(chunk) {  responseText += chunk;});response.on('end', function() {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: null, data: {statusCode: response.statusCode, headers: response.headers, text: responseText}}), 'utf8');fs.unlinkSync('" + syncFile + "');});response.on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});}).on('error', function(error) {fs.writeFileSync('" + contentFile + "', JSON.stringify({err: error}), 'utf8');fs.unlinkSync('" + syncFile + "');});" + (data ? "req.write('" + JSON.stringify(data).slice(1, -1).replace(/'/g, "\\'") + "');" : "") + "req.end();";
-          var syncProc = spawn7(process.argv[0], ["-e", execString]);
+          var syncProc = spawn8(process.argv[0], ["-e", execString]);
           while (fs3.existsSync(syncFile)) {
           }
           var resp = JSON.parse(fs3.readFileSync(contentFile, "utf8"));
@@ -255290,6 +255290,39 @@ var init_js_yaml = __esm({
 });
 
 // src/commands/lambda/helpers/yaml-schema.ts
+function switchVariables(content) {
+  const found = {};
+  const walk = (node) => {
+    if (node instanceof SwitchMarker) {
+      const { var: name2, cases } = node.fields;
+      if (typeof name2 === "string" && isPlainObject2(cases)) {
+        found[name2] = found[name2] ?? /* @__PURE__ */ new Set();
+        Object.keys(cases).forEach((c) => found[name2].add(c));
+        Object.values(cases).forEach(walk);
+      }
+      return;
+    }
+    if (node instanceof IfMarker) {
+      const { var: name2, equals } = node.fields;
+      if (typeof name2 === "string") {
+        found[name2] = found[name2] ?? /* @__PURE__ */ new Set();
+        if (equals !== void 0) {
+          found[name2].add(String(equals));
+          found[name2].add(String(equals) === "false" ? "true" : "false");
+        } else {
+          found[name2].add("false");
+          found[name2].add("true");
+        }
+      }
+      Object.values(node.fields).forEach(walk);
+      return;
+    }
+    if (Array.isArray(node)) node.forEach(walk);
+    else if (isPlainObject2(node)) Object.values(node).forEach(walk);
+  };
+  walk(load(content, { schema: LAMBFORGE_SCHEMA }));
+  return Object.fromEntries(Object.entries(found).map(([k, v]) => [k, [...v]]));
+}
 var EnvMarker, SwitchMarker, IfMarker, isPlainObject2, isFalsy, envScalarTag, envSequenceTag, mappingMarkerOptions, switchTag, ifTag, LAMBFORGE_SCHEMA, resolveConditionals, loadYaml;
 var init_yaml_schema = __esm({
   "src/commands/lambda/helpers/yaml-schema.ts"() {
@@ -255356,9 +255389,9 @@ var init_yaml_schema = __esm({
       switchTag,
       ifTag
     );
-    resolveConditionals = (node) => {
+    resolveConditionals = (node, env2 = process.env) => {
       if (node instanceof EnvMarker) {
-        return process.env[String(node.name)] ?? resolveConditionals(node.fallback);
+        return env2[String(node.name)] ?? resolveConditionals(node.fallback, env2);
       }
       if (node instanceof SwitchMarker) {
         const { var: varName, default: fallback, cases } = node.fields;
@@ -255368,12 +255401,12 @@ var init_yaml_schema = __esm({
           );
         }
         const branches = isPlainObject2(cases) ? cases : {};
-        const selected = String(process.env[varName] ?? fallback ?? "");
+        const selected = String(env2[varName] ?? fallback ?? "");
         if (selected in branches) {
-          return resolveConditionals(branches[selected]);
+          return resolveConditionals(branches[selected], env2);
         }
         if (fallback != null && String(fallback) in branches) {
-          return resolveConditionals(branches[String(fallback)]);
+          return resolveConditionals(branches[String(fallback)], env2);
         }
         return null;
       }
@@ -255381,26 +255414,26 @@ var init_yaml_schema = __esm({
         const f3 = node.fields;
         let matches;
         if (typeof f3.var === "string") {
-          const current = process.env[f3.var] ?? f3.default;
+          const current = env2[f3.var] ?? f3.default;
           matches = "equals" in f3 ? String(current) === String(f3.equals) : !isFalsy(current);
         } else {
-          matches = !isFalsy(resolveConditionals(f3.when));
+          matches = !isFalsy(resolveConditionals(f3.when, env2));
         }
-        return resolveConditionals(matches ? f3.then : f3.else) ?? null;
+        return resolveConditionals(matches ? f3.then : f3.else, env2) ?? null;
       }
       if (Array.isArray(node)) {
-        return node.map(resolveConditionals);
+        return node.map((n) => resolveConditionals(n, env2));
       }
       if (isPlainObject2(node)) {
         const out = {};
         for (const key of Object.keys(node)) {
-          out[key] = resolveConditionals(node[key]);
+          out[key] = resolveConditionals(node[key], env2);
         }
         return out;
       }
       return node;
     };
-    loadYaml = (content) => resolveConditionals(load(content, { schema: LAMBFORGE_SCHEMA }));
+    loadYaml = (content, env2 = process.env) => resolveConditionals(load(content, { schema: LAMBFORGE_SCHEMA }), env2);
   }
 });
 
@@ -321757,6 +321790,40 @@ var init_gitignore = __esm({
 });
 
 // src/commands/repo/discover.ts
+function variantCombinations(vars) {
+  return Object.entries(vars).reduce(
+    (combos, [name2, cases]) => combos.flatMap((c) => cases.map((v) => ({ ...c, [name2]: v }))),
+    [{}]
+  ).slice(0, MAX_VARIANTS);
+}
+function unitsOfFile(id, file2, content) {
+  const combos = variantCombinations(switchVariables(content));
+  if (combos.length <= 1) {
+    const own = loadYaml(content) ?? {};
+    return [{ id, file: file2, own, spec: own }];
+  }
+  const seen = /* @__PURE__ */ new Set();
+  const units = [];
+  for (const vars of combos) {
+    const own = loadYaml(content, { ...process.env, ...vars }) ?? {};
+    const name2 = String(own.function?.name ?? "");
+    if (seen.has(name2)) continue;
+    seen.add(name2);
+    units.push({
+      id,
+      file: file2,
+      own,
+      spec: own,
+      vars,
+      variant: Object.entries(vars).map(([k, v]) => `${k}=${v}`).join(" ")
+    });
+  }
+  if (units.length === 1) {
+    const own = loadYaml(content) ?? {};
+    return [{ id, file: file2, own, spec: own }];
+  }
+  return units;
+}
 function repoRoot(start3) {
   let dir = (0, import_path6.resolve)(start3);
   while ((0, import_path6.dirname)(dir) !== dir) {
@@ -321785,16 +321852,16 @@ function findFiles(root) {
   return found.sort();
 }
 function discover(root) {
-  const units = findFiles(root).map((file2) => {
+  const units = findFiles(root).flatMap((file2) => {
     const id = (0, import_path6.relative)(root, (0, import_path6.dirname)(file2)).split(import_path6.sep).join("/") || ".";
     try {
-      const own = loadYaml((0, import_fs11.readFileSync)(file2, "utf8")) ?? {};
-      return { id, file: file2, own, spec: own };
+      return unitsOfFile(id, file2, (0, import_fs11.readFileSync)(file2, "utf8"));
     } catch (e2) {
-      return { id, file: file2, own: {}, spec: {}, error: e2.message };
+      return [{ id, file: file2, own: {}, spec: {}, error: e2.message }];
     }
   });
-  const byFolder = new Map(units.map((u) => [u.id, u]));
+  const byFolder = /* @__PURE__ */ new Map();
+  units.forEach((u) => byFolder.has(u.id) || byFolder.set(u.id, u));
   const parentOf = (id) => {
     let dir = id;
     while (dir !== ".") {
@@ -321814,7 +321881,7 @@ function discover(root) {
   }
   return units;
 }
-var import_fs11, import_path6, SKIP, MAX_DEPTH;
+var import_fs11, import_path6, SKIP, MAX_DEPTH, unitKey, MAX_VARIANTS;
 var init_discover = __esm({
   "src/commands/repo/discover.ts"() {
     import_fs11 = require("fs");
@@ -321823,6 +321890,8 @@ var init_discover = __esm({
     init_gitignore();
     SKIP = /* @__PURE__ */ new Set(["node_modules", ".git", ".gcache", "dist", "release"]);
     MAX_DEPTH = 8;
+    unitKey = (u) => u.variant ? `${u.id} (${u.variant})` : u.id;
+    MAX_VARIANTS = 16;
   }
 });
 
@@ -321853,6 +321922,10 @@ var init_lambforge_schema = __esm({
     properties = {
       function: { $ref: "#/definitions/function" },
       environment: { $ref: "#/definitions/environment" },
+      build: {
+        type: "string",
+        description: 'The command gcli apply runs in this folder before it deploys (e.g. "npm run build:es"). Default: the package.json build script, if there is one.'
+      },
       options: {
         type: "object",
         additionalProperties: false,
@@ -322157,13 +322230,13 @@ function crossChecks(units) {
       const other = seen.get(key);
       if (other) {
         out.push({
-          unit: u.id,
+          unit: unitKey(u),
           path: what,
           level: "error",
           message: `"${value}" is also used by ${other}`
         });
       } else {
-        seen.set(key, u.id);
+        seen.set(key, unitKey(u));
       }
     }
   }
@@ -322175,7 +322248,7 @@ function crossChecks(units) {
       for (const name2 of [d?.serves, ...Object.values(d?.paths ?? {})]) {
         if (name2 && !["all", "full-path"].includes(name2) && !lambdas.has(name2)) {
           out.push({
-            unit: u.id,
+            unit: unitKey(u),
             path: `domains[${i2}]`,
             level: "warning",
             message: `"${name2}" is no lambda in this repository (fine if another repo deploys it)`
@@ -322219,7 +322292,7 @@ var init_validate = __esm({
           ].flatMap(
             ([section, fields]) => Object.keys(u.own[section] ?? {}).filter((k) => !fields.includes(k) && !GCLI_ONLY.has(k)).map(
               (k) => ({
-                unit: u.id,
+                unit: unitKey(u),
                 path: `${section}.${k}`,
                 level: "warning",
                 message: "the platform API does not take this key"
@@ -322232,21 +322305,21 @@ var init_validate = __esm({
     findingsFor = (units) => [
       ...units.filter((u) => u.error).map(
         (u) => ({
-          unit: u.id,
+          unit: unitKey(u),
           path: "(file)",
           level: "error",
           message: u.error
         })
       ),
-      ...units.filter((u) => !u.error).flatMap((u) => check2(u.id, u.own)),
+      ...units.filter((u) => !u.error).flatMap((u) => check2(unitKey(u), u.own)),
       ...crossChecks(units)
     ];
     report = (units, findings) => {
       for (const u of units) {
-        const mine = findings.filter((f3) => f3.unit === u.id);
+        const mine = findings.filter((f3) => f3.unit === unitKey(u));
         const label = u.inheritsFrom ? ` (environment from ${u.inheritsFrom})` : "";
         Logger.info(
-          `${mine.some((f3) => f3.level === "error") ? "x" : mine.length ? "!" : "v"} ${u.id}${label}`
+          `${mine.some((f3) => f3.level === "error") ? "x" : mine.length ? "!" : "v"} ${unitKey(u)}${label}`
         );
         for (const f3 of mine)
           Logger[f3.level === "error" ? "error" : "info"](
@@ -322412,6 +322485,7 @@ var STATE, countPlan, unitInSync, nameOf, unitNames;
 var init_plan_view = __esm({
   "src/commands/repo/plan-view.ts"() {
     init_ui();
+    init_discover();
     init_drift();
     STATE = {
       "in-sync": { mark: "\u2714", style: ["green"], text: "in sync" },
@@ -322431,7 +322505,7 @@ var init_plan_view = __esm({
     nameOf = (p, names3) => names3.get(p.unit) ?? p.unit;
     unitNames = (units) => new Map(
       units.map((u) => [
-        u.id,
+        unitKey(u),
         u.spec.function?.name ?? (u.id === "." ? "(root)" : u.id)
       ])
     );
@@ -322528,7 +322602,7 @@ function planUnit(unit, live) {
       });
     }
   }
-  return { unit: unit.id, sections };
+  return { unit: unitKey(unit), sections };
 }
 var import_rxjs58, import_operators41, LIVE_FIELDS, unmanaged, loadLive, plan_default2;
 var init_plan4 = __esm({
@@ -322847,7 +322921,7 @@ function workFor(unit, plan, opts = {}) {
     mq: drifts(plan, (s2) => s2.startsWith("triggers.mq ")).length > 0 || lambda === "createLambda" && !!unit.spec.triggers?.mq?.length
   };
 }
-var import_node_path, drifts, hasWork, unitFolder;
+var import_node_path, drifts, hasWork, unitFolder, buildCommand, lastLines;
 var init_apply_work = __esm({
   "src/commands/repo/apply-work.ts"() {
     import_node_path = require("node:path");
@@ -322856,6 +322930,8 @@ var init_apply_work = __esm({
     );
     hasWork = (w) => !!(w.environment || w.lambda || w.time || w.domains || w.mq);
     unitFolder = (root, unit) => (0, import_node_path.dirname)((0, import_node_path.resolve)(root, unit.file));
+    buildCommand = (spec, packageJson) => typeof spec?.build === "string" && spec.build.trim() ? spec.build.trim() : packageJson?.scripts?.build && !/^echo\b/.test(packageJson.scripts.build.trim()) ? "npm run build" : null;
+    lastLines = (text, n) => text.trimEnd().split("\n").slice(-n).join("\n");
   }
 });
 
@@ -322864,9 +322940,11 @@ var apply_exports4 = {};
 __export(apply_exports4, {
   default: () => apply_default4
 });
-var import_rxjs61, import_operators44, inFolder, environmentStep, lambdaStep, extrasStep, apply_default4;
+var import_node_child_process, import_node_fs2, import_rxjs61, import_operators44, inFolder, buildStep, environmentStep, lambdaStep, readPackageJson, deployStep, extrasStep, apply_default4;
 var init_apply4 = __esm({
   "src/commands/repo/apply.ts"() {
+    import_node_child_process = require("node:child_process");
+    import_node_fs2 = require("node:fs");
     import_rxjs61 = __toESM(require_cjs());
     import_operators44 = __toESM(require_operators());
     init_apply2();
@@ -322883,9 +322961,49 @@ var init_apply4 = __esm({
     init_plan_view();
     inFolder = (unit, root, work$) => (0, import_rxjs61.defer)(() => {
       const back = process.cwd();
+      const saved = Object.keys(unit.vars ?? {}).map(
+        (k) => [k, process.env[k]]
+      );
+      Object.assign(process.env, unit.vars ?? {});
       process.chdir(unitFolder(root, unit));
-      return work$().pipe((0, import_operators44.finalize)(() => process.chdir(back)));
+      return work$().pipe(
+        (0, import_operators44.finalize)(() => {
+          process.chdir(back);
+          saved.forEach(
+            ([k, v]) => v === void 0 ? delete process.env[k] : process.env[k] = v
+          );
+        })
+      );
     });
+    buildStep = (w, command) => new import_rxjs61.Observable((subscriber) => {
+      const child = (0, import_node_child_process.spawn)(command, {
+        shell: true,
+        cwd: process.cwd(),
+        env: process.env
+      });
+      let output = "";
+      const collect2 = (chunk) => {
+        output = (output + chunk.toString()).slice(-2e5);
+      };
+      child.stdout?.on("data", collect2);
+      child.stderr?.on("data", collect2);
+      child.on("error", (e2) => subscriber.error(e2));
+      child.on("close", (code) => {
+        if (code === 0) {
+          subscriber.next(output);
+          subscriber.complete();
+          return;
+        }
+        ui.print(ui.dim(lastLines(output, 30).replace(/^/gm, "   \u2502 ")));
+        subscriber.error(new Error(`${command} exited with code ${code}`));
+      });
+      return () => child.killed || child.kill();
+    }).pipe(
+      step(command, {
+        scope: `build[${w.name}]`,
+        done: () => `${command} done`
+      })
+    );
     environmentStep = (projectId, w) => {
       const env2 = w.unit.spec.environment;
       const { clusterName, ...data } = env2;
@@ -322903,7 +323021,21 @@ var init_apply4 = __esm({
         })
       );
     };
-    lambdaStep = (projectId, w) => (0, import_rxjs61.defer)(
+    lambdaStep = (projectId, w, build2) => {
+      const command = build2 ? buildCommand(w.unit.spec, readPackageJson()) : null;
+      return (0, import_rxjs61.concat)(
+        command ? buildStep(w, command).pipe((0, import_operators44.ignoreElements)()) : import_rxjs61.EMPTY,
+        deployStep(projectId, w)
+      );
+    };
+    readPackageJson = () => {
+      try {
+        return JSON.parse((0, import_node_fs2.readFileSync)("package.json", "utf8"));
+      } catch {
+        return null;
+      }
+    };
+    deployStep = (projectId, w) => (0, import_rxjs61.defer)(
       () => createOrUpdateLambda(
         {
           project: projectId,
@@ -323003,13 +323135,17 @@ var init_apply4 = __esm({
                   return (0, import_rxjs61.of)(null);
                 }
                 ui.header("Applying");
-                const environments = todo.filter((w) => w.environment).map((w) => environmentStep(projectId, w));
+                const environments = [
+                  ...new Map(
+                    todo.filter((w) => w.environment).map((w) => [w.unit.spec.environment?.name, w])
+                  ).values()
+                ].map((w) => environmentStep(projectId, w));
                 const units = todo.map(
                   (w) => inFolder(
                     w.unit,
                     root,
                     () => (0, import_rxjs61.concat)(
-                      w.lambda ? lambdaStep(projectId, w) : import_rxjs61.EMPTY,
+                      w.lambda ? lambdaStep(projectId, w, cmd.build !== false) : import_rxjs61.EMPTY,
                       extrasStep(projectId, w)
                     ).pipe((0, import_operators44.toArray)())
                   )
@@ -324604,7 +324740,7 @@ async function start2(args) {
     loadSpec().pipe(
       (0, import_operators47.switchMap)(
         (config2) => (0, import_rxjs67.of)({
-          watcher: (0, import_node_fs2.watch)(process.cwd(), {
+          watcher: (0, import_node_fs3.watch)(process.cwd(), {
             recursive: true
           }),
           whitelist: new Map(
@@ -324638,7 +324774,7 @@ async function start2(args) {
 `, "start");
               }),
               (0, import_operators47.tap)(() => {
-                child = (0, import_node_child_process.spawn)(
+                child = (0, import_node_child_process2.spawn)(
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
                   {
@@ -324692,7 +324828,7 @@ async function start2(args) {
               (0, import_operators47.tap)(() => {
                 ui.info(`running ${startCommand} ${outfile}
 `, "start");
-                child = (0, import_node_child_process.spawn)(
+                child = (0, import_node_child_process2.spawn)(
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
                   {
@@ -324708,11 +324844,11 @@ async function start2(args) {
     )
   );
 }
-var import_node_child_process, import_node_fs2, import_rxjs67, import_operators47;
+var import_node_child_process2, import_node_fs3, import_rxjs67, import_operators47;
 var init_start3 = __esm({
   "src/commands/start/start.ts"() {
-    import_node_child_process = require("node:child_process");
-    import_node_fs2 = require("node:fs");
+    import_node_child_process2 = require("node:child_process");
+    import_node_fs3 = require("node:fs");
     import_rxjs67 = __toESM(require_cjs());
     import_operators47 = __toESM(require_operators());
     init_log();
@@ -327503,7 +327639,7 @@ __export(main_exports, {
   main: () => main
 });
 module.exports = __toCommonJS(main_exports);
-var import_node_fs3 = require("node:fs");
+var import_node_fs4 = require("node:fs");
 var import_node_os = __toESM(require("node:os"));
 var import_node_path2 = __toESM(require("node:path"));
 var import_node_sea = require("node:sea");
@@ -328271,8 +328407,8 @@ if (!isWebContainer) {
       const assetArrayBuffer = (0, import_node_sea.getAsset)("esbuild-native");
       if (assetArrayBuffer) {
         const assetBuffer = Buffer.from(assetArrayBuffer);
-        if (!(0, import_node_fs3.existsSync)(tempBinaryPath)) {
-          (0, import_node_fs3.writeFileSync)(tempBinaryPath, assetBuffer, { mode: 493 });
+        if (!(0, import_node_fs4.existsSync)(tempBinaryPath)) {
+          (0, import_node_fs4.writeFileSync)(tempBinaryPath, assetBuffer, { mode: 493 });
         }
         process.env.ESBUILD_BINARY_PATH = tempBinaryPath;
       }
@@ -328284,7 +328420,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.286" : "development";
+var version2 = true ? "1.8.287" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
