@@ -42,10 +42,15 @@ same `LocalRunnerModelInput` fields.
   `supports_tool_calls`, + `vision` when `modalities.vision` or an image
   input modality - no `/props` = `[]`, which the backend treats as
   tool-capable but the web app's runner page labels "chat only"; alias
-  entries of one model are dropped, the first wins). Strata's engine is
-  llama.cpp-based: the port and the required bearer key are per instance in
+  entries of one model are dropped, the first wins). Strata serves a
+  llama.cpp-style API (`/v1/models` with aliases, `/props`) from its own
+  engine: the port and the required bearer key are per instance in
   `~/.strata/data/native-instances/<uuid>.json` (`port`, `api_key`) - e.g.
-  18500, not the 8080 of its install file.
+  18500, not the 8080 of its install file. It only runs the model families
+  it has engines for (Qwen3.8-Flash-Next, Qwen3.6, DeepSeek-V4.1 in 0.2.13),
+  so other models go through `llama-server`. Worked example (Strata +
+  Inkling 2 Mini on llama.cpp b12633+ + Ollama in one runner): README
+  "Example: Strata and Inkling 2 Mini next to Ollama".
 - Resolution (`adapters/spec.ts` `resolveBackends`): `--backend` (with
   `--ollama` prepended as `ollama`) > `runner.json.backends` (ignored when
   `--ollama` is given - that's what single-Ollama units run) > one Ollama.

@@ -1145,6 +1145,108 @@ own models; the rest keep working. Without `--backend` the runner serves one
 Ollama, exactly as before. Re-running `runner:daemon:install` without
 `--backend` goes back to Ollama only.
 
+### Example: Strata and Inkling 2 Mini next to Ollama
+
+A complete setup with three local servers in one runner: Ollama, [Strata](https://github.com/niko1221/strata)
+(Qwen3.8-Flash-Next) and Thinking Machines' Inkling 2 Mini on llama.cpp.
+
+#### Strata
+
+1. Install the Strata app (AppImage on Linux), let it download a model and
+   load it in the app.
+2. Read the port and API key of the running model. They are set per
+   instance, not by the install file (which says 8080):
+
+   ```bash
+   cat ~/.strata/data/native-instances/*.json   # "port" (e.g. 18500) and "api_key"
+   curl -s http://127.0.0.1:18500/health        # works without the key
+   ```
+
+3. Add it as a backend with its key (the key is saved in `runner.json`, 0600):
+
+   ```bash
+   STRATA_API_KEY=<api_key> gcli runner:start \
+     --ollama http://127.0.0.1:11434 \
+     --backend strata=openai:http://127.0.0.1:18500
+   ```
+
+If Strata later starts on another port or with a new key, re-run the
+command (or `runner:daemon:install`) with the new values.
+
+#### Inkling 2 Mini (llama.cpp `llama-server`)
+
+Inkling 2 Mini (26B mixture of experts, about 5B active, text + images + tools)
+does not run in Strata (no engine for its architecture), and Ollama supports
+it on Apple silicon only as of 0.40.17. On Linux/Windows with NVIDIA, use
+llama.cpp's `llama-server`:
+
+1. **llama.cpp b12633 or newer.** It needs the Inkling loop fix
+   ([#32704](https://github.com/ggml-org/llama.cpp/pull/32704), merged
+   2026-11-21). The prebuilt release `llama-<build>-bin-ubuntu-cuda-13.5-x64.tar.gz`
+   plus `cudart-llama-<build>-bin-ubuntu-cuda-13.5-x64.tar.gz` (unpack both into
+   one folder) needs no CUDA toolkit.
+2. **A GGUF in the mainline layout.** Unsloth's files in the repo root use
+   Unsloth's own layout and fail on mainline llama.cpp with
+   `tensor 'blk.24.attn_q.weight' not found`. Use their `Mainline_Support`
+   files (rename `.gguf_file` to `.gguf`) or ggml-org's GGUFs:
+
+   ```bash
+   hf download unsloth/Inkling-2-Mini-GGUF \
+     Mainline_Support/Inkling-2-Mini-UD-Q8_K_XL.gguf_file mmproj-BF16.gguf \
+     --local-dir ./Inkling-2-Mini
+   mv ./Inkling-2-Mini/Mainline_Support/Inkling-2-Mini-UD-Q8_K_XL.gguf_file \
+      ./Inkling-2-Mini/Inkling-2-Mini-UD-Q8_K_XL.gguf
+   ```
+
+   Pick the size by VRAM: UD-Q8_K_XL is 22.9 GB (fits on 2× 16 GB GPUs),
+   UD-Q4_K_XL is 17.6 GB, UD-IQ3_XXS is 11.7 GB.
+3. **Start `llama-server`** on localhost:
+
+   ```bash
+   LD_LIBRARY_PATH=./llama-b12633 ./llama-b12633/llama-server \
+     --model ./Inkling-2-Mini/Inkling-2-Mini-UD-Q8_K_XL.gguf \
+     --mmproj ./Inkling-2-Mini/mmproj-BF16.gguf \
+     --alias inkling-2-mini --host 127.0.0.1 --port 18600 \
+     --split-mode layer --fit-target 512 --load-mode none \
+     --ctx-size 65536 --parallel 1 --flash-attn on --jinja
+   ```
+
+   Don't pass `--n-gpu-layers 999`: a value set by hand turns off llama.cpp's
+   automatic fitting (`--fit`), and the model can then run out of memory on
+   the first GPU. `--jinja` uses the model's chat template, which the runner
+   needs for tool calls (agent mode). The runner reads the context window and
+   the tools/vision support from `/props`.
+4. **Add it as a backend** (llama-server needs no key unless you start it with `--api-key`):
+
+   ```bash
+   gcli runner:start --ollama http://127.0.0.1:11434 \
+     --backend inkling=openai:http://127.0.0.1:18600
+   ```
+
+It appears in the chat as `inkling/inkling-2-mini`. On two RTX 3080 Ti
+(16 GB each) with UD-Q8_K_XL we measured about 13-16 tokens/s generation and
+about 160 tokens/s prompt processing. A 4,000-token agent prompt takes about
+25 s on its first turn; later turns reuse the cached prompt.
+
+#### All three in one runner (as a service)
+
+Pass every backend in one command. Re-installing replaces the saved list, so
+a backend you leave out is removed:
+
+```bash
+STRATA_API_KEY=<api_key> gcli runner:daemon:install \
+  --ollama http://127.0.0.1:11434 \
+  --backend strata=openai:http://127.0.0.1:18500 \
+  --backend inkling=openai:http://127.0.0.1:18600
+gcli runner:daemon:logs   # "inkling (openai) at http://127.0.0.1:18600: 1 model(s)"
+```
+
+The servers don't have to run at the same time. A stopped backend only logs
+`Cannot reach <name> ... Retrying...`, and its models show as offline until it
+is back; the runner keeps serving the others. That matters because Strata
+and Inkling each use most of your VRAM: stop one before starting the other.
+Stopping a server in the middle of a chat cancels that request.
+
 Notes:
 
 - Ollama models are only offered if Ollama reports them as chat-capable;
