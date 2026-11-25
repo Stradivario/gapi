@@ -9,6 +9,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { bytes, errorText, step, ui } from '~/services/ui';
 
 import { loadSpec } from '../lambda/helpers/load-spec';
+import { isolatedPlugin } from './isolated';
 
 export interface BuildArguments {
   files: string[];
@@ -58,14 +59,21 @@ export default async (args: BuildArguments) => {
                 // Decorator metadata needs the project's tsconfig; without one
                 // the plugin failed with "[plugin: tsc] failed to open
                 // 'undefined'" - plain esbuild handles a project without it.
-                plugins: existsSync(join(process.cwd(), 'tsconfig.json'))
-                  ? [
-                      esbuildDecorators({
-                        tsconfig: './tsconfig.json',
-                        cwd: process.cwd(),
-                      }),
-                    ]
-                  : [],
+                plugins: [
+                  // only this package's own node_modules (a service with
+                  // its own lock file inside a monorepo)
+                  ...(config?.options?.bundler?.isolated
+                    ? [isolatedPlugin(process.cwd())]
+                    : []),
+                  ...(existsSync(join(process.cwd(), 'tsconfig.json'))
+                    ? [
+                        esbuildDecorators({
+                          tsconfig: './tsconfig.json',
+                          cwd: process.cwd(),
+                        }),
+                      ]
+                    : []),
+                ],
               }),
             ).pipe(
               tap((data) => {

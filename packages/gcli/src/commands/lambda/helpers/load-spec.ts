@@ -59,6 +59,8 @@ interface BundlerOptions {
     minify: boolean;
     target: boolean;
     external: string[];
+    /* only this package's own node_modules (see build/isolated.ts) */
+    isolated?: boolean;
   };
 }
 

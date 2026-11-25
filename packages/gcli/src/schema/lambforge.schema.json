@@ -26,6 +26,7 @@
             "target": { "type": ["string", "boolean"] },
             "outfile": { "type": "string" },
             "external": { "type": "array", "items": { "type": "string" } },
+            "isolated": { "type": "boolean", "description": "Bundle only from this package's own node_modules (a service with its own lock file inside a monorepo); anything found only above it stays an external require." },
             "watch": { "type": "array", "items": { "type": "string" } },
             "ignore": { "type": "array", "items": { "type": "string" } }
           }
