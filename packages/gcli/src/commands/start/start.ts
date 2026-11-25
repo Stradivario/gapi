@@ -10,7 +10,6 @@ import build, { BuildArguments } from '../build/build';
 import { loadSpec } from '../lambda/helpers/load-spec';
 
 export default async function start(args: BuildArguments) {
-  Logger.log('---------------------------------');
   return lastValueFrom(
     loadSpec().pipe(
       switchMap((config) =>

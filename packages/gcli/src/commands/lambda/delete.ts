@@ -46,10 +46,7 @@ export default async (cmd: {
           'url',
           'method',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][deleteLambda]');
         Logger.table([data], columns);
-        Logger.log('-------------------');
       }),
     ),
   );

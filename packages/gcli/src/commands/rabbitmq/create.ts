@@ -49,10 +49,7 @@ export default (
         }),
       ),
       tap((broker) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][installRabbitMq]');
         Logger.table([broker]);
-        Logger.log('-------------------');
       }),
     ),
   );

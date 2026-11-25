@@ -45,10 +45,7 @@ export default (
           'triggerName',
           'cron',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][deleteLambdaTimeTrigger]');
         Logger.table([data], columns);
-        Logger.log('-------------------');
       }),
     ),
   );

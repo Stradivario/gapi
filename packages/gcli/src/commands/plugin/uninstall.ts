@@ -12,9 +12,7 @@ export default (cmd: { project?: string; name: string; cluster?: string }) =>
         GraphqlClienAPI.uninstallPlugin(projectId, cmd.name, cmd.cluster),
       ),
       tap((pluginName) => {
-        Logger.log('-------------------');
-        Logger.log(`[Action][uninstallPlugin] removed ${pluginName}`);
-        Logger.log('-------------------');
+        Logger.success(`Plugin ${pluginName} removed`);
       }),
     ),
   );

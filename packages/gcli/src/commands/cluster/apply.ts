@@ -3,6 +3,7 @@ import { lastValueFrom, Observable } from 'rxjs';
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
+import { ui } from '~/services/ui';
 
 import { loadSpec } from '../lambda/helpers/load-spec';
 import { runClusterChange } from './helpers/cluster-change';
@@ -135,12 +136,10 @@ const applyCluster = async (
   }
 
   const { steps, notes } = planClusterChanges(current, desired);
-  Logger.log('-------------------');
-  Logger.log(`[Action][clusterApply] ${desired.name}`);
+  ui.header(`Applying cluster ${desired.name}`);
   notes.forEach((n) => Logger.warn(`note: ${n}`));
   if (!steps.length) {
     Logger.info('Nothing to change - the cluster already matches the spec.');
-    Logger.log('-------------------');
     return { cluster: current, applied: [] as ClusterStep[] };
   }
   Logger.table(
@@ -150,7 +149,6 @@ const applyCluster = async (
       needsYes: 'destructive' in s && s.destructive ? 'yes' : '',
     })),
   );
-  Logger.log('-------------------');
   if (cmd.dryRun) {
     Logger.info('--dry-run: nothing was changed.');
     return { cluster: current, applied: [] as ClusterStep[] };

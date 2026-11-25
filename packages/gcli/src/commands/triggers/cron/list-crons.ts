@@ -31,10 +31,7 @@ export default (
           'lambdaName',
           'cron',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][listProjectTimeTriggers]');
         Logger.table(data, columns);
-        Logger.log('-------------------');
       }),
     ),
   );

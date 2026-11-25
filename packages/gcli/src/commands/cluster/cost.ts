@@ -14,8 +14,6 @@ export default async (cmd: { project?: string }) => {
   const rows = await lastValueFrom(
     GraphqlClienAPI.projectClustersOverview(projectId),
   );
-  Logger.log('-------------------');
-  Logger.log('[Action][clusterCost]');
   if (!rows.length) {
     Logger.info('No private clusters for this project.');
   } else {
@@ -32,6 +30,5 @@ export default async (cmd: { project?: string }) => {
       })),
     );
   }
-  Logger.log('-------------------');
   return rows;
 };

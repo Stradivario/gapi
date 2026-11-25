@@ -12,8 +12,6 @@ export default (cmd: { project?: string }) =>
         GraphqlClienAPI.listMessageQueueTriggers(projectId),
       ),
       tap((triggers) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][listMessageQueueTriggers]');
         if (!triggers?.length) {
           Logger.info('No message-queue triggers yet. See mq-trigger:create.');
         } else {
@@ -28,7 +26,6 @@ export default (cmd: { project?: string }) =>
             })),
           );
         }
-        Logger.log('-------------------');
       }),
     ),
   );

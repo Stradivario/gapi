@@ -10,8 +10,6 @@ export default (cmd: { project?: string }) =>
     parseProjectId(cmd.project).pipe(
       switchMap((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
       tap((installed) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][listInstalledPlugins]');
         if (!installed?.length) {
           Logger.info(
             'No plugins installed for this project yet. See plugin:install.',
@@ -27,7 +25,6 @@ export default (cmd: { project?: string }) =>
             })),
           );
         }
-        Logger.log('-------------------');
       }),
     ),
   );

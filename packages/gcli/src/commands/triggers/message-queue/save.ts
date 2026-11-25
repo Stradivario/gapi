@@ -121,8 +121,6 @@ export default (mode: 'create' | 'update', cmd: MqTriggerFlags) =>
         );
       }),
       tap((trigger) => {
-        Logger.log('-------------------');
-        Logger.log(`[Action][${mode}MessageQueueTrigger]`);
         Logger.table([
           {
             name: trigger.name,
@@ -132,7 +130,6 @@ export default (mode: 'create' | 'update', cmd: MqTriggerFlags) =>
             errorTopic: trigger.errorTopic ?? '',
           },
         ]);
-        Logger.log('-------------------');
       }),
     ),
   );

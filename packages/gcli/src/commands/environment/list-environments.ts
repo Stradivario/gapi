@@ -25,10 +25,7 @@ export default (cmd: { project: string }) =>
           'clusterId',
           'clusterName',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][listEnvironments]');
         Logger.table(data, columns);
-        Logger.log('-------------------');
       }),
     ),
   );

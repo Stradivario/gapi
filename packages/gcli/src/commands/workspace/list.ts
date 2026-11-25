@@ -11,8 +11,6 @@ export default async (cmd: { project?: string }) => {
     readSavedWorkspaces(),
   ]);
   const onThisMachine = new Set(Object.values(saved).map((w) => w.id));
-  Logger.log('-------------------');
-  Logger.log('[Action][listLocalWorkspaces]');
   if (!workspaces?.length) {
     Logger.info(
       'No local workspaces yet. Run `gcli workspace:start` in a project directory.',
@@ -34,5 +32,4 @@ export default async (cmd: { project?: string }) => {
       })),
     );
   }
-  Logger.log('-------------------');
 };

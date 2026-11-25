@@ -11,10 +11,7 @@ export default async () =>
       tap((project) => {
         const columns: (keyof Unboxed<typeof project>)[] = ['id', 'name'];
 
-        Logger.log('-------------------');
-        Logger.log('[Action][listProjects]');
         Logger.table(project, columns);
-        Logger.log('-------------------');
       }),
     ),
   );

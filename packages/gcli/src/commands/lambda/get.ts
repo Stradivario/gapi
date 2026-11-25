@@ -25,10 +25,7 @@ export default async (cmd: {
       'clusterId',
       'clusterName',
     ];
-    Logger.log('-------------------');
-    Logger.log('[Action][getLambda]');
     Logger.table([data], columns);
-    Logger.log('-------------------');
   });
 
   if (cmd.lambda) {

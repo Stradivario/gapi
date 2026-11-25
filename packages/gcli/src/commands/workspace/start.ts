@@ -5,6 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
+import { ui } from '~/services/ui';
 
 import { deriveSubscriptionsUrl, readLoginApiUrl } from '../runner/config';
 import { RUNNER_AUTH_EXIT_CODE } from '../runner/daemon';
@@ -115,8 +116,7 @@ export default async (cmd: WorkspaceStartOptions) => {
       ? new TerminalPrompt()
       : null;
 
-  Logger.log('-------------------');
-  Logger.log('[Lambforge local workspace]');
+  ui.header('Lambforge local workspace');
   Logger.info(`Directory: ${root}`);
   Logger.info(`Project:   ${workspace.projectId}`);
   Logger.info(`Lambforge: ${wsUrl}`);
@@ -145,7 +145,6 @@ export default async (cmd: WorkspaceStartOptions) => {
   Logger.info(
     'Press Ctrl+C to disconnect (stops every process the chat started).',
   );
-  Logger.log('-------------------');
 
   const connection = new WorkspaceConnection({
     wsUrl,

@@ -111,8 +111,6 @@ export default async (cmd: AutoscaleOptions) => {
     GraphqlClienAPI.updateProjectClusterAutoscale(projectId, clusterId, input),
   );
   const a = cluster.autoscale ?? {};
-  Logger.log('-------------------');
-  Logger.log('[Action][updateProjectClusterAutoscale]');
   Logger.table([
     {
       cluster: cluster.name,
@@ -132,6 +130,5 @@ export default async (cmd: AutoscaleOptions) => {
       cooldownMin: a.cooldownMinutes,
     },
   ]);
-  Logger.log('-------------------');
   return cluster;
 };

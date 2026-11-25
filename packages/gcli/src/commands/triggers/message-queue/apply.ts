@@ -105,8 +105,6 @@ export default (cmd: { project?: string; spec?: string }) =>
         ),
       ),
       tap((results) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][applyMessageQueueTriggers]');
         Logger.table(
           results.map(({ mode, saved }) => ({
             name: saved.name,
@@ -117,7 +115,6 @@ export default (cmd: { project?: string; spec?: string }) =>
             result: mode === 'create' ? 'created' : 'updated',
           })),
         );
-        Logger.log('-------------------');
       }),
     ),
   );

@@ -3,6 +3,7 @@ import { lastValueFrom } from 'rxjs';
 
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
+import { ui } from '~/services/ui';
 
 import {
   BackendOptions,
@@ -72,14 +73,12 @@ export default async (
     runner.wsUrl ||
     deriveSubscriptionsUrl(await readLoginApiUrl());
 
-  Logger.log('-------------------');
-  Logger.log('[Lambforge local AI runner]');
+  ui.header('Lambforge local AI runner');
   Logger.info(`Lambforge: ${wsUrl}`);
   Logger.info(`Backends:  ${describeBackends(backends)}`);
   Logger.info(
     'Tip: agent mode sends large prompts (instructions + tool list). Give your model server a big context window, e.g. start Ollama with OLLAMA_CONTEXT_LENGTH=32768.',
   );
-  Logger.log('-------------------');
 
   const connection = new RunnerConnection({
     wsUrl,

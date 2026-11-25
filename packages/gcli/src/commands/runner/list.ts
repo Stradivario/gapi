@@ -8,8 +8,6 @@ export default () =>
   lastValueFrom(
     GraphqlClienAPI.listLocalRunners().pipe(
       tap((runners) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][listLocalRunners]');
         if (!runners?.length) {
           Logger.info(
             'No local runners yet. Run `gcli runner:start` on the machine that runs Ollama.',
@@ -25,7 +23,6 @@ export default () =>
             })),
           );
         }
-        Logger.log('-------------------');
       }),
     ),
   );

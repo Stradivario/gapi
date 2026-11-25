@@ -61,6 +61,16 @@ fragment in every repo the change touches.
   restore it (`git checkout -- release/index.js`) unless you are releasing.
 - `README-CLI.md` = `node release/index.js --all-help` output.
 
+## Output (feature cli-output)
+
+Every command prints through `ui` (`src/services/ui.ts`): `ui.header` for
+a flow, `step(label, { scope, done })` around each slow part, `ui.success`
+/ `ui.warn` / `ui.error` with a scope, `ui.done` + `ui.summary` at the end,
+`ui.table` for lists, `ui.print` for data. No raw `console.log`, no
+hand-written escape codes, no `-----` banners; colour only on symbols and
+scopes. Data a script may read gets a `--json` flag (progress on stderr).
+`docs/features/cli-output.md` has the full vocabulary.
+
 ## Running & testing
 
 ```bash

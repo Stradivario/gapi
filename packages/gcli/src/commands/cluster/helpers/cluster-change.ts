@@ -75,10 +75,7 @@ export const runClusterChange = async (
   wait?: boolean,
 ) => {
   const cluster = await lastValueFrom(change$);
-  Logger.log('-------------------');
-  Logger.log(`[Action][${action}]`);
   Logger.table([describeChange(cluster)]);
-  Logger.log('-------------------');
   if (!wait) {
     if (cluster.status !== 'ready') {
       Logger.info(
@@ -89,7 +86,7 @@ export const runClusterChange = async (
   }
   Logger.info(`Waiting for cluster ${cluster.id} to settle...`);
   const final = await pollUntilReady(projectId, cluster.id);
-  Logger.log(`[Action][${action}] final status: ${final.status}`);
+  Logger.success(`${action}: cluster status ${final.status}`);
   if (final.status === 'error') {
     throw new Error(
       `Cluster ${cluster.id} ended in "error"${final.error ? `: ${final.error}` : ''}`,

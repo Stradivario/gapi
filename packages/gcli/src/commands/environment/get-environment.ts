@@ -54,10 +54,7 @@ export default (cmd: {
           'clusterId',
           'clusterName',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][getEnvironment]');
         Logger.table([data], columns);
-        Logger.log('-------------------');
       }),
     ),
   );

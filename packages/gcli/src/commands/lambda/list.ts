@@ -31,10 +31,7 @@ export default (cmd: {
           'clusterId',
           'clusterName',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][listLambdas]');
         Logger.table(data, columns);
-        Logger.log('-------------------');
       }),
     ),
   );

@@ -18,8 +18,6 @@ export default async (cmd: ClusterTargetOptions & { limit?: string }) => {
   const events = await lastValueFrom(
     GraphqlClienAPI.clusterScaleEvents(projectId, clusterId, limit),
   );
-  Logger.log('-------------------');
-  Logger.log('[Action][clusterScaleEvents]');
   if (!events.length) {
     Logger.info('No scale events yet.');
   } else {
@@ -34,6 +32,5 @@ export default async (cmd: ClusterTargetOptions & { limit?: string }) => {
       })),
     );
   }
-  Logger.log('-------------------');
   return events;
 };

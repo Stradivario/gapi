@@ -17,8 +17,6 @@ export default async (cmd: ClusterTargetOptions) => {
   const [latest] = await lastValueFrom(
     GraphqlClienAPI.clusterHealth(projectId, clusterId, 1),
   );
-  Logger.log('-------------------');
-  Logger.log('[Action][clusterHealth]');
   if (!latest) {
     Logger.info(
       'No health reports yet - the cluster agent has not reported (it installs with the cluster; check cluster:status for "agent").',
@@ -50,6 +48,5 @@ export default async (cmd: ClusterTargetOptions) => {
       );
     }
   }
-  Logger.log('-------------------');
   return latest ?? null;
 };

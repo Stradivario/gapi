@@ -65,8 +65,6 @@ export default (cmd: DeclareQueueFlags) =>
         ),
       ),
       tap(({ broker, missing, skipped }) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][declareQueue]');
         Logger.table([
           ...missing.map((name) => ({
             broker,
@@ -79,7 +77,6 @@ export default (cmd: DeclareQueueFlags) =>
             result: 'exists',
           })),
         ]);
-        Logger.log('-------------------');
       }),
     ),
   );

@@ -183,6 +183,16 @@ const MessageQueueTriggerFragment = `
   threshold
 `;
 
+export interface LambdaBuildStatus {
+  status?: string | null;
+  ready?: boolean | null;
+  building?: boolean | null;
+  failed?: boolean | null;
+  logsTail?: string | null;
+  buildErrors?: string | null;
+  runtimeErrors?: string | null;
+}
+
 export class GraphqlClienAPI {
   public static query<T>({
     query,
@@ -359,6 +369,27 @@ export class GraphqlClienAPI {
     );
   }
 
+  /** One poll of a lambda's package build: ready / building / failed, the
+      log tail on failure, build/runtime errors found in a ready one. */
+  public static getLambdaBuildStatus(lambdaId: string) {
+    return this.query<{ getLambdaBuildStatus: LambdaBuildStatus }>({
+      query: gql`
+        query getLambdaBuildStatus($lambdaId: String!) {
+          getLambdaBuildStatus(lambdaId: $lambdaId) {
+            status
+            ready
+            building
+            failed
+            logsTail
+            buildErrors
+            runtimeErrors
+          }
+        }
+      `,
+      variables: { lambdaId },
+    }).pipe(map((res) => res.getLambdaBuildStatus));
+  }
+
   public static getLambdaBuilderLogs(lambdaId: string) {
     return this.query<IQuery>({
       query: gql`
@@ -448,7 +479,7 @@ export class GraphqlClienAPI {
       variables: {
         id,
       },
-    }).pipe(map((res) => res.listProjects));
+    }).pipe(map((res) => res.getProject));
   }
 
   public static listEnvironments(projectId: string) {

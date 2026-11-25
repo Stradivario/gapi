@@ -15,8 +15,6 @@ export default async (cmd: ClusterTargetOptions) => {
   const plan = await lastValueFrom(
     GraphqlClienAPI.clusterProvisioningPlan(projectId, clusterId),
   );
-  Logger.log('-------------------');
-  Logger.log('[Action][clusterProvisioningPlan]');
   Logger.info(
     `mode ${plan.mode}${plan.enabled ? '' : ' (autoscaling off)'}, heartbeat ${plan.sampleAt ?? 'none'}`,
   );
@@ -49,6 +47,5 @@ export default async (cmd: ClusterTargetOptions) => {
       `Consolidation: ${plan.consolidation.action} ${plan.consolidation.node} - ${plan.consolidation.reason}`,
     );
   }
-  Logger.log('-------------------');
   return plan;
 };

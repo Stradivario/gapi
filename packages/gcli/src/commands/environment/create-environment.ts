@@ -58,10 +58,7 @@ export default (
           'clusterId',
           'clusterName',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][createEnvironment]');
         Logger.table([data], columns);
-        Logger.log('-------------------');
       }),
     ),
   );

@@ -57,10 +57,7 @@ export default async (
         ).pipe(map((cluster) => ({ projectId, cluster }))),
       ),
       tap(({ cluster }) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][provisionProjectCluster]');
         Logger.table([cluster]);
-        Logger.log('-------------------');
         if (!cmd.wait) {
           Logger.info(
             `Provisioning runs in the background - this takes several minutes. Re-run with --wait to block until it's ready, or 'cluster:list --project ${cluster.projectId}' to check progress.`,
@@ -79,11 +76,7 @@ export default async (
     result.projectId,
     result.cluster.id,
   );
-  Logger.log('-------------------');
-  Logger.log(
-    `[Action][provisionProjectCluster] final status: ${finalCluster.status}`,
-  );
+  Logger.info(`Cluster status: ${finalCluster.status}`);
   Logger.table([finalCluster]);
-  Logger.log('-------------------');
   return finalCluster;
 };

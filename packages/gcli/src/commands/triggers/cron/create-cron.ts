@@ -63,10 +63,7 @@ export default (cmd: {
           'cron',
           'createdBy',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][createTimeTrigger]');
         Logger.table([data], columns);
-        Logger.log('-------------------');
       }),
     ),
   );

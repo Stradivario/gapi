@@ -78,7 +78,6 @@ export const followRun = (
 };
 
 export const printRunResult = (run: WorkflowRun) => {
-  Logger.log('-------------------');
   Logger.log(`Run ${run.name}: ${run.phase}`);
   if (run.errorType) {
     Logger.error(`${run.errorType}${run.cause ? `: ${run.cause}` : ''}`);
@@ -87,5 +86,4 @@ export const printRunResult = (run: WorkflowRun) => {
     Logger.log('Output:');
     Logger.log(JSON.stringify(run.output, null, 2));
   }
-  Logger.log('-------------------');
 };

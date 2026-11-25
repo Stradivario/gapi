@@ -8,8 +8,6 @@ export default () =>
   lastValueFrom(
     GraphqlClienAPI.listAvailablePlugins().pipe(
       tap((plugins) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][listAvailablePlugins]');
         Logger.table(
           (plugins || []).map((p) => ({
             name: p.name,
@@ -18,7 +16,6 @@ export default () =>
             description: p.description,
           })),
         );
-        Logger.log('-------------------');
       }),
     ),
   );

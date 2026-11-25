@@ -12,8 +12,6 @@ export default (cmd: { project?: string }) =>
         GraphqlClienAPI.listRabbitMqInstances(projectId),
       ),
       tap((brokers) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][listRabbitMqInstances]');
         if (!brokers?.length) {
           Logger.info(
             'No RabbitMQ brokers for this project yet. See rabbitmq:create.',
@@ -29,7 +27,6 @@ export default (cmd: { project?: string }) =>
             })),
           );
         }
-        Logger.log('-------------------');
       }),
     ),
   );

@@ -54,10 +54,7 @@ export default (cmd: {
           'maxMemory',
           'region',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][deleteEnvironment]');
         Logger.table([data], columns);
-        Logger.log('-------------------');
       }),
     ),
   );

@@ -20,10 +20,7 @@ export default async (cmd: {
         ),
       ),
       tap(({ cluster }) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][teardownProjectCluster]');
         Logger.table([cluster]);
-        Logger.log('-------------------');
         if (!cmd.wait) {
           Logger.info(
             "Teardown runs in the background - this takes a few minutes. Re-run with --wait to block until it's gone, or cluster:list to check progress.",
@@ -41,8 +38,6 @@ export default async (cmd: {
   const finalCluster = await pollUntilReady(projectId, cluster.id, {
     goneMeansDeleted: true,
   });
-  Logger.log(
-    `[Action][teardownProjectCluster] final status: ${finalCluster.status}`,
-  );
+  Logger.info(`Cluster status: ${finalCluster.status}`);
   return finalCluster;
 };

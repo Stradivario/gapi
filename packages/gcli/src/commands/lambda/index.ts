@@ -57,6 +57,14 @@ export function registerLambdaCommands(program: Command) {
     ],
 
     ['--spec <spec>', 'Spec file yml or json path'],
+    [
+      '--no-wait',
+      'Return once the lambda is saved, without waiting for the build and rollout',
+    ],
+    [
+      '--json',
+      'Print the saved lambda as JSON on stdout (progress goes to stderr)',
+    ],
     ['--packageJson <packageJson>', 'Define packageJson in string format'],
     ['--package <package>', 'Path to package.json'],
     [

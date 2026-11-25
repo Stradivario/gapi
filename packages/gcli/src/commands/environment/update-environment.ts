@@ -60,10 +60,7 @@ export default (
           'clusterId',
           'clusterName',
         ];
-        Logger.log('-------------------');
-        Logger.log('[Action][updateEnvironment]');
         Logger.table([data], columns);
-        Logger.log('-------------------');
       }),
     ),
   );

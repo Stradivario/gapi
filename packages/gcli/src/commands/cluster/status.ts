@@ -46,8 +46,6 @@ export default async (cmd: ClusterTargetOptions) => {
     GraphqlClienAPI.projectClustersOverview(projectId),
   );
   const rows = clusterId ? all.filter((c) => c.clusterId === clusterId) : all;
-  Logger.log('-------------------');
-  Logger.log('[Action][projectClustersOverview]');
   if (!rows.length) {
     Logger.info(
       clusterId
@@ -69,6 +67,5 @@ export default async (cmd: ClusterTargetOptions) => {
       Logger.table(issues);
     }
   }
-  Logger.log('-------------------');
   return rows;
 };

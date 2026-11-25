@@ -10,8 +10,6 @@ export default (cmd: { project?: string }) =>
     parseProjectId(cmd.project).pipe(
       switchMap((projectId) => GraphqlClienAPI.projectClusters(projectId)),
       tap((clusters) => {
-        Logger.log('-------------------');
-        Logger.log('[Action][projectClusters]');
         if (!clusters?.length) {
           Logger.info(
             'No private clusters for this project yet - this project runs on the shared cluster. See cluster:create.',
@@ -38,7 +36,6 @@ export default (cmd: { project?: string }) =>
             }),
           );
         }
-        Logger.log('-------------------');
       }),
     ),
   );

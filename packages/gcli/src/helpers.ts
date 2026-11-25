@@ -27,7 +27,21 @@ export class ExitCodeError extends CustomError {
   }
 }
 
+/** The command already told the user what went wrong (e.g. a failed
+    build with its log tail): exit with the code, print nothing more. */
+export class ReportedError extends CustomError {
+  readonly code: number;
+
+  constructor(message: string, code = 1) {
+    super(message);
+    this.code = code;
+  }
+}
+
 export function exitWithError(error: Error): never {
+  if (error instanceof ReportedError) {
+    process.exit(error.code);
+  }
   if (error instanceof ExitCodeError) {
     Logger.error(error.message);
     process.exit(error.code);
