@@ -41,6 +41,7 @@ import {
 } from '~/services/ui';
 
 import { packageArchive } from '../package';
+import { deployStateOf } from './deploy-state';
 import { DomainConfig, loadSpec } from './load-spec';
 import { readFileAsObservable } from './read-file';
 import { spreadScaleOptions } from './spread';
@@ -275,35 +276,21 @@ const saveLambda = (
     }),
   );
 
-type DeployState = 'DEPLOYING' | 'LIVE' | 'FAILED';
-
 const DEPLOY_POLL_MS = 3_000;
 const DEPLOY_TIMEOUT_MS = 15 * 60_000;
 
-/** Where the deploy is now. An update that needed a new build answers
-    deployStatus DEPLOYING and turns LIVE / FAILED once it is rolled out; a
-    new lambda is followed through its package build. */
-const deployState = (
-  lambda: SavedLambda,
-  type: 'createLambda' | 'updateLambda',
-): Observable<{ state: DeployState; status?: string | null }> =>
-  type === 'updateLambda'
-    ? GraphqlClienAPI.getLambda(lambda.id, ['deployStatus' as never]).pipe(
-        map((l) => ({
-          state: ((l as SavedLambda).deployStatus ?? 'LIVE') as DeployState,
-          status: 'rolling out',
-        })),
-      )
-    : GraphqlClienAPI.getLambdaBuildStatus(lambda.id).pipe(
-        map((b) => ({
-          state: (b?.failed
-            ? 'FAILED'
-            : b?.ready
-              ? 'LIVE'
-              : 'DEPLOYING') as DeployState,
-          status: b?.status,
-        })),
-      );
+const deployState = (lambda: SavedLambda) =>
+  forkJoin({
+    build: GraphqlClienAPI.getLambdaBuildStatus(lambda.id),
+    // not on every API yet: an error = not known
+    lambda: GraphqlClienAPI.getLambda(lambda.id, [
+      'deployStatus' as never,
+    ]).pipe(catchError(() => of(null))),
+  }).pipe(
+    map(({ build, lambda: l }) =>
+      deployStateOf(build, (l as SavedLambda | null)?.deployStatus),
+    ),
+  );
 
 /** A ready lambda can still carry broken output or fail to load its code. */
 const reportBuildProblems = (lambdaId: string, scope: string) =>
@@ -328,14 +315,14 @@ const followDeploy = (
   scope: string,
   wait: boolean,
 ): Observable<SavedLambda> => {
-  const needsWait =
-    type === 'createLambda' || lambda?.deployStatus === 'DEPLOYING';
-  if (!wait || !lambda?.id || !needsWait) return of(lambda);
+  // every deploy is followed: the mutation's answer does not say whether a
+  // build is running (deployStatus is not in its fields)
+  if (!wait || !lambda?.id) return of(lambda);
   const started = Date.now();
   const spinner = ui.spin('building and rolling out', scope);
   const logsHint = `gcli lambda:logs-builder --name ${lambda.name}`;
   return timer(DEPLOY_POLL_MS, DEPLOY_POLL_MS).pipe(
-    switchMap(() => deployState(lambda, type)),
+    switchMap(() => deployState(lambda)),
     tap(({ status }) =>
       spinner.update(
         `building and rolling out${status ? ` (${status})` : ''} ${ui.dim(elapsed(Date.now() - started))}`,
