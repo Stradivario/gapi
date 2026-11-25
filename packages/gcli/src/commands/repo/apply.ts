@@ -1,3 +1,6 @@
+import { spawn } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+
 import {
   concat,
   defer,
@@ -10,6 +13,7 @@ import {
 import {
   catchError,
   finalize,
+  ignoreElements,
   map,
   switchMap,
   tap,
@@ -28,7 +32,14 @@ import { parseProjectId, ReportedError, resolveClusterId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { elapsed, errorText, step, ui } from '~/services/ui';
 
-import { hasWork, unitFolder, UnitWork, workFor } from './apply-work';
+import {
+  buildCommand,
+  hasWork,
+  lastLines,
+  unitFolder,
+  UnitWork,
+  workFor,
+} from './apply-work';
 import { discover, repoRoot, Unit } from './discover';
 import { Loose } from './drift';
 import { loadLive, planUnit, unmanaged } from './plan';
@@ -39,11 +50,57 @@ import { countPlan, renderPlan, unitNames } from './plan-view';
 const inFolder = <T>(unit: Unit, root: string, work$: () => Observable<T>) =>
   defer(() => {
     const back = process.cwd();
+    // a variant's variables (CLUSTER_MODE=worker): the deploy re-reads
+    // lambforge.yaml and must pick the same case
+    const saved = Object.keys(unit.vars ?? {}).map(
+      (k) => [k, process.env[k]] as const,
+    );
+    Object.assign(process.env, unit.vars ?? {});
     // discover() gives an absolute file; resolve() keeps it, and still
     // places a relative one under the root
     process.chdir(unitFolder(root, unit));
-    return work$().pipe(finalize(() => process.chdir(back)));
+    return work$().pipe(
+      finalize(() => {
+        process.chdir(back);
+        saved.forEach(([k, v]) =>
+          v === undefined ? delete process.env[k] : (process.env[k] = v),
+        );
+      }),
+    );
   });
+
+/** Runs the unit's build in its folder (its variables are set): the
+    output is shown only when it fails (last 30 lines). */
+const buildStep = (w: UnitWork, command: string) =>
+  new Observable<string>((subscriber) => {
+    const child = spawn(command, {
+      shell: true,
+      cwd: process.cwd(),
+      env: process.env,
+    });
+    let output = '';
+    const collect = (chunk: Buffer) => {
+      output = (output + chunk.toString()).slice(-200_000);
+    };
+    child.stdout?.on('data', collect);
+    child.stderr?.on('data', collect);
+    child.on('error', (e) => subscriber.error(e));
+    child.on('close', (code) => {
+      if (code === 0) {
+        subscriber.next(output);
+        subscriber.complete();
+        return;
+      }
+      ui.print(ui.dim(lastLines(output, 30).replace(/^/gm, '   │ ')));
+      subscriber.error(new Error(`${command} exited with code ${code}`));
+    });
+    return () => child.killed || child.kill();
+  }).pipe(
+    step(command, {
+      scope: `build[${w.name}]`,
+      done: () => `${command} done`,
+    }),
+  );
 
 const environmentStep = (projectId: string, w: UnitWork) => {
   const env = w.unit.spec.environment as Loose;
@@ -65,7 +122,23 @@ const environmentStep = (projectId: string, w: UnitWork) => {
   );
 };
 
-const lambdaStep = (projectId: string, w: UnitWork) =>
+const lambdaStep = (projectId: string, w: UnitWork, build: boolean) => {
+  const command = build ? buildCommand(w.unit.spec, readPackageJson()) : null;
+  return concat(
+    command ? buildStep(w, command).pipe(ignoreElements()) : EMPTY,
+    deployStep(projectId, w),
+  );
+};
+
+const readPackageJson = () => {
+  try {
+    return JSON.parse(readFileSync('package.json', 'utf8'));
+  } catch {
+    return null;
+  }
+};
+
+const deployStep = (projectId: string, w: UnitWork) =>
   defer(() =>
     createOrUpdateLambda(
       {
@@ -125,7 +198,14 @@ const extrasStep = (projectId: string, w: UnitWork) => {
  */
 export default (
   path: string | undefined,
-  cmd: { project?: string; yes?: boolean; code?: boolean; only?: string },
+  cmd: {
+    project?: string;
+    yes?: boolean;
+    code?: boolean;
+    only?: string;
+    /* --no-build: deploy what is built */
+    build?: boolean;
+  },
 ) => {
   const started = Date.now();
   const root = repoRoot(path ?? process.cwd());
@@ -200,13 +280,20 @@ export default (
             }
             ui.header('Applying');
             // environments first: lambdas name them
-            const environments = todo
-              .filter((w) => w.environment)
-              .map((w) => environmentStep(projectId, w));
+            // variants of one file can share an environment: once each
+            const environments = [
+              ...new Map(
+                todo
+                  .filter((w) => w.environment)
+                  .map((w) => [w.unit.spec.environment?.name, w] as const),
+              ).values(),
+            ].map((w) => environmentStep(projectId, w));
             const units = todo.map((w) =>
               inFolder(w.unit, root, () =>
                 concat(
-                  w.lambda ? lambdaStep(projectId, w) : EMPTY,
+                  w.lambda
+                    ? lambdaStep(projectId, w, cmd.build !== false)
+                    : EMPTY,
                   extrasStep(projectId, w),
                 ).pipe(toArray()),
               ),

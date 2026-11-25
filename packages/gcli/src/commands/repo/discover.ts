@@ -1,7 +1,10 @@
 import { existsSync, readdirSync, readFileSync } from 'fs';
 import { dirname, join, relative, resolve, sep } from 'path';
 
-import { loadYaml } from '~/commands/lambda/helpers/yaml-schema';
+import {
+  loadYaml,
+  switchVariables,
+} from '~/commands/lambda/helpers/yaml-schema';
 import { GitignoreMatcher } from '~/commands/workspace/gitignore';
 
 import { Loose } from './drift';
@@ -24,6 +27,64 @@ export interface Unit {
   inheritsFrom?: string;
   /** a YAML error, when the file did not parse */
   error?: string;
+  /** one file, several lambdas (`!switch` on a variable, e.g.
+      CLUSTER_MODE=worker): the variables this unit is evaluated with */
+  vars?: Record<string, string>;
+  /** `CLUSTER_MODE=worker` - shown next to the folder */
+  variant?: string;
+}
+
+/** Unique per lambda: the folder, plus the variant when the file has several. */
+export const unitKey = (u: Pick<Unit, 'id' | 'variant'>) =>
+  u.variant ? `${u.id} (${u.variant})` : u.id;
+
+const MAX_VARIANTS = 16;
+
+/** Every combination of the file's switch variables, e.g.
+    [{ CLUSTER_MODE: 'provisioner' }, { CLUSTER_MODE: 'worker' }]. */
+export function variantCombinations(
+  vars: Record<string, string[]>,
+): Record<string, string>[] {
+  return Object.entries(vars)
+    .reduce<Record<string, string>[]>(
+      (combos, [name, cases]) =>
+        combos.flatMap((c) => cases.map((v) => ({ ...c, [name]: v }))),
+      [{}],
+    )
+    .slice(0, MAX_VARIANTS);
+}
+
+/** The units of one file: one per variant that makes a DIFFERENT lambda
+    (a switch that only changes build options stays one unit). */
+export function unitsOfFile(id: string, file: string, content: string): Unit[] {
+  const combos = variantCombinations(switchVariables(content));
+  if (combos.length <= 1) {
+    const own = (loadYaml(content) ?? {}) as Loose;
+    return [{ id, file, own, spec: own }];
+  }
+  const seen = new Set<string>();
+  const units: Unit[] = [];
+  for (const vars of combos) {
+    const own = (loadYaml(content, { ...process.env, ...vars }) ?? {}) as Loose;
+    const name = String(own.function?.name ?? '');
+    if (seen.has(name)) continue;
+    seen.add(name);
+    units.push({
+      id,
+      file,
+      own,
+      spec: own,
+      vars,
+      variant: Object.entries(vars)
+        .map(([k, v]) => `${k}=${v}`)
+        .join(' '),
+    });
+  }
+  if (units.length === 1) {
+    const own = (loadYaml(content) ?? {}) as Loose;
+    return [{ id, file, own, spec: own }];
+  }
+  return units;
 }
 
 /** The git root above `start`, else `start`. */
@@ -59,16 +120,17 @@ export function findFiles(root: string): string[] {
 
 /** The units of a repository, parents before children. */
 export function discover(root: string): Unit[] {
-  const units: Unit[] = findFiles(root).map((file) => {
+  const units: Unit[] = findFiles(root).flatMap((file) => {
     const id = relative(root, dirname(file)).split(sep).join('/') || '.';
     try {
-      const own = (loadYaml(readFileSync(file, 'utf8')) ?? {}) as Loose;
-      return { id, file, own, spec: own };
+      return unitsOfFile(id, file, readFileSync(file, 'utf8'));
     } catch (e) {
-      return { id, file, own: {}, spec: {}, error: (e as Error).message };
+      return [{ id, file, own: {}, spec: {}, error: (e as Error).message }];
     }
   });
-  const byFolder = new Map(units.map((u) => [u.id, u]));
+  // the first unit of a folder stands for it (variants share their parent)
+  const byFolder = new Map<string, Unit>();
+  units.forEach((u) => byFolder.has(u.id) || byFolder.set(u.id, u));
   const parentOf = (id: string): Unit | undefined => {
     let dir = id;
     while (dir !== '.') {

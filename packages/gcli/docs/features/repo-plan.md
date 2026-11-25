@@ -16,6 +16,15 @@ Code: `src/commands/repo/`. Schema: `src/schema/lambforge.schema.json`
 
 ## How it works
 
+- **Variants** (`unitsOfFile`, discover.ts): a file whose `!switch` /
+  `!if` reads a variable (`CLUSTER_MODE`, `SUBSCRIPTIONS_ONLY`) is planned
+  once per value (`switchVariables` in yaml-schema.ts finds them; `!if`
+  gives the matching value and `false`/`true`). Each variant that makes a
+  different `function.name` is its own unit (`unitKey` = folder +
+  `VAR=value`), so cluster-worker and graphql-server-subscriptions are
+  managed, not "unmanaged" (2026-11-25). A switch that changes only build
+  options stays one unit. At most 16 combinations.
+
 - **Discovery** (`discover.ts`): from the git root above `path`; skips
   `node_modules`, `.git`, `.gcache`, `dist`, `release` and `.gitignore`
   matches (the workspace `GitignoreMatcher`), depth 8. A unit = a folder
@@ -42,7 +51,7 @@ Code: `src/commands/repo/`. Schema: `src/schema/lambforge.schema.json`
 
 ## Test
 
-`npx jest test/repo-plan test/repo-apply` (discovery + inheritance + skips, schema,
+`npx jest test/repo-plan test/repo-apply test/repo-variants` (discovery + inheritance + skips, schema,
 cross checks, drift, plan, export round trip).
 
 ## Debug
@@ -69,9 +78,16 @@ cross checks, drift, plan, export round trip).
    `triggers.time` and `domains:` along), else just the time trigger /
    domains that drifted; then `triggers.mq` (`applyMqTriggers`, shared with
    mq-trigger:apply).
-4. `workFor` (pure): function missing = create, changes = update, in sync =
+4. **Build first**: before a deploy, `build:` of lambforge.yaml, else
+   `npm run build` when package.json has a real `build` script (not an
+   `echo` placeholder), runs in the unit folder with the variant's
+   variables set (`inFolder` sets and restores them - the deploy re-reads
+   lambforge.yaml with them too). Output only on failure (last 30 lines).
+   `--no-build` deploys what is built. Variants sharing an environment
+   apply it once.
+5. `workFor` (pure): function missing = create, changes = update, in sync =
    nothing unless `--code`. A new lambda also gets its queue triggers.
-5. Stops at the first failure (what ran stays applied), exit 1.
+6. Stops at the first failure (what ran stays applied), exit 1.
 
 Code changes are not in the plan yet (no archive fingerprint on the
 server), so `apply` redeploys code only with `--code` or when settings

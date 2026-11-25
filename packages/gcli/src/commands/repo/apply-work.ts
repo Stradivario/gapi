@@ -67,3 +67,19 @@ export const hasWork = (w: UnitWork) =>
     resolve() keeps it (and still places a relative one under the root). */
 export const unitFolder = (root: string, unit: Unit) =>
   dirname(resolve(root, unit.file));
+
+/** What runs before a deploy: `build:` of lambforge.yaml, else the
+    package's `build` script, else nothing (a plain file / static site). */
+export const buildCommand = (
+  spec: { build?: unknown },
+  packageJson: { scripts?: Record<string, string> } | null,
+): string | null =>
+  typeof spec?.build === 'string' && spec.build.trim()
+    ? spec.build.trim()
+    : packageJson?.scripts?.build &&
+        !/^echo\b/.test(packageJson.scripts.build.trim())
+      ? 'npm run build'
+      : null;
+
+export const lastLines = (text: string, n: number) =>
+  text.trimEnd().split('\n').slice(-n).join('\n');

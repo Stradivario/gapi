@@ -7,7 +7,7 @@ import { parseProjectId } from '~/helpers';
 import { GraphqlClienAPI, ProjectDomain } from '~/services/gql-client';
 import { ui } from '~/services/ui';
 
-import { discover, repoRoot, Unit } from './discover';
+import { discover, repoRoot, Unit, unitKey } from './discover';
 import {
   Change,
   environmentChanges,
@@ -156,7 +156,7 @@ export function planUnit(unit: Unit, live: Live): UnitPlan {
       });
     }
   }
-  return { unit: unit.id, sections };
+  return { unit: unitKey(unit), sections };
 }
 
 /** Lambdas of the project no file of this repository declares. */

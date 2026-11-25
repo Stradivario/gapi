@@ -9,6 +9,10 @@
   "properties": {
     "function": { "$ref": "#/definitions/function" },
     "environment": { "$ref": "#/definitions/environment" },
+    "build": {
+      "type": "string",
+      "description": "The command gcli apply runs in this folder before it deploys (e.g. \"npm run build:es\"). Default: the package.json build script, if there is one."
+    },
     "options": {
       "type": "object",
       "additionalProperties": false,

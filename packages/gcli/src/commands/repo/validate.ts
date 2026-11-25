@@ -4,7 +4,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
 
-import { discover, repoRoot, Unit } from './discover';
+import { discover, repoRoot, Unit, unitKey } from './discover';
 import { Loose } from './drift';
 import { check, Finding } from './schema-check';
 
@@ -24,13 +24,13 @@ export function crossChecks(units: Unit[]): Finding[] {
       const other = seen.get(key);
       if (other) {
         out.push({
-          unit: u.id,
+          unit: unitKey(u),
           path: what,
           level: 'error',
           message: `"${value}" is also used by ${other}`,
         });
       } else {
-        seen.set(key, u.id);
+        seen.set(key, unitKey(u));
       }
     }
   }
@@ -46,7 +46,7 @@ export function crossChecks(units: Unit[]): Finding[] {
           !lambdas.has(name)
         ) {
           out.push({
-            unit: u.id,
+            unit: unitKey(u),
             path: `domains[${i}]`,
             level: 'warning',
             message: `"${name}" is no lambda in this repository (fine if another repo deploys it)`,
@@ -90,7 +90,7 @@ const onlineChecks = (units: Unit[]) =>
             .filter((k) => !fields.includes(k) && !GCLI_ONLY.has(k))
             .map(
               (k): Finding => ({
-                unit: u.id,
+                unit: unitKey(u),
                 path: `${section}.${k}`,
                 level: 'warning',
                 message: 'the platform API does not take this key',
@@ -106,22 +106,22 @@ export const findingsFor = (units: Unit[]): Finding[] => [
     .filter((u) => u.error)
     .map(
       (u): Finding => ({
-        unit: u.id,
+        unit: unitKey(u),
         path: '(file)',
         level: 'error',
         message: u.error,
       }),
     ),
-  ...units.filter((u) => !u.error).flatMap((u) => check(u.id, u.own)),
+  ...units.filter((u) => !u.error).flatMap((u) => check(unitKey(u), u.own)),
   ...crossChecks(units),
 ];
 
 export const report = (units: Unit[], findings: Finding[]) => {
   for (const u of units) {
-    const mine = findings.filter((f) => f.unit === u.id);
+    const mine = findings.filter((f) => f.unit === unitKey(u));
     const label = u.inheritsFrom ? ` (environment from ${u.inheritsFrom})` : '';
     Logger.info(
-      `${mine.some((f) => f.level === 'error') ? 'x' : mine.length ? '!' : 'v'} ${u.id}${label}`,
+      `${mine.some((f) => f.level === 'error') ? 'x' : mine.length ? '!' : 'v'} ${unitKey(u)}${label}`,
     );
     for (const f of mine)
       Logger[f.level === 'error' ? 'error' : 'info'](

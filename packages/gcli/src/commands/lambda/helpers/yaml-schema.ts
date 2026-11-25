@@ -144,9 +144,12 @@ export const LAMBFORGE_SCHEMA = CORE_SCHEMA.withTags(
   ifTag,
 );
 
-const resolveConditionals = (node: unknown): unknown => {
+const resolveConditionals = (
+  node: unknown,
+  env: NodeJS.ProcessEnv = process.env,
+): unknown => {
   if (node instanceof EnvMarker) {
-    return process.env[String(node.name)] ?? resolveConditionals(node.fallback);
+    return env[String(node.name)] ?? resolveConditionals(node.fallback, env);
   }
 
   if (node instanceof SwitchMarker) {
@@ -157,12 +160,12 @@ const resolveConditionals = (node: unknown): unknown => {
       );
     }
     const branches = isPlainObject(cases) ? cases : {};
-    const selected = String(process.env[varName] ?? fallback ?? '');
+    const selected = String(env[varName] ?? fallback ?? '');
     if (selected in branches) {
-      return resolveConditionals(branches[selected]);
+      return resolveConditionals(branches[selected], env);
     }
     if (fallback != null && String(fallback) in branches) {
-      return resolveConditionals(branches[String(fallback)]);
+      return resolveConditionals(branches[String(fallback)], env);
     }
     return null;
   }
@@ -171,25 +174,25 @@ const resolveConditionals = (node: unknown): unknown => {
     const f = node.fields;
     let matches: boolean;
     if (typeof f.var === 'string') {
-      const current = process.env[f.var] ?? f.default;
+      const current = env[f.var] ?? f.default;
       matches =
         'equals' in f
           ? String(current) === String(f.equals)
           : !isFalsy(current);
     } else {
-      matches = !isFalsy(resolveConditionals(f.when));
+      matches = !isFalsy(resolveConditionals(f.when, env));
     }
-    return resolveConditionals(matches ? f.then : f.else) ?? null;
+    return resolveConditionals(matches ? f.then : f.else, env) ?? null;
   }
 
   if (Array.isArray(node)) {
-    return node.map(resolveConditionals);
+    return node.map((n) => resolveConditionals(n, env));
   }
 
   if (isPlainObject(node)) {
     const out: Record<string, unknown> = {};
     for (const key of Object.keys(node)) {
-      out[key] = resolveConditionals(node[key]);
+      out[key] = resolveConditionals(node[key], env);
     }
     return out;
   }
@@ -197,5 +200,48 @@ const resolveConditionals = (node: unknown): unknown => {
   return node;
 };
 
-export const loadYaml = <T = unknown>(content: string): T =>
-  resolveConditionals(load(content, { schema: LAMBFORGE_SCHEMA })) as T;
+/** `env`: the variables the conditional tags read (default process.env) -
+    gcli plan evaluates one file once per `!switch` case this way. */
+export const loadYaml = <T = unknown>(
+  content: string,
+  env: NodeJS.ProcessEnv = process.env,
+): T =>
+  resolveConditionals(load(content, { schema: LAMBFORGE_SCHEMA }), env) as T;
+
+/** Every `!switch` / `!if` variable of a file with the values that pick a
+    branch, e.g. `{ CLUSTER_MODE: ['provisioner', 'worker'] }` or
+    `{ SUBSCRIPTIONS_ONLY: ['false', 'true'] }` - one file, two lambdas. */
+export function switchVariables(content: string): Record<string, string[]> {
+  const found: Record<string, Set<string>> = {};
+  const walk = (node: unknown) => {
+    if (node instanceof SwitchMarker) {
+      const { var: name, cases } = node.fields;
+      if (typeof name === 'string' && isPlainObject(cases)) {
+        found[name] = found[name] ?? new Set();
+        Object.keys(cases).forEach((c) => found[name].add(c));
+        Object.values(cases).forEach(walk);
+      }
+      return;
+    }
+    if (node instanceof IfMarker) {
+      // `!if { var, equals? }`: the value that matches, and one that does not
+      const { var: name, equals } = node.fields;
+      if (typeof name === 'string') {
+        found[name] = found[name] ?? new Set();
+        if (equals !== undefined) {
+          found[name].add(String(equals));
+          found[name].add(String(equals) === 'false' ? 'true' : 'false');
+        } else {
+          found[name].add('false');
+          found[name].add('true');
+        }
+      }
+      Object.values(node.fields).forEach(walk);
+      return;
+    }
+    if (Array.isArray(node)) node.forEach(walk);
+    else if (isPlainObject(node)) Object.values(node).forEach(walk);
+  };
+  walk(load(content, { schema: LAMBFORGE_SCHEMA }));
+  return Object.fromEntries(Object.entries(found).map(([k, v]) => [k, [...v]]));
+}

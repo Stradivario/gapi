@@ -1,5 +1,6 @@
 import { paint, ui } from '~/services/ui';
 
+import { unitKey } from './discover';
 import { show } from './drift';
 import type { SectionPlan, UnitPlan } from './plan';
 
@@ -37,11 +38,15 @@ const nameOf = (p: UnitPlan, names: Map<string, string>) =>
 
 /** lambda name per unit folder ('(root)' for a file at the root) */
 export const unitNames = (
-  units: { id: string; spec: { function?: { name?: string } } }[],
+  units: {
+    id: string;
+    variant?: string;
+    spec: { function?: { name?: string } };
+  }[],
 ) =>
   new Map(
     units.map((u) => [
-      u.id,
+      unitKey(u),
       u.spec.function?.name ?? (u.id === '.' ? '(root)' : u.id),
     ]),
   );
