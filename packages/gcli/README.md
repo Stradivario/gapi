@@ -312,11 +312,11 @@ gcli cluster:pod-placement -c <id> --mode fill    # pack machines (spread = empt
 gcli cluster:autoscale -c <id> --no-replace-cheaper
 ```
 
-A recommendation applied with `lambda:resources` is printed as
-`scaleOptions` lines for `lambforge.yaml`: a deploy from the yaml sets the
-reserved CPU / memory, so put them there. `--auto` lambdas are re-sized by
-the platform at most once a day; a later deploy from the yaml sets the yaml
-values again until the next automatic change. Every command takes `--json`.
+A recommendation is printed as `scaleOptions` lines for `lambforge.yaml`: a
+deploy from the yaml sets the reserved CPU / memory, so put them there - or
+use `--auto`: the platform then sizes the lambda itself (at most once a day)
+and a deploy keeps its sized `minCpu` / `minMemory` (never above the yaml's
+max), taking everything else from the yaml. Every command takes `--json`.
 
 ### RabbitMQ Brokers
 

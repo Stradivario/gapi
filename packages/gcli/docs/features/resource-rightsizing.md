@@ -17,7 +17,9 @@ Canonical doc: graphql-server-lambdas `docs/features/resource-rightsizing.md`
 Code: `src/services/cost-optimization.ts` (`CostAPI`), `src/commands/cost/`
 (`parse.ts` is pure: days, hibernation flags, rows, the lambforge.yaml
 snippet, plugin limits kept). `lambda:resources` never applies a
-recommendation server-side: a deploy from lambforge.yaml would set the yaml
-values again, so it prints the `scaleOptions` lines instead.
+recommendation server-side: a deploy from lambforge.yaml sets the yaml
+values, so it prints the `scaleOptions` lines instead. Lambdas in `--auto`
+keep their sized minCpu / minMemory through a deploy (server side,
+`keepAutoSized` in graphql-server-lambdas).
 
 Test: `npx jest --coverage=false test/cost-commands.spec.ts`.
