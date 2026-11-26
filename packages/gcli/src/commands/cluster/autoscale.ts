@@ -27,6 +27,8 @@ export interface AutoscaleOptions extends ClusterTargetOptions {
   mode?: string;
   /** commander: --consolidation / --no-consolidation */
   consolidation?: boolean;
+  /** commander: --replace-cheaper / --no-replace-cheaper */
+  replaceCheaper?: boolean;
   minNodeAge?: string;
 }
 
@@ -86,6 +88,9 @@ export const toAutoscaleInput = (
   if (cmd.consolidation !== undefined) {
     input.consolidation = cmd.consolidation;
   }
+  if (cmd.replaceCheaper !== undefined) {
+    input.replaceCheaper = cmd.replaceCheaper;
+  }
   if (cmd.serverTypes !== undefined) {
     // "" (or "none") clears the list: workers use the cluster's own type
     input.serverTypes = ['', 'none'].includes(cmd.serverTypes.trim())
@@ -97,7 +102,7 @@ export const toAutoscaleInput = (
   }
   if (!Object.keys(input).length) {
     throw new Error(
-      'Nothing to change: pass --enable/--disable and/or --mode, --consolidation/--no-consolidation, --minNodeAge, --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)',
+      'Nothing to change: pass --enable/--disable and/or --mode, --consolidation/--no-consolidation, --replace-cheaper/--no-replace-cheaper, --minNodeAge, --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)',
     );
   }
   return input;
@@ -117,6 +122,8 @@ export default async (cmd: AutoscaleOptions) => {
       workers: cluster.topology?.workers,
       enabled: a.enabled,
       mode: a.mode,
+      consolidation: a.consolidation,
+      replaceCheaper: a.replaceCheaper,
       profile: a.scalingProfile,
       workerTypes: a.serverTypes?.length
         ? a.serverTypes.join(',')

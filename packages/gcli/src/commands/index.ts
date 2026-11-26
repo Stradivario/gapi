@@ -1,6 +1,7 @@
 import { registerAuthCommands } from './auth';
 import { buildCommands } from './build';
 import { registerClusterCommands } from './cluster';
+import { registerCostCommands } from './cost';
 import { registerDomainCommands } from './domain';
 import { registerEnvironmentCommands } from './environment';
 import { registerLambdaCommands } from './lambda';
@@ -34,4 +35,5 @@ export const commands = [
   registerWorkflowCommands,
   registerDomainCommands,
   registerRepoCommands,
+  registerCostCommands,
 ];

@@ -291,6 +291,14 @@ export function registerClusterCommands(program: Command) {
     )
     .option('--no-consolidation', 'pods mode: never remove workers by itself')
     .option(
+      '--replace-cheaper',
+      'pods mode: swap a worker for one cheaper machine that holds all its pods (default on)',
+    )
+    .option(
+      '--no-replace-cheaper',
+      'pods mode: never replace a worker by a cheaper type',
+    )
+    .option(
       '--minNodeAge <minutes>',
       'pods mode: never remove a worker younger than this (5-1440)',
     )

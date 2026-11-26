@@ -15,11 +15,11 @@ var __export = (target, all) => {
   for (var name2 in all)
     __defProp(target, name2, { get: all[name2], enumerable: true });
 };
-var __copyProps = (to, from18, except, desc) => {
-  if (from18 && typeof from18 === "object" || typeof from18 === "function") {
-    for (let key of __getOwnPropNames(from18))
+var __copyProps = (to, from19, except, desc) => {
+  if (from19 && typeof from19 === "object" || typeof from19 === "function") {
+    for (let key of __getOwnPropNames(from19))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from18[key], enumerable: !(desc = __getOwnPropDesc(from18, key)) || desc.enumerable });
+        __defProp(to, key, { get: () => from19[key], enumerable: !(desc = __getOwnPropDesc(from19, key)) || desc.enumerable });
   }
   return to;
 };
@@ -8917,9 +8917,9 @@ var require_Subscription = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9100,9 +9100,9 @@ var require_timeoutProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9860,9 +9860,9 @@ var require_animationFrameProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10460,9 +10460,9 @@ var require_intervalProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10669,9 +10669,9 @@ var require_immediateProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12233,10 +12233,10 @@ var require_from = __commonJS({
     exports2.from = void 0;
     var scheduled_1 = require_scheduled();
     var innerFrom_1 = require_innerFrom();
-    function from18(input, scheduler) {
+    function from19(input, scheduler) {
       return scheduler ? scheduled_1.scheduled(input, scheduler) : innerFrom_1.innerFrom(input);
     }
-    exports2.from = from18;
+    exports2.from = from19;
   }
 });
 
@@ -12391,7 +12391,7 @@ var require_lastValueFrom = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.lastValueFrom = void 0;
     var EmptyError_1 = require_EmptyError();
-    function lastValueFrom70(source, config2) {
+    function lastValueFrom75(source, config2) {
       var hasConfig = typeof config2 === "object";
       return new Promise(function(resolve5, reject) {
         var _hasValue = false;
@@ -12414,7 +12414,7 @@ var require_lastValueFrom = __commonJS({
         });
       });
     }
-    exports2.lastValueFrom = lastValueFrom70;
+    exports2.lastValueFrom = lastValueFrom75;
   }
 });
 
@@ -12591,7 +12591,7 @@ var require_map = __commonJS({
     exports2.map = void 0;
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function map39(project, thisArg) {
+    function map42(project, thisArg) {
       return lift_1.operate(function(source, subscriber) {
         var index = 0;
         source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, function(value) {
@@ -12599,7 +12599,7 @@ var require_map = __commonJS({
         }));
       });
     }
-    exports2.map = map39;
+    exports2.map = map42;
   }
 });
 
@@ -12624,9 +12624,9 @@ var require_mapOneOrManyArgs = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12666,9 +12666,9 @@ var require_bindCallbackInternals = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -13800,9 +13800,9 @@ var require_zip = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14430,9 +14430,9 @@ var require_combineLatest2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14478,9 +14478,9 @@ var require_combineLatestWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14552,9 +14552,9 @@ var require_concat2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14598,9 +14598,9 @@ var require_concatWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15091,9 +15091,9 @@ var require_endWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15638,9 +15638,9 @@ var require_merge2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15685,9 +15685,9 @@ var require_mergeWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15770,9 +15770,9 @@ var require_onErrorResumeNextWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15954,9 +15954,9 @@ var require_raceWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16352,9 +16352,9 @@ var require_share = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16648,7 +16648,7 @@ var require_switchMap = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function switchMap62(project, resultSelector) {
+    function switchMap67(project, resultSelector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSubscriber = null;
         var index = 0;
@@ -16672,7 +16672,7 @@ var require_switchMap = __commonJS({
         }));
       });
     }
-    exports2.switchMap = switchMap62;
+    exports2.switchMap = switchMap67;
   }
 });
 
@@ -16792,7 +16792,7 @@ var require_tap = __commonJS({
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var identity_1 = require_identity();
-    function tap62(observerOrNext, error48, complete) {
+    function tap67(observerOrNext, error48, complete) {
       var tapObserver = isFunction_1.isFunction(observerOrNext) || error48 || complete ? { next: observerOrNext, error: error48, complete } : observerOrNext;
       return tapObserver ? lift_1.operate(function(source, subscriber) {
         var _a2;
@@ -16821,7 +16821,7 @@ var require_tap = __commonJS({
         }));
       }) : identity_1.identity;
     }
-    exports2.tap = tap62;
+    exports2.tap = tap67;
   }
 });
 
@@ -17354,9 +17354,9 @@ var require_withLatestFrom = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17440,9 +17440,9 @@ var require_zip2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17483,9 +17483,9 @@ var require_zipWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -18251,9 +18251,9 @@ var require_race2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
-      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from18[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from19) {
+      for (var i2 = 0, il = from19.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from19[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -19972,7 +19972,7 @@ var require_index_node_cjs = __commonJS({
       }
       return true;
     }
-    function map39(obj, fn, contextObj) {
+    function map42(obj, fn, contextObj) {
       var res = {};
       for (var key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -20462,7 +20462,7 @@ var require_index_node_cjs = __commonJS({
     exports2.isValidTimestamp = isValidTimestamp;
     exports2.issuedAtTime = issuedAtTime;
     exports2.jsonEval = jsonEval;
-    exports2.map = map39;
+    exports2.map = map42;
     exports2.querystring = querystring;
     exports2.querystringDecode = querystringDecode;
     exports2.safeGet = safeGet;
@@ -31385,7 +31385,7 @@ var require_from2 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors().codes.ERR_INVALID_ARG_TYPE;
-    function from18(Readable2, iterable, opts) {
+    function from19(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -31424,7 +31424,7 @@ var require_from2 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from18;
+    module2.exports = from19;
   }
 });
 
@@ -31468,7 +31468,7 @@ var require_stream_readable = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from18;
+    var from19;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -32150,10 +32150,10 @@ var require_stream_readable = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from18 === void 0) {
-          from18 = require_from2();
+        if (from19 === void 0) {
+          from19 = require_from2();
         }
-        return from18(Readable2, iterable, opts);
+        return from19(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -32333,8 +32333,8 @@ var require_pipeline = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from18, to) {
-      return from18.pipe(to);
+    function pipe2(from19, to) {
+      return from19.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -34112,7 +34112,7 @@ var require_from3 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors2().codes.ERR_INVALID_ARG_TYPE;
-    function from18(Readable2, iterable, opts) {
+    function from19(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -34151,7 +34151,7 @@ var require_from3 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from18;
+    module2.exports = from19;
   }
 });
 
@@ -34195,7 +34195,7 @@ var require_stream_readable2 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from18;
+    var from19;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -34877,10 +34877,10 @@ var require_stream_readable2 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from18 === void 0) {
-          from18 = require_from3();
+        if (from19 === void 0) {
+          from19 = require_from3();
         }
-        return from18(Readable2, iterable, opts);
+        return from19(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -35060,8 +35060,8 @@ var require_pipeline2 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from18, to) {
-      return from18.pipe(to);
+    function pipe2(from19, to) {
+      return from19.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -35484,16 +35484,16 @@ var require_encoder = __commonJS({
       }
       return bl(acc);
     }
-    function encodeMap(map39, options, encode3) {
-      const acc = [getHeader(map39.size, 128, 222)];
-      const keys = [...map39.keys()];
+    function encodeMap(map42, options, encode3) {
+      const acc = [getHeader(map42.size, 128, 222)];
+      const keys = [...map42.keys()];
       if (!options.preferMap) {
         if (keys.every((item) => typeof item === "string")) {
           console.warn("Map with string only keys will be deserialized as an object!");
         }
       }
       keys.forEach((key) => {
-        acc.push(encode3(key), encode3(map39.get(key)));
+        acc.push(encode3(key), encode3(map42.get(key)));
       });
       return bl(acc);
     }
@@ -36058,6 +36058,7 @@ serverTypes
 scaleUpStep
 mode
 consolidation
+replaceCheaper
 minNodeAgeMinutes
 pools {
   name
@@ -38965,14 +38966,14 @@ function __spreadArrays() {
       r2[k] = a[j];
   return r2;
 }
-function __spreadArray(to, from18, pack) {
-  if (pack || arguments.length === 2) for (var i2 = 0, l = from18.length, ar; i2 < l; i2++) {
-    if (ar || !(i2 in from18)) {
-      if (!ar) ar = Array.prototype.slice.call(from18, 0, i2);
-      ar[i2] = from18[i2];
+function __spreadArray(to, from19, pack) {
+  if (pack || arguments.length === 2) for (var i2 = 0, l = from19.length, ar; i2 < l; i2++) {
+    if (ar || !(i2 in from19)) {
+      if (!ar) ar = Array.prototype.slice.call(from19, 0, i2);
+      ar[i2] = from19[i2];
     }
   }
-  return to.concat(ar || Array.prototype.slice.call(from18));
+  return to.concat(ar || Array.prototype.slice.call(from19));
 }
 function __await(v) {
   return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -39991,22 +39992,22 @@ var require_source_map_generator = __commonJS({
       }, this);
     };
     SourceMapGenerator.prototype.toJSON = function SourceMapGenerator_toJSON() {
-      var map39 = {
+      var map42 = {
         version: this._version,
         sources: this._sources.toArray(),
         names: this._names.toArray(),
         mappings: this._serializeMappings()
       };
       if (this._file != null) {
-        map39.file = this._file;
+        map42.file = this._file;
       }
       if (this._sourceRoot != null) {
-        map39.sourceRoot = this._sourceRoot;
+        map42.sourceRoot = this._sourceRoot;
       }
       if (this._sourcesContents) {
-        map39.sourcesContent = this._generateSourcesContent(map39.sources, map39.sourceRoot);
+        map42.sourcesContent = this._generateSourcesContent(map42.sources, map42.sourceRoot);
       }
-      return map39;
+      return map42;
     };
     SourceMapGenerator.prototype.toString = function SourceMapGenerator_toString() {
       return JSON.stringify(this.toJSON());
@@ -40899,7 +40900,7 @@ var require_source_node = __commonJS({
         line: 1,
         column: 0
       };
-      var map39 = new SourceMapGenerator(aArgs);
+      var map42 = new SourceMapGenerator(aArgs);
       var sourceMappingActive = false;
       var lastOriginalSource = null;
       var lastOriginalLine = null;
@@ -40909,7 +40910,7 @@ var require_source_node = __commonJS({
         generated.code += chunk;
         if (original.source !== null && original.line !== null && original.column !== null) {
           if (lastOriginalSource !== original.source || lastOriginalLine !== original.line || lastOriginalColumn !== original.column || lastOriginalName !== original.name) {
-            map39.addMapping({
+            map42.addMapping({
               source: original.source,
               original: {
                 line: original.line,
@@ -40928,7 +40929,7 @@ var require_source_node = __commonJS({
           lastOriginalName = original.name;
           sourceMappingActive = true;
         } else if (sourceMappingActive) {
-          map39.addMapping({
+          map42.addMapping({
             generated: {
               line: generated.line,
               column: generated.column
@@ -40945,7 +40946,7 @@ var require_source_node = __commonJS({
               lastOriginalSource = null;
               sourceMappingActive = false;
             } else if (sourceMappingActive) {
-              map39.addMapping({
+              map42.addMapping({
                 source: original.source,
                 original: {
                   line: original.line,
@@ -40964,9 +40965,9 @@ var require_source_node = __commonJS({
         }
       });
       this.walkSourceContents(function(sourceFile, sourceContent) {
-        map39.setSourceContent(sourceFile, sourceContent);
+        map42.setSourceContent(sourceFile, sourceContent);
       });
-      return { code: generated.code, map: map39 };
+      return { code: generated.code, map: map42 };
     };
     exports2.SourceNode = SourceNode;
   }
@@ -41496,11 +41497,11 @@ var require_typescript = __commonJS({
         for (var name2 in all)
           __defProp2(target, name2, { get: all[name2], enumerable: true });
       };
-      var __copyProps2 = (to, from18, except, desc) => {
-        if (from18 && typeof from18 === "object" || typeof from18 === "function") {
-          for (let key of __getOwnPropNames2(from18))
+      var __copyProps2 = (to, from19, except, desc) => {
+        if (from19 && typeof from19 === "object" || typeof from19 === "function") {
+          for (let key of __getOwnPropNames2(from19))
             if (!__hasOwnProp2.call(to, key) && key !== except)
-              __defProp2(to, key, { get: () => from18[key], enumerable: !(desc = __getOwnPropDesc2(from18, key)) || desc.enumerable });
+              __defProp2(to, key, { get: () => from19[key], enumerable: !(desc = __getOwnPropDesc2(from19, key)) || desc.enumerable });
         }
         return to;
       };
@@ -43306,7 +43307,7 @@ var require_typescript = __commonJS({
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map39,
+        map: () => map42,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -43950,7 +43951,7 @@ var require_typescript = __commonJS({
       function clear(array2) {
         array2.length = 0;
       }
-      function map39(array2, f3) {
+      function map42(array2, f3) {
         let result;
         if (array2 !== void 0) {
           result = [];
@@ -44344,14 +44345,14 @@ var require_typescript = __commonJS({
       function toOffset(array2, offset) {
         return offset < 0 ? array2.length + offset : offset;
       }
-      function addRange(to, from18, start3, end) {
-        if (from18 === void 0 || from18.length === 0) return to;
-        if (to === void 0) return from18.slice(start3, end);
-        start3 = start3 === void 0 ? 0 : toOffset(from18, start3);
-        end = end === void 0 ? from18.length : toOffset(from18, end);
-        for (let i2 = start3; i2 < end && i2 < from18.length; i2++) {
-          if (from18[i2] !== void 0) {
-            to.push(from18[i2]);
+      function addRange(to, from19, start3, end) {
+        if (from19 === void 0 || from19.length === 0) return to;
+        if (to === void 0) return from19.slice(start3, end);
+        start3 = start3 === void 0 ? 0 : toOffset(from19, start3);
+        end = end === void 0 ? from19.length : toOffset(from19, end);
+        for (let i2 = start3; i2 < end && i2 < from19.length; i2++) {
+          if (from19[i2] !== void 0) {
+            to.push(from19[i2]);
           }
         }
         return to;
@@ -45479,7 +45480,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
         }
         Debug2.getFunctionName = getFunctionName;
         function formatSymbol(symbol2) {
-          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map39(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
+          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map42(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
         }
         Debug2.formatSymbol = formatSymbol;
         function formatEnum(value = 0, enumObject, isFlags) {
@@ -45905,7 +45906,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
               case 1:
                 return zipWith(
                   this.sources,
-                  this.targets || map39(this.sources, () => "any"),
+                  this.targets || map42(this.sources, () => "any"),
                   (s2, t2) => `${s2.__debugTypeToString()} -> ${typeof t2 === "string" ? t2 : t2.__debugTypeToString()}`
                 ).join(", ");
               case 2:
@@ -46540,10 +46541,10 @@ ${lanes.join("\n")}
         }
       }
       function formatDisjunction(alternatives) {
-        return map39(alternatives, formatAlternative).join(" || ") || "*";
+        return map42(alternatives, formatAlternative).join(" || ") || "*";
       }
       function formatAlternative(comparators) {
-        return map39(comparators, formatComparator).join(" ");
+        return map42(comparators, formatComparator).join(" ");
       }
       function formatComparator(comparator) {
         return `${comparator.operator}${comparator.operand}`;
@@ -50860,8 +50861,8 @@ ${lanes.join("\n")}
         const canonicalDirectoryName = getCanonicalFileName(directoryName);
         return startsWith(canonicalFileName, canonicalDirectoryName + "/") || startsWith(canonicalFileName, canonicalDirectoryName + "\\");
       }
-      function getPathComponentsRelativeTo(from18, to, stringEqualityComparer, getCanonicalFileName) {
-        const fromComponents = reducePathComponents(getPathComponents(from18));
+      function getPathComponentsRelativeTo(from19, to, stringEqualityComparer, getCanonicalFileName) {
+        const fromComponents = reducePathComponents(getPathComponents(from19));
         const toComponents = reducePathComponents(getPathComponents(to));
         let start3;
         for (start3 = 0; start3 < fromComponents.length && start3 < toComponents.length; start3++) {
@@ -50897,8 +50898,8 @@ ${lanes.join("\n")}
           false
         );
       }
-      function getRelativePathFromFile(from18, to, getCanonicalFileName) {
-        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from18), to, getCanonicalFileName));
+      function getRelativePathFromFile(from19, to, getCanonicalFileName) {
+        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from19), to, getCanonicalFileName));
       }
       function getRelativePathToDirectoryOrUrl(directoryPathOrUrl, relativeOrAbsolutePath, currentDirectory, getCanonicalFileName, isAbsolutePathAnUrl) {
         const pathComponents2 = getPathComponentsRelativeTo(
@@ -58449,15 +58450,15 @@ ${lanes.join("\n")}
         if (!nodeArray || isArray(child) || !isElement(child)) return false;
         return contains(nodeArray, child);
       }
-      function insertStatementsAfterPrologue(to, from18, isPrologueDirective2) {
-        if (from18 === void 0 || from18.length === 0) return to;
+      function insertStatementsAfterPrologue(to, from19, isPrologueDirective2) {
+        if (from19 === void 0 || from19.length === 0) return to;
         let statementIndex = 0;
         for (; statementIndex < to.length; ++statementIndex) {
           if (!isPrologueDirective2(to[statementIndex])) {
             break;
           }
         }
-        to.splice(statementIndex, 0, ...from18);
+        to.splice(statementIndex, 0, ...from19);
         return to;
       }
       function insertStatementAfterPrologue(to, statement, isPrologueDirective2) {
@@ -58474,11 +58475,11 @@ ${lanes.join("\n")}
       function isAnyPrologueDirective(node) {
         return isPrologueDirective(node) || !!(getEmitFlags(node) & 2097152);
       }
-      function insertStatementsAfterStandardPrologue(to, from18) {
-        return insertStatementsAfterPrologue(to, from18, isPrologueDirective);
+      function insertStatementsAfterStandardPrologue(to, from19) {
+        return insertStatementsAfterPrologue(to, from19, isPrologueDirective);
       }
-      function insertStatementsAfterCustomPrologue(to, from18) {
-        return insertStatementsAfterPrologue(to, from18, isAnyPrologueDirective);
+      function insertStatementsAfterCustomPrologue(to, from19) {
+        return insertStatementsAfterPrologue(to, from19, isAnyPrologueDirective);
       }
       function insertStatementAfterStandardPrologue(to, statement) {
         return insertStatementAfterPrologue(to, statement, isPrologueDirective);
@@ -64470,7 +64471,7 @@ ${lanes.join("\n")}
         currentDirectory = normalizePath(currentDirectory);
         const absolutePath = combinePaths(currentDirectory, path2);
         return {
-          includeFilePatterns: map39(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
+          includeFilePatterns: map42(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
           includeFilePattern: getRegularExpressionForWildcard(includes, absolutePath, "files"),
           includeDirectoryPattern: getRegularExpressionForWildcard(includes, absolutePath, "directories"),
           excludePattern: getRegularExpressionForWildcard(excludes, absolutePath, "exclude"),
@@ -66980,7 +66981,7 @@ ${lanes.join("\n")}
           if (isObjectBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createObjectLiteralExpression(map39(node.elements, convertToObjectAssignmentElement)),
+                factory2.createObjectLiteralExpression(map42(node.elements, convertToObjectAssignmentElement)),
                 node
               ),
               node
@@ -66992,7 +66993,7 @@ ${lanes.join("\n")}
           if (isArrayBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createArrayLiteralExpression(map39(node.elements, convertToArrayAssignmentElement)),
+                factory2.createArrayLiteralExpression(map42(node.elements, convertToArrayAssignmentElement)),
                 node
               ),
               node
@@ -72957,13 +72958,13 @@ ${lanes.join("\n")}
             [cooked, raw]
           );
         }
-        function createSpreadArrayHelper(to, from18, packFrom) {
+        function createSpreadArrayHelper(to, from19, packFrom) {
           context.requestEmitHelper(spreadArrayHelper);
           return factory2.createCallExpression(
             getUnscopedHelperName("__spreadArray"),
             /*typeArguments*/
             void 0,
-            [to, from18, packFrom ? immutableTrue() : immutableFalse()]
+            [to, from19, packFrom ? immutableTrue() : immutableFalse()]
           );
         }
         function createPropKeyHelper(expr) {
@@ -74814,7 +74815,7 @@ ${lanes.join("\n")}
               if (some(helperNames)) {
                 helperNames.sort(compareStringsCaseSensitive);
                 const namedBindings = nodeFactory.createNamedImports(
-                  map39(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
+                  map42(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
                     /*isTypeOnly*/
                     false,
                     /*propertyName*/
@@ -85017,7 +85018,7 @@ ${lanes.join("\n")}
               break;
             }
             case "amd-dependency": {
-              context.amdDependencies = map39(
+              context.amdDependencies = map42(
                 toArray6(entryOrList),
                 (x2) => ({ name: x2.arguments.name, path: x2.arguments.path })
               );
@@ -87366,7 +87367,7 @@ ${lanes.join("\n")}
       function convertToTSConfig(configParseResult, configFileName, host) {
         var _a2, _b, _c;
         const getCanonicalFileName = createGetCanonicalFileName(host.useCaseSensitiveFileNames);
-        const files = map39(
+        const files = map42(
           filter6(
             configParseResult.fileNames,
             !((_b = (_a2 = configParseResult.options.configFile) == null ? void 0 : _a2.configFileSpecs) == null ? void 0 : _b.validatedIncludeSpecs) ? returnTrue : matchesSpecs(
@@ -87396,7 +87397,7 @@ ${lanes.join("\n")}
             version: void 0
           },
           watchOptions: watchOptionMap && optionMapToObject(watchOptionMap),
-          references: map39(configParseResult.projectReferences, (r2) => ({ ...r2, path: r2.originalPath ? r2.originalPath : "", originalPath: void 0 })),
+          references: map42(configParseResult.projectReferences, (r2) => ({ ...r2, path: r2.originalPath ? r2.originalPath : "", originalPath: void 0 })),
           files: length(files) ? files : void 0,
           ...((_c = configParseResult.options.configFile) == null ? void 0 : _c.configFileSpecs) ? {
             include: filterSameAsDefaultInclude(configParseResult.options.configFile.configFileSpecs.validatedIncludeSpecs),
@@ -88085,7 +88086,7 @@ ${lanes.join("\n")}
             const setPropertyInResultIfNotUndefined = (propertyName) => {
               if (ownConfig.raw[propertyName]) return;
               if (extendsRaw[propertyName]) {
-                result[propertyName] = map39(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
+                result[propertyName] = map42(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
                   relativeDifference || (relativeDifference = convertToRelativePath(getDirectoryPath(extendedConfigPath), basePath, createGetCanonicalFileName(host.useCaseSensitiveFileNames))),
                   path2
                 ));
@@ -88394,7 +88395,7 @@ ${lanes.join("\n")}
         }
       }
       function convertJsonOptionOfListType(option, values, basePath, errors, propertyAssignment, valueExpression, sourceFile) {
-        return filter6(map39(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
+        return filter6(map42(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
       }
       var invalidTrailingRecursionPattern = /(?:^|\/)\*\*\/?$/;
       var wildcardDirectoryPattern = /^[^*?]*(?=\/[^/]*[*?])/;
@@ -88434,7 +88435,7 @@ ${lanes.join("\n")}
                   ".json"
                   /* Json */
                 ));
-                const includeFilePatterns = map39(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
+                const includeFilePatterns = map42(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
                 jsonOnlyIncludeRegexes = includeFilePatterns ? includeFilePatterns.map((pattern) => getRegexFromPattern(pattern, host.useCaseSensitiveFileNames)) : emptyArray;
               }
               const includeIndex = findIndex(jsonOnlyIncludeRegexes, (re) => re.test(file2));
@@ -95734,7 +95735,7 @@ ${lanes.join("\n")}
         }
         const normalizedSourcePaths = getPathsRelativeToRootDirs(sourceDirectory, rootDirs, getCanonicalFileName);
         const relativePaths = flatMap(normalizedSourcePaths, (sourcePath) => {
-          return map39(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
+          return map42(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
         });
         const shortest = min(relativePaths, compareNumberOfDirectorySeparators);
         if (!shortest) {
@@ -98779,7 +98780,7 @@ ${lanes.join("\n")}
               const exportedSymbol = exports22 ? find(symbolsToArray(exports22), (symbol2) => !!getSymbolIfSameReference(symbol2, localSymbol)) : void 0;
               const diagnostic = exportedSymbol ? error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_exported_as_2, moduleName, declarationName, symbolToString(exportedSymbol)) : error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_not_exported, moduleName, declarationName);
               if (localSymbol.declarations) {
-                addRelatedInfo(diagnostic, ...map39(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
+                addRelatedInfo(diagnostic, ...map42(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
               }
             }
           } else {
@@ -101560,7 +101561,7 @@ ${lanes.join("\n")}
               const types3 = type2.types;
               const templateHead = factory.createTemplateHead(texts[0]);
               const templateSpans = factory.createNodeArray(
-                map39(types3, (t2, i2) => factory.createTemplateLiteralTypeSpan(
+                map42(types3, (t2, i2) => factory.createTemplateLiteralTypeSpan(
                   typeToTypeNodeHelper(t2, context),
                   (i2 < types3.length - 1 ? factory.createTemplateMiddle : factory.createTemplateTail)(texts[i2 + 1])
                 ))
@@ -101929,7 +101930,7 @@ ${lanes.join("\n")}
               }
               const abstractSignatures = filter6(resolved.constructSignatures, (signature) => !!(signature.flags & 4));
               if (some(abstractSignatures)) {
-                const types3 = map39(abstractSignatures, getOrCreateTypeFromSignature);
+                const types3 = map42(abstractSignatures, getOrCreateTypeFromSignature);
                 const typeElementCount = resolved.callSignatures.length + (resolved.constructSignatures.length - abstractSignatures.length) + resolved.indexInfos.length + // exclude `prototype` when writing a class expression as a type literal, as per
                 // the logic in `createTypeNodesFromResolvedType`.
                 (context.flags & 2048 ? countWhere(resolved.properties, (p) => !(p.flags & 4194304)) : length(resolved.properties));
@@ -102147,7 +102148,7 @@ ${lanes.join("\n")}
                   const newComponents = filter6(indexInfo.components, (e2) => {
                     return !hasLateBindableName(e2);
                   });
-                  return map39(newComponents, (e2) => {
+                  return map42(newComponents, (e2) => {
                     trackComputedName(e2.name.expression, context2.enclosingDeclaration, context2);
                     return setTextRange2(
                       context2,
@@ -102956,7 +102957,7 @@ ${lanes.join("\n")}
             const parameterDeclaration = getEffectiveParameterDeclaration(parameterSymbol);
             const parameterType = getTypeOfSymbol(parameterSymbol);
             const parameterTypeNode = serializeTypeForDeclaration(context, parameterDeclaration, parameterType, parameterSymbol);
-            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map39(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
+            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map42(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
             const isRest = parameterDeclaration && isRestParameter(parameterDeclaration) || getCheckFlags(parameterSymbol) & 32768;
             const dotDotDotToken = isRest ? factory.createToken(
               26
@@ -103154,7 +103155,7 @@ ${lanes.join("\n")}
             let typeParameterNodes;
             const targetSymbol = getTargetSymbol(symbol2);
             if (targetSymbol.flags & (32 | 64 | 524288)) {
-              typeParameterNodes = factory.createNodeArray(map39(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
+              typeParameterNodes = factory.createNodeArray(map42(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
             }
             return typeParameterNodes;
           }
@@ -103179,7 +103180,7 @@ ${lanes.join("\n")}
                 const params = getTypeParametersOfClassOrInterface(
                   parentSymbol.flags & 2097152 ? resolveAlias(parentSymbol) : parentSymbol
                 );
-                typeParameterNodes = mapToTypeNodes(map39(params, (t2) => getMappedType(t2, nextSymbol.links.mapper)), context);
+                typeParameterNodes = mapToTypeNodes(map42(params, (t2) => getMappedType(t2, nextSymbol.links.mapper)), context);
               } else {
                 typeParameterNodes = typeParametersToTypeParameterDeclarations(symbol2, context);
               }
@@ -104002,7 +104003,7 @@ ${lanes.join("\n")}
             }
             function getNamesOfDeclaration(statement) {
               if (isVariableStatement(statement)) {
-                return filter6(map39(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
+                return filter6(map42(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
               }
               return filter6([getNameOfDeclaration(statement)], isIdentifierAndNotUndefined);
             }
@@ -104028,7 +104029,7 @@ ${lanes.join("\n")}
                           void 0,
                           /*isTypeOnly*/
                           false,
-                          factory.createNamedExports(map39(flatMap(excessExports, (e2) => getNamesOfDeclaration(e2)), (id) => factory.createExportSpecifier(
+                          factory.createNamedExports(map42(flatMap(excessExports, (e2) => getNamesOfDeclaration(e2)), (id) => factory.createExportSpecifier(
                             /*isTypeOnly*/
                             false,
                             /*propertyName*/
@@ -104448,7 +104449,7 @@ ${lanes.join("\n")}
               var _a22;
               const aliasType = getDeclaredTypeOfTypeAlias(symbol2);
               const typeParams = getSymbolLinks(symbol2).typeParameters;
-              const typeParamDecls = map39(typeParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map42(typeParams, (p) => typeParameterToDeclaration(p, context));
               const jsdocAliasDecl = (_a22 = symbol2.declarations) == null ? void 0 : _a22.find(isJSDocTypeAlias);
               const commentText = getTextOfJSDocComment(jsdocAliasDecl ? jsdocAliasDecl.comment || jsdocAliasDecl.parent.comment : void 0);
               const restoreFlags = saveRestoreFlags(context);
@@ -104479,7 +104480,7 @@ ${lanes.join("\n")}
               context.approximateLength += 14 + internalSymbolName.length;
               const interfaceType = getDeclaredTypeOfClassOrInterface(symbol2);
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map39(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map42(localParams, (p) => typeParameterToDeclaration(p, context));
               const baseTypes = getBaseTypes(interfaceType);
               const baseType = length(baseTypes) ? getIntersectionType(baseTypes) : void 0;
               const members = serializePropertySymbolsForClassOrInterface(
@@ -104792,7 +104793,7 @@ ${lanes.join("\n")}
                 addingDeclare = oldAddingDeclare;
                 const declarations = results;
                 results = oldResults;
-                const defaultReplaced = map39(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
+                const defaultReplaced = map42(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
                   /*modifiers*/
                   void 0,
                   /*isTypeOnly*/
@@ -104811,7 +104812,7 @@ ${lanes.join("\n")}
                   d,
                   32
                   /* Export */
-                )) ? map39(defaultReplaced, removeExportModifier) : defaultReplaced;
+                )) ? map42(defaultReplaced, removeExportModifier) : defaultReplaced;
                 fakespace = factory.updateModuleDeclaration(
                   fakespace,
                   fakespace.modifiers,
@@ -104859,7 +104860,7 @@ ${lanes.join("\n")}
                 }
                 return cleanup(factory.createExpressionWithTypeArguments(
                   expr,
-                  map39(e2.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
+                  map42(e2.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
                 ));
                 function cleanup(result2) {
                   context.enclosingDeclaration = oldEnclosing;
@@ -104878,7 +104879,7 @@ ${lanes.join("\n")}
               const oldEnclosing = context.enclosingDeclaration;
               context.enclosingDeclaration = originalDecl || oldEnclosing;
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map39(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map42(localParams, (p) => typeParameterToDeclaration(p, context));
               forEach(localParams, (p) => context.approximateLength += symbolName(p.symbol).length);
               const classType = getTypeWithThisArgument(getDeclaredTypeOfClassOrInterface(symbol2));
               const baseTypes = getBaseTypes(classType);
@@ -104889,7 +104890,7 @@ ${lanes.join("\n")}
               const staticBaseType = isClass ? getBaseConstructorTypeOfClass(staticType) : anyType2;
               context.approximateLength += (length(baseTypes) ? 8 : 0) + (length(implementsExpressions) ? 11 : 0);
               const heritageClauses = [
-                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map39(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
+                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map42(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
                 ...!length(implementsExpressions) ? [] : [factory.createHeritageClause(119, implementsExpressions)]
               ];
               const symbolProps = getNonInheritedProperties(classType, baseTypes, getPropertiesOfType(classType));
@@ -105718,7 +105719,7 @@ ${lanes.join("\n")}
               let typeArgs;
               let reference;
               if (t2.target && isSymbolAccessibleByFlags(t2.target.symbol, enclosingDeclaration, flags)) {
-                typeArgs = map39(getTypeArguments(t2), (t22) => typeToTypeNodeHelper(t22, context));
+                typeArgs = map42(getTypeArguments(t2), (t22) => typeToTypeNodeHelper(t22, context));
                 reference = symbolToExpression(
                   t2.target.symbol,
                   context,
@@ -106182,7 +106183,7 @@ ${lanes.join("\n")}
         }
         function getTypeOfPrototypeProperty(prototype) {
           const classType = getDeclaredTypeOfSymbol(getParentOfSymbol(prototype));
-          return classType.typeParameters ? createTypeReference(classType, map39(classType.typeParameters, (_2) => anyType2)) : classType;
+          return classType.typeParameters ? createTypeReference(classType, map42(classType.typeParameters, (_2) => anyType2)) : classType;
         }
         function getTypeOfPropertyOfType(type2, name2) {
           const prop = getPropertyOfType(type2, name2);
@@ -106230,7 +106231,7 @@ ${lanes.join("\n")}
           if (source.flags & 1048576) {
             return mapType2(source, (t2) => getRestType(t2, properties2, symbol2));
           }
-          let omitKeyType = getUnionType(map39(properties2, getLiteralTypeFromPropertyName));
+          let omitKeyType = getUnionType(map42(properties2, getLiteralTypeFromPropertyName));
           const spreadableProperties = [];
           const unspreadableToRestKeys = [];
           for (const prop of getPropertiesOfType(source)) {
@@ -106956,9 +106957,9 @@ ${lanes.join("\n")}
           if (elements.length === 0 || elements.length === 1 && restElement) {
             return languageVersion >= 2 ? createIterableType(anyType2) : anyArrayType;
           }
-          const elementTypes = map39(elements, (e2) => isOmittedExpression(e2) ? anyType2 : getTypeFromBindingElement(e2, includePatternInType, reportErrors2));
+          const elementTypes = map42(elements, (e2) => isOmittedExpression(e2) ? anyType2 : getTypeFromBindingElement(e2, includePatternInType, reportErrors2));
           const minLength = findLastIndex(elements, (e2) => !(e2 === restElement || isOmittedExpression(e2) || hasDefaultValue(e2)), elements.length - 1) + 1;
-          const elementFlags = map39(
+          const elementFlags = map42(
             elements,
             (e2, i2) => e2 === restElement ? 4 : i2 >= minLength ? 2 : 1
             /* Required */
@@ -107640,7 +107641,7 @@ ${lanes.join("\n")}
         }
         function getInstantiatedConstructorsForTypeArguments(type2, typeArgumentNodes, location) {
           const signatures = getConstructorsForTypeArguments(type2, typeArgumentNodes, location);
-          const typeArguments = map39(typeArgumentNodes, getTypeFromTypeNode);
+          const typeArguments = map42(typeArgumentNodes, getTypeFromTypeNode);
           return sameMap(signatures, (sig) => some(sig.typeParameters) ? getSignatureInstantiation(sig, typeArguments, isInJSFile(location)) : sig);
         }
         function getBaseConstructorTypeOfClass(type2) {
@@ -108471,14 +108472,14 @@ ${lanes.join("\n")}
             if (isTupleType(restType)) {
               return [expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol)];
             } else if (!skipUnionExpanding && restType.flags & 1048576 && every(restType.types, isTupleType)) {
-              return map39(restType.types, (t2) => expandSignatureParametersWithTupleMembers(t2, restIndex, restSymbol));
+              return map42(restType.types, (t2) => expandSignatureParametersWithTupleMembers(t2, restIndex, restSymbol));
             }
           }
           return [sig.parameters];
           function expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol) {
             const elementTypes = getTypeArguments(restType);
             const associatedNames = getUniqAssociatedNamesFromTupleType(restType, restSymbol);
-            const restParams = map39(elementTypes, (t2, i2) => {
+            const restParams = map42(elementTypes, (t2, i2) => {
               const name2 = associatedNames && associatedNames[i2] ? associatedNames[i2] : getParameterNameAtPosition(sig, restIndex + i2, restType);
               const flags = restType.target.elementFlags[i2];
               const checkFlags = flags & 12 ? 32768 : flags & 2 ? 16384 : 0;
@@ -108489,7 +108490,7 @@ ${lanes.join("\n")}
             return concatenate(sig.parameters.slice(0, restIndex), restParams);
           }
           function getUniqAssociatedNamesFromTupleType(type2, restSymbol) {
-            const names3 = map39(type2.target.labeledElementDeclarations, (labeledElement, i2) => getTupleElementLabel(labeledElement, i2, type2.target.elementFlags[i2], restSymbol));
+            const names3 = map42(type2.target.labeledElementDeclarations, (labeledElement, i2) => getTupleElementLabel(labeledElement, i2, type2.target.elementFlags[i2], restSymbol));
             if (names3) {
               const duplicates = [];
               const uniqueNames = /* @__PURE__ */ new Set();
@@ -108660,7 +108661,7 @@ ${lanes.join("\n")}
               if (signatures !== masterList) {
                 const signature = signatures[0];
                 Debug.assert(!!signature, "getUnionSignatures bails early on empty signature lists and should not have empty lists on second pass");
-                results = !!signature.typeParameters && some(results, (s2) => !!s2.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s2.typeParameters)) ? void 0 : map39(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
+                results = !!signature.typeParameters && some(results, (s2) => !!s2.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s2.typeParameters)) ? void 0 : map42(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
                 if (!results) {
                   break;
                 }
@@ -108783,7 +108784,7 @@ ${lanes.join("\n")}
             for (const info of sourceInfos) {
               const indexType = info.keyType;
               if (every(types3, (t2) => !!getIndexInfoOfType(t2, indexType))) {
-                result.push(createIndexInfo(indexType, getUnionType(map39(types3, (t2) => getIndexTypeOfType(t2, indexType))), some(types3, (t2) => getIndexInfoOfType(t2, indexType).isReadonly)));
+                result.push(createIndexInfo(indexType, getUnionType(map42(types3, (t2) => getIndexTypeOfType(t2, indexType))), some(types3, (t2) => getIndexInfoOfType(t2, indexType).isReadonly)));
               }
             }
             return result;
@@ -108791,12 +108792,12 @@ ${lanes.join("\n")}
           return emptyArray;
         }
         function resolveUnionTypeMembers(type2) {
-          const callSignatures = getUnionSignatures(map39(type2.types, (t2) => t2 === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
+          const callSignatures = getUnionSignatures(map42(type2.types, (t2) => t2 === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
             t2,
             0
             /* Call */
           )));
-          const constructSignatures = getUnionSignatures(map39(type2.types, (t2) => getSignaturesOfType(
+          const constructSignatures = getUnionSignatures(map42(type2.types, (t2) => getSignaturesOfType(
             t2,
             1
             /* Construct */
@@ -108813,7 +108814,7 @@ ${lanes.join("\n")}
             1
             /* Construct */
           ).length > 0);
-          const mixinFlags = map39(types3, isMixinConstructorType);
+          const mixinFlags = map42(types3, isMixinConstructorType);
           if (constructorTypeCount > 0 && constructorTypeCount === countWhere(mixinFlags, (b) => b)) {
             const firstMixinIndex = mixinFlags.indexOf(
               /*searchElement*/
@@ -108854,7 +108855,7 @@ ${lanes.join("\n")}
                 /* Construct */
               );
               if (signatures.length && mixinCount > 0) {
-                signatures = map39(signatures, (s2) => {
+                signatures = map42(signatures, (s2) => {
                   const clone22 = cloneSignature(s2);
                   clone22.resolvedReturnType = includeMixinType(getReturnTypeOfSignature(s2), types3, mixinFlags, i2);
                   return clone22;
@@ -109643,7 +109644,7 @@ ${lanes.join("\n")}
               return getBaseConstraint(getSubstitutionIntersection(t2));
             }
             if (isGenericTupleType(t2)) {
-              const newElements = map39(getElementTypes(t2), (v, i2) => {
+              const newElements = map42(getElementTypes(t2), (v, i2) => {
                 const constraint = v.flags & 262144 && t2.target.elementFlags[i2] & 8 && getBaseConstraint(v) || v;
                 return constraint !== v && everyType(constraint, (c) => isArrayOrTupleType(c) && !isGenericTupleType(c)) ? constraint : v;
               });
@@ -110079,7 +110080,7 @@ ${lanes.join("\n")}
               }
             }
           }
-          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map39(applicableInfos, (info) => info.type)), reduceLeft(
+          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map42(applicableInfos, (info) => info.type)), reduceLeft(
             applicableInfos,
             (isReadonly, info) => isReadonly && info.isReadonly,
             /*initial*/
@@ -110479,7 +110480,7 @@ ${lanes.join("\n")}
               return errorType;
             }
             let type2 = signature.target ? instantiateType(getReturnTypeOfSignature(signature.target), signature.mapper) : signature.compositeSignatures ? instantiateType(getUnionOrIntersectionType(
-              map39(signature.compositeSignatures, getReturnTypeOfSignature),
+              map42(signature.compositeSignatures, getReturnTypeOfSignature),
               signature.compositeKind,
               2
               /* Subtype */
@@ -110618,7 +110619,7 @@ ${lanes.join("\n")}
         function createCanonicalSignature(signature) {
           return getSignatureInstantiation(
             signature,
-            map39(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
+            map42(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
             isInJSFile(signature.declaration)
           );
         }
@@ -110629,8 +110630,8 @@ ${lanes.join("\n")}
               return signature.baseSignatureCache;
             }
             const typeEraser = createTypeEraser(typeParameters);
-            const baseConstraintMapper = createTypeMapper(typeParameters, map39(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
-            let baseConstraints = map39(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
+            const baseConstraintMapper = createTypeMapper(typeParameters, map42(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
+            let baseConstraints = map42(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
             for (let i2 = 0; i2 < typeParameters.length - 1; i2++) {
               baseConstraints = instantiateTypes(baseConstraints, baseConstraintMapper);
             }
@@ -110900,7 +110901,7 @@ ${lanes.join("\n")}
               return concatenate(type2.target.outerTypeParameters, (_a2 = type2.target.localTypeParameters) == null ? void 0 : _a2.map(() => errorType)) || emptyArray;
             }
             const node = type2.node;
-            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type2.target.outerTypeParameters, getEffectiveTypeArguments2(node, type2.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map39(node.elements, getTypeFromTypeNode);
+            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type2.target.outerTypeParameters, getEffectiveTypeArguments2(node, type2.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map42(node.elements, getTypeFromTypeNode);
             if (popTypeResolution()) {
               type2.resolvedTypeArguments ?? (type2.resolvedTypeArguments = type2.mapper ? instantiateTypes(typeArguments, type2.mapper) : typeArguments);
             } else {
@@ -111306,7 +111307,7 @@ ${lanes.join("\n")}
           return links.resolvedType;
         }
         function typeArgumentsFromTypeReferenceNode(node) {
-          return map39(node.typeArguments, getTypeFromTypeNode);
+          return map42(node.typeArguments, getTypeFromTypeNode);
         }
         function getTypeFromTypeQueryNode(node) {
           const links = getNodeLinks(node);
@@ -111779,8 +111780,8 @@ ${lanes.join("\n")}
           if (elementType) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const elementFlags = map39(node.elements, getTupleElementFlags);
-          return getTupleTargetType(elementFlags, readonly2, map39(node.elements, memberIfLabeledElementDeclaration));
+          const elementFlags = map42(node.elements, getTupleElementFlags);
+          return getTupleTargetType(elementFlags, readonly2, map42(node.elements, memberIfLabeledElementDeclaration));
         }
         function memberIfLabeledElementDeclaration(member) {
           return isNamedTupleMember(member) || isParameter(member) ? member : void 0;
@@ -111853,7 +111854,7 @@ ${lanes.join("\n")}
                 void 0
               );
             } else {
-              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map39(node.elements, getTypeFromTypeNode);
+              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map42(node.elements, getTypeFromTypeNode);
               links.resolvedType = createNormalizedTypeReference(target, elementTypes);
             }
           }
@@ -111863,7 +111864,7 @@ ${lanes.join("\n")}
           return isTypeOperatorNode(node) && node.operator === 148;
         }
         function createTupleType(elementTypes, elementFlags, readonly2 = false, namedMemberDeclarations = []) {
-          const tupleTarget = getTupleTargetType(elementFlags || map39(
+          const tupleTarget = getTupleTargetType(elementFlags || map42(
             elementTypes,
             (_2) => 1
             /* Required */
@@ -111874,7 +111875,7 @@ ${lanes.join("\n")}
           if (elementFlags.length === 1 && elementFlags[0] & 4) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const key = map39(elementFlags, (f3) => f3 & 1 ? "#" : f3 & 2 ? "?" : f3 & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map39(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
+          const key = map42(elementFlags, (f3) => f3 & 1 ? "#" : f3 & 2 ? "?" : f3 & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map42(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
           let type2 = tupleTypes.get(key);
           if (!type2) {
             tupleTypes.set(key, type2 = createTupleTargetType(elementFlags, readonly2, namedMemberDeclarations));
@@ -111949,7 +111950,7 @@ ${lanes.join("\n")}
           if (target.combinedFlags & 8) {
             const unionIndex = findIndex(elementTypes, (t2, i2) => !!(target.elementFlags[i2] & 8 && t2.flags & (131072 | 1048576)));
             if (unionIndex >= 0) {
-              return checkCrossProductUnion(map39(elementTypes, (t2, i2) => target.elementFlags[i2] & 8 ? t2 : unknownType2)) ? mapType2(elementTypes[unionIndex], (t2) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t2))) : errorType;
+              return checkCrossProductUnion(map42(elementTypes, (t2, i2) => target.elementFlags[i2] & 8 ? t2 : unknownType2)) ? mapType2(elementTypes[unionIndex], (t2) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t2))) : errorType;
             }
           }
           const expandedTypes = [];
@@ -112119,7 +112120,7 @@ ${lanes.join("\n")}
             const source = types3[i2];
             if (hasEmptyObject || source.flags & 469499904) {
               if (source.flags & 262144 && getBaseConstraintOrType(source).flags & 1048576) {
-                if (isTypeRelatedTo(source, getUnionType(map39(types3, (t2) => t2 === source ? neverType2 : t2)), strictSubtypeRelation)) {
+                if (isTypeRelatedTo(source, getUnionType(map42(types3, (t2) => t2 === source ? neverType2 : t2)), strictSubtypeRelation)) {
                   orderedRemoveItemAt(types3, i2);
                 }
                 continue;
@@ -112382,7 +112383,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            links.resolvedType = getUnionType(map39(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
+            links.resolvedType = getUnionType(map42(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
           }
           return links.resolvedType;
         }
@@ -112665,7 +112666,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            const types3 = map39(node.types, getTypeFromTypeNode);
+            const types3 = map42(node.types, getTypeFromTypeNode);
             const emptyIndex = types3.length === 2 ? types3.indexOf(emptyTypeLiteralType) : -1;
             const t2 = emptyIndex >= 0 ? types3[1 - emptyIndex] : unknownType2;
             const noSupertypeReduction = !!(t2.flags & (4 | 8 | 64) || t2.flags & 134217728 && isPatternLiteralType(t2));
@@ -112774,8 +112775,8 @@ ${lanes.join("\n")}
         }
         function getLiteralTypeFromProperties(type2, include, includeOrigin) {
           const origin = includeOrigin && (getObjectFlags(type2) & (3 | 4) || type2.aliasSymbol) ? createOriginIndexType(type2) : void 0;
-          const propertyTypes = map39(getPropertiesOfType(type2), (prop) => getLiteralTypeFromProperty(prop, include));
-          const indexKeyTypes = map39(getIndexInfosOfType(type2), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
+          const propertyTypes = map42(getPropertiesOfType(type2), (prop) => getLiteralTypeFromProperty(prop, include));
+          const indexKeyTypes = map42(getIndexInfosOfType(type2), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
           return getUnionType(
             concatenate(propertyTypes, indexKeyTypes),
             1,
@@ -112795,7 +112796,7 @@ ${lanes.join("\n")}
         }
         function getIndexType(type2, indexFlags = 0) {
           type2 = getReducedType(type2);
-          return isNoInferType(type2) ? getNoInferType(getIndexType(type2.baseType, indexFlags)) : shouldDeferIndexType(type2, indexFlags) ? getIndexTypeForGenericType(type2, indexFlags) : type2.flags & 1048576 ? getIntersectionType(map39(type2.types, (t2) => getIndexType(t2, indexFlags))) : type2.flags & 2097152 ? getUnionType(map39(type2.types, (t2) => getIndexType(t2, indexFlags))) : getObjectFlags(type2) & 32 ? getIndexTypeForMappedType(type2, indexFlags) : type2 === wildcardType ? wildcardType : type2.flags & 2 ? neverType2 : type2.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
+          return isNoInferType(type2) ? getNoInferType(getIndexType(type2.baseType, indexFlags)) : shouldDeferIndexType(type2, indexFlags) ? getIndexTypeForGenericType(type2, indexFlags) : type2.flags & 1048576 ? getIntersectionType(map42(type2.types, (t2) => getIndexType(t2, indexFlags))) : type2.flags & 2097152 ? getUnionType(map42(type2.types, (t2) => getIndexType(t2, indexFlags))) : getObjectFlags(type2) & 32 ? getIndexTypeForMappedType(type2, indexFlags) : type2 === wildcardType ? wildcardType : type2.flags & 2 ? neverType2 : type2.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
             type2,
             (indexFlags & 2 ? 128 : 402653316) | (indexFlags & 1 ? 0 : 296 | 12288),
             indexFlags === 0
@@ -112833,8 +112834,8 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             links.resolvedType = getTemplateLiteralType(
-              [node.head.text, ...map39(node.templateSpans, (span) => span.literal.text)],
-              map39(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
+              [node.head.text, ...map42(node.templateSpans, (span) => span.literal.text)],
+              map42(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
             );
           }
           return links.resolvedType;
@@ -112865,7 +112866,7 @@ ${lanes.join("\n")}
               return newTypes[0];
             }
           }
-          const id = `${getTypeListId(newTypes)}|${map39(newTexts, (t2) => t2.length).join(",")}|${newTexts.join("")}`;
+          const id = `${getTypeListId(newTypes)}|${map42(newTexts, (t2) => t2.length).join(",")}|${newTexts.join("")}`;
           let type2 = templateLiteralTypes.get(id);
           if (!type2) {
             templateLiteralTypes.set(id, type2 = createTemplateLiteralType(newTexts, newTypes));
@@ -113095,7 +113096,7 @@ ${lanes.join("\n")}
                   diagnostics.add(createDiagnosticForNode(accessExpression, Diagnostics.Property_0_does_not_exist_on_type_1, indexType.value, typeToString(objectType2)));
                   return undefinedType2;
                 } else if (indexType.flags & (8 | 4)) {
-                  const types3 = map39(objectType2.properties, (property) => {
+                  const types3 = map42(objectType2.properties, (property) => {
                     return getTypeOfSymbol(property);
                   });
                   return getUnionType(append(types3, undefinedType2));
@@ -113256,13 +113257,13 @@ ${lanes.join("\n")}
         }
         function distributeIndexOverObjectType(objectType2, indexType, writing) {
           if (objectType2.flags & 1048576 || objectType2.flags & 2097152 && !shouldDeferIndexType(objectType2)) {
-            const types3 = map39(objectType2.types, (t2) => getSimplifiedType(getIndexedAccessType(t2, indexType), writing));
+            const types3 = map42(objectType2.types, (t2) => getSimplifiedType(getIndexedAccessType(t2, indexType), writing));
             return objectType2.flags & 2097152 || writing ? getIntersectionType(types3) : getUnionType(types3);
           }
         }
         function distributeObjectOverIndexType(objectType2, indexType, writing) {
           if (indexType.flags & 1048576) {
-            const types3 = map39(indexType.types, (t2) => getSimplifiedType(getIndexedAccessType(objectType2, t2), writing));
+            const types3 = map42(indexType.types, (t2) => getSimplifiedType(getIndexedAccessType(objectType2, t2), writing));
             return writing ? getIntersectionType(types3) : getUnionType(types3);
           }
         }
@@ -113545,7 +113546,7 @@ ${lanes.join("\n")}
               const newRoot = newType.root;
               if (newRoot.outerTypeParameters) {
                 const typeParamMapper = combineTypeMappers(newType.mapper, newMapper);
-                const typeArguments = map39(newRoot.outerTypeParameters, (t2) => getMappedType(t2, typeParamMapper));
+                const typeArguments = map42(newRoot.outerTypeParameters, (t2) => getMappedType(t2, typeParamMapper));
                 const newRootMapper = createTypeMapper(newRoot.outerTypeParameters, typeArguments);
                 const newCheckType = newRoot.isDistributive ? getMappedType(newRoot.checkType, newRootMapper) : void 0;
                 if (!newCheckType || newCheckType === newRoot.checkType || !(newCheckType.flags & (1048576 | 131072))) {
@@ -114206,7 +114207,7 @@ ${lanes.join("\n")}
         }
         function createBackreferenceMapper(context, index) {
           const forwardInferences = context.inferences.slice(index);
-          return createTypeMapper(map39(forwardInferences, (i2) => i2.typeParameter), map39(forwardInferences, () => unknownType2));
+          return createTypeMapper(map42(forwardInferences, (i2) => i2.typeParameter), map42(forwardInferences, () => unknownType2));
         }
         function createOuterReturnMapper(context) {
           return context.outerReturnMapper ?? (context.outerReturnMapper = mergeTypeMappers(context.returnMapper, cloneInferenceContext(context).mapper));
@@ -114237,7 +114238,7 @@ ${lanes.join("\n")}
         function instantiateSignature(signature, mapper, eraseTypeParameters) {
           let freshTypeParameters;
           if (signature.typeParameters && !eraseTypeParameters) {
-            freshTypeParameters = map39(signature.typeParameters, cloneTypeParameter);
+            freshTypeParameters = map42(signature.typeParameters, cloneTypeParameter);
             mapper = combineTypeMappers(createTypeMapper(signature.typeParameters, freshTypeParameters), mapper);
             for (const tp of freshTypeParameters) {
               tp.mapper = mapper;
@@ -114309,7 +114310,7 @@ ${lanes.join("\n")}
           }
           if (typeParameters.length) {
             const combinedMapper = combineTypeMappers(type2.mapper, mapper);
-            const typeArguments = map39(typeParameters, (t2) => getMappedType(t2, combinedMapper));
+            const typeArguments = map42(typeParameters, (t2) => getMappedType(t2, combinedMapper));
             const newAliasSymbol = aliasSymbol || type2.aliasSymbol;
             const newAliasTypeArguments = aliasSymbol ? aliasTypeArguments : instantiateTypes(type2.aliasTypeArguments, mapper);
             const id = getTypeListId(typeArguments) + getAliasId(newAliasSymbol, newAliasTypeArguments);
@@ -114421,7 +114422,7 @@ ${lanes.join("\n")}
                   return instantiateMappedTupleType(t2, type2, typeVariable, mapper);
                 }
                 if (isArrayOrTupleOrIntersection(t2)) {
-                  return getIntersectionType(map39(t2.types, instantiateConstituent));
+                  return getIntersectionType(map42(t2.types, instantiateConstituent));
                 }
               }
               return instantiateAnonymousType(type2, prependTypeMapping(typeVariable, t2, mapper));
@@ -114436,12 +114437,12 @@ ${lanes.join("\n")}
           const elementFlags = tupleType2.target.elementFlags;
           const fixedLength = tupleType2.target.fixedLength;
           const fixedMapper = fixedLength ? prependTypeMapping(typeVariable, tupleType2, mapper) : mapper;
-          const newElementTypes = map39(getElementTypes(tupleType2), (type2, i2) => {
+          const newElementTypes = map42(getElementTypes(tupleType2), (type2, i2) => {
             const flags = elementFlags[i2];
             return i2 < fixedLength ? instantiateMappedTypeTemplate(mappedType, getStringLiteralType("" + i2), !!(flags & 2), fixedMapper) : flags & 8 ? instantiateType(mappedType, prependTypeMapping(typeVariable, type2, mapper)) : getElementTypeOfArrayType(instantiateType(mappedType, prependTypeMapping(typeVariable, createArrayType(type2), mapper))) ?? unknownType2;
           });
           const modifiers = getMappedTypeModifiers(mappedType);
-          const newElementFlags = modifiers & 4 ? map39(elementFlags, (f3) => f3 & 1 ? 2 : f3) : modifiers & 8 ? map39(elementFlags, (f3) => f3 & 2 ? 1 : f3) : elementFlags;
+          const newElementFlags = modifiers & 4 ? map42(elementFlags, (f3) => f3 & 1 ? 2 : f3) : modifiers & 8 ? map42(elementFlags, (f3) => f3 & 2 ? 1 : f3) : elementFlags;
           const newReadonly = getModifiedReadonlyState(tupleType2.target.readonly, getMappedTypeModifiers(mappedType));
           return contains(newElementTypes, errorType) ? errorType : createTupleType(newElementTypes, newElementFlags, newReadonly, tupleType2.target.labeledElementDeclarations);
         }
@@ -114497,7 +114498,7 @@ ${lanes.join("\n")}
         function getConditionalTypeInstantiation(type2, mapper, forConstraint, aliasSymbol, aliasTypeArguments) {
           const root = type2.root;
           if (root.outerTypeParameters) {
-            const typeArguments = map39(root.outerTypeParameters, (t2) => getMappedType(t2, mapper));
+            const typeArguments = map42(root.outerTypeParameters, (t2) => getMappedType(t2, mapper));
             const id = (forConstraint ? "C" : "") + getTypeListId(typeArguments) + getAliasId(aliasSymbol, aliasTypeArguments);
             let result = root.instantiations.get(id);
             if (!result) {
@@ -114729,7 +114730,7 @@ ${lanes.join("\n")}
               return result;
             }
           } else if (type2.flags & 2097152) {
-            return getIntersectionType(map39(type2.types, getTypeWithoutSignatures));
+            return getIntersectionType(map42(type2.types, getTypeWithoutSignatures));
           }
           return type2;
         }
@@ -114885,7 +114886,7 @@ ${lanes.join("\n")}
           }
           const returnExpression = node.body;
           const sourceReturn = getReturnTypeOfSignature(sourceSig);
-          const targetReturn = getUnionType(map39(targetSignatures, getReturnTypeOfSignature));
+          const targetReturn = getUnionType(map42(targetSignatures, getReturnTypeOfSignature));
           if (!checkTypeRelatedTo(
             sourceReturn,
             targetReturn,
@@ -117724,9 +117725,9 @@ ${lanes.join("\n")}
               false
             )) {
               if (props.length > 5) {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map39(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map42(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
               } else {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map39(props, (p) => symbolToString(p)).join(", "));
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map42(props, (p) => symbolToString(p)).join(", "));
               }
               if (shouldSkipElaboration && errorInfo) {
                 overrideNextErrorInfo++;
@@ -119303,7 +119304,7 @@ ${lanes.join("\n")}
           return createInferenceContextWorker(typeParameters.map(createInferenceInfo), signature, flags, compareTypes || compareTypesAssignable);
         }
         function cloneInferenceContext(context, extraFlags = 0) {
-          return context && createInferenceContextWorker(map39(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
+          return context && createInferenceContextWorker(map42(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
         }
         function createInferenceContextWorker(inferences, signature, flags, compareTypes) {
           const context = {
@@ -119321,8 +119322,8 @@ ${lanes.join("\n")}
         }
         function makeFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map39(context.inferences, (i2) => i2.typeParameter),
-            map39(context.inferences, (inference, i2) => () => {
+            map42(context.inferences, (i2) => i2.typeParameter),
+            map42(context.inferences, (inference, i2) => () => {
               if (!inference.isFixed) {
                 inferFromIntraExpressionSites(context);
                 clearCachedInferences(context.inferences);
@@ -119334,8 +119335,8 @@ ${lanes.join("\n")}
         }
         function makeNonFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map39(context.inferences, (i2) => i2.typeParameter),
-            map39(context.inferences, (_2, i2) => () => {
+            map42(context.inferences, (i2) => i2.typeParameter),
+            map42(context.inferences, (_2, i2) => () => {
               return getInferredType(context, i2);
             })
           );
@@ -119395,7 +119396,7 @@ ${lanes.join("\n")}
         }
         function cloneInferredPartOfContext(context) {
           const inferences = filter6(context.inferences, hasInferenceCandidates);
-          return inferences.length ? createInferenceContextWorker(map39(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
+          return inferences.length ? createInferenceContextWorker(map42(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
         }
         function getMapperFromContext(context) {
           return context && context.mapper;
@@ -119483,7 +119484,7 @@ ${lanes.join("\n")}
             return createArrayType(elementType, isReadonlyArrayType(source));
           }
           if (isTupleType(source)) {
-            const elementTypes = map39(getElementTypes(source), (t2) => inferReverseMappedType(t2, target, constraint));
+            const elementTypes = map42(getElementTypes(source), (t2) => inferReverseMappedType(t2, target, constraint));
             if (!every(elementTypes, (t2) => !!t2)) {
               return void 0;
             }
@@ -119653,7 +119654,7 @@ ${lanes.join("\n")}
           return false;
         }
         function inferTypesFromTemplateLiteralType(source, target) {
-          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map39(source.types, (s2, i2) => {
+          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map42(source.types, (s2, i2) => {
             return isTypeAssignableTo(getBaseConstraintOrType(s2), getBaseConstraintOrType(target.types[i2])) ? s2 : getStringLikeTypeForType(s2);
           }) : inferFromLiteralPartsToTemplateLiteral(source.texts, source.types, target) : void 0;
         }
@@ -120117,8 +120118,8 @@ ${lanes.join("\n")}
               if (extendedConstraint && inferToMappedType(source, target, extendedConstraint)) {
                 return true;
               }
-              const propTypes = map39(getPropertiesOfType(source), getTypeOfSymbol);
-              const indexTypes = map39(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
+              const propTypes = map42(getPropertiesOfType(source), getTypeOfSymbol);
+              const indexTypes = map42(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
               inferFromTypes(getUnionType(concatenate(propTypes, indexTypes)), getTemplateTypeFromMappedType(target));
               return true;
             }
@@ -121205,7 +121206,7 @@ ${lanes.join("\n")}
           ) : type2;
         }
         function mapTypeWithAlias(type2, mapper, aliasSymbol, aliasTypeArguments) {
-          return type2.flags & 1048576 && aliasSymbol ? getUnionType(map39(type2.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type2, mapper);
+          return type2.flags & 1048576 && aliasSymbol ? getUnionType(map42(type2.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type2, mapper);
         }
         function extractTypesOfKind(type2, kind) {
           return filterType(type2, (t2) => (t2.flags & kind) !== 0);
@@ -121973,7 +121974,7 @@ ${lanes.join("\n")}
           }
           function getUnionOrEvolvingArrayType(types3, subtypeReduction) {
             if (isEvolvingArrayTypeList(types3)) {
-              return getEvolvingArrayType(getUnionType(map39(types3, getElementTypeOfEvolvingArrayType)));
+              return getEvolvingArrayType(getUnionType(map42(types3, getElementTypeOfEvolvingArrayType)));
             }
             const result = recombineUnknownType(getUnionType(sameMap(types3, finalizeEvolvingArrayType), subtypeReduction));
             if (result !== declaredType && result.flags & declaredType.flags & 1048576 && arrayIsEqualTo(result.types, declaredType.types)) {
@@ -122067,7 +122068,7 @@ ${lanes.join("\n")}
           function narrowTypeBySwitchOnDiscriminantProperty(type2, access, data) {
             if (data.clauseStart < data.clauseEnd && type2.flags & 1048576 && getKeyPropertyName(type2) === getAccessedPropertyName(access)) {
               const clauseTypes = getSwitchClauseTypes(data.switchStatement).slice(data.clauseStart, data.clauseEnd);
-              const candidate = getUnionType(map39(clauseTypes, (t2) => getConstituentTypeForKeyType(type2, t2) || unknownType2));
+              const candidate = getUnionType(map42(clauseTypes, (t2) => getConstituentTypeForKeyType(type2, t2) || unknownType2));
               if (candidate !== unknownType2) {
                 return candidate;
               }
@@ -122495,7 +122496,7 @@ ${lanes.join("\n")}
               return filterType(type2, (t2) => getTypeFacts(t2, notEqualFacts) === notEqualFacts);
             }
             const clauseWitnesses = witnesses.slice(clauseStart, clauseEnd);
-            return getUnionType(map39(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type2, text) : neverType2));
+            return getUnionType(map42(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type2, text) : neverType2));
           }
           function narrowTypeBySwitchOnTrue(type2, { switchStatement, clauseStart, clauseEnd }) {
             const defaultIndex = findIndex(
@@ -122530,7 +122531,7 @@ ${lanes.join("\n")}
               return type2;
             }
             const clauses = switchStatement.caseBlock.clauses.slice(clauseStart, clauseEnd);
-            return getUnionType(map39(clauses, (clause) => clause.kind === 297 ? narrowType(
+            return getUnionType(map42(clauses, (clause) => clause.kind === 297 ? narrowType(
               type2,
               clause.expression,
               /*assumeTrue*/
@@ -122622,7 +122623,7 @@ ${lanes.join("\n")}
               /* Construct */
             );
             if (constructSignatures.length) {
-              return getUnionType(map39(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
+              return getUnionType(map42(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
             }
             return emptyObjectType;
           }
@@ -124792,7 +124793,7 @@ ${lanes.join("\n")}
             getMatchingUnionConstituentForObjectLiteral(contextualType, node) ?? discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map39(
+                map42(
                   filter6(node.properties, (p) => {
                     if (!p.symbol) {
                       return false;
@@ -124807,7 +124808,7 @@ ${lanes.join("\n")}
                   }),
                   (prop) => [() => getContextFreeTypeOfExpression(prop.kind === 304 ? prop.initializer : prop.name), prop.symbol.escapedName]
                 ),
-                map39(
+                map42(
                   filter6(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     return !!(s2.flags & 16777216) && !!((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members) && !node.symbol.members.has(s2.escapedName) && isDiscriminantProperty(contextualType, s2.escapedName);
@@ -124829,11 +124830,11 @@ ${lanes.join("\n")}
             discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map39(
+                map42(
                   filter6(node.properties, (p) => !!p.symbol && p.kind === 292 && isDiscriminantProperty(contextualType, p.symbol.escapedName) && (!p.initializer || isPossiblyDiscriminantValue(p.initializer))),
                   (prop) => [!prop.initializer ? () => trueType : () => getContextFreeTypeOfExpression(prop.initializer), prop.symbol.escapedName]
                 ),
-                map39(
+                map42(
                   filter6(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     if (!(s2.flags & 16777216) || !((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members)) {
@@ -124892,13 +124893,13 @@ ${lanes.join("\n")}
           }
           if (type2.flags & 1048576) {
             return getUnionType(
-              map39(type2.types, (t2) => instantiateInstantiableTypes(t2, mapper)),
+              map42(type2.types, (t2) => instantiateInstantiableTypes(t2, mapper)),
               0
               /* None */
             );
           }
           if (type2.flags & 2097152) {
-            return getIntersectionType(map39(type2.types, (t2) => instantiateInstantiableTypes(t2, mapper)));
+            return getIntersectionType(map42(type2.types, (t2) => instantiateInstantiableTypes(t2, mapper)));
           }
           return type2;
         }
@@ -126228,7 +126229,7 @@ ${lanes.join("\n")}
             );
           }
           if (signatures.length === 0 && apparentElemType.flags & 1048576) {
-            signatures = getUnionSignatures(map39(apparentElemType.types, (t2) => getUninstantiatedJsxSignaturesOfType(t2, caller)));
+            signatures = getUnionSignatures(map42(apparentElemType.types, (t2) => getUninstantiatedJsxSignaturesOfType(t2, caller)));
           }
           return signatures;
         }
@@ -127702,7 +127703,7 @@ ${lanes.join("\n")}
         function checkTypeArguments(signature, typeArgumentNodes, reportErrors2, headMessage) {
           const isJavascript = isInJSFile(signature.declaration);
           const typeParameters = signature.typeParameters;
-          const typeArgumentTypes = fillMissingTypeArguments(map39(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
+          const typeArgumentTypes = fillMissingTypeArguments(map42(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
           let mapper;
           for (let i2 = 0; i2 < typeArgumentNodes.length; i2++) {
             Debug.assert(typeParameters[i2] !== void 0, "Should not call checkTypeArguments with too many type arguments");
@@ -128383,7 +128384,7 @@ ${lanes.join("\n")}
                 const diags = max > 1 ? allDiagnostics[minIndex] : flatten(allDiagnostics);
                 Debug.assert(diags.length > 0, "No errors reported for 3 or fewer overload signatures");
                 let chain = chainDiagnosticMessages(
-                  map39(diags, createDiagnosticMessageChainFromDiagnostic),
+                  map42(diags, createDiagnosticMessageChainFromDiagnostic),
                   Diagnostics.No_overload_matches_this_call
                 );
                 if (headMessage) {
@@ -132951,7 +132952,7 @@ ${lanes.join("\n")}
                   if (returnSignature && !returnSignature.typeParameters && !every(context.inferences, hasInferenceCandidates)) {
                     const uniqueTypeParameters = getUniqueTypeParameters(context, signature.typeParameters);
                     const instantiatedSignature = getSignatureInstantiationWithoutFillingInTypeArguments(signature, uniqueTypeParameters);
-                    const inferences = map39(context.inferences, (info) => createInferenceInfo(info.typeParameter));
+                    const inferences = map42(context.inferences, (info) => createInferenceInfo(info.typeParameter));
                     applyToParameterTypes(instantiatedSignature, contextualSignature, (source, target) => {
                       inferTypes(
                         inferences,
@@ -133899,7 +133900,7 @@ ${lanes.join("\n")}
           return getEffectiveTypeArguments2(node, typeParameters)[index];
         }
         function getEffectiveTypeArguments2(node, typeParameters) {
-          return fillMissingTypeArguments(map39(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
+          return fillMissingTypeArguments(map42(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
         }
         function checkTypeArgumentConstraints(node, typeParameters) {
           let typeArguments;
@@ -134545,7 +134546,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const onfulfilledParameterType = getTypeWithFacts(
-            getUnionType(map39(candidates, getTypeOfFirstParameterOfSignature)),
+            getUnionType(map42(candidates, getTypeOfFirstParameterOfSignature)),
             2097152
             /* NEUndefinedOrNull */
           );
@@ -134564,7 +134565,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           return typeAsPromise.promisedTypeOfPromise = getUnionType(
-            map39(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
+            map42(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
             2
             /* Subtype */
           );
@@ -136563,7 +136564,7 @@ ${lanes.join("\n")}
             }
             return noCache ? noIterationTypes : setCachedIterationTypes(type2, resolver.iterableCacheKey, noIterationTypes);
           }
-          const iteratorType = getIntersectionType(map39(validSignatures, getReturnTypeOfSignature));
+          const iteratorType = getIntersectionType(map42(validSignatures, getReturnTypeOfSignature));
           const iterationTypes = getIterationTypesOfIteratorWorker(iteratorType, resolver, errorNode, errorOutputContainer, noCache) ?? noIterationTypes;
           return noCache ? iterationTypes : setCachedIterationTypes(type2, resolver.iterableCacheKey, iterationTypes);
         }
@@ -137782,7 +137783,7 @@ ${lanes.join("\n")}
                 error210(errorNode, Diagnostics.Non_abstract_class_0_does_not_implement_inherited_abstract_member_1_from_class_2, memberInfo.typeName, first2(memberInfo.missedProperties), memberInfo.baseTypeName);
               }
             } else if (length(memberInfo.missedProperties) > 5) {
-              const missedProperties = map39(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map42(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
               const remainingMissedProperties = length(memberInfo.missedProperties) - 4;
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1_and_2_more, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
@@ -137790,7 +137791,7 @@ ${lanes.join("\n")}
                 error210(errorNode, Diagnostics.Non_abstract_class_0_is_missing_implementations_for_the_following_members_of_1_Colon_2_and_3_more, memberInfo.typeName, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
               }
             } else {
-              const missedProperties = map39(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map42(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1, memberInfo.baseTypeName, missedProperties);
               } else {
@@ -139905,7 +139906,7 @@ ${lanes.join("\n")}
             } else if (symbol2) {
               const symbolLinks2 = getSymbolLinks(symbol2);
               const declarationList = mapDefined(infos, (i2) => i2.declaration);
-              const nodeListId = map39(declarationList, getNodeId).join(",");
+              const nodeListId = map42(declarationList, getNodeId).join(",");
               if (!symbolLinks2.filteredIndexSymbolCache) {
                 symbolLinks2.filteredIndexSymbolCache = /* @__PURE__ */ new Map();
               }
@@ -141161,7 +141162,7 @@ ${lanes.join("\n")}
                       const newComponents = filter6(info.components, (e2) => {
                         return !hasLateBindableName(e2);
                       });
-                      result.push(...map39(newComponents, (e2) => {
+                      result.push(...map42(newComponents, (e2) => {
                         trackComputedName(e2.name.expression);
                         const mods = infoList === staticInfos ? [factory.createModifier(
                           126
@@ -143124,7 +143125,7 @@ ${lanes.join("\n")}
             if (sourceProperties) {
               const sourcePropertiesFiltered = findDiscriminantProperties(sourceProperties, target);
               if (sourcePropertiesFiltered) {
-                const discriminated = discriminateTypeByDiscriminableItems(target, map39(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
+                const discriminated = discriminateTypeByDiscriminableItems(target, map42(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
                 if (discriminated !== target) {
                   return discriminated;
                 }
@@ -145612,7 +145613,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map39(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map42(node.sourceFiles, transformSourceFile));
         }
       }
       function getExportNeedsImportStarHelper(node) {
@@ -146561,7 +146562,7 @@ ${lanes.join("\n")}
       }
       function makeArrayAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isArrayBindingOrAssignmentElement);
-        return factory2.createArrayLiteralExpression(map39(elements, factory2.converters.convertToArrayAssignmentElement));
+        return factory2.createArrayLiteralExpression(map42(elements, factory2.converters.convertToArrayAssignmentElement));
       }
       function makeObjectBindingPattern(factory2, elements) {
         Debug.assertEachNode(elements, isBindingElement);
@@ -146569,7 +146570,7 @@ ${lanes.join("\n")}
       }
       function makeObjectAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isObjectBindingOrAssignmentElement);
-        return factory2.createObjectLiteralExpression(map39(elements, factory2.converters.convertToObjectAssignmentElement));
+        return factory2.createObjectLiteralExpression(map42(elements, factory2.converters.convertToObjectAssignmentElement));
       }
       function makeBindingElement(factory2, name2) {
         return factory2.createBindingElement(
@@ -148015,7 +148016,7 @@ ${lanes.join("\n")}
             return setTextRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map39(variables, transformInitializedVariable)
+                  map42(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -148221,7 +148222,7 @@ ${lanes.join("\n")}
           currentNamespaceContainerName = localName;
           const statements = [];
           startLexicalEnvironment();
-          const members = map39(node.members, transformEnumMember);
+          const members = map42(node.members, transformEnumMember);
           insertStatementsAfterStandardPrologue(statements, endLexicalEnvironment());
           addRange(statements, members);
           currentNamespaceContainerName = savedCurrentNamespaceLocalName;
@@ -150132,7 +150133,7 @@ ${lanes.join("\n")}
             if (isDecoratedClassDeclaration) {
               Debug.assertIsDefined(pendingStatements, "Decorated classes transformed by TypeScript are expected to be within a variable declaration.");
               if (some(pendingExpressions)) {
-                addRange(pendingStatements, map39(pendingExpressions, factory2.createExpressionStatement));
+                addRange(pendingStatements, map42(pendingExpressions, factory2.createExpressionStatement));
               }
               if (some(staticPropertiesOrClassStaticBlocks)) {
                 addPropertyOrClassStaticBlockStatements(pendingStatements, staticPropertiesOrClassStaticBlocks, ((_b = node.emitNode) == null ? void 0 : _b.classThis) ?? factory2.getInternalName(node));
@@ -151921,13 +151922,13 @@ ${lanes.join("\n")}
           }
           const { false: decorators, true: metadata } = groupBy(allDecorators.decorators, isSyntheticMetadataDecorator);
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map39(decorators, transformDecorator));
+          addRange(decoratorExpressions, map42(decorators, transformDecorator));
           addRange(decoratorExpressions, flatMap(allDecorators.parameters, transformDecoratorsOfParameter));
-          addRange(decoratorExpressions, map39(metadata, transformDecorator));
+          addRange(decoratorExpressions, map42(metadata, transformDecorator));
           return decoratorExpressions;
         }
         function addClassElementDecorationStatements(statements, node, isStatic2) {
-          addRange(statements, map39(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
+          addRange(statements, map42(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
         }
         function isDecoratedClassElement(member, isStaticElement, parent2) {
           return nodeOrChildIsDecorated(
@@ -153832,7 +153833,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map39(allDecorators.decorators, transformDecorator));
+          addRange(decoratorExpressions, map42(allDecorators.decorators, transformDecorator));
           return decoratorExpressions;
         }
         function transformDecorator(decorator) {
@@ -154505,7 +154506,7 @@ ${lanes.join("\n")}
             }
             return void 0;
           }
-          return factory2.inlineExpressions(map39(variables, transformInitializedVariable));
+          return factory2.inlineExpressions(map42(variables, transformInitializedVariable));
         }
         function hoistVariableDeclarationList(node) {
           forEach(node.declarations, hoistVariable);
@@ -157921,7 +157922,7 @@ ${lanes.join("\n")}
           return target && target >= 5 ? factory2.createObjectLiteralExpression(transformJsxAttributesToProps(attrs, children)) : transformJsxAttributesToExpression(attrs, children);
         }
         function transformJsxAttributesToProps(attrs, children) {
-          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map39(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
+          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map42(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
           if (children) {
             props.push(children);
           }
@@ -161210,7 +161211,7 @@ ${lanes.join("\n")}
               /* NoHoisting */
             )
           );
-          const part = factory2.createVariableDeclarationList(map39(currentState.loopOutParameters, createOutVariable));
+          const part = factory2.createVariableDeclarationList(map42(currentState.loopOutParameters, createOutVariable));
           return { functionName, containsYield, functionDeclaration, part };
         }
         function createFunctionForBodyOfIterationStatement(node, currentState, outerState) {
@@ -161338,7 +161339,7 @@ ${lanes.join("\n")}
             loopFunctionExpressionName,
             /*typeArguments*/
             void 0,
-            map39(state2.loopParameters, (p) => p.name)
+            map42(state2.loopParameters, (p) => p.name)
           );
           const callResult = containsYield ? factory2.createYieldExpression(
             factory2.createToken(
@@ -161916,7 +161917,7 @@ ${lanes.join("\n")}
           return isSpreadElement(node) ? visitSpanOfSpreads : visitSpanOfNonSpreads;
         }
         function visitSpanOfSpreads(chunk) {
-          return map39(chunk, visitExpressionOfSpread);
+          return map42(chunk, visitExpressionOfSpread);
         }
         function visitExpressionOfSpread(node) {
           Debug.assertNode(node, isSpreadElement);
@@ -162488,7 +162489,7 @@ ${lanes.join("\n")}
             return setSourceMapRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map39(variables, transformInitializedVariable)
+                  map42(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -163046,7 +163047,7 @@ ${lanes.join("\n")}
             const variables = getInitializedVariables(initializer3);
             node = factory2.updateForStatement(
               node,
-              variables.length > 0 ? factory2.inlineExpressions(map39(variables, transformInitializedVariable)) : void 0,
+              variables.length > 0 ? factory2.inlineExpressions(map42(variables, transformInitializedVariable)) : void 0,
               visitNode3(node.condition, visitor, isExpression),
               visitNode3(node.incrementor, visitor, isExpression),
               visitIterationBody(node.statement, visitor, context)
@@ -166372,7 +166373,7 @@ ${lanes.join("\n")}
             moduleBodyBlock
           );
           const moduleName = tryGetModuleNameFromFile(factory2, node, host, compilerOptions);
-          const dependencies = factory2.createArrayLiteralExpression(map39(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
+          const dependencies = factory2.createArrayLiteralExpression(map42(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
           const updated = setEmitFlags(
             factory2.updateSourceFile(
               node,
@@ -168102,7 +168103,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map39(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map42(node.sourceFiles, transformSourceFile));
         }
       }
       function canProduceDiagnostics(node) {
@@ -168850,7 +168851,7 @@ ${lanes.join("\n")}
             rawLibReferenceDirectives = [];
             let hasNoDefaultLib = false;
             const bundle = factory2.createBundle(
-              map39(node.sourceFiles, (sourceFile) => {
+              map42(node.sourceFiles, (sourceFile) => {
                 if (sourceFile.isDeclarationFile) return void 0;
                 hasNoDefaultLib = hasNoDefaultLib || sourceFile.hasNoDefaultLib;
                 currentSourceFile = sourceFile;
@@ -168961,7 +168962,7 @@ ${lanes.join("\n")}
             getLibReferences()
           );
           function collectFileReferences(sourceFile) {
-            rawReferencedFiles = concatenate(rawReferencedFiles, map39(sourceFile.referencedFiles, (f3) => [sourceFile, f3]));
+            rawReferencedFiles = concatenate(rawReferencedFiles, map42(sourceFile.referencedFiles, (f3) => [sourceFile, f3]));
             rawTypeReferenceDirectives = concatenate(rawTypeReferenceDirectives, sourceFile.typeReferenceDirectives);
             rawLibReferenceDirectives = concatenate(rawLibReferenceDirectives, sourceFile.libReferenceDirectives);
           }
@@ -169175,7 +169176,7 @@ ${lanes.join("\n")}
           )) {
             return factory2.createNodeArray();
           }
-          const newParams = map39(params, (p) => ensureParameter(p, modifierMask));
+          const newParams = map42(params, (p) => ensureParameter(p, modifierMask));
           if (!newParams) {
             return factory2.createNodeArray();
           }
@@ -169927,7 +169928,7 @@ ${lanes.join("\n")}
                     void 0,
                     /*isTypeOnly*/
                     false,
-                    factory2.createNamedExports(map39(exportMappings, ([gen, exp]) => {
+                    factory2.createNamedExports(map42(exportMappings, ([gen, exp]) => {
                       return factory2.createExportSpecifier(
                         /*isTypeOnly*/
                         false,
@@ -170135,11 +170136,11 @@ ${lanes.join("\n")}
                   2
                   /* Const */
                 ));
-                const heritageClauses = factory2.createNodeArray(map39(input.heritageClauses, (clause) => {
+                const heritageClauses = factory2.createNodeArray(map42(input.heritageClauses, (clause) => {
                   if (clause.token === 96) {
                     const oldDiag2 = getSymbolAccessibilityDiagnostic;
                     getSymbolAccessibilityDiagnostic = createGetSymbolAccessibilityDiagnosticForNode(clause.types[0]);
-                    const newClause = factory2.updateHeritageClause(clause, map39(clause.types, (t2) => factory2.updateExpressionWithTypeArguments(t2, newId, visitNodes2(t2.typeArguments, visitDeclarationSubtree, isTypeNode))));
+                    const newClause = factory2.updateHeritageClause(clause, map42(clause.types, (t2) => factory2.updateExpressionWithTypeArguments(t2, newId, visitNodes2(t2.typeArguments, visitDeclarationSubtree, isTypeNode))));
                     getSymbolAccessibilityDiagnostic = oldDiag2;
                     return newClause;
                   }
@@ -170301,7 +170302,7 @@ ${lanes.join("\n")}
         }
         function transformHeritageClauses(nodes) {
           return factory2.createNodeArray(filter6(
-            map39(nodes, (clause) => factory2.updateHeritageClause(
+            map42(nodes, (clause) => factory2.updateHeritageClause(
               clause,
               visitNodes2(
                 factory2.createNodeArray(filter6(clause.types, (t2) => {
@@ -170423,7 +170424,7 @@ ${lanes.join("\n")}
         const moduleKind = getEmitModuleKind(compilerOptions);
         const useDefineForClassFields = getUseDefineForClassFields(compilerOptions);
         const transformers = [];
-        addRange(transformers, customTransformers && map39(customTransformers.before, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map42(customTransformers.before, wrapScriptTransformerFactory));
         transformers.push(transformTypeScript);
         if (compilerOptions.experimentalDecorators) {
           transformers.push(transformLegacyDecorators);
@@ -170461,13 +170462,13 @@ ${lanes.join("\n")}
           transformers.push(transformGenerators);
         }
         transformers.push(getModuleTransformer(moduleKind));
-        addRange(transformers, customTransformers && map39(customTransformers.after, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map42(customTransformers.after, wrapScriptTransformerFactory));
         return transformers;
       }
       function getDeclarationTransformers(customTransformers) {
         const transformers = [];
         transformers.push(transformDeclarations);
-        addRange(transformers, customTransformers && map39(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
+        addRange(transformers, customTransformers && map42(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
         return transformers;
       }
       function wrapCustomTransformer(transformer) {
@@ -176243,7 +176244,7 @@ ${lanes.join("\n")}
           var _a2;
           if (!host.realpath || ensureTrailingDirectorySeparator(toPath3(host.realpath(rootDir))) === rootDirPath) {
             const resultFromHost = {
-              files: map39(host.readDirectory(
+              files: map42(host.readDirectory(
                 rootDir,
                 /*extensions*/
                 void 0,
@@ -176342,7 +176343,7 @@ ${lanes.join("\n")}
           function getFileSystemEntriesFromHost(dir, path2) {
             if (rootSymLinkResult && path2 === rootDirPath) return rootSymLinkResult;
             const result = {
-              files: map39(host.readDirectory(
+              files: map42(host.readDirectory(
                 dir,
                 /*extensions*/
                 void 0,
@@ -182656,7 +182657,7 @@ ${lanes.join("\n")}
         let filePathsSetList;
         const latestChangedDtsFile = buildInfo.latestChangedDtsFile ? toAbsolutePath(buildInfo.latestChangedDtsFile) : void 0;
         const fileInfos = /* @__PURE__ */ new Map();
-        const changedFilesSet = new Set(map39(buildInfo.changeFileSet, toFilePath));
+        const changedFilesSet = new Set(map42(buildInfo.changeFileSet, toFilePath));
         if (isIncrementalBundleEmitBuildInfo(buildInfo)) {
           buildInfo.fileInfos.forEach((fileInfo, index) => {
             const path2 = toFilePath(index + 1);
@@ -188581,7 +188582,7 @@ ${lanes.join("\n")}
               return factory.createArrayTypeNode(visitNode3(node.type, visitExistingNodeTreeSymbols, isTypeNode));
             }
             if (isJSDocTypeLiteral(node)) {
-              return factory.createTypeLiteralNode(map39(node.jsDocPropertyTags, (t2) => {
+              return factory.createTypeLiteralNode(map42(node.jsDocPropertyTags, (t2) => {
                 const name2 = visitNode3(isIdentifier(t2.name) ? t2.name : t2.name.right, visitExistingNodeTreeSymbols, isIdentifier);
                 const overrideTypeNode = resolver.getJsDocPropertyOverride(context, node, t2);
                 return factory.createPropertySignature(
@@ -188647,7 +188648,7 @@ ${lanes.join("\n")}
               } else {
                 return factory.createFunctionTypeNode(
                   visitNodes2(node.typeParameters, visitExistingNodeTreeSymbols, isTypeParameterDeclaration),
-                  map39(node.parameters, (p, i2) => factory.createParameterDeclaration(
+                  map42(node.parameters, (p, i2) => factory.createParameterDeclaration(
                     /*modifiers*/
                     void 0,
                     getEffectiveDotDotDotForParameter(p),
@@ -192430,8 +192431,8 @@ ${lanes.join("\n")}
         let lastPos = -1;
         for (const { fileName, textChanges: textChanges2 } of edits) {
           Debug.assert(fileName === renameFilename);
-          for (const change of textChanges2) {
-            const { span, newText } = change;
+          for (const change2 of textChanges2) {
+            const { span, newText } = change2;
             const index = indexInTextChange(newText, escapeString2(name2));
             if (index !== -1) {
               lastPos = span.start + delta + index;
@@ -192466,11 +192467,11 @@ ${lanes.join("\n")}
           cb(targetNode, commentKind || kind, sourceFile.text.slice(pos, end), hasTrailingNewLine !== void 0 ? hasTrailingNewLine : htnl);
         };
       }
-      function indexInTextChange(change, name2) {
-        if (startsWith(change, name2)) return 0;
-        let idx = change.indexOf(" " + name2);
-        if (idx === -1) idx = change.indexOf("." + name2);
-        if (idx === -1) idx = change.indexOf('"' + name2);
+      function indexInTextChange(change2, name2) {
+        if (startsWith(change2, name2)) return 0;
+        let idx = change2.indexOf(" " + name2);
+        if (idx === -1) idx = change2.indexOf("." + name2);
+        if (idx === -1) idx = change2.indexOf('"' + name2);
         return idx === -1 ? -1 : idx + 1;
       }
       function needsParentheses(expression) {
@@ -192930,7 +192931,7 @@ ${lanes.join("\n")}
         return expression;
       }
       function mapOneOrMany(valueOrArray, f3, resultSelector = identity) {
-        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map39(valueOrArray, f3)) : f3(valueOrArray, 0) : void 0;
+        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map42(valueOrArray, f3)) : f3(valueOrArray, 0) : void 0;
       }
       function firstOrOnly(valueOrArray) {
         return isArray(valueOrArray) ? first2(valueOrArray) : valueOrArray;
@@ -196864,7 +196865,7 @@ interface Symbol {
         curCancellationToken = cancellationToken;
         curSourceFile = sourceFile;
         try {
-          return map39(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
+          return map42(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
         } finally {
           reset();
         }
@@ -197517,7 +197518,7 @@ interface Symbol {
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
           nameSpan: n.name && getNodeSpan(n.name),
-          childItems: map39(n.children, convertToTree)
+          childItems: map42(n.children, convertToTree)
         };
       }
       function convertToPrimaryNavBarMenuItem(n) {
@@ -197526,7 +197527,7 @@ interface Symbol {
           kind: getNodeKind(n.node),
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
-          childItems: map39(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
+          childItems: map42(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
           indent: n.indent,
           bolded: false,
           grayed: false
@@ -199754,12 +199755,12 @@ interface Symbol {
               "args",
               /*questionToken*/
               void 0,
-              factory.createUnionTypeNode(map39(signatureDeclarations, convertSignatureParametersToTuple))
+              factory.createUnionTypeNode(map42(signatureDeclarations, convertSignatureParametersToTuple))
             )
           ]);
         }
         function convertSignatureParametersToTuple(decl) {
-          const members = map39(decl.parameters, convertParameterToNamedTupleMember);
+          const members = map42(decl.parameters, convertParameterToNamedTupleMember);
           return setEmitFlags(
             factory.createTupleTypeNode(members),
             some(members, (m2) => !!length(getSyntheticLeadingComments(m2))) ? 0 : 1
@@ -200239,9 +200240,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function doChange5(sourceFile, program2, host, changes, functionDeclaration, groupedReferences) {
         const signature = groupedReferences.signature;
-        const newFunctionDeclarationParams = map39(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
+        const newFunctionDeclarationParams = map42(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
         if (signature) {
-          const newSignatureParams = map39(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
+          const newSignatureParams = map42(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
           replaceParameters(signature, newSignatureParams);
         }
         replaceParameters(functionDeclaration, newFunctionDeclarationParams);
@@ -200304,10 +200305,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         function groupReferences(referenceEntries) {
           const classReferences = { accessExpressions: [], typeUsages: [] };
           const groupedReferences2 = { functionCalls: [], declarations: [], classReferences, valid: true };
-          const functionSymbols = map39(functionNames, getSymbolTargetAtLocation);
-          const classSymbols = map39(classNames, getSymbolTargetAtLocation);
+          const functionSymbols = map42(functionNames, getSymbolTargetAtLocation);
+          const classSymbols = map42(classNames, getSymbolTargetAtLocation);
           const isConstructor = isConstructorDeclaration(functionDeclaration);
-          const contextualSymbols = map39(functionNames, (name2) => getSymbolForContextualType(name2, checker));
+          const contextualSymbols = map42(functionNames, (name2) => getSymbolForContextualType(name2, checker));
           for (const entry of referenceEntries) {
             if (entry.kind === ts_FindAllReferences_exports.EntryKind.Span) {
               groupedReferences2.valid = false;
@@ -200571,7 +200572,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const parameters = getRefactorableParameters(functionDeclaration.parameters);
         const hasRestParameter2 = isRestParameter(last2(parameters));
         const nonRestArguments = hasRestParameter2 ? functionArguments.slice(0, parameters.length - 1) : functionArguments;
-        const properties2 = map39(nonRestArguments, (arg, i2) => {
+        const properties2 = map42(nonRestArguments, (arg, i2) => {
           const parameterName = getParameterName(parameters[i2]);
           const property = createPropertyOrShorthandAssignment(parameterName, arg);
           suppressLeadingAndTrailingTrivia(property.name);
@@ -200594,7 +200595,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function createNewParameters(functionDeclaration, program2, host) {
         const checker = program2.getTypeChecker();
         const refactorableParameters = getRefactorableParameters(functionDeclaration.parameters);
-        const bindingElements = map39(refactorableParameters, createBindingElementFromParameterDeclaration);
+        const bindingElements = map42(refactorableParameters, createBindingElementFromParameterDeclaration);
         const objectParameterName = factory.createObjectBindingPattern(bindingElements);
         const objectParameterType = createParameterTypeNode(refactorableParameters);
         let objectInitializer;
@@ -200649,7 +200650,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return element;
         }
         function createParameterTypeNode(parameters) {
-          const members = map39(parameters, createPropertySignatureFromParameterDeclaration);
+          const members = map42(parameters, createPropertySignatureFromParameterDeclaration);
           const typeNode = addEmitFlags(
             factory.createTypeLiteralNode(members),
             1
@@ -200924,7 +200925,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           i2 = newIndex - 1;
           const isLast = i2 === nodes.length - 1;
           if (isTemplateExpression(currentNode)) {
-            const spans = map39(currentNode.templateSpans, (span, index) => {
+            const spans = map42(currentNode.templateSpans, (span, index) => {
               copyExpressionComments(span);
               const isLastSpan = index === currentNode.templateSpans.length - 1;
               const text = span.literal.text + (isLastSpan ? subsequentText : "");
@@ -202551,8 +202552,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getPropertyAssignmentsForWritesAndVariableDeclarations(exposedVariableDeclarations, writes) {
-        const variableAssignments = map39(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
-        const writeAssignments = map39(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
+        const variableAssignments = map42(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
+        const writeAssignments = map42(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
         return variableAssignments === void 0 ? writeAssignments : writeAssignments === void 0 ? variableAssignments : variableAssignments.concat(writeAssignments);
       }
       function isReadonlyArray(v) {
@@ -204077,7 +204078,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function displayPartsToString(displayParts) {
         if (displayParts) {
-          return map39(displayParts, (displayPart2) => displayPart2.text).join("");
+          return map42(displayParts, (displayPart2) => displayPart2.text).join("");
         }
         return "";
       }
@@ -205327,8 +205328,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           } else {
             for (const pos2 of positions) {
-              const from18 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
-              const offset = text.substr(from18, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
+              const from19 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
+              const offset = text.substr(from19, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
               textChanges2.push({
                 newText: "",
                 span: {
@@ -205440,7 +205441,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             const multiLineCommentStart = /(?:\/\*+\s*)/.source;
             const anyNumberOfSpacesAndAsterisksAtStartOfLine = /(?:^(?:\s|\*)*)/.source;
             const preamble = "(" + anyNumberOfSpacesAndAsterisksAtStartOfLine + "|" + singleLineCommentStart + "|" + multiLineCommentStart + ")";
-            const literals = "(?:" + map39(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
+            const literals = "(?:" + map42(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
             const endOfLineOrEndOfComment = /(?:$|\*\/)/.source;
             const messageRemainder = /(?:.*?)/.source;
             const messagePortion = "(" + literals + messageRemainder + ")";
@@ -206379,9 +206380,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         let declarations;
         if (symbol2 && symbol2.declarations) {
           const indices = indicesOf(symbol2.declarations);
-          const keys = map39(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
+          const keys = map42(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
           indices.sort((a, b) => compareStringsCaseSensitive(keys[a].file, keys[b].file) || keys[a].pos - keys[b].pos);
-          const sortedDeclarations = map39(indices, (i2) => symbol2.declarations[i2]);
+          const sortedDeclarations = map42(indices, (i2) => symbol2.declarations[i2]);
           let lastDecl;
           for (const decl of sortedDeclarations) {
             if (isValidCallHierarchyDeclaration(decl)) {
@@ -206513,11 +206514,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getCallSiteGroupKey(entry) {
         return getNodeId(entry.declaration);
       }
-      function createCallHierarchyIncomingCall(from18, fromSpans) {
-        return { from: from18, fromSpans };
+      function createCallHierarchyIncomingCall(from19, fromSpans) {
+        return { from: from19, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
-        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map39(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map42(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getIncomingCalls(program2, declaration, cancellationToken) {
         if (isSourceFile(declaration) || isModuleDeclaration(declaration) || isClassStaticBlockDeclaration(declaration)) {
@@ -206703,7 +206704,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return { to, fromSpans };
       }
       function convertCallSiteGroupToOutgoingCall(program2, entries) {
-        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map39(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map42(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getOutgoingCalls(program2, declaration) {
         if (declaration.flags & 33554432 || isMethodSignature(declaration)) {
@@ -206816,7 +206817,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getFixes(context) {
         const diagnostics = getDiagnostics(context);
         const registrations = errorCodeToFixes.get(String(context.errorCode));
-        return flatMap(registrations, (f3) => map39(f3.getCodeActions(context), removeFixIdIfFixAllUnavailable(f3, diagnostics)));
+        return flatMap(registrations, (f3) => map42(f3.getCodeActions(context), removeFixIdIfFixAllUnavailable(f3, diagnostics)));
       }
       function getAllFixes(context) {
         return fixIdToRegistration.get(cast(context.fixId, isString)).getAllCodeActions(context);
@@ -207652,7 +207653,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function transformJSDocTypeLiteral(node) {
-        const typeNode = factory.createTypeLiteralNode(map39(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
+        const typeNode = factory.createTypeLiteralNode(map42(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
           /*modifiers*/
           void 0,
           isIdentifier(tag.name) ? tag.name : tag.name.right,
@@ -208923,7 +208924,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function convertVariableStatement(sourceFile, statement, changes, checker, identifiers, target, quotePreference) {
         const { declarationList } = statement;
         let foundImport = false;
-        const converted = map39(declarationList.declarations, (decl) => {
+        const converted = map42(declarationList.declarations, (decl) => {
           const { name: name2, initializer: initializer3 } = decl;
           if (initializer3) {
             if (isExportsOrModuleExportsOrAlias(sourceFile, initializer3)) {
@@ -209688,11 +209689,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const rightSibling = currentNodeIndex < maxChildIndex ? commentNode.getChildAt(currentNodeIndex + 1) : void 0;
         return { leftSibling, rightSibling };
       }
-      function findEndOfTextBetween(jsDocComment, from18, to) {
-        const comment = jsDocComment.getText().substring(from18 - jsDocComment.getStart(), to - jsDocComment.getStart());
+      function findEndOfTextBetween(jsDocComment, from19, to) {
+        const comment = jsDocComment.getText().substring(from19 - jsDocComment.getStart(), to - jsDocComment.getStart());
         for (let i2 = comment.length; i2 > 0; i2--) {
           if (!/[*/\s]/.test(comment.substring(i2 - 1, i2))) {
-            return from18 + i2;
+            return from19 + i2;
           }
         }
         return to;
@@ -212048,7 +212049,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         ));
       }
       function createExportSpecifiers(names3, allowTypeModifier) {
-        return factory.createNodeArray(map39(names3, (n) => factory.createExportSpecifier(
+        return factory.createNodeArray(map42(names3, (n) => factory.createExportSpecifier(
           allowTypeModifier && n.isTypeOnly,
           /*propertyName*/
           void 0,
@@ -212934,7 +212935,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const checker = context.program.getTypeChecker();
         const jsxAttributesNode = info.parentDeclaration.attributes;
         const hasSpreadAttribute = some(jsxAttributesNode.properties, isJsxSpreadAttribute);
-        const attrs = map39(info.attributes, (attr) => {
+        const attrs = map42(info.attributes, (attr) => {
           const value = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(attr), info.parentDeclaration);
           const name2 = factory.createIdentifier(attr.name);
           const jsxAttribute = factory.createJsxAttribute(name2, factory.createJsxExpression(
@@ -212955,7 +212956,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const quotePreference = getQuotePreference(context.sourceFile, context.preferences);
         const target = getEmitScriptTarget(context.program.getCompilerOptions());
         const checker = context.program.getTypeChecker();
-        const props = map39(info.properties, (prop) => {
+        const props = map42(info.properties, (prop) => {
           const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), info.parentDeclaration);
           return factory.createPropertyAssignment(createPropertyNameFromSymbol(prop, target, quotePreference, checker), initializer3);
         });
@@ -213037,7 +213038,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return factory.createArrayLiteralExpression();
         }
         if (isObjectLiteralType(type2)) {
-          const props = map39(checker.getPropertiesOfType(type2), (prop) => {
+          const props = map42(checker.getPropertiesOfType(type2), (prop) => {
             const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), enclosingDeclaration);
             return factory.createPropertyAssignment(prop.name, initializer3);
           });
@@ -213375,7 +213376,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function updateParameters(importAdder, scriptTarget, node, newParameters) {
-        const parameters = map39(node.parameters, (p) => factory.createParameterDeclaration(
+        const parameters = map42(node.parameters, (p) => factory.createParameterDeclaration(
           p.modifiers,
           p.dotDotDotToken,
           p.name,
@@ -213953,7 +213954,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           jsDocParameterTag.isNameFirst,
           jsDocParameterTag.comment
         );
-        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map39(tags, (t2) => t2 === jsDocParameterTag ? newJSDocParameterTag : t2)));
+        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map42(tags, (t2) => t2 === jsDocParameterTag ? newJSDocParameterTag : t2)));
         return createCodeFixActionWithoutFixAll(renameUnmatchedParameter, changes, [Diagnostics.Rename_param_tag_name_0_to_1, name2.getText(sourceFile), parameterName]);
       }
       function getInfo14(sourceFile, pos) {
@@ -214069,7 +214070,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               const elements = token.parent.elements;
               const diagnostic = [
                 elements.length > 1 ? Diagnostics.Remove_unused_declarations_for_Colon_0 : Diagnostics.Remove_unused_declaration_for_Colon_0,
-                map39(elements, (e2) => e2.getText(sourceFile)).join(", ")
+                map42(elements, (e2) => e2.getText(sourceFile)).join(", ")
               ];
               return [
                 createDeleteFix(ts_textChanges_exports.ChangeTracker.with(context, (t2) => deleteDestructuringElements(t2, sourceFile, token.parent)), diagnostic)
@@ -216030,7 +216031,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             ));
           }
         } else {
-          const paramTags = map39(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
+          const paramTags = map42(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
             /*tagName*/
             void 0,
             name2,
@@ -217164,8 +217165,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const isJs = isInJSFile(contextNode);
         const { typeArguments, arguments: args, parent: parent2 } = call;
         const contextualType = isJs ? void 0 : checker.getContextualType(call);
-        const names3 = map39(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
-        const instanceTypes = isJs ? [] : map39(args, (arg) => checker.getTypeAtLocation(arg));
+        const names3 = map42(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
+        const instanceTypes = isJs ? [] : map42(args, (arg) => checker.getTypeAtLocation(arg));
         const { argumentTypeNodes, argumentTypeParameters } = getArgumentTypesAndTypeParameters(
           checker,
           importAdder,
@@ -217473,7 +217474,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function getReturnTypeFromSignatures(signatures, checker, context, enclosingDeclaration) {
         if (length(signatures)) {
-          const type2 = checker.getUnionType(map39(signatures, checker.getReturnTypeOfSignature));
+          const type2 = checker.getUnionType(map42(signatures, checker.getReturnTypeOfSignature));
           return checker.typeToTypeNode(type2, enclosingDeclaration, 1, 8, getNoopSymbolTrackerWithResolver(context));
         }
       }
@@ -219478,7 +219479,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           if (elements.length === 0) {
             return void 0;
           }
-          const newClauses = map39(elements, (element) => factory.createCaseClause(element, []));
+          const newClauses = map42(elements, (element) => factory.createCaseClause(element, []));
           const newLineChar = getNewLineOrDefaultFromHost(host, formatContext == null ? void 0 : formatContext.options);
           const printer = createSnippetPrinter({
             removeComments: true,
@@ -219488,7 +219489,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             newLine: getNewLineKind(newLineChar)
           });
           const printNode = formatContext ? (node) => printer.printAndFormatNode(4, node, sourceFile, formatContext) : (node) => printer.printNode(4, node, sourceFile);
-          const insertText = map39(newClauses, (clause, i2) => {
+          const insertText = map42(newClauses, (clause, i2) => {
             if (preferences.includeCompletionsWithSnippetText) {
               return `${printNode(clause)}$${i2 + 1}`;
             }
@@ -224715,7 +224716,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
         }
         const checker = program2.getTypeChecker();
-        return map39(referenceEntries, (entry) => toImplementationLocation(entry, checker));
+        return map42(referenceEntries, (entry) => toImplementationLocation(entry, checker));
       }
       function getImplementationReferenceEntries(program2, cancellationToken, sourceFiles, node, position) {
         if (node.kind === 308) {
@@ -224738,7 +224739,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function findReferenceOrRenameEntries(program2, cancellationToken, sourceFiles, node, position, options, convertEntry) {
-        return map39(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
+        return map42(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
       }
       function getReferenceEntriesForNode(position, node, program2, sourceFiles, cancellationToken, options = {}, sourceFilesSet = new Set(sourceFiles.map((f3) => f3.fileName))) {
         return flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options, sourceFilesSet));
@@ -226618,7 +226619,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           const staticBlocks = filter6(classDecl.members, isClassStaticBlockDeclaration);
           const containerName = symbol22 ? typeChecker.symbolToString(symbol22, classDecl) : "";
           const sourceFile2 = node.getSourceFile();
-          return map39(staticBlocks, (staticBlock) => {
+          return map42(staticBlocks, (staticBlock) => {
             let { pos } = moveRangePastModifiers(staticBlock);
             pos = skipTrivia(sourceFile2.text, pos);
             return createDefinitionInfoFromName(
@@ -226958,7 +226959,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         const withoutExpandos = filter6(filteredDeclarations, (d) => !isExpandoDeclaration(d));
         const results = some(withoutExpandos) ? withoutExpandos : filteredDeclarations;
-        return map39(results, (declaration) => createDefinitionInfo(
+        return map42(results, (declaration) => createDefinitionInfo(
           declaration,
           typeChecker,
           symbol2,
@@ -228185,7 +228186,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getJSDocTagNameCompletions() {
-        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map39(jsDocTagNames, (tagName) => {
+        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map42(jsDocTagNames, (tagName) => {
           return {
             name: tagName,
             kind: "keyword",
@@ -228196,7 +228197,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       var getJSDocTagNameCompletionDetails = getJSDocTagCompletionDetails;
       function getJSDocTagCompletions() {
-        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map39(jsDocTagNames, (tagName) => {
+        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map42(jsDocTagNames, (tagName) => {
           return {
             name: `@${tagName}`,
             kind: "keyword",
@@ -228456,11 +228457,11 @@ ${content}
         if (!classOrInterface) {
           return;
         }
-        const firstMatch = classOrInterface.members.find((member) => changes.some((change) => matchNode(change, member)));
+        const firstMatch = classOrInterface.members.find((member) => changes.some((change2) => matchNode(change2, member)));
         if (firstMatch) {
           const lastMatch = findLast(
             classOrInterface.members,
-            (member) => changes.some((change) => matchNode(change, member))
+            (member) => changes.some((change2) => matchNode(change2, member))
           );
           forEach(changes, wipeNode);
           changeTracker.replaceNodeRangeWithNodes(
@@ -229028,7 +229029,7 @@ ${content}
         return isString(moduleSpecifierText) && some(sourceFile.moduleAugmentations, (moduleName) => isStringLiteral(moduleName) && moduleName.text === moduleSpecifierText);
       }
       function getNewImportSpecifiers(namedImports) {
-        return flatMap(namedImports, (namedImport) => map39(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
+        return flatMap(namedImports, (namedImport) => map42(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
           importSpecifier,
           importSpecifier.isTypeOnly,
           /*propertyName*/
@@ -230194,7 +230195,7 @@ ${content}
           /*meaning*/
           void 0
         ) : emptyArray;
-        const items = map39(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
+        const items = map42(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
         let selectedItemIndex = 0;
         let itemsSeen = 0;
         for (let i2 = 0; i2 < items.length; i2++) {
@@ -230254,7 +230255,7 @@ ${content}
       ), spacePart()];
       function getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, checker, enclosingDeclaration, sourceFile) {
         const infos = (isTypeParameterList ? itemInfoForTypeParameters : itemInfoForParameters)(candidateSignature, checker, enclosingDeclaration, sourceFile);
-        return map39(infos, ({ isVariadic, parameters, prefix, suffix }) => {
+        return map42(infos, ({ isVariadic, parameters, prefix, suffix }) => {
           const prefixDisplayParts = [...callTargetDisplayParts, ...prefix];
           const suffixDisplayParts = [...suffix, ...returnTypeToDisplayParts(candidateSignature, enclosingDeclaration, checker)];
           const documentation = candidateSignature.getDocumentationComment(checker);
@@ -230292,7 +230293,7 @@ ${content}
         const parameters = (typeParameters || emptyArray).map((t2) => createSignatureHelpParameterForTypeParameter(t2, checker, enclosingDeclaration, sourceFile, printer));
         const thisParameter = candidateSignature.thisParameter ? [checker.symbolToParameterDeclaration(candidateSignature.thisParameter, enclosingDeclaration, signatureHelpNodeBuilderFlags)] : [];
         return checker.getExpandedParameters(candidateSignature).map((paramList) => {
-          const params = factory.createNodeArray([...thisParameter, ...map39(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
+          const params = factory.createNodeArray([...thisParameter, ...map42(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
           const parameterParts = mapToDisplayParts((writer) => {
             printer.writeList(2576, params, sourceFile, writer);
           });
@@ -231742,9 +231743,9 @@ ${content}
           cb(tracker);
           return tracker.getChanges();
         }
-        pushRaw(sourceFile, change) {
-          Debug.assertEqual(sourceFile.fileName, change.fileName);
-          for (const c of change.textChanges) {
+        pushRaw(sourceFile, change2) {
+          Debug.assertEqual(sourceFile.fileName, change2.fileName);
+          for (const c of change2.textChanges) {
             this.changes.push({
               kind: 3,
               sourceFile,
@@ -232442,17 +232443,17 @@ ${options.prefix}` : "\n" : options.prefix
           return applyChanges(nonFormattedText, changes) + newLineCharacter;
         }
         changesToText2.newFileChangesWorker = newFileChangesWorker;
-        function computeNewText(change, targetSourceFile, sourceFile, newLineCharacter, formatContext, validate) {
+        function computeNewText(change2, targetSourceFile, sourceFile, newLineCharacter, formatContext, validate) {
           var _a2;
-          if (change.kind === 0) {
+          if (change2.kind === 0) {
             return "";
           }
-          if (change.kind === 3) {
-            return change.text;
+          if (change2.kind === 3) {
+            return change2.text;
           }
-          const { options = {}, range: { pos } } = change;
+          const { options = {}, range: { pos } } = change2;
           const format2 = (n) => getFormattedTextOfNode(n, targetSourceFile, sourceFile, pos, options, newLineCharacter, formatContext, validate);
-          const text = change.kind === 2 ? change.nodes.map((n) => removeSuffix(format2(n), newLineCharacter)).join(((_a2 = change.options) == null ? void 0 : _a2.joiner) || newLineCharacter) : format2(change.node);
+          const text = change2.kind === 2 ? change2.nodes.map((n) => removeSuffix(format2(n), newLineCharacter)).join(((_a2 = change2.options) == null ? void 0 : _a2.joiner) || newLineCharacter) : format2(change2.node);
           const noIndent = options.indentation !== void 0 || getLineStartPositionForPosition(pos, targetSourceFile) === pos ? text : text.replace(/^\s+/, "");
           return (options.prefix || "") + noIndent + (!options.suffix || endsWith(noIndent, options.suffix) ? "" : options.suffix);
         }
@@ -234768,9 +234769,9 @@ ${options.prefix}` : "\n" : options.prefix
       function toTokenRange(arg) {
         return typeof arg === "number" ? tokenRangeFrom([arg]) : isArray(arg) ? tokenRangeFrom(arg) : arg;
       }
-      function tokenRangeFromRange(from18, to, except = []) {
+      function tokenRangeFromRange(from19, to, except = []) {
         const tokens = [];
-        for (let token = from18; token <= to; token++) {
+        for (let token = from19; token <= to; token++) {
           if (!contains(except, token)) {
             tokens.push(token);
           }
@@ -238809,7 +238810,7 @@ ${options.prefix}` : "\n" : options.prefix
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map39,
+        map: () => map42,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -241484,7 +241485,7 @@ ${options.prefix}` : "\n" : options.prefix
           if (!this.languageServiceEnabled) {
             return this.getRootScriptInfos();
           }
-          return map39(this.program.getSourceFiles(), (sourceFile) => {
+          return map42(this.program.getSourceFiles(), (sourceFile) => {
             const scriptInfo = this.projectService.getScriptInfoForPath(sourceFile.resolvedPath);
             Debug.assert(!!scriptInfo, "getScriptInfo", () => `scriptInfo for a file '${sourceFile.fileName}' Path: '${sourceFile.path}' / '${sourceFile.resolvedPath}' is missing.`);
             return scriptInfo;
@@ -246667,8 +246668,8 @@ Dynamic files must always be opened with service's current directory or service 
         }
         /** @internal */
         applyChangesToFile(scriptInfo, changes) {
-          for (const change of changes) {
-            scriptInfo.editContent(change.span.start, change.span.start + change.span.length, change.newText);
+          for (const change2 of changes) {
+            scriptInfo.editContent(change2.span.start, change2.span.start + change2.span.length, change2.newText);
           }
         }
         // eslint-disable-line @typescript-eslint/unified-signatures
@@ -246975,7 +246976,7 @@ Dynamic files must always be opened with service's current directory or service 
         async enableRequestedPluginsWorker(pendingPlugins) {
           Debug.assert(this.currentPluginEnablementPromise === void 0);
           let sendProjectsUpdatedInBackgroundEvent = false;
-          await Promise.all(map39(pendingPlugins, async ([project, promises]) => {
+          await Promise.all(map42(pendingPlugins, async ([project, promises]) => {
             const results = await Promise.all(promises);
             if (project.isClosed() || isProjectDeferredClose(project)) {
               this.logger.info(`Cancelling plugin enabling for ${project.getProjectName()} as it is ${project.isClosed() ? "closed" : "deferred close"}`);
@@ -247311,7 +247312,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source: diag2.source,
-          relatedInformation: map39(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map42(diag2.relatedInformation, formatRelatedInformation)
         };
       }
       function formatRelatedInformation(info) {
@@ -247352,7 +247353,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source,
-          relatedInformation: map39(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map42(diag2.relatedInformation, formatRelatedInformation)
         };
         return includeFileName ? { ...common, fileName: diag2.file && diag2.file.fileName } : common;
       }
@@ -247865,7 +247866,7 @@ ${json2}${newLine}`;
               if (!result.some((p) => p.projectErrors && p.projectErrors.length !== 0)) {
                 return this.requiredResponse(result);
               }
-              const converted = map39(result, (p) => {
+              const converted = map42(result, (p) => {
                 if (!p.projectErrors || p.projectErrors.length === 0) {
                   return p;
                 }
@@ -247896,11 +247897,11 @@ ${json2}${newLine}`;
                 })),
                 request.arguments.changedFiles && mapIterator(request.arguments.changedFiles, (file2) => ({
                   fileName: file2.fileName,
-                  changes: mapDefinedIterator(arrayReverseIterator(file2.textChanges), (change) => {
+                  changes: mapDefinedIterator(arrayReverseIterator(file2.textChanges), (change2) => {
                     const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(file2.fileName));
-                    const start3 = scriptInfo.lineOffsetToPosition(change.start.line, change.start.offset);
-                    const end = scriptInfo.lineOffsetToPosition(change.end.line, change.end.offset);
-                    return start3 >= 0 ? { span: { start: start3, length: end - start3 }, newText: change.newText } : void 0;
+                    const start3 = scriptInfo.lineOffsetToPosition(change2.start.line, change2.start.offset);
+                    const end = scriptInfo.lineOffsetToPosition(change2.end.line, change2.end.offset);
+                    return start3 >= 0 ? { span: { start: start3, length: end - start3 }, newText: change2.newText } : void 0;
                   })
                 })),
                 request.arguments.closedFiles
@@ -248937,7 +248938,7 @@ ${json2}${newLine}`;
               this.event({
                 triggerFile: event.data.triggerFile,
                 configFile: event.data.configFileName,
-                diagnostics: map39(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
+                diagnostics: map42(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
                   diagnostic,
                   /*includeFileName*/
                   true
@@ -249278,7 +249279,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             concatenate(projectErrors, optionsErrors),
             (diagnostic) => !!diagnostic.file && diagnostic.file.fileName === configFile
           );
-          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map39(
+          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map42(
             diagnosticsForConfigFile,
             (diagnostic) => formatDiagnosticToProtocol(
               diagnostic,
@@ -249303,7 +249304,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             // TODO: GH#18217
             reportsUnnecessary: d.reportsUnnecessary,
             reportsDeprecated: d.reportsDeprecated,
-            relatedInformation: map39(d.relatedInformation, formatRelatedInformation)
+            relatedInformation: map42(d.relatedInformation, formatRelatedInformation)
           }));
         }
         getCompilerOptionsDiagnostics(args) {
@@ -249331,7 +249332,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
               endLocation: scriptInfo && scriptInfo.positionToLineOffset(d.start + d.length),
               reportsUnnecessary: d.reportsUnnecessary,
               reportsDeprecated: d.reportsDeprecated,
-              relatedInformation: map39(d.relatedInformation, formatRelatedInformation)
+              relatedInformation: map42(d.relatedInformation, formatRelatedInformation)
             })
           );
         }
@@ -250238,7 +250239,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             false
           ) })) : result.map((details) => ({
             ...details,
-            codeActions: map39(details.codeActions, (action) => this.mapCodeAction(action)),
+            codeActions: map42(details.codeActions, (action) => this.mapCodeAction(action)),
             documentation: this.mapDisplayParts(details.documentation, project),
             tags: this.mapJSDocTagInfo(details.tags, project, useDisplayParts)
           }));
@@ -250378,7 +250379,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           this.projectService.closeClientFile(file2);
         }
         mapLocationNavigationBarItems(items, scriptInfo) {
-          return map39(items, (item) => ({
+          return map42(items, (item) => ({
             text: item.text,
             kind: item.kind,
             kindModifiers: item.kindModifiers,
@@ -250399,7 +250400,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             kindModifiers: tree.kindModifiers,
             spans: tree.spans.map((span) => toProtocolTextSpan(span, scriptInfo)),
             nameSpan: tree.nameSpan && toProtocolTextSpan(tree.nameSpan, scriptInfo),
-            childItems: map39(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
+            childItems: map42(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
           };
         }
         getNavigationTree(args, simplifiedResult) {
@@ -250708,7 +250709,7 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
           return { edits: this.mapTextChangesToCodeEdits(edits), fixId: fixId56 };
         }
         mapTextChangesToCodeEdits(textChanges2) {
-          return textChanges2.map((change) => this.mapTextChangeToCodeEdit(change));
+          return textChanges2.map((change2) => this.mapTextChangeToCodeEdit(change2));
         }
         mapTextChangeToCodeEdit(textChanges2) {
           const scriptInfo = this.projectService.getScriptInfoOrConfig(textChanges2.fileName);
@@ -250720,11 +250721,11 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
           }
           return scriptInfo ? { fileName: textChanges2.fileName, textChanges: textChanges2.textChanges.map((textChange) => convertTextChangeToCodeEdit(textChange, scriptInfo)) } : convertNewFileTextChangeToCodeEdit(textChanges2);
         }
-        convertTextChangeToCodeEdit(change, scriptInfo) {
+        convertTextChangeToCodeEdit(change2, scriptInfo) {
           return {
-            start: scriptInfo.positionToLineOffset(change.span.start),
-            end: scriptInfo.positionToLineOffset(change.span.start + change.span.length),
-            newText: change.newText ? change.newText : ""
+            start: scriptInfo.positionToLineOffset(change2.span.start),
+            end: scriptInfo.positionToLineOffset(change2.span.start + change2.span.length),
+            newText: change2.newText ? change2.newText : ""
           };
         }
         getBraceMatching(args, simplifiedResult) {
@@ -250791,7 +250792,7 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
           const { locations } = args;
           const { file: file2, languageService } = this.getFileAndLanguageServiceForSyntacticOperation(args);
           const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(file2));
-          return map39(locations, (location) => {
+          return map42(locations, (location) => {
             const pos = this.getPosition(location, scriptInfo);
             const selectionRange = languageService.getSmartSelectionRange(file2, pos);
             return simplifiedResult ? this.mapSelectionRange(selectionRange, scriptInfo) : selectionRange;
@@ -251115,8 +251116,8 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
         const contextTextSpan = contextSpan && toProtocolTextSpan(contextSpan, scriptInfo);
         return contextTextSpan ? { ...textSpan, contextStart: contextTextSpan.start, contextEnd: contextTextSpan.end } : textSpan;
       }
-      function convertTextChangeToCodeEdit(change, scriptInfo) {
-        return { start: positionToLineOffset(scriptInfo, change.span.start), end: positionToLineOffset(scriptInfo, textSpanEnd(change.span)), newText: change.newText };
+      function convertTextChangeToCodeEdit(change2, scriptInfo) {
+        return { start: positionToLineOffset(scriptInfo, change2.span.start), end: positionToLineOffset(scriptInfo, textSpanEnd(change2.span)), newText: change2.newText };
       }
       function positionToLineOffset(info, position) {
         return isConfigFile(info) ? locationFromLineAndCharacter(info.getLineAndCharacterOfPosition(position)) : info.positionToLineOffset(position);
@@ -251138,9 +251139,9 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
       }
       function convertNewFileTextChangeToCodeEdit(textChanges2) {
         Debug.assert(textChanges2.textChanges.length === 1);
-        const change = first2(textChanges2.textChanges);
-        Debug.assert(change.span.start === 0 && change.span.length === 0);
-        return { fileName: textChanges2.fileName, textChanges: [{ start: { line: 0, offset: 0 }, end: { line: 0, offset: 0 }, newText: change.newText }] };
+        const change2 = first2(textChanges2.textChanges);
+        Debug.assert(change2.span.start === 0 && change2.span.length === 0);
+        return { fileName: textChanges2.fileName, textChanges: [{ start: { line: 0, offset: 0 }, end: { line: 0, offset: 0 }, newText: change2.newText }] };
       }
       function getLocationInNewDocument(oldText, renameFilename, renameLocation, edits) {
         const newText = applyEdits(oldText, renameFilename, edits);
@@ -251397,8 +251398,8 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
           let snap = this.versions[this.currentVersionToIndex()];
           if (this.changes.length > 0) {
             let snapIndex = snap.index;
-            for (const change of this.changes) {
-              snapIndex = snapIndex.edit(change.pos, change.deleteLen, change.insertedText);
+            for (const change2 of this.changes) {
+              snapIndex = snapIndex.edit(change2.pos, change2.deleteLen, change2.insertedText);
             }
             snap = new LineIndexSnapshot(this.currentVersion + 1, this, snapIndex, this.changes);
             this.currentVersion = snap.version;
@@ -254170,7 +254171,7 @@ function build(state2, object3) {
     }
     return node2;
   }
-  const map39 = tag.represent(object3);
+  const map42 = tag.represent(object3);
   const style = new Style();
   style.tagged = !implicitTag;
   const node = {
@@ -254180,7 +254181,7 @@ function build(state2, object3) {
     items: []
   };
   if (!state2.noRefs) state2.refs.set(object3, node);
-  for (const [objectKey, objectValue] of map39) {
+  for (const [objectKey, objectValue] of map42) {
     const key = build(state2, objectKey);
     if (key === INVALID) continue;
     const value = build(state2, objectValue);
@@ -255001,9 +255002,9 @@ var init_js_yaml = __esm({
       create: () => ({}),
       identify: isPlainObject,
       represent: (o) => {
-        const map39 = /* @__PURE__ */ new Map();
-        for (const key of Object.keys(o)) map39.set(key, o[key]);
-        return map39;
+        const map42 = /* @__PURE__ */ new Map();
+        for (const key of Object.keys(o)) map42.set(key, o[key]);
+        return map42;
       },
       addPair: (container, key, value) => {
         if (key !== null && typeof key === "object") return "object-based map does not support complex keys";
@@ -255028,9 +255029,9 @@ var init_js_yaml = __esm({
       create: () => /* @__PURE__ */ new Set(),
       identify: (data) => data instanceof Set,
       represent: (data) => {
-        const map39 = /* @__PURE__ */ new Map();
-        for (const key of data) map39.set(key, null);
-        return map39;
+        const map42 = /* @__PURE__ */ new Map();
+        for (const key of data) map42.set(key, null);
+        return map42;
       },
       addPair: (container, key, value) => {
         if (value !== null) return "cannot resolve a set item";
@@ -255143,19 +255144,19 @@ var init_js_yaml = __esm({
       identify: (data) => data instanceof Map || isPlainObject(data),
       represent: (data) => {
         if (data instanceof Map) return data;
-        const map39 = /* @__PURE__ */ new Map();
+        const map42 = /* @__PURE__ */ new Map();
         const obj = data;
-        for (const key of Object.keys(obj)) map39.set(key, obj[key]);
-        return map39;
+        for (const key of Object.keys(obj)) map42.set(key, obj[key]);
+        return map42;
       }
     });
     legacyMapTag = defineMappingTag("tag:yaml.org,2002:map", {
       create: () => ({}),
       identify: isPlainObject,
       represent: (o) => {
-        const map39 = /* @__PURE__ */ new Map();
-        for (const key of Object.keys(o)) map39.set(key, o[key]);
-        return map39;
+        const map42 = /* @__PURE__ */ new Map();
+        for (const key of Object.keys(o)) map42.set(key, o[key]);
+        return map42;
       },
       addPair: (container, key, value) => {
         const normalizedKey = normalizeKey(key);
@@ -257431,7 +257432,7 @@ var init_health = __esm({
       ).pipe(
         (0, import_operators14.switchMap)(({ projectId, clusterId }) => {
           const fetch3 = () => GraphqlClienAPI.clusterHealthView(projectId, clusterId);
-          const show2 = (data) => {
+          const show3 = (data) => {
             if (cmd.json) {
               process.stdout.write(`${JSON.stringify(data, null, 2)}
 `);
@@ -257451,14 +257452,14 @@ var init_health = __esm({
           return seconds ? (0, import_rxjs26.timer)(0, seconds * 1e3).pipe(
             (0, import_operators14.switchMap)(
               () => fetch3().pipe(
-                (0, import_operators14.tap)(show2),
+                (0, import_operators14.tap)(show3),
                 (0, import_operators14.catchError)((error48) => {
                   ui.warn(`refresh failed: ${errorText(error48)}`, "health");
                   return import_rxjs26.EMPTY;
                 })
               )
             )
-          ) : fetch3().pipe((0, import_operators14.tap)(show2));
+          ) : fetch3().pipe((0, import_operators14.tap)(show3));
         })
       );
       return (0, import_rxjs26.lastValueFrom)(flow);
@@ -257657,12 +257658,15 @@ var init_autoscale = __esm({
       if (cmd.consolidation !== void 0) {
         input.consolidation = cmd.consolidation;
       }
+      if (cmd.replaceCheaper !== void 0) {
+        input.replaceCheaper = cmd.replaceCheaper;
+      }
       if (cmd.serverTypes !== void 0) {
         input.serverTypes = ["", "none"].includes(cmd.serverTypes.trim()) ? [] : cmd.serverTypes.split(",").map((t2) => t2.trim().toLowerCase()).filter(Boolean);
       }
       if (!Object.keys(input).length) {
         throw new Error(
-          "Nothing to change: pass --enable/--disable and/or --mode, --consolidation/--no-consolidation, --minNodeAge, --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)"
+          "Nothing to change: pass --enable/--disable and/or --mode, --consolidation/--no-consolidation, --replace-cheaper/--no-replace-cheaper, --minNodeAge, --profile, --serverTypes, --step, --min, --max, --cpuUp, --memUp, --cpuDown, --memDown, --samples, --cooldown (gcli cluster:status shows the current policy)"
         );
       }
       return input;
@@ -257680,6 +257684,8 @@ var init_autoscale = __esm({
           workers: cluster.topology?.workers,
           enabled: a.enabled,
           mode: a.mode,
+          consolidation: a.consolidation,
+          replaceCheaper: a.replaceCheaper,
           profile: a.scalingProfile,
           workerTypes: a.serverTypes?.length ? a.serverTypes.join(",") : "(cluster type)",
           step: a.scaleUpStep,
@@ -257826,16 +257832,590 @@ var init_load_balancer = __esm({
   }
 });
 
+// src/services/cost-optimization.ts
+var import_operators15, PART, HIBERNATION, CostAPI;
+var init_cost_optimization = __esm({
+  "src/services/cost-optimization.ts"() {
+    import_operators15 = __toESM(require_operators());
+    init_gql_client();
+    PART = `current recommended action typical peak note`;
+    HIBERNATION = `enabled timezone days wakeAt sleepAt state override overrideUntil lambdasAsleep error`;
+    CostAPI = {
+      lambdaRecommendations: (projectId, days) => GraphqlClienAPI.query({
+        query: gql`
+        query lambdaResourceRecommendations($projectId: String!, $days: Int) {
+          lambdaResourceRecommendations(projectId: $projectId, days: $days) {
+            lambdaId lambdaName clusterId mode
+            cpu { ${PART} } memory { ${PART} }
+            monthlyCostNow monthlyCostRecommended currency confident hours
+          }
+        }
+      `,
+        variables: { projectId, days }
+      }).pipe((0, import_operators15.map)((r2) => r2.lambdaResourceRecommendations ?? [])),
+      pluginRecommendations: (projectId, days) => GraphqlClienAPI.query({
+        query: gql`
+        query pluginResourceRecommendations($projectId: String!, $days: Int) {
+          pluginResourceRecommendations(projectId: $projectId, days: $days) {
+            pluginName clusterId
+            cpu { ${PART} } memory { ${PART} }
+            monthlyCostNow monthlyCostRecommended currency confident hours
+          }
+        }
+      `,
+        variables: { projectId, days }
+      }).pipe((0, import_operators15.map)((r2) => r2.pluginResourceRecommendations ?? [])),
+      setLambdaResourcesMode: (projectId, lambdaId, mode) => GraphqlClienAPI.query({
+        query: gql`
+        mutation setLambdaResourcesMode(
+          $projectId: String!
+          $lambdaId: String!
+          $mode: String!
+        ) {
+          setLambdaResourcesMode(
+            projectId: $projectId
+            lambdaId: $lambdaId
+            mode: $mode
+          )
+        }
+      `,
+        variables: { projectId, lambdaId, mode }
+      }).pipe((0, import_operators15.map)((r2) => r2.setLambdaResourcesMode)),
+      updatePluginSettings: (projectId, pluginName, clusterId, change2) => GraphqlClienAPI.query({
+        query: gql`
+        mutation updatePluginSettings(
+          $projectId: String!
+          $pluginName: String!
+          $clusterId: String
+          $resources: PluginResourcesInput
+          $autoGrowStorage: Boolean
+        ) {
+          updatePluginSettings(
+            projectId: $projectId
+            pluginName: $pluginName
+            clusterId: $clusterId
+            resources: $resources
+            autoGrowStorage: $autoGrowStorage
+          ) {
+            resources {
+              minCpu
+              maxCpu
+              minMemory
+              maxMemory
+            }
+            autoGrowStorage
+          }
+        }
+      `,
+        variables: { projectId, pluginName, clusterId, ...change2 }
+      }).pipe((0, import_operators15.map)((r2) => r2.updatePluginSettings)),
+      installedPluginResources: (projectId) => GraphqlClienAPI.query({
+        query: gql`
+        query installedPluginResources($projectId: String!) {
+          listInstalledPlugins(projectId: $projectId) {
+            plugin {
+              name
+            }
+            clusterId
+            resources {
+              minCpu
+              maxCpu
+              minMemory
+              maxMemory
+            }
+          }
+        }
+      `,
+        variables: { projectId }
+      }).pipe((0, import_operators15.map)((r2) => r2.listInstalledPlugins ?? [])),
+      hibernation: (projectId) => GraphqlClienAPI.query({
+        query: gql`
+        query projectHibernation($projectId: String!) {
+          projectHibernation(projectId: $projectId) { ${HIBERNATION} }
+        }
+      `,
+        variables: { projectId }
+      }).pipe((0, import_operators15.map)((r2) => r2.projectHibernation)),
+      setHibernation: (projectId, input) => GraphqlClienAPI.query({
+        query: gql`
+        mutation setProjectHibernation($projectId: String!, $input: ProjectHibernationInput!) {
+          setProjectHibernation(projectId: $projectId, input: $input) { ${HIBERNATION} }
+        }
+      `,
+        variables: { projectId, input }
+      }).pipe((0, import_operators15.map)((r2) => r2.setProjectHibernation)),
+      hibernateNow: (projectId) => GraphqlClienAPI.query({
+        query: gql`
+        mutation hibernateProjectNow($projectId: String!) {
+          hibernateProjectNow(projectId: $projectId) { ${HIBERNATION} }
+        }
+      `,
+        variables: { projectId }
+      }).pipe((0, import_operators15.map)((r2) => r2.hibernateProjectNow)),
+      wakeNow: (projectId) => GraphqlClienAPI.query({
+        query: gql`
+        mutation wakeProjectNow($projectId: String!) {
+          wakeProjectNow(projectId: $projectId) { ${HIBERNATION} }
+        }
+      `,
+        variables: { projectId }
+      }).pipe((0, import_operators15.map)((r2) => r2.wakeProjectNow)),
+      savings: (projectId) => GraphqlClienAPI.query({
+        query: gql`
+        query projectSavings($projectId: String!) {
+          projectSavings(projectId: $projectId) {
+            currency
+            total
+            ongoingMonthly
+            items {
+              kind
+              label
+              amount
+              monthly
+              ongoing
+            }
+          }
+        }
+      `,
+        variables: { projectId }
+      }).pipe((0, import_operators15.map)((r2) => r2.projectSavings)),
+      setPodPlacement: (projectId, clusterId, placement) => GraphqlClienAPI.query({
+        query: gql`
+        mutation setProjectClusterPodPlacement(
+          $projectId: String!
+          $clusterId: String!
+          $placement: String!
+        ) {
+          setProjectClusterPodPlacement(
+            projectId: $projectId
+            clusterId: $clusterId
+            placement: $placement
+          ) {
+            id
+            name
+            status
+            podPlacement
+            podPlacementJob
+            podPlacementError
+          }
+        }
+      `,
+        variables: { projectId, clusterId, placement }
+      }).pipe((0, import_operators15.map)((r2) => r2.setProjectClusterPodPlacement))
+    };
+  }
+});
+
+// src/commands/cost/parse.ts
+function parseDays(value) {
+  const one = (v) => {
+    const t2 = v.trim().toLowerCase().slice(0, 3);
+    const n = DAY_NAMES.includes(t2) ? DAY_NAMES.indexOf(t2) : Number(t2);
+    if (!Number.isInteger(n) || n < 0 || n > 6) {
+      throw new Error(
+        `--days: "${v}" is not a day (0-6, 0 = Sunday, or mon..sun)`
+      );
+    }
+    return n;
+  };
+  const days = value.split(",").filter((p) => p.trim()).flatMap((part) => {
+    const [a, b] = part.split("-");
+    if (b === void 0) return [one(a)];
+    const from19 = one(a);
+    const to = one(b);
+    if (to < from19) throw new Error(`--days: "${part}" runs backwards`);
+    return Array.from({ length: to - from19 + 1 }, (_2, i2) => from19 + i2);
+  });
+  if (!days.length) throw new Error("--days: at least one day");
+  return [...new Set(days)].sort((a, b) => a - b);
+}
+function toHibernationInput(cmd) {
+  if (cmd.enable && cmd.disable) {
+    throw new Error("Pass --enable or --disable, not both");
+  }
+  const input = {};
+  if (cmd.enable) input.enabled = true;
+  if (cmd.disable) input.enabled = false;
+  if (cmd.timezone !== void 0) input.timezone = cmd.timezone.trim();
+  if (cmd.days !== void 0) input.days = parseDays(cmd.days);
+  for (const [flag, field] of [
+    ["wake", "wakeAt"],
+    ["sleep", "sleepAt"]
+  ]) {
+    const v = cmd[flag];
+    if (v === void 0) continue;
+    if (!HHMM.test(v)) throw new Error(`--${flag} must be HH:MM, got "${v}"`);
+    input[field] = v;
+  }
+  return Object.keys(input).length ? input : null;
+}
+var HHMM, DAY_NAMES, hibernationRow, change, recommendationRow, yamlSnippet, pluginResources;
+var init_parse = __esm({
+  "src/commands/cost/parse.ts"() {
+    HHMM = /^([01]\d|2[0-3]):[0-5]\d$/;
+    DAY_NAMES = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    hibernationRow = (h2) => ({
+      enabled: h2.enabled,
+      state: h2.state,
+      hours: `${h2.wakeAt}-${h2.sleepAt}`,
+      days: (h2.days ?? []).map((d) => DAY_NAMES[d]).join(","),
+      timezone: h2.timezone,
+      override: h2.override ? `${h2.override} until ${h2.overrideUntil ?? "?"}` : "",
+      lambdasAsleep: h2.lambdasAsleep ?? 0,
+      error: h2.error ?? ""
+    });
+    change = (p, unit) => p.action === "keep" ? `${p.current}${unit} (keep)` : `${p.current} -> ${p.recommended}${unit} (${p.action})`;
+    recommendationRow = (r2) => ({
+      name: "lambdaName" in r2 ? r2.lambdaName : r2.pluginName,
+      ..."mode" in r2 ? { mode: r2.mode ?? "fixed" } : {},
+      cpu: change(r2.cpu, "m"),
+      memory: change(r2.memory, " MB"),
+      use: `cpu ${r2.cpu.typical}/${r2.cpu.peak}m, mem ${r2.memory.typical}/${r2.memory.peak} MB`,
+      monthly: `${r2.monthlyCostNow} -> ${r2.monthlyCostRecommended} ${r2.currency}`,
+      data: r2.confident ? `${r2.hours} h` : `${r2.hours} h (under a day)`,
+      note: [r2.cpu.note, r2.memory.note].filter(Boolean).join("; ")
+    });
+    yamlSnippet = (r2) => `# ${r2.lambdaName} (lambforge.yaml)
+scaleOptions:
+  minCpu: ${r2.cpu.recommended}
+  minMemory: ${r2.memory.recommended}`;
+    pluginResources = (r2, current) => ({
+      minCpu: r2.cpu.recommended,
+      maxCpu: Math.max(Number(current?.maxCpu) || 0, r2.cpu.recommended),
+      minMemory: r2.memory.recommended,
+      maxMemory: Math.max(Number(current?.maxMemory) || 0, r2.memory.recommended)
+    });
+  }
+});
+
+// src/commands/cost/lambda-resources.ts
+var lambda_resources_exports = {};
+__export(lambda_resources_exports, {
+  default: () => lambda_resources_default
+});
+var import_rxjs31, import_operators16, lambda_resources_default;
+var init_lambda_resources = __esm({
+  "src/commands/cost/lambda-resources.ts"() {
+    import_rxjs31 = __toESM(require_cjs());
+    import_operators16 = __toESM(require_operators());
+    init_helpers();
+    init_cost_optimization();
+    init_ui();
+    init_parse();
+    lambda_resources_default = (cmd) => {
+      if (cmd.auto && cmd.fixed)
+        throw new Error("Pass --auto or --fixed, not both");
+      if ((cmd.auto || cmd.fixed) && !cmd.name) {
+        throw new Error("--auto / --fixed need --name <lambda>");
+      }
+      const days = cmd.days ? Number(cmd.days) : void 0;
+      return (0, import_rxjs31.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators16.switchMap)(
+            (projectId) => CostAPI.lambdaRecommendations(projectId, days).pipe(
+              (0, import_operators16.map)(
+                (all) => cmd.name ? all.filter((r2) => r2.lambdaName === cmd.name) : all
+              ),
+              (0, import_operators16.switchMap)((rows) => {
+                if (!cmd.auto && !cmd.fixed) return [rows];
+                const [r2] = rows;
+                if (!r2) {
+                  throw new Error(
+                    `No measurements for lambda "${cmd.name}" yet (the cluster agent records them while it runs)`
+                  );
+                }
+                const mode = cmd.auto ? "auto" : "fixed";
+                return CostAPI.setLambdaResourcesMode(
+                  projectId,
+                  r2.lambdaId,
+                  mode
+                ).pipe(
+                  (0, import_operators16.tap)(
+                    () => ui.success(
+                      mode === "auto" ? `${r2.lambdaName} is sized automatically from now on (at most once a day, within the plan)` : `${r2.lambdaName}: recommendations only`,
+                      "resources"
+                    )
+                  ),
+                  (0, import_operators16.map)(() => [{ ...r2, mode }])
+                );
+              })
+            )
+          ),
+          (0, import_operators16.tap)((rows) => {
+            if (cmd.json) return ui.print(JSON.stringify(rows, null, 2));
+            if (!rows.length) {
+              return ui.info(
+                "No measurements yet - the cluster agent records them while lambdas run.",
+                "resources"
+              );
+            }
+            ui.table(rows.map(recommendationRow));
+            const changes = rows.filter(
+              (r2) => r2.confident && r2.mode !== "auto" && (r2.cpu.action !== "keep" || r2.memory.action !== "keep")
+            );
+            if (changes.length && !cmd.auto) {
+              ui.info(
+                "Apply in lambforge.yaml and deploy (a deploy from the yaml sets these values), or keep one sized automatically with --name <lambda> --auto:",
+                "resources"
+              );
+              ui.print(changes.map(yamlSnippet).join("\n\n"));
+            }
+          })
+        )
+      );
+    };
+  }
+});
+
+// src/commands/cost/plugin-resources.ts
+var plugin_resources_exports = {};
+__export(plugin_resources_exports, {
+  autoGrow: () => autoGrow,
+  default: () => plugin_resources_default
+});
+var import_rxjs32, import_operators17, plugin_resources_default, autoGrow;
+var init_plugin_resources = __esm({
+  "src/commands/cost/plugin-resources.ts"() {
+    import_rxjs32 = __toESM(require_cjs());
+    import_operators17 = __toESM(require_operators());
+    init_helpers();
+    init_cost_optimization();
+    init_ui();
+    init_parse();
+    plugin_resources_default = (cmd) => {
+      if (cmd.apply && !cmd.name) throw new Error("--apply needs --name <plugin>");
+      const days = cmd.days ? Number(cmd.days) : void 0;
+      return (0, import_rxjs32.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators17.switchMap)(
+            (projectId) => CostAPI.pluginRecommendations(projectId, days).pipe(
+              (0, import_operators17.map)(
+                (all) => cmd.name ? all.filter((r2) => r2.pluginName === cmd.name) : all
+              ),
+              (0, import_operators17.switchMap)((rows) => {
+                if (!cmd.apply) return [rows];
+                const [r2] = rows;
+                if (!r2) {
+                  throw new Error(`No measurements for plugin "${cmd.name}" yet`);
+                }
+                if (!r2.confident) {
+                  throw new Error(
+                    `${r2.pluginName}: under a day of measurements (${r2.hours} h) - try again later`
+                  );
+                }
+                return CostAPI.installedPluginResources(projectId).pipe(
+                  (0, import_operators17.map)(
+                    (installs) => installs.find(
+                      (i2) => i2.plugin?.name === r2.pluginName && (i2.clusterId ?? "") === (r2.clusterId ?? "")
+                    )?.resources ?? null
+                  ),
+                  (0, import_operators17.switchMap)(
+                    (current) => CostAPI.updatePluginSettings(
+                      projectId,
+                      r2.pluginName,
+                      r2.clusterId ?? void 0,
+                      { resources: pluginResources(r2, current) }
+                    )
+                  ),
+                  (0, import_operators17.tap)(
+                    (res) => ui.success(
+                      `${r2.pluginName} now reserves ${res.resources?.minCpu}m CPU and ${res.resources?.minMemory} MB (instances restart one at a time)`,
+                      "plugins"
+                    )
+                  ),
+                  (0, import_operators17.map)(() => rows)
+                );
+              })
+            )
+          ),
+          (0, import_operators17.tap)((rows) => {
+            if (cmd.json) return ui.print(JSON.stringify(rows, null, 2));
+            if (!rows.length) {
+              return ui.info(
+                "No measurements yet - the cluster agent records them while plugins run (a plugin installed on two clusters is left out).",
+                "plugins"
+              );
+            }
+            ui.table(rows.map(recommendationRow));
+          })
+        )
+      );
+    };
+    autoGrow = (plugin, cmd) => {
+      if (!!cmd.on === !!cmd.off) throw new Error("Pass --on or --off");
+      return (0, import_rxjs32.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators17.switchMap)(
+            (projectId) => CostAPI.updatePluginSettings(projectId, plugin, cmd.clusterId, {
+              autoGrowStorage: !!cmd.on
+            })
+          ),
+          (0, import_operators17.tap)(
+            (res) => ui.success(
+              res.autoGrowStorage === false ? `${plugin}: the volume only warns at 80 % / 90 % full` : `${plugin}: the volume grows to the next size by itself at 90 % full`,
+              "plugins"
+            )
+          )
+        )
+      );
+    };
+  }
+});
+
+// src/commands/cost/hibernation.ts
+var hibernation_exports = {};
+__export(hibernation_exports, {
+  default: () => hibernation_default,
+  sleepNow: () => sleepNow,
+  wakeNow: () => wakeNow
+});
+var import_rxjs33, import_operators18, show, hibernation_default, sleepNow, wakeNow;
+var init_hibernation = __esm({
+  "src/commands/cost/hibernation.ts"() {
+    import_rxjs33 = __toESM(require_cjs());
+    import_operators18 = __toESM(require_operators());
+    init_helpers();
+    init_cost_optimization();
+    init_ui();
+    init_parse();
+    show = (json2) => (h2) => json2 ? ui.print(JSON.stringify(h2, null, 2)) : ui.table([hibernationRow(h2)]);
+    hibernation_default = (cmd) => {
+      const input = toHibernationInput(cmd);
+      return (0, import_rxjs33.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators18.switchMap)(
+            (projectId) => input ? CostAPI.setHibernation(projectId, input) : CostAPI.hibernation(projectId)
+          ),
+          (0, import_operators18.tap)(show(cmd.json))
+        )
+      );
+    };
+    sleepNow = (cmd) => (0, import_rxjs33.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators18.switchMap)((projectId) => CostAPI.hibernateNow(projectId)),
+        (0, import_operators18.tap)(
+          (h2) => ui.success(
+            `asleep until ${h2.overrideUntil ?? "the next wake time"}`,
+            "hibernation"
+          )
+        ),
+        (0, import_operators18.tap)(show(cmd.json))
+      )
+    );
+    wakeNow = (cmd) => (0, import_rxjs33.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators18.switchMap)((projectId) => CostAPI.wakeNow(projectId)),
+        (0, import_operators18.tap)(
+          (h2) => ui.success(
+            `awake until ${h2.overrideUntil ?? "the next sleep time"}`,
+            "hibernation"
+          )
+        ),
+        (0, import_operators18.tap)(show(cmd.json))
+      )
+    );
+  }
+});
+
+// src/commands/cost/savings.ts
+var savings_exports = {};
+__export(savings_exports, {
+  default: () => savings_default
+});
+var import_rxjs34, import_operators19, savings_default;
+var init_savings = __esm({
+  "src/commands/cost/savings.ts"() {
+    import_rxjs34 = __toESM(require_cjs());
+    import_operators19 = __toESM(require_operators());
+    init_helpers();
+    init_cost_optimization();
+    init_ui();
+    savings_default = (cmd) => (0, import_rxjs34.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators19.switchMap)((projectId) => CostAPI.savings(projectId)),
+        (0, import_operators19.tap)((s2) => {
+          if (cmd.json) return ui.print(JSON.stringify(s2, null, 2));
+          ui.summary([
+            ["Saved this month", `${s2.total} ${s2.currency}`],
+            ["Still saving", `${s2.ongoingMonthly} ${s2.currency}/month`]
+          ]);
+          if (s2.items.length) {
+            ui.table(
+              s2.items.map((i2) => ({
+                kind: i2.kind,
+                what: i2.label,
+                saved: `${i2.amount} ${s2.currency}`,
+                perMonth: i2.ongoing ? `${i2.monthly} ${s2.currency}` : "ended"
+              }))
+            );
+          }
+        })
+      )
+    );
+  }
+});
+
+// src/commands/cost/pod-placement.ts
+var pod_placement_exports = {};
+__export(pod_placement_exports, {
+  PLACEMENTS: () => PLACEMENTS,
+  default: () => pod_placement_default
+});
+var import_rxjs35, import_operators20, PLACEMENTS, pod_placement_default;
+var init_pod_placement = __esm({
+  "src/commands/cost/pod-placement.ts"() {
+    import_rxjs35 = __toESM(require_cjs());
+    import_operators20 = __toESM(require_operators());
+    init_cost_optimization();
+    init_ui();
+    init_cluster_change();
+    PLACEMENTS = ["spread", "fill"];
+    pod_placement_default = (cmd) => {
+      if (!PLACEMENTS.includes(cmd.mode)) {
+        throw new Error(
+          `--mode must be spread (new pods on the emptiest machine) or fill (pack machines, so the autoscaler can remove empty ones), got "${cmd.mode ?? ""}"`
+        );
+      }
+      return (0, import_rxjs35.lastValueFrom)(
+        (0, import_rxjs35.from)(resolveClusterTarget(cmd)).pipe(
+          (0, import_operators20.switchMap)(
+            ({ projectId, clusterId }) => CostAPI.setPodPlacement(
+              projectId,
+              clusterId,
+              cmd.mode
+            )
+          ),
+          (0, import_operators20.tap)((c) => {
+            ui.table([
+              {
+                cluster: c.name,
+                status: c.status,
+                podPlacement: c.podPlacement,
+                job: c.podPlacementJob ?? "",
+                error: c.podPlacementError ?? ""
+              }
+            ]);
+            ui.info(
+              "Applied on the control planes in the background (no reboot); running pods stay where they are. gcli cluster:status shows it.",
+              "cluster"
+            );
+          })
+        )
+      );
+    };
+  }
+});
+
 // src/commands/domain/list.ts
 var list_exports2 = {};
 __export(list_exports2, {
   default: () => list_default2
 });
-var import_rxjs31, import_operators15, SERVES, list_default2;
+var import_rxjs36, import_operators21, SERVES, list_default2;
 var init_list2 = __esm({
   "src/commands/domain/list.ts"() {
-    import_rxjs31 = __toESM(require_cjs());
-    import_operators15 = __toESM(require_operators());
+    import_rxjs36 = __toESM(require_cjs());
+    import_operators21 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -257843,10 +258423,10 @@ var init_list2 = __esm({
       all: "every lambda at /<route>",
       passthrough: "full paths"
     };
-    list_default2 = (cmd) => (0, import_rxjs31.lastValueFrom)(
+    list_default2 = (cmd) => (0, import_rxjs36.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators15.switchMap)((projectId) => GraphqlClienAPI.listProjectDomains(projectId)),
-        (0, import_operators15.tap)((domains) => {
+        (0, import_operators21.switchMap)((projectId) => GraphqlClienAPI.listProjectDomains(projectId)),
+        (0, import_operators21.tap)((domains) => {
           if (!domains.length) {
             Logger.info(
               "No domains yet - see domain:apply (domains: in lambforge.yaml)."
@@ -257934,11 +258514,11 @@ __export(apply_exports2, {
   default: () => apply_default2,
   reportDomain: () => reportDomain
 });
-var import_rxjs32, import_operators16, reportDomain, runStep, applyDomains, apply_default2;
+var import_rxjs37, import_operators22, reportDomain, runStep, applyDomains, apply_default2;
 var init_apply2 = __esm({
   "src/commands/domain/apply.ts"() {
-    import_rxjs32 = __toESM(require_cjs());
-    import_operators16 = __toESM(require_operators());
+    import_rxjs37 = __toESM(require_cjs());
+    import_operators22 = __toESM(require_operators());
     init_load_spec();
     init_helpers();
     init_gql_client();
@@ -257968,19 +258548,19 @@ var init_apply2 = __esm({
         throw new Error(
           `domains: "${step2.label}" needs a lambda to start with - set \`serves\` or a path`
         );
-      })() : (0, import_rxjs32.of)(step2.existing);
+      })() : (0, import_rxjs37.of)(step2.existing);
       return created$.pipe(
-        (0, import_operators16.switchMap)(
+        (0, import_operators22.switchMap)(
           (domain2) => step2.same || // routing applies to a live domain; a new custom domain gets it on the
           // next apply, once it is verified
-          domain2.status !== "active" ? (0, import_rxjs32.of)(domain2) : GraphqlClienAPI.setDomainRouting(domain2.id, routing)
+          domain2.status !== "active" ? (0, import_rxjs37.of)(domain2) : GraphqlClienAPI.setDomainRouting(domain2.id, routing)
         )
       );
     };
-    applyDomains = (projectId, entries, defaultLambda) => !entries?.length ? (0, import_rxjs32.of)([]) : GraphqlClienAPI.listProjectDomains(projectId).pipe(
-      (0, import_operators16.switchMap)(
+    applyDomains = (projectId, entries, defaultLambda) => !entries?.length ? (0, import_rxjs37.of)([]) : GraphqlClienAPI.listProjectDomains(projectId).pipe(
+      (0, import_operators22.switchMap)(
         (domains) => GraphqlClienAPI.listLambdas(projectId).pipe(
-          (0, import_operators16.map)((lambdas) => ({
+          (0, import_operators22.map)((lambdas) => ({
             domains,
             lambdaIds: new Map(
               (lambdas ?? []).map((l) => [l.name, l.id])
@@ -257988,14 +258568,14 @@ var init_apply2 = __esm({
           }))
         )
       ),
-      (0, import_operators16.switchMap)(
-        ({ domains, lambdaIds }) => (0, import_rxjs32.concat)(
+      (0, import_operators22.switchMap)(
+        ({ domains, lambdaIds }) => (0, import_rxjs37.concat)(
           ...entries.map(
-            (entry) => (0, import_rxjs32.of)(entry).pipe(
-              (0, import_operators16.map)((e2) => domainStep(e2, domains, lambdaIds, defaultLambda)),
-              (0, import_operators16.switchMap)(
+            (entry) => (0, import_rxjs37.of)(entry).pipe(
+              (0, import_operators22.map)((e2) => domainStep(e2, domains, lambdaIds, defaultLambda)),
+              (0, import_operators22.switchMap)(
                 (step2) => runStep(projectId, step2).pipe(
-                  (0, import_operators16.tap)((d) => {
+                  (0, import_operators22.tap)((d) => {
                     if (step2.same && !step2.create) {
                       Logger.info(`${d.hostname} is up to date`);
                     } else {
@@ -258008,13 +258588,13 @@ var init_apply2 = __esm({
           )
         )
       ),
-      (0, import_operators16.toArray)()
+      (0, import_operators22.toArray)()
     );
-    apply_default2 = (cmd) => (0, import_rxjs32.lastValueFrom)(
+    apply_default2 = (cmd) => (0, import_rxjs37.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators16.switchMap)(
+        (0, import_operators22.switchMap)(
           (projectId) => loadSpec(cmd.spec).pipe(
-            (0, import_operators16.switchMap)((spec) => {
+            (0, import_operators22.switchMap)((spec) => {
               const entries = spec?.domains ?? [];
               if (!entries.length) {
                 throw new Error(
@@ -258025,7 +258605,7 @@ var init_apply2 = __esm({
             })
           )
         ),
-        (0, import_operators16.catchError)((e2) => {
+        (0, import_operators22.catchError)((e2) => {
           Logger.error(e2?.message ?? String(e2));
           throw e2;
         })
@@ -258039,18 +258619,18 @@ var list_environments_exports = {};
 __export(list_environments_exports, {
   default: () => list_environments_default
 });
-var import_rxjs33, import_operators17, list_environments_default;
+var import_rxjs38, import_operators23, list_environments_default;
 var init_list_environments = __esm({
   "src/commands/environment/list-environments.ts"() {
-    import_rxjs33 = __toESM(require_cjs());
-    import_operators17 = __toESM(require_operators());
+    import_rxjs38 = __toESM(require_cjs());
+    import_operators23 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_environments_default = (cmd) => (0, import_rxjs33.lastValueFrom)(
+    list_environments_default = (cmd) => (0, import_rxjs38.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators17.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
-        (0, import_operators17.tap)((data) => {
+        (0, import_operators23.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
+        (0, import_operators23.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -258116,11 +258696,11 @@ var create_environment_exports = {};
 __export(create_environment_exports, {
   default: () => create_environment_default
 });
-var import_rxjs34, import_operators18, create_environment_default;
+var import_rxjs39, import_operators24, create_environment_default;
 var init_create_environment = __esm({
   "src/commands/environment/create-environment.ts"() {
-    import_rxjs34 = __toESM(require_cjs());
-    import_operators18 = __toESM(require_operators());
+    import_rxjs39 = __toESM(require_cjs());
+    import_operators24 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -258128,22 +258708,22 @@ var init_create_environment = __esm({
     init_environment_payload();
     create_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs34.lastValueFrom)(
+      return (0, import_rxjs39.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators18.switchMap)(
+          (0, import_operators24.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-              (0, import_operators18.map)((data) => ({
+              (0, import_operators24.map)((data) => ({
                 projectId,
                 ...data?.environment ?? data
               }))
             )
           ),
-          (0, import_operators18.switchMap)(
+          (0, import_operators24.switchMap)(
             ({ projectId, clusterName: dataClusterName, ...data }) => resolveClusterId(projectId, {
               clusterId: cmdRest.clusterId || data.clusterId,
               clusterName: cmdClusterName || dataClusterName
             }).pipe(
-              (0, import_operators18.switchMap)(
+              (0, import_operators24.switchMap)(
                 (clusterId) => GraphqlClienAPI.createEnvironment(projectId, {
                   ...environmentPayload(data, cmdRest),
                   clusterId
@@ -258151,7 +258731,7 @@ var init_create_environment = __esm({
               )
             )
           ),
-          (0, import_operators18.tap)((data) => {
+          (0, import_operators24.tap)((data) => {
             Logger.success(`Environment ${data?.name ?? ""} created`);
             const columns = [
               "id",
@@ -258180,11 +258760,11 @@ var update_environment_exports = {};
 __export(update_environment_exports, {
   default: () => update_environment_default
 });
-var import_rxjs35, import_operators19, update_environment_default;
+var import_rxjs40, import_operators25, update_environment_default;
 var init_update_environment = __esm({
   "src/commands/environment/update-environment.ts"() {
-    import_rxjs35 = __toESM(require_cjs());
-    import_operators19 = __toESM(require_operators());
+    import_rxjs40 = __toESM(require_cjs());
+    import_operators25 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -258192,22 +258772,22 @@ var init_update_environment = __esm({
     init_environment_payload();
     update_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs35.lastValueFrom)(
+      return (0, import_rxjs40.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators19.switchMap)(
+          (0, import_operators25.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-              (0, import_operators19.map)((data) => ({
+              (0, import_operators25.map)((data) => ({
                 projectId,
                 ...data?.environment ?? data
               }))
             )
           ),
-          (0, import_operators19.switchMap)(
+          (0, import_operators25.switchMap)(
             ({ projectId, clusterName: dataClusterName, ...data }) => resolveClusterId(projectId, {
               clusterId: cmdRest.clusterId || data.clusterId,
               clusterName: cmdClusterName || dataClusterName
             }).pipe(
-              (0, import_operators19.switchMap)(
+              (0, import_operators25.switchMap)(
                 (clusterId) => GraphqlClienAPI.updateEnvironment(projectId, {
                   ...environmentPayload(data, cmdRest),
                   clusterId
@@ -258215,7 +258795,7 @@ var init_update_environment = __esm({
               )
             )
           ),
-          (0, import_operators19.tap)((data) => {
+          (0, import_operators25.tap)((data) => {
             Logger.success(`Environment ${data?.name ?? ""} updated`);
             const columns = [
               "id",
@@ -258244,31 +258824,31 @@ var delete_environment_exports = {};
 __export(delete_environment_exports, {
   default: () => delete_environment_default
 });
-var import_rxjs36, import_operators20, delete_environment_default;
+var import_rxjs41, import_operators26, delete_environment_default;
 var init_delete_environment = __esm({
   "src/commands/environment/delete-environment.ts"() {
-    import_rxjs36 = __toESM(require_cjs());
-    import_operators20 = __toESM(require_operators());
+    import_rxjs41 = __toESM(require_cjs());
+    import_operators26 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_environment_default = (cmd) => (0, import_rxjs36.lastValueFrom)(
+    delete_environment_default = (cmd) => (0, import_rxjs41.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators20.switchMap)(
+        (0, import_operators26.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators20.map)((data) => ({
+            (0, import_operators26.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators20.switchMap)(
+        (0, import_operators26.switchMap)(
           ({ projectId, name: name2 }) => resolveClusterId(projectId, {
             clusterId: cmd.clusterId,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators20.switchMap)(
+            (0, import_operators26.switchMap)(
               (clusterId) => GraphqlClienAPI.deleteEnvironment(
                 name2,
                 projectId,
@@ -258278,7 +258858,7 @@ var init_delete_environment = __esm({
             )
           )
         ),
-        (0, import_operators20.tap)((data) => {
+        (0, import_operators26.tap)((data) => {
           Logger.success(`Environment ${data?.name ?? ""} deleted`);
           const columns = [
             "id",
@@ -258304,31 +258884,31 @@ var get_environment_exports = {};
 __export(get_environment_exports, {
   default: () => get_environment_default
 });
-var import_rxjs37, import_operators21, get_environment_default;
+var import_rxjs42, import_operators27, get_environment_default;
 var init_get_environment = __esm({
   "src/commands/environment/get-environment.ts"() {
-    import_rxjs37 = __toESM(require_cjs());
-    import_operators21 = __toESM(require_operators());
+    import_rxjs42 = __toESM(require_cjs());
+    import_operators27 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    get_environment_default = (cmd) => (0, import_rxjs37.lastValueFrom)(
+    get_environment_default = (cmd) => (0, import_rxjs42.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators21.switchMap)(
+        (0, import_operators27.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators21.map)((data) => ({
+            (0, import_operators27.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators21.switchMap)(
+        (0, import_operators27.switchMap)(
           ({ projectId, name: name2 }) => resolveClusterId(projectId, {
             clusterId: cmd.clusterId,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators21.switchMap)(
+            (0, import_operators27.switchMap)(
               (clusterId) => GraphqlClienAPI.getEnvironment(
                 cmd.name ?? name2,
                 projectId,
@@ -258337,7 +258917,7 @@ var init_get_environment = __esm({
             )
           )
         ),
-        (0, import_operators21.tap)((data) => {
+        (0, import_operators27.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -267022,9 +267602,9 @@ var require_mime_types = __commonJS({
         for (var i2 = 0; i2 < exts.length; i2++) {
           var extension2 = exts[i2];
           if (types3[extension2]) {
-            var from18 = preference.indexOf(db[types3[extension2]].source);
+            var from19 = preference.indexOf(db[types3[extension2]].source);
             var to = preference.indexOf(mime.source);
-            if (types3[extension2] !== "application/octet-stream" && (from18 > to || from18 === to && types3[extension2].substr(0, 12) === "application/")) {
+            if (types3[extension2] !== "application/octet-stream" && (from19 > to || from19 === to && types3[extension2].substr(0, 12) === "application/")) {
               continue;
             }
           }
@@ -270006,10 +270586,10 @@ var require_async3 = __commonJS({
         return eachOfImplementation(coll, wrapAsync(iteratee), callback);
       }
       var eachOf$1 = awaitify(eachOf, 3);
-      function map39(coll, iteratee, callback) {
+      function map42(coll, iteratee, callback) {
         return _asyncMap(eachOf$1, coll, iteratee, callback);
       }
-      var map$1 = awaitify(map39, 3);
+      var map$1 = awaitify(map42, 3);
       var applyEach$1 = applyEach(map$1);
       function eachOfSeries(coll, iteratee, callback) {
         return eachOfLimit$2(coll, 1, iteratee, callback);
@@ -271580,15 +272160,15 @@ var require_polyfills = __commonJS({
       }
       if (platform2 === "win32") {
         fs3.rename = /* @__PURE__ */ (function(fs$rename) {
-          return function(from18, to, cb) {
+          return function(from19, to, cb) {
             var start3 = Date.now();
             var backoff = 0;
-            fs$rename(from18, to, function CB(er) {
+            fs$rename(from19, to, function CB(er) {
               if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start3 < 6e4) {
                 setTimeout(function() {
                   fs3.stat(to, function(stater, st) {
                     if (stater && stater.code === "ENOENT")
-                      fs$rename(from18, to, CB);
+                      fs$rename(from19, to, CB);
                     else
                       cb(er);
                   });
@@ -274819,8 +275399,8 @@ var require_lodash3 = __commonJS({
         return apply(func, this, otherArgs);
       };
     }
-    function getMapData(map39, key) {
-      var data = map39.__data__;
+    function getMapData(map42, key) {
+      var data = map42.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -275224,8 +275804,8 @@ var require_lodash4 = __commonJS({
     var createSet = !(Set2 && 1 / setToArray(new Set2([, -0]))[1] == INFINITY) ? noop3 : function(values) {
       return new Set2(values);
     };
-    function getMapData(map39, key) {
-      var data = map39.__data__;
+    function getMapData(map42, key) {
+      var data = map42.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -278496,7 +279076,7 @@ var require_from4 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors3().codes.ERR_INVALID_ARG_TYPE;
-    function from18(Readable2, iterable, opts) {
+    function from19(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -278535,7 +279115,7 @@ var require_from4 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from18;
+    module2.exports = from19;
   }
 });
 
@@ -278579,7 +279159,7 @@ var require_stream_readable4 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from18;
+    var from19;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -279261,10 +279841,10 @@ var require_stream_readable4 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from18 === void 0) {
-          from18 = require_from4();
+        if (from19 === void 0) {
+          from19 = require_from4();
         }
-        return from18(Readable2, iterable, opts);
+        return from19(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -279444,8 +280024,8 @@ var require_pipeline3 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from18, to) {
-      return from18.pipe(to);
+    function pipe2(from19, to) {
+      return from19.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -281838,7 +282418,7 @@ var require_from5 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors4().codes.ERR_INVALID_ARG_TYPE;
-    function from18(Readable2, iterable, opts) {
+    function from19(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -281877,7 +282457,7 @@ var require_from5 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from18;
+    module2.exports = from19;
   }
 });
 
@@ -281921,7 +282501,7 @@ var require_stream_readable5 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from18;
+    var from19;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -282603,10 +283183,10 @@ var require_stream_readable5 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from18 === void 0) {
-          from18 = require_from5();
+        if (from19 === void 0) {
+          from19 = require_from5();
         }
-        return from18(Readable2, iterable, opts);
+        return from19(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -282786,8 +283366,8 @@ var require_pipeline4 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from18, to) {
-      return from18.pipe(to);
+    function pipe2(from19, to) {
+      return from19.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -284610,7 +285190,7 @@ var require_from6 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors5().codes.ERR_INVALID_ARG_TYPE;
-    function from18(Readable2, iterable, opts) {
+    function from19(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -284649,7 +285229,7 @@ var require_from6 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from18;
+    module2.exports = from19;
   }
 });
 
@@ -284693,7 +285273,7 @@ var require_stream_readable6 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from18;
+    var from19;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -285375,10 +285955,10 @@ var require_stream_readable6 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from18 === void 0) {
-          from18 = require_from6();
+        if (from19 === void 0) {
+          from19 = require_from6();
         }
-        return from18(Readable2, iterable, opts);
+        return from19(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -285558,8 +286138,8 @@ var require_pipeline5 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from18, to) {
-      return from18.pipe(to);
+    function pipe2(from19, to) {
+      return from19.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -287847,7 +288427,7 @@ var require_from7 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors6().codes.ERR_INVALID_ARG_TYPE;
-    function from18(Readable2, iterable, opts) {
+    function from19(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -287886,7 +288466,7 @@ var require_from7 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from18;
+    module2.exports = from19;
   }
 });
 
@@ -287930,7 +288510,7 @@ var require_stream_readable7 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from18;
+    var from19;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -288612,10 +289192,10 @@ var require_stream_readable7 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from18 === void 0) {
-          from18 = require_from7();
+        if (from19 === void 0) {
+          from19 = require_from7();
         }
-        return from18(Readable2, iterable, opts);
+        return from19(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -288795,8 +289375,8 @@ var require_pipeline6 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from18, to) {
-      return from18.pipe(to);
+    function pipe2(from19, to) {
+      return from19.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -289591,31 +290171,31 @@ __export(package_exports, {
   default: () => package_default,
   packageArchive: () => packageArchive
 });
-var import_archiver, import_child_process3, import_fs5, import_rxjs38, import_operators22, import_util3, ReadFile, packageArchive, package_default;
+var import_archiver, import_child_process3, import_fs5, import_rxjs43, import_operators28, import_util3, ReadFile, packageArchive, package_default;
 var init_package = __esm({
   "src/commands/lambda/package.ts"() {
     import_archiver = __toESM(require_archiver());
     import_child_process3 = require("child_process");
     import_fs5 = require("fs");
-    import_rxjs38 = __toESM(require_cjs());
-    import_operators22 = __toESM(require_operators());
+    import_rxjs43 = __toESM(require_cjs());
+    import_operators28 = __toESM(require_operators());
     import_util3 = require("util");
     init_helpers2();
     init_archive_globs();
     init_load_spec();
     init_parse_ignore();
     init_read_file();
-    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators22.catchError)(() => (0, import_rxjs38.of)("")));
+    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators28.catchError)(() => (0, import_rxjs43.of)("")));
     packageArchive = (cmd) => loadSpec(cmd.spec).pipe(
-      (0, import_operators22.map)((spec) => spec?.function ?? spec),
-      (0, import_operators22.switchMap)(
-        (data) => (0, import_rxjs38.forkJoin)([
-          (0, import_rxjs38.defer)(() => (0, import_util3.promisify)(import_child_process3.exec)(["chmod", "+x", data.script].join(" "))),
+      (0, import_operators28.map)((spec) => spec?.function ?? spec),
+      (0, import_operators28.switchMap)(
+        (data) => (0, import_rxjs43.forkJoin)([
+          (0, import_rxjs43.defer)(() => (0, import_util3.promisify)(import_child_process3.exec)(["chmod", "+x", data.script].join(" "))),
           ReadFile(".gignore").pipe(
-            (0, import_operators22.map)((ignore) => parseIgnoredFiles(ignore))
+            (0, import_operators28.map)((ignore) => parseIgnoredFiles(ignore))
           )
         ]).pipe(
-          (0, import_operators22.switchMap)(([, ignore]) => {
+          (0, import_operators28.switchMap)(([, ignore]) => {
             const archive = (0, import_archiver.default)("zip", { zlib: { level: 9 } });
             let files = 0;
             archive.on("entry", (entry) => {
@@ -289626,12 +290206,12 @@ var init_package = __esm({
             );
             archive.finalize();
             const path2 = `.gcache/${data.name}.zip`;
-            return (0, import_rxjs38.defer)(() => streamToBufferPromise(archive)).pipe(
-              (0, import_operators22.switchMap)(
-                (buffer) => (0, import_rxjs38.defer)(() => (0, import_util3.promisify)(import_fs5.mkdir)(".gcache")).pipe(
-                  (0, import_operators22.catchError)(() => (0, import_rxjs38.of)(true)),
-                  (0, import_operators22.switchMap)(() => (0, import_util3.promisify)(import_fs5.writeFile)(path2, buffer)),
-                  (0, import_operators22.map)(() => ({ path: path2, files, bytes: buffer.length }))
+            return (0, import_rxjs43.defer)(() => streamToBufferPromise(archive)).pipe(
+              (0, import_operators28.switchMap)(
+                (buffer) => (0, import_rxjs43.defer)(() => (0, import_util3.promisify)(import_fs5.mkdir)(".gcache")).pipe(
+                  (0, import_operators28.catchError)(() => (0, import_rxjs43.of)(true)),
+                  (0, import_operators28.switchMap)(() => (0, import_util3.promisify)(import_fs5.writeFile)(path2, buffer)),
+                  (0, import_operators28.map)(() => ({ path: path2, files, bytes: buffer.length }))
                 )
               )
             );
@@ -289639,7 +290219,7 @@ var init_package = __esm({
         )
       )
     );
-    package_default = (cmd) => (0, import_rxjs38.lastValueFrom)(packageArchive(cmd));
+    package_default = (cmd) => (0, import_rxjs43.lastValueFrom)(packageArchive(cmd));
   }
 });
 
@@ -289690,17 +290270,17 @@ function timeTriggerPlan(lambdaName, desired, existing) {
   const sameName = existing.triggerName === storedTriggerName(lambdaName, desired.triggerName) || existing.triggerName === desired.triggerName;
   return sameName && existing.cron?.trim() === desired.cron.trim() ? "same" : "replace";
 }
-var import_rxjs39, import_operators23, storedTriggerName, syncTimeTrigger;
+var import_rxjs44, import_operators29, storedTriggerName, syncTimeTrigger;
 var init_time_trigger_sync = __esm({
   "src/commands/lambda/helpers/time-trigger-sync.ts"() {
-    import_rxjs39 = __toESM(require_cjs());
-    import_operators23 = __toESM(require_operators());
+    import_rxjs44 = __toESM(require_cjs());
+    import_operators29 = __toESM(require_operators());
     init_gql_client();
     init_log();
     storedTriggerName = (lambdaName, triggerName) => `${lambdaName}-${triggerName}`;
     syncTimeTrigger = (projectId, lambda, desired) => {
       if (!desired?.triggerName || !desired?.cron || !lambda?.id || !lambda.name) {
-        return (0, import_rxjs39.of)("none");
+        return (0, import_rxjs44.of)("none");
       }
       const lambdaId = lambda.id;
       const lambdaName = lambda.name;
@@ -289710,16 +290290,16 @@ var init_time_trigger_sync = __esm({
         cron: desired.cron
       });
       return GraphqlClienAPI.listProjectTimeTriggers(projectId).pipe(
-        (0, import_operators23.map)((all) => (all ?? []).find((t2) => t2.lambdaId === lambdaId)),
-        (0, import_operators23.switchMap)((existing) => {
+        (0, import_operators29.map)((all) => (all ?? []).find((t2) => t2.lambdaId === lambdaId)),
+        (0, import_operators29.switchMap)((existing) => {
           const plan = timeTriggerPlan(lambdaName, desired, existing);
-          const run2 = plan === "create" ? create() : plan === "replace" ? (0, import_rxjs39.concat)(
+          const run2 = plan === "create" ? create() : plan === "replace" ? (0, import_rxjs44.concat)(
             GraphqlClienAPI.deleteLambdaTimeTrigger(lambdaId),
             create()
-          ) : (0, import_rxjs39.of)(null);
+          ) : (0, import_rxjs44.of)(null);
           return run2.pipe(
-            (0, import_operators23.map)(() => plan),
-            (0, import_operators23.tap)((done) => {
+            (0, import_operators29.map)(() => plan),
+            (0, import_operators29.tap)((done) => {
               const label = `${storedTriggerName(lambdaName, desired.triggerName)} (${desired.cron})`;
               const text = {
                 none: "",
@@ -289731,11 +290311,11 @@ var init_time_trigger_sync = __esm({
             })
           );
         }),
-        (0, import_operators23.catchError)((e2) => {
+        (0, import_operators29.catchError)((e2) => {
           Logger.error(
             `triggers.time was not applied: ${e2?.message ?? e2} - run gcli cron:create`
           );
-          return (0, import_rxjs39.of)("none");
+          return (0, import_rxjs44.of)("none");
         })
       );
     };
@@ -289753,14 +290333,14 @@ function streamToBufferPromise(file2) {
     });
   });
 }
-var import_form_data, import_fs6, import_rxjs40, import_operators24, import_stream_to_buffer, ReadFile2, lambdaPayload, uploadArchive, saveLambda, DEPLOY_POLL_MS, DEPLOY_TIMEOUT_MS, deployState, reportBuildProblems, followDeploy, createOrUpdateLambda, finish, siteUrlOf, createCommand;
+var import_form_data, import_fs6, import_rxjs45, import_operators30, import_stream_to_buffer, ReadFile2, lambdaPayload, uploadArchive, saveLambda, DEPLOY_POLL_MS, DEPLOY_TIMEOUT_MS, deployState, reportBuildProblems, followDeploy, createOrUpdateLambda, finish, siteUrlOf, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
     import_fs6 = require("fs");
     init_src();
-    import_rxjs40 = __toESM(require_cjs());
-    import_operators24 = __toESM(require_operators());
+    import_rxjs45 = __toESM(require_cjs());
+    import_operators30 = __toESM(require_operators());
     import_stream_to_buffer = __toESM(require_stream_to_buffer());
     init_apply2();
     init_helpers();
@@ -289772,7 +290352,7 @@ var init_helpers2 = __esm({
     init_read_file();
     init_spread();
     init_time_trigger_sync();
-    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators24.catchError)(() => (0, import_rxjs40.of)("")));
+    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators30.catchError)(() => (0, import_rxjs45.of)("")));
     lambdaPayload = (cmd, payload, clusterId, files) => ({
       code: cmd.code || files.code || "",
       name: cmd.name || payload.name || "",
@@ -289825,12 +290405,12 @@ var init_helpers2 = __esm({
         scope,
         done: (s2) => `archive packed (${s2.files} files, ${bytes(s2.bytes)})`
       }),
-      (0, import_operators24.switchMap)(
+      (0, import_operators30.switchMap)(
         (stats) => GraphqlClienAPI.getConfig().pipe(
-          (0, import_operators24.switchMap)((config2) => {
+          (0, import_operators30.switchMap)((config2) => {
             const body = new import_form_data.default();
             body.append("file[]", (0, import_fs6.createReadStream)(stats.path));
-            return (0, import_rxjs40.defer)(
+            return (0, import_rxjs45.defer)(
               () => fetch2(config2.uploadUrl, {
                 method: "POST",
                 body,
@@ -289843,11 +290423,11 @@ var init_helpers2 = __esm({
               })
             );
           }),
-          (0, import_operators24.switchMap)(
-            (res) => (0, import_rxjs40.defer)(() => res.json()).pipe(
-              (0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null)),
-              (0, import_operators24.switchMap)(
-                (file2) => res.ok && file2?.id ? (0, import_rxjs40.of)({ ...data, customUploadFileId: file2.id }) : (0, import_rxjs40.throwError)(
+          (0, import_operators30.switchMap)(
+            (res) => (0, import_rxjs45.defer)(() => res.json()).pipe(
+              (0, import_operators30.catchError)(() => (0, import_rxjs45.of)(null)),
+              (0, import_operators30.switchMap)(
+                (file2) => res.ok && file2?.id ? (0, import_rxjs45.of)({ ...data, customUploadFileId: file2.id }) : (0, import_rxjs45.throwError)(
                   () => new Error(
                     `the upload was refused (HTTP ${res.status}${file2?.message ? `: ${file2.message}` : ""})`
                   )
@@ -289862,21 +290442,21 @@ var init_helpers2 = __esm({
         )
       )
     );
-    saveLambda = (cmd, type2, payload, scope) => (0, import_rxjs40.forkJoin)({
+    saveLambda = (cmd, type2, payload, scope) => (0, import_rxjs45.forkJoin)({
       clusterId: resolveClusterId(payload.projectId, {
         clusterId: cmd.clusterId || payload.clusterId,
         clusterName: cmd.clusterName || payload.clusterName
       }),
-      code: cmd.code ? (0, import_rxjs40.of)(cmd.code) : ReadFile2(cmd.file || payload.file),
+      code: cmd.code ? (0, import_rxjs45.of)(cmd.code) : ReadFile2(cmd.file || payload.file),
       script: ReadFile2(cmd.script || payload.script),
       packageJson: ReadFile2(cmd.package || payload.package)
     }).pipe(
-      (0, import_operators24.switchMap)(
+      (0, import_operators30.switchMap)(
         ({ clusterId, ...files }) => GraphqlClienAPI[type2](
           lambdaPayload(cmd, payload, clusterId, files)
         )
       ),
-      (0, import_operators24.map)((lambda) => lambda),
+      (0, import_operators30.map)((lambda) => lambda),
       step(type2 === "createLambda" ? "creating lambda" : "saving lambda", {
         scope,
         done: () => type2 === "createLambda" ? "lambda created" : "lambda saved"
@@ -289884,19 +290464,19 @@ var init_helpers2 = __esm({
     );
     DEPLOY_POLL_MS = 3e3;
     DEPLOY_TIMEOUT_MS = 15 * 6e4;
-    deployState = (lambda) => (0, import_rxjs40.forkJoin)({
+    deployState = (lambda) => (0, import_rxjs45.forkJoin)({
       build: GraphqlClienAPI.getLambdaBuildStatus(lambda.id),
       // not on every API yet: an error = not known
       lambda: GraphqlClienAPI.getLambda(lambda.id, [
         "deployStatus"
-      ]).pipe((0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null)))
+      ]).pipe((0, import_operators30.catchError)(() => (0, import_rxjs45.of)(null)))
     }).pipe(
-      (0, import_operators24.map)(
+      (0, import_operators30.map)(
         ({ build: build2, lambda: l }) => deployStateOf(build2, l?.deployStatus)
       )
     );
     reportBuildProblems = (lambdaId, scope) => GraphqlClienAPI.getLambdaBuildStatus(lambdaId).pipe(
-      (0, import_operators24.tap)((b) => {
+      (0, import_operators30.tap)((b) => {
         if (b?.buildErrors)
           ui.warn(`the build log has errors:
 ${ui.dim(b.buildErrors)}`, scope);
@@ -289907,64 +290487,64 @@ ${ui.dim(b.runtimeErrors)}`,
             scope
           );
       }),
-      (0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null))
+      (0, import_operators30.catchError)(() => (0, import_rxjs45.of)(null))
     );
     followDeploy = (lambda, type2, scope, wait) => {
-      if (!wait || !lambda?.id) return (0, import_rxjs40.of)(lambda);
+      if (!wait || !lambda?.id) return (0, import_rxjs45.of)(lambda);
       const started = Date.now();
       const spinner = ui.spin("building and rolling out", scope);
       const logsHint = `gcli lambda:logs-builder --name ${lambda.name}`;
-      return (0, import_rxjs40.timer)(DEPLOY_POLL_MS, DEPLOY_POLL_MS).pipe(
-        (0, import_operators24.switchMap)(() => deployState(lambda)),
-        (0, import_operators24.tap)(
+      return (0, import_rxjs45.timer)(DEPLOY_POLL_MS, DEPLOY_POLL_MS).pipe(
+        (0, import_operators30.switchMap)(() => deployState(lambda)),
+        (0, import_operators30.tap)(
           ({ status: status2 }) => spinner.update(
             `building and rolling out${status2 ? ` (${status2})` : ""} ${ui.dim(elapsed(Date.now() - started))}`
           )
         ),
-        (0, import_operators24.takeWhile)(({ state: state2 }) => state2 === "DEPLOYING", true),
-        (0, import_operators24.last)(),
-        (0, import_operators24.timeout)({ first: DEPLOY_TIMEOUT_MS }),
-        (0, import_operators24.finalize)(() => spinner.stop()),
-        (0, import_operators24.switchMap)(({ state: state2 }) => {
+        (0, import_operators30.takeWhile)(({ state: state2 }) => state2 === "DEPLOYING", true),
+        (0, import_operators30.last)(),
+        (0, import_operators30.timeout)({ first: DEPLOY_TIMEOUT_MS }),
+        (0, import_operators30.finalize)(() => spinner.stop()),
+        (0, import_operators30.switchMap)(({ state: state2 }) => {
           const took = ui.dim(elapsed(Date.now() - started));
           if (state2 === "LIVE") {
             ui.success(`built and live ${took}`, scope);
-            return reportBuildProblems(lambda.id, scope).pipe((0, import_operators24.map)(() => lambda));
+            return reportBuildProblems(lambda.id, scope).pipe((0, import_operators30.map)(() => lambda));
           }
           ui.error(`the deploy failed ${took}`, scope);
           return GraphqlClienAPI.getLambdaBuildStatus(lambda.id).pipe(
-            (0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null)),
-            (0, import_operators24.tap)((b) => {
+            (0, import_operators30.catchError)(() => (0, import_rxjs45.of)(null)),
+            (0, import_operators30.tap)((b) => {
               if (b?.logsTail) ui.print(ui.dim(b.logsTail.replace(/^/gm, "   \u2502 ")));
               ui.print(`
    Full build log: ${ui.bold(logsHint)}`);
             }),
-            (0, import_operators24.switchMap)(
-              () => (0, import_rxjs40.throwError)(
+            (0, import_operators30.switchMap)(
+              () => (0, import_rxjs45.throwError)(
                 () => new ReportedError(`deploy of ${lambda.name} failed`)
               )
             )
           );
         }),
-        (0, import_operators24.catchError)((e2) => {
-          if (e2 instanceof ReportedError) return (0, import_rxjs40.throwError)(() => e2);
+        (0, import_operators30.catchError)((e2) => {
+          if (e2 instanceof ReportedError) return (0, import_rxjs45.throwError)(() => e2);
           const why = e2?.name === "TimeoutError" ? `still building after ${elapsed(DEPLOY_TIMEOUT_MS)}` : `could not follow the build (${errorText(e2)})`;
           ui.warn(`${why} - follow it with ${logsHint}`, scope);
-          return (0, import_rxjs40.of)(lambda);
+          return (0, import_rxjs45.of)(lambda);
         })
       );
     };
     createOrUpdateLambda = (cmd, type2) => {
       if (cmd.json) humanOutputToStderr();
-      return (0, import_rxjs40.lastValueFrom)(
+      return (0, import_rxjs45.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators24.switchMap)(
-            (projectId) => (0, import_rxjs40.forkJoin)({
+          (0, import_operators30.switchMap)(
+            (projectId) => (0, import_rxjs45.forkJoin)({
               project: GraphqlClienAPI.getProject(projectId),
               spec: loadSpec(cmd.spec)
-            }).pipe((0, import_operators24.map)((r2) => ({ projectId, ...r2 })))
+            }).pipe((0, import_operators30.map)((r2) => ({ projectId, ...r2 })))
           ),
-          (0, import_operators24.switchMap)(({ projectId, project, spec }) => {
+          (0, import_operators30.switchMap)(({ projectId, project, spec }) => {
             const data = { projectId, ...spec?.function ?? spec };
             const name2 = cmd.name || data.name || "";
             const scope = `lambda[${name2}]`;
@@ -289975,39 +290555,39 @@ ${ui.dim(b.runtimeErrors)}`,
                 `${type2 === "createLambda" ? "Creating" : "Deploying"} ${name2} to project ${project?.name || projectId}`
               );
             }
-            const prepared$ = data.uploadAsZip ? uploadArchive(cmd, data, scope) : (0, import_rxjs40.of)({ ...data, customUploadFileId: "" });
+            const prepared$ = data.uploadAsZip ? uploadArchive(cmd, data, scope) : (0, import_rxjs45.of)({ ...data, customUploadFileId: "" });
             return prepared$.pipe(
-              (0, import_operators24.switchMap)((payload) => saveLambda(cmd, type2, payload, scope)),
-              (0, import_operators24.switchMap)(
+              (0, import_operators30.switchMap)((payload) => saveLambda(cmd, type2, payload, scope)),
+              (0, import_operators30.switchMap)(
                 (lambda) => followDeploy(lambda, type2, scope, cmd.wait !== false)
               ),
               // apply `triggers.time` of lambforge.yaml (it used to be ignored)
-              (0, import_operators24.switchMap)(
+              (0, import_operators30.switchMap)(
                 (lambda) => syncTimeTrigger(projectId, lambda, timeTrigger).pipe(
-                  (0, import_operators24.map)(() => lambda)
+                  (0, import_operators30.map)(() => lambda)
                 )
               ),
               // apply `domains:` - reported, never fails the deploy itself
-              (0, import_operators24.switchMap)(
+              (0, import_operators30.switchMap)(
                 (lambda) => applyDomains(projectId, domains, lambda?.name).pipe(
-                  (0, import_operators24.catchError)((e2) => {
+                  (0, import_operators30.catchError)((e2) => {
                     ui.warn(
                       `not applied: ${errorText(e2)} - run gcli domain:apply`,
                       "domains"
                     );
-                    return (0, import_rxjs40.of)([]);
+                    return (0, import_rxjs45.of)([]);
                   }),
-                  (0, import_operators24.map)(() => lambda)
+                  (0, import_operators30.map)(() => lambda)
                 )
               ),
-              (0, import_operators24.switchMap)((lambda) => finish(lambda, type2, cmd))
+              (0, import_operators30.switchMap)((lambda) => finish(lambda, type2, cmd))
             );
           })
         )
       );
     };
     finish = (lambda, type2, cmd) => siteUrlOf(lambda).pipe(
-      (0, import_operators24.tap)((siteUrl) => {
+      (0, import_operators30.tap)((siteUrl) => {
         if (cmd.embedded) {
           ui.success(
             `live at ${siteUrl || lambda?.url || "-"}`,
@@ -290026,12 +290606,12 @@ ${ui.dim(b.runtimeErrors)}`,
           process.stdout.write(`${JSON.stringify(lambda, null, 2)}
 `);
       }),
-      (0, import_operators24.map)(() => lambda)
+      (0, import_operators30.map)(() => lambda)
     );
     siteUrlOf = (lambda) => lambda?.id ? GraphqlClienAPI.getLambda(lambda.id, ["siteUrl"]).pipe(
-      (0, import_operators24.map)((l) => l.siteUrl ?? null),
-      (0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null))
-    ) : (0, import_rxjs40.of)(null);
+      (0, import_operators30.map)((l) => l.siteUrl ?? null),
+      (0, import_operators30.catchError)(() => (0, import_rxjs45.of)(null))
+    ) : (0, import_rxjs45.of)(null);
     createCommand = (command) => (options) => (program2) => {
       const cmd = program2.command(command);
       for (const option of options) {
@@ -290047,27 +290627,27 @@ var list_exports3 = {};
 __export(list_exports3, {
   default: () => list_default3
 });
-var import_rxjs41, import_operators25, list_default3;
+var import_rxjs46, import_operators31, list_default3;
 var init_list3 = __esm({
   "src/commands/lambda/list.ts"() {
-    import_rxjs41 = __toESM(require_cjs());
-    import_operators25 = __toESM(require_operators());
+    import_rxjs46 = __toESM(require_cjs());
+    import_operators31 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default3 = (cmd) => (0, import_rxjs41.lastValueFrom)(
+    list_default3 = (cmd) => (0, import_rxjs46.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators25.switchMap)(
+        (0, import_operators31.switchMap)(
           (projectId) => resolveClusterId(projectId, {
             clusterId: cmd.clusterId,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators25.switchMap)(
+            (0, import_operators31.switchMap)(
               (clusterId) => GraphqlClienAPI.listLambdas(projectId, clusterId)
             )
           )
         ),
-        (0, import_operators25.tap)((data) => {
+        (0, import_operators31.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -290087,17 +290667,17 @@ var get_exports = {};
 __export(get_exports, {
   default: () => get_default
 });
-var import_rxjs42, import_operators26, get_default;
+var import_rxjs47, import_operators32, get_default;
 var init_get = __esm({
   "src/commands/lambda/get.ts"() {
-    import_rxjs42 = __toESM(require_cjs());
-    import_operators26 = __toESM(require_operators());
+    import_rxjs47 = __toESM(require_cjs());
+    import_operators32 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     get_default = async (cmd) => {
-      const table = (0, import_operators26.tap)((data) => {
+      const table = (0, import_operators32.tap)((data) => {
         const columns = [
           "name",
           "projectId",
@@ -290109,33 +290689,33 @@ var init_get = __esm({
         Logger.table([data], columns);
       });
       if (cmd.lambda) {
-        return (0, import_rxjs42.lastValueFrom)(
+        return (0, import_rxjs47.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators26.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
+            (0, import_operators32.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
             table
           )
         );
       }
-      const spec = await (0, import_rxjs42.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs47.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs42.lastValueFrom)(
+        return (0, import_rxjs47.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators26.catchError)((error48) => {
+            (0, import_operators32.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs42.throwError)(
+                return (0, import_rxjs47.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs42.throwError)(() => error48);
+              return (0, import_rxjs47.throwError)(() => error48);
             }),
-            (0, import_operators26.switchMap)(
+            (0, import_operators32.switchMap)(
               (projectId) => resolveClusterId(projectId, {
                 clusterId: cmd.clusterId,
                 clusterName: cmd.clusterName
               }).pipe(
-                (0, import_operators26.switchMap)(
+                (0, import_operators32.switchMap)(
                   (clusterId) => GraphqlClienAPI.getLambdaByName(
                     name2,
                     projectId,
@@ -290185,34 +290765,34 @@ var delete_exports = {};
 __export(delete_exports, {
   default: () => delete_default
 });
-var import_rxjs43, import_operators27, delete_default;
+var import_rxjs48, import_operators33, delete_default;
 var init_delete = __esm({
   "src/commands/lambda/delete.ts"() {
-    import_rxjs43 = __toESM(require_cjs());
-    import_operators27 = __toESM(require_operators());
+    import_rxjs48 = __toESM(require_cjs());
+    import_operators33 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     delete_default = async (cmd) => {
-      const spec = await (0, import_rxjs43.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs48.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       const env2 = cmd.env ?? spec.function?.env ?? spec.env;
       const clusterIdHint = cmd.clusterId ?? spec.function?.clusterId ?? spec.clusterId;
       const clusterNameHint = cmd.clusterName ?? spec.function?.clusterName ?? spec.clusterName;
-      return (0, import_rxjs43.lastValueFrom)(
+      return (0, import_rxjs48.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators27.switchMap)(
+          (0, import_operators33.switchMap)(
             (projectId) => resolveClusterId(projectId, {
               clusterId: clusterIdHint,
               clusterName: clusterNameHint
             }).pipe(
-              (0, import_operators27.switchMap)(
+              (0, import_operators33.switchMap)(
                 (clusterId) => GraphqlClienAPI.deleteLambda({ name: name2, projectId, env: env2, clusterId })
               )
             )
           ),
-          (0, import_operators27.tap)((data) => {
+          (0, import_operators33.tap)((data) => {
             Logger.success(`Lambda ${data?.name ?? ""} deleted`);
             const columns = [
               "name",
@@ -290233,45 +290813,45 @@ var logs_exports = {};
 __export(logs_exports, {
   default: () => logs_default
 });
-var import_rxjs44, import_operators28, logs_default;
+var import_rxjs49, import_operators34, logs_default;
 var init_logs = __esm({
   "src/commands/lambda/logs.ts"() {
-    import_rxjs44 = __toESM(require_cjs());
-    import_operators28 = __toESM(require_operators());
+    import_rxjs49 = __toESM(require_cjs());
+    import_operators34 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_default = async (cmd) => {
-      const result = (0, import_operators28.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators34.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs44.lastValueFrom)(
+        return (0, import_rxjs49.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators28.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
+            (0, import_operators34.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs44.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs49.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs44.lastValueFrom)(
+        return (0, import_rxjs49.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators28.catchError)((error48) => {
+            (0, import_operators34.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs44.throwError)(
+                return (0, import_rxjs49.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs44.throwError)(() => error48);
+              return (0, import_rxjs49.throwError)(() => error48);
             }),
-            (0, import_operators28.switchMap)(
+            (0, import_operators34.switchMap)(
               (projectId) => resolveClusterId(projectId, {
                 clusterId: cmd.clusterId,
                 clusterName: cmd.clusterName
               }).pipe(
-                (0, import_operators28.switchMap)(
+                (0, import_operators34.switchMap)(
                   (clusterId) => GraphqlClienAPI.getLambdaLogsByName(name2, projectId, clusterId)
                 )
               )
@@ -290290,45 +290870,45 @@ var logs_builder_exports = {};
 __export(logs_builder_exports, {
   default: () => logs_builder_default
 });
-var import_rxjs45, import_operators29, logs_builder_default;
+var import_rxjs50, import_operators35, logs_builder_default;
 var init_logs_builder = __esm({
   "src/commands/lambda/logs-builder.ts"() {
-    import_rxjs45 = __toESM(require_cjs());
-    import_operators29 = __toESM(require_operators());
+    import_rxjs50 = __toESM(require_cjs());
+    import_operators35 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_builder_default = async (cmd) => {
-      const result = (0, import_operators29.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators35.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs45.lastValueFrom)(
+        return (0, import_rxjs50.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators29.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
+            (0, import_operators35.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs45.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs50.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs45.lastValueFrom)(
+        return (0, import_rxjs50.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators29.catchError)((error48) => {
+            (0, import_operators35.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs45.throwError)(
+                return (0, import_rxjs50.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs45.throwError)(() => error48);
+              return (0, import_rxjs50.throwError)(() => error48);
             }),
-            (0, import_operators29.switchMap)(
+            (0, import_operators35.switchMap)(
               (projectId) => resolveClusterId(projectId, {
                 clusterId: cmd.clusterId,
                 clusterName: cmd.clusterName
               }).pipe(
-                (0, import_operators29.switchMap)(
+                (0, import_operators35.switchMap)(
                   (clusterId) => GraphqlClienAPI.getLambdaBuilderLogsByName(
                     name2,
                     projectId,
@@ -290351,39 +290931,39 @@ var test_exports = {};
 __export(test_exports, {
   default: () => test_default
 });
-var import_rxjs46, import_operators30, test_default;
+var import_rxjs51, import_operators36, test_default;
 var init_test = __esm({
   "src/commands/lambda/test.ts"() {
-    import_rxjs46 = __toESM(require_cjs());
-    import_operators30 = __toESM(require_operators());
+    import_rxjs51 = __toESM(require_cjs());
+    import_operators36 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     test_default = async (cmd) => {
-      const spec = await (0, import_rxjs46.lastValueFrom)(loadSpec(cmd.spec));
-      const processParameters = (lambda) => (0, import_rxjs46.of)(lambda).pipe(
-        (0, import_operators30.map)((lambda2) => ({
+      const spec = await (0, import_rxjs51.lastValueFrom)(loadSpec(cmd.spec));
+      const processParameters = (lambda) => (0, import_rxjs51.of)(lambda).pipe(
+        (0, import_operators36.map)((lambda2) => ({
           ...lambda2,
           url: cmd.pathParams ? cmd.pathParams.split(";").map((param) => param.split("=")).reduce(
             (prev, [key, value]) => prev.replace(key, value),
             lambda2.url
           ) : lambda2.url
         })),
-        (0, import_operators30.tap)(() => {
+        (0, import_operators36.tap)(() => {
           Logger.info(
             `About to hit URL: ${[lambda.url, cmd.queryParams].join("")}`
           );
         }),
-        (0, import_operators30.switchMap)(
-          (lambda2) => (0, import_rxjs46.from)(
+        (0, import_operators36.switchMap)(
+          (lambda2) => (0, import_rxjs51.from)(
             fetch([lambda2.url, cmd.queryParams].filter((i2) => !!i2).join(""), {
               method: cmd?.method ?? "GET",
               body: cmd.body
             })
-          ).pipe((0, import_operators30.switchMap)((res) => res.json()))
+          ).pipe((0, import_operators36.switchMap)((res) => res.json()))
         ),
-        (0, import_operators30.tap)((data) => {
+        (0, import_operators36.tap)((data) => {
           if (data.error) {
             Logger.error(data);
           } else {
@@ -290392,29 +290972,29 @@ var init_test = __esm({
         })
       );
       if (cmd.lambda) {
-        return (0, import_rxjs46.lastValueFrom)(
+        return (0, import_rxjs51.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators30.switchMap)(
+            (0, import_operators36.switchMap)(
               (id) => GraphqlClienAPI.getLambda(id, ["id", "url", "method", "params"])
             ),
-            (0, import_operators30.switchMap)(processParameters)
+            (0, import_operators36.switchMap)(processParameters)
           )
         );
       }
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs46.lastValueFrom)(
+        return (0, import_rxjs51.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators30.catchError)((error48) => {
+            (0, import_operators36.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs46.throwError)(
+                return (0, import_rxjs51.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs46.throwError)(() => error48);
+              return (0, import_rxjs51.throwError)(() => error48);
             }),
-            (0, import_operators30.switchMap)(
+            (0, import_operators36.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId, [
                 "id",
                 "url",
@@ -290422,7 +291002,7 @@ var init_test = __esm({
                 "params"
               ])
             ),
-            (0, import_operators30.switchMap)(processParameters)
+            (0, import_operators36.switchMap)(processParameters)
           )
         );
       }
@@ -290436,16 +291016,16 @@ var list_exports4 = {};
 __export(list_exports4, {
   default: () => list_default4
 });
-var import_rxjs47, import_operators31, list_default4;
+var import_rxjs52, import_operators37, list_default4;
 var init_list4 = __esm({
   "src/commands/plugin/list.ts"() {
-    import_rxjs47 = __toESM(require_cjs());
-    import_operators31 = __toESM(require_operators());
+    import_rxjs52 = __toESM(require_cjs());
+    import_operators37 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default4 = () => (0, import_rxjs47.lastValueFrom)(
+    list_default4 = () => (0, import_rxjs52.lastValueFrom)(
       GraphqlClienAPI.listAvailablePlugins().pipe(
-        (0, import_operators31.tap)((plugins) => {
+        (0, import_operators37.tap)((plugins) => {
           Logger.table(
             (plugins || []).map((p) => ({
               name: p.name,
@@ -290465,18 +291045,18 @@ var installed_exports = {};
 __export(installed_exports, {
   default: () => installed_default
 });
-var import_rxjs48, import_operators32, installed_default;
+var import_rxjs53, import_operators38, installed_default;
 var init_installed = __esm({
   "src/commands/plugin/installed.ts"() {
-    import_rxjs48 = __toESM(require_cjs());
-    import_operators32 = __toESM(require_operators());
+    import_rxjs53 = __toESM(require_cjs());
+    import_operators38 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    installed_default = (cmd) => (0, import_rxjs48.lastValueFrom)(
+    installed_default = (cmd) => (0, import_rxjs53.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators32.switchMap)((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
-        (0, import_operators32.tap)((installed) => {
+        (0, import_operators38.switchMap)((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
+        (0, import_operators38.tap)((installed) => {
           if (!installed?.length) {
             Logger.info(
               "No plugins installed for this project yet. See plugin:install."
@@ -290501,32 +291081,32 @@ var install_exports = {};
 __export(install_exports, {
   default: () => install_default
 });
-var import_rxjs49, import_operators33, install_default;
+var import_rxjs54, import_operators39, install_default;
 var init_install = __esm({
   "src/commands/plugin/install.ts"() {
-    import_rxjs49 = __toESM(require_cjs());
-    import_operators33 = __toESM(require_operators());
+    import_rxjs54 = __toESM(require_cjs());
+    import_operators39 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    install_default = (cmd) => (0, import_rxjs49.lastValueFrom)(
+    install_default = (cmd) => (0, import_rxjs54.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators33.switchMap)(
+        (0, import_operators39.switchMap)(
           (projectId) => loadSpec(
             cmd.spec ?? "plugin.yaml"
           ).pipe(
             // No spec file is required at all if --name/--cluster fully
             // cover it (unlike every other resource here, a plugin install
             // is often just "install this by name", no YAML needed).
-            (0, import_operators33.catchError)(() => (0, import_rxjs49.of)(void 0)),
-            (0, import_operators33.map)((data) => ({
+            (0, import_operators39.catchError)(() => (0, import_rxjs54.of)(void 0)),
+            (0, import_operators39.map)((data) => ({
               projectId,
               ...data ? data.plugin ?? data : {}
             }))
           )
         ),
-        (0, import_operators33.switchMap)(
+        (0, import_operators39.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.installPlugin(
             projectId,
             cmd.name || data.name,
@@ -290534,7 +291114,7 @@ var init_install = __esm({
             cmd.cluster || data.clusterId
           )
         ),
-        (0, import_operators33.tap)((installed) => {
+        (0, import_operators39.tap)((installed) => {
           Logger.success("Plugin installed");
           Logger.table([installed]);
         })
@@ -290548,20 +291128,20 @@ var uninstall_exports = {};
 __export(uninstall_exports, {
   default: () => uninstall_default
 });
-var import_rxjs50, import_operators34, uninstall_default;
+var import_rxjs55, import_operators40, uninstall_default;
 var init_uninstall = __esm({
   "src/commands/plugin/uninstall.ts"() {
-    import_rxjs50 = __toESM(require_cjs());
-    import_operators34 = __toESM(require_operators());
+    import_rxjs55 = __toESM(require_cjs());
+    import_operators40 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    uninstall_default = (cmd) => (0, import_rxjs50.lastValueFrom)(
+    uninstall_default = (cmd) => (0, import_rxjs55.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators34.switchMap)(
+        (0, import_operators40.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallPlugin(projectId, cmd.name, cmd.cluster)
         ),
-        (0, import_operators34.tap)((pluginName) => {
+        (0, import_operators40.tap)((pluginName) => {
           Logger.success(`Plugin ${pluginName} removed`);
         })
       )
@@ -290574,16 +291154,16 @@ var list_exports5 = {};
 __export(list_exports5, {
   default: () => list_default5
 });
-var import_rxjs51, import_operators35, list_default5;
+var import_rxjs56, import_operators41, list_default5;
 var init_list5 = __esm({
   "src/commands/project/list.ts"() {
-    import_rxjs51 = __toESM(require_cjs());
-    import_operators35 = __toESM(require_operators());
+    import_rxjs56 = __toESM(require_cjs());
+    import_operators41 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default5 = async () => (0, import_rxjs51.lastValueFrom)(
+    list_default5 = async () => (0, import_rxjs56.lastValueFrom)(
       GraphqlClienAPI.listProjects().pipe(
-        (0, import_operators35.tap)((project) => {
+        (0, import_operators41.tap)((project) => {
           const columns = ["id", "name"];
           Logger.table(project, columns);
         })
@@ -290597,24 +291177,24 @@ var use_exports = {};
 __export(use_exports, {
   default: () => use_default
 });
-var import_fs7, import_rxjs52, import_operators36, import_util4, use_default;
+var import_fs7, import_rxjs57, import_operators42, import_util4, use_default;
 var init_use = __esm({
   "src/commands/project/use.ts"() {
     import_fs7 = require("fs");
-    import_rxjs52 = __toESM(require_cjs());
-    import_operators36 = __toESM(require_operators());
+    import_rxjs57 = __toESM(require_cjs());
+    import_operators42 = __toESM(require_operators());
     import_util4 = require("util");
     init_helpers();
     init_gql_client();
     init_types();
     use_default = async (cmd) => {
-      return (0, import_rxjs52.lastValueFrom)(
+      return (0, import_rxjs57.lastValueFrom)(
         parseProjectId(cmd).pipe(
-          (0, import_operators36.switchMap)(
-            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators36.map)(() => projectId))
+          (0, import_operators42.switchMap)(
+            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators42.map)(() => projectId))
           ),
-          (0, import_operators36.switchMap)(
-            (projectId) => (0, import_rxjs52.from)(
+          (0, import_operators42.switchMap)(
+            (projectId) => (0, import_rxjs57.from)(
               (0, import_util4.promisify)(import_fs7.writeFile)(projectDirectory, projectId, {
                 encoding: "utf-8"
               })
@@ -291061,8 +291641,8 @@ var init_parseUtil = __esm({
       }
       let errorMessage = "";
       const maps = errorMaps.filter((m2) => !!m2).slice().reverse();
-      for (const map39 of maps) {
-        errorMessage = map39(fullIssue, { data, defaultError: errorMessage }).message;
+      for (const map42 of maps) {
+        errorMessage = map42(fullIssue, { data, defaultError: errorMessage }).message;
       }
       return {
         ...issueData,
@@ -295493,7 +296073,7 @@ var init_errors2 = __esm({
 
 // ../../node_modules/zod/v4/core/parse.js
 var _parse, parse, _parseAsync, parseAsync, _safeParse, safeParse, _safeParseAsync, safeParseAsync, _encode, encode, _decode, decode, _encodeAsync, encodeAsync, _decodeAsync, decodeAsync, _safeEncode, safeEncode, _safeDecode, safeDecode, _safeEncodeAsync, safeEncodeAsync, _safeDecodeAsync, safeDecodeAsync;
-var init_parse = __esm({
+var init_parse2 = __esm({
   "../../node_modules/zod/v4/core/parse.js"() {
     init_core();
     init_errors2();
@@ -296723,7 +297303,7 @@ var init_schemas = __esm({
     init_checks();
     init_core();
     init_doc();
-    init_parse();
+    init_parse2();
     init_regexes();
     init_util2();
     init_versions();
@@ -297584,19 +298164,19 @@ var init_schemas = __esm({
       });
       const disc = cached(() => {
         const opts = def.options;
-        const map39 = /* @__PURE__ */ new Map();
+        const map42 = /* @__PURE__ */ new Map();
         for (const o of opts) {
           const values = o._zod.propValues?.[def.discriminator];
           if (!values || values.size === 0)
             throw new Error(`Invalid discriminated union option at index "${def.options.indexOf(o)}"`);
           for (const v of values) {
-            if (map39.has(v)) {
+            if (map42.has(v)) {
               throw new Error(`Duplicate discriminator value "${String(v)}"`);
             }
-            map39.set(v, o);
+            map42.set(v, o);
           }
         }
-        return map39;
+        return map42;
       });
       inst._zod.parse = (payload, ctx) => {
         const input = payload.value;
@@ -306652,7 +307232,7 @@ __export(core_exports2, {
 var init_core2 = __esm({
   "../../node_modules/zod/v4/core/index.js"() {
     init_core();
-    init_parse();
+    init_parse2();
     init_errors2();
     init_schemas();
     init_checks();
@@ -306671,7 +307251,7 @@ var init_core2 = __esm({
 });
 
 // ../../node_modules/zod/v4/mini/parse.js
-var init_parse2 = __esm({
+var init_parse3 = __esm({
   "../../node_modules/zod/v4/mini/parse.js"() {
     init_core2();
   }
@@ -306682,7 +307262,7 @@ var init_schemas2 = __esm({
   "../../node_modules/zod/v4/mini/schemas.js"() {
     init_core2();
     init_util2();
-    init_parse2();
+    init_parse3();
   }
 });
 
@@ -306713,7 +307293,7 @@ var init_coerce = __esm({
 var init_external2 = __esm({
   "../../node_modules/zod/v4/mini/external.js"() {
     init_core2();
-    init_parse2();
+    init_parse3();
     init_schemas2();
     init_checks2();
     init_core2();
@@ -306939,7 +307519,7 @@ var init_errors3 = __esm({
 
 // ../../node_modules/zod/v4/classic/parse.js
 var parse2, parseAsync2, safeParse3, safeParseAsync2, encode2, decode2, encodeAsync2, decodeAsync2, safeEncode2, safeDecode2, safeEncodeAsync2, safeDecodeAsync2;
-var init_parse3 = __esm({
+var init_parse4 = __esm({
   "../../node_modules/zod/v4/classic/parse.js"() {
     init_core2();
     init_errors3();
@@ -307079,7 +307659,7 @@ __export(schemas_exports3, {
   looseObject: () => looseObject,
   looseRecord: () => looseRecord,
   mac: () => mac2,
-  map: () => map21,
+  map: () => map24,
   meta: () => meta2,
   nan: () => nan,
   nanoid: () => nanoid2,
@@ -307375,7 +307955,7 @@ function looseRecord(keyType, valueType, params) {
     ...util_exports.normalizeParams(params)
   });
 }
-function map21(keyType, valueType, params) {
+function map24(keyType, valueType, params) {
   return new ZodMap2({
     type: "map",
     keyType,
@@ -307589,7 +308169,7 @@ var init_schemas3 = __esm({
     init_to_json_schema();
     init_checks3();
     init_iso2();
-    init_parse3();
+    init_parse4();
     ZodType2 = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
       $ZodType.init(inst, def);
       Object.assign(inst["~standard"], {
@@ -308217,9 +308797,9 @@ var init_schemas3 = __esm({
 });
 
 // ../../node_modules/zod/v4/classic/compat.js
-function setErrorMap(map39) {
+function setErrorMap(map42) {
   config({
-    customError: map39
+    customError: map42
   });
 }
 function getErrorMap2() {
@@ -308919,7 +309499,7 @@ __export(external_exports3, {
   lt: () => _lt,
   lte: () => _lte,
   mac: () => mac2,
-  map: () => map21,
+  map: () => map24,
   maxLength: () => _maxLength,
   maxSize: () => _maxSize,
   meta: () => meta2,
@@ -309008,7 +309588,7 @@ var init_external3 = __esm({
     init_schemas3();
     init_checks3();
     init_errors3();
-    init_parse3();
+    init_parse4();
     init_compat();
     init_core2();
     init_en2();
@@ -312485,17 +313065,17 @@ var require_codegen = __commonJS({
       }
     };
     var ForRange = class extends For {
-      constructor(varKind, name2, from18, to) {
+      constructor(varKind, name2, from19, to) {
         super();
         this.varKind = varKind;
         this.name = name2;
-        this.from = from18;
+        this.from = from19;
         this.to = to;
       }
       render(opts) {
         const varKind = opts.es5 ? scope_1.varKinds.var : this.varKind;
-        const { name: name2, from: from18, to } = this;
-        return `for(${varKind} ${name2}=${from18}; ${name2}<${to}; ${name2}++)` + super.render(opts);
+        const { name: name2, from: from19, to } = this;
+        return `for(${varKind} ${name2}=${from19}; ${name2}<${to}; ${name2}++)` + super.render(opts);
       }
       get names() {
         const names3 = addExprNames(super.names, this.from);
@@ -312714,9 +313294,9 @@ var require_codegen = __commonJS({
         return this._for(new ForLoop(iteration), forBody);
       }
       // `for` statement for a range of values
-      forRange(nameOrPrefix, from18, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
+      forRange(nameOrPrefix, from19, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
         const name2 = this._scope.toName(nameOrPrefix);
-        return this._for(new ForRange(varKind, name2, from18, to), () => forBody(name2));
+        return this._for(new ForRange(varKind, name2, from19, to), () => forBody(name2));
       }
       // `for-of` statement (in es5 mode replace with a normal for loop)
       forOf(nameOrPrefix, iterable, forBody, varKind = scope_1.varKinds.const) {
@@ -312855,13 +313435,13 @@ var require_codegen = __commonJS({
       }
     };
     exports2.CodeGen = CodeGen;
-    function addNames(names3, from18) {
-      for (const n in from18)
-        names3[n] = (names3[n] || 0) + (from18[n] || 0);
+    function addNames(names3, from19) {
+      for (const n in from19)
+        names3[n] = (names3[n] || 0) + (from19[n] || 0);
       return names3;
     }
-    function addExprNames(names3, from18) {
-      return from18 instanceof code_1._CodeOrName ? addNames(names3, from18.names) : names3;
+    function addExprNames(names3, from19) {
+      return from19 instanceof code_1._CodeOrName ? addNames(names3, from19.names) : names3;
     }
     function optimizeExpr(expr, names3, constants) {
       if (expr instanceof code_1.Name)
@@ -312888,9 +313468,9 @@ var require_codegen = __commonJS({
         return e2 instanceof code_1._Code && e2._items.some((c) => c instanceof code_1.Name && names3[c.str] === 1 && constants[c.str] !== void 0);
       }
     }
-    function subtractNames(names3, from18) {
-      for (const n in from18)
-        names3[n] = (names3[n] || 0) - (from18[n] || 0);
+    function subtractNames(names3, from19) {
+      for (const n in from19)
+        names3[n] = (names3[n] || 0) - (from19[n] || 0);
     }
     function not(x2) {
       return typeof x2 == "boolean" || typeof x2 == "number" || x2 === null ? !x2 : (0, code_1._)`!${par(x2)}`;
@@ -313008,31 +313588,31 @@ var require_util5 = __commonJS({
     }
     exports2.eachItem = eachItem;
     function makeMergeEvaluated({ mergeNames, mergeToName, mergeValues: mergeValues3, resultToName }) {
-      return (gen, from18, to, toName) => {
-        const res = to === void 0 ? from18 : to instanceof codegen_1.Name ? (from18 instanceof codegen_1.Name ? mergeNames(gen, from18, to) : mergeToName(gen, from18, to), to) : from18 instanceof codegen_1.Name ? (mergeToName(gen, to, from18), from18) : mergeValues3(from18, to);
+      return (gen, from19, to, toName) => {
+        const res = to === void 0 ? from19 : to instanceof codegen_1.Name ? (from19 instanceof codegen_1.Name ? mergeNames(gen, from19, to) : mergeToName(gen, from19, to), to) : from19 instanceof codegen_1.Name ? (mergeToName(gen, to, from19), from19) : mergeValues3(from19, to);
         return toName === codegen_1.Name && !(res instanceof codegen_1.Name) ? resultToName(gen, res) : res;
       };
     }
     exports2.mergeEvaluated = {
       props: makeMergeEvaluated({
-        mergeNames: (gen, from18, to) => gen.if((0, codegen_1._)`${to} !== true && ${from18} !== undefined`, () => {
-          gen.if((0, codegen_1._)`${from18} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from18})`));
+        mergeNames: (gen, from19, to) => gen.if((0, codegen_1._)`${to} !== true && ${from19} !== undefined`, () => {
+          gen.if((0, codegen_1._)`${from19} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from19})`));
         }),
-        mergeToName: (gen, from18, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
-          if (from18 === true) {
+        mergeToName: (gen, from19, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
+          if (from19 === true) {
             gen.assign(to, true);
           } else {
             gen.assign(to, (0, codegen_1._)`${to} || {}`);
-            setEvaluated(gen, to, from18);
+            setEvaluated(gen, to, from19);
           }
         }),
-        mergeValues: (from18, to) => from18 === true ? true : { ...from18, ...to },
+        mergeValues: (from19, to) => from19 === true ? true : { ...from19, ...to },
         resultToName: evaluatedPropsToName
       }),
       items: makeMergeEvaluated({
-        mergeNames: (gen, from18, to) => gen.if((0, codegen_1._)`${to} !== true && ${from18} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from18} === true ? true : ${to} > ${from18} ? ${to} : ${from18}`)),
-        mergeToName: (gen, from18, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from18 === true ? true : (0, codegen_1._)`${to} > ${from18} ? ${to} : ${from18}`)),
-        mergeValues: (from18, to) => from18 === true ? true : Math.max(from18, to),
+        mergeNames: (gen, from19, to) => gen.if((0, codegen_1._)`${to} !== true && ${from19} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from19} === true ? true : ${to} > ${from19} ? ${to} : ${from19}`)),
+        mergeToName: (gen, from19, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from19 === true ? true : (0, codegen_1._)`${to} > ${from19} ? ${to} : ${from19}`)),
+        mergeValues: (from19, to) => from19 === true ? true : Math.max(from19, to),
         resultToName: (gen, items) => gen.var("items", items)
       })
     };
@@ -321557,33 +322137,33 @@ async function startProxy(cmd) {
       cmd.url ? cmd.url.replace(/\/mcp\/?$/, "") : "https://api.lambforge.com"
     );
   }
-  return (0, import_rxjs53.lastValueFrom)(
+  return (0, import_rxjs58.lastValueFrom)(
     GraphqlClienAPI.getConfig().pipe(
-      (0, import_operators37.take)(1),
-      (0, import_operators37.map)((config2) => ({
+      (0, import_operators43.take)(1),
+      (0, import_operators43.map)((config2) => ({
         ...config2,
         mcpUrl: new URL(
           cmd.url || [config2.url.replace(/\/graphql$/, ""), "/mcp"].join("") || "http://127.0.0.1:8000/mcp"
         )
       })),
-      (0, import_operators37.tap)((config2) => {
+      (0, import_operators43.tap)((config2) => {
         config2.mcpUrl.searchParams.set("transportType", "streamable-http");
         process.stderr.write(`Starting MCP proxy \u2192 ${config2.mcpUrl}
 `);
         process.stderr.write("Retrieving config for auth...\n");
       }),
-      (0, import_operators37.switchMap)(
-        (config2) => config2?.token ? (0, import_rxjs53.of)(config2) : (0, import_rxjs53.throwError)(
+      (0, import_operators43.switchMap)(
+        (config2) => config2?.token ? (0, import_rxjs58.of)(config2) : (0, import_rxjs58.throwError)(
           () => new Error("User is not authenticated (no token in config)")
         )
       ),
-      (0, import_operators37.tap)((config2) => {
+      (0, import_operators43.tap)((config2) => {
         process.stderr.write(
           `Config retrieved. Token start: ${config2.token.substring(0, 5)}
 `
         );
       }),
-      (0, import_operators37.map)((config2) => ({
+      (0, import_operators43.map)((config2) => ({
         ...config2,
         transport: new StreamableHTTPClientTransport(config2.mcpUrl, {
           requestInit: {
@@ -321591,34 +322171,34 @@ async function startProxy(cmd) {
               Authorization: config2.token
             }
           },
-          fetch: (input, init) => (0, import_rxjs53.lastValueFrom)(performFetch(input, init))
+          fetch: (input, init) => (0, import_rxjs58.lastValueFrom)(performFetch(input, init))
         }),
         client: new Client({
           name: "gapi-proxy-client",
           version: "1.0.0"
         })
       })),
-      (0, import_operators37.tap)(() => {
+      (0, import_operators43.tap)(() => {
         process.stderr.write("Connecting to upstream...\n");
       }),
-      (0, import_operators37.switchMap)(
-        (config2) => (0, import_rxjs53.from)(config2.client.connect(config2.transport)).pipe((0, import_operators37.map)(() => config2))
+      (0, import_operators43.switchMap)(
+        (config2) => (0, import_rxjs58.from)(config2.client.connect(config2.transport)).pipe((0, import_operators43.map)(() => config2))
       ),
-      (0, import_operators37.tap)(() => {
+      (0, import_operators43.tap)(() => {
         process.stderr.write("Connected to upstream MCP server\n");
       }),
       // Get capabilities AFTER connection is established
-      (0, import_operators37.map)((config2) => ({
+      (0, import_operators43.map)((config2) => ({
         ...config2,
         capabilities: config2.client.getServerCapabilities()
       })),
-      (0, import_operators37.tap)((config2) => {
+      (0, import_operators43.tap)((config2) => {
         process.stderr.write(
           `Upstream capabilities: ${JSON.stringify(config2.capabilities)}
 `
         );
       }),
-      (0, import_operators37.map)((config2) => {
+      (0, import_operators43.map)((config2) => {
         const server2 = new Server(
           {
             name: "gapi-proxy",
@@ -321628,45 +322208,45 @@ async function startProxy(cmd) {
             capabilities: config2.capabilities || {}
           }
         );
-        server2.fallbackRequestHandler = async (request) => (0, import_rxjs53.lastValueFrom)(
-          (0, import_rxjs53.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
-            (0, import_operators37.catchError)((e2) => {
+        server2.fallbackRequestHandler = async (request) => (0, import_rxjs58.lastValueFrom)(
+          (0, import_rxjs58.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
+            (0, import_operators43.catchError)((e2) => {
               process.stderr.write(`Upstream error: ${e2.message}
 `);
-              return (0, import_rxjs53.throwError)(() => e2);
+              return (0, import_rxjs58.throwError)(() => e2);
             })
           )
         );
         server2.fallbackNotificationHandler = async (notification) => {
-          await (0, import_rxjs53.lastValueFrom)(
-            (0, import_rxjs53.of)(notification).pipe(
-              (0, import_operators37.filter)((n) => n.method !== "notifications/initialized"),
-              (0, import_operators37.switchMap)(
-                (n) => (0, import_rxjs53.defer)(() => config2.client.notification(n)).pipe(
-                  (0, import_operators37.catchError)((e2) => {
+          await (0, import_rxjs58.lastValueFrom)(
+            (0, import_rxjs58.of)(notification).pipe(
+              (0, import_operators43.filter)((n) => n.method !== "notifications/initialized"),
+              (0, import_operators43.switchMap)(
+                (n) => (0, import_rxjs58.defer)(() => config2.client.notification(n)).pipe(
+                  (0, import_operators43.catchError)((e2) => {
                     process.stderr.write(`Notification error: ${e2}
 `);
-                    return import_rxjs53.EMPTY;
+                    return import_rxjs58.EMPTY;
                   })
                 )
               ),
-              (0, import_operators37.defaultIfEmpty)(null)
+              (0, import_operators43.defaultIfEmpty)(null)
             )
           );
         };
         return server2;
       }),
-      (0, import_operators37.switchMap)((server2) => (0, import_rxjs53.from)(server2.connect(new StdioServerTransport()))),
-      (0, import_operators37.tap)(() => {
+      (0, import_operators43.switchMap)((server2) => (0, import_rxjs58.from)(server2.connect(new StdioServerTransport()))),
+      (0, import_operators43.tap)(() => {
         process.stderr.write("MCP stdio server ready\n");
       }),
       // Keep the process running indefinitely to handle stdio communication
-      (0, import_operators37.switchMap)(() => new Promise(() => {
+      (0, import_operators43.switchMap)(() => new Promise(() => {
       }))
     )
   );
 }
-var import_fs9, import_rxjs53, import_operators37, import_stream2, pendingToken, currentToken, withToken, performFetch;
+var import_fs9, import_rxjs58, import_operators43, import_stream2, pendingToken, currentToken, withToken, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
@@ -321674,8 +322254,8 @@ var init_start = __esm({
     init_server2();
     init_stdio2();
     import_fs9 = require("fs");
-    import_rxjs53 = __toESM(require_cjs());
-    import_operators37 = __toESM(require_operators());
+    import_rxjs58 = __toESM(require_cjs());
+    import_operators43 = __toESM(require_operators());
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
@@ -321684,10 +322264,10 @@ var init_start = __esm({
     pendingToken = null;
     currentToken = (force = false) => {
       if (!pendingToken || force) {
-        pendingToken = (0, import_rxjs53.lastValueFrom)(
+        pendingToken = (0, import_rxjs58.lastValueFrom)(
           GraphqlClienAPI.getConfig(force).pipe(
-            (0, import_operators37.take)(1),
-            (0, import_operators37.map)((config2) => config2.token)
+            (0, import_operators43.take)(1),
+            (0, import_operators43.map)((config2) => config2.token)
           )
         ).finally(() => {
           pendingToken = null;
@@ -321701,16 +322281,16 @@ var init_start = __esm({
       return { ...init, headers };
     };
     performFetch = (input, init) => {
-      return (0, import_rxjs53.from)(currentToken()).pipe(
-        (0, import_operators37.switchMap)((token) => fetch(input, withToken(init, token))),
-        (0, import_operators37.switchMap)((res) => {
+      return (0, import_rxjs58.from)(currentToken()).pipe(
+        (0, import_operators43.switchMap)((token) => fetch(input, withToken(init, token))),
+        (0, import_operators43.switchMap)((res) => {
           if (res.status === 401 || res.status === 403) {
             process.stderr.write(
               `[DEBUG] Request failed with ${res.status}. Refreshing token...
 `
             );
-            return (0, import_rxjs53.from)(currentToken(true)).pipe(
-              (0, import_operators37.switchMap)((token) => {
+            return (0, import_rxjs58.from)(currentToken(true)).pipe(
+              (0, import_operators43.switchMap)((token) => {
                 process.stderr.write(
                   "[DEBUG] Token refreshed. Retrying request...\n"
                 );
@@ -321718,9 +322298,9 @@ var init_start = __esm({
               })
             );
           }
-          return (0, import_rxjs53.of)(res);
+          return (0, import_rxjs58.of)(res);
         }),
-        (0, import_operators37.map)((res) => {
+        (0, import_operators43.map)((res) => {
           if (typeof res?.body?.pipeThrough !== "function") {
             try {
               const webStream = import_stream2.Readable.toWeb(res.body);
@@ -321734,10 +322314,10 @@ var init_start = __esm({
           }
           return res;
         }),
-        (0, import_operators37.catchError)((e2) => {
+        (0, import_operators43.catchError)((e2) => {
           process.stderr.write(`[ERROR] Fetch error: ${e2.message}
 `);
-          return (0, import_rxjs53.throwError)(() => e2);
+          return (0, import_rxjs58.throwError)(() => e2);
         })
       );
     };
@@ -321749,28 +322329,28 @@ var create_exports3 = {};
 __export(create_exports3, {
   default: () => create_default3
 });
-var import_rxjs54, import_operators38, create_default3;
+var import_rxjs59, import_operators44, create_default3;
 var init_create3 = __esm({
   "src/commands/rabbitmq/create.ts"() {
-    import_rxjs54 = __toESM(require_cjs());
-    import_operators38 = __toESM(require_operators());
+    import_rxjs59 = __toESM(require_cjs());
+    import_operators44 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_default3 = (cmd) => (0, import_rxjs54.lastValueFrom)(
+    create_default3 = (cmd) => (0, import_rxjs59.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators38.switchMap)(
+        (0, import_operators44.switchMap)(
           (projectId) => loadSpec(
             cmd.spec ?? "rabbitmq.yaml"
           ).pipe(
-            (0, import_operators38.map)((data) => ({
+            (0, import_operators44.map)((data) => ({
               projectId,
               ...data ? data.rabbitmq ?? data : {}
             }))
           )
         ),
-        (0, import_operators38.switchMap)(
+        (0, import_operators44.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.installRabbitMq(projectId, {
             name: cmd.name || data.name,
             description: cmd.description || data.description,
@@ -321781,7 +322361,7 @@ var init_create3 = __esm({
             clusterId: cmd.cluster || data.clusterId
           })
         ),
-        (0, import_operators38.tap)((broker) => {
+        (0, import_operators44.tap)((broker) => {
           Logger.success(`RabbitMQ broker ${broker?.name ?? ""} installed`);
           Logger.table([broker]);
         })
@@ -321795,20 +322375,20 @@ var list_exports6 = {};
 __export(list_exports6, {
   default: () => list_default6
 });
-var import_rxjs55, import_operators39, list_default6;
+var import_rxjs60, import_operators45, list_default6;
 var init_list6 = __esm({
   "src/commands/rabbitmq/list.ts"() {
-    import_rxjs55 = __toESM(require_cjs());
-    import_operators39 = __toESM(require_operators());
+    import_rxjs60 = __toESM(require_cjs());
+    import_operators45 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default6 = (cmd) => (0, import_rxjs55.lastValueFrom)(
+    list_default6 = (cmd) => (0, import_rxjs60.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators39.switchMap)(
+        (0, import_operators45.switchMap)(
           (projectId) => GraphqlClienAPI.listRabbitMqInstances(projectId)
         ),
-        (0, import_operators39.tap)((brokers) => {
+        (0, import_operators45.tap)((brokers) => {
           if (!brokers?.length) {
             Logger.info(
               "No RabbitMQ brokers for this project yet. See rabbitmq:create."
@@ -321876,40 +322456,40 @@ var declare_queue_exports = {};
 __export(declare_queue_exports, {
   default: () => declare_queue_default
 });
-var import_rxjs56, import_operators40, declare_queue_default;
+var import_rxjs61, import_operators46, declare_queue_default;
 var init_declare_queue = __esm({
   "src/commands/rabbitmq/declare-queue.ts"() {
-    import_rxjs56 = __toESM(require_cjs());
-    import_operators40 = __toESM(require_operators());
+    import_rxjs61 = __toESM(require_cjs());
+    import_operators46 = __toESM(require_operators());
     init_load_spec();
     init_helpers();
     init_gql_client();
     init_log();
     init_resolve_broker();
-    declare_queue_default = (cmd) => (0, import_rxjs56.lastValueFrom)(
+    declare_queue_default = (cmd) => (0, import_rxjs61.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators40.switchMap)(
-          (projectId) => (cmd.name?.length ? (0, import_rxjs56.of)({ names: cmd.name, broker: cmd.broker }) : loadSpec(cmd.spec).pipe(
-            (0, import_operators40.map)((data) => ({
+        (0, import_operators46.switchMap)(
+          (projectId) => (cmd.name?.length ? (0, import_rxjs61.of)({ names: cmd.name, broker: cmd.broker }) : loadSpec(cmd.spec).pipe(
+            (0, import_operators46.map)((data) => ({
               names: data?.queues?.declare ?? [],
               broker: cmd.broker ?? data?.queues?.broker
             })),
-            (0, import_operators40.catchError)(
-              () => (0, import_rxjs56.of)({ names: [], broker: cmd.broker })
+            (0, import_operators46.catchError)(
+              () => (0, import_rxjs61.of)({ names: [], broker: cmd.broker })
             )
           )).pipe(
-            (0, import_operators40.switchMap)(({ names: names3, broker }) => {
+            (0, import_operators46.switchMap)(({ names: names3, broker }) => {
               if (!names3.length) {
                 throw new Error(
                   "queue:declare needs --name (repeatable) or queues.declare in lambforge.yaml"
                 );
               }
               return GraphqlClienAPI.listRabbitMqInstances(projectId).pipe(
-                (0, import_operators40.map)((brokers) => resolveBroker(brokers, broker)),
-                (0, import_operators40.switchMap)((target) => {
+                (0, import_operators46.map)((brokers) => resolveBroker(brokers, broker)),
+                (0, import_operators46.switchMap)((target) => {
                   const missing = queuesToDeclare(target, names3);
                   const skipped = names3.filter((n) => !missing.includes(n));
-                  return (0, import_rxjs56.concat)(
+                  return (0, import_rxjs61.concat)(
                     ...missing.map(
                       (name2) => GraphqlClienAPI.declareQueue(target.id, projectId, {
                         name: name2,
@@ -321918,15 +322498,15 @@ var init_declare_queue = __esm({
                       })
                     )
                   ).pipe(
-                    (0, import_operators40.toArray)(),
-                    (0, import_operators40.map)(() => ({ broker: target.name, missing, skipped }))
+                    (0, import_operators46.toArray)(),
+                    (0, import_operators46.map)(() => ({ broker: target.name, missing, skipped }))
                   );
                 })
               );
             })
           )
         ),
-        (0, import_operators40.tap)(({ broker, missing, skipped }) => {
+        (0, import_operators46.tap)(({ broker, missing, skipped }) => {
           Logger.table([
             ...missing.map((name2) => ({
               broker,
@@ -321950,20 +322530,20 @@ var delete_exports2 = {};
 __export(delete_exports2, {
   default: () => delete_default2
 });
-var import_rxjs57, import_operators41, delete_default2;
+var import_rxjs62, import_operators47, delete_default2;
 var init_delete2 = __esm({
   "src/commands/rabbitmq/delete.ts"() {
-    import_rxjs57 = __toESM(require_cjs());
-    import_operators41 = __toESM(require_operators());
+    import_rxjs62 = __toESM(require_cjs());
+    import_operators47 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    delete_default2 = (cmd) => (0, import_rxjs57.lastValueFrom)(
+    delete_default2 = (cmd) => (0, import_rxjs62.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators41.switchMap)(
+        (0, import_operators47.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallRabbitMq(cmd.id, projectId)
         ),
-        (0, import_operators41.tap)((broker) => {
+        (0, import_operators47.tap)((broker) => {
           Logger.success(`RabbitMQ broker ${broker?.name ?? ""} removed`);
           Logger.table([broker]);
         })
@@ -322544,11 +323124,11 @@ function crossChecks(units) {
   }
   return out;
 }
-var import_rxjs58, import_operators42, GCLI_ONLY, onlineChecks, findingsFor, report, validate_default;
+var import_rxjs63, import_operators48, GCLI_ONLY, onlineChecks, findingsFor, report, validate_default;
 var init_validate = __esm({
   "src/commands/repo/validate.ts"() {
-    import_rxjs58 = __toESM(require_cjs());
-    import_operators42 = __toESM(require_operators());
+    import_rxjs63 = __toESM(require_cjs());
+    import_operators48 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_discover();
@@ -322569,7 +323149,7 @@ var init_validate = __esm({
       "CreateOrUpdateLambdaInput",
       "FissionEnvironmentInputType"
     ]).pipe(
-      (0, import_operators42.map)(
+      (0, import_operators48.map)(
         ([lambdaFields, envFields]) => units.flatMap(
           (u) => [
             ["function", lambdaFields],
@@ -322617,16 +323197,16 @@ var init_validate = __esm({
       );
       return errors;
     };
-    validate_default = (path2, cmd) => (0, import_rxjs58.lastValueFrom)(
-      (0, import_rxjs58.of)(discover(repoRoot(path2 ?? process.cwd()))).pipe(
-        (0, import_operators42.switchMap)(
+    validate_default = (path2, cmd) => (0, import_rxjs63.lastValueFrom)(
+      (0, import_rxjs63.of)(discover(repoRoot(path2 ?? process.cwd()))).pipe(
+        (0, import_operators48.switchMap)(
           (units) => (cmd.online ? onlineChecks(units).pipe(
-            (0, import_operators42.catchError)((e2) => {
+            (0, import_operators48.catchError)((e2) => {
               Logger.error(`--online skipped: ${e2?.message ?? e2}`);
-              return (0, import_rxjs58.of)([]);
+              return (0, import_rxjs63.of)([]);
             })
-          ) : (0, import_rxjs58.of)([])).pipe(
-            (0, import_operators42.map)((online) => {
+          ) : (0, import_rxjs63.of)([])).pipe(
+            (0, import_operators48.map)((online) => {
               const offline = findingsFor(units);
               const seen = new Set(offline.map((f3) => `${f3.unit} ${f3.path}`));
               const extra = online.filter(
@@ -322636,7 +323216,7 @@ var init_validate = __esm({
             })
           )
         ),
-        (0, import_operators42.tap)(({ units, findings }) => {
+        (0, import_operators48.tap)(({ units, findings }) => {
           if (!units.length) Logger.info("No lambforge.yaml found.");
           if (report(units, findings)) process.exitCode = 1;
         })
@@ -322667,7 +323247,7 @@ function environmentChanges(wanted, live) {
     (f3) => wanted[f3] !== void 0 && f3 in live && !same(live[f3], wanted[f3])
   ).map((field) => ({ field, now: live[field], wanted: wanted[field] }));
 }
-var same, names, FUNCTION_FIELDS, SCALE_FIELDS, ENV_FIELDS, stateOf, show;
+var same, names, FUNCTION_FIELDS, SCALE_FIELDS, ENV_FIELDS, stateOf, show2;
 var init_drift = __esm({
   "src/commands/repo/drift.ts"() {
     same = (a, b) => {
@@ -322725,7 +323305,7 @@ var init_drift = __esm({
       "region"
     ];
     stateOf = (exists, changes) => !exists ? "missing" : changes.length ? "changes" : "in-sync";
-    show = (v) => v === void 0 || v === null ? "-" : Array.isArray(v) ? `[${v.join(", ")}]` : String(v);
+    show2 = (v) => v === void 0 || v === null ? "-" : Array.isArray(v) ? `[${v.join(", ")}]` : String(v);
   }
 });
 
@@ -322748,7 +323328,7 @@ function renderPlan(plans, unmanaged2, names3 = /* @__PURE__ */ new Map()) {
       );
       for (const c of s2.changes) {
         ui.print(
-          `      ${ui.dim(`${c.field}:`)} ${show(c.now)} ${ui.dim("->")} ${show(c.wanted)}`
+          `      ${ui.dim(`${c.field}:`)} ${show2(c.now)} ${ui.dim("->")} ${show2(c.wanted)}`
         );
       }
       if (s2.note) ui.print(`      ${paint(s2.note, ["red"])}`);
@@ -322889,11 +323469,11 @@ function planUnit(unit, live) {
   }
   return { unit: unitKey(unit), sections };
 }
-var import_rxjs59, import_operators43, LIVE_FIELDS, unmanaged, loadLive, plan_default2;
+var import_rxjs64, import_operators49, LIVE_FIELDS, unmanaged, loadLive, plan_default2;
 var init_plan4 = __esm({
   "src/commands/repo/plan.ts"() {
-    import_rxjs59 = __toESM(require_cjs());
-    import_operators43 = __toESM(require_operators());
+    import_rxjs64 = __toESM(require_cjs());
+    import_operators49 = __toESM(require_operators());
     init_plan3();
     init_time_trigger_sync();
     init_helpers();
@@ -322914,38 +323494,38 @@ var init_plan4 = __esm({
       );
       return live.lambdas.filter((l) => !declared.has(l.name)).map((l) => l.name);
     };
-    loadLive = (projectId) => (0, import_rxjs59.forkJoin)({
+    loadLive = (projectId) => (0, import_rxjs64.forkJoin)({
       lambdas: GraphqlClienAPI.listLambdasForPlan(projectId),
       environments: GraphqlClienAPI.listEnvironments(projectId).pipe(
-        (0, import_operators43.map)((e2) => e2 ?? [])
+        (0, import_operators49.map)((e2) => e2 ?? [])
       ),
       timeTriggers: GraphqlClienAPI.listProjectTimeTriggers(projectId).pipe(
-        (0, import_operators43.map)((t2) => t2 ?? []),
-        (0, import_operators43.catchError)(() => (0, import_rxjs59.of)([]))
+        (0, import_operators49.map)((t2) => t2 ?? []),
+        (0, import_operators49.catchError)(() => (0, import_rxjs64.of)([]))
       ),
       mqTriggers: GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
-        (0, import_operators43.map)((t2) => t2 ?? []),
-        (0, import_operators43.catchError)(() => (0, import_rxjs59.of)([]))
+        (0, import_operators49.map)((t2) => t2 ?? []),
+        (0, import_operators49.catchError)(() => (0, import_rxjs64.of)([]))
       ),
       domains: GraphqlClienAPI.listProjectDomains(projectId).pipe(
-        (0, import_operators43.catchError)(() => (0, import_rxjs59.of)([]))
+        (0, import_operators49.catchError)(() => (0, import_rxjs64.of)([]))
       )
     });
-    plan_default2 = (path2, cmd) => (0, import_rxjs59.lastValueFrom)(
+    plan_default2 = (path2, cmd) => (0, import_rxjs64.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators43.switchMap)((projectId) => {
+        (0, import_operators49.switchMap)((projectId) => {
           const units = discover(repoRoot(path2 ?? process.cwd())).filter(
             (u) => !u.error
           );
           return loadLive(projectId).pipe(
-            (0, import_operators43.map)((live) => ({
+            (0, import_operators49.map)((live) => ({
               units,
               live,
               plans: units.map((u) => planUnit(u, live))
             }))
           );
         }),
-        (0, import_operators43.tap)(({ units, live, plans }) => {
+        (0, import_operators49.tap)(({ units, live, plans }) => {
           const rest = unmanaged(units, live);
           const all = plans.flatMap((p) => p.sections);
           const errors = all.filter((s2) => s2.state === "error").length;
@@ -322978,11 +323558,11 @@ __export(save_exports, {
   mergeOverExisting: () => mergeOverExisting,
   toTriggerInput: () => toTriggerInput
 });
-var import_rxjs60, import_operators44, int2, toTriggerInput, mergeOverExisting, save_default;
+var import_rxjs65, import_operators50, int2, toTriggerInput, mergeOverExisting, save_default;
 var init_save = __esm({
   "src/commands/triggers/message-queue/save.ts"() {
-    import_rxjs60 = __toESM(require_cjs());
-    import_operators44 = __toESM(require_operators());
+    import_rxjs65 = __toESM(require_cjs());
+    import_operators50 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -323044,12 +323624,12 @@ var init_save = __esm({
         )
       );
     };
-    save_default = (mode, cmd) => (0, import_rxjs60.lastValueFrom)(
+    save_default = (mode, cmd) => (0, import_rxjs65.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators44.switchMap)((projectId) => {
+        (0, import_operators50.switchMap)((projectId) => {
           const changes = toTriggerInput(mode, cmd);
-          const payload$ = mode === "create" ? (0, import_rxjs60.of)(changes) : GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
-            (0, import_operators44.map)(
+          const payload$ = mode === "create" ? (0, import_rxjs65.of)(changes) : GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
+            (0, import_operators50.map)(
               (triggers) => mergeOverExisting(
                 triggers.find((t2) => t2.name === cmd.name),
                 changes
@@ -323057,12 +323637,12 @@ var init_save = __esm({
             )
           );
           return payload$.pipe(
-            (0, import_operators44.switchMap)(
+            (0, import_operators50.switchMap)(
               (payload) => GraphqlClienAPI.saveMessageQueueTrigger(mode, projectId, payload)
             )
           );
         }),
-        (0, import_operators44.tap)((trigger) => {
+        (0, import_operators50.tap)((trigger) => {
           Logger.success(`Queue trigger ${trigger?.name ?? ""} saved`);
           Logger.table([
             {
@@ -323087,11 +323667,11 @@ __export(apply_exports3, {
   default: () => apply_default3,
   yamlTriggerInput: () => yamlTriggerInput
 });
-var import_rxjs61, import_operators45, yamlTriggerInput, applyMode, applyMqTriggers, apply_default3;
+var import_rxjs66, import_operators51, yamlTriggerInput, applyMode, applyMqTriggers, apply_default3;
 var init_apply3 = __esm({
   "src/commands/triggers/message-queue/apply.ts"() {
-    import_rxjs61 = __toESM(require_cjs());
-    import_operators45 = __toESM(require_operators());
+    import_rxjs66 = __toESM(require_cjs());
+    import_operators51 = __toESM(require_operators());
     init_load_spec();
     init_resolve_broker();
     init_helpers();
@@ -323130,10 +323710,10 @@ var init_apply3 = __esm({
     applyMqTriggers = (projectId, data) => {
       const triggers = data?.triggers?.mq ?? [];
       return GraphqlClienAPI.listRabbitMqInstances(projectId).pipe(
-        (0, import_operators45.switchMap)(
+        (0, import_operators51.switchMap)(
           (brokers) => GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
-            (0, import_operators45.switchMap)(
-              (existing) => (0, import_rxjs61.concat)(
+            (0, import_operators51.switchMap)(
+              (existing) => (0, import_rxjs66.concat)(
                 ...triggers.map((trigger) => {
                   const input = yamlTriggerInput(trigger, {
                     lambda: data?.function?.name ?? data?.name,
@@ -323150,19 +323730,19 @@ var init_apply3 = __esm({
                       existing.find((t2) => t2.name === input.name),
                       input
                     )
-                  ).pipe((0, import_operators45.map)((saved) => ({ mode, saved })));
+                  ).pipe((0, import_operators51.map)((saved) => ({ mode, saved })));
                 })
-              ).pipe((0, import_operators45.toArray)())
+              ).pipe((0, import_operators51.toArray)())
             )
           )
         )
       );
     };
-    apply_default3 = (cmd) => (0, import_rxjs61.lastValueFrom)(
+    apply_default3 = (cmd) => (0, import_rxjs66.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators45.switchMap)(
+        (0, import_operators51.switchMap)(
           (projectId) => loadSpec(cmd.spec).pipe(
-            (0, import_operators45.switchMap)((data) => {
+            (0, import_operators51.switchMap)((data) => {
               if (!data?.triggers?.mq?.length) {
                 throw new Error(
                   "mq-trigger:apply needs triggers.mq in lambforge.yaml"
@@ -323172,7 +323752,7 @@ var init_apply3 = __esm({
             })
           )
         ),
-        (0, import_operators45.tap)((results) => {
+        (0, import_operators51.tap)((results) => {
           Logger.table(
             results.map(({ mode, saved }) => ({
               name: saved.name,
@@ -323225,13 +323805,13 @@ var apply_exports4 = {};
 __export(apply_exports4, {
   default: () => apply_default4
 });
-var import_node_child_process, import_node_fs2, import_rxjs62, import_operators46, inFolder, buildStep, environmentStep, lambdaStep, readPackageJson, deployStep, extrasStep, apply_default4;
+var import_node_child_process, import_node_fs2, import_rxjs67, import_operators52, inFolder, buildStep, environmentStep, lambdaStep, readPackageJson, deployStep, extrasStep, apply_default4;
 var init_apply4 = __esm({
   "src/commands/repo/apply.ts"() {
     import_node_child_process = require("node:child_process");
     import_node_fs2 = require("node:fs");
-    import_rxjs62 = __toESM(require_cjs());
-    import_operators46 = __toESM(require_operators());
+    import_rxjs67 = __toESM(require_cjs());
+    import_operators52 = __toESM(require_operators());
     init_apply2();
     init_environment_payload();
     init_helpers2();
@@ -323244,7 +323824,7 @@ var init_apply4 = __esm({
     init_discover();
     init_plan4();
     init_plan_view();
-    inFolder = (unit, root, work$) => (0, import_rxjs62.defer)(() => {
+    inFolder = (unit, root, work$) => (0, import_rxjs67.defer)(() => {
       const back = process.cwd();
       const saved = Object.keys(unit.vars ?? {}).map(
         (k) => [k, process.env[k]]
@@ -323252,7 +323832,7 @@ var init_apply4 = __esm({
       Object.assign(process.env, unit.vars ?? {});
       process.chdir(unitFolder(root, unit));
       return work$().pipe(
-        (0, import_operators46.finalize)(() => {
+        (0, import_operators52.finalize)(() => {
           process.chdir(back);
           saved.forEach(
             ([k, v]) => v === void 0 ? delete process.env[k] : process.env[k] = v
@@ -323260,7 +323840,7 @@ var init_apply4 = __esm({
         })
       );
     });
-    buildStep = (w, command) => new import_rxjs62.Observable((subscriber) => {
+    buildStep = (w, command) => new import_rxjs67.Observable((subscriber) => {
       const child = (0, import_node_child_process.spawn)(command, {
         shell: true,
         cwd: process.cwd(),
@@ -323296,7 +323876,7 @@ var init_apply4 = __esm({
         clusterId: data.clusterId,
         clusterName
       }).pipe(
-        (0, import_operators46.switchMap)((clusterId) => {
+        (0, import_operators52.switchMap)((clusterId) => {
           const payload = { ...environmentPayload(data, {}), clusterId };
           return w.environment === "create" ? GraphqlClienAPI.createEnvironment(projectId, payload) : GraphqlClienAPI.updateEnvironment(projectId, payload);
         }),
@@ -323308,8 +323888,8 @@ var init_apply4 = __esm({
     };
     lambdaStep = (projectId, w, build2) => {
       const command = build2 ? buildCommand(w.unit.spec, readPackageJson()) : null;
-      return (0, import_rxjs62.concat)(
-        command ? buildStep(w, command).pipe((0, import_operators46.ignoreElements)()) : import_rxjs62.EMPTY,
+      return (0, import_rxjs67.concat)(
+        command ? buildStep(w, command).pipe((0, import_operators52.ignoreElements)()) : import_rxjs67.EMPTY,
         deployStep(projectId, w)
       );
     };
@@ -323320,7 +323900,7 @@ var init_apply4 = __esm({
         return null;
       }
     };
-    deployStep = (projectId, w) => (0, import_rxjs62.defer)(
+    deployStep = (projectId, w) => (0, import_rxjs67.defer)(
       () => createOrUpdateLambda(
         {
           project: projectId,
@@ -323333,15 +323913,15 @@ var init_apply4 = __esm({
       const spec = w.unit.spec;
       const name2 = spec.function?.name;
       const lambda$ = w.time || w.domains ? GraphqlClienAPI.listLambdas(projectId).pipe(
-        (0, import_operators46.map)((all) => (all ?? []).find((l) => l.name === name2))
-      ) : (0, import_rxjs62.of)(null);
+        (0, import_operators52.map)((all) => (all ?? []).find((l) => l.name === name2))
+      ) : (0, import_rxjs67.of)(null);
       return lambda$.pipe(
-        (0, import_operators46.switchMap)(
-          (lambda) => (0, import_rxjs62.concat)(
-            w.time && lambda ? syncTimeTrigger(projectId, lambda, spec.triggers?.time) : import_rxjs62.EMPTY,
+        (0, import_operators52.switchMap)(
+          (lambda) => (0, import_rxjs67.concat)(
+            w.time && lambda ? syncTimeTrigger(projectId, lambda, spec.triggers?.time) : import_rxjs67.EMPTY,
             w.domains ? applyDomains(projectId, spec.domains ?? [], name2).pipe(
               step("applying", { scope: "domains", done: () => "applied" })
-            ) : import_rxjs62.EMPTY,
+            ) : import_rxjs67.EMPTY,
             w.mq ? applyMqTriggers(projectId, spec).pipe(
               step("saving", {
                 scope: `triggers.mq[${name2}]`,
@@ -323349,29 +323929,29 @@ var init_apply4 = __esm({
                   (x2) => `${x2.saved.name} ${x2.mode === "create" ? "created" : "updated"}`
                 ).join(", ")
               })
-            ) : import_rxjs62.EMPTY
+            ) : import_rxjs67.EMPTY
           )
         ),
-        (0, import_operators46.toArray)()
+        (0, import_operators52.toArray)()
       );
     };
     apply_default4 = (path2, cmd) => {
       const started = Date.now();
       const root = repoRoot(path2 ?? process.cwd());
-      return (0, import_rxjs62.lastValueFrom)(
+      return (0, import_rxjs67.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators46.switchMap)(
+          (0, import_operators52.switchMap)(
             (projectId) => GraphqlClienAPI.getProject(projectId).pipe(
-              (0, import_operators46.catchError)(() => (0, import_rxjs62.of)(null)),
-              (0, import_operators46.map)((project) => ({ projectId, project }))
+              (0, import_operators52.catchError)(() => (0, import_rxjs67.of)(null)),
+              (0, import_operators52.map)((project) => ({ projectId, project }))
             )
           ),
-          (0, import_operators46.switchMap)(({ projectId, project }) => {
+          (0, import_operators52.switchMap)(({ projectId, project }) => {
             const units = discover(root).filter(
               (u) => !u.error && (!cmd.only || u.spec.function?.name === cmd.only || u.id === cmd.only)
             );
             if (!units.length) {
-              return (0, import_rxjs62.throwError)(
+              return (0, import_rxjs67.throwError)(
                 () => new Error(
                   cmd.only ? `no lambforge.yaml here declares ${cmd.only}` : `no lambforge.yaml found under ${root}`
                 )
@@ -323384,7 +323964,7 @@ var init_apply4 = __esm({
               step("reading the project", {
                 done: (live) => `read ${live.lambdas.length} lambdas, ${live.environments.length} environments`
               }),
-              (0, import_operators46.map)((live) => {
+              (0, import_operators52.map)((live) => {
                 const plans = units.map((u) => planUnit(u, live));
                 const names3 = unitNames(units);
                 ui.print("");
@@ -323397,27 +323977,27 @@ var init_apply4 = __esm({
               })
             );
           }),
-          (0, import_operators46.switchMap)(({ projectId, plans, work }) => {
+          (0, import_operators52.switchMap)(({ projectId, plans, work }) => {
             const { errors } = countPlan(plans);
             const todo = work.filter(hasWork);
             if (errors) {
               ui.error(
                 `${errors} error(s) in the plan - fix them, nothing was applied`
               );
-              return (0, import_rxjs62.throwError)(() => new ReportedError("plan has errors"));
+              return (0, import_rxjs67.throwError)(() => new ReportedError("plan has errors"));
             }
             if (!todo.length) {
               ui.done("Everything is in sync - nothing to apply");
-              return (0, import_rxjs62.of)(null);
+              return (0, import_rxjs67.of)(null);
             }
             const lambdas = todo.filter((w) => w.lambda).length;
             const question = `Apply changes to ${todo.length} lambforge.yaml (${lambdas} deploy${lambdas === 1 ? "" : "s"})?`;
             ui.print("");
-            return (cmd.yes ? (0, import_rxjs62.of)(true) : ui.confirm(question)).pipe(
-              (0, import_operators46.switchMap)((yes) => {
+            return (cmd.yes ? (0, import_rxjs67.of)(true) : ui.confirm(question)).pipe(
+              (0, import_operators52.switchMap)((yes) => {
                 if (!yes) {
                   ui.warn("Cancelled - nothing was changed");
-                  return (0, import_rxjs62.of)(null);
+                  return (0, import_rxjs67.of)(null);
                 }
                 ui.header("Applying");
                 const environments = [
@@ -323429,27 +324009,27 @@ var init_apply4 = __esm({
                   (w) => inFolder(
                     w.unit,
                     root,
-                    () => (0, import_rxjs62.concat)(
-                      w.lambda ? lambdaStep(projectId, w, cmd.build !== false) : import_rxjs62.EMPTY,
+                    () => (0, import_rxjs67.concat)(
+                      w.lambda ? lambdaStep(projectId, w, cmd.build !== false) : import_rxjs67.EMPTY,
                       extrasStep(projectId, w)
-                    ).pipe((0, import_operators46.toArray)())
+                    ).pipe((0, import_operators52.toArray)())
                   )
                 );
-                return (0, import_rxjs62.concat)(...environments, ...units).pipe(
-                  (0, import_operators46.toArray)(),
-                  (0, import_operators46.tap)(
+                return (0, import_rxjs67.concat)(...environments, ...units).pipe(
+                  (0, import_operators52.toArray)(),
+                  (0, import_operators52.tap)(
                     () => ui.done(
                       `Apply complete! ${todo.length} applied ${ui.dim(elapsed(Date.now() - started))}`
                     )
                   ),
-                  (0, import_operators46.catchError)((e2) => {
+                  (0, import_operators52.catchError)((e2) => {
                     if (!(e2 instanceof ReportedError)) ui.error(errorText(e2));
                     ui.print(
                       ui.dim(
                         "\n   Stopped at the first failure - what ran before it stays applied. Fix it and run gcli apply again."
                       )
                     );
-                    return (0, import_rxjs62.throwError)(() => new ReportedError("apply failed"));
+                    return (0, import_rxjs67.throwError)(() => new ReportedError("apply failed"));
                   })
                 );
               })
@@ -323499,13 +324079,13 @@ function toYaml(lambda, env2, trigger, domains) {
 # generated by gcli export from the running lambda "${lambda.name}" - review before committing
 ` + dump(spec, { lineWidth: 100, noRefs: true });
 }
-var import_fs12, import_rxjs63, import_operators47, SCALE_KEYS, ENV_KEYS, names2, compact, pick3, domainsOf, export_default;
+var import_fs12, import_rxjs68, import_operators53, SCALE_KEYS, ENV_KEYS, names2, compact, pick3, domainsOf, export_default;
 var init_export = __esm({
   "src/commands/repo/export.ts"() {
     import_fs12 = require("fs");
     init_js_yaml();
-    import_rxjs63 = __toESM(require_cjs());
-    import_operators47 = __toESM(require_operators());
+    import_rxjs68 = __toESM(require_cjs());
+    import_operators53 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -323558,34 +324138,34 @@ var init_export = __esm({
         }
       ];
     });
-    export_default = (name2, cmd) => (0, import_rxjs63.lastValueFrom)(
+    export_default = (name2, cmd) => (0, import_rxjs68.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators47.switchMap)(
-          (projectId) => (0, import_rxjs63.forkJoin)({
+        (0, import_operators53.switchMap)(
+          (projectId) => (0, import_rxjs68.forkJoin)({
             lambdas: GraphqlClienAPI.listLambdasForPlan(projectId),
             environments: GraphqlClienAPI.listEnvironments(projectId).pipe(
-              (0, import_operators47.map)((e2) => e2 ?? [])
+              (0, import_operators53.map)((e2) => e2 ?? [])
             ),
             triggers: GraphqlClienAPI.listProjectTimeTriggers(projectId).pipe(
-              (0, import_operators47.map)((t2) => t2 ?? []),
-              (0, import_operators47.catchError)(() => (0, import_rxjs63.of)([]))
+              (0, import_operators53.map)((t2) => t2 ?? []),
+              (0, import_operators53.catchError)(() => (0, import_rxjs68.of)([]))
             ),
             domains: GraphqlClienAPI.listProjectDomains(projectId).pipe(
-              (0, import_operators47.catchError)(() => (0, import_rxjs63.of)([]))
+              (0, import_operators53.catchError)(() => (0, import_rxjs68.of)([]))
             )
           })
         ),
-        (0, import_operators47.switchMap)(({ lambdas, environments, triggers, domains }) => {
+        (0, import_operators53.switchMap)(({ lambdas, environments, triggers, domains }) => {
           const lambda = lambdas.find((l) => l.name === name2);
           if (!lambda)
-            return (0, import_rxjs63.throwError)(
+            return (0, import_rxjs68.throwError)(
               () => new Error(`No lambda "${name2}" in the project`)
             );
           const env2 = environments.find(
             (e2) => e2.name === lambda.env && (e2.clusterId ?? null) === (lambda.clusterId ?? null)
           ) ?? environments.find((e2) => e2.name === lambda.env);
           const trigger = triggers.find((t2) => t2.lambdaId === lambda.id);
-          return (0, import_rxjs63.of)(
+          return (0, import_rxjs68.of)(
             toYaml(
               lambda,
               env2,
@@ -323594,7 +324174,7 @@ var init_export = __esm({
             )
           );
         }),
-        (0, import_operators47.tap)((yaml) => {
+        (0, import_operators53.tap)((yaml) => {
           if (cmd.output) {
             (0, import_fs12.writeFileSync)(cmd.output, yaml);
             Logger.info(`Wrote ${cmd.output}`);
@@ -323675,17 +324255,17 @@ var init_ollama = __esm({
         }
       }
       async describe(tag) {
-        const show2 = await this.show(tag);
-        const contextLength = Object.entries(show2?.model_info ?? {}).find(
+        const show3 = await this.show(tag);
+        const contextLength = Object.entries(show3?.model_info ?? {}).find(
           ([key]) => key.endsWith(".context_length")
         )?.[1];
         return {
-          unusable: show2?.unusable,
+          unusable: show3?.unusable,
           name: tag.name,
           family: tag.details?.family,
           parameterSize: tag.details?.parameter_size,
           quantization: tag.details?.quantization_level,
-          capabilities: show2?.capabilities ?? [],
+          capabilities: show3?.capabilities ?? [],
           contextLength: typeof contextLength === "number" ? contextLength : void 0
         };
       }
@@ -323708,9 +324288,9 @@ var init_ollama = __esm({
           if (!res.ok) {
             return void 0;
           }
-          const show2 = await res.json();
-          this.showCache.set(key, show2);
-          return show2;
+          const show3 = await res.json();
+          this.showCache.set(key, show3);
+          return show3;
         } catch {
           return void 0;
         }
@@ -324656,11 +325236,11 @@ __export(start_exports2, {
   default: () => start_default,
   resolveRunner: () => resolveRunner
 });
-var import_os6, import_rxjs64, RUNNER_VERSION, resolveRunner, start_default;
+var import_os6, import_rxjs69, RUNNER_VERSION, resolveRunner, start_default;
 var init_start2 = __esm({
   "src/commands/runner/start.ts"() {
     import_os6 = require("os");
-    import_rxjs64 = __toESM(require_cjs());
+    import_rxjs69 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_ui();
@@ -324682,7 +325262,7 @@ var init_start2 = __esm({
       }
       const name2 = cmd.name || (0, import_os6.hostname)();
       Logger.info(`Registering this machine as local runner "${name2}"...`);
-      const { runner, token } = await (0, import_rxjs64.lastValueFrom)(
+      const { runner, token } = await (0, import_rxjs69.lastValueFrom)(
         GraphqlClienAPI.createLocalRunner(name2)
       ).catch((e2) => {
         throw new Error(
@@ -324884,16 +325464,16 @@ var list_exports7 = {};
 __export(list_exports7, {
   default: () => list_default7
 });
-var import_rxjs65, import_operators48, list_default7;
+var import_rxjs70, import_operators54, list_default7;
 var init_list7 = __esm({
   "src/commands/runner/list.ts"() {
-    import_rxjs65 = __toESM(require_cjs());
-    import_operators48 = __toESM(require_operators());
+    import_rxjs70 = __toESM(require_cjs());
+    import_operators54 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default7 = () => (0, import_rxjs65.lastValueFrom)(
+    list_default7 = () => (0, import_rxjs70.lastValueFrom)(
       GraphqlClienAPI.listLocalRunners().pipe(
-        (0, import_operators48.tap)((runners) => {
+        (0, import_operators54.tap)((runners) => {
           if (!runners?.length) {
             Logger.info(
               "No local runners yet. Run `gcli runner:start` on the machine that runs Ollama."
@@ -324921,10 +325501,10 @@ __export(models_exports, {
   default: () => models_default,
   parseSelection: () => parseSelection
 });
-var import_rxjs66, isShown, parseSelection, models_default;
+var import_rxjs71, isShown, parseSelection, models_default;
 var init_models = __esm({
   "src/commands/runner/models.ts"() {
-    import_rxjs66 = __toESM(require_cjs());
+    import_rxjs71 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -324954,11 +325534,11 @@ var init_models = __esm({
       }
       let runner;
       if (selection) {
-        runner = await (0, import_rxjs66.lastValueFrom)(
+        runner = await (0, import_rxjs71.lastValueFrom)(
           GraphqlClienAPI.setLocalRunnerModels(runnerId, selection.models)
         );
       } else {
-        const runners = await (0, import_rxjs66.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
+        const runners = await (0, import_rxjs71.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
         runner = runners.find((r2) => r2.id === runnerId);
       }
       if (!runner) {
@@ -324993,10 +325573,10 @@ var delete_exports3 = {};
 __export(delete_exports3, {
   default: () => delete_default3
 });
-var import_rxjs67, delete_default3;
+var import_rxjs72, delete_default3;
 var init_delete3 = __esm({
   "src/commands/runner/delete.ts"() {
-    import_rxjs67 = __toESM(require_cjs());
+    import_rxjs72 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -325006,7 +325586,7 @@ var init_delete3 = __esm({
       if (!runnerId) {
         throw new Error("Specify the runner with --id (see `gcli runner:list`).");
       }
-      await (0, import_rxjs67.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
+      await (0, import_rxjs72.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
       if (saved?.id === runnerId) {
         await forgetRunner();
       }
@@ -325021,10 +325601,10 @@ __export(start_exports3, {
   default: () => start2
 });
 async function start2(args) {
-  return (0, import_rxjs68.lastValueFrom)(
+  return (0, import_rxjs73.lastValueFrom)(
     loadSpec().pipe(
-      (0, import_operators49.switchMap)(
-        (config2) => (0, import_rxjs68.of)({
+      (0, import_operators55.switchMap)(
+        (config2) => (0, import_rxjs73.of)({
           watcher: (0, import_node_fs3.watch)(process.cwd(), {
             recursive: true
           }),
@@ -325045,7 +325625,7 @@ async function start2(args) {
           outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
           startCommand: "node"
         }).pipe(
-          (0, import_operators49.switchMap)(
+          (0, import_operators55.switchMap)(
             ({
               child,
               watcher,
@@ -325053,12 +325633,12 @@ async function start2(args) {
               outfile,
               startCommand,
               ignorelist
-            }) => (0, import_rxjs68.from)(build_default(args)).pipe(
-              (0, import_operators49.tap)(() => {
+            }) => (0, import_rxjs73.from)(build_default(args)).pipe(
+              (0, import_operators55.tap)(() => {
                 ui.info(`running ${startCommand} ${outfile}
 `, "start");
               }),
-              (0, import_operators49.tap)(() => {
+              (0, import_operators55.tap)(() => {
                 child = (0, import_node_child_process2.spawn)(
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
@@ -325068,14 +325648,14 @@ async function start2(args) {
                   }
                 );
               }),
-              (0, import_operators49.tap)(
-                () => (0, import_rxjs68.merge)(
-                  (0, import_rxjs68.fromEvent)(process, "SIGINT"),
-                  (0, import_rxjs68.fromEvent)(process, "SIGTERM"),
-                  (0, import_rxjs68.fromEvent)(process, "exit")
+              (0, import_operators55.tap)(
+                () => (0, import_rxjs73.merge)(
+                  (0, import_rxjs73.fromEvent)(process, "SIGINT"),
+                  (0, import_rxjs73.fromEvent)(process, "SIGTERM"),
+                  (0, import_rxjs73.fromEvent)(process, "exit")
                 ).pipe(
-                  (0, import_operators49.debounceTime)(100),
-                  (0, import_operators49.tap)(() => {
+                  (0, import_operators55.debounceTime)(100),
+                  (0, import_operators55.tap)(() => {
                     Logger.warn("\u26A0\uFE0F  Main process shutting down");
                     watcher.close();
                     child.kill("SIGTERM");
@@ -325083,13 +325663,13 @@ async function start2(args) {
                   })
                 ).subscribe()
               ),
-              (0, import_operators49.switchMap)(
-                () => (0, import_rxjs68.fromEvent)(watcher, "change").pipe(
-                  (0, import_operators49.map)(([event, filename]) => ({
+              (0, import_operators55.switchMap)(
+                () => (0, import_rxjs73.fromEvent)(watcher, "change").pipe(
+                  (0, import_operators55.map)(([event, filename]) => ({
                     event,
                     filename
                   })),
-                  (0, import_operators49.filter)(({ filename }) => {
+                  (0, import_operators55.filter)(({ filename }) => {
                     if (!filename) {
                       return false;
                     }
@@ -325101,16 +325681,16 @@ async function start2(args) {
                     const rootDir = filename.split(/[/\\]/)[0];
                     return whitelist.has(rootDir);
                   }),
-                  (0, import_operators49.debounceTime)(100)
+                  (0, import_operators55.debounceTime)(100)
                 )
               ),
-              (0, import_operators49.tap)((data) => {
+              (0, import_operators55.tap)((data) => {
                 ui.print("");
                 ui.info(`${data.filename} changed - restarting`, "start");
                 child?.kill("SIGTERM");
               }),
-              (0, import_operators49.switchMap)(() => build_default(args)),
-              (0, import_operators49.tap)(() => {
+              (0, import_operators55.switchMap)(() => build_default(args)),
+              (0, import_operators55.tap)(() => {
                 ui.info(`running ${startCommand} ${outfile}
 `, "start");
                 child = (0, import_node_child_process2.spawn)(
@@ -325129,13 +325709,13 @@ async function start2(args) {
     )
   );
 }
-var import_node_child_process2, import_node_fs3, import_rxjs68, import_operators49;
+var import_node_child_process2, import_node_fs3, import_rxjs73, import_operators55;
 var init_start3 = __esm({
   "src/commands/start/start.ts"() {
     import_node_child_process2 = require("node:child_process");
     import_node_fs3 = require("node:fs");
-    import_rxjs68 = __toESM(require_cjs());
-    import_operators49 = __toESM(require_operators());
+    import_rxjs73 = __toESM(require_cjs());
+    import_operators55 = __toESM(require_operators());
     init_log();
     init_ui();
     init_build();
@@ -325148,25 +325728,25 @@ var create_cron_exports = {};
 __export(create_cron_exports, {
   default: () => create_cron_default
 });
-var import_rxjs69, import_operators50, create_cron_default;
+var import_rxjs74, import_operators56, create_cron_default;
 var init_create_cron = __esm({
   "src/commands/triggers/cron/create-cron.ts"() {
-    import_rxjs69 = __toESM(require_cjs());
-    import_operators50 = __toESM(require_operators());
+    import_rxjs74 = __toESM(require_cjs());
+    import_operators56 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_cron_default = (cmd) => (0, import_rxjs69.lastValueFrom)(
+    create_cron_default = (cmd) => (0, import_rxjs74.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators50.switchMap)(
+        (0, import_operators56.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators50.switchMap)(
+            (0, import_operators56.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators50.map)((lambda) => {
+                (0, import_operators56.map)((lambda) => {
                   const fromSpec = data?.triggers?.time ?? data;
                   return {
                     lambdaName: lambda.name,
@@ -325179,8 +325759,8 @@ var init_create_cron = __esm({
             )
           )
         ),
-        (0, import_operators50.switchMap)(
-          ({ lambdaId, cron, triggerName, lambdaName }) => !cron || !triggerName ? (0, import_rxjs69.throwError)(
+        (0, import_operators56.switchMap)(
+          ({ lambdaId, cron, triggerName, lambdaName }) => !cron || !triggerName ? (0, import_rxjs74.throwError)(
             () => new Error(
               "cron:create needs --cron and --triggerName (or triggers.time.cron / triggerName in lambforge.yaml)"
             )
@@ -325188,9 +325768,9 @@ var init_create_cron = __esm({
             lambdaId,
             cron,
             triggerName
-          }).pipe((0, import_operators50.map)((data) => ({ ...data, lambdaName })))
+          }).pipe((0, import_operators56.map)((data) => ({ ...data, lambdaName })))
         ),
-        (0, import_operators50.tap)((data) => {
+        (0, import_operators56.tap)((data) => {
           Logger.success(`Time trigger ${data?.triggerName ?? ""} created`);
           const columns = [
             "id",
@@ -325211,25 +325791,25 @@ var delete_cron_exports = {};
 __export(delete_cron_exports, {
   default: () => delete_cron_default
 });
-var import_rxjs70, import_operators51, delete_cron_default;
+var import_rxjs75, import_operators57, delete_cron_default;
 var init_delete_cron = __esm({
   "src/commands/triggers/cron/delete-cron.ts"() {
-    import_rxjs70 = __toESM(require_cjs());
-    import_operators51 = __toESM(require_operators());
+    import_rxjs75 = __toESM(require_cjs());
+    import_operators57 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_cron_default = (cmd) => (0, import_rxjs70.lastValueFrom)(
+    delete_cron_default = (cmd) => (0, import_rxjs75.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators51.switchMap)(
+        (0, import_operators57.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators51.switchMap)(
+            (0, import_operators57.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators51.map)((lambda) => ({
+                (0, import_operators57.map)((lambda) => ({
                   lambdaName: lambda.name,
                   lambdaId: lambda.id
                 }))
@@ -325237,12 +325817,12 @@ var init_delete_cron = __esm({
             )
           )
         ),
-        (0, import_operators51.switchMap)(
+        (0, import_operators57.switchMap)(
           ({ lambdaId, lambdaName }) => GraphqlClienAPI.deleteLambdaTimeTrigger(lambdaId).pipe(
-            (0, import_operators51.map)((data) => ({ ...data, lambdaName }))
+            (0, import_operators57.map)((data) => ({ ...data, lambdaName }))
           )
         ),
-        (0, import_operators51.tap)((data) => {
+        (0, import_operators57.tap)((data) => {
           Logger.success(`Time trigger ${data?.triggerName ?? ""} deleted`);
           const columns = [
             "id",
@@ -325262,29 +325842,29 @@ var list_crons_exports = {};
 __export(list_crons_exports, {
   default: () => list_crons_default
 });
-var import_rxjs71, import_operators52, list_crons_default;
+var import_rxjs76, import_operators58, list_crons_default;
 var init_list_crons = __esm({
   "src/commands/triggers/cron/list-crons.ts"() {
-    import_rxjs71 = __toESM(require_cjs());
-    import_operators52 = __toESM(require_operators());
+    import_rxjs76 = __toESM(require_cjs());
+    import_operators58 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_crons_default = (cmd) => (0, import_rxjs71.lastValueFrom)(
+    list_crons_default = (cmd) => (0, import_rxjs76.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators52.switchMap)(
-          (projectId) => (0, import_rxjs71.combineLatest)([
+        (0, import_operators58.switchMap)(
+          (projectId) => (0, import_rxjs76.combineLatest)([
             GraphqlClienAPI.listProjectTimeTriggers(projectId),
             GraphqlClienAPI.listLambdas(projectId)
           ])
         ),
-        (0, import_operators52.map)(
+        (0, import_operators58.map)(
           ([triggers, lambdas]) => triggers.map((v) => ({
             lambdaName: lambdas.find((l) => l.id === v.lambdaId)?.name,
             ...v
           }))
         ),
-        (0, import_operators52.tap)((data) => {
+        (0, import_operators58.tap)((data) => {
           const columns = [
             "id",
             "triggerName",
@@ -325303,20 +325883,20 @@ var list_exports8 = {};
 __export(list_exports8, {
   default: () => list_default8
 });
-var import_rxjs72, import_operators53, list_default8;
+var import_rxjs77, import_operators59, list_default8;
 var init_list8 = __esm({
   "src/commands/triggers/message-queue/list.ts"() {
-    import_rxjs72 = __toESM(require_cjs());
-    import_operators53 = __toESM(require_operators());
+    import_rxjs77 = __toESM(require_cjs());
+    import_operators59 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default8 = (cmd) => (0, import_rxjs72.lastValueFrom)(
+    list_default8 = (cmd) => (0, import_rxjs77.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators53.switchMap)(
+        (0, import_operators59.switchMap)(
           (projectId) => GraphqlClienAPI.listMessageQueueTriggers(projectId)
         ),
-        (0, import_operators53.tap)((triggers) => {
+        (0, import_operators59.tap)((triggers) => {
           if (!triggers?.length) {
             Logger.info("No message-queue triggers yet. See mq-trigger:create.");
           } else {
@@ -325342,20 +325922,20 @@ var delete_exports4 = {};
 __export(delete_exports4, {
   default: () => delete_default4
 });
-var import_rxjs73, import_operators54, delete_default4;
+var import_rxjs78, import_operators60, delete_default4;
 var init_delete4 = __esm({
   "src/commands/triggers/message-queue/delete.ts"() {
-    import_rxjs73 = __toESM(require_cjs());
-    import_operators54 = __toESM(require_operators());
+    import_rxjs78 = __toESM(require_cjs());
+    import_operators60 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    delete_default4 = (cmd) => (0, import_rxjs73.lastValueFrom)(
+    delete_default4 = (cmd) => (0, import_rxjs78.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators54.switchMap)(
+        (0, import_operators60.switchMap)(
           (projectId) => GraphqlClienAPI.deleteMessageQueueTrigger(projectId, cmd.name)
         ),
-        (0, import_operators54.tap)((trigger) => {
+        (0, import_operators60.tap)((trigger) => {
           Logger.success(`Queue trigger ${trigger?.name ?? ""} deleted`);
           Logger.info(
             `Deleted trigger ${trigger?.name ?? cmd.name}${trigger?.lambdaName ? ` (lambda ${trigger.lambdaName})` : ""}`
@@ -325458,12 +326038,12 @@ var init_definition = __esm({
 });
 
 // src/commands/workflow/helpers.ts
-var import_promises7, import_rxjs74, import_operators55, resolveWorkflow, withProject, readWorkflowFile, writeTextFile, POLL_MS, followRun, printRunResult;
+var import_promises7, import_rxjs79, import_operators61, resolveWorkflow, withProject, readWorkflowFile, writeTextFile, POLL_MS, followRun, printRunResult;
 var init_helpers4 = __esm({
   "src/commands/workflow/helpers.ts"() {
     import_promises7 = require("fs/promises");
-    import_rxjs74 = __toESM(require_cjs());
-    import_operators55 = __toESM(require_operators());
+    import_rxjs79 = __toESM(require_cjs());
+    import_operators61 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -325473,7 +326053,7 @@ var init_helpers4 = __esm({
         throw new Error("--name is required (see workflow:list)");
       }
       return GraphqlClienAPI.listWorkflows(projectId).pipe(
-        (0, import_operators55.map)((workflows) => {
+        (0, import_operators61.map)((workflows) => {
           const workflow = workflows.find((w) => w.name === name2 || w.id === name2);
           if (!workflow) {
             throw new Error(
@@ -325484,30 +326064,30 @@ var init_helpers4 = __esm({
         })
       );
     };
-    withProject = (project, fn) => (0, import_rxjs74.lastValueFrom)(parseProjectId(project).pipe((0, import_operators55.switchMap)(fn)));
+    withProject = (project, fn) => (0, import_rxjs79.lastValueFrom)(parseProjectId(project).pipe((0, import_operators61.switchMap)(fn)));
     readWorkflowFile = (path2) => {
       if (!path2) {
         throw new Error("--file is required (a workflow YAML or JSON file)");
       }
-      return (0, import_rxjs74.from)((0, import_promises7.readFile)(path2, "utf8")).pipe((0, import_operators55.map)(parseWorkflowFile));
+      return (0, import_rxjs79.from)((0, import_promises7.readFile)(path2, "utf8")).pipe((0, import_operators61.map)(parseWorkflowFile));
     };
-    writeTextFile = (path2, text) => (0, import_rxjs74.from)((0, import_promises7.writeFile)(path2, text, "utf8"));
+    writeTextFile = (path2, text) => (0, import_rxjs79.from)((0, import_promises7.writeFile)(path2, text, "utf8"));
     POLL_MS = 2e3;
     followRun = (projectId, workflowId, runName) => {
       let printed = 0;
-      return (0, import_rxjs74.timer)(0, POLL_MS).pipe(
-        (0, import_operators55.switchMap)(
+      return (0, import_rxjs79.timer)(0, POLL_MS).pipe(
+        (0, import_operators61.switchMap)(
           () => GraphqlClienAPI.getWorkflowRun(projectId, workflowId, runName)
         ),
-        (0, import_operators55.tap)((run2) => {
+        (0, import_operators61.tap)((run2) => {
           for (const e2 of newEvents(run2, printed)) {
             Logger.log(formatEvent(e2));
             printed = Math.max(printed, e2.seq);
           }
         }),
-        (0, import_operators55.filter)((run2) => isTerminal2(run2.phase)),
-        (0, import_operators55.take)(1),
-        (0, import_operators55.tap)(printRunResult)
+        (0, import_operators61.filter)((run2) => isTerminal2(run2.phase)),
+        (0, import_operators61.take)(1),
+        (0, import_operators61.tap)(printRunResult)
       );
     };
     printRunResult = (run2) => {
@@ -325528,10 +326108,10 @@ var list_exports9 = {};
 __export(list_exports9, {
   default: () => list_default9
 });
-var import_operators56, list_default9;
+var import_operators62, list_default9;
 var init_list9 = __esm({
   "src/commands/workflow/list.ts"() {
-    import_operators56 = __toESM(require_operators());
+    import_operators62 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_definition();
@@ -325539,7 +326119,7 @@ var init_list9 = __esm({
     list_default9 = (cmd) => withProject(
       cmd.project,
       (projectId) => GraphqlClienAPI.listWorkflows(projectId).pipe(
-        (0, import_operators56.tap)((workflows) => {
+        (0, import_operators62.tap)((workflows) => {
           if (!workflows.length) {
             Logger.info(
               "No workflows yet. Draft one with workflow:generate, or write a file and workflow:apply it."
@@ -325566,18 +326146,18 @@ var get_exports2 = {};
 __export(get_exports2, {
   default: () => get_default2
 });
-var import_rxjs75, import_operators57, get_default2;
+var import_rxjs80, import_operators63, get_default2;
 var init_get2 = __esm({
   "src/commands/workflow/get.ts"() {
-    import_rxjs75 = __toESM(require_cjs());
-    import_operators57 = __toESM(require_operators());
+    import_rxjs80 = __toESM(require_cjs());
+    import_operators63 = __toESM(require_operators());
     init_log();
     init_definition();
     init_helpers4();
     get_default2 = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators57.switchMap)((w) => {
+        (0, import_operators63.switchMap)((w) => {
           const text = toWorkflowYaml({
             name: w.name,
             description: w.description ?? void 0,
@@ -325585,10 +326165,10 @@ var init_get2 = __esm({
           });
           if (!cmd.out) {
             Logger.log(text);
-            return (0, import_rxjs75.of)(null);
+            return (0, import_rxjs80.of)(null);
           }
           return writeTextFile(cmd.out, text).pipe(
-            (0, import_operators57.tap)(() => Logger.info(`Wrote ${cmd.out}`))
+            (0, import_operators63.tap)(() => Logger.info(`Wrote ${cmd.out}`))
           );
         })
       )
@@ -325602,10 +326182,10 @@ __export(apply_exports5, {
   applyWorkflow: () => applyWorkflow,
   default: () => apply_default5
 });
-var import_operators58, applyWorkflow, apply_default5;
+var import_operators64, applyWorkflow, apply_default5;
 var init_apply5 = __esm({
   "src/commands/workflow/apply.ts"() {
-    import_operators58 = __toESM(require_operators());
+    import_operators64 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
@@ -325616,7 +326196,7 @@ var init_apply5 = __esm({
         );
       }
       return GraphqlClienAPI.listWorkflows(projectId).pipe(
-        (0, import_operators58.switchMap)((workflows) => {
+        (0, import_operators64.switchMap)((workflows) => {
           const existing = workflows.find((w) => w.name === file2.name);
           return existing ? GraphqlClienAPI.updateWorkflow(projectId, existing.id, {
             description: file2.description,
@@ -325628,7 +326208,7 @@ var init_apply5 = __esm({
             clusterId: file2.clusterId
           });
         }),
-        (0, import_operators58.tap)(
+        (0, import_operators64.tap)(
           (w) => Logger.success(
             `Workflow ${w.name} saved (${Object.keys(w.definition?.states ?? {}).length} steps). Run it: gcli workflow:run --name ${w.name} --wait`
           )
@@ -325638,7 +326218,7 @@ var init_apply5 = __esm({
     apply_default5 = (cmd) => withProject(
       cmd.project,
       (projectId) => readWorkflowFile(cmd.file).pipe(
-        (0, import_operators58.switchMap)(
+        (0, import_operators64.switchMap)(
           (file2) => applyWorkflow(projectId, {
             ...file2,
             name: cmd.name ?? file2.name,
@@ -325655,12 +326235,12 @@ var generate_exports = {};
 __export(generate_exports, {
   default: () => generate_default
 });
-var import_promises8, import_rxjs76, import_operators59, generate_default;
+var import_promises8, import_rxjs81, import_operators65, generate_default;
 var init_generate = __esm({
   "src/commands/workflow/generate.ts"() {
     import_promises8 = require("fs/promises");
-    import_rxjs76 = __toESM(require_cjs());
-    import_operators59 = __toESM(require_operators());
+    import_rxjs81 = __toESM(require_cjs());
+    import_operators65 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_apply5();
@@ -325672,26 +326252,26 @@ var init_generate = __esm({
           'Describe the workflow: --description "charge the card with retries, then email the receipt"'
         );
       }
-      const base$ = cmd.from ? (0, import_rxjs76.from)((0, import_promises8.readFile)(cmd.from, "utf8")).pipe((0, import_operators59.map)(parseWorkflowFile)) : cmd.name ? GraphqlClienAPI.listWorkflows(projectId).pipe(
-        (0, import_operators59.switchMap)(
+      const base$ = cmd.from ? (0, import_rxjs81.from)((0, import_promises8.readFile)(cmd.from, "utf8")).pipe((0, import_operators65.map)(parseWorkflowFile)) : cmd.name ? GraphqlClienAPI.listWorkflows(projectId).pipe(
+        (0, import_operators65.switchMap)(
           (workflows) => workflows.some((w) => w.name === cmd.name) ? resolveWorkflow(projectId, cmd.name).pipe(
-            (0, import_operators59.map)((w) => ({
+            (0, import_operators65.map)((w) => ({
               name: w.name,
               description: w.description ?? void 0,
               definition: w.definition
             }))
-          ) : (0, import_rxjs76.of)(null)
+          ) : (0, import_rxjs81.of)(null)
         )
-      ) : (0, import_rxjs76.of)(null);
+      ) : (0, import_rxjs81.of)(null);
       return base$.pipe(
-        (0, import_operators59.tap)(() => Logger.info("Asking the AI for a draft...")),
-        (0, import_operators59.switchMap)(
+        (0, import_operators65.tap)(() => Logger.info("Asking the AI for a draft...")),
+        (0, import_operators65.switchMap)(
           (base) => GraphqlClienAPI.generateWorkflowDraft(
             projectId,
             cmd.description,
             base?.definition
           ).pipe(
-            (0, import_operators59.map)((draft) => ({
+            (0, import_operators65.map)((draft) => ({
               draft,
               file: {
                 name: cmd.name ?? base?.name,
@@ -325701,19 +326281,19 @@ var init_generate = __esm({
             }))
           )
         ),
-        (0, import_operators59.tap)(({ draft }) => {
+        (0, import_operators65.tap)(({ draft }) => {
           if (draft.explanation) Logger.log(draft.explanation);
           (draft.warnings ?? []).filter(Boolean).forEach((w) => Logger.warn(`- ${w}`));
         }),
-        (0, import_operators59.switchMap)(({ file: file2 }) => {
+        (0, import_operators65.switchMap)(({ file: file2 }) => {
           const text = toWorkflowYaml(file2);
           const written$ = cmd.out ? writeTextFile(cmd.out, text).pipe(
-            (0, import_operators59.tap)(() => Logger.info(`Wrote ${cmd.out}`))
-          ) : (0, import_rxjs76.of)(null).pipe((0, import_operators59.tap)(() => !cmd.apply && Logger.log(text)));
+            (0, import_operators65.tap)(() => Logger.info(`Wrote ${cmd.out}`))
+          ) : (0, import_rxjs81.of)(null).pipe((0, import_operators65.tap)(() => !cmd.apply && Logger.log(text)));
           return written$.pipe(
-            (0, import_operators59.switchMap)(
-              () => cmd.apply ? applyWorkflow(projectId, file2) : (0, import_rxjs76.of)(null).pipe(
-                (0, import_operators59.tap)(
+            (0, import_operators65.switchMap)(
+              () => cmd.apply ? applyWorkflow(projectId, file2) : (0, import_rxjs81.of)(null).pipe(
+                (0, import_operators65.tap)(
                   () => Logger.info(
                     cmd.out ? `Review it, then: gcli workflow:apply --file ${cmd.out}${file2.name ? "" : " --name <name>"}` : "Save it with -o <file>, or re-run with --apply --name <name>"
                   )
@@ -325732,24 +326312,24 @@ var validate_exports2 = {};
 __export(validate_exports2, {
   default: () => validate_default2
 });
-var import_operators60, validate_default2;
+var import_operators66, validate_default2;
 var init_validate2 = __esm({
   "src/commands/workflow/validate.ts"() {
-    import_operators60 = __toESM(require_operators());
+    import_operators66 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
     validate_default2 = (cmd) => withProject(
       cmd.project,
       (projectId) => readWorkflowFile(cmd.file).pipe(
-        (0, import_operators60.switchMap)(
+        (0, import_operators66.switchMap)(
           (file2) => GraphqlClienAPI.validateWorkflow(
             projectId,
             file2.definition,
             file2.clusterId
           )
         ),
-        (0, import_operators60.tap)(
+        (0, import_operators66.tap)(
           (v) => Logger.info(
             `Valid. Calls: ${(v.functions ?? []).join(", ") || "no lambdas"}`
           )
@@ -325764,18 +326344,18 @@ var delete_exports5 = {};
 __export(delete_exports5, {
   default: () => delete_default5
 });
-var import_operators61, delete_default5;
+var import_operators67, delete_default5;
 var init_delete5 = __esm({
   "src/commands/workflow/delete.ts"() {
-    import_operators61 = __toESM(require_operators());
+    import_operators67 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
     delete_default5 = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators61.switchMap)((w) => GraphqlClienAPI.deleteWorkflow(projectId, w.id)),
-        (0, import_operators61.tap)((w) => Logger.info(`Deleted workflow ${w.name} and its runs`))
+        (0, import_operators67.switchMap)((w) => GraphqlClienAPI.deleteWorkflow(projectId, w.id)),
+        (0, import_operators67.tap)((w) => Logger.info(`Deleted workflow ${w.name} and its runs`))
       )
     );
   }
@@ -325786,28 +326366,28 @@ var run_exports = {};
 __export(run_exports, {
   default: () => run_default
 });
-var import_promises9, import_rxjs77, import_operators62, run_default;
+var import_promises9, import_rxjs82, import_operators68, run_default;
 var init_run = __esm({
   "src/commands/workflow/run.ts"() {
     import_promises9 = require("fs/promises");
-    import_rxjs77 = __toESM(require_cjs());
-    import_operators62 = __toESM(require_operators());
+    import_rxjs82 = __toESM(require_cjs());
+    import_operators68 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_definition();
     init_helpers4();
     run_default = (cmd) => withProject(
       cmd.project,
-      (projectId) => (cmd.inputFile ? (0, import_rxjs77.from)((0, import_promises9.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs77.of)(cmd.input)).pipe(
-        (0, import_operators62.map)(parseRunInput),
-        (0, import_operators62.switchMap)(
+      (projectId) => (cmd.inputFile ? (0, import_rxjs82.from)((0, import_promises9.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs82.of)(cmd.input)).pipe(
+        (0, import_operators68.map)(parseRunInput),
+        (0, import_operators68.switchMap)(
           (input) => resolveWorkflow(projectId, cmd.name).pipe(
-            (0, import_operators62.switchMap)(
+            (0, import_operators68.switchMap)(
               (w) => GraphqlClienAPI.startWorkflowRun(projectId, w.id, input).pipe(
-                (0, import_operators62.tap)((run2) => Logger.info(`Started run ${run2.name}`)),
-                (0, import_operators62.switchMap)(
-                  (run2) => cmd.wait ? followRun(projectId, w.id, run2.name) : (0, import_rxjs77.of)(run2).pipe(
-                    (0, import_operators62.tap)(
+                (0, import_operators68.tap)((run2) => Logger.info(`Started run ${run2.name}`)),
+                (0, import_operators68.switchMap)(
+                  (run2) => cmd.wait ? followRun(projectId, w.id, run2.name) : (0, import_rxjs82.of)(run2).pipe(
+                    (0, import_operators68.tap)(
                       () => Logger.info(
                         `Follow it: gcli workflow:status --name ${w.name} --run ${run2.name} --follow`
                       )
@@ -325883,10 +326463,10 @@ var runs_exports = {};
 __export(runs_exports, {
   default: () => runs_default
 });
-var import_operators63, runs_default;
+var import_operators69, runs_default;
 var init_runs = __esm({
   "src/commands/workflow/runs.ts"() {
-    import_operators63 = __toESM(require_operators());
+    import_operators69 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
@@ -325894,14 +326474,14 @@ var init_runs = __esm({
     runs_default = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators63.switchMap)(
+        (0, import_operators69.switchMap)(
           (w) => GraphqlClienAPI.listWorkflowRuns(
             projectId,
             w.id,
             cmd.limit ? Number(cmd.limit) : void 0
           )
         ),
-        (0, import_operators63.tap)(
+        (0, import_operators69.tap)(
           (runs) => runs.length ? Logger.table(
             runs.map((r2) => ({
               run: r2.name,
@@ -325923,10 +326503,10 @@ var status_exports2 = {};
 __export(status_exports2, {
   default: () => status_default2
 });
-var import_operators64, status_default2;
+var import_operators70, status_default2;
 var init_status2 = __esm({
   "src/commands/workflow/status.ts"() {
-    import_operators64 = __toESM(require_operators());
+    import_operators70 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_definition();
@@ -325936,9 +326516,9 @@ var init_status2 = __esm({
         throw new Error("--run is required (see workflow:runs)");
       }
       return resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators64.switchMap)(
+        (0, import_operators70.switchMap)(
           (w) => cmd.follow ? followRun(projectId, w.id, cmd.run) : GraphqlClienAPI.getWorkflowRun(projectId, w.id, cmd.run).pipe(
-            (0, import_operators64.tap)((run2) => {
+            (0, import_operators70.tap)((run2) => {
               (run2.events ?? []).forEach((e2) => Logger.log(formatEvent(e2)));
               printRunResult(run2);
             })
@@ -325954,10 +326534,10 @@ var cancel_exports = {};
 __export(cancel_exports, {
   default: () => cancel_default
 });
-var import_operators65, cancel_default;
+var import_operators71, cancel_default;
 var init_cancel = __esm({
   "src/commands/workflow/cancel.ts"() {
-    import_operators65 = __toESM(require_operators());
+    import_operators71 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
@@ -325966,10 +326546,10 @@ var init_cancel = __esm({
         throw new Error("--run is required (see workflow:runs)");
       }
       return resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators65.switchMap)(
+        (0, import_operators71.switchMap)(
           (w) => GraphqlClienAPI.cancelWorkflowRun(projectId, w.id, cmd.run)
         ),
-        (0, import_operators65.tap)((run2) => Logger.info(`Run ${run2.name}: ${run2.phase}`))
+        (0, import_operators71.tap)((run2) => Logger.info(`Run ${run2.name}: ${run2.phase}`))
       );
     });
   }
@@ -325980,30 +326560,30 @@ var trigger_add_exports = {};
 __export(trigger_add_exports, {
   default: () => trigger_add_default
 });
-var import_promises10, import_rxjs78, import_operators66, trigger_add_default;
+var import_promises10, import_rxjs83, import_operators72, trigger_add_default;
 var init_trigger_add = __esm({
   "src/commands/workflow/trigger-add.ts"() {
     import_promises10 = require("fs/promises");
-    import_rxjs78 = __toESM(require_cjs());
-    import_operators66 = __toESM(require_operators());
+    import_rxjs83 = __toESM(require_cjs());
+    import_operators72 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
     init_triggers();
     trigger_add_default = (cmd) => withProject(
       cmd.project,
-      (projectId) => (cmd.inputFile ? (0, import_rxjs78.from)((0, import_promises10.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs78.of)(void 0)).pipe(
-        (0, import_operators66.map)((inputText) => buildTriggerInput({ ...cmd, inputText })),
-        (0, import_operators66.switchMap)(
+      (projectId) => (cmd.inputFile ? (0, import_rxjs83.from)((0, import_promises10.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs83.of)(void 0)).pipe(
+        (0, import_operators72.map)((inputText) => buildTriggerInput({ ...cmd, inputText })),
+        (0, import_operators72.switchMap)(
           (trigger) => resolveWorkflow(projectId, cmd.name).pipe(
-            (0, import_operators66.switchMap)(
+            (0, import_operators72.switchMap)(
               (w) => GraphqlClienAPI.addWorkflowTrigger(projectId, w.id, trigger).pipe(
-                (0, import_operators66.map)((updated) => ({ before: w.triggers ?? [], updated }))
+                (0, import_operators72.map)((updated) => ({ before: w.triggers ?? [], updated }))
               )
             )
           )
         ),
-        (0, import_operators66.tap)(({ before, updated }) => {
+        (0, import_operators72.tap)(({ before, updated }) => {
           const added = (updated.triggers ?? []).find(
             (t2) => !before.some((b) => b.id === t2.id)
           );
@@ -326027,17 +326607,17 @@ var trigger_list_exports = {};
 __export(trigger_list_exports, {
   default: () => trigger_list_default
 });
-var import_operators67, trigger_list_default;
+var import_operators73, trigger_list_default;
 var init_trigger_list = __esm({
   "src/commands/workflow/trigger-list.ts"() {
-    import_operators67 = __toESM(require_operators());
+    import_operators73 = __toESM(require_operators());
     init_log();
     init_helpers4();
     init_triggers();
     trigger_list_default = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators67.tap)(
+        (0, import_operators73.tap)(
           (w) => w.triggers?.length ? Logger.table(w.triggers.map(triggerRow)) : Logger.info(
             'No triggers. Add one with workflow:trigger:add --http or --cron "@daily".'
           )
@@ -326052,10 +326632,10 @@ var trigger_remove_exports = {};
 __export(trigger_remove_exports, {
   default: () => trigger_remove_default
 });
-var import_operators68, trigger_remove_default;
+var import_operators74, trigger_remove_default;
 var init_trigger_remove = __esm({
   "src/commands/workflow/trigger-remove.ts"() {
-    import_operators68 = __toESM(require_operators());
+    import_operators74 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
@@ -326063,14 +326643,14 @@ var init_trigger_remove = __esm({
     trigger_remove_default = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators68.switchMap)(
+        (0, import_operators74.switchMap)(
           (w) => GraphqlClienAPI.removeWorkflowTrigger(
             projectId,
             w.id,
             findTrigger(w.triggers, cmd.trigger).id
           )
         ),
-        (0, import_operators68.tap)(
+        (0, import_operators74.tap)(
           (w) => Logger.success(
             `Trigger removed from ${w.name} (${w.triggers?.length ?? 0} left)`
           )
@@ -327066,15 +327646,15 @@ function kill(child) {
   } catch {
   }
 }
-var import_child_process8, import_crypto3, import_fs15, import_path10, import_rxjs79, import_operators69, MAX_SESSIONS, WATCH_BATCH_MS, TerminalManager;
+var import_child_process8, import_crypto3, import_fs15, import_path10, import_rxjs84, import_operators75, MAX_SESSIONS, WATCH_BATCH_MS, TerminalManager;
 var init_terminals = __esm({
   "src/commands/workspace/terminals.ts"() {
     import_child_process8 = require("child_process");
     import_crypto3 = require("crypto");
     import_fs15 = require("fs");
     import_path10 = require("path");
-    import_rxjs79 = __toESM(require_cjs());
-    import_operators69 = __toESM(require_operators());
+    import_rxjs84 = __toESM(require_cjs());
+    import_operators75 = __toESM(require_operators());
     init_files();
     MAX_SESSIONS = 4;
     WATCH_BATCH_MS = 150;
@@ -327088,7 +327668,7 @@ var init_terminals = __esm({
         this.root = root;
         this.env = env2;
         this.notIgnored = notIgnored;
-        this.events$ = new import_rxjs79.Subject();
+        this.events$ = new import_rxjs84.Subject();
         /** shells (`terminal/*`) */
         this.sessions = /* @__PURE__ */ new Map();
         /** file watches (`watch/*`) - the open editor, terminal or not */
@@ -327188,12 +327768,12 @@ ${e2.message}\r
           this.unwatch(oldest);
         }
         const sessionId = (0, import_crypto3.randomUUID)();
-        const changed$ = new import_rxjs79.Subject();
+        const changed$ = new import_rxjs84.Subject();
         const changes = changed$.pipe(
-          (0, import_operators69.bufferTime)(WATCH_BATCH_MS),
-          (0, import_operators69.filter)((paths) => paths.length > 0),
-          (0, import_operators69.concatMap)((paths) => (0, import_rxjs79.from)(this.notIgnored([...new Set(paths)]))),
-          (0, import_operators69.mergeMap)((paths) => (0, import_rxjs79.from)(paths))
+          (0, import_operators75.bufferTime)(WATCH_BATCH_MS),
+          (0, import_operators75.filter)((paths) => paths.length > 0),
+          (0, import_operators75.concatMap)((paths) => (0, import_rxjs84.from)(this.notIgnored([...new Set(paths)]))),
+          (0, import_operators75.mergeMap)((paths) => (0, import_rxjs84.from)(paths))
         ).subscribe(
           (path2) => this.events$.next({ sessionId, kind: "changed", data: path2 })
         );
@@ -327235,12 +327815,12 @@ ${e2.message}\r
 });
 
 // src/commands/workspace/connection.ts
-var import_os7, import_rxjs80, import_operators70, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, PUSH_TERMINAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num3, short, WorkspaceConnection;
+var import_os7, import_rxjs85, import_operators76, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, PUSH_TERMINAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num3, short, WorkspaceConnection;
 var init_connection2 = __esm({
   "src/commands/workspace/connection.ts"() {
     import_os7 = require("os");
-    import_rxjs80 = __toESM(require_cjs());
-    import_operators70 = __toESM(require_operators());
+    import_rxjs85 = __toESM(require_cjs());
+    import_operators76 = __toESM(require_operators());
     init_tunnel();
     init_approvals();
     init_files();
@@ -327294,11 +327874,11 @@ var init_connection2 = __esm({
           (paths) => this.files.notIgnored(paths)
         );
         this.terminals.events$.pipe(
-          (0, import_operators70.bufferTime)(40),
-          (0, import_operators70.filter)((events) => events.length > 0),
-          (0, import_operators70.concatMap)(
-            (events) => (0, import_rxjs80.from)(this.operation(PUSH_TERMINAL_MUTATION, { events })).pipe(
-              (0, import_operators70.catchError)(() => import_rxjs80.EMPTY)
+          (0, import_operators76.bufferTime)(40),
+          (0, import_operators76.filter)((events) => events.length > 0),
+          (0, import_operators76.concatMap)(
+            (events) => (0, import_rxjs85.from)(this.operation(PUSH_TERMINAL_MUTATION, { events })).pipe(
+              (0, import_operators76.catchError)(() => import_rxjs85.EMPTY)
             )
           )
         ).subscribe();
@@ -327710,12 +328290,12 @@ __export(start_exports4, {
   WORKSPACE_VERSION: () => WORKSPACE_VERSION,
   default: () => start_default2
 });
-var import_promises12, import_path11, import_rxjs81, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
+var import_promises12, import_path11, import_rxjs86, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
 var init_start4 = __esm({
   "src/commands/workspace/start.ts"() {
     import_promises12 = require("fs/promises");
     import_path11 = require("path");
-    import_rxjs81 = __toESM(require_cjs());
+    import_rxjs86 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
@@ -327746,7 +328326,7 @@ var init_start4 = __esm({
       if (saved && (!cmd.project || cmd.project === saved.projectId)) {
         return saved;
       }
-      const projectId = await (0, import_rxjs81.lastValueFrom)(parseProjectId(cmd.project)).catch(
+      const projectId = await (0, import_rxjs86.lastValueFrom)(parseProjectId(cmd.project)).catch(
         () => {
           throw new Error(
             "No project selected. Pass --project <projectId> or run `gcli project:use <projectId>` first."
@@ -327755,7 +328335,7 @@ var init_start4 = __esm({
       );
       const name2 = cmd.name || (0, import_path11.basename)(root);
       Logger.info(`Registering ${root} as local workspace "${name2}"...`);
-      const { workspace, token } = await (0, import_rxjs81.lastValueFrom)(
+      const { workspace, token } = await (0, import_rxjs86.lastValueFrom)(
         GraphqlClienAPI.createLocalWorkspace(projectId, name2)
       ).catch((e2) => {
         throw new Error(
@@ -327853,16 +328433,16 @@ var list_exports10 = {};
 __export(list_exports10, {
   default: () => list_default10
 });
-var import_rxjs82, list_default10;
+var import_rxjs87, list_default10;
 var init_list10 = __esm({
   "src/commands/workspace/list.ts"() {
-    import_rxjs82 = __toESM(require_cjs());
+    import_rxjs87 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
     list_default10 = async (cmd) => {
       const [workspaces, saved] = await Promise.all([
-        (0, import_rxjs82.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
+        (0, import_rxjs87.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
         readSavedWorkspaces()
       ]);
       const onThisMachine = new Set(Object.values(saved).map((w) => w.id));
@@ -327893,11 +328473,11 @@ var delete_exports6 = {};
 __export(delete_exports6, {
   default: () => delete_default6
 });
-var import_promises13, import_rxjs83, delete_default6;
+var import_promises13, import_rxjs88, delete_default6;
 var init_delete6 = __esm({
   "src/commands/workspace/delete.ts"() {
     import_promises13 = require("fs/promises");
-    import_rxjs83 = __toESM(require_cjs());
+    import_rxjs88 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
@@ -327909,7 +328489,7 @@ var init_delete6 = __esm({
           "No workspace registered for this directory - pass --id (see `gcli workspace:list`)."
         );
       }
-      await (0, import_rxjs83.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
+      await (0, import_rxjs88.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
       await forgetWorkspace({ id: workspaceId });
       Logger.success(
         `Local workspace ${workspaceId} deleted; its token no longer works.`
@@ -328096,6 +328676,12 @@ function registerClusterCommands(program2) {
     "--consolidation",
     "pods mode: remove the newest worker when its pods fit elsewhere"
   ).option("--no-consolidation", "pods mode: never remove workers by itself").option(
+    "--replace-cheaper",
+    "pods mode: swap a worker for one cheaper machine that holds all its pods (default on)"
+  ).option(
+    "--no-replace-cheaper",
+    "pods mode: never replace a worker by a cheaper type"
+  ).option(
     "--minNodeAge <minutes>",
     "pods mode: never remove a worker younger than this (5-1440)"
   ).action(lazy(() => Promise.resolve().then(() => (init_autoscale(), autoscale_exports)).then((m2) => m2.default)));
@@ -328119,6 +328705,43 @@ function registerClusterCommands(program2) {
       "Add or remove the cluster's load balancer (billed per hour while enabled). On a virtual cluster this is its dedicated LB - its own IP; the platform subdomain keeps working either way"
     )
   ).option("--enable", "Add the load balancer").option("--disable", "Remove the load balancer").option("--wait", "Block until the cluster settles").action(lazy(() => Promise.resolve().then(() => (init_load_balancer(), load_balancer_exports)).then((m2) => m2.default)));
+}
+
+// src/commands/cost/index.ts
+init_helpers();
+function registerCostCommands(program2) {
+  program2.command("lambda:resources").description(
+    "What each lambda really uses next to what it reserves, and the right-sized CPU / memory (raise / lower / keep, cost now vs recommended); --auto keeps one sized automatically"
+  ).option("-p, --project <project>").option("-n, --name <name>", "One lambda").option("--days <days>", "Measurement window, 1-8 days (default 7)").option(
+    "--auto",
+    "With --name: the platform applies the recommendation itself (a day of data, within the plan, at most once a day, you are notified)"
+  ).option("--fixed", "With --name: recommendations only (the default)").option("--json", "Print the rows as JSON").action(lazy(() => Promise.resolve().then(() => (init_lambda_resources(), lambda_resources_exports)).then((m2) => m2.default)));
+  program2.command("plugin:resources").description(
+    "What each installed plugin (Redis, MongoDB, NATS, ...) really uses per instance, and the right-sized CPU / memory; --apply sets it"
+  ).option("-p, --project <project>").option("-n, --name <name>", "One plugin, e.g. redis-plugin").option("--days <days>", "Measurement window, 1-8 days (default 7)").option(
+    "--apply",
+    "With --name: reserve the recommended CPU / memory (limits kept; instances restart one at a time)"
+  ).option("--json", "Print the rows as JSON").action(lazy(() => Promise.resolve().then(() => (init_plugin_resources(), plugin_resources_exports)).then((m2) => m2.default)));
+  program2.command("plugin:auto-grow").arguments("<plugin>").description(
+    "Whether the plugin's volume grows to the next size by itself at 90 % full (on by default) or only warns"
+  ).option("-p, --project <project>").option("--on", "Grow by itself").option("--off", "Only warn at 80 % / 90 %").option(
+    "-cid, --clusterId <clusterId>",
+    "Which installation, when the plugin is on several clusters (omit for the shared cluster)"
+  ).action(lazy(() => Promise.resolve().then(() => (init_plugin_resources(), plugin_resources_exports)).then((m2) => m2.autoGrow)));
+  program2.command("project:hibernation").description(
+    "Show or set when the project sleeps: outside its working hours always-on lambdas scale to 0 (plugins keep running). Off by default"
+  ).option("-p, --project <project>").option("--enable", "Turn hibernation on").option("--disable", "Turn it off (wakes the project)").option("--timezone <tz>", "IANA time zone, e.g. Europe/Sofia").option(
+    "--days <days>",
+    "Working days: mon-fri, 1-5, sat,sun ... (0 = Sunday)"
+  ).option("--wake <HH:MM>", "Working hours start").option("--sleep <HH:MM>", "Working hours end").option("--json", "Print as JSON").action(lazy(() => Promise.resolve().then(() => (init_hibernation(), hibernation_exports)).then((m2) => m2.default)));
+  program2.command("project:sleep").description("Put the project to sleep now, until its next wake time").option("-p, --project <project>").option("--json", "Print as JSON").action(lazy(() => Promise.resolve().then(() => (init_hibernation(), hibernation_exports)).then((m2) => m2.sleepNow)));
+  program2.command("project:wake").description("Wake the project now, until its next sleep time").option("-p, --project <project>").option("--json", "Print as JSON").action(lazy(() => Promise.resolve().then(() => (init_hibernation(), hibernation_exports)).then((m2) => m2.wakeNow)));
+  program2.command("project:savings").description(
+    "What the platform saved this month: fewer / cheaper machines, hours asleep, lambdas sized down automatically"
+  ).option("-p, --project <project>").option("--json", "Print as JSON").action(lazy(() => Promise.resolve().then(() => (init_savings(), savings_exports)).then((m2) => m2.default)));
+  program2.command("cluster:pod-placement").description(
+    "How a Talos cluster's scheduler places new pods: spread (emptiest machine) or fill (pack machines, so the autoscaler can remove empty ones). Changed live, no reboot"
+  ).option("-p, --project <project>").option("-c, --cluster <cluster>", "Cluster id (see cluster:list)").option("--clusterName <clusterName>", "Cluster name instead of --cluster").option("--mode <mode>", "spread | fill").action(lazy(() => Promise.resolve().then(() => (init_pod_placement(), pod_placement_exports)).then((m2) => m2.default)));
 }
 
 // src/commands/domain/index.ts
@@ -328678,7 +329301,8 @@ var commands = [
   registerWorkspaceCommands,
   registerWorkflowCommands,
   registerDomainCommands,
-  registerRepoCommands
+  registerRepoCommands,
+  registerCostCommands
 ];
 
 // src/main.ts
@@ -328708,7 +329332,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.288" : "development";
+var version2 = true ? "1.8.289" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));

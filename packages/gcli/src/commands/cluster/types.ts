@@ -30,6 +30,7 @@ serverTypes
 scaleUpStep
 mode
 consolidation
+replaceCheaper
 minNodeAgeMinutes
 pools {
   name
@@ -205,6 +206,9 @@ export interface ClusterAutoscalePolicy {
   mode?: 'thresholds' | 'pods';
   /** pods mode: remove the newest worker when its pods fit elsewhere. */
   consolidation?: boolean;
+  /** pods mode (plan 50 B4): swap a worker for one cheaper machine that
+      holds all its pods. Default true. */
+  replaceCheaper?: boolean;
   minNodeAgeMinutes?: number;
   /** pods mode: extra node pools (replaces the list). */
   pools?: ClusterNodePool[];

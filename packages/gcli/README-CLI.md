@@ -99,6 +99,14 @@ Commands:
   plan [options] [path]                                Compare every lambforge.yaml of the repository with what runs in the project: in sync, will change, missing, unmanaged
   apply [options] [path]                               Make every lambforge.yaml of the repository true: shows the plan, asks, then creates / updates environments, lambdas (waiting for each build), time + queue triggers and domains. Never deletes.
   export [options] <lambda>                            Generate a lambforge.yaml from a running lambda (function, environment, time trigger, domains) - secret and config names only
+  lambda:resources [options]                           What each lambda really uses next to what it reserves, and the right-sized CPU / memory (raise / lower / keep, cost now vs recommended); --auto keeps one sized automatically
+  plugin:resources [options]                           What each installed plugin (Redis, MongoDB, NATS, ...) really uses per instance, and the right-sized CPU / memory; --apply sets it
+  plugin:auto-grow [options] <plugin>                  Whether the plugin's volume grows to the next size by itself at 90 % full (on by default) or only warns
+  project:hibernation [options]                        Show or set when the project sleeps: outside its working hours always-on lambdas scale to 0 (plugins keep running). Off by default
+  project:sleep [options]                              Put the project to sleep now, until its next wake time
+  project:wake [options]                               Wake the project now, until its next sleep time
+  project:savings [options]                            What the platform saved this month: fewer / cheaper machines, hours asleep, lambdas sized down automatically
+  cluster:pod-placement [options]                      How a Talos cluster's scheduler places new pods: spread (emptiest machine) or fill (pack machines, so the autoscaler can remove empty ones). Changed live, no reboot
   help [command]                                       display help for command
 i  
    --- Subcommand: login ---
@@ -923,6 +931,10 @@ Options:
   --consolidation              pods mode: remove the newest worker when its
                                pods fit elsewhere
   --no-consolidation           pods mode: never remove workers by itself
+  --replace-cheaper            pods mode: swap a worker for one cheaper machine
+                               that holds all its pods (default on)
+  --no-replace-cheaper         pods mode: never replace a worker by a cheaper
+                               type
   --minNodeAge <minutes>       pods mode: never remove a worker younger than
                                this (5-1440)
   -h, --help                   display help for command
@@ -1466,3 +1478,104 @@ Options:
   -p, --project <project>
   -o, --output <file>      Write to a file instead of stdout
   -h, --help               display help for command
+i  
+   --- Subcommand: lambda:resources ---
+Usage: gcli lambda:resources [options]
+
+What each lambda really uses next to what it reserves, and the right-sized CPU / memory (raise / lower / keep, cost now vs recommended); --auto keeps one sized automatically
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        One lambda
+  --days <days>            Measurement window, 1-8 days (default 7)
+  --auto                   With --name: the platform applies the recommendation
+                           itself (a day of data, within the plan, at most once
+                           a day, you are notified)
+  --fixed                  With --name: recommendations only (the default)
+  --json                   Print the rows as JSON
+  -h, --help               display help for command
+i  
+   --- Subcommand: plugin:resources ---
+Usage: gcli plugin:resources [options]
+
+What each installed plugin (Redis, MongoDB, NATS, ...) really uses per instance, and the right-sized CPU / memory; --apply sets it
+
+Options:
+  -p, --project <project>
+  -n, --name <name>        One plugin, e.g. redis-plugin
+  --days <days>            Measurement window, 1-8 days (default 7)
+  --apply                  With --name: reserve the recommended CPU / memory
+                           (limits kept; instances restart one at a time)
+  --json                   Print the rows as JSON
+  -h, --help               display help for command
+i  
+   --- Subcommand: plugin:auto-grow ---
+Usage: gcli plugin:auto-grow [options] <plugin>
+
+Whether the plugin's volume grows to the next size by itself at 90 % full (on by default) or only warns
+
+Options:
+  -p, --project <project>
+  --on                           Grow by itself
+  --off                          Only warn at 80 % / 90 %
+  -cid, --clusterId <clusterId>  Which installation, when the plugin is on
+                                 several clusters (omit for the shared cluster)
+  -h, --help                     display help for command
+i  
+   --- Subcommand: project:hibernation ---
+Usage: gcli project:hibernation [options]
+
+Show or set when the project sleeps: outside its working hours always-on lambdas scale to 0 (plugins keep running). Off by default
+
+Options:
+  -p, --project <project>
+  --enable                 Turn hibernation on
+  --disable                Turn it off (wakes the project)
+  --timezone <tz>          IANA time zone, e.g. Europe/Sofia
+  --days <days>            Working days: mon-fri, 1-5, sat,sun ... (0 = Sunday)
+  --wake <HH:MM>           Working hours start
+  --sleep <HH:MM>          Working hours end
+  --json                   Print as JSON
+  -h, --help               display help for command
+i  
+   --- Subcommand: project:sleep ---
+Usage: gcli project:sleep [options]
+
+Put the project to sleep now, until its next wake time
+
+Options:
+  -p, --project <project>
+  --json                   Print as JSON
+  -h, --help               display help for command
+i  
+   --- Subcommand: project:wake ---
+Usage: gcli project:wake [options]
+
+Wake the project now, until its next sleep time
+
+Options:
+  -p, --project <project>
+  --json                   Print as JSON
+  -h, --help               display help for command
+i  
+   --- Subcommand: project:savings ---
+Usage: gcli project:savings [options]
+
+What the platform saved this month: fewer / cheaper machines, hours asleep, lambdas sized down automatically
+
+Options:
+  -p, --project <project>
+  --json                   Print as JSON
+  -h, --help               display help for command
+i  
+   --- Subcommand: cluster:pod-placement ---
+Usage: gcli cluster:pod-placement [options]
+
+How a Talos cluster's scheduler places new pods: spread (emptiest machine) or fill (pack machines, so the autoscaler can remove empty ones). Changed live, no reboot
+
+Options:
+  -p, --project <project>
+  -c, --cluster <cluster>      Cluster id (see cluster:list)
+  --clusterName <clusterName>  Cluster name instead of --cluster
+  --mode <mode>                spread | fill
+  -h, --help                   display help for command

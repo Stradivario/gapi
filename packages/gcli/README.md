@@ -286,6 +286,38 @@ cluster:
 and later adds or removes the dedicated load balancer when `loadBalancer`
 changes; removing it is skipped unless you pass `--yes`.
 
+### Cost optimization (right-sizing, hibernation, savings)
+
+```bash
+# What each lambda really uses next to what it reserves, and the right size
+gcli lambda:resources                      # every lambda (7 days of data)
+gcli lambda:resources -n api               # one lambda
+gcli lambda:resources -n api --auto        # keep it sized automatically
+gcli lambda:resources -n api --fixed       # back to recommendations only
+
+# The same for marketplace plugins; --apply reserves the recommended values
+gcli plugin:resources
+gcli plugin:resources -n redis-plugin --apply
+gcli plugin:auto-grow redis-plugin --off   # volume only warns at 80/90 % full
+
+# Sleep outside working hours (always-on lambdas scale to 0, plugins keep running)
+gcli project:hibernation                   # show
+gcli project:hibernation --enable --days mon-fri --wake 08:00 --sleep 20:00 --timezone Europe/Sofia
+gcli project:sleep | gcli project:wake     # until the next change
+
+gcli project:savings                       # what the platform saved this month
+
+# Private Talos clusters
+gcli cluster:pod-placement -c <id> --mode fill    # pack machines (spread = emptiest machine)
+gcli cluster:autoscale -c <id> --no-replace-cheaper
+```
+
+A recommendation applied with `lambda:resources` is printed as
+`scaleOptions` lines for `lambforge.yaml`: a deploy from the yaml sets the
+reserved CPU / memory, so put them there. `--auto` lambdas are re-sized by
+the platform at most once a day; a later deploy from the yaml sets the yaml
+values again until the next automatic change. Every command takes `--json`.
+
 ### RabbitMQ Brokers
 
 A project may have several RabbitMQ brokers, each optionally scoped to one of its private clusters.
