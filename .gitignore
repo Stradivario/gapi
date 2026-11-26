@@ -1,5 +1,7 @@
 node_modules
 .cache
 build
+# gcli's build command is source, not build output
+!packages/gcli/src/commands/build/
 dist
 coverage
