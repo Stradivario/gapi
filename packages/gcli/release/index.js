@@ -15,11 +15,11 @@ var __export = (target, all) => {
   for (var name2 in all)
     __defProp(target, name2, { get: all[name2], enumerable: true });
 };
-var __copyProps = (to, from17, except, desc) => {
-  if (from17 && typeof from17 === "object" || typeof from17 === "function") {
-    for (let key of __getOwnPropNames(from17))
+var __copyProps = (to, from18, except, desc) => {
+  if (from18 && typeof from18 === "object" || typeof from18 === "function") {
+    for (let key of __getOwnPropNames(from18))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from17[key], enumerable: !(desc = __getOwnPropDesc(from17, key)) || desc.enumerable });
+        __defProp(to, key, { get: () => from18[key], enumerable: !(desc = __getOwnPropDesc(from18, key)) || desc.enumerable });
   }
   return to;
 };
@@ -2472,7 +2472,7 @@ var require_ponyfill_es2018 = __commonJS({
         return new originalPromise(executor);
       }
       function promiseResolvedWith(value) {
-        return newPromise((resolve4) => resolve4(value));
+        return newPromise((resolve5) => resolve5(value));
       }
       function promiseRejectedWith(reason) {
         return originalPromiseReject(reason);
@@ -2642,8 +2642,8 @@ var require_ponyfill_es2018 = __commonJS({
         return new TypeError("Cannot " + name2 + " a stream using a released reader");
       }
       function defaultReaderClosedPromiseInitialize(reader) {
-        reader._closedPromise = newPromise((resolve4, reject) => {
-          reader._closedPromise_resolve = resolve4;
+        reader._closedPromise = newPromise((resolve5, reject) => {
+          reader._closedPromise_resolve = resolve5;
           reader._closedPromise_reject = reject;
         });
       }
@@ -2817,8 +2817,8 @@ var require_ponyfill_es2018 = __commonJS({
           }
           let resolvePromise;
           let rejectPromise;
-          const promise2 = newPromise((resolve4, reject) => {
-            resolvePromise = resolve4;
+          const promise2 = newPromise((resolve5, reject) => {
+            resolvePromise = resolve5;
             rejectPromise = reject;
           });
           const readRequest = {
@@ -2923,8 +2923,8 @@ var require_ponyfill_es2018 = __commonJS({
           const reader = this._reader;
           let resolvePromise;
           let rejectPromise;
-          const promise2 = newPromise((resolve4, reject) => {
-            resolvePromise = resolve4;
+          const promise2 = newPromise((resolve5, reject) => {
+            resolvePromise = resolve5;
             rejectPromise = reject;
           });
           const readRequest = {
@@ -3943,8 +3943,8 @@ var require_ponyfill_es2018 = __commonJS({
           }
           let resolvePromise;
           let rejectPromise;
-          const promise2 = newPromise((resolve4, reject) => {
-            resolvePromise = resolve4;
+          const promise2 = newPromise((resolve5, reject) => {
+            resolvePromise = resolve5;
             rejectPromise = reject;
           });
           const readIntoRequest = {
@@ -4256,10 +4256,10 @@ var require_ponyfill_es2018 = __commonJS({
           wasAlreadyErroring = true;
           reason = void 0;
         }
-        const promise2 = newPromise((resolve4, reject) => {
+        const promise2 = newPromise((resolve5, reject) => {
           stream._pendingAbortRequest = {
             _promise: void 0,
-            _resolve: resolve4,
+            _resolve: resolve5,
             _reject: reject,
             _reason: reason,
             _wasAlreadyErroring: wasAlreadyErroring
@@ -4276,9 +4276,9 @@ var require_ponyfill_es2018 = __commonJS({
         if (state2 === "closed" || state2 === "errored") {
           return promiseRejectedWith(new TypeError(`The stream (in ${state2} state) is not in the writable state and cannot be closed`));
         }
-        const promise2 = newPromise((resolve4, reject) => {
+        const promise2 = newPromise((resolve5, reject) => {
           const closeRequest = {
-            _resolve: resolve4,
+            _resolve: resolve5,
             _reject: reject
           };
           stream._closeRequest = closeRequest;
@@ -4291,9 +4291,9 @@ var require_ponyfill_es2018 = __commonJS({
         return promise2;
       }
       function WritableStreamAddWriteRequest(stream) {
-        const promise2 = newPromise((resolve4, reject) => {
+        const promise2 = newPromise((resolve5, reject) => {
           const writeRequest = {
-            _resolve: resolve4,
+            _resolve: resolve5,
             _reject: reject
           };
           stream._writeRequests.push(writeRequest);
@@ -4909,8 +4909,8 @@ var require_ponyfill_es2018 = __commonJS({
         return new TypeError("Cannot " + name2 + " a stream using a released writer");
       }
       function defaultWriterClosedPromiseInitialize(writer) {
-        writer._closedPromise = newPromise((resolve4, reject) => {
-          writer._closedPromise_resolve = resolve4;
+        writer._closedPromise = newPromise((resolve5, reject) => {
+          writer._closedPromise_resolve = resolve5;
           writer._closedPromise_reject = reject;
           writer._closedPromiseState = "pending";
         });
@@ -4946,8 +4946,8 @@ var require_ponyfill_es2018 = __commonJS({
         writer._closedPromiseState = "resolved";
       }
       function defaultWriterReadyPromiseInitialize(writer) {
-        writer._readyPromise = newPromise((resolve4, reject) => {
-          writer._readyPromise_resolve = resolve4;
+        writer._readyPromise = newPromise((resolve5, reject) => {
+          writer._readyPromise_resolve = resolve5;
           writer._readyPromise_reject = reject;
         });
         writer._readyPromiseState = "pending";
@@ -5034,7 +5034,7 @@ var require_ponyfill_es2018 = __commonJS({
         source._disturbed = true;
         let shuttingDown = false;
         let currentWrite = promiseResolvedWith(void 0);
-        return newPromise((resolve4, reject) => {
+        return newPromise((resolve5, reject) => {
           let abortAlgorithm;
           if (signal !== void 0) {
             abortAlgorithm = () => {
@@ -5179,7 +5179,7 @@ var require_ponyfill_es2018 = __commonJS({
             if (isError) {
               reject(error48);
             } else {
-              resolve4(void 0);
+              resolve5(void 0);
             }
             return null;
           }
@@ -5460,8 +5460,8 @@ var require_ponyfill_es2018 = __commonJS({
         let branch1;
         let branch2;
         let resolveCancelPromise;
-        const cancelPromise = newPromise((resolve4) => {
-          resolveCancelPromise = resolve4;
+        const cancelPromise = newPromise((resolve5) => {
+          resolveCancelPromise = resolve5;
         });
         function pullAlgorithm() {
           if (reading) {
@@ -5552,8 +5552,8 @@ var require_ponyfill_es2018 = __commonJS({
         let branch1;
         let branch2;
         let resolveCancelPromise;
-        const cancelPromise = newPromise((resolve4) => {
-          resolveCancelPromise = resolve4;
+        const cancelPromise = newPromise((resolve5) => {
+          resolveCancelPromise = resolve5;
         });
         function forwardReaderError(thisReader) {
           uponRejection(thisReader._closedPromise, (r2) => {
@@ -6333,8 +6333,8 @@ var require_ponyfill_es2018 = __commonJS({
           const writableHighWaterMark = ExtractHighWaterMark(writableStrategy, 1);
           const writableSizeAlgorithm = ExtractSizeAlgorithm(writableStrategy);
           let startPromise_resolve;
-          const startPromise = newPromise((resolve4) => {
-            startPromise_resolve = resolve4;
+          const startPromise = newPromise((resolve5) => {
+            startPromise_resolve = resolve5;
           });
           InitializeTransformStream(this, startPromise, writableHighWaterMark, writableSizeAlgorithm, readableHighWaterMark, readableSizeAlgorithm);
           SetUpTransformStreamDefaultControllerFromTransformer(this, transformer);
@@ -6427,8 +6427,8 @@ var require_ponyfill_es2018 = __commonJS({
         if (stream._backpressureChangePromise !== void 0) {
           stream._backpressureChangePromise_resolve();
         }
-        stream._backpressureChangePromise = newPromise((resolve4) => {
-          stream._backpressureChangePromise_resolve = resolve4;
+        stream._backpressureChangePromise = newPromise((resolve5) => {
+          stream._backpressureChangePromise_resolve = resolve5;
         });
         stream._backpressure = backpressure;
       }
@@ -6596,8 +6596,8 @@ var require_ponyfill_es2018 = __commonJS({
           return controller._finishPromise;
         }
         const readable = stream._readable;
-        controller._finishPromise = newPromise((resolve4, reject) => {
-          controller._finishPromise_resolve = resolve4;
+        controller._finishPromise = newPromise((resolve5, reject) => {
+          controller._finishPromise_resolve = resolve5;
           controller._finishPromise_reject = reject;
         });
         const cancelPromise = controller._cancelAlgorithm(reason);
@@ -6623,8 +6623,8 @@ var require_ponyfill_es2018 = __commonJS({
           return controller._finishPromise;
         }
         const readable = stream._readable;
-        controller._finishPromise = newPromise((resolve4, reject) => {
-          controller._finishPromise_resolve = resolve4;
+        controller._finishPromise = newPromise((resolve5, reject) => {
+          controller._finishPromise_resolve = resolve5;
           controller._finishPromise_reject = reject;
         });
         const flushPromise = controller._flushAlgorithm();
@@ -6654,8 +6654,8 @@ var require_ponyfill_es2018 = __commonJS({
           return controller._finishPromise;
         }
         const writable = stream._writable;
-        controller._finishPromise = newPromise((resolve4, reject) => {
-          controller._finishPromise_resolve = resolve4;
+        controller._finishPromise = newPromise((resolve5, reject) => {
+          controller._finishPromise_resolve = resolve5;
           controller._finishPromise_reject = reject;
         });
         const cancelPromise = controller._cancelAlgorithm(reason);
@@ -8532,7 +8532,7 @@ var init_abort_error = __esm({
 
 // ../../node_modules/node-fetch/src/index.js
 async function fetch2(url2, options_) {
-  return new Promise((resolve4, reject) => {
+  return new Promise((resolve5, reject) => {
     const request = new Request2(url2, options_);
     const { parsedURL, options } = getNodeRequestOptions(request);
     if (!supportedSchemas.has(parsedURL.protocol)) {
@@ -8541,7 +8541,7 @@ async function fetch2(url2, options_) {
     if (parsedURL.protocol === "data:") {
       const data = dist_default(request.url);
       const response2 = new Response2(data, { headers: { "Content-Type": data.typeFull } });
-      resolve4(response2);
+      resolve5(response2);
       return;
     }
     const send = (parsedURL.protocol === "https:" ? import_node_https.default : import_node_http2.default).request;
@@ -8663,7 +8663,7 @@ async function fetch2(url2, options_) {
             if (responseReferrerPolicy) {
               requestOptions.referrerPolicy = responseReferrerPolicy;
             }
-            resolve4(fetch2(new Request2(locationURL, requestOptions)));
+            resolve5(fetch2(new Request2(locationURL, requestOptions)));
             finalize5();
             return;
           }
@@ -8696,7 +8696,7 @@ async function fetch2(url2, options_) {
       const codings = headers.get("Content-Encoding");
       if (!request.compress || request.method === "HEAD" || codings === null || response_.statusCode === 204 || response_.statusCode === 304) {
         response = new Response2(body, responseOptions);
-        resolve4(response);
+        resolve5(response);
         return;
       }
       const zlibOptions = {
@@ -8710,7 +8710,7 @@ async function fetch2(url2, options_) {
           }
         });
         response = new Response2(body, responseOptions);
-        resolve4(response);
+        resolve5(response);
         return;
       }
       if (codings === "deflate" || codings === "x-deflate") {
@@ -8734,12 +8734,12 @@ async function fetch2(url2, options_) {
             });
           }
           response = new Response2(body, responseOptions);
-          resolve4(response);
+          resolve5(response);
         });
         raw.once("end", () => {
           if (!response) {
             response = new Response2(body, responseOptions);
-            resolve4(response);
+            resolve5(response);
           }
         });
         return;
@@ -8751,11 +8751,11 @@ async function fetch2(url2, options_) {
           }
         });
         response = new Response2(body, responseOptions);
-        resolve4(response);
+        resolve5(response);
         return;
       }
       response = new Response2(body, responseOptions);
-      resolve4(response);
+      resolve5(response);
     });
     writeToStream(request_, request).catch(reject);
   });
@@ -8917,9 +8917,9 @@ var require_Subscription = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9100,9 +9100,9 @@ var require_timeoutProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -9498,19 +9498,19 @@ var require_Observable = __commonJS({
     var config_1 = require_config();
     var isFunction_1 = require_isFunction();
     var errorContext_1 = require_errorContext();
-    var Observable12 = (function() {
-      function Observable13(subscribe) {
+    var Observable13 = (function() {
+      function Observable14(subscribe) {
         if (subscribe) {
           this._subscribe = subscribe;
         }
       }
-      Observable13.prototype.lift = function(operator) {
-        var observable = new Observable13();
+      Observable14.prototype.lift = function(operator) {
+        var observable = new Observable14();
         observable.source = this;
         observable.operator = operator;
         return observable;
       };
-      Observable13.prototype.subscribe = function(observerOrNext, error48, complete) {
+      Observable14.prototype.subscribe = function(observerOrNext, error48, complete) {
         var _this = this;
         var subscriber = isSubscriber(observerOrNext) ? observerOrNext : new Subscriber_1.SafeSubscriber(observerOrNext, error48, complete);
         errorContext_1.errorContext(function() {
@@ -9519,17 +9519,17 @@ var require_Observable = __commonJS({
         });
         return subscriber;
       };
-      Observable13.prototype._trySubscribe = function(sink) {
+      Observable14.prototype._trySubscribe = function(sink) {
         try {
           return this._subscribe(sink);
         } catch (err) {
           sink.error(err);
         }
       };
-      Observable13.prototype.forEach = function(next, promiseCtor) {
+      Observable14.prototype.forEach = function(next, promiseCtor) {
         var _this = this;
         promiseCtor = getPromiseCtor(promiseCtor);
-        return new promiseCtor(function(resolve4, reject) {
+        return new promiseCtor(function(resolve5, reject) {
           var subscriber = new Subscriber_1.SafeSubscriber({
             next: function(value) {
               try {
@@ -9540,45 +9540,45 @@ var require_Observable = __commonJS({
               }
             },
             error: reject,
-            complete: resolve4
+            complete: resolve5
           });
           _this.subscribe(subscriber);
         });
       };
-      Observable13.prototype._subscribe = function(subscriber) {
+      Observable14.prototype._subscribe = function(subscriber) {
         var _a2;
         return (_a2 = this.source) === null || _a2 === void 0 ? void 0 : _a2.subscribe(subscriber);
       };
-      Observable13.prototype[observable_1.observable] = function() {
+      Observable14.prototype[observable_1.observable] = function() {
         return this;
       };
-      Observable13.prototype.pipe = function() {
+      Observable14.prototype.pipe = function() {
         var operations = [];
         for (var _i = 0; _i < arguments.length; _i++) {
           operations[_i] = arguments[_i];
         }
         return pipe_1.pipeFromArray(operations)(this);
       };
-      Observable13.prototype.toPromise = function(promiseCtor) {
+      Observable14.prototype.toPromise = function(promiseCtor) {
         var _this = this;
         promiseCtor = getPromiseCtor(promiseCtor);
-        return new promiseCtor(function(resolve4, reject) {
+        return new promiseCtor(function(resolve5, reject) {
           var value;
           _this.subscribe(function(x2) {
             return value = x2;
           }, function(err) {
             return reject(err);
           }, function() {
-            return resolve4(value);
+            return resolve5(value);
           });
         });
       };
-      Observable13.create = function(subscribe) {
-        return new Observable13(subscribe);
+      Observable14.create = function(subscribe) {
+        return new Observable14(subscribe);
       };
-      return Observable13;
+      return Observable14;
     })();
-    exports2.Observable = Observable12;
+    exports2.Observable = Observable13;
     function getPromiseCtor(promiseCtor) {
       var _a2;
       return (_a2 = promiseCtor !== null && promiseCtor !== void 0 ? promiseCtor : config_1.config.Promise) !== null && _a2 !== void 0 ? _a2 : Promise;
@@ -9860,9 +9860,9 @@ var require_animationFrameProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10460,9 +10460,9 @@ var require_intervalProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -10669,9 +10669,9 @@ var require_immediateProvider = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -11665,11 +11665,11 @@ var require_innerFrom = __commonJS({
     "use strict";
     var __awaiter2 = exports2 && exports2.__awaiter || function(thisArg, _arguments, P, generator) {
       function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve4) {
-          resolve4(value);
+        return value instanceof P ? value : new P(function(resolve5) {
+          resolve5(value);
         });
       }
-      return new (P || (P = Promise))(function(resolve4, reject) {
+      return new (P || (P = Promise))(function(resolve5, reject) {
         function fulfilled(value) {
           try {
             step2(generator.next(value));
@@ -11685,7 +11685,7 @@ var require_innerFrom = __commonJS({
           }
         }
         function step2(result) {
-          result.done ? resolve4(result.value) : adopt(result.value).then(fulfilled, rejected);
+          result.done ? resolve5(result.value) : adopt(result.value).then(fulfilled, rejected);
         }
         step2((generator = generator.apply(thisArg, _arguments || [])).next());
       });
@@ -11767,14 +11767,14 @@ var require_innerFrom = __commonJS({
       }, i2);
       function verb(n) {
         i2[n] = o[n] && function(v) {
-          return new Promise(function(resolve4, reject) {
-            v = o[n](v), settle(resolve4, reject, v.done, v.value);
+          return new Promise(function(resolve5, reject) {
+            v = o[n](v), settle(resolve5, reject, v.done, v.value);
           });
         };
       }
-      function settle(resolve4, reject, d, v) {
+      function settle(resolve5, reject, d, v) {
         Promise.resolve(v).then(function(v2) {
-          resolve4({ value: v2, done: d });
+          resolve5({ value: v2, done: d });
         }, reject);
       }
     };
@@ -12233,10 +12233,10 @@ var require_from = __commonJS({
     exports2.from = void 0;
     var scheduled_1 = require_scheduled();
     var innerFrom_1 = require_innerFrom();
-    function from17(input, scheduler) {
+    function from18(input, scheduler) {
       return scheduler ? scheduled_1.scheduled(input, scheduler) : innerFrom_1.innerFrom(input);
     }
-    exports2.from = from17;
+    exports2.from = from18;
   }
 });
 
@@ -12391,9 +12391,9 @@ var require_lastValueFrom = __commonJS({
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.lastValueFrom = void 0;
     var EmptyError_1 = require_EmptyError();
-    function lastValueFrom69(source, config2) {
+    function lastValueFrom70(source, config2) {
       var hasConfig = typeof config2 === "object";
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         var _hasValue = false;
         var _value;
         source.subscribe({
@@ -12404,9 +12404,9 @@ var require_lastValueFrom = __commonJS({
           error: reject,
           complete: function() {
             if (_hasValue) {
-              resolve4(_value);
+              resolve5(_value);
             } else if (hasConfig) {
-              resolve4(config2.defaultValue);
+              resolve5(config2.defaultValue);
             } else {
               reject(new EmptyError_1.EmptyError());
             }
@@ -12414,7 +12414,7 @@ var require_lastValueFrom = __commonJS({
         });
       });
     }
-    exports2.lastValueFrom = lastValueFrom69;
+    exports2.lastValueFrom = lastValueFrom70;
   }
 });
 
@@ -12428,16 +12428,16 @@ var require_firstValueFrom = __commonJS({
     var Subscriber_1 = require_Subscriber();
     function firstValueFrom2(source, config2) {
       var hasConfig = typeof config2 === "object";
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         var subscriber = new Subscriber_1.SafeSubscriber({
           next: function(value) {
-            resolve4(value);
+            resolve5(value);
             subscriber.unsubscribe();
           },
           error: reject,
           complete: function() {
             if (hasConfig) {
-              resolve4(config2.defaultValue);
+              resolve5(config2.defaultValue);
             } else {
               reject(new EmptyError_1.EmptyError());
             }
@@ -12591,7 +12591,7 @@ var require_map = __commonJS({
     exports2.map = void 0;
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function map38(project, thisArg) {
+    function map39(project, thisArg) {
       return lift_1.operate(function(source, subscriber) {
         var index = 0;
         source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, function(value) {
@@ -12599,7 +12599,7 @@ var require_map = __commonJS({
         }));
       });
     }
-    exports2.map = map38;
+    exports2.map = map39;
   }
 });
 
@@ -12624,9 +12624,9 @@ var require_mapOneOrManyArgs = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -12666,9 +12666,9 @@ var require_bindCallbackInternals = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -13069,12 +13069,12 @@ var require_defer = __commonJS({
     exports2.defer = void 0;
     var Observable_1 = require_Observable();
     var innerFrom_1 = require_innerFrom();
-    function defer7(observableFactory) {
+    function defer9(observableFactory) {
       return new Observable_1.Observable(function(subscriber) {
         innerFrom_1.innerFrom(observableFactory()).subscribe(subscriber);
       });
     }
-    exports2.defer = defer7;
+    exports2.defer = defer9;
   }
 });
 
@@ -13449,7 +13449,7 @@ var require_timer = __commonJS({
     var async_1 = require_async();
     var isScheduler_1 = require_isScheduler();
     var isDate_1 = require_isDate();
-    function timer4(dueTime, intervalOrScheduler, scheduler) {
+    function timer5(dueTime, intervalOrScheduler, scheduler) {
       if (dueTime === void 0) {
         dueTime = 0;
       }
@@ -13482,7 +13482,7 @@ var require_timer = __commonJS({
         }, due);
       });
     }
-    exports2.timer = timer4;
+    exports2.timer = timer5;
   }
 });
 
@@ -13800,9 +13800,9 @@ var require_zip = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14276,13 +14276,13 @@ var require_catchError = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var lift_1 = require_lift();
-    function catchError21(selector) {
+    function catchError22(selector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSub = null;
         var syncUnsub = false;
         var handledResult;
         innerSub = source.subscribe(OperatorSubscriber_1.createOperatorSubscriber(subscriber, void 0, void 0, function(err) {
-          handledResult = innerFrom_1.innerFrom(selector(err, catchError21(selector)(source)));
+          handledResult = innerFrom_1.innerFrom(selector(err, catchError22(selector)(source)));
           if (innerSub) {
             innerSub.unsubscribe();
             innerSub = null;
@@ -14298,7 +14298,7 @@ var require_catchError = __commonJS({
         }
       });
     }
-    exports2.catchError = catchError21;
+    exports2.catchError = catchError22;
   }
 });
 
@@ -14430,9 +14430,9 @@ var require_combineLatest2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14478,9 +14478,9 @@ var require_combineLatestWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14552,9 +14552,9 @@ var require_concat2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -14598,9 +14598,9 @@ var require_concatWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15091,9 +15091,9 @@ var require_endWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15638,9 +15638,9 @@ var require_merge2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15685,9 +15685,9 @@ var require_mergeWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15770,9 +15770,9 @@ var require_onErrorResumeNextWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -15954,9 +15954,9 @@ var require_raceWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16352,9 +16352,9 @@ var require_share = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -16648,7 +16648,7 @@ var require_switchMap = __commonJS({
     var innerFrom_1 = require_innerFrom();
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
-    function switchMap61(project, resultSelector) {
+    function switchMap62(project, resultSelector) {
       return lift_1.operate(function(source, subscriber) {
         var innerSubscriber = null;
         var index = 0;
@@ -16672,7 +16672,7 @@ var require_switchMap = __commonJS({
         }));
       });
     }
-    exports2.switchMap = switchMap61;
+    exports2.switchMap = switchMap62;
   }
 });
 
@@ -16792,7 +16792,7 @@ var require_tap = __commonJS({
     var lift_1 = require_lift();
     var OperatorSubscriber_1 = require_OperatorSubscriber();
     var identity_1 = require_identity();
-    function tap61(observerOrNext, error48, complete) {
+    function tap62(observerOrNext, error48, complete) {
       var tapObserver = isFunction_1.isFunction(observerOrNext) || error48 || complete ? { next: observerOrNext, error: error48, complete } : observerOrNext;
       return tapObserver ? lift_1.operate(function(source, subscriber) {
         var _a2;
@@ -16821,7 +16821,7 @@ var require_tap = __commonJS({
         }));
       }) : identity_1.identity;
     }
-    exports2.tap = tap61;
+    exports2.tap = tap62;
   }
 });
 
@@ -17354,9 +17354,9 @@ var require_withLatestFrom = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17440,9 +17440,9 @@ var require_zip2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -17483,9 +17483,9 @@ var require_zipWith = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -18251,9 +18251,9 @@ var require_race2 = __commonJS({
       }
       return ar;
     };
-    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from17) {
-      for (var i2 = 0, il = from17.length, j = to.length; i2 < il; i2++, j++)
-        to[j] = from17[i2];
+    var __spreadArray2 = exports2 && exports2.__spreadArray || function(to, from18) {
+      for (var i2 = 0, il = from18.length, j = to.length; i2 < il; i2++, j++)
+        to[j] = from18[i2];
       return to;
     };
     Object.defineProperty(exports2, "__esModule", { value: true });
@@ -18841,11 +18841,11 @@ var require_tslib = __commonJS({
       };
       __awaiter2 = function(thisArg, _arguments, P, generator) {
         function adopt(value) {
-          return value instanceof P ? value : new P(function(resolve4) {
-            resolve4(value);
+          return value instanceof P ? value : new P(function(resolve5) {
+            resolve5(value);
           });
         }
-        return new (P || (P = Promise))(function(resolve4, reject) {
+        return new (P || (P = Promise))(function(resolve5, reject) {
           function fulfilled(value) {
             try {
               step2(generator.next(value));
@@ -18861,7 +18861,7 @@ var require_tslib = __commonJS({
             }
           }
           function step2(result) {
-            result.done ? resolve4(result.value) : adopt(result.value).then(fulfilled, rejected);
+            result.done ? resolve5(result.value) : adopt(result.value).then(fulfilled, rejected);
           }
           step2((generator = generator.apply(thisArg, _arguments || [])).next());
         });
@@ -19035,14 +19035,14 @@ var require_tslib = __commonJS({
         }, i2);
         function verb(n) {
           i2[n] = o[n] && function(v) {
-            return new Promise(function(resolve4, reject) {
-              v = o[n](v), settle(resolve4, reject, v.done, v.value);
+            return new Promise(function(resolve5, reject) {
+              v = o[n](v), settle(resolve5, reject, v.done, v.value);
             });
           };
         }
-        function settle(resolve4, reject, d, v) {
+        function settle(resolve5, reject, d, v) {
           Promise.resolve(v).then(function(v2) {
-            resolve4({ value: v2, done: d });
+            resolve5({ value: v2, done: d });
           }, reject);
         }
       };
@@ -19200,11 +19200,11 @@ var require_tslib2 = __commonJS({
       };
       __awaiter2 = function(thisArg, _arguments, P, generator) {
         function adopt(value) {
-          return value instanceof P ? value : new P(function(resolve4) {
-            resolve4(value);
+          return value instanceof P ? value : new P(function(resolve5) {
+            resolve5(value);
           });
         }
-        return new (P || (P = Promise))(function(resolve4, reject) {
+        return new (P || (P = Promise))(function(resolve5, reject) {
           function fulfilled(value) {
             try {
               step2(generator.next(value));
@@ -19220,7 +19220,7 @@ var require_tslib2 = __commonJS({
             }
           }
           function step2(result) {
-            result.done ? resolve4(result.value) : adopt(result.value).then(fulfilled, rejected);
+            result.done ? resolve5(result.value) : adopt(result.value).then(fulfilled, rejected);
           }
           step2((generator = generator.apply(thisArg, _arguments || [])).next());
         });
@@ -19394,14 +19394,14 @@ var require_tslib2 = __commonJS({
         }, i2);
         function verb(n) {
           i2[n] = o[n] && function(v) {
-            return new Promise(function(resolve4, reject) {
-              v = o[n](v), settle(resolve4, reject, v.done, v.value);
+            return new Promise(function(resolve5, reject) {
+              v = o[n](v), settle(resolve5, reject, v.done, v.value);
             });
           };
         }
-        function settle(resolve4, reject, d, v) {
+        function settle(resolve5, reject, d, v) {
           Promise.resolve(v).then(function(v2) {
-            resolve4({ value: v2, done: d });
+            resolve5({ value: v2, done: d });
           }, reject);
         }
       };
@@ -19770,8 +19770,8 @@ var require_index_node_cjs = __commonJS({
           };
           this.resolve = function() {
           };
-          this.promise = new Promise(function(resolve4, reject) {
-            _this.resolve = resolve4;
+          this.promise = new Promise(function(resolve5, reject) {
+            _this.resolve = resolve5;
             _this.reject = reject;
           });
         }
@@ -19972,7 +19972,7 @@ var require_index_node_cjs = __commonJS({
       }
       return true;
     }
-    function map38(obj, fn, contextObj) {
+    function map39(obj, fn, contextObj) {
       var res = {};
       for (var key in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -20462,7 +20462,7 @@ var require_index_node_cjs = __commonJS({
     exports2.isValidTimestamp = isValidTimestamp;
     exports2.issuedAtTime = issuedAtTime;
     exports2.jsonEval = jsonEval;
-    exports2.map = map38;
+    exports2.map = map39;
     exports2.querystring = querystring;
     exports2.querystringDecode = querystringDecode;
     exports2.safeGet = safeGet;
@@ -20571,11 +20571,11 @@ var require_tslib3 = __commonJS({
       };
       __awaiter2 = function(thisArg, _arguments, P, generator) {
         function adopt(value) {
-          return value instanceof P ? value : new P(function(resolve4) {
-            resolve4(value);
+          return value instanceof P ? value : new P(function(resolve5) {
+            resolve5(value);
           });
         }
-        return new (P || (P = Promise))(function(resolve4, reject) {
+        return new (P || (P = Promise))(function(resolve5, reject) {
           function fulfilled(value) {
             try {
               step2(generator.next(value));
@@ -20591,7 +20591,7 @@ var require_tslib3 = __commonJS({
             }
           }
           function step2(result) {
-            result.done ? resolve4(result.value) : adopt(result.value).then(fulfilled, rejected);
+            result.done ? resolve5(result.value) : adopt(result.value).then(fulfilled, rejected);
           }
           step2((generator = generator.apply(thisArg, _arguments || [])).next());
         });
@@ -20765,14 +20765,14 @@ var require_tslib3 = __commonJS({
         }, i2);
         function verb(n) {
           i2[n] = o[n] && function(v) {
-            return new Promise(function(resolve4, reject) {
-              v = o[n](v), settle(resolve4, reject, v.done, v.value);
+            return new Promise(function(resolve5, reject) {
+              v = o[n](v), settle(resolve5, reject, v.done, v.value);
             });
           };
         }
-        function settle(resolve4, reject, d, v) {
+        function settle(resolve5, reject, d, v) {
           Promise.resolve(v).then(function(v2) {
-            resolve4({ value: v2, done: d });
+            resolve5({ value: v2, done: d });
           }, reject);
         }
       };
@@ -21836,9 +21836,9 @@ var require_index_node_cjs2 = __commonJS({
         });
         FirebaseAppImpl2.prototype.delete = function() {
           var _this = this;
-          return new Promise(function(resolve4) {
+          return new Promise(function(resolve5) {
             _this.checkDestroyed_();
-            resolve4();
+            resolve5();
           }).then(function() {
             _this.firebase_.INTERNAL.removeApp(_this.name_);
             return Promise.all(_this.container.getProviders().map(function(provider) {
@@ -31175,14 +31175,14 @@ var require_async_iterator = __commonJS({
       };
     }
     function readAndResolve(iter) {
-      var resolve4 = iter[kLastResolve];
-      if (resolve4 !== null) {
+      var resolve5 = iter[kLastResolve];
+      if (resolve5 !== null) {
         var data = iter[kStream].read();
         if (data !== null) {
           iter[kLastPromise] = null;
           iter[kLastResolve] = null;
           iter[kLastReject] = null;
-          resolve4(createIterResult(data, false));
+          resolve5(createIterResult(data, false));
         }
       }
     }
@@ -31190,13 +31190,13 @@ var require_async_iterator = __commonJS({
       process.nextTick(readAndResolve, iter);
     }
     function wrapForNext(lastPromise, iter) {
-      return function(resolve4, reject) {
+      return function(resolve5, reject) {
         lastPromise.then(function() {
           if (iter[kEnded]) {
-            resolve4(createIterResult(void 0, true));
+            resolve5(createIterResult(void 0, true));
             return;
           }
-          iter[kHandlePromise](resolve4, reject);
+          iter[kHandlePromise](resolve5, reject);
         }, reject);
       };
     }
@@ -31216,12 +31216,12 @@ var require_async_iterator = __commonJS({
           return Promise.resolve(createIterResult(void 0, true));
         }
         if (this[kStream].destroyed) {
-          return new Promise(function(resolve4, reject) {
+          return new Promise(function(resolve5, reject) {
             process.nextTick(function() {
               if (_this[kError]) {
                 reject(_this[kError]);
               } else {
-                resolve4(createIterResult(void 0, true));
+                resolve5(createIterResult(void 0, true));
               }
             });
           });
@@ -31244,13 +31244,13 @@ var require_async_iterator = __commonJS({
       return this;
     }), _defineProperty(_Object$setPrototypeO, "return", function _return() {
       var _this2 = this;
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         _this2[kStream].destroy(null, function(err) {
           if (err) {
             reject(err);
             return;
           }
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         });
       });
     }), _Object$setPrototypeO), AsyncIteratorPrototype);
@@ -31272,15 +31272,15 @@ var require_async_iterator = __commonJS({
         value: stream._readableState.endEmitted,
         writable: true
       }), _defineProperty(_Object$create, kHandlePromise, {
-        value: function value(resolve4, reject) {
+        value: function value(resolve5, reject) {
           var data = iterator[kStream].read();
           if (data) {
             iterator[kLastPromise] = null;
             iterator[kLastResolve] = null;
             iterator[kLastReject] = null;
-            resolve4(createIterResult(data, false));
+            resolve5(createIterResult(data, false));
           } else {
-            iterator[kLastResolve] = resolve4;
+            iterator[kLastResolve] = resolve5;
             iterator[kLastReject] = reject;
           }
         },
@@ -31299,12 +31299,12 @@ var require_async_iterator = __commonJS({
           iterator[kError] = err;
           return;
         }
-        var resolve4 = iterator[kLastResolve];
-        if (resolve4 !== null) {
+        var resolve5 = iterator[kLastResolve];
+        if (resolve5 !== null) {
           iterator[kLastPromise] = null;
           iterator[kLastResolve] = null;
           iterator[kLastReject] = null;
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         }
         iterator[kEnded] = true;
       });
@@ -31319,7 +31319,7 @@ var require_async_iterator = __commonJS({
 var require_from2 = __commonJS({
   "../../node_modules/bl/node_modules/readable-stream/lib/internal/streams/from.js"(exports2, module2) {
     "use strict";
-    function asyncGeneratorStep(gen, resolve4, reject, _next, _throw, key, arg) {
+    function asyncGeneratorStep(gen, resolve5, reject, _next, _throw, key, arg) {
       try {
         var info = gen[key](arg);
         var value = info.value;
@@ -31328,7 +31328,7 @@ var require_from2 = __commonJS({
         return;
       }
       if (info.done) {
-        resolve4(value);
+        resolve5(value);
       } else {
         Promise.resolve(value).then(_next, _throw);
       }
@@ -31336,13 +31336,13 @@ var require_from2 = __commonJS({
     function _asyncToGenerator(fn) {
       return function() {
         var self2 = this, args = arguments;
-        return new Promise(function(resolve4, reject) {
+        return new Promise(function(resolve5, reject) {
           var gen = fn.apply(self2, args);
           function _next(value) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "next", value);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "next", value);
           }
           function _throw(err) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "throw", err);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "throw", err);
           }
           _next(void 0);
         });
@@ -31385,7 +31385,7 @@ var require_from2 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors().codes.ERR_INVALID_ARG_TYPE;
-    function from17(Readable2, iterable, opts) {
+    function from18(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -31424,7 +31424,7 @@ var require_from2 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from17;
+    module2.exports = from18;
   }
 });
 
@@ -31468,7 +31468,7 @@ var require_stream_readable = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from17;
+    var from18;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -32150,10 +32150,10 @@ var require_stream_readable = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from17 === void 0) {
-          from17 = require_from2();
+        if (from18 === void 0) {
+          from18 = require_from2();
         }
-        return from17(Readable2, iterable, opts);
+        return from18(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -32333,8 +32333,8 @@ var require_pipeline = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from17, to) {
-      return from17.pipe(to);
+    function pipe2(from18, to) {
+      return from18.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -33902,14 +33902,14 @@ var require_async_iterator2 = __commonJS({
       };
     }
     function readAndResolve(iter) {
-      var resolve4 = iter[kLastResolve];
-      if (resolve4 !== null) {
+      var resolve5 = iter[kLastResolve];
+      if (resolve5 !== null) {
         var data = iter[kStream].read();
         if (data !== null) {
           iter[kLastPromise] = null;
           iter[kLastResolve] = null;
           iter[kLastReject] = null;
-          resolve4(createIterResult(data, false));
+          resolve5(createIterResult(data, false));
         }
       }
     }
@@ -33917,13 +33917,13 @@ var require_async_iterator2 = __commonJS({
       process.nextTick(readAndResolve, iter);
     }
     function wrapForNext(lastPromise, iter) {
-      return function(resolve4, reject) {
+      return function(resolve5, reject) {
         lastPromise.then(function() {
           if (iter[kEnded]) {
-            resolve4(createIterResult(void 0, true));
+            resolve5(createIterResult(void 0, true));
             return;
           }
-          iter[kHandlePromise](resolve4, reject);
+          iter[kHandlePromise](resolve5, reject);
         }, reject);
       };
     }
@@ -33943,12 +33943,12 @@ var require_async_iterator2 = __commonJS({
           return Promise.resolve(createIterResult(void 0, true));
         }
         if (this[kStream].destroyed) {
-          return new Promise(function(resolve4, reject) {
+          return new Promise(function(resolve5, reject) {
             process.nextTick(function() {
               if (_this[kError]) {
                 reject(_this[kError]);
               } else {
-                resolve4(createIterResult(void 0, true));
+                resolve5(createIterResult(void 0, true));
               }
             });
           });
@@ -33971,13 +33971,13 @@ var require_async_iterator2 = __commonJS({
       return this;
     }), _defineProperty(_Object$setPrototypeO, "return", function _return() {
       var _this2 = this;
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         _this2[kStream].destroy(null, function(err) {
           if (err) {
             reject(err);
             return;
           }
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         });
       });
     }), _Object$setPrototypeO), AsyncIteratorPrototype);
@@ -33999,15 +33999,15 @@ var require_async_iterator2 = __commonJS({
         value: stream._readableState.endEmitted,
         writable: true
       }), _defineProperty(_Object$create, kHandlePromise, {
-        value: function value(resolve4, reject) {
+        value: function value(resolve5, reject) {
           var data = iterator[kStream].read();
           if (data) {
             iterator[kLastPromise] = null;
             iterator[kLastResolve] = null;
             iterator[kLastReject] = null;
-            resolve4(createIterResult(data, false));
+            resolve5(createIterResult(data, false));
           } else {
-            iterator[kLastResolve] = resolve4;
+            iterator[kLastResolve] = resolve5;
             iterator[kLastReject] = reject;
           }
         },
@@ -34026,12 +34026,12 @@ var require_async_iterator2 = __commonJS({
           iterator[kError] = err;
           return;
         }
-        var resolve4 = iterator[kLastResolve];
-        if (resolve4 !== null) {
+        var resolve5 = iterator[kLastResolve];
+        if (resolve5 !== null) {
           iterator[kLastPromise] = null;
           iterator[kLastResolve] = null;
           iterator[kLastReject] = null;
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         }
         iterator[kEnded] = true;
       });
@@ -34046,7 +34046,7 @@ var require_async_iterator2 = __commonJS({
 var require_from3 = __commonJS({
   "../../node_modules/msgpack5/node_modules/readable-stream/lib/internal/streams/from.js"(exports2, module2) {
     "use strict";
-    function asyncGeneratorStep(gen, resolve4, reject, _next, _throw, key, arg) {
+    function asyncGeneratorStep(gen, resolve5, reject, _next, _throw, key, arg) {
       try {
         var info = gen[key](arg);
         var value = info.value;
@@ -34055,7 +34055,7 @@ var require_from3 = __commonJS({
         return;
       }
       if (info.done) {
-        resolve4(value);
+        resolve5(value);
       } else {
         Promise.resolve(value).then(_next, _throw);
       }
@@ -34063,13 +34063,13 @@ var require_from3 = __commonJS({
     function _asyncToGenerator(fn) {
       return function() {
         var self2 = this, args = arguments;
-        return new Promise(function(resolve4, reject) {
+        return new Promise(function(resolve5, reject) {
           var gen = fn.apply(self2, args);
           function _next(value) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "next", value);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "next", value);
           }
           function _throw(err) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "throw", err);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "throw", err);
           }
           _next(void 0);
         });
@@ -34112,7 +34112,7 @@ var require_from3 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors2().codes.ERR_INVALID_ARG_TYPE;
-    function from17(Readable2, iterable, opts) {
+    function from18(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -34151,7 +34151,7 @@ var require_from3 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from17;
+    module2.exports = from18;
   }
 });
 
@@ -34195,7 +34195,7 @@ var require_stream_readable2 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from17;
+    var from18;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -34877,10 +34877,10 @@ var require_stream_readable2 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from17 === void 0) {
-          from17 = require_from3();
+        if (from18 === void 0) {
+          from18 = require_from3();
         }
-        return from17(Readable2, iterable, opts);
+        return from18(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -35060,8 +35060,8 @@ var require_pipeline2 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from17, to) {
-      return from17.pipe(to);
+    function pipe2(from18, to) {
+      return from18.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -35484,16 +35484,16 @@ var require_encoder = __commonJS({
       }
       return bl(acc);
     }
-    function encodeMap(map38, options, encode3) {
-      const acc = [getHeader(map38.size, 128, 222)];
-      const keys = [...map38.keys()];
+    function encodeMap(map39, options, encode3) {
+      const acc = [getHeader(map39.size, 128, 222)];
+      const keys = [...map39.keys()];
       if (!options.preferMap) {
         if (keys.every((item) => typeof item === "string")) {
           console.warn("Map with string only keys will be deserialized as an object!");
         }
       }
       keys.forEach((key) => {
-        acc.push(encode3(key), encode3(map38.get(key)));
+        acc.push(encode3(key), encode3(map39.get(key)));
       });
       return bl(acc);
     }
@@ -35511,16 +35511,16 @@ var require_encoder = __commonJS({
       });
       return bl(acc);
     }
-    function write64BitUint(buf, offset, num3) {
-      const lo = num3 % 4294967296;
-      const hi = Math.floor(num3 / 4294967296);
+    function write64BitUint(buf, offset, num4) {
+      const lo = num4 % 4294967296;
+      const hi = Math.floor(num4 / 4294967296);
       buf.writeUInt32BE(hi, offset + 0);
       buf.writeUInt32BE(lo, offset + 4);
     }
-    function write64BitInt(buf, offset, num3) {
-      const negate = num3 < 0;
-      num3 = Math.abs(num3);
-      write64BitUint(buf, offset, num3);
+    function write64BitInt(buf, offset, num4) {
+      const negate = num4 < 0;
+      num4 = Math.abs(num4);
+      write64BitUint(buf, offset, num4);
       if (negate) negate64BitInt(buf, offset);
     }
     function negate64BitInt(buf, offset) {
@@ -36105,6 +36105,13 @@ health {
   memRequestsPercent
   cpuUsagePercent
   memUsagePercent
+  usageSource
+  capacity {
+    cpu
+    memory
+    cpuSource
+    memSource
+  }
   fissionReady
   prometheusReady
   kubernetesVersion
@@ -37614,6 +37621,34 @@ var init_gql_client = __esm({
           variables: { clusterId, name: name2 }
         }).pipe((0, import_operators.map)((res) => res.detachClusterNode));
       }
+      /** cluster:health - the overview (capacity, issues) and the newest
+          heartbeat (nodes) of one cluster in ONE request. */
+      static clusterHealthView(projectId, clusterId) {
+        return this.query({
+          query: gql`
+        query clusterHealthView($projectId: String!, $clusterId: String!) {
+          projectClustersOverview(projectId: $projectId) {
+            ${ClusterOverviewFragment}
+          }
+          clusterHealth(
+            projectId: $projectId
+            clusterId: $clusterId
+            limit: 1
+          ) {
+            ${ClusterHealthFragment}
+          }
+        }
+      `,
+          variables: { projectId, clusterId }
+        }).pipe(
+          (0, import_operators.map)((res) => ({
+            overview: (res.projectClustersOverview ?? []).find(
+              (c) => c.clusterId === clusterId
+            ) ?? null,
+            latest: (res.clusterHealth ?? [])[0] ?? null
+          }))
+        );
+      }
       static clusterHealth(projectId, clusterId, limit = 1) {
         return this.query({
           query: gql`
@@ -38275,6 +38310,14 @@ var init_ui = __esm({
 ${paint(`=== ${text}`, ["bold"])}
 
 `),
+      /** a screen that refreshes (--watch): on an interactive terminal the
+          previous one is cleared first; in a pipe or CI each frame is printed
+          below the last, separated by a blank line */
+      redraw: (lines) => write(
+        state.out,
+        interactive(state.out) ? `\x1B[2J\x1B[H${lines.join("\n")}` : `
+${lines.join("\n")}`
+      ),
       /** the closing `✔  Deploy complete!` */
       done: (text) => write(
         state.out,
@@ -38300,11 +38343,11 @@ ${paint(SYMBOLS.success, KIND_STYLE.success)}  ${paint(text, ["bold", "underline
         const widths = cols.map(
           (c, i2) => Math.max(c.length, ...rows.map((r2) => visibleLength(r2[i2])))
         );
-        const render = (cells) => cells.map(
+        const render2 = (cells) => cells.map(
           (c, i2) => i2 === cells.length - 1 ? c : c + " ".repeat(widths[i2] - visibleLength(c))
         ).join("   ").trimEnd();
-        write(state.out, dim(render(cols.map((c) => c.toUpperCase()))));
-        rows.forEach((r2) => write(state.out, render(r2)));
+        write(state.out, dim(render2(cols.map((c) => c.toUpperCase()))));
+        rows.forEach((r2) => write(state.out, render2(r2)));
       },
       spin,
       /** `?  question [y/N]` - yes only on y / yes. Not on a terminal: an error
@@ -38785,11 +38828,11 @@ function __metadata(metadataKey, metadataValue) {
 }
 function __awaiter(thisArg, _arguments, P, generator) {
   function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve4) {
-      resolve4(value);
+    return value instanceof P ? value : new P(function(resolve5) {
+      resolve5(value);
     });
   }
-  return new (P || (P = Promise))(function(resolve4, reject) {
+  return new (P || (P = Promise))(function(resolve5, reject) {
     function fulfilled(value) {
       try {
         step2(generator.next(value));
@@ -38805,7 +38848,7 @@ function __awaiter(thisArg, _arguments, P, generator) {
       }
     }
     function step2(result) {
-      result.done ? resolve4(result.value) : adopt(result.value).then(fulfilled, rejected);
+      result.done ? resolve5(result.value) : adopt(result.value).then(fulfilled, rejected);
     }
     step2((generator = generator.apply(thisArg, _arguments || [])).next());
   });
@@ -38922,14 +38965,14 @@ function __spreadArrays() {
       r2[k] = a[j];
   return r2;
 }
-function __spreadArray(to, from17, pack) {
-  if (pack || arguments.length === 2) for (var i2 = 0, l = from17.length, ar; i2 < l; i2++) {
-    if (ar || !(i2 in from17)) {
-      if (!ar) ar = Array.prototype.slice.call(from17, 0, i2);
-      ar[i2] = from17[i2];
+function __spreadArray(to, from18, pack) {
+  if (pack || arguments.length === 2) for (var i2 = 0, l = from18.length, ar; i2 < l; i2++) {
+    if (ar || !(i2 in from18)) {
+      if (!ar) ar = Array.prototype.slice.call(from18, 0, i2);
+      ar[i2] = from18[i2];
     }
   }
-  return to.concat(ar || Array.prototype.slice.call(from17));
+  return to.concat(ar || Array.prototype.slice.call(from18));
 }
 function __await(v) {
   return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -38996,14 +39039,14 @@ function __asyncValues(o) {
   }, i2);
   function verb(n) {
     i2[n] = o[n] && function(v) {
-      return new Promise(function(resolve4, reject) {
-        v = o[n](v), settle(resolve4, reject, v.done, v.value);
+      return new Promise(function(resolve5, reject) {
+        v = o[n](v), settle(resolve5, reject, v.done, v.value);
       });
     };
   }
-  function settle(resolve4, reject, d, v) {
+  function settle(resolve5, reject, d, v) {
     Promise.resolve(v).then(function(v2) {
-      resolve4({ value: v2, done: d });
+      resolve5({ value: v2, done: d });
     }, reject);
   }
 }
@@ -39410,7 +39453,7 @@ var require_util = __commonJS({
     exports2.isAbsolute = function(aPath) {
       return aPath.charAt(0) === "/" || urlRegexp.test(aPath);
     };
-    function relative3(aRoot, aPath) {
+    function relative4(aRoot, aPath) {
       if (aRoot === "") {
         aRoot = ".";
       }
@@ -39429,7 +39472,7 @@ var require_util = __commonJS({
       }
       return Array(level + 1).join("../") + aPath.substr(aRoot.length + 1);
     }
-    exports2.relative = relative3;
+    exports2.relative = relative4;
     var supportsNullProto = (function() {
       var obj = /* @__PURE__ */ Object.create(null);
       return !("__proto__" in obj);
@@ -39948,22 +39991,22 @@ var require_source_map_generator = __commonJS({
       }, this);
     };
     SourceMapGenerator.prototype.toJSON = function SourceMapGenerator_toJSON() {
-      var map38 = {
+      var map39 = {
         version: this._version,
         sources: this._sources.toArray(),
         names: this._names.toArray(),
         mappings: this._serializeMappings()
       };
       if (this._file != null) {
-        map38.file = this._file;
+        map39.file = this._file;
       }
       if (this._sourceRoot != null) {
-        map38.sourceRoot = this._sourceRoot;
+        map39.sourceRoot = this._sourceRoot;
       }
       if (this._sourcesContents) {
-        map38.sourcesContent = this._generateSourcesContent(map38.sources, map38.sourceRoot);
+        map39.sourcesContent = this._generateSourcesContent(map39.sources, map39.sourceRoot);
       }
-      return map38;
+      return map39;
     };
     SourceMapGenerator.prototype.toString = function SourceMapGenerator_toString() {
       return JSON.stringify(this.toJSON());
@@ -40856,7 +40899,7 @@ var require_source_node = __commonJS({
         line: 1,
         column: 0
       };
-      var map38 = new SourceMapGenerator(aArgs);
+      var map39 = new SourceMapGenerator(aArgs);
       var sourceMappingActive = false;
       var lastOriginalSource = null;
       var lastOriginalLine = null;
@@ -40866,7 +40909,7 @@ var require_source_node = __commonJS({
         generated.code += chunk;
         if (original.source !== null && original.line !== null && original.column !== null) {
           if (lastOriginalSource !== original.source || lastOriginalLine !== original.line || lastOriginalColumn !== original.column || lastOriginalName !== original.name) {
-            map38.addMapping({
+            map39.addMapping({
               source: original.source,
               original: {
                 line: original.line,
@@ -40885,7 +40928,7 @@ var require_source_node = __commonJS({
           lastOriginalName = original.name;
           sourceMappingActive = true;
         } else if (sourceMappingActive) {
-          map38.addMapping({
+          map39.addMapping({
             generated: {
               line: generated.line,
               column: generated.column
@@ -40902,7 +40945,7 @@ var require_source_node = __commonJS({
               lastOriginalSource = null;
               sourceMappingActive = false;
             } else if (sourceMappingActive) {
-              map38.addMapping({
+              map39.addMapping({
                 source: original.source,
                 original: {
                   line: original.line,
@@ -40921,9 +40964,9 @@ var require_source_node = __commonJS({
         }
       });
       this.walkSourceContents(function(sourceFile, sourceContent) {
-        map38.setSourceContent(sourceFile, sourceContent);
+        map39.setSourceContent(sourceFile, sourceContent);
       });
-      return { code: generated.code, map: map38 };
+      return { code: generated.code, map: map39 };
     };
     exports2.SourceNode = SourceNode;
   }
@@ -41453,11 +41496,11 @@ var require_typescript = __commonJS({
         for (var name2 in all)
           __defProp2(target, name2, { get: all[name2], enumerable: true });
       };
-      var __copyProps2 = (to, from17, except, desc) => {
-        if (from17 && typeof from17 === "object" || typeof from17 === "function") {
-          for (let key of __getOwnPropNames2(from17))
+      var __copyProps2 = (to, from18, except, desc) => {
+        if (from18 && typeof from18 === "object" || typeof from18 === "function") {
+          for (let key of __getOwnPropNames2(from18))
             if (!__hasOwnProp2.call(to, key) && key !== except)
-              __defProp2(to, key, { get: () => from17[key], enumerable: !(desc = __getOwnPropDesc2(from17, key)) || desc.enumerable });
+              __defProp2(to, key, { get: () => from18[key], enumerable: !(desc = __getOwnPropDesc2(from18, key)) || desc.enumerable });
         }
         return to;
       };
@@ -43263,7 +43306,7 @@ var require_typescript = __commonJS({
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map38,
+        map: () => map39,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -43907,7 +43950,7 @@ var require_typescript = __commonJS({
       function clear(array2) {
         array2.length = 0;
       }
-      function map38(array2, f3) {
+      function map39(array2, f3) {
         let result;
         if (array2 !== void 0) {
           result = [];
@@ -44301,14 +44344,14 @@ var require_typescript = __commonJS({
       function toOffset(array2, offset) {
         return offset < 0 ? array2.length + offset : offset;
       }
-      function addRange(to, from17, start3, end) {
-        if (from17 === void 0 || from17.length === 0) return to;
-        if (to === void 0) return from17.slice(start3, end);
-        start3 = start3 === void 0 ? 0 : toOffset(from17, start3);
-        end = end === void 0 ? from17.length : toOffset(from17, end);
-        for (let i2 = start3; i2 < end && i2 < from17.length; i2++) {
-          if (from17[i2] !== void 0) {
-            to.push(from17[i2]);
+      function addRange(to, from18, start3, end) {
+        if (from18 === void 0 || from18.length === 0) return to;
+        if (to === void 0) return from18.slice(start3, end);
+        start3 = start3 === void 0 ? 0 : toOffset(from18, start3);
+        end = end === void 0 ? from18.length : toOffset(from18, end);
+        for (let i2 = start3; i2 < end && i2 < from18.length; i2++) {
+          if (from18[i2] !== void 0) {
+            to.push(from18[i2]);
           }
         }
         return to;
@@ -45436,7 +45479,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
         }
         Debug2.getFunctionName = getFunctionName;
         function formatSymbol(symbol2) {
-          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map38(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
+          return `{ name: ${unescapeLeadingUnderscores(symbol2.escapedName)}; flags: ${formatSymbolFlags(symbol2.flags)}; declarations: ${map39(symbol2.declarations, (node) => formatSyntaxKind(node.kind))} }`;
         }
         Debug2.formatSymbol = formatSymbol;
         function formatEnum(value = 0, enumObject, isFlags) {
@@ -45862,7 +45905,7 @@ Node ${formatSyntaxKind(node.kind)} was unexpected.`,
               case 1:
                 return zipWith(
                   this.sources,
-                  this.targets || map38(this.sources, () => "any"),
+                  this.targets || map39(this.sources, () => "any"),
                   (s2, t2) => `${s2.__debugTypeToString()} -> ${typeof t2 === "string" ? t2 : t2.__debugTypeToString()}`
                 ).join(", ");
               case 2:
@@ -46497,10 +46540,10 @@ ${lanes.join("\n")}
         }
       }
       function formatDisjunction(alternatives) {
-        return map38(alternatives, formatAlternative).join(" || ") || "*";
+        return map39(alternatives, formatAlternative).join(" || ") || "*";
       }
       function formatAlternative(comparators) {
-        return map38(comparators, formatComparator).join(" ");
+        return map39(comparators, formatComparator).join(" ");
       }
       function formatComparator(comparator) {
         return `${comparator.operator}${comparator.operand}`;
@@ -50817,8 +50860,8 @@ ${lanes.join("\n")}
         const canonicalDirectoryName = getCanonicalFileName(directoryName);
         return startsWith(canonicalFileName, canonicalDirectoryName + "/") || startsWith(canonicalFileName, canonicalDirectoryName + "\\");
       }
-      function getPathComponentsRelativeTo(from17, to, stringEqualityComparer, getCanonicalFileName) {
-        const fromComponents = reducePathComponents(getPathComponents(from17));
+      function getPathComponentsRelativeTo(from18, to, stringEqualityComparer, getCanonicalFileName) {
+        const fromComponents = reducePathComponents(getPathComponents(from18));
         const toComponents = reducePathComponents(getPathComponents(to));
         let start3;
         for (start3 = 0; start3 < fromComponents.length && start3 < toComponents.length; start3++) {
@@ -50831,11 +50874,11 @@ ${lanes.join("\n")}
           return toComponents;
         }
         const components = toComponents.slice(start3);
-        const relative3 = [];
+        const relative4 = [];
         for (; start3 < fromComponents.length; start3++) {
-          relative3.push("..");
+          relative4.push("..");
         }
-        return ["", ...relative3, ...components];
+        return ["", ...relative4, ...components];
       }
       function getRelativePathFromDirectory(fromDirectory, to, getCanonicalFileNameOrIgnoreCase) {
         Debug.assert(getRootLength(fromDirectory) > 0 === getRootLength(to) > 0, "Paths must either both be absolute or both be relative");
@@ -50854,8 +50897,8 @@ ${lanes.join("\n")}
           false
         );
       }
-      function getRelativePathFromFile(from17, to, getCanonicalFileName) {
-        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from17), to, getCanonicalFileName));
+      function getRelativePathFromFile(from18, to, getCanonicalFileName) {
+        return ensurePathIsNonModuleName(getRelativePathFromDirectory(getDirectoryPath(from18), to, getCanonicalFileName));
       }
       function getRelativePathToDirectoryOrUrl(directoryPathOrUrl, relativeOrAbsolutePath, currentDirectory, getCanonicalFileName, isAbsolutePathAnUrl) {
         const pathComponents2 = getPathComponentsRelativeTo(
@@ -58406,15 +58449,15 @@ ${lanes.join("\n")}
         if (!nodeArray || isArray(child) || !isElement(child)) return false;
         return contains(nodeArray, child);
       }
-      function insertStatementsAfterPrologue(to, from17, isPrologueDirective2) {
-        if (from17 === void 0 || from17.length === 0) return to;
+      function insertStatementsAfterPrologue(to, from18, isPrologueDirective2) {
+        if (from18 === void 0 || from18.length === 0) return to;
         let statementIndex = 0;
         for (; statementIndex < to.length; ++statementIndex) {
           if (!isPrologueDirective2(to[statementIndex])) {
             break;
           }
         }
-        to.splice(statementIndex, 0, ...from17);
+        to.splice(statementIndex, 0, ...from18);
         return to;
       }
       function insertStatementAfterPrologue(to, statement, isPrologueDirective2) {
@@ -58431,11 +58474,11 @@ ${lanes.join("\n")}
       function isAnyPrologueDirective(node) {
         return isPrologueDirective(node) || !!(getEmitFlags(node) & 2097152);
       }
-      function insertStatementsAfterStandardPrologue(to, from17) {
-        return insertStatementsAfterPrologue(to, from17, isPrologueDirective);
+      function insertStatementsAfterStandardPrologue(to, from18) {
+        return insertStatementsAfterPrologue(to, from18, isPrologueDirective);
       }
-      function insertStatementsAfterCustomPrologue(to, from17) {
-        return insertStatementsAfterPrologue(to, from17, isAnyPrologueDirective);
+      function insertStatementsAfterCustomPrologue(to, from18) {
+        return insertStatementsAfterPrologue(to, from18, isAnyPrologueDirective);
       }
       function insertStatementAfterStandardPrologue(to, statement) {
         return insertStatementAfterPrologue(to, statement, isPrologueDirective);
@@ -64427,7 +64470,7 @@ ${lanes.join("\n")}
         currentDirectory = normalizePath(currentDirectory);
         const absolutePath = combinePaths(currentDirectory, path2);
         return {
-          includeFilePatterns: map38(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
+          includeFilePatterns: map39(getRegularExpressionsForWildcards(includes, absolutePath, "files"), (pattern) => `^${pattern}$`),
           includeFilePattern: getRegularExpressionForWildcard(includes, absolutePath, "files"),
           includeDirectoryPattern: getRegularExpressionForWildcard(includes, absolutePath, "directories"),
           excludePattern: getRegularExpressionForWildcard(excludes, absolutePath, "exclude"),
@@ -66937,7 +66980,7 @@ ${lanes.join("\n")}
           if (isObjectBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createObjectLiteralExpression(map38(node.elements, convertToObjectAssignmentElement)),
+                factory2.createObjectLiteralExpression(map39(node.elements, convertToObjectAssignmentElement)),
                 node
               ),
               node
@@ -66949,7 +66992,7 @@ ${lanes.join("\n")}
           if (isArrayBindingPattern(node)) {
             return setOriginalNode(
               setTextRange(
-                factory2.createArrayLiteralExpression(map38(node.elements, convertToArrayAssignmentElement)),
+                factory2.createArrayLiteralExpression(map39(node.elements, convertToArrayAssignmentElement)),
                 node
               ),
               node
@@ -72914,13 +72957,13 @@ ${lanes.join("\n")}
             [cooked, raw]
           );
         }
-        function createSpreadArrayHelper(to, from17, packFrom) {
+        function createSpreadArrayHelper(to, from18, packFrom) {
           context.requestEmitHelper(spreadArrayHelper);
           return factory2.createCallExpression(
             getUnscopedHelperName("__spreadArray"),
             /*typeArguments*/
             void 0,
-            [to, from17, packFrom ? immutableTrue() : immutableFalse()]
+            [to, from18, packFrom ? immutableTrue() : immutableFalse()]
           );
         }
         function createPropKeyHelper(expr) {
@@ -74771,7 +74814,7 @@ ${lanes.join("\n")}
               if (some(helperNames)) {
                 helperNames.sort(compareStringsCaseSensitive);
                 const namedBindings = nodeFactory.createNamedImports(
-                  map38(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
+                  map39(helperNames, (name2) => isFileLevelUniqueName(sourceFile, name2) ? nodeFactory.createImportSpecifier(
                     /*isTypeOnly*/
                     false,
                     /*propertyName*/
@@ -84974,7 +85017,7 @@ ${lanes.join("\n")}
               break;
             }
             case "amd-dependency": {
-              context.amdDependencies = map38(
+              context.amdDependencies = map39(
                 toArray6(entryOrList),
                 (x2) => ({ name: x2.arguments.name, path: x2.arguments.path })
               );
@@ -87323,7 +87366,7 @@ ${lanes.join("\n")}
       function convertToTSConfig(configParseResult, configFileName, host) {
         var _a2, _b, _c;
         const getCanonicalFileName = createGetCanonicalFileName(host.useCaseSensitiveFileNames);
-        const files = map38(
+        const files = map39(
           filter6(
             configParseResult.fileNames,
             !((_b = (_a2 = configParseResult.options.configFile) == null ? void 0 : _a2.configFileSpecs) == null ? void 0 : _b.validatedIncludeSpecs) ? returnTrue : matchesSpecs(
@@ -87353,7 +87396,7 @@ ${lanes.join("\n")}
             version: void 0
           },
           watchOptions: watchOptionMap && optionMapToObject(watchOptionMap),
-          references: map38(configParseResult.projectReferences, (r2) => ({ ...r2, path: r2.originalPath ? r2.originalPath : "", originalPath: void 0 })),
+          references: map39(configParseResult.projectReferences, (r2) => ({ ...r2, path: r2.originalPath ? r2.originalPath : "", originalPath: void 0 })),
           files: length(files) ? files : void 0,
           ...((_c = configParseResult.options.configFile) == null ? void 0 : _c.configFileSpecs) ? {
             include: filterSameAsDefaultInclude(configParseResult.options.configFile.configFileSpecs.validatedIncludeSpecs),
@@ -87643,8 +87686,8 @@ ${lanes.join("\n")}
           if (!option) Debug.fail(`No option named ${settingName}?`);
           const map210 = option.type instanceof Map ? option.type : void 0;
           if (isArray(value)) {
-            const map39 = "element" in option && option.element.type instanceof Map ? option.element.type : void 0;
-            return `[${value.map((v) => formatSingleValue(v, map39)).join(", ")}]`;
+            const map310 = "element" in option && option.element.type instanceof Map ? option.element.type : void 0;
+            return `[${value.map((v) => formatSingleValue(v, map310)).join(", ")}]`;
           } else {
             return formatSingleValue(value, map210);
           }
@@ -88042,7 +88085,7 @@ ${lanes.join("\n")}
             const setPropertyInResultIfNotUndefined = (propertyName) => {
               if (ownConfig.raw[propertyName]) return;
               if (extendsRaw[propertyName]) {
-                result[propertyName] = map38(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
+                result[propertyName] = map39(extendsRaw[propertyName], (path2) => startsWithConfigDirTemplate(path2) || isRootedDiskPath(path2) ? path2 : combinePaths(
                   relativeDifference || (relativeDifference = convertToRelativePath(getDirectoryPath(extendedConfigPath), basePath, createGetCanonicalFileName(host.useCaseSensitiveFileNames))),
                   path2
                 ));
@@ -88351,7 +88394,7 @@ ${lanes.join("\n")}
         }
       }
       function convertJsonOptionOfListType(option, values, basePath, errors, propertyAssignment, valueExpression, sourceFile) {
-        return filter6(map38(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
+        return filter6(map39(values, (v, index) => convertJsonOption(option.element, v, basePath, errors, propertyAssignment, valueExpression == null ? void 0 : valueExpression.elements[index], sourceFile)), (v) => option.listPreserveFalsyValues ? true : !!v);
       }
       var invalidTrailingRecursionPattern = /(?:^|\/)\*\*\/?$/;
       var wildcardDirectoryPattern = /^[^*?]*(?=\/[^/]*[*?])/;
@@ -88391,7 +88434,7 @@ ${lanes.join("\n")}
                   ".json"
                   /* Json */
                 ));
-                const includeFilePatterns = map38(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
+                const includeFilePatterns = map39(getRegularExpressionsForWildcards(includes, basePath, "files"), (pattern) => `^${pattern}$`);
                 jsonOnlyIncludeRegexes = includeFilePatterns ? includeFilePatterns.map((pattern) => getRegexFromPattern(pattern, host.useCaseSensitiveFileNames)) : emptyArray;
               }
               const includeIndex = findIndex(jsonOnlyIncludeRegexes, (re) => re.test(file2));
@@ -89404,11 +89447,11 @@ ${lanes.join("\n")}
             if (i2 < rootLength) {
               return void 0;
             }
-            const sep4 = directory.lastIndexOf(directorySeparator, i2 - 1);
-            if (sep4 === -1) {
+            const sep5 = directory.lastIndexOf(directorySeparator, i2 - 1);
+            if (sep5 === -1) {
               return void 0;
             }
-            return directory.substr(0, Math.max(sep4, rootLength));
+            return directory.substr(0, Math.max(sep5, rootLength));
           }
         }
       }
@@ -95314,9 +95357,9 @@ ${lanes.join("\n")}
               if (!startsWithDirectory(target, realPathDirectory, getCanonicalFileName)) {
                 return;
               }
-              const relative3 = getRelativePathFromDirectory(realPathDirectory, target, getCanonicalFileName);
+              const relative4 = getRelativePathFromDirectory(realPathDirectory, target, getCanonicalFileName);
               for (const symlinkDirectory of symlinkDirectories) {
-                const option = resolvePath(symlinkDirectory, relative3);
+                const option = resolvePath(symlinkDirectory, relative4);
                 const result2 = cb(option, target === referenceRedirect);
                 shouldFilterIgnoredPaths = true;
                 if (result2) return result2;
@@ -95691,7 +95734,7 @@ ${lanes.join("\n")}
         }
         const normalizedSourcePaths = getPathsRelativeToRootDirs(sourceDirectory, rootDirs, getCanonicalFileName);
         const relativePaths = flatMap(normalizedSourcePaths, (sourcePath) => {
-          return map38(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
+          return map39(normalizedTargetPaths, (targetPath) => ensurePathIsNonModuleName(getRelativePathFromDirectory(sourcePath, targetPath, getCanonicalFileName)));
         });
         const shortest = min(relativePaths, compareNumberOfDirectorySeparators);
         if (!shortest) {
@@ -98736,7 +98779,7 @@ ${lanes.join("\n")}
               const exportedSymbol = exports22 ? find(symbolsToArray(exports22), (symbol2) => !!getSymbolIfSameReference(symbol2, localSymbol)) : void 0;
               const diagnostic = exportedSymbol ? error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_exported_as_2, moduleName, declarationName, symbolToString(exportedSymbol)) : error210(name2, Diagnostics.Module_0_declares_1_locally_but_it_is_not_exported, moduleName, declarationName);
               if (localSymbol.declarations) {
-                addRelatedInfo(diagnostic, ...map38(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
+                addRelatedInfo(diagnostic, ...map39(localSymbol.declarations, (decl, index) => createDiagnosticForNode(decl, index === 0 ? Diagnostics._0_is_declared_here : Diagnostics.and_here, declarationName)));
               }
             }
           } else {
@@ -101517,7 +101560,7 @@ ${lanes.join("\n")}
               const types3 = type2.types;
               const templateHead = factory.createTemplateHead(texts[0]);
               const templateSpans = factory.createNodeArray(
-                map38(types3, (t2, i2) => factory.createTemplateLiteralTypeSpan(
+                map39(types3, (t2, i2) => factory.createTemplateLiteralTypeSpan(
                   typeToTypeNodeHelper(t2, context),
                   (i2 < types3.length - 1 ? factory.createTemplateMiddle : factory.createTemplateTail)(texts[i2 + 1])
                 ))
@@ -101886,7 +101929,7 @@ ${lanes.join("\n")}
               }
               const abstractSignatures = filter6(resolved.constructSignatures, (signature) => !!(signature.flags & 4));
               if (some(abstractSignatures)) {
-                const types3 = map38(abstractSignatures, getOrCreateTypeFromSignature);
+                const types3 = map39(abstractSignatures, getOrCreateTypeFromSignature);
                 const typeElementCount = resolved.callSignatures.length + (resolved.constructSignatures.length - abstractSignatures.length) + resolved.indexInfos.length + // exclude `prototype` when writing a class expression as a type literal, as per
                 // the logic in `createTypeNodesFromResolvedType`.
                 (context.flags & 2048 ? countWhere(resolved.properties, (p) => !(p.flags & 4194304)) : length(resolved.properties));
@@ -102104,7 +102147,7 @@ ${lanes.join("\n")}
                   const newComponents = filter6(indexInfo.components, (e2) => {
                     return !hasLateBindableName(e2);
                   });
-                  return map38(newComponents, (e2) => {
+                  return map39(newComponents, (e2) => {
                     trackComputedName(e2.name.expression, context2.enclosingDeclaration, context2);
                     return setTextRange2(
                       context2,
@@ -102913,7 +102956,7 @@ ${lanes.join("\n")}
             const parameterDeclaration = getEffectiveParameterDeclaration(parameterSymbol);
             const parameterType = getTypeOfSymbol(parameterSymbol);
             const parameterTypeNode = serializeTypeForDeclaration(context, parameterDeclaration, parameterType, parameterSymbol);
-            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map38(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
+            const modifiers = !(context.flags & 8192) && preserveModifierFlags && parameterDeclaration && canHaveModifiers(parameterDeclaration) ? map39(getModifiers(parameterDeclaration), factory.cloneNode) : void 0;
             const isRest = parameterDeclaration && isRestParameter(parameterDeclaration) || getCheckFlags(parameterSymbol) & 32768;
             const dotDotDotToken = isRest ? factory.createToken(
               26
@@ -103111,7 +103154,7 @@ ${lanes.join("\n")}
             let typeParameterNodes;
             const targetSymbol = getTargetSymbol(symbol2);
             if (targetSymbol.flags & (32 | 64 | 524288)) {
-              typeParameterNodes = factory.createNodeArray(map38(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
+              typeParameterNodes = factory.createNodeArray(map39(getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2), (tp) => typeParameterToDeclaration(tp, context)));
             }
             return typeParameterNodes;
           }
@@ -103136,7 +103179,7 @@ ${lanes.join("\n")}
                 const params = getTypeParametersOfClassOrInterface(
                   parentSymbol.flags & 2097152 ? resolveAlias(parentSymbol) : parentSymbol
                 );
-                typeParameterNodes = mapToTypeNodes(map38(params, (t2) => getMappedType(t2, nextSymbol.links.mapper)), context);
+                typeParameterNodes = mapToTypeNodes(map39(params, (t2) => getMappedType(t2, nextSymbol.links.mapper)), context);
               } else {
                 typeParameterNodes = typeParametersToTypeParameterDeclarations(symbol2, context);
               }
@@ -103959,7 +104002,7 @@ ${lanes.join("\n")}
             }
             function getNamesOfDeclaration(statement) {
               if (isVariableStatement(statement)) {
-                return filter6(map38(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
+                return filter6(map39(statement.declarationList.declarations, getNameOfDeclaration), isIdentifierAndNotUndefined);
               }
               return filter6([getNameOfDeclaration(statement)], isIdentifierAndNotUndefined);
             }
@@ -103985,7 +104028,7 @@ ${lanes.join("\n")}
                           void 0,
                           /*isTypeOnly*/
                           false,
-                          factory.createNamedExports(map38(flatMap(excessExports, (e2) => getNamesOfDeclaration(e2)), (id) => factory.createExportSpecifier(
+                          factory.createNamedExports(map39(flatMap(excessExports, (e2) => getNamesOfDeclaration(e2)), (id) => factory.createExportSpecifier(
                             /*isTypeOnly*/
                             false,
                             /*propertyName*/
@@ -104405,7 +104448,7 @@ ${lanes.join("\n")}
               var _a22;
               const aliasType = getDeclaredTypeOfTypeAlias(symbol2);
               const typeParams = getSymbolLinks(symbol2).typeParameters;
-              const typeParamDecls = map38(typeParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map39(typeParams, (p) => typeParameterToDeclaration(p, context));
               const jsdocAliasDecl = (_a22 = symbol2.declarations) == null ? void 0 : _a22.find(isJSDocTypeAlias);
               const commentText = getTextOfJSDocComment(jsdocAliasDecl ? jsdocAliasDecl.comment || jsdocAliasDecl.parent.comment : void 0);
               const restoreFlags = saveRestoreFlags(context);
@@ -104436,7 +104479,7 @@ ${lanes.join("\n")}
               context.approximateLength += 14 + internalSymbolName.length;
               const interfaceType = getDeclaredTypeOfClassOrInterface(symbol2);
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map38(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map39(localParams, (p) => typeParameterToDeclaration(p, context));
               const baseTypes = getBaseTypes(interfaceType);
               const baseType = length(baseTypes) ? getIntersectionType(baseTypes) : void 0;
               const members = serializePropertySymbolsForClassOrInterface(
@@ -104749,7 +104792,7 @@ ${lanes.join("\n")}
                 addingDeclare = oldAddingDeclare;
                 const declarations = results;
                 results = oldResults;
-                const defaultReplaced = map38(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
+                const defaultReplaced = map39(declarations, (d) => isExportAssignment(d) && !d.isExportEquals && isIdentifier(d.expression) ? factory.createExportDeclaration(
                   /*modifiers*/
                   void 0,
                   /*isTypeOnly*/
@@ -104768,7 +104811,7 @@ ${lanes.join("\n")}
                   d,
                   32
                   /* Export */
-                )) ? map38(defaultReplaced, removeExportModifier) : defaultReplaced;
+                )) ? map39(defaultReplaced, removeExportModifier) : defaultReplaced;
                 fakespace = factory.updateModuleDeclaration(
                   fakespace,
                   fakespace.modifiers,
@@ -104816,7 +104859,7 @@ ${lanes.join("\n")}
                 }
                 return cleanup(factory.createExpressionWithTypeArguments(
                   expr,
-                  map38(e2.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
+                  map39(e2.typeArguments, (a) => syntacticNodeBuilder.tryReuseExistingTypeNode(context, a) || typeToTypeNodeHelper(getTypeFromTypeNode2(context, a), context))
                 ));
                 function cleanup(result2) {
                   context.enclosingDeclaration = oldEnclosing;
@@ -104835,7 +104878,7 @@ ${lanes.join("\n")}
               const oldEnclosing = context.enclosingDeclaration;
               context.enclosingDeclaration = originalDecl || oldEnclosing;
               const localParams = getLocalTypeParametersOfClassOrInterfaceOrTypeAlias(symbol2);
-              const typeParamDecls = map38(localParams, (p) => typeParameterToDeclaration(p, context));
+              const typeParamDecls = map39(localParams, (p) => typeParameterToDeclaration(p, context));
               forEach(localParams, (p) => context.approximateLength += symbolName(p.symbol).length);
               const classType = getTypeWithThisArgument(getDeclaredTypeOfClassOrInterface(symbol2));
               const baseTypes = getBaseTypes(classType);
@@ -104846,7 +104889,7 @@ ${lanes.join("\n")}
               const staticBaseType = isClass ? getBaseConstructorTypeOfClass(staticType) : anyType2;
               context.approximateLength += (length(baseTypes) ? 8 : 0) + (length(implementsExpressions) ? 11 : 0);
               const heritageClauses = [
-                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map38(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
+                ...!length(baseTypes) ? [] : [factory.createHeritageClause(96, map39(baseTypes, (b) => serializeBaseType(b, staticBaseType, localName)))],
                 ...!length(implementsExpressions) ? [] : [factory.createHeritageClause(119, implementsExpressions)]
               ];
               const symbolProps = getNonInheritedProperties(classType, baseTypes, getPropertiesOfType(classType));
@@ -105675,7 +105718,7 @@ ${lanes.join("\n")}
               let typeArgs;
               let reference;
               if (t2.target && isSymbolAccessibleByFlags(t2.target.symbol, enclosingDeclaration, flags)) {
-                typeArgs = map38(getTypeArguments(t2), (t22) => typeToTypeNodeHelper(t22, context));
+                typeArgs = map39(getTypeArguments(t2), (t22) => typeToTypeNodeHelper(t22, context));
                 reference = symbolToExpression(
                   t2.target.symbol,
                   context,
@@ -106139,7 +106182,7 @@ ${lanes.join("\n")}
         }
         function getTypeOfPrototypeProperty(prototype) {
           const classType = getDeclaredTypeOfSymbol(getParentOfSymbol(prototype));
-          return classType.typeParameters ? createTypeReference(classType, map38(classType.typeParameters, (_2) => anyType2)) : classType;
+          return classType.typeParameters ? createTypeReference(classType, map39(classType.typeParameters, (_2) => anyType2)) : classType;
         }
         function getTypeOfPropertyOfType(type2, name2) {
           const prop = getPropertyOfType(type2, name2);
@@ -106187,7 +106230,7 @@ ${lanes.join("\n")}
           if (source.flags & 1048576) {
             return mapType2(source, (t2) => getRestType(t2, properties2, symbol2));
           }
-          let omitKeyType = getUnionType(map38(properties2, getLiteralTypeFromPropertyName));
+          let omitKeyType = getUnionType(map39(properties2, getLiteralTypeFromPropertyName));
           const spreadableProperties = [];
           const unspreadableToRestKeys = [];
           for (const prop of getPropertiesOfType(source)) {
@@ -106913,9 +106956,9 @@ ${lanes.join("\n")}
           if (elements.length === 0 || elements.length === 1 && restElement) {
             return languageVersion >= 2 ? createIterableType(anyType2) : anyArrayType;
           }
-          const elementTypes = map38(elements, (e2) => isOmittedExpression(e2) ? anyType2 : getTypeFromBindingElement(e2, includePatternInType, reportErrors2));
+          const elementTypes = map39(elements, (e2) => isOmittedExpression(e2) ? anyType2 : getTypeFromBindingElement(e2, includePatternInType, reportErrors2));
           const minLength = findLastIndex(elements, (e2) => !(e2 === restElement || isOmittedExpression(e2) || hasDefaultValue(e2)), elements.length - 1) + 1;
-          const elementFlags = map38(
+          const elementFlags = map39(
             elements,
             (e2, i2) => e2 === restElement ? 4 : i2 >= minLength ? 2 : 1
             /* Required */
@@ -107597,7 +107640,7 @@ ${lanes.join("\n")}
         }
         function getInstantiatedConstructorsForTypeArguments(type2, typeArgumentNodes, location) {
           const signatures = getConstructorsForTypeArguments(type2, typeArgumentNodes, location);
-          const typeArguments = map38(typeArgumentNodes, getTypeFromTypeNode);
+          const typeArguments = map39(typeArgumentNodes, getTypeFromTypeNode);
           return sameMap(signatures, (sig) => some(sig.typeParameters) ? getSignatureInstantiation(sig, typeArguments, isInJSFile(location)) : sig);
         }
         function getBaseConstructorTypeOfClass(type2) {
@@ -108428,14 +108471,14 @@ ${lanes.join("\n")}
             if (isTupleType(restType)) {
               return [expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol)];
             } else if (!skipUnionExpanding && restType.flags & 1048576 && every(restType.types, isTupleType)) {
-              return map38(restType.types, (t2) => expandSignatureParametersWithTupleMembers(t2, restIndex, restSymbol));
+              return map39(restType.types, (t2) => expandSignatureParametersWithTupleMembers(t2, restIndex, restSymbol));
             }
           }
           return [sig.parameters];
           function expandSignatureParametersWithTupleMembers(restType, restIndex, restSymbol) {
             const elementTypes = getTypeArguments(restType);
             const associatedNames = getUniqAssociatedNamesFromTupleType(restType, restSymbol);
-            const restParams = map38(elementTypes, (t2, i2) => {
+            const restParams = map39(elementTypes, (t2, i2) => {
               const name2 = associatedNames && associatedNames[i2] ? associatedNames[i2] : getParameterNameAtPosition(sig, restIndex + i2, restType);
               const flags = restType.target.elementFlags[i2];
               const checkFlags = flags & 12 ? 32768 : flags & 2 ? 16384 : 0;
@@ -108446,7 +108489,7 @@ ${lanes.join("\n")}
             return concatenate(sig.parameters.slice(0, restIndex), restParams);
           }
           function getUniqAssociatedNamesFromTupleType(type2, restSymbol) {
-            const names3 = map38(type2.target.labeledElementDeclarations, (labeledElement, i2) => getTupleElementLabel(labeledElement, i2, type2.target.elementFlags[i2], restSymbol));
+            const names3 = map39(type2.target.labeledElementDeclarations, (labeledElement, i2) => getTupleElementLabel(labeledElement, i2, type2.target.elementFlags[i2], restSymbol));
             if (names3) {
               const duplicates = [];
               const uniqueNames = /* @__PURE__ */ new Set();
@@ -108617,7 +108660,7 @@ ${lanes.join("\n")}
               if (signatures !== masterList) {
                 const signature = signatures[0];
                 Debug.assert(!!signature, "getUnionSignatures bails early on empty signature lists and should not have empty lists on second pass");
-                results = !!signature.typeParameters && some(results, (s2) => !!s2.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s2.typeParameters)) ? void 0 : map38(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
+                results = !!signature.typeParameters && some(results, (s2) => !!s2.typeParameters && !compareTypeParametersIdentical(signature.typeParameters, s2.typeParameters)) ? void 0 : map39(results, (sig) => combineSignaturesOfUnionMembers(sig, signature));
                 if (!results) {
                   break;
                 }
@@ -108740,7 +108783,7 @@ ${lanes.join("\n")}
             for (const info of sourceInfos) {
               const indexType = info.keyType;
               if (every(types3, (t2) => !!getIndexInfoOfType(t2, indexType))) {
-                result.push(createIndexInfo(indexType, getUnionType(map38(types3, (t2) => getIndexTypeOfType(t2, indexType))), some(types3, (t2) => getIndexInfoOfType(t2, indexType).isReadonly)));
+                result.push(createIndexInfo(indexType, getUnionType(map39(types3, (t2) => getIndexTypeOfType(t2, indexType))), some(types3, (t2) => getIndexInfoOfType(t2, indexType).isReadonly)));
               }
             }
             return result;
@@ -108748,12 +108791,12 @@ ${lanes.join("\n")}
           return emptyArray;
         }
         function resolveUnionTypeMembers(type2) {
-          const callSignatures = getUnionSignatures(map38(type2.types, (t2) => t2 === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
+          const callSignatures = getUnionSignatures(map39(type2.types, (t2) => t2 === globalFunctionType ? [unknownSignature] : getSignaturesOfType(
             t2,
             0
             /* Call */
           )));
-          const constructSignatures = getUnionSignatures(map38(type2.types, (t2) => getSignaturesOfType(
+          const constructSignatures = getUnionSignatures(map39(type2.types, (t2) => getSignaturesOfType(
             t2,
             1
             /* Construct */
@@ -108770,7 +108813,7 @@ ${lanes.join("\n")}
             1
             /* Construct */
           ).length > 0);
-          const mixinFlags = map38(types3, isMixinConstructorType);
+          const mixinFlags = map39(types3, isMixinConstructorType);
           if (constructorTypeCount > 0 && constructorTypeCount === countWhere(mixinFlags, (b) => b)) {
             const firstMixinIndex = mixinFlags.indexOf(
               /*searchElement*/
@@ -108811,7 +108854,7 @@ ${lanes.join("\n")}
                 /* Construct */
               );
               if (signatures.length && mixinCount > 0) {
-                signatures = map38(signatures, (s2) => {
+                signatures = map39(signatures, (s2) => {
                   const clone22 = cloneSignature(s2);
                   clone22.resolvedReturnType = includeMixinType(getReturnTypeOfSignature(s2), types3, mixinFlags, i2);
                   return clone22;
@@ -109600,7 +109643,7 @@ ${lanes.join("\n")}
               return getBaseConstraint(getSubstitutionIntersection(t2));
             }
             if (isGenericTupleType(t2)) {
-              const newElements = map38(getElementTypes(t2), (v, i2) => {
+              const newElements = map39(getElementTypes(t2), (v, i2) => {
                 const constraint = v.flags & 262144 && t2.target.elementFlags[i2] & 8 && getBaseConstraint(v) || v;
                 return constraint !== v && everyType(constraint, (c) => isArrayOrTupleType(c) && !isGenericTupleType(c)) ? constraint : v;
               });
@@ -110036,7 +110079,7 @@ ${lanes.join("\n")}
               }
             }
           }
-          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map38(applicableInfos, (info) => info.type)), reduceLeft(
+          return applicableInfos ? createIndexInfo(unknownType2, getIntersectionType(map39(applicableInfos, (info) => info.type)), reduceLeft(
             applicableInfos,
             (isReadonly, info) => isReadonly && info.isReadonly,
             /*initial*/
@@ -110436,7 +110479,7 @@ ${lanes.join("\n")}
               return errorType;
             }
             let type2 = signature.target ? instantiateType(getReturnTypeOfSignature(signature.target), signature.mapper) : signature.compositeSignatures ? instantiateType(getUnionOrIntersectionType(
-              map38(signature.compositeSignatures, getReturnTypeOfSignature),
+              map39(signature.compositeSignatures, getReturnTypeOfSignature),
               signature.compositeKind,
               2
               /* Subtype */
@@ -110575,7 +110618,7 @@ ${lanes.join("\n")}
         function createCanonicalSignature(signature) {
           return getSignatureInstantiation(
             signature,
-            map38(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
+            map39(signature.typeParameters, (tp) => tp.target && !getConstraintOfTypeParameter(tp.target) ? tp.target : tp),
             isInJSFile(signature.declaration)
           );
         }
@@ -110586,8 +110629,8 @@ ${lanes.join("\n")}
               return signature.baseSignatureCache;
             }
             const typeEraser = createTypeEraser(typeParameters);
-            const baseConstraintMapper = createTypeMapper(typeParameters, map38(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
-            let baseConstraints = map38(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
+            const baseConstraintMapper = createTypeMapper(typeParameters, map39(typeParameters, (tp) => getConstraintOfTypeParameter(tp) || unknownType2));
+            let baseConstraints = map39(typeParameters, (tp) => instantiateType(tp, baseConstraintMapper) || unknownType2);
             for (let i2 = 0; i2 < typeParameters.length - 1; i2++) {
               baseConstraints = instantiateTypes(baseConstraints, baseConstraintMapper);
             }
@@ -110857,7 +110900,7 @@ ${lanes.join("\n")}
               return concatenate(type2.target.outerTypeParameters, (_a2 = type2.target.localTypeParameters) == null ? void 0 : _a2.map(() => errorType)) || emptyArray;
             }
             const node = type2.node;
-            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type2.target.outerTypeParameters, getEffectiveTypeArguments2(node, type2.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map38(node.elements, getTypeFromTypeNode);
+            const typeArguments = !node ? emptyArray : node.kind === 184 ? concatenate(type2.target.outerTypeParameters, getEffectiveTypeArguments2(node, type2.target.localTypeParameters)) : node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map39(node.elements, getTypeFromTypeNode);
             if (popTypeResolution()) {
               type2.resolvedTypeArguments ?? (type2.resolvedTypeArguments = type2.mapper ? instantiateTypes(typeArguments, type2.mapper) : typeArguments);
             } else {
@@ -111263,7 +111306,7 @@ ${lanes.join("\n")}
           return links.resolvedType;
         }
         function typeArgumentsFromTypeReferenceNode(node) {
-          return map38(node.typeArguments, getTypeFromTypeNode);
+          return map39(node.typeArguments, getTypeFromTypeNode);
         }
         function getTypeFromTypeQueryNode(node) {
           const links = getNodeLinks(node);
@@ -111736,8 +111779,8 @@ ${lanes.join("\n")}
           if (elementType) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const elementFlags = map38(node.elements, getTupleElementFlags);
-          return getTupleTargetType(elementFlags, readonly2, map38(node.elements, memberIfLabeledElementDeclaration));
+          const elementFlags = map39(node.elements, getTupleElementFlags);
+          return getTupleTargetType(elementFlags, readonly2, map39(node.elements, memberIfLabeledElementDeclaration));
         }
         function memberIfLabeledElementDeclaration(member) {
           return isNamedTupleMember(member) || isParameter(member) ? member : void 0;
@@ -111810,7 +111853,7 @@ ${lanes.join("\n")}
                 void 0
               );
             } else {
-              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map38(node.elements, getTypeFromTypeNode);
+              const elementTypes = node.kind === 189 ? [getTypeFromTypeNode(node.elementType)] : map39(node.elements, getTypeFromTypeNode);
               links.resolvedType = createNormalizedTypeReference(target, elementTypes);
             }
           }
@@ -111820,7 +111863,7 @@ ${lanes.join("\n")}
           return isTypeOperatorNode(node) && node.operator === 148;
         }
         function createTupleType(elementTypes, elementFlags, readonly2 = false, namedMemberDeclarations = []) {
-          const tupleTarget = getTupleTargetType(elementFlags || map38(
+          const tupleTarget = getTupleTargetType(elementFlags || map39(
             elementTypes,
             (_2) => 1
             /* Required */
@@ -111831,7 +111874,7 @@ ${lanes.join("\n")}
           if (elementFlags.length === 1 && elementFlags[0] & 4) {
             return readonly2 ? globalReadonlyArrayType : globalArrayType;
           }
-          const key = map38(elementFlags, (f3) => f3 & 1 ? "#" : f3 & 2 ? "?" : f3 & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map38(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
+          const key = map39(elementFlags, (f3) => f3 & 1 ? "#" : f3 & 2 ? "?" : f3 & 4 ? "." : "*").join() + (readonly2 ? "R" : "") + (some(namedMemberDeclarations, (node) => !!node) ? "," + map39(namedMemberDeclarations, (node) => node ? getNodeId(node) : "_").join(",") : "");
           let type2 = tupleTypes.get(key);
           if (!type2) {
             tupleTypes.set(key, type2 = createTupleTargetType(elementFlags, readonly2, namedMemberDeclarations));
@@ -111906,7 +111949,7 @@ ${lanes.join("\n")}
           if (target.combinedFlags & 8) {
             const unionIndex = findIndex(elementTypes, (t2, i2) => !!(target.elementFlags[i2] & 8 && t2.flags & (131072 | 1048576)));
             if (unionIndex >= 0) {
-              return checkCrossProductUnion(map38(elementTypes, (t2, i2) => target.elementFlags[i2] & 8 ? t2 : unknownType2)) ? mapType2(elementTypes[unionIndex], (t2) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t2))) : errorType;
+              return checkCrossProductUnion(map39(elementTypes, (t2, i2) => target.elementFlags[i2] & 8 ? t2 : unknownType2)) ? mapType2(elementTypes[unionIndex], (t2) => createNormalizedTupleType(target, replaceElement(elementTypes, unionIndex, t2))) : errorType;
             }
           }
           const expandedTypes = [];
@@ -112076,7 +112119,7 @@ ${lanes.join("\n")}
             const source = types3[i2];
             if (hasEmptyObject || source.flags & 469499904) {
               if (source.flags & 262144 && getBaseConstraintOrType(source).flags & 1048576) {
-                if (isTypeRelatedTo(source, getUnionType(map38(types3, (t2) => t2 === source ? neverType2 : t2)), strictSubtypeRelation)) {
+                if (isTypeRelatedTo(source, getUnionType(map39(types3, (t2) => t2 === source ? neverType2 : t2)), strictSubtypeRelation)) {
                   orderedRemoveItemAt(types3, i2);
                 }
                 continue;
@@ -112339,7 +112382,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            links.resolvedType = getUnionType(map38(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
+            links.resolvedType = getUnionType(map39(node.types, getTypeFromTypeNode), 1, aliasSymbol, getTypeArgumentsForAliasSymbol(aliasSymbol));
           }
           return links.resolvedType;
         }
@@ -112622,7 +112665,7 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             const aliasSymbol = getAliasSymbolForTypeNode(node);
-            const types3 = map38(node.types, getTypeFromTypeNode);
+            const types3 = map39(node.types, getTypeFromTypeNode);
             const emptyIndex = types3.length === 2 ? types3.indexOf(emptyTypeLiteralType) : -1;
             const t2 = emptyIndex >= 0 ? types3[1 - emptyIndex] : unknownType2;
             const noSupertypeReduction = !!(t2.flags & (4 | 8 | 64) || t2.flags & 134217728 && isPatternLiteralType(t2));
@@ -112731,8 +112774,8 @@ ${lanes.join("\n")}
         }
         function getLiteralTypeFromProperties(type2, include, includeOrigin) {
           const origin = includeOrigin && (getObjectFlags(type2) & (3 | 4) || type2.aliasSymbol) ? createOriginIndexType(type2) : void 0;
-          const propertyTypes = map38(getPropertiesOfType(type2), (prop) => getLiteralTypeFromProperty(prop, include));
-          const indexKeyTypes = map38(getIndexInfosOfType(type2), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
+          const propertyTypes = map39(getPropertiesOfType(type2), (prop) => getLiteralTypeFromProperty(prop, include));
+          const indexKeyTypes = map39(getIndexInfosOfType(type2), (info) => info !== enumNumberIndexInfo && isKeyTypeIncluded(info.keyType, include) ? info.keyType === stringType2 && include & 8 ? stringOrNumberType : info.keyType : neverType2);
           return getUnionType(
             concatenate(propertyTypes, indexKeyTypes),
             1,
@@ -112752,7 +112795,7 @@ ${lanes.join("\n")}
         }
         function getIndexType(type2, indexFlags = 0) {
           type2 = getReducedType(type2);
-          return isNoInferType(type2) ? getNoInferType(getIndexType(type2.baseType, indexFlags)) : shouldDeferIndexType(type2, indexFlags) ? getIndexTypeForGenericType(type2, indexFlags) : type2.flags & 1048576 ? getIntersectionType(map38(type2.types, (t2) => getIndexType(t2, indexFlags))) : type2.flags & 2097152 ? getUnionType(map38(type2.types, (t2) => getIndexType(t2, indexFlags))) : getObjectFlags(type2) & 32 ? getIndexTypeForMappedType(type2, indexFlags) : type2 === wildcardType ? wildcardType : type2.flags & 2 ? neverType2 : type2.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
+          return isNoInferType(type2) ? getNoInferType(getIndexType(type2.baseType, indexFlags)) : shouldDeferIndexType(type2, indexFlags) ? getIndexTypeForGenericType(type2, indexFlags) : type2.flags & 1048576 ? getIntersectionType(map39(type2.types, (t2) => getIndexType(t2, indexFlags))) : type2.flags & 2097152 ? getUnionType(map39(type2.types, (t2) => getIndexType(t2, indexFlags))) : getObjectFlags(type2) & 32 ? getIndexTypeForMappedType(type2, indexFlags) : type2 === wildcardType ? wildcardType : type2.flags & 2 ? neverType2 : type2.flags & (1 | 131072) ? stringNumberSymbolType : getLiteralTypeFromProperties(
             type2,
             (indexFlags & 2 ? 128 : 402653316) | (indexFlags & 1 ? 0 : 296 | 12288),
             indexFlags === 0
@@ -112790,8 +112833,8 @@ ${lanes.join("\n")}
           const links = getNodeLinks(node);
           if (!links.resolvedType) {
             links.resolvedType = getTemplateLiteralType(
-              [node.head.text, ...map38(node.templateSpans, (span) => span.literal.text)],
-              map38(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
+              [node.head.text, ...map39(node.templateSpans, (span) => span.literal.text)],
+              map39(node.templateSpans, (span) => getTypeFromTypeNode(span.type))
             );
           }
           return links.resolvedType;
@@ -112822,7 +112865,7 @@ ${lanes.join("\n")}
               return newTypes[0];
             }
           }
-          const id = `${getTypeListId(newTypes)}|${map38(newTexts, (t2) => t2.length).join(",")}|${newTexts.join("")}`;
+          const id = `${getTypeListId(newTypes)}|${map39(newTexts, (t2) => t2.length).join(",")}|${newTexts.join("")}`;
           let type2 = templateLiteralTypes.get(id);
           if (!type2) {
             templateLiteralTypes.set(id, type2 = createTemplateLiteralType(newTexts, newTypes));
@@ -113052,7 +113095,7 @@ ${lanes.join("\n")}
                   diagnostics.add(createDiagnosticForNode(accessExpression, Diagnostics.Property_0_does_not_exist_on_type_1, indexType.value, typeToString(objectType2)));
                   return undefinedType2;
                 } else if (indexType.flags & (8 | 4)) {
-                  const types3 = map38(objectType2.properties, (property) => {
+                  const types3 = map39(objectType2.properties, (property) => {
                     return getTypeOfSymbol(property);
                   });
                   return getUnionType(append(types3, undefinedType2));
@@ -113213,13 +113256,13 @@ ${lanes.join("\n")}
         }
         function distributeIndexOverObjectType(objectType2, indexType, writing) {
           if (objectType2.flags & 1048576 || objectType2.flags & 2097152 && !shouldDeferIndexType(objectType2)) {
-            const types3 = map38(objectType2.types, (t2) => getSimplifiedType(getIndexedAccessType(t2, indexType), writing));
+            const types3 = map39(objectType2.types, (t2) => getSimplifiedType(getIndexedAccessType(t2, indexType), writing));
             return objectType2.flags & 2097152 || writing ? getIntersectionType(types3) : getUnionType(types3);
           }
         }
         function distributeObjectOverIndexType(objectType2, indexType, writing) {
           if (indexType.flags & 1048576) {
-            const types3 = map38(indexType.types, (t2) => getSimplifiedType(getIndexedAccessType(objectType2, t2), writing));
+            const types3 = map39(indexType.types, (t2) => getSimplifiedType(getIndexedAccessType(objectType2, t2), writing));
             return writing ? getIntersectionType(types3) : getUnionType(types3);
           }
         }
@@ -113502,7 +113545,7 @@ ${lanes.join("\n")}
               const newRoot = newType.root;
               if (newRoot.outerTypeParameters) {
                 const typeParamMapper = combineTypeMappers(newType.mapper, newMapper);
-                const typeArguments = map38(newRoot.outerTypeParameters, (t2) => getMappedType(t2, typeParamMapper));
+                const typeArguments = map39(newRoot.outerTypeParameters, (t2) => getMappedType(t2, typeParamMapper));
                 const newRootMapper = createTypeMapper(newRoot.outerTypeParameters, typeArguments);
                 const newCheckType = newRoot.isDistributive ? getMappedType(newRoot.checkType, newRootMapper) : void 0;
                 if (!newCheckType || newCheckType === newRoot.checkType || !(newCheckType.flags & (1048576 | 131072))) {
@@ -114163,7 +114206,7 @@ ${lanes.join("\n")}
         }
         function createBackreferenceMapper(context, index) {
           const forwardInferences = context.inferences.slice(index);
-          return createTypeMapper(map38(forwardInferences, (i2) => i2.typeParameter), map38(forwardInferences, () => unknownType2));
+          return createTypeMapper(map39(forwardInferences, (i2) => i2.typeParameter), map39(forwardInferences, () => unknownType2));
         }
         function createOuterReturnMapper(context) {
           return context.outerReturnMapper ?? (context.outerReturnMapper = mergeTypeMappers(context.returnMapper, cloneInferenceContext(context).mapper));
@@ -114194,7 +114237,7 @@ ${lanes.join("\n")}
         function instantiateSignature(signature, mapper, eraseTypeParameters) {
           let freshTypeParameters;
           if (signature.typeParameters && !eraseTypeParameters) {
-            freshTypeParameters = map38(signature.typeParameters, cloneTypeParameter);
+            freshTypeParameters = map39(signature.typeParameters, cloneTypeParameter);
             mapper = combineTypeMappers(createTypeMapper(signature.typeParameters, freshTypeParameters), mapper);
             for (const tp of freshTypeParameters) {
               tp.mapper = mapper;
@@ -114266,7 +114309,7 @@ ${lanes.join("\n")}
           }
           if (typeParameters.length) {
             const combinedMapper = combineTypeMappers(type2.mapper, mapper);
-            const typeArguments = map38(typeParameters, (t2) => getMappedType(t2, combinedMapper));
+            const typeArguments = map39(typeParameters, (t2) => getMappedType(t2, combinedMapper));
             const newAliasSymbol = aliasSymbol || type2.aliasSymbol;
             const newAliasTypeArguments = aliasSymbol ? aliasTypeArguments : instantiateTypes(type2.aliasTypeArguments, mapper);
             const id = getTypeListId(typeArguments) + getAliasId(newAliasSymbol, newAliasTypeArguments);
@@ -114378,7 +114421,7 @@ ${lanes.join("\n")}
                   return instantiateMappedTupleType(t2, type2, typeVariable, mapper);
                 }
                 if (isArrayOrTupleOrIntersection(t2)) {
-                  return getIntersectionType(map38(t2.types, instantiateConstituent));
+                  return getIntersectionType(map39(t2.types, instantiateConstituent));
                 }
               }
               return instantiateAnonymousType(type2, prependTypeMapping(typeVariable, t2, mapper));
@@ -114393,12 +114436,12 @@ ${lanes.join("\n")}
           const elementFlags = tupleType2.target.elementFlags;
           const fixedLength = tupleType2.target.fixedLength;
           const fixedMapper = fixedLength ? prependTypeMapping(typeVariable, tupleType2, mapper) : mapper;
-          const newElementTypes = map38(getElementTypes(tupleType2), (type2, i2) => {
+          const newElementTypes = map39(getElementTypes(tupleType2), (type2, i2) => {
             const flags = elementFlags[i2];
             return i2 < fixedLength ? instantiateMappedTypeTemplate(mappedType, getStringLiteralType("" + i2), !!(flags & 2), fixedMapper) : flags & 8 ? instantiateType(mappedType, prependTypeMapping(typeVariable, type2, mapper)) : getElementTypeOfArrayType(instantiateType(mappedType, prependTypeMapping(typeVariable, createArrayType(type2), mapper))) ?? unknownType2;
           });
           const modifiers = getMappedTypeModifiers(mappedType);
-          const newElementFlags = modifiers & 4 ? map38(elementFlags, (f3) => f3 & 1 ? 2 : f3) : modifiers & 8 ? map38(elementFlags, (f3) => f3 & 2 ? 1 : f3) : elementFlags;
+          const newElementFlags = modifiers & 4 ? map39(elementFlags, (f3) => f3 & 1 ? 2 : f3) : modifiers & 8 ? map39(elementFlags, (f3) => f3 & 2 ? 1 : f3) : elementFlags;
           const newReadonly = getModifiedReadonlyState(tupleType2.target.readonly, getMappedTypeModifiers(mappedType));
           return contains(newElementTypes, errorType) ? errorType : createTupleType(newElementTypes, newElementFlags, newReadonly, tupleType2.target.labeledElementDeclarations);
         }
@@ -114454,7 +114497,7 @@ ${lanes.join("\n")}
         function getConditionalTypeInstantiation(type2, mapper, forConstraint, aliasSymbol, aliasTypeArguments) {
           const root = type2.root;
           if (root.outerTypeParameters) {
-            const typeArguments = map38(root.outerTypeParameters, (t2) => getMappedType(t2, mapper));
+            const typeArguments = map39(root.outerTypeParameters, (t2) => getMappedType(t2, mapper));
             const id = (forConstraint ? "C" : "") + getTypeListId(typeArguments) + getAliasId(aliasSymbol, aliasTypeArguments);
             let result = root.instantiations.get(id);
             if (!result) {
@@ -114686,7 +114729,7 @@ ${lanes.join("\n")}
               return result;
             }
           } else if (type2.flags & 2097152) {
-            return getIntersectionType(map38(type2.types, getTypeWithoutSignatures));
+            return getIntersectionType(map39(type2.types, getTypeWithoutSignatures));
           }
           return type2;
         }
@@ -114842,7 +114885,7 @@ ${lanes.join("\n")}
           }
           const returnExpression = node.body;
           const sourceReturn = getReturnTypeOfSignature(sourceSig);
-          const targetReturn = getUnionType(map38(targetSignatures, getReturnTypeOfSignature));
+          const targetReturn = getUnionType(map39(targetSignatures, getReturnTypeOfSignature));
           if (!checkTypeRelatedTo(
             sourceReturn,
             targetReturn,
@@ -117681,9 +117724,9 @@ ${lanes.join("\n")}
               false
             )) {
               if (props.length > 5) {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map38(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2_and_3_more, typeToString(source2), typeToString(target2), map39(props.slice(0, 4), (p) => symbolToString(p)).join(", "), props.length - 4);
               } else {
-                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map38(props, (p) => symbolToString(p)).join(", "));
+                reportError(Diagnostics.Type_0_is_missing_the_following_properties_from_type_1_Colon_2, typeToString(source2), typeToString(target2), map39(props, (p) => symbolToString(p)).join(", "));
               }
               if (shouldSkipElaboration && errorInfo) {
                 overrideNextErrorInfo++;
@@ -119260,7 +119303,7 @@ ${lanes.join("\n")}
           return createInferenceContextWorker(typeParameters.map(createInferenceInfo), signature, flags, compareTypes || compareTypesAssignable);
         }
         function cloneInferenceContext(context, extraFlags = 0) {
-          return context && createInferenceContextWorker(map38(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
+          return context && createInferenceContextWorker(map39(context.inferences, cloneInferenceInfo), context.signature, context.flags | extraFlags, context.compareTypes);
         }
         function createInferenceContextWorker(inferences, signature, flags, compareTypes) {
           const context = {
@@ -119278,8 +119321,8 @@ ${lanes.join("\n")}
         }
         function makeFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map38(context.inferences, (i2) => i2.typeParameter),
-            map38(context.inferences, (inference, i2) => () => {
+            map39(context.inferences, (i2) => i2.typeParameter),
+            map39(context.inferences, (inference, i2) => () => {
               if (!inference.isFixed) {
                 inferFromIntraExpressionSites(context);
                 clearCachedInferences(context.inferences);
@@ -119291,8 +119334,8 @@ ${lanes.join("\n")}
         }
         function makeNonFixingMapperForContext(context) {
           return makeDeferredTypeMapper(
-            map38(context.inferences, (i2) => i2.typeParameter),
-            map38(context.inferences, (_2, i2) => () => {
+            map39(context.inferences, (i2) => i2.typeParameter),
+            map39(context.inferences, (_2, i2) => () => {
               return getInferredType(context, i2);
             })
           );
@@ -119352,7 +119395,7 @@ ${lanes.join("\n")}
         }
         function cloneInferredPartOfContext(context) {
           const inferences = filter6(context.inferences, hasInferenceCandidates);
-          return inferences.length ? createInferenceContextWorker(map38(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
+          return inferences.length ? createInferenceContextWorker(map39(inferences, cloneInferenceInfo), context.signature, context.flags, context.compareTypes) : void 0;
         }
         function getMapperFromContext(context) {
           return context && context.mapper;
@@ -119440,7 +119483,7 @@ ${lanes.join("\n")}
             return createArrayType(elementType, isReadonlyArrayType(source));
           }
           if (isTupleType(source)) {
-            const elementTypes = map38(getElementTypes(source), (t2) => inferReverseMappedType(t2, target, constraint));
+            const elementTypes = map39(getElementTypes(source), (t2) => inferReverseMappedType(t2, target, constraint));
             if (!every(elementTypes, (t2) => !!t2)) {
               return void 0;
             }
@@ -119610,7 +119653,7 @@ ${lanes.join("\n")}
           return false;
         }
         function inferTypesFromTemplateLiteralType(source, target) {
-          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map38(source.types, (s2, i2) => {
+          return source.flags & 128 ? inferFromLiteralPartsToTemplateLiteral([source.value], emptyArray, target) : source.flags & 134217728 ? arrayIsEqualTo(source.texts, target.texts) ? map39(source.types, (s2, i2) => {
             return isTypeAssignableTo(getBaseConstraintOrType(s2), getBaseConstraintOrType(target.types[i2])) ? s2 : getStringLikeTypeForType(s2);
           }) : inferFromLiteralPartsToTemplateLiteral(source.texts, source.types, target) : void 0;
         }
@@ -120074,8 +120117,8 @@ ${lanes.join("\n")}
               if (extendedConstraint && inferToMappedType(source, target, extendedConstraint)) {
                 return true;
               }
-              const propTypes = map38(getPropertiesOfType(source), getTypeOfSymbol);
-              const indexTypes = map38(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
+              const propTypes = map39(getPropertiesOfType(source), getTypeOfSymbol);
+              const indexTypes = map39(getIndexInfosOfType(source), (info) => info !== enumNumberIndexInfo ? info.type : neverType2);
               inferFromTypes(getUnionType(concatenate(propTypes, indexTypes)), getTemplateTypeFromMappedType(target));
               return true;
             }
@@ -121162,7 +121205,7 @@ ${lanes.join("\n")}
           ) : type2;
         }
         function mapTypeWithAlias(type2, mapper, aliasSymbol, aliasTypeArguments) {
-          return type2.flags & 1048576 && aliasSymbol ? getUnionType(map38(type2.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type2, mapper);
+          return type2.flags & 1048576 && aliasSymbol ? getUnionType(map39(type2.types, mapper), 1, aliasSymbol, aliasTypeArguments) : mapType2(type2, mapper);
         }
         function extractTypesOfKind(type2, kind) {
           return filterType(type2, (t2) => (t2.flags & kind) !== 0);
@@ -121930,7 +121973,7 @@ ${lanes.join("\n")}
           }
           function getUnionOrEvolvingArrayType(types3, subtypeReduction) {
             if (isEvolvingArrayTypeList(types3)) {
-              return getEvolvingArrayType(getUnionType(map38(types3, getElementTypeOfEvolvingArrayType)));
+              return getEvolvingArrayType(getUnionType(map39(types3, getElementTypeOfEvolvingArrayType)));
             }
             const result = recombineUnknownType(getUnionType(sameMap(types3, finalizeEvolvingArrayType), subtypeReduction));
             if (result !== declaredType && result.flags & declaredType.flags & 1048576 && arrayIsEqualTo(result.types, declaredType.types)) {
@@ -122024,7 +122067,7 @@ ${lanes.join("\n")}
           function narrowTypeBySwitchOnDiscriminantProperty(type2, access, data) {
             if (data.clauseStart < data.clauseEnd && type2.flags & 1048576 && getKeyPropertyName(type2) === getAccessedPropertyName(access)) {
               const clauseTypes = getSwitchClauseTypes(data.switchStatement).slice(data.clauseStart, data.clauseEnd);
-              const candidate = getUnionType(map38(clauseTypes, (t2) => getConstituentTypeForKeyType(type2, t2) || unknownType2));
+              const candidate = getUnionType(map39(clauseTypes, (t2) => getConstituentTypeForKeyType(type2, t2) || unknownType2));
               if (candidate !== unknownType2) {
                 return candidate;
               }
@@ -122452,7 +122495,7 @@ ${lanes.join("\n")}
               return filterType(type2, (t2) => getTypeFacts(t2, notEqualFacts) === notEqualFacts);
             }
             const clauseWitnesses = witnesses.slice(clauseStart, clauseEnd);
-            return getUnionType(map38(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type2, text) : neverType2));
+            return getUnionType(map39(clauseWitnesses, (text) => text ? narrowTypeByTypeName(type2, text) : neverType2));
           }
           function narrowTypeBySwitchOnTrue(type2, { switchStatement, clauseStart, clauseEnd }) {
             const defaultIndex = findIndex(
@@ -122487,7 +122530,7 @@ ${lanes.join("\n")}
               return type2;
             }
             const clauses = switchStatement.caseBlock.clauses.slice(clauseStart, clauseEnd);
-            return getUnionType(map38(clauses, (clause) => clause.kind === 297 ? narrowType(
+            return getUnionType(map39(clauses, (clause) => clause.kind === 297 ? narrowType(
               type2,
               clause.expression,
               /*assumeTrue*/
@@ -122579,7 +122622,7 @@ ${lanes.join("\n")}
               /* Construct */
             );
             if (constructSignatures.length) {
-              return getUnionType(map38(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
+              return getUnionType(map39(constructSignatures, (signature) => getReturnTypeOfSignature(getErasedSignature(signature))));
             }
             return emptyObjectType;
           }
@@ -124749,7 +124792,7 @@ ${lanes.join("\n")}
             getMatchingUnionConstituentForObjectLiteral(contextualType, node) ?? discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map38(
+                map39(
                   filter6(node.properties, (p) => {
                     if (!p.symbol) {
                       return false;
@@ -124764,7 +124807,7 @@ ${lanes.join("\n")}
                   }),
                   (prop) => [() => getContextFreeTypeOfExpression(prop.kind === 304 ? prop.initializer : prop.name), prop.symbol.escapedName]
                 ),
-                map38(
+                map39(
                   filter6(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     return !!(s2.flags & 16777216) && !!((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members) && !node.symbol.members.has(s2.escapedName) && isDiscriminantProperty(contextualType, s2.escapedName);
@@ -124786,11 +124829,11 @@ ${lanes.join("\n")}
             discriminateTypeByDiscriminableItems(
               contextualType,
               concatenate(
-                map38(
+                map39(
                   filter6(node.properties, (p) => !!p.symbol && p.kind === 292 && isDiscriminantProperty(contextualType, p.symbol.escapedName) && (!p.initializer || isPossiblyDiscriminantValue(p.initializer))),
                   (prop) => [!prop.initializer ? () => trueType : () => getContextFreeTypeOfExpression(prop.initializer), prop.symbol.escapedName]
                 ),
-                map38(
+                map39(
                   filter6(getPropertiesOfType(contextualType), (s2) => {
                     var _a2;
                     if (!(s2.flags & 16777216) || !((_a2 = node == null ? void 0 : node.symbol) == null ? void 0 : _a2.members)) {
@@ -124849,13 +124892,13 @@ ${lanes.join("\n")}
           }
           if (type2.flags & 1048576) {
             return getUnionType(
-              map38(type2.types, (t2) => instantiateInstantiableTypes(t2, mapper)),
+              map39(type2.types, (t2) => instantiateInstantiableTypes(t2, mapper)),
               0
               /* None */
             );
           }
           if (type2.flags & 2097152) {
-            return getIntersectionType(map38(type2.types, (t2) => instantiateInstantiableTypes(t2, mapper)));
+            return getIntersectionType(map39(type2.types, (t2) => instantiateInstantiableTypes(t2, mapper)));
           }
           return type2;
         }
@@ -126185,7 +126228,7 @@ ${lanes.join("\n")}
             );
           }
           if (signatures.length === 0 && apparentElemType.flags & 1048576) {
-            signatures = getUnionSignatures(map38(apparentElemType.types, (t2) => getUninstantiatedJsxSignaturesOfType(t2, caller)));
+            signatures = getUnionSignatures(map39(apparentElemType.types, (t2) => getUninstantiatedJsxSignaturesOfType(t2, caller)));
           }
           return signatures;
         }
@@ -127659,7 +127702,7 @@ ${lanes.join("\n")}
         function checkTypeArguments(signature, typeArgumentNodes, reportErrors2, headMessage) {
           const isJavascript = isInJSFile(signature.declaration);
           const typeParameters = signature.typeParameters;
-          const typeArgumentTypes = fillMissingTypeArguments(map38(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
+          const typeArgumentTypes = fillMissingTypeArguments(map39(typeArgumentNodes, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isJavascript);
           let mapper;
           for (let i2 = 0; i2 < typeArgumentNodes.length; i2++) {
             Debug.assert(typeParameters[i2] !== void 0, "Should not call checkTypeArguments with too many type arguments");
@@ -128340,7 +128383,7 @@ ${lanes.join("\n")}
                 const diags = max > 1 ? allDiagnostics[minIndex] : flatten(allDiagnostics);
                 Debug.assert(diags.length > 0, "No errors reported for 3 or fewer overload signatures");
                 let chain = chainDiagnosticMessages(
-                  map38(diags, createDiagnosticMessageChainFromDiagnostic),
+                  map39(diags, createDiagnosticMessageChainFromDiagnostic),
                   Diagnostics.No_overload_matches_this_call
                 );
                 if (headMessage) {
@@ -132908,7 +132951,7 @@ ${lanes.join("\n")}
                   if (returnSignature && !returnSignature.typeParameters && !every(context.inferences, hasInferenceCandidates)) {
                     const uniqueTypeParameters = getUniqueTypeParameters(context, signature.typeParameters);
                     const instantiatedSignature = getSignatureInstantiationWithoutFillingInTypeArguments(signature, uniqueTypeParameters);
-                    const inferences = map38(context.inferences, (info) => createInferenceInfo(info.typeParameter));
+                    const inferences = map39(context.inferences, (info) => createInferenceInfo(info.typeParameter));
                     applyToParameterTypes(instantiatedSignature, contextualSignature, (source, target) => {
                       inferTypes(
                         inferences,
@@ -133856,7 +133899,7 @@ ${lanes.join("\n")}
           return getEffectiveTypeArguments2(node, typeParameters)[index];
         }
         function getEffectiveTypeArguments2(node, typeParameters) {
-          return fillMissingTypeArguments(map38(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
+          return fillMissingTypeArguments(map39(node.typeArguments, getTypeFromTypeNode), typeParameters, getMinTypeArgumentCount(typeParameters), isInJSFile(node));
         }
         function checkTypeArgumentConstraints(node, typeParameters) {
           let typeArguments;
@@ -134502,7 +134545,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const onfulfilledParameterType = getTypeWithFacts(
-            getUnionType(map38(candidates, getTypeOfFirstParameterOfSignature)),
+            getUnionType(map39(candidates, getTypeOfFirstParameterOfSignature)),
             2097152
             /* NEUndefinedOrNull */
           );
@@ -134521,7 +134564,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           return typeAsPromise.promisedTypeOfPromise = getUnionType(
-            map38(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
+            map39(onfulfilledParameterSignatures, getTypeOfFirstParameterOfSignature),
             2
             /* Subtype */
           );
@@ -136520,7 +136563,7 @@ ${lanes.join("\n")}
             }
             return noCache ? noIterationTypes : setCachedIterationTypes(type2, resolver.iterableCacheKey, noIterationTypes);
           }
-          const iteratorType = getIntersectionType(map38(validSignatures, getReturnTypeOfSignature));
+          const iteratorType = getIntersectionType(map39(validSignatures, getReturnTypeOfSignature));
           const iterationTypes = getIterationTypesOfIteratorWorker(iteratorType, resolver, errorNode, errorOutputContainer, noCache) ?? noIterationTypes;
           return noCache ? iterationTypes : setCachedIterationTypes(type2, resolver.iterableCacheKey, iterationTypes);
         }
@@ -137739,7 +137782,7 @@ ${lanes.join("\n")}
                 error210(errorNode, Diagnostics.Non_abstract_class_0_does_not_implement_inherited_abstract_member_1_from_class_2, memberInfo.typeName, first2(memberInfo.missedProperties), memberInfo.baseTypeName);
               }
             } else if (length(memberInfo.missedProperties) > 5) {
-              const missedProperties = map38(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map39(memberInfo.missedProperties.slice(0, 4), (prop) => `'${prop}'`).join(", ");
               const remainingMissedProperties = length(memberInfo.missedProperties) - 4;
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1_and_2_more, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
@@ -137747,7 +137790,7 @@ ${lanes.join("\n")}
                 error210(errorNode, Diagnostics.Non_abstract_class_0_is_missing_implementations_for_the_following_members_of_1_Colon_2_and_3_more, memberInfo.typeName, memberInfo.baseTypeName, missedProperties, remainingMissedProperties);
               }
             } else {
-              const missedProperties = map38(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
+              const missedProperties = map39(memberInfo.missedProperties, (prop) => `'${prop}'`).join(", ");
               if (isClassExpression(errorNode)) {
                 error210(errorNode, Diagnostics.Non_abstract_class_expression_is_missing_implementations_for_the_following_members_of_0_Colon_1, memberInfo.baseTypeName, missedProperties);
               } else {
@@ -139862,7 +139905,7 @@ ${lanes.join("\n")}
             } else if (symbol2) {
               const symbolLinks2 = getSymbolLinks(symbol2);
               const declarationList = mapDefined(infos, (i2) => i2.declaration);
-              const nodeListId = map38(declarationList, getNodeId).join(",");
+              const nodeListId = map39(declarationList, getNodeId).join(",");
               if (!symbolLinks2.filteredIndexSymbolCache) {
                 symbolLinks2.filteredIndexSymbolCache = /* @__PURE__ */ new Map();
               }
@@ -141118,7 +141161,7 @@ ${lanes.join("\n")}
                       const newComponents = filter6(info.components, (e2) => {
                         return !hasLateBindableName(e2);
                       });
-                      result.push(...map38(newComponents, (e2) => {
+                      result.push(...map39(newComponents, (e2) => {
                         trackComputedName(e2.name.expression);
                         const mods = infoList === staticInfos ? [factory.createModifier(
                           126
@@ -143081,7 +143124,7 @@ ${lanes.join("\n")}
             if (sourceProperties) {
               const sourcePropertiesFiltered = findDiscriminantProperties(sourceProperties, target);
               if (sourcePropertiesFiltered) {
-                const discriminated = discriminateTypeByDiscriminableItems(target, map38(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
+                const discriminated = discriminateTypeByDiscriminableItems(target, map39(sourcePropertiesFiltered, (p) => [() => getTypeOfSymbol(p), p.escapedName]), isRelatedTo);
                 if (discriminated !== target) {
                   return discriminated;
                 }
@@ -145569,7 +145612,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map38(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map39(node.sourceFiles, transformSourceFile));
         }
       }
       function getExportNeedsImportStarHelper(node) {
@@ -146518,7 +146561,7 @@ ${lanes.join("\n")}
       }
       function makeArrayAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isArrayBindingOrAssignmentElement);
-        return factory2.createArrayLiteralExpression(map38(elements, factory2.converters.convertToArrayAssignmentElement));
+        return factory2.createArrayLiteralExpression(map39(elements, factory2.converters.convertToArrayAssignmentElement));
       }
       function makeObjectBindingPattern(factory2, elements) {
         Debug.assertEachNode(elements, isBindingElement);
@@ -146526,7 +146569,7 @@ ${lanes.join("\n")}
       }
       function makeObjectAssignmentPattern(factory2, elements) {
         Debug.assertEachNode(elements, isObjectBindingOrAssignmentElement);
-        return factory2.createObjectLiteralExpression(map38(elements, factory2.converters.convertToObjectAssignmentElement));
+        return factory2.createObjectLiteralExpression(map39(elements, factory2.converters.convertToObjectAssignmentElement));
       }
       function makeBindingElement(factory2, name2) {
         return factory2.createBindingElement(
@@ -147972,7 +148015,7 @@ ${lanes.join("\n")}
             return setTextRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map38(variables, transformInitializedVariable)
+                  map39(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -148178,7 +148221,7 @@ ${lanes.join("\n")}
           currentNamespaceContainerName = localName;
           const statements = [];
           startLexicalEnvironment();
-          const members = map38(node.members, transformEnumMember);
+          const members = map39(node.members, transformEnumMember);
           insertStatementsAfterStandardPrologue(statements, endLexicalEnvironment());
           addRange(statements, members);
           currentNamespaceContainerName = savedCurrentNamespaceLocalName;
@@ -150089,7 +150132,7 @@ ${lanes.join("\n")}
             if (isDecoratedClassDeclaration) {
               Debug.assertIsDefined(pendingStatements, "Decorated classes transformed by TypeScript are expected to be within a variable declaration.");
               if (some(pendingExpressions)) {
-                addRange(pendingStatements, map38(pendingExpressions, factory2.createExpressionStatement));
+                addRange(pendingStatements, map39(pendingExpressions, factory2.createExpressionStatement));
               }
               if (some(staticPropertiesOrClassStaticBlocks)) {
                 addPropertyOrClassStaticBlockStatements(pendingStatements, staticPropertiesOrClassStaticBlocks, ((_b = node.emitNode) == null ? void 0 : _b.classThis) ?? factory2.getInternalName(node));
@@ -151878,13 +151921,13 @@ ${lanes.join("\n")}
           }
           const { false: decorators, true: metadata } = groupBy(allDecorators.decorators, isSyntheticMetadataDecorator);
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map38(decorators, transformDecorator));
+          addRange(decoratorExpressions, map39(decorators, transformDecorator));
           addRange(decoratorExpressions, flatMap(allDecorators.parameters, transformDecoratorsOfParameter));
-          addRange(decoratorExpressions, map38(metadata, transformDecorator));
+          addRange(decoratorExpressions, map39(metadata, transformDecorator));
           return decoratorExpressions;
         }
         function addClassElementDecorationStatements(statements, node, isStatic2) {
-          addRange(statements, map38(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
+          addRange(statements, map39(generateClassElementDecorationExpressions(node, isStatic2), (expr) => factory2.createExpressionStatement(expr)));
         }
         function isDecoratedClassElement(member, isStaticElement, parent2) {
           return nodeOrChildIsDecorated(
@@ -153789,7 +153832,7 @@ ${lanes.join("\n")}
             return void 0;
           }
           const decoratorExpressions = [];
-          addRange(decoratorExpressions, map38(allDecorators.decorators, transformDecorator));
+          addRange(decoratorExpressions, map39(allDecorators.decorators, transformDecorator));
           return decoratorExpressions;
         }
         function transformDecorator(decorator) {
@@ -154462,7 +154505,7 @@ ${lanes.join("\n")}
             }
             return void 0;
           }
-          return factory2.inlineExpressions(map38(variables, transformInitializedVariable));
+          return factory2.inlineExpressions(map39(variables, transformInitializedVariable));
         }
         function hoistVariableDeclarationList(node) {
           forEach(node.declarations, hoistVariable);
@@ -157878,7 +157921,7 @@ ${lanes.join("\n")}
           return target && target >= 5 ? factory2.createObjectLiteralExpression(transformJsxAttributesToProps(attrs, children)) : transformJsxAttributesToExpression(attrs, children);
         }
         function transformJsxAttributesToProps(attrs, children) {
-          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map38(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
+          const props = flatten(spanMap(attrs, isJsxSpreadAttribute, (attrs2, isSpread) => flatten(map39(attrs2, (attr) => isSpread ? transformJsxSpreadAttributeToProps(attr) : transformJsxAttributeToObjectLiteralElement(attr)))));
           if (children) {
             props.push(children);
           }
@@ -161167,7 +161210,7 @@ ${lanes.join("\n")}
               /* NoHoisting */
             )
           );
-          const part = factory2.createVariableDeclarationList(map38(currentState.loopOutParameters, createOutVariable));
+          const part = factory2.createVariableDeclarationList(map39(currentState.loopOutParameters, createOutVariable));
           return { functionName, containsYield, functionDeclaration, part };
         }
         function createFunctionForBodyOfIterationStatement(node, currentState, outerState) {
@@ -161295,7 +161338,7 @@ ${lanes.join("\n")}
             loopFunctionExpressionName,
             /*typeArguments*/
             void 0,
-            map38(state2.loopParameters, (p) => p.name)
+            map39(state2.loopParameters, (p) => p.name)
           );
           const callResult = containsYield ? factory2.createYieldExpression(
             factory2.createToken(
@@ -161873,7 +161916,7 @@ ${lanes.join("\n")}
           return isSpreadElement(node) ? visitSpanOfSpreads : visitSpanOfNonSpreads;
         }
         function visitSpanOfSpreads(chunk) {
-          return map38(chunk, visitExpressionOfSpread);
+          return map39(chunk, visitExpressionOfSpread);
         }
         function visitExpressionOfSpread(node) {
           Debug.assertNode(node, isSpreadElement);
@@ -162445,7 +162488,7 @@ ${lanes.join("\n")}
             return setSourceMapRange(
               factory2.createExpressionStatement(
                 factory2.inlineExpressions(
-                  map38(variables, transformInitializedVariable)
+                  map39(variables, transformInitializedVariable)
                 )
               ),
               node
@@ -163003,7 +163046,7 @@ ${lanes.join("\n")}
             const variables = getInitializedVariables(initializer3);
             node = factory2.updateForStatement(
               node,
-              variables.length > 0 ? factory2.inlineExpressions(map38(variables, transformInitializedVariable)) : void 0,
+              variables.length > 0 ? factory2.inlineExpressions(map39(variables, transformInitializedVariable)) : void 0,
               visitNode3(node.condition, visitor, isExpression),
               visitNode3(node.incrementor, visitor, isExpression),
               visitIterationBody(node.statement, visitor, context)
@@ -165153,7 +165196,7 @@ ${lanes.join("\n")}
           }
         }
         function createImportCallExpressionAMD(arg, containsLexicalThis) {
-          const resolve4 = factory2.createUniqueName("resolve");
+          const resolve5 = factory2.createUniqueName("resolve");
           const reject = factory2.createUniqueName("reject");
           const parameters = [
             factory2.createParameterDeclaration(
@@ -165162,7 +165205,7 @@ ${lanes.join("\n")}
               /*dotDotDotToken*/
               void 0,
               /*name*/
-              resolve4
+              resolve5
             ),
             factory2.createParameterDeclaration(
               /*modifiers*/
@@ -165179,7 +165222,7 @@ ${lanes.join("\n")}
                 factory2.createIdentifier("require"),
                 /*typeArguments*/
                 void 0,
-                [factory2.createArrayLiteralExpression([arg || factory2.createOmittedExpression()]), resolve4, reject]
+                [factory2.createArrayLiteralExpression([arg || factory2.createOmittedExpression()]), resolve5, reject]
               )
             )
           ]);
@@ -166329,7 +166372,7 @@ ${lanes.join("\n")}
             moduleBodyBlock
           );
           const moduleName = tryGetModuleNameFromFile(factory2, node, host, compilerOptions);
-          const dependencies = factory2.createArrayLiteralExpression(map38(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
+          const dependencies = factory2.createArrayLiteralExpression(map39(dependencyGroups, (dependencyGroup) => dependencyGroup.name));
           const updated = setEmitFlags(
             factory2.updateSourceFile(
               node,
@@ -168059,7 +168102,7 @@ ${lanes.join("\n")}
           return node.kind === 308 ? transformSourceFile(node) : transformBundle(node);
         }
         function transformBundle(node) {
-          return context.factory.createBundle(map38(node.sourceFiles, transformSourceFile));
+          return context.factory.createBundle(map39(node.sourceFiles, transformSourceFile));
         }
       }
       function canProduceDiagnostics(node) {
@@ -168807,7 +168850,7 @@ ${lanes.join("\n")}
             rawLibReferenceDirectives = [];
             let hasNoDefaultLib = false;
             const bundle = factory2.createBundle(
-              map38(node.sourceFiles, (sourceFile) => {
+              map39(node.sourceFiles, (sourceFile) => {
                 if (sourceFile.isDeclarationFile) return void 0;
                 hasNoDefaultLib = hasNoDefaultLib || sourceFile.hasNoDefaultLib;
                 currentSourceFile = sourceFile;
@@ -168918,7 +168961,7 @@ ${lanes.join("\n")}
             getLibReferences()
           );
           function collectFileReferences(sourceFile) {
-            rawReferencedFiles = concatenate(rawReferencedFiles, map38(sourceFile.referencedFiles, (f3) => [sourceFile, f3]));
+            rawReferencedFiles = concatenate(rawReferencedFiles, map39(sourceFile.referencedFiles, (f3) => [sourceFile, f3]));
             rawTypeReferenceDirectives = concatenate(rawTypeReferenceDirectives, sourceFile.typeReferenceDirectives);
             rawLibReferenceDirectives = concatenate(rawLibReferenceDirectives, sourceFile.libReferenceDirectives);
           }
@@ -169132,7 +169175,7 @@ ${lanes.join("\n")}
           )) {
             return factory2.createNodeArray();
           }
-          const newParams = map38(params, (p) => ensureParameter(p, modifierMask));
+          const newParams = map39(params, (p) => ensureParameter(p, modifierMask));
           if (!newParams) {
             return factory2.createNodeArray();
           }
@@ -169884,7 +169927,7 @@ ${lanes.join("\n")}
                     void 0,
                     /*isTypeOnly*/
                     false,
-                    factory2.createNamedExports(map38(exportMappings, ([gen, exp]) => {
+                    factory2.createNamedExports(map39(exportMappings, ([gen, exp]) => {
                       return factory2.createExportSpecifier(
                         /*isTypeOnly*/
                         false,
@@ -170092,11 +170135,11 @@ ${lanes.join("\n")}
                   2
                   /* Const */
                 ));
-                const heritageClauses = factory2.createNodeArray(map38(input.heritageClauses, (clause) => {
+                const heritageClauses = factory2.createNodeArray(map39(input.heritageClauses, (clause) => {
                   if (clause.token === 96) {
                     const oldDiag2 = getSymbolAccessibilityDiagnostic;
                     getSymbolAccessibilityDiagnostic = createGetSymbolAccessibilityDiagnosticForNode(clause.types[0]);
-                    const newClause = factory2.updateHeritageClause(clause, map38(clause.types, (t2) => factory2.updateExpressionWithTypeArguments(t2, newId, visitNodes2(t2.typeArguments, visitDeclarationSubtree, isTypeNode))));
+                    const newClause = factory2.updateHeritageClause(clause, map39(clause.types, (t2) => factory2.updateExpressionWithTypeArguments(t2, newId, visitNodes2(t2.typeArguments, visitDeclarationSubtree, isTypeNode))));
                     getSymbolAccessibilityDiagnostic = oldDiag2;
                     return newClause;
                   }
@@ -170258,7 +170301,7 @@ ${lanes.join("\n")}
         }
         function transformHeritageClauses(nodes) {
           return factory2.createNodeArray(filter6(
-            map38(nodes, (clause) => factory2.updateHeritageClause(
+            map39(nodes, (clause) => factory2.updateHeritageClause(
               clause,
               visitNodes2(
                 factory2.createNodeArray(filter6(clause.types, (t2) => {
@@ -170380,7 +170423,7 @@ ${lanes.join("\n")}
         const moduleKind = getEmitModuleKind(compilerOptions);
         const useDefineForClassFields = getUseDefineForClassFields(compilerOptions);
         const transformers = [];
-        addRange(transformers, customTransformers && map38(customTransformers.before, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map39(customTransformers.before, wrapScriptTransformerFactory));
         transformers.push(transformTypeScript);
         if (compilerOptions.experimentalDecorators) {
           transformers.push(transformLegacyDecorators);
@@ -170418,13 +170461,13 @@ ${lanes.join("\n")}
           transformers.push(transformGenerators);
         }
         transformers.push(getModuleTransformer(moduleKind));
-        addRange(transformers, customTransformers && map38(customTransformers.after, wrapScriptTransformerFactory));
+        addRange(transformers, customTransformers && map39(customTransformers.after, wrapScriptTransformerFactory));
         return transformers;
       }
       function getDeclarationTransformers(customTransformers) {
         const transformers = [];
         transformers.push(transformDeclarations);
-        addRange(transformers, customTransformers && map38(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
+        addRange(transformers, customTransformers && map39(customTransformers.afterDeclarations, wrapDeclarationTransformerFactory));
         return transformers;
       }
       function wrapCustomTransformer(transformer) {
@@ -176200,7 +176243,7 @@ ${lanes.join("\n")}
           var _a2;
           if (!host.realpath || ensureTrailingDirectorySeparator(toPath3(host.realpath(rootDir))) === rootDirPath) {
             const resultFromHost = {
-              files: map38(host.readDirectory(
+              files: map39(host.readDirectory(
                 rootDir,
                 /*extensions*/
                 void 0,
@@ -176299,7 +176342,7 @@ ${lanes.join("\n")}
           function getFileSystemEntriesFromHost(dir, path2) {
             if (rootSymLinkResult && path2 === rootDirPath) return rootSymLinkResult;
             const result = {
-              files: map38(host.readDirectory(
+              files: map39(host.readDirectory(
                 dir,
                 /*extensions*/
                 void 0,
@@ -182613,7 +182656,7 @@ ${lanes.join("\n")}
         let filePathsSetList;
         const latestChangedDtsFile = buildInfo.latestChangedDtsFile ? toAbsolutePath(buildInfo.latestChangedDtsFile) : void 0;
         const fileInfos = /* @__PURE__ */ new Map();
-        const changedFilesSet = new Set(map38(buildInfo.changeFileSet, toFilePath));
+        const changedFilesSet = new Set(map39(buildInfo.changeFileSet, toFilePath));
         if (isIncrementalBundleEmitBuildInfo(buildInfo)) {
           buildInfo.fileInfos.forEach((fileInfo, index) => {
             const path2 = toFilePath(index + 1);
@@ -184096,7 +184139,7 @@ ${lanes.join("\n")}
       function createTabularErrorsDisplay(filesInError, host) {
         const distinctFiles = filesInError.filter((value, index, self2) => index === self2.findIndex((file2) => (file2 == null ? void 0 : file2.fileName) === (value == null ? void 0 : value.fileName)));
         if (distinctFiles.length === 0) return "";
-        const numberLength = (num3) => Math.log(num3) * Math.LOG10E + 1;
+        const numberLength = (num4) => Math.log(num4) * Math.LOG10E + 1;
         const fileToErrorCount = distinctFiles.map((file2) => [file2, countWhere(filesInError, (fileInError) => fileInError.fileName === file2.fileName)]);
         const maxErrors = maxBy(fileToErrorCount, 0, (value) => value[1]);
         const headerRow = Diagnostics.Errors_Files.message;
@@ -188538,7 +188581,7 @@ ${lanes.join("\n")}
               return factory.createArrayTypeNode(visitNode3(node.type, visitExistingNodeTreeSymbols, isTypeNode));
             }
             if (isJSDocTypeLiteral(node)) {
-              return factory.createTypeLiteralNode(map38(node.jsDocPropertyTags, (t2) => {
+              return factory.createTypeLiteralNode(map39(node.jsDocPropertyTags, (t2) => {
                 const name2 = visitNode3(isIdentifier(t2.name) ? t2.name : t2.name.right, visitExistingNodeTreeSymbols, isIdentifier);
                 const overrideTypeNode = resolver.getJsDocPropertyOverride(context, node, t2);
                 return factory.createPropertySignature(
@@ -188604,7 +188647,7 @@ ${lanes.join("\n")}
               } else {
                 return factory.createFunctionTypeNode(
                   visitNodes2(node.typeParameters, visitExistingNodeTreeSymbols, isTypeParameterDeclaration),
-                  map38(node.parameters, (p, i2) => factory.createParameterDeclaration(
+                  map39(node.parameters, (p, i2) => factory.createParameterDeclaration(
                     /*modifiers*/
                     void 0,
                     getEffectiveDotDotDotForParameter(p),
@@ -192887,7 +192930,7 @@ ${lanes.join("\n")}
         return expression;
       }
       function mapOneOrMany(valueOrArray, f3, resultSelector = identity) {
-        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map38(valueOrArray, f3)) : f3(valueOrArray, 0) : void 0;
+        return valueOrArray ? isArray(valueOrArray) ? resultSelector(map39(valueOrArray, f3)) : f3(valueOrArray, 0) : void 0;
       }
       function firstOrOnly(valueOrArray) {
         return isArray(valueOrArray) ? first2(valueOrArray) : valueOrArray;
@@ -196821,7 +196864,7 @@ interface Symbol {
         curCancellationToken = cancellationToken;
         curSourceFile = sourceFile;
         try {
-          return map38(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
+          return map39(primaryNavBarMenuItems(rootNavigationBarNode(sourceFile)), convertToPrimaryNavBarMenuItem);
         } finally {
           reset();
         }
@@ -197474,7 +197517,7 @@ interface Symbol {
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
           nameSpan: n.name && getNodeSpan(n.name),
-          childItems: map38(n.children, convertToTree)
+          childItems: map39(n.children, convertToTree)
         };
       }
       function convertToPrimaryNavBarMenuItem(n) {
@@ -197483,7 +197526,7 @@ interface Symbol {
           kind: getNodeKind(n.node),
           kindModifiers: getModifiers2(n.node),
           spans: getSpans(n),
-          childItems: map38(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
+          childItems: map39(n.children, convertToSecondaryNavBarMenuItem) || emptyChildItemArray,
           indent: n.indent,
           bolded: false,
           grayed: false
@@ -199711,12 +199754,12 @@ interface Symbol {
               "args",
               /*questionToken*/
               void 0,
-              factory.createUnionTypeNode(map38(signatureDeclarations, convertSignatureParametersToTuple))
+              factory.createUnionTypeNode(map39(signatureDeclarations, convertSignatureParametersToTuple))
             )
           ]);
         }
         function convertSignatureParametersToTuple(decl) {
-          const members = map38(decl.parameters, convertParameterToNamedTupleMember);
+          const members = map39(decl.parameters, convertParameterToNamedTupleMember);
           return setEmitFlags(
             factory.createTupleTypeNode(members),
             some(members, (m2) => !!length(getSyntheticLeadingComments(m2))) ? 0 : 1
@@ -200196,9 +200239,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function doChange5(sourceFile, program2, host, changes, functionDeclaration, groupedReferences) {
         const signature = groupedReferences.signature;
-        const newFunctionDeclarationParams = map38(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
+        const newFunctionDeclarationParams = map39(createNewParameters(functionDeclaration, program2, host), (param) => getSynthesizedDeepClone(param));
         if (signature) {
-          const newSignatureParams = map38(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
+          const newSignatureParams = map39(createNewParameters(signature, program2, host), (param) => getSynthesizedDeepClone(param));
           replaceParameters(signature, newSignatureParams);
         }
         replaceParameters(functionDeclaration, newFunctionDeclarationParams);
@@ -200261,10 +200304,10 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         function groupReferences(referenceEntries) {
           const classReferences = { accessExpressions: [], typeUsages: [] };
           const groupedReferences2 = { functionCalls: [], declarations: [], classReferences, valid: true };
-          const functionSymbols = map38(functionNames, getSymbolTargetAtLocation);
-          const classSymbols = map38(classNames, getSymbolTargetAtLocation);
+          const functionSymbols = map39(functionNames, getSymbolTargetAtLocation);
+          const classSymbols = map39(classNames, getSymbolTargetAtLocation);
           const isConstructor = isConstructorDeclaration(functionDeclaration);
-          const contextualSymbols = map38(functionNames, (name2) => getSymbolForContextualType(name2, checker));
+          const contextualSymbols = map39(functionNames, (name2) => getSymbolForContextualType(name2, checker));
           for (const entry of referenceEntries) {
             if (entry.kind === ts_FindAllReferences_exports.EntryKind.Span) {
               groupedReferences2.valid = false;
@@ -200528,7 +200571,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const parameters = getRefactorableParameters(functionDeclaration.parameters);
         const hasRestParameter2 = isRestParameter(last2(parameters));
         const nonRestArguments = hasRestParameter2 ? functionArguments.slice(0, parameters.length - 1) : functionArguments;
-        const properties2 = map38(nonRestArguments, (arg, i2) => {
+        const properties2 = map39(nonRestArguments, (arg, i2) => {
           const parameterName = getParameterName(parameters[i2]);
           const property = createPropertyOrShorthandAssignment(parameterName, arg);
           suppressLeadingAndTrailingTrivia(property.name);
@@ -200551,7 +200594,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function createNewParameters(functionDeclaration, program2, host) {
         const checker = program2.getTypeChecker();
         const refactorableParameters = getRefactorableParameters(functionDeclaration.parameters);
-        const bindingElements = map38(refactorableParameters, createBindingElementFromParameterDeclaration);
+        const bindingElements = map39(refactorableParameters, createBindingElementFromParameterDeclaration);
         const objectParameterName = factory.createObjectBindingPattern(bindingElements);
         const objectParameterType = createParameterTypeNode(refactorableParameters);
         let objectInitializer;
@@ -200606,7 +200649,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return element;
         }
         function createParameterTypeNode(parameters) {
-          const members = map38(parameters, createPropertySignatureFromParameterDeclaration);
+          const members = map39(parameters, createPropertySignatureFromParameterDeclaration);
           const typeNode = addEmitFlags(
             factory.createTypeLiteralNode(members),
             1
@@ -200881,7 +200924,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           i2 = newIndex - 1;
           const isLast = i2 === nodes.length - 1;
           if (isTemplateExpression(currentNode)) {
-            const spans = map38(currentNode.templateSpans, (span, index) => {
+            const spans = map39(currentNode.templateSpans, (span, index) => {
               copyExpressionComments(span);
               const isLastSpan = index === currentNode.templateSpans.length - 1;
               const text = span.literal.text + (isLastSpan ? subsequentText : "");
@@ -202508,8 +202551,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getPropertyAssignmentsForWritesAndVariableDeclarations(exposedVariableDeclarations, writes) {
-        const variableAssignments = map38(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
-        const writeAssignments = map38(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
+        const variableAssignments = map39(exposedVariableDeclarations, (v) => factory.createShorthandPropertyAssignment(v.symbol.name));
+        const writeAssignments = map39(writes, (w) => factory.createShorthandPropertyAssignment(w.symbol.name));
         return variableAssignments === void 0 ? writeAssignments : writeAssignments === void 0 ? variableAssignments : variableAssignments.concat(writeAssignments);
       }
       function isReadonlyArray(v) {
@@ -204034,7 +204077,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function displayPartsToString(displayParts) {
         if (displayParts) {
-          return map38(displayParts, (displayPart2) => displayPart2.text).join("");
+          return map39(displayParts, (displayPart2) => displayPart2.text).join("");
         }
         return "";
       }
@@ -205284,8 +205327,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             }
           } else {
             for (const pos2 of positions) {
-              const from17 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
-              const offset = text.substr(from17, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
+              const from18 = pos2 - closeMultiline.length > 0 ? pos2 - closeMultiline.length : 0;
+              const offset = text.substr(from18, closeMultiline.length) === closeMultiline ? closeMultiline.length : 0;
               textChanges2.push({
                 newText: "",
                 span: {
@@ -205397,7 +205440,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             const multiLineCommentStart = /(?:\/\*+\s*)/.source;
             const anyNumberOfSpacesAndAsterisksAtStartOfLine = /(?:^(?:\s|\*)*)/.source;
             const preamble = "(" + anyNumberOfSpacesAndAsterisksAtStartOfLine + "|" + singleLineCommentStart + "|" + multiLineCommentStart + ")";
-            const literals = "(?:" + map38(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
+            const literals = "(?:" + map39(descriptors, (d) => "(" + escapeRegExp(d.text) + ")").join("|") + ")";
             const endOfLineOrEndOfComment = /(?:$|\*\/)/.source;
             const messageRemainder = /(?:.*?)/.source;
             const messagePortion = "(" + literals + messageRemainder + ")";
@@ -206336,9 +206379,9 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         let declarations;
         if (symbol2 && symbol2.declarations) {
           const indices = indicesOf(symbol2.declarations);
-          const keys = map38(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
+          const keys = map39(symbol2.declarations, (decl) => ({ file: decl.getSourceFile().fileName, pos: decl.pos }));
           indices.sort((a, b) => compareStringsCaseSensitive(keys[a].file, keys[b].file) || keys[a].pos - keys[b].pos);
-          const sortedDeclarations = map38(indices, (i2) => symbol2.declarations[i2]);
+          const sortedDeclarations = map39(indices, (i2) => symbol2.declarations[i2]);
           let lastDecl;
           for (const decl of sortedDeclarations) {
             if (isValidCallHierarchyDeclaration(decl)) {
@@ -206470,11 +206513,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getCallSiteGroupKey(entry) {
         return getNodeId(entry.declaration);
       }
-      function createCallHierarchyIncomingCall(from17, fromSpans) {
-        return { from: from17, fromSpans };
+      function createCallHierarchyIncomingCall(from18, fromSpans) {
+        return { from: from18, fromSpans };
       }
       function convertCallSiteGroupToIncomingCall(program2, entries) {
-        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map38(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyIncomingCall(createCallHierarchyItem(program2, entries[0].declaration), map39(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getIncomingCalls(program2, declaration, cancellationToken) {
         if (isSourceFile(declaration) || isModuleDeclaration(declaration) || isClassStaticBlockDeclaration(declaration)) {
@@ -206660,7 +206703,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         return { to, fromSpans };
       }
       function convertCallSiteGroupToOutgoingCall(program2, entries) {
-        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map38(entries, (entry) => createTextSpanFromRange(entry.range)));
+        return createCallHierarchyOutgoingCall(createCallHierarchyItem(program2, entries[0].declaration), map39(entries, (entry) => createTextSpanFromRange(entry.range)));
       }
       function getOutgoingCalls(program2, declaration) {
         if (declaration.flags & 33554432 || isMethodSignature(declaration)) {
@@ -206773,7 +206816,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function getFixes(context) {
         const diagnostics = getDiagnostics(context);
         const registrations = errorCodeToFixes.get(String(context.errorCode));
-        return flatMap(registrations, (f3) => map38(f3.getCodeActions(context), removeFixIdIfFixAllUnavailable(f3, diagnostics)));
+        return flatMap(registrations, (f3) => map39(f3.getCodeActions(context), removeFixIdIfFixAllUnavailable(f3, diagnostics)));
       }
       function getAllFixes(context) {
         return fixIdToRegistration.get(cast(context.fixId, isString)).getAllCodeActions(context);
@@ -207609,7 +207652,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function transformJSDocTypeLiteral(node) {
-        const typeNode = factory.createTypeLiteralNode(map38(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
+        const typeNode = factory.createTypeLiteralNode(map39(node.jsDocPropertyTags, (tag) => factory.createPropertySignature(
           /*modifiers*/
           void 0,
           isIdentifier(tag.name) ? tag.name : tag.name.right,
@@ -208880,7 +208923,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       function convertVariableStatement(sourceFile, statement, changes, checker, identifiers, target, quotePreference) {
         const { declarationList } = statement;
         let foundImport = false;
-        const converted = map38(declarationList.declarations, (decl) => {
+        const converted = map39(declarationList.declarations, (decl) => {
           const { name: name2, initializer: initializer3 } = decl;
           if (initializer3) {
             if (isExportsOrModuleExportsOrAlias(sourceFile, initializer3)) {
@@ -209645,11 +209688,11 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const rightSibling = currentNodeIndex < maxChildIndex ? commentNode.getChildAt(currentNodeIndex + 1) : void 0;
         return { leftSibling, rightSibling };
       }
-      function findEndOfTextBetween(jsDocComment, from17, to) {
-        const comment = jsDocComment.getText().substring(from17 - jsDocComment.getStart(), to - jsDocComment.getStart());
+      function findEndOfTextBetween(jsDocComment, from18, to) {
+        const comment = jsDocComment.getText().substring(from18 - jsDocComment.getStart(), to - jsDocComment.getStart());
         for (let i2 = comment.length; i2 > 0; i2--) {
           if (!/[*/\s]/.test(comment.substring(i2 - 1, i2))) {
-            return from17 + i2;
+            return from18 + i2;
           }
         }
         return to;
@@ -212005,7 +212048,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         ));
       }
       function createExportSpecifiers(names3, allowTypeModifier) {
-        return factory.createNodeArray(map38(names3, (n) => factory.createExportSpecifier(
+        return factory.createNodeArray(map39(names3, (n) => factory.createExportSpecifier(
           allowTypeModifier && n.isTypeOnly,
           /*propertyName*/
           void 0,
@@ -212891,7 +212934,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const checker = context.program.getTypeChecker();
         const jsxAttributesNode = info.parentDeclaration.attributes;
         const hasSpreadAttribute = some(jsxAttributesNode.properties, isJsxSpreadAttribute);
-        const attrs = map38(info.attributes, (attr) => {
+        const attrs = map39(info.attributes, (attr) => {
           const value = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(attr), info.parentDeclaration);
           const name2 = factory.createIdentifier(attr.name);
           const jsxAttribute = factory.createJsxAttribute(name2, factory.createJsxExpression(
@@ -212912,7 +212955,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const quotePreference = getQuotePreference(context.sourceFile, context.preferences);
         const target = getEmitScriptTarget(context.program.getCompilerOptions());
         const checker = context.program.getTypeChecker();
-        const props = map38(info.properties, (prop) => {
+        const props = map39(info.properties, (prop) => {
           const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), info.parentDeclaration);
           return factory.createPropertyAssignment(createPropertyNameFromSymbol(prop, target, quotePreference, checker), initializer3);
         });
@@ -212994,7 +213037,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           return factory.createArrayLiteralExpression();
         }
         if (isObjectLiteralType(type2)) {
-          const props = map38(checker.getPropertiesOfType(type2), (prop) => {
+          const props = map39(checker.getPropertiesOfType(type2), (prop) => {
             const initializer3 = tryGetValueFromType(context, checker, importAdder, quotePreference, checker.getTypeOfSymbol(prop), enclosingDeclaration);
             return factory.createPropertyAssignment(prop.name, initializer3);
           });
@@ -213332,7 +213375,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function updateParameters(importAdder, scriptTarget, node, newParameters) {
-        const parameters = map38(node.parameters, (p) => factory.createParameterDeclaration(
+        const parameters = map39(node.parameters, (p) => factory.createParameterDeclaration(
           p.modifiers,
           p.dotDotDotToken,
           p.name,
@@ -213910,7 +213953,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           jsDocParameterTag.isNameFirst,
           jsDocParameterTag.comment
         );
-        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map38(tags, (t2) => t2 === jsDocParameterTag ? newJSDocParameterTag : t2)));
+        const changes = ts_textChanges_exports.ChangeTracker.with(context, (changeTracker) => changeTracker.replaceJSDocComment(sourceFile, jsDocHost, map39(tags, (t2) => t2 === jsDocParameterTag ? newJSDocParameterTag : t2)));
         return createCodeFixActionWithoutFixAll(renameUnmatchedParameter, changes, [Diagnostics.Rename_param_tag_name_0_to_1, name2.getText(sourceFile), parameterName]);
       }
       function getInfo14(sourceFile, pos) {
@@ -214026,7 +214069,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
               const elements = token.parent.elements;
               const diagnostic = [
                 elements.length > 1 ? Diagnostics.Remove_unused_declarations_for_Colon_0 : Diagnostics.Remove_unused_declaration_for_Colon_0,
-                map38(elements, (e2) => e2.getText(sourceFile)).join(", ")
+                map39(elements, (e2) => e2.getText(sourceFile)).join(", ")
               ];
               return [
                 createDeleteFix(ts_textChanges_exports.ChangeTracker.with(context, (t2) => deleteDestructuringElements(t2, sourceFile, token.parent)), diagnostic)
@@ -215987,7 +216030,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             ));
           }
         } else {
-          const paramTags = map38(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
+          const paramTags = map39(inferences, ({ name: name2, typeNode, isOptional }) => factory.createJSDocParameterTag(
             /*tagName*/
             void 0,
             name2,
@@ -217121,8 +217164,8 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         const isJs = isInJSFile(contextNode);
         const { typeArguments, arguments: args, parent: parent2 } = call;
         const contextualType = isJs ? void 0 : checker.getContextualType(call);
-        const names3 = map38(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
-        const instanceTypes = isJs ? [] : map38(args, (arg) => checker.getTypeAtLocation(arg));
+        const names3 = map39(args, (arg) => isIdentifier(arg) ? arg.text : isPropertyAccessExpression(arg) && isIdentifier(arg.name) ? arg.name.text : void 0);
+        const instanceTypes = isJs ? [] : map39(args, (arg) => checker.getTypeAtLocation(arg));
         const { argumentTypeNodes, argumentTypeParameters } = getArgumentTypesAndTypeParameters(
           checker,
           importAdder,
@@ -217430,7 +217473,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       function getReturnTypeFromSignatures(signatures, checker, context, enclosingDeclaration) {
         if (length(signatures)) {
-          const type2 = checker.getUnionType(map38(signatures, checker.getReturnTypeOfSignature));
+          const type2 = checker.getUnionType(map39(signatures, checker.getReturnTypeOfSignature));
           return checker.typeToTypeNode(type2, enclosingDeclaration, 1, 8, getNoopSymbolTrackerWithResolver(context));
         }
       }
@@ -219435,7 +219478,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           if (elements.length === 0) {
             return void 0;
           }
-          const newClauses = map38(elements, (element) => factory.createCaseClause(element, []));
+          const newClauses = map39(elements, (element) => factory.createCaseClause(element, []));
           const newLineChar = getNewLineOrDefaultFromHost(host, formatContext == null ? void 0 : formatContext.options);
           const printer = createSnippetPrinter({
             removeComments: true,
@@ -219445,7 +219488,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
             newLine: getNewLineKind(newLineChar)
           });
           const printNode = formatContext ? (node) => printer.printAndFormatNode(4, node, sourceFile, formatContext) : (node) => printer.printNode(4, node, sourceFile);
-          const insertText = map38(newClauses, (clause, i2) => {
+          const insertText = map39(newClauses, (clause, i2) => {
             if (preferences.includeCompletionsWithSnippetText) {
               return `${printNode(clause)}$${i2 + 1}`;
             }
@@ -219622,12 +219665,12 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           if (insertQuestionDot || propertyAccessToConvert.questionDotToken) {
             insertText = `?.${insertText}`;
           }
-          const dot = findChildOfKind(propertyAccessToConvert, 25, sourceFile) || findChildOfKind(propertyAccessToConvert, 29, sourceFile);
-          if (!dot) {
+          const dot2 = findChildOfKind(propertyAccessToConvert, 25, sourceFile) || findChildOfKind(propertyAccessToConvert, 29, sourceFile);
+          if (!dot2) {
             return void 0;
           }
-          const end = startsWith(name2, propertyAccessToConvert.name.text) ? propertyAccessToConvert.name.end : dot.end;
-          replacementSpan = createTextSpanFromBounds(dot.getStart(sourceFile), end);
+          const end = startsWith(name2, propertyAccessToConvert.name.text) ? propertyAccessToConvert.name.end : dot2.end;
+          replacementSpan = createTextSpanFromBounds(dot2.getStart(sourceFile), end);
         }
         if (isJsxInitializer) {
           if (insertText === void 0) insertText = name2;
@@ -224672,7 +224715,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           }
         }
         const checker = program2.getTypeChecker();
-        return map38(referenceEntries, (entry) => toImplementationLocation(entry, checker));
+        return map39(referenceEntries, (entry) => toImplementationLocation(entry, checker));
       }
       function getImplementationReferenceEntries(program2, cancellationToken, sourceFiles, node, position) {
         if (node.kind === 308) {
@@ -224695,7 +224738,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function findReferenceOrRenameEntries(program2, cancellationToken, sourceFiles, node, position, options, convertEntry) {
-        return map38(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
+        return map39(flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options)), (entry) => convertEntry(entry, node, program2.getTypeChecker()));
       }
       function getReferenceEntriesForNode(position, node, program2, sourceFiles, cancellationToken, options = {}, sourceFilesSet = new Set(sourceFiles.map((f3) => f3.fileName))) {
         return flattenEntries(Core.getReferencedSymbolsForNode(position, node, program2, sourceFiles, cancellationToken, options, sourceFilesSet));
@@ -226575,7 +226618,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
           const staticBlocks = filter6(classDecl.members, isClassStaticBlockDeclaration);
           const containerName = symbol22 ? typeChecker.symbolToString(symbol22, classDecl) : "";
           const sourceFile2 = node.getSourceFile();
-          return map38(staticBlocks, (staticBlock) => {
+          return map39(staticBlocks, (staticBlock) => {
             let { pos } = moveRangePastModifiers(staticBlock);
             pos = skipTrivia(sourceFile2.text, pos);
             return createDefinitionInfoFromName(
@@ -226915,7 +226958,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
         const withoutExpandos = filter6(filteredDeclarations, (d) => !isExpandoDeclaration(d));
         const results = some(withoutExpandos) ? withoutExpandos : filteredDeclarations;
-        return map38(results, (declaration) => createDefinitionInfo(
+        return map39(results, (declaration) => createDefinitionInfo(
           declaration,
           typeChecker,
           symbol2,
@@ -228142,7 +228185,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
         }
       }
       function getJSDocTagNameCompletions() {
-        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map38(jsDocTagNames, (tagName) => {
+        return jsDocTagNameCompletionEntries || (jsDocTagNameCompletionEntries = map39(jsDocTagNames, (tagName) => {
           return {
             name: tagName,
             kind: "keyword",
@@ -228153,7 +228196,7 @@ ${newComment.split("\n").map((c) => ` * ${c}`).join("\n")}
       }
       var getJSDocTagNameCompletionDetails = getJSDocTagCompletionDetails;
       function getJSDocTagCompletions() {
-        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map38(jsDocTagNames, (tagName) => {
+        return jsDocTagCompletionEntries || (jsDocTagCompletionEntries = map39(jsDocTagNames, (tagName) => {
           return {
             name: `@${tagName}`,
             kind: "keyword",
@@ -228985,7 +229028,7 @@ ${content}
         return isString(moduleSpecifierText) && some(sourceFile.moduleAugmentations, (moduleName) => isStringLiteral(moduleName) && moduleName.text === moduleSpecifierText);
       }
       function getNewImportSpecifiers(namedImports) {
-        return flatMap(namedImports, (namedImport) => map38(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
+        return flatMap(namedImports, (namedImport) => map39(tryGetNamedBindingElements(namedImport), (importSpecifier) => importSpecifier.name && importSpecifier.propertyName && moduleExportNameTextEscaped(importSpecifier.name) === moduleExportNameTextEscaped(importSpecifier.propertyName) ? factory.updateImportSpecifier(
           importSpecifier,
           importSpecifier.isTypeOnly,
           /*propertyName*/
@@ -230151,7 +230194,7 @@ ${content}
           /*meaning*/
           void 0
         ) : emptyArray;
-        const items = map38(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
+        const items = map39(candidates, (candidateSignature) => getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, typeChecker, enclosingDeclaration, sourceFile));
         let selectedItemIndex = 0;
         let itemsSeen = 0;
         for (let i2 = 0; i2 < items.length; i2++) {
@@ -230211,7 +230254,7 @@ ${content}
       ), spacePart()];
       function getSignatureHelpItem(candidateSignature, callTargetDisplayParts, isTypeParameterList, checker, enclosingDeclaration, sourceFile) {
         const infos = (isTypeParameterList ? itemInfoForTypeParameters : itemInfoForParameters)(candidateSignature, checker, enclosingDeclaration, sourceFile);
-        return map38(infos, ({ isVariadic, parameters, prefix, suffix }) => {
+        return map39(infos, ({ isVariadic, parameters, prefix, suffix }) => {
           const prefixDisplayParts = [...callTargetDisplayParts, ...prefix];
           const suffixDisplayParts = [...suffix, ...returnTypeToDisplayParts(candidateSignature, enclosingDeclaration, checker)];
           const documentation = candidateSignature.getDocumentationComment(checker);
@@ -230249,7 +230292,7 @@ ${content}
         const parameters = (typeParameters || emptyArray).map((t2) => createSignatureHelpParameterForTypeParameter(t2, checker, enclosingDeclaration, sourceFile, printer));
         const thisParameter = candidateSignature.thisParameter ? [checker.symbolToParameterDeclaration(candidateSignature.thisParameter, enclosingDeclaration, signatureHelpNodeBuilderFlags)] : [];
         return checker.getExpandedParameters(candidateSignature).map((paramList) => {
-          const params = factory.createNodeArray([...thisParameter, ...map38(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
+          const params = factory.createNodeArray([...thisParameter, ...map39(paramList, (param) => checker.symbolToParameterDeclaration(param, enclosingDeclaration, signatureHelpNodeBuilderFlags))]);
           const parameterParts = mapToDisplayParts((writer) => {
             printer.writeList(2576, params, sourceFile, writer);
           });
@@ -233388,7 +233431,7 @@ ${options.prefix}` : "\n" : options.prefix
         ]);
         const highPriorityCommonRules = [
           // Leave comments alone
-          rule(
+          rule2(
             "IgnoreBeforeComment",
             anyToken,
             comments,
@@ -233396,7 +233439,7 @@ ${options.prefix}` : "\n" : options.prefix
             1
             /* StopProcessingSpaceActions */
           ),
-          rule(
+          rule2(
             "IgnoreAfterLineComment",
             2,
             anyToken,
@@ -233404,7 +233447,7 @@ ${options.prefix}` : "\n" : options.prefix
             1
             /* StopProcessingSpaceActions */
           ),
-          rule(
+          rule2(
             "NotSpaceBeforeColon",
             anyToken,
             59,
@@ -233412,7 +233455,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterColon",
             59,
             anyToken,
@@ -233420,7 +233463,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeQuestionMark",
             anyToken,
             58,
@@ -233429,7 +233472,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // insert space after '?' only when it is used in conditional operator
-          rule(
+          rule2(
             "SpaceAfterQuestionMarkInConditionalOperator",
             58,
             anyToken,
@@ -233438,7 +233481,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // in other cases there should be no space between '?' and next token
-          rule(
+          rule2(
             "NoSpaceAfterQuestionMark",
             58,
             anyToken,
@@ -233446,7 +233489,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeDot",
             anyToken,
             [
@@ -233458,7 +233501,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterDot",
             [
               25,
@@ -233470,7 +233513,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenImportParenInImportType",
             102,
             21,
@@ -233481,7 +233524,7 @@ ${options.prefix}` : "\n" : options.prefix
           // Special handling of unary operators.
           // Prefix operators generally shouldn't have a space between
           // them and their target unary expression.
-          rule(
+          rule2(
             "NoSpaceAfterUnaryPrefixOperator",
             unaryPrefixOperators,
             unaryPrefixExpressions,
@@ -233489,7 +233532,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterUnaryPreincrementOperator",
             46,
             unaryPreincrementExpressions,
@@ -233497,7 +233540,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterUnaryPredecrementOperator",
             47,
             unaryPredecrementExpressions,
@@ -233505,7 +233548,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeUnaryPostincrementOperator",
             unaryPostincrementExpressions,
             46,
@@ -233513,7 +233556,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeUnaryPostdecrementOperator",
             unaryPostdecrementExpressions,
             47,
@@ -233526,7 +233569,7 @@ ${options.prefix}` : "\n" : options.prefix
           // around unary operators.  Examples:
           //      1 - -2  --X--> 1--2
           //      a + ++b --X--> a+++b
-          rule(
+          rule2(
             "SpaceAfterPostincrementWhenFollowedByAdd",
             46,
             40,
@@ -233534,7 +233577,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterAddWhenFollowedByUnaryPlus",
             40,
             40,
@@ -233542,7 +233585,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterAddWhenFollowedByPreincrement",
             40,
             46,
@@ -233550,7 +233593,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterPostdecrementWhenFollowedBySubtract",
             47,
             41,
@@ -233558,7 +233601,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterSubtractWhenFollowedByUnaryMinus",
             41,
             41,
@@ -233566,7 +233609,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterSubtractWhenFollowedByPredecrement",
             41,
             47,
@@ -233574,7 +233617,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterCloseBrace",
             20,
             [
@@ -233587,7 +233630,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // For functions and control block place } on a new line [multi-line rule]
-          rule(
+          rule2(
             "NewLineBeforeCloseBraceInBlockContext",
             anyTokenIncludingMultilineComments,
             20,
@@ -233596,7 +233639,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertNewLine */
           ),
           // Space/new line after }.
-          rule(
+          rule2(
             "SpaceAfterCloseBrace",
             20,
             anyTokenExcept(
@@ -233609,7 +233652,7 @@ ${options.prefix}` : "\n" : options.prefix
           ),
           // Special case for (}, else) and (}, while) since else & while tokens are not part of the tree which makes SpaceAfterCloseBrace rule not applied
           // Also should not apply to })
-          rule(
+          rule2(
             "SpaceBetweenCloseBraceAndElse",
             20,
             93,
@@ -233617,7 +233660,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceBetweenCloseBraceAndWhile",
             20,
             117,
@@ -233625,7 +233668,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenEmptyBraceBrackets",
             19,
             20,
@@ -233634,7 +233677,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Add a space after control dec context if the next character is an open bracket ex: 'if (false)[a, b] = [1, 2];' -> 'if (false) [a, b] = [1, 2];'
-          rule(
+          rule2(
             "SpaceAfterConditionalClosingParen",
             22,
             23,
@@ -233642,7 +233685,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenFunctionKeywordAndStar",
             100,
             42,
@@ -233650,7 +233693,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterStarInGeneratorDeclaration",
             42,
             80,
@@ -233658,7 +233701,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterFunctionInFuncDecl",
             100,
             anyToken,
@@ -233667,7 +233710,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // Insert new line after { and before } in multi-line contexts.
-          rule(
+          rule2(
             "NewLineAfterOpenBraceInBlockContext",
             19,
             anyToken,
@@ -233679,7 +233722,7 @@ ${options.prefix}` : "\n" : options.prefix
           // Though, we do extra check on the context to make sure we are dealing with get/set node. Example:
           //      get x() {}
           //      set x(val) {}
-          rule(
+          rule2(
             "SpaceAfterGetSetInMember",
             [
               139,
@@ -233691,7 +233734,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenYieldKeywordAndStar",
             127,
             42,
@@ -233699,7 +233742,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceBetweenYieldOrYieldStarAndOperand",
             [
               127,
@@ -233711,7 +233754,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenReturnAndSemicolon",
             107,
             27,
@@ -233719,7 +233762,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterCertainKeywords",
             [
               115,
@@ -233736,7 +233779,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterLetConstInVariableDeclaration",
             [
               121,
@@ -233748,7 +233791,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeOpenParenInFuncCall",
             anyToken,
             21,
@@ -233757,7 +233800,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Special case for binary operators (that are keywords). For these we have to add a space and shouldn't follow any user options.
-          rule(
+          rule2(
             "SpaceBeforeBinaryKeywordOperator",
             anyToken,
             binaryKeywordOperators,
@@ -233765,7 +233808,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterBinaryKeywordOperator",
             binaryKeywordOperators,
             anyToken,
@@ -233773,7 +233816,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterVoidOperator",
             116,
             anyToken,
@@ -233782,7 +233825,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // Async-await
-          rule(
+          rule2(
             "SpaceBetweenAsyncAndOpenParen",
             134,
             21,
@@ -233790,7 +233833,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceBetweenAsyncAndFunctionKeyword",
             134,
             [
@@ -233803,7 +233846,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // Template string
-          rule(
+          rule2(
             "NoSpaceBetweenTagAndTemplateString",
             [
               80,
@@ -233820,7 +233863,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // JSX opening elements
-          rule(
+          rule2(
             "SpaceBeforeJsxAttribute",
             anyToken,
             80,
@@ -233828,7 +233871,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceBeforeSlashInJsxOpeningElement",
             anyToken,
             44,
@@ -233836,7 +233879,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeGreaterThanTokenInJsxOpeningElement",
             44,
             32,
@@ -233844,7 +233887,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeEqualInJsxAttribute",
             anyToken,
             64,
@@ -233852,7 +233895,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterEqualInJsxAttribute",
             64,
             anyToken,
@@ -233860,7 +233903,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeJsxNamespaceColon",
             80,
             59,
@@ -233868,7 +233911,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterJsxNamespaceColon",
             59,
             80,
@@ -233878,7 +233921,7 @@ ${options.prefix}` : "\n" : options.prefix
           ),
           // TypeScript-specific rules
           // Use of module as a function call. e.g.: import m2 = module("m2");
-          rule(
+          rule2(
             "NoSpaceAfterModuleImport",
             [
               144,
@@ -233891,7 +233934,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Add a space around certain TypeScript keywords
-          rule(
+          rule2(
             "SpaceAfterCertainTypeScriptKeywords",
             [
               128,
@@ -233925,7 +233968,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceBeforeCertainTypeScriptKeywords",
             anyToken,
             [
@@ -233939,7 +233982,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // Treat string literals in module names as identifiers, and add a space between the literal and the opening Brace braces, e.g.: module "m2" {
-          rule(
+          rule2(
             "SpaceAfterModuleName",
             11,
             19,
@@ -233948,7 +233991,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // Lambda expressions
-          rule(
+          rule2(
             "SpaceBeforeArrow",
             anyToken,
             39,
@@ -233956,7 +233999,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterArrow",
             39,
             anyToken,
@@ -233965,7 +234008,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // Optional parameters and let args
-          rule(
+          rule2(
             "NoSpaceAfterEllipsis",
             26,
             80,
@@ -233973,7 +234016,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterOptionalParameters",
             58,
             [
@@ -233986,7 +234029,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Remove spaces in empty interface literals. e.g.: x: {}
-          rule(
+          rule2(
             "NoSpaceBetweenEmptyInterfaceBraceBrackets",
             19,
             20,
@@ -233995,7 +234038,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // generics and type assertions
-          rule(
+          rule2(
             "NoSpaceBeforeOpenAngularBracket",
             typeNames,
             30,
@@ -234003,7 +234046,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenCloseParenAndAngularBracket",
             22,
             30,
@@ -234011,7 +234054,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterOpenAngularBracket",
             30,
             anyToken,
@@ -234019,7 +234062,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeCloseAngularBracket",
             anyToken,
             32,
@@ -234027,7 +234070,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterCloseAngularBracket",
             32,
             [
@@ -234048,7 +234091,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // decorators
-          rule(
+          rule2(
             "SpaceBeforeAt",
             [
               22,
@@ -234060,7 +234103,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterAt",
             60,
             anyToken,
@@ -234069,7 +234112,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert space after @ in decorator
-          rule(
+          rule2(
             "SpaceAfterDecorator",
             anyToken,
             [
@@ -234092,7 +234135,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeNonNullAssertionOperator",
             anyToken,
             54,
@@ -234100,7 +234143,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterNewKeywordOnConstructorSignature",
             105,
             21,
@@ -234108,7 +234151,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceLessThanAndNonJSXTypeAnnotation",
             30,
             30,
@@ -234119,7 +234162,7 @@ ${options.prefix}` : "\n" : options.prefix
         ];
         const userConfigurableRules = [
           // Treat constructor as an identifier in a function declaration, and remove spaces between constructor and following left parentheses
-          rule(
+          rule2(
             "SpaceAfterConstructor",
             137,
             21,
@@ -234127,7 +234170,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterConstructor",
             137,
             21,
@@ -234135,7 +234178,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterComma",
             28,
             anyToken,
@@ -234143,7 +234186,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterComma",
             28,
             anyToken,
@@ -234152,7 +234195,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert space after function keyword for anonymous functions
-          rule(
+          rule2(
             "SpaceAfterAnonymousFunctionKeyword",
             [
               100,
@@ -234164,7 +234207,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterAnonymousFunctionKeyword",
             [
               100,
@@ -234177,7 +234220,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert space after keywords in control flow statements
-          rule(
+          rule2(
             "SpaceAfterKeywordInControl",
             keywords,
             21,
@@ -234185,7 +234228,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterKeywordInControl",
             keywords,
             21,
@@ -234194,7 +234237,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert space after opening and before closing nonempty parenthesis
-          rule(
+          rule2(
             "SpaceAfterOpenParen",
             21,
             anyToken,
@@ -234202,7 +234245,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceBeforeCloseParen",
             anyToken,
             22,
@@ -234210,7 +234253,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceBetweenOpenParens",
             21,
             21,
@@ -234218,7 +234261,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenParens",
             21,
             22,
@@ -234226,7 +234269,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterOpenParen",
             21,
             anyToken,
@@ -234234,7 +234277,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeCloseParen",
             anyToken,
             22,
@@ -234243,7 +234286,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert space after opening and before closing nonempty brackets
-          rule(
+          rule2(
             "SpaceAfterOpenBracket",
             23,
             anyToken,
@@ -234251,7 +234294,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceBeforeCloseBracket",
             anyToken,
             24,
@@ -234259,7 +234302,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenBrackets",
             23,
             24,
@@ -234267,7 +234310,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterOpenBracket",
             23,
             anyToken,
@@ -234275,7 +234318,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeCloseBracket",
             anyToken,
             24,
@@ -234284,7 +234327,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert a space after { and before } in single-line contexts, but remove space from empty object literals {}.
-          rule(
+          rule2(
             "SpaceAfterOpenBrace",
             19,
             anyToken,
@@ -234292,7 +234335,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceBeforeCloseBrace",
             anyToken,
             20,
@@ -234300,7 +234343,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenEmptyBraceBrackets",
             19,
             20,
@@ -234308,7 +234351,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterOpenBrace",
             19,
             anyToken,
@@ -234316,7 +234359,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeCloseBrace",
             anyToken,
             20,
@@ -234325,7 +234368,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert a space after opening and before closing empty brace brackets
-          rule(
+          rule2(
             "SpaceBetweenEmptyBraceBrackets",
             19,
             20,
@@ -234333,7 +234376,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBetweenEmptyBraceBrackets",
             19,
             20,
@@ -234342,7 +234385,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert space after opening and before closing template string braces
-          rule(
+          rule2(
             "SpaceAfterTemplateHeadAndMiddle",
             [
               16,
@@ -234355,7 +234398,7 @@ ${options.prefix}` : "\n" : options.prefix
             1
             /* CanDeleteNewLines */
           ),
-          rule(
+          rule2(
             "SpaceBeforeTemplateMiddleAndTail",
             anyToken,
             [
@@ -234367,7 +234410,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterTemplateHeadAndMiddle",
             [
               16,
@@ -234380,7 +234423,7 @@ ${options.prefix}` : "\n" : options.prefix
             1
             /* CanDeleteNewLines */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeTemplateMiddleAndTail",
             anyToken,
             [
@@ -234393,7 +234436,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // No space after { and before } in JSX expression
-          rule(
+          rule2(
             "SpaceAfterOpenBraceInJsxExpression",
             19,
             anyToken,
@@ -234401,7 +234444,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceBeforeCloseBraceInJsxExpression",
             anyToken,
             20,
@@ -234409,7 +234452,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterOpenBraceInJsxExpression",
             19,
             anyToken,
@@ -234417,7 +234460,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeCloseBraceInJsxExpression",
             anyToken,
             20,
@@ -234426,7 +234469,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert space after semicolon in for statement
-          rule(
+          rule2(
             "SpaceAfterSemicolonInFor",
             27,
             anyToken,
@@ -234434,7 +234477,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterSemicolonInFor",
             27,
             anyToken,
@@ -234443,7 +234486,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Insert space before and after binary operators
-          rule(
+          rule2(
             "SpaceBeforeBinaryOperator",
             anyToken,
             binaryOperators,
@@ -234451,7 +234494,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterBinaryOperator",
             binaryOperators,
             anyToken,
@@ -234459,7 +234502,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeBinaryOperator",
             anyToken,
             binaryOperators,
@@ -234467,7 +234510,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterBinaryOperator",
             binaryOperators,
             anyToken,
@@ -234475,7 +234518,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceBeforeOpenParenInFuncDecl",
             anyToken,
             21,
@@ -234483,7 +234526,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeOpenParenInFuncDecl",
             anyToken,
             21,
@@ -234492,7 +234535,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // Open Brace braces after control block
-          rule(
+          rule2(
             "NewLineBeforeOpenBraceInControl",
             controlOpenBraceLeftTokenRange,
             19,
@@ -234503,7 +234546,7 @@ ${options.prefix}` : "\n" : options.prefix
           ),
           // Open Brace braces after function
           // TypeScript: Function can have return types, which can be made of tons of different token kinds
-          rule(
+          rule2(
             "NewLineBeforeOpenBraceInFunction",
             functionOpenBraceLeftTokenRange,
             19,
@@ -234513,7 +234556,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* CanDeleteNewLines */
           ),
           // Open Brace braces after TypeScript module/class/interface
-          rule(
+          rule2(
             "NewLineBeforeOpenBraceInTypeScriptDeclWithBlock",
             typeScriptOpenBraceLeftTokenRange,
             19,
@@ -234522,7 +234565,7 @@ ${options.prefix}` : "\n" : options.prefix
             1
             /* CanDeleteNewLines */
           ),
-          rule(
+          rule2(
             "SpaceAfterTypeAssertion",
             32,
             anyToken,
@@ -234530,7 +234573,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterTypeAssertion",
             32,
             anyToken,
@@ -234538,7 +234581,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceBeforeTypeAnnotation",
             anyToken,
             [
@@ -234550,7 +234593,7 @@ ${options.prefix}` : "\n" : options.prefix
             4
             /* InsertSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeTypeAnnotation",
             anyToken,
             [
@@ -234562,7 +234605,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoOptionalSemicolon",
             27,
             anyTokenIncludingEOF,
@@ -234574,7 +234617,7 @@ ${options.prefix}` : "\n" : options.prefix
             32
             /* DeleteToken */
           ),
-          rule(
+          rule2(
             "OptionalSemicolon",
             anyToken,
             anyTokenIncludingEOF,
@@ -234589,7 +234632,7 @@ ${options.prefix}` : "\n" : options.prefix
         ];
         const lowPriorityCommonRules = [
           // Space after keyword but not before ; or : or ?
-          rule(
+          rule2(
             "NoSpaceBeforeSemicolon",
             anyToken,
             27,
@@ -234597,7 +234640,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceBeforeOpenBraceInControl",
             controlOpenBraceLeftTokenRange,
             19,
@@ -234606,7 +234649,7 @@ ${options.prefix}` : "\n" : options.prefix
             1
             /* CanDeleteNewLines */
           ),
-          rule(
+          rule2(
             "SpaceBeforeOpenBraceInFunction",
             functionOpenBraceLeftTokenRange,
             19,
@@ -234615,7 +234658,7 @@ ${options.prefix}` : "\n" : options.prefix
             1
             /* CanDeleteNewLines */
           ),
-          rule(
+          rule2(
             "SpaceBeforeOpenBraceInTypeScriptDeclWithBlock",
             typeScriptOpenBraceLeftTokenRange,
             19,
@@ -234624,7 +234667,7 @@ ${options.prefix}` : "\n" : options.prefix
             1
             /* CanDeleteNewLines */
           ),
-          rule(
+          rule2(
             "NoSpaceBeforeComma",
             anyToken,
             28,
@@ -234633,7 +234676,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* DeleteSpace */
           ),
           // No space before and after indexer `x[]`
-          rule(
+          rule2(
             "NoSpaceBeforeOpenBracket",
             anyTokenExcept(
               134,
@@ -234645,7 +234688,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "NoSpaceAfterCloseBracket",
             24,
             anyToken,
@@ -234653,7 +234696,7 @@ ${options.prefix}` : "\n" : options.prefix
             16
             /* DeleteSpace */
           ),
-          rule(
+          rule2(
             "SpaceAfterSemicolon",
             27,
             anyToken,
@@ -234662,7 +234705,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // Remove extra space between for and await
-          rule(
+          rule2(
             "SpaceBetweenForAndAwaitKeyword",
             99,
             135,
@@ -234671,7 +234714,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // Remove extra spaces between ... and type name in tuple spread
-          rule(
+          rule2(
             "SpaceBetweenDotDotDotAndTypeName",
             26,
             typeNames,
@@ -234681,7 +234724,7 @@ ${options.prefix}` : "\n" : options.prefix
           ),
           // Add a space between statements. All keywords except (do,else,case) has open/close parens after them.
           // So, we have a rule to add a space for [),Any], [do,Any], [else,Any], and [case,Any]
-          rule(
+          rule2(
             "SpaceBetweenStatements",
             [
               22,
@@ -234696,7 +234739,7 @@ ${options.prefix}` : "\n" : options.prefix
             /* InsertSpace */
           ),
           // This low-pri rule takes care of "try {", "catch {" and "finally {" in case the rule SpaceBeforeOpenBraceInControl didn't execute on FormatOnEnter.
-          rule(
+          rule2(
             "SpaceAfterTryCatchFinally",
             [
               113,
@@ -234716,7 +234759,7 @@ ${options.prefix}` : "\n" : options.prefix
           ...lowPriorityCommonRules
         ];
       }
-      function rule(debugName, left, right, context, action, flags = 0) {
+      function rule2(debugName, left, right, context, action, flags = 0) {
         return { leftTokenRange: toTokenRange(left), rightTokenRange: toTokenRange(right), rule: { debugName, context, action, flags } };
       }
       function tokenRangeFrom(tokens) {
@@ -234725,9 +234768,9 @@ ${options.prefix}` : "\n" : options.prefix
       function toTokenRange(arg) {
         return typeof arg === "number" ? tokenRangeFrom([arg]) : isArray(arg) ? tokenRangeFrom(arg) : arg;
       }
-      function tokenRangeFromRange(from17, to, except = []) {
+      function tokenRangeFromRange(from18, to, except = []) {
         const tokens = [];
-        for (let token = from17; token <= to; token++) {
+        for (let token = from18; token <= to; token++) {
           if (!contains(except, token)) {
             tokens.push(token);
           }
@@ -235159,11 +235202,11 @@ ${options.prefix}` : "\n" : options.prefix
           if (bucket) {
             const rules2 = [];
             let ruleActionMask = 0;
-            for (const rule2 of bucket) {
+            for (const rule22 of bucket) {
               const acceptRuleActions = ~getRuleActionExclusion(ruleActionMask);
-              if (rule2.action & acceptRuleActions && every(rule2.context, (c) => c(context))) {
-                rules2.push(rule2);
-                ruleActionMask |= rule2.action;
+              if (rule22.action & acceptRuleActions && every(rule22.context, (c) => c(context))) {
+                rules2.push(rule22);
+                ruleActionMask |= rule22.action;
               }
             }
             if (rules2.length) {
@@ -235175,16 +235218,16 @@ ${options.prefix}` : "\n" : options.prefix
       function buildMap(rules) {
         const map210 = new Array(mapRowLength * mapRowLength);
         const rulesBucketConstructionStateList = new Array(map210.length);
-        for (const rule2 of rules) {
-          const specificRule = rule2.leftTokenRange.isSpecific && rule2.rightTokenRange.isSpecific;
-          for (const left of rule2.leftTokenRange.tokens) {
-            for (const right of rule2.rightTokenRange.tokens) {
+        for (const rule22 of rules) {
+          const specificRule = rule22.leftTokenRange.isSpecific && rule22.rightTokenRange.isSpecific;
+          for (const left of rule22.leftTokenRange.tokens) {
+            for (const right of rule22.rightTokenRange.tokens) {
               const index = getRuleBucketIndex(left, right);
               let rulesBucket = map210[index];
               if (rulesBucket === void 0) {
                 rulesBucket = map210[index] = [];
               }
-              addRule(rulesBucket, rule2.rule, specificRule, rulesBucketConstructionStateList, index);
+              addRule(rulesBucket, rule22.rule, specificRule, rulesBucketConstructionStateList, index);
             }
           }
         }
@@ -235206,10 +235249,10 @@ ${options.prefix}` : "\n" : options.prefix
         RulesPosition2[RulesPosition2["NoContextRulesAny"] = maskBitSize * 5] = "NoContextRulesAny";
         return RulesPosition2;
       })(RulesPosition || {});
-      function addRule(rules, rule2, specificTokens, constructionState, rulesBucketIndex) {
-        const position = rule2.action & 3 ? specificTokens ? 0 : RulesPosition.StopRulesAny : rule2.context !== anyContext ? specificTokens ? RulesPosition.ContextRulesSpecific : RulesPosition.ContextRulesAny : specificTokens ? RulesPosition.NoContextRulesSpecific : RulesPosition.NoContextRulesAny;
+      function addRule(rules, rule22, specificTokens, constructionState, rulesBucketIndex) {
+        const position = rule22.action & 3 ? specificTokens ? 0 : RulesPosition.StopRulesAny : rule22.context !== anyContext ? specificTokens ? RulesPosition.ContextRulesSpecific : RulesPosition.ContextRulesAny : specificTokens ? RulesPosition.NoContextRulesSpecific : RulesPosition.NoContextRulesAny;
         const state2 = constructionState[rulesBucketIndex] || 0;
-        rules.splice(getInsertionIndex(state2, position), 0, rule2);
+        rules.splice(getInsertionIndex(state2, position), 0, rule22);
         constructionState[rulesBucketIndex] = increaseInsertionIndex(state2, position);
       }
       function getInsertionIndex(indexBitmap, maskPosition) {
@@ -235958,8 +236001,8 @@ ${options.prefix}` : "\n" : options.prefix
           let trimTrailingWhitespaces = formattingContext.options.trimTrailingWhitespace !== false;
           let lineAction = 0;
           if (rules) {
-            forEachRight(rules, (rule2) => {
-              lineAction = applyRuleEdits(rule2, previousItem, previousStartLine, currentItem, currentStartLine);
+            forEachRight(rules, (rule22) => {
+              lineAction = applyRuleEdits(rule22, previousItem, previousStartLine, currentItem, currentStartLine);
               if (dynamicIndentation) {
                 switch (lineAction) {
                   case 2:
@@ -235987,7 +236030,7 @@ ${options.prefix}` : "\n" : options.prefix
                     );
                 }
               }
-              trimTrailingWhitespaces = trimTrailingWhitespaces && !(rule2.action & 16) && rule2.flags !== 1;
+              trimTrailingWhitespaces = trimTrailingWhitespaces && !(rule22.action & 16) && rule22.flags !== 1;
             });
           } else {
             trimTrailingWhitespaces = trimTrailingWhitespaces && currentItem.kind !== 1;
@@ -236126,9 +236169,9 @@ ${options.prefix}` : "\n" : options.prefix
             edits.push(createTextChangeFromStartLength(start3, 0, text));
           }
         }
-        function applyRuleEdits(rule2, previousRange2, previousStartLine, currentRange, currentStartLine) {
+        function applyRuleEdits(rule22, previousRange2, previousStartLine, currentRange, currentStartLine) {
           const onLaterLine = currentStartLine !== previousStartLine;
-          switch (rule2.action) {
+          switch (rule22.action) {
             case 1:
               return 0;
             case 16:
@@ -236141,7 +236184,7 @@ ${options.prefix}` : "\n" : options.prefix
               recordDelete(previousRange2.pos, previousRange2.end - previousRange2.pos);
               break;
             case 8:
-              if (rule2.flags !== 1 && previousStartLine !== currentStartLine) {
+              if (rule22.flags !== 1 && previousStartLine !== currentStartLine) {
                 return 0;
               }
               const lineDelta = currentStartLine - previousStartLine;
@@ -236151,7 +236194,7 @@ ${options.prefix}` : "\n" : options.prefix
               }
               break;
             case 4:
-              if (rule2.flags !== 1 && previousStartLine !== currentStartLine) {
+              if (rule22.flags !== 1 && previousStartLine !== currentStartLine) {
                 return 0;
               }
               const posDelta = currentRange.pos - previousRange2.end;
@@ -238766,7 +238809,7 @@ ${options.prefix}` : "\n" : options.prefix
         makeImport: () => makeImport,
         makeStringLiteral: () => makeStringLiteral,
         mangleScopedPackageName: () => mangleScopedPackageName,
-        map: () => map38,
+        map: () => map39,
         mapAllOrFail: () => mapAllOrFail,
         mapDefined: () => mapDefined,
         mapDefinedIterator: () => mapDefinedIterator,
@@ -241441,7 +241484,7 @@ ${options.prefix}` : "\n" : options.prefix
           if (!this.languageServiceEnabled) {
             return this.getRootScriptInfos();
           }
-          return map38(this.program.getSourceFiles(), (sourceFile) => {
+          return map39(this.program.getSourceFiles(), (sourceFile) => {
             const scriptInfo = this.projectService.getScriptInfoForPath(sourceFile.resolvedPath);
             Debug.assert(!!scriptInfo, "getScriptInfo", () => `scriptInfo for a file '${sourceFile.fileName}' Path: '${sourceFile.path}' / '${sourceFile.resolvedPath}' is missing.`);
             return scriptInfo;
@@ -246684,20 +246727,20 @@ Dynamic files must always be opened with service's current directory or service 
           const excludeRules = [];
           const normalizedNames = rootFiles.map((f3) => normalizeSlashes(f3.fileName));
           for (const name2 of Object.keys(this.safelist)) {
-            const rule2 = this.safelist[name2];
+            const rule22 = this.safelist[name2];
             for (const root of normalizedNames) {
-              if (rule2.match.test(root)) {
+              if (rule22.match.test(root)) {
                 this.logger.info(`Excluding files based on rule ${name2} matching file '${root}'`);
-                if (rule2.types) {
-                  for (const type2 of rule2.types) {
+                if (rule22.types) {
+                  for (const type2 of rule22.types) {
                     if (!typeAcqInclude.includes(type2)) {
                       typeAcqInclude.push(type2);
                     }
                   }
                 }
-                if (rule2.exclude) {
-                  for (const exclude of rule2.exclude) {
-                    const processedRule = root.replace(rule2.match, (...groups) => {
+                if (rule22.exclude) {
+                  for (const exclude of rule22.exclude) {
+                    const processedRule = root.replace(rule22.match, (...groups) => {
                       return exclude.map((groupNumberOrString) => {
                         if (typeof groupNumberOrString === "number") {
                           if (!isString(groups[groupNumberOrString])) {
@@ -246932,7 +246975,7 @@ Dynamic files must always be opened with service's current directory or service 
         async enableRequestedPluginsWorker(pendingPlugins) {
           Debug.assert(this.currentPluginEnablementPromise === void 0);
           let sendProjectsUpdatedInBackgroundEvent = false;
-          await Promise.all(map38(pendingPlugins, async ([project, promises]) => {
+          await Promise.all(map39(pendingPlugins, async ([project, promises]) => {
             const results = await Promise.all(promises);
             if (project.isClosed() || isProjectDeferredClose(project)) {
               this.logger.info(`Cancelling plugin enabling for ${project.getProjectName()} as it is ${project.isClosed() ? "closed" : "deferred close"}`);
@@ -247268,7 +247311,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source: diag2.source,
-          relatedInformation: map38(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map39(diag2.relatedInformation, formatRelatedInformation)
         };
       }
       function formatRelatedInformation(info) {
@@ -247309,7 +247352,7 @@ Dynamic files must always be opened with service's current directory or service 
           reportsUnnecessary: diag2.reportsUnnecessary,
           reportsDeprecated: diag2.reportsDeprecated,
           source,
-          relatedInformation: map38(diag2.relatedInformation, formatRelatedInformation)
+          relatedInformation: map39(diag2.relatedInformation, formatRelatedInformation)
         };
         return includeFileName ? { ...common, fileName: diag2.file && diag2.file.fileName } : common;
       }
@@ -247822,7 +247865,7 @@ ${json2}${newLine}`;
               if (!result.some((p) => p.projectErrors && p.projectErrors.length !== 0)) {
                 return this.requiredResponse(result);
               }
-              const converted = map38(result, (p) => {
+              const converted = map39(result, (p) => {
                 if (!p.projectErrors || p.projectErrors.length === 0) {
                   return p;
                 }
@@ -248894,7 +248937,7 @@ ${json2}${newLine}`;
               this.event({
                 triggerFile: event.data.triggerFile,
                 configFile: event.data.configFileName,
-                diagnostics: map38(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
+                diagnostics: map39(event.data.diagnostics, (diagnostic) => formatDiagnosticToProtocol(
                   diagnostic,
                   /*includeFileName*/
                   true
@@ -249235,7 +249278,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             concatenate(projectErrors, optionsErrors),
             (diagnostic) => !!diagnostic.file && diagnostic.file.fileName === configFile
           );
-          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map38(
+          return includeLinePosition ? this.convertToDiagnosticsWithLinePositionFromDiagnosticFile(diagnosticsForConfigFile) : map39(
             diagnosticsForConfigFile,
             (diagnostic) => formatDiagnosticToProtocol(
               diagnostic,
@@ -249260,7 +249303,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             // TODO: GH#18217
             reportsUnnecessary: d.reportsUnnecessary,
             reportsDeprecated: d.reportsDeprecated,
-            relatedInformation: map38(d.relatedInformation, formatRelatedInformation)
+            relatedInformation: map39(d.relatedInformation, formatRelatedInformation)
           }));
         }
         getCompilerOptionsDiagnostics(args) {
@@ -249288,7 +249331,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
               endLocation: scriptInfo && scriptInfo.positionToLineOffset(d.start + d.length),
               reportsUnnecessary: d.reportsUnnecessary,
               reportsDeprecated: d.reportsDeprecated,
-              relatedInformation: map38(d.relatedInformation, formatRelatedInformation)
+              relatedInformation: map39(d.relatedInformation, formatRelatedInformation)
             })
           );
         }
@@ -250195,7 +250238,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             false
           ) })) : result.map((details) => ({
             ...details,
-            codeActions: map38(details.codeActions, (action) => this.mapCodeAction(action)),
+            codeActions: map39(details.codeActions, (action) => this.mapCodeAction(action)),
             documentation: this.mapDisplayParts(details.documentation, project),
             tags: this.mapJSDocTagInfo(details.tags, project, useDisplayParts)
           }));
@@ -250335,7 +250378,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
           this.projectService.closeClientFile(file2);
         }
         mapLocationNavigationBarItems(items, scriptInfo) {
-          return map38(items, (item) => ({
+          return map39(items, (item) => ({
             text: item.text,
             kind: item.kind,
             kindModifiers: item.kindModifiers,
@@ -250356,7 +250399,7 @@ Project '${project.projectName}' (${ProjectKind[project.projectKind]}) ${counter
             kindModifiers: tree.kindModifiers,
             spans: tree.spans.map((span) => toProtocolTextSpan(span, scriptInfo)),
             nameSpan: tree.nameSpan && toProtocolTextSpan(tree.nameSpan, scriptInfo),
-            childItems: map38(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
+            childItems: map39(tree.childItems, (item) => this.toLocationNavigationTree(item, scriptInfo))
           };
         }
         getNavigationTree(args, simplifiedResult) {
@@ -250748,7 +250791,7 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
           const { locations } = args;
           const { file: file2, languageService } = this.getFileAndLanguageServiceForSyntacticOperation(args);
           const scriptInfo = Debug.checkDefined(this.projectService.getScriptInfo(file2));
-          return map38(locations, (location) => {
+          return map39(locations, (location) => {
             const pos = this.getPosition(location, scriptInfo);
             const selectionRange = languageService.getSmartSelectionRange(file2, pos);
             return simplifiedResult ? this.mapSelectionRange(selectionRange, scriptInfo) : selectionRange;
@@ -251897,8 +251940,8 @@ Additional information: BADCLIENT: Bad error code, ${badCode} not found in range
         installPackage(options) {
           this.packageInstallId++;
           const request = { kind: "installPackage", ...options, id: this.packageInstallId };
-          const promise2 = new Promise((resolve4, reject) => {
-            (this.packageInstalledPromise ?? (this.packageInstalledPromise = /* @__PURE__ */ new Map())).set(this.packageInstallId, { resolve: resolve4, reject });
+          const promise2 = new Promise((resolve5, reject) => {
+            (this.packageInstalledPromise ?? (this.packageInstalledPromise = /* @__PURE__ */ new Map())).set(this.packageInstallId, { resolve: resolve5, reject });
           });
           this.installer.send(request);
           return promise2;
@@ -254127,7 +254170,7 @@ function build(state2, object3) {
     }
     return node2;
   }
-  const map38 = tag.represent(object3);
+  const map39 = tag.represent(object3);
   const style = new Style();
   style.tagged = !implicitTag;
   const node = {
@@ -254137,7 +254180,7 @@ function build(state2, object3) {
     items: []
   };
   if (!state2.noRefs) state2.refs.set(object3, node);
-  for (const [objectKey, objectValue] of map38) {
+  for (const [objectKey, objectValue] of map39) {
     const key = build(state2, objectKey);
     if (key === INVALID) continue;
     const value = build(state2, objectValue);
@@ -254499,8 +254542,8 @@ function writeFlowMapping(state2, level, node) {
     if (explicitPair) pairBuffer += "? ";
     else if (state2.quoteFlowKeys) pairBuffer += '"';
     const valueText = writeNode(state2, level, value, {});
-    const sep4 = state2.flowSkipColonSpace || valueText === "" ? "" : " ";
-    pairBuffer += `${keyText}${state2.quoteFlowKeys && !explicitPair ? '"' : ""}:${sep4}${valueText}`;
+    const sep5 = state2.flowSkipColonSpace || valueText === "" ? "" : " ";
+    pairBuffer += `${keyText}${state2.quoteFlowKeys && !explicitPair ? '"' : ""}:${sep5}${valueText}`;
     result += pairBuffer;
   }
   const pad = state2.flowBracketPadding && result !== "" ? " " : "";
@@ -254597,8 +254640,8 @@ function writeNode(state2, level, node, ctx) {
       if (anchor !== null) props.push(anchor);
       if (tag !== null) props.push(tag);
     }
-    const sep4 = body === "" || body.charCodeAt(0) === CHAR_LINE_FEED ? "" : " ";
-    body = `${props.join(" ")}${sep4}${body}`;
+    const sep5 = body === "" || body.charCodeAt(0) === CHAR_LINE_FEED ? "" : " ";
+    body = `${props.join(" ")}${sep5}${body}`;
   }
   return body;
 }
@@ -254643,8 +254686,8 @@ function present(documents, options) {
         block: true,
         compact: true
       });
-      const sep4 = body === "" ? "" : hasDirectives || rootStartsOwnLine(doc.contents) ? "\n" : " ";
-      result += `---${sep4}${body}
+      const sep5 = body === "" ? "" : hasDirectives || rootStartsOwnLine(doc.contents) ? "\n" : " ";
+      result += `---${sep5}${body}
 `;
     } else result += writeNode(state2, 0, doc.contents, {
       block: true,
@@ -254958,9 +255001,9 @@ var init_js_yaml = __esm({
       create: () => ({}),
       identify: isPlainObject,
       represent: (o) => {
-        const map38 = /* @__PURE__ */ new Map();
-        for (const key of Object.keys(o)) map38.set(key, o[key]);
-        return map38;
+        const map39 = /* @__PURE__ */ new Map();
+        for (const key of Object.keys(o)) map39.set(key, o[key]);
+        return map39;
       },
       addPair: (container, key, value) => {
         if (key !== null && typeof key === "object") return "object-based map does not support complex keys";
@@ -254985,9 +255028,9 @@ var init_js_yaml = __esm({
       create: () => /* @__PURE__ */ new Set(),
       identify: (data) => data instanceof Set,
       represent: (data) => {
-        const map38 = /* @__PURE__ */ new Map();
-        for (const key of data) map38.set(key, null);
-        return map38;
+        const map39 = /* @__PURE__ */ new Map();
+        for (const key of data) map39.set(key, null);
+        return map39;
       },
       addPair: (container, key, value) => {
         if (value !== null) return "cannot resolve a set item";
@@ -255100,19 +255143,19 @@ var init_js_yaml = __esm({
       identify: (data) => data instanceof Map || isPlainObject(data),
       represent: (data) => {
         if (data instanceof Map) return data;
-        const map38 = /* @__PURE__ */ new Map();
+        const map39 = /* @__PURE__ */ new Map();
         const obj = data;
-        for (const key of Object.keys(obj)) map38.set(key, obj[key]);
-        return map38;
+        for (const key of Object.keys(obj)) map39.set(key, obj[key]);
+        return map39;
       }
     });
     legacyMapTag = defineMappingTag("tag:yaml.org,2002:map", {
       create: () => ({}),
       identify: isPlainObject,
       represent: (o) => {
-        const map38 = /* @__PURE__ */ new Map();
-        for (const key of Object.keys(o)) map38.set(key, o[key]);
-        return map38;
+        const map39 = /* @__PURE__ */ new Map();
+        for (const key of Object.keys(o)) map39.set(key, o[key]);
+        return map39;
       },
       addPair: (container, key, value) => {
         const normalizedKey = normalizeKey(key);
@@ -255475,30 +255518,72 @@ var init_load_spec = __esm({
   }
 });
 
+// src/commands/build/isolated.ts
+var import_path, import_rxjs7, import_operators6, isolatedPlugin, isOutside;
+var init_isolated = __esm({
+  "src/commands/build/isolated.ts"() {
+    import_path = require("path");
+    import_rxjs7 = __toESM(require_cjs());
+    import_operators6 = __toESM(require_operators());
+    isolatedPlugin = (root) => ({
+      name: "gcli-isolated",
+      setup(build2) {
+        const own = (0, import_path.resolve)(root);
+        build2.onResolve({ filter: /^[^./]/ }, (args) => {
+          if (args.pluginData?.gcliIsolated) return void 0;
+          return (0, import_rxjs7.lastValueFrom)(
+            (0, import_rxjs7.defer)(
+              () => build2.resolve(args.path, {
+                resolveDir: args.resolveDir,
+                kind: args.kind,
+                importer: args.importer,
+                pluginData: { gcliIsolated: true }
+              })
+            ).pipe(
+              // only "found above the package" changes; everything else goes
+              // back to esbuild's own resolution (and its leniency for an
+              // optional require inside try / catch)
+              (0, import_operators6.map)(
+                (result) => !result.errors.length && isOutside(own, result.path) ? { path: args.path, external: true } : void 0
+              )
+            )
+          );
+        });
+      }
+    });
+    isOutside = (root, file2) => {
+      if (!file2 || !file2.startsWith(import_path.sep)) return false;
+      const rel = (0, import_path.relative)(root, file2);
+      return rel.startsWith("..");
+    };
+  }
+});
+
 // src/commands/build/build.ts
 var build_exports = {};
 __export(build_exports, {
   default: () => build_default
 });
-var import_esbuild_decorators, import_esbuild, import_fs3, import_path, import_rxjs7, import_operators6, esbuildMessage, sizeOf, build_default;
+var import_esbuild_decorators, import_esbuild, import_fs3, import_path2, import_rxjs8, import_operators7, esbuildMessage, sizeOf, build_default;
 var init_build = __esm({
   "src/commands/build/build.ts"() {
     import_esbuild_decorators = __toESM(require_src());
     import_esbuild = __toESM(require("esbuild"));
     import_fs3 = require("fs");
-    import_path = require("path");
-    import_rxjs7 = __toESM(require_cjs());
-    import_operators6 = __toESM(require_operators());
+    import_path2 = require("path");
+    import_rxjs8 = __toESM(require_cjs());
+    import_operators7 = __toESM(require_operators());
     init_ui();
     init_load_spec();
+    init_isolated();
     esbuildMessage = (m2) => `${m2.location ? `${m2.location.file}:${m2.location.line} ` : ""}${m2.text}`;
     sizeOf = (file2) => file2 && (0, import_fs3.existsSync)(file2) ? ` (${bytes((0, import_fs3.statSync)(file2).size)})` : "";
     build_default = async (args) => {
-      return (0, import_rxjs7.lastValueFrom)(
+      return (0, import_rxjs8.lastValueFrom)(
         loadSpec().pipe(
-          (0, import_operators6.switchMap)(
-            (config2) => (0, import_rxjs7.of)(config2).pipe(
-              (0, import_operators6.map)((config3) => ({
+          (0, import_operators7.switchMap)(
+            (config2) => (0, import_rxjs8.of)(config2).pipe(
+              (0, import_operators7.map)((config3) => ({
                 esbuild: import_esbuild.default,
                 options: {
                   entryPoints: args.files?.length ? args.files : [config3?.function?.file ?? config3?.file ?? "index.ts"],
@@ -255510,23 +255595,28 @@ var init_build = __esm({
                   external: args.external ?? config3?.options?.bundler?.external ?? []
                 }
               })),
-              (0, import_operators6.switchMap)(({ esbuild: esbuild2, options }) => {
+              (0, import_operators7.switchMap)(({ esbuild: esbuild2, options }) => {
                 const entry = options.entryPoints.join(", ");
-                return (0, import_rxjs7.defer)(
+                return (0, import_rxjs8.defer)(
                   () => esbuild2.build({
                     ...options,
                     // Decorator metadata needs the project's tsconfig; without one
                     // the plugin failed with "[plugin: tsc] failed to open
                     // 'undefined'" - plain esbuild handles a project without it.
-                    plugins: (0, import_fs3.existsSync)((0, import_path.join)(process.cwd(), "tsconfig.json")) ? [
-                      (0, import_esbuild_decorators.esbuildDecorators)({
-                        tsconfig: "./tsconfig.json",
-                        cwd: process.cwd()
-                      })
-                    ] : []
+                    plugins: [
+                      // only this package's own node_modules (a service with
+                      // its own lock file inside a monorepo)
+                      ...config2?.options?.bundler?.isolated ? [isolatedPlugin(process.cwd())] : [],
+                      ...(0, import_fs3.existsSync)((0, import_path2.join)(process.cwd(), "tsconfig.json")) ? [
+                        (0, import_esbuild_decorators.esbuildDecorators)({
+                          tsconfig: "./tsconfig.json",
+                          cwd: process.cwd()
+                        })
+                      ] : []
+                    ]
                   })
                 ).pipe(
-                  (0, import_operators6.tap)((data) => {
+                  (0, import_operators7.tap)((data) => {
                     data.warnings.forEach(
                       (w) => ui.warn(esbuildMessage(w), "build")
                     );
@@ -255559,10 +255649,10 @@ function pollUntilReady(projectId, clusterId, {
       project's list leaves deleted clusters out) */
   goneMeansDeleted = false
 } = {}) {
-  return (0, import_rxjs8.firstValueFrom)(
-    (0, import_rxjs8.timer)(0, intervalMs).pipe(
-      (0, import_operators7.switchMap)(() => GraphqlClienAPI.projectClusters(projectId)),
-      (0, import_operators7.switchMap)((clusters) => {
+  return (0, import_rxjs9.firstValueFrom)(
+    (0, import_rxjs9.timer)(0, intervalMs).pipe(
+      (0, import_operators8.switchMap)(() => GraphqlClienAPI.projectClusters(projectId)),
+      (0, import_operators8.switchMap)((clusters) => {
         const cluster = (clusters || []).find((c) => c.id === clusterId);
         if (!cluster && goneMeansDeleted) {
           return [{ id: clusterId, status: "deleted" }];
@@ -255572,13 +255662,13 @@ function pollUntilReady(projectId, clusterId, {
         }
         return [cluster];
       }),
-      (0, import_operators7.tap)(
+      (0, import_operators8.tap)(
         (cluster) => Logger.info(`[cluster ${clusterId}] status: ${cluster.status}`)
       ),
-      (0, import_operators7.first)((cluster) => TERMINAL_STATUSES.includes(cluster.status)),
-      (0, import_operators7.timeout)({
+      (0, import_operators8.first)((cluster) => TERMINAL_STATUSES.includes(cluster.status)),
+      (0, import_operators8.timeout)({
         each: timeoutMs,
-        with: () => (0, import_rxjs8.throwError)(
+        with: () => (0, import_rxjs9.throwError)(
           () => new Error(
             `Timed out after ${timeoutMs}ms waiting for cluster ${clusterId} to reach a terminal status.`
           )
@@ -255587,11 +255677,11 @@ function pollUntilReady(projectId, clusterId, {
     )
   );
 }
-var import_rxjs8, import_operators7, TERMINAL_STATUSES;
+var import_rxjs9, import_operators8, TERMINAL_STATUSES;
 var init_poll_until_ready = __esm({
   "src/commands/cluster/helpers/poll-until-ready.ts"() {
-    import_rxjs8 = __toESM(require_cjs());
-    import_operators7 = __toESM(require_operators());
+    import_rxjs9 = __toESM(require_cjs());
+    import_operators8 = __toESM(require_operators());
     init_gql_client();
     init_log();
     TERMINAL_STATUSES = ["ready", "error", "deleted"];
@@ -255599,15 +255689,15 @@ var init_poll_until_ready = __esm({
 });
 
 // src/commands/cluster/helpers/virtual-cluster.ts
-var import_rxjs9, provisionVirtualCluster;
+var import_rxjs10, provisionVirtualCluster;
 var init_virtual_cluster = __esm({
   "src/commands/cluster/helpers/virtual-cluster.ts"() {
-    import_rxjs9 = __toESM(require_cjs());
+    import_rxjs10 = __toESM(require_cjs());
     init_gql_client();
     provisionVirtualCluster = async (projectId, name2, host, dedicatedLoadBalancer) => {
       let hostClusterId;
       if (host) {
-        const clusters = await (0, import_rxjs9.lastValueFrom)(
+        const clusters = await (0, import_rxjs10.lastValueFrom)(
           GraphqlClienAPI.projectClustersDetailed(projectId)
         );
         hostClusterId = clusters.find(
@@ -255619,7 +255709,7 @@ var init_virtual_cluster = __esm({
           );
         }
       }
-      return (0, import_rxjs9.lastValueFrom)(
+      return (0, import_rxjs10.lastValueFrom)(
         GraphqlClienAPI.provisionProjectVirtualCluster(projectId, {
           name: name2,
           hostClusterId,
@@ -255635,12 +255725,12 @@ var create_exports = {};
 __export(create_exports, {
   default: () => create_default
 });
-var import_rxjs10, import_rxjs11, import_operators8, create_default;
+var import_rxjs11, import_rxjs12, import_operators9, create_default;
 var init_create = __esm({
   "src/commands/cluster/create.ts"() {
-    import_rxjs10 = __toESM(require_cjs());
     import_rxjs11 = __toESM(require_cjs());
-    import_operators8 = __toESM(require_operators());
+    import_rxjs12 = __toESM(require_cjs());
+    import_operators9 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -255648,20 +255738,20 @@ var init_create = __esm({
     init_poll_until_ready();
     init_virtual_cluster();
     create_default = async (cmd) => {
-      const result = await (0, import_rxjs10.lastValueFrom)(
+      const result = await (0, import_rxjs11.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators8.switchMap)(
+          (0, import_operators9.switchMap)(
             (projectId) => loadSpec(
               cmd.spec ?? "cluster.yaml"
             ).pipe(
-              (0, import_operators8.map)((data) => ({
+              (0, import_operators9.map)((data) => ({
                 projectId,
                 ...data ? data.cluster ?? data : {}
               }))
             )
           ),
-          (0, import_operators8.switchMap)(
-            ({ projectId, ...data }) => (cmd.virtual || data.provider === "vcluster" ? (0, import_rxjs11.from)(
+          (0, import_operators9.switchMap)(
+            ({ projectId, ...data }) => (cmd.virtual || data.provider === "vcluster" ? (0, import_rxjs12.from)(
               provisionVirtualCluster(
                 projectId,
                 cmd.name || data.name,
@@ -255677,9 +255767,9 @@ var init_create = __esm({
               singleNode: cmd.singleNode ?? data.singleNode,
               withLoadBalancer: data.loadBalancer,
               controlPlanes: data.controlPlanes
-            })).pipe((0, import_operators8.map)((cluster) => ({ projectId, cluster })))
+            })).pipe((0, import_operators9.map)((cluster) => ({ projectId, cluster })))
           ),
-          (0, import_operators8.tap)(({ cluster }) => {
+          (0, import_operators9.tap)(({ cluster }) => {
             Logger.table([cluster]);
             if (!cmd.wait) {
               Logger.info(
@@ -255705,22 +255795,22 @@ var init_create = __esm({
 });
 
 // src/commands/cluster/helpers/cluster-change.ts
-var import_rxjs12, import_operators9, resolveClusterTarget, parseIntOption, describeChange, runClusterChange;
+var import_rxjs13, import_operators10, resolveClusterTarget, parseIntOption, describeChange, runClusterChange;
 var init_cluster_change = __esm({
   "src/commands/cluster/helpers/cluster-change.ts"() {
-    import_rxjs12 = __toESM(require_cjs());
-    import_operators9 = __toESM(require_operators());
+    import_rxjs13 = __toESM(require_cjs());
+    import_operators10 = __toESM(require_operators());
     init_helpers();
     init_log();
     init_poll_until_ready();
-    resolveClusterTarget = async (cmd) => (0, import_rxjs12.lastValueFrom)(
+    resolveClusterTarget = async (cmd) => (0, import_rxjs13.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators9.switchMap)(
+        (0, import_operators10.switchMap)(
           (projectId) => resolveClusterId(projectId, {
             clusterId: cmd.cluster,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators9.map)((clusterId) => {
+            (0, import_operators10.map)((clusterId) => {
               if (!clusterId) {
                 throw new Error(
                   "Pass --cluster <id> or --clusterName <name> (see gcli cluster:list)."
@@ -255753,7 +255843,7 @@ var init_cluster_change = __esm({
       error: cluster.error ?? ""
     });
     runClusterChange = async (action, projectId, change$, wait) => {
-      const cluster = await (0, import_rxjs12.lastValueFrom)(change$);
+      const cluster = await (0, import_rxjs13.lastValueFrom)(change$);
       Logger.table([describeChange(cluster)]);
       if (!wait) {
         if (cluster.status !== "ready") {
@@ -256100,7 +256190,7 @@ async function waitForStorage(clusterId, name2, timeoutMs) {
   const deadline = Date.now() + timeoutMs;
   let last2 = "";
   while (Date.now() < deadline) {
-    const nodes = await (0, import_rxjs13.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId));
+    const nodes = await (0, import_rxjs14.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId));
     const node = nodes.find((n) => n.name === name2);
     if (node?.storage === "ready") {
       Logger.success(`${name2} carries volumes now.`);
@@ -256123,10 +256213,10 @@ async function waitForStorage(clusterId, name2, timeoutMs) {
   );
   return false;
 }
-var import_rxjs13, sleep2, node_storage_default;
+var import_rxjs14, sleep2, node_storage_default;
 var init_node_storage = __esm({
   "src/commands/cluster/node-storage.ts"() {
-    import_rxjs13 = __toESM(require_cjs());
+    import_rxjs14 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_cluster_change();
@@ -256141,7 +256231,7 @@ var init_node_storage = __esm({
         throw new Error("--timeout is in minutes, 1 to 120");
       }
       const { clusterId } = await resolveClusterTarget(cmd);
-      const node = await (0, import_rxjs13.lastValueFrom)(
+      const node = await (0, import_rxjs14.lastValueFrom)(
         GraphqlClienAPI.setClusterNodeStorage(clusterId, name2, !cmd.off)
       );
       if (cmd.off) {
@@ -256169,10 +256259,10 @@ var apply_exports = {};
 __export(apply_exports, {
   default: () => apply_default
 });
-var import_rxjs14, readDesired, apply_default, applyMachines, applyCluster;
+var import_rxjs15, readDesired, apply_default, applyMachines, applyCluster;
 var init_apply = __esm({
   "src/commands/cluster/apply.ts"() {
-    import_rxjs14 = __toESM(require_cjs());
+    import_rxjs15 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
@@ -256185,7 +256275,7 @@ var init_apply = __esm({
     init_virtual_cluster();
     init_node_storage();
     readDesired = async (spec) => {
-      const data = await (0, import_rxjs14.lastValueFrom)(
+      const data = await (0, import_rxjs15.lastValueFrom)(
         loadSpec(
           spec ?? "cluster.yaml"
         )
@@ -256208,7 +256298,7 @@ var init_apply = __esm({
       return result;
     };
     applyMachines = async (clusterId, machines, cmd) => {
-      const nodes = await (0, import_rxjs14.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId));
+      const nodes = await (0, import_rxjs15.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId));
       const { steps, notes } = planMachines(machines, nodes, clusterId);
       notes.forEach((n) => Logger.warn(`note: ${n}`));
       if (!steps.length) {
@@ -256231,7 +256321,7 @@ var init_apply = __esm({
           continue;
         }
         Logger.info(`-> ${step2.description}`);
-        await (0, import_rxjs14.lastValueFrom)(
+        await (0, import_rxjs15.lastValueFrom)(
           GraphqlClienAPI.setClusterNodeStorage(clusterId, step2.name, step2.enabled)
         );
         if (step2.enabled && !await waitForStorage(clusterId, step2.name, 40 * 6e4)) {
@@ -256246,8 +256336,8 @@ var init_apply = __esm({
         throw new Error(`Invalid cluster spec:
 - ${errors.join("\n- ")}`);
       }
-      const projectId = await (0, import_rxjs14.lastValueFrom)(parseProjectId(cmd.project));
-      const clusters = await (0, import_rxjs14.lastValueFrom)(
+      const projectId = await (0, import_rxjs15.lastValueFrom)(parseProjectId(cmd.project));
+      const clusters = await (0, import_rxjs15.lastValueFrom)(
         GraphqlClienAPI.projectClustersDetailed(projectId)
       );
       const current = clusters.find(
@@ -256300,7 +256390,7 @@ var init_apply = __esm({
             desired.name,
             desired.host,
             desired.loadBalancer
-          ) : await (0, import_rxjs14.lastValueFrom)(
+          ) : await (0, import_rxjs15.lastValueFrom)(
             GraphqlClienAPI.provisionProjectCluster(projectId, {
               name: desired.name,
               imageId: desired.imageId,
@@ -256321,7 +256411,7 @@ var init_apply = __esm({
             );
           }
         } else if (step2.kind === "autoscale") {
-          await (0, import_rxjs14.lastValueFrom)(
+          await (0, import_rxjs15.lastValueFrom)(
             GraphqlClienAPI.updateProjectClusterAutoscale(
               projectId,
               clusterId,
@@ -256366,18 +256456,18 @@ var list_exports = {};
 __export(list_exports, {
   default: () => list_default
 });
-var import_rxjs15, import_operators10, list_default;
+var import_rxjs16, import_operators11, list_default;
 var init_list = __esm({
   "src/commands/cluster/list.ts"() {
-    import_rxjs15 = __toESM(require_cjs());
-    import_operators10 = __toESM(require_operators());
+    import_rxjs16 = __toESM(require_cjs());
+    import_operators11 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default = (cmd) => (0, import_rxjs15.lastValueFrom)(
+    list_default = (cmd) => (0, import_rxjs16.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators10.switchMap)((projectId) => GraphqlClienAPI.projectClusters(projectId)),
-        (0, import_operators10.tap)((clusters) => {
+        (0, import_operators11.switchMap)((projectId) => GraphqlClienAPI.projectClusters(projectId)),
+        (0, import_operators11.tap)((clusters) => {
           if (!clusters?.length) {
             Logger.info(
               "No private clusters for this project yet - this project runs on the shared cluster. See cluster:create."
@@ -256409,24 +256499,24 @@ var teardown_exports = {};
 __export(teardown_exports, {
   default: () => teardown_default
 });
-var import_rxjs16, import_operators11, teardown_default;
+var import_rxjs17, import_operators12, teardown_default;
 var init_teardown = __esm({
   "src/commands/cluster/teardown.ts"() {
-    import_rxjs16 = __toESM(require_cjs());
-    import_operators11 = __toESM(require_operators());
+    import_rxjs17 = __toESM(require_cjs());
+    import_operators12 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_poll_until_ready();
     teardown_default = async (cmd) => {
-      const { projectId, cluster } = await (0, import_rxjs16.lastValueFrom)(
+      const { projectId, cluster } = await (0, import_rxjs17.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators11.switchMap)(
+          (0, import_operators12.switchMap)(
             (projectId2) => GraphqlClienAPI.teardownProjectCluster(cmd.cluster).pipe(
-              (0, import_operators11.map)((cluster2) => ({ projectId: projectId2, cluster: cluster2 }))
+              (0, import_operators12.map)((cluster2) => ({ projectId: projectId2, cluster: cluster2 }))
             )
           ),
-          (0, import_operators11.tap)(({ cluster: cluster2 }) => {
+          (0, import_operators12.tap)(({ cluster: cluster2 }) => {
             Logger.table([cluster2]);
             if (!cmd.wait) {
               Logger.info(
@@ -256454,23 +256544,202 @@ var kubeconfig_exports = {};
 __export(kubeconfig_exports, {
   default: () => kubeconfig_default
 });
-var import_rxjs17, import_operators12, kubeconfig_default;
+var import_rxjs18, import_operators13, kubeconfig_default;
 var init_kubeconfig = __esm({
   "src/commands/cluster/kubeconfig.ts"() {
-    import_rxjs17 = __toESM(require_cjs());
-    import_operators12 = __toESM(require_operators());
+    import_rxjs18 = __toESM(require_cjs());
+    import_operators13 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_read_file();
-    kubeconfig_default = (cmd) => (0, import_rxjs17.lastValueFrom)(
+    kubeconfig_default = (cmd) => (0, import_rxjs18.lastValueFrom)(
       GraphqlClienAPI.clusterKubeconfig(cmd.cluster).pipe(
-        (0, import_operators12.switchMap)(
+        (0, import_operators13.switchMap)(
           (kubeconfig) => cmd.output ? writeFileAsObservable(cmd.output, kubeconfig).pipe(
-            (0, import_operators12.tap)(() => Logger.info(`Wrote kubeconfig to ${cmd.output}`))
-          ) : (0, import_rxjs17.of)(kubeconfig).pipe((0, import_operators12.tap)((value) => Logger.log(value)))
+            (0, import_operators13.tap)(() => Logger.info(`Wrote kubeconfig to ${cmd.output}`))
+          ) : (0, import_rxjs18.of)(kubeconfig).pipe((0, import_operators13.tap)((value) => Logger.log(value)))
         )
       )
     );
+  }
+});
+
+// src/commands/cluster/helpers/health-view.ts
+function bar(percent, width = 20) {
+  const p = Math.max(0, Math.min(100, percent ?? 0));
+  if (!unicode) {
+    const full2 = Math.round(p / 100 * width);
+    return paint("#".repeat(full2), [toneOf(p)]) + paint("-".repeat(width - full2), ["dim"]);
+  }
+  const eighths = Math.round(p / 100 * width * 8);
+  const full = Math.floor(eighths / 8);
+  const part = BLOCKS[eighths % 8];
+  const rest = width - full - (part ? 1 : 0);
+  return paint("\u2588".repeat(full) + part, [percent == null ? "dim" : toneOf(p)]) + paint("\u2591".repeat(rest), ["dim"]);
+}
+function amountOf(kind, percent, capacity) {
+  const total = capacity ? capacity[kind] / UNITS[kind].divisor : 0;
+  if (percent == null || !(total > 0)) return "";
+  return `${num(total * percent / 100)} of ${num(total)} ${UNITS[kind].unit}`;
+}
+function sizeOf2(capacity) {
+  if (!capacity) return "";
+  const source = capacity.cpuSource === "limit" || capacity.memSource === "limit" ? "cluster size" : "nodes";
+  return `${num(capacity.cpu / 1e3)} CPU ${SYMBOLS.dot} ${num(capacity.memory / GIB)} GiB, ${source}`;
+}
+function ago(iso, now) {
+  if (!iso) return "";
+  const s2 = Math.max(0, Math.round((now.getTime() - Date.parse(iso)) / 1e3));
+  if (s2 < 60) return `${s2}s ago`;
+  if (s2 < 3600) return `${Math.floor(s2 / 60)}m ago`;
+  return `${Math.floor(s2 / 3600)}h ago`;
+}
+function headerLine(c, now) {
+  const overall = c.overall || c.status;
+  const badge = paint(`${dot} ${overall}`, OVERALL_STYLE[overall] ?? ["dim"]);
+  const details = [
+    c.status !== "ready" ? c.status : "",
+    sizeOf2(c.health?.capacity),
+    c.agentVersion ? `agent ${c.agentVersion}` : "",
+    c.agentOnline === false ? "agent offline" : "",
+    ago(c.health?.reportedAt ?? c.agentLastSeenAt, now)
+  ].filter(Boolean);
+  return `${paint(c.name, ["bold"])}  ${badge}  ${paint(
+    details.join(` ${SYMBOLS.dot} `),
+    ["dim"]
+  )}`;
+}
+function meterLines(c) {
+  const h2 = c.health;
+  if (!h2) return [paint("No health report yet", ["dim"])];
+  const fromHost = h2.usageSource === "host" ? paint("(host)", ["dim"]) : "";
+  const rows = [
+    ["CPU requested", h2.cpuRequestsPercent, "cpu", ""],
+    ["CPU used", h2.cpuUsagePercent, "cpu", fromHost],
+    ["Mem requested", h2.memRequestsPercent, "memory", ""],
+    ["Mem used", h2.memUsagePercent, "memory", fromHost]
+  ];
+  return rows.map(
+    ([label, value, kind, note]) => [
+      label.padEnd(14),
+      bar(value),
+      pct(value).padStart(5),
+      "  ",
+      amountOf(kind, value, h2.capacity).padEnd(16),
+      note
+    ].join(" ").trimEnd()
+  );
+}
+function podsLine(c) {
+  const h2 = c.health;
+  if (!h2) return "";
+  const pending = h2.pendingPods ? paint(`pending ${h2.pendingPods}`, ["yellow"]) : "pending 0";
+  return [
+    `Pods ${h2.pods ?? 0}`,
+    pending,
+    `runtime ${readiness(h2.fissionReady)}`,
+    `prometheus ${readiness(h2.prometheusReady)}`
+  ].join(` ${SYMBOLS.dot} `);
+}
+function nodeLines(nodes, capacity) {
+  if (!nodes?.length) return [];
+  const ofHost = capacity?.cpuSource === "limit";
+  const width = Math.max(5, ...nodes.map((n) => n.name.length));
+  const head = paint(
+    `${"Nodes".padEnd(width)}  ${"pods".padStart(4)}  cpu requested`,
+    ["dim"]
+  );
+  return [
+    head,
+    ...nodes.map((n) => {
+      const state2 = [
+        n.ready === false ? paint("not ready", ["red"]) : "",
+        n.cordoned ? paint("cordoned", ["yellow"]) : "",
+        n.role === "control-plane" ? paint("control plane", ["dim"]) : ""
+      ].filter(Boolean);
+      const cores = `${num((n.cpuRequests ?? 0) / 1e3)} CPU`;
+      const usage = ofHost ? [cores.padStart(8)] : [
+        bar(nodeRequests(n), 10),
+        pct(nodeRequests(n)).padStart(4),
+        paint(
+          n.cpuAllocatable ? `${cores.replace(" CPU", "")} of ${num(n.cpuAllocatable / 1e3)} CPU` : "",
+          ["dim"]
+        )
+      ];
+      return [
+        n.name.padEnd(width),
+        String(n.podCount ?? 0).padStart(4),
+        ...usage,
+        ...state2
+      ].filter(Boolean).join("  ");
+    })
+  ];
+}
+function issueLines(c) {
+  const issues = c.issues ?? [];
+  if (!issues.length) {
+    return [`${paint(SYMBOLS.success, ["green", "bold"])}  No issues`];
+  }
+  return issues.map((i2) => {
+    const [symbol2, style] = ISSUE_SYMBOL[i2.severity] ?? ISSUE_SYMBOL.info;
+    return `${paint(symbol2, style)}  ${i2.message}`;
+  });
+}
+function healthView(overview, latest, now) {
+  const nodes = nodeLines(latest?.nodes, overview.health?.capacity);
+  const pods = podsLine(overview);
+  return [
+    headerLine(overview, now),
+    rule(74),
+    ...meterLines(overview),
+    ...pods ? ["", pods] : [],
+    ...nodes.length ? ["", ...nodes] : [],
+    "",
+    ...issueLines(overview)
+  ];
+}
+function statusView(clusters, now) {
+  return clusters.flatMap((c, index) => {
+    const h2 = c.health;
+    const compact2 = (label, requested, used) => `  ${label.padEnd(4)}${bar(requested, 14)} ${pct(requested).padStart(4)} requested ${SYMBOLS.dot} ${pct(used)} used`;
+    return [
+      ...index ? [""] : [],
+      headerLine(c, now),
+      ...h2 ? [
+        compact2("CPU", h2.cpuRequestsPercent, h2.cpuUsagePercent),
+        compact2("Mem", h2.memRequestsPercent, h2.memUsagePercent)
+      ] : [`  ${paint("No health report yet", ["dim"])}`],
+      ...(c.issues ?? []).length ? issueLines(c).map((l) => `  ${l}`) : []
+    ];
+  });
+}
+var BLOCKS, toneOf, pct, num, GIB, UNITS, OVERALL_STYLE, dot, readiness, nodeRequests, ISSUE_SYMBOL, rule;
+var init_health_view = __esm({
+  "src/commands/cluster/helpers/health-view.ts"() {
+    init_ui();
+    BLOCKS = ["", "\u258F", "\u258E", "\u258D", "\u258C", "\u258B", "\u258A", "\u2589"];
+    toneOf = (percent) => percent >= 85 ? "red" : percent >= 70 ? "yellow" : "green";
+    pct = (v) => v == null ? "-" : `${Math.round(v)}%`;
+    num = (v) => String(v >= 100 ? Math.round(v) : Math.round(v * 10) / 10);
+    GIB = 1024 ** 3;
+    UNITS = {
+      cpu: { divisor: 1e3, unit: "CPU" },
+      memory: { divisor: GIB, unit: "GiB" }
+    };
+    OVERALL_STYLE = {
+      healthy: ["green"],
+      degraded: ["yellow"],
+      critical: ["red"]
+    };
+    dot = unicode ? "\u25CF" : "*";
+    readiness = (ok) => ok ? paint(`${SYMBOLS.success} ready`, ["green"]) : paint(`${SYMBOLS.error} not ready`, ["red"]);
+    nodeRequests = (n) => n.cpuAllocatable ? (n.cpuRequests ?? 0) / n.cpuAllocatable * 100 : null;
+    ISSUE_SYMBOL = {
+      critical: [SYMBOLS.error, ["red", "bold"]],
+      warning: [SYMBOLS.warn, ["yellow", "bold"]],
+      info: [SYMBOLS.info, ["cyan", "bold"]]
+    };
+    rule = (width) => paint((unicode ? "\u2500" : "-").repeat(width), ["dim"]);
   }
 });
 
@@ -256480,14 +256749,16 @@ __export(status_exports, {
   default: () => status_default,
   overviewRow: () => overviewRow
 });
-var import_rxjs18, pct, overviewRow, status_default;
+var import_rxjs19, pct2, overviewRow, status_default;
 var init_status = __esm({
   "src/commands/cluster/status.ts"() {
-    import_rxjs18 = __toESM(require_cjs());
+    import_rxjs19 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
-    pct = (v) => v == null ? "-" : `${Math.round(v)}%`;
+    init_ui();
+    init_health_view();
+    pct2 = (v) => v == null ? "-" : `${Math.round(v)}%`;
     overviewRow = (c) => ({
       name: c.name,
       id: c.clusterId,
@@ -256496,19 +256767,20 @@ var init_status = __esm({
       agent: c.agentOnline ? "online" : "offline",
       nodes: c.health ? `${c.health.nodesReady ?? 0}/${c.health.nodesTotal ?? 0} ready` : "-",
       pods: c.health ? `${c.health.pods ?? 0} (${c.health.pendingPods ?? 0} pending)` : "-",
-      cpu: c.health ? `${pct(c.health.cpuUsagePercent)} used / ${pct(c.health.cpuRequestsPercent)} req` : "-",
-      mem: c.health ? `${pct(c.health.memUsagePercent)} used / ${pct(c.health.memRequestsPercent)} req` : "-",
+      cpu: c.health ? `${pct2(c.health.cpuUsagePercent)} used / ${pct2(c.health.cpuRequestsPercent)} req` : "-",
+      mem: c.health ? `${pct2(c.health.memUsagePercent)} used / ${pct2(c.health.memRequestsPercent)} req` : "-",
       autoscale: c.autoscale?.enabled ? `on ${c.autoscale.minWorkers}-${c.autoscale.maxWorkers}` : "off"
     });
     status_default = async (cmd) => {
-      const projectId = await (0, import_rxjs18.lastValueFrom)(parseProjectId(cmd.project));
-      const clusterId = await (0, import_rxjs18.lastValueFrom)(
+      if (cmd.json) humanOutputToStderr();
+      const projectId = await (0, import_rxjs19.lastValueFrom)(parseProjectId(cmd.project));
+      const clusterId = await (0, import_rxjs19.lastValueFrom)(
         resolveClusterId(projectId, {
           clusterId: cmd.cluster,
           clusterName: cmd.clusterName
         })
       );
-      const all = await (0, import_rxjs18.lastValueFrom)(
+      const all = await (0, import_rxjs19.lastValueFrom)(
         GraphqlClienAPI.projectClustersOverview(projectId)
       );
       const rows = clusterId ? all.filter((c) => c.clusterId === clusterId) : all;
@@ -256516,20 +256788,11 @@ var init_status = __esm({
         Logger.info(
           clusterId ? `No cluster ${clusterId} in this project.` : "No private clusters for this project - it runs on the shared cluster. See cluster:create."
         );
+      } else if (cmd.json) {
+        process.stdout.write(`${JSON.stringify(rows, null, 2)}
+`);
       } else {
-        Logger.table(rows.map(overviewRow));
-        const issues = rows.flatMap(
-          (c) => (c.issues ?? []).map((i2) => ({
-            cluster: c.name,
-            severity: i2.severity,
-            code: i2.code,
-            message: i2.message
-          }))
-        );
-        if (issues.length) {
-          Logger.log("Issues:");
-          Logger.table(issues);
-        }
+        ui.print(["", ...statusView(rows, /* @__PURE__ */ new Date()), ""].join("\n"));
       }
       return rows;
     };
@@ -256648,8 +256911,8 @@ async function ensureTalosctl(version3) {
     return "talosctl";
   }
   const asset = talosctlAssetName();
-  const dir = (0, import_path2.join)(mainDirectory, "bin");
-  const binary = (0, import_path2.join)(
+  const dir = (0, import_path3.join)(mainDirectory, "bin");
+  const binary = (0, import_path3.join)(
     dir,
     `talosctl-${version3}${asset.endsWith(".exe") ? ".exe" : ""}`
   );
@@ -256679,25 +256942,25 @@ async function ensureTalosctl(version3) {
   Logger.info(`talosctl ${version3} saved to ${binary}`);
   return binary;
 }
-var import_child_process2, import_crypto, import_fs4, import_promises, import_path2, RELEASES, VERSION_RE, clientVersionOf, runBinary;
+var import_child_process2, import_crypto, import_fs4, import_promises, import_path3, RELEASES, VERSION_RE, clientVersionOf, runBinary;
 var init_talosctl = __esm({
   "src/commands/cluster/helpers/talosctl.ts"() {
     import_child_process2 = require("child_process");
     import_crypto = require("crypto");
     import_fs4 = require("fs");
     import_promises = require("fs/promises");
-    import_path2 = require("path");
+    import_path3 = require("path");
     init_log();
     init_types();
     RELEASES = "https://github.com/siderolabs/talos/releases/download";
     VERSION_RE = /^v\d+\.\d+\.\d+$/;
     clientVersionOf = (output) => output.match(/Talos (v\d+\.\d+\.\d+\S*)/)?.[1] ?? null;
     runBinary = (binary, args, timeoutMs = 2e4) => new Promise(
-      (resolve4) => (0, import_child_process2.execFile)(
+      (resolve5) => (0, import_child_process2.execFile)(
         binary,
         args,
         { timeout: timeoutMs, maxBuffer: 10 * 1024 * 1024 },
-        (error48, stdout, stderr) => resolve4({
+        (error48, stdout, stderr) => resolve5({
           code: error48 ? error48.code ?? 1 : 0,
           stdout: String(stdout),
           stderr: String(stderr)
@@ -256712,34 +256975,34 @@ var attach_exports = {};
 __export(attach_exports, {
   default: () => attach_default
 });
-var import_promises2, import_os3, import_path3, import_readline, import_rxjs19, sleep3, ask, attach_default;
+var import_promises2, import_os3, import_path4, import_readline, import_rxjs20, sleep3, ask, attach_default;
 var init_attach2 = __esm({
   "src/commands/cluster/attach.ts"() {
     import_promises2 = require("fs/promises");
     import_os3 = require("os");
-    import_path3 = require("path");
+    import_path4 = require("path");
     import_readline = require("readline");
-    import_rxjs19 = __toESM(require_cjs());
+    import_rxjs20 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_attach();
     init_cluster_change();
     init_talosctl();
     sleep3 = (ms) => new Promise((r2) => setTimeout(r2, ms));
-    ask = (question) => new Promise((resolve4) => {
+    ask = (question) => new Promise((resolve5) => {
       const rl = (0, import_readline.createInterface)({
         input: process.stdin,
         output: process.stdout
       });
       rl.question(question, (answer) => {
         rl.close();
-        resolve4(answer.trim());
+        resolve5(answer.trim());
       });
     });
     attach_default = async (cmd) => {
       const opts = parseAttachOptions(cmd);
       const { clusterId } = await resolveClusterTarget(cmd);
-      const info = await (0, import_rxjs19.lastValueFrom)(
+      const info = await (0, import_rxjs20.lastValueFrom)(
         GraphqlClienAPI.clusterAttachInfo(clusterId)
       );
       if (!info.attachable) {
@@ -256797,7 +257060,7 @@ var init_attach2 = __esm({
           return;
         }
       }
-      const join_ = await (0, import_rxjs19.lastValueFrom)(
+      const join_ = await (0, import_rxjs20.lastValueFrom)(
         GraphqlClienAPI.clusterNodeJoinConfig({
           clusterId,
           name: opts.name,
@@ -256812,8 +257075,8 @@ var init_attach2 = __esm({
           `The cluster runs Talos ${join_.talosVersion}, the machine booted ${version3}. It installs ${join_.talosVersion} anyway; if the join fails, boot ${join_.isoUrl}.`
         );
       }
-      const dir = await (0, import_promises2.mkdtemp)((0, import_path3.join)((0, import_os3.tmpdir)(), "gcli-attach-"));
-      const file2 = (0, import_path3.join)(dir, "machine.yaml");
+      const dir = await (0, import_promises2.mkdtemp)((0, import_path4.join)((0, import_os3.tmpdir)(), "gcli-attach-"));
+      const file2 = (0, import_path4.join)(dir, "machine.yaml");
       try {
         await (0, import_promises2.writeFile)(file2, join_.config, { mode: 384 });
         const applied = await talosctl(
@@ -256841,7 +257104,7 @@ var init_attach2 = __esm({
       const deadline = Date.now() + opts.timeoutMs;
       while (Date.now() < deadline) {
         await sleep3(15e3);
-        const nodes = await (0, import_rxjs19.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId));
+        const nodes = await (0, import_rxjs20.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId));
         const node = nodes.find((n) => n.name === opts.name);
         if (node?.status === "ready") {
           Logger.success(`${opts.name} joined and is ready`);
@@ -256866,17 +257129,17 @@ var nodes_exports = {};
 __export(nodes_exports, {
   default: () => nodes_default
 });
-var import_rxjs20, nodes_default;
+var import_rxjs21, nodes_default;
 var init_nodes = __esm({
   "src/commands/cluster/nodes.ts"() {
-    import_rxjs20 = __toESM(require_cjs());
+    import_rxjs21 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_attach();
     init_cluster_change();
     nodes_default = async (cmd) => {
       const { clusterId } = await resolveClusterTarget(cmd);
-      const nodes = await (0, import_rxjs20.lastValueFrom)(
+      const nodes = await (0, import_rxjs21.lastValueFrom)(
         GraphqlClienAPI.clusterNodes(clusterId, true)
       );
       if (!nodes.length) {
@@ -256899,10 +257162,10 @@ __export(pause_exports, {
   pause: () => pause,
   resume: () => resume
 });
-var import_rxjs21, setPaused, pause, resume;
+var import_rxjs22, setPaused, pause, resume;
 var init_pause = __esm({
   "src/commands/cluster/pause.ts"() {
-    import_rxjs21 = __toESM(require_cjs());
+    import_rxjs22 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_cluster_change();
@@ -256912,7 +257175,7 @@ var init_pause = __esm({
         throw new Error("--name is required (see gcli cluster:nodes)");
       }
       const { clusterId } = await resolveClusterTarget(cmd);
-      const node = await (0, import_rxjs21.lastValueFrom)(
+      const node = await (0, import_rxjs22.lastValueFrom)(
         GraphqlClienAPI.setClusterNodePaused(clusterId, name2, paused)
       );
       Logger.log(
@@ -256930,14 +257193,14 @@ __export(reset_machine_exports, {
   default: () => reset_machine_default,
   hostnameOf: () => hostnameOf
 });
-var import_promises3, import_os4, import_path4, import_readline2, import_rxjs22, hostnameOf, reset_machine_default;
+var import_promises3, import_os4, import_path5, import_readline2, import_rxjs23, hostnameOf, reset_machine_default;
 var init_reset_machine = __esm({
   "src/commands/cluster/reset-machine.ts"() {
     import_promises3 = require("fs/promises");
     import_os4 = require("os");
-    import_path4 = require("path");
+    import_path5 = require("path");
     import_readline2 = require("readline");
-    import_rxjs22 = __toESM(require_cjs());
+    import_rxjs23 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_attach();
@@ -256958,7 +257221,7 @@ var init_reset_machine = __esm({
         );
       }
       const { clusterId } = await resolveClusterTarget(cmd);
-      const node = (await (0, import_rxjs22.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId, true))).find((n) => n.name === name2);
+      const node = (await (0, import_rxjs23.lastValueFrom)(GraphqlClienAPI.clusterNodes(clusterId, true))).find((n) => n.name === name2);
       if (node?.source === "hetzner") {
         throw new Error(
           `${name2} is a Hetzner node - those are removed by scaling the cluster.`
@@ -256969,12 +257232,12 @@ var init_reset_machine = __esm({
           `${name2} is still in the cluster. Detach it first: gcli cluster:detach --cluster ${clusterId} --name ${name2}`
         );
       }
-      const access = await (0, import_rxjs22.lastValueFrom)(
+      const access = await (0, import_rxjs23.lastValueFrom)(
         GraphqlClienAPI.clusterTalosconfig(clusterId, 15)
       );
       const binary = access.talosVersion ? await ensureTalosctl(access.talosVersion) : "talosctl";
-      const dir = await (0, import_promises3.mkdtemp)((0, import_path4.join)((0, import_os4.tmpdir)(), "gcli-reset-"));
-      const config2 = (0, import_path4.join)(dir, "talosconfig");
+      const dir = await (0, import_promises3.mkdtemp)((0, import_path5.join)((0, import_os4.tmpdir)(), "gcli-reset-"));
+      const config2 = (0, import_path5.join)(dir, "talosconfig");
       try {
         await (0, import_promises3.writeFile)(config2, access.talosconfig, { mode: 384 });
         const talos = (args, timeoutMs = 3e4) => runBinary(
@@ -256995,7 +257258,7 @@ var init_reset_machine = __esm({
           );
         }
         if (!cmd.yes) {
-          const answer = await new Promise((resolve4) => {
+          const answer = await new Promise((resolve5) => {
             const rl = (0, import_readline2.createInterface)({
               input: process.stdin,
               output: process.stdout
@@ -257004,7 +257267,7 @@ var init_reset_machine = __esm({
               `Wipe the config and data of ${name2} (${ip})? It reboots into maintenance mode, ready to attach again. Type the machine name to continue: `,
               (a) => {
                 rl.close();
-                resolve4(a.trim());
+                resolve5(a.trim());
               }
             );
           });
@@ -257046,11 +257309,11 @@ var talosconfig_exports = {};
 __export(talosconfig_exports, {
   default: () => talosconfig_default
 });
-var import_promises4, import_rxjs23, talosconfig_default;
+var import_promises4, import_rxjs24, talosconfig_default;
 var init_talosconfig = __esm({
   "src/commands/cluster/talosconfig.ts"() {
     import_promises4 = require("fs/promises");
-    import_rxjs23 = __toESM(require_cjs());
+    import_rxjs24 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_cluster_change();
@@ -257060,7 +257323,7 @@ var init_talosconfig = __esm({
         throw new Error("--ttl is in minutes, 5 to 1440");
       }
       const { clusterId } = await resolveClusterTarget(cmd);
-      const res = await (0, import_rxjs23.lastValueFrom)(
+      const res = await (0, import_rxjs24.lastValueFrom)(
         GraphqlClienAPI.clusterTalosconfig(clusterId, ttl)
       );
       if (!cmd.output) {
@@ -257083,11 +257346,11 @@ var detach_exports = {};
 __export(detach_exports, {
   default: () => detach_default
 });
-var import_readline3, import_rxjs24, detach_default;
+var import_readline3, import_rxjs25, detach_default;
 var init_detach = __esm({
   "src/commands/cluster/detach.ts"() {
     import_readline3 = require("readline");
-    import_rxjs24 = __toESM(require_cjs());
+    import_rxjs25 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_attach();
@@ -257099,7 +257362,7 @@ var init_detach = __esm({
       }
       const { clusterId } = await resolveClusterTarget(cmd);
       if (!cmd.yes) {
-        const answer = await new Promise((resolve4) => {
+        const answer = await new Promise((resolve5) => {
           const rl = (0, import_readline3.createInterface)({
             input: process.stdin,
             output: process.stdout
@@ -257108,7 +257371,7 @@ var init_detach = __esm({
             `Drain and remove ${name2} from the cluster? Its pods move to other nodes. [y/N] `,
             (a) => {
               rl.close();
-              resolve4(a.trim().toLowerCase());
+              resolve5(a.trim().toLowerCase());
             }
           );
         });
@@ -257117,7 +257380,7 @@ var init_detach = __esm({
           return;
         }
       }
-      const node = await (0, import_rxjs24.lastValueFrom)(
+      const node = await (0, import_rxjs25.lastValueFrom)(
         GraphqlClienAPI.detachClusterNode(clusterId, name2)
       );
       Logger.success(`${node.name} is detached`);
@@ -257131,53 +257394,74 @@ var init_detach = __esm({
 // src/commands/cluster/health.ts
 var health_exports = {};
 __export(health_exports, {
-  default: () => health_default
+  default: () => health_default,
+  watchSeconds: () => watchSeconds
 });
-var import_rxjs25, pct2, health_default;
+var import_rxjs26, import_operators14, DEFAULT_WATCH_SECONDS, MIN_WATCH_SECONDS, watchSeconds, render, health_default;
 var init_health = __esm({
   "src/commands/cluster/health.ts"() {
-    import_rxjs25 = __toESM(require_cjs());
+    import_rxjs26 = __toESM(require_cjs());
+    import_operators14 = __toESM(require_operators());
     init_gql_client();
-    init_log();
+    init_ui();
     init_cluster_change();
-    pct2 = (v) => v == null ? "-" : `${Math.round(v)}%`;
-    health_default = async (cmd) => {
-      const { projectId, clusterId } = await resolveClusterTarget(cmd);
-      const [latest] = await (0, import_rxjs25.lastValueFrom)(
-        GraphqlClienAPI.clusterHealth(projectId, clusterId, 1)
-      );
-      if (!latest) {
-        Logger.info(
-          'No health reports yet - the cluster agent has not reported (it installs with the cluster; check cluster:status for "agent").'
+    init_health_view();
+    DEFAULT_WATCH_SECONDS = 30;
+    MIN_WATCH_SECONDS = 5;
+    watchSeconds = (watch3) => {
+      if (!watch3) return 0;
+      const seconds = watch3 === true ? DEFAULT_WATCH_SECONDS : Number(watch3);
+      if (!Number.isFinite(seconds) || seconds < MIN_WATCH_SECONDS) {
+        throw new Error(
+          `--watch takes a number of seconds, at least ${MIN_WATCH_SECONDS}`
         );
-      } else {
-        Logger.table([
-          {
-            reportedAt: latest.createdAt,
-            kubernetes: latest.kubernetesVersion,
-            agent: latest.agentVersion,
-            pods: latest.pods,
-            pendingPods: latest.pendingPods,
-            fission: latest.fissionReady ? "ready" : "not ready",
-            prometheus: latest.prometheusReady ? "ready" : "not ready",
-            cpu: `${pct2(latest.cpuUsagePercent)} used / ${pct2(latest.cpuRequestsPercent)} req`,
-            mem: `${pct2(latest.memUsagePercent)} used / ${pct2(latest.memRequestsPercent)} req`
-          }
-        ]);
-        if (latest.nodes?.length) {
-          Logger.table(
-            latest.nodes.map((n) => ({
-              node: n.name,
-              role: n.role,
-              ready: n.ready,
-              type: n.instanceType,
-              pods: n.podCount,
-              cordoned: n.cordoned ?? false
-            }))
-          );
-        }
       }
-      return latest ?? null;
+      return seconds;
+    };
+    render = (data, clusterId, now) => data.overview ? healthView(data.overview, data.latest, now) : [
+      ui.dim(
+        `No cluster ${clusterId} in this project (see gcli cluster:list).`
+      )
+    ];
+    health_default = (cmd) => {
+      if (cmd.json) humanOutputToStderr();
+      const seconds = watchSeconds(cmd.watch);
+      const flow = (0, import_rxjs26.defer)(
+        () => (0, import_rxjs26.from)(resolveClusterTarget(cmd))
+      ).pipe(
+        (0, import_operators14.switchMap)(({ projectId, clusterId }) => {
+          const fetch3 = () => GraphqlClienAPI.clusterHealthView(projectId, clusterId);
+          const show2 = (data) => {
+            if (cmd.json) {
+              process.stdout.write(`${JSON.stringify(data, null, 2)}
+`);
+              return;
+            }
+            const lines = render(data, clusterId, /* @__PURE__ */ new Date());
+            if (seconds) {
+              ui.redraw([
+                ...lines,
+                "",
+                ui.dim(`Refreshing every ${seconds}s - Ctrl+C to stop`)
+              ]);
+            } else {
+              ui.print(["", ...lines, ""].join("\n"));
+            }
+          };
+          return seconds ? (0, import_rxjs26.timer)(0, seconds * 1e3).pipe(
+            (0, import_operators14.switchMap)(
+              () => fetch3().pipe(
+                (0, import_operators14.tap)(show2),
+                (0, import_operators14.catchError)((error48) => {
+                  ui.warn(`refresh failed: ${errorText(error48)}`, "health");
+                  return import_rxjs26.EMPTY;
+                })
+              )
+            )
+          ) : fetch3().pipe((0, import_operators14.tap)(show2));
+        })
+      );
+      return (0, import_rxjs26.lastValueFrom)(flow);
     };
   }
 });
@@ -257187,17 +257471,17 @@ var scale_events_exports = {};
 __export(scale_events_exports, {
   default: () => scale_events_default
 });
-var import_rxjs26, scale_events_default;
+var import_rxjs27, scale_events_default;
 var init_scale_events = __esm({
   "src/commands/cluster/scale-events.ts"() {
-    import_rxjs26 = __toESM(require_cjs());
+    import_rxjs27 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_cluster_change();
     scale_events_default = async (cmd) => {
       const limit = cmd.limit === void 0 ? 20 : parseIntOption("limit", cmd.limit, 1, 200);
       const { projectId, clusterId } = await resolveClusterTarget(cmd);
-      const events = await (0, import_rxjs26.lastValueFrom)(
+      const events = await (0, import_rxjs27.lastValueFrom)(
         GraphqlClienAPI.clusterScaleEvents(projectId, clusterId, limit)
       );
       if (!events.length) {
@@ -257224,17 +257508,17 @@ var cost_exports = {};
 __export(cost_exports, {
   default: () => cost_default
 });
-var import_rxjs27, money, cost_default;
+var import_rxjs28, money, cost_default;
 var init_cost = __esm({
   "src/commands/cluster/cost.ts"() {
-    import_rxjs27 = __toESM(require_cjs());
+    import_rxjs28 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
     money = (v) => v == null ? "-" : v.toFixed(2);
     cost_default = async (cmd) => {
-      const projectId = await (0, import_rxjs27.lastValueFrom)(parseProjectId(cmd.project));
-      const rows = await (0, import_rxjs27.lastValueFrom)(
+      const projectId = await (0, import_rxjs28.lastValueFrom)(parseProjectId(cmd.project));
+      const rows = await (0, import_rxjs28.lastValueFrom)(
         GraphqlClienAPI.projectClustersOverview(projectId)
       );
       if (!rows.length) {
@@ -257319,10 +257603,10 @@ __export(autoscale_exports, {
   default: () => autoscale_default,
   toAutoscaleInput: () => toAutoscaleInput
 });
-var import_rxjs28, toAutoscaleInput, autoscale_default;
+var import_rxjs29, toAutoscaleInput, autoscale_default;
 var init_autoscale = __esm({
   "src/commands/cluster/autoscale.ts"() {
-    import_rxjs28 = __toESM(require_cjs());
+    import_rxjs29 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_cluster_change();
@@ -257386,7 +257670,7 @@ var init_autoscale = __esm({
     autoscale_default = async (cmd) => {
       const input = toAutoscaleInput(cmd);
       const { projectId, clusterId } = await resolveClusterTarget(cmd);
-      const cluster = await (0, import_rxjs28.lastValueFrom)(
+      const cluster = await (0, import_rxjs29.lastValueFrom)(
         GraphqlClienAPI.updateProjectClusterAutoscale(projectId, clusterId, input)
       );
       const a = cluster.autoscale ?? {};
@@ -257417,16 +257701,16 @@ var plan_exports = {};
 __export(plan_exports, {
   default: () => plan_default
 });
-var import_rxjs29, plan_default;
+var import_rxjs30, plan_default;
 var init_plan2 = __esm({
   "src/commands/cluster/plan.ts"() {
-    import_rxjs29 = __toESM(require_cjs());
+    import_rxjs30 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_cluster_change();
     plan_default = async (cmd) => {
       const { projectId, clusterId } = await resolveClusterTarget(cmd);
-      const plan = await (0, import_rxjs29.lastValueFrom)(
+      const plan = await (0, import_rxjs30.lastValueFrom)(
         GraphqlClienAPI.clusterProvisioningPlan(projectId, clusterId)
       );
       Logger.info(
@@ -257547,11 +257831,11 @@ var list_exports2 = {};
 __export(list_exports2, {
   default: () => list_default2
 });
-var import_rxjs30, import_operators13, SERVES, list_default2;
+var import_rxjs31, import_operators15, SERVES, list_default2;
 var init_list2 = __esm({
   "src/commands/domain/list.ts"() {
-    import_rxjs30 = __toESM(require_cjs());
-    import_operators13 = __toESM(require_operators());
+    import_rxjs31 = __toESM(require_cjs());
+    import_operators15 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -257559,10 +257843,10 @@ var init_list2 = __esm({
       all: "every lambda at /<route>",
       passthrough: "full paths"
     };
-    list_default2 = (cmd) => (0, import_rxjs30.lastValueFrom)(
+    list_default2 = (cmd) => (0, import_rxjs31.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators13.switchMap)((projectId) => GraphqlClienAPI.listProjectDomains(projectId)),
-        (0, import_operators13.tap)((domains) => {
+        (0, import_operators15.switchMap)((projectId) => GraphqlClienAPI.listProjectDomains(projectId)),
+        (0, import_operators15.tap)((domains) => {
           if (!domains.length) {
             Logger.info(
               "No domains yet - see domain:apply (domains: in lambforge.yaml)."
@@ -257650,11 +257934,11 @@ __export(apply_exports2, {
   default: () => apply_default2,
   reportDomain: () => reportDomain
 });
-var import_rxjs31, import_operators14, reportDomain, runStep, applyDomains, apply_default2;
+var import_rxjs32, import_operators16, reportDomain, runStep, applyDomains, apply_default2;
 var init_apply2 = __esm({
   "src/commands/domain/apply.ts"() {
-    import_rxjs31 = __toESM(require_cjs());
-    import_operators14 = __toESM(require_operators());
+    import_rxjs32 = __toESM(require_cjs());
+    import_operators16 = __toESM(require_operators());
     init_load_spec();
     init_helpers();
     init_gql_client();
@@ -257684,19 +257968,19 @@ var init_apply2 = __esm({
         throw new Error(
           `domains: "${step2.label}" needs a lambda to start with - set \`serves\` or a path`
         );
-      })() : (0, import_rxjs31.of)(step2.existing);
+      })() : (0, import_rxjs32.of)(step2.existing);
       return created$.pipe(
-        (0, import_operators14.switchMap)(
+        (0, import_operators16.switchMap)(
           (domain2) => step2.same || // routing applies to a live domain; a new custom domain gets it on the
           // next apply, once it is verified
-          domain2.status !== "active" ? (0, import_rxjs31.of)(domain2) : GraphqlClienAPI.setDomainRouting(domain2.id, routing)
+          domain2.status !== "active" ? (0, import_rxjs32.of)(domain2) : GraphqlClienAPI.setDomainRouting(domain2.id, routing)
         )
       );
     };
-    applyDomains = (projectId, entries, defaultLambda) => !entries?.length ? (0, import_rxjs31.of)([]) : GraphqlClienAPI.listProjectDomains(projectId).pipe(
-      (0, import_operators14.switchMap)(
+    applyDomains = (projectId, entries, defaultLambda) => !entries?.length ? (0, import_rxjs32.of)([]) : GraphqlClienAPI.listProjectDomains(projectId).pipe(
+      (0, import_operators16.switchMap)(
         (domains) => GraphqlClienAPI.listLambdas(projectId).pipe(
-          (0, import_operators14.map)((lambdas) => ({
+          (0, import_operators16.map)((lambdas) => ({
             domains,
             lambdaIds: new Map(
               (lambdas ?? []).map((l) => [l.name, l.id])
@@ -257704,14 +257988,14 @@ var init_apply2 = __esm({
           }))
         )
       ),
-      (0, import_operators14.switchMap)(
-        ({ domains, lambdaIds }) => (0, import_rxjs31.concat)(
+      (0, import_operators16.switchMap)(
+        ({ domains, lambdaIds }) => (0, import_rxjs32.concat)(
           ...entries.map(
-            (entry) => (0, import_rxjs31.of)(entry).pipe(
-              (0, import_operators14.map)((e2) => domainStep(e2, domains, lambdaIds, defaultLambda)),
-              (0, import_operators14.switchMap)(
+            (entry) => (0, import_rxjs32.of)(entry).pipe(
+              (0, import_operators16.map)((e2) => domainStep(e2, domains, lambdaIds, defaultLambda)),
+              (0, import_operators16.switchMap)(
                 (step2) => runStep(projectId, step2).pipe(
-                  (0, import_operators14.tap)((d) => {
+                  (0, import_operators16.tap)((d) => {
                     if (step2.same && !step2.create) {
                       Logger.info(`${d.hostname} is up to date`);
                     } else {
@@ -257724,13 +258008,13 @@ var init_apply2 = __esm({
           )
         )
       ),
-      (0, import_operators14.toArray)()
+      (0, import_operators16.toArray)()
     );
-    apply_default2 = (cmd) => (0, import_rxjs31.lastValueFrom)(
+    apply_default2 = (cmd) => (0, import_rxjs32.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators14.switchMap)(
+        (0, import_operators16.switchMap)(
           (projectId) => loadSpec(cmd.spec).pipe(
-            (0, import_operators14.switchMap)((spec) => {
+            (0, import_operators16.switchMap)((spec) => {
               const entries = spec?.domains ?? [];
               if (!entries.length) {
                 throw new Error(
@@ -257741,7 +258025,7 @@ var init_apply2 = __esm({
             })
           )
         ),
-        (0, import_operators14.catchError)((e2) => {
+        (0, import_operators16.catchError)((e2) => {
           Logger.error(e2?.message ?? String(e2));
           throw e2;
         })
@@ -257755,18 +258039,18 @@ var list_environments_exports = {};
 __export(list_environments_exports, {
   default: () => list_environments_default
 });
-var import_rxjs32, import_operators15, list_environments_default;
+var import_rxjs33, import_operators17, list_environments_default;
 var init_list_environments = __esm({
   "src/commands/environment/list-environments.ts"() {
-    import_rxjs32 = __toESM(require_cjs());
-    import_operators15 = __toESM(require_operators());
+    import_rxjs33 = __toESM(require_cjs());
+    import_operators17 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_environments_default = (cmd) => (0, import_rxjs32.lastValueFrom)(
+    list_environments_default = (cmd) => (0, import_rxjs33.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators15.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
-        (0, import_operators15.tap)((data) => {
+        (0, import_operators17.switchMap)((projectId) => GraphqlClienAPI.listEnvironments(projectId)),
+        (0, import_operators17.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -257832,11 +258116,11 @@ var create_environment_exports = {};
 __export(create_environment_exports, {
   default: () => create_environment_default
 });
-var import_rxjs33, import_operators16, create_environment_default;
+var import_rxjs34, import_operators18, create_environment_default;
 var init_create_environment = __esm({
   "src/commands/environment/create-environment.ts"() {
-    import_rxjs33 = __toESM(require_cjs());
-    import_operators16 = __toESM(require_operators());
+    import_rxjs34 = __toESM(require_cjs());
+    import_operators18 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -257844,22 +258128,22 @@ var init_create_environment = __esm({
     init_environment_payload();
     create_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs33.lastValueFrom)(
+      return (0, import_rxjs34.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators16.switchMap)(
+          (0, import_operators18.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-              (0, import_operators16.map)((data) => ({
+              (0, import_operators18.map)((data) => ({
                 projectId,
                 ...data?.environment ?? data
               }))
             )
           ),
-          (0, import_operators16.switchMap)(
+          (0, import_operators18.switchMap)(
             ({ projectId, clusterName: dataClusterName, ...data }) => resolveClusterId(projectId, {
               clusterId: cmdRest.clusterId || data.clusterId,
               clusterName: cmdClusterName || dataClusterName
             }).pipe(
-              (0, import_operators16.switchMap)(
+              (0, import_operators18.switchMap)(
                 (clusterId) => GraphqlClienAPI.createEnvironment(projectId, {
                   ...environmentPayload(data, cmdRest),
                   clusterId
@@ -257867,7 +258151,7 @@ var init_create_environment = __esm({
               )
             )
           ),
-          (0, import_operators16.tap)((data) => {
+          (0, import_operators18.tap)((data) => {
             Logger.success(`Environment ${data?.name ?? ""} created`);
             const columns = [
               "id",
@@ -257896,11 +258180,11 @@ var update_environment_exports = {};
 __export(update_environment_exports, {
   default: () => update_environment_default
 });
-var import_rxjs34, import_operators17, update_environment_default;
+var import_rxjs35, import_operators19, update_environment_default;
 var init_update_environment = __esm({
   "src/commands/environment/update-environment.ts"() {
-    import_rxjs34 = __toESM(require_cjs());
-    import_operators17 = __toESM(require_operators());
+    import_rxjs35 = __toESM(require_cjs());
+    import_operators19 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -257908,22 +258192,22 @@ var init_update_environment = __esm({
     init_environment_payload();
     update_environment_default = (cmd) => {
       const { clusterName: cmdClusterName, ...cmdRest } = cmd;
-      return (0, import_rxjs34.lastValueFrom)(
+      return (0, import_rxjs35.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators17.switchMap)(
+          (0, import_operators19.switchMap)(
             (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-              (0, import_operators17.map)((data) => ({
+              (0, import_operators19.map)((data) => ({
                 projectId,
                 ...data?.environment ?? data
               }))
             )
           ),
-          (0, import_operators17.switchMap)(
+          (0, import_operators19.switchMap)(
             ({ projectId, clusterName: dataClusterName, ...data }) => resolveClusterId(projectId, {
               clusterId: cmdRest.clusterId || data.clusterId,
               clusterName: cmdClusterName || dataClusterName
             }).pipe(
-              (0, import_operators17.switchMap)(
+              (0, import_operators19.switchMap)(
                 (clusterId) => GraphqlClienAPI.updateEnvironment(projectId, {
                   ...environmentPayload(data, cmdRest),
                   clusterId
@@ -257931,7 +258215,7 @@ var init_update_environment = __esm({
               )
             )
           ),
-          (0, import_operators17.tap)((data) => {
+          (0, import_operators19.tap)((data) => {
             Logger.success(`Environment ${data?.name ?? ""} updated`);
             const columns = [
               "id",
@@ -257960,31 +258244,31 @@ var delete_environment_exports = {};
 __export(delete_environment_exports, {
   default: () => delete_environment_default
 });
-var import_rxjs35, import_operators18, delete_environment_default;
+var import_rxjs36, import_operators20, delete_environment_default;
 var init_delete_environment = __esm({
   "src/commands/environment/delete-environment.ts"() {
-    import_rxjs35 = __toESM(require_cjs());
-    import_operators18 = __toESM(require_operators());
+    import_rxjs36 = __toESM(require_cjs());
+    import_operators20 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_environment_default = (cmd) => (0, import_rxjs35.lastValueFrom)(
+    delete_environment_default = (cmd) => (0, import_rxjs36.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators18.switchMap)(
+        (0, import_operators20.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators18.map)((data) => ({
+            (0, import_operators20.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators18.switchMap)(
+        (0, import_operators20.switchMap)(
           ({ projectId, name: name2 }) => resolveClusterId(projectId, {
             clusterId: cmd.clusterId,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators18.switchMap)(
+            (0, import_operators20.switchMap)(
               (clusterId) => GraphqlClienAPI.deleteEnvironment(
                 name2,
                 projectId,
@@ -257994,7 +258278,7 @@ var init_delete_environment = __esm({
             )
           )
         ),
-        (0, import_operators18.tap)((data) => {
+        (0, import_operators20.tap)((data) => {
           Logger.success(`Environment ${data?.name ?? ""} deleted`);
           const columns = [
             "id",
@@ -258020,31 +258304,31 @@ var get_environment_exports = {};
 __export(get_environment_exports, {
   default: () => get_environment_default
 });
-var import_rxjs36, import_operators19, get_environment_default;
+var import_rxjs37, import_operators21, get_environment_default;
 var init_get_environment = __esm({
   "src/commands/environment/get-environment.ts"() {
-    import_rxjs36 = __toESM(require_cjs());
-    import_operators19 = __toESM(require_operators());
+    import_rxjs37 = __toESM(require_cjs());
+    import_operators21 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    get_environment_default = (cmd) => (0, import_rxjs36.lastValueFrom)(
+    get_environment_default = (cmd) => (0, import_rxjs37.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators19.switchMap)(
+        (0, import_operators21.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "env.yaml").pipe(
-            (0, import_operators19.map)((data) => ({
+            (0, import_operators21.map)((data) => ({
               projectId,
               ...data?.environment ?? data
             }))
           )
         ),
-        (0, import_operators19.switchMap)(
+        (0, import_operators21.switchMap)(
           ({ projectId, name: name2 }) => resolveClusterId(projectId, {
             clusterId: cmd.clusterId,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators19.switchMap)(
+            (0, import_operators21.switchMap)(
               (clusterId) => GraphqlClienAPI.getEnvironment(
                 cmd.name ?? name2,
                 projectId,
@@ -258053,7 +258337,7 @@ var init_get_environment = __esm({
             )
           )
         ),
-        (0, import_operators19.tap)((data) => {
+        (0, import_operators21.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -266738,9 +267022,9 @@ var require_mime_types = __commonJS({
         for (var i2 = 0; i2 < exts.length; i2++) {
           var extension2 = exts[i2];
           if (types3[extension2]) {
-            var from17 = preference.indexOf(db[types3[extension2]].source);
+            var from18 = preference.indexOf(db[types3[extension2]].source);
             var to = preference.indexOf(mime.source);
-            if (types3[extension2] !== "application/octet-stream" && (from17 > to || from17 === to && types3[extension2].substr(0, 12) === "application/")) {
+            if (types3[extension2] !== "application/octet-stream" && (from18 > to || from18 === to && types3[extension2].substr(0, 12) === "application/")) {
               continue;
             }
           }
@@ -266754,8 +267038,8 @@ var require_mime_types = __commonJS({
 // ../../node_modules/asynckit/lib/defer.js
 var require_defer2 = __commonJS({
   "../../node_modules/asynckit/lib/defer.js"(exports2, module2) {
-    module2.exports = defer7;
-    function defer7(fn) {
+    module2.exports = defer9;
+    function defer9(fn) {
       var nextTick = typeof setImmediate == "function" ? setImmediate : typeof process == "object" && typeof process.nextTick == "function" ? process.nextTick : null;
       if (nextTick) {
         nextTick(fn);
@@ -266769,18 +267053,18 @@ var require_defer2 = __commonJS({
 // ../../node_modules/asynckit/lib/async.js
 var require_async2 = __commonJS({
   "../../node_modules/asynckit/lib/async.js"(exports2, module2) {
-    var defer7 = require_defer2();
+    var defer9 = require_defer2();
     module2.exports = async;
     function async(callback) {
       var isAsync2 = false;
-      defer7(function() {
+      defer9(function() {
         isAsync2 = true;
       });
       return function async_callback(err, result) {
         if (isAsync2) {
           callback(err, result);
         } else {
-          defer7(function nextTick_callback() {
+          defer9(function nextTick_callback() {
             callback(err, result);
           });
         }
@@ -269184,9 +269468,9 @@ var require_readdir_glob = __commonJS({
     var fs3 = require("fs");
     var { EventEmitter } = require("events");
     var { Minimatch } = require_minimatch();
-    var { resolve: resolve4 } = require("path");
+    var { resolve: resolve5 } = require("path");
     function readdir(dir, strict) {
-      return new Promise((resolve5, reject) => {
+      return new Promise((resolve6, reject) => {
         fs3.readdir(dir, { withFileTypes: true }, (err, files) => {
           if (err) {
             switch (err.code) {
@@ -269194,7 +269478,7 @@ var require_readdir_glob = __commonJS({
                 if (strict) {
                   reject(err);
                 } else {
-                  resolve5([]);
+                  resolve6([]);
                 }
                 break;
               case "ENOTSUP":
@@ -269204,7 +269488,7 @@ var require_readdir_glob = __commonJS({
               case "ENAMETOOLONG":
               // Filename too long
               case "UNKNOWN":
-                resolve5([]);
+                resolve6([]);
                 break;
               case "ELOOP":
               // Too many levels of symbolic links
@@ -269213,30 +269497,30 @@ var require_readdir_glob = __commonJS({
                 break;
             }
           } else {
-            resolve5(files);
+            resolve6(files);
           }
         });
       });
     }
     function stat2(file2, followSyslinks) {
-      return new Promise((resolve5, reject) => {
+      return new Promise((resolve6, reject) => {
         const statFunc = followSyslinks ? fs3.stat : fs3.lstat;
         statFunc(file2, (err, stats) => {
           if (err) {
             switch (err.code) {
               case "ENOENT":
                 if (followSyslinks) {
-                  resolve5(stat2(file2, false));
+                  resolve6(stat2(file2, false));
                 } else {
-                  resolve5(null);
+                  resolve6(null);
                 }
                 break;
               default:
-                resolve5(null);
+                resolve6(null);
                 break;
             }
           } else {
-            resolve5(stats);
+            resolve6(stats);
           }
         });
       });
@@ -269250,8 +269534,8 @@ var require_readdir_glob = __commonJS({
           useStat = true;
         }
         const filename = dir + "/" + name2;
-        const relative3 = filename.slice(1);
-        const absolute = path2 + "/" + relative3;
+        const relative4 = filename.slice(1);
+        const absolute = path2 + "/" + relative4;
         let stats = null;
         if (useStat || followSyslinks) {
           stats = await stat2(absolute, followSyslinks);
@@ -269263,12 +269547,12 @@ var require_readdir_glob = __commonJS({
           stats = { isDirectory: () => false };
         }
         if (stats.isDirectory()) {
-          if (!shouldSkip(relative3)) {
-            yield { relative: relative3, absolute, stats };
+          if (!shouldSkip(relative4)) {
+            yield { relative: relative4, absolute, stats };
             yield* exploreWalkAsync(filename, path2, followSyslinks, useStat, shouldSkip, false);
           }
         } else {
-          yield { relative: relative3, absolute, stats };
+          yield { relative: relative4, absolute, stats };
         }
       }
     }
@@ -269326,7 +269610,7 @@ var require_readdir_glob = __commonJS({
             (skip) => new Minimatch(skip, { dot: true })
           );
         }
-        this.iterator = explore(resolve4(cwd || "."), this.options.follow, this.options.stat, this._shouldSkipDirectory.bind(this));
+        this.iterator = explore(resolve5(cwd || "."), this.options.follow, this.options.stat, this._shouldSkipDirectory.bind(this));
         this.paused = false;
         this.inactive = false;
         this.aborted = false;
@@ -269338,11 +269622,11 @@ var require_readdir_glob = __commonJS({
         }
         setTimeout(() => this._next(), 0);
       }
-      _shouldSkipDirectory(relative3) {
-        return this.skipMatchers.some((m2) => m2.match(relative3));
+      _shouldSkipDirectory(relative4) {
+        return this.skipMatchers.some((m2) => m2.match(relative4));
       }
-      _fileMatches(relative3, isDirectory) {
-        const file2 = relative3 + (isDirectory ? "/" : "");
+      _fileMatches(relative4, isDirectory) {
+        const file2 = relative4 + (isDirectory ? "/" : "");
         return (this.matchers.length === 0 || this.matchers.some((m2) => m2.match(file2))) && !this.ignoreMatchers.some((m2) => m2.match(file2)) && (!this.options.nodir || !isDirectory);
       }
       _next() {
@@ -269351,16 +269635,16 @@ var require_readdir_glob = __commonJS({
             if (!obj.done) {
               const isDirectory = obj.value.stats.isDirectory();
               if (this._fileMatches(obj.value.relative, isDirectory)) {
-                let relative3 = obj.value.relative;
+                let relative4 = obj.value.relative;
                 let absolute = obj.value.absolute;
                 if (this.options.mark && isDirectory) {
-                  relative3 += "/";
+                  relative4 += "/";
                   absolute += "/";
                 }
                 if (this.options.stat) {
-                  this.emit("match", { relative: relative3, absolute, stat: obj.value.stats });
+                  this.emit("match", { relative: relative4, absolute, stat: obj.value.stats });
                 } else {
-                  this.emit("match", { relative: relative3, absolute });
+                  this.emit("match", { relative: relative4, absolute });
                 }
               }
               this._next(this.iterator);
@@ -269421,8 +269705,8 @@ var require_async3 = __commonJS({
       function fallback(fn) {
         setTimeout(fn, 0);
       }
-      function wrap(defer7) {
-        return (fn, ...args) => defer7(() => fn(...args));
+      function wrap(defer9) {
+        return (fn, ...args) => defer9(() => fn(...args));
       }
       var _defer;
       if (hasQueueMicrotask) {
@@ -269492,10 +269776,10 @@ var require_async3 = __commonJS({
           if (typeof args[arity - 1] === "function") {
             return asyncFn.apply(this, args);
           }
-          return new Promise((resolve4, reject2) => {
+          return new Promise((resolve5, reject2) => {
             args[arity - 1] = (err, ...cbArgs) => {
               if (err) return reject2(err);
-              resolve4(cbArgs.length > 1 ? cbArgs : cbArgs[0]);
+              resolve5(cbArgs.length > 1 ? cbArgs : cbArgs[0]);
             };
             asyncFn.apply(this, args);
           });
@@ -269722,10 +270006,10 @@ var require_async3 = __commonJS({
         return eachOfImplementation(coll, wrapAsync(iteratee), callback);
       }
       var eachOf$1 = awaitify(eachOf, 3);
-      function map38(coll, iteratee, callback) {
+      function map39(coll, iteratee, callback) {
         return _asyncMap(eachOf$1, coll, iteratee, callback);
       }
-      var map$1 = awaitify(map38, 3);
+      var map$1 = awaitify(map39, 3);
       var applyEach$1 = applyEach(map$1);
       function eachOfSeries(coll, iteratee, callback) {
         return eachOfLimit$2(coll, 1, iteratee, callback);
@@ -269738,13 +270022,13 @@ var require_async3 = __commonJS({
       var applyEachSeries = applyEach(mapSeries$1);
       const PROMISE_SYMBOL = /* @__PURE__ */ Symbol("promiseCallback");
       function promiseCallback() {
-        let resolve4, reject2;
+        let resolve5, reject2;
         function callback(err, ...args) {
           if (err) return reject2(err);
-          resolve4(args.length > 1 ? args : args[0]);
+          resolve5(args.length > 1 ? args : args[0]);
         }
         callback[PROMISE_SYMBOL] = new Promise((res, rej) => {
-          resolve4 = res, reject2 = rej;
+          resolve5 = res, reject2 = rej;
         });
         return callback;
       }
@@ -270068,8 +270352,8 @@ var require_async3 = __commonJS({
             });
           }
           if (rejectOnError || !callback) {
-            return new Promise((resolve4, reject2) => {
-              res = resolve4;
+            return new Promise((resolve5, reject2) => {
+              res = resolve5;
               rej = reject2;
             });
           }
@@ -270108,10 +270392,10 @@ var require_async3 = __commonJS({
         }
         const eventMethod = (name2) => (handler) => {
           if (!handler) {
-            return new Promise((resolve4, reject2) => {
+            return new Promise((resolve5, reject2) => {
               once2(name2, (err, data) => {
                 if (err) return reject2(err);
-                resolve4(data);
+                resolve5(data);
               });
             });
           }
@@ -270898,7 +271182,7 @@ var require_async3 = __commonJS({
         var fn = wrapAsync(asyncFn);
         return initialParams((args, callback) => {
           var timedOut = false;
-          var timer4;
+          var timer5;
           function timeoutCallback() {
             var name2 = asyncFn.name || "anonymous";
             var error48 = new Error('Callback function "' + name2 + '" timed out.');
@@ -270912,10 +271196,10 @@ var require_async3 = __commonJS({
           args.push((...cbArgs) => {
             if (!timedOut) {
               callback(...cbArgs);
-              clearTimeout(timer4);
+              clearTimeout(timer5);
             }
           });
-          timer4 = setTimeout(timeoutCallback, milliseconds);
+          timer5 = setTimeout(timeoutCallback, milliseconds);
           fn(...args);
         });
       }
@@ -271296,15 +271580,15 @@ var require_polyfills = __commonJS({
       }
       if (platform2 === "win32") {
         fs3.rename = /* @__PURE__ */ (function(fs$rename) {
-          return function(from17, to, cb) {
+          return function(from18, to, cb) {
             var start3 = Date.now();
             var backoff = 0;
-            fs$rename(from17, to, function CB(er) {
+            fs$rename(from18, to, function CB(er) {
               if (er && (er.code === "EACCES" || er.code === "EPERM") && Date.now() - start3 < 6e4) {
                 setTimeout(function() {
                   fs3.stat(to, function(stater, st) {
                     if (stater && stater.code === "ENOENT")
-                      fs$rename(from17, to, CB);
+                      fs$rename(from18, to, CB);
                     else
                       cb(er);
                   });
@@ -274535,8 +274819,8 @@ var require_lodash3 = __commonJS({
         return apply(func, this, otherArgs);
       };
     }
-    function getMapData(map38, key) {
-      var data = map38.__data__;
+    function getMapData(map39, key) {
+      var data = map39.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -274940,8 +275224,8 @@ var require_lodash4 = __commonJS({
     var createSet = !(Set2 && 1 / setToArray(new Set2([, -0]))[1] == INFINITY) ? noop3 : function(values) {
       return new Set2(values);
     };
-    function getMapData(map38, key) {
-      var data = map38.__data__;
+    function getMapData(map39, key) {
+      var data = map39.__data__;
       return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
     }
     function getNative(object3, key) {
@@ -278002,14 +278286,14 @@ var require_async_iterator3 = __commonJS({
       };
     }
     function readAndResolve(iter) {
-      var resolve4 = iter[kLastResolve];
-      if (resolve4 !== null) {
+      var resolve5 = iter[kLastResolve];
+      if (resolve5 !== null) {
         var data = iter[kStream].read();
         if (data !== null) {
           iter[kLastPromise] = null;
           iter[kLastResolve] = null;
           iter[kLastReject] = null;
-          resolve4(createIterResult(data, false));
+          resolve5(createIterResult(data, false));
         }
       }
     }
@@ -278017,13 +278301,13 @@ var require_async_iterator3 = __commonJS({
       process.nextTick(readAndResolve, iter);
     }
     function wrapForNext(lastPromise, iter) {
-      return function(resolve4, reject) {
+      return function(resolve5, reject) {
         lastPromise.then(function() {
           if (iter[kEnded]) {
-            resolve4(createIterResult(void 0, true));
+            resolve5(createIterResult(void 0, true));
             return;
           }
-          iter[kHandlePromise](resolve4, reject);
+          iter[kHandlePromise](resolve5, reject);
         }, reject);
       };
     }
@@ -278043,12 +278327,12 @@ var require_async_iterator3 = __commonJS({
           return Promise.resolve(createIterResult(void 0, true));
         }
         if (this[kStream].destroyed) {
-          return new Promise(function(resolve4, reject) {
+          return new Promise(function(resolve5, reject) {
             process.nextTick(function() {
               if (_this[kError]) {
                 reject(_this[kError]);
               } else {
-                resolve4(createIterResult(void 0, true));
+                resolve5(createIterResult(void 0, true));
               }
             });
           });
@@ -278071,13 +278355,13 @@ var require_async_iterator3 = __commonJS({
       return this;
     }), _defineProperty(_Object$setPrototypeO, "return", function _return() {
       var _this2 = this;
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         _this2[kStream].destroy(null, function(err) {
           if (err) {
             reject(err);
             return;
           }
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         });
       });
     }), _Object$setPrototypeO), AsyncIteratorPrototype);
@@ -278099,15 +278383,15 @@ var require_async_iterator3 = __commonJS({
         value: stream._readableState.endEmitted,
         writable: true
       }), _defineProperty(_Object$create, kHandlePromise, {
-        value: function value(resolve4, reject) {
+        value: function value(resolve5, reject) {
           var data = iterator[kStream].read();
           if (data) {
             iterator[kLastPromise] = null;
             iterator[kLastResolve] = null;
             iterator[kLastReject] = null;
-            resolve4(createIterResult(data, false));
+            resolve5(createIterResult(data, false));
           } else {
-            iterator[kLastResolve] = resolve4;
+            iterator[kLastResolve] = resolve5;
             iterator[kLastReject] = reject;
           }
         },
@@ -278126,12 +278410,12 @@ var require_async_iterator3 = __commonJS({
           iterator[kError] = err;
           return;
         }
-        var resolve4 = iterator[kLastResolve];
-        if (resolve4 !== null) {
+        var resolve5 = iterator[kLastResolve];
+        if (resolve5 !== null) {
           iterator[kLastPromise] = null;
           iterator[kLastResolve] = null;
           iterator[kLastReject] = null;
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         }
         iterator[kEnded] = true;
       });
@@ -278146,7 +278430,7 @@ var require_async_iterator3 = __commonJS({
 var require_from4 = __commonJS({
   "../../node_modules/archiver/node_modules/readable-stream/lib/internal/streams/from.js"(exports2, module2) {
     "use strict";
-    function asyncGeneratorStep(gen, resolve4, reject, _next, _throw, key, arg) {
+    function asyncGeneratorStep(gen, resolve5, reject, _next, _throw, key, arg) {
       try {
         var info = gen[key](arg);
         var value = info.value;
@@ -278155,7 +278439,7 @@ var require_from4 = __commonJS({
         return;
       }
       if (info.done) {
-        resolve4(value);
+        resolve5(value);
       } else {
         Promise.resolve(value).then(_next, _throw);
       }
@@ -278163,13 +278447,13 @@ var require_from4 = __commonJS({
     function _asyncToGenerator(fn) {
       return function() {
         var self2 = this, args = arguments;
-        return new Promise(function(resolve4, reject) {
+        return new Promise(function(resolve5, reject) {
           var gen = fn.apply(self2, args);
           function _next(value) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "next", value);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "next", value);
           }
           function _throw(err) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "throw", err);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "throw", err);
           }
           _next(void 0);
         });
@@ -278212,7 +278496,7 @@ var require_from4 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors3().codes.ERR_INVALID_ARG_TYPE;
-    function from17(Readable2, iterable, opts) {
+    function from18(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -278251,7 +278535,7 @@ var require_from4 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from17;
+    module2.exports = from18;
   }
 });
 
@@ -278295,7 +278579,7 @@ var require_stream_readable4 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from17;
+    var from18;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -278977,10 +279261,10 @@ var require_stream_readable4 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from17 === void 0) {
-          from17 = require_from4();
+        if (from18 === void 0) {
+          from18 = require_from4();
         }
-        return from17(Readable2, iterable, opts);
+        return from18(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -279160,8 +279444,8 @@ var require_pipeline3 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from17, to) {
-      return from17.pipe(to);
+    function pipe2(from18, to) {
+      return from18.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -279675,11 +279959,11 @@ var require_core = __commonJS({
         this._finalize();
       }
       var self2 = this;
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         var errored;
         self2._module.on("end", function() {
           if (!errored) {
-            resolve4();
+            resolve5();
           }
         });
         self2._module.on("error", function(err) {
@@ -281344,14 +281628,14 @@ var require_async_iterator4 = __commonJS({
       };
     }
     function readAndResolve(iter) {
-      var resolve4 = iter[kLastResolve];
-      if (resolve4 !== null) {
+      var resolve5 = iter[kLastResolve];
+      if (resolve5 !== null) {
         var data = iter[kStream].read();
         if (data !== null) {
           iter[kLastPromise] = null;
           iter[kLastResolve] = null;
           iter[kLastReject] = null;
-          resolve4(createIterResult(data, false));
+          resolve5(createIterResult(data, false));
         }
       }
     }
@@ -281359,13 +281643,13 @@ var require_async_iterator4 = __commonJS({
       process.nextTick(readAndResolve, iter);
     }
     function wrapForNext(lastPromise, iter) {
-      return function(resolve4, reject) {
+      return function(resolve5, reject) {
         lastPromise.then(function() {
           if (iter[kEnded]) {
-            resolve4(createIterResult(void 0, true));
+            resolve5(createIterResult(void 0, true));
             return;
           }
-          iter[kHandlePromise](resolve4, reject);
+          iter[kHandlePromise](resolve5, reject);
         }, reject);
       };
     }
@@ -281385,12 +281669,12 @@ var require_async_iterator4 = __commonJS({
           return Promise.resolve(createIterResult(void 0, true));
         }
         if (this[kStream].destroyed) {
-          return new Promise(function(resolve4, reject) {
+          return new Promise(function(resolve5, reject) {
             process.nextTick(function() {
               if (_this[kError]) {
                 reject(_this[kError]);
               } else {
-                resolve4(createIterResult(void 0, true));
+                resolve5(createIterResult(void 0, true));
               }
             });
           });
@@ -281413,13 +281697,13 @@ var require_async_iterator4 = __commonJS({
       return this;
     }), _defineProperty(_Object$setPrototypeO, "return", function _return() {
       var _this2 = this;
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         _this2[kStream].destroy(null, function(err) {
           if (err) {
             reject(err);
             return;
           }
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         });
       });
     }), _Object$setPrototypeO), AsyncIteratorPrototype);
@@ -281441,15 +281725,15 @@ var require_async_iterator4 = __commonJS({
         value: stream._readableState.endEmitted,
         writable: true
       }), _defineProperty(_Object$create, kHandlePromise, {
-        value: function value(resolve4, reject) {
+        value: function value(resolve5, reject) {
           var data = iterator[kStream].read();
           if (data) {
             iterator[kLastPromise] = null;
             iterator[kLastResolve] = null;
             iterator[kLastReject] = null;
-            resolve4(createIterResult(data, false));
+            resolve5(createIterResult(data, false));
           } else {
-            iterator[kLastResolve] = resolve4;
+            iterator[kLastResolve] = resolve5;
             iterator[kLastReject] = reject;
           }
         },
@@ -281468,12 +281752,12 @@ var require_async_iterator4 = __commonJS({
           iterator[kError] = err;
           return;
         }
-        var resolve4 = iterator[kLastResolve];
-        if (resolve4 !== null) {
+        var resolve5 = iterator[kLastResolve];
+        if (resolve5 !== null) {
           iterator[kLastPromise] = null;
           iterator[kLastResolve] = null;
           iterator[kLastReject] = null;
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         }
         iterator[kEnded] = true;
       });
@@ -281488,7 +281772,7 @@ var require_async_iterator4 = __commonJS({
 var require_from5 = __commonJS({
   "../../node_modules/compress-commons/node_modules/readable-stream/lib/internal/streams/from.js"(exports2, module2) {
     "use strict";
-    function asyncGeneratorStep(gen, resolve4, reject, _next, _throw, key, arg) {
+    function asyncGeneratorStep(gen, resolve5, reject, _next, _throw, key, arg) {
       try {
         var info = gen[key](arg);
         var value = info.value;
@@ -281497,7 +281781,7 @@ var require_from5 = __commonJS({
         return;
       }
       if (info.done) {
-        resolve4(value);
+        resolve5(value);
       } else {
         Promise.resolve(value).then(_next, _throw);
       }
@@ -281505,13 +281789,13 @@ var require_from5 = __commonJS({
     function _asyncToGenerator(fn) {
       return function() {
         var self2 = this, args = arguments;
-        return new Promise(function(resolve4, reject) {
+        return new Promise(function(resolve5, reject) {
           var gen = fn.apply(self2, args);
           function _next(value) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "next", value);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "next", value);
           }
           function _throw(err) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "throw", err);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "throw", err);
           }
           _next(void 0);
         });
@@ -281554,7 +281838,7 @@ var require_from5 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors4().codes.ERR_INVALID_ARG_TYPE;
-    function from17(Readable2, iterable, opts) {
+    function from18(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -281593,7 +281877,7 @@ var require_from5 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from17;
+    module2.exports = from18;
   }
 });
 
@@ -281637,7 +281921,7 @@ var require_stream_readable5 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from17;
+    var from18;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -282319,10 +282603,10 @@ var require_stream_readable5 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from17 === void 0) {
-          from17 = require_from5();
+        if (from18 === void 0) {
+          from18 = require_from5();
         }
-        return from17(Readable2, iterable, opts);
+        return from18(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -282502,8 +282786,8 @@ var require_pipeline4 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from17, to) {
-      return from17.pipe(to);
+    function pipe2(from18, to) {
+      return from18.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -282948,9 +283232,9 @@ var require_buffer_crc32 = __commonJS({
         throw new Error("input must be buffer, number, or string, received " + typeof input);
       }
     }
-    function bufferizeInt(num3) {
+    function bufferizeInt(num4) {
       var tmp = ensureBuffer(4);
-      tmp.writeInt32BE(num3, 0);
+      tmp.writeInt32BE(num4, 0);
       return tmp;
     }
     function _crc32(buf, previous) {
@@ -284116,14 +284400,14 @@ var require_async_iterator5 = __commonJS({
       };
     }
     function readAndResolve(iter) {
-      var resolve4 = iter[kLastResolve];
-      if (resolve4 !== null) {
+      var resolve5 = iter[kLastResolve];
+      if (resolve5 !== null) {
         var data = iter[kStream].read();
         if (data !== null) {
           iter[kLastPromise] = null;
           iter[kLastResolve] = null;
           iter[kLastReject] = null;
-          resolve4(createIterResult(data, false));
+          resolve5(createIterResult(data, false));
         }
       }
     }
@@ -284131,13 +284415,13 @@ var require_async_iterator5 = __commonJS({
       process.nextTick(readAndResolve, iter);
     }
     function wrapForNext(lastPromise, iter) {
-      return function(resolve4, reject) {
+      return function(resolve5, reject) {
         lastPromise.then(function() {
           if (iter[kEnded]) {
-            resolve4(createIterResult(void 0, true));
+            resolve5(createIterResult(void 0, true));
             return;
           }
-          iter[kHandlePromise](resolve4, reject);
+          iter[kHandlePromise](resolve5, reject);
         }, reject);
       };
     }
@@ -284157,12 +284441,12 @@ var require_async_iterator5 = __commonJS({
           return Promise.resolve(createIterResult(void 0, true));
         }
         if (this[kStream].destroyed) {
-          return new Promise(function(resolve4, reject) {
+          return new Promise(function(resolve5, reject) {
             process.nextTick(function() {
               if (_this[kError]) {
                 reject(_this[kError]);
               } else {
-                resolve4(createIterResult(void 0, true));
+                resolve5(createIterResult(void 0, true));
               }
             });
           });
@@ -284185,13 +284469,13 @@ var require_async_iterator5 = __commonJS({
       return this;
     }), _defineProperty(_Object$setPrototypeO, "return", function _return() {
       var _this2 = this;
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         _this2[kStream].destroy(null, function(err) {
           if (err) {
             reject(err);
             return;
           }
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         });
       });
     }), _Object$setPrototypeO), AsyncIteratorPrototype);
@@ -284213,15 +284497,15 @@ var require_async_iterator5 = __commonJS({
         value: stream._readableState.endEmitted,
         writable: true
       }), _defineProperty(_Object$create, kHandlePromise, {
-        value: function value(resolve4, reject) {
+        value: function value(resolve5, reject) {
           var data = iterator[kStream].read();
           if (data) {
             iterator[kLastPromise] = null;
             iterator[kLastResolve] = null;
             iterator[kLastReject] = null;
-            resolve4(createIterResult(data, false));
+            resolve5(createIterResult(data, false));
           } else {
-            iterator[kLastResolve] = resolve4;
+            iterator[kLastResolve] = resolve5;
             iterator[kLastReject] = reject;
           }
         },
@@ -284240,12 +284524,12 @@ var require_async_iterator5 = __commonJS({
           iterator[kError] = err;
           return;
         }
-        var resolve4 = iterator[kLastResolve];
-        if (resolve4 !== null) {
+        var resolve5 = iterator[kLastResolve];
+        if (resolve5 !== null) {
           iterator[kLastPromise] = null;
           iterator[kLastResolve] = null;
           iterator[kLastReject] = null;
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         }
         iterator[kEnded] = true;
       });
@@ -284260,7 +284544,7 @@ var require_async_iterator5 = __commonJS({
 var require_from6 = __commonJS({
   "../../node_modules/crc32-stream/node_modules/readable-stream/lib/internal/streams/from.js"(exports2, module2) {
     "use strict";
-    function asyncGeneratorStep(gen, resolve4, reject, _next, _throw, key, arg) {
+    function asyncGeneratorStep(gen, resolve5, reject, _next, _throw, key, arg) {
       try {
         var info = gen[key](arg);
         var value = info.value;
@@ -284269,7 +284553,7 @@ var require_from6 = __commonJS({
         return;
       }
       if (info.done) {
-        resolve4(value);
+        resolve5(value);
       } else {
         Promise.resolve(value).then(_next, _throw);
       }
@@ -284277,13 +284561,13 @@ var require_from6 = __commonJS({
     function _asyncToGenerator(fn) {
       return function() {
         var self2 = this, args = arguments;
-        return new Promise(function(resolve4, reject) {
+        return new Promise(function(resolve5, reject) {
           var gen = fn.apply(self2, args);
           function _next(value) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "next", value);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "next", value);
           }
           function _throw(err) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "throw", err);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "throw", err);
           }
           _next(void 0);
         });
@@ -284326,7 +284610,7 @@ var require_from6 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors5().codes.ERR_INVALID_ARG_TYPE;
-    function from17(Readable2, iterable, opts) {
+    function from18(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -284365,7 +284649,7 @@ var require_from6 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from17;
+    module2.exports = from18;
   }
 });
 
@@ -284409,7 +284693,7 @@ var require_stream_readable6 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from17;
+    var from18;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -285091,10 +285375,10 @@ var require_stream_readable6 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from17 === void 0) {
-          from17 = require_from6();
+        if (from18 === void 0) {
+          from18 = require_from6();
         }
-        return from17(Readable2, iterable, opts);
+        return from18(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -285274,8 +285558,8 @@ var require_pipeline5 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from17, to) {
-      return from17.pipe(to);
+    function pipe2(from18, to) {
+      return from18.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -286051,9 +286335,9 @@ var require_headers = __commonJS({
       }
       return 0;
     };
-    var indexOf = function(block, num3, offset, end) {
+    var indexOf = function(block, num4, offset, end) {
       for (; offset < end; offset++) {
-        if (block[offset] === num3) return offset;
+        if (block[offset] === num4) return offset;
       }
       return end;
     };
@@ -287353,14 +287637,14 @@ var require_async_iterator6 = __commonJS({
       };
     }
     function readAndResolve(iter) {
-      var resolve4 = iter[kLastResolve];
-      if (resolve4 !== null) {
+      var resolve5 = iter[kLastResolve];
+      if (resolve5 !== null) {
         var data = iter[kStream].read();
         if (data !== null) {
           iter[kLastPromise] = null;
           iter[kLastResolve] = null;
           iter[kLastReject] = null;
-          resolve4(createIterResult(data, false));
+          resolve5(createIterResult(data, false));
         }
       }
     }
@@ -287368,13 +287652,13 @@ var require_async_iterator6 = __commonJS({
       process.nextTick(readAndResolve, iter);
     }
     function wrapForNext(lastPromise, iter) {
-      return function(resolve4, reject) {
+      return function(resolve5, reject) {
         lastPromise.then(function() {
           if (iter[kEnded]) {
-            resolve4(createIterResult(void 0, true));
+            resolve5(createIterResult(void 0, true));
             return;
           }
-          iter[kHandlePromise](resolve4, reject);
+          iter[kHandlePromise](resolve5, reject);
         }, reject);
       };
     }
@@ -287394,12 +287678,12 @@ var require_async_iterator6 = __commonJS({
           return Promise.resolve(createIterResult(void 0, true));
         }
         if (this[kStream].destroyed) {
-          return new Promise(function(resolve4, reject) {
+          return new Promise(function(resolve5, reject) {
             process.nextTick(function() {
               if (_this[kError]) {
                 reject(_this[kError]);
               } else {
-                resolve4(createIterResult(void 0, true));
+                resolve5(createIterResult(void 0, true));
               }
             });
           });
@@ -287422,13 +287706,13 @@ var require_async_iterator6 = __commonJS({
       return this;
     }), _defineProperty(_Object$setPrototypeO, "return", function _return() {
       var _this2 = this;
-      return new Promise(function(resolve4, reject) {
+      return new Promise(function(resolve5, reject) {
         _this2[kStream].destroy(null, function(err) {
           if (err) {
             reject(err);
             return;
           }
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         });
       });
     }), _Object$setPrototypeO), AsyncIteratorPrototype);
@@ -287450,15 +287734,15 @@ var require_async_iterator6 = __commonJS({
         value: stream._readableState.endEmitted,
         writable: true
       }), _defineProperty(_Object$create, kHandlePromise, {
-        value: function value(resolve4, reject) {
+        value: function value(resolve5, reject) {
           var data = iterator[kStream].read();
           if (data) {
             iterator[kLastPromise] = null;
             iterator[kLastResolve] = null;
             iterator[kLastReject] = null;
-            resolve4(createIterResult(data, false));
+            resolve5(createIterResult(data, false));
           } else {
-            iterator[kLastResolve] = resolve4;
+            iterator[kLastResolve] = resolve5;
             iterator[kLastReject] = reject;
           }
         },
@@ -287477,12 +287761,12 @@ var require_async_iterator6 = __commonJS({
           iterator[kError] = err;
           return;
         }
-        var resolve4 = iterator[kLastResolve];
-        if (resolve4 !== null) {
+        var resolve5 = iterator[kLastResolve];
+        if (resolve5 !== null) {
           iterator[kLastPromise] = null;
           iterator[kLastResolve] = null;
           iterator[kLastReject] = null;
-          resolve4(createIterResult(void 0, true));
+          resolve5(createIterResult(void 0, true));
         }
         iterator[kEnded] = true;
       });
@@ -287497,7 +287781,7 @@ var require_async_iterator6 = __commonJS({
 var require_from7 = __commonJS({
   "../../node_modules/tar-stream/node_modules/readable-stream/lib/internal/streams/from.js"(exports2, module2) {
     "use strict";
-    function asyncGeneratorStep(gen, resolve4, reject, _next, _throw, key, arg) {
+    function asyncGeneratorStep(gen, resolve5, reject, _next, _throw, key, arg) {
       try {
         var info = gen[key](arg);
         var value = info.value;
@@ -287506,7 +287790,7 @@ var require_from7 = __commonJS({
         return;
       }
       if (info.done) {
-        resolve4(value);
+        resolve5(value);
       } else {
         Promise.resolve(value).then(_next, _throw);
       }
@@ -287514,13 +287798,13 @@ var require_from7 = __commonJS({
     function _asyncToGenerator(fn) {
       return function() {
         var self2 = this, args = arguments;
-        return new Promise(function(resolve4, reject) {
+        return new Promise(function(resolve5, reject) {
           var gen = fn.apply(self2, args);
           function _next(value) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "next", value);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "next", value);
           }
           function _throw(err) {
-            asyncGeneratorStep(gen, resolve4, reject, _next, _throw, "throw", err);
+            asyncGeneratorStep(gen, resolve5, reject, _next, _throw, "throw", err);
           }
           _next(void 0);
         });
@@ -287563,7 +287847,7 @@ var require_from7 = __commonJS({
       return obj;
     }
     var ERR_INVALID_ARG_TYPE = require_errors6().codes.ERR_INVALID_ARG_TYPE;
-    function from17(Readable2, iterable, opts) {
+    function from18(Readable2, iterable, opts) {
       var iterator;
       if (iterable && typeof iterable.next === "function") {
         iterator = iterable;
@@ -287602,7 +287886,7 @@ var require_from7 = __commonJS({
       }
       return readable;
     }
-    module2.exports = from17;
+    module2.exports = from18;
   }
 });
 
@@ -287646,7 +287930,7 @@ var require_stream_readable7 = __commonJS({
     var ERR_STREAM_UNSHIFT_AFTER_END_EVENT = _require$codes.ERR_STREAM_UNSHIFT_AFTER_END_EVENT;
     var StringDecoder;
     var createReadableStreamAsyncIterator;
-    var from17;
+    var from18;
     require_inherits()(Readable2, Stream3);
     var errorOrDestroy = destroyImpl.errorOrDestroy;
     var kProxyEvents = ["error", "close", "destroy", "pause", "resume"];
@@ -288328,10 +288612,10 @@ var require_stream_readable7 = __commonJS({
     }
     if (typeof Symbol === "function") {
       Readable2.from = function(iterable, opts) {
-        if (from17 === void 0) {
-          from17 = require_from7();
+        if (from18 === void 0) {
+          from18 = require_from7();
         }
-        return from17(Readable2, iterable, opts);
+        return from18(Readable2, iterable, opts);
       };
     }
     function indexOf(xs, x2) {
@@ -288511,8 +288795,8 @@ var require_pipeline6 = __commonJS({
     function call(fn) {
       fn();
     }
-    function pipe2(from17, to) {
-      return from17.pipe(to);
+    function pipe2(from18, to) {
+      return from18.pipe(to);
     }
     function popCallback(streams) {
       if (!streams.length) return noop3;
@@ -289307,31 +289591,31 @@ __export(package_exports, {
   default: () => package_default,
   packageArchive: () => packageArchive
 });
-var import_archiver, import_child_process3, import_fs5, import_rxjs37, import_operators20, import_util3, ReadFile, packageArchive, package_default;
+var import_archiver, import_child_process3, import_fs5, import_rxjs38, import_operators22, import_util3, ReadFile, packageArchive, package_default;
 var init_package = __esm({
   "src/commands/lambda/package.ts"() {
     import_archiver = __toESM(require_archiver());
     import_child_process3 = require("child_process");
     import_fs5 = require("fs");
-    import_rxjs37 = __toESM(require_cjs());
-    import_operators20 = __toESM(require_operators());
+    import_rxjs38 = __toESM(require_cjs());
+    import_operators22 = __toESM(require_operators());
     import_util3 = require("util");
     init_helpers2();
     init_archive_globs();
     init_load_spec();
     init_parse_ignore();
     init_read_file();
-    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators20.catchError)(() => (0, import_rxjs37.of)("")));
+    ReadFile = (file2) => readFileAsObservable(file2).pipe((0, import_operators22.catchError)(() => (0, import_rxjs38.of)("")));
     packageArchive = (cmd) => loadSpec(cmd.spec).pipe(
-      (0, import_operators20.map)((spec) => spec?.function ?? spec),
-      (0, import_operators20.switchMap)(
-        (data) => (0, import_rxjs37.forkJoin)([
-          (0, import_rxjs37.defer)(() => (0, import_util3.promisify)(import_child_process3.exec)(["chmod", "+x", data.script].join(" "))),
+      (0, import_operators22.map)((spec) => spec?.function ?? spec),
+      (0, import_operators22.switchMap)(
+        (data) => (0, import_rxjs38.forkJoin)([
+          (0, import_rxjs38.defer)(() => (0, import_util3.promisify)(import_child_process3.exec)(["chmod", "+x", data.script].join(" "))),
           ReadFile(".gignore").pipe(
-            (0, import_operators20.map)((ignore) => parseIgnoredFiles(ignore))
+            (0, import_operators22.map)((ignore) => parseIgnoredFiles(ignore))
           )
         ]).pipe(
-          (0, import_operators20.switchMap)(([, ignore]) => {
+          (0, import_operators22.switchMap)(([, ignore]) => {
             const archive = (0, import_archiver.default)("zip", { zlib: { level: 9 } });
             let files = 0;
             archive.on("entry", (entry) => {
@@ -289342,12 +289626,12 @@ var init_package = __esm({
             );
             archive.finalize();
             const path2 = `.gcache/${data.name}.zip`;
-            return (0, import_rxjs37.defer)(() => streamToBufferPromise(archive)).pipe(
-              (0, import_operators20.switchMap)(
-                (buffer) => (0, import_rxjs37.defer)(() => (0, import_util3.promisify)(import_fs5.mkdir)(".gcache")).pipe(
-                  (0, import_operators20.catchError)(() => (0, import_rxjs37.of)(true)),
-                  (0, import_operators20.switchMap)(() => (0, import_util3.promisify)(import_fs5.writeFile)(path2, buffer)),
-                  (0, import_operators20.map)(() => ({ path: path2, files, bytes: buffer.length }))
+            return (0, import_rxjs38.defer)(() => streamToBufferPromise(archive)).pipe(
+              (0, import_operators22.switchMap)(
+                (buffer) => (0, import_rxjs38.defer)(() => (0, import_util3.promisify)(import_fs5.mkdir)(".gcache")).pipe(
+                  (0, import_operators22.catchError)(() => (0, import_rxjs38.of)(true)),
+                  (0, import_operators22.switchMap)(() => (0, import_util3.promisify)(import_fs5.writeFile)(path2, buffer)),
+                  (0, import_operators22.map)(() => ({ path: path2, files, bytes: buffer.length }))
                 )
               )
             );
@@ -289355,7 +289639,7 @@ var init_package = __esm({
         )
       )
     );
-    package_default = (cmd) => (0, import_rxjs37.lastValueFrom)(packageArchive(cmd));
+    package_default = (cmd) => (0, import_rxjs38.lastValueFrom)(packageArchive(cmd));
   }
 });
 
@@ -289406,17 +289690,17 @@ function timeTriggerPlan(lambdaName, desired, existing) {
   const sameName = existing.triggerName === storedTriggerName(lambdaName, desired.triggerName) || existing.triggerName === desired.triggerName;
   return sameName && existing.cron?.trim() === desired.cron.trim() ? "same" : "replace";
 }
-var import_rxjs38, import_operators21, storedTriggerName, syncTimeTrigger;
+var import_rxjs39, import_operators23, storedTriggerName, syncTimeTrigger;
 var init_time_trigger_sync = __esm({
   "src/commands/lambda/helpers/time-trigger-sync.ts"() {
-    import_rxjs38 = __toESM(require_cjs());
-    import_operators21 = __toESM(require_operators());
+    import_rxjs39 = __toESM(require_cjs());
+    import_operators23 = __toESM(require_operators());
     init_gql_client();
     init_log();
     storedTriggerName = (lambdaName, triggerName) => `${lambdaName}-${triggerName}`;
     syncTimeTrigger = (projectId, lambda, desired) => {
       if (!desired?.triggerName || !desired?.cron || !lambda?.id || !lambda.name) {
-        return (0, import_rxjs38.of)("none");
+        return (0, import_rxjs39.of)("none");
       }
       const lambdaId = lambda.id;
       const lambdaName = lambda.name;
@@ -289426,16 +289710,16 @@ var init_time_trigger_sync = __esm({
         cron: desired.cron
       });
       return GraphqlClienAPI.listProjectTimeTriggers(projectId).pipe(
-        (0, import_operators21.map)((all) => (all ?? []).find((t2) => t2.lambdaId === lambdaId)),
-        (0, import_operators21.switchMap)((existing) => {
+        (0, import_operators23.map)((all) => (all ?? []).find((t2) => t2.lambdaId === lambdaId)),
+        (0, import_operators23.switchMap)((existing) => {
           const plan = timeTriggerPlan(lambdaName, desired, existing);
-          const run2 = plan === "create" ? create() : plan === "replace" ? (0, import_rxjs38.concat)(
+          const run2 = plan === "create" ? create() : plan === "replace" ? (0, import_rxjs39.concat)(
             GraphqlClienAPI.deleteLambdaTimeTrigger(lambdaId),
             create()
-          ) : (0, import_rxjs38.of)(null);
+          ) : (0, import_rxjs39.of)(null);
           return run2.pipe(
-            (0, import_operators21.map)(() => plan),
-            (0, import_operators21.tap)((done) => {
+            (0, import_operators23.map)(() => plan),
+            (0, import_operators23.tap)((done) => {
               const label = `${storedTriggerName(lambdaName, desired.triggerName)} (${desired.cron})`;
               const text = {
                 none: "",
@@ -289447,11 +289731,11 @@ var init_time_trigger_sync = __esm({
             })
           );
         }),
-        (0, import_operators21.catchError)((e2) => {
+        (0, import_operators23.catchError)((e2) => {
           Logger.error(
             `triggers.time was not applied: ${e2?.message ?? e2} - run gcli cron:create`
           );
-          return (0, import_rxjs38.of)("none");
+          return (0, import_rxjs39.of)("none");
         })
       );
     };
@@ -289460,23 +289744,23 @@ var init_time_trigger_sync = __esm({
 
 // src/commands/lambda/helpers/index.ts
 function streamToBufferPromise(file2) {
-  return new Promise((resolve4, reject) => {
+  return new Promise((resolve5, reject) => {
     (0, import_stream_to_buffer.default)(file2, function(err, buffer) {
       if (err) {
         return reject(err);
       }
-      resolve4(buffer);
+      resolve5(buffer);
     });
   });
 }
-var import_form_data, import_fs6, import_rxjs39, import_operators22, import_stream_to_buffer, ReadFile2, lambdaPayload, uploadArchive, saveLambda, DEPLOY_POLL_MS, DEPLOY_TIMEOUT_MS, deployState, reportBuildProblems, followDeploy, createOrUpdateLambda, finish, siteUrlOf, createCommand;
+var import_form_data, import_fs6, import_rxjs40, import_operators24, import_stream_to_buffer, ReadFile2, lambdaPayload, uploadArchive, saveLambda, DEPLOY_POLL_MS, DEPLOY_TIMEOUT_MS, deployState, reportBuildProblems, followDeploy, createOrUpdateLambda, finish, siteUrlOf, createCommand;
 var init_helpers2 = __esm({
   "src/commands/lambda/helpers/index.ts"() {
     import_form_data = __toESM(require_form_data());
     import_fs6 = require("fs");
     init_src();
-    import_rxjs39 = __toESM(require_cjs());
-    import_operators22 = __toESM(require_operators());
+    import_rxjs40 = __toESM(require_cjs());
+    import_operators24 = __toESM(require_operators());
     import_stream_to_buffer = __toESM(require_stream_to_buffer());
     init_apply2();
     init_helpers();
@@ -289488,7 +289772,7 @@ var init_helpers2 = __esm({
     init_read_file();
     init_spread();
     init_time_trigger_sync();
-    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators22.catchError)(() => (0, import_rxjs39.of)("")));
+    ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators24.catchError)(() => (0, import_rxjs40.of)("")));
     lambdaPayload = (cmd, payload, clusterId, files) => ({
       code: cmd.code || files.code || "",
       name: cmd.name || payload.name || "",
@@ -289541,12 +289825,12 @@ var init_helpers2 = __esm({
         scope,
         done: (s2) => `archive packed (${s2.files} files, ${bytes(s2.bytes)})`
       }),
-      (0, import_operators22.switchMap)(
+      (0, import_operators24.switchMap)(
         (stats) => GraphqlClienAPI.getConfig().pipe(
-          (0, import_operators22.switchMap)((config2) => {
+          (0, import_operators24.switchMap)((config2) => {
             const body = new import_form_data.default();
             body.append("file[]", (0, import_fs6.createReadStream)(stats.path));
-            return (0, import_rxjs39.defer)(
+            return (0, import_rxjs40.defer)(
               () => fetch2(config2.uploadUrl, {
                 method: "POST",
                 body,
@@ -289559,11 +289843,11 @@ var init_helpers2 = __esm({
               })
             );
           }),
-          (0, import_operators22.switchMap)(
-            (res) => (0, import_rxjs39.defer)(() => res.json()).pipe(
-              (0, import_operators22.catchError)(() => (0, import_rxjs39.of)(null)),
-              (0, import_operators22.switchMap)(
-                (file2) => res.ok && file2?.id ? (0, import_rxjs39.of)({ ...data, customUploadFileId: file2.id }) : (0, import_rxjs39.throwError)(
+          (0, import_operators24.switchMap)(
+            (res) => (0, import_rxjs40.defer)(() => res.json()).pipe(
+              (0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null)),
+              (0, import_operators24.switchMap)(
+                (file2) => res.ok && file2?.id ? (0, import_rxjs40.of)({ ...data, customUploadFileId: file2.id }) : (0, import_rxjs40.throwError)(
                   () => new Error(
                     `the upload was refused (HTTP ${res.status}${file2?.message ? `: ${file2.message}` : ""})`
                   )
@@ -289578,21 +289862,21 @@ var init_helpers2 = __esm({
         )
       )
     );
-    saveLambda = (cmd, type2, payload, scope) => (0, import_rxjs39.forkJoin)({
+    saveLambda = (cmd, type2, payload, scope) => (0, import_rxjs40.forkJoin)({
       clusterId: resolveClusterId(payload.projectId, {
         clusterId: cmd.clusterId || payload.clusterId,
         clusterName: cmd.clusterName || payload.clusterName
       }),
-      code: cmd.code ? (0, import_rxjs39.of)(cmd.code) : ReadFile2(cmd.file || payload.file),
+      code: cmd.code ? (0, import_rxjs40.of)(cmd.code) : ReadFile2(cmd.file || payload.file),
       script: ReadFile2(cmd.script || payload.script),
       packageJson: ReadFile2(cmd.package || payload.package)
     }).pipe(
-      (0, import_operators22.switchMap)(
+      (0, import_operators24.switchMap)(
         ({ clusterId, ...files }) => GraphqlClienAPI[type2](
           lambdaPayload(cmd, payload, clusterId, files)
         )
       ),
-      (0, import_operators22.map)((lambda) => lambda),
+      (0, import_operators24.map)((lambda) => lambda),
       step(type2 === "createLambda" ? "creating lambda" : "saving lambda", {
         scope,
         done: () => type2 === "createLambda" ? "lambda created" : "lambda saved"
@@ -289600,19 +289884,19 @@ var init_helpers2 = __esm({
     );
     DEPLOY_POLL_MS = 3e3;
     DEPLOY_TIMEOUT_MS = 15 * 6e4;
-    deployState = (lambda) => (0, import_rxjs39.forkJoin)({
+    deployState = (lambda) => (0, import_rxjs40.forkJoin)({
       build: GraphqlClienAPI.getLambdaBuildStatus(lambda.id),
       // not on every API yet: an error = not known
       lambda: GraphqlClienAPI.getLambda(lambda.id, [
         "deployStatus"
-      ]).pipe((0, import_operators22.catchError)(() => (0, import_rxjs39.of)(null)))
+      ]).pipe((0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null)))
     }).pipe(
-      (0, import_operators22.map)(
+      (0, import_operators24.map)(
         ({ build: build2, lambda: l }) => deployStateOf(build2, l?.deployStatus)
       )
     );
     reportBuildProblems = (lambdaId, scope) => GraphqlClienAPI.getLambdaBuildStatus(lambdaId).pipe(
-      (0, import_operators22.tap)((b) => {
+      (0, import_operators24.tap)((b) => {
         if (b?.buildErrors)
           ui.warn(`the build log has errors:
 ${ui.dim(b.buildErrors)}`, scope);
@@ -289623,64 +289907,64 @@ ${ui.dim(b.runtimeErrors)}`,
             scope
           );
       }),
-      (0, import_operators22.catchError)(() => (0, import_rxjs39.of)(null))
+      (0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null))
     );
     followDeploy = (lambda, type2, scope, wait) => {
-      if (!wait || !lambda?.id) return (0, import_rxjs39.of)(lambda);
+      if (!wait || !lambda?.id) return (0, import_rxjs40.of)(lambda);
       const started = Date.now();
       const spinner = ui.spin("building and rolling out", scope);
       const logsHint = `gcli lambda:logs-builder --name ${lambda.name}`;
-      return (0, import_rxjs39.timer)(DEPLOY_POLL_MS, DEPLOY_POLL_MS).pipe(
-        (0, import_operators22.switchMap)(() => deployState(lambda)),
-        (0, import_operators22.tap)(
+      return (0, import_rxjs40.timer)(DEPLOY_POLL_MS, DEPLOY_POLL_MS).pipe(
+        (0, import_operators24.switchMap)(() => deployState(lambda)),
+        (0, import_operators24.tap)(
           ({ status: status2 }) => spinner.update(
             `building and rolling out${status2 ? ` (${status2})` : ""} ${ui.dim(elapsed(Date.now() - started))}`
           )
         ),
-        (0, import_operators22.takeWhile)(({ state: state2 }) => state2 === "DEPLOYING", true),
-        (0, import_operators22.last)(),
-        (0, import_operators22.timeout)({ first: DEPLOY_TIMEOUT_MS }),
-        (0, import_operators22.finalize)(() => spinner.stop()),
-        (0, import_operators22.switchMap)(({ state: state2 }) => {
+        (0, import_operators24.takeWhile)(({ state: state2 }) => state2 === "DEPLOYING", true),
+        (0, import_operators24.last)(),
+        (0, import_operators24.timeout)({ first: DEPLOY_TIMEOUT_MS }),
+        (0, import_operators24.finalize)(() => spinner.stop()),
+        (0, import_operators24.switchMap)(({ state: state2 }) => {
           const took = ui.dim(elapsed(Date.now() - started));
           if (state2 === "LIVE") {
             ui.success(`built and live ${took}`, scope);
-            return reportBuildProblems(lambda.id, scope).pipe((0, import_operators22.map)(() => lambda));
+            return reportBuildProblems(lambda.id, scope).pipe((0, import_operators24.map)(() => lambda));
           }
           ui.error(`the deploy failed ${took}`, scope);
           return GraphqlClienAPI.getLambdaBuildStatus(lambda.id).pipe(
-            (0, import_operators22.catchError)(() => (0, import_rxjs39.of)(null)),
-            (0, import_operators22.tap)((b) => {
+            (0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null)),
+            (0, import_operators24.tap)((b) => {
               if (b?.logsTail) ui.print(ui.dim(b.logsTail.replace(/^/gm, "   \u2502 ")));
               ui.print(`
    Full build log: ${ui.bold(logsHint)}`);
             }),
-            (0, import_operators22.switchMap)(
-              () => (0, import_rxjs39.throwError)(
+            (0, import_operators24.switchMap)(
+              () => (0, import_rxjs40.throwError)(
                 () => new ReportedError(`deploy of ${lambda.name} failed`)
               )
             )
           );
         }),
-        (0, import_operators22.catchError)((e2) => {
-          if (e2 instanceof ReportedError) return (0, import_rxjs39.throwError)(() => e2);
+        (0, import_operators24.catchError)((e2) => {
+          if (e2 instanceof ReportedError) return (0, import_rxjs40.throwError)(() => e2);
           const why = e2?.name === "TimeoutError" ? `still building after ${elapsed(DEPLOY_TIMEOUT_MS)}` : `could not follow the build (${errorText(e2)})`;
           ui.warn(`${why} - follow it with ${logsHint}`, scope);
-          return (0, import_rxjs39.of)(lambda);
+          return (0, import_rxjs40.of)(lambda);
         })
       );
     };
     createOrUpdateLambda = (cmd, type2) => {
       if (cmd.json) humanOutputToStderr();
-      return (0, import_rxjs39.lastValueFrom)(
+      return (0, import_rxjs40.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators22.switchMap)(
-            (projectId) => (0, import_rxjs39.forkJoin)({
+          (0, import_operators24.switchMap)(
+            (projectId) => (0, import_rxjs40.forkJoin)({
               project: GraphqlClienAPI.getProject(projectId),
               spec: loadSpec(cmd.spec)
-            }).pipe((0, import_operators22.map)((r2) => ({ projectId, ...r2 })))
+            }).pipe((0, import_operators24.map)((r2) => ({ projectId, ...r2 })))
           ),
-          (0, import_operators22.switchMap)(({ projectId, project, spec }) => {
+          (0, import_operators24.switchMap)(({ projectId, project, spec }) => {
             const data = { projectId, ...spec?.function ?? spec };
             const name2 = cmd.name || data.name || "";
             const scope = `lambda[${name2}]`;
@@ -289691,39 +289975,39 @@ ${ui.dim(b.runtimeErrors)}`,
                 `${type2 === "createLambda" ? "Creating" : "Deploying"} ${name2} to project ${project?.name || projectId}`
               );
             }
-            const prepared$ = data.uploadAsZip ? uploadArchive(cmd, data, scope) : (0, import_rxjs39.of)({ ...data, customUploadFileId: "" });
+            const prepared$ = data.uploadAsZip ? uploadArchive(cmd, data, scope) : (0, import_rxjs40.of)({ ...data, customUploadFileId: "" });
             return prepared$.pipe(
-              (0, import_operators22.switchMap)((payload) => saveLambda(cmd, type2, payload, scope)),
-              (0, import_operators22.switchMap)(
+              (0, import_operators24.switchMap)((payload) => saveLambda(cmd, type2, payload, scope)),
+              (0, import_operators24.switchMap)(
                 (lambda) => followDeploy(lambda, type2, scope, cmd.wait !== false)
               ),
               // apply `triggers.time` of lambforge.yaml (it used to be ignored)
-              (0, import_operators22.switchMap)(
+              (0, import_operators24.switchMap)(
                 (lambda) => syncTimeTrigger(projectId, lambda, timeTrigger).pipe(
-                  (0, import_operators22.map)(() => lambda)
+                  (0, import_operators24.map)(() => lambda)
                 )
               ),
               // apply `domains:` - reported, never fails the deploy itself
-              (0, import_operators22.switchMap)(
+              (0, import_operators24.switchMap)(
                 (lambda) => applyDomains(projectId, domains, lambda?.name).pipe(
-                  (0, import_operators22.catchError)((e2) => {
+                  (0, import_operators24.catchError)((e2) => {
                     ui.warn(
                       `not applied: ${errorText(e2)} - run gcli domain:apply`,
                       "domains"
                     );
-                    return (0, import_rxjs39.of)([]);
+                    return (0, import_rxjs40.of)([]);
                   }),
-                  (0, import_operators22.map)(() => lambda)
+                  (0, import_operators24.map)(() => lambda)
                 )
               ),
-              (0, import_operators22.switchMap)((lambda) => finish(lambda, type2, cmd))
+              (0, import_operators24.switchMap)((lambda) => finish(lambda, type2, cmd))
             );
           })
         )
       );
     };
     finish = (lambda, type2, cmd) => siteUrlOf(lambda).pipe(
-      (0, import_operators22.tap)((siteUrl) => {
+      (0, import_operators24.tap)((siteUrl) => {
         if (cmd.embedded) {
           ui.success(
             `live at ${siteUrl || lambda?.url || "-"}`,
@@ -289742,12 +290026,12 @@ ${ui.dim(b.runtimeErrors)}`,
           process.stdout.write(`${JSON.stringify(lambda, null, 2)}
 `);
       }),
-      (0, import_operators22.map)(() => lambda)
+      (0, import_operators24.map)(() => lambda)
     );
     siteUrlOf = (lambda) => lambda?.id ? GraphqlClienAPI.getLambda(lambda.id, ["siteUrl"]).pipe(
-      (0, import_operators22.map)((l) => l.siteUrl ?? null),
-      (0, import_operators22.catchError)(() => (0, import_rxjs39.of)(null))
-    ) : (0, import_rxjs39.of)(null);
+      (0, import_operators24.map)((l) => l.siteUrl ?? null),
+      (0, import_operators24.catchError)(() => (0, import_rxjs40.of)(null))
+    ) : (0, import_rxjs40.of)(null);
     createCommand = (command) => (options) => (program2) => {
       const cmd = program2.command(command);
       for (const option of options) {
@@ -289763,27 +290047,27 @@ var list_exports3 = {};
 __export(list_exports3, {
   default: () => list_default3
 });
-var import_rxjs40, import_operators23, list_default3;
+var import_rxjs41, import_operators25, list_default3;
 var init_list3 = __esm({
   "src/commands/lambda/list.ts"() {
-    import_rxjs40 = __toESM(require_cjs());
-    import_operators23 = __toESM(require_operators());
+    import_rxjs41 = __toESM(require_cjs());
+    import_operators25 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default3 = (cmd) => (0, import_rxjs40.lastValueFrom)(
+    list_default3 = (cmd) => (0, import_rxjs41.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators23.switchMap)(
+        (0, import_operators25.switchMap)(
           (projectId) => resolveClusterId(projectId, {
             clusterId: cmd.clusterId,
             clusterName: cmd.clusterName
           }).pipe(
-            (0, import_operators23.switchMap)(
+            (0, import_operators25.switchMap)(
               (clusterId) => GraphqlClienAPI.listLambdas(projectId, clusterId)
             )
           )
         ),
-        (0, import_operators23.tap)((data) => {
+        (0, import_operators25.tap)((data) => {
           const columns = [
             "id",
             "name",
@@ -289803,17 +290087,17 @@ var get_exports = {};
 __export(get_exports, {
   default: () => get_default
 });
-var import_rxjs41, import_operators24, get_default;
+var import_rxjs42, import_operators26, get_default;
 var init_get = __esm({
   "src/commands/lambda/get.ts"() {
-    import_rxjs41 = __toESM(require_cjs());
-    import_operators24 = __toESM(require_operators());
+    import_rxjs42 = __toESM(require_cjs());
+    import_operators26 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     get_default = async (cmd) => {
-      const table = (0, import_operators24.tap)((data) => {
+      const table = (0, import_operators26.tap)((data) => {
         const columns = [
           "name",
           "projectId",
@@ -289825,33 +290109,33 @@ var init_get = __esm({
         Logger.table([data], columns);
       });
       if (cmd.lambda) {
-        return (0, import_rxjs41.lastValueFrom)(
+        return (0, import_rxjs42.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators24.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
+            (0, import_operators26.switchMap)((id) => GraphqlClienAPI.getLambda(id)),
             table
           )
         );
       }
-      const spec = await (0, import_rxjs41.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs42.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs41.lastValueFrom)(
+        return (0, import_rxjs42.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators24.catchError)((error48) => {
+            (0, import_operators26.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs41.throwError)(
+                return (0, import_rxjs42.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs41.throwError)(() => error48);
+              return (0, import_rxjs42.throwError)(() => error48);
             }),
-            (0, import_operators24.switchMap)(
+            (0, import_operators26.switchMap)(
               (projectId) => resolveClusterId(projectId, {
                 clusterId: cmd.clusterId,
                 clusterName: cmd.clusterName
               }).pipe(
-                (0, import_operators24.switchMap)(
+                (0, import_operators26.switchMap)(
                   (clusterId) => GraphqlClienAPI.getLambdaByName(
                     name2,
                     projectId,
@@ -289901,34 +290185,34 @@ var delete_exports = {};
 __export(delete_exports, {
   default: () => delete_default
 });
-var import_rxjs42, import_operators25, delete_default;
+var import_rxjs43, import_operators27, delete_default;
 var init_delete = __esm({
   "src/commands/lambda/delete.ts"() {
-    import_rxjs42 = __toESM(require_cjs());
-    import_operators25 = __toESM(require_operators());
+    import_rxjs43 = __toESM(require_cjs());
+    import_operators27 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     delete_default = async (cmd) => {
-      const spec = await (0, import_rxjs42.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs43.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       const env2 = cmd.env ?? spec.function?.env ?? spec.env;
       const clusterIdHint = cmd.clusterId ?? spec.function?.clusterId ?? spec.clusterId;
       const clusterNameHint = cmd.clusterName ?? spec.function?.clusterName ?? spec.clusterName;
-      return (0, import_rxjs42.lastValueFrom)(
+      return (0, import_rxjs43.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators25.switchMap)(
+          (0, import_operators27.switchMap)(
             (projectId) => resolveClusterId(projectId, {
               clusterId: clusterIdHint,
               clusterName: clusterNameHint
             }).pipe(
-              (0, import_operators25.switchMap)(
+              (0, import_operators27.switchMap)(
                 (clusterId) => GraphqlClienAPI.deleteLambda({ name: name2, projectId, env: env2, clusterId })
               )
             )
           ),
-          (0, import_operators25.tap)((data) => {
+          (0, import_operators27.tap)((data) => {
             Logger.success(`Lambda ${data?.name ?? ""} deleted`);
             const columns = [
               "name",
@@ -289949,45 +290233,45 @@ var logs_exports = {};
 __export(logs_exports, {
   default: () => logs_default
 });
-var import_rxjs43, import_operators26, logs_default;
+var import_rxjs44, import_operators28, logs_default;
 var init_logs = __esm({
   "src/commands/lambda/logs.ts"() {
-    import_rxjs43 = __toESM(require_cjs());
-    import_operators26 = __toESM(require_operators());
+    import_rxjs44 = __toESM(require_cjs());
+    import_operators28 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_default = async (cmd) => {
-      const result = (0, import_operators26.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators28.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs43.lastValueFrom)(
+        return (0, import_rxjs44.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators26.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
+            (0, import_operators28.switchMap)((id) => GraphqlClienAPI.getLambdaLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs43.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs44.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs43.lastValueFrom)(
+        return (0, import_rxjs44.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators26.catchError)((error48) => {
+            (0, import_operators28.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs43.throwError)(
+                return (0, import_rxjs44.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs43.throwError)(() => error48);
+              return (0, import_rxjs44.throwError)(() => error48);
             }),
-            (0, import_operators26.switchMap)(
+            (0, import_operators28.switchMap)(
               (projectId) => resolveClusterId(projectId, {
                 clusterId: cmd.clusterId,
                 clusterName: cmd.clusterName
               }).pipe(
-                (0, import_operators26.switchMap)(
+                (0, import_operators28.switchMap)(
                   (clusterId) => GraphqlClienAPI.getLambdaLogsByName(name2, projectId, clusterId)
                 )
               )
@@ -290006,45 +290290,45 @@ var logs_builder_exports = {};
 __export(logs_builder_exports, {
   default: () => logs_builder_default
 });
-var import_rxjs44, import_operators27, logs_builder_default;
+var import_rxjs45, import_operators29, logs_builder_default;
 var init_logs_builder = __esm({
   "src/commands/lambda/logs-builder.ts"() {
-    import_rxjs44 = __toESM(require_cjs());
-    import_operators27 = __toESM(require_operators());
+    import_rxjs45 = __toESM(require_cjs());
+    import_operators29 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     logs_builder_default = async (cmd) => {
-      const result = (0, import_operators27.tap)(({ data }) => Logger.log(data));
+      const result = (0, import_operators29.tap)(({ data }) => Logger.log(data));
       if (cmd.lambda) {
-        return (0, import_rxjs44.lastValueFrom)(
+        return (0, import_rxjs45.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators27.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
+            (0, import_operators29.switchMap)((id) => GraphqlClienAPI.getLambdaBuilderLogs(id)),
             result
           )
         );
       }
-      const spec = await (0, import_rxjs44.lastValueFrom)(loadSpec(cmd.spec));
+      const spec = await (0, import_rxjs45.lastValueFrom)(loadSpec(cmd.spec));
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs44.lastValueFrom)(
+        return (0, import_rxjs45.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators27.catchError)((error48) => {
+            (0, import_operators29.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs44.throwError)(
+                return (0, import_rxjs45.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:logs --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs44.throwError)(() => error48);
+              return (0, import_rxjs45.throwError)(() => error48);
             }),
-            (0, import_operators27.switchMap)(
+            (0, import_operators29.switchMap)(
               (projectId) => resolveClusterId(projectId, {
                 clusterId: cmd.clusterId,
                 clusterName: cmd.clusterName
               }).pipe(
-                (0, import_operators27.switchMap)(
+                (0, import_operators29.switchMap)(
                   (clusterId) => GraphqlClienAPI.getLambdaBuilderLogsByName(
                     name2,
                     projectId,
@@ -290067,39 +290351,39 @@ var test_exports = {};
 __export(test_exports, {
   default: () => test_default
 });
-var import_rxjs45, import_operators28, test_default;
+var import_rxjs46, import_operators30, test_default;
 var init_test = __esm({
   "src/commands/lambda/test.ts"() {
-    import_rxjs45 = __toESM(require_cjs());
-    import_operators28 = __toESM(require_operators());
+    import_rxjs46 = __toESM(require_cjs());
+    import_operators30 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
     test_default = async (cmd) => {
-      const spec = await (0, import_rxjs45.lastValueFrom)(loadSpec(cmd.spec));
-      const processParameters = (lambda) => (0, import_rxjs45.of)(lambda).pipe(
-        (0, import_operators28.map)((lambda2) => ({
+      const spec = await (0, import_rxjs46.lastValueFrom)(loadSpec(cmd.spec));
+      const processParameters = (lambda) => (0, import_rxjs46.of)(lambda).pipe(
+        (0, import_operators30.map)((lambda2) => ({
           ...lambda2,
           url: cmd.pathParams ? cmd.pathParams.split(";").map((param) => param.split("=")).reduce(
             (prev, [key, value]) => prev.replace(key, value),
             lambda2.url
           ) : lambda2.url
         })),
-        (0, import_operators28.tap)(() => {
+        (0, import_operators30.tap)(() => {
           Logger.info(
             `About to hit URL: ${[lambda.url, cmd.queryParams].join("")}`
           );
         }),
-        (0, import_operators28.switchMap)(
-          (lambda2) => (0, import_rxjs45.from)(
+        (0, import_operators30.switchMap)(
+          (lambda2) => (0, import_rxjs46.from)(
             fetch([lambda2.url, cmd.queryParams].filter((i2) => !!i2).join(""), {
               method: cmd?.method ?? "GET",
               body: cmd.body
             })
-          ).pipe((0, import_operators28.switchMap)((res) => res.json()))
+          ).pipe((0, import_operators30.switchMap)((res) => res.json()))
         ),
-        (0, import_operators28.tap)((data) => {
+        (0, import_operators30.tap)((data) => {
           if (data.error) {
             Logger.error(data);
           } else {
@@ -290108,29 +290392,29 @@ var init_test = __esm({
         })
       );
       if (cmd.lambda) {
-        return (0, import_rxjs45.lastValueFrom)(
+        return (0, import_rxjs46.lastValueFrom)(
           isMongoId(cmd.lambda).pipe(
-            (0, import_operators28.switchMap)(
+            (0, import_operators30.switchMap)(
               (id) => GraphqlClienAPI.getLambda(id, ["id", "url", "method", "params"])
             ),
-            (0, import_operators28.switchMap)(processParameters)
+            (0, import_operators30.switchMap)(processParameters)
           )
         );
       }
       const name2 = typeof cmd.name === "string" ? cmd.name : spec.function?.name ?? spec.name;
       if (name2) {
-        return (0, import_rxjs45.lastValueFrom)(
+        return (0, import_rxjs46.lastValueFrom)(
           parseProjectId(cmd.project).pipe(
-            (0, import_operators28.catchError)((error48) => {
+            (0, import_operators30.catchError)((error48) => {
               if (!cmd.project) {
-                return (0, import_rxjs45.throwError)(
+                return (0, import_rxjs46.throwError)(
                   () => `No project id try with "gcli use --project your-project-id" to specify one  
  Hint: "gcli lambda:get --name ${name2} --project your-project-id"`
                 );
               }
-              return (0, import_rxjs45.throwError)(() => error48);
+              return (0, import_rxjs46.throwError)(() => error48);
             }),
-            (0, import_operators28.switchMap)(
+            (0, import_operators30.switchMap)(
               (projectId) => GraphqlClienAPI.getLambdaByName(name2, projectId, [
                 "id",
                 "url",
@@ -290138,7 +290422,7 @@ var init_test = __esm({
                 "params"
               ])
             ),
-            (0, import_operators28.switchMap)(processParameters)
+            (0, import_operators30.switchMap)(processParameters)
           )
         );
       }
@@ -290152,16 +290436,16 @@ var list_exports4 = {};
 __export(list_exports4, {
   default: () => list_default4
 });
-var import_rxjs46, import_operators29, list_default4;
+var import_rxjs47, import_operators31, list_default4;
 var init_list4 = __esm({
   "src/commands/plugin/list.ts"() {
-    import_rxjs46 = __toESM(require_cjs());
-    import_operators29 = __toESM(require_operators());
+    import_rxjs47 = __toESM(require_cjs());
+    import_operators31 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default4 = () => (0, import_rxjs46.lastValueFrom)(
+    list_default4 = () => (0, import_rxjs47.lastValueFrom)(
       GraphqlClienAPI.listAvailablePlugins().pipe(
-        (0, import_operators29.tap)((plugins) => {
+        (0, import_operators31.tap)((plugins) => {
           Logger.table(
             (plugins || []).map((p) => ({
               name: p.name,
@@ -290181,18 +290465,18 @@ var installed_exports = {};
 __export(installed_exports, {
   default: () => installed_default
 });
-var import_rxjs47, import_operators30, installed_default;
+var import_rxjs48, import_operators32, installed_default;
 var init_installed = __esm({
   "src/commands/plugin/installed.ts"() {
-    import_rxjs47 = __toESM(require_cjs());
-    import_operators30 = __toESM(require_operators());
+    import_rxjs48 = __toESM(require_cjs());
+    import_operators32 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    installed_default = (cmd) => (0, import_rxjs47.lastValueFrom)(
+    installed_default = (cmd) => (0, import_rxjs48.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators30.switchMap)((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
-        (0, import_operators30.tap)((installed) => {
+        (0, import_operators32.switchMap)((projectId) => GraphqlClienAPI.listInstalledPlugins(projectId)),
+        (0, import_operators32.tap)((installed) => {
           if (!installed?.length) {
             Logger.info(
               "No plugins installed for this project yet. See plugin:install."
@@ -290217,32 +290501,32 @@ var install_exports = {};
 __export(install_exports, {
   default: () => install_default
 });
-var import_rxjs48, import_operators31, install_default;
+var import_rxjs49, import_operators33, install_default;
 var init_install = __esm({
   "src/commands/plugin/install.ts"() {
-    import_rxjs48 = __toESM(require_cjs());
-    import_operators31 = __toESM(require_operators());
+    import_rxjs49 = __toESM(require_cjs());
+    import_operators33 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    install_default = (cmd) => (0, import_rxjs48.lastValueFrom)(
+    install_default = (cmd) => (0, import_rxjs49.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators31.switchMap)(
+        (0, import_operators33.switchMap)(
           (projectId) => loadSpec(
             cmd.spec ?? "plugin.yaml"
           ).pipe(
             // No spec file is required at all if --name/--cluster fully
             // cover it (unlike every other resource here, a plugin install
             // is often just "install this by name", no YAML needed).
-            (0, import_operators31.catchError)(() => (0, import_rxjs48.of)(void 0)),
-            (0, import_operators31.map)((data) => ({
+            (0, import_operators33.catchError)(() => (0, import_rxjs49.of)(void 0)),
+            (0, import_operators33.map)((data) => ({
               projectId,
               ...data ? data.plugin ?? data : {}
             }))
           )
         ),
-        (0, import_operators31.switchMap)(
+        (0, import_operators33.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.installPlugin(
             projectId,
             cmd.name || data.name,
@@ -290250,7 +290534,7 @@ var init_install = __esm({
             cmd.cluster || data.clusterId
           )
         ),
-        (0, import_operators31.tap)((installed) => {
+        (0, import_operators33.tap)((installed) => {
           Logger.success("Plugin installed");
           Logger.table([installed]);
         })
@@ -290264,20 +290548,20 @@ var uninstall_exports = {};
 __export(uninstall_exports, {
   default: () => uninstall_default
 });
-var import_rxjs49, import_operators32, uninstall_default;
+var import_rxjs50, import_operators34, uninstall_default;
 var init_uninstall = __esm({
   "src/commands/plugin/uninstall.ts"() {
-    import_rxjs49 = __toESM(require_cjs());
-    import_operators32 = __toESM(require_operators());
+    import_rxjs50 = __toESM(require_cjs());
+    import_operators34 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    uninstall_default = (cmd) => (0, import_rxjs49.lastValueFrom)(
+    uninstall_default = (cmd) => (0, import_rxjs50.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators32.switchMap)(
+        (0, import_operators34.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallPlugin(projectId, cmd.name, cmd.cluster)
         ),
-        (0, import_operators32.tap)((pluginName) => {
+        (0, import_operators34.tap)((pluginName) => {
           Logger.success(`Plugin ${pluginName} removed`);
         })
       )
@@ -290290,16 +290574,16 @@ var list_exports5 = {};
 __export(list_exports5, {
   default: () => list_default5
 });
-var import_rxjs50, import_operators33, list_default5;
+var import_rxjs51, import_operators35, list_default5;
 var init_list5 = __esm({
   "src/commands/project/list.ts"() {
-    import_rxjs50 = __toESM(require_cjs());
-    import_operators33 = __toESM(require_operators());
+    import_rxjs51 = __toESM(require_cjs());
+    import_operators35 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default5 = async () => (0, import_rxjs50.lastValueFrom)(
+    list_default5 = async () => (0, import_rxjs51.lastValueFrom)(
       GraphqlClienAPI.listProjects().pipe(
-        (0, import_operators33.tap)((project) => {
+        (0, import_operators35.tap)((project) => {
           const columns = ["id", "name"];
           Logger.table(project, columns);
         })
@@ -290313,24 +290597,24 @@ var use_exports = {};
 __export(use_exports, {
   default: () => use_default
 });
-var import_fs7, import_rxjs51, import_operators34, import_util4, use_default;
+var import_fs7, import_rxjs52, import_operators36, import_util4, use_default;
 var init_use = __esm({
   "src/commands/project/use.ts"() {
     import_fs7 = require("fs");
-    import_rxjs51 = __toESM(require_cjs());
-    import_operators34 = __toESM(require_operators());
+    import_rxjs52 = __toESM(require_cjs());
+    import_operators36 = __toESM(require_operators());
     import_util4 = require("util");
     init_helpers();
     init_gql_client();
     init_types();
     use_default = async (cmd) => {
-      return (0, import_rxjs51.lastValueFrom)(
+      return (0, import_rxjs52.lastValueFrom)(
         parseProjectId(cmd).pipe(
-          (0, import_operators34.switchMap)(
-            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators34.map)(() => projectId))
+          (0, import_operators36.switchMap)(
+            (projectId) => GraphqlClienAPI.getProject(projectId).pipe((0, import_operators36.map)(() => projectId))
           ),
-          (0, import_operators34.switchMap)(
-            (projectId) => (0, import_rxjs51.from)(
+          (0, import_operators36.switchMap)(
+            (projectId) => (0, import_rxjs52.from)(
               (0, import_util4.promisify)(import_fs7.writeFile)(projectDirectory, projectId, {
                 encoding: "utf-8"
               })
@@ -290777,8 +291061,8 @@ var init_parseUtil = __esm({
       }
       let errorMessage = "";
       const maps = errorMaps.filter((m2) => !!m2).slice().reverse();
-      for (const map38 of maps) {
-        errorMessage = map38(fullIssue, { data, defaultError: errorMessage }).message;
+      for (const map39 of maps) {
+        errorMessage = map39(fullIssue, { data, defaultError: errorMessage }).message;
       }
       return {
         ...issueData,
@@ -297300,19 +297584,19 @@ var init_schemas = __esm({
       });
       const disc = cached(() => {
         const opts = def.options;
-        const map38 = /* @__PURE__ */ new Map();
+        const map39 = /* @__PURE__ */ new Map();
         for (const o of opts) {
           const values = o._zod.propValues?.[def.discriminator];
           if (!values || values.size === 0)
             throw new Error(`Invalid discriminated union option at index "${def.options.indexOf(o)}"`);
           for (const v of values) {
-            if (map38.has(v)) {
+            if (map39.has(v)) {
               throw new Error(`Duplicate discriminator value "${String(v)}"`);
             }
-            map38.set(v, o);
+            map39.set(v, o);
           }
         }
-        return map38;
+        return map39;
       });
       inst._zod.parse = (payload, ctx) => {
         const input = payload.value;
@@ -306795,7 +307079,7 @@ __export(schemas_exports3, {
   looseObject: () => looseObject,
   looseRecord: () => looseRecord,
   mac: () => mac2,
-  map: () => map20,
+  map: () => map21,
   meta: () => meta2,
   nan: () => nan,
   nanoid: () => nanoid2,
@@ -307091,7 +307375,7 @@ function looseRecord(keyType, valueType, params) {
     ...util_exports.normalizeParams(params)
   });
 }
-function map20(keyType, valueType, params) {
+function map21(keyType, valueType, params) {
   return new ZodMap2({
     type: "map",
     keyType,
@@ -307933,9 +308217,9 @@ var init_schemas3 = __esm({
 });
 
 // ../../node_modules/zod/v4/classic/compat.js
-function setErrorMap(map38) {
+function setErrorMap(map39) {
   config({
-    customError: map38
+    customError: map39
   });
 }
 function getErrorMap2() {
@@ -308635,7 +308919,7 @@ __export(external_exports3, {
   lt: () => _lt,
   lte: () => _lte,
   mac: () => mac2,
-  map: () => map20,
+  map: () => map21,
   maxLength: () => _maxLength,
   maxSize: () => _maxSize,
   meta: () => meta2,
@@ -311175,7 +311459,7 @@ var init_protocol = __esm({
               return;
             }
             const pollInterval = task2.pollInterval ?? this._options?.defaultTaskPollInterval ?? 1e3;
-            await new Promise((resolve4) => setTimeout(resolve4, pollInterval));
+            await new Promise((resolve5) => setTimeout(resolve5, pollInterval));
             options?.signal?.throwIfAborted();
           }
         } catch (error48) {
@@ -311192,7 +311476,7 @@ var init_protocol = __esm({
        */
       request(request, resultSchema, options) {
         const { relatedRequestId, resumptionToken, onresumptiontoken, task, relatedTask } = options ?? {};
-        return new Promise((resolve4, reject) => {
+        return new Promise((resolve5, reject) => {
           const earlyReject = (error48) => {
             reject(error48);
           };
@@ -311270,7 +311554,7 @@ var init_protocol = __esm({
               if (!parseResult.success) {
                 reject(parseResult.error);
               } else {
-                resolve4(parseResult.data);
+                resolve5(parseResult.data);
               }
             } catch (error48) {
               reject(error48);
@@ -311531,12 +311815,12 @@ var init_protocol = __esm({
           }
         } catch {
         }
-        return new Promise((resolve4, reject) => {
+        return new Promise((resolve5, reject) => {
           if (signal.aborted) {
             reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
             return;
           }
-          const timeoutId = setTimeout(resolve4, interval2);
+          const timeoutId = setTimeout(resolve5, interval2);
           signal.addEventListener("abort", () => {
             clearTimeout(timeoutId);
             reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
@@ -312201,17 +312485,17 @@ var require_codegen = __commonJS({
       }
     };
     var ForRange = class extends For {
-      constructor(varKind, name2, from17, to) {
+      constructor(varKind, name2, from18, to) {
         super();
         this.varKind = varKind;
         this.name = name2;
-        this.from = from17;
+        this.from = from18;
         this.to = to;
       }
       render(opts) {
         const varKind = opts.es5 ? scope_1.varKinds.var : this.varKind;
-        const { name: name2, from: from17, to } = this;
-        return `for(${varKind} ${name2}=${from17}; ${name2}<${to}; ${name2}++)` + super.render(opts);
+        const { name: name2, from: from18, to } = this;
+        return `for(${varKind} ${name2}=${from18}; ${name2}<${to}; ${name2}++)` + super.render(opts);
       }
       get names() {
         const names3 = addExprNames(super.names, this.from);
@@ -312430,9 +312714,9 @@ var require_codegen = __commonJS({
         return this._for(new ForLoop(iteration), forBody);
       }
       // `for` statement for a range of values
-      forRange(nameOrPrefix, from17, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
+      forRange(nameOrPrefix, from18, to, forBody, varKind = this.opts.es5 ? scope_1.varKinds.var : scope_1.varKinds.let) {
         const name2 = this._scope.toName(nameOrPrefix);
-        return this._for(new ForRange(varKind, name2, from17, to), () => forBody(name2));
+        return this._for(new ForRange(varKind, name2, from18, to), () => forBody(name2));
       }
       // `for-of` statement (in es5 mode replace with a normal for loop)
       forOf(nameOrPrefix, iterable, forBody, varKind = scope_1.varKinds.const) {
@@ -312571,13 +312855,13 @@ var require_codegen = __commonJS({
       }
     };
     exports2.CodeGen = CodeGen;
-    function addNames(names3, from17) {
-      for (const n in from17)
-        names3[n] = (names3[n] || 0) + (from17[n] || 0);
+    function addNames(names3, from18) {
+      for (const n in from18)
+        names3[n] = (names3[n] || 0) + (from18[n] || 0);
       return names3;
     }
-    function addExprNames(names3, from17) {
-      return from17 instanceof code_1._CodeOrName ? addNames(names3, from17.names) : names3;
+    function addExprNames(names3, from18) {
+      return from18 instanceof code_1._CodeOrName ? addNames(names3, from18.names) : names3;
     }
     function optimizeExpr(expr, names3, constants) {
       if (expr instanceof code_1.Name)
@@ -312604,9 +312888,9 @@ var require_codegen = __commonJS({
         return e2 instanceof code_1._Code && e2._items.some((c) => c instanceof code_1.Name && names3[c.str] === 1 && constants[c.str] !== void 0);
       }
     }
-    function subtractNames(names3, from17) {
-      for (const n in from17)
-        names3[n] = (names3[n] || 0) - (from17[n] || 0);
+    function subtractNames(names3, from18) {
+      for (const n in from18)
+        names3[n] = (names3[n] || 0) - (from18[n] || 0);
     }
     function not(x2) {
       return typeof x2 == "boolean" || typeof x2 == "number" || x2 === null ? !x2 : (0, code_1._)`!${par(x2)}`;
@@ -312724,31 +313008,31 @@ var require_util5 = __commonJS({
     }
     exports2.eachItem = eachItem;
     function makeMergeEvaluated({ mergeNames, mergeToName, mergeValues: mergeValues3, resultToName }) {
-      return (gen, from17, to, toName) => {
-        const res = to === void 0 ? from17 : to instanceof codegen_1.Name ? (from17 instanceof codegen_1.Name ? mergeNames(gen, from17, to) : mergeToName(gen, from17, to), to) : from17 instanceof codegen_1.Name ? (mergeToName(gen, to, from17), from17) : mergeValues3(from17, to);
+      return (gen, from18, to, toName) => {
+        const res = to === void 0 ? from18 : to instanceof codegen_1.Name ? (from18 instanceof codegen_1.Name ? mergeNames(gen, from18, to) : mergeToName(gen, from18, to), to) : from18 instanceof codegen_1.Name ? (mergeToName(gen, to, from18), from18) : mergeValues3(from18, to);
         return toName === codegen_1.Name && !(res instanceof codegen_1.Name) ? resultToName(gen, res) : res;
       };
     }
     exports2.mergeEvaluated = {
       props: makeMergeEvaluated({
-        mergeNames: (gen, from17, to) => gen.if((0, codegen_1._)`${to} !== true && ${from17} !== undefined`, () => {
-          gen.if((0, codegen_1._)`${from17} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from17})`));
+        mergeNames: (gen, from18, to) => gen.if((0, codegen_1._)`${to} !== true && ${from18} !== undefined`, () => {
+          gen.if((0, codegen_1._)`${from18} === true`, () => gen.assign(to, true), () => gen.assign(to, (0, codegen_1._)`${to} || {}`).code((0, codegen_1._)`Object.assign(${to}, ${from18})`));
         }),
-        mergeToName: (gen, from17, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
-          if (from17 === true) {
+        mergeToName: (gen, from18, to) => gen.if((0, codegen_1._)`${to} !== true`, () => {
+          if (from18 === true) {
             gen.assign(to, true);
           } else {
             gen.assign(to, (0, codegen_1._)`${to} || {}`);
-            setEvaluated(gen, to, from17);
+            setEvaluated(gen, to, from18);
           }
         }),
-        mergeValues: (from17, to) => from17 === true ? true : { ...from17, ...to },
+        mergeValues: (from18, to) => from18 === true ? true : { ...from18, ...to },
         resultToName: evaluatedPropsToName
       }),
       items: makeMergeEvaluated({
-        mergeNames: (gen, from17, to) => gen.if((0, codegen_1._)`${to} !== true && ${from17} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from17} === true ? true : ${to} > ${from17} ? ${to} : ${from17}`)),
-        mergeToName: (gen, from17, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from17 === true ? true : (0, codegen_1._)`${to} > ${from17} ? ${to} : ${from17}`)),
-        mergeValues: (from17, to) => from17 === true ? true : Math.max(from17, to),
+        mergeNames: (gen, from18, to) => gen.if((0, codegen_1._)`${to} !== true && ${from18} !== undefined`, () => gen.assign(to, (0, codegen_1._)`${from18} === true ? true : ${to} > ${from18} ? ${to} : ${from18}`)),
+        mergeToName: (gen, from18, to) => gen.if((0, codegen_1._)`${to} !== true`, () => gen.assign(to, from18 === true ? true : (0, codegen_1._)`${to} > ${from18} ? ${to} : ${from18}`)),
+        mergeValues: (from18, to) => from18 === true ? true : Math.max(from18, to),
         resultToName: (gen, items) => gen.var("items", items)
       })
     };
@@ -313053,12 +313337,12 @@ var require_applicability = __commonJS({
     }
     exports2.schemaHasRulesForType = schemaHasRulesForType;
     function shouldUseGroup(schema2, group) {
-      return group.rules.some((rule) => shouldUseRule(schema2, rule));
+      return group.rules.some((rule2) => shouldUseRule(schema2, rule2));
     }
     exports2.shouldUseGroup = shouldUseGroup;
-    function shouldUseRule(schema2, rule) {
+    function shouldUseRule(schema2, rule2) {
       var _a2;
-      return schema2[rule.keyword] !== void 0 || ((_a2 = rule.definition.implements) === null || _a2 === void 0 ? void 0 : _a2.some((kwd) => schema2[kwd] !== void 0));
+      return schema2[rule2.keyword] !== void 0 || ((_a2 = rule2.definition.implements) === null || _a2 === void 0 ? void 0 : _a2.some((kwd) => schema2[kwd] !== void 0));
     }
     exports2.shouldUseRule = shouldUseRule;
   }
@@ -314110,9 +314394,9 @@ var require_validate = __commonJS({
       if (useDefaults)
         (0, defaults_1.assignDefaults)(it, group.type);
       gen.block(() => {
-        for (const rule of group.rules) {
-          if ((0, applicability_1.shouldUseRule)(schema2, rule)) {
-            keywordCode(it, rule.keyword, rule.definition, group.type);
+        for (const rule2 of group.rules) {
+          if ((0, applicability_1.shouldUseRule)(schema2, rule2)) {
+            keywordCode(it, rule2.keyword, rule2.definition, group.type);
           }
         }
       });
@@ -314147,9 +314431,9 @@ var require_validate = __commonJS({
     function checkKeywordTypes(it, ts) {
       const rules = it.self.RULES.all;
       for (const keyword in rules) {
-        const rule = rules[keyword];
-        if (typeof rule == "object" && (0, applicability_1.shouldUseRule)(it.schema, rule)) {
-          const { type: type2 } = rule.definition;
+        const rule2 = rules[keyword];
+        if (typeof rule2 == "object" && (0, applicability_1.shouldUseRule)(it.schema, rule2)) {
+          const { type: type2 } = rule2.definition;
           if (type2.length && !type2.some((t2) => hasApplicableType(ts, t2))) {
             strictTypesError(it, `missing type "${type2.join(",")}" for keyword "${keyword}"`);
           }
@@ -314563,7 +314847,7 @@ var require_compile = __commonJS({
       const schOrFunc = root.refs[ref];
       if (schOrFunc)
         return schOrFunc;
-      let _sch = resolve4.call(this, root, ref);
+      let _sch = resolve5.call(this, root, ref);
       if (_sch === void 0) {
         const schema2 = (_a2 = root.localRefs) === null || _a2 === void 0 ? void 0 : _a2[ref];
         const { schemaId } = this.opts;
@@ -314590,7 +314874,7 @@ var require_compile = __commonJS({
     function sameSchemaEnv(s1, s2) {
       return s1.schema === s2.schema && s1.root === s2.root && s1.baseId === s2.baseId;
     }
-    function resolve4(root, ref) {
+    function resolve5(root, ref) {
       let sch;
       while (typeof (sch = this.refs[ref]) == "string")
         ref = sch;
@@ -315165,55 +315449,55 @@ var require_fast_uri = __commonJS({
       }
       return uri;
     }
-    function resolve4(baseURI, relativeURI, options) {
+    function resolve5(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
       const resolved = resolveComponent(parse3(baseURI, schemelessOptions), parse3(relativeURI, schemelessOptions), schemelessOptions, true);
       schemelessOptions.skipEscape = true;
       return serialize(resolved, schemelessOptions);
     }
-    function resolveComponent(base, relative3, options, skipNormalization) {
+    function resolveComponent(base, relative4, options, skipNormalization) {
       const target = {};
       if (!skipNormalization) {
         base = parse3(serialize(base, options), options);
-        relative3 = parse3(serialize(relative3, options), options);
+        relative4 = parse3(serialize(relative4, options), options);
       }
       options = options || {};
-      if (!options.tolerant && relative3.scheme) {
-        target.scheme = relative3.scheme;
-        target.userinfo = relative3.userinfo;
-        target.host = relative3.host;
-        target.port = relative3.port;
-        target.path = removeDotSegments(relative3.path || "");
-        target.query = relative3.query;
+      if (!options.tolerant && relative4.scheme) {
+        target.scheme = relative4.scheme;
+        target.userinfo = relative4.userinfo;
+        target.host = relative4.host;
+        target.port = relative4.port;
+        target.path = removeDotSegments(relative4.path || "");
+        target.query = relative4.query;
       } else {
-        if (relative3.userinfo !== void 0 || relative3.host !== void 0 || relative3.port !== void 0) {
-          target.userinfo = relative3.userinfo;
-          target.host = relative3.host;
-          target.port = relative3.port;
-          target.path = removeDotSegments(relative3.path || "");
-          target.query = relative3.query;
+        if (relative4.userinfo !== void 0 || relative4.host !== void 0 || relative4.port !== void 0) {
+          target.userinfo = relative4.userinfo;
+          target.host = relative4.host;
+          target.port = relative4.port;
+          target.path = removeDotSegments(relative4.path || "");
+          target.query = relative4.query;
         } else {
-          if (!relative3.path) {
+          if (!relative4.path) {
             target.path = base.path;
-            if (relative3.query !== void 0) {
-              target.query = relative3.query;
+            if (relative4.query !== void 0) {
+              target.query = relative4.query;
             } else {
               target.query = base.query;
             }
           } else {
-            if (relative3.path[0] === "/") {
-              target.path = removeDotSegments(relative3.path);
+            if (relative4.path[0] === "/") {
+              target.path = removeDotSegments(relative4.path);
             } else {
               if ((base.userinfo !== void 0 || base.host !== void 0 || base.port !== void 0) && !base.path) {
-                target.path = "/" + relative3.path;
+                target.path = "/" + relative4.path;
               } else if (!base.path) {
-                target.path = relative3.path;
+                target.path = relative4.path;
               } else {
-                target.path = base.path.slice(0, base.path.lastIndexOf("/") + 1) + relative3.path;
+                target.path = base.path.slice(0, base.path.lastIndexOf("/") + 1) + relative4.path;
               }
               target.path = removeDotSegments(target.path);
             }
-            target.query = relative3.query;
+            target.query = relative4.query;
           }
           target.userinfo = base.userinfo;
           target.host = base.host;
@@ -315221,7 +315505,7 @@ var require_fast_uri = __commonJS({
         }
         target.scheme = base.scheme;
       }
-      target.fragment = relative3.fragment;
+      target.fragment = relative4.fragment;
       return target;
     }
     function equal(uriA, uriB, options) {
@@ -315392,7 +315676,7 @@ var require_fast_uri = __commonJS({
     var fastUri = {
       SCHEMES,
       normalize: normalize2,
-      resolve: resolve4,
+      resolve: resolve5,
       resolveComponent,
       equal,
       serialize,
@@ -315782,8 +316066,8 @@ var require_core2 = __commonJS({
         return this;
       }
       getKeyword(keyword) {
-        const rule = this.RULES.all[keyword];
-        return typeof rule == "object" ? rule.definition : !!rule;
+        const rule2 = this.RULES.all[keyword];
+        return typeof rule2 == "object" ? rule2.definition : !!rule2;
       }
       // Remove keyword
       removeKeyword(keyword) {
@@ -315791,7 +316075,7 @@ var require_core2 = __commonJS({
         delete RULES.keywords[keyword];
         delete RULES.all[keyword];
         for (const group of RULES.rules) {
-          const i2 = group.rules.findIndex((rule) => rule.keyword === keyword);
+          const i2 = group.rules.findIndex((rule2) => rule2.keyword === keyword);
           if (i2 >= 0)
             group.rules.splice(i2, 1);
         }
@@ -315818,10 +316102,10 @@ var require_core2 = __commonJS({
           for (const seg of segments)
             keywords = keywords[seg];
           for (const key in rules) {
-            const rule = rules[key];
-            if (typeof rule != "object")
+            const rule2 = rules[key];
+            if (typeof rule2 != "object")
               continue;
-            const { $data } = rule.definition;
+            const { $data } = rule2.definition;
             const schema2 = keywords[key];
             if ($data && schema2)
               keywords[key] = schemaOrData(schema2);
@@ -315985,7 +316269,7 @@ var require_core2 = __commonJS({
       RULES.keywords[keyword] = true;
       if (!definition)
         return;
-      const rule = {
+      const rule2 = {
         keyword,
         definition: {
           ...definition,
@@ -315994,18 +316278,18 @@ var require_core2 = __commonJS({
         }
       };
       if (definition.before)
-        addBeforeRule.call(this, ruleGroup, rule, definition.before);
+        addBeforeRule.call(this, ruleGroup, rule2, definition.before);
       else
-        ruleGroup.rules.push(rule);
-      RULES.all[keyword] = rule;
+        ruleGroup.rules.push(rule2);
+      RULES.all[keyword] = rule2;
       (_a2 = definition.implements) === null || _a2 === void 0 ? void 0 : _a2.forEach((kwd) => this.addKeyword(kwd));
     }
-    function addBeforeRule(ruleGroup, rule, before) {
+    function addBeforeRule(ruleGroup, rule2, before) {
       const i2 = ruleGroup.rules.findIndex((_rule) => _rule.keyword === before);
       if (i2 >= 0) {
-        ruleGroup.rules.splice(i2, 0, rule);
+        ruleGroup.rules.splice(i2, 0, rule2);
       } else {
-        ruleGroup.rules.push(rule);
+        ruleGroup.rules.push(rule2);
         this.logger.warn(`rule ${before} is not defined`);
       }
     }
@@ -319169,8 +319453,8 @@ var init_client2 = __esm({
             if (existingTimer) {
               clearTimeout(existingTimer);
             }
-            const timer4 = setTimeout(refresh, debounceMs);
-            this._listChangedDebounceTimers.set(listType, timer4);
+            const timer5 = setTimeout(refresh, debounceMs);
+            this._listChangedDebounceTimers.set(listType, timer5);
           } else {
             refresh();
           }
@@ -321140,12 +321424,12 @@ var init_stdio2 = __esm({
         this.onclose?.();
       }
       send(message) {
-        return new Promise((resolve4) => {
+        return new Promise((resolve5) => {
           const json2 = serializeMessage(message);
           if (this._stdout.write(json2)) {
-            resolve4();
+            resolve5();
           } else {
-            this._stdout.once("drain", resolve4);
+            this._stdout.once("drain", resolve5);
           }
         });
       }
@@ -321273,33 +321557,33 @@ async function startProxy(cmd) {
       cmd.url ? cmd.url.replace(/\/mcp\/?$/, "") : "https://api.lambforge.com"
     );
   }
-  return (0, import_rxjs52.lastValueFrom)(
+  return (0, import_rxjs53.lastValueFrom)(
     GraphqlClienAPI.getConfig().pipe(
-      (0, import_operators35.take)(1),
-      (0, import_operators35.map)((config2) => ({
+      (0, import_operators37.take)(1),
+      (0, import_operators37.map)((config2) => ({
         ...config2,
         mcpUrl: new URL(
           cmd.url || [config2.url.replace(/\/graphql$/, ""), "/mcp"].join("") || "http://127.0.0.1:8000/mcp"
         )
       })),
-      (0, import_operators35.tap)((config2) => {
+      (0, import_operators37.tap)((config2) => {
         config2.mcpUrl.searchParams.set("transportType", "streamable-http");
         process.stderr.write(`Starting MCP proxy \u2192 ${config2.mcpUrl}
 `);
         process.stderr.write("Retrieving config for auth...\n");
       }),
-      (0, import_operators35.switchMap)(
-        (config2) => config2?.token ? (0, import_rxjs52.of)(config2) : (0, import_rxjs52.throwError)(
+      (0, import_operators37.switchMap)(
+        (config2) => config2?.token ? (0, import_rxjs53.of)(config2) : (0, import_rxjs53.throwError)(
           () => new Error("User is not authenticated (no token in config)")
         )
       ),
-      (0, import_operators35.tap)((config2) => {
+      (0, import_operators37.tap)((config2) => {
         process.stderr.write(
           `Config retrieved. Token start: ${config2.token.substring(0, 5)}
 `
         );
       }),
-      (0, import_operators35.map)((config2) => ({
+      (0, import_operators37.map)((config2) => ({
         ...config2,
         transport: new StreamableHTTPClientTransport(config2.mcpUrl, {
           requestInit: {
@@ -321307,34 +321591,34 @@ async function startProxy(cmd) {
               Authorization: config2.token
             }
           },
-          fetch: (input, init) => (0, import_rxjs52.lastValueFrom)(performFetch(input, init))
+          fetch: (input, init) => (0, import_rxjs53.lastValueFrom)(performFetch(input, init))
         }),
         client: new Client({
           name: "gapi-proxy-client",
           version: "1.0.0"
         })
       })),
-      (0, import_operators35.tap)(() => {
+      (0, import_operators37.tap)(() => {
         process.stderr.write("Connecting to upstream...\n");
       }),
-      (0, import_operators35.switchMap)(
-        (config2) => (0, import_rxjs52.from)(config2.client.connect(config2.transport)).pipe((0, import_operators35.map)(() => config2))
+      (0, import_operators37.switchMap)(
+        (config2) => (0, import_rxjs53.from)(config2.client.connect(config2.transport)).pipe((0, import_operators37.map)(() => config2))
       ),
-      (0, import_operators35.tap)(() => {
+      (0, import_operators37.tap)(() => {
         process.stderr.write("Connected to upstream MCP server\n");
       }),
       // Get capabilities AFTER connection is established
-      (0, import_operators35.map)((config2) => ({
+      (0, import_operators37.map)((config2) => ({
         ...config2,
         capabilities: config2.client.getServerCapabilities()
       })),
-      (0, import_operators35.tap)((config2) => {
+      (0, import_operators37.tap)((config2) => {
         process.stderr.write(
           `Upstream capabilities: ${JSON.stringify(config2.capabilities)}
 `
         );
       }),
-      (0, import_operators35.map)((config2) => {
+      (0, import_operators37.map)((config2) => {
         const server2 = new Server(
           {
             name: "gapi-proxy",
@@ -321344,45 +321628,45 @@ async function startProxy(cmd) {
             capabilities: config2.capabilities || {}
           }
         );
-        server2.fallbackRequestHandler = async (request) => (0, import_rxjs52.lastValueFrom)(
-          (0, import_rxjs52.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
-            (0, import_operators35.catchError)((e2) => {
+        server2.fallbackRequestHandler = async (request) => (0, import_rxjs53.lastValueFrom)(
+          (0, import_rxjs53.defer)(() => config2.client.request(request, external_exports3.any())).pipe(
+            (0, import_operators37.catchError)((e2) => {
               process.stderr.write(`Upstream error: ${e2.message}
 `);
-              return (0, import_rxjs52.throwError)(() => e2);
+              return (0, import_rxjs53.throwError)(() => e2);
             })
           )
         );
         server2.fallbackNotificationHandler = async (notification) => {
-          await (0, import_rxjs52.lastValueFrom)(
-            (0, import_rxjs52.of)(notification).pipe(
-              (0, import_operators35.filter)((n) => n.method !== "notifications/initialized"),
-              (0, import_operators35.switchMap)(
-                (n) => (0, import_rxjs52.defer)(() => config2.client.notification(n)).pipe(
-                  (0, import_operators35.catchError)((e2) => {
+          await (0, import_rxjs53.lastValueFrom)(
+            (0, import_rxjs53.of)(notification).pipe(
+              (0, import_operators37.filter)((n) => n.method !== "notifications/initialized"),
+              (0, import_operators37.switchMap)(
+                (n) => (0, import_rxjs53.defer)(() => config2.client.notification(n)).pipe(
+                  (0, import_operators37.catchError)((e2) => {
                     process.stderr.write(`Notification error: ${e2}
 `);
-                    return import_rxjs52.EMPTY;
+                    return import_rxjs53.EMPTY;
                   })
                 )
               ),
-              (0, import_operators35.defaultIfEmpty)(null)
+              (0, import_operators37.defaultIfEmpty)(null)
             )
           );
         };
         return server2;
       }),
-      (0, import_operators35.switchMap)((server2) => (0, import_rxjs52.from)(server2.connect(new StdioServerTransport()))),
-      (0, import_operators35.tap)(() => {
+      (0, import_operators37.switchMap)((server2) => (0, import_rxjs53.from)(server2.connect(new StdioServerTransport()))),
+      (0, import_operators37.tap)(() => {
         process.stderr.write("MCP stdio server ready\n");
       }),
       // Keep the process running indefinitely to handle stdio communication
-      (0, import_operators35.switchMap)(() => new Promise(() => {
+      (0, import_operators37.switchMap)(() => new Promise(() => {
       }))
     )
   );
 }
-var import_fs9, import_rxjs52, import_operators35, import_stream2, pendingToken, currentToken, withToken, performFetch;
+var import_fs9, import_rxjs53, import_operators37, import_stream2, pendingToken, currentToken, withToken, performFetch;
 var init_start = __esm({
   "src/commands/proxy/start.ts"() {
     init_client2();
@@ -321390,8 +321674,8 @@ var init_start = __esm({
     init_server2();
     init_stdio2();
     import_fs9 = require("fs");
-    import_rxjs52 = __toESM(require_cjs());
-    import_operators35 = __toESM(require_operators());
+    import_rxjs53 = __toESM(require_cjs());
+    import_operators37 = __toESM(require_operators());
     import_stream2 = require("stream");
     init_zod();
     init_gql_client();
@@ -321400,10 +321684,10 @@ var init_start = __esm({
     pendingToken = null;
     currentToken = (force = false) => {
       if (!pendingToken || force) {
-        pendingToken = (0, import_rxjs52.lastValueFrom)(
+        pendingToken = (0, import_rxjs53.lastValueFrom)(
           GraphqlClienAPI.getConfig(force).pipe(
-            (0, import_operators35.take)(1),
-            (0, import_operators35.map)((config2) => config2.token)
+            (0, import_operators37.take)(1),
+            (0, import_operators37.map)((config2) => config2.token)
           )
         ).finally(() => {
           pendingToken = null;
@@ -321417,16 +321701,16 @@ var init_start = __esm({
       return { ...init, headers };
     };
     performFetch = (input, init) => {
-      return (0, import_rxjs52.from)(currentToken()).pipe(
-        (0, import_operators35.switchMap)((token) => fetch(input, withToken(init, token))),
-        (0, import_operators35.switchMap)((res) => {
+      return (0, import_rxjs53.from)(currentToken()).pipe(
+        (0, import_operators37.switchMap)((token) => fetch(input, withToken(init, token))),
+        (0, import_operators37.switchMap)((res) => {
           if (res.status === 401 || res.status === 403) {
             process.stderr.write(
               `[DEBUG] Request failed with ${res.status}. Refreshing token...
 `
             );
-            return (0, import_rxjs52.from)(currentToken(true)).pipe(
-              (0, import_operators35.switchMap)((token) => {
+            return (0, import_rxjs53.from)(currentToken(true)).pipe(
+              (0, import_operators37.switchMap)((token) => {
                 process.stderr.write(
                   "[DEBUG] Token refreshed. Retrying request...\n"
                 );
@@ -321434,9 +321718,9 @@ var init_start = __esm({
               })
             );
           }
-          return (0, import_rxjs52.of)(res);
+          return (0, import_rxjs53.of)(res);
         }),
-        (0, import_operators35.map)((res) => {
+        (0, import_operators37.map)((res) => {
           if (typeof res?.body?.pipeThrough !== "function") {
             try {
               const webStream = import_stream2.Readable.toWeb(res.body);
@@ -321450,10 +321734,10 @@ var init_start = __esm({
           }
           return res;
         }),
-        (0, import_operators35.catchError)((e2) => {
+        (0, import_operators37.catchError)((e2) => {
           process.stderr.write(`[ERROR] Fetch error: ${e2.message}
 `);
-          return (0, import_rxjs52.throwError)(() => e2);
+          return (0, import_rxjs53.throwError)(() => e2);
         })
       );
     };
@@ -321465,28 +321749,28 @@ var create_exports3 = {};
 __export(create_exports3, {
   default: () => create_default3
 });
-var import_rxjs53, import_operators36, create_default3;
+var import_rxjs54, import_operators38, create_default3;
 var init_create3 = __esm({
   "src/commands/rabbitmq/create.ts"() {
-    import_rxjs53 = __toESM(require_cjs());
-    import_operators36 = __toESM(require_operators());
+    import_rxjs54 = __toESM(require_cjs());
+    import_operators38 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_default3 = (cmd) => (0, import_rxjs53.lastValueFrom)(
+    create_default3 = (cmd) => (0, import_rxjs54.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators36.switchMap)(
+        (0, import_operators38.switchMap)(
           (projectId) => loadSpec(
             cmd.spec ?? "rabbitmq.yaml"
           ).pipe(
-            (0, import_operators36.map)((data) => ({
+            (0, import_operators38.map)((data) => ({
               projectId,
               ...data ? data.rabbitmq ?? data : {}
             }))
           )
         ),
-        (0, import_operators36.switchMap)(
+        (0, import_operators38.switchMap)(
           ({ projectId, ...data }) => GraphqlClienAPI.installRabbitMq(projectId, {
             name: cmd.name || data.name,
             description: cmd.description || data.description,
@@ -321497,7 +321781,7 @@ var init_create3 = __esm({
             clusterId: cmd.cluster || data.clusterId
           })
         ),
-        (0, import_operators36.tap)((broker) => {
+        (0, import_operators38.tap)((broker) => {
           Logger.success(`RabbitMQ broker ${broker?.name ?? ""} installed`);
           Logger.table([broker]);
         })
@@ -321511,20 +321795,20 @@ var list_exports6 = {};
 __export(list_exports6, {
   default: () => list_default6
 });
-var import_rxjs54, import_operators37, list_default6;
+var import_rxjs55, import_operators39, list_default6;
 var init_list6 = __esm({
   "src/commands/rabbitmq/list.ts"() {
-    import_rxjs54 = __toESM(require_cjs());
-    import_operators37 = __toESM(require_operators());
+    import_rxjs55 = __toESM(require_cjs());
+    import_operators39 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default6 = (cmd) => (0, import_rxjs54.lastValueFrom)(
+    list_default6 = (cmd) => (0, import_rxjs55.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators37.switchMap)(
+        (0, import_operators39.switchMap)(
           (projectId) => GraphqlClienAPI.listRabbitMqInstances(projectId)
         ),
-        (0, import_operators37.tap)((brokers) => {
+        (0, import_operators39.tap)((brokers) => {
           if (!brokers?.length) {
             Logger.info(
               "No RabbitMQ brokers for this project yet. See rabbitmq:create."
@@ -321592,40 +321876,40 @@ var declare_queue_exports = {};
 __export(declare_queue_exports, {
   default: () => declare_queue_default
 });
-var import_rxjs55, import_operators38, declare_queue_default;
+var import_rxjs56, import_operators40, declare_queue_default;
 var init_declare_queue = __esm({
   "src/commands/rabbitmq/declare-queue.ts"() {
-    import_rxjs55 = __toESM(require_cjs());
-    import_operators38 = __toESM(require_operators());
+    import_rxjs56 = __toESM(require_cjs());
+    import_operators40 = __toESM(require_operators());
     init_load_spec();
     init_helpers();
     init_gql_client();
     init_log();
     init_resolve_broker();
-    declare_queue_default = (cmd) => (0, import_rxjs55.lastValueFrom)(
+    declare_queue_default = (cmd) => (0, import_rxjs56.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators38.switchMap)(
-          (projectId) => (cmd.name?.length ? (0, import_rxjs55.of)({ names: cmd.name, broker: cmd.broker }) : loadSpec(cmd.spec).pipe(
-            (0, import_operators38.map)((data) => ({
+        (0, import_operators40.switchMap)(
+          (projectId) => (cmd.name?.length ? (0, import_rxjs56.of)({ names: cmd.name, broker: cmd.broker }) : loadSpec(cmd.spec).pipe(
+            (0, import_operators40.map)((data) => ({
               names: data?.queues?.declare ?? [],
               broker: cmd.broker ?? data?.queues?.broker
             })),
-            (0, import_operators38.catchError)(
-              () => (0, import_rxjs55.of)({ names: [], broker: cmd.broker })
+            (0, import_operators40.catchError)(
+              () => (0, import_rxjs56.of)({ names: [], broker: cmd.broker })
             )
           )).pipe(
-            (0, import_operators38.switchMap)(({ names: names3, broker }) => {
+            (0, import_operators40.switchMap)(({ names: names3, broker }) => {
               if (!names3.length) {
                 throw new Error(
                   "queue:declare needs --name (repeatable) or queues.declare in lambforge.yaml"
                 );
               }
               return GraphqlClienAPI.listRabbitMqInstances(projectId).pipe(
-                (0, import_operators38.map)((brokers) => resolveBroker(brokers, broker)),
-                (0, import_operators38.switchMap)((target) => {
+                (0, import_operators40.map)((brokers) => resolveBroker(brokers, broker)),
+                (0, import_operators40.switchMap)((target) => {
                   const missing = queuesToDeclare(target, names3);
                   const skipped = names3.filter((n) => !missing.includes(n));
-                  return (0, import_rxjs55.concat)(
+                  return (0, import_rxjs56.concat)(
                     ...missing.map(
                       (name2) => GraphqlClienAPI.declareQueue(target.id, projectId, {
                         name: name2,
@@ -321634,15 +321918,15 @@ var init_declare_queue = __esm({
                       })
                     )
                   ).pipe(
-                    (0, import_operators38.toArray)(),
-                    (0, import_operators38.map)(() => ({ broker: target.name, missing, skipped }))
+                    (0, import_operators40.toArray)(),
+                    (0, import_operators40.map)(() => ({ broker: target.name, missing, skipped }))
                   );
                 })
               );
             })
           )
         ),
-        (0, import_operators38.tap)(({ broker, missing, skipped }) => {
+        (0, import_operators40.tap)(({ broker, missing, skipped }) => {
           Logger.table([
             ...missing.map((name2) => ({
               broker,
@@ -321666,20 +321950,20 @@ var delete_exports2 = {};
 __export(delete_exports2, {
   default: () => delete_default2
 });
-var import_rxjs56, import_operators39, delete_default2;
+var import_rxjs57, import_operators41, delete_default2;
 var init_delete2 = __esm({
   "src/commands/rabbitmq/delete.ts"() {
-    import_rxjs56 = __toESM(require_cjs());
-    import_operators39 = __toESM(require_operators());
+    import_rxjs57 = __toESM(require_cjs());
+    import_operators41 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    delete_default2 = (cmd) => (0, import_rxjs56.lastValueFrom)(
+    delete_default2 = (cmd) => (0, import_rxjs57.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators39.switchMap)(
+        (0, import_operators41.switchMap)(
           (projectId) => GraphqlClienAPI.uninstallRabbitMq(cmd.id, projectId)
         ),
-        (0, import_operators39.tap)((broker) => {
+        (0, import_operators41.tap)((broker) => {
           Logger.success(`RabbitMQ broker ${broker?.name ?? ""} removed`);
           Logger.table([broker]);
         })
@@ -321736,11 +322020,11 @@ function globToRegex(glob) {
   }
   return out;
 }
-var import_fs10, import_path5, GitignoreMatcher;
+var import_fs10, import_path6, GitignoreMatcher;
 var init_gitignore = __esm({
   "src/commands/workspace/gitignore.ts"() {
     import_fs10 = require("fs");
-    import_path5 = require("path");
+    import_path6 = require("path");
     GitignoreMatcher = class {
       constructor(root, readText = (path2) => (0, import_fs10.readFileSync)(path2, "utf8")) {
         this.root = root;
@@ -321763,9 +322047,9 @@ var init_gitignore = __esm({
         let ignored = false;
         for (let depth = 0; depth < parts.length; depth++) {
           const relToFile = parts.slice(depth).join("/");
-          for (const rule of this.rulesOf(parts.slice(0, depth).join("/"))) {
-            if ((!rule.dirOnly || isDir) && rule.regex.test(relToFile)) {
-              ignored = !rule.negate;
+          for (const rule2 of this.rulesOf(parts.slice(0, depth).join("/"))) {
+            if ((!rule2.dirOnly || isDir) && rule2.regex.test(relToFile)) {
+              ignored = !rule2.negate;
             }
           }
         }
@@ -321776,7 +322060,7 @@ var init_gitignore = __esm({
         if (!rules) {
           try {
             rules = parseGitignore(
-              this.readText((0, import_path5.join)(this.root, dir, ".gitignore"))
+              this.readText((0, import_path6.join)(this.root, dir, ".gitignore"))
             );
           } catch {
             rules = [];
@@ -321825,12 +322109,12 @@ function unitsOfFile(id, file2, content) {
   return units;
 }
 function repoRoot(start3) {
-  let dir = (0, import_path6.resolve)(start3);
-  while ((0, import_path6.dirname)(dir) !== dir) {
-    if ((0, import_fs11.existsSync)((0, import_path6.join)(dir, ".git"))) return dir;
-    dir = (0, import_path6.dirname)(dir);
+  let dir = (0, import_path7.resolve)(start3);
+  while ((0, import_path7.dirname)(dir) !== dir) {
+    if ((0, import_fs11.existsSync)((0, import_path7.join)(dir, ".git"))) return dir;
+    dir = (0, import_path7.dirname)(dir);
   }
-  return (0, import_path6.resolve)(start3);
+  return (0, import_path7.resolve)(start3);
 }
 function findFiles(root) {
   const ignore = new GitignoreMatcher(root);
@@ -321838,8 +322122,8 @@ function findFiles(root) {
   const walk = (dir, depth) => {
     if (depth > MAX_DEPTH) return;
     for (const entry of (0, import_fs11.readdirSync)(dir, { withFileTypes: true })) {
-      const path2 = (0, import_path6.join)(dir, entry.name);
-      const rel = (0, import_path6.relative)(root, path2).split(import_path6.sep).join("/");
+      const path2 = (0, import_path7.join)(dir, entry.name);
+      const rel = (0, import_path7.relative)(root, path2).split(import_path7.sep).join("/");
       if (entry.isDirectory()) {
         if (!SKIP.has(entry.name) && !ignore.ignored(rel, true))
           walk(path2, depth + 1);
@@ -321853,7 +322137,7 @@ function findFiles(root) {
 }
 function discover(root) {
   const units = findFiles(root).flatMap((file2) => {
-    const id = (0, import_path6.relative)(root, (0, import_path6.dirname)(file2)).split(import_path6.sep).join("/") || ".";
+    const id = (0, import_path7.relative)(root, (0, import_path7.dirname)(file2)).split(import_path7.sep).join("/") || ".";
     try {
       return unitsOfFile(id, file2, (0, import_fs11.readFileSync)(file2, "utf8"));
     } catch (e2) {
@@ -321865,7 +322149,7 @@ function discover(root) {
   const parentOf = (id) => {
     let dir = id;
     while (dir !== ".") {
-      dir = (0, import_path6.dirname)(dir) === "." || (0, import_path6.dirname)(dir) === dir ? "." : (0, import_path6.dirname)(dir);
+      dir = (0, import_path7.dirname)(dir) === "." || (0, import_path7.dirname)(dir) === dir ? "." : (0, import_path7.dirname)(dir);
       const unit = byFolder.get(dir);
       if (unit && unit.id !== id) return unit;
     }
@@ -321881,11 +322165,11 @@ function discover(root) {
   }
   return units;
 }
-var import_fs11, import_path6, SKIP, MAX_DEPTH, unitKey, MAX_VARIANTS;
+var import_fs11, import_path7, SKIP, MAX_DEPTH, unitKey, MAX_VARIANTS;
 var init_discover = __esm({
   "src/commands/repo/discover.ts"() {
     import_fs11 = require("fs");
-    import_path6 = require("path");
+    import_path7 = require("path");
     init_yaml_schema();
     init_gitignore();
     SKIP = /* @__PURE__ */ new Set(["node_modules", ".git", ".gcache", "dist", "release"]);
@@ -321939,6 +322223,7 @@ var init_lambforge_schema = __esm({
               target: { type: ["string", "boolean"] },
               outfile: { type: "string" },
               external: { type: "array", items: { type: "string" } },
+              isolated: { type: "boolean", description: "Bundle only from this package's own node_modules (a service with its own lock file inside a monorepo); anything found only above it stays an external require." },
               watch: { type: "array", items: { type: "string" } },
               ignore: { type: "array", items: { type: "string" } }
             }
@@ -322259,11 +322544,11 @@ function crossChecks(units) {
   }
   return out;
 }
-var import_rxjs57, import_operators40, GCLI_ONLY, onlineChecks, findingsFor, report, validate_default;
+var import_rxjs58, import_operators42, GCLI_ONLY, onlineChecks, findingsFor, report, validate_default;
 var init_validate = __esm({
   "src/commands/repo/validate.ts"() {
-    import_rxjs57 = __toESM(require_cjs());
-    import_operators40 = __toESM(require_operators());
+    import_rxjs58 = __toESM(require_cjs());
+    import_operators42 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_discover();
@@ -322284,7 +322569,7 @@ var init_validate = __esm({
       "CreateOrUpdateLambdaInput",
       "FissionEnvironmentInputType"
     ]).pipe(
-      (0, import_operators40.map)(
+      (0, import_operators42.map)(
         ([lambdaFields, envFields]) => units.flatMap(
           (u) => [
             ["function", lambdaFields],
@@ -322332,16 +322617,16 @@ var init_validate = __esm({
       );
       return errors;
     };
-    validate_default = (path2, cmd) => (0, import_rxjs57.lastValueFrom)(
-      (0, import_rxjs57.of)(discover(repoRoot(path2 ?? process.cwd()))).pipe(
-        (0, import_operators40.switchMap)(
+    validate_default = (path2, cmd) => (0, import_rxjs58.lastValueFrom)(
+      (0, import_rxjs58.of)(discover(repoRoot(path2 ?? process.cwd()))).pipe(
+        (0, import_operators42.switchMap)(
           (units) => (cmd.online ? onlineChecks(units).pipe(
-            (0, import_operators40.catchError)((e2) => {
+            (0, import_operators42.catchError)((e2) => {
               Logger.error(`--online skipped: ${e2?.message ?? e2}`);
-              return (0, import_rxjs57.of)([]);
+              return (0, import_rxjs58.of)([]);
             })
-          ) : (0, import_rxjs57.of)([])).pipe(
-            (0, import_operators40.map)((online) => {
+          ) : (0, import_rxjs58.of)([])).pipe(
+            (0, import_operators42.map)((online) => {
               const offline = findingsFor(units);
               const seen = new Set(offline.map((f3) => `${f3.unit} ${f3.path}`));
               const extra = online.filter(
@@ -322351,7 +322636,7 @@ var init_validate = __esm({
             })
           )
         ),
-        (0, import_operators40.tap)(({ units, findings }) => {
+        (0, import_operators42.tap)(({ units, findings }) => {
           if (!units.length) Logger.info("No lambforge.yaml found.");
           if (report(units, findings)) process.exitCode = 1;
         })
@@ -322604,11 +322889,11 @@ function planUnit(unit, live) {
   }
   return { unit: unitKey(unit), sections };
 }
-var import_rxjs58, import_operators41, LIVE_FIELDS, unmanaged, loadLive, plan_default2;
+var import_rxjs59, import_operators43, LIVE_FIELDS, unmanaged, loadLive, plan_default2;
 var init_plan4 = __esm({
   "src/commands/repo/plan.ts"() {
-    import_rxjs58 = __toESM(require_cjs());
-    import_operators41 = __toESM(require_operators());
+    import_rxjs59 = __toESM(require_cjs());
+    import_operators43 = __toESM(require_operators());
     init_plan3();
     init_time_trigger_sync();
     init_helpers();
@@ -322629,38 +322914,38 @@ var init_plan4 = __esm({
       );
       return live.lambdas.filter((l) => !declared.has(l.name)).map((l) => l.name);
     };
-    loadLive = (projectId) => (0, import_rxjs58.forkJoin)({
+    loadLive = (projectId) => (0, import_rxjs59.forkJoin)({
       lambdas: GraphqlClienAPI.listLambdasForPlan(projectId),
       environments: GraphqlClienAPI.listEnvironments(projectId).pipe(
-        (0, import_operators41.map)((e2) => e2 ?? [])
+        (0, import_operators43.map)((e2) => e2 ?? [])
       ),
       timeTriggers: GraphqlClienAPI.listProjectTimeTriggers(projectId).pipe(
-        (0, import_operators41.map)((t2) => t2 ?? []),
-        (0, import_operators41.catchError)(() => (0, import_rxjs58.of)([]))
+        (0, import_operators43.map)((t2) => t2 ?? []),
+        (0, import_operators43.catchError)(() => (0, import_rxjs59.of)([]))
       ),
       mqTriggers: GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
-        (0, import_operators41.map)((t2) => t2 ?? []),
-        (0, import_operators41.catchError)(() => (0, import_rxjs58.of)([]))
+        (0, import_operators43.map)((t2) => t2 ?? []),
+        (0, import_operators43.catchError)(() => (0, import_rxjs59.of)([]))
       ),
       domains: GraphqlClienAPI.listProjectDomains(projectId).pipe(
-        (0, import_operators41.catchError)(() => (0, import_rxjs58.of)([]))
+        (0, import_operators43.catchError)(() => (0, import_rxjs59.of)([]))
       )
     });
-    plan_default2 = (path2, cmd) => (0, import_rxjs58.lastValueFrom)(
+    plan_default2 = (path2, cmd) => (0, import_rxjs59.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators41.switchMap)((projectId) => {
+        (0, import_operators43.switchMap)((projectId) => {
           const units = discover(repoRoot(path2 ?? process.cwd())).filter(
             (u) => !u.error
           );
           return loadLive(projectId).pipe(
-            (0, import_operators41.map)((live) => ({
+            (0, import_operators43.map)((live) => ({
               units,
               live,
               plans: units.map((u) => planUnit(u, live))
             }))
           );
         }),
-        (0, import_operators41.tap)(({ units, live, plans }) => {
+        (0, import_operators43.tap)(({ units, live, plans }) => {
           const rest = unmanaged(units, live);
           const all = plans.flatMap((p) => p.sections);
           const errors = all.filter((s2) => s2.state === "error").length;
@@ -322693,11 +322978,11 @@ __export(save_exports, {
   mergeOverExisting: () => mergeOverExisting,
   toTriggerInput: () => toTriggerInput
 });
-var import_rxjs59, import_operators42, int2, toTriggerInput, mergeOverExisting, save_default;
+var import_rxjs60, import_operators44, int2, toTriggerInput, mergeOverExisting, save_default;
 var init_save = __esm({
   "src/commands/triggers/message-queue/save.ts"() {
-    import_rxjs59 = __toESM(require_cjs());
-    import_operators42 = __toESM(require_operators());
+    import_rxjs60 = __toESM(require_cjs());
+    import_operators44 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -322759,12 +323044,12 @@ var init_save = __esm({
         )
       );
     };
-    save_default = (mode, cmd) => (0, import_rxjs59.lastValueFrom)(
+    save_default = (mode, cmd) => (0, import_rxjs60.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators42.switchMap)((projectId) => {
+        (0, import_operators44.switchMap)((projectId) => {
           const changes = toTriggerInput(mode, cmd);
-          const payload$ = mode === "create" ? (0, import_rxjs59.of)(changes) : GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
-            (0, import_operators42.map)(
+          const payload$ = mode === "create" ? (0, import_rxjs60.of)(changes) : GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
+            (0, import_operators44.map)(
               (triggers) => mergeOverExisting(
                 triggers.find((t2) => t2.name === cmd.name),
                 changes
@@ -322772,12 +323057,12 @@ var init_save = __esm({
             )
           );
           return payload$.pipe(
-            (0, import_operators42.switchMap)(
+            (0, import_operators44.switchMap)(
               (payload) => GraphqlClienAPI.saveMessageQueueTrigger(mode, projectId, payload)
             )
           );
         }),
-        (0, import_operators42.tap)((trigger) => {
+        (0, import_operators44.tap)((trigger) => {
           Logger.success(`Queue trigger ${trigger?.name ?? ""} saved`);
           Logger.table([
             {
@@ -322802,11 +323087,11 @@ __export(apply_exports3, {
   default: () => apply_default3,
   yamlTriggerInput: () => yamlTriggerInput
 });
-var import_rxjs60, import_operators43, yamlTriggerInput, applyMode, applyMqTriggers, apply_default3;
+var import_rxjs61, import_operators45, yamlTriggerInput, applyMode, applyMqTriggers, apply_default3;
 var init_apply3 = __esm({
   "src/commands/triggers/message-queue/apply.ts"() {
-    import_rxjs60 = __toESM(require_cjs());
-    import_operators43 = __toESM(require_operators());
+    import_rxjs61 = __toESM(require_cjs());
+    import_operators45 = __toESM(require_operators());
     init_load_spec();
     init_resolve_broker();
     init_helpers();
@@ -322845,10 +323130,10 @@ var init_apply3 = __esm({
     applyMqTriggers = (projectId, data) => {
       const triggers = data?.triggers?.mq ?? [];
       return GraphqlClienAPI.listRabbitMqInstances(projectId).pipe(
-        (0, import_operators43.switchMap)(
+        (0, import_operators45.switchMap)(
           (brokers) => GraphqlClienAPI.listMessageQueueTriggers(projectId).pipe(
-            (0, import_operators43.switchMap)(
-              (existing) => (0, import_rxjs60.concat)(
+            (0, import_operators45.switchMap)(
+              (existing) => (0, import_rxjs61.concat)(
                 ...triggers.map((trigger) => {
                   const input = yamlTriggerInput(trigger, {
                     lambda: data?.function?.name ?? data?.name,
@@ -322865,19 +323150,19 @@ var init_apply3 = __esm({
                       existing.find((t2) => t2.name === input.name),
                       input
                     )
-                  ).pipe((0, import_operators43.map)((saved) => ({ mode, saved })));
+                  ).pipe((0, import_operators45.map)((saved) => ({ mode, saved })));
                 })
-              ).pipe((0, import_operators43.toArray)())
+              ).pipe((0, import_operators45.toArray)())
             )
           )
         )
       );
     };
-    apply_default3 = (cmd) => (0, import_rxjs60.lastValueFrom)(
+    apply_default3 = (cmd) => (0, import_rxjs61.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators43.switchMap)(
+        (0, import_operators45.switchMap)(
           (projectId) => loadSpec(cmd.spec).pipe(
-            (0, import_operators43.switchMap)((data) => {
+            (0, import_operators45.switchMap)((data) => {
               if (!data?.triggers?.mq?.length) {
                 throw new Error(
                   "mq-trigger:apply needs triggers.mq in lambforge.yaml"
@@ -322887,7 +323172,7 @@ var init_apply3 = __esm({
             })
           )
         ),
-        (0, import_operators43.tap)((results) => {
+        (0, import_operators45.tap)((results) => {
           Logger.table(
             results.map(({ mode, saved }) => ({
               name: saved.name,
@@ -322940,13 +323225,13 @@ var apply_exports4 = {};
 __export(apply_exports4, {
   default: () => apply_default4
 });
-var import_node_child_process, import_node_fs2, import_rxjs61, import_operators44, inFolder, buildStep, environmentStep, lambdaStep, readPackageJson, deployStep, extrasStep, apply_default4;
+var import_node_child_process, import_node_fs2, import_rxjs62, import_operators46, inFolder, buildStep, environmentStep, lambdaStep, readPackageJson, deployStep, extrasStep, apply_default4;
 var init_apply4 = __esm({
   "src/commands/repo/apply.ts"() {
     import_node_child_process = require("node:child_process");
     import_node_fs2 = require("node:fs");
-    import_rxjs61 = __toESM(require_cjs());
-    import_operators44 = __toESM(require_operators());
+    import_rxjs62 = __toESM(require_cjs());
+    import_operators46 = __toESM(require_operators());
     init_apply2();
     init_environment_payload();
     init_helpers2();
@@ -322959,7 +323244,7 @@ var init_apply4 = __esm({
     init_discover();
     init_plan4();
     init_plan_view();
-    inFolder = (unit, root, work$) => (0, import_rxjs61.defer)(() => {
+    inFolder = (unit, root, work$) => (0, import_rxjs62.defer)(() => {
       const back = process.cwd();
       const saved = Object.keys(unit.vars ?? {}).map(
         (k) => [k, process.env[k]]
@@ -322967,7 +323252,7 @@ var init_apply4 = __esm({
       Object.assign(process.env, unit.vars ?? {});
       process.chdir(unitFolder(root, unit));
       return work$().pipe(
-        (0, import_operators44.finalize)(() => {
+        (0, import_operators46.finalize)(() => {
           process.chdir(back);
           saved.forEach(
             ([k, v]) => v === void 0 ? delete process.env[k] : process.env[k] = v
@@ -322975,7 +323260,7 @@ var init_apply4 = __esm({
         })
       );
     });
-    buildStep = (w, command) => new import_rxjs61.Observable((subscriber) => {
+    buildStep = (w, command) => new import_rxjs62.Observable((subscriber) => {
       const child = (0, import_node_child_process.spawn)(command, {
         shell: true,
         cwd: process.cwd(),
@@ -323011,7 +323296,7 @@ var init_apply4 = __esm({
         clusterId: data.clusterId,
         clusterName
       }).pipe(
-        (0, import_operators44.switchMap)((clusterId) => {
+        (0, import_operators46.switchMap)((clusterId) => {
           const payload = { ...environmentPayload(data, {}), clusterId };
           return w.environment === "create" ? GraphqlClienAPI.createEnvironment(projectId, payload) : GraphqlClienAPI.updateEnvironment(projectId, payload);
         }),
@@ -323023,8 +323308,8 @@ var init_apply4 = __esm({
     };
     lambdaStep = (projectId, w, build2) => {
       const command = build2 ? buildCommand(w.unit.spec, readPackageJson()) : null;
-      return (0, import_rxjs61.concat)(
-        command ? buildStep(w, command).pipe((0, import_operators44.ignoreElements)()) : import_rxjs61.EMPTY,
+      return (0, import_rxjs62.concat)(
+        command ? buildStep(w, command).pipe((0, import_operators46.ignoreElements)()) : import_rxjs62.EMPTY,
         deployStep(projectId, w)
       );
     };
@@ -323035,7 +323320,7 @@ var init_apply4 = __esm({
         return null;
       }
     };
-    deployStep = (projectId, w) => (0, import_rxjs61.defer)(
+    deployStep = (projectId, w) => (0, import_rxjs62.defer)(
       () => createOrUpdateLambda(
         {
           project: projectId,
@@ -323048,15 +323333,15 @@ var init_apply4 = __esm({
       const spec = w.unit.spec;
       const name2 = spec.function?.name;
       const lambda$ = w.time || w.domains ? GraphqlClienAPI.listLambdas(projectId).pipe(
-        (0, import_operators44.map)((all) => (all ?? []).find((l) => l.name === name2))
-      ) : (0, import_rxjs61.of)(null);
+        (0, import_operators46.map)((all) => (all ?? []).find((l) => l.name === name2))
+      ) : (0, import_rxjs62.of)(null);
       return lambda$.pipe(
-        (0, import_operators44.switchMap)(
-          (lambda) => (0, import_rxjs61.concat)(
-            w.time && lambda ? syncTimeTrigger(projectId, lambda, spec.triggers?.time) : import_rxjs61.EMPTY,
+        (0, import_operators46.switchMap)(
+          (lambda) => (0, import_rxjs62.concat)(
+            w.time && lambda ? syncTimeTrigger(projectId, lambda, spec.triggers?.time) : import_rxjs62.EMPTY,
             w.domains ? applyDomains(projectId, spec.domains ?? [], name2).pipe(
               step("applying", { scope: "domains", done: () => "applied" })
-            ) : import_rxjs61.EMPTY,
+            ) : import_rxjs62.EMPTY,
             w.mq ? applyMqTriggers(projectId, spec).pipe(
               step("saving", {
                 scope: `triggers.mq[${name2}]`,
@@ -323064,29 +323349,29 @@ var init_apply4 = __esm({
                   (x2) => `${x2.saved.name} ${x2.mode === "create" ? "created" : "updated"}`
                 ).join(", ")
               })
-            ) : import_rxjs61.EMPTY
+            ) : import_rxjs62.EMPTY
           )
         ),
-        (0, import_operators44.toArray)()
+        (0, import_operators46.toArray)()
       );
     };
     apply_default4 = (path2, cmd) => {
       const started = Date.now();
       const root = repoRoot(path2 ?? process.cwd());
-      return (0, import_rxjs61.lastValueFrom)(
+      return (0, import_rxjs62.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators44.switchMap)(
+          (0, import_operators46.switchMap)(
             (projectId) => GraphqlClienAPI.getProject(projectId).pipe(
-              (0, import_operators44.catchError)(() => (0, import_rxjs61.of)(null)),
-              (0, import_operators44.map)((project) => ({ projectId, project }))
+              (0, import_operators46.catchError)(() => (0, import_rxjs62.of)(null)),
+              (0, import_operators46.map)((project) => ({ projectId, project }))
             )
           ),
-          (0, import_operators44.switchMap)(({ projectId, project }) => {
+          (0, import_operators46.switchMap)(({ projectId, project }) => {
             const units = discover(root).filter(
               (u) => !u.error && (!cmd.only || u.spec.function?.name === cmd.only || u.id === cmd.only)
             );
             if (!units.length) {
-              return (0, import_rxjs61.throwError)(
+              return (0, import_rxjs62.throwError)(
                 () => new Error(
                   cmd.only ? `no lambforge.yaml here declares ${cmd.only}` : `no lambforge.yaml found under ${root}`
                 )
@@ -323099,7 +323384,7 @@ var init_apply4 = __esm({
               step("reading the project", {
                 done: (live) => `read ${live.lambdas.length} lambdas, ${live.environments.length} environments`
               }),
-              (0, import_operators44.map)((live) => {
+              (0, import_operators46.map)((live) => {
                 const plans = units.map((u) => planUnit(u, live));
                 const names3 = unitNames(units);
                 ui.print("");
@@ -323112,27 +323397,27 @@ var init_apply4 = __esm({
               })
             );
           }),
-          (0, import_operators44.switchMap)(({ projectId, plans, work }) => {
+          (0, import_operators46.switchMap)(({ projectId, plans, work }) => {
             const { errors } = countPlan(plans);
             const todo = work.filter(hasWork);
             if (errors) {
               ui.error(
                 `${errors} error(s) in the plan - fix them, nothing was applied`
               );
-              return (0, import_rxjs61.throwError)(() => new ReportedError("plan has errors"));
+              return (0, import_rxjs62.throwError)(() => new ReportedError("plan has errors"));
             }
             if (!todo.length) {
               ui.done("Everything is in sync - nothing to apply");
-              return (0, import_rxjs61.of)(null);
+              return (0, import_rxjs62.of)(null);
             }
             const lambdas = todo.filter((w) => w.lambda).length;
             const question = `Apply changes to ${todo.length} lambforge.yaml (${lambdas} deploy${lambdas === 1 ? "" : "s"})?`;
             ui.print("");
-            return (cmd.yes ? (0, import_rxjs61.of)(true) : ui.confirm(question)).pipe(
-              (0, import_operators44.switchMap)((yes) => {
+            return (cmd.yes ? (0, import_rxjs62.of)(true) : ui.confirm(question)).pipe(
+              (0, import_operators46.switchMap)((yes) => {
                 if (!yes) {
                   ui.warn("Cancelled - nothing was changed");
-                  return (0, import_rxjs61.of)(null);
+                  return (0, import_rxjs62.of)(null);
                 }
                 ui.header("Applying");
                 const environments = [
@@ -323144,27 +323429,27 @@ var init_apply4 = __esm({
                   (w) => inFolder(
                     w.unit,
                     root,
-                    () => (0, import_rxjs61.concat)(
-                      w.lambda ? lambdaStep(projectId, w, cmd.build !== false) : import_rxjs61.EMPTY,
+                    () => (0, import_rxjs62.concat)(
+                      w.lambda ? lambdaStep(projectId, w, cmd.build !== false) : import_rxjs62.EMPTY,
                       extrasStep(projectId, w)
-                    ).pipe((0, import_operators44.toArray)())
+                    ).pipe((0, import_operators46.toArray)())
                   )
                 );
-                return (0, import_rxjs61.concat)(...environments, ...units).pipe(
-                  (0, import_operators44.toArray)(),
-                  (0, import_operators44.tap)(
+                return (0, import_rxjs62.concat)(...environments, ...units).pipe(
+                  (0, import_operators46.toArray)(),
+                  (0, import_operators46.tap)(
                     () => ui.done(
                       `Apply complete! ${todo.length} applied ${ui.dim(elapsed(Date.now() - started))}`
                     )
                   ),
-                  (0, import_operators44.catchError)((e2) => {
+                  (0, import_operators46.catchError)((e2) => {
                     if (!(e2 instanceof ReportedError)) ui.error(errorText(e2));
                     ui.print(
                       ui.dim(
                         "\n   Stopped at the first failure - what ran before it stays applied. Fix it and run gcli apply again."
                       )
                     );
-                    return (0, import_rxjs61.throwError)(() => new ReportedError("apply failed"));
+                    return (0, import_rxjs62.throwError)(() => new ReportedError("apply failed"));
                   })
                 );
               })
@@ -323214,13 +323499,13 @@ function toYaml(lambda, env2, trigger, domains) {
 # generated by gcli export from the running lambda "${lambda.name}" - review before committing
 ` + dump(spec, { lineWidth: 100, noRefs: true });
 }
-var import_fs12, import_rxjs62, import_operators45, SCALE_KEYS, ENV_KEYS, names2, compact, pick3, domainsOf, export_default;
+var import_fs12, import_rxjs63, import_operators47, SCALE_KEYS, ENV_KEYS, names2, compact, pick3, domainsOf, export_default;
 var init_export = __esm({
   "src/commands/repo/export.ts"() {
     import_fs12 = require("fs");
     init_js_yaml();
-    import_rxjs62 = __toESM(require_cjs());
-    import_operators45 = __toESM(require_operators());
+    import_rxjs63 = __toESM(require_cjs());
+    import_operators47 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -323273,34 +323558,34 @@ var init_export = __esm({
         }
       ];
     });
-    export_default = (name2, cmd) => (0, import_rxjs62.lastValueFrom)(
+    export_default = (name2, cmd) => (0, import_rxjs63.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators45.switchMap)(
-          (projectId) => (0, import_rxjs62.forkJoin)({
+        (0, import_operators47.switchMap)(
+          (projectId) => (0, import_rxjs63.forkJoin)({
             lambdas: GraphqlClienAPI.listLambdasForPlan(projectId),
             environments: GraphqlClienAPI.listEnvironments(projectId).pipe(
-              (0, import_operators45.map)((e2) => e2 ?? [])
+              (0, import_operators47.map)((e2) => e2 ?? [])
             ),
             triggers: GraphqlClienAPI.listProjectTimeTriggers(projectId).pipe(
-              (0, import_operators45.map)((t2) => t2 ?? []),
-              (0, import_operators45.catchError)(() => (0, import_rxjs62.of)([]))
+              (0, import_operators47.map)((t2) => t2 ?? []),
+              (0, import_operators47.catchError)(() => (0, import_rxjs63.of)([]))
             ),
             domains: GraphqlClienAPI.listProjectDomains(projectId).pipe(
-              (0, import_operators45.catchError)(() => (0, import_rxjs62.of)([]))
+              (0, import_operators47.catchError)(() => (0, import_rxjs63.of)([]))
             )
           })
         ),
-        (0, import_operators45.switchMap)(({ lambdas, environments, triggers, domains }) => {
+        (0, import_operators47.switchMap)(({ lambdas, environments, triggers, domains }) => {
           const lambda = lambdas.find((l) => l.name === name2);
           if (!lambda)
-            return (0, import_rxjs62.throwError)(
+            return (0, import_rxjs63.throwError)(
               () => new Error(`No lambda "${name2}" in the project`)
             );
           const env2 = environments.find(
             (e2) => e2.name === lambda.env && (e2.clusterId ?? null) === (lambda.clusterId ?? null)
           ) ?? environments.find((e2) => e2.name === lambda.env);
           const trigger = triggers.find((t2) => t2.lambdaId === lambda.id);
-          return (0, import_rxjs62.of)(
+          return (0, import_rxjs63.of)(
             toYaml(
               lambda,
               env2,
@@ -323309,7 +323594,7 @@ var init_export = __esm({
             )
           );
         }),
-        (0, import_operators45.tap)((yaml) => {
+        (0, import_operators47.tap)((yaml) => {
           if (cmd.output) {
             (0, import_fs12.writeFileSync)(cmd.output, yaml);
             Logger.info(`Wrote ${cmd.output}`);
@@ -323480,12 +323765,12 @@ var init_ollama2 = __esm({
 });
 
 // src/commands/runner/adapters/openai.ts
-var formatParams, num, OpenAIAdapter;
+var formatParams, num2, OpenAIAdapter;
 var init_openai = __esm({
   "src/commands/runner/adapters/openai.ts"() {
     init_base2();
     formatParams = (n) => typeof n === "number" && n > 0 ? `${(n / 1e9).toFixed(n >= 1e10 ? 0 : 1)}B` : void 0;
-    num = (v) => typeof v === "number" && v > 0 ? v : void 0;
+    num2 = (v) => typeof v === "number" && v > 0 ? v : void 0;
     OpenAIAdapter = class extends HttpModelAdapter {
       async listModels() {
         const res = await this.fetchFn(`${this.url}/v1/models`, {
@@ -323508,12 +323793,12 @@ var init_openai = __esm({
           names3.forEach((n) => claimed.add(n));
         }
         return kept.map((m2) => {
-          const runtime = num(m2.max_model_len) ?? num(m2.meta?.n_ctx) ?? this.runningContext(props);
+          const runtime = num2(m2.max_model_len) ?? num2(m2.meta?.n_ctx) ?? this.runningContext(props);
           return {
             name: m2.id,
             parameterSize: formatParams(m2.meta?.n_params),
             capabilities: this.capabilities(m2, props),
-            contextLength: num(m2.meta?.n_ctx_train) ?? num(m2.context_length) ?? num(m2.max_model_len),
+            contextLength: num2(m2.meta?.n_ctx_train) ?? num2(m2.context_length) ?? num2(m2.max_model_len),
             // A llama.cpp server serves exactly one model, so /props applies to it.
             ...runtime ? { runtimeContextLength: runtime } : {}
           };
@@ -323534,7 +323819,7 @@ var init_openai = __esm({
         return caps;
       }
       runningContext(props) {
-        return num(props?.default_generation_settings?.n_ctx) ?? num(props?.n_ctx);
+        return num2(props?.default_generation_settings?.n_ctx) ?? num2(props?.n_ctx);
       }
       async props() {
         try {
@@ -323803,7 +324088,7 @@ var init_tunnel = __esm({
       }
       /** Resolves when the socket closes; `true` if it got as far as being acknowledged. */
       connectOnce() {
-        return new Promise((resolve4) => {
+        return new Promise((resolve5) => {
           let acknowledged = false;
           const createSocket = this.baseOptions.createSocket ?? ((url2, protocol) => {
             if (typeof WebSocket === "undefined") {
@@ -323818,7 +324103,7 @@ var init_tunnel = __esm({
             socket = createSocket(this.baseOptions.wsUrl, "graphql-ws");
           } catch (e2) {
             this.baseOptions.logger.error(describeError(e2));
-            resolve4(false);
+            resolve5(false);
             return;
           }
           this.socket = socket;
@@ -323859,7 +324144,7 @@ var init_tunnel = __esm({
           socket.onerror = () => void 0;
           socket.onclose = () => {
             this.onDisconnected();
-            resolve4(acknowledged);
+            resolve5(acknowledged);
           };
         });
       }
@@ -323939,16 +324224,16 @@ var init_tunnel = __esm({
       }
       operation(query, variables) {
         const id = String(this.nextOperationId++);
-        return new Promise((resolve4, reject) => {
+        return new Promise((resolve5, reject) => {
           if (this.socket?.readyState !== OPEN) {
             reject(new Error("not connected"));
             return;
           }
-          const timer4 = setTimeout(() => {
+          const timer5 = setTimeout(() => {
             this.operations.delete(id);
             reject(new Error("timed out waiting for Lambforge"));
           }, this.baseOptions.operationTimeoutMs ?? 2e4);
-          this.operations.set(id, { resolve: resolve4, reject, timer: timer4 });
+          this.operations.set(id, { resolve: resolve5, reject, timer: timer5 });
           this.send({ id, type: "start", payload: { query, variables } });
         });
       }
@@ -324218,19 +324503,19 @@ var init_connection = __esm({
 });
 
 // src/commands/runner/daemon.ts
-var import_child_process4, import_fs13, import_promises6, import_os5, import_path7, import_util11, DEFAULT_SERVICE_NAME, RUNNER_AUTH_EXIT_CODE, systemdQuote, unitPath, buildUnit, resolveGcliCommand, defaultExec, SystemdUserService, assertSystemdAvailable;
+var import_child_process4, import_fs13, import_promises6, import_os5, import_path8, import_util11, DEFAULT_SERVICE_NAME, RUNNER_AUTH_EXIT_CODE, systemdQuote, unitPath, buildUnit, resolveGcliCommand, defaultExec, SystemdUserService, assertSystemdAvailable;
 var init_daemon = __esm({
   "src/commands/runner/daemon.ts"() {
     import_child_process4 = require("child_process");
     import_fs13 = require("fs");
     import_promises6 = require("fs/promises");
     import_os5 = require("os");
-    import_path7 = require("path");
+    import_path8 = require("path");
     import_util11 = require("util");
     DEFAULT_SERVICE_NAME = "lambforge-runner";
     RUNNER_AUTH_EXIT_CODE = 78;
     systemdQuote = (word) => /^[A-Za-z0-9_@%+=:,./-]+$/.test(word) ? word : `"${word.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
-    unitPath = (serviceName, home = (0, import_os5.homedir)()) => (0, import_path7.join)(home, ".config", "systemd", "user", `${serviceName}.service`);
+    unitPath = (serviceName, home = (0, import_os5.homedir)()) => (0, import_path8.join)(home, ".config", "systemd", "user", `${serviceName}.service`);
     buildUnit = ({
       serviceName,
       execStart,
@@ -324291,7 +324576,7 @@ var init_daemon = __esm({
       /** install -> daemon-reload -> enable -> restart (picks up a changed unit). */
       async install(unitContent) {
         const path2 = unitPath(this.serviceName, this.home);
-        await (0, import_promises6.mkdir)((0, import_path7.join)(path2, ".."), { recursive: true });
+        await (0, import_promises6.mkdir)((0, import_path8.join)(path2, ".."), { recursive: true });
         await (0, import_promises6.writeFile)(path2, unitContent, "utf-8");
         await this.systemctl("daemon-reload");
         await this.systemctl("enable", this.unit);
@@ -324371,11 +324656,11 @@ __export(start_exports2, {
   default: () => start_default,
   resolveRunner: () => resolveRunner
 });
-var import_os6, import_rxjs63, RUNNER_VERSION, resolveRunner, start_default;
+var import_os6, import_rxjs64, RUNNER_VERSION, resolveRunner, start_default;
 var init_start2 = __esm({
   "src/commands/runner/start.ts"() {
     import_os6 = require("os");
-    import_rxjs63 = __toESM(require_cjs());
+    import_rxjs64 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_ui();
@@ -324397,7 +324682,7 @@ var init_start2 = __esm({
       }
       const name2 = cmd.name || (0, import_os6.hostname)();
       Logger.info(`Registering this machine as local runner "${name2}"...`);
-      const { runner, token } = await (0, import_rxjs63.lastValueFrom)(
+      const { runner, token } = await (0, import_rxjs64.lastValueFrom)(
         GraphqlClienAPI.createLocalRunner(name2)
       ).catch((e2) => {
         throw new Error(
@@ -324543,7 +324828,7 @@ var init_daemon_commands = __esm({
       return { serviceName, systemd };
     };
     reportStarted = async (serviceName, systemd, settleMs = 2e3) => {
-      await new Promise((resolve4) => setTimeout(resolve4, settleMs));
+      await new Promise((resolve5) => setTimeout(resolve5, settleMs));
       const { active, exitStatus } = await systemd.outcome();
       if (active) {
         Logger.success(`${serviceName} is running. Logs: gcli runner:daemon:logs`);
@@ -324583,12 +324868,12 @@ var init_daemon_commands = __esm({
     logs = (cmd) => {
       assertSystemdAvailable();
       const serviceName = cmd.service || DEFAULT_SERVICE_NAME;
-      return new Promise((resolve4) => {
+      return new Promise((resolve5) => {
         (0, import_child_process5.spawn)(
           "journalctl",
           ["--user", "-u", `${serviceName}.service`, "-f", "-n", cmd.lines || "50"],
           { stdio: "inherit" }
-        ).on("exit", () => resolve4());
+        ).on("exit", () => resolve5());
       });
     };
   }
@@ -324599,16 +324884,16 @@ var list_exports7 = {};
 __export(list_exports7, {
   default: () => list_default7
 });
-var import_rxjs64, import_operators46, list_default7;
+var import_rxjs65, import_operators48, list_default7;
 var init_list7 = __esm({
   "src/commands/runner/list.ts"() {
-    import_rxjs64 = __toESM(require_cjs());
-    import_operators46 = __toESM(require_operators());
+    import_rxjs65 = __toESM(require_cjs());
+    import_operators48 = __toESM(require_operators());
     init_gql_client();
     init_log();
-    list_default7 = () => (0, import_rxjs64.lastValueFrom)(
+    list_default7 = () => (0, import_rxjs65.lastValueFrom)(
       GraphqlClienAPI.listLocalRunners().pipe(
-        (0, import_operators46.tap)((runners) => {
+        (0, import_operators48.tap)((runners) => {
           if (!runners?.length) {
             Logger.info(
               "No local runners yet. Run `gcli runner:start` on the machine that runs Ollama."
@@ -324636,10 +324921,10 @@ __export(models_exports, {
   default: () => models_default,
   parseSelection: () => parseSelection
 });
-var import_rxjs65, isShown, parseSelection, models_default;
+var import_rxjs66, isShown, parseSelection, models_default;
 var init_models = __esm({
   "src/commands/runner/models.ts"() {
-    import_rxjs65 = __toESM(require_cjs());
+    import_rxjs66 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -324669,11 +324954,11 @@ var init_models = __esm({
       }
       let runner;
       if (selection) {
-        runner = await (0, import_rxjs65.lastValueFrom)(
+        runner = await (0, import_rxjs66.lastValueFrom)(
           GraphqlClienAPI.setLocalRunnerModels(runnerId, selection.models)
         );
       } else {
-        const runners = await (0, import_rxjs65.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
+        const runners = await (0, import_rxjs66.lastValueFrom)(GraphqlClienAPI.listLocalRunners());
         runner = runners.find((r2) => r2.id === runnerId);
       }
       if (!runner) {
@@ -324708,10 +324993,10 @@ var delete_exports3 = {};
 __export(delete_exports3, {
   default: () => delete_default3
 });
-var import_rxjs66, delete_default3;
+var import_rxjs67, delete_default3;
 var init_delete3 = __esm({
   "src/commands/runner/delete.ts"() {
-    import_rxjs66 = __toESM(require_cjs());
+    import_rxjs67 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config();
@@ -324721,7 +325006,7 @@ var init_delete3 = __esm({
       if (!runnerId) {
         throw new Error("Specify the runner with --id (see `gcli runner:list`).");
       }
-      await (0, import_rxjs66.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
+      await (0, import_rxjs67.lastValueFrom)(GraphqlClienAPI.deleteLocalRunner(runnerId));
       if (saved?.id === runnerId) {
         await forgetRunner();
       }
@@ -324736,10 +325021,10 @@ __export(start_exports3, {
   default: () => start2
 });
 async function start2(args) {
-  return (0, import_rxjs67.lastValueFrom)(
+  return (0, import_rxjs68.lastValueFrom)(
     loadSpec().pipe(
-      (0, import_operators47.switchMap)(
-        (config2) => (0, import_rxjs67.of)({
+      (0, import_operators49.switchMap)(
+        (config2) => (0, import_rxjs68.of)({
           watcher: (0, import_node_fs3.watch)(process.cwd(), {
             recursive: true
           }),
@@ -324760,7 +325045,7 @@ async function start2(args) {
           outfile: args.outfile ?? config2?.options?.bundler?.outfile ?? "index.js",
           startCommand: "node"
         }).pipe(
-          (0, import_operators47.switchMap)(
+          (0, import_operators49.switchMap)(
             ({
               child,
               watcher,
@@ -324768,12 +325053,12 @@ async function start2(args) {
               outfile,
               startCommand,
               ignorelist
-            }) => (0, import_rxjs67.from)(build_default(args)).pipe(
-              (0, import_operators47.tap)(() => {
+            }) => (0, import_rxjs68.from)(build_default(args)).pipe(
+              (0, import_operators49.tap)(() => {
                 ui.info(`running ${startCommand} ${outfile}
 `, "start");
               }),
-              (0, import_operators47.tap)(() => {
+              (0, import_operators49.tap)(() => {
                 child = (0, import_node_child_process2.spawn)(
                   startCommand,
                   ["--disable-warning=DEP0040", outfile],
@@ -324783,14 +325068,14 @@ async function start2(args) {
                   }
                 );
               }),
-              (0, import_operators47.tap)(
-                () => (0, import_rxjs67.merge)(
-                  (0, import_rxjs67.fromEvent)(process, "SIGINT"),
-                  (0, import_rxjs67.fromEvent)(process, "SIGTERM"),
-                  (0, import_rxjs67.fromEvent)(process, "exit")
+              (0, import_operators49.tap)(
+                () => (0, import_rxjs68.merge)(
+                  (0, import_rxjs68.fromEvent)(process, "SIGINT"),
+                  (0, import_rxjs68.fromEvent)(process, "SIGTERM"),
+                  (0, import_rxjs68.fromEvent)(process, "exit")
                 ).pipe(
-                  (0, import_operators47.debounceTime)(100),
-                  (0, import_operators47.tap)(() => {
+                  (0, import_operators49.debounceTime)(100),
+                  (0, import_operators49.tap)(() => {
                     Logger.warn("\u26A0\uFE0F  Main process shutting down");
                     watcher.close();
                     child.kill("SIGTERM");
@@ -324798,13 +325083,13 @@ async function start2(args) {
                   })
                 ).subscribe()
               ),
-              (0, import_operators47.switchMap)(
-                () => (0, import_rxjs67.fromEvent)(watcher, "change").pipe(
-                  (0, import_operators47.map)(([event, filename]) => ({
+              (0, import_operators49.switchMap)(
+                () => (0, import_rxjs68.fromEvent)(watcher, "change").pipe(
+                  (0, import_operators49.map)(([event, filename]) => ({
                     event,
                     filename
                   })),
-                  (0, import_operators47.filter)(({ filename }) => {
+                  (0, import_operators49.filter)(({ filename }) => {
                     if (!filename) {
                       return false;
                     }
@@ -324816,16 +325101,16 @@ async function start2(args) {
                     const rootDir = filename.split(/[/\\]/)[0];
                     return whitelist.has(rootDir);
                   }),
-                  (0, import_operators47.debounceTime)(100)
+                  (0, import_operators49.debounceTime)(100)
                 )
               ),
-              (0, import_operators47.tap)((data) => {
+              (0, import_operators49.tap)((data) => {
                 ui.print("");
                 ui.info(`${data.filename} changed - restarting`, "start");
                 child?.kill("SIGTERM");
               }),
-              (0, import_operators47.switchMap)(() => build_default(args)),
-              (0, import_operators47.tap)(() => {
+              (0, import_operators49.switchMap)(() => build_default(args)),
+              (0, import_operators49.tap)(() => {
                 ui.info(`running ${startCommand} ${outfile}
 `, "start");
                 child = (0, import_node_child_process2.spawn)(
@@ -324844,13 +325129,13 @@ async function start2(args) {
     )
   );
 }
-var import_node_child_process2, import_node_fs3, import_rxjs67, import_operators47;
+var import_node_child_process2, import_node_fs3, import_rxjs68, import_operators49;
 var init_start3 = __esm({
   "src/commands/start/start.ts"() {
     import_node_child_process2 = require("node:child_process");
     import_node_fs3 = require("node:fs");
-    import_rxjs67 = __toESM(require_cjs());
-    import_operators47 = __toESM(require_operators());
+    import_rxjs68 = __toESM(require_cjs());
+    import_operators49 = __toESM(require_operators());
     init_log();
     init_ui();
     init_build();
@@ -324863,25 +325148,25 @@ var create_cron_exports = {};
 __export(create_cron_exports, {
   default: () => create_cron_default
 });
-var import_rxjs68, import_operators48, create_cron_default;
+var import_rxjs69, import_operators50, create_cron_default;
 var init_create_cron = __esm({
   "src/commands/triggers/cron/create-cron.ts"() {
-    import_rxjs68 = __toESM(require_cjs());
-    import_operators48 = __toESM(require_operators());
+    import_rxjs69 = __toESM(require_cjs());
+    import_operators50 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    create_cron_default = (cmd) => (0, import_rxjs68.lastValueFrom)(
+    create_cron_default = (cmd) => (0, import_rxjs69.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators48.switchMap)(
+        (0, import_operators50.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators48.switchMap)(
+            (0, import_operators50.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators48.map)((lambda) => {
+                (0, import_operators50.map)((lambda) => {
                   const fromSpec = data?.triggers?.time ?? data;
                   return {
                     lambdaName: lambda.name,
@@ -324894,8 +325179,8 @@ var init_create_cron = __esm({
             )
           )
         ),
-        (0, import_operators48.switchMap)(
-          ({ lambdaId, cron, triggerName, lambdaName }) => !cron || !triggerName ? (0, import_rxjs68.throwError)(
+        (0, import_operators50.switchMap)(
+          ({ lambdaId, cron, triggerName, lambdaName }) => !cron || !triggerName ? (0, import_rxjs69.throwError)(
             () => new Error(
               "cron:create needs --cron and --triggerName (or triggers.time.cron / triggerName in lambforge.yaml)"
             )
@@ -324903,9 +325188,9 @@ var init_create_cron = __esm({
             lambdaId,
             cron,
             triggerName
-          }).pipe((0, import_operators48.map)((data) => ({ ...data, lambdaName })))
+          }).pipe((0, import_operators50.map)((data) => ({ ...data, lambdaName })))
         ),
-        (0, import_operators48.tap)((data) => {
+        (0, import_operators50.tap)((data) => {
           Logger.success(`Time trigger ${data?.triggerName ?? ""} created`);
           const columns = [
             "id",
@@ -324926,25 +325211,25 @@ var delete_cron_exports = {};
 __export(delete_cron_exports, {
   default: () => delete_cron_default
 });
-var import_rxjs69, import_operators49, delete_cron_default;
+var import_rxjs70, import_operators51, delete_cron_default;
 var init_delete_cron = __esm({
   "src/commands/triggers/cron/delete-cron.ts"() {
-    import_rxjs69 = __toESM(require_cjs());
-    import_operators49 = __toESM(require_operators());
+    import_rxjs70 = __toESM(require_cjs());
+    import_operators51 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
     init_load_spec();
-    delete_cron_default = (cmd) => (0, import_rxjs69.lastValueFrom)(
+    delete_cron_default = (cmd) => (0, import_rxjs70.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators49.switchMap)(
+        (0, import_operators51.switchMap)(
           (projectId) => loadSpec(cmd.spec ?? "cron.yaml").pipe(
-            (0, import_operators49.switchMap)(
+            (0, import_operators51.switchMap)(
               (data) => GraphqlClienAPI.getLambdaByName(
                 cmd?.lambdaName ?? data?.function?.name ?? data?.name,
                 projectId
               ).pipe(
-                (0, import_operators49.map)((lambda) => ({
+                (0, import_operators51.map)((lambda) => ({
                   lambdaName: lambda.name,
                   lambdaId: lambda.id
                 }))
@@ -324952,12 +325237,12 @@ var init_delete_cron = __esm({
             )
           )
         ),
-        (0, import_operators49.switchMap)(
+        (0, import_operators51.switchMap)(
           ({ lambdaId, lambdaName }) => GraphqlClienAPI.deleteLambdaTimeTrigger(lambdaId).pipe(
-            (0, import_operators49.map)((data) => ({ ...data, lambdaName }))
+            (0, import_operators51.map)((data) => ({ ...data, lambdaName }))
           )
         ),
-        (0, import_operators49.tap)((data) => {
+        (0, import_operators51.tap)((data) => {
           Logger.success(`Time trigger ${data?.triggerName ?? ""} deleted`);
           const columns = [
             "id",
@@ -324977,29 +325262,29 @@ var list_crons_exports = {};
 __export(list_crons_exports, {
   default: () => list_crons_default
 });
-var import_rxjs70, import_operators50, list_crons_default;
+var import_rxjs71, import_operators52, list_crons_default;
 var init_list_crons = __esm({
   "src/commands/triggers/cron/list-crons.ts"() {
-    import_rxjs70 = __toESM(require_cjs());
-    import_operators50 = __toESM(require_operators());
+    import_rxjs71 = __toESM(require_cjs());
+    import_operators52 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_crons_default = (cmd) => (0, import_rxjs70.lastValueFrom)(
+    list_crons_default = (cmd) => (0, import_rxjs71.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators50.switchMap)(
-          (projectId) => (0, import_rxjs70.combineLatest)([
+        (0, import_operators52.switchMap)(
+          (projectId) => (0, import_rxjs71.combineLatest)([
             GraphqlClienAPI.listProjectTimeTriggers(projectId),
             GraphqlClienAPI.listLambdas(projectId)
           ])
         ),
-        (0, import_operators50.map)(
+        (0, import_operators52.map)(
           ([triggers, lambdas]) => triggers.map((v) => ({
             lambdaName: lambdas.find((l) => l.id === v.lambdaId)?.name,
             ...v
           }))
         ),
-        (0, import_operators50.tap)((data) => {
+        (0, import_operators52.tap)((data) => {
           const columns = [
             "id",
             "triggerName",
@@ -325018,20 +325303,20 @@ var list_exports8 = {};
 __export(list_exports8, {
   default: () => list_default8
 });
-var import_rxjs71, import_operators51, list_default8;
+var import_rxjs72, import_operators53, list_default8;
 var init_list8 = __esm({
   "src/commands/triggers/message-queue/list.ts"() {
-    import_rxjs71 = __toESM(require_cjs());
-    import_operators51 = __toESM(require_operators());
+    import_rxjs72 = __toESM(require_cjs());
+    import_operators53 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    list_default8 = (cmd) => (0, import_rxjs71.lastValueFrom)(
+    list_default8 = (cmd) => (0, import_rxjs72.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators51.switchMap)(
+        (0, import_operators53.switchMap)(
           (projectId) => GraphqlClienAPI.listMessageQueueTriggers(projectId)
         ),
-        (0, import_operators51.tap)((triggers) => {
+        (0, import_operators53.tap)((triggers) => {
           if (!triggers?.length) {
             Logger.info("No message-queue triggers yet. See mq-trigger:create.");
           } else {
@@ -325057,20 +325342,20 @@ var delete_exports4 = {};
 __export(delete_exports4, {
   default: () => delete_default4
 });
-var import_rxjs72, import_operators52, delete_default4;
+var import_rxjs73, import_operators54, delete_default4;
 var init_delete4 = __esm({
   "src/commands/triggers/message-queue/delete.ts"() {
-    import_rxjs72 = __toESM(require_cjs());
-    import_operators52 = __toESM(require_operators());
+    import_rxjs73 = __toESM(require_cjs());
+    import_operators54 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
-    delete_default4 = (cmd) => (0, import_rxjs72.lastValueFrom)(
+    delete_default4 = (cmd) => (0, import_rxjs73.lastValueFrom)(
       parseProjectId(cmd.project).pipe(
-        (0, import_operators52.switchMap)(
+        (0, import_operators54.switchMap)(
           (projectId) => GraphqlClienAPI.deleteMessageQueueTrigger(projectId, cmd.name)
         ),
-        (0, import_operators52.tap)((trigger) => {
+        (0, import_operators54.tap)((trigger) => {
           Logger.success(`Queue trigger ${trigger?.name ?? ""} deleted`);
           Logger.info(
             `Deleted trigger ${trigger?.name ?? cmd.name}${trigger?.lambdaName ? ` (lambda ${trigger.lambdaName})` : ""}`
@@ -325173,12 +325458,12 @@ var init_definition = __esm({
 });
 
 // src/commands/workflow/helpers.ts
-var import_promises7, import_rxjs73, import_operators53, resolveWorkflow, withProject, readWorkflowFile, writeTextFile, POLL_MS, followRun, printRunResult;
+var import_promises7, import_rxjs74, import_operators55, resolveWorkflow, withProject, readWorkflowFile, writeTextFile, POLL_MS, followRun, printRunResult;
 var init_helpers4 = __esm({
   "src/commands/workflow/helpers.ts"() {
     import_promises7 = require("fs/promises");
-    import_rxjs73 = __toESM(require_cjs());
-    import_operators53 = __toESM(require_operators());
+    import_rxjs74 = __toESM(require_cjs());
+    import_operators55 = __toESM(require_operators());
     init_helpers();
     init_gql_client();
     init_log();
@@ -325188,7 +325473,7 @@ var init_helpers4 = __esm({
         throw new Error("--name is required (see workflow:list)");
       }
       return GraphqlClienAPI.listWorkflows(projectId).pipe(
-        (0, import_operators53.map)((workflows) => {
+        (0, import_operators55.map)((workflows) => {
           const workflow = workflows.find((w) => w.name === name2 || w.id === name2);
           if (!workflow) {
             throw new Error(
@@ -325199,30 +325484,30 @@ var init_helpers4 = __esm({
         })
       );
     };
-    withProject = (project, fn) => (0, import_rxjs73.lastValueFrom)(parseProjectId(project).pipe((0, import_operators53.switchMap)(fn)));
+    withProject = (project, fn) => (0, import_rxjs74.lastValueFrom)(parseProjectId(project).pipe((0, import_operators55.switchMap)(fn)));
     readWorkflowFile = (path2) => {
       if (!path2) {
         throw new Error("--file is required (a workflow YAML or JSON file)");
       }
-      return (0, import_rxjs73.from)((0, import_promises7.readFile)(path2, "utf8")).pipe((0, import_operators53.map)(parseWorkflowFile));
+      return (0, import_rxjs74.from)((0, import_promises7.readFile)(path2, "utf8")).pipe((0, import_operators55.map)(parseWorkflowFile));
     };
-    writeTextFile = (path2, text) => (0, import_rxjs73.from)((0, import_promises7.writeFile)(path2, text, "utf8"));
+    writeTextFile = (path2, text) => (0, import_rxjs74.from)((0, import_promises7.writeFile)(path2, text, "utf8"));
     POLL_MS = 2e3;
     followRun = (projectId, workflowId, runName) => {
       let printed = 0;
-      return (0, import_rxjs73.timer)(0, POLL_MS).pipe(
-        (0, import_operators53.switchMap)(
+      return (0, import_rxjs74.timer)(0, POLL_MS).pipe(
+        (0, import_operators55.switchMap)(
           () => GraphqlClienAPI.getWorkflowRun(projectId, workflowId, runName)
         ),
-        (0, import_operators53.tap)((run2) => {
+        (0, import_operators55.tap)((run2) => {
           for (const e2 of newEvents(run2, printed)) {
             Logger.log(formatEvent(e2));
             printed = Math.max(printed, e2.seq);
           }
         }),
-        (0, import_operators53.filter)((run2) => isTerminal2(run2.phase)),
-        (0, import_operators53.take)(1),
-        (0, import_operators53.tap)(printRunResult)
+        (0, import_operators55.filter)((run2) => isTerminal2(run2.phase)),
+        (0, import_operators55.take)(1),
+        (0, import_operators55.tap)(printRunResult)
       );
     };
     printRunResult = (run2) => {
@@ -325243,10 +325528,10 @@ var list_exports9 = {};
 __export(list_exports9, {
   default: () => list_default9
 });
-var import_operators54, list_default9;
+var import_operators56, list_default9;
 var init_list9 = __esm({
   "src/commands/workflow/list.ts"() {
-    import_operators54 = __toESM(require_operators());
+    import_operators56 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_definition();
@@ -325254,7 +325539,7 @@ var init_list9 = __esm({
     list_default9 = (cmd) => withProject(
       cmd.project,
       (projectId) => GraphqlClienAPI.listWorkflows(projectId).pipe(
-        (0, import_operators54.tap)((workflows) => {
+        (0, import_operators56.tap)((workflows) => {
           if (!workflows.length) {
             Logger.info(
               "No workflows yet. Draft one with workflow:generate, or write a file and workflow:apply it."
@@ -325281,18 +325566,18 @@ var get_exports2 = {};
 __export(get_exports2, {
   default: () => get_default2
 });
-var import_rxjs74, import_operators55, get_default2;
+var import_rxjs75, import_operators57, get_default2;
 var init_get2 = __esm({
   "src/commands/workflow/get.ts"() {
-    import_rxjs74 = __toESM(require_cjs());
-    import_operators55 = __toESM(require_operators());
+    import_rxjs75 = __toESM(require_cjs());
+    import_operators57 = __toESM(require_operators());
     init_log();
     init_definition();
     init_helpers4();
     get_default2 = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators55.switchMap)((w) => {
+        (0, import_operators57.switchMap)((w) => {
           const text = toWorkflowYaml({
             name: w.name,
             description: w.description ?? void 0,
@@ -325300,10 +325585,10 @@ var init_get2 = __esm({
           });
           if (!cmd.out) {
             Logger.log(text);
-            return (0, import_rxjs74.of)(null);
+            return (0, import_rxjs75.of)(null);
           }
           return writeTextFile(cmd.out, text).pipe(
-            (0, import_operators55.tap)(() => Logger.info(`Wrote ${cmd.out}`))
+            (0, import_operators57.tap)(() => Logger.info(`Wrote ${cmd.out}`))
           );
         })
       )
@@ -325317,10 +325602,10 @@ __export(apply_exports5, {
   applyWorkflow: () => applyWorkflow,
   default: () => apply_default5
 });
-var import_operators56, applyWorkflow, apply_default5;
+var import_operators58, applyWorkflow, apply_default5;
 var init_apply5 = __esm({
   "src/commands/workflow/apply.ts"() {
-    import_operators56 = __toESM(require_operators());
+    import_operators58 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
@@ -325331,7 +325616,7 @@ var init_apply5 = __esm({
         );
       }
       return GraphqlClienAPI.listWorkflows(projectId).pipe(
-        (0, import_operators56.switchMap)((workflows) => {
+        (0, import_operators58.switchMap)((workflows) => {
           const existing = workflows.find((w) => w.name === file2.name);
           return existing ? GraphqlClienAPI.updateWorkflow(projectId, existing.id, {
             description: file2.description,
@@ -325343,7 +325628,7 @@ var init_apply5 = __esm({
             clusterId: file2.clusterId
           });
         }),
-        (0, import_operators56.tap)(
+        (0, import_operators58.tap)(
           (w) => Logger.success(
             `Workflow ${w.name} saved (${Object.keys(w.definition?.states ?? {}).length} steps). Run it: gcli workflow:run --name ${w.name} --wait`
           )
@@ -325353,7 +325638,7 @@ var init_apply5 = __esm({
     apply_default5 = (cmd) => withProject(
       cmd.project,
       (projectId) => readWorkflowFile(cmd.file).pipe(
-        (0, import_operators56.switchMap)(
+        (0, import_operators58.switchMap)(
           (file2) => applyWorkflow(projectId, {
             ...file2,
             name: cmd.name ?? file2.name,
@@ -325370,12 +325655,12 @@ var generate_exports = {};
 __export(generate_exports, {
   default: () => generate_default
 });
-var import_promises8, import_rxjs75, import_operators57, generate_default;
+var import_promises8, import_rxjs76, import_operators59, generate_default;
 var init_generate = __esm({
   "src/commands/workflow/generate.ts"() {
     import_promises8 = require("fs/promises");
-    import_rxjs75 = __toESM(require_cjs());
-    import_operators57 = __toESM(require_operators());
+    import_rxjs76 = __toESM(require_cjs());
+    import_operators59 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_apply5();
@@ -325387,26 +325672,26 @@ var init_generate = __esm({
           'Describe the workflow: --description "charge the card with retries, then email the receipt"'
         );
       }
-      const base$ = cmd.from ? (0, import_rxjs75.from)((0, import_promises8.readFile)(cmd.from, "utf8")).pipe((0, import_operators57.map)(parseWorkflowFile)) : cmd.name ? GraphqlClienAPI.listWorkflows(projectId).pipe(
-        (0, import_operators57.switchMap)(
+      const base$ = cmd.from ? (0, import_rxjs76.from)((0, import_promises8.readFile)(cmd.from, "utf8")).pipe((0, import_operators59.map)(parseWorkflowFile)) : cmd.name ? GraphqlClienAPI.listWorkflows(projectId).pipe(
+        (0, import_operators59.switchMap)(
           (workflows) => workflows.some((w) => w.name === cmd.name) ? resolveWorkflow(projectId, cmd.name).pipe(
-            (0, import_operators57.map)((w) => ({
+            (0, import_operators59.map)((w) => ({
               name: w.name,
               description: w.description ?? void 0,
               definition: w.definition
             }))
-          ) : (0, import_rxjs75.of)(null)
+          ) : (0, import_rxjs76.of)(null)
         )
-      ) : (0, import_rxjs75.of)(null);
+      ) : (0, import_rxjs76.of)(null);
       return base$.pipe(
-        (0, import_operators57.tap)(() => Logger.info("Asking the AI for a draft...")),
-        (0, import_operators57.switchMap)(
+        (0, import_operators59.tap)(() => Logger.info("Asking the AI for a draft...")),
+        (0, import_operators59.switchMap)(
           (base) => GraphqlClienAPI.generateWorkflowDraft(
             projectId,
             cmd.description,
             base?.definition
           ).pipe(
-            (0, import_operators57.map)((draft) => ({
+            (0, import_operators59.map)((draft) => ({
               draft,
               file: {
                 name: cmd.name ?? base?.name,
@@ -325416,19 +325701,19 @@ var init_generate = __esm({
             }))
           )
         ),
-        (0, import_operators57.tap)(({ draft }) => {
+        (0, import_operators59.tap)(({ draft }) => {
           if (draft.explanation) Logger.log(draft.explanation);
           (draft.warnings ?? []).filter(Boolean).forEach((w) => Logger.warn(`- ${w}`));
         }),
-        (0, import_operators57.switchMap)(({ file: file2 }) => {
+        (0, import_operators59.switchMap)(({ file: file2 }) => {
           const text = toWorkflowYaml(file2);
           const written$ = cmd.out ? writeTextFile(cmd.out, text).pipe(
-            (0, import_operators57.tap)(() => Logger.info(`Wrote ${cmd.out}`))
-          ) : (0, import_rxjs75.of)(null).pipe((0, import_operators57.tap)(() => !cmd.apply && Logger.log(text)));
+            (0, import_operators59.tap)(() => Logger.info(`Wrote ${cmd.out}`))
+          ) : (0, import_rxjs76.of)(null).pipe((0, import_operators59.tap)(() => !cmd.apply && Logger.log(text)));
           return written$.pipe(
-            (0, import_operators57.switchMap)(
-              () => cmd.apply ? applyWorkflow(projectId, file2) : (0, import_rxjs75.of)(null).pipe(
-                (0, import_operators57.tap)(
+            (0, import_operators59.switchMap)(
+              () => cmd.apply ? applyWorkflow(projectId, file2) : (0, import_rxjs76.of)(null).pipe(
+                (0, import_operators59.tap)(
                   () => Logger.info(
                     cmd.out ? `Review it, then: gcli workflow:apply --file ${cmd.out}${file2.name ? "" : " --name <name>"}` : "Save it with -o <file>, or re-run with --apply --name <name>"
                   )
@@ -325447,24 +325732,24 @@ var validate_exports2 = {};
 __export(validate_exports2, {
   default: () => validate_default2
 });
-var import_operators58, validate_default2;
+var import_operators60, validate_default2;
 var init_validate2 = __esm({
   "src/commands/workflow/validate.ts"() {
-    import_operators58 = __toESM(require_operators());
+    import_operators60 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
     validate_default2 = (cmd) => withProject(
       cmd.project,
       (projectId) => readWorkflowFile(cmd.file).pipe(
-        (0, import_operators58.switchMap)(
+        (0, import_operators60.switchMap)(
           (file2) => GraphqlClienAPI.validateWorkflow(
             projectId,
             file2.definition,
             file2.clusterId
           )
         ),
-        (0, import_operators58.tap)(
+        (0, import_operators60.tap)(
           (v) => Logger.info(
             `Valid. Calls: ${(v.functions ?? []).join(", ") || "no lambdas"}`
           )
@@ -325479,18 +325764,18 @@ var delete_exports5 = {};
 __export(delete_exports5, {
   default: () => delete_default5
 });
-var import_operators59, delete_default5;
+var import_operators61, delete_default5;
 var init_delete5 = __esm({
   "src/commands/workflow/delete.ts"() {
-    import_operators59 = __toESM(require_operators());
+    import_operators61 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
     delete_default5 = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators59.switchMap)((w) => GraphqlClienAPI.deleteWorkflow(projectId, w.id)),
-        (0, import_operators59.tap)((w) => Logger.info(`Deleted workflow ${w.name} and its runs`))
+        (0, import_operators61.switchMap)((w) => GraphqlClienAPI.deleteWorkflow(projectId, w.id)),
+        (0, import_operators61.tap)((w) => Logger.info(`Deleted workflow ${w.name} and its runs`))
       )
     );
   }
@@ -325501,28 +325786,28 @@ var run_exports = {};
 __export(run_exports, {
   default: () => run_default
 });
-var import_promises9, import_rxjs76, import_operators60, run_default;
+var import_promises9, import_rxjs77, import_operators62, run_default;
 var init_run = __esm({
   "src/commands/workflow/run.ts"() {
     import_promises9 = require("fs/promises");
-    import_rxjs76 = __toESM(require_cjs());
-    import_operators60 = __toESM(require_operators());
+    import_rxjs77 = __toESM(require_cjs());
+    import_operators62 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_definition();
     init_helpers4();
     run_default = (cmd) => withProject(
       cmd.project,
-      (projectId) => (cmd.inputFile ? (0, import_rxjs76.from)((0, import_promises9.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs76.of)(cmd.input)).pipe(
-        (0, import_operators60.map)(parseRunInput),
-        (0, import_operators60.switchMap)(
+      (projectId) => (cmd.inputFile ? (0, import_rxjs77.from)((0, import_promises9.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs77.of)(cmd.input)).pipe(
+        (0, import_operators62.map)(parseRunInput),
+        (0, import_operators62.switchMap)(
           (input) => resolveWorkflow(projectId, cmd.name).pipe(
-            (0, import_operators60.switchMap)(
+            (0, import_operators62.switchMap)(
               (w) => GraphqlClienAPI.startWorkflowRun(projectId, w.id, input).pipe(
-                (0, import_operators60.tap)((run2) => Logger.info(`Started run ${run2.name}`)),
-                (0, import_operators60.switchMap)(
-                  (run2) => cmd.wait ? followRun(projectId, w.id, run2.name) : (0, import_rxjs76.of)(run2).pipe(
-                    (0, import_operators60.tap)(
+                (0, import_operators62.tap)((run2) => Logger.info(`Started run ${run2.name}`)),
+                (0, import_operators62.switchMap)(
+                  (run2) => cmd.wait ? followRun(projectId, w.id, run2.name) : (0, import_rxjs77.of)(run2).pipe(
+                    (0, import_operators62.tap)(
                       () => Logger.info(
                         `Follow it: gcli workflow:status --name ${w.name} --run ${run2.name} --follow`
                       )
@@ -325598,10 +325883,10 @@ var runs_exports = {};
 __export(runs_exports, {
   default: () => runs_default
 });
-var import_operators61, runs_default;
+var import_operators63, runs_default;
 var init_runs = __esm({
   "src/commands/workflow/runs.ts"() {
-    import_operators61 = __toESM(require_operators());
+    import_operators63 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
@@ -325609,14 +325894,14 @@ var init_runs = __esm({
     runs_default = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators61.switchMap)(
+        (0, import_operators63.switchMap)(
           (w) => GraphqlClienAPI.listWorkflowRuns(
             projectId,
             w.id,
             cmd.limit ? Number(cmd.limit) : void 0
           )
         ),
-        (0, import_operators61.tap)(
+        (0, import_operators63.tap)(
           (runs) => runs.length ? Logger.table(
             runs.map((r2) => ({
               run: r2.name,
@@ -325638,10 +325923,10 @@ var status_exports2 = {};
 __export(status_exports2, {
   default: () => status_default2
 });
-var import_operators62, status_default2;
+var import_operators64, status_default2;
 var init_status2 = __esm({
   "src/commands/workflow/status.ts"() {
-    import_operators62 = __toESM(require_operators());
+    import_operators64 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_definition();
@@ -325651,9 +325936,9 @@ var init_status2 = __esm({
         throw new Error("--run is required (see workflow:runs)");
       }
       return resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators62.switchMap)(
+        (0, import_operators64.switchMap)(
           (w) => cmd.follow ? followRun(projectId, w.id, cmd.run) : GraphqlClienAPI.getWorkflowRun(projectId, w.id, cmd.run).pipe(
-            (0, import_operators62.tap)((run2) => {
+            (0, import_operators64.tap)((run2) => {
               (run2.events ?? []).forEach((e2) => Logger.log(formatEvent(e2)));
               printRunResult(run2);
             })
@@ -325669,10 +325954,10 @@ var cancel_exports = {};
 __export(cancel_exports, {
   default: () => cancel_default
 });
-var import_operators63, cancel_default;
+var import_operators65, cancel_default;
 var init_cancel = __esm({
   "src/commands/workflow/cancel.ts"() {
-    import_operators63 = __toESM(require_operators());
+    import_operators65 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
@@ -325681,10 +325966,10 @@ var init_cancel = __esm({
         throw new Error("--run is required (see workflow:runs)");
       }
       return resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators63.switchMap)(
+        (0, import_operators65.switchMap)(
           (w) => GraphqlClienAPI.cancelWorkflowRun(projectId, w.id, cmd.run)
         ),
-        (0, import_operators63.tap)((run2) => Logger.info(`Run ${run2.name}: ${run2.phase}`))
+        (0, import_operators65.tap)((run2) => Logger.info(`Run ${run2.name}: ${run2.phase}`))
       );
     });
   }
@@ -325695,30 +325980,30 @@ var trigger_add_exports = {};
 __export(trigger_add_exports, {
   default: () => trigger_add_default
 });
-var import_promises10, import_rxjs77, import_operators64, trigger_add_default;
+var import_promises10, import_rxjs78, import_operators66, trigger_add_default;
 var init_trigger_add = __esm({
   "src/commands/workflow/trigger-add.ts"() {
     import_promises10 = require("fs/promises");
-    import_rxjs77 = __toESM(require_cjs());
-    import_operators64 = __toESM(require_operators());
+    import_rxjs78 = __toESM(require_cjs());
+    import_operators66 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
     init_triggers();
     trigger_add_default = (cmd) => withProject(
       cmd.project,
-      (projectId) => (cmd.inputFile ? (0, import_rxjs77.from)((0, import_promises10.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs77.of)(void 0)).pipe(
-        (0, import_operators64.map)((inputText) => buildTriggerInput({ ...cmd, inputText })),
-        (0, import_operators64.switchMap)(
+      (projectId) => (cmd.inputFile ? (0, import_rxjs78.from)((0, import_promises10.readFile)(cmd.inputFile, "utf8")) : (0, import_rxjs78.of)(void 0)).pipe(
+        (0, import_operators66.map)((inputText) => buildTriggerInput({ ...cmd, inputText })),
+        (0, import_operators66.switchMap)(
           (trigger) => resolveWorkflow(projectId, cmd.name).pipe(
-            (0, import_operators64.switchMap)(
+            (0, import_operators66.switchMap)(
               (w) => GraphqlClienAPI.addWorkflowTrigger(projectId, w.id, trigger).pipe(
-                (0, import_operators64.map)((updated) => ({ before: w.triggers ?? [], updated }))
+                (0, import_operators66.map)((updated) => ({ before: w.triggers ?? [], updated }))
               )
             )
           )
         ),
-        (0, import_operators64.tap)(({ before, updated }) => {
+        (0, import_operators66.tap)(({ before, updated }) => {
           const added = (updated.triggers ?? []).find(
             (t2) => !before.some((b) => b.id === t2.id)
           );
@@ -325742,17 +326027,17 @@ var trigger_list_exports = {};
 __export(trigger_list_exports, {
   default: () => trigger_list_default
 });
-var import_operators65, trigger_list_default;
+var import_operators67, trigger_list_default;
 var init_trigger_list = __esm({
   "src/commands/workflow/trigger-list.ts"() {
-    import_operators65 = __toESM(require_operators());
+    import_operators67 = __toESM(require_operators());
     init_log();
     init_helpers4();
     init_triggers();
     trigger_list_default = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators65.tap)(
+        (0, import_operators67.tap)(
           (w) => w.triggers?.length ? Logger.table(w.triggers.map(triggerRow)) : Logger.info(
             'No triggers. Add one with workflow:trigger:add --http or --cron "@daily".'
           )
@@ -325767,10 +326052,10 @@ var trigger_remove_exports = {};
 __export(trigger_remove_exports, {
   default: () => trigger_remove_default
 });
-var import_operators66, trigger_remove_default;
+var import_operators68, trigger_remove_default;
 var init_trigger_remove = __esm({
   "src/commands/workflow/trigger-remove.ts"() {
-    import_operators66 = __toESM(require_operators());
+    import_operators68 = __toESM(require_operators());
     init_gql_client();
     init_log();
     init_helpers4();
@@ -325778,14 +326063,14 @@ var init_trigger_remove = __esm({
     trigger_remove_default = (cmd) => withProject(
       cmd.project,
       (projectId) => resolveWorkflow(projectId, cmd.name).pipe(
-        (0, import_operators66.switchMap)(
+        (0, import_operators68.switchMap)(
           (w) => GraphqlClienAPI.removeWorkflowTrigger(
             projectId,
             w.id,
             findTrigger(w.triggers, cmd.trigger).id
           )
         ),
-        (0, import_operators66.tap)(
+        (0, import_operators68.tap)(
           (w) => Logger.success(
             `Trigger removed from ${w.name} (${w.triggers?.length ?? 0} left)`
           )
@@ -325812,7 +326097,7 @@ var init_approvals = __esm({
       }
       askNow(question, signal) {
         if (signal.aborted) return Promise.resolve(null);
-        return new Promise((resolve4) => {
+        return new Promise((resolve5) => {
           const rl = (0, import_readline4.createInterface)({
             input: process.stdin,
             output: process.stdout
@@ -325820,7 +326105,7 @@ var init_approvals = __esm({
           const done = (value) => {
             signal.removeEventListener("abort", onAbort);
             rl.close();
-            resolve4(value);
+            resolve5(value);
           };
           const onAbort = () => {
             process.stdout.write("\n  (answered elsewhere)\n");
@@ -325873,20 +326158,20 @@ var init_approvals = __esm({
           return { approved: false, decision: "expired", by: "timeout" };
         }
         const settle = new AbortController();
-        const outcome = await new Promise((resolve4) => {
+        const outcome = await new Promise((resolve5) => {
           const finish2 = (o) => {
-            clearTimeout(timer4);
+            clearTimeout(timer5);
             input.signal?.removeEventListener("abort", onStopped);
             if (approvalId) this.waiting.delete(approvalId);
             settle.abort();
-            resolve4(o);
+            resolve5(o);
           };
           const fromDecision = (decision, by) => ({
             approved: decision !== "deny",
             decision,
             by
           });
-          const timer4 = setTimeout(
+          const timer5 = setTimeout(
             () => finish2({ approved: false, decision: "expired", by: "timeout" }),
             this.timeoutMs
           );
@@ -325968,13 +326253,13 @@ var init_config2 = __esm({
 });
 
 // src/commands/workspace/files.ts
-var import_child_process6, import_crypto2, import_fs14, import_path8, import_util12, run, WorkspaceError, MAX_READ_BYTES, MAX_WRITE_BYTES, DEFAULT_LIST_LIMIT, MAX_LIST_LIMIT, DEFAULT_SEARCH_RESULTS, MAX_SEARCH_RESULTS, MAX_MATCH_TEXT, SKIP_DIRS, SECRET_FILE, SECRET_TEMPLATE, isSecretFile, contentHash, toPosix, WorkspaceFiles;
+var import_child_process6, import_crypto2, import_fs14, import_path9, import_util12, run, WorkspaceError, MAX_READ_BYTES, MAX_WRITE_BYTES, DEFAULT_LIST_LIMIT, MAX_LIST_LIMIT, DEFAULT_SEARCH_RESULTS, MAX_SEARCH_RESULTS, MAX_MATCH_TEXT, SKIP_DIRS, SECRET_FILE, SECRET_TEMPLATE, isSecretFile, contentHash, toPosix, WorkspaceFiles;
 var init_files = __esm({
   "src/commands/workspace/files.ts"() {
     import_child_process6 = require("child_process");
     import_crypto2 = require("crypto");
     import_fs14 = require("fs");
-    import_path8 = require("path");
+    import_path9 = require("path");
     import_util12 = require("util");
     init_gitignore();
     run = (0, import_util12.promisify)(import_child_process6.execFile);
@@ -325995,11 +326280,11 @@ var init_files = __esm({
     SECRET_FILE = /^(\.env(\..+)?|.*\.(pem|key|p12|pfx|keystore|jks)|id_(rsa|dsa|ecdsa|ed25519)(\.pub)?|\.npmrc|\.pypirc|\.netrc|credentials(\.json)?)$/i;
     SECRET_TEMPLATE = /\.(example|sample|template|dist|defaults)$/i;
     isSecretFile = (path2) => {
-      const name2 = (0, import_path8.basename)(path2);
+      const name2 = (0, import_path9.basename)(path2);
       return SECRET_FILE.test(name2) && !SECRET_TEMPLATE.test(name2);
     };
     contentHash = (content) => (0, import_crypto2.createHash)("sha256").update(content).digest("hex").slice(0, 16);
-    toPosix = (p) => p.split(import_path8.sep).join("/");
+    toPosix = (p) => p.split(import_path9.sep).join("/");
     WorkspaceFiles = class {
       constructor(root, options = {}) {
         this.root = root;
@@ -326009,9 +326294,9 @@ var init_files = __esm({
       /** Absolute path for a workspace-relative one, or a WorkspaceError. */
       async resolvePath(input, { forWrite = false } = {}) {
         const rel = (input ?? ".").trim() || ".";
-        const abs = (0, import_path8.resolve)(this.root, rel);
-        const fromRoot = (0, import_path8.relative)(this.root, abs);
-        if (fromRoot.startsWith("..") || (0, import_path8.isAbsolute)(fromRoot)) {
+        const abs = (0, import_path9.resolve)(this.root, rel);
+        const fromRoot = (0, import_path9.relative)(this.root, abs);
+        if (fromRoot.startsWith("..") || (0, import_path9.isAbsolute)(fromRoot)) {
           throw new WorkspaceError(
             `${input} is outside the workspace root - paths are relative to ${this.root}`,
             403
@@ -326021,8 +326306,8 @@ var init_files = __esm({
         for (; ; ) {
           try {
             const real = await import_fs14.promises.realpath(existing);
-            const realFromRoot = (0, import_path8.relative)(this.root, real);
-            if (realFromRoot.startsWith("..") || (0, import_path8.isAbsolute)(realFromRoot)) {
+            const realFromRoot = (0, import_path9.relative)(this.root, real);
+            if (realFromRoot.startsWith("..") || (0, import_path9.isAbsolute)(realFromRoot)) {
               throw new WorkspaceError(
                 `${input} resolves outside the workspace root (symlink)`,
                 403
@@ -326031,7 +326316,7 @@ var init_files = __esm({
             break;
           } catch (e2) {
             if (e2 instanceof WorkspaceError) throw e2;
-            const parent = (0, import_path8.dirname)(existing);
+            const parent = (0, import_path9.dirname)(existing);
             if (parent === existing) break;
             existing = parent;
           }
@@ -326114,7 +326399,7 @@ var init_files = __esm({
         const out = [];
         const walk = async (relDir) => {
           if (out.length > limit) return;
-          const entries = await import_fs14.promises.readdir((0, import_path8.join)(this.root, relDir), { withFileTypes: true }).catch(() => []);
+          const entries = await import_fs14.promises.readdir((0, import_path9.join)(this.root, relDir), { withFileTypes: true }).catch(() => []);
           for (const entry of entries) {
             if (SKIP_DIRS.has(entry.name)) continue;
             const rel = relDir === "." ? entry.name : `${relDir}/${entry.name}`;
@@ -326158,7 +326443,7 @@ var init_files = __esm({
         entries = entries.slice(0, limit);
         await Promise.all(
           entries.filter((e2) => e2.type === "file").map(async (e2) => {
-            const stat2 = await import_fs14.promises.stat((0, import_path8.join)(this.root, e2.path)).catch(() => void 0);
+            const stat2 = await import_fs14.promises.stat((0, import_path9.join)(this.root, e2.path)).catch(() => void 0);
             e2.size = stat2?.size;
             e2.mtimeMs = stat2 ? Math.floor(stat2.mtimeMs) : void 0;
           })
@@ -326226,7 +326511,7 @@ var init_files = __esm({
             );
           }
         }
-        await import_fs14.promises.mkdir((0, import_path8.dirname)(abs), { recursive: true });
+        await import_fs14.promises.mkdir((0, import_path9.dirname)(abs), { recursive: true });
         await import_fs14.promises.writeFile(abs, content, "utf-8");
         return {
           path: rel,
@@ -326329,7 +326614,7 @@ var init_files = __esm({
           raw = [];
           for (const file2 of await this.allFiles(rel, 2e4)) {
             if (globRe && !globRe.test(file2)) continue;
-            const text = await import_fs14.promises.readFile((0, import_path8.join)(this.root, file2)).catch(() => null);
+            const text = await import_fs14.promises.readFile((0, import_path9.join)(this.root, file2)).catch(() => null);
             if (!text || text.subarray(0, 8e3).includes(0)) continue;
             text.toString("utf-8").split("\n").forEach((line2, i2) => {
               if (raw.length <= max && re.test(line2)) {
@@ -326490,19 +326775,19 @@ ${this.text}` : this.text;
       child.stdout.setEncoding("utf-8").on("data", (d) => stdout.push(d));
       child.stderr.setEncoding("utf-8").on("data", (d) => stderr.push(d));
       let timedOut = false;
-      const timer4 = setTimeout(() => {
+      const timer5 = setTimeout(() => {
         timedOut = true;
         terminate(child);
       }, timeoutS * 1e3);
       const onAbort = () => terminate(child);
       args.signal?.addEventListener("abort", onAbort, { once: true });
       child.on("error", (e2) => {
-        clearTimeout(timer4);
+        clearTimeout(timer5);
         args.signal?.removeEventListener("abort", onAbort);
         reject(new WorkspaceError(`could not start the command: ${e2.message}`));
       });
       child.on("close", (code, signal) => {
-        clearTimeout(timer4);
+        clearTimeout(timer5);
         args.signal?.removeEventListener("abort", onAbort);
         resolvePromise({
           command: args.command,
@@ -326637,7 +326922,7 @@ ${this.text}` : this.text;
         const waitMs = Math.min(Math.max(0, args.waitSeconds ?? DEFAULT_WAIT_S), MAX_WAIT_S) * 1e3;
         let matched = false;
         await new Promise((done) => {
-          const timer4 = setTimeout(
+          const timer5 = setTimeout(
             finish2,
             waitRe ? waitMs : Math.min(waitMs, 3e3)
           );
@@ -326648,7 +326933,7 @@ ${this.text}` : this.text;
             }
           };
           function finish2() {
-            clearTimeout(timer4);
+            clearTimeout(timer5);
             managed.listeners.delete(check3);
             args.signal?.removeEventListener("abort", finish2);
             done();
@@ -326781,15 +327066,15 @@ function kill(child) {
   } catch {
   }
 }
-var import_child_process8, import_crypto3, import_fs15, import_path9, import_rxjs78, import_operators67, MAX_SESSIONS, WATCH_BATCH_MS, TerminalManager;
+var import_child_process8, import_crypto3, import_fs15, import_path10, import_rxjs79, import_operators69, MAX_SESSIONS, WATCH_BATCH_MS, TerminalManager;
 var init_terminals = __esm({
   "src/commands/workspace/terminals.ts"() {
     import_child_process8 = require("child_process");
     import_crypto3 = require("crypto");
     import_fs15 = require("fs");
-    import_path9 = require("path");
-    import_rxjs78 = __toESM(require_cjs());
-    import_operators67 = __toESM(require_operators());
+    import_path10 = require("path");
+    import_rxjs79 = __toESM(require_cjs());
+    import_operators69 = __toESM(require_operators());
     init_files();
     MAX_SESSIONS = 4;
     WATCH_BATCH_MS = 150;
@@ -326803,7 +327088,7 @@ var init_terminals = __esm({
         this.root = root;
         this.env = env2;
         this.notIgnored = notIgnored;
-        this.events$ = new import_rxjs78.Subject();
+        this.events$ = new import_rxjs79.Subject();
         /** shells (`terminal/*`) */
         this.sessions = /* @__PURE__ */ new Map();
         /** file watches (`watch/*`) - the open editor, terminal or not */
@@ -326903,12 +327188,12 @@ ${e2.message}\r
           this.unwatch(oldest);
         }
         const sessionId = (0, import_crypto3.randomUUID)();
-        const changed$ = new import_rxjs78.Subject();
+        const changed$ = new import_rxjs79.Subject();
         const changes = changed$.pipe(
-          (0, import_operators67.bufferTime)(WATCH_BATCH_MS),
-          (0, import_operators67.filter)((paths) => paths.length > 0),
-          (0, import_operators67.concatMap)((paths) => (0, import_rxjs78.from)(this.notIgnored([...new Set(paths)]))),
-          (0, import_operators67.mergeMap)((paths) => (0, import_rxjs78.from)(paths))
+          (0, import_operators69.bufferTime)(WATCH_BATCH_MS),
+          (0, import_operators69.filter)((paths) => paths.length > 0),
+          (0, import_operators69.concatMap)((paths) => (0, import_rxjs79.from)(this.notIgnored([...new Set(paths)]))),
+          (0, import_operators69.mergeMap)((paths) => (0, import_rxjs79.from)(paths))
         ).subscribe(
           (path2) => this.events$.next({ sessionId, kind: "changed", data: path2 })
         );
@@ -326936,7 +327221,7 @@ ${e2.message}\r
       watchRoot(onChange) {
         try {
           return (0, import_fs15.watch)(this.root, { recursive: true }, (_event, filename) => {
-            const path2 = filename?.toString().split(import_path9.sep).join("/");
+            const path2 = filename?.toString().split(import_path10.sep).join("/");
             if (path2) {
               onChange(path2);
             }
@@ -326950,12 +327235,12 @@ ${e2.message}\r
 });
 
 // src/commands/workspace/connection.ts
-var import_os7, import_rxjs79, import_operators68, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, PUSH_TERMINAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num2, short, WorkspaceConnection;
+var import_os7, import_rxjs80, import_operators70, WORKSPACE_PATH_PREFIX, WORKSPACE_OPS, HEARTBEAT_MUTATION2, REQUEST_APPROVAL_MUTATION, PUSH_TERMINAL_MUTATION, SETTLE_APPROVAL_MUTATION, str, num3, short, WorkspaceConnection;
 var init_connection2 = __esm({
   "src/commands/workspace/connection.ts"() {
     import_os7 = require("os");
-    import_rxjs79 = __toESM(require_cjs());
-    import_operators68 = __toESM(require_operators());
+    import_rxjs80 = __toESM(require_cjs());
+    import_operators70 = __toESM(require_operators());
     init_tunnel();
     init_approvals();
     init_files();
@@ -326996,7 +327281,7 @@ var init_connection2 = __esm({
   settleLocalWorkspaceApproval(approvalId: $approvalId, decision: $decision) { status }
 }`;
     str = (v) => typeof v === "string" ? v : void 0;
-    num2 = (v) => typeof v === "number" && Number.isFinite(v) ? v : void 0;
+    num3 = (v) => typeof v === "number" && Number.isFinite(v) ? v : void 0;
     short = (text, max = 100) => text.length > max ? `${text.slice(0, max - 1)}\u2026` : text;
     WorkspaceConnection = class extends TunnelConnection {
       constructor(options) {
@@ -327009,11 +327294,11 @@ var init_connection2 = __esm({
           (paths) => this.files.notIgnored(paths)
         );
         this.terminals.events$.pipe(
-          (0, import_operators68.bufferTime)(40),
-          (0, import_operators68.filter)((events) => events.length > 0),
-          (0, import_operators68.concatMap)(
-            (events) => (0, import_rxjs79.from)(this.operation(PUSH_TERMINAL_MUTATION, { events })).pipe(
-              (0, import_operators68.catchError)(() => import_rxjs79.EMPTY)
+          (0, import_operators70.bufferTime)(40),
+          (0, import_operators70.filter)((events) => events.length > 0),
+          (0, import_operators70.concatMap)(
+            (events) => (0, import_rxjs80.from)(this.operation(PUSH_TERMINAL_MUTATION, { events })).pipe(
+              (0, import_operators70.catchError)(() => import_rxjs80.EMPTY)
             )
           )
         ).subscribe();
@@ -327164,14 +327449,14 @@ var init_connection2 = __esm({
             return this.files.list({
               path: str(args.path),
               recursive: args.recursive !== false,
-              limit: num2(args.limit)
+              limit: num3(args.limit)
             });
           case "read":
             log2(`-> read ${str(args.path)}`);
             return this.files.read({
               path: str(args.path),
-              startLine: num2(args.startLine),
-              endLine: num2(args.endLine)
+              startLine: num3(args.startLine),
+              endLine: num3(args.endLine)
             });
           case "search":
             log2(`-> search /${str(args.pattern)}/ in ${str(args.path) ?? "."}`);
@@ -327181,7 +327466,7 @@ var init_connection2 = __esm({
               glob: str(args.glob),
               regex: args.regex !== false,
               caseSensitive: args.caseSensitive === true,
-              maxResults: num2(args.maxResults)
+              maxResults: num3(args.maxResults)
             });
           case "write": {
             const result = await this.files.write({
@@ -327217,15 +327502,15 @@ var init_connection2 = __esm({
           case "process/logs":
             return this.processes.logs({
               processId: str(args.processId),
-              tail: num2(args.tail),
-              sinceLine: num2(args.sinceLine)
+              tail: num3(args.tail),
+              sinceLine: num3(args.sinceLine)
             });
           case "terminal/open":
             this.requireTerminal();
             log2("\u25A3  terminal opened from the browser");
             return this.terminals.open({
-              cols: num2(args.cols),
-              rows: num2(args.rows)
+              cols: num3(args.cols),
+              rows: num3(args.rows)
             });
           case "terminal/input":
             this.requireTerminal();
@@ -327288,7 +327573,7 @@ var init_connection2 = __esm({
           command,
           cwd,
           displayCwd,
-          timeoutSeconds: num2(args.timeoutSeconds),
+          timeoutSeconds: num3(args.timeoutSeconds),
           env: buildEnv(this.options, { CI: "1" }),
           signal
         });
@@ -327307,7 +327592,7 @@ var init_connection2 = __esm({
           displayCwd,
           name: str(args.name),
           waitFor: str(args.waitFor),
-          waitSeconds: num2(args.waitSeconds),
+          waitSeconds: num3(args.waitSeconds),
           env: buildEnv(this.options),
           signal
         });
@@ -327359,8 +327644,8 @@ var init_policy = __esm({
     ];
     HIDDEN_COMMAND = /\$\(|`|<\(|>\(/;
     segmentsOf = (command) => command.split(/&&|\|\||;|\||\n/).map((s2) => s2.trim()).filter(Boolean);
-    ruleToRegExp = (rule) => new RegExp(
-      `^${rule.trim().replace(/[.+^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*")}$`
+    ruleToRegExp = (rule2) => new RegExp(
+      `^${rule2.trim().replace(/[.+^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*")}$`
     );
     normalize = (segment) => segment.replace(/^(\w+=\S*\s+)+/, "").replace(/\s+/g, " ");
     alwaysRuleFor = (segment) => {
@@ -327372,15 +327657,15 @@ var init_policy = __esm({
       constructor(mode, allow = [], useDefaults = true) {
         this.mode = mode;
         this.rules = [];
-        for (const rule of [...useDefaults ? DEFAULT_ALLOW : [], ...allow]) {
-          this.add(rule);
+        for (const rule2 of [...useDefaults ? DEFAULT_ALLOW : [], ...allow]) {
+          this.add(rule2);
         }
       }
       get allowRules() {
         return this.rules.map((r2) => r2.rule);
       }
-      add(rule) {
-        const trimmed = rule.trim();
+      add(rule2) {
+        const trimmed = rule2.trim();
         if (trimmed && !this.rules.some((r2) => r2.rule === trimmed)) {
           this.rules.push({ rule: trimmed, re: ruleToRegExp(trimmed) });
         }
@@ -327425,12 +327710,12 @@ __export(start_exports4, {
   WORKSPACE_VERSION: () => WORKSPACE_VERSION,
   default: () => start_default2
 });
-var import_promises12, import_path10, import_rxjs80, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
+var import_promises12, import_path11, import_rxjs81, WORKSPACE_VERSION, csv, resolveWorkspace, start_default2;
 var init_start4 = __esm({
   "src/commands/workspace/start.ts"() {
     import_promises12 = require("fs/promises");
-    import_path10 = require("path");
-    import_rxjs80 = __toESM(require_cjs());
+    import_path11 = require("path");
+    import_rxjs81 = __toESM(require_cjs());
     init_helpers();
     init_gql_client();
     init_log();
@@ -327448,7 +327733,7 @@ var init_start4 = __esm({
       if (cmd.token) {
         return {
           id: "(from --token)",
-          name: cmd.name ?? (0, import_path10.basename)(root),
+          name: cmd.name ?? (0, import_path11.basename)(root),
           token: cmd.token,
           projectId: cmd.project ?? "",
           root
@@ -327461,16 +327746,16 @@ var init_start4 = __esm({
       if (saved && (!cmd.project || cmd.project === saved.projectId)) {
         return saved;
       }
-      const projectId = await (0, import_rxjs80.lastValueFrom)(parseProjectId(cmd.project)).catch(
+      const projectId = await (0, import_rxjs81.lastValueFrom)(parseProjectId(cmd.project)).catch(
         () => {
           throw new Error(
             "No project selected. Pass --project <projectId> or run `gcli project:use <projectId>` first."
           );
         }
       );
-      const name2 = cmd.name || (0, import_path10.basename)(root);
+      const name2 = cmd.name || (0, import_path11.basename)(root);
       Logger.info(`Registering ${root} as local workspace "${name2}"...`);
-      const { workspace, token } = await (0, import_rxjs80.lastValueFrom)(
+      const { workspace, token } = await (0, import_rxjs81.lastValueFrom)(
         GraphqlClienAPI.createLocalWorkspace(projectId, name2)
       ).catch((e2) => {
         throw new Error(
@@ -327568,16 +327853,16 @@ var list_exports10 = {};
 __export(list_exports10, {
   default: () => list_default10
 });
-var import_rxjs81, list_default10;
+var import_rxjs82, list_default10;
 var init_list10 = __esm({
   "src/commands/workspace/list.ts"() {
-    import_rxjs81 = __toESM(require_cjs());
+    import_rxjs82 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
     list_default10 = async (cmd) => {
       const [workspaces, saved] = await Promise.all([
-        (0, import_rxjs81.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
+        (0, import_rxjs82.lastValueFrom)(GraphqlClienAPI.listLocalWorkspaces(cmd.project)),
         readSavedWorkspaces()
       ]);
       const onThisMachine = new Set(Object.values(saved).map((w) => w.id));
@@ -327608,11 +327893,11 @@ var delete_exports6 = {};
 __export(delete_exports6, {
   default: () => delete_default6
 });
-var import_promises13, import_rxjs82, delete_default6;
+var import_promises13, import_rxjs83, delete_default6;
 var init_delete6 = __esm({
   "src/commands/workspace/delete.ts"() {
     import_promises13 = require("fs/promises");
-    import_rxjs82 = __toESM(require_cjs());
+    import_rxjs83 = __toESM(require_cjs());
     init_gql_client();
     init_log();
     init_config2();
@@ -327624,7 +327909,7 @@ var init_delete6 = __esm({
           "No workspace registered for this directory - pass --id (see `gcli workspace:list`)."
         );
       }
-      await (0, import_rxjs82.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
+      await (0, import_rxjs83.lastValueFrom)(GraphqlClienAPI.deleteLocalWorkspace(workspaceId));
       await forgetWorkspace({ id: workspaceId });
       Logger.success(
         `Local workspace ${workspaceId} deleted; its token no longer works.`
@@ -327719,7 +328004,7 @@ function registerClusterCommands(program2) {
     program2.command("cluster:status").description(
       "Every cluster's status, agent, nodes, CPU/memory load, autoscaling and open issues (or one with --cluster)"
     )
-  ).action(lazy(() => Promise.resolve().then(() => (init_status(), status_exports)).then((m2) => m2.default)));
+  ).option("--json", "Machine-readable output").action(lazy(() => Promise.resolve().then(() => (init_status(), status_exports)).then((m2) => m2.default)));
   target(
     program2.command("cluster:attach").description(
       "Attach a machine you own (booted from the Talos ISO, on this network) to a Talos cluster as an extra worker - its install disk is WIPED"
@@ -327772,9 +328057,12 @@ function registerClusterCommands(program2) {
   ).option("-n, --name <name>", "Machine name (see cluster:nodes)").option("--yes", "Do not ask for confirmation").action(lazy(() => Promise.resolve().then(() => (init_detach(), detach_exports)).then((m2) => m2.default)));
   target(
     program2.command("cluster:health").description(
-      "The latest health report of a cluster's agent, with every node"
+      "A cluster's health as a dashboard: CPU/memory requested and used (of what the cluster may use), nodes and open issues"
     )
-  ).action(lazy(() => Promise.resolve().then(() => (init_health(), health_exports)).then((m2) => m2.default)));
+  ).option(
+    "-w, --watch [seconds]",
+    "Redraw every 30 s (or the given seconds) until Ctrl+C"
+  ).option("--json", "Machine-readable output").action(lazy(() => Promise.resolve().then(() => (init_health(), health_exports)).then((m2) => m2.default)));
   target(
     program2.command("cluster:scale-events").description("Manual and autoscaler scale history, newest first")
   ).option("--limit <limit>", "How many events (default 20)").action(lazy(() => Promise.resolve().then(() => (init_scale_events(), scale_events_exports)).then((m2) => m2.default)));
@@ -328420,7 +328708,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.287" : "development";
+var version2 = true ? "1.8.288" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));

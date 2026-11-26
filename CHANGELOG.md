@@ -1,4 +1,4 @@
-## [1.8.288](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.288) (2026-11-25)
+## [1.8.289](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.289) (2026-11-26)
 
 
 ### Bug Fixes
@@ -55,6 +55,7 @@
 * **gcli:** browser terminal PTY starts at the browser's size (stty) - no 80-column wrap ([2c95540](https://github.com/Stradivario/gapi/commit/2c9554091e48782e1fab0a6863a159057cad479d))
 * **gcli:** build reads lambforge.yaml, environment flags as numbers, plan-safe scale defaults ([1fd8120](https://github.com/Stradivario/gapi/commit/1fd8120678a9ce13b4539d62d488529aac69dc24))
 * **gcli:** builded again the package with namespace import from all ([f655951](https://github.com/Stradivario/gapi/commit/f6559518341065cef27d9404d8941480ff704ee0))
+* **gcli:** commit build/isolated.ts - the root .gitignore 'build' rule hid it, CI could not find the module ([d291ab0](https://github.com/Stradivario/gapi/commit/d291ab049dd690a66d0086449bbe31fd587d755e))
 * **gcli:** decompress logs ([705241b](https://github.com/Stradivario/gapi/commit/705241b05fcba9d8375c4cf8a73710f1989323e3))
 * **gcli:** default export of form data and stream to buffer ([94800cb](https://github.com/Stradivario/gapi/commit/94800cb9fa946b6843dd9a7517c987007b254821))
 * **gcli:** deploys follow the build status and deployStatus ([d8a8e73](https://github.com/Stradivario/gapi/commit/d8a8e735a9b52e74000628a118abf6dd482c0318))
@@ -160,6 +161,7 @@
 * **gcli:** browser login (gcli login without --token, mcp:start LambforgeLogin), cluster:autoscale --profile/--serverTypes/--step, lambda Site address ([acd1970](https://github.com/Stradivario/gapi/commit/acd1970c87cf8583f3bcd1900bc491c1332de2a1))
 * **gcli:** build script added outfile ([1bea705](https://github.com/Stradivario/gapi/commit/1bea7057543c37999ec2bd23983bc8a0401361f0))
 * **gcli:** bundle binary ([e4ad1a0](https://github.com/Stradivario/gapi/commit/e4ad1a075bb468f014d5cc01cda31227775fe04a))
+* **gcli:** cluster:health and cluster:status as a terminal dashboard (meters of what the cluster may use, nodes, issues, --watch, --json) ([d3a53fc](https://github.com/Stradivario/gapi/commit/d3a53fc958c890d3141729c35d249c3d8633a382))
 * **gcli:** cluster:plan; cluster:autoscale --mode/--consolidation/--minNodeAge; pools in cluster YAML (plan 17) ([9b1dfc7](https://github.com/Stradivario/gapi/commit/9b1dfc743652279fb88b9c1eedef27745f6e02fe))
 * **gcli:** domains: in lambforge.yaml - domain:apply, domain:list, applied on every deploy ([3a1173e](https://github.com/Stradivario/gapi/commit/3a1173e41b02c6a9d9108ac79c26e9b8ab3be82e))
 * **gcli:** environment crud operations added ([5c4bde8](https://github.com/Stradivario/gapi/commit/5c4bde864e328e97c21f616af5911e3ce0208edf))
@@ -171,6 +173,7 @@
 * **gcli:** new output in every command, build as one step ([a10109c](https://github.com/Stradivario/gapi/commit/a10109ca448dadeb7942900ddfee742cc90523d1))
 * **gcli:** npm ignore file added ([15530eb](https://github.com/Stradivario/gapi/commit/15530eb085653d26f53e01fd9d7902bdfd99b734))
 * **gcli:** one-way terminal input + resize frames (no round trip per keystroke), PTY resize via stty -F ([34f054d](https://github.com/Stradivario/gapi/commit/34f054dbbef33261ffe9f4ac022441f5e755de81))
+* **gcli:** options.bundler.isolated - bundle only from the package's own node_modules ([afe5ac5](https://github.com/Stradivario/gapi/commit/afe5ac56ec3952386a96e0c2576778d2c932a6ad))
 * **gcli:** queue:declare, mq-trigger:apply and queues / triggers.mq in lambforge.yaml ([cf567e0](https://github.com/Stradivario/gapi/commit/cf567e021b296dc60d7c6e31967a98c9dd0a10d5))
 * **gcli:** readme.md added correct link [ci-skip] ([ff79521](https://github.com/Stradivario/gapi/commit/ff7952137b93a50e57ca51f15d3dbd71565c348d))
 * **gcli:** removed archiver as default export ([7ea3f62](https://github.com/Stradivario/gapi/commit/7ea3f6265dc58dc1f37d9177b1c8dd7ca2c91551))
