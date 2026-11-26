@@ -1,4 +1,4 @@
-## [1.8.289](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.289) (2026-11-26)
+## [1.8.290](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.290) (2026-11-26)
 
 
 ### Bug Fixes
@@ -163,6 +163,7 @@
 * **gcli:** bundle binary ([e4ad1a0](https://github.com/Stradivario/gapi/commit/e4ad1a075bb468f014d5cc01cda31227775fe04a))
 * **gcli:** cluster:health and cluster:status as a terminal dashboard (meters of what the cluster may use, nodes, issues, --watch, --json) ([d3a53fc](https://github.com/Stradivario/gapi/commit/d3a53fc958c890d3141729c35d249c3d8633a382))
 * **gcli:** cluster:plan; cluster:autoscale --mode/--consolidation/--minNodeAge; pools in cluster YAML (plan 17) ([9b1dfc7](https://github.com/Stradivario/gapi/commit/9b1dfc743652279fb88b9c1eedef27745f6e02fe))
+* **gcli:** cost optimization commands (plan 50) - lambda:resources, plugin:resources, plugin:auto-grow, project:hibernation/sleep/wake/savings, cluster:pod-placement, autoscale --replace-cheaper ([f2c7e32](https://github.com/Stradivario/gapi/commit/f2c7e327cf9c40da7c3266cdf5902577351a3c05))
 * **gcli:** domains: in lambforge.yaml - domain:apply, domain:list, applied on every deploy ([3a1173e](https://github.com/Stradivario/gapi/commit/3a1173e41b02c6a9d9108ac79c26e9b8ab3be82e))
 * **gcli:** environment crud operations added ([5c4bde8](https://github.com/Stradivario/gapi/commit/5c4bde864e328e97c21f616af5911e3ce0208edf))
 * **gcli:** federation and envSecret are adopted to the cli ([244b451](https://github.com/Stradivario/gapi/commit/244b4515ae93fddbc9aace6cef917181982f9f06))
