@@ -67,3 +67,31 @@ with URL / Site / Logs.
 
 Test: `npx jest test/ui.spec.ts`. Look: run any command in a terminal and
 piped (`| cat`) - the pipe must show no escape codes and no spinner frames.
+
+## cluster:health / cluster:status as a dashboard (2026-11-26)
+
+`src/commands/cluster/helpers/health-view.ts` (pure, every function returns
+lines): `headerLine` (`name  ● overall  size · agent · 12s ago`, the dot in
+the overall's colour), `meterLines` (label, a 20-cell bar in eighths of a
+cell `▏▎▍▌▋▊▉█`, percent, "2.7 of 6 CPU", `(host)` when a virtual
+cluster's usage comes from its host), `podsLine`, `nodeLines` (a bar per
+node against its own capacity; a node of a cluster measured against its
+size - a vCluster's stand-in nodes - shows only its amount), `issueLines`
+(`✖` / `⚠` / `i` + the overview's message). Bar colours follow the web
+meters: green, yellow from 70 %, red from 85 %. No unicode = `#` / `-`
+bars; no colour (pipe, NO_COLOR) = plain text.
+
+- `cluster:health`: ONE request (`GraphqlClienAPI.clusterHealthView`:
+  `projectClustersOverview` + `clusterHealth(limit: 1)`). `--watch
+  [seconds]` (default 30 = the heartbeat, at least 5) redraws with
+  `ui.redraw` - the screen is cleared on an interactive terminal, each frame
+  appended in a pipe/CI; a failed refresh is a `⚠` and the next tick tries
+  again. `--json` = `{ overview, latest }` on stdout.
+- `cluster:status`: `statusView` - per cluster the header and two compact
+  bars (requested, with used next to it) plus its issues; `--json` = the
+  overview list. `overviewRow` (the old table row) stays exported.
+- Totals come from `health.capacity` (cluster-provisioner 2026-11-26:
+  min(nodes, the cluster's size)).
+
+Test: `npx jest test/cluster-health-view.spec.ts`. Look: `gcli cluster:health
+--cluster <id>` in a terminal, then `| cat` (no escape codes).

@@ -3,8 +3,10 @@ import { lastValueFrom } from 'rxjs';
 import { parseProjectId, resolveClusterId } from '~/helpers';
 import { GraphqlClienAPI } from '~/services/gql-client';
 import { Logger } from '~/services/log';
+import { humanOutputToStderr, ui } from '~/services/ui';
 
 import { ClusterTargetOptions } from './helpers/cluster-change';
+import { statusView } from './helpers/health-view';
 import { ClusterOverview } from './types';
 
 const pct = (v?: number) => (v == null ? '-' : `${Math.round(v)}%`);
@@ -34,7 +36,8 @@ export const overviewRow = (c: ClusterOverview) => ({
 
 /** gcli cluster:status [--cluster <id>] - every cluster's health, agent,
     load, autoscale and open issues (projectClustersOverview). */
-export default async (cmd: ClusterTargetOptions) => {
+export default async (cmd: ClusterTargetOptions & { json?: boolean }) => {
+  if (cmd.json) humanOutputToStderr();
   const projectId = await lastValueFrom(parseProjectId(cmd.project));
   const clusterId = await lastValueFrom(
     resolveClusterId(projectId, {
@@ -52,20 +55,10 @@ export default async (cmd: ClusterTargetOptions) => {
         ? `No cluster ${clusterId} in this project.`
         : 'No private clusters for this project - it runs on the shared cluster. See cluster:create.',
     );
+  } else if (cmd.json) {
+    process.stdout.write(`${JSON.stringify(rows, null, 2)}\n`);
   } else {
-    Logger.table(rows.map(overviewRow));
-    const issues = rows.flatMap((c) =>
-      (c.issues ?? []).map((i) => ({
-        cluster: c.name,
-        severity: i.severity,
-        code: i.code,
-        message: i.message,
-      })),
-    );
-    if (issues.length) {
-      Logger.log('Issues:');
-      Logger.table(issues);
-    }
+    ui.print(['', ...statusView(rows, new Date()), ''].join('\n'));
   }
   return rows;
 };

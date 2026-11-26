@@ -1445,6 +1445,39 @@ export class GraphqlClienAPI {
     }).pipe(map((res) => res.detachClusterNode));
   }
 
+  /** cluster:health - the overview (capacity, issues) and the newest
+      heartbeat (nodes) of one cluster in ONE request. */
+  public static clusterHealthView(projectId: string, clusterId: string) {
+    return this.query<{
+      projectClustersOverview: ClusterOverview[];
+      clusterHealth: ClusterHealthSnapshot[];
+    }>({
+      query: gql`
+        query clusterHealthView($projectId: String!, $clusterId: String!) {
+          projectClustersOverview(projectId: $projectId) {
+            ${ClusterOverviewFragment}
+          }
+          clusterHealth(
+            projectId: $projectId
+            clusterId: $clusterId
+            limit: 1
+          ) {
+            ${ClusterHealthFragment}
+          }
+        }
+      `,
+      variables: { projectId, clusterId },
+    }).pipe(
+      map((res) => ({
+        overview:
+          (res.projectClustersOverview ?? []).find(
+            (c) => c.clusterId === clusterId,
+          ) ?? null,
+        latest: (res.clusterHealth ?? [])[0] ?? null,
+      })),
+    );
+  }
+
   public static clusterHealth(projectId: string, clusterId: string, limit = 1) {
     return this.query<{ clusterHealth: ClusterHealthSnapshot[] }>({
       query: gql`

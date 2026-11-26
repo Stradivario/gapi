@@ -154,11 +154,33 @@ cluster is `ready` again. `--clusterName <name>` works instead of
 
 ```bash
 # Health, load, autoscaling and open issues of every cluster (or one)
-gcli cluster:status [--cluster '<clusterId>']
-gcli cluster:health --cluster '<clusterId>'        # latest agent report, per node
+gcli cluster:status [--cluster '<clusterId>']      # a header + CPU/memory bars per cluster
+gcli cluster:health --cluster '<clusterId>'        # dashboard: meters, nodes, issues
+gcli cluster:health --cluster '<clusterId>' --watch     # redraw every 30 s (--watch 10 = 10 s)
+gcli cluster:health --cluster '<clusterId>' --json      # the data, for scripts
 gcli cluster:scale-events --cluster '<clusterId>'  # manual + autoscaler history
 gcli cluster:cost                                  # month-to-date + monthly estimate
 
+```
+
+`cluster:health` draws the cluster as a dashboard. Each meter says what its
+percentage is of: a virtual cluster is measured against the size you gave
+it, and its live usage comes from its host (`(host)`):
+
+```
+instance-stage  ● healthy  6 CPU · 12 GiB, cluster size · agent 0.12.0 · 21s ago
+──────────────────────────────────────────────────────────────────────────
+CPU requested  █████████░░░░░░░░░░░   45%    2.7 of 6 CPU
+CPU used       ███▌░░░░░░░░░░░░░░░░   18%    1.1 of 6 CPU     (host)
+Mem requested  ████████░░░░░░░░░░░░   40%    4.8 of 12 GiB
+Mem used       ███████░░░░░░░░░░░░░   35%    4.2 of 12 GiB    (host)
+
+Pods 51 · pending 0 · runtime ✔ ready · prometheus ✔ ready
+
+✔  No issues
+```
+
+```bash
 # Attach a machine you own (booted from the Talos ISO, on this network) as an
 # extra worker - its install disk is WIPED (feature self-managed-nodes, admin)
 gcli cluster:attach --cluster '<clusterId>' --node-ip 192.168.1.50 --name home-1 --disk /dev/nvme0n1 [--pool home] [--reserved]

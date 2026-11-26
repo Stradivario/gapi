@@ -94,7 +94,9 @@ export function registerClusterCommands(program: Command) {
       .description(
         "Every cluster's status, agent, nodes, CPU/memory load, autoscaling and open issues (or one with --cluster)",
       ),
-  ).action(lazy(() => import('./status').then((m) => m.default)));
+  )
+    .option('--json', 'Machine-readable output')
+    .action(lazy(() => import('./status').then((m) => m.default)));
 
   /* Self-managed machines (feature self-managed-nodes): your own computer
      joins a Lambforge Talos cluster as an extra worker over KubeSpan. */
@@ -205,9 +207,15 @@ export function registerClusterCommands(program: Command) {
     program
       .command('cluster:health')
       .description(
-        "The latest health report of a cluster's agent, with every node",
+        "A cluster's health as a dashboard: CPU/memory requested and used (of what the cluster may use), nodes and open issues",
       ),
-  ).action(lazy(() => import('./health').then((m) => m.default)));
+  )
+    .option(
+      '-w, --watch [seconds]',
+      'Redraw every 30 s (or the given seconds) until Ctrl+C',
+    )
+    .option('--json', 'Machine-readable output')
+    .action(lazy(() => import('./health').then((m) => m.default)));
 
   target(
     program

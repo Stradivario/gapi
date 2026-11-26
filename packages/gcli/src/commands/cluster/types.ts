@@ -78,6 +78,13 @@ health {
   memRequestsPercent
   cpuUsagePercent
   memUsagePercent
+  usageSource
+  capacity {
+    cpu
+    memory
+    cpuSource
+    memSource
+  }
   fissionReady
   prometheusReady
   kubernetesVersion
@@ -214,6 +221,16 @@ export interface ClusterAutoscalePolicy {
   lastDecision?: string | null;
 }
 
+export interface ClusterCapacity {
+  /** millicores */
+  cpu: number;
+  /** bytes */
+  memory: number;
+  /** 'nodes' = the schedulable nodes, 'limit' = the cluster's own size */
+  cpuSource: string;
+  memSource: string;
+}
+
 export interface ClusterOverview {
   clusterId: string;
   name: string;
@@ -233,6 +250,11 @@ export interface ClusterOverview {
     memRequestsPercent?: number;
     cpuUsagePercent?: number;
     memUsagePercent?: number;
+    /** 'nodes' (metrics-server) or 'host' (a virtual cluster, measured by
+        its host's agent) */
+    usageSource?: string | null;
+    /** what the percentages are of (platform 2026-11-26) */
+    capacity?: ClusterCapacity | null;
     fissionReady?: boolean;
     prometheusReady?: boolean;
     kubernetesVersion?: string;

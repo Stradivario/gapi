@@ -51,7 +51,7 @@ export function colorEnabled(stream: Stream): boolean {
 const interactive = (stream: Stream) =>
   !!stream?.isTTY && !env.CI && env.TERM !== 'dumb';
 
-const unicode =
+export const unicode =
   process.platform !== 'win32' ||
   !!env.WT_SESSION ||
   env.TERM_PROGRAM === 'vscode';
@@ -247,6 +247,17 @@ export const ui = {
   /** `=== Deploying api to project shop`, with a blank line around it */
   header: (text: string) =>
     write(state.out, `\n${paint(`=== ${text}`, ['bold'])}\n\n`),
+
+  /** a screen that refreshes (--watch): on an interactive terminal the
+      previous one is cleared first; in a pipe or CI each frame is printed
+      below the last, separated by a blank line */
+  redraw: (lines: string[]) =>
+    write(
+      state.out,
+      interactive(state.out)
+        ? `\x1b[2J\x1b[H${lines.join('\n')}`
+        : `\n${lines.join('\n')}`,
+    ),
 
   /** the closing `✔  Deploy complete!` */
   done: (text: string) =>

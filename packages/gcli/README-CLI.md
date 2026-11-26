@@ -48,7 +48,7 @@ Commands:
   cluster:reset-machine [options]                      Bring a detached machine back to maintenance mode to attach it again (wipes its config and data, keeps the boot loader)
   cluster:talosconfig [options]                        A short-lived talosconfig for one of your Talos clusters (admin of its machines with talosctl) - printed, or saved with -o
   cluster:detach [options]                             Drain and remove an attached machine from a cluster (reset the machine afterwards)
-  cluster:health [options]                             The latest health report of a cluster's agent, with every node
+  cluster:health [options]                             A cluster's health as a dashboard: CPU/memory requested and used (of what the cluster may use), nodes and open issues
   cluster:scale-events [options]                       Manual and autoscaler scale history, newest first
   cluster:cost [options]                               Month-to-date cost and the monthly estimate of the project's private clusters
   cluster:scale [options]                              Set the number of worker nodes (1-10) of a multi-node cluster - billed per node-hour
@@ -90,12 +90,18 @@ Commands:
   workflow:runs [options]                              List a workflow runs, newest first
   workflow:status [options]                            Show a run: its step events, error and output (--follow until it ends)
   workflow:cancel [options]                            Cancel a running run
-  workflow:trigger:add [options]                       Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs Fission 1.26+ on the cluster
+  workflow:trigger:add [options]                       Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs runtime 1.26+ on the cluster
   workflow:trigger:list [options]                      List a workflow HTTP and schedule triggers
   workflow:trigger:remove [options]                    Remove a workflow trigger
+  domain:list [options]                                List the domains and platform names of a project
+  domain:apply [options]                               Claim, add and route the domains listed under domains: in lambforge.yaml
+  validate [options] [path]                            Check every lambforge.yaml of the repository (unknown keys, wrong types, clashing names); --online also against the live platform API
+  plan [options] [path]                                Compare every lambforge.yaml of the repository with what runs in the project: in sync, will change, missing, unmanaged
+  apply [options] [path]                               Make every lambforge.yaml of the repository true: shows the plan, asks, then creates / updates environments, lambdas (waiting for each build), time + queue triggers and domains. Never deletes.
+  export [options] <lambda>                            Generate a lambforge.yaml from a running lambda (function, environment, time trigger, domains) - secret and config names only
   help [command]                                       display help for command
-[36m
---- Subcommand: login ---[0m
+i  
+   --- Subcommand: login ---
 Usage: gcli login [options]
 
 Log in. Without --token: prints a link, opens your browser and waits for you to approve it on lambforge.com
@@ -108,8 +114,8 @@ Options:
   -t, --token <token>     Specify custom token generated from the website
   -u, --url <url>         Specify api url
   -h, --help              display help for command
-[36m
---- Subcommand: lambda:list ---[0m
+i  
+   --- Subcommand: lambda:list ---
 Usage: gcli lambda:list [options]
 
 List of all lambdas for project
@@ -125,8 +131,8 @@ Options:
                                     resolved to its id before the request;
                                     --clusterId wins if both are given
   -h, --help                        display help for command
-[36m
---- Subcommand: lambda:get ---[0m
+i  
+   --- Subcommand: lambda:get ---
 Usage: gcli lambda:get [options]
 
 Get lambda by id
@@ -143,8 +149,8 @@ Options:
                                     human-readable name (see cluster:list);
                                     --clusterId wins if both are given
   -h, --help                        display help for command
-[36m
---- Subcommand: lambda:create ---[0m
+i  
+   --- Subcommand: lambda:create ---
 Usage: gcli lambda:create [options]
 
 Options:
@@ -155,6 +161,8 @@ Options:
   --clusterName <clusterName>                      Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given. Can also be set as `clusterName` in the lambforge.yaml spec's function block.
   --method <method...>                             HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method
   --spec <spec>                                    Spec file yml or json path
+  --no-wait                                        Return once the lambda is saved, without waiting for the build and rollout
+  --json                                           Print the saved lambda as JSON on stdout (progress goes to stderr)
   --packageJson <packageJson>                      Define packageJson in string format
   --package <package>                              Path to package.json
   --buildBashScript <buildBashScript>              Package build command for builder to run with
@@ -188,8 +196,8 @@ Options:
   --spread <spread>                                Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides
   --spreadStrict <spreadStrict>                    With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up
   -h, --help                                       display help for command
-[36m
---- Subcommand: lambda:update ---[0m
+i  
+   --- Subcommand: lambda:update ---
 Usage: gcli lambda:update [options]
 
 Options:
@@ -200,6 +208,8 @@ Options:
   --clusterName <clusterName>                      Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given. Can also be set as `clusterName` in the lambforge.yaml spec's function block.
   --method <method...>                             HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method
   --spec <spec>                                    Spec file yml or json path
+  --no-wait                                        Return once the lambda is saved, without waiting for the build and rollout
+  --json                                           Print the saved lambda as JSON on stdout (progress goes to stderr)
   --packageJson <packageJson>                      Define packageJson in string format
   --package <package>                              Path to package.json
   --buildBashScript <buildBashScript>              Package build command for builder to run with
@@ -233,8 +243,8 @@ Options:
   --spread <spread>                                Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides
   --spreadStrict <spreadStrict>                    With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up
   -h, --help                                       display help for command
-[36m
---- Subcommand: lambda:delete ---[0m
+i  
+   --- Subcommand: lambda:delete ---
 Usage: gcli lambda:delete [options]
 
 Get lambda by id
@@ -253,8 +263,8 @@ Options:
                                     human-readable name (see cluster:list);
                                     --clusterId wins if both are given
   -h, --help                        display help for command
-[36m
---- Subcommand: lambda:log ---[0m
+i  
+   --- Subcommand: lambda:log ---
 Usage: gcli lambda:log [options]
 
 Get lambda log
@@ -271,8 +281,8 @@ Options:
                                     human-readable name (see cluster:list);
                                     --clusterId wins if both are given
   -h, --help                        display help for command
-[36m
---- Subcommand: lambda:build:log ---[0m
+i  
+   --- Subcommand: lambda:build:log ---
 Usage: gcli lambda:build:log [options]
 
 Get build log
@@ -289,8 +299,8 @@ Options:
                                     human-readable name (see cluster:list);
                                     --clusterId wins if both are given
   -h, --help                        display help for command
-[36m
---- Subcommand: lambda:test ---[0m
+i  
+   --- Subcommand: lambda:test ---
 Usage: gcli lambda:test [options]
 
 Test lambda
@@ -306,8 +316,8 @@ Options:
   -m, --method <method>             HTTP Methods: GET,POST,PUT,DELETE,HEAD. To
                                     mention single method
   -h, --help                        display help for command
-[36m
---- Subcommand: lambda:package ---[0m
+i  
+   --- Subcommand: lambda:package ---
 Usage: gcli lambda:package [options]
 
 Options:
@@ -318,6 +328,8 @@ Options:
   --clusterName <clusterName>                      Same as --clusterId but by the cluster's human-readable name (see cluster:list); --clusterId wins if both are given. Can also be set as `clusterName` in the lambforge.yaml spec's function block.
   --method <method...>                             HTTP Methods: GET,POST,PUT,DELETE,HEAD. To mention single method
   --spec <spec>                                    Spec file yml or json path
+  --no-wait                                        Return once the lambda is saved, without waiting for the build and rollout
+  --json                                           Print the saved lambda as JSON on stdout (progress goes to stderr)
   --packageJson <packageJson>                      Define packageJson in string format
   --package <package>                              Path to package.json
   --buildBashScript <buildBashScript>              Package build command for builder to run with
@@ -351,32 +363,32 @@ Options:
   --spread <spread>                                Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides
   --spreadStrict <spreadStrict>                    With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up
   -h, --help                                       display help for command
-[36m
---- Subcommand: project:list ---[0m
+i  
+   --- Subcommand: project:list ---
 Usage: gcli project:list [options]
 
 List of all projects
 
 Options:
   -h, --help  display help for command
-[36m
---- Subcommand: project:use ---[0m
+i  
+   --- Subcommand: project:use ---
 Usage: gcli project:use [options] <project>
 
 Adds default project to be used all around the CLI
 
 Options:
   -h, --help  display help for command
-[36m
---- Subcommand: project:clear ---[0m
+i  
+   --- Subcommand: project:clear ---
 Usage: gcli project:clear [options]
 
 Clears default project to be used all around the CLI
 
 Options:
   -h, --help  display help for command
-[36m
---- Subcommand: build ---[0m
+i  
+   --- Subcommand: build ---
 Usage: gcli build [options]
 
 Build bundle using esbuild https://esbuild.github.io 
@@ -395,8 +407,8 @@ Options:
                                 else index.js)
   -e, --external <external...>  External libraries
   -h, --help                    display help for command
-[36m
---- Subcommand: environment:list ---[0m
+i  
+   --- Subcommand: environment:list ---
 Usage: gcli environment:list [options]
 
 List of all environments for project
@@ -404,8 +416,8 @@ List of all environments for project
 Options:
   -p, --project <project>
   -h, --help               display help for command
-[36m
---- Subcommand: environment:create ---[0m
+i  
+   --- Subcommand: environment:create ---
 Usage: gcli environment:create [options]
 
 Create environment for project
@@ -432,8 +444,8 @@ Options:
                                        both are given. Can also be set as
                                        `clusterName` in env.yaml.
   -h, --help                           display help for command
-[36m
---- Subcommand: environment:update ---[0m
+i  
+   --- Subcommand: environment:update ---
 Usage: gcli environment:update [options]
 
 Update environment for project
@@ -460,8 +472,8 @@ Options:
                                        human-readable name; --clusterId wins if
                                        both are given
   -h, --help                           display help for command
-[36m
---- Subcommand: environment:delete ---[0m
+i  
+   --- Subcommand: environment:delete ---
 Usage: gcli environment:delete [options]
 
 Delete environment for project
@@ -478,8 +490,8 @@ Options:
                                     human-readable name; --clusterId wins if
                                     both are given
   -h, --help                        display help for command
-[36m
---- Subcommand: environment:get ---[0m
+i  
+   --- Subcommand: environment:get ---
 Usage: gcli environment:get [options]
 
 Get environment for project
@@ -494,8 +506,8 @@ Options:
                                     human-readable name; --clusterId wins if
                                     both are given
   -h, --help                        display help for command
-[36m
---- Subcommand: mcp:start ---[0m
+i  
+   --- Subcommand: mcp:start ---
 Usage: gcli mcp:start [options]
 
 Start mcp proxy server
@@ -503,8 +515,8 @@ Start mcp proxy server
 Options:
   -u, --url <url>  Specify mcp api url
   -h, --help       display help for command
-[36m
---- Subcommand: start ---[0m
+i  
+   --- Subcommand: start ---
 Usage: gcli start [options]
 
 Start bundle using esbuild https://esbuild.github.io 
@@ -519,8 +531,8 @@ Options:
   -i, --ignore <ignore...>      Ignore folders from triggering restarts
   -e, --external <external...>  External libraries
   -h, --help                    display help for command
-[36m
---- Subcommand: cron:create ---[0m
+i  
+   --- Subcommand: cron:create ---
 Usage: gcli cron:create [options]
 
 Create cron
@@ -531,8 +543,8 @@ Options:
   -t, --triggerName <triggerName>
   -c, --cron <cron>
   -h, --help                       display help for command
-[36m
---- Subcommand: cron:delete ---[0m
+i  
+   --- Subcommand: cron:delete ---
 Usage: gcli cron:delete [options]
 
 Delete cron
@@ -541,8 +553,8 @@ Options:
   -p, --project <project>
   -l, --lambdaName <lambdaName>
   -h, --help                     display help for command
-[36m
---- Subcommand: cron:list ---[0m
+i  
+   --- Subcommand: cron:list ---
 Usage: gcli cron:list [options]
 
 List of all cron jobs for project
@@ -550,8 +562,8 @@ List of all cron jobs for project
 Options:
   -p, --project <project>
   -h, --help               display help for command
-[36m
---- Subcommand: mq-trigger:list ---[0m
+i  
+   --- Subcommand: mq-trigger:list ---
 Usage: gcli mq-trigger:list [options]
 
 List the message-queue triggers of a project
@@ -559,8 +571,8 @@ List the message-queue triggers of a project
 Options:
   -p, --project <project>
   -h, --help               display help for command
-[36m
---- Subcommand: mq-trigger:create ---[0m
+i  
+   --- Subcommand: mq-trigger:create ---
 Usage: gcli mq-trigger:create [options]
 
 Run a lambda for every message on a RabbitMQ queue
@@ -581,8 +593,8 @@ Options:
   --max-replicas <n>
   --threshold <n>               Messages per replica before scaling out
   -h, --help                    display help for command
-[36m
---- Subcommand: mq-trigger:update ---[0m
+i  
+   --- Subcommand: mq-trigger:update ---
 Usage: gcli mq-trigger:update [options]
 
 Change a message-queue trigger (same flags as create)
@@ -603,8 +615,8 @@ Options:
   --max-replicas <n>
   --threshold <n>               Messages per replica before scaling out
   -h, --help                    display help for command
-[36m
---- Subcommand: mq-trigger:apply ---[0m
+i  
+   --- Subcommand: mq-trigger:apply ---
 Usage: gcli mq-trigger:apply [options]
 
 Create or update the message-queue triggers listed under triggers.mq in lambforge.yaml
@@ -613,8 +625,8 @@ Options:
   -p, --project <project>
   -spec, --spec <spec>
   -h, --help               display help for command
-[36m
---- Subcommand: mq-trigger:delete ---[0m
+i  
+   --- Subcommand: mq-trigger:delete ---
 Usage: gcli mq-trigger:delete [options]
 
 Delete a message-queue trigger
@@ -623,8 +635,8 @@ Options:
   -p, --project <project>
   -n, --name <name>        Trigger name
   -h, --help               display help for command
-[36m
---- Subcommand: cluster:create ---[0m
+i  
+   --- Subcommand: cluster:create ---
 Usage: gcli cluster:create [options]
 
 Provision a private Talos cluster, or with --virtual a virtual cluster, for a project (runs in the background; use --wait to block)
@@ -638,9 +650,9 @@ Options:
   -l, --location <location>
   --workers <workers>        Worker count (ignored when --singleNode)
   --singleNode               Control plane carries the workload too
-  --virtual                  A virtual cluster (own Kubernetes API + Fission,
-                             no servers, ~2 minutes) instead of a private Talos
-                             cluster
+  --virtual                  A virtual cluster (own Kubernetes API + the
+                             Lambforge runtime, no servers, ~2 minutes) instead
+                             of a private Talos cluster
   --host <host>              With --virtual: name of a private cluster of this
                              project to run on (default: the shared cluster)
   --dedicated-lb             With --virtual: give its router its own load
@@ -648,8 +660,8 @@ Options:
                              are served on the platform subdomain
   --wait                     Block until the cluster is ready (or errors)
   -h, --help                 display help for command
-[36m
---- Subcommand: cluster:apply ---[0m
+i  
+   --- Subcommand: cluster:apply ---
 Usage: gcli cluster:apply [options]
 
 Make a private cluster match the `cluster:` section of lambforge.yaml: creates it if missing, then applies topology, workers, control planes, load balancer and autoscaling
@@ -661,8 +673,8 @@ Options:
   --yes                    Also apply steps that remove capacity or the load
                            balancer IP
   -h, --help               display help for command
-[36m
---- Subcommand: cluster:list ---[0m
+i  
+   --- Subcommand: cluster:list ---
 Usage: gcli cluster:list [options]
 
 List every private cluster this project has (it may have several - dev/stage/prod, ...)
@@ -670,8 +682,8 @@ List every private cluster this project has (it may have several - dev/stage/pro
 Options:
   -p, --project <project>
   -h, --help               display help for command
-[36m
---- Subcommand: cluster:teardown ---[0m
+i  
+   --- Subcommand: cluster:teardown ---
 Usage: gcli cluster:teardown [options]
 
 Tear down one of a project's clusters (runs in the background - use --wait to block)
@@ -681,8 +693,8 @@ Options:
   -c, --cluster <cluster>  Cluster id (see cluster:list)
   --wait                   Block until the cluster is gone (or errors)
   -h, --help               display help for command
-[36m
---- Subcommand: cluster:kubeconfig ---[0m
+i  
+   --- Subcommand: cluster:kubeconfig ---
 Usage: gcli cluster:kubeconfig [options]
 
 Print (or save) a cluster's raw kubeconfig YAML - only available once it's 'ready'
@@ -692,8 +704,8 @@ Options:
   -c, --cluster <cluster>  Cluster id (see cluster:list)
   -o, --output <output>    Write to this file instead of stdout
   -h, --help               display help for command
-[36m
---- Subcommand: cluster:status ---[0m
+i  
+   --- Subcommand: cluster:status ---
 Usage: gcli cluster:status [options]
 
 Every cluster's status, agent, nodes, CPU/memory load, autoscaling and open issues (or one with --cluster)
@@ -702,9 +714,10 @@ Options:
   -p, --project <project>
   -c, --cluster <cluster>      Cluster id (see cluster:list)
   --clusterName <clusterName>  Cluster name instead of --cluster
+  --json                       Machine-readable output
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:attach ---[0m
+i  
+   --- Subcommand: cluster:attach ---
 Usage: gcli cluster:attach [options]
 
 Attach a machine you own (booted from the Talos ISO, on this network) to a Talos cluster as an extra worker - its install disk is WIPED
@@ -725,8 +738,8 @@ Options:
   --no-wait                    Do not wait for the machine to join
   --timeout <minutes>          How long to wait for the join (default 10)
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:nodes ---[0m
+i  
+   --- Subcommand: cluster:nodes ---
 Usage: gcli cluster:nodes [options]
 
 Every node of a cluster: its Hetzner control planes and workers and the machines attached to it
@@ -736,8 +749,8 @@ Options:
   -c, --cluster <cluster>      Cluster id (see cluster:list)
   --clusterName <clusterName>  Cluster name instead of --cluster
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:pause ---[0m
+i  
+   --- Subcommand: cluster:pause ---
 Usage: gcli cluster:pause [options]
 
 Pause an attached machine (cordon): nothing new runs there, running work stays
@@ -748,8 +761,8 @@ Options:
   --clusterName <clusterName>  Cluster name instead of --cluster
   -n, --name <name>            Machine name (see cluster:nodes)
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:resume ---[0m
+i  
+   --- Subcommand: cluster:resume ---
 Usage: gcli cluster:resume [options]
 
 Let new work run on a paused machine again (uncordon)
@@ -760,8 +773,8 @@ Options:
   --clusterName <clusterName>  Cluster name instead of --cluster
   -n, --name <name>            Machine name (see cluster:nodes)
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:node-storage ---[0m
+i  
+   --- Subcommand: cluster:node-storage ---
 Usage: gcli cluster:node-storage [options]
 
 Let an attached machine carry volumes on its own disk (it restarts once), or stop with --off
@@ -776,8 +789,8 @@ Options:
   --no-wait                    Do not wait until the machine is ready
   --timeout <minutes>          How long to wait (default 40)
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:reset-machine ---[0m
+i  
+   --- Subcommand: cluster:reset-machine ---
 Usage: gcli cluster:reset-machine [options]
 
 Bring a detached machine back to maintenance mode to attach it again (wipes its config and data, keeps the boot loader)
@@ -790,8 +803,8 @@ Options:
   --node-ip <nodeIp>           The machine's address on your network
   --yes                        Do not ask for confirmation
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:talosconfig ---[0m
+i  
+   --- Subcommand: cluster:talosconfig ---
 Usage: gcli cluster:talosconfig [options]
 
 A short-lived talosconfig for one of your Talos clusters (admin of its machines with talosctl) - printed, or saved with -o
@@ -804,8 +817,8 @@ Options:
   --ttl <minutes>              How long it works, 5 to 1440 minutes (default
                                60)
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:detach ---[0m
+i  
+   --- Subcommand: cluster:detach ---
 Usage: gcli cluster:detach [options]
 
 Drain and remove an attached machine from a cluster (reset the machine afterwards)
@@ -817,19 +830,22 @@ Options:
   -n, --name <name>            Machine name (see cluster:nodes)
   --yes                        Do not ask for confirmation
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:health ---[0m
+i  
+   --- Subcommand: cluster:health ---
 Usage: gcli cluster:health [options]
 
-The latest health report of a cluster's agent, with every node
+A cluster's health as a dashboard: CPU/memory requested and used (of what the cluster may use), nodes and open issues
 
 Options:
   -p, --project <project>
   -c, --cluster <cluster>      Cluster id (see cluster:list)
   --clusterName <clusterName>  Cluster name instead of --cluster
+  -w, --watch [seconds]        Redraw every 30 s (or the given seconds) until
+                               Ctrl+C
+  --json                       Machine-readable output
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:scale-events ---[0m
+i  
+   --- Subcommand: cluster:scale-events ---
 Usage: gcli cluster:scale-events [options]
 
 Manual and autoscaler scale history, newest first
@@ -840,8 +856,8 @@ Options:
   --clusterName <clusterName>  Cluster name instead of --cluster
   --limit <limit>              How many events (default 20)
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:cost ---[0m
+i  
+   --- Subcommand: cluster:cost ---
 Usage: gcli cluster:cost [options]
 
 Month-to-date cost and the monthly estimate of the project's private clusters
@@ -849,8 +865,8 @@ Month-to-date cost and the monthly estimate of the project's private clusters
 Options:
   -p, --project <project>
   -h, --help               display help for command
-[36m
---- Subcommand: cluster:scale ---[0m
+i  
+   --- Subcommand: cluster:scale ---
 Usage: gcli cluster:scale [options]
 
 Set the number of worker nodes (1-10) of a multi-node cluster - billed per node-hour
@@ -862,8 +878,8 @@ Options:
   --workers <workers>          Worker nodes, 1-10
   --wait                       Block until the cluster settles
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:scale:control-planes ---[0m
+i  
+   --- Subcommand: cluster:scale:control-planes ---
 Usage: gcli cluster:scale:control-planes [options]
 
 Set the number of control-plane nodes (1, 3 or 5)
@@ -875,8 +891,8 @@ Options:
   --count <count>              Control planes: 1, 3 or 5
   --wait                       Block until the cluster settles
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:autoscale ---[0m
+i  
+   --- Subcommand: cluster:autoscale ---
 Usage: gcli cluster:autoscale [options]
 
 Change the worker autoscaling policy - only the flags you pass change
@@ -910,8 +926,8 @@ Options:
   --minNodeAge <minutes>       pods mode: never remove a worker younger than
                                this (5-1440)
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:plan ---[0m
+i  
+   --- Subcommand: cluster:plan ---
 Usage: gcli cluster:plan [options]
 
 Why pods are pending and what the pods-mode autoscaler would do: a verdict per pod, the nodes it would create, consolidation
@@ -921,8 +937,8 @@ Options:
   -c, --cluster <cluster>      Cluster id (see cluster:list)
   --clusterName <clusterName>  Cluster name instead of --cluster
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:multi-node ---[0m
+i  
+   --- Subcommand: cluster:multi-node ---
 Usage: gcli cluster:multi-node [options]
 
 Convert a single-node cluster to dedicated worker nodes (required for autoscaling)
@@ -934,8 +950,8 @@ Options:
   --workers <workers>          Worker nodes, 1-10
   --wait                       Block until the cluster settles
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:single-node ---[0m
+i  
+   --- Subcommand: cluster:single-node ---
 Usage: gcli cluster:single-node [options]
 
 Convert a multi-node cluster back to a single node (removes the worker nodes)
@@ -946,8 +962,8 @@ Options:
   --clusterName <clusterName>  Cluster name instead of --cluster
   --wait                       Block until the cluster settles
   -h, --help                   display help for command
-[36m
---- Subcommand: cluster:load-balancer ---[0m
+i  
+   --- Subcommand: cluster:load-balancer ---
 Usage: gcli cluster:load-balancer [options]
 
 Add or remove the cluster's load balancer (billed per hour while enabled). On a virtual cluster this is its dedicated LB - its own IP; the platform subdomain keeps working either way
@@ -960,8 +976,8 @@ Options:
   --disable                    Remove the load balancer
   --wait                       Block until the cluster settles
   -h, --help                   display help for command
-[36m
---- Subcommand: rabbitmq:create ---[0m
+i  
+   --- Subcommand: rabbitmq:create ---
 Usage: gcli rabbitmq:create [options]
 
 Provision a RabbitMQ broker for a project (a project may have several)
@@ -977,8 +993,8 @@ Options:
   -c, --cluster <cluster>          Which private cluster to provision this
                                    broker on; omit for the shared cluster
   -h, --help                       display help for command
-[36m
---- Subcommand: rabbitmq:list ---[0m
+i  
+   --- Subcommand: rabbitmq:list ---
 Usage: gcli rabbitmq:list [options]
 
 List every RabbitMQ broker for a project
@@ -986,8 +1002,8 @@ List every RabbitMQ broker for a project
 Options:
   -p, --project <project>
   -h, --help               display help for command
-[36m
---- Subcommand: queue:declare ---[0m
+i  
+   --- Subcommand: queue:declare ---
 Usage: gcli queue:declare [options]
 
 Declare queues on a RabbitMQ broker of the project (skips the ones it has)
@@ -1000,8 +1016,8 @@ Options:
                            the project has one
   -spec, --spec <spec>
   -h, --help               display help for command
-[36m
---- Subcommand: rabbitmq:delete ---[0m
+i  
+   --- Subcommand: rabbitmq:delete ---
 Usage: gcli rabbitmq:delete [options]
 
 Delete a RabbitMQ broker
@@ -1010,16 +1026,16 @@ Options:
   -p, --project <project>
   --id <id>                Broker id (see rabbitmq:list)
   -h, --help               display help for command
-[36m
---- Subcommand: plugin:list ---[0m
+i  
+   --- Subcommand: plugin:list ---
 Usage: gcli plugin:list [options]
 
 List every plugin available in the marketplace catalog
 
 Options:
   -h, --help  display help for command
-[36m
---- Subcommand: plugin:installed ---[0m
+i  
+   --- Subcommand: plugin:installed ---
 Usage: gcli plugin:installed [options]
 
 List plugins installed for a project (may include the same plugin on several clusters)
@@ -1027,8 +1043,8 @@ List plugins installed for a project (may include the same plugin on several clu
 Options:
   -p, --project <project>
   -h, --help               display help for command
-[36m
---- Subcommand: plugin:install ---[0m
+i  
+   --- Subcommand: plugin:install ---
 Usage: gcli plugin:install [options]
 
 Install a marketplace plugin for a project
@@ -1040,8 +1056,8 @@ Options:
   -c, --cluster <cluster>  Which private cluster to install into; omit for the
                            shared cluster
   -h, --help               display help for command
-[36m
---- Subcommand: plugin:uninstall ---[0m
+i  
+   --- Subcommand: plugin:uninstall ---
 Usage: gcli plugin:uninstall [options]
 
 Uninstall a plugin from a project (--cluster picks which installation, if it's on several)
@@ -1051,8 +1067,8 @@ Options:
   -n, --name <name>        Plugin name
   -c, --cluster <cluster>
   -h, --help               display help for command
-[36m
---- Subcommand: runner:start ---[0m
+i  
+   --- Subcommand: runner:start ---
 Usage: gcli runner:start [options]
 
 Connect this machine's model servers (Ollama, Strata or any OpenAI-compatible server) to the Lambforge chat as a local AI runner (outbound connection only - works behind NAT, nothing is exposed)
@@ -1074,8 +1090,8 @@ Options:
   --wsUrl <url>              Lambforge subscriptions endpoint override
   --reset                    Forget the saved runner and register a new one
   -h, --help                 display help for command
-[36m
---- Subcommand: runner:daemon:install ---[0m
+i  
+   --- Subcommand: runner:daemon:install ---
 Usage: gcli runner:daemon:install|runner:start:daemon [options]
 
 Run the runner in the background as a systemd user service: starts with your session, restarts on failure (Linux)
@@ -1097,8 +1113,8 @@ Options:
   --service <name>           systemd unit name (default: lambforge-runner)
   --dry-run                  Print the unit file instead of installing it
   -h, --help                 display help for command
-[36m
---- Subcommand: runner:daemon:status ---[0m
+i  
+   --- Subcommand: runner:daemon:status ---
 Usage: gcli runner:daemon:status [options]
 
 Show the runner service status (systemctl --user status)
@@ -1106,8 +1122,8 @@ Show the runner service status (systemctl --user status)
 Options:
   --service <name>  systemd unit name (default: lambforge-runner)
   -h, --help        display help for command
-[36m
---- Subcommand: runner:daemon:start ---[0m
+i  
+   --- Subcommand: runner:daemon:start ---
 Usage: gcli runner:daemon:start [options]
 
 Start the installed runner service, and report whether it stays up
@@ -1115,8 +1131,8 @@ Start the installed runner service, and report whether it stays up
 Options:
   --service <name>  systemd unit name (default: lambforge-runner)
   -h, --help        display help for command
-[36m
---- Subcommand: runner:daemon:stop ---[0m
+i  
+   --- Subcommand: runner:daemon:stop ---
 Usage: gcli runner:daemon:stop [options]
 
 Stop the runner service (it stays installed and starts at your next login)
@@ -1124,8 +1140,8 @@ Stop the runner service (it stays installed and starts at your next login)
 Options:
   --service <name>  systemd unit name (default: lambforge-runner)
   -h, --help        display help for command
-[36m
---- Subcommand: runner:daemon:restart ---[0m
+i  
+   --- Subcommand: runner:daemon:restart ---
 Usage: gcli runner:daemon:restart [options]
 
 Restart the runner service (e.g. after `gcli login` to another server)
@@ -1133,8 +1149,8 @@ Restart the runner service (e.g. after `gcli login` to another server)
 Options:
   --service <name>  systemd unit name (default: lambforge-runner)
   -h, --help        display help for command
-[36m
---- Subcommand: runner:daemon:logs ---[0m
+i  
+   --- Subcommand: runner:daemon:logs ---
 Usage: gcli runner:daemon:logs [options]
 
 Follow the runner service log (journalctl --user -f)
@@ -1143,8 +1159,8 @@ Options:
   --service <name>  systemd unit name (default: lambforge-runner)
   --lines <n>       Lines of history to show first (default 50)
   -h, --help        display help for command
-[36m
---- Subcommand: runner:daemon:uninstall ---[0m
+i  
+   --- Subcommand: runner:daemon:uninstall ---
 Usage: gcli runner:daemon:uninstall [options]
 
 Stop and remove the runner service (the runner stays registered)
@@ -1152,16 +1168,16 @@ Stop and remove the runner service (the runner stays registered)
 Options:
   --service <name>  systemd unit name (default: lambforge-runner)
   -h, --help        display help for command
-[36m
---- Subcommand: runner:list ---[0m
+i  
+   --- Subcommand: runner:list ---
 Usage: gcli runner:list [options]
 
 List your local AI runners and the models they serve
 
 Options:
   -h, --help  display help for command
-[36m
---- Subcommand: runner:models ---[0m
+i  
+   --- Subcommand: runner:models ---
 Usage: gcli runner:models [options]
 
 Choose which of a runner's models appear in the chat model picker (no flags: list them)
@@ -1172,8 +1188,8 @@ Options:
   --all            Show every model again
   --none           Hide all models of this runner from the chat
   -h, --help       display help for command
-[36m
---- Subcommand: runner:delete ---[0m
+i  
+   --- Subcommand: runner:delete ---
 Usage: gcli runner:delete [options]
 
 Delete a local AI runner and revoke its token
@@ -1181,8 +1197,8 @@ Delete a local AI runner and revoke its token
 Options:
   --id <id>   Runner id (default: the runner saved on this machine)
   -h, --help  display help for command
-[36m
---- Subcommand: workspace:start ---[0m
+i  
+   --- Subcommand: workspace:start ---
 Usage: gcli workspace:start [options]
 
 Connect the current directory to the Lambforge chat as a local workspace: the AI agents can read/edit its files and run commands here (outbound connection only - works behind NAT)
@@ -1206,14 +1222,16 @@ Options:
   --env <names>              Comma-separated environment variables to pass to
                              commands (default: a minimal environment)
   --inherit-env              Pass your whole shell environment to commands
+  --allow-terminal           Let you open a terminal on this machine from the
+                             Lambforge editor
   --allow-secrets            Let the chat read/write .env files, keys and other
                              secrets files
   --wsUrl <url>              Lambforge subscriptions endpoint override
   --reset                    Forget the workspace saved for this directory and
                              register a new one
   -h, --help                 display help for command
-[36m
---- Subcommand: workspace:list ---[0m
+i  
+   --- Subcommand: workspace:list ---
 Usage: gcli workspace:list [options]
 
 List your local workspaces (online status, directory, processes)
@@ -1221,8 +1239,8 @@ List your local workspaces (online status, directory, processes)
 Options:
   -p, --project <projectId>  Only this project
   -h, --help                 display help for command
-[36m
---- Subcommand: workspace:delete ---[0m
+i  
+   --- Subcommand: workspace:delete ---
 Usage: gcli workspace:delete [options]
 
 Delete a local workspace and revoke its token (default: the one registered for this directory)
@@ -1230,8 +1248,8 @@ Delete a local workspace and revoke its token (default: the one registered for t
 Options:
   --id <id>   Workspace id (see `gcli workspace:list`)
   -h, --help  display help for command
-[36m
---- Subcommand: workflow:list ---[0m
+i  
+   --- Subcommand: workflow:list ---
 Usage: gcli workflow:list [options]
 
 List the project workflows
@@ -1239,8 +1257,8 @@ List the project workflows
 Options:
   -p, --project <project>
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:get ---[0m
+i  
+   --- Subcommand: workflow:get ---
 Usage: gcli workflow:get [options]
 
 Print a workflow as YAML (the format workflow:apply reads), or write it with -o
@@ -1250,8 +1268,8 @@ Options:
   -n, --name <name>        Workflow name
   -o, --out <file>         Write the YAML to this file
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:generate ---[0m
+i  
+   --- Subcommand: workflow:generate ---
 Usage: gcli workflow:generate [options]
 
 Draft a workflow with AI from plain language (or change one with --name / --from). Prints or writes YAML; saves only with --apply
@@ -1266,8 +1284,8 @@ Options:
   -o, --out <file>          Write the draft YAML to this file
   --apply                   Save the draft as the workflow (needs a name)
   -h, --help                display help for command
-[36m
---- Subcommand: workflow:apply ---[0m
+i  
+   --- Subcommand: workflow:apply ---
 Usage: gcli workflow:apply [options]
 
 Create or update a workflow from a YAML/JSON file (workflow: {name, description, definition})
@@ -1278,8 +1296,8 @@ Options:
   -n, --name <name>         Overrides workflow.name from the file
   -d, --description <text>  Overrides workflow.description
   -h, --help                display help for command
-[36m
---- Subcommand: workflow:validate ---[0m
+i  
+   --- Subcommand: workflow:validate ---
 Usage: gcli workflow:validate [options]
 
 Check a workflow file against the cluster (lambdas exist, graph is valid)
@@ -1288,8 +1306,8 @@ Options:
   -p, --project <project>
   -f, --file <file>        Workflow file
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:delete ---[0m
+i  
+   --- Subcommand: workflow:delete ---
 Usage: gcli workflow:delete [options]
 
 Delete a workflow and all of its runs
@@ -1298,8 +1316,8 @@ Options:
   -p, --project <project>
   -n, --name <name>        Workflow name
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:run ---[0m
+i  
+   --- Subcommand: workflow:run ---
 Usage: gcli workflow:run [options]
 
 Start a run; the JSON input is the first step request body. --wait follows it to the end
@@ -1311,8 +1329,8 @@ Options:
   --input-file <file>      Read the run input from a JSON file
   -w, --wait               Print each step as it happens until the run ends
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:runs ---[0m
+i  
+   --- Subcommand: workflow:runs ---
 Usage: gcli workflow:runs [options]
 
 List a workflow runs, newest first
@@ -1322,8 +1340,8 @@ Options:
   -n, --name <name>        Workflow name
   -l, --limit <limit>      How many (default 50)
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:status ---[0m
+i  
+   --- Subcommand: workflow:status ---
 Usage: gcli workflow:status [options]
 
 Show a run: its step events, error and output (--follow until it ends)
@@ -1334,8 +1352,8 @@ Options:
   -r, --run <run>          Run name (see workflow:runs)
   -f, --follow             Keep printing events until the run ends
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:cancel ---[0m
+i  
+   --- Subcommand: workflow:cancel ---
 Usage: gcli workflow:cancel [options]
 
 Cancel a running run
@@ -1345,11 +1363,11 @@ Options:
   -n, --name <name>        Workflow name
   -r, --run <run>          Run name (see workflow:runs)
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:trigger:add ---[0m
+i  
+   --- Subcommand: workflow:trigger:add ---
 Usage: gcli workflow:trigger:add [options]
 
-Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs Fission 1.26+ on the cluster
+Start runs from an HTTP URL (--http; the JSON body is the input) or a schedule (--cron). Needs runtime 1.26+ on the cluster
 
 Options:
   -p, --project <project>
@@ -1363,8 +1381,8 @@ Options:
   -i, --input <json>       Schedule: the input of every run (default {})
   --input-file <file>      Schedule: read the run input from a JSON file
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:trigger:list ---[0m
+i  
+   --- Subcommand: workflow:trigger:list ---
 Usage: gcli workflow:trigger:list [options]
 
 List a workflow HTTP and schedule triggers
@@ -1373,8 +1391,8 @@ Options:
   -p, --project <project>
   -n, --name <name>        Workflow name
   -h, --help               display help for command
-[36m
---- Subcommand: workflow:trigger:remove ---[0m
+i  
+   --- Subcommand: workflow:trigger:remove ---
 Usage: gcli workflow:trigger:remove [options]
 
 Remove a workflow trigger
@@ -1384,4 +1402,67 @@ Options:
   -n, --name <name>        Workflow name
   -t, --trigger <trigger>  Trigger id, path or schedule (see
                            workflow:trigger:list)
+  -h, --help               display help for command
+i  
+   --- Subcommand: domain:list ---
+Usage: gcli domain:list [options]
+
+List the domains and platform names of a project
+
+Options:
+  -p, --project <project>
+  -h, --help               display help for command
+i  
+   --- Subcommand: domain:apply ---
+Usage: gcli domain:apply [options]
+
+Claim, add and route the domains listed under domains: in lambforge.yaml
+
+Options:
+  -p, --project <project>
+  -spec, --spec <spec>
+  -h, --help               display help for command
+i  
+   --- Subcommand: validate ---
+Usage: gcli validate [options] [path]
+
+Check every lambforge.yaml of the repository (unknown keys, wrong types, clashing names); --online also against the live platform API
+
+Options:
+  --online    Compare function / environment keys with the live API
+  -h, --help  display help for command
+i  
+   --- Subcommand: plan ---
+Usage: gcli plan [options] [path]
+
+Compare every lambforge.yaml of the repository with what runs in the project: in sync, will change, missing, unmanaged
+
+Options:
+  -p, --project <project>
+  --exit-code              Exit 2 when something would change, 1 on errors (for
+                           CI)
+  --json                   Machine-readable output
+  -h, --help               display help for command
+i  
+   --- Subcommand: apply ---
+Usage: gcli apply [options] [path]
+
+Make every lambforge.yaml of the repository true: shows the plan, asks, then creates / updates environments, lambdas (waiting for each build), time + queue triggers and domains. Never deletes.
+
+Options:
+  -p, --project <project>
+  -y, --yes                Apply without asking (CI)
+  --code                   Also redeploy lambdas whose settings are in sync
+                           (code changes are not detected yet)
+  --only <lambda>          Only the lambforge.yaml of this lambda (or folder)
+  -h, --help               display help for command
+i  
+   --- Subcommand: export ---
+Usage: gcli export [options] <lambda>
+
+Generate a lambforge.yaml from a running lambda (function, environment, time trigger, domains) - secret and config names only
+
+Options:
+  -p, --project <project>
+  -o, --output <file>      Write to a file instead of stdout
   -h, --help               display help for command
