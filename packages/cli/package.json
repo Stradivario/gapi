@@ -1,6 +1,6 @@
 {
   "name": "@gapi/cli",
-  "version": "1.8.293",
+  "version": "1.8.294",
   "description": "Gapi command line interface",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
@@ -35,7 +35,7 @@
   "author": "Kristiyan Tachev (@Stradivario)",
   "license": "MIT",
   "dependencies": {
-    "@gapi/schematics": "^1.8.293",
+    "@gapi/schematics": "^1.8.294",
     "@rxdi/compressor": "^0.7.264",
     "@rxdi/core": "^0.7.264",
     "@zeit/ncc": "^0.22.1",
