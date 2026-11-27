@@ -807,6 +807,40 @@ export class AppModule {}
 
 (#gapi-configuration)
 
+## Health checks (Lambforge)
+
+On [Lambforge](https://lambforge.com) the runtime asks your app whether it is
+healthy. Register checks with `HealthModule.forRoot` - each check gets the same
+instances your app uses (`deps`):
+
+```typescript
+import { HealthModule, Module } from '@gapi/core';
+
+@Module({
+  imports: [
+    HealthModule.forRoot([
+      // readiness: while it fails, the pod gets no new requests
+      { name: 'redis', deps: [RedisService], check: (redis) => redis.ping() },
+      // liveness: failing for 60 s restarts the container - only when a
+      // restart is the fix (a client stuck disconnected)
+      {
+        name: 'nats',
+        liveness: true,
+        deps: [NatsClientService],
+        check: (nats) => nats.getClient()?.flush(),
+      },
+    ]),
+  ],
+})
+export class AppModule {}
+```
+
+A check fails when it throws, rejects, errors (an Observable) or takes longer
+than `timeout` (2000 ms). Check with a real round trip, not a "connected" flag.
+`registerHealthCheck` and `trackWork` (work the pod must finish before it
+stops) are exported too - they come from `@lambforge/runtime`. Outside
+Lambforge the checks are registered and never asked.
+
 ## Configuration
 
 > Since 1.0.0 version @gapi micrated to @rxdi there is a little changes which are with Configuration

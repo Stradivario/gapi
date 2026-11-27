@@ -24,6 +24,13 @@ export class CoreModule {
 
 export * from './enum-to-gql';
 export { GeoJSON } from './geojson.types';
+export { GapiHealthCheck, HealthModule } from './health';
+export type { HealthCheck } from '@lambforge/runtime';
+export {
+  registerHealthCheck,
+  trackWork,
+  unregisterHealthCheck,
+} from '@lambforge/runtime';
 export * from '@rxdi/core';
 export * from '@rxdi/graphql';
 export * from '@rxdi/graphql-pubsub';

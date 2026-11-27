@@ -25,6 +25,7 @@
     "url": "https://github.com/Stradivario/gapi/issues"
   },
   "dependencies": {
+    "@lambforge/runtime": "^0.0.2",
     "@rxdi/core": "^0.7.256",
     "@rxdi/graphql": "^0.7.256",
     "@rxdi/graphql-pubsub": "^0.7.256",
