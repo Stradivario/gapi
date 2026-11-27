@@ -2843,6 +2843,13 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@lambforge/runtime@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@lambforge/runtime/-/runtime-0.0.2.tgz#b7eeb291b668e4950a9da750a95f456ede89dfed"
+  integrity sha512-zsvWhDVU7/LeGLZRkXfrysB+g8RuEHVHmxqGjy8utZjkQrrIbAl1uWMoQITVJ1UUCdu3xeLBqjRkcfA9n5t5eA==
+  dependencies:
+    rxjs "^7.8.2"
+
 "@material-ui/core@^3.9.3":
   version "3.9.4"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.9.4.tgz#5297fd4ad9e739a87da4a6d34fc4af5396886e13"
