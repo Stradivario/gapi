@@ -1,4 +1,4 @@
-## [1.8.290](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.290) (2026-11-26)
+## [1.8.291](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.291) (2026-11-27)
 
 
 ### Bug Fixes
@@ -63,6 +63,7 @@
 * **gcli:** environment update ([b1815c5](https://github.com/Stradivario/gapi/commit/b1815c599163dc8aeade8409f2941a3a3c4191db))
 * **gcli:** esbuild marked as external but installable inside dependencies ([e8d6b72](https://github.com/Stradivario/gapi/commit/e8d6b72f217123da5e2445fe8987cbeda4fd371c))
 * **gcli:** esbuild was not included into the npm package ([3e30711](https://github.com/Stradivario/gapi/commit/3e30711da0a38856ea82bf0cf60f6d2612a3c5de))
+* **gcli:** GraphQL errors print as the server's message, not the raw JSON list ([3e10b6d](https://github.com/Stradivario/gapi/commit/3e10b6d6b00094f0359c09aaac6a29d44c0d598e))
 * **gcli:** lint for the repo commands (no any, import order) ([f43f3d1](https://github.com/Stradivario/gapi/commit/f43f3d1436a411d2c7cda310ced427532fcf8888))
 * **gcli:** load spec file default export fix ([1d1c71f](https://github.com/Stradivario/gapi/commit/1d1c71f96813aa59f883bced7e44f655849cb980))
 * **gcli:** login - upload URL defaults to <API origin>/upload-lambda; --ci needs no --key ([0a6fce2](https://github.com/Stradivario/gapi/commit/0a6fce2b0221acde37564b6b797636bc8f00e6f7))
