@@ -1,4 +1,4 @@
-## [1.8.292](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.292) (2026-11-27)
+## [1.8.293](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.293) (2026-11-27)
 
 
 ### Bug Fixes
@@ -136,6 +136,7 @@
 * **cluster:** add support for virtual clusters with provisioning and validation ([0e5cf9c](https://github.com/Stradivario/gapi/commit/0e5cf9c239fbaac820f5459b7234f15464802b6f))
 * **cluster:** refactor cluster commands to use clusterId directly and improve teardown handling ([f9ccb4c](https://github.com/Stradivario/gapi/commit/f9ccb4c52737e1f25d7dcbd9188cc97088f5fd5b))
 * **context7:** added ownership for context7 readme [ci-skip] ([28ededf](https://github.com/Stradivario/gapi/commit/28ededff4a7618f977e1f31efa629d22cb7a41a0))
+* **core:** HealthModule.forRoot - Lambforge health checks with injected deps; registerHealthCheck + trackWork from @lambforge/runtime ([0d6fdf2](https://github.com/Stradivario/gapi/commit/0d6fdf2edc489aee360437b281d97776237af481))
 * **dev:** added lambda logs commands ([905b9bf](https://github.com/Stradivario/gapi/commit/905b9bf68bf174e8cb11792e8bacb1eb4a5dc02c))
 * **dev:** decompress the result from logs ([f33a6ab](https://github.com/Stradivario/gapi/commit/f33a6ab615a448155c57fc7ec1022e8db83b97f7))
 * **dev:** loaded spec on single place and used all over the functions ([ab73876](https://github.com/Stradivario/gapi/commit/ab7387672b61f8ee1dc884e6424d1ebfb4e36d5a))
