@@ -1,6 +1,5 @@
 import { hostname } from 'os';
-import { EMPTY, from } from 'rxjs';
-import { bufferTime, catchError, concatMap, filter } from 'rxjs/operators';
+import { from } from 'rxjs';
 
 import {
   describeError,
@@ -20,6 +19,7 @@ import {
 import { WorkspaceError, WorkspaceFiles } from './files';
 import { CommandPolicy } from './policy';
 import { buildEnv, EnvOptions, ProcessManager, runCommand } from './processes';
+import { sendWhileIdle } from './send-while-idle';
 import { TerminalEvent, TerminalManager } from './terminals';
 
 export const WORKSPACE_PATH_PREFIX = '/workspace/';
@@ -114,15 +114,13 @@ export class WorkspaceConnection extends TunnelConnection<LocalWorkspaceIdentity
       // read when a change comes in - this.files exists by then
       (paths) => this.files.notIgnored(paths),
     );
-    // terminal output / exits / changed files -> the browser, batched
+    // terminal output / exits / changed files -> the browser: at once when
+    // nothing is in flight (no 40 ms window before every echo), batched
+    // while a send is on its way
     this.terminals.events$
       .pipe(
-        bufferTime(40),
-        filter((events) => events.length > 0),
-        concatMap((events: TerminalEvent[]) =>
-          from(this.operation(PUSH_TERMINAL_MUTATION, { events })).pipe(
-            catchError(() => EMPTY),
-          ),
+        sendWhileIdle((events: TerminalEvent[]) =>
+          from(this.operation(PUSH_TERMINAL_MUTATION, { events })),
         ),
       )
       .subscribe();
