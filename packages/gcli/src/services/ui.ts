@@ -368,6 +368,10 @@ export function step<T>(
 /** Text of anything thrown: Error, GraphQL error list, string, object. */
 export function errorText(error: unknown): string {
   if (error instanceof Error) {
+    const details = (error as Error & { errors?: unknown }).errors;
+    if (env.GCLI_DEBUG && details) {
+      return `${error.message}\n${JSON.stringify(details, null, 2)}`;
+    }
     return env.GCLI_DEBUG && error.stack ? error.stack : error.message;
   }
   if (Array.isArray(error)) return error.map(errorText).join('\n');

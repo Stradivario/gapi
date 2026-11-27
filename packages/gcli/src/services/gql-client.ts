@@ -193,6 +193,23 @@ export interface LambdaBuildStatus {
   runtimeErrors?: string | null;
 }
 
+/** The API answered with GraphQL errors: the message is what the server
+    said (one line per error); the full list (paths, codes, the downstream
+    query) stays on `errors` and is printed with GCLI_DEBUG=1. */
+export class GraphQLRequestError extends Error {
+  constructor(
+    public readonly errors: Array<
+      { message?: string } & Record<string, unknown>
+    >,
+  ) {
+    super(
+      errors.map((e) => e?.message || 'GraphQL error').join('\n') ||
+        'GraphQL error',
+    );
+    this.name = 'GraphQLRequestError';
+  }
+}
+
 export class GraphqlClienAPI {
   public static query<T>({
     query,
@@ -217,7 +234,7 @@ export class GraphqlClienAPI {
           switchMap((res) => res.json()),
           map(({ data, errors }) => {
             if (errors?.length) {
-              throw new Error(JSON.stringify(errors, null, 2));
+              throw new GraphQLRequestError(errors);
             }
             if (!data) {
               throw new Error('missing-entry');

@@ -36546,7 +36546,7 @@ function gql(...args) {
   }
   return result;
 }
-var import_compressor, firebase, import_rxjs2, import_operators, ProjectDomainFragment, MessageQueueTriggerFragment, GraphqlClienAPI;
+var import_compressor, firebase, import_rxjs2, import_operators, ProjectDomainFragment, MessageQueueTriggerFragment, GraphQLRequestError, GraphqlClienAPI;
 var init_gql_client = __esm({
   "src/services/gql-client.ts"() {
     init_index_cjs();
@@ -36599,6 +36599,15 @@ var init_gql_client = __esm({
   maxReplicaCount
   threshold
 `;
+    GraphQLRequestError = class extends Error {
+      constructor(errors) {
+        super(
+          errors.map((e2) => e2?.message || "GraphQL error").join("\n") || "GraphQL error"
+        );
+        this.errors = errors;
+        this.name = "GraphQLRequestError";
+      }
+    };
     GraphqlClienAPI = class {
       static query({
         query,
@@ -36620,7 +36629,7 @@ var init_gql_client = __esm({
               (0, import_operators.switchMap)((res) => res.json()),
               (0, import_operators.map)(({ data, errors }) => {
                 if (errors?.length) {
-                  throw new Error(JSON.stringify(errors, null, 2));
+                  throw new GraphQLRequestError(errors);
                 }
                 if (!data) {
                   throw new Error("missing-entry");
@@ -38247,6 +38256,11 @@ function step(label, opts = {}) {
 }
 function errorText(error48) {
   if (error48 instanceof Error) {
+    const details = error48.errors;
+    if (env.GCLI_DEBUG && details) {
+      return `${error48.message}
+${JSON.stringify(details, null, 2)}`;
+    }
     return env.GCLI_DEBUG && error48.stack ? error48.stack : error48.message;
   }
   if (Array.isArray(error48)) return error48.map(errorText).join("\n");
@@ -329332,7 +329346,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.289" : "development";
+var version2 = true ? "1.8.290" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
