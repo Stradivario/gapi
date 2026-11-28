@@ -690,6 +690,7 @@ export class GraphqlClienAPI {
               functionTimeout
               specializationTimeout
               idleTimeout
+              sleepSchedule
             }
           }
         }

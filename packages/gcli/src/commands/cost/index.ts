@@ -2,7 +2,7 @@ import { Command } from 'commander';
 
 import { lazy } from '~/helpers';
 
-/** Plan 50 - cost optimization: right-sizing, hibernation, savings, pod
+/** Plan 50 - cost optimization: right-sizing, sleep schedules, savings, pod
     placement, plugin volume auto-grow. */
 export function registerCostCommands(program: Command) {
   program
@@ -51,37 +51,54 @@ export function registerCostCommands(program: Command) {
     )
     .action(lazy(() => import('./plugin-resources').then((m) => m.autoGrow)));
 
-  program
-    .command('project:hibernation')
-    .description(
-      'Show or set when the project sleeps: outside its working hours always-on lambdas scale to 0 (plugins keep running). Off by default',
-    )
-    .option('-p, --project <project>')
-    .option('--enable', 'Turn hibernation on')
-    .option('--disable', 'Turn it off (wakes the project)')
-    .option('--timezone <tz>', 'IANA time zone, e.g. Europe/Sofia')
+  const scheduleCommand = (verb: string, description: string) =>
+    program
+      .command(`sleep-schedule:${verb}`)
+      .description(description)
+      .option('-p, --project <project>')
+      .option('--json', 'Print as JSON');
+
+  scheduleCommand(
+    'list',
+    "The project's sleep schedules: hours, days, time zone, paused, state and the lambdas following each (scaleOptions.sleepSchedule)",
+  ).action(lazy(() => import('./sleep-schedule').then((m) => m.default)));
+
+  scheduleCommand(
+    'set',
+    'Create or change a named sleep schedule (only the flags given change; applies at once). Outside its hours the lambdas following it scale to 0 (plugins keep running)',
+  )
+    .arguments('<name>')
     .option(
       '--days <days>',
       'Working days: mon-fri, 1-5, sat,sun ... (0 = Sunday)',
     )
     .option('--wake <HH:MM>', 'Working hours start')
     .option('--sleep <HH:MM>', 'Working hours end')
-    .option('--json', 'Print as JSON')
-    .action(lazy(() => import('./hibernation').then((m) => m.default)));
+    .option('--timezone <tz>', 'IANA time zone, e.g. Europe/Sofia')
+    .option('--pause', 'Pause it: its lambdas stay awake')
+    .option('--resume', 'Resume a paused schedule')
+    .action(lazy(() => import('./sleep-schedule').then((m) => m.set)));
 
-  program
-    .command('project:sleep')
-    .description('Put the project to sleep now, until its next wake time')
-    .option('-p, --project <project>')
-    .option('--json', 'Print as JSON')
-    .action(lazy(() => import('./hibernation').then((m) => m.sleepNow)));
+  scheduleCommand(
+    'delete',
+    'Delete a sleep schedule (refused while lambdas follow it - change their scaleOptions.sleepSchedule first)',
+  )
+    .arguments('<name>')
+    .action(lazy(() => import('./sleep-schedule').then((m) => m.remove)));
 
-  program
-    .command('project:wake')
-    .description('Wake the project now, until its next sleep time')
-    .option('-p, --project <project>')
-    .option('--json', 'Print as JSON')
-    .action(lazy(() => import('./hibernation').then((m) => m.wakeNow)));
+  scheduleCommand(
+    'sleep',
+    "Put the schedule's lambdas to sleep now, until its next wake time",
+  )
+    .arguments('<name>')
+    .action(lazy(() => import('./sleep-schedule').then((m) => m.sleepNow)));
+
+  scheduleCommand(
+    'wake',
+    "Wake the schedule's lambdas now, until its next sleep time",
+  )
+    .arguments('<name>')
+    .action(lazy(() => import('./sleep-schedule').then((m) => m.wakeNow)));
 
   program
     .command('project:savings')

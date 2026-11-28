@@ -102,9 +102,11 @@ Commands:
   lambda:resources [options]                           What each lambda really uses next to what it reserves, and the right-sized CPU / memory (raise / lower / keep, cost now vs recommended); --auto keeps one sized automatically
   plugin:resources [options]                           What each installed plugin (Redis, MongoDB, NATS, ...) really uses per instance, and the right-sized CPU / memory; --apply sets it
   plugin:auto-grow [options] <plugin>                  Whether the plugin's volume grows to the next size by itself at 90 % full (on by default) or only warns
-  project:hibernation [options]                        Show or set when the project sleeps: outside its working hours always-on lambdas scale to 0 (plugins keep running). Off by default
-  project:sleep [options]                              Put the project to sleep now, until its next wake time
-  project:wake [options]                               Wake the project now, until its next sleep time
+  sleep-schedule:list [options]                        The project's sleep schedules: hours, days, time zone, paused, state and the lambdas following each (scaleOptions.sleepSchedule)
+  sleep-schedule:set [options] <name>                  Create or change a named sleep schedule (only the flags given change; applies at once). Outside its hours the lambdas following it scale to 0 (plugins keep running)
+  sleep-schedule:delete [options] <name>               Delete a sleep schedule (refused while lambdas follow it - change their scaleOptions.sleepSchedule first)
+  sleep-schedule:sleep [options] <name>                Put the schedule's lambdas to sleep now, until its next wake time
+  sleep-schedule:wake [options] <name>                 Wake the schedule's lambdas now, until its next sleep time
   project:savings [options]                            What the platform saved this month: fewer / cheaper machines, hours asleep, lambdas sized down automatically
   cluster:pod-placement [options]                      How a Talos cluster's scheduler places new pods: spread (emptiest machine) or fill (pack machines, so the autoscaler can remove empty ones). Changed live, no reboot
   help [command]                                       display help for command
@@ -203,6 +205,7 @@ Options:
   --specializationTimeout <specializationTimeout>  Timeout for executor to wait for function pod creation
   --spread <spread>                                Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides
   --spreadStrict <spreadStrict>                    With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up
+  --sleepSchedule <name>                           The project's sleep schedule this lambda follows (see sleep-schedule:list); outside its hours it scales to 0. '' = always on. newdeploy with minScale >= 1 only
   -h, --help                                       display help for command
 i  
    --- Subcommand: lambda:update ---
@@ -250,6 +253,7 @@ Options:
   --specializationTimeout <specializationTimeout>  Timeout for executor to wait for function pod creation
   --spread <spread>                                Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides
   --spreadStrict <spreadStrict>                    With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up
+  --sleepSchedule <name>                           The project's sleep schedule this lambda follows (see sleep-schedule:list); outside its hours it scales to 0. '' = always on. newdeploy with minScale >= 1 only
   -h, --help                                       display help for command
 i  
    --- Subcommand: lambda:delete ---
@@ -370,6 +374,7 @@ Options:
   --specializationTimeout <specializationTimeout>  Timeout for executor to wait for function pod creation
   --spread <spread>                                Where the replicas run (newdeploy): 'machines' = on different machines of the cluster, as evenly as possible; 'none' = the scheduler decides
   --spreadStrict <spreadStrict>                    With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up
+  --sleepSchedule <name>                           The project's sleep schedule this lambda follows (see sleep-schedule:list); outside its hours it scales to 0. '' = always on. newdeploy with minScale >= 1 only
   -h, --help                                       display help for command
 i  
    --- Subcommand: project:list ---
@@ -1522,36 +1527,56 @@ Options:
                                  several clusters (omit for the shared cluster)
   -h, --help                     display help for command
 i  
-   --- Subcommand: project:hibernation ---
-Usage: gcli project:hibernation [options]
+   --- Subcommand: sleep-schedule:list ---
+Usage: gcli sleep-schedule:list [options]
 
-Show or set when the project sleeps: outside its working hours always-on lambdas scale to 0 (plugins keep running). Off by default
+The project's sleep schedules: hours, days, time zone, paused, state and the lambdas following each (scaleOptions.sleepSchedule)
 
 Options:
   -p, --project <project>
-  --enable                 Turn hibernation on
-  --disable                Turn it off (wakes the project)
-  --timezone <tz>          IANA time zone, e.g. Europe/Sofia
+  --json                   Print as JSON
+  -h, --help               display help for command
+i  
+   --- Subcommand: sleep-schedule:set ---
+Usage: gcli sleep-schedule:set [options] <name>
+
+Create or change a named sleep schedule (only the flags given change; applies at once). Outside its hours the lambdas following it scale to 0 (plugins keep running)
+
+Options:
+  -p, --project <project>
+  --json                   Print as JSON
   --days <days>            Working days: mon-fri, 1-5, sat,sun ... (0 = Sunday)
   --wake <HH:MM>           Working hours start
   --sleep <HH:MM>          Working hours end
-  --json                   Print as JSON
+  --timezone <tz>          IANA time zone, e.g. Europe/Sofia
+  --pause                  Pause it: its lambdas stay awake
+  --resume                 Resume a paused schedule
   -h, --help               display help for command
 i  
-   --- Subcommand: project:sleep ---
-Usage: gcli project:sleep [options]
+   --- Subcommand: sleep-schedule:delete ---
+Usage: gcli sleep-schedule:delete [options] <name>
 
-Put the project to sleep now, until its next wake time
+Delete a sleep schedule (refused while lambdas follow it - change their scaleOptions.sleepSchedule first)
 
 Options:
   -p, --project <project>
   --json                   Print as JSON
   -h, --help               display help for command
 i  
-   --- Subcommand: project:wake ---
-Usage: gcli project:wake [options]
+   --- Subcommand: sleep-schedule:sleep ---
+Usage: gcli sleep-schedule:sleep [options] <name>
 
-Wake the project now, until its next sleep time
+Put the schedule's lambdas to sleep now, until its next wake time
+
+Options:
+  -p, --project <project>
+  --json                   Print as JSON
+  -h, --help               display help for command
+i  
+   --- Subcommand: sleep-schedule:wake ---
+Usage: gcli sleep-schedule:wake [options] <name>
+
+Wake the schedule's lambdas now, until its next sleep time
 
 Options:
   -p, --project <project>

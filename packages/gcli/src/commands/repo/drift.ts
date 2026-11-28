@@ -85,6 +85,7 @@ const SCALE_FIELDS = [
   'functionTimeout',
   'specializationTimeout',
   'idleTimeout',
+  'sleepSchedule',
 ];
 
 export function functionChanges(wanted: Loose, live: Loose): Change[] {

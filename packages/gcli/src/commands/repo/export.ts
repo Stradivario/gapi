@@ -22,6 +22,7 @@ const SCALE_KEYS = [
   'functionTimeout',
   'specializationTimeout',
   'idleTimeout',
+  'sleepSchedule',
 ];
 const ENV_KEYS = [
   'name',

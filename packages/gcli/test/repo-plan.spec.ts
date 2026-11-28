@@ -121,6 +121,53 @@ describe('drift', () => {
     ]);
   });
 
+  it('scaleOptions.sleepSchedule: compared when the file sets it; "" = none', () => {
+    const live = { scaleOptions: { sleepSchedule: 'working-hours' } };
+    expect(
+      functionChanges(
+        { scaleOptions: { sleepSchedule: 'working-hours' } },
+        live,
+      ),
+    ).toEqual([]);
+    expect(
+      functionChanges({ scaleOptions: { sleepSchedule: 'nights' } }, live),
+    ).toEqual([
+      {
+        field: 'scaleOptions.sleepSchedule',
+        now: 'working-hours',
+        wanted: 'nights',
+      },
+    ]);
+    expect(
+      functionChanges({ scaleOptions: { sleepSchedule: '' } }, live),
+    ).toEqual([
+      { field: 'scaleOptions.sleepSchedule', now: 'working-hours', wanted: '' },
+    ]);
+    expect(
+      functionChanges(
+        { scaleOptions: { sleepSchedule: '' } },
+        { scaleOptions: { sleepSchedule: null } },
+      ),
+    ).toEqual([]);
+  });
+
+  it('schema: scaleOptions.sleepSchedule is a schedule name or empty', () => {
+    const spec = (sleepSchedule: unknown) => ({
+      function: { name: 'a', scaleOptions: { sleepSchedule } },
+    });
+    expect(check('u', spec('working-hours'))).toEqual([]);
+    expect(check('u', spec(''))).toEqual([]);
+    expect(check('u', spec('Working Hours'))).toEqual([
+      expect.objectContaining({
+        path: 'function.scaleOptions.sleepSchedule',
+        level: 'error',
+      }),
+    ]);
+    expect(check('u', spec(3))).toEqual([
+      expect.objectContaining({ level: 'error' }),
+    ]);
+  });
+
   it('a secret the live lambda lists twice is still the same set', () => {
     expect(
       functionChanges(
@@ -202,7 +249,11 @@ describe('plan + export round trip', () => {
     secrets: [{ name: 'db' }],
     configs: [],
     envSecrets: [],
-    scaleOptions: { executorType: 'newdeploy', maxScale: 2 },
+    scaleOptions: {
+      executorType: 'newdeploy',
+      maxScale: 2,
+      sleepSchedule: 'working-hours',
+    },
   };
   const env = {
     name: 'nodejs',
@@ -235,6 +286,10 @@ describe('plan + export round trip', () => {
     ) as Record<string, unknown>;
     const unit = { id: '.', file: '', own: spec, spec };
     expect(check('.', spec)).toEqual([]);
+    expect(
+      (spec.function as { scaleOptions: Record<string, unknown> }).scaleOptions
+        .sleepSchedule,
+    ).toBe('working-hours');
     const plan = planUnit(unit, live);
     expect(plan.sections.map((s) => [s.section, s.state])).toEqual([
       ['function', 'in-sync'],

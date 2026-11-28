@@ -44,10 +44,11 @@ import { packageArchive } from '../package';
 import { deployStateOf } from './deploy-state';
 import { DomainConfig, loadSpec } from './load-spec';
 import { readFileAsObservable } from './read-file';
+import { sleepScheduleOption } from './sleep-schedule';
 import { spreadScaleOptions } from './spread';
 import { DesiredTimeTrigger, syncTimeTrigger } from './time-trigger-sync';
 
-export { spreadScaleOptions };
+export { sleepScheduleOption, spreadScaleOptions };
 
 const ReadFile = (file: string): Observable<string> =>
   readFileAsObservable(file).pipe(catchError(() => of('')));
@@ -111,6 +112,8 @@ export interface CreateOrUpdateLambdaArguments {
   spread?: string;
   /* 'true' / 'false' from the flag, boolean from the spec */
   spreadStrict?: string | boolean;
+  /* The project's sleep schedule the lambda follows; '' = always on */
+  sleepSchedule?: string;
 }
 
 export function streamToBufferPromise(file: File | ReadStream | WriteStream) {
@@ -193,6 +196,7 @@ const lambdaPayload = (
       payload.scaleOptions?.specializationTimeout ||
       0,
     ...spreadScaleOptions(cmd, payload.scaleOptions),
+    ...sleepScheduleOption(cmd, payload.scaleOptions),
   },
 });
 

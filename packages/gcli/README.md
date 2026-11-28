@@ -286,7 +286,7 @@ cluster:
 and later adds or removes the dedicated load balancer when `loadBalancer`
 changes; removing it is skipped unless you pass `--yes`.
 
-### Cost optimization (right-sizing, hibernation, savings)
+### Cost optimization (right-sizing, sleep schedules, savings)
 
 ```bash
 # What each lambda really uses next to what it reserves, and the right size
@@ -300,10 +300,13 @@ gcli plugin:resources
 gcli plugin:resources -n redis-plugin --apply
 gcli plugin:auto-grow redis-plugin --off   # volume only warns at 80/90 % full
 
-# Sleep outside working hours (always-on lambdas scale to 0, plugins keep running)
-gcli project:hibernation                   # show
-gcli project:hibernation --enable --days mon-fri --wake 08:00 --sleep 20:00 --timezone Europe/Sofia
-gcli project:sleep | gcli project:wake     # until the next change
+# Sleep schedules: named working hours that lambdas follow
+gcli sleep-schedule:list                   # name, hours, days, tz, paused, state, lambdas
+gcli sleep-schedule:set working-hours --days mon-fri --wake 08:00 --sleep 20:00 --timezone Europe/Sofia
+gcli sleep-schedule:set working-hours --pause   # its lambdas stay awake (--resume)
+gcli sleep-schedule:sleep working-hours    # asleep now, until its next wake time
+gcli sleep-schedule:wake working-hours     # awake now, until its next sleep time
+gcli sleep-schedule:delete working-hours   # refused while lambdas follow it
 
 gcli project:savings                       # what the platform saved this month
 
@@ -317,6 +320,16 @@ deploy from the yaml sets the reserved CPU / memory, so put them there - or
 use `--auto`: the platform then sizes the lambda itself (at most once a day)
 and a deploy keeps its sized `minCpu` / `minMemory` (never above the yaml's
 max), taking everything else from the yaml. Every command takes `--json`.
+
+A lambda follows a sleep schedule through `scaleOptions.sleepSchedule:
+<name>` in its `lambforge.yaml` (or `--sleepSchedule <name>` on
+`lambda:create` / `lambda:update`; `''` = always on). Outside the schedule's
+hours the lambda scales to 0 and its first request wakes it (a cold start);
+when the hours start it gets its own `minScale` back. Plugins keep running.
+It only matters for `executorType: newdeploy` with `minScale >= 1`, and the
+server refuses a name the project has no schedule for - create it with
+`sleep-schedule:set` first. `set` changes only the flags given, so
+`sleep-schedule:set <name> --sleep 22:00` keeps the rest.
 
 ### RabbitMQ Brokers
 
@@ -495,6 +508,7 @@ function:
     specializationTimeout: 120
     spread: machines            # replicas on different machines ('none' = the scheduler decides)
     spreadStrict: false         # true = a replica waits rather than share a machine
+    sleepSchedule: working-hours # follows this sleep schedule (gcli sleep-schedule:list); empty = always on
 
 environment:
   name: nodejs

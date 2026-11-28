@@ -32,7 +32,7 @@ Code: `src/commands/repo/`. Schema: `src/schema/lambforge.schema.json`
   the nearest parent's (owner decision: own wins). `own` = the file,
   `spec` = with inheritance.
 - **Schema check** (`schema-check.ts`): a small JSON-Schema subset (type,
-  enum, required, properties, additionalProperties, patternProperties,
+  enum, pattern (strings), required, properties, additionalProperties, patternProperties,
   items, $ref) - no ajv. Unknown keys are WARNINGS, wrong types / missing
   required keys ERRORS. Top-level keys starting with `.` (YAML anchors) are
   allowed. Cross checks (`validate.ts`): the same `function.name` / route

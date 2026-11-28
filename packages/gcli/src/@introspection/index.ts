@@ -1796,6 +1796,10 @@ export
     
   */
     requestsPerPod?: number | null;
+    /**
+    description?: Name of one of the project's sleep schedules (sleepSchedules): outside its hours this lambda scales to zero. Empty = always on. newdeploy with minScale >= 1 only
+  */
+    sleepSchedule?: string | null;
 }
 
 export   
@@ -3936,6 +3940,10 @@ cp -r ${SRC_PKG} ${DEPLOY_PKG}
     description: With spread "machines": true = a replica waits rather than share a machine
   */
     spreadStrict?: boolean | null;
+    /**
+    description: Name of one of the project's sleep schedules (sleepSchedules): outside its hours this lambda scales to zero. Empty = always on. newdeploy with minScale >= 1 only
+  */
+    sleepSchedule?: string | null;
 }
 
   

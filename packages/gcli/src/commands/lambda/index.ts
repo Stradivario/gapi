@@ -166,6 +166,10 @@ export function registerLambdaCommands(program: Command) {
       '--spreadStrict <spreadStrict>',
       "With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up",
     ],
+    [
+      '--sleepSchedule <name>',
+      "The project's sleep schedule this lambda follows (see sleep-schedule:list); outside its hours it scales to 0. '' = always on. newdeploy with minScale >= 1 only",
+    ],
   ];
 
   createCommand('lambda:create')(createOrUpdateOptions)(program).action(

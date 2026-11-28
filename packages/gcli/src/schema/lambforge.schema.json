@@ -149,7 +149,8 @@
             "specializationTimeout": { "type": "integer" },
             "idleTimeout": { "type": "integer" },
             "spread": { "enum": ["machines", "none"] },
-            "spreadStrict": { "type": "boolean" }
+            "spreadStrict": { "type": "boolean" },
+            "sleepSchedule": { "type": "string", "pattern": "^$|^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$", "description": "Name of a project sleep schedule (gcli sleep-schedule:list) this lambda follows; outside its hours it scales to 0. Empty = always on. newdeploy with minScale >= 1 only" }
           }
         }
       }

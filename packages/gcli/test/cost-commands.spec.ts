@@ -3,9 +3,11 @@ import {
   parseDays,
   pluginResources,
   recommendationRow,
-  toHibernationInput,
+  sleepScheduleRow,
+  toSleepScheduleInput,
   yamlSnippet,
 } from '../src/commands/cost/parse';
+import { sleepScheduleOption } from '../src/commands/lambda/helpers/sleep-schedule';
 
 const part = (current: number, recommended: number, action: string) => ({
   current,
@@ -25,25 +27,96 @@ describe('plan 50 cost commands', () => {
     expect(() => parseDays('8')).toThrow(/not a day/);
   });
 
-  it('hibernation: only the flags given; nothing = show', () => {
-    expect(toHibernationInput({})).toBeNull();
+  it('sleep-schedule:set: the name plus only the flags given', () => {
+    expect(toSleepScheduleInput('working-hours', {})).toEqual({
+      name: 'working-hours',
+    });
     expect(
-      toHibernationInput({
-        enable: true,
+      toSleepScheduleInput(' office ', {
+        resume: true,
         days: 'mon-fri',
         wake: '08:00',
         sleep: '20:00',
-        timezone: 'Europe/Sofia',
+        timezone: ' Europe/Sofia ',
       }),
     ).toEqual({
+      name: 'office',
       enabled: true,
       days: [1, 2, 3, 4, 5],
       wakeAt: '08:00',
       sleepAt: '20:00',
       timezone: 'Europe/Sofia',
     });
-    expect(() => toHibernationInput({ wake: '8:00' })).toThrow(/HH:MM/);
-    expect(() => toHibernationInput({ enable: true, disable: true })).toThrow();
+    expect(toSleepScheduleInput('a', { pause: true })).toEqual({
+      name: 'a',
+      enabled: false,
+    });
+    expect(() => toSleepScheduleInput('a', { wake: '8:00' })).toThrow(/HH:MM/);
+    expect(() =>
+      toSleepScheduleInput('a', { pause: true, resume: true }),
+    ).toThrow(/not both/);
+  });
+
+  it('sleep-schedule names: lowercase, digits and dashes, 1-40 characters', () => {
+    for (const ok of ['a', 'working-hours', '9to5', 'a'.repeat(40)]) {
+      expect(toSleepScheduleInput(ok, {}).name).toBe(ok);
+    }
+    for (const bad of ['', 'Working', '-a', 'a-', 'a_b', 'a'.repeat(41)]) {
+      expect(() => toSleepScheduleInput(bad, {})).toThrow(/schedule name/);
+    }
+  });
+
+  it('sleep-schedule:list row: hours, days, paused, state, lambdas', () => {
+    expect(
+      sleepScheduleRow({
+        name: 'working-hours',
+        enabled: false,
+        timezone: 'Europe/Sofia',
+        days: [1, 2, 3, 4, 5],
+        wakeAt: '08:00',
+        sleepAt: '20:00',
+        lambdas: ['api', 'worker'],
+        state: 'asleep',
+        override: 'sleep',
+        overrideUntil: '2026-11-30T08:00:00Z',
+      }),
+    ).toEqual({
+      name: 'working-hours',
+      hours: '08:00-20:00',
+      days: 'mon,tue,wed,thu,fri',
+      timezone: 'Europe/Sofia',
+      paused: 'yes',
+      state: 'asleep (sleep until 2026-11-30T08:00:00Z)',
+      lambdas: 'api, worker',
+      error: '',
+    });
+    expect(sleepScheduleRow({ name: 'x', state: 'awake' })).toMatchObject({
+      paused: '',
+      state: 'awake',
+      lambdas: '',
+    });
+  });
+
+  it('scaleOptions.sleepSchedule: flag over spec, only sent when set', () => {
+    expect(sleepScheduleOption({}, {})).toEqual({});
+    expect(sleepScheduleOption({}, undefined)).toEqual({});
+    expect(sleepScheduleOption({}, { sleepSchedule: null })).toEqual({});
+    expect(sleepScheduleOption({}, { sleepSchedule: 'working-hours' })).toEqual(
+      { sleepSchedule: 'working-hours' },
+    );
+    expect(
+      sleepScheduleOption(
+        { sleepSchedule: 'nights' },
+        { sleepSchedule: 'working-hours' },
+      ),
+    ).toEqual({ sleepSchedule: 'nights' });
+    // '' = always on, sent so a deploy clears it
+    expect(
+      sleepScheduleOption({ sleepSchedule: '' }, { sleepSchedule: 'x' }),
+    ).toEqual({ sleepSchedule: '' });
+    expect(() =>
+      sleepScheduleOption({}, { sleepSchedule: 'Working Hours' }),
+    ).toThrow(/scaleOptions.sleepSchedule/);
   });
 
   it('a lambda recommendation: a row and the lambforge.yaml lines', () => {

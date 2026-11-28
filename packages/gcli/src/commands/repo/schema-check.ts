@@ -34,8 +34,8 @@ const resolveRef = (node: Node): Node =>
     : node;
 
 /**
- * The JSON Schema subset lambforge.schema.json uses: type, enum, required,
- * properties, additionalProperties (false = an unknown key is a WARNING -
+ * The JSON Schema subset lambforge.schema.json uses: type, enum, pattern
+ * (strings), required, properties, additionalProperties (false = an unknown key is a WARNING -
  * a typo like `servs:` or a key the platform ignores), patternProperties,
  * items, $ref. Wrong types / values and missing required keys are errors.
  */
@@ -65,6 +65,20 @@ export function check(
         path: at,
         level: 'error',
         message: `must be one of ${n.enum.join(', ')}`,
+      },
+    ];
+  }
+  if (
+    n.pattern &&
+    typeof value === 'string' &&
+    !new RegExp(n.pattern).test(value)
+  ) {
+    return [
+      {
+        unit,
+        path: at,
+        level: 'error',
+        message: `"${value}" does not match ${n.pattern}`,
       },
     ];
   }

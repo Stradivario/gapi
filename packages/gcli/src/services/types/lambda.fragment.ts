@@ -77,5 +77,6 @@ scaleOptions {
   concurrency
   functionTimeout
   specializationTimeout
+  sleepSchedule
 }
 `;

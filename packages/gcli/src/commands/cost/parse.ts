@@ -1,13 +1,27 @@
 /** Plan 50 - pure option parsing and row shaping for the cost commands. */
 import type {
-  HibernationInput,
   LambdaRecommendation,
   PluginRecommendation,
-  ProjectHibernation,
+  SleepSchedule,
+  SleepScheduleInput,
 } from '~/services/cost-optimization';
 
 const HHMM = /^([01]\d|2[0-3]):[0-5]\d$/;
 const DAY_NAMES = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+/** A sleep schedule's name (unique per project), e.g. working-hours - the
+    same rule as the server and lambforge.yaml `scaleOptions.sleepSchedule`. */
+export const SLEEP_SCHEDULE_NAME = /^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$/;
+
+export function checkScheduleName(name: string, what = 'name'): string {
+  const n = (name ?? '').trim();
+  if (!SLEEP_SCHEDULE_NAME.test(n)) {
+    throw new Error(
+      `${what}: "${name}" is not a schedule name (lowercase letters, digits and '-', 1-40 characters, e.g. working-hours)`,
+    );
+  }
+  return n;
+}
 
 /** "1-5", "mon-fri", "0,6", "sat,sun" -> [1,2,3,4,5] */
 export function parseDays(value: string): number[] {
@@ -36,25 +50,27 @@ export function parseDays(value: string): number[] {
   return [...new Set(days)].sort((a, b) => a - b);
 }
 
-export interface HibernationOptions {
-  enable?: boolean;
-  disable?: boolean;
+export interface SleepScheduleOptions {
+  pause?: boolean;
+  resume?: boolean;
   timezone?: string;
   days?: string;
   wake?: string;
   sleep?: string;
 }
 
-/** Only the flags given; null = nothing to change (show it). */
-export function toHibernationInput(
-  cmd: HibernationOptions,
-): HibernationInput | null {
-  if (cmd.enable && cmd.disable) {
-    throw new Error('Pass --enable or --disable, not both');
+/** The name plus only the flags given (the server keeps the rest of an
+    existing schedule). */
+export function toSleepScheduleInput(
+  name: string,
+  cmd: SleepScheduleOptions,
+): SleepScheduleInput {
+  if (cmd.pause && cmd.resume) {
+    throw new Error('Pass --pause or --resume, not both');
   }
-  const input: HibernationInput = {};
-  if (cmd.enable) input.enabled = true;
-  if (cmd.disable) input.enabled = false;
+  const input: SleepScheduleInput = { name: checkScheduleName(name) };
+  if (cmd.pause) input.enabled = false;
+  if (cmd.resume) input.enabled = true;
   if (cmd.timezone !== undefined) input.timezone = cmd.timezone.trim();
   if (cmd.days !== undefined) input.days = parseDays(cmd.days);
   for (const [flag, field] of [
@@ -66,18 +82,20 @@ export function toHibernationInput(
     if (!HHMM.test(v)) throw new Error(`--${flag} must be HH:MM, got "${v}"`);
     input[field] = v;
   }
-  return Object.keys(input).length ? input : null;
+  return input;
 }
 
-export const hibernationRow = (h: ProjectHibernation) => ({
-  enabled: h.enabled,
-  state: h.state,
-  hours: `${h.wakeAt}-${h.sleepAt}`,
-  days: (h.days ?? []).map((d) => DAY_NAMES[d]).join(','),
-  timezone: h.timezone,
-  override: h.override ? `${h.override} until ${h.overrideUntil ?? '?'}` : '',
-  lambdasAsleep: h.lambdasAsleep ?? 0,
-  error: h.error ?? '',
+export const sleepScheduleRow = (s: SleepSchedule) => ({
+  name: s.name,
+  hours: `${s.wakeAt ?? '?'}-${s.sleepAt ?? '?'}`,
+  days: (s.days ?? []).map((d) => DAY_NAMES[d]).join(','),
+  timezone: s.timezone ?? '',
+  paused: s.enabled === false ? 'yes' : '',
+  state: s.override
+    ? `${s.state ?? '?'} (${s.override} until ${s.overrideUntil ?? '?'})`
+    : (s.state ?? ''),
+  lambdas: (s.lambdas ?? []).join(', '),
+  error: s.error ?? '',
 });
 
 const change = (

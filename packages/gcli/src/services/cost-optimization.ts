@@ -1,7 +1,7 @@
 /**
  * Plan 50 - cost optimization from the CLI: right-sizing recommendations
- * (lambdas and plugins), the per-lambda resources mode, hibernation, saved
- * this month, plugin volume auto-grow and the cluster's pod placement.
+ * (lambdas and plugins), the per-lambda resources mode, sleep schedules,
+ * saved this month, plugin volume auto-grow and the cluster's pod placement.
  */
 import { map } from 'rxjs/operators';
 
@@ -44,20 +44,31 @@ export interface PluginRecommendation {
   hours: number;
 }
 
-export interface ProjectHibernation {
-  enabled: boolean;
-  timezone: string;
-  days: number[];
-  wakeAt: string;
-  sleepAt: string;
-  state: 'awake' | 'asleep';
+/** A named schedule lambdas follow (`scaleOptions.sleepSchedule`): outside
+    its hours they scale to zero. */
+export interface SleepSchedule {
+  id?: string | null;
+  projectId?: string | null;
+  name: string;
+  /** false = paused: its lambdas stay awake */
+  enabled?: boolean | null;
+  timezone?: string | null;
+  /** the days WITH working hours, 0 = Sunday */
+  days?: number[] | null;
+  wakeAt?: string | null;
+  sleepAt?: string | null;
+  lambdas?: string[] | null;
+  state?: 'awake' | 'asleep' | null;
   override?: string | null;
   overrideUntil?: string | null;
   lambdasAsleep?: number | null;
+  sleptAt?: string | null;
+  wokeAt?: string | null;
   error?: string | null;
 }
 
-export interface HibernationInput {
+export interface SleepScheduleInput {
+  name: string;
   enabled?: boolean;
   timezone?: string;
   days?: number[];
@@ -78,7 +89,7 @@ export interface ProjectSavings {
   }>;
 }
 
-const HIBERNATION = `enabled timezone days wakeAt sleepAt state override overrideUntil lambdasAsleep error`;
+const SLEEP_SCHEDULE = `id projectId name enabled timezone days wakeAt sleepAt lambdas state override overrideUntil lambdasAsleep sleptAt wokeAt error`;
 
 export const CostAPI = {
   lambdaRecommendations: (projectId: string, days?: number) =>
@@ -215,45 +226,57 @@ export const CostAPI = {
       variables: { projectId },
     }).pipe(map((r) => r.listInstalledPlugins ?? [])),
 
-  hibernation: (projectId: string) =>
-    GraphqlClienAPI.query<{ projectHibernation: ProjectHibernation }>({
+  sleepSchedules: (projectId: string) =>
+    GraphqlClienAPI.query<{ sleepSchedules: SleepSchedule[] }>({
       query: gql`
-        query projectHibernation($projectId: String!) {
-          projectHibernation(projectId: $projectId) { ${HIBERNATION} }
+        query sleepSchedules($projectId: String!) {
+          sleepSchedules(projectId: $projectId) { ${SLEEP_SCHEDULE} }
         }
       `,
       variables: { projectId },
-    }).pipe(map((r) => r.projectHibernation)),
+    }).pipe(map((r) => r.sleepSchedules ?? [])),
 
-  setHibernation: (projectId: string, input: HibernationInput) =>
-    GraphqlClienAPI.query<{ setProjectHibernation: ProjectHibernation }>({
+  /** Create or change by name; applies at once. */
+  saveSleepSchedule: (projectId: string, input: SleepScheduleInput) =>
+    GraphqlClienAPI.query<{ saveSleepSchedule: SleepSchedule }>({
       query: gql`
-        mutation setProjectHibernation($projectId: String!, $input: ProjectHibernationInput!) {
-          setProjectHibernation(projectId: $projectId, input: $input) { ${HIBERNATION} }
+        mutation saveSleepSchedule($projectId: String!, $input: SleepScheduleInput!) {
+          saveSleepSchedule(projectId: $projectId, input: $input) { ${SLEEP_SCHEDULE} }
         }
       `,
       variables: { projectId, input },
-    }).pipe(map((r) => r.setProjectHibernation)),
+    }).pipe(map((r) => r.saveSleepSchedule)),
 
-  hibernateNow: (projectId: string) =>
-    GraphqlClienAPI.query<{ hibernateProjectNow: ProjectHibernation }>({
+  /** Refused (the error names them) while lambdas follow it. */
+  deleteSleepSchedule: (projectId: string, name: string) =>
+    GraphqlClienAPI.query<{ deleteSleepSchedule: boolean }>({
       query: gql`
-        mutation hibernateProjectNow($projectId: String!) {
-          hibernateProjectNow(projectId: $projectId) { ${HIBERNATION} }
+        mutation deleteSleepSchedule($projectId: String!, $name: String!) {
+          deleteSleepSchedule(projectId: $projectId, name: $name)
         }
       `,
-      variables: { projectId },
-    }).pipe(map((r) => r.hibernateProjectNow)),
+      variables: { projectId, name },
+    }).pipe(map((r) => r.deleteSleepSchedule)),
 
-  wakeNow: (projectId: string) =>
-    GraphqlClienAPI.query<{ wakeProjectNow: ProjectHibernation }>({
+  sleepScheduleNow: (projectId: string, name: string) =>
+    GraphqlClienAPI.query<{ sleepScheduleNow: SleepSchedule }>({
       query: gql`
-        mutation wakeProjectNow($projectId: String!) {
-          wakeProjectNow(projectId: $projectId) { ${HIBERNATION} }
+        mutation sleepScheduleNow($projectId: String!, $name: String!) {
+          sleepScheduleNow(projectId: $projectId, name: $name) { ${SLEEP_SCHEDULE} }
         }
       `,
-      variables: { projectId },
-    }).pipe(map((r) => r.wakeProjectNow)),
+      variables: { projectId, name },
+    }).pipe(map((r) => r.sleepScheduleNow)),
+
+  wakeScheduleNow: (projectId: string, name: string) =>
+    GraphqlClienAPI.query<{ wakeScheduleNow: SleepSchedule }>({
+      query: gql`
+        mutation wakeScheduleNow($projectId: String!, $name: String!) {
+          wakeScheduleNow(projectId: $projectId, name: $name) { ${SLEEP_SCHEDULE} }
+        }
+      `,
+      variables: { projectId, name },
+    }).pipe(map((r) => r.wakeScheduleNow)),
 
   savings: (projectId: string) =>
     GraphqlClienAPI.query<{ projectSavings: ProjectSavings }>({

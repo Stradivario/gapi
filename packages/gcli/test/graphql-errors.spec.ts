@@ -5,15 +5,15 @@ describe('GraphQL errors print as the server said them', () => {
   it('the message only, one line per error; the list stays on the error', () => {
     const e = new GraphQLRequestError([
       {
-        message: 'Turn hibernation on first - set the working hours.',
-        path: ['hibernateProjectNow'],
+        message: 'No sleep schedule "office" in this project.',
+        path: ['sleepScheduleNow'],
         extensions: { code: 'DOWNSTREAM_SERVICE_ERROR' },
       },
       { message: 'second' },
     ]);
     expect(errorText(e)).toBe(
-      'Turn hibernation on first - set the working hours.\nsecond',
+      'No sleep schedule "office" in this project.\nsecond',
     );
-    expect(e.errors[0].path).toEqual(['hibernateProjectNow']);
+    expect(e.errors[0].path).toEqual(['sleepScheduleNow']);
   });
 });
