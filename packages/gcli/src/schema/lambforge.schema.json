@@ -172,8 +172,27 @@
         "maxMemory": { "type": "number" },
         "region": { "type": "string" },
         "terminationGracePeriod": { "type": "integer" },
+        "health": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "The container's own health endpoints; set = they replace the platform's default probes. readiness failing = no new requests, liveness failing for failAfter = restart.",
+          "properties": {
+            "readiness": { "$ref": "#/definitions/probe" },
+            "liveness": { "$ref": "#/definitions/probe" }
+          }
+        },
         "clusterId": { "type": "string" },
         "clusterName": { "type": "string" }
+      }
+    },
+    "probe": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "An HTTP GET on the runtime port (http: a path) or a TCP connect (tcp: a port).",
+      "properties": {
+        "http": { "type": "string", "pattern": "^/[A-Za-z0-9._~/-]*$" },
+        "tcp": { "type": "integer", "minimum": 1, "maximum": 65535 },
+        "failAfter": { "type": "integer", "minimum": 1, "maximum": 3600 }
       }
     },
     "mqTrigger": {

@@ -12,4 +12,8 @@ maxMemory
 region
 clusterId
 clusterName
+health {
+  readiness { http tcp failAfter }
+  liveness { http tcp failAfter }
+}
 `;

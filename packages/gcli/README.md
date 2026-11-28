@@ -507,6 +507,9 @@ environment:
   maxMemory: 0
   region: EU_BALKANS
   clusterId: '' # omit/empty for the shared cluster; see cluster:list
+  health:       # optional: the container's own health endpoints (any image)
+    readiness: { http: /healthz }              # or tcp: 6379
+    liveness: { http: /healthz, failAfter: 60 }
 
 options:
   bundler:
@@ -525,6 +528,15 @@ machine going down takes one replica, not several (use it with
 `spreadStrict: true` keeps a replica waiting rather than sharing a machine.
 Flags: `--spread machines|none`, `--spreadStrict true|false`. Left out = the
 lambda keeps what it has. Changing it restarts the replicas once.
+
+**Health checks** (`environment.health`): readiness failing = the pod gets
+no new requests; liveness failing for `failAfter` seconds (default 60;
+readiness 30) = the container restarts. Each probe is `http: <path>` on the
+runtime port 8888 or `tcp: <port>`. Leave it out on
+`rxdi/fission-nodejs-graphql` 0.0.98+: those answer the platform's probes
+from the lambda's `registerHealthCheck` / `HealthModule` checks
+(`@lambforge/runtime`, `@gapi/core`). `plan` / `apply` compare it and
+`export` writes it.
 
 ### Domains in lambforge.yaml
 

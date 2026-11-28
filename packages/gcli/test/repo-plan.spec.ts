@@ -141,6 +141,54 @@ describe('drift', () => {
       environmentChanges({ image: 'b', maxPods: 0 }, { image: 'a' }),
     ).toEqual([{ field: 'image', now: 'a', wanted: 'b' }]);
   });
+
+  it('health: compared as an object (the API returns every field)', () => {
+    const live = {
+      health: {
+        __typename: 'EnvironmentHealthType',
+        readiness: { http: '/healthz', tcp: null, failAfter: null },
+        liveness: null,
+      },
+    };
+    expect(
+      environmentChanges({ health: { readiness: { http: '/healthz' } } }, live),
+    ).toEqual([]);
+    expect(
+      environmentChanges(
+        {
+          health: { readiness: { http: '/healthz' }, liveness: { tcp: 6379 } },
+        },
+        live,
+      ).map((c) => c.field),
+    ).toEqual(['health']);
+  });
+});
+
+describe('schema check: environment.health', () => {
+  it('takes probes, refuses unknown keys and bad paths', () => {
+    const ok = check('u', {
+      environment: {
+        name: 'e',
+        image: 'i',
+        health: {
+          readiness: { http: '/healthz' },
+          liveness: { tcp: 6379, failAfter: 60 },
+        },
+      },
+    } as never);
+    expect(ok.filter((f) => f.path.includes('health'))).toEqual([]);
+    const bad = check('u', {
+      environment: {
+        name: 'e',
+        image: 'i',
+        health: { readiness: { path: '/x' }, liveness: { tcp: 'a' } },
+      },
+    } as never);
+    expect(bad.map((f) => f.path).sort()).toEqual([
+      'environment.health.liveness.tcp',
+      'environment.health.readiness.path',
+    ]);
+  });
 });
 
 describe('plan + export round trip', () => {

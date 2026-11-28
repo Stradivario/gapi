@@ -19,7 +19,28 @@ export type UnitState = 'in-sync' | 'changes' | 'missing';
 
 /** Lists compare as sets (order is no change); numbers / strings loosely
     (`"20"` and `20` are the same in YAML). */
+/** An object without its empty values (null / undefined / __typename),
+    keys sorted - the live API returns every field, the yaml only some. */
+const normalized = (v: unknown): unknown => {
+  if (v === null || v === undefined || typeof v !== 'object') return v;
+  const entries = Object.entries(v as Record<string, unknown>)
+    .filter(([k, x]) => k !== '__typename' && x !== null && x !== undefined)
+    .map(([k, x]) => [k, normalized(x)] as const)
+    .filter(([, x]) => !(typeof x === 'object' && x && !Object.keys(x).length))
+    .sort(([a], [b]) => a.localeCompare(b));
+  return Object.fromEntries(entries);
+};
+
 const same = (a: unknown, b: unknown): boolean => {
+  if (
+    (a && typeof a === 'object' && !Array.isArray(a)) ||
+    (b && typeof b === 'object' && !Array.isArray(b))
+  ) {
+    return (
+      JSON.stringify(normalized(a) ?? {}) ===
+      JSON.stringify(normalized(b) ?? {})
+    );
+  }
   if (Array.isArray(a) || Array.isArray(b)) {
     // true sets: a name listed twice on the live lambda is still one
     const x = [...new Set(((a as unknown[]) ?? []).map(String))].sort();
@@ -97,6 +118,7 @@ const ENV_FIELDS = [
   'minMemory',
   'maxMemory',
   'region',
+  'health',
 ];
 
 export function environmentChanges(wanted: Loose, live: Loose): Change[] {

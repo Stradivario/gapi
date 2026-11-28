@@ -41,6 +41,8 @@ Code: `src/commands/repo/`. Schema: `src/schema/lambforge.schema.json`
 - **Drift** (`drift.ts`, pure): only keys the file sets; lists as sets;
   `"20"` == `20`; a scaleOptions size/time of `0` = server default, not
   drift; environment fields the server did not return are skipped.
+  Object fields (`environment.health`) compare by value (`normalized()`:
+  null / `__typename` dropped, keys sorted).
 - **Plan** (`plan.ts`): the project is read ONCE (lambdas with
   `listLambdasForPlan` - secret NAMES only, environments, time / mq
   triggers, domains), then `planUnit` per unit reuses `timeTriggerPlan` and

@@ -37,6 +37,7 @@ const ENV_KEYS = [
   'minMemory',
   'maxMemory',
   'region',
+  'health',
 ];
 
 const names = (list: unknown) =>
