@@ -1,4 +1,4 @@
-## [1.8.294](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.294) (2026-11-27)
+## [1.8.295](https://github.com/Stradivario/gapi/compare/v1.8.28...v1.8.295) (2026-11-28)
 
 
 ### Bug Fixes
@@ -172,6 +172,7 @@
 * **gcli:** firebase-style output, deploys wait for the build ([1d689c5](https://github.com/Stradivario/gapi/commit/1d689c5e00bc29836f8db6f4b1a6b2d0f11674c6))
 * **gcli:** gcli apply - plan, confirm, then apply every lambforge.yaml ([f53fea5](https://github.com/Stradivario/gapi/commit/f53fea53fbd98972558fdd2e8abbf5feac841f1a))
 * **gcli:** lambda:create / lambda:update apply triggers.time from lambforge.yaml ([e74b79f](https://github.com/Stradivario/gapi/commit/e74b79fa19b6adc42c98f1fa30aa97e037aeac50))
+* **gcli:** lambforge.yaml environment.health - schema, plan/apply drift, export ([7aaff34](https://github.com/Stradivario/gapi/commit/7aaff349c51602c1f4433b969ea89d14ec0ee54f))
 * **gcli:** logging is now on a single place introduced new configuration lambforge.yaml and start bundling capabilities using esbuild really amazing commitgit add .! ([064cd2a](https://github.com/Stradivario/gapi/commit/064cd2a7bb1b33951869961624df81f3b4c097ad))
 * **gcli:** new output in every command, build as one step ([a10109c](https://github.com/Stradivario/gapi/commit/a10109ca448dadeb7942900ddfee742cc90523d1))
 * **gcli:** npm ignore file added ([15530eb](https://github.com/Stradivario/gapi/commit/15530eb085653d26f53e01fd9d7902bdfd99b734))

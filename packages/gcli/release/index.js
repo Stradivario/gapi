@@ -36251,6 +36251,10 @@ maxMemory
 region
 clusterId
 clusterName
+health {
+  readiness { http tcp failAfter }
+  liveness { http tcp failAfter }
+}
 `;
   }
 });
@@ -50682,7 +50686,7 @@ ${lanes.join("\n")}
         }
         const length2 = path2.length;
         const root = path2.substring(0, rootLength);
-        let normalized;
+        let normalized2;
         let index = rootLength;
         let segmentStart = index;
         let normalizedUpTo = index;
@@ -50695,7 +50699,7 @@ ${lanes.join("\n")}
             ch = path2.charCodeAt(index);
           }
           if (index > segmentStart) {
-            normalized ?? (normalized = path2.substring(0, segmentStart - 1));
+            normalized2 ?? (normalized2 = path2.substring(0, segmentStart - 1));
             segmentStart = index;
           }
           let segmentEnd = path2.indexOf(directorySeparator, index + 1);
@@ -50704,53 +50708,53 @@ ${lanes.join("\n")}
           }
           const segmentLength = segmentEnd - segmentStart;
           if (segmentLength === 1 && path2.charCodeAt(index) === 46) {
-            normalized ?? (normalized = path2.substring(0, normalizedUpTo));
+            normalized2 ?? (normalized2 = path2.substring(0, normalizedUpTo));
           } else if (segmentLength === 2 && path2.charCodeAt(index) === 46 && path2.charCodeAt(index + 1) === 46) {
             if (!seenNonDotDotSegment) {
-              if (normalized !== void 0) {
-                normalized += normalized.length === rootLength ? ".." : "/..";
+              if (normalized2 !== void 0) {
+                normalized2 += normalized2.length === rootLength ? ".." : "/..";
               } else {
                 normalizedUpTo = index + 2;
               }
-            } else if (normalized === void 0) {
+            } else if (normalized2 === void 0) {
               if (normalizedUpTo - 2 >= 0) {
-                normalized = path2.substring(0, Math.max(rootLength, path2.lastIndexOf(directorySeparator, normalizedUpTo - 2)));
+                normalized2 = path2.substring(0, Math.max(rootLength, path2.lastIndexOf(directorySeparator, normalizedUpTo - 2)));
               } else {
-                normalized = path2.substring(0, normalizedUpTo);
+                normalized2 = path2.substring(0, normalizedUpTo);
               }
             } else {
-              const lastSlash = normalized.lastIndexOf(directorySeparator);
+              const lastSlash = normalized2.lastIndexOf(directorySeparator);
               if (lastSlash !== -1) {
-                normalized = normalized.substring(0, Math.max(rootLength, lastSlash));
+                normalized2 = normalized2.substring(0, Math.max(rootLength, lastSlash));
               } else {
-                normalized = root;
+                normalized2 = root;
               }
-              if (normalized.length === rootLength) {
+              if (normalized2.length === rootLength) {
                 seenNonDotDotSegment = rootLength !== 0;
               }
             }
-          } else if (normalized !== void 0) {
-            if (normalized.length !== rootLength) {
-              normalized += directorySeparator;
+          } else if (normalized2 !== void 0) {
+            if (normalized2.length !== rootLength) {
+              normalized2 += directorySeparator;
             }
             seenNonDotDotSegment = true;
-            normalized += path2.substring(segmentStart, segmentEnd);
+            normalized2 += path2.substring(segmentStart, segmentEnd);
           } else {
             seenNonDotDotSegment = true;
             normalizedUpTo = segmentEnd;
           }
           index = segmentEnd + 1;
         }
-        return normalized ?? (length2 > rootLength ? removeTrailingDirectorySeparator(path2) : path2);
+        return normalized2 ?? (length2 > rootLength ? removeTrailingDirectorySeparator(path2) : path2);
       }
       function normalizePath(path2) {
         path2 = normalizeSlashes(path2);
-        let normalized = simpleNormalizePath(path2);
-        if (normalized !== void 0) {
-          return normalized;
+        let normalized2 = simpleNormalizePath(path2);
+        if (normalized2 !== void 0) {
+          return normalized2;
         }
-        normalized = getNormalizedAbsolutePath(path2, "");
-        return normalized && hasTrailingDirectorySeparator(path2) ? ensureTrailingDirectorySeparator(normalized) : normalized;
+        normalized2 = getNormalizedAbsolutePath(path2, "");
+        return normalized2 && hasTrailingDirectorySeparator(path2) ? ensureTrailingDirectorySeparator(normalized2) : normalized2;
       }
       function simpleNormalizePath(path2) {
         if (!relativePathSegmentRegExp.test(path2)) {
@@ -89193,11 +89197,11 @@ ${lanes.join("\n")}
             for (const root of typeRoots) {
               if (host.directoryExists(root)) {
                 for (const typeDirectivePath of host.getDirectories(root)) {
-                  const normalized = normalizePath(typeDirectivePath);
-                  const packageJsonPath = combinePaths(root, normalized, "package.json");
+                  const normalized2 = normalizePath(typeDirectivePath);
+                  const packageJsonPath = combinePaths(root, normalized2, "package.json");
                   const isNotNeededPackage = host.fileExists(packageJsonPath) && readJson(packageJsonPath, host).typings === null;
                   if (!isNotNeededPackage) {
-                    const baseFileName = getBaseFileName(normalized);
+                    const baseFileName = getBaseFileName(normalized2);
                     if (baseFileName.charCodeAt(0) !== 46) {
                       result.push(baseFileName);
                     }
@@ -95513,8 +95517,8 @@ ${lanes.join("\n")}
       function tryGetModuleNameFromPaths(relativeToBaseUrl, paths, allowedEndings, baseDirectory, getCanonicalFileName, host, compilerOptions) {
         for (const key in paths) {
           for (const patternText2 of paths[key]) {
-            const normalized = normalizePath(patternText2);
-            const pattern = getRelativePathIfInSameVolume(normalized, baseDirectory, getCanonicalFileName) ?? normalized;
+            const normalized2 = normalizePath(patternText2);
+            const pattern = getRelativePathIfInSameVolume(normalized2, baseDirectory, getCanonicalFileName) ?? normalized2;
             const indexOfStar = pattern.indexOf("*");
             const candidates = allowedEndings.map((ending) => ({
               ending,
@@ -183041,8 +183045,8 @@ ${lanes.join("\n")}
         return toWatch && filterCustomPath(toWatch.dirPath) ? toWatch.dirPath : void 0;
       }
       function getRootDirectoryOfResolutionCache(rootDirForResolution, getCurrentDirectory) {
-        const normalized = getNormalizedAbsolutePath(rootDirForResolution, getCurrentDirectory());
-        return !isDiskPathRoot(normalized) ? removeTrailingDirectorySeparator(normalized) : normalized;
+        const normalized2 = getNormalizedAbsolutePath(rootDirForResolution, getCurrentDirectory());
+        return !isDiskPathRoot(normalized2) ? removeTrailingDirectorySeparator(normalized2) : normalized2;
       }
       function getModuleResolutionHost(resolutionHost) {
         var _a2;
@@ -232417,11 +232421,11 @@ ${options.prefix}` : "\n" : options.prefix
         function getTextChangesFromChanges(changes, newLineCharacter, formatContext, validate) {
           return mapDefined(group(changes, (c) => c.sourceFile.path), (changesInFile) => {
             const sourceFile = changesInFile[0].sourceFile;
-            const normalized = toSorted(changesInFile, (a, b) => a.range.pos - b.range.pos || a.range.end - b.range.end);
-            for (let i2 = 0; i2 < normalized.length - 1; i2++) {
-              Debug.assert(normalized[i2].range.end <= normalized[i2 + 1].range.pos, "Changes overlap", () => `${JSON.stringify(normalized[i2].range)} and ${JSON.stringify(normalized[i2 + 1].range)}`);
+            const normalized2 = toSorted(changesInFile, (a, b) => a.range.pos - b.range.pos || a.range.end - b.range.end);
+            for (let i2 = 0; i2 < normalized2.length - 1; i2++) {
+              Debug.assert(normalized2[i2].range.end <= normalized2[i2 + 1].range.pos, "Changes overlap", () => `${JSON.stringify(normalized2[i2].range)} and ${JSON.stringify(normalized2[i2 + 1].range)}`);
             }
-            const textChanges2 = mapDefined(normalized, (c) => {
+            const textChanges2 = mapDefined(normalized2, (c) => {
               const span = createTextSpanFromRange(c.range);
               const targetSourceFile = c.kind === 1 ? getSourceFileOfNode(getOriginalNode(c.node)) ?? c.sourceFile : c.kind === 2 ? getSourceFileOfNode(getOriginalNode(c.nodes[0])) ?? c.sourceFile : c.sourceFile;
               const newText = computeNewText(c, targetSourceFile, sourceFile, newLineCharacter, formatContext, validate);
@@ -246829,12 +246833,12 @@ Dynamic files must always be opened with service's current directory or service 
           let configuredProjects;
           let rootFiles = [];
           for (const file2 of proj.rootFiles) {
-            const normalized = toNormalizedPath(file2.fileName);
-            if (getBaseConfigFileName(normalized)) {
-              if (this.serverMode === 0 && this.host.fileExists(normalized)) {
-                let project = this.findConfiguredProjectByProjectName(normalized);
+            const normalized2 = toNormalizedPath(file2.fileName);
+            if (getBaseConfigFileName(normalized2)) {
+              if (this.serverMode === 0 && this.host.fileExists(normalized2)) {
+                let project = this.findConfiguredProjectByProjectName(normalized2);
                 if (!project) {
-                  project = this.createConfiguredProject(normalized, `Creating configured project in external project: ${proj.projectFileName}`);
+                  project = this.createConfiguredProject(normalized2, `Creating configured project in external project: ${proj.projectFileName}`);
                   if (!this.getHostPreferences().lazyConfiguredProjectsFromExternalProject) project.updateGraph();
                 }
                 (configuredProjects ?? (configuredProjects = /* @__PURE__ */ new Set())).add(project);
@@ -277651,9 +277655,9 @@ var require_archiver_utils = __commonJS({
       } else if (typeof source === "string") {
         return new Buffer(source);
       } else if (utils.isStream(source) && !source._readableState) {
-        var normalized = new PassThrough3();
-        source.pipe(normalized);
-        return normalized;
+        var normalized2 = new PassThrough3();
+        source.pipe(normalized2);
+        return normalized2;
       }
       return source;
     };
@@ -283452,9 +283456,9 @@ var require_util4 = __commonJS({
       } else if (typeof source === "string") {
         return Buffer.from(source);
       } else if (util2.isStream(source) && !source._readableState) {
-        var normalized = new PassThrough3();
-        source.pipe(normalized);
-        return normalized;
+        var normalized2 = new PassThrough3();
+        source.pipe(normalized2);
+        return normalized2;
       }
       return source;
     };
@@ -297987,7 +297991,7 @@ var init_schemas = __esm({
       const _normalized = cached(() => normalizeDef(def));
       const generateFastpass = (shape) => {
         const doc = new Doc(["shape", "payload", "ctx"]);
-        const normalized = _normalized.value;
+        const normalized2 = _normalized.value;
         const parseStr = (key) => {
           const k = esc(key);
           return `shape[${k}]._zod.run({ value: input[${k}], issues: [] }, ctx)`;
@@ -297995,11 +297999,11 @@ var init_schemas = __esm({
         doc.write(`const input = payload.value;`);
         const ids = /* @__PURE__ */ Object.create(null);
         let counter = 0;
-        for (const key of normalized.keys) {
+        for (const key of normalized2.keys) {
           ids[key] = `key_${counter++}`;
         }
         doc.write(`const newResult = {};`);
-        for (const key of normalized.keys) {
+        for (const key of normalized2.keys) {
           const id = ids[key];
           const k = esc(key);
           const schema2 = shape[key];
@@ -322963,8 +322967,27 @@ var init_lambforge_schema = __esm({
           maxMemory: { type: "number" },
           region: { type: "string" },
           terminationGracePeriod: { type: "integer" },
+          health: {
+            type: "object",
+            additionalProperties: false,
+            description: "The container's own health endpoints; set = they replace the platform's default probes. readiness failing = no new requests, liveness failing for failAfter = restart.",
+            properties: {
+              readiness: { $ref: "#/definitions/probe" },
+              liveness: { $ref: "#/definitions/probe" }
+            }
+          },
           clusterId: { type: "string" },
           clusterName: { type: "string" }
+        }
+      },
+      probe: {
+        type: "object",
+        additionalProperties: false,
+        description: "An HTTP GET on the runtime port (http: a path) or a TCP connect (tcp: a port).",
+        properties: {
+          http: { type: "string", pattern: "^/[A-Za-z0-9._~/-]*$" },
+          tcp: { type: "integer", minimum: 1, maximum: 65535 },
+          failAfter: { type: "integer", minimum: 1, maximum: 3600 }
         }
       },
       mqTrigger: {
@@ -323261,10 +323284,18 @@ function environmentChanges(wanted, live) {
     (f3) => wanted[f3] !== void 0 && f3 in live && !same(live[f3], wanted[f3])
   ).map((field) => ({ field, now: live[field], wanted: wanted[field] }));
 }
-var same, names, FUNCTION_FIELDS, SCALE_FIELDS, ENV_FIELDS, stateOf, show2;
+var normalized, same, names, FUNCTION_FIELDS, SCALE_FIELDS, ENV_FIELDS, stateOf, show2;
 var init_drift = __esm({
   "src/commands/repo/drift.ts"() {
+    normalized = (v) => {
+      if (v === null || v === void 0 || typeof v !== "object") return v;
+      const entries = Object.entries(v).filter(([k, x2]) => k !== "__typename" && x2 !== null && x2 !== void 0).map(([k, x2]) => [k, normalized(x2)]).filter(([, x2]) => !(typeof x2 === "object" && x2 && !Object.keys(x2).length)).sort(([a], [b]) => a.localeCompare(b));
+      return Object.fromEntries(entries);
+    };
     same = (a, b) => {
+      if (a && typeof a === "object" && !Array.isArray(a) || b && typeof b === "object" && !Array.isArray(b)) {
+        return JSON.stringify(normalized(a) ?? {}) === JSON.stringify(normalized(b) ?? {});
+      }
       if (Array.isArray(a) || Array.isArray(b)) {
         const x2 = [...new Set((a ?? []).map(String))].sort();
         const y = [...new Set((b ?? []).map(String))].sort();
@@ -323316,7 +323347,8 @@ var init_drift = __esm({
       "maxCpu",
       "minMemory",
       "maxMemory",
-      "region"
+      "region",
+      "health"
     ];
     stateOf = (exists, changes) => !exists ? "missing" : changes.length ? "changes" : "in-sync";
     show2 = (v) => v === void 0 || v === null ? "-" : Array.isArray(v) ? `[${v.join(", ")}]` : String(v);
@@ -324130,7 +324162,8 @@ var init_export = __esm({
       "maxCpu",
       "minMemory",
       "maxMemory",
-      "region"
+      "region",
+      "health"
     ];
     names2 = (list) => (list ?? []).map((x2) => typeof x2 === "string" ? x2 : x2?.name).filter(Boolean);
     compact = (o) => Object.fromEntries(
@@ -329372,7 +329405,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.293" : "development";
+var version2 = true ? "1.8.294" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
