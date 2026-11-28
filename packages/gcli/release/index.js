@@ -13224,7 +13224,7 @@ var require_fromEvent = __commonJS({
         return function(handler) {
           return target[methodName](eventName, handler, options);
         };
-      }) : isNodeStyleEventEmitter(target) ? nodeEventEmitterMethods.map(toCommonHandlerRegistry(target, eventName)) : isJQueryStyleEventEmitter(target) ? jqueryMethods.map(toCommonHandlerRegistry(target, eventName)) : [], 2), add = _a2[0], remove = _a2[1];
+      }) : isNodeStyleEventEmitter(target) ? nodeEventEmitterMethods.map(toCommonHandlerRegistry(target, eventName)) : isJQueryStyleEventEmitter(target) ? jqueryMethods.map(toCommonHandlerRegistry(target, eventName)) : [], 2), add = _a2[0], remove2 = _a2[1];
       if (!add) {
         if (isArrayLike_1.isArrayLike(target)) {
           return mergeMap_1.mergeMap(function(subTarget) {
@@ -13245,7 +13245,7 @@ var require_fromEvent = __commonJS({
         };
         add(handler);
         return function() {
-          return remove(handler);
+          return remove2(handler);
         };
       });
     }
@@ -30710,7 +30710,7 @@ var require_stream_writable = __commonJS({
         }
         return this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._writableState) {
           return;
         }
@@ -30809,7 +30809,7 @@ var require_stream_duplex = __commonJS({
         }
         return this._readableState.destroyed && this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (this._readableState === void 0 || this._writableState === void 0) {
           return;
         }
@@ -31536,7 +31536,7 @@ var require_stream_readable = __commonJS({
         }
         return this._readableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._readableState) {
           return;
         }
@@ -32096,7 +32096,7 @@ var require_stream_readable = __commonJS({
       get: function get() {
         return this._readableState.flowing;
       },
-      set: function set2(state2) {
+      set: function set3(state2) {
         if (this._readableState) {
           this._readableState.flowing = state2;
         }
@@ -33675,7 +33675,7 @@ var require_stream_writable2 = __commonJS({
         }
         return this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._writableState) {
           return;
         }
@@ -33774,7 +33774,7 @@ var require_stream_duplex2 = __commonJS({
         }
         return this._readableState.destroyed && this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (this._readableState === void 0 || this._writableState === void 0) {
           return;
         }
@@ -34263,7 +34263,7 @@ var require_stream_readable2 = __commonJS({
         }
         return this._readableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._readableState) {
           return;
         }
@@ -34823,7 +34823,7 @@ var require_stream_readable2 = __commonJS({
       get: function get() {
         return this._readableState.flowing;
       },
-      set: function set2(state2) {
+      set: function set3(state2) {
         if (this._readableState) {
           this._readableState.flowing = state2;
         }
@@ -36342,6 +36342,7 @@ scaleOptions {
   concurrency
   functionTimeout
   specializationTimeout
+  sleepSchedule
 }
 `;
   }
@@ -37031,6 +37032,7 @@ var init_gql_client = __esm({
               functionTimeout
               specializationTimeout
               idleTimeout
+              sleepSchedule
             }
           }
         }
@@ -39660,11 +39662,11 @@ var require_array_set = __commonJS({
       this._set = hasNativeMap ? /* @__PURE__ */ new Map() : /* @__PURE__ */ Object.create(null);
     }
     ArraySet.fromArray = function ArraySet_fromArray(aArray, aAllowDuplicates) {
-      var set2 = new ArraySet();
+      var set3 = new ArraySet();
       for (var i2 = 0, len = aArray.length; i2 < len; i2++) {
-        set2.add(aArray[i2], aAllowDuplicates);
+        set3.add(aArray[i2], aAllowDuplicates);
       }
-      return set2;
+      return set3;
     };
     ArraySet.prototype.size = function ArraySet_size() {
       return hasNativeMap ? this._set.size : Object.getOwnPropertyNames(this._set).length;
@@ -44113,9 +44115,9 @@ var require_typescript = __commonJS({
         map210.set(key, value);
         return value;
       }
-      function tryAddToSet(set2, value) {
-        if (!set2.has(value)) {
-          set2.add(value);
+      function tryAddToSet(set3, value) {
+        if (!set3.has(value)) {
+          set3.add(value);
           return true;
         }
         return false;
@@ -44729,7 +44731,7 @@ var require_typescript = __commonJS({
             }
           }
         }
-        const set2 = {
+        const set3 = {
           has(element) {
             const hash2 = getHashCode(element);
             if (!multiMap.has(hash2)) return false;
@@ -44798,11 +44800,11 @@ var require_typescript = __commonJS({
             for (const elements of arrayFrom(multiMap.values())) {
               if (isArray(elements)) {
                 for (const element of elements) {
-                  action(element, element, set2);
+                  action(element, element, set3);
                 }
               } else {
                 const element = elements;
-                action(element, element, set2);
+                action(element, element, set3);
               }
             }
           },
@@ -44822,7 +44824,7 @@ var require_typescript = __commonJS({
           },
           [Symbol.toStringTag]: multiMap[Symbol.toStringTag]
         };
-        return set2;
+        return set3;
       }
       function isArray(value) {
         return Array.isArray(value);
@@ -89430,11 +89432,11 @@ ${lanes.join("\n")}
         }
         function createPerModuleNameCache() {
           const directoryPathMap = /* @__PURE__ */ new Map();
-          return { get, set: set2 };
+          return { get, set: set3 };
           function get(directory) {
             return directoryPathMap.get(toPath(directory, currentDirectory, getCanonicalFileName));
           }
-          function set2(directory, result) {
+          function set3(directory, result) {
             const path2 = toPath(directory, currentDirectory, getCanonicalFileName);
             if (directoryPathMap.has(path2)) {
               return;
@@ -112179,8 +112181,8 @@ ${lanes.join("\n")}
             i2--;
             const t2 = types3[i2];
             const flags = t2.flags;
-            const remove = flags & (128 | 134217728 | 268435456) && includes & 4 || flags & 256 && includes & 8 || flags & 2048 && includes & 64 || flags & 8192 && includes & 4096 || reduceVoidUndefined && flags & 32768 && includes & 16384 || isFreshLiteralType(t2) && containsType(types3, t2.regularType);
-            if (remove) {
+            const remove2 = flags & (128 | 134217728 | 268435456) && includes & 4 || flags & 256 && includes & 8 || flags & 2048 && includes & 64 || flags & 8192 && includes & 4096 || reduceVoidUndefined && flags & 32768 && includes & 16384 || isFreshLiteralType(t2) && containsType(types3, t2.regularType);
+            if (remove2) {
               orderedRemoveItemAt(types3, i2);
             }
           }
@@ -112446,8 +112448,8 @@ ${lanes.join("\n")}
           while (i2 > 0) {
             i2--;
             const t2 = types3[i2];
-            const remove = t2.flags & 4 && includes & (128 | 134217728 | 268435456) || t2.flags & 8 && includes & 256 || t2.flags & 64 && includes & 2048 || t2.flags & 4096 && includes & 8192 || t2.flags & 16384 && includes & 32768 || isEmptyAnonymousObjectType(t2) && includes & 470302716;
-            if (remove) {
+            const remove2 = t2.flags & 4 && includes & (128 | 134217728 | 268435456) || t2.flags & 8 && includes & 256 || t2.flags & 64 && includes & 2048 || t2.flags & 4096 && includes & 8192 || t2.flags & 16384 && includes & 32768 || isEmptyAnonymousObjectType(t2) && includes & 470302716;
+            if (remove2) {
               orderedRemoveItemAt(types3, i2);
             }
           }
@@ -175432,24 +175434,24 @@ ${lanes.join("\n")}
           return isFileLevelUniqueNameInCurrentFile(name2, privateName) && !isReservedName(name2, privateName) && !generatedNames.has(name2);
         }
         function isReservedName(name2, privateName) {
-          let set2;
+          let set3;
           let stack;
           if (privateName) {
-            set2 = reservedPrivateNames;
+            set3 = reservedPrivateNames;
             stack = reservedPrivateNamesStack;
           } else {
-            set2 = reservedNames;
+            set3 = reservedNames;
             stack = reservedNamesStack;
           }
-          if (set2 == null ? void 0 : set2.has(name2)) {
+          if (set3 == null ? void 0 : set3.has(name2)) {
             return true;
           }
           for (let i2 = stack.length - 1; i2 >= 0; i2--) {
-            if (set2 === stack[i2]) {
+            if (set3 === stack[i2]) {
               continue;
             }
-            set2 = stack[i2];
-            if (set2 == null ? void 0 : set2.has(name2)) {
+            set3 = stack[i2];
+            if (set3 == null ? void 0 : set3.has(name2)) {
               return true;
             }
           }
@@ -180942,11 +180944,11 @@ ${lanes.join("\n")}
               size: () => forward.size,
               deleteKey: (k) => {
                 (deleted || (deleted = /* @__PURE__ */ new Set())).add(k);
-                const set2 = forward.get(k);
-                if (!set2) {
+                const set3 = forward.get(k);
+                if (!set3) {
                   return false;
                 }
-                set2.forEach((v) => deleteFromMultimap(reverse, v, k));
+                set3.forEach((v) => deleteFromMultimap(reverse, v, k));
                 forward.delete(k);
                 return true;
               },
@@ -180978,17 +180980,17 @@ ${lanes.join("\n")}
         }
         BuilderState2.createManyToManyPathMap = createManyToManyPathMap;
         function addToMultimap(map210, k, v) {
-          let set2 = map210.get(k);
-          if (!set2) {
-            set2 = /* @__PURE__ */ new Set();
-            map210.set(k, set2);
+          let set3 = map210.get(k);
+          if (!set3) {
+            set3 = /* @__PURE__ */ new Set();
+            map210.set(k, set3);
           }
-          set2.add(v);
+          set3.add(v);
         }
         function deleteFromMultimap(map210, k, v) {
-          const set2 = map210.get(k);
-          if (set2 == null ? void 0 : set2.delete(v)) {
-            if (!set2.size) {
+          const set3 = map210.get(k);
+          if (set3 == null ? void 0 : set3.delete(v)) {
+            if (!set3.size) {
               map210.delete(k);
             }
             return true;
@@ -182039,8 +182041,8 @@ ${lanes.join("\n")}
           }
           return fileId;
         }
-        function toFileIdListId(set2) {
-          const fileIds = arrayFrom(set2.keys(), toFileId).sort(compareValues);
+        function toFileIdListId(set3) {
+          const fileIds = arrayFrom(set3.keys(), toFileId).sort(compareValues);
           const key = fileIds.join();
           let fileIdListId = fileNamesToFileIdListId == null ? void 0 : fileNamesToFileIdListId.get(key);
           if (fileIdListId === void 0) {
@@ -240834,21 +240836,21 @@ ${options.prefix}` : "\n" : options.prefix
         if ((arr1 || emptyArray2).length === 0 && (arr2 || emptyArray2).length === 0) {
           return true;
         }
-        const set2 = /* @__PURE__ */ new Map();
+        const set3 = /* @__PURE__ */ new Map();
         let unique = 0;
         for (const v of arr1) {
-          if (set2.get(v) !== true) {
-            set2.set(v, true);
+          if (set3.get(v) !== true) {
+            set3.set(v, true);
             unique++;
           }
         }
         for (const v of arr2) {
-          const isSet = set2.get(v);
+          const isSet = set3.get(v);
           if (isSet === void 0) {
             return false;
           }
           if (isSet === true) {
-            set2.set(v, false);
+            set3.set(v, false);
             unique--;
           }
         }
@@ -257851,13 +257853,13 @@ var init_load_balancer = __esm({
 });
 
 // src/services/cost-optimization.ts
-var import_operators15, PART, HIBERNATION, CostAPI;
+var import_operators15, PART, SLEEP_SCHEDULE, CostAPI;
 var init_cost_optimization = __esm({
   "src/services/cost-optimization.ts"() {
     import_operators15 = __toESM(require_operators());
     init_gql_client();
     PART = `current recommended action typical peak note`;
-    HIBERNATION = `enabled timezone days wakeAt sleepAt state override overrideUntil lambdasAsleep error`;
+    SLEEP_SCHEDULE = `id projectId name enabled timezone days wakeAt sleepAt lambdas state override overrideUntil lambdasAsleep sleptAt wokeAt error`;
     CostAPI = {
       lambdaRecommendations: (projectId, days) => GraphqlClienAPI.query({
         query: gql`
@@ -257946,38 +257948,48 @@ var init_cost_optimization = __esm({
       `,
         variables: { projectId }
       }).pipe((0, import_operators15.map)((r2) => r2.listInstalledPlugins ?? [])),
-      hibernation: (projectId) => GraphqlClienAPI.query({
+      sleepSchedules: (projectId) => GraphqlClienAPI.query({
         query: gql`
-        query projectHibernation($projectId: String!) {
-          projectHibernation(projectId: $projectId) { ${HIBERNATION} }
+        query sleepSchedules($projectId: String!) {
+          sleepSchedules(projectId: $projectId) { ${SLEEP_SCHEDULE} }
         }
       `,
         variables: { projectId }
-      }).pipe((0, import_operators15.map)((r2) => r2.projectHibernation)),
-      setHibernation: (projectId, input) => GraphqlClienAPI.query({
+      }).pipe((0, import_operators15.map)((r2) => r2.sleepSchedules ?? [])),
+      /** Create or change by name; applies at once. */
+      saveSleepSchedule: (projectId, input) => GraphqlClienAPI.query({
         query: gql`
-        mutation setProjectHibernation($projectId: String!, $input: ProjectHibernationInput!) {
-          setProjectHibernation(projectId: $projectId, input: $input) { ${HIBERNATION} }
+        mutation saveSleepSchedule($projectId: String!, $input: SleepScheduleInput!) {
+          saveSleepSchedule(projectId: $projectId, input: $input) { ${SLEEP_SCHEDULE} }
         }
       `,
         variables: { projectId, input }
-      }).pipe((0, import_operators15.map)((r2) => r2.setProjectHibernation)),
-      hibernateNow: (projectId) => GraphqlClienAPI.query({
+      }).pipe((0, import_operators15.map)((r2) => r2.saveSleepSchedule)),
+      /** Refused (the error names them) while lambdas follow it. */
+      deleteSleepSchedule: (projectId, name2) => GraphqlClienAPI.query({
         query: gql`
-        mutation hibernateProjectNow($projectId: String!) {
-          hibernateProjectNow(projectId: $projectId) { ${HIBERNATION} }
+        mutation deleteSleepSchedule($projectId: String!, $name: String!) {
+          deleteSleepSchedule(projectId: $projectId, name: $name)
         }
       `,
-        variables: { projectId }
-      }).pipe((0, import_operators15.map)((r2) => r2.hibernateProjectNow)),
-      wakeNow: (projectId) => GraphqlClienAPI.query({
+        variables: { projectId, name: name2 }
+      }).pipe((0, import_operators15.map)((r2) => r2.deleteSleepSchedule)),
+      sleepScheduleNow: (projectId, name2) => GraphqlClienAPI.query({
         query: gql`
-        mutation wakeProjectNow($projectId: String!) {
-          wakeProjectNow(projectId: $projectId) { ${HIBERNATION} }
+        mutation sleepScheduleNow($projectId: String!, $name: String!) {
+          sleepScheduleNow(projectId: $projectId, name: $name) { ${SLEEP_SCHEDULE} }
         }
       `,
-        variables: { projectId }
-      }).pipe((0, import_operators15.map)((r2) => r2.wakeProjectNow)),
+        variables: { projectId, name: name2 }
+      }).pipe((0, import_operators15.map)((r2) => r2.sleepScheduleNow)),
+      wakeScheduleNow: (projectId, name2) => GraphqlClienAPI.query({
+        query: gql`
+        mutation wakeScheduleNow($projectId: String!, $name: String!) {
+          wakeScheduleNow(projectId: $projectId, name: $name) { ${SLEEP_SCHEDULE} }
+        }
+      `,
+        variables: { projectId, name: name2 }
+      }).pipe((0, import_operators15.map)((r2) => r2.wakeScheduleNow)),
       savings: (projectId) => GraphqlClienAPI.query({
         query: gql`
         query projectSavings($projectId: String!) {
@@ -258025,6 +258037,15 @@ var init_cost_optimization = __esm({
 });
 
 // src/commands/cost/parse.ts
+function checkScheduleName(name2, what = "name") {
+  const n = (name2 ?? "").trim();
+  if (!SLEEP_SCHEDULE_NAME.test(n)) {
+    throw new Error(
+      `${what}: "${name2}" is not a schedule name (lowercase letters, digits and '-', 1-40 characters, e.g. working-hours)`
+    );
+  }
+  return n;
+}
 function parseDays(value) {
   const one = (v) => {
     const t2 = v.trim().toLowerCase().slice(0, 3);
@@ -258047,13 +258068,13 @@ function parseDays(value) {
   if (!days.length) throw new Error("--days: at least one day");
   return [...new Set(days)].sort((a, b) => a - b);
 }
-function toHibernationInput(cmd) {
-  if (cmd.enable && cmd.disable) {
-    throw new Error("Pass --enable or --disable, not both");
+function toSleepScheduleInput(name2, cmd) {
+  if (cmd.pause && cmd.resume) {
+    throw new Error("Pass --pause or --resume, not both");
   }
-  const input = {};
-  if (cmd.enable) input.enabled = true;
-  if (cmd.disable) input.enabled = false;
+  const input = { name: checkScheduleName(name2) };
+  if (cmd.pause) input.enabled = false;
+  if (cmd.resume) input.enabled = true;
   if (cmd.timezone !== void 0) input.timezone = cmd.timezone.trim();
   if (cmd.days !== void 0) input.days = parseDays(cmd.days);
   for (const [flag, field] of [
@@ -258065,22 +258086,23 @@ function toHibernationInput(cmd) {
     if (!HHMM.test(v)) throw new Error(`--${flag} must be HH:MM, got "${v}"`);
     input[field] = v;
   }
-  return Object.keys(input).length ? input : null;
+  return input;
 }
-var HHMM, DAY_NAMES, hibernationRow, change, recommendationRow, yamlSnippet, pluginResources;
+var HHMM, DAY_NAMES, SLEEP_SCHEDULE_NAME, sleepScheduleRow, change, recommendationRow, yamlSnippet, pluginResources;
 var init_parse = __esm({
   "src/commands/cost/parse.ts"() {
     HHMM = /^([01]\d|2[0-3]):[0-5]\d$/;
     DAY_NAMES = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-    hibernationRow = (h2) => ({
-      enabled: h2.enabled,
-      state: h2.state,
-      hours: `${h2.wakeAt}-${h2.sleepAt}`,
-      days: (h2.days ?? []).map((d) => DAY_NAMES[d]).join(","),
-      timezone: h2.timezone,
-      override: h2.override ? `${h2.override} until ${h2.overrideUntil ?? "?"}` : "",
-      lambdasAsleep: h2.lambdasAsleep ?? 0,
-      error: h2.error ?? ""
+    SLEEP_SCHEDULE_NAME = /^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$/;
+    sleepScheduleRow = (s2) => ({
+      name: s2.name,
+      hours: `${s2.wakeAt ?? "?"}-${s2.sleepAt ?? "?"}`,
+      days: (s2.days ?? []).map((d) => DAY_NAMES[d]).join(","),
+      timezone: s2.timezone ?? "",
+      paused: s2.enabled === false ? "yes" : "",
+      state: s2.override ? `${s2.state ?? "?"} (${s2.override} until ${s2.overrideUntil ?? "?"})` : s2.state ?? "",
+      lambdas: (s2.lambdas ?? []).join(", "),
+      error: s2.error ?? ""
     });
     change = (p, unit) => p.action === "keep" ? `${p.current}${unit} (keep)` : `${p.current} -> ${p.recommended}${unit} (${p.action})`;
     recommendationRow = (r2) => ({
@@ -258280,58 +258302,93 @@ var init_plugin_resources = __esm({
   }
 });
 
-// src/commands/cost/hibernation.ts
-var hibernation_exports = {};
-__export(hibernation_exports, {
-  default: () => hibernation_default,
+// src/commands/cost/sleep-schedule.ts
+var sleep_schedule_exports = {};
+__export(sleep_schedule_exports, {
+  default: () => sleep_schedule_default,
+  remove: () => remove,
+  set: () => set,
   sleepNow: () => sleepNow,
   wakeNow: () => wakeNow
 });
-var import_rxjs33, import_operators18, show, hibernation_default, sleepNow, wakeNow;
-var init_hibernation = __esm({
-  "src/commands/cost/hibernation.ts"() {
+var import_rxjs33, import_operators18, SCOPE, show, sleep_schedule_default, set, remove, sleepNow, wakeNow;
+var init_sleep_schedule = __esm({
+  "src/commands/cost/sleep-schedule.ts"() {
     import_rxjs33 = __toESM(require_cjs());
     import_operators18 = __toESM(require_operators());
     init_helpers();
     init_cost_optimization();
     init_ui();
     init_parse();
-    show = (json2) => (h2) => json2 ? ui.print(JSON.stringify(h2, null, 2)) : ui.table([hibernationRow(h2)]);
-    hibernation_default = (cmd) => {
-      const input = toHibernationInput(cmd);
+    SCOPE = "sleep-schedule";
+    show = (json2) => (s2) => json2 ? ui.print(JSON.stringify(s2, null, 2)) : ui.table((Array.isArray(s2) ? s2 : [s2]).map(sleepScheduleRow));
+    sleep_schedule_default = (cmd) => (0, import_rxjs33.lastValueFrom)(
+      parseProjectId(cmd.project).pipe(
+        (0, import_operators18.switchMap)((projectId) => CostAPI.sleepSchedules(projectId)),
+        (0, import_operators18.tap)(show(cmd.json))
+      )
+    );
+    set = (name2, cmd) => {
+      const input = toSleepScheduleInput(name2, cmd);
       return (0, import_rxjs33.lastValueFrom)(
         parseProjectId(cmd.project).pipe(
-          (0, import_operators18.switchMap)(
-            (projectId) => input ? CostAPI.setHibernation(projectId, input) : CostAPI.hibernation(projectId)
-          ),
+          (0, import_operators18.switchMap)((projectId) => CostAPI.saveSleepSchedule(projectId, input)),
+          (0, import_operators18.tap)((s2) => {
+            if (!cmd.json) ui.success(`${s2.name} saved`, SCOPE);
+          }),
           (0, import_operators18.tap)(show(cmd.json))
         )
       );
     };
-    sleepNow = (cmd) => (0, import_rxjs33.lastValueFrom)(
-      parseProjectId(cmd.project).pipe(
-        (0, import_operators18.switchMap)((projectId) => CostAPI.hibernateNow(projectId)),
-        (0, import_operators18.tap)(
-          (h2) => ui.success(
-            `asleep until ${h2.overrideUntil ?? "the next wake time"}`,
-            "hibernation"
+    remove = (name2, cmd) => {
+      const scheduleName = checkScheduleName(name2);
+      return (0, import_rxjs33.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators18.switchMap)(
+            (projectId) => CostAPI.deleteSleepSchedule(projectId, scheduleName)
+          ),
+          (0, import_operators18.tap)(
+            (deleted) => cmd.json ? ui.print(JSON.stringify({ name: scheduleName, deleted })) : deleted ? ui.success(`${scheduleName} deleted`, SCOPE) : ui.warn(`${scheduleName} was not deleted`, SCOPE)
           )
-        ),
-        (0, import_operators18.tap)(show(cmd.json))
-      )
-    );
-    wakeNow = (cmd) => (0, import_rxjs33.lastValueFrom)(
-      parseProjectId(cmd.project).pipe(
-        (0, import_operators18.switchMap)((projectId) => CostAPI.wakeNow(projectId)),
-        (0, import_operators18.tap)(
-          (h2) => ui.success(
-            `awake until ${h2.overrideUntil ?? "the next sleep time"}`,
-            "hibernation"
-          )
-        ),
-        (0, import_operators18.tap)(show(cmd.json))
-      )
-    );
+        )
+      );
+    };
+    sleepNow = (name2, cmd) => {
+      const scheduleName = checkScheduleName(name2);
+      return (0, import_rxjs33.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators18.switchMap)(
+            (projectId) => CostAPI.sleepScheduleNow(projectId, scheduleName)
+          ),
+          (0, import_operators18.tap)((s2) => {
+            if (!cmd.json)
+              ui.success(
+                `${s2.name} asleep until ${s2.overrideUntil ?? "the next wake time"}`,
+                SCOPE
+              );
+          }),
+          (0, import_operators18.tap)(show(cmd.json))
+        )
+      );
+    };
+    wakeNow = (name2, cmd) => {
+      const scheduleName = checkScheduleName(name2);
+      return (0, import_rxjs33.lastValueFrom)(
+        parseProjectId(cmd.project).pipe(
+          (0, import_operators18.switchMap)(
+            (projectId) => CostAPI.wakeScheduleNow(projectId, scheduleName)
+          ),
+          (0, import_operators18.tap)((s2) => {
+            if (!cmd.json)
+              ui.success(
+                `${s2.name} awake until ${s2.overrideUntil ?? "the next sleep time"}`,
+                SCOPE
+              );
+          }),
+          (0, import_operators18.tap)(show(cmd.json))
+        )
+      );
+    };
   }
 });
 
@@ -269535,9 +269592,9 @@ var require_minimatch = __commonJS({
     var twoStarNoDot = "(?:(?!(?:\\/|^)\\.).)*?";
     var reSpecials = charSet("().*{}+?[]^$\\!");
     function charSet(s2) {
-      return s2.split("").reduce(function(set2, c) {
-        set2[c] = true;
-        return set2;
+      return s2.split("").reduce(function(set3, c) {
+        set3[c] = true;
+        return set3;
       }, {});
     }
     var slashSplit = /\/+/;
@@ -269623,22 +269680,22 @@ var require_minimatch = __commonJS({
         return;
       }
       this.parseNegate();
-      var set2 = this.globSet = this.braceExpand();
+      var set3 = this.globSet = this.braceExpand();
       if (options.debug) this.debug = console.error;
-      this.debug(this.pattern, set2);
-      set2 = this.globParts = set2.map(function(s2) {
+      this.debug(this.pattern, set3);
+      set3 = this.globParts = set3.map(function(s2) {
         return s2.split(slashSplit);
       });
-      this.debug(this.pattern, set2);
-      set2 = set2.map(function(s2, si, set3) {
+      this.debug(this.pattern, set3);
+      set3 = set3.map(function(s2, si, set4) {
         return s2.map(this.parse, this);
       }, this);
-      this.debug(this.pattern, set2);
-      set2 = set2.filter(function(s2) {
+      this.debug(this.pattern, set3);
+      set3 = set3.filter(function(s2) {
         return s2.indexOf(false) === -1;
       });
-      this.debug(this.pattern, set2);
-      this.set = set2;
+      this.debug(this.pattern, set3);
+      this.set = set3;
     }
     Minimatch.prototype.parseNegate = parseNegate;
     function parseNegate() {
@@ -269913,15 +269970,15 @@ var require_minimatch = __commonJS({
     Minimatch.prototype.makeRe = makeRe;
     function makeRe() {
       if (this.regexp || this.regexp === false) return this.regexp;
-      var set2 = this.set;
-      if (!set2.length) {
+      var set3 = this.set;
+      if (!set3.length) {
         this.regexp = false;
         return this.regexp;
       }
       var options = this.options;
       var twoStar = options.noglobstar ? star : options.dot ? twoStarDot : twoStarNoDot;
       var flags = options.nocase ? "i" : "";
-      var re = set2.map(function(pattern) {
+      var re = set3.map(function(pattern) {
         return pattern.map(function(p) {
           return p === GLOBSTAR ? twoStar : typeof p === "string" ? regExpEscape(p) : p._src;
         }).join("\\/");
@@ -269958,16 +270015,16 @@ var require_minimatch = __commonJS({
       }
       f3 = f3.split(slashSplit);
       this.debug(this.pattern, "split", f3);
-      var set2 = this.set;
-      this.debug(this.pattern, "set", set2);
+      var set3 = this.set;
+      this.debug(this.pattern, "set", set3);
       var filename;
       var i2;
       for (i2 = f3.length - 1; i2 >= 0; i2--) {
         filename = f3[i2];
         if (filename) break;
       }
-      for (i2 = 0; i2 < set2.length; i2++) {
-        var pattern = set2[i2];
+      for (i2 = 0; i2 < set3.length; i2++) {
+        var pattern = set3[i2];
         var file2 = f3;
         if (options.matchBase && pattern.length === 1) {
           file2 = [filename];
@@ -275570,9 +275627,9 @@ var require_lodash4 = __commonJS({
       }
       return result;
     }
-    function setToArray(set2) {
-      var index = -1, result = Array(set2.size);
-      set2.forEach(function(value) {
+    function setToArray(set3) {
+      var index = -1, result = Array(set3.size);
+      set3.forEach(function(value) {
         result[++index] = value;
       });
       return result;
@@ -275785,9 +275842,9 @@ var require_lodash4 = __commonJS({
         isCommon = false;
         includes = arrayIncludesWith;
       } else if (length >= LARGE_ARRAY_SIZE) {
-        var set2 = iteratee ? null : createSet(array2);
-        if (set2) {
-          return setToArray(set2);
+        var set3 = iteratee ? null : createSet(array2);
+        if (set3) {
+          return setToArray(set3);
         }
         isCommon = false;
         includes = cacheHas;
@@ -276456,15 +276513,15 @@ var require_sync = __commonJS({
       if (this.realpath) {
         var self2 = this;
         this.matches.forEach(function(matchset, index) {
-          var set2 = self2.matches[index] = /* @__PURE__ */ Object.create(null);
+          var set3 = self2.matches[index] = /* @__PURE__ */ Object.create(null);
           for (var p in matchset) {
             try {
               p = self2._makeAbs(p);
               var real = rp.realpathSync(p, self2.realpathCache);
-              set2[real] = true;
+              set3[real] = true;
             } catch (er) {
               if (er.syscall === "stat")
-                set2[self2._makeAbs(p)] = true;
+                set3[self2._makeAbs(p)] = true;
               else
                 throw er;
             }
@@ -276936,13 +276993,13 @@ var require_glob = __commonJS({
       var options = extend2({}, options_);
       options.noprocess = true;
       var g = new Glob(pattern, options);
-      var set2 = g.minimatch.set;
+      var set3 = g.minimatch.set;
       if (!pattern)
         return false;
-      if (set2.length > 1)
+      if (set3.length > 1)
         return true;
-      for (var j = 0; j < set2[0].length; j++) {
-        if (typeof set2[0][j] !== "string")
+      for (var j = 0; j < set3[0].length; j++) {
+        if (typeof set3[0][j] !== "string")
           return true;
       }
       return false;
@@ -277032,18 +277089,18 @@ var require_glob = __commonJS({
       var n = found.length;
       if (n === 0)
         return cb();
-      var set2 = this.matches[index] = /* @__PURE__ */ Object.create(null);
+      var set3 = this.matches[index] = /* @__PURE__ */ Object.create(null);
       found.forEach(function(p, i2) {
         p = self2._makeAbs(p);
         rp.realpath(p, self2.realpathCache, function(er, real) {
           if (!er)
-            set2[real] = true;
+            set3[real] = true;
           else if (er.syscall === "stat")
-            set2[p] = true;
+            set3[p] = true;
           else
             self2.emit("error", er);
           if (--n === 0) {
-            self2.matches[index] = set2;
+            self2.matches[index] = set3;
             cb();
           }
         });
@@ -278657,7 +278714,7 @@ var require_stream_writable4 = __commonJS({
         }
         return this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._writableState) {
           return;
         }
@@ -278756,7 +278813,7 @@ var require_stream_duplex4 = __commonJS({
         }
         return this._readableState.destroyed && this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (this._readableState === void 0 || this._writableState === void 0) {
           return;
         }
@@ -279245,7 +279302,7 @@ var require_stream_readable4 = __commonJS({
         }
         return this._readableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._readableState) {
           return;
         }
@@ -279805,7 +279862,7 @@ var require_stream_readable4 = __commonJS({
       get: function get() {
         return this._readableState.flowing;
       },
-      set: function set2(state2) {
+      set: function set3(state2) {
         if (this._readableState) {
           this._readableState.flowing = state2;
         }
@@ -281999,7 +282056,7 @@ var require_stream_writable5 = __commonJS({
         }
         return this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._writableState) {
           return;
         }
@@ -282098,7 +282155,7 @@ var require_stream_duplex5 = __commonJS({
         }
         return this._readableState.destroyed && this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (this._readableState === void 0 || this._writableState === void 0) {
           return;
         }
@@ -282587,7 +282644,7 @@ var require_stream_readable5 = __commonJS({
         }
         return this._readableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._readableState) {
           return;
         }
@@ -283147,7 +283204,7 @@ var require_stream_readable5 = __commonJS({
       get: function get() {
         return this._readableState.flowing;
       },
-      set: function set2(state2) {
+      set: function set3(state2) {
         if (this._readableState) {
           this._readableState.flowing = state2;
         }
@@ -284771,7 +284828,7 @@ var require_stream_writable6 = __commonJS({
         }
         return this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._writableState) {
           return;
         }
@@ -284870,7 +284927,7 @@ var require_stream_duplex6 = __commonJS({
         }
         return this._readableState.destroyed && this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (this._readableState === void 0 || this._writableState === void 0) {
           return;
         }
@@ -285359,7 +285416,7 @@ var require_stream_readable6 = __commonJS({
         }
         return this._readableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._readableState) {
           return;
         }
@@ -285919,7 +285976,7 @@ var require_stream_readable6 = __commonJS({
       get: function get() {
         return this._readableState.flowing;
       },
-      set: function set2(state2) {
+      set: function set3(state2) {
         if (this._readableState) {
           this._readableState.flowing = state2;
         }
@@ -288008,7 +288065,7 @@ var require_stream_writable7 = __commonJS({
         }
         return this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._writableState) {
           return;
         }
@@ -288107,7 +288164,7 @@ var require_stream_duplex7 = __commonJS({
         }
         return this._readableState.destroyed && this._writableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (this._readableState === void 0 || this._writableState === void 0) {
           return;
         }
@@ -288596,7 +288653,7 @@ var require_stream_readable7 = __commonJS({
         }
         return this._readableState.destroyed;
       },
-      set: function set2(value) {
+      set: function set3(value) {
         if (!this._readableState) {
           return;
         }
@@ -289156,7 +289213,7 @@ var require_stream_readable7 = __commonJS({
       get: function get() {
         return this._readableState.flowing;
       },
-      set: function set2(state2) {
+      set: function set3(state2) {
         if (this._readableState) {
           this._readableState.flowing = state2;
         }
@@ -290260,6 +290317,22 @@ var init_deploy_state = __esm({
   }
 });
 
+// src/commands/lambda/helpers/sleep-schedule.ts
+function sleepScheduleOption(cmd, spec) {
+  const value = cmd.sleepSchedule ?? spec?.sleepSchedule;
+  if (value == null) return {};
+  const name2 = String(value).trim();
+  if (name2 === "") return { sleepSchedule: "" };
+  return {
+    sleepSchedule: checkScheduleName(name2, "scaleOptions.sleepSchedule")
+  };
+}
+var init_sleep_schedule2 = __esm({
+  "src/commands/lambda/helpers/sleep-schedule.ts"() {
+    init_parse();
+  }
+});
+
 // src/commands/lambda/helpers/spread.ts
 function spreadScaleOptions(cmd, spec) {
   const spread = cmd.spread ?? spec?.spread;
@@ -290368,6 +290441,7 @@ var init_helpers2 = __esm({
     init_deploy_state();
     init_load_spec();
     init_read_file();
+    init_sleep_schedule2();
     init_spread();
     init_time_trigger_sync();
     ReadFile2 = (file2) => readFileAsObservable(file2).pipe((0, import_operators30.catchError)(() => (0, import_rxjs45.of)("")));
@@ -290415,7 +290489,8 @@ var init_helpers2 = __esm({
         concurrency: cmd.concurrency || payload.scaleOptions?.concurrency || 0,
         functionTimeout: cmd.functionTimeout || payload.scaleOptions?.functionTimeout || 0,
         specializationTimeout: cmd.specializationTimeout || payload.scaleOptions?.specializationTimeout || 0,
-        ...spreadScaleOptions(cmd, payload.scaleOptions)
+        ...spreadScaleOptions(cmd, payload.scaleOptions),
+        ...sleepScheduleOption(cmd, payload.scaleOptions)
       }
     });
     uploadArchive = (cmd, data, scope) => packageArchive(cmd).pipe(
@@ -295355,10 +295430,10 @@ function jsonStringifyReplacer(_2, value) {
   return value;
 }
 function cached(getter) {
-  const set2 = false;
+  const set3 = false;
   return {
     get value() {
-      if (!set2) {
+      if (!set3) {
         const value = getter();
         Object.defineProperty(this, "value", { value });
         return value;
@@ -307698,7 +307773,7 @@ __export(schemas_exports3, {
   readonly: () => readonly,
   record: () => record,
   refine: () => refine,
-  set: () => set,
+  set: () => set2,
   strictObject: () => strictObject,
   string: () => string2,
   stringFormat: () => stringFormat,
@@ -307981,7 +308056,7 @@ function map24(keyType, valueType, params) {
     ...util_exports.normalizeParams(params)
   });
 }
-function set(valueType, params) {
+function set2(valueType, params) {
   return new ZodSet2({
     type: "set",
     valueType,
@@ -309563,7 +309638,7 @@ __export(external_exports3, {
   safeEncodeAsync: () => safeEncodeAsync2,
   safeParse: () => safeParse3,
   safeParseAsync: () => safeParseAsync2,
-  set: () => set,
+  set: () => set2,
   setErrorMap: () => setErrorMap,
   size: () => _size,
   slugify: () => _slugify,
@@ -322609,8 +322684,8 @@ function globToRegex(glob) {
       out += "[^/]";
     } else if (c === "[" && glob.indexOf("]", i2 + 1) > i2 + 1) {
       const end = glob.indexOf("]", i2 + 1);
-      const set2 = glob.slice(i2 + 1, end).replace(/\\/g, "\\\\");
-      out += `[${set2.startsWith("!") ? `^${set2.slice(1)}` : set2}]`;
+      const set3 = glob.slice(i2 + 1, end).replace(/\\/g, "\\\\");
+      out += `[${set3.startsWith("!") ? `^${set3.slice(1)}` : set3}]`;
       i2 = end;
     } else {
       out += c.replace(/[.+^${}()|[\]\\]/g, "\\$&");
@@ -322944,7 +323019,8 @@ var init_lambforge_schema = __esm({
               specializationTimeout: { type: "integer" },
               idleTimeout: { type: "integer" },
               spread: { enum: ["machines", "none"] },
-              spreadStrict: { type: "boolean" }
+              spreadStrict: { type: "boolean" },
+              sleepSchedule: { type: "string", pattern: "^$|^[a-z0-9]([a-z0-9-]{0,38}[a-z0-9])?$", description: "Name of a project sleep schedule (gcli sleep-schedule:list) this lambda follows; outside its hours it scales to 0. Empty = always on. newdeploy with minScale >= 1 only" }
             }
           }
         }
@@ -323056,6 +323132,16 @@ function check2(unit, value, node = schema, path2 = "") {
         path: at,
         level: "error",
         message: `must be one of ${n.enum.join(", ")}`
+      }
+    ];
+  }
+  if (n.pattern && typeof value === "string" && !new RegExp(n.pattern).test(value)) {
+    return [
+      {
+        unit,
+        path: at,
+        level: "error",
+        message: `"${value}" does not match ${n.pattern}`
       }
     ];
   }
@@ -323333,7 +323419,8 @@ var init_drift = __esm({
       "concurrency",
       "functionTimeout",
       "specializationTimeout",
-      "idleTimeout"
+      "idleTimeout",
+      "sleepSchedule"
     ];
     ENV_FIELDS = [
       "image",
@@ -324147,7 +324234,8 @@ var init_export = __esm({
       "concurrency",
       "functionTimeout",
       "specializationTimeout",
-      "idleTimeout"
+      "idleTimeout",
+      "sleepSchedule"
     ];
     ENV_KEYS = [
       "name",
@@ -328801,14 +328889,30 @@ function registerCostCommands(program2) {
     "-cid, --clusterId <clusterId>",
     "Which installation, when the plugin is on several clusters (omit for the shared cluster)"
   ).action(lazy(() => Promise.resolve().then(() => (init_plugin_resources(), plugin_resources_exports)).then((m2) => m2.autoGrow)));
-  program2.command("project:hibernation").description(
-    "Show or set when the project sleeps: outside its working hours always-on lambdas scale to 0 (plugins keep running). Off by default"
-  ).option("-p, --project <project>").option("--enable", "Turn hibernation on").option("--disable", "Turn it off (wakes the project)").option("--timezone <tz>", "IANA time zone, e.g. Europe/Sofia").option(
+  const scheduleCommand = (verb, description2) => program2.command(`sleep-schedule:${verb}`).description(description2).option("-p, --project <project>").option("--json", "Print as JSON");
+  scheduleCommand(
+    "list",
+    "The project's sleep schedules: hours, days, time zone, paused, state and the lambdas following each (scaleOptions.sleepSchedule)"
+  ).action(lazy(() => Promise.resolve().then(() => (init_sleep_schedule(), sleep_schedule_exports)).then((m2) => m2.default)));
+  scheduleCommand(
+    "set",
+    "Create or change a named sleep schedule (only the flags given change; applies at once). Outside its hours the lambdas following it scale to 0 (plugins keep running)"
+  ).arguments("<name>").option(
     "--days <days>",
     "Working days: mon-fri, 1-5, sat,sun ... (0 = Sunday)"
-  ).option("--wake <HH:MM>", "Working hours start").option("--sleep <HH:MM>", "Working hours end").option("--json", "Print as JSON").action(lazy(() => Promise.resolve().then(() => (init_hibernation(), hibernation_exports)).then((m2) => m2.default)));
-  program2.command("project:sleep").description("Put the project to sleep now, until its next wake time").option("-p, --project <project>").option("--json", "Print as JSON").action(lazy(() => Promise.resolve().then(() => (init_hibernation(), hibernation_exports)).then((m2) => m2.sleepNow)));
-  program2.command("project:wake").description("Wake the project now, until its next sleep time").option("-p, --project <project>").option("--json", "Print as JSON").action(lazy(() => Promise.resolve().then(() => (init_hibernation(), hibernation_exports)).then((m2) => m2.wakeNow)));
+  ).option("--wake <HH:MM>", "Working hours start").option("--sleep <HH:MM>", "Working hours end").option("--timezone <tz>", "IANA time zone, e.g. Europe/Sofia").option("--pause", "Pause it: its lambdas stay awake").option("--resume", "Resume a paused schedule").action(lazy(() => Promise.resolve().then(() => (init_sleep_schedule(), sleep_schedule_exports)).then((m2) => m2.set)));
+  scheduleCommand(
+    "delete",
+    "Delete a sleep schedule (refused while lambdas follow it - change their scaleOptions.sleepSchedule first)"
+  ).arguments("<name>").action(lazy(() => Promise.resolve().then(() => (init_sleep_schedule(), sleep_schedule_exports)).then((m2) => m2.remove)));
+  scheduleCommand(
+    "sleep",
+    "Put the schedule's lambdas to sleep now, until its next wake time"
+  ).arguments("<name>").action(lazy(() => Promise.resolve().then(() => (init_sleep_schedule(), sleep_schedule_exports)).then((m2) => m2.sleepNow)));
+  scheduleCommand(
+    "wake",
+    "Wake the schedule's lambdas now, until its next sleep time"
+  ).arguments("<name>").action(lazy(() => Promise.resolve().then(() => (init_sleep_schedule(), sleep_schedule_exports)).then((m2) => m2.wakeNow)));
   program2.command("project:savings").description(
     "What the platform saved this month: fewer / cheaper machines, hours asleep, lambdas sized down automatically"
   ).option("-p, --project <project>").option("--json", "Print as JSON").action(lazy(() => Promise.resolve().then(() => (init_savings(), savings_exports)).then((m2) => m2.default)));
@@ -329012,6 +329116,10 @@ function registerLambdaCommands(program2) {
     [
       "--spreadStrict <spreadStrict>",
       "With --spread machines: 'true' = a replica waits rather than share a machine; 'false' (default) = prefer different machines, never block a scale-up"
+    ],
+    [
+      "--sleepSchedule <name>",
+      "The project's sleep schedule this lambda follows (see sleep-schedule:list); outside its hours it scales to 0. '' = always on. newdeploy with minScale >= 1 only"
     ]
   ];
   createCommand("lambda:create")(createOrUpdateOptions)(program2).action(
@@ -329405,7 +329513,7 @@ if (!isWebContainer) {
   } else {
   }
 }
-var version2 = true ? "1.8.294" : "development";
+var version2 = true ? "1.8.295" : "development";
 var main = (argv) => {
   import_commander.program.name("gcli").version(version2);
   commands.map((command) => command(import_commander.program));
